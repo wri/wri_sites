@@ -1,0 +1,7 @@
+; $Id$
+name = Field Permissions
+description = Set field-level permissions to edit or view CCK fields in any node, and optionally, edit or view permissions for nodes owned by the current user.
+dependencies[] = field
+package = CCK
+core = 7.x
+files[] = field_permissions.module
