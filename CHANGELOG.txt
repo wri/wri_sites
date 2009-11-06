@@ -3,4 +3,5 @@
 7.x-1.x-dev
 ===========
 
-- No changes yet.
+- Added support for create field permission.
+- Every permission type can be enabled independently.

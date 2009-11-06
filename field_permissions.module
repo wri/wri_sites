@@ -7,6 +7,51 @@
  */
 
 /**
+ * Obtain the list of field permissions.
+ */
+function field_permissions_list($field_label = '') {
+  return array(
+    'create' => array(
+      'title' => t('Create @field', array('@field' => $field_label)),
+      'description' => t('Create @field (edit on content creation).', array('@field' => $field_label)),
+    ),
+    'edit' => array(
+      'title' => t('Edit any @field', array('@field' => $field_label)),
+      'description' => t('Edit any @field, regardless of its content author.', array('@field' => $field_label)),
+    ),
+    'edit own' => array(
+      'title' => t('Edit own @field', array('@field' => $field_label)),
+      'description' => t('Edit own @field on content created by the user.', array('@field' => $field_label)),
+    ),
+    'view'=> array(
+      'title' => t('View any @field', array('@field' => $field_label)),
+      'description' => t('View any @field, regardless of its content author.', array('@field' => $field_label)),
+    ),
+    'view own' => array(
+      'title' => t('View own @field', array('@field' => $field_label)),
+      'description' => t('View own @field on content created by the user.', array('@field' => $field_label)),
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_permissions().
+ */
+function field_permissions_permissions() {
+  $perms = array();
+  foreach (field_info_fields() as $field_name => $field) {
+    if (!empty($field['field_permissions'])) {
+      foreach (field_permissions_list($field['widget']['label']) as $permission_type => $permission_info) {
+        if (!empty($field['field_permissions'][$permission_type])) {
+          $perms[$permission_type . ' ' . $field_name] = $permission_info;
+        }
+      }
+    }
+  }
+  return $perms;
+}
+
+/**
  * Implementation of hook_field_settings_alter().
  *
  * @todo: figure out how this should be done in D7.
@@ -14,18 +59,19 @@
 function field_permissions_field_settings_alter(&$settings, $op, $field) {
   switch ($op) {
     case 'form':
+      $field_permissions = array();
+      foreach (field_permissions_list($field['widget']['label']) as $permission_type => $permission_info) {
+        $field_permissions[$permission_type] = $permission_info['description'];
+      }
       $settings['field_permissions'] = array(
         '#title' => t('Field permissions'),
-        '#type' => 'radios',
-        '#options' => array(
-          '' => t('Disabled'),
-          'any' => t('Enable view and edit permissions for this field in any node.'),
-          'own' => t('Enable view and edit permissions for this field in any node and nodes owned by the current user.'),
-        ),
-        '#default_value' => (!empty($field['field_permissions']) ? $field['field_permissions'] : ''),
-        '#description' => t('Use this option to enable role based permissions for this field.
-When permissions are enabled, access to this field is denied by default. You should assign permissions to the proper user roles from the <a href="@admin-permissions">permissions administration</a> page.
-On the other hand, when this option is disabled, field permissions are inherited from node view and/or edit permissions. ie. users allowed to view a node will also be able to view all fields where this option is not enabled.', array(
+        '#type' => 'checkboxes',
+        '#checkall' => TRUE,
+        '#options' => $field_permissions,
+        '#default_value' => (isset($field['field_permissions']) && is_array($field['field_permissions']) ? $field['field_permissions'] : array()),
+        '#description' => t('Use these options to enable role based permissions for this field.
+When permissions are enabled, access to this field is denied by default and explicit permissions should be granted to the proper user roles from the <a href="@admin-permissions">permissions administration</a> page.
+On the other hand, when these options are disabled, field permissions are inherited from content view and/or edit permissions. In example, users allowed to view a particular content will also be able to view this field, and so on.', array(
           '@admin-permissions' => url('admin/config/people/permissions'),
         )),
         '#weight' => -1,
@@ -39,37 +85,6 @@ On the other hand, when this option is disabled, field permissions are inherited
 }
 
 /**
- * Implementation of hook_permissions().
- */
-function field_permissions_permissions() {
-  $perms = array();
-  foreach (field_info_fields() as $field_name => $field) {
-    if (!empty($field['field_permissions'])) {
-      // Build list of permission types enabled for this field.
-      $perms["view $field_name"] = array(
-        'title' => t('View any @field', array('@field' => $field_name)),
-        'description' => t('View any @field, regardless of its content author.', array('@field' => $field_name)),
-      );
-      $perms["edit $field_name"] = array(
-        'title' => t('Edit any @field', array('@field' => $field_name)),
-        'description' => t('Edit any @field, regardless of its content author.', array('@field' => $field_name)),
-      );
-      if ($field['field_permissions'] == 'own') {
-        $perms["view own $field_name"] = array(
-          'title' => t('View own @field', array('@field' => $field_name)),
-          'description' => t('View own @field on content created by the user.', array('@field' => $field_name)),
-        );
-        $perms["edit own $field_name"] = array(
-          'title' => t('Edit own @field', array('@field' => $field_name)),
-          'description' => t('Edit own @field on content created by the user.', array('@field' => $field_name)),
-        ));
-      }
-    }
-  }
-  return $perms;
-}
-
-/**
  * Implementation of hook_field_access().
  *
  * @see field_access()
@@ -77,32 +92,37 @@ function field_permissions_permissions() {
 function field_permissions_field_access($op, $field, $obj_type, $object, $account) {
   // Check access only if permissions has been enabled for this field.
   if (!empty($field['field_permissions']) && ($op == 'view' || $op == 'edit')) {
-    // Check if user has access to view/edit this field in any node.
+    // Check if user has access to edit this field on object creation.
+    if ($op == 'edit' && empty($object->nid)) {
+      return user_access('create '. $field['field_name'], $account);
+    }
+
+    // Check if user has access to view/edit this field in any object.
     if (user_access($op .' '. $field['field_name'], $account)) {
       return TRUE;
     }
 
-    // Check if user has access to view/edit this field in own nodes,
+    // Check if user has access to view/edit this field in own objects,
     // but only if 'own' permissions have been enabled for this field.
-    if ($field['field_permissions'] == 'own' && user_access($op .' own '. $field['field_name'], $account)) {
+    if ((!empty($field['field_permissions']['view own']) || !empty($field['field_permissions']['edit own'])) && user_access($op .' own '. $field['field_name'], $account)) {
 
-      // When field_access('view') is invoked, it may or may not provide a
-      // node object. It will almost always, except when this function is
+      // When field_access('view') is invoked, it may or may not provide an
+      // object. It will almost always, except when this function is
       // invoked as as a field access callback from Views, where it is used to
       // evaluate if the field can be included in the query itself. In this
       // case we should grant access. Views will invoke field_access('view')
       // again, indirectly, when rendering the fields using field_format(),
-      // and this time it will provide a pseudo node object that includes the
-      // uid of the node creator, so here is where we have the chance to
-      // evaluate node ownership to check for 'view own <field>' permission.
+      // and this time it will provide a pseudo object that includes the
+      // uid of the object creator, so here is where we have the chance to
+      // evaluate object ownership to check for 'view own <field>' permission.
       if ($op == 'view') {
-        return (!isset($node) || $node->uid == $account->uid);
+        return (!isset($object) || $object->uid == $account->uid);
       }
 
-      // When field_access('edit') is invoked, it always provides a node,
-      // so we can always check the ownership of the node.
+      // When field_access('edit') is invoked, it always provides an object,
+      // so we can always check the ownership of the object.
       if ($op == 'edit') {
-        return (isset($node) && $node->uid == $account->uid);
+        return (isset($object) && $object->uid == $account->uid);
       }
     }
     return FALSE;

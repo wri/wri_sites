@@ -5,6 +5,13 @@
 ;; Original author: markus_petrux (http://drupal.org/user/39593)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+WARNING   WARNING   WARNING   WARNING   WARNING   WARNING   WARNING
+
+This branch of the module does not work yet!
+
+WARNING   WARNING   WARNING   WARNING   WARNING   WARNING   WARNING
+
+
 CONTENTS OF THIS FILE
 =====================
 * OVERVIEW
@@ -34,21 +41,22 @@ USAGE
 =====
 
 Once Field Permissions module is installed, you need to edit the field settings
-form to enable permissions for each where you need this feature. You can choose
-between:
+form to enable permissions for each where you need this feature. You can enable
+any of the following permission types:
 
-  * Disabled.
-  * Enable view and edit permissions for this field in any content.
-  * Enable view and edit permissions for this field in any content and content
-    owned by the current user.
+  * Create FIELD (edit on content creation).
+  * Edit any FIELD, regardless of its content author.
+  * Edit own FIELD on content created by the user.
+  * View any FIELD, regardless of its content author.
+  * View own FIELD on content created by the user.
 
-Use this option to enable role based permissions for this field. When
-permissions are enabled, access to this field is denied by default. You should
-assign permissions to the proper user roles from the permissions administration
-page. On the other hand, when this option is disabled, field permissions are
-inherited from content view and/or edit permissions. ie. users allowed to view
-a particular content will also be able to view all fields in that content when
-this option is not enabled.
+Use these options to enable role based permissions for this field. When
+permissions are enabled, access to this field is denied by default and explicit
+permissions should be granted to the proper user roles from the permissions
+administration page. On the other hand, when these options are disabled, field
+permissions are inherited from content view and/or edit permissions. In
+example, users allowed to view a particular content will also be able to view
+this field, and so on.
 
 
 REQUIREMENTS
