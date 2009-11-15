@@ -3,129 +3,87 @@
 
 /**
  * @file
- * Main script for the Field Permissions module.
+ * This is the main script for the Field Permissions module. It merely contains
+ * the implementation of hooks invoked by Drupal core and CCK.
+ * All common functions are externalized into several scripts that are included
+ * on demand to save memory consumption during normal site operation.
  */
 
 /**
- * Obtain the list of field permissions.
+ * Implementation of hook_menu().
  */
-function field_permissions_list($field_label = '') {
+function field_permissions_menu() {
+  module_load_include('inc', 'field_permissions', 'includes/admin');
+  return _field_permissions_menu();
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function field_permissions_theme() {
   return array(
-    'create' => array(
-      'title' => t('Create @field', array('@field' => $field_label)),
-      'description' => t('Create @field (edit on content creation).', array('@field' => $field_label)),
-    ),
-    'edit' => array(
-      'title' => t('Edit any @field', array('@field' => $field_label)),
-      'description' => t('Edit any @field, regardless of its content author.', array('@field' => $field_label)),
-    ),
-    'edit own' => array(
-      'title' => t('Edit own @field', array('@field' => $field_label)),
-      'description' => t('Edit own @field on content created by the user.', array('@field' => $field_label)),
-    ),
-    'view'=> array(
-      'title' => t('View any @field', array('@field' => $field_label)),
-      'description' => t('View any @field, regardless of its content author.', array('@field' => $field_label)),
-    ),
-    'view own' => array(
-      'title' => t('View own @field', array('@field' => $field_label)),
-      'description' => t('View own @field on content created by the user.', array('@field' => $field_label)),
-    ),
+    'field_permissions_troubleshooting_form' => array('render element' => 'form', 'file' => 'includes/admin.inc'),
   );
 }
 
 /**
- * Implementation of hook_permissions().
+ * Implementation of hook_permission().
  */
-function field_permissions_permissions() {
-  $perms = array();
-  foreach (field_info_fields() as $field_name => $field) {
-    if (!empty($field['field_permissions'])) {
-      foreach (field_permissions_list($field['widget']['label']) as $permission_type => $permission_info) {
-        if (!empty($field['field_permissions'][$permission_type])) {
-          $perms[$permission_type . ' ' . $field_name] = $permission_info;
-        }
-      }
-    }
-  }
-  return $perms;
+function field_permissions_permission() {
+  module_load_include('inc', 'field_permissions', 'includes/admin');
+  return _field_permissions_permission();
 }
 
 /**
- * Implementation of hook_field_settings_alter().
- *
- * @todo: figure out how this should be done in D7.
+ * Implementation of hook_form_alter().
  */
-function field_permissions_field_settings_alter(&$settings, $op, $field) {
-  switch ($op) {
-    case 'form':
-      $field_permissions = array();
-      foreach (field_permissions_list($field['widget']['label']) as $permission_type => $permission_info) {
-        $field_permissions[$permission_type] = $permission_info['description'];
-      }
-      $settings['field_permissions'] = array(
-        '#title' => t('Field permissions'),
-        '#type' => 'checkboxes',
-        '#checkall' => TRUE,
-        '#options' => $field_permissions,
-        '#default_value' => (isset($field['field_permissions']) && is_array($field['field_permissions']) ? $field['field_permissions'] : array()),
-        '#description' => t('Use these options to enable role based permissions for this field.
-When permissions are enabled, access to this field is denied by default and explicit permissions should be granted to the proper user roles from the <a href="@admin-permissions">permissions administration</a> page.
-On the other hand, when these options are disabled, field permissions are inherited from content view and/or edit permissions. In example, users allowed to view a particular content will also be able to view this field, and so on.', array(
-          '@admin-permissions' => url('admin/config/people/permissions'),
-        )),
-        '#weight' => -1,
-      );
-      break;
-
-    case 'save':
-      $settings[] = 'field_permissions';
-      break;
+function field_permissions_form_alter(&$form, $form_state, $form_id) {
+  if (in_array($form_id, array('field_ui_field_settings_form', 'field_ui_field_edit_form')) && isset($form['field']['settings'])) {
+    module_load_include('inc', 'field_permissions', 'includes/admin');
+    return _field_permissions_field_settings_form_alter($form, $form_state, $form_id);
   }
 }
 
 /**
  * Implementation of hook_field_access().
  *
+ * @param $op
+ *   The operation to be performed. Possible values:
+ *   - 'edit'
+ *   - 'view'
+ * @param $field
+ *   The field on which the operation is to be performed.
+ * @param $obj_type
+ *   The type of $object; e.g. 'node' or 'user'.
+ * @param $object
+ *   The object on which the operation is to be performed.
+ * @param $account
+ *   The account to check.
+ *
+ * @return
+ *   FALSE if the operation is not allowed.
+ *   Note when field_access() is invoked, access is granted unless one
+ *   implementation of hook_field_access() explicitly returns FALSE.
+ *
  * @see field_access()
  */
 function field_permissions_field_access($op, $field, $obj_type, $object, $account) {
-  // Check access only if permissions has been enabled for this field.
-  if (!empty($field['field_permissions']) && ($op == 'view' || $op == 'edit')) {
-    // Check if user has access to edit this field on object creation.
-    if ($op == 'edit' && empty($object->nid)) {
-      return user_access('create '. $field['field_name'], $account);
-    }
-
-    // Check if user has access to view/edit this field in any object.
-    if (user_access($op .' '. $field['field_name'], $account)) {
-      return TRUE;
-    }
-
-    // Check if user has access to view/edit this field in own objects,
-    // but only if 'own' permissions have been enabled for this field.
-    if ((!empty($field['field_permissions']['view own']) || !empty($field['field_permissions']['edit own'])) && user_access($op .' own '. $field['field_name'], $account)) {
-
-      // When field_access('view') is invoked, it may or may not provide an
-      // object. It will almost always, except when this function is
-      // invoked as as a field access callback from Views, where it is used to
-      // evaluate if the field can be included in the query itself. In this
-      // case we should grant access. Views will invoke field_access('view')
-      // again, indirectly, when rendering the fields using field_format(),
-      // and this time it will provide a pseudo object that includes the
-      // uid of the object creator, so here is where we have the chance to
-      // evaluate object ownership to check for 'view own <field>' permission.
-      if ($op == 'view') {
-        return (!isset($object) || $object->uid == $account->uid);
-      }
-
-      // When field_access('edit') is invoked, it always provides an object,
-      // so we can always check the ownership of the object.
-      if ($op == 'edit') {
-        return (isset($object) && $object->uid == $account->uid);
-      }
-    }
-    return FALSE;
+  // Ignore the request if permissions have not been enabled for this field.
+  $field_permissions = (isset($field['settings']['field_permissions']) && is_array($field['settings']['field_permissions']) ? array_filter($field['settings']['field_permissions']) : array());
+  if (empty($field_permissions)) {
+    return;
   }
-  return TRUE;
+
+  if ($op == 'view') {
+    if (!empty($field_permissions['view']) || !empty($field_permissions['view own'])) {
+      module_load_include('inc', 'field_permissions', 'includes/field_access');
+      return _field_permissions_field_view_access($field['field_name'], $field_permissions, $obj_type, $object, $account);
+    }
+  }
+  elseif ($op == 'edit') {
+    if (!empty($field_permissions['edit']) || !empty($field_permissions['edit own']) || !empty($field_permissions['create'])) {
+      module_load_include('inc', 'field_permissions', 'includes/field_access');
+      return _field_permissions_field_edit_access($field['field_name'], $field_permissions, $obj_type, $object, $account);
+    }
+  }
 }

@@ -5,13 +5,6 @@
 ;; Original author: markus_petrux (http://drupal.org/user/39593)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-WARNING   WARNING   WARNING   WARNING   WARNING   WARNING   WARNING
-
-This branch of the module does not work yet!
-
-WARNING   WARNING   WARNING   WARNING   WARNING   WARNING   WARNING
-
-
 CONTENTS OF THIS FILE
 =====================
 * OVERVIEW
@@ -23,26 +16,22 @@ CONTENTS OF THIS FILE
 OVERVIEW
 ========
 
-The Field Permissions module is a drop-in replacement for the Content
-Permissions module shipped with CCK.
+The Field Permissions module allows site administrators set field-level
+permissions to edit or view CCK fields in any content, edit field during
+content creation, and edit or view permissions for content owned by the
+current user.
 
-The key differences are:
-
-  * It allows site administrators to set field-level permissions to edit or
-    view CCK fields in any content, and optionally, edit or view permissions
-    for content owned by the current user.
-
-  * Permissions for each field are not created by default. Instead,
-    administrators can enable these permissions explicitly for the fields
-    where this feature is needed.
+Permissions for each field are not created by default. Instead, administrators
+can enable these permissions explicitly for the fields where this feature is
+needed.
 
 
 USAGE
 =====
 
 Once Field Permissions module is installed, you need to edit the field settings
-form to enable permissions for each where you need this feature. You can enable
-any of the following permission types:
+form to enable permissions for each field where you need this feature. You can
+enable any of the following permission types:
 
   * Create FIELD (edit on content creation).
   * Edit any FIELD, regardless of its content author.
@@ -54,15 +43,15 @@ Use these options to enable role based permissions for this field. When
 permissions are enabled, access to this field is denied by default and explicit
 permissions should be granted to the proper user roles from the permissions
 administration page. On the other hand, when these options are disabled, field
-permissions are inherited from content view and/or edit permissions. In
-example, users allowed to view a particular content will also be able to view
-this field, and so on.
+permissions are inherited from content view and/or edit permissions. In example,
+users allowed to view a particular node will also be able to view this field,
+and so on.
 
 
 REQUIREMENTS
 ============
 
-- Field module (Drupal core).
+- Field UI module (Drupal core).
 
 
 INSTALLATION

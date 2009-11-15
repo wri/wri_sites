@@ -5,3 +5,4 @@
 
 - Added support for create field permission.
 - Every permission type can be enabled independently.
+- Sync code base from 6.x-1.0 release.
