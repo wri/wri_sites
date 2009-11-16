@@ -40,7 +40,7 @@ function _field_permissions_field_view_access($field_name, $field_permissions, $
     }
     // @todo: what to do with non-node objects?
     elseif (!empty($object->vid)) {
-      $object_uid = db_query('SELECT uid FROM {node_revisions} WHERE vid = :vid', array(':vid' => $object->vid))->fetchField();
+      $object_uid = db_query('SELECT uid FROM {node_revision} WHERE vid = :vid', array(':vid' => $object->vid))->fetchField();
     }
     elseif (!empty($object->nid)) {
       $object_uid = db_query('SELECT uid FROM {node} WHERE nid = :nid', array(':nid' => $object->nid))->fetchField();
