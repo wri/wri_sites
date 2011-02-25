@@ -1,4 +1,3 @@
-// $Id$
 
 /**
  * Quick tooltips behavior.

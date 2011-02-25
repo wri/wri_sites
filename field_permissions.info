@@ -1,4 +1,3 @@
-; $Id$
 name = Field Permissions
 description = Set field-level permissions to edit or view CCK fields in any node, edit field during node creation, and edit or view permissions for nodes owned by the current user.
 dependencies[] = field_ui
