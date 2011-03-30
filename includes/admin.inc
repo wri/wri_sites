@@ -90,7 +90,7 @@ function _field_permissions_field_settings_form_alter(&$form, $form_state, $form
     '#description' => t('Use these options to enable role based permissions for this field.
 When permissions are enabled, access to this field is denied by default and explicit permissions should be granted to the proper user roles from the <a href="@admin-permissions">permissions administration</a> page.
 On the other hand, when these options are disabled, field permissions are inherited from the content view and/or edit permissions. In example, users allowed to view a particular node will also be able to view this field, and so on.', array(
-      '@admin-permissions' => url('admin/config/people/permissions'),
+      '@admin-permissions' => url('admin/people/permissions', array('fragment' => 'module-field_permissions')),
     )),
     '#weight' => -1,
   );
