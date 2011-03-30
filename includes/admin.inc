@@ -6,46 +6,6 @@
  */
 
 /**
- * Implementation of hook_menu().
- */
-function _field_permissions_menu() {
-  $items = array();
-  $items['admin/structure/field_permissions'] = array(
-    'title' => 'Field permissions',
-    'description' => 'Report and troubleshoot field permissions.',
-    'page callback' => 'field_permissions_overview',
-    'access arguments' => array('administer field permissions'),
-    'file' => 'includes/admin.inc',
-  );
-  $items['admin/structure/field_permissions/overview'] = array(
-    'title' => 'Overview',
-    'type' => MENU_DEFAULT_LOCAL_TASK,
-    'weight' => -10,
-  );
-
-  // @todo: what to do with non-node objects?
-/*
-  $items['admin/structure/field_permissions/troubleshooting'] = array(
-    'title' => 'Troubleshooting',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('field_permissions_troubleshooting_form'),
-    'access arguments' => array('administer field permissions'),
-    'file' => 'includes/admin.inc',
-    'type' => MENU_LOCAL_TASK,
-    'weight' => 10,
-  );
-  $items['field_permissions/autocomplete'] = array(
-    'title' => 'Field permissions autocomplete',
-    'page callback' => 'field_permissions_autocomplete',
-    'access arguments' => array('administer field permissions'),
-    'file' => 'includes/admin.inc',
-    'type' => MENU_CALLBACK,
-  );
-//*/
-  return $items;
-}
-
-/**
  * Obtain the list of field permissions.
  */
 function field_permissions_list($field_name = '') {
