@@ -82,13 +82,12 @@ function field_permissions_permission() {
 }
 
 /**
- * Implementation of hook_form_alter().
+ * Implements of hook_form_FORM_ID_alter().
  */
-function field_permissions_form_alter(&$form, $form_state, $form_id) {
-  if (in_array($form_id, array('field_ui_field_settings_form', 'field_ui_field_edit_form')) && isset($form['field']['settings'])) {
-    module_load_include('inc', 'field_permissions', 'includes/admin');
-    return _field_permissions_field_settings_form_alter($form, $form_state, $form_id);
-  }
+function field_permissions_form_field_ui_field_edit_form_alter(&$form, $form_state, $form_id) {
+  // Injects the Field Permissions settings on the Edit field tab.
+  module_load_include('inc', 'field_permissions', 'includes/admin');
+  return _field_permissions_field_settings_form_alter($form, $form_state, $form_id);
 }
 
 /**

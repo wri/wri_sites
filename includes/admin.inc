@@ -67,16 +67,8 @@ function _field_permissions_permission() {
  * Alter the field settings form.
  */
 function _field_permissions_field_settings_form_alter(&$form, $form_state, $form_id) {
-  // Try to obtain the field name from the form itself.
-  if ($form_id == 'field_ui_field_settings_form') {
-    $field_name = $form['field']['field_name']['#value'];
-  }
-  elseif ($form_id == 'field_ui_field_edit_form') {
-    $field_name = $form['instance']['field_name']['#value'];
-  }
-  else {
-    return;
-  }
+  // Obtain the field name from the form itself.
+  $field_name = isset($form['instance']['field_name']['#value']) ? $form['instance']['field_name']['#value'] : '';
 
   // Try to obtain information about this field.
   $field = field_info_field($field_name);
