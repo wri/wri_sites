@@ -27,8 +27,8 @@ function field_permissions_help($path, $arg) {
  * Implements hook_menu().
  */
 function field_permissions_menu() {
-  $items['admin/reports/fields/overview'] = array(
-    'title' => 'Overview',
+  $items['admin/reports/fields/list'] = array(
+    'title' => 'List',
     'type' => MENU_DEFAULT_LOCAL_TASK,
     'weight' => -10,
   );
