@@ -9,6 +9,24 @@
  */
 
 /**
+ * Indicates that a field does not have any access control.
+ */
+define('FIELD_PERMISSIONS_PUBLIC', 0);
+
+/**
+ * Indicates that a field is private.
+ *
+ * Private fields are never displayed, and are only editable by the author (and
+ * by site administrators with the 'access private fields' permission).
+ */
+define('FIELD_PERMISSIONS_PRIVATE', 1);
+
+/**
+ * Indicates that a field has custom permissions.
+ */
+define('FIELD_PERMISSIONS_CUSTOM', 2);
+
+/**
  * Implements hook_help().
  */
 function field_permissions_help($path, $arg) {
@@ -115,21 +133,40 @@ function field_permissions_form_field_ui_field_edit_form_alter(&$form, $form_sta
  */
 function field_permissions_field_access($op, $field, $obj_type, $object, $account) {
   // Ignore the request if permissions have not been enabled for this field.
-  $field_permissions = (isset($field['settings']['field_permissions']) && is_array($field['settings']['field_permissions']) ? array_filter($field['settings']['field_permissions']) : array());
-  if (empty($field_permissions)) {
+  if (!isset($field['field_permissions']['type']) || $field['field_permissions']['type'] == FIELD_PERMISSIONS_PUBLIC) {
     return;
   }
-
-  if ($op == 'view') {
-    if (!empty($field_permissions['view']) || !empty($field_permissions['view own'])) {
-      module_load_include('inc', 'field_permissions', 'includes/field_access');
-      return _field_permissions_field_view_access($field['field_name'], $field_permissions, $obj_type, $object, $account);
+  // If the field is private, then no one is allowed to see it when the object
+  // is being viewed as its own entity, and only the author (and administrators
+  // with the 'access private fields' permissions) can edit it. In the special
+  // case where the field is being viewed outside the context of its own entity
+  // (for example, in a View that is specifically designed to show this field),
+  // then we do allow administrators with the 'access private fields'
+  // permission to see it; this allows administrators to view sensitive
+  // information in contexts where it was specifically intended to be shown,
+  // but not have it appear in random places around the site.
+  elseif ($field['field_permissions']['type'] == FIELD_PERMISSIONS_PRIVATE) {
+    if ($op == 'view') {
+      return !isset($object->entity_view_prepared) && user_access('access private fields', $account);
+    }
+    elseif ($op == 'edit') {
+      if (user_access('access private fields', $account)) {
+        return TRUE;
+      }
+      else {
+        module_load_include('inc', 'field_permissions', 'includes/field_access');
+        return _field_permissions_object_is_owned_by_account($object, $account);
+      }
     }
   }
-  elseif ($op == 'edit') {
-    if (!empty($field_permissions['edit']) || !empty($field_permissions['edit own']) || !empty($field_permissions['create'])) {
-      module_load_include('inc', 'field_permissions', 'includes/field_access');
-      return _field_permissions_field_edit_access($field['field_name'], $field_permissions, $obj_type, $object, $account);
+  // Otherwise, check access by permission.
+  elseif ($field['field_permissions']['type'] == FIELD_PERMISSIONS_CUSTOM) {
+    module_load_include('inc', 'field_permissions', 'includes/field_access');
+    if ($op == 'view') {
+      return _field_permissions_field_view_access($field['field_name'], $obj_type, $object, $account);
+    }
+    elseif ($op == 'edit') {
+      return _field_permissions_field_edit_access($field['field_name'], $obj_type, $object, $account);
     }
   }
 }
