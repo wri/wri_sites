@@ -40,8 +40,11 @@ function _field_permissions_field_view_access($field_name, $obj_type, $object, $
  * Implementation of hook_field_access('edit').
  */
 function _field_permissions_field_edit_access($field_name, $obj_type, $object, $account) {
+  // Check if the object is already created.
+  $ids = entity_extract_ids($obj_type, $object);
+
   // Check if user has access to edit this field on object creation.
-  if (empty($object->nid)) {
+  if (empty($ids[0])) {
     return user_access('create ' . $field_name, $account);
   }
 
