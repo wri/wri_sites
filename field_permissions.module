@@ -136,21 +136,17 @@ function field_permissions_field_access($op, $field, $obj_type, $object, $accoun
   if (!isset($field['field_permissions']['type']) || $field['field_permissions']['type'] == FIELD_PERMISSIONS_PUBLIC) {
     return;
   }
-  // If the field is private, then no one is allowed to see it when the object
-  // is being viewed as its own entity, and only the author (and administrators
-  // with the 'access private fields' permissions) can edit it. In the special
-  // case where the field is being viewed outside the context of its own entity
-  // (for example, in a View that is specifically designed to show this field),
-  // then we do allow administrators with the 'access private fields'
-  // permission to see it; this allows administrators to view sensitive
-  // information in contexts where it was specifically intended to be shown,
-  // but not have it appear in random places around the site.
+  // If the field is private, then only the author (and administrators with the
+  // 'access private fields' permissions) can view and edit it.
   elseif ($field['field_permissions']['type'] == FIELD_PERMISSIONS_PRIVATE) {
-    if ($op == 'view') {
-      return !isset($object->entity_view_prepared) && user_access('access private fields', $account);
+    if (user_access('access private fields', $account)) {
+      return TRUE;
     }
-    elseif ($op == 'edit') {
-      if (user_access('access private fields', $account)) {
+    else {
+      if (!isset($object) && $op == 'view') {
+        // See comments in _field_permissions_field_view_access() about why we
+        // need to return TRUE in this situation for Views to work correctly
+        // (and why it should be safe to do so).
         return TRUE;
       }
       else {
