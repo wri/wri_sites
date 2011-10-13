@@ -1,6 +1,5 @@
 name = Field Permissions
 description = Set field-level permissions to create, update or view fields.
-dependencies[] = field_ui
 package = Fields
 core = 7.x
 files[] = field_permissions.module
