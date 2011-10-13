@@ -41,10 +41,13 @@ function _field_permissions_field_view_access($field_name, $obj_type, $object, $
  */
 function _field_permissions_field_edit_access($field_name, $obj_type, $object, $account) {
   // Check if the object is already created.
-  $ids = entity_extract_ids($obj_type, $object);
+  // @TODO: There is an exception warning that is issued here, hence the @. We
+  // should remove the @ when the Drupal core bug is fixed. You can find the
+  // bug here: http://drupal.org/node/1301522
+  list($id, $vid, $bundle) = @entity_extract_ids($obj_type, $object);
 
   // Check if user has access to edit this field on object creation.
-  if (empty($ids[0])) {
+  if (!isset($id)) {
     return user_access('create ' . $field_name, $account);
   }
 
