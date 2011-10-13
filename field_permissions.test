@@ -122,9 +122,13 @@ class FieldPermissionsTestCase extends DrupalWebTestCase {
     $this->assertNoText($field_info['name']);
     $this->assertNoText($field_info['value']);
 
-    // Grant this user the administrator role.
+    // Grant this user the Drupal core administrator role. This will give them
+    // the 'access private fields' permission (tested here), and it also means
+    // that when custom field permissions are created later on in this test,
+    // the admin user will automatically get those permissions granted also.
+    $user_admin_rid = variable_get('user_admin_role', 0);
     $edit = array(
-      'roles[3]' => TRUE,
+      "roles[$user_admin_rid]" => TRUE,
     );
     $this->drupalPost('user/' . $this->admin_user->uid . '/edit', $edit, t('Save'));
 
@@ -165,9 +169,10 @@ class FieldPermissionsTestCase extends DrupalWebTestCase {
 
     // == CREATE ===============================================================
 
-    drupal_static_reset('user_access');
-    $this->assertTrue(user_access('create '. $field_info['machine_name'], $this->admin_user), t('Admin user does have "create @field" permission.', array('@field' => $field_info['machine_name'])));
-    $this->assertFalse(user_access('create '. $field_info['machine_name'], $this->limited_user), t('Limited user does not have "create @field" permission.', array('@field' => $field_info['machine_name'])));
+    // The admin user should have been automatically granted the create
+    // permission, but the limited user shouldn't have it yet.
+    $this->assertUserHasPermission($this->admin_user, 'create ' . $field_info['machine_name'], t('Admin user does have "create @field" permission.', array('@field' => $field_info['machine_name'])));
+    $this->assertUserDoesNotHavePermission($this->limited_user, 'create ' . $field_info['machine_name'], t('Limited user does not have "create @field" permission.', array('@field' => $field_info['machine_name'])));
 
     // Should not see the field on the entity creation form anymore for limited_user.
     $this->drupalGet('user/logout');
@@ -180,9 +185,8 @@ class FieldPermissionsTestCase extends DrupalWebTestCase {
       $this->limited_rid .'[create '. $field_info['machine_name'] .']' => TRUE,
     );
     $this->drupalPost('admin/people/permissions', $edit, t('Save permissions'));
-    drupal_static_reset('user_access');
-    $this->assertTrue(user_access('create '. $field_info['machine_name'], $this->admin_user), t('Admin user does have "create @field" permission.', array('@field' => $field_info['machine_name'])));
-    $this->assertTrue(user_access('create '. $field_info['machine_name'], $this->limited_user), t('Limited user does have "create @field" permission.', array('@field' => $field_info['machine_name'])));
+    $this->assertUserHasPermission($this->admin_user, 'create ' . $field_info['machine_name'], t('Admin user does have "create @field" permission.', array('@field' => $field_info['machine_name'])));
+    $this->assertUserHasPermission($this->limited_user, 'create ' . $field_info['machine_name'], t('Limited user does have "create @field" permission.', array('@field' => $field_info['machine_name'])));
 
     // Should see the field again on the entity creation form.
     $this->drupalGet($field_info['add_path']);
@@ -216,9 +220,8 @@ class FieldPermissionsTestCase extends DrupalWebTestCase {
       $this->limited_rid .'[view '. $field_info['machine_name'] .']' => TRUE,
     );
     $this->drupalPost('admin/people/permissions', $edit, t('Save permissions'));
-    drupal_static_reset('user_access');
-    $this->assertTrue(user_access('view '. $field_info['machine_name'], $this->admin_user), t('Admin user does have "view @field" permission.', array('@field' => $field_info['machine_name'])));
-    $this->assertTrue(user_access('view '. $field_info['machine_name'], $this->limited_user), t('Limited user does have "view @field" permission.', array('@field' => $field_info['machine_name'])));
+    $this->assertUserHasPermission($this->admin_user, 'view ' . $field_info['machine_name'], t('Admin user does have "view @field" permission.', array('@field' => $field_info['machine_name'])));
+    $this->assertUserHasPermission($this->limited_user, 'view ' . $field_info['machine_name'], t('Limited user does have "view @field" permission.', array('@field' => $field_info['machine_name'])));
 
     // Limited user can now see the field.
     $this->drupalGet('user/logout');
@@ -246,9 +249,8 @@ class FieldPermissionsTestCase extends DrupalWebTestCase {
       $this->limited_rid .'[edit '. $field_info['machine_name'] .']' => TRUE,
     );
     $this->drupalPost('admin/people/permissions', $edit, t('Save permissions'));
-    drupal_static_reset('user_access');
-    $this->assertTrue(user_access('edit '. $field_info['machine_name'], $this->admin_user), t('Admin user does have "edit @field" permission.', array('@field' => $field_info['machine_name'])));
-    $this->assertTrue(user_access('edit '. $field_info['machine_name'], $this->limited_user), t('Limited user does have "edit @field" permission.', array('@field' => $field_info['machine_name'])));
+    $this->assertUserHasPermission($this->admin_user, 'edit ' . $field_info['machine_name'], t('Admin user does have "edit @field" permission.', array('@field' => $field_info['machine_name'])));
+    $this->assertUserHasPermission($this->limited_user, 'edit ' . $field_info['machine_name'], t('Limited user does have "edit @field" permission.', array('@field' => $field_info['machine_name'])));
 
     // Ensure the editing screen still has the body.
     $this->drupalGet('node/' . $nid2 . '/edit');
@@ -259,5 +261,45 @@ class FieldPermissionsTestCase extends DrupalWebTestCase {
     $this->drupalLogin($this->limited_user);
     $this->drupalGet('node/' . $nid2 . '/edit');
     $this->assertText($field_info['value']);
+  }
+
+  /**
+   * Asserts that a user account has a permission.
+   */
+  protected function assertUserHasPermission($account, $permission, $message) {
+     $this->_assertUserPermissionState($account, $permission, $message, TRUE);
+  }
+
+  /**
+   * Asserts that a user account does not have a permission.
+   */
+  protected function assertUserDoesNotHavePermission($account, $permission, $message) {
+    $this->_assertUserPermissionState($account, $permission, $message, FALSE);
+  }
+
+  /**
+   * Helper function for asserting user permissions.
+   */
+  protected function _assertUserPermissionState($account, $permission, $message, $should_have_permission) {
+    // We need to clear static caches since the tests may have recently changed
+    // the permissions via the UI (i.e., in a different thread than the one
+    // running the tests).
+    drupal_static_reset('user_access');
+    drupal_static_reset('user_role_permissions');
+
+    // Load the full user account, since we may have been provided an out of
+    // date pseudo-account of the kind SimpleTest uses (e.g. as returned by
+    // drupalCreateUser()), rather than an up to date object that actually
+    // contains the full list of roles this user has been assigned.
+    $full_account = user_load($account->uid);
+
+    // Now check the permission.
+    $has_permission = user_access($permission, $full_account);
+    if ($should_have_permission) {
+      $this->assertTrue($has_permission, $message);
+    }
+    else {
+      $this->assertFalse($has_permission, $message);
+    }
   }
 }
