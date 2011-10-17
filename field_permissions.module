@@ -59,36 +59,7 @@ function field_permissions_menu() {
     'type' => MENU_LOCAL_TASK,
     'weight' => 0,
   );
-
-  // @todo: what to do with non-node objects?
-/*
-  $items['admin/structure/field_permissions/troubleshooting'] = array(
-    'title' => 'Troubleshooting',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('field_permissions_troubleshooting_form'),
-    'access arguments' => array('administer field permissions'),
-    'file' => 'includes/admin.inc',
-    'type' => MENU_LOCAL_TASK,
-    'weight' => 10,
-  );
-  $items['field_permissions/autocomplete'] = array(
-    'title' => 'Field permissions autocomplete',
-    'page callback' => 'field_permissions_autocomplete',
-    'access arguments' => array('administer field permissions'),
-    'file' => 'includes/admin.inc',
-    'type' => MENU_CALLBACK,
-  );
-//*/
   return $items;
-}
-
-/**
- * Implementation of hook_theme().
- */
-function field_permissions_theme() {
-  return array(
-    'field_permissions_troubleshooting_form' => array('render element' => 'form', 'file' => 'includes/admin.inc'),
-  );
 }
 
 /**
