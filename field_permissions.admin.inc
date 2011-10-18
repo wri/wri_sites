@@ -152,7 +152,7 @@ function _field_permissions_field_settings_form_alter(&$form, $form_state, $form
     ),
     // Custom styling for the permissions matrix on the field settings page.
     '#attached' => array(
-      'css' => array(drupal_get_path('module', 'field_permissions') . '/css/field_permissions.field.settings.css'),
+      'css' => array(drupal_get_path('module', 'field_permissions') . '/field_permissions.settings.css'),
     ),
   );
 
@@ -285,7 +285,7 @@ function field_permissions_permissions_matrix($field, $instance) {
   $form['#attached']['js'][] = drupal_get_path('module', 'user') . '/user.permissions.js';
 
   // Attach our custom JavaScript for the permission matrix.
-  $form['#attached']['js'][] = drupal_get_path('module', 'field_permissions') . '/js/field_permissions.field.settings.js';
+  $form['#attached']['js'][] = drupal_get_path('module', 'field_permissions') . '/field_permissions.admin.js';
 
   return $form;
 }
@@ -327,7 +327,7 @@ function _field_permissions_field_settings_form_submit($form, &$form_state) {
  * Menu callback; Field permissions overview.
  */
 function field_permissions_overview() {
-  drupal_add_css(drupal_get_path('module', 'field_permissions') .'/css/field_permissions.admin.css');
+  drupal_add_css(drupal_get_path('module', 'field_permissions') .'/field_permissions.admin.css');
 
   $headers = array(t('Field name'), t('Field type'), t('Object type'), t('Used in'));
   foreach (field_permissions_list() as $permission_type => $permission_info) {

@@ -55,7 +55,7 @@ function field_permissions_menu() {
     'description' => 'Report and troubleshoot field permissions.',
     'page callback' => 'field_permissions_overview',
     'access arguments' => array('administer field permissions'),
-    'file' => 'includes/admin.inc',
+    'file' => 'field_permissions.admin.inc',
     'type' => MENU_LOCAL_TASK,
     'weight' => 0,
   );
@@ -66,7 +66,7 @@ function field_permissions_menu() {
  * Implementation of hook_permission().
  */
 function field_permissions_permission() {
-  module_load_include('inc', 'field_permissions', 'includes/admin');
+  module_load_include('inc', 'field_permissions', 'field_permissions.admin');
   return _field_permissions_permission();
 }
 
@@ -75,7 +75,7 @@ function field_permissions_permission() {
  */
 function field_permissions_form_field_ui_field_edit_form_alter(&$form, &$form_state, $form_id) {
   // Injects the Field Permissions settings on the Edit field tab.
-  form_load_include($form_state, 'inc', 'field_permissions', 'includes/admin');
+  form_load_include($form_state, 'inc', 'field_permissions', 'field_permissions.admin');
   return _field_permissions_field_settings_form_alter($form, $form_state, $form_id);
 }
 
@@ -121,14 +121,14 @@ function field_permissions_field_access($op, $field, $obj_type, $object, $accoun
         return TRUE;
       }
       else {
-        module_load_include('inc', 'field_permissions', 'includes/field_access');
+        module_load_include('inc', 'field_permissions', 'field_permissions.access');
         return _field_permissions_object_is_owned_by_account($object, $account);
       }
     }
   }
   // Otherwise, check access by permission.
   elseif ($field['field_permissions']['type'] == FIELD_PERMISSIONS_CUSTOM) {
-    module_load_include('inc', 'field_permissions', 'includes/field_access');
+    module_load_include('inc', 'field_permissions', 'field_permissions.access');
     if ($op == 'view') {
       return _field_permissions_field_view_access($field['field_name'], $obj_type, $object, $account);
     }
