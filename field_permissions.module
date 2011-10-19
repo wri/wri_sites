@@ -121,14 +121,12 @@ function field_permissions_field_access($op, $field, $obj_type, $object, $accoun
         return TRUE;
       }
       else {
-        module_load_include('inc', 'field_permissions', 'field_permissions.access');
         return _field_permissions_object_is_owned_by_account($object, $account);
       }
     }
   }
   // Otherwise, check access by permission.
   elseif ($field['field_permissions']['type'] == FIELD_PERMISSIONS_CUSTOM) {
-    module_load_include('inc', 'field_permissions', 'field_permissions.access');
     if ($op == 'view') {
       return _field_permissions_field_view_access($field['field_name'], $obj_type, $object, $account);
     }
@@ -136,4 +134,75 @@ function field_permissions_field_access($op, $field, $obj_type, $object, $accoun
       return _field_permissions_field_edit_access($field['field_name'], $obj_type, $object, $account);
     }
   }
+}
+
+/**
+ * Implementation of hook_field_access('view').
+ */
+function _field_permissions_field_view_access($field_name, $obj_type, $object, $account) {
+  // Check if user has access to view this field in any object.
+  if (user_access('view ' . $field_name, $account)) {
+    return TRUE;
+  }
+
+  // If the user has permission to view objects that they own, return TRUE if
+  // they own this object or FALSE if they don't.
+  if (user_access('view own ' . $field_name, $account)) {
+
+    // When field_access('view') is invoked, it may or may not provide
+    // an object. It will, almost always, except when this function is
+    // invoked as a field access callback from Views, where it is used to
+    // evaluate if the field can be included in the query itself. In this
+    // case we should grant access. Views will invoke field_access('view')
+    // again, indirectly, when rendering the fields using field_view_field(),
+    // and at that point the object will be passed along, so we can do the
+    // proper check for object ownership then.
+    if (!isset($object)) {
+      return TRUE;
+    }
+
+    return _field_permissions_object_is_owned_by_account($object, $account);
+  }
+
+  return FALSE;
+}
+
+/**
+ * Implementation of hook_field_access('edit').
+ */
+function _field_permissions_field_edit_access($field_name, $obj_type, $object, $account) {
+  // Check if the object is already created.
+  // @TODO: There is an exception warning that is issued here, hence the @. We
+  // should remove the @ when the Drupal core bug is fixed. You can find the
+  // bug here: http://drupal.org/node/1301522
+  list($id, $vid, $bundle) = @entity_extract_ids($obj_type, $object);
+
+  // Check if user has access to edit this field on object creation.
+  if (!isset($id)) {
+    return user_access('create ' . $field_name, $account);
+  }
+
+  // Check if user has access to edit this field in any object.
+  if (user_access('edit ' . $field_name, $account)) {
+    return TRUE;
+  }
+
+  // If the user has permission to edit objects that they own, check if they
+  // own this object and return TRUE if they do.
+  if (user_access('edit own ' . $field_name, $account) && _field_permissions_object_is_owned_by_account($object, $account)) {
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Returns TRUE if an object is owned by a user account, FALSE otherwise.
+ */
+function _field_permissions_object_is_owned_by_account($object, $account) {
+  // Try to get the uid of the object owner from the object itself. If it's not
+  // set (for example, if the object type does not store a uid or does not have
+  // a concept of "ownership"), we need to assume that the provided user
+  // account does not own it.
+  return isset($object->uid) && $object->uid == $account->uid;
 }
