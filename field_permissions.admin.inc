@@ -152,7 +152,7 @@ function _field_permissions_field_settings_form_alter(&$form, $form_state, $form
     ),
     // Custom styling for the permissions matrix on the field settings page.
     '#attached' => array(
-      'css' => array(drupal_get_path('module', 'field_permissions') . '/field_permissions.settings.css'),
+      'css' => array(drupal_get_path('module', 'field_permissions') . '/field_permissions.admin.css'),
     ),
   );
 

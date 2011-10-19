@@ -4,6 +4,5 @@ package = Fields
 core = 7.x
 files[] = field_permissions.module
 files[] = field_permissions.admin.inc
-files[] = field_permissions.access.inc
 files[] = field_permissions.test
 configure = admin/reports/fields/permissions
