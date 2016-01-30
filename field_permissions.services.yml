@@ -1,0 +1,5 @@
+# defines a FieldPermissionsService
+services:
+  fieldpermissionsservice:
+    class: Drupal\field_permissions\FieldPermissionsService
+    # arguments: ['@http_client']

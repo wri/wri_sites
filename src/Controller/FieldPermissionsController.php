@@ -8,8 +8,10 @@ use Drupal\Core\Entity\EntityTypeManager;
 use Symfony\Component\Validator\Constraints\File;
 use Drupal\Core\Field;
 use Drupal\field_permissions\FieldPermissions;
+use Drupal\field_permissions\FieldPermissionsService;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class FieldPermissionsController {
+class FieldPermissionsController extends ControllerBase {
 
   public function content(){
 
@@ -26,6 +28,18 @@ class FieldPermissionsController {
     );
 
   return $build;
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * Uses late static binding to create an instance of this class with
+   * injected dependencies.
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('fieldpermissionsservice')
+    );
   }
 
   public function buildHeader(){

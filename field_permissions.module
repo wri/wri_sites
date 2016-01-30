@@ -19,7 +19,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
 use Drupal\Core\Url;
 use Drupal\Core\Routing\AdminContext;
-use Drupal\field_permissions\FieldPermissions;
+use Drupal\field_permissions\FieldPermissionsService;
 
 /**
  * Indicates that a field does not have any access control.
@@ -164,7 +164,7 @@ function field_permissions_permissions_matrix(\Drupal\field\Entity\FieldStorageC
     '#value' => $role_names,
   );
   $label = $field->getName();
-  $permissions = FieldPermissions::ListFieldPermissionSupport($field, $label);
+  $permissions = FieldPermissionsService::ListFieldPermissionSupport($field, $label);
   $options = array_keys($permissions);
   /*header theme table*/
   $form['permissions'] = array(
@@ -180,7 +180,7 @@ function field_permissions_permissions_matrix(\Drupal\field\Entity\FieldStorageC
         'class' => array('checkbox'),
       );
     }
-    $test = FieldPermissions::GetPermissionValue();
+    $test = FieldPermissionsService::GetPermissionValue();
     foreach ($permissions as $provider => $permission) {
       $form['permissions'][$provider]['description'] = array(
         '#type' => 'inline_template',
