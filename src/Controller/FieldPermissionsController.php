@@ -23,24 +23,14 @@ class FieldPermissionsController {
       '#header' => $this->buildHeader(),
       '#title' => $this->getTitle(),
       '#rows' => $this->buildRows(),
-      //TODO to be implemented
-//      '#empty' => $this->t('There is no @label yet.', array('@label' => $this->entityType->getLabel())),
-//      '#cache' => [
-//        'contexts' => $this->entityType->getListCacheContexts(),
-//        'tags' => $this->entityType->getListCacheTags(),
-//      ],
     );
 
   return $build;
   }
 
-
-
-
   public function buildHeader(){
-    // $support = new FieldPermissions();
     $headers = array(t('Field name'), t('Field type'), t('Entity type'), t('Used in'));
-    $permissions_list = ieldPermissions::field_permissions_list();
+    $permissions_list = FieldPermissions::field_permissions_list();
     foreach ( $permissions_list as $permission_type => $permission_info) {
       $headers[] = array('data' => $permission_info['label'], 'class' => 'field-permissions-header');
     }
@@ -53,37 +43,24 @@ class FieldPermissionsController {
 
   protected function buildRows(){
     $instances = \Drupal::entityTypeManager()->getStorage('field_storage_config')->loadMultiple();
-//    $field_types= $instances->getDefinitions();
-//    $field_types= \Drupal\Core\FieldTypePluginManager::getDefinitions();
+
     /**
      *  occorre caricare l'elenco dei tipi di field in modo da poter presentare in tabella la parte
      *  descrittiva e non il nomi macchina
-     *
-     *
-     *
      */
-     // dpm($instances);
     $rows=[];
 
     /**
      * @var $instance \Drupal\field\Entity\FieldStorageConfig
      */
     foreach( $instances as $key=>$instance){
-//    $row=[];
-//      $row[]=$instance->get('field_name');
-//      $row[]=$instance->get('type');
-//      $row[]=$instance->get('entity_type');
-//
       $rows[]=$this->buildRow($instance);
     }
-
-//    dpm($instances);
     return $rows;
   }
 
 //  protected function buildRow(EntityInterface $field_storage) {
   protected function buildRow(\Drupal\field\Entity\FieldStorageConfig $field_storage) {
-
     $row = [];
     if ($field_storage->isLocked()) {
       $row[0]['class'] = array('menu-disabled');
