@@ -1,0 +1,5 @@
+services:
+    field_permissions.subscriber:
+        class: 'Drupal\field_permissions\Routing\RouteSubscriberFieldPermissions'
+        tags:
+          - {name: event_subscriber }

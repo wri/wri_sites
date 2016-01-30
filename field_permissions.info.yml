@@ -1,0 +1,8 @@
+name: Field Permissions
+type: module
+hidden: false
+description: 'Set field-level permissions to create, update or view fields.'
+package: field
+version: 8.x-1.x-dev
+core: '8.x'
+datestamp: 1449315106

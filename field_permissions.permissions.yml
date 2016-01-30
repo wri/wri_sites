@@ -1,0 +1,2 @@
+permission_callbacks:
+  - Drupal\field_permissions\FieldPermissions::permissions

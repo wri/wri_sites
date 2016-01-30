@@ -1,0 +1,6 @@
+field_permissions_admin:
+  path: 'admin/reports/fields/permissions'
+  defaults:
+    _controller: '\Drupal\field_permissions\Controller\FieldPermissionsController::content'
+  requirements:
+    _permission: 'access content'

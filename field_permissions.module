@@ -1,0 +1,271 @@
+<?php
+
+/**
+ * @file
+ * Contains field_permissions.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Entity\Entity\EntityFormDisplay;
+use Drupal\Core\Url;
+use Drupal\Core\Routing\AdminContext;
+use Drupal\field_permissions\FieldPermissions;
+
+/**
+ * Indicates that a field does not have any access control.
+ */
+define('FIELD_PERMISSIONS_PUBLIC', 0);
+
+/**
+ * Indicates that a field is private.
+ *
+ * Private fields are never displayed, and are only editable by the author (and
+ * by site administrators with the 'access private fields' permission).
+ */
+define('FIELD_PERMISSIONS_PRIVATE', 1);
+
+/**
+ * Indicates that a field has custom permissions.
+ */
+define('FIELD_PERMISSIONS_CUSTOM', 2);
+
+
+/**
+ * Implements hook_help().
+ */
+function field_permissions_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the test module.
+    case 'help.page.test':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('test') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+
+/**
+ * Implements hook_entity_field_access().
+ */
+function field_permissions_entity_field_access($operation, \Drupal\Core\Field\FieldDefinitionInterface $field_definition, \Drupal\Core\Session\AccountInterface $account, \Drupal\Core\Field\FieldItemListInterface $items = NULL) {
+  // dpm($field_definition);
+  // dpm($operation);
+
+  //  $field_name = $field_definition->getName();
+
+  //  $field = \Drupal::entityTypeManager()->getStorage('field_config')->loadMultiple($settings);
+  $config = \Drupal::service('config.factory')->getEditable('field_permissions.field.settings');
+  $field_name = $field_definition->getName();
+  dpm($operation);
+  // dpm($account);
+  dpm($field_name);
+  dpm($account->hasPermission('view_' . $field_name));
+  dpm(AccessResult::allowedIfHasPermission($account, 'view_' . $field_name));
+  return AccessResult::forbidden();
+  if(!$account->hasPermission('view_' . $field_name)) {
+    return AccessResult::forbidden();
+  }
+  else {
+
+  }
+  dpm(AccessResult::allowedIfHasPermission($account, 'view_' . $field_name));
+// dpm()
+   // $account = \Drupal::currentUser();
+  // return $account->hasPermission('view_' . $field_name);
+  // return FALSE;
+  // return AccessResult::allowedIfHasPermission($account, 'view_' . $field_name);
+  // dpm($result);
+  // dpm($result);
+  /*
+  dpm($field_name);
+  $field_per_type = $config->get('permission_type_' . $field_name));
+  dpm($operation);
+  */
+
+//   $config->save();
+
+  /*
+  if ($field_definition->getName() == 'field_test_text') {
+    if ($items) {
+      if ($items->value == 'no access value') {
+        return AccessResult::forbidden()->cacheUntilEntityChanges($items->getEntity());
+      }
+      elseif ($operation == 'edit' && $items->value == 'no edit access value') {
+        return AccessResult::forbidden()->cacheUntilEntityChanges($items->getEntity());
+      }
+    }
+  }
+  if ($field = \Drupal::state()->get('views_field_access_test-field')) {
+    if ($field_definition->getName() === $field) {
+      $result = AccessResult::allowedIfHasPermission($account, 'view test entity field');
+      // For test purposes we want to actively deny access.
+      if ($result->isNeutral()) {
+        $result = AccessResult::forbidden();
+      }
+      return $result;
+    }
+  }
+  */
+  // No opinion.
+  return AccessResult::neutral();
+}
+
+  /**
+   * Implements hook_form_alter().
+   */
+  function field_permissions_form_field_config_edit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+    // da aggiungere i permessi del modulo
+    $current_path = \Drupal::service('path.current')->getPath();
+    $path_args = explode('/', $current_path);
+    $settings = ['id' => $path_args[7]];
+    // da caricare singolarmente ?
+    $field = \Drupal::entityTypeManager()->getStorage('field_config')->loadMultiple($settings);
+    $config = \Drupal::service('config.factory')->getEditable('field_permissions.field.settings');
+
+    $default_type =  ($config->get('permission_type_' . reset($field)->getName())) ? $config->get('permission_type_' . reset($field)->getName()) : FIELD_PERMISSIONS_PUBLIC;
+
+    $form['fid'] = array('#type' => 'hidden', '#value' => $path_args[7]);
+    $form['field']['field_permissions'] = array(
+      '#weight' => -10,
+      // '#access' => user_access('administer field permissions'),
+    );
+    $form['field']['field_permissions']['type'] = array(
+      '#title' => t('Field visibility and permissions'),
+      '#type' => 'radios',
+      '#options' => array(
+        FIELD_PERMISSIONS_PUBLIC => t('Public (author and administrators can edit, everyone can view)'),
+        FIELD_PERMISSIONS_PRIVATE => t('Private (only author and administrators can edit and view)'),
+        FIELD_PERMISSIONS_CUSTOM => t('Custom permissions'),
+      ),
+      '#default_value' => isset($form['#field']['field_permissions']['type']) ? $form['#field']['field_permissions']['type'] : $default_type,
+    );
+    $form['field_permissions']['permissions'] = field_permissions_permissions_matrix(reset($field));
+    $form['actions']['submit']['#submit'][] = 'field_permission_field_config_edit_form_submit';
+}
+
+function field_permissions_permissions_matrix(\Drupal\field\Entity\FieldStorageConfig $field) {
+  $roles = user_roles();
+  $role_names = array_keys($roles);
+  $form['role_names'] = array(
+    '#type' => 'value',
+    '#value' => $role_names,
+  );
+  $label = $field->getName();
+  $permissions = FieldPermissions::ListFieldPermissionSupport($field, $label);
+  $options = array_keys($permissions);
+  /*header theme table*/
+  $form['permissions'] = array(
+      '#type' => 'table',
+      '#header' => array(t('Permission')),
+      '#id' => 'permissions',
+      '#attributes' => ['class' => ['permissions', 'js-permissions']],
+      '#sticky' => TRUE,
+    );
+    foreach ($role_names as $name) {
+      $form['permissions']['#header'][] = array(
+        'data' => $name,
+        'class' => array('checkbox'),
+      );
+    }
+    $test = FieldPermissions::GetPermissionValue();
+    foreach ($permissions as $provider => $permission) {
+      $form['permissions'][$provider]['description'] = array(
+        '#type' => 'inline_template',
+        '#template' => '<div class="permission"><span class="title">{{ title }}</span>{% if description or warning %}<div class="description">{% if warning %}<em class="permission-warning">{{ warning }}</em> {% endif %}{{ description }}</div>{% endif %}</div>',
+        '#context' => array(
+          'title' => $permission["title"],//$perm_item['title'],
+        ),
+      );
+      $options[$provider] = '';
+
+      foreach ($role_names as $rid => $name) {
+        $form['permissions'][$provider][$rid] = array(
+          '#title' => $name . ': ' . $permission["title"],
+          '#title_display' => 'invisible',
+          '#wrapper_attributes' => array(
+            'class' => array('checkbox'),
+          ),
+          '#type' => 'checkbox',
+          '#default_value' => in_array($provider, $test[$name]) ? 1 : 0,
+          '#attributes' => array('class' => array('rid-' . $rid, 'js-rid-' . $rid)),
+          // '#parents' => array($rid, $perm),
+        );
+      }
+    }
+    return $form;
+}
+
+// Add form submit function.
+function field_permission_field_config_edit_form_submit(array &$form, FormStateInterface $form_state) {
+
+  $type_permission =  $form_state->getValue("type");
+  $settings = ['id' => $form_state->getValue("fid")];
+  $custum_permissions = $form_state->getValue("permissions");
+  $roules = $form_state->getValue("role_names");
+
+  $field = \Drupal::entityTypeManager()->getStorage('field_config')->loadMultiple($settings);
+  $config = \Drupal::service('config.factory')->getEditable('field_permissions.field.settings');
+  $field_name = reset($field)->getName();
+  $config->set('permission_type_' . $field_name , $type_permission);
+  $config->save();
+
+  $perm_settings = [];
+  // Set all perm.
+  if($type_permission == FIELD_PERMISSIONS_CUSTOM) {
+    foreach($custum_permissions as $perm_name => $field_perm) {
+      foreach($field_perm as $rid => $roule_perm) {
+        $roule_name = $roules[$rid];
+        $perm_settings[$roule_name][$perm_name] = $roule_perm;
+      }
+    }
+  }
+  // PUBLIC PERMISSION
+  // Set only view all field
+  else if ($type_permission == FIELD_PERMISSIONS_PUBLIC) {
+    foreach($custum_permissions as $perm_name => $field_perm) {
+      foreach($field_perm as $rid => $roule_perm) {
+          if($perm_name != 'view_'. $field_name) {
+            $roule_perm = 0;
+          }
+          else {
+            $roule_perm = 1;
+          }
+          $roule_name = $roules[$rid];
+          $perm_settings[$roule_name][$perm_name] = $roule_perm;
+      }
+    }
+  }
+  // PRIVATE PERMISSION
+  // Set only view_own_ and edit_own_ all field
+  else if ($type_permission == FIELD_PERMISSIONS_PRIVATE) {
+    foreach($custum_permissions as $perm_name => $field_perm) {
+      foreach($field_perm as $rid => $roule_perm) {
+          if($perm_name != 'view_own_'. $field_name && $perm_name != 'edit_own_'. $field_name ) {
+            $roule_perm = 0;
+          }
+          else {
+            $roule_perm = 1;
+          }
+          $roule_name = $roules[$rid];
+          $perm_settings[$roule_name][$perm_name] = $roule_perm;
+      }
+    }
+  }
+  // change_permissions
+  foreach($perm_settings as $roule_name => $perm){
+    user_role_change_permissions($roule_name, $perm);
+  }
+}
