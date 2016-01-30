@@ -128,9 +128,9 @@ function field_permissions_entity_field_access($operation, \Drupal\Core\Field\Fi
    */
   function field_permissions_form_field_config_edit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
     // da aggiungere i permessi del modulo
-    $current_path = \Drupal::service('path.current')->getPath();
-    $path_args = explode('/', $current_path);
-    $settings = ['id' => $path_args[7]];
+    $id = $form_state->getBuildInfo()['callback_object']->getEntity()->id();
+    $settings = ['id' => $id];
+    
     // da caricare singolarmente ?
     $field = \Drupal::entityTypeManager()->getStorage('field_config')->loadMultiple($settings);
     $config = \Drupal::service('config.factory')->getEditable('field_permissions.field.settings');
