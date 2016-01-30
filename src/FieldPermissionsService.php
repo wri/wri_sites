@@ -2,14 +2,11 @@
 
 namespace Drupal\field_permissions;
 
-use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Entity\ContentEntityBase;
-use Drupal\Core\Entity\EntityTypeManager;
-use Symfony\Component\Validator\Constraints\File;
 use Drupal\Core\Field;
+use Drupal\field\FieldStorageConfigInterface;
 
 
-class FieldPermissionsService {
+class FieldPermissionsService implements FieldPermissionsServiceInterface {
 
   /**
    * Obtain the list of field permissions.
@@ -45,19 +42,13 @@ class FieldPermissionsService {
   }
 
   /**
-   * Returns field permissions in format suitable for use in hook_permission.
-   *
-   * @param \Drupal\field\Entity\FieldStorageConfig $field
-   *   The field to return permissions for.
-   *
-   * @return array
-   *   An array of permission information,
+   * {@inheritdoc}
    */
-  public function ListFieldPermissionSupport(\Drupal\field\Entity\FieldStorageConfig $field, $label ='') {
+  public function listFieldPermissionSupport(FieldStorageConfigInterface $field, $label = '') {
     $permissions = array();
     $permission_list = FieldPermissions::field_permissions_list($label);
     foreach ($permission_list as $permission_type => $permission_info) {
-      $permission =  str_replace(' ', '_' , $permission_type) . '_' .  $field->getName();
+      $permission = str_replace(' ', '_', $permission_type) . '_' . $field->getName();
       $permissions[$permission] = array(
         'title' => $permission_info['title']->__toString(),
         'description' => $permission_info['label']->__toString(),
@@ -66,26 +57,28 @@ class FieldPermissionsService {
     return $permissions;
   }
 
-  // Get default value for checkbox  role permission.
-  public function GetPermissionValue(\Drupal\field\Entity\FieldStorageConfig $field){
+  /**
+   * {@inheritdoc}
+   */
+  public function getPermissionValue(FieldStorageConfigInterface $field) {
     $roules = user_roles();
     $field_field_permissions = [];
     $ye = new FieldPermissions();
-    $field_permission_perm =  $ye->permissions();
-    $permissions =  user_role_permissions();
-    foreach($roules as $rule_name => $roule) {
+    $field_permission_perm = $ye->permissions();
+    $permissions = user_role_permissions();
+    foreach ($roules as $rule_name => $roule) {
       $roule_perms = $roule->getPermissions();
       $field_field_permissions[$rule_name] = [];
       // For all element set admin permission.
       if(/*empty($roule_perms) && */ $roule->isAdmin()) {
-        foreach(array_keys($field_permission_perm) as $perm_name) {
+        foreach (array_keys($field_permission_perm) as $perm_name) {
           $field_field_permissions[$rule_name][] = $perm_name;
         }
       }
       else {
-        foreach($roule_perms as $key => $roule_perm) {
-          if(in_array($roule_perm, array_keys($field_permission_perm))){
-            $field_field_permissions[$rule_name][] =  $roule_perm;
+        foreach ($roule_perms as $key => $roule_perm) {
+          if (in_array($roule_perm, array_keys($field_permission_perm))) {
+            $field_field_permissions[$rule_name][] = $roule_perm;
           }
         }
       }

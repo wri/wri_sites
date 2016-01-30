@@ -164,7 +164,7 @@ function field_permissions_permissions_matrix(\Drupal\field\Entity\FieldStorageC
     '#value' => $role_names,
   );
   $label = $field->getName();
-  $permissions = FieldPermissionsService::ListFieldPermissionSupport($field, $label);
+  $permissions = \Drupal::service('field_permissions.permissions_service')->listFieldPermissionSupport($field, $label);
   $options = array_keys($permissions);
   /*header theme table*/
   $form['permissions'] = array(
