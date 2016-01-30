@@ -1,0 +1,4 @@
+field_permissions.settings:
+ message: 'PIPPO'
+ type: string
+ label: "Message text"
