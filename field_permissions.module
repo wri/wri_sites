@@ -56,70 +56,30 @@ function field_permissions_help($route_name, RouteMatchInterface $route_match) {
   }
 }
 
-
 /**
  * Implements hook_entity_field_access().
  */
-function field_permissions_entity_field_access($operation, \Drupal\Core\Field\FieldDefinitionInterface $field_definition, \Drupal\Core\Session\AccountInterface $account, \Drupal\Core\Field\FieldItemListInterface $items = NULL) {
-  // dpm($field_definition);
-  // dpm($operation);
-
-  //  $field_name = $field_definition->getName();
-
-  //  $field = \Drupal::entityTypeManager()->getStorage('field_config')->loadMultiple($settings);
+function field_permissions_entity_field_access($operation, FieldDefinitionInterface $field_definition, \Drupal\Core\Session\AccountInterface $account, \Drupal\Core\Field\FieldItemListInterface $items = NULL) {
+  $bundle = $field_definition->getTargetEntityTypeId();
+  $id = $field_definition->getConfig($bundle)->id();
+  $field_name =  $field_definition->getConfig($bundle)->getName();
   $config = \Drupal::service('config.factory')->getEditable('field_permissions.field.settings');
-  $field_name = $field_definition->getName();
-  dpm($operation);
-  // dpm($account);
-  dpm($field_name);
-  dpm($account->hasPermission('view_' . $field_name));
-  dpm(AccessResult::allowedIfHasPermission($account, 'view_' . $field_name));
-  return AccessResult::forbidden();
-  if(!$account->hasPermission('view_' . $field_name)) {
-    return AccessResult::forbidden();
-  }
-  else {
+  $field_settings_perm = $config->get('permission_type_' . $field_name);
 
+  $settings = ['id' => $id];
+  $field = \Drupal::entityTypeManager()->getStorage('field_config')->loadMultiple($settings);
+  if(empty($field)) {
+   return AccessResult::neutral();
   }
-  dpm(AccessResult::allowedIfHasPermission($account, 'view_' . $field_name));
-// dpm()
-   // $account = \Drupal::currentUser();
-  // return $account->hasPermission('view_' . $field_name);
-  // return FALSE;
-  // return AccessResult::allowedIfHasPermission($account, 'view_' . $field_name);
-  // dpm($result);
-  // dpm($result);
-  /*
-  dpm($field_name);
-  $field_per_type = $config->get('permission_type_' . $field_name));
-  dpm($operation);
-  */
+  $default_type =  ($field_settings_perm) ? $field_settings_perm : FIELD_PERMISSIONS_PUBLIC;
+  dpm([$field_name => $default_type, "perm" => $account->hasPermission($operation . '_' . $field_name)] );
+  if($default_type === FIELD_PERMISSIONS_PRIVATE) {
+   dpm("private");
+  }
+  else if($default_type == FIELD_PERMISSIONS_CUSTOM && !$account->hasPermission($operation . '_' . $field_name)) {
+   return AccessResult::forbidden();
+  }
 
-//   $config->save();
-
-  /*
-  if ($field_definition->getName() == 'field_test_text') {
-    if ($items) {
-      if ($items->value == 'no access value') {
-        return AccessResult::forbidden()->cacheUntilEntityChanges($items->getEntity());
-      }
-      elseif ($operation == 'edit' && $items->value == 'no edit access value') {
-        return AccessResult::forbidden()->cacheUntilEntityChanges($items->getEntity());
-      }
-    }
-  }
-  if ($field = \Drupal::state()->get('views_field_access_test-field')) {
-    if ($field_definition->getName() === $field) {
-      $result = AccessResult::allowedIfHasPermission($account, 'view test entity field');
-      // For test purposes we want to actively deny access.
-      if ($result->isNeutral()) {
-        $result = AccessResult::forbidden();
-      }
-      return $result;
-    }
-  }
-  */
-  // No opinion.
   return AccessResult::neutral();
 }
 
@@ -130,14 +90,14 @@ function field_permissions_entity_field_access($operation, \Drupal\Core\Field\Fi
     // da aggiungere i permessi del modulo
     $id = $form_state->getBuildInfo()['callback_object']->getEntity()->id();
     $settings = ['id' => $id];
-    
+
     // da caricare singolarmente ?
     $field = \Drupal::entityTypeManager()->getStorage('field_config')->loadMultiple($settings);
     $config = \Drupal::service('config.factory')->getEditable('field_permissions.field.settings');
 
     $default_type =  ($config->get('permission_type_' . reset($field)->getName())) ? $config->get('permission_type_' . reset($field)->getName()) : FIELD_PERMISSIONS_PUBLIC;
 
-    $form['fid'] = array('#type' => 'hidden', '#value' => $path_args[7]);
+    $form['fid'] = array('#type' => 'hidden', '#value' => $id);
     $form['field']['field_permissions'] = array(
       '#weight' => -10,
       // '#access' => user_access('administer field permissions'),
@@ -210,14 +170,19 @@ function field_permissions_permissions_matrix(\Drupal\field\Entity\FieldStorageC
 
 // Add form submit function.
 function field_permission_field_config_edit_form_submit(array &$form, FormStateInterface $form_state) {
-
+  dpm($form_state->getValue("fid"));
+  dpm("test");
+  $id = $form_state->getBuildInfo()['callback_object']->getEntity()->id();
+  // exit();
   $type_permission =  $form_state->getValue("type");
-  $settings = ['id' => $form_state->getValue("fid")];
+  $settings = ['id' => $id];
   $custum_permissions = $form_state->getValue("permissions");
   $roules = $form_state->getValue("role_names");
 
   $field = \Drupal::entityTypeManager()->getStorage('field_config')->loadMultiple($settings);
   $config = \Drupal::service('config.factory')->getEditable('field_permissions.field.settings');
+//  dpm($field);
+
   $field_name = reset($field)->getName();
   $config->set('permission_type_' . $field_name , $type_permission);
   $config->save();
