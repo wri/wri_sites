@@ -46,7 +46,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
    */
   public function listFieldPermissionSupport(FieldStorageConfigInterface $field, $label = '') {
     $permissions = array();
-    $permission_list = FieldPermissions::field_permissions_list($label);
+    $permission_list = FieldPermissionsService::getList($label);
     foreach ($permission_list as $permission_type => $permission_info) {
       $permission = str_replace(' ', '_', $permission_type) . '_' . $field->getName();
       $permissions[$permission] = array(
@@ -63,8 +63,8 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
   public function getPermissionValue(FieldStorageConfigInterface $field) {
     $roules = user_roles();
     $field_field_permissions = [];
-    $ye = new FieldPermissions();
-    $field_permission_perm = $ye->permissions();
+    //$ye = new FieldPermissions();
+    $field_permission_perm = FieldPermissionsService::permissions();
     $permissions = user_role_permissions();
     foreach ($roules as $rule_name => $roule) {
       $roule_perms = $roule->getPermissions();
@@ -92,7 +92,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
     $instances = \Drupal::entityTypeManager()->getStorage('field_storage_config')->loadMultiple();
     foreach ($instances as $key => $instance) {
       $field_name = $instance->getName();
-      $permission_list = $this->getList($field_name);
+      $permission_list = FieldPermissionsService::getList($field_name);
       $perms_name = array_keys($permission_list);
       foreach ($perms_name as $perm_name) {
         $name = str_replace(' ', '_', $perm_name) . '_' . $field_name;
