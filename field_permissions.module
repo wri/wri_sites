@@ -19,7 +19,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
 use Drupal\Core\Url;
 use Drupal\Core\Routing\AdminContext;
-use Drupal\field_permissions\FieldPermissions;
+use Drupal\field_permissions\FieldPermissionsService;
 
 /**
  * Indicates that a field does not have any access control.
@@ -67,20 +67,17 @@ function field_permissions_entity_field_access($operation, FieldDefinitionInterf
   $field_settings_perm = $config->get('permission_type_' . $field_name);
   $settings = ['id' => $id];
   $field = \Drupal::entityTypeManager()->getStorage('field_config')->loadMultiple($settings);
-  $node = \Drupal::routeMatch()->getParameter('node');
 
-  if(empty($field) || !$node->id()) {
+  if(empty($field) || empty($items)) {
    return AccessResult::neutral();
   }
-  $default_type =  ($field_settings_perm) ? $field_settings_perm : FIELD_PERMISSIONS_PUBLIC;
-  //  dpm([$field_name => $default_type, "perm" => $account->hasPermission($operation . '_' . $field_name)] );
-  if($default_type == FIELD_PERMISSIONS_PRIVATE) {
-    if( $node->getOwnerId() != $account->id()) {
-        return AccessResult::forbidden();
-    }
+  $default_type = ($field_settings_perm) ? $field_settings_perm : FIELD_PERMISSIONS_PUBLIC;
+  if($default_type == FIELD_PERMISSIONS_PUBLIC ){
+    return AccessResult::neutral();
   }
-  else if($default_type == FIELD_PERMISSIONS_CUSTOM && !$account->hasPermission($operation . '_' . $field_name)) {
-   return AccessResult::forbidden();
+  $access_field = FieldPermissionsService::GetFieldAccess($default_type, $operation,$items,$account,$field_definition);
+  if(!$access_field) {
+    return AccessResult::forbidden();
   }
   return AccessResult::neutral();
 }
@@ -93,7 +90,6 @@ function field_permissions_entity_field_access($operation, FieldDefinitionInterf
     $id = $form_state->getBuildInfo()['callback_object']->getEntity()->id();
     $settings = ['id' => $id];
 
-    // da caricare singolarmente ?
     $field = \Drupal::entityTypeManager()->getStorage('field_config')->loadMultiple($settings);
     $config = \Drupal::service('config.factory')->getEditable('field_permissions.field.settings');
 
@@ -126,7 +122,8 @@ function field_permissions_permissions_matrix(\Drupal\field\Entity\FieldStorageC
     '#value' => $role_names,
   );
   $label = $field->getName();
-  $permissions = FieldPermissions::ListFieldPermissionSupport($field, $label);
+  $permissions = \Drupal::service('field_permissions.permissions_service')->listFieldPermissionSupport($field, $label);
+  //$permissions = FieldPermissions::ListFieldPermissionSupport($field, $label);
   $options = array_keys($permissions);
   /*header theme table*/
   $form['permissions'] = array(
@@ -142,7 +139,8 @@ function field_permissions_permissions_matrix(\Drupal\field\Entity\FieldStorageC
         'class' => array('checkbox'),
       );
     }
-    $test = FieldPermissions::GetPermissionValue();
+    // $test = FieldPermissions::GetPermissionValue();
+    $test = FieldPermissionsService::GetPermissionValue();
     foreach ($permissions as $provider => $permission) {
       $form['permissions'][$provider]['description'] = array(
         '#type' => 'inline_template',
@@ -172,10 +170,9 @@ function field_permissions_permissions_matrix(\Drupal\field\Entity\FieldStorageC
 
 // Add form submit function.
 function field_permission_field_config_edit_form_submit(array &$form, FormStateInterface $form_state) {
-  dpm($form_state->getValue("fid"));
-  dpm("test");
+
   $id = $form_state->getBuildInfo()['callback_object']->getEntity()->id();
-  // exit();
+
   $type_permission =  $form_state->getValue("type");
   $settings = ['id' => $id];
   $custum_permissions = $form_state->getValue("permissions");
@@ -183,7 +180,6 @@ function field_permission_field_config_edit_form_submit(array &$form, FormStateI
 
   $field = \Drupal::entityTypeManager()->getStorage('field_config')->loadMultiple($settings);
   $config = \Drupal::service('config.factory')->getEditable('field_permissions.field.settings');
-//  dpm($field);
 
   $field_name = reset($field)->getName();
   $config->set('permission_type_' . $field_name , $type_permission);

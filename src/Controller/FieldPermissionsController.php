@@ -6,10 +6,37 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeManager;
 use Symfony\Component\Validator\Constraints\File;
+use \Drupal\field\Entity\FieldStorageConfig;
 use Drupal\Core\Field;
-use Drupal\field_permissions\FieldPermissions;
+use Drupal\field_permissions\FieldPermissionsService;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class FieldPermissionsController {
+class FieldPermissionsController extends ControllerBase {
+
+  protected $fieldPermissions;
+
+  /**
+   * Boh boh.
+   *
+   * @param FieldPermissionsService $field_permissions_service
+   *   param
+   */
+  public function __construct(FieldPermissionsService $field_permissions_service) {
+    $this->fieldPermissions = $field_permissions_service;
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * Uses late static binding to create an instance of this class with
+   * injected dependencies.
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('field_permissions.permissions_service')
+    );
+  }
+
 
   public function content(){
 
@@ -30,14 +57,14 @@ class FieldPermissionsController {
 
   public function buildHeader(){
     $headers = array(t('Field name'), t('Field type'), t('Entity type'), t('Used in'));
-    $permissions_list = FieldPermissions::field_permissions_list();
+    $permissions_list = $this->fieldPermissions->getList();
     foreach ( $permissions_list as $permission_type => $permission_info) {
       $headers[] = array('data' => $permission_info['label'], 'class' => 'field-permissions-header');
     }
     return $headers;
   }
 
-  public function getTitle(){
+  public function getTitle() {
     return t('Field permissions');
   }
 
@@ -59,12 +86,20 @@ class FieldPermissionsController {
     return $rows;
   }
 
-//  protected function buildRow(EntityInterface $field_storage) {
-  protected function buildRow(\Drupal\field\Entity\FieldStorageConfig $field_storage) {
+  /**
+   * XXXXX.
+   *
+   * @param \Drupal\field\Entity\FieldStorageConfig $field_storage
+   *   xxx
+   *
+   * @return array
+   *   xxx
+   */
+  protected function buildRow(FieldStorageConfig $field_storage) {
     $row = [];
     if ($field_storage->isLocked()) {
       $row[0]['class'] = array('menu-disabled');
-      $row[0]['data']['id'] =  $this->t('@field_name (Locked)', array('@field_name' => $field_storage->getName()));
+      $row[0]['data']['id'] = $this->t('@field_name (Locked)', array('@field_name' => $field_storage->getName()));
     }
     else {
       $row[0]['data'] = $field_storage->getName();
