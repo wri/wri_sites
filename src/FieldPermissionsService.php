@@ -102,4 +102,55 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
     return $permissions;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  function GetFieldAccess($default_type, $operation, $items,AccountInterface $account, $field_definition) {
+    $bundle = $field_definition->getTargetEntityTypeId();
+    $field_name =  $field_definition->getConfig($bundle)->getName();
+    if($default_type == FIELD_PERMISSIONS_PRIVATE){
+      if($operation === "view") {
+        if($items->getEntity()->getOwnerId() == $account->id()) {
+          return $account->hasPermission($operation . "_own_" .$field_name);
+        }
+        else {
+          return FALSE;
+        }
+      }
+      else if($operation === "edit") {
+        if($items->getEntity()->isNew()) {
+          return $account->hasPermission("create_" . $field_name);
+        }
+        else if($items->getEntity()->getOwnerId() == $account->id()) {
+          return $account->hasPermission($operation . "_own_" .$field_name);
+        }
+        else {
+          return FALSE;
+        }
+      }
+    }
+    if($default_type == FIELD_PERMISSIONS_CUSTOM) {
+      if($operation === "view") {
+        if($account->hasPermission($operation . "_" . $field_name)) {
+          return $account->hasPermission($operation . "_" . $field_name);
+        }
+        else if($items->getEntity()->getOwnerId() == $account->id()) {
+          return $account->hasPermission($operation . "_own_" .$field_name);
+        }
+      }
+     else if($operation === "edit") {
+        if($items->getEntity()->isNew()) {
+          return $account->hasPermission("create_" . $field_name);
+        }
+        if($account->hasPermission($operation . "_" . $field_name)) {
+
+          return $account->hasPermission($operation . "_" . $field_name);
+        }
+        else if($items->getEntity()->getOwnerId() == $account->id()) {
+          return $account->hasPermission($operation . "_own_" .$field_name);
+        }
+      }
+    }
+  }
+
 }
