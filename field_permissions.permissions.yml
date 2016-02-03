@@ -1,2 +1,2 @@
 permission_callbacks:
-  - Drupal\field_permissions\FieldPermissions::permissions
+  - Drupal\field_permissions\FieldPermissionsService::permissions

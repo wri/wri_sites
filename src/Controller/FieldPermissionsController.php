@@ -11,9 +11,9 @@ use Drupal\Core\Field;
 use Drupal\field_permissions\FieldPermissionsService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class FieldPermissionsController extends ControllerBase {
-
-  protected $fieldPermissions;
+class FieldPermissionsController extends ControllerBase
+{
+    protected $fieldPermissions;
 
   /**
    * Boh boh.
@@ -21,8 +21,9 @@ class FieldPermissionsController extends ControllerBase {
    * @param FieldPermissionsService $field_permissions_service
    *   param
    */
-  public function __construct(FieldPermissionsService $field_permissions_service) {
-    $this->fieldPermissions = $field_permissions_service;
+  public function __construct(FieldPermissionsService $field_permissions_service)
+  {
+      $this->fieldPermissions = $field_permissions_service;
   }
 
   /**
@@ -31,14 +32,16 @@ class FieldPermissionsController extends ControllerBase {
    * Uses late static binding to create an instance of this class with
    * injected dependencies.
    */
-  public static function create(ContainerInterface $container) {
-    return new static(
+  public static function create(ContainerInterface $container)
+  {
+      return new static(
       $container->get('field_permissions.permissions_service')
     );
   }
 
 
-  public function content(){
+    public function content()
+    {
 
 //    $fields = \Drupal::entityTypeManager()->getStorage('field_config')->loadMultiple();
 //    $instances = \Drupal::entityTypeManager()->getStorage('field_storage_config')->loadByProperties(['entity_type'=>'field']);
@@ -52,24 +55,27 @@ class FieldPermissionsController extends ControllerBase {
       '#rows' => $this->buildRows(),
     );
 
-  return $build;
-  }
-
-  public function buildHeader(){
-    $headers = array(t('Field name'), t('Field type'), t('Entity type'), t('Used in'));
-    $permissions_list = $this->fieldPermissions->getList();
-    foreach ( $permissions_list as $permission_type => $permission_info) {
-      $headers[] = array('data' => $permission_info['label'], 'class' => 'field-permissions-header');
+        return $build;
     }
-    return $headers;
-  }
 
-  public function getTitle() {
-    return t('Field permissions');
-  }
+    public function buildHeader()
+    {
+        $headers = array(t('Field name'), t('Field type'), t('Entity type'), t('Used in'));
+        $permissions_list = $this->fieldPermissions->getList();
+        foreach ($permissions_list as $permission_type => $permission_info) {
+            $headers[] = array('data' => $permission_info['label'], 'class' => 'field-permissions-header');
+        }
+        return $headers;
+    }
 
-  protected function buildRows(){
-    $instances = \Drupal::entityTypeManager()->getStorage('field_storage_config')->loadMultiple();
+    public function getTitle()
+    {
+        return t('Field permissions');
+    }
+
+    protected function buildRows()
+    {
+        $instances = \Drupal::entityTypeManager()->getStorage('field_storage_config')->loadMultiple();
 
     /**
      *  occorre caricare l'elenco dei tipi di field in modo da poter presentare in tabella la parte
@@ -80,11 +86,11 @@ class FieldPermissionsController extends ControllerBase {
     /**
      * @var $instance \Drupal\field\Entity\FieldStorageConfig
      */
-    foreach( $instances as $key=>$instance){
-      $rows[]=$this->buildRow($instance);
+    foreach ($instances as $key=>$instance) {
+        $rows[]=$this->buildRow($instance);
     }
-    return $rows;
-  }
+        return $rows;
+    }
 
   /**
    * XXXXX.
@@ -95,34 +101,32 @@ class FieldPermissionsController extends ControllerBase {
    * @return array
    *   xxx
    */
-  protected function buildRow(FieldStorageConfig $field_storage) {
-    $row = [];
-    if ($field_storage->isLocked()) {
-      $row[0]['class'] = array('menu-disabled');
-      $row[0]['data']['id'] = $this->t('@field_name (Locked)', array('@field_name' => $field_storage->getName()));
-    }
-    else {
-      $row[0]['data'] = $field_storage->getName();
-    }
-    $row[1]['data'] = $field_storage->getType();
-    $row[2]['data'] = $field_storage->getTargetEntityTypeId();
-    $row[3]['data'] =  implode(",", $field_storage->getBundles());
+  protected function buildRow(FieldStorageConfig $field_storage)
+  {
+      $row = [];
+      if ($field_storage->isLocked()) {
+          $row[0]['class'] = array('menu-disabled');
+          $row[0]['data']['id'] = $this->t('@field_name (Locked)', array('@field_name' => $field_storage->getName()));
+      } else {
+          $row[0]['data'] = $field_storage->getName();
+      }
+      $row[1]['data'] = $field_storage->getType();
+      $row[2]['data'] = $field_storage->getTargetEntityTypeId();
+      $row[3]['data'] =  implode(",", $field_storage->getBundles());
 
-    $default_type = $this->fieldPermissions->fieldGetPermissionType($field_storage);
-    if($default_type == FIELD_PERMISSIONS_PUBLIC) {
-      $row[4]['data'] = t("Public field (author and administrators can edit, everyone can view)");
-      $row[4]['colspan'] = 5;
-    }
-    else if($default_type == FIELD_PERMISSIONS_PRIVATE){
-      $row[4]['data'] = t("Private field (only author and administrators can edit and view)");
-      $row[4]['colspan'] = 5;
-    }
-    else if($default_type == FIELD_PERMISSIONS_CUSTOM){
+      $default_type = $this->fieldPermissions->fieldGetPermissionType($field_storage);
+      if ($default_type == FIELD_PERMISSIONS_PUBLIC) {
+          $row[4]['data'] = t("Public field (author and administrators can edit, everyone can view)");
+          $row[4]['colspan'] = 5;
+      } elseif ($default_type == FIELD_PERMISSIONS_PRIVATE) {
+          $row[4]['data'] = t("Private field (only author and administrators can edit and view)");
+          $row[4]['colspan'] = 5;
+      } elseif ($default_type == FIELD_PERMISSIONS_CUSTOM) {
 
       // s$role = \Drupal\user\Entity\Role::load('authenticated');
       $row[4]['data'] = t("Custom field Permission ()");
-      $row[4]['colspan'] = 5;
-    }
+          $row[4]['colspan'] = 5;
+      }
       // foreach()
     //  dpm($field_storage->getEntityType());
 //    $field_type=$field_storage->getD
@@ -146,6 +150,4 @@ class FieldPermissionsController extends ControllerBase {
 //    ];
     return $row;
   }
-
-
 }

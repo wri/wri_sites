@@ -111,9 +111,11 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
   /**
    * {@inheritdoc}
    */
-  function GetFieldAccess($default_type, $operation, $items,AccountInterface $account, $field_definition) {
-    $bundle = $field_definition->getTargetEntityTypeId();
-    $field_name =  $field_definition->getConfig($bundle)->getName();
+  function GetFieldAccess($operation, $items,AccountInterface $account, $field_definition) {
+    $default_type = FieldPermissionsService::fieldGetPermissionType($field_definition);
+    if($default_type == FIELD_PERMISSIONS_PUBLIC ){
+      return TRUE;
+    }
     if($default_type == FIELD_PERMISSIONS_PRIVATE){
       if($operation === "view") {
         if($items->getEntity()->getOwnerId() == $account->id()) {
@@ -144,7 +146,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
           return $account->hasPermission($operation . "_own_" .$field_name);
         }
       }
-     else if($operation === "edit") {
+      else if($operation === "edit") {
         if($items->getEntity()->isNew()) {
           return $account->hasPermission("create_" . $field_name);
         }
