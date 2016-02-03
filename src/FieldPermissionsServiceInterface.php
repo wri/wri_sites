@@ -41,4 +41,7 @@ interface FieldPermissionsServiceInterface {
    */
   public function permissions();
 
+  public function fieldGetPermissionType(FieldStorageConfigInterface $field);
+
+
 }

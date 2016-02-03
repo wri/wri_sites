@@ -104,10 +104,25 @@ class FieldPermissionsController extends ControllerBase {
     else {
       $row[0]['data'] = $field_storage->getName();
     }
-      $row[1]['data'] = $field_storage->getType();
-      $row[2]['data'] = $field_storage->getTargetEntityTypeId();
-      $row[3]['data'] =  implode(",", $field_storage->getBundles());
+    $row[1]['data'] = $field_storage->getType();
+    $row[2]['data'] = $field_storage->getTargetEntityTypeId();
+    $row[3]['data'] =  implode(",", $field_storage->getBundles());
 
+    $default_type = $this->fieldPermissions->fieldGetPermissionType($field_storage);
+    if($default_type == FIELD_PERMISSIONS_PUBLIC) {
+      $row[4]['data'] = t("Public field (author and administrators can edit, everyone can view)");
+      $row[4]['colspan'] = 5;
+    }
+    else if($default_type == FIELD_PERMISSIONS_PRIVATE){
+      $row[4]['data'] = t("Private field (only author and administrators can edit and view)");
+      $row[4]['colspan'] = 5;
+    }
+    else if($default_type == FIELD_PERMISSIONS_CUSTOM){
+
+      // s$role = \Drupal\user\Entity\Role::load('authenticated');
+      $row[4]['data'] = t("Custom field Permission ()");
+      $row[4]['colspan'] = 5;
+    }
       // foreach()
     //  dpm($field_storage->getEntityType());
 //    $field_type=$field_storage->getD

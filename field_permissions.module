@@ -60,18 +60,16 @@ function field_permissions_help($route_name, RouteMatchInterface $route_match) {
  * Implements hook_entity_field_access().
  */
 function field_permissions_entity_field_access($operation, FieldDefinitionInterface $field_definition, AccountInterface $account, \Drupal\Core\Field\FieldItemListInterface $items = NULL) {
+
   $bundle = $field_definition->getTargetEntityTypeId();
   $id = $field_definition->getConfig($bundle)->id();
-  $field_name =  $field_definition->getConfig($bundle)->getName();
-  $config = \Drupal::service('config.factory')->getEditable('field_permissions.field.settings');
-  $field_settings_perm = $config->get('permission_type_' . $field_name);
   $settings = ['id' => $id];
   $field = \Drupal::entityTypeManager()->getStorage('field_config')->loadMultiple($settings);
-
   if(empty($field) || empty($items)) {
    return AccessResult::neutral();
   }
-  $default_type = ($field_settings_perm) ? $field_settings_perm : FIELD_PERMISSIONS_PUBLIC;
+  $default_type = FieldPermissionsService::fieldGetPermissionType($field_definition);
+  // $default_type = ($field_settings_perm) ? $field_settings_perm : FIELD_PERMISSIONS_PUBLIC;
   if($default_type == FIELD_PERMISSIONS_PUBLIC ){
     return AccessResult::neutral();
   }
@@ -87,9 +85,9 @@ function field_permissions_entity_field_access($operation, FieldDefinitionInterf
    */
   function field_permissions_form_field_config_edit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
     // da aggiungere i permessi del modulo
+    
     $id = $form_state->getBuildInfo()['callback_object']->getEntity()->id();
     $settings = ['id' => $id];
-
     $field = \Drupal::entityTypeManager()->getStorage('field_config')->loadMultiple($settings);
     $config = \Drupal::service('config.factory')->getEditable('field_permissions.field.settings');
 

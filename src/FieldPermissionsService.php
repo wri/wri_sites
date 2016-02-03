@@ -102,6 +102,12 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
     return $permissions;
   }
 
+  public function fieldGetPermissionType(FieldStorageConfigInterface $field) {
+    $config = \Drupal::service('config.factory')->getEditable('field_permissions.field.settings');
+    $field_settings_perm = $config->get('permission_type_' . $field->getName());
+    return ($field_settings_perm) ? $field_settings_perm : FIELD_PERMISSIONS_PUBLIC;
+  }
+
   /**
    * {@inheritdoc}
    */
