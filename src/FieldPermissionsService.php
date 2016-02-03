@@ -1,8 +1,11 @@
 <?php
 
-namespace Drupal\field_permissions;
+/**
+ * @file
+ * Contains FieldPermissionsService.php.
+ */
 
-use Drupal\Core\Field;
+namespace Drupal\field_permissions;
 use Drupal\field\FieldStorageConfigInterface;
 
 
@@ -63,14 +66,13 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
   public function getPermissionValue(FieldStorageConfigInterface $field) {
     $roules = user_roles();
     $field_field_permissions = [];
-    //$ye = new FieldPermissions();
     $field_permission_perm = FieldPermissionsService::permissions();
     $permissions = user_role_permissions();
     foreach ($roules as $rule_name => $roule) {
       $roule_perms = $roule->getPermissions();
       $field_field_permissions[$rule_name] = [];
       // For all element set admin permission.
-      if(/*empty($roule_perms) && */ $roule->isAdmin()) {
+      if ($roule->isAdmin()) {
         foreach (array_keys($field_permission_perm) as $perm_name) {
           $field_field_permissions[$rule_name][] = $perm_name;
         }
@@ -86,7 +88,9 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
     return $field_field_permissions;
   }
 
-
+  /**
+   * {@inheritdoc}
+   */
   public function permissions() {
     $permissions = [];
     $instances = \Drupal::entityTypeManager()->getStorage('field_storage_config')->loadMultiple();
@@ -102,6 +106,9 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
     return $permissions;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function fieldGetPermissionType(FieldStorageConfigInterface $field) {
     $config = \Drupal::service('config.factory')->getEditable('field_permissions.field.settings');
     $field_settings_perm = $config->get('permission_type_' . $field->getName());
@@ -111,51 +118,50 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
   /**
    * {@inheritdoc}
    */
-  function GetFieldAccess($operation, $items,AccountInterface $account, $field_definition) {
+  public function getFieldAccess($operation, $items, AccountInterface $account, $field_definition) {
     $default_type = FieldPermissionsService::fieldGetPermissionType($field_definition);
-    if($default_type == FIELD_PERMISSIONS_PUBLIC ){
+    if ($default_type == FIELD_PERMISSIONS_PUBLIC) {
       return TRUE;
     }
-    if($default_type == FIELD_PERMISSIONS_PRIVATE){
-      if($operation === "view") {
-        if($items->getEntity()->getOwnerId() == $account->id()) {
-          return $account->hasPermission($operation . "_own_" .$field_name);
+    if ($default_type == FIELD_PERMISSIONS_PRIVATE) {
+      if ($operation === "view") {
+        if ($items->getEntity()->getOwnerId() == $account->id()) {
+          return $account->hasPermission($operation . "_own_" . $field_name);
         }
         else {
           return FALSE;
         }
       }
-      else if($operation === "edit") {
-        if($items->getEntity()->isNew()) {
+      elseif ($operation === "edit") {
+        if ($items->getEntity()->isNew()) {
           return $account->hasPermission("create_" . $field_name);
         }
-        else if($items->getEntity()->getOwnerId() == $account->id()) {
-          return $account->hasPermission($operation . "_own_" .$field_name);
+        elseif ($items->getEntity()->getOwnerId() == $account->id()) {
+          return $account->hasPermission($operation . "_own_" . $field_name);
         }
         else {
           return FALSE;
         }
       }
     }
-    if($default_type == FIELD_PERMISSIONS_CUSTOM) {
-      if($operation === "view") {
-        if($account->hasPermission($operation . "_" . $field_name)) {
+    if ($default_type == FIELD_PERMISSIONS_CUSTOM) {
+      if ($operation === "view") {
+        if ($account->hasPermission($operation . "_" . $field_name)) {
           return $account->hasPermission($operation . "_" . $field_name);
         }
-        else if($items->getEntity()->getOwnerId() == $account->id()) {
-          return $account->hasPermission($operation . "_own_" .$field_name);
+        elseif ($items->getEntity()->getOwnerId() == $account->id()) {
+          return $account->hasPermission($operation . "_own_" . $field_name);
         }
       }
-      else if($operation === "edit") {
-        if($items->getEntity()->isNew()) {
+      elseif ($operation === "edit") {
+        if ($items->getEntity()->isNew()) {
           return $account->hasPermission("create_" . $field_name);
         }
-        if($account->hasPermission($operation . "_" . $field_name)) {
-
+        if ($account->hasPermission($operation . "_" . $field_name)) {
           return $account->hasPermission($operation . "_" . $field_name);
         }
-        else if($items->getEntity()->getOwnerId() == $account->id()) {
-          return $account->hasPermission($operation . "_own_" .$field_name);
+        elseif ($items->getEntity()->getOwnerId() == $account->id()) {
+          return $account->hasPermission($operation . "_own_" . $field_name);
         }
       }
     }

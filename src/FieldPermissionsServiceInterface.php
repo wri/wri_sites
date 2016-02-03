@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains FieldPermissionsServiceInterface.php.
+ */
+
 namespace Drupal\field_permissions;
 
 use Drupal\field\FieldStorageConfigInterface;
@@ -41,7 +46,14 @@ interface FieldPermissionsServiceInterface {
    */
   public function permissions();
 
+  /**
+   * {@inheritdoc}
+   */
   public function fieldGetPermissionType(FieldStorageConfigInterface $field);
 
+  /**
+   * {@inheritdoc}
+   */
+  public function getFieldAccess($operation, $items, AccountInterface $account, $field_definition);
 
 }
