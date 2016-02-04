@@ -119,8 +119,9 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
    * {@inheritdoc}
    */
   public function getFieldAccess($operation, $items, AccountInterface $account, $field_definition) {
+
     $default_type = FieldPermissionsService::fieldGetPermissionType($field_definition);
-    if ($default_type == FIELD_PERMISSIONS_PUBLIC) {
+    if (in_array("administrator", $account->getRoles()) || $default_type == FIELD_PERMISSIONS_PUBLIC) {
       return TRUE;
     }
     if ($default_type == FIELD_PERMISSIONS_PRIVATE) {
