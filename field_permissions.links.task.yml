@@ -1,0 +1,4 @@
+field_permissions_admin:
+  route_name: field_permissions_admin
+  base_route: entity.field_storage_config.collection
+  title: Permissions
