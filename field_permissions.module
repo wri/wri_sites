@@ -84,6 +84,11 @@ function field_permissions_form_field_config_edit_form_alter(&$form, \Drupal\Cor
     '#default_value' => isset($form['#field']['field_permissions']['type']) ? $form['#field']['field_permissions']['type'] : $default_type,
   );
   $form['field_permissions']['permissions'] = field_permissions_permissions_matrix($field);
+  $form['#attached'] = array(
+    'library' =>  array(
+      'field_permissions/field_permissions'
+    ),
+  );
   $form['actions']['submit']['#submit'][] = 'field_permission_field_config_edit_form_submit';
 }
 
