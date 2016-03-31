@@ -1,2 +1,10 @@
 permission_callbacks:
   - Drupal\field_permissions\FieldPermissionsService::permissions
+admin_field_permissions:
+  title: 'Administer field permissions'
+  description: 'Manage field permissions and field permissions settings.'
+  restrict access: TRUE
+access_user_private_field:
+  title: 'Access other users private fields'
+  description: 'View and edit the stored values of all private fields.'
+  restrict access: TRUE

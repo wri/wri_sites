@@ -118,6 +118,19 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
   /**
    * {@inheritdoc}
    */
+  public function GetAccessAdminFieldPermissions(AccountInterface $account) {
+    return $account->hasPermission("admin_field_permissions");
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function GetAccessPrivateFieldPermissions(AccountInterface $account) {
+    return $account->hasPermission("access_user_private_field");
+  }
+  /**
+   * {@inheritdoc}
+   */
   public function getFieldAccess($operation, $items, AccountInterface $account, $field_definition) {
 
     $default_type = FieldPermissionsService::fieldGetPermissionType($field_definition);
@@ -130,18 +143,20 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
           return $account->hasPermission($operation . "_own_" . $field_name);
         }
         else {
-          return FALSE;
+          return FieldPermissionsService::GetAccessPrivateFieldPermissions($account);
         }
       }
       elseif ($operation === "edit") {
         if ($items->getEntity()->isNew()) {
-          return $account->hasPermission("create_" . $field_name);
+          return TRUE;
+          //return $account->hasPermission("create_" . $field_name);
         }
         elseif ($items->getEntity()->getOwnerId() == $account->id()) {
-          return $account->hasPermission($operation . "_own_" . $field_name);
+          return TRUE;
+          //return $account->hasPermission($operation . "_own_" . $field_name);
         }
         else {
-          return FALSE;
+          return FieldPermissionsService::GetAccessPrivateFieldPermissions($account);;
         }
       }
     }
