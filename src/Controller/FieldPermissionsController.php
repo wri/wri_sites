@@ -6,7 +6,6 @@
  */
 
 namespace Drupal\field_permissions\Controller;
-
 use Drupal\Core\Controller\ControllerBase;
 use \Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field_permissions\FieldPermissionsService;
@@ -41,6 +40,9 @@ class FieldPermissionsController extends ControllerBase {
    * {@inheritdoc}
    */
   public function content() {
+    dpm(\Drupal::moduleHandler()->getImplementations('entity_base_field_info'));
+    dpm($field_info = \Drupal::moduleHandler()->invoke("path", 'entity_base_field_info'));
+    //dpm(\Drupal::moduleHandler()->implementsHook('form', 'alter'));
     $build['table'] = array(
       '#type' => 'table',
       '#header' => $this->buildHeader(),

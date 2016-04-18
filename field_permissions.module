@@ -10,7 +10,6 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\field_permissions\FieldPermissionsService;
 
 /**
@@ -51,8 +50,9 @@ function field_permissions_help($route_name, RouteMatchInterface $route_match) {
 /**
  * Implements hook_entity_field_access().
  */
-function field_permissions_entity_field_access($operation, FieldDefinitionInterface $field_definition, AccountInterface $account, FieldItemListInterface $items = NULL) {
-  if (!$field_definition->isDisplayConfigurable() || empty($items)) {
+function field_permissions_entity_field_access($operation, FieldDefinitionInterface $field_definition, $account, FieldItemListInterface $items = NULL) {
+  $context = ($operation == "view") ? 'display' : 'edit';
+  if (!$field_definition->isDisplayConfigurable($context) || empty($items)) {
     return AccessResult::neutral();
   }
   $access_field = FieldPermissionsService::getFieldAccess($operation, $items, $account, $field_definition);
@@ -67,10 +67,10 @@ function field_permissions_entity_field_access($operation, FieldDefinitionInterf
  */
 function field_permissions_form_field_config_edit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   $account = \Drupal::currentUser();
-  // return $form;
   if (!FieldPermissionsService::GetAccessAdminFieldPermissions($account)) {
     return $form;
   }
+
   $field = $form_state->getBuildInfo()['callback_object']->getEntity();
   $default_type = FieldPermissionsService::fieldGetPermissionType($field);
   $form['fid'] = array('#type' => 'hidden', '#value' => $field->id());
@@ -87,17 +87,20 @@ function field_permissions_form_field_config_edit_form_alter(&$form, \Drupal\Cor
     ),
     '#default_value' => isset($form['#field']['field_permissions']['type']) ? $form['#field']['field_permissions']['type'] : $default_type,
   );
-  $form['field_permissions']['permissions'] = field_permissions_permissions_matrix($field);
-  $form['#attached']['library'] =  array(
+  field_permissions_permissions_matrix($field, $form, $form_state);
+  $form['#attached']['library'] = array(
     'field_permissions/field_permissions',
   );
   $form['actions']['submit']['#submit'][] = 'field_permission_field_config_edit_form_submit';
 }
 
 /**
- * Implements hook_form_alter().
+ * Return Matrix field permission.
+ *
+ * @param Drupal\field\Entity\FieldStorageConfig $field
+ *  Field to implement permissions.
  */
-function field_permissions_permissions_matrix(\Drupal\field\Entity\FieldStorageConfig $field) {
+function field_permissions_permissions_matrix($field, &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
   $roles = user_roles();
   $role_names = array_keys($roles);
   $form['role_names'] = array(
@@ -105,7 +108,7 @@ function field_permissions_permissions_matrix(\Drupal\field\Entity\FieldStorageC
     '#value' => $role_names,
   );
   $label = $field->getName();
-  $permissions = \Drupal::service('field_permissions.permissions_service')->listFieldPermissionSupport($field, $label);
+  $permissions = FieldPermissionsService::listFieldPermissionSupport($field, $label);
   $options = array_keys($permissions);
   /*header theme table */
   $form['permissions'] = array(
@@ -139,19 +142,18 @@ function field_permissions_permissions_matrix(\Drupal\field\Entity\FieldStorageC
           'class' => array('checkbox'),
         ),
         '#type' => 'checkbox',
-        '#default_value' => in_array($provider, $test[$name]) ? 1 : 0,
+        '#default_value' => (!empty($test[$name]) && in_array($provider, $test[$name])) ? 1 : 0,
         '#attributes' => array('class' => array('rid-' . $rid, 'js-rid-' . $rid)),
       );
     }
   }
-  return $form;
 }
 
 /**
  * Implements hook_form_submit().
  */
 function field_permission_field_config_edit_form_submit(array &$form, FormStateInterface $form_state) {
-  $config = \Drupal::service('config.factory')->getEditable('field_permissions.field.settings');
+  $config = \Drupal::service('config.factory')->getEditable('field_permissions.settings');
   $field = $form_state->getBuildInfo()['callback_object']->getEntity();
   $custum_permissions = $form_state->getValue("permissions");
   $roules = $form_state->getValue("role_names");

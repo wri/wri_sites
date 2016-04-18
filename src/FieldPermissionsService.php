@@ -46,8 +46,9 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
 
   /**
    * {@inheritdoc}
+   * FieldStorageConfigInterface
    */
-  public function listFieldPermissionSupport(FieldStorageConfigInterface $field, $label = '') {
+  public static function listFieldPermissionSupport($field, $label = '') {
     $permissions = array();
     $permission_list = FieldPermissionsService::getList($label);
     foreach ($permission_list as $permission_type => $permission_info) {
@@ -63,11 +64,11 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
   /**
    * {@inheritdoc}
    */
-  public function getPermissionValue(FieldStorageConfigInterface $field) {
+  public static function getPermissionValue(/*FieldStorageConfigInterface $field*/) {
     $roules = user_roles();
     $field_field_permissions = [];
     $field_permission_perm = FieldPermissionsService::permissions();
-    $permissions = user_role_permissions();
+    $permissions = user_role_permissions(array());
     foreach ($roules as $rule_name => $roule) {
       $roule_perms = $roule->getPermissions();
       $field_field_permissions[$rule_name] = [];
@@ -91,7 +92,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
   /**
    * {@inheritdoc}
    */
-  public function permissions() {
+  public static function permissions() {
     $permissions = [];
     $instances = \Drupal::entityTypeManager()->getStorage('field_storage_config')->loadMultiple();
     foreach ($instances as $key => $instance) {
@@ -109,34 +110,36 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
   /**
    * {@inheritdoc}
    */
-  public function fieldGetPermissionType(FieldStorageConfigInterface $field) {
-    $config = \Drupal::service('config.factory')->getEditable('field_permissions.field.settings');
+  public static function fieldGetPermissionType($field) {
+    $config = \Drupal::service('config.factory')->getEditable('field_permissions.settings');
     $field_settings_perm = $config->get('permission_type_' . $field->getName());
     return ($field_settings_perm) ? $field_settings_perm : FIELD_PERMISSIONS_PUBLIC;
   }
 
   /**
    * {@inheritdoc}
+   * AccountInterface
    */
-  public function GetAccessAdminFieldPermissions(AccountInterface $account) {
+  public static function GetAccessAdminFieldPermissions($account) {
     return $account->hasPermission("admin_field_permissions");
   }
 
   /**
    * {@inheritdoc}
+   * AccountInterface
    */
-  public function GetAccessPrivateFieldPermissions(AccountInterface $account) {
+  public static function GetAccessPrivateFieldPermissions($account) {
     return $account->hasPermission("access_user_private_field");
   }
   /**
    * {@inheritdoc}
    */
-  public function getFieldAccess($operation, $items, AccountInterface $account, $field_definition) {
-
+  public static function getFieldAccess($operation, $items, $account, $field_definition) {
     $default_type = FieldPermissionsService::fieldGetPermissionType($field_definition);
     if (in_array("administrator", $account->getRoles()) || $default_type == FIELD_PERMISSIONS_PUBLIC) {
       return TRUE;
     }
+    $field_name = $field_definition->getName();
     if ($default_type == FIELD_PERMISSIONS_PRIVATE) {
       if ($operation === "view") {
         if ($items->getEntity()->getOwnerId() == $account->id()) {
@@ -148,6 +151,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
       }
       elseif ($operation === "edit") {
         if ($items->getEntity()->isNew()) {
+          // ?? create test
           return TRUE;
           //return $account->hasPermission("create_" . $field_name);
         }
@@ -162,6 +166,11 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
     }
     if ($default_type == FIELD_PERMISSIONS_CUSTOM) {
       if ($operation === "view") {
+      /*  print "test0" . $operation . "_" . $field_name;
+        print $account->hasPermission($operation . "_" . $field_name);
+        print "aaa";
+        exit(0);
+        */
         if ($account->hasPermission($operation . "_" . $field_name)) {
           return $account->hasPermission($operation . "_" . $field_name);
         }

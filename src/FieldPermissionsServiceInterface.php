@@ -7,8 +7,6 @@
 
 namespace Drupal\field_permissions;
 
-use Drupal\field\FieldStorageConfigInterface;
-
 
 interface FieldPermissionsServiceInterface {
 
@@ -31,7 +29,7 @@ interface FieldPermissionsServiceInterface {
    * @return array
    *   An array of permission information,
    */
-  public function listFieldPermissionSupport(FieldStorageConfigInterface $field, $label = '');
+  public static function listFieldPermissionSupport($field, $label = '');
 
   /**
    * Get default value for checkbox  role permission.
@@ -39,21 +37,24 @@ interface FieldPermissionsServiceInterface {
    * @param \Drupal\field\FieldStorageConfigInterface $field
    *   The field to return permissions for.
    */
-  public function getPermissionValue(FieldStorageConfigInterface $field);
+ public static function getPermissionValue(/*FieldStorageConfigInterface $field*/);
 
   /**
    * Returns permissions.
    */
-  public function permissions();
+  public static function permissions();
+
+  /**
+   * Get default value for checkbox  role permission.
+   *
+   * @param \Drupal\field\FieldStorageConfigInterface $field
+   *   The field to return permissions for.
+   */
+  public static function fieldGetPermissionType($field);
 
   /**
    * {@inheritdoc}
    */
-  public function fieldGetPermissionType(FieldStorageConfigInterface $field);
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getFieldAccess($operation, $items, AccountInterface $account, $field_definition);
+  public static function getFieldAccess($operation, $items, $account, $field_definition);
 
 }

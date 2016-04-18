@@ -1,1 +1,7 @@
 field_permissions.settings:
+  type: config_object
+  label: 'Field UI settings'
+  mapping:
+    permission_type_body:
+      type: integer
+      label: 'Value public private ciustom permission'
