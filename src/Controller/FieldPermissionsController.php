@@ -40,8 +40,8 @@ class FieldPermissionsController extends ControllerBase {
    * {@inheritdoc}
    */
   public function content() {
-    dpm(\Drupal::moduleHandler()->getImplementations('entity_base_field_info'));
-    dpm($field_info = \Drupal::moduleHandler()->invoke("path", 'entity_base_field_info'));
+    ///dpm(\Drupal::moduleHandler()->getImplementations('entity_base_field_info'));
+    // dpm($field_info = \Drupal::moduleHandler()->invoke("path", 'entity_base_field_info'));
     //dpm(\Drupal::moduleHandler()->implementsHook('form', 'alter'));
     $build['table'] = array(
       '#type' => 'table',
