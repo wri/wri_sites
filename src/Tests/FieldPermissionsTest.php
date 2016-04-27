@@ -75,7 +75,13 @@ class FieldPermissionsTest extends WebTestBase {
    *
    * @var array
    */
-  public static $modules = ['node', 'field', 'field_ui', 'user', 'field_permissions'];
+  public static $modules = [
+    'node',
+    'field',
+    'field_ui',
+    'user',
+    'field_permissions',
+  ];
 
   /**
    * Simpletest's setUp().
@@ -104,7 +110,7 @@ class FieldPermissionsTest extends WebTestBase {
       'create article content',
     ));
 
-    $this->limitedUser =  $this->drupalCreateUser(array(
+    $this->limitedUser = $this->drupalCreateUser(array(
       'access content',
       'create article content',
       'edit any article content',
@@ -134,7 +140,7 @@ class FieldPermissionsTest extends WebTestBase {
    */
   public function TestPremissionFormUi($rule, $perm) {
     $edit = array();
-    $edit[$rule->id() .'[' . $perm .']'] = TRUE;
+    $edit[$rule->id() . '[' . $perm . ']'] = TRUE;
     $this->drupalGet('admin/people/permissions');
     $this->drupalPostForm(NULL, $edit, t('Save permissions'));
     drupal_static_reset('user_access');
@@ -153,10 +159,7 @@ class FieldPermissionsTest extends WebTestBase {
     }
     elseif ($perm == FIELD_PERMISSIONS_CUSTOM && !empty($custom_permission)) {
       $custom_permission['type'] = $perm;
-
-      //print_r($custom_permission);
       $this->drupalPostForm(NULL, $custom_permission, t('Save settings'));
-
     }
     drupal_static_reset('user_access');
     drupal_static_reset('user_role_permissions');
@@ -224,14 +227,14 @@ class FieldPermissionsTest extends WebTestBase {
     $permission_list = array_keys($permission_list);
     $permission_role = array_keys(user_roles());
     $remove_perm = array();
-    // set all check to false,
-    foreach($permission_role as $rname) {
-      foreach($permission_list as $perm) {
+    // Set all check to false.
+    foreach ($permission_role as $rname) {
+      foreach ($permission_list as $perm) {
         $key = 'permissions[' . $perm . '][' . $rname . ']';
         $custom_perm[$key] = FALSE;
       }
     }
-    // set perm check to true,
+    // Set perm check to true.
     foreach ($field_perm as $perm) {
       $key = 'permissions[' . $perm . '][' . $role->id() . ']';
       $custom_perm[$key] = TRUE;
@@ -239,10 +242,16 @@ class FieldPermissionsTest extends WebTestBase {
     return $custom_perm;
   }
 
+  /**
+   * Test case.
+   */
   function TestCreateCustomPermission($role, $permissions = array(), $custom_permission = array()) {
     return array_merge($custom_permission, $this->TestGetCustomPemrission($role, $permissions));
   }
 
+  /**
+   * Test case.
+   */
   function TestChangeCustomPermission($custom_permission) {
     $this->drupalLogin($this->adminUser);
     $this->TestFieldChangePermissionField(FIELD_PERMISSIONS_CUSTOM, $custom_permission);
@@ -258,7 +267,7 @@ class FieldPermissionsTest extends WebTestBase {
     $this->drupalGet('admin/structure/types/manage/article/fields/node.article.body');
     $this->assertNoText('Field visibility and permissions');
     $this->TestPremissionFormUi($this->adminUserRole, "admin_field_permissions");
-    // test page width permissin [admin_field_permissions].
+    // Test page width permissin [admin_field_permissions].
     $this->drupalGet('admin/structure/types/manage/article/fields/node.article.body');
     $this->assertText('Field visibility and permissions');
     $this->drupalLogout();
@@ -306,8 +315,6 @@ class FieldPermissionsTest extends WebTestBase {
   function TestViewOwnField() {
     $permission = array();
     $permission = $this->TestCreateCustomPermission($this->limitUserRole, array("view_own_body"), $permission);
-  //  print_r($permission);
-
     $this->TestChangeCustomPermission($permission);
 
     // Login width author node.
@@ -329,7 +336,6 @@ class FieldPermissionsTest extends WebTestBase {
   function TestViewEditOwnField() {
     $permission = array();
     $permission = $this->TestCreateCustomPermission($this->limitUserRole, array("view_own_body", "edit_own_body"), $permission);
-    // $permission[$this->limitUserRole]['permissions[edit_own_body][0]'] = -1;
     $this->TestChangeCustomPermission($permission);
 
     // Login width author node.
