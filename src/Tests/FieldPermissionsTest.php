@@ -75,13 +75,7 @@ class FieldPermissionsTest extends WebTestBase {
    *
    * @var array
    */
-  public static $modules = [
-    'node',
-    'field',
-    'field_ui',
-    'user',
-    'field_permissions',
-  ];
+  public static $modules = ['node', 'field', 'field_ui', 'user', 'field_permissions'];
 
   /**
    * Simpletest's setUp().

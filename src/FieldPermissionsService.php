@@ -116,7 +116,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
 
   /**
    * {@inheritdoc}
-   * AccountInterface
+   *  AccountInterface
    */
   public static function GetAccessAdminFieldPermissions($account) {
     return $account->hasPermission("admin_field_permissions");
@@ -124,7 +124,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
 
   /**
    * {@inheritdoc}
-   * AccountInterface
+   *  AccountInterface.
    */
   public static function GetAccessPrivateFieldPermissions($account) {
     return $account->hasPermission("access_user_private_field");
@@ -134,7 +134,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
    */
   public static function getFieldAccess($operation, $items, $account, $field_definition) {
     $default_type = FieldPermissionsService::fieldGetPermissionType($field_definition);
-    if ($account->getRoles()->isAdmin() || $default_type == FIELD_PERMISSIONS_PUBLIC) {
+    if (in_array("administrator", $account->getRoles()) || $default_type == FIELD_PERMISSIONS_PUBLIC) {
       return TRUE;
     }
     $field_name = $field_definition->getName();
