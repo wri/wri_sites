@@ -1,11 +1,11 @@
 <?php
 /**
  * @file
- * Contains FieldPermissionsTest.php
+ *  Contains FieldPermissionsTest.php
  */
 
 namespace Drupal\field_permissions\Tests;
-
+use Drupal\field_permissions\FieldPermissionsService;
 use Drupal\simpletest\WebTestBase;
 
 /**
@@ -103,6 +103,7 @@ class FieldPermissionsTest extends WebTestBase {
       'administer nodes',
       'create article content',
     ));
+
     $this->limitedUser =  $this->drupalCreateUser(array(
       'access content',
       'create article content',
@@ -117,6 +118,7 @@ class FieldPermissionsTest extends WebTestBase {
 
     $this->adminUserRole = \Drupal\user\Entity\Role::load($this->adminUser->getRoles(array('authenticated'))[0]);
     $this->limitUserRole = \Drupal\user\Entity\Role::load($this->limitedUser->getRoles(array('authenticated'))[0]);
+    $this->webUserRole = \Drupal\user\Entity\Role::load($this->limitedUser->getRoles(array('authenticated'))[0]);
 
   }
 
@@ -151,10 +153,13 @@ class FieldPermissionsTest extends WebTestBase {
     }
     elseif ($perm == FIELD_PERMISSIONS_CUSTOM && !empty($custom_permission)) {
       $custom_permission['type'] = $perm;
+
+      //print_r($custom_permission);
       $this->drupalPostForm(NULL, $custom_permission, t('Save settings'));
-      drupal_static_reset('user_access');
-      drupal_static_reset('user_role_permissions');
+
     }
+    drupal_static_reset('user_access');
+    drupal_static_reset('user_role_permissions');
   }
 
 
@@ -215,9 +220,21 @@ class FieldPermissionsTest extends WebTestBase {
    */
   function TestGetCustomPemrission($role, $field_perm = array()) {
     $custom_perm = array();
+    $permission_list = FieldPermissionsService::permissions();
+    $permission_list = array_keys($permission_list);
+    $permission_role = array_keys(user_roles());
+    $remove_perm = array();
+    // set all check to false,
+    foreach($permission_role as $rname) {
+      foreach($permission_list as $perm) {
+        $key = 'permissions[' . $perm . '][' . $rname . ']';
+        $custom_perm[$key] = FALSE;
+      }
+    }
+    // set perm check to true,
     foreach ($field_perm as $perm) {
-      $key = 'permissions[' . $perm . '][' . $role->getWeight() . ']';
-      $custom_perm[$key] = 1;
+      $key = 'permissions[' . $perm . '][' . $role->id() . ']';
+      $custom_perm[$key] = TRUE;
     }
     return $custom_perm;
   }
@@ -241,7 +258,6 @@ class FieldPermissionsTest extends WebTestBase {
     $this->drupalGet('admin/structure/types/manage/article/fields/node.article.body');
     $this->assertNoText('Field visibility and permissions');
     $this->TestPremissionFormUi($this->adminUserRole, "admin_field_permissions");
-    // $TestPremissionFormUi->TestPremissionFormUi("admin_field_permissions");
     // test page width permissin [admin_field_permissions].
     $this->drupalGet('admin/structure/types/manage/article/fields/node.article.body');
     $this->assertText('Field visibility and permissions');
@@ -273,6 +289,7 @@ class FieldPermissionsTest extends WebTestBase {
    */
   function TestChengeToPrivateField() {
     $this->drupalLogin($this->adminUser);
+
     $this->TestViewNodeField(TRUE);
 
     $this->TestPremissionFormUi($this->adminUserRole, "admin_field_permissions");
@@ -289,6 +306,8 @@ class FieldPermissionsTest extends WebTestBase {
   function TestViewOwnField() {
     $permission = array();
     $permission = $this->TestCreateCustomPermission($this->limitUserRole, array("view_own_body"), $permission);
+  //  print_r($permission);
+
     $this->TestChangeCustomPermission($permission);
 
     // Login width author node.
@@ -310,6 +329,7 @@ class FieldPermissionsTest extends WebTestBase {
   function TestViewEditOwnField() {
     $permission = array();
     $permission = $this->TestCreateCustomPermission($this->limitUserRole, array("view_own_body", "edit_own_body"), $permission);
+    // $permission[$this->limitUserRole]['permissions[edit_own_body][0]'] = -1;
     $this->TestChangeCustomPermission($permission);
 
     // Login width author node.
@@ -323,6 +343,7 @@ class FieldPermissionsTest extends WebTestBase {
     $this->TestViewNodeField(FALSE);
     $this->TestEditNodeField(FALSE);
     $this->drupalLogout();
+
   }
 
   /**
@@ -348,17 +369,24 @@ class FieldPermissionsTest extends WebTestBase {
    * Test execute().
    */
   public function testTestPremissionUi() {
+
     $this->TestPermissionPage();
     $this->TestFieldEdit();
     $this->TestInitAddNode();
+
     debug("Test Private field");
     $this->TestChengeToPrivateField();
     debug("Test View own field");
+
     $this->TestViewOwnField();
+
     debug("Test View own and edit own field");
     $this->TestViewEditOwnField();
     debug("Test View any and edit any field");
     $this->TestViewEditAllField();
+
+    $this->drupalLogin($this->adminUser);
+    $this->drupalGet('admin/people/permissions');
   }
 
 }

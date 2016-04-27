@@ -6,8 +6,6 @@
  */
 
 namespace Drupal\field_permissions;
-use Drupal\field\FieldStorageConfigInterface;
-
 
 class FieldPermissionsService implements FieldPermissionsServiceInterface {
 
@@ -136,14 +134,14 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
    */
   public static function getFieldAccess($operation, $items, $account, $field_definition) {
     $default_type = FieldPermissionsService::fieldGetPermissionType($field_definition);
-    if (in_array("administrator", $account->getRoles()) || $default_type == FIELD_PERMISSIONS_PUBLIC) {
+    if ($account->getRoles()->isAdmin() || $default_type == FIELD_PERMISSIONS_PUBLIC) {
       return TRUE;
     }
     $field_name = $field_definition->getName();
     if ($default_type == FIELD_PERMISSIONS_PRIVATE) {
       if ($operation === "view") {
         if ($items->getEntity()->getOwnerId() == $account->id()) {
-          return $account->hasPermission($operation . "_own_" . $field_name);
+          return FieldPermissionsService::GetAccessPrivateFieldPermissions($account) || $account->hasPermission($operation . "_own_" . $field_name);
         }
         else {
           return FieldPermissionsService::GetAccessPrivateFieldPermissions($account);
@@ -151,13 +149,11 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
       }
       elseif ($operation === "edit") {
         if ($items->getEntity()->isNew()) {
-          // ?? create test
+          // ??
           return TRUE;
-          //return $account->hasPermission("create_" . $field_name);
         }
         elseif ($items->getEntity()->getOwnerId() == $account->id()) {
           return TRUE;
-          //return $account->hasPermission($operation . "_own_" . $field_name);
         }
         else {
           return FieldPermissionsService::GetAccessPrivateFieldPermissions($account);;
@@ -166,11 +162,6 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
     }
     if ($default_type == FIELD_PERMISSIONS_CUSTOM) {
       if ($operation === "view") {
-      /*  print "test0" . $operation . "_" . $field_name;
-        print $account->hasPermission($operation . "_" . $field_name);
-        print "aaa";
-        exit(0);
-        */
         if ($account->hasPermission($operation . "_" . $field_name)) {
           return $account->hasPermission($operation . "_" . $field_name);
         }

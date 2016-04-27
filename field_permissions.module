@@ -98,7 +98,7 @@ function field_permissions_form_field_config_edit_form_alter(&$form, \Drupal\Cor
  * Return Matrix field permission.
  *
  * @param Drupal\field\Entity\FieldStorageConfig $field
- *  Field to implement permissions.
+ *   Field to implement permissions.
  */
 function field_permissions_permissions_matrix($field, &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
   $roles = user_roles();
@@ -135,16 +135,18 @@ function field_permissions_permissions_matrix($field, &$form, \Drupal\Core\Form\
     );
     $options[$provider] = '';
     foreach ($role_names as $rid => $name) {
-      $form['permissions'][$provider][$rid] = array(
+      $form['permissions'][$provider][$name] = array(
         '#title' => $name . ': ' . $permission["title"],
         '#title_display' => 'invisible',
+        '#type' => 'checkbox',
+        '#attributes' => array('class' => array('rid-' . $rid, 'js-rid-' . $rid)),
         '#wrapper_attributes' => array(
           'class' => array('checkbox'),
         ),
-        '#type' => 'checkbox',
-        '#default_value' => (!empty($test[$name]) && in_array($provider, $test[$name])) ? 1 : 0,
-        '#attributes' => array('class' => array('rid-' . $rid, 'js-rid-' . $rid)),
       );
+      if (!empty($test[$name]) && in_array($provider, $test[$name])) {
+        $form['permissions'][$provider][$name]['#default_value'] = in_array($provider, $test[$name]);
+      }
     }
   }
 }
@@ -159,45 +161,42 @@ function field_permission_field_config_edit_form_submit(array &$form, FormStateI
   $roules = $form_state->getValue("role_names");
   $type_permission = $form_state->getValue("type");
   $field_name = $field->getName();
-
   $config->set('permission_type_' . $field_name, $type_permission);
   $config->save();
-
   $perm_settings = [];
   // Set all perm.
   if ($type_permission == FIELD_PERMISSIONS_CUSTOM) {
     foreach ($custum_permissions as $perm_name => $field_perm) {
-      foreach ($field_perm as $rid => $roule_perm) {
-        $roule_name = $roules[$rid];
-        $perm_settings[$roule_name][$perm_name] = $roule_perm;
+      foreach ($field_perm as $rname => $roule_perm) {
+        $perm_settings[$rname][$perm_name] = $roule_perm;
       }
     }
   }
   elseif ($type_permission == FIELD_PERMISSIONS_PUBLIC) {
+
     foreach ($custum_permissions as $perm_name => $field_perm) {
-      foreach ($field_perm as $rid => $roule_perm) {
+      foreach ($field_perm as $rname => $roule_perm) {
         if ($perm_name != 'view_' . $field_name) {
           $roule_perm = 0;
         }
         else {
           $roule_perm = 1;
         }
-        $roule_name = $roules[$rid];
-        $perm_settings[$roule_name][$perm_name] = $roule_perm;
+        $perm_settings[$rname][$perm_name] = $roule_perm;
       }
     }
   }
   elseif ($type_permission == FIELD_PERMISSIONS_PRIVATE) {
+    $no_role = array('anonymous', 'authenticated');
     foreach ($custum_permissions as $perm_name => $field_perm) {
-      foreach ($field_perm as $rid => $roule_perm) {
-        if ($perm_name != 'view_own_' . $field_name && $perm_name != 'edit_own_' . $field_name) {
+      foreach ($field_perm as $rname => $roule_perm) {
+        if (in_array($rname, $no_role) || $perm_name != 'view_own_' . $field_name && $perm_name != 'edit_own_' . $field_name) {
           $roule_perm = 0;
         }
         else {
           $roule_perm = 1;
         }
-        $roule_name = $roules[$rid];
-        $perm_settings[$roule_name][$perm_name] = $roule_perm;
+        $perm_settings[$rname][$perm_name] = $roule_perm;
       }
     }
   }
