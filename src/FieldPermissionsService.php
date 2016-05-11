@@ -110,11 +110,15 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
     $instances = \Drupal::entityTypeManager()->getStorage('field_storage_config')->loadMultiple();
     foreach ($instances as $key => $instance) {
       $field_name = $instance->getName();
-      $permission_list = FieldPermissionsService::getList($field_name);
-      $perms_name = array_keys($permission_list);
-      foreach ($perms_name as $perm_name) {
-        $name = str_replace(' ', '_', $perm_name) . '_' . $field_name;
-        $permissions[$name] = $permission_list[$perm_name];
+      // Check if permissionType is not default, before creating permissions.
+      $type = FieldPermissionsService::fieldGetPermissionType($instance);
+      if ($type <> FIELD_PERMISSIONS_PUBLIC) {
+        $permission_list = FieldPermissionsService::getList($field_name);
+        $perms_name = array_keys($permission_list);
+        foreach ($perms_name as $perm_name) {
+          $name = str_replace(' ', '_', $perm_name) . '_' . $field_name;
+          $permissions[$name] = $permission_list[$perm_name];
+        }
       }
     }
     return $permissions;
