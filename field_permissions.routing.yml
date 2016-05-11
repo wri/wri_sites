@@ -1,4 +1,4 @@
-field_permissions_admin:
+field_permissions.reports:
   path: 'admin/reports/fields/permissions'
   defaults:
     _controller: '\Drupal\field_permissions\Controller\FieldPermissionsController::content'

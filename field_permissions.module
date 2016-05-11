@@ -36,12 +36,8 @@ define('FIELD_PERMISSIONS_CUSTOM', 2);
  */
 function field_permissions_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
-    // Main module help for the test module.
-    case 'help.page.test':
-      $output = '';
-      $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('test') . '</p>';
-      return $output;
+    case 'help.page.field_permissions':
+      return '<p>' . t('Set field-level permissions to edit or view fields in any node, edit field during node creation, and edit or view permissions for nodes owned by the current user.') . '</p>';
 
     default:
   }
@@ -64,8 +60,10 @@ function field_permissions_entity_field_access($operation, FieldDefinitionInterf
 
 /**
  * Implements hook_form_alter().
+ *
+ * @see field_permissions_permissions_matrix()
  */
-function field_permissions_form_field_config_edit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+function field_permissions_form_field_config_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $account = \Drupal::currentUser();
   if (!FieldPermissionsService::GetAccessAdminFieldPermissions($account)) {
     return $form;
@@ -97,10 +95,10 @@ function field_permissions_form_field_config_edit_form_alter(&$form, \Drupal\Cor
 /**
  * Return Matrix field permission.
  *
- * @param Drupal\field\Entity\FieldStorageConfig $field
+ * @param FieldStorageConfig $field
  *   Field to implement permissions.
  */
-function field_permissions_permissions_matrix($field, &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+function field_permissions_permissions_matrix($field, &$form, FormStateInterface $form_state) {
   $roles = user_roles();
   $role_names = array_keys($roles);
   $form['role_names'] = array(

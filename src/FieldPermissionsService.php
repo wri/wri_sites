@@ -7,6 +7,9 @@
 
 namespace Drupal\field_permissions;
 
+/**
+ * Implemenst FieldPermissionsServiceInterfaces.
+ */
 class FieldPermissionsService implements FieldPermissionsServiceInterface {
 
   /**
@@ -43,8 +46,17 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
   }
 
   /**
-   * {@inheritdoc}
-   * FieldStorageConfigInterface
+   * GetPermissions width title and description key of array the name of perm.
+   *
+   * @param FieldStorageConfigInterface $field
+   *   The field to return permissions for.
+   * @param string $label
+   *   Param to pass FieldPermissionsService::getList($label).
+   *
+   * @see FieldPermissionsService::getList($label)
+   *
+   * @return array
+   *   Return arry for permission ti singol field.
    */
   public static function listFieldPermissionSupport($field, $label = '') {
     $permissions = array();
@@ -60,9 +72,9 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * Get All permission Value for all field and all roles.
    */
-  public static function getPermissionValue(/*FieldStorageConfigInterface $field*/) {
+  public static function getPermissionValue() {
     $roules = user_roles();
     $field_field_permissions = [];
     $field_permission_perm = FieldPermissionsService::permissions();
@@ -88,7 +100,10 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * Get implemets permissions invoke in field_permissions.permissions.yml.
+   *
+   * @return array
+   *  Add custom permissions.
    */
   public static function permissions() {
     $permissions = [];
@@ -106,7 +121,13 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * Get permission type for single field.
+   *
+   * @param FieldStorageConfigInterface $field
+   *    Field to get permissions.
+   *
+   * @return int
+   *   return PUBLIC || PRIVATE || CUSTOM
    */
   public static function fieldGetPermissionType($field) {
     $config = \Drupal::service('config.factory')->getEditable('field_permissions.settings');
@@ -115,22 +136,42 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
   }
 
   /**
-   * {@inheritdoc}
-   *  AccountInterface
+   * Return permissions to garenat access to admin field perm.
+   *
+   * @param AccountInterface $account
+   *   User to garant permissions.
+   *
+   * @return bool
+   *   Garant or negate access.
    */
   public static function GetAccessAdminFieldPermissions($account) {
     return $account->hasPermission("admin_field_permissions");
   }
 
   /**
-   * {@inheritdoc}
-   *  AccountInterface.
+   * Return permissions to garenat access to private field.
+   *
+   * @param AccountInterface $account
+   *   User to garant permissions.
+   *
+   * @return bool
+   *   Garant or negate access.
    */
   public static function GetAccessPrivateFieldPermissions($account) {
     return $account->hasPermission("access_user_private_field");
   }
+
   /**
-   * {@inheritdoc}
+   * Return access to field on itemes and opertations.
+   *
+   * @param string $operation
+   *    String operation on field.
+   * @param Entity $items
+   *   Entity cotain fields.
+   * @param AccountInterface $account
+   *    Account to get permissions.
+   * @param FieldDefinitionInterface $field_definition
+   *   Fields to get permissions.
    */
   public static function getFieldAccess($operation, $items, $account, $field_definition) {
     $default_type = FieldPermissionsService::fieldGetPermissionType($field_definition);

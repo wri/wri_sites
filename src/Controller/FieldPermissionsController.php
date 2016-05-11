@@ -11,14 +11,19 @@ use \Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field_permissions\FieldPermissionsService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+
+/**
+ * Define FieldPermissionsController.
+ */
 class FieldPermissionsController extends ControllerBase {
 
   protected $fieldPermissions;
 
   /**
-   * Boh boh.
+   * Costructor.
    *
-   * @param FieldPermissionsService $field_permissions_service.
+   * @param FieldPermissionsService $field_permissions_service
+   *   Field permissions services.
    */
   public function __construct(FieldPermissionsService $field_permissions_service) {
     $this->fieldPermissions = $field_permissions_service;
@@ -37,12 +42,11 @@ class FieldPermissionsController extends ControllerBase {
   }
 
   /**
-   * {@inheritdoc}
+   * Content to page report all field permissions settings.
+   *
+   * Build table to Path: 'admin/reports/fields/permissions'.
    */
   public function content() {
-    ///dpm(\Drupal::moduleHandler()->getImplementations('entity_base_field_info'));
-    // dpm($field_info = \Drupal::moduleHandler()->invoke("path", 'entity_base_field_info'));
-    //dpm(\Drupal::moduleHandler()->implementsHook('form', 'alter'));
     $build['table'] = array(
       '#type' => 'table',
       '#header' => $this->buildHeader(),
@@ -53,7 +57,7 @@ class FieldPermissionsController extends ControllerBase {
   }
 
   /**
-   * {@inheritdoc}
+   * Builed header tabel to content.
    */
   public function buildHeader() {
     $headers = array(
@@ -77,14 +81,13 @@ class FieldPermissionsController extends ControllerBase {
   }
 
   /**
-   * {@inheritdoc}
+   * Builed Row tabel to content.
+   *
+   * @var $instance \Drupal\field\Entity\FieldStorageConfig
    */
   protected function buildRows() {
     $instances = \Drupal::entityTypeManager()->getStorage('field_storage_config')->loadMultiple();
     $rows = [];
-    /*
-     * @var $instance \Drupal\field\Entity\FieldStorageConfig
-     */
     foreach ($instances as $key => $instance) {
       $rows[] = $this->buildRow($instance);
     }
@@ -92,10 +95,13 @@ class FieldPermissionsController extends ControllerBase {
   }
 
   /**
-   * XXXXX.
-   * @param \Drupal\field\Entity\FieldStorageConfig $field_storage.
+   * Build single row to content.
+   *
+   * @param \Drupal\field\Entity\FieldStorageConfig $field_storage
+   *  Field to populate row.
+   *
    * @return array
-   *   xxx
+   *   Build row.
    */
   protected function buildRow(FieldStorageConfig $field_storage) {
     $row = [];
