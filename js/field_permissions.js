@@ -1,6 +1,7 @@
 (function ($) {
 Drupal.behaviors.fieldPermissions = {
   attach: function (context, settings) {
+    return 0;
     var PemTable = $(context).find("#permissions");
     var PermDefaultType = $(context).find('#edit-type input:checked');
     var PermInputType = $(context).find('#edit-type input');

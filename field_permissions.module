@@ -5,12 +5,15 @@
  * Contains field_permissions.module.
  */
 
-use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\CssCommand;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\field_permissions\FieldPermissionsService;
+
 
 /**
  * Indicates that a field does not have any access control.
@@ -58,6 +61,16 @@ function field_permissions_entity_field_access($operation, FieldDefinitionInterf
   return AccessResult::neutral();
 }
 
+function _supportAjax(array &$form, FormStateInterface $form_state) {
+  $response = new AjaxResponse();
+  $type_permission = $form_state->getValue("type");
+  $css = [
+    'display' => ($type_permission != FIELD_PERMISSIONS_CUSTOM) ? 'none' : '',
+  ];
+  $response->addCommand(new CssCommand('#permissions', $css));
+  return $response;
+}
+
 /**
  * Implements hook_form_alter().
  *
@@ -84,11 +97,17 @@ function field_permissions_form_field_config_edit_form_alter(&$form, FormStateIn
       FIELD_PERMISSIONS_CUSTOM => t('Custom permissions'),
     ),
     '#default_value' => isset($form['#field']['field_permissions']['type']) ? $form['#field']['field_permissions']['type'] : $default_type,
+    '#ajax' => [
+      'callback' => '_supportAjax',
+      'event' => 'change',
+      'progress' => array(
+        'type' => 'none',
+      ),
+    ],
   );
+
   field_permissions_permissions_matrix($field, $form, $form_state);
-  $form['#attached']['library'] = array(
-    'field_permissions/field_permissions',
-  );
+  $form['#attached']['library'][] = 'user/drupal.user.permissions';
   $form['actions']['submit']['#submit'][] = 'field_permission_field_config_edit_form_submit';
 }
 
@@ -137,7 +156,7 @@ function field_permissions_permissions_matrix($field, &$form, FormStateInterface
         '#title' => $name . ': ' . $permission["title"],
         '#title_display' => 'invisible',
         '#type' => 'checkbox',
-        '#attributes' => array('class' => array('rid-' . $rid, 'js-rid-' . $rid)),
+        '#attributes' => array('class' => array('rid-' . $name, 'js-rid-' . $name)),
         '#wrapper_attributes' => array(
           'class' => array('checkbox'),
         ),
