@@ -210,8 +210,13 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
         if ($account->hasPermission($operation . "_" . $field_name)) {
           return $account->hasPermission($operation . "_" . $field_name);
         }
-        elseif ($items->getEntity()->getOwnerId() == $account->id()) {
-          return $account->hasPermission($operation . "_own_" . $field_name);
+        else {
+          if (($items->getEntity()->getEntityTypeId() == 'user') && ($items->getEntity()->id() == $account->id())) {
+            return $account->hasPermission($operation . "_own_" . $field_name);
+          }
+          elseif ($items->getEntity()->getOwnerId() == $account->id()) {
+            return $account->hasPermission($operation . "_own_" . $field_name);
+          }
         }
       }
       elseif ($operation === "edit") {
@@ -221,8 +226,13 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
         if ($account->hasPermission($operation . "_" . $field_name)) {
           return $account->hasPermission($operation . "_" . $field_name);
         }
-        elseif ($items->getEntity()->getOwnerId() == $account->id()) {
-          return $account->hasPermission($operation . "_own_" . $field_name);
+        else {
+          if (($items->getEntity()->getEntityTypeId() == 'user') && ($items->getEntity()->id() == $account->id())) {
+            return $account->hasPermission($operation . "_own_" . $field_name);
+          }
+          elseif ($items->getEntity()->getOwnerId() == $account->id()) {
+            return $account->hasPermission($operation . "_own_" . $field_name);
+          }
         }
       }
     }
