@@ -1,28 +1,10 @@
 <?php
 /**
  * @file
- *  Contains FieldPermissionsTest.php
+ * Contains FieldPermissionsTest.php
  */
 
 namespace Drupal\field_permissions\Tests;
-use Drupal\field_permissions\FieldPermissionsService;
-use Drupal\simpletest\WebTestBase;
-
-/**
- * Indicates that a field does not have any access control.
- */
-define('FIELD_PERMISSIONS_PUBLIC', 0);
-/**
- * Indicates that a field is private.
- *
- * Private fields are never displayed, and are only editable by the author (and
- * by site administrators with the 'access private fields' permission).
- */
-define('FIELD_PERMISSIONS_PRIVATE', 1);
-/**
- * Indicates that a field has custom permissions.
- */
-define('FIELD_PERMISSIONS_CUSTOM', 2);
 
 /**
  * A generic field testing class.
@@ -41,41 +23,8 @@ define('FIELD_PERMISSIONS_CUSTOM', 2);
  *
  * @group field_permission
  */
-class FieldPermissionsTest extends WebTestBase {
+class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
 
-  // Our tests will generate some random field instance
-  // names. We store them here so many functions can act on them.
-  protected $instanceNames;
-
-  /**
-   * An administrative user with permission to configure comment settings.
-   *
-   * @var \Drupal\user\AccountInterface
-   */
-  protected $adminUser;
-  /**
-   * An limit user.
-   *
-   * @var \Drupal\user\AccountInterface
-   */
-  protected $limitedUser;
-  /**
-   * A normal user with permission.
-   *
-   * @var \Drupal\user\UserInterface
-   */
-  protected $webUser;
-  protected $adminUserRole;
-  protected $limitUserRole;
-  protected $nodeTest;
-
-
-  /**
-   * Modules to install.
-   *
-   * @var array
-   */
-  public static $modules = ['node', 'field', 'field_ui', 'user', 'field_permissions'];
 
   /**
    * Simpletest's setUp().
@@ -86,61 +35,8 @@ class FieldPermissionsTest extends WebTestBase {
    */
   public function setUp() {
     parent::setUp();
-
-    // Create node type.
-    $this->drupalCreateContentType(array(
-      'type' => 'article',
-      'name' => 'Article',
-    ));
-    $this->checkPermissions(array("create article content"), TRUE);
-    $this->adminUser = $this->drupalCreateUser(array(
-      'administer content types',
-      'access user profiles',
-      'access content',
-      'administer permissions',
-      'administer node fields',
-      'bypass node access',
-      'administer nodes',
-      'create article content',
-    ));
-
-    $this->limitedUser = $this->drupalCreateUser(array(
-      'access content',
-      'create article content',
-      'edit any article content',
-    ));
-
-    $this->webUser = $this->drupalCreateUser(array(
-      'access content',
-      'create article content',
-      'edit any article content',
-    ));
-
-    $this->adminUserRole = \Drupal\user\Entity\Role::load($this->adminUser->getRoles(array('authenticated'))[0]);
-    $this->limitUserRole = \Drupal\user\Entity\Role::load($this->limitedUser->getRoles(array('authenticated'))[0]);
-    $this->webUserRole = \Drupal\user\Entity\Role::load($this->limitedUser->getRoles(array('authenticated'))[0]);
-
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function getModule() {
-    return 'field_permission';
-  }
-
-  /**
-   * Test Send form permission page width enable permission by rules.
-   */
-  public function TestPremissionFormUi($rule, $perm) {
-    $edit = array();
-    $edit[$rule->id() . '[' . $perm . ']'] = TRUE;
-    $this->drupalGet('admin/people/permissions');
-    $this->drupalPostForm(NULL, $edit, t('Save permissions'));
-    drupal_static_reset('user_access');
-    drupal_static_reset('user_role_permissions');
-    $this->assertText(t('The changes have been saved.'), t('Successful save message displayed.'));
-  }
 
   /**
    * Test chanege parmission field enable perm by rule.
@@ -215,37 +111,6 @@ class FieldPermissionsTest extends WebTestBase {
   /**
    * Test case.
    */
-  function TestGetCustomPemrission($role, $field_perm = array()) {
-    $custom_perm = array();
-    $permission_list = FieldPermissionsService::permissions();
-    $permission_list = array_keys($permission_list);
-    $permission_role = array_keys(user_roles());
-    $remove_perm = array();
-    // Set all check to false.
-    foreach ($permission_role as $rname) {
-      foreach ($permission_list as $perm) {
-        $key = 'permissions[' . $perm . '][' . $rname . ']';
-        $custom_perm[$key] = FALSE;
-      }
-    }
-    // Set perm check to true.
-    foreach ($field_perm as $perm) {
-      $key = 'permissions[' . $perm . '][' . $role->id() . ']';
-      $custom_perm[$key] = TRUE;
-    }
-    return $custom_perm;
-  }
-
-  /**
-   * Test case.
-   */
-  function TestCreateCustomPermission($role, $permissions = array(), $custom_permission = array()) {
-    return array_merge($custom_permission, $this->TestGetCustomPemrission($role, $permissions));
-  }
-
-  /**
-   * Test case.
-   */
   function TestChangeCustomPermission($custom_permission) {
     $this->drupalLogin($this->adminUser);
     $this->TestFieldChangePermissionField(FIELD_PERMISSIONS_CUSTOM, $custom_permission);
@@ -266,6 +131,7 @@ class FieldPermissionsTest extends WebTestBase {
     $this->assertText('Field visibility and permissions');
     $this->drupalLogout();
   }
+
   /*
    * Test permiossion page.
    * nota : admin/people/permissions
@@ -277,6 +143,7 @@ class FieldPermissionsTest extends WebTestBase {
     $this->assertText('Administer field permissions');
     $this->drupalLogout();
   }
+
   /**
    * Test create content.
    */
@@ -300,6 +167,7 @@ class FieldPermissionsTest extends WebTestBase {
     $this->TestViewNodeField(FALSE);
 
     $this->TestPremissionFormUi($this->adminUserRole, "access_user_private_field");
+    //debug($this->adminUserRole);
     $this->TestViewNodeField(TRUE);
     $this->drupalLogout();
   }
@@ -349,7 +217,7 @@ class FieldPermissionsTest extends WebTestBase {
   /**
    * Test - view edit all field.
    */
-  function TestViewEditAllField() {
+  public function TestViewEditAllField() {
 
     $this->drupalLogin($this->adminUser);
     $this->TestViewNodeField(FALSE);
@@ -387,6 +255,7 @@ class FieldPermissionsTest extends WebTestBase {
 
     $this->drupalLogin($this->adminUser);
     $this->drupalGet('admin/people/permissions');
+
   }
 
 }

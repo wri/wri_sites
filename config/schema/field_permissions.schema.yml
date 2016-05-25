@@ -4,4 +4,13 @@ field_permissions.settings:
   mapping:
     permission_type_body:
       type: integer
-      label: 'Value public private ciustom permission'
+      label: 'Value public private custom permission'
+    permission_type_field_text:
+      type: integer
+      label: 'Value public private custom permission'
+    permission_type_comment_body:
+      type: integer
+      label: 'Value public private custom permission'
+    permission_type_comment:
+      type: integer
+      label: 'Value public private custom permission'
