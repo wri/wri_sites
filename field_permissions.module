@@ -78,6 +78,8 @@ function _supportAjax(array &$form, FormStateInterface $form_state) {
  * @see field_permissions_permissions_matrix()
  */
 function field_permissions_form_field_config_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  //$config = \Drupal::service('config.factory')->getEditable('field_permissions.settings');
   $account = \Drupal::currentUser();
   if (!FieldPermissionsService::GetAccessAdminFieldPermissions($account)) {
     return $form;
@@ -173,14 +175,17 @@ function field_permissions_permissions_matrix($field, &$form, FormStateInterface
  * Implements hook_form_submit().
  */
 function field_permission_field_config_edit_form_submit(array &$form, FormStateInterface $form_state) {
-  $config = \Drupal::service('config.factory')->getEditable('field_permissions.settings');
+
   $field = $form_state->getBuildInfo()['callback_object']->getEntity();
   $custum_permissions = $form_state->getValue("permissions");
   $roules = $form_state->getValue("role_names");
   $type_permission = $form_state->getValue("type");
   $field_name = $field->getName();
-  $config->set('permission_type_' . $field_name, $type_permission);
+  // Save Permissions type for field.
+  $config = \Drupal::service('config.factory')->getEditable('field_permissions.settings');
+  $config->set('type.field:' . $field_name, $type_permission);
   $config->save();
+
   $perm_settings = [];
   // Set all perm.
   if ($type_permission == FIELD_PERMISSIONS_CUSTOM) {
