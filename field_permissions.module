@@ -6,8 +6,6 @@
  */
 
 use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax\CssCommand;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -50,7 +48,6 @@ function field_permissions_help($route_name, RouteMatchInterface $route_match) {
  * Implements hook_entity_field_access().
  */
 function field_permissions_entity_field_access($operation, FieldDefinitionInterface $field_definition, $account, FieldItemListInterface $items = NULL) {
-
   $context = ($operation == "view") ? 'display' : 'edit';
   if (!$field_definition->isDisplayConfigurable($context) || empty($items)) {
     return AccessResult::neutral();
@@ -62,24 +59,12 @@ function field_permissions_entity_field_access($operation, FieldDefinitionInterf
   return AccessResult::neutral();
 }
 
-function _supportAjax(array &$form, FormStateInterface $form_state) {
-  $response = new AjaxResponse();
-  $type_permission = $form_state->getValue("type");
-  $css = [
-    'display' => ($type_permission != FIELD_PERMISSIONS_CUSTOM) ? 'none' : '',
-  ];
-  $response->addCommand(new CssCommand('#permissions', $css));
-  return $response;
-}
-
 /**
  * Implements hook_form_alter().
  *
  * @see field_permissions_permissions_matrix()
  */
 function field_permissions_form_field_config_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-
-  //$config = \Drupal::service('config.factory')->getEditable('field_permissions.settings');
   $account = \Drupal::currentUser();
   if (!FieldPermissionsService::GetAccessAdminFieldPermissions($account)) {
     return $form;
@@ -100,17 +85,12 @@ function field_permissions_form_field_config_edit_form_alter(&$form, FormStateIn
       FIELD_PERMISSIONS_CUSTOM => t('Custom permissions'),
     ),
     '#default_value' => isset($form['#field']['field_permissions']['type']) ? $form['#field']['field_permissions']['type'] : $default_type,
-    '#ajax' => [
-      'callback' => '_supportAjax',
-      'event' => 'change',
-      'progress' => array(
-        'type' => 'none',
-      ),
-    ],
   );
 
   field_permissions_permissions_matrix($field, $form, $form_state);
   $form['#attached']['library'][] = 'user/drupal.user.permissions';
+  $form['#attached']['library'][] = 'field_permissions/field_permissions';
+
   $form['actions']['submit']['#submit'][] = 'field_permission_field_config_edit_form_submit';
 }
 
@@ -182,9 +162,7 @@ function field_permission_field_config_edit_form_submit(array &$form, FormStateI
   $type_permission = $form_state->getValue("type");
   $field_name = $field->getName();
   // Save Permissions type for field.
-  $config = \Drupal::service('config.factory')->getEditable('field_permissions.settings');
-  $config->set('type.field:' . $field_name, $type_permission);
-  $config->save();
+  FieldPermissionsService::fieldSetPermissionType($field, $type_permission);
 
   $perm_settings = [];
   // Set all perm.
@@ -196,7 +174,6 @@ function field_permission_field_config_edit_form_submit(array &$form, FormStateI
     }
   }
   elseif ($type_permission == FIELD_PERMISSIONS_PUBLIC) {
-
     foreach ($custum_permissions as $perm_name => $field_perm) {
       foreach ($field_perm as $rname => $roule_perm) {
         if ($perm_name != 'view_' . $field_name) {

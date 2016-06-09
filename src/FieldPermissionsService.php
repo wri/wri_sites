@@ -140,6 +140,13 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
     return ($field_settings_perm) ? $field_settings_perm : FIELD_PERMISSIONS_PUBLIC;
   }
 
+  public static function fieldSetPermissionType($field, $type_permission) {
+    $field_name = $field->getName();
+    $config = \Drupal::service('config.factory')->getEditable('field_permissions.settings');
+    $config->set('type.field:' . $field_name, $type_permission);
+    $config->save();
+  }
+
   /**
    * Return permissions to garenat access to admin field perm.
    *
@@ -166,6 +173,24 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
     return $account->hasPermission("access_user_private_field");
   }
 
+  /**
+   * Field is attached to comment entity.
+   *
+   * @param FieldDefinitionInterface $field_definition
+   *   Fields to get permissions.
+   *
+   * @return bool
+   *   TRUE if in a comment entity.
+   */
+  public static function FieldIsCommentField($field_definition) {
+    $field_name = $field_definition->getName();
+    $field_names = \Drupal::service('comment.manager')->getFields('node');
+    // Comment field.
+    if (in_array($field_name, array_keys($field_names))) {
+      return TRUE;
+    }
+    return FALSE;
+  }
 
   /**
    * Return access to field on itemes and opertations.
@@ -180,102 +205,206 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
    *   Fields to get permissions.
    */
   public static function getFieldAccess($operation, $items, $account, $field_definition) {
-
     $field_name = $field_definition->getName();
-    $field_names = \Drupal::service('comment.manager')->getFields('node');
     $default_type = FieldPermissionsService::fieldGetPermissionType($field_definition);
-    // Comment field.
-    if (in_array($field_name, array_keys($field_names))) {
-      // IN DEV.
-      // Delegate access field comment type to entity_comment.
-      // @see field_permissions_entity_access($entity, $operation, $account)
-      return TRUE;
-    }
-    // NO impement metod getOwnerId.
-    if (!method_exists($items->getEntity(), 'getOwnerId') && $items->getEntity()->getEntityTypeId() != 'user') {
-      return TRUE;
-    }
     if (in_array("administrator", $account->getRoles()) || $default_type == FIELD_PERMISSIONS_PUBLIC) {
       return TRUE;
     }
-    $field_name = $field_definition->getName();
+    // Field add to comment entity.
+    if (FieldPermissionsService::FieldIsCommentField($field_definition)) {
+      return TRUE;
+    }
+    // NO impement metod getOwnerId || entity not user or field_collection.
+    // field collection request https://www.drupal.org/node/2734551
+    // $items->getEntity()->getEntityTypeId() == 'field_collection_item'
+    if (!method_exists($items->getEntity(), 'getOwnerId') && $items->getEntity()->getEntityTypeId() != 'user') {
+      return TRUE;
+    }
+    $entity = $items->getEntity();
     if ($default_type == FIELD_PERMISSIONS_PRIVATE) {
-      if ($operation === "view") {
-        // USER.
-        if ($items->getEntity()->getEntityTypeId() == 'user') {
-          if (FieldPermissionsService::GetAccessPrivateFieldPermissions($account)) {
-            return TRUE;
-          }
-          if ($items->getEntity()->id() == $account->id()) {
-            return $account->hasPermission($operation . "_own_" . $field_name);
-          }
-        }
-        else {
-          // NODE.
-          if ($items->getEntity()->getOwnerId() == $account->id()) {
-            return FieldPermissionsService::GetAccessPrivateFieldPermissions($account) || $account->hasPermission($operation . "_own_" . $field_name);
-          }
-          else {
-            return FieldPermissionsService::GetAccessPrivateFieldPermissions($account);
-          }
-        }
-      }
-      elseif ($operation === "edit") {
-        // USER.
-        if ($items->getEntity()->getEntityTypeId() == 'user') {
-          if ($items->getEntity()->id() == $account->id()) {
-            return FieldPermissionsService::GetAccessPrivateFieldPermissions($account) || $account->hasPermission($operation . "_own_" . $field_name);
-          }
-        }
-        else {
-          if ($items->getEntity()->isNew()) {
-            // Dev implement create permission.
-            return TRUE;
-          }
-          elseif ($items->getEntity()->getOwnerId() == $account->id()) {
-            return TRUE;
-          }
-          else {
-            return FieldPermissionsService::GetAccessPrivateFieldPermissions($account);;
-          }
-        }
-      }
+      return FieldPermissionsService::getFieldAccessPrivate($operation, $entity, $account, $field_name);
     }
     if ($default_type == FIELD_PERMISSIONS_CUSTOM) {
-      if ($operation === "view") {
-        if ($account->hasPermission($operation . "_" . $field_name)) {
-          return $account->hasPermission($operation . "_" . $field_name);
-        }
-        else {
-          if (($items->getEntity()->getEntityTypeId() == 'user')) {
-            if (($items->getEntity()->id() == $account->id())) {
-              return $account->hasPermission($operation . "_own_" . $field_name);
-            }
-          }
-          elseif ($items->getEntity()->getOwnerId() == $account->id()) {
-            return $account->hasPermission($operation . "_own_" . $field_name);
-          }
-        }
-      }
-      elseif ($operation === "edit") {
-        if ($items->getEntity()->isNew()) {
-          return $account->hasPermission("create_" . $field_name);
-        }
-        if ($account->hasPermission($operation . "_" . $field_name)) {
-          return $account->hasPermission($operation . "_" . $field_name);
-        }
-        else {
-          if (($items->getEntity()->getEntityTypeId() == 'user')) {
-            if (($items->getEntity()->id() == $account->id())) {
-              return $account->hasPermission($operation . "_own_" . $field_name);
-            }
-          }
-          elseif ($items->getEntity()->getOwnerId() == $account->id()) {
-            return $account->hasPermission($operation . "_own_" . $field_name);
-          }
-        }
+      return FieldPermissionsService::getFieldAccessCustom($operation, $entity, $account, $field_name);
+    }
+  }
+
+  /**
+   * Access to field on itemes and opertations whith FIELD_PERMISSIONS_PRIVATE.
+   *
+   * @param string $operation
+   *    String operation on field.
+   * @param Entity $items
+   *   Entity cotain fields.
+   * @param AccountInterface $account
+   *    Account to get permissions.
+   * @param string $field_name
+   *   Fieldsname to get permissions.
+   *
+   * @return bool
+   *   Check permission.
+   */
+  public static function getFieldAccessPrivate($operation, $entity, $account, $field_name) {
+    if ($operation === "view") {
+      return FieldPermissionsService::getFieldAccessPrivateView($entity, $account, $field_name);
+    }
+    elseif ($operation === "edit") {
+      return FieldPermissionsService::getFieldAccessPrivateEdit($entity, $account, $field_name);
+    }
+  }
+
+  /**
+   * Access to field on itemes and opertations whith FIELD_PERMISSIONS_CUSTOM.
+   *
+   * @param string $operation
+   *    String operation on field.
+   * @param Entity $items
+   *   Entity cotain fields.
+   * @param AccountInterface $account
+   *    Account to get permissions.
+   * @param string $field_name
+   *   Fieldsname to get permissions.
+   *
+   * @return bool
+   *   Check permission.
+   */
+  public static function getFieldAccessCustom($operation, $entity, $account, $field_name) {
+    if ($operation === "view") {
+      return FieldPermissionsService::getFieldAccessCustomView($entity, $account, $field_name);
+    }
+    elseif ($operation === "edit") {
+      return FieldPermissionsService::getFieldAccessCustomEdit($entity, $account, $field_name);
+    }
+  }
+
+  /**
+   * Access to field on itemes VIEW and FIELD_PERMISSIONS_PRIVATE.
+   *
+   * @param Entity $items
+   *   Entity cotain fields.
+   * @param AccountInterface $account
+   *    Account to get permissions.
+   * @param string $field_name
+   *   Fieldsname to get permissions.
+   *
+   * @return bool
+   *   Check permission.
+   */
+  public static function getFieldAccessPrivateView($entity, $account, $field_name) {
+    if (FieldPermissionsService::GetAccessPrivateFieldPermissions($account)) {
+      return TRUE;
+    }
+    // USER.
+    if ($entity->getEntityTypeId() == 'user') {
+      if ($entity->id() == $account->id()) {
+        return $account->hasPermission("view_own_" . $field_name);
       }
     }
+    else {
+      // ENTITY.
+      if ($entity->getOwnerId() == $account->id()) {
+        return $account->hasPermission("view_own_" . $field_name);
+      }
+    }
+    return FALSE;
+  }
+
+  /**
+   * Access to field on itemes EDIT and FIELD_PERMISSIONS_PRIVATE.
+   *
+   * @param Entity $items
+   *   Entity cotain fields.
+   * @param AccountInterface $account
+   *    Account to get permissions.
+   * @param string $field_name
+   *   Fieldsname to get permissions.
+   *
+   * @return bool
+   *   Check permission.
+   */
+  public static function getFieldAccessPrivateEdit($entity, $account, $field_name) {
+    if (FieldPermissionsService::GetAccessPrivateFieldPermissions($account)) {
+      return TRUE;
+    }
+    // USER.
+    if ($entity->getEntityTypeId() == 'user') {
+      if ($entity->id() == $account->id()) {
+        return $account->hasPermission("edit_own_" . $field_name);
+      }
+    }
+    else {
+      if ($entity->isNew()) {
+        // Private field create access true.
+        return TRUE;
+      }
+      elseif ($entity->getOwnerId() == $account->id()) {
+        return TRUE;
+      }
+    }
+    return FALSE;
+  }
+
+  /**
+   * Access to field on itemes VIEW and FIELD_PERMISSIONS_CUSTOM.
+   *
+   * @param Entity $items
+   *   Entity cotain fields.
+   * @param AccountInterface $account
+   *    Account to get permissions.
+   * @param string $field_name
+   *   Fieldsname to get permissions.
+   *
+   * @return bool
+   *   Check permission.
+   */
+  public static function getFieldAccessCustomView($entity, $account, $field_name) {
+    if ($account->hasPermission("view_" . $field_name)) {
+      return $account->hasPermission("view_" . $field_name);
+    }
+    else {
+      if (($entity->getEntityTypeId() == 'user')) {
+        if (($entity->id() == $account->id())) {
+          return $account->hasPermission("view_own_" . $field_name);
+        }
+      }
+      elseif ($entity->getOwnerId() == $account->id()) {
+        return $account->hasPermission("view_own_" . $field_name);
+      }
+    }
+    return FALSE;
+  }
+
+  /**
+   * Access to field on itemes EDIT and FIELD_PERMISSIONS_CUSTOM.
+   *
+   * @param Entity $items
+   *   Entity cotain fields.
+   * @param AccountInterface $account
+   *    Account to get permissions.
+   * @param string $field_name
+   *   Fieldsname to get permissions.
+   *
+   * @return bool
+   *   Check permission.
+   */
+  public static function getFieldAccessCustomEdit($entity, $account, $field_name) {
+    if ($entity->isNew()) {
+      return $account->hasPermission("create_" . $field_name);
+    }
+    if ($account->hasPermission("edit_" . $field_name)) {
+      return $account->hasPermission("edit_" . $field_name);
+    }
+    else {
+      if (($entity->getEntityTypeId() == 'user')) {
+        if ($entity->id() == $account->id()) {
+          return $account->hasPermission("edit_own_" . $field_name);
+        }
+      }
+      elseif ($entity->getOwnerId() == $account->id()) {
+        return $account->hasPermission("edit_own_" . $field_name);
+      }
+    }
+    return FALSE;
   }
 
 }

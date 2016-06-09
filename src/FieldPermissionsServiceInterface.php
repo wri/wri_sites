@@ -38,6 +38,7 @@ interface FieldPermissionsServiceInterface {
    */
   public static function getPermissionValue();
 
+
   /**
    * Returns permissions implements in field_permissions.
    */
@@ -52,6 +53,25 @@ interface FieldPermissionsServiceInterface {
   public static function fieldGetPermissionType($field);
 
   /**
+   * Get default value for checkbox  role permission.
+   *
+   * @param \Drupal\field\FieldStorageConfigInterface $field
+   *   The field to return permissions for.
+   */
+  public static function fieldSetPermissionType($field, $type_permission);
+
+  /**
+   * Field is attached to comment entity.
+   *
+   * @param FieldDefinitionInterface $field_definition
+   *   Fields to get permissions.
+   *
+   * @return bool
+   *   TRUE if in a comment entity.
+   */
+  public static function fieldIsCommentField($field_definition);
+
+  /**
    * Get access for field by operations and account permisisons.
    *
    * @param string $operation
@@ -64,5 +84,98 @@ interface FieldPermissionsServiceInterface {
    *   Fields to get permissions.
    */
   public static function getFieldAccess($operation, $items, $account, $field_definition);
+
+  /**
+   * Access to field on itemes and opertations whith FIELD_PERMISSIONS_PRIVATE.
+   *
+   * @param string $operation
+   *    String operation on field.
+   * @param Entity $items
+   *   Entity cotain fields.
+   * @param AccountInterface $account
+   *    Account to get permissions.
+   * @param string $field_name
+   *   Fieldsname to get permissions.
+   *
+   * @return bool
+   *   Check permission.
+   */
+  public static function getFieldAccessPrivate($operation, $items, $account, $field_name);
+
+  /**
+   * Access to field on itemes VIEW and FIELD_PERMISSIONS_PRIVATE.
+   *
+   * @param Entity $items
+   *   Entity cotain fields.
+   * @param AccountInterface $account
+   *    Account to get permissions.
+   * @param string $field_name
+   *   Fieldsname to get permissions.
+   *
+   * @return bool
+   *   Check permission.
+   */
+  public static function getFieldAccessPrivateView($items, $account, $field_name);
+
+  /**
+   * Access to field on itemes EDIT and FIELD_PERMISSIONS_PRIVATE.
+   *
+   * @param Entity $items
+   *   Entity cotain fields.
+   * @param AccountInterface $account
+   *    Account to get permissions.
+   * @param string $field_name
+   *   Fieldsname to get permissions.
+   *
+   * @return bool
+   *   Check permission.
+   */
+  public static function getFieldAccessPrivateEdit($items, $account, $field_name);
+  /**
+   * Access to field on itemes and opertations whith FIELD_PERMISSIONS_CUSTOM.
+   *
+   * @param string $operation
+   *    String operation on field.
+   * @param Entity $items
+   *   Entity cotain fields.
+   * @param AccountInterface $account
+   *    Account to get permissions.
+   * @param string $field_name
+   *   Fieldsname to get permissions.
+   *
+   * @return bool
+   *   Check permission.
+   */
+  public static function getFieldAccessCustom($operation, $items, $account, $field_name);
+
+  /**
+   * Access to field on itemes VIEW and FIELD_PERMISSIONS_CUSTOM.
+   *
+   * @param Entity $items
+   *   Entity cotain fields.
+   * @param AccountInterface $account
+   *    Account to get permissions.
+   * @param string $field_name
+   *   Fieldsname to get permissions.
+   *
+   * @return bool
+   *   Check permission.
+   */
+  public static function getFieldAccessCustomView($items, $account, $field_name);
+
+  /**
+   * Access to field on itemes EDIT and FIELD_PERMISSIONS_CUSTOM.
+   *
+   * @param Entity $items
+   *   Entity cotain fields.
+   * @param AccountInterface $account
+   *    Account to get permissions.
+   * @param string $field_name
+   *   Fieldsname to get permissions.
+   *
+   * @return bool
+   *   Check permission.
+   */
+  public static function getFieldAccessCustomEdit($items, $account, $field_name);
 
 }
