@@ -205,7 +205,6 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
    *   Fields to get permissions.
    */
   public static function getFieldAccess($operation, $items, $account, $field_definition) {
-    $field_name = $field_definition->getName();
     $default_type = FieldPermissionsService::fieldGetPermissionType($field_definition);
     if (in_array("administrator", $account->getRoles()) || $default_type == FIELD_PERMISSIONS_PUBLIC) {
       return TRUE;
@@ -216,11 +215,12 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
     }
     // NO impement metod getOwnerId || entity not user or field_collection.
     // field collection request https://www.drupal.org/node/2734551
-    // $items->getEntity()->getEntityTypeId() == 'field_collection_item'
-    if (!method_exists($items->getEntity(), 'getOwnerId') && $items->getEntity()->getEntityTypeId() != 'user') {
+    $list_entity = array('comment', 'user');
+    $field_name = $field_definition->getName();
+    $entity = $items->getEntity();
+    if (!method_exists($items->getEntity(), 'getOwnerId') && !in_array($items->getEntity()->getEntityTypeId(), $list_entity)) {
       return TRUE;
     }
-    $entity = $items->getEntity();
     if ($default_type == FIELD_PERMISSIONS_PRIVATE) {
       return FieldPermissionsService::getFieldAccessPrivate($operation, $entity, $account, $field_name);
     }
@@ -234,7 +234,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
    *
    * @param string $operation
    *    String operation on field.
-   * @param Entity $items
+   * @param Entity $entity
    *   Entity cotain fields.
    * @param AccountInterface $account
    *    Account to get permissions.
@@ -245,6 +245,9 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
    *   Check permission.
    */
   public static function getFieldAccessPrivate($operation, $entity, $account, $field_name) {
+    if (FieldPermissionsService::GetAccessPrivateFieldPermissions($account)) {
+      return TRUE;
+    }
     if ($operation === "view") {
       return FieldPermissionsService::getFieldAccessPrivateView($entity, $account, $field_name);
     }
@@ -258,7 +261,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
    *
    * @param string $operation
    *    String operation on field.
-   * @param Entity $items
+   * @param Entity $entity
    *   Entity cotain fields.
    * @param AccountInterface $account
    *    Account to get permissions.
@@ -280,7 +283,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
   /**
    * Access to field on itemes VIEW and FIELD_PERMISSIONS_PRIVATE.
    *
-   * @param Entity $items
+   * @param Entity $entity
    *   Entity cotain fields.
    * @param AccountInterface $account
    *    Account to get permissions.
@@ -291,28 +294,22 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
    *   Check permission.
    */
   public static function getFieldAccessPrivateView($entity, $account, $field_name) {
-    if (FieldPermissionsService::GetAccessPrivateFieldPermissions($account)) {
-      return TRUE;
-    }
     // USER.
     if ($entity->getEntityTypeId() == 'user') {
-      if ($entity->id() == $account->id()) {
-        return $account->hasPermission("view_own_" . $field_name);
-      }
+      return $entity->id() == $account->id();
+    }
+    elseif ($entity->getEntityTypeId() == 'comment') {
+      return $entity->get('uid')->target_id == $account->id();
     }
     else {
-      // ENTITY.
-      if ($entity->getOwnerId() == $account->id()) {
-        return $account->hasPermission("view_own_" . $field_name);
-      }
+      return $entity->getOwnerId() == $account->id();
     }
-    return FALSE;
   }
 
   /**
    * Access to field on itemes EDIT and FIELD_PERMISSIONS_PRIVATE.
    *
-   * @param Entity $items
+   * @param Entity $entity
    *   Entity cotain fields.
    * @param AccountInterface $account
    *    Account to get permissions.
@@ -323,31 +320,26 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
    *   Check permission.
    */
   public static function getFieldAccessPrivateEdit($entity, $account, $field_name) {
-    if (FieldPermissionsService::GetAccessPrivateFieldPermissions($account)) {
+    if ($entity->isNew()) {
       return TRUE;
     }
     // USER.
     if ($entity->getEntityTypeId() == 'user') {
-      if ($entity->id() == $account->id()) {
-        return $account->hasPermission("edit_own_" . $field_name);
-      }
+      return ($entity->id() == $account->id());
+    }
+    // COMMENT.
+    elseif ($entity->getEntityTypeId() == 'comment') {
+      return $entity->get('uid')->target_id == $account->id();
     }
     else {
-      if ($entity->isNew()) {
-        // Private field create access true.
-        return TRUE;
-      }
-      elseif ($entity->getOwnerId() == $account->id()) {
-        return TRUE;
-      }
+      return $entity->getOwnerId() == $account->id();
     }
-    return FALSE;
   }
 
   /**
    * Access to field on itemes VIEW and FIELD_PERMISSIONS_CUSTOM.
    *
-   * @param Entity $items
+   * @param Entity $entity
    *   Entity cotain fields.
    * @param AccountInterface $account
    *    Account to get permissions.
@@ -362,22 +354,24 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
       return $account->hasPermission("view_" . $field_name);
     }
     else {
-      if (($entity->getEntityTypeId() == 'user')) {
-        if (($entity->id() == $account->id())) {
-          return $account->hasPermission("view_own_" . $field_name);
-        }
+      // USER.
+      if ($entity->getEntityTypeId() == 'user') {
+        return $entity->id() == $account->id() && $account->hasPermission("view_own_" . $field_name);
       }
-      elseif ($entity->getOwnerId() == $account->id()) {
-        return $account->hasPermission("view_own_" . $field_name);
+      // COMMENT.
+      elseif ($entity->getEntityTypeId() == 'comment') {
+        return $entity->get('uid')->target_id == $account->id() && $account->hasPermission("view_own_" . $field_name);
+      }
+      else {
+        return $entity->getOwnerId() == $account->id() && $account->hasPermission("view_own_" . $field_name);
       }
     }
-    return FALSE;
   }
 
   /**
    * Access to field on itemes EDIT and FIELD_PERMISSIONS_CUSTOM.
    *
-   * @param Entity $items
+   * @param Entity $entity
    *   Entity cotain fields.
    * @param AccountInterface $account
    *    Account to get permissions.
@@ -395,16 +389,18 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
       return $account->hasPermission("edit_" . $field_name);
     }
     else {
-      if (($entity->getEntityTypeId() == 'user')) {
-        if ($entity->id() == $account->id()) {
-          return $account->hasPermission("edit_own_" . $field_name);
-        }
+      // USER.
+      if ($entity->getEntityTypeId() == 'user') {
+        return $entity->id() == $account->id() && $account->hasPermission("edit_own_" . $field_name);
       }
-      elseif ($entity->getOwnerId() == $account->id()) {
-        return $account->hasPermission("edit_own_" . $field_name);
+      // COMMENT.
+      elseif ($entity->getEntityTypeId() == 'comment') {
+        return $entity->get('uid')->target_id == $account->id() && $account->hasPermission("edit_own_" . $field_name);
+      }
+      else {
+        return $entity->getOwnerId() == $account->id() && $account->hasPermission("edit_own_" . $field_name);
       }
     }
-    return FALSE;
   }
 
 }

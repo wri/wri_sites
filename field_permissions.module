@@ -66,11 +66,14 @@ function field_permissions_entity_field_access($operation, FieldDefinitionInterf
  */
 function field_permissions_form_field_config_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $account = \Drupal::currentUser();
+  $field = $form_state->getBuildInfo()['callback_object']->getEntity();
   if (!FieldPermissionsService::GetAccessAdminFieldPermissions($account)) {
     return $form;
   }
-
-  $field = $form_state->getBuildInfo()['callback_object']->getEntity();
+  // Remove on comment field.
+  if (FieldPermissionsService::FieldIsCommentField($field)) {
+    return $form;
+  }
   $default_type = FieldPermissionsService::fieldGetPermissionType($field);
   $form['fid'] = array('#type' => 'hidden', '#value' => $field->id());
   $form['field']['field_permissions'] = array(

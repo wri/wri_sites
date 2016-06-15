@@ -201,8 +201,7 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
     $this->drupalLogout();
   }
 
-  private function TestCommentFieldPrivate($bundle = 'node') {
-    /*
+  private function TestCommentFieldPrivate($bundle = 'comment') {
     if ($bundle == 'comment') {
       $path = 'admin/structure/comment/manage/comment/fields/comment.comment.comment_body';
       $permission = array();
@@ -228,44 +227,6 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
       // Admin edit comment post to Limit user.
       $this->drupalGet('comment/2/edit');
       // Hide comment body to edit comment.
-      $this->assertNoText('Limit User comment body');
-      $this->drupalLogout();
-    }*/
-    // else
-    if ($bundle = 'node') {
-
-      $path = 'admin/structure/comment/manage/comment/fields/comment.comment.comment_body';
-      $permission = array();
-      $this->drupalLogin($this->adminUser);
-      // Add perm to admin (admin field permissions).
-      $this->TestPremissionFormUi($this->adminUserRole, "admin_field_permissions");
-      // Set Public field to comment body.
-      $this->TestFieldChangePermissionCommentField(FIELD_PERMISSIONS_PUBLIC, $permission, $path);
-      // set private comment field in node atricle.
-      $path = 'admin/structure/types/manage/article/fields/node.article.comment';
-      $this->TestPremissionFormUi($this->adminUserRole, "admin_field_permissions");
-      $this->TestFieldChangePermissionCommentField(FIELD_PERMISSIONS_PRIVATE, $permission, $path);
-      $this->drupalLogout();
-
-      $this->drupalLogin($this->limitedUser);
-      $this->drupalGet('node/' . $this->nodeTest->id());
-      //return TRUE;
-      // Test hide body comment post by Adminuser but display subject..
-      $this->assertNoText($this->subject);
-      $this->assertNoText($this->field_text);
-      // Test view your comment.
-      $this->assertText('Limit User comment subject');
-      $this->assertText('Limit User comment body');
-        return TRUE;
-      // Test edit your comment.
-      $this->drupalGet('comment/2/edit');
-      $this->assertText('Limit User comment body');
-
-      $this->drupalLogin($this->adminUser);
-      // Admin edit comment post to Limit user.
-      $this->drupalGet('node/' . $this->nodeTest->id());
-      // Hide comment body to edit comment.
-      $this->assertNoText('Limit User comment subject');
       $this->assertNoText('Limit User comment body');
       $this->drupalLogout();
     }
@@ -352,16 +313,16 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
 
     $edit = array();
     $permission = array();
-/*
+
     $this->NodeAddCommentField();
     $this->TestCommentFieldBase();
+
     $this->TestCommentFieldPrivate();
-    $this->TestCommentFieldCustom();
     $this->TestAccessPrivateFied();
-*/
+
+    $this->TestCommentFieldCustom();
+    // $this->TestAccessPrivateFied();
     //$this->TestCommentFieldPrivate('node');
-
-
 
   }
 
