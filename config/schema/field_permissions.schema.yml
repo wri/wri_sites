@@ -1,0 +1,14 @@
+# Schema for configuration files of the FieldPermissoins module.
+
+field_permissions.settings:
+  type: config_object
+  mapping:
+    type:
+      type: sequence
+      label: 'field list permission type'
+      sequence:
+        type: field_permissions.[%key]
+
+field_permissions.field:*:
+  type: integer
+  label: 'permissions'

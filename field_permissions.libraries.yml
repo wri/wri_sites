@@ -1,0 +1,9 @@
+field_permissions:
+  version: VERSION
+  js:
+    js/field_permissions.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/drupal.form
