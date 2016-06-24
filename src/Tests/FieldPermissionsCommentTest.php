@@ -5,24 +5,9 @@
  */
 
 namespace Drupal\field_permissions\Tests;
+
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
-
-/**
- * Indicates that a field does not have any access control.
- */
-//define('FIELD_PERMISSIONS_PUBLIC', 0);
-/**
- * Indicates that a field is private.
- *
- * Private fields are never displayed, and are only editable by the author (and
- * by site administrators with the 'access private fields' permission).
- */
-//define('FIELD_PERMISSIONS_PRIVATE', 1);
-/**
- * Indicates that a field has custom permissions.
- */
-//define('FIELD_PERMISSIONS_CUSTOM', 2);
 
 /**
  * A generic field testing class.
