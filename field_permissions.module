@@ -7,6 +7,7 @@
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -66,15 +67,16 @@ function field_permissions_entity_field_access($operation, FieldDefinitionInterf
  */
 function field_permissions_form_field_config_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $account = \Drupal::currentUser();
+  /** @var FieldDefinitionInterface $field */
   $field = $form_state->getBuildInfo()['callback_object']->getEntity();
-  if (!FieldPermissionsService::GetAccessAdminFieldPermissions($account)) {
+  if (!FieldPermissionsService::getAccessAdminFieldPermissions($account)) {
     return $form;
   }
   // Remove on comment field.
-  if (FieldPermissionsService::FieldIsCommentField($field)) {
+  if (FieldPermissionsService::fieldIsCommentField($field)) {
     return $form;
   }
-  $default_type = FieldPermissionsService::fieldGetPermissionType($field);
+  $default_type = FieldPermissionsService::fieldGetPermissionType($field->getFieldStorageDefinition());
   $form['fid'] = array('#type' => 'hidden', '#value' => $field->id());
   $form['field']['field_permissions'] = array(
     '#weight' => -10,
@@ -90,7 +92,7 @@ function field_permissions_form_field_config_edit_form_alter(&$form, FormStateIn
     '#default_value' => isset($form['#field']['field_permissions']['type']) ? $form['#field']['field_permissions']['type'] : $default_type,
   );
 
-  field_permissions_permissions_matrix($field, $form, $form_state);
+  field_permissions_permissions_matrix($field->getFieldStorageDefinition(), $form, $form_state);
   $form['#attached']['library'][] = 'user/drupal.user.permissions';
   $form['#attached']['library'][] = 'field_permissions/field_permissions';
 
@@ -100,10 +102,10 @@ function field_permissions_form_field_config_edit_form_alter(&$form, FormStateIn
 /**
  * Return Matrix field permission.
  *
- * @param FieldStorageConfig $field
+ * @param FieldStorageDefinitionInterface $field
  *   Field to implement permissions.
  */
-function field_permissions_permissions_matrix($field, &$form, FormStateInterface $form_state) {
+function field_permissions_permissions_matrix(FieldStorageDefinitionInterface $field, array &$form, FormStateInterface $form_state) {
   $roles = user_roles();
   $role_names = array_keys($roles);
   $form['role_names'] = array(
@@ -159,13 +161,14 @@ function field_permissions_permissions_matrix($field, &$form, FormStateInterface
  */
 function field_permission_field_config_edit_form_submit(array &$form, FormStateInterface $form_state) {
 
+  /** @var FieldDefinitionInterface $field */
   $field = $form_state->getBuildInfo()['callback_object']->getEntity();
   $custum_permissions = $form_state->getValue("permissions");
   $roules = $form_state->getValue("role_names");
   $type_permission = $form_state->getValue("type");
   $field_name = $field->getName();
   // Save Permissions type for field.
-  FieldPermissionsService::fieldSetPermissionType($field, $type_permission);
+  FieldPermissionsService::fieldSetPermissionType($field->getFieldStorageDefinition(), $type_permission);
 
   $perm_settings = [];
   // Set all perm.

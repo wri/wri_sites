@@ -21,7 +21,7 @@ use Drupal\simpletest\WebTestBase;
  * 'code_' and 'form_' prefixes denote the type of test:
  * using code only, or through Drupal page forms.
  */
-class FieldPermissionsTestBase extends WebTestBase {
+abstract class FieldPermissionsTestBase extends WebTestBase {
 
   // Our tests will generate some random field instance
   // names. We store them here so many functions can act on them.
