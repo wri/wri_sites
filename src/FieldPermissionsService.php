@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains FieldPermissionsService.php.
- */
-
 namespace Drupal\field_permissions;
 
 /**
@@ -140,6 +135,9 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
     return ($field_settings_perm) ? $field_settings_perm : FIELD_PERMISSIONS_PUBLIC;
   }
 
+  /**
+   *
+   */
   public static function fieldSetPermissionType($field, $type_permission) {
     $field_name = $field->getName();
     $config = \Drupal::service('config.factory')->getEditable('field_permissions.settings');

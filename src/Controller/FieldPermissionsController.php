@@ -1,16 +1,10 @@
 <?php
 
-/**
- * @file
- * Contains FieldPermissionsController.php.
- */
-
 namespace Drupal\field_permissions\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use \Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field_permissions\FieldPermissionsService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-
 
 /**
  * Define FieldPermissionsController.
@@ -98,7 +92,7 @@ class FieldPermissionsController extends ControllerBase {
    * Build single row to content.
    *
    * @param \Drupal\field\Entity\FieldStorageConfig $field_storage
-   *  Field to populate row.
+   *   Field to populate row.
    *
    * @return array
    *   Build row.

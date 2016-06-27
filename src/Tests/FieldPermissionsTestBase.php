@@ -1,16 +1,10 @@
 <?php
-/**
- * @file
- * Contains FieldPermissionsTest.php
- */
 
 namespace Drupal\field_permissions\Tests;
 
-use Drupal\field\Tests\FieldUnitTestBase;
+use Drupal\user\Entity\Role;
 use Drupal\field_permissions\FieldPermissionsService;
 use Drupal\simpletest\WebTestBase;
-use Drupal\field\Entity\FieldConfig;
-use Drupal\field\Entity\FieldStorageConfig;
 
 /**
  * A generic field testing class.
@@ -26,9 +20,8 @@ use Drupal\field\Entity\FieldStorageConfig;
  *
  * 'code_' and 'form_' prefixes denote the type of test:
  * using code only, or through Drupal page forms.
- *
  */
- class FieldPermissionsTestBase extends WebTestBase {
+class FieldPermissionsTestBase extends WebTestBase {
 
   // Our tests will generate some random field instance
   // names. We store them here so many functions can act on them.
@@ -118,18 +111,19 @@ use Drupal\field\Entity\FieldStorageConfig;
       'edit any article content',
     ));
 
-    $this->adminUserRole = \Drupal\user\Entity\Role::load($this->adminUser->getRoles(array('authenticated'))[0]);
-    $this->limitUserRole = \Drupal\user\Entity\Role::load($this->limitedUser->getRoles(array('authenticated'))[0]);
-    $this->webUserRole = \Drupal\user\Entity\Role::load($this->limitedUser->getRoles(array('authenticated'))[0]);
+    $this->adminUserRole = Role::load($this->adminUser->getRoles(array('authenticated'))[0]);
+    $this->limitUserRole = Role::load($this->limitedUser->getRoles(array('authenticated'))[0]);
+    $this->webUserRole = Role::load($this->limitedUser->getRoles(array('authenticated'))[0]);
 
   }
 
   /**
    * {@inheritdoc}
-  protected function getModule() {
-    return 'field_permission';
-  }
-  */
+   * protected function getModule() {
+   * return 'field_permission';
+   * }.
+   */
+
   /**
    * Test Send form permission page width enable permission by rules.
    */
@@ -142,7 +136,6 @@ use Drupal\field\Entity\FieldStorageConfig;
     drupal_static_reset('user_role_permissions');
     $this->assertText(t('The changes have been saved.'), t('Successful save message displayed.'));
   }
-
 
   /**
    * Test case.
@@ -172,7 +165,7 @@ use Drupal\field\Entity\FieldStorageConfig;
    * Test case.
    */
   function TestCreateCustomPermission($role, $permissions = array(), $custom_permission = array()) {
-   // debug($custom_permission);
+    // debug($custom_permission);
     $tmp = $this->TestGetCustomPemrission($role, $permissions);
     foreach ($tmp as $key => $val) {
       if (isset($custom_permission[$key]) && $custom_permission[$key] === TRUE) {
@@ -181,17 +174,16 @@ use Drupal\field\Entity\FieldStorageConfig;
     }
     return $tmp;
     // debug(array_merge($this->TestGetCustomPemrission($role, $permissions), $custom_permission));
-    //  return array_merge($this->TestGetCustomPemrission($role, $permissions), $custom_permission);
+    //  return array_merge($this->TestGetCustomPemrission($role, $permissions), $custom_permission);.
   }
 
   /**
    * Test case.
-
-  function TestChangeCustomPermission($custom_permission) {
-    $this->drupalLogin($this->adminUser);
-    $this->TestFieldChangePermissionField(FIELD_PERMISSIONS_CUSTOM, $custom_permission);
-    $this->drupalLogout();
-  }
+   *    * Function TestChangeCustomPermission($custom_permission) {
+   * $this->drupalLogin($this->adminUser);
+   * $this->TestFieldChangePermissionField(FIELD_PERMISSIONS_CUSTOM, $custom_permission);
+   * $this->drupalLogout();
+   * }.
   */
 
 }

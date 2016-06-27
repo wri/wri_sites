@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains FieldPermissionsTest.php
- */
 
 namespace Drupal\field_permissions\Tests;
 
@@ -25,7 +21,6 @@ namespace Drupal\field_permissions\Tests;
  */
 class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
 
-
   /**
    * Simpletest's setUp().
    *
@@ -36,7 +31,6 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
   public function setUp() {
     parent::setUp();
   }
-
 
   /**
    * Test chanege parmission field enable perm by rule.
@@ -54,7 +48,6 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
     drupal_static_reset('user_access');
     drupal_static_reset('user_role_permissions');
   }
-
 
   /**
    * Support node add by api.
@@ -132,9 +125,9 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
     $this->drupalLogout();
   }
 
-  /*
+  /**
    * Test permiossion page.
-   * nota : admin/people/permissions
+   * nota : admin/people/permissions.
    */
   public function TestPermissionPage() {
     $this->drupalLogin($this->adminUser);
@@ -167,10 +160,11 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
     $this->TestViewNodeField(FALSE);
 
     $this->TestPremissionFormUi($this->adminUserRole, "access_user_private_field");
-    //debug($this->adminUserRole);
+    // debug($this->adminUserRole);.
     $this->TestViewNodeField(TRUE);
     $this->drupalLogout();
   }
+
   /**
    * Test PUBLIC - view own field.
    */

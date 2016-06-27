@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains FieldPermissionsServiceInterface.php.
- */
-
 namespace Drupal\field_permissions;
 
 /**
@@ -37,7 +32,6 @@ interface FieldPermissionsServiceInterface {
    * Get default value for checkbox role permission.
    */
   public static function getPermissionValue();
-
 
   /**
    * Returns permissions implements in field_permissions.
@@ -131,6 +125,7 @@ interface FieldPermissionsServiceInterface {
    *   Check permission.
    */
   public static function getFieldAccessPrivateEdit($items, $account, $field_name);
+
   /**
    * Access to field on itemes and opertations whith FIELD_PERMISSIONS_CUSTOM.
    *
