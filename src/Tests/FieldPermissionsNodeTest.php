@@ -1,137 +1,161 @@
 <?php
 
 namespace Drupal\field_permissions\Tests;
+use Drupal\Core\Url;
 
 /**
- * A generic field testing class.
- *
- * Subclass this one to test your specific field type
- * and get some basic unit testing for free.
- *
- * Since Simpletest only looks through one class definition
- * to find test functions, we define generic tests as
- * 'code_testWhatever' or 'form_testWhatever'. Subclasses
- * can then implement shim test methods that just call the
- * generic tests.
- *
- * 'code_' and 'form_' prefixes denote the type of test:
- * using code only, or through Drupal page forms.
+ * Test field permissions on nodes.
  *
  * @group field_permission
  */
 class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
 
   /**
-   * Simpletest's setUp().
+   * {@inheritdoc}
    *
-   * We want to be able to subclass this class, so we jump
-   * through a few hoops in order to get the modules from args
-   * and add our own.
+   * @todo Current code requires the comment module.
+   *
+   * @see https://www.drupal.org/node/2757299
+   */
+  public static $modules = ['comment'];
+
+  /**
+   * {@inheritdoc}
    */
   public function setUp() {
     parent::setUp();
+
+    // Grant the web user permission to administer node fields.
+    $this->webUserRole
+      ->grantPermission('administer content types')
+      ->grantPermission('administer node fields')
+      ->save();
   }
 
   /**
-   * Test chanege parmission field enable perm by rule.
+   * Test field permissions on nodes.
    */
-  public function TestFieldChangePermissionField($perm = FIELD_PERMISSIONS_PUBLIC, $custom_permission = array()) {
+  public function testNodeFieldPermissions() {
+    $this->_testPermissionPage();
+    $this->_testFieldPermissionConfigurationEdit();
+    $this->_testInitAddNode();
+    $this->_testChengeToPrivateField();
+    $this->_testViewOwnField();
+    $this->_testViewEditOwnField();
+    $this->_testViewEditAllField();
+  }
+
+  /**
+   * Set the bode body field permissions to the given type.
+   *
+   * @param int $perm
+   *   The permission type.
+   * @param array $custom_permission
+   *   An array of custom permissions.
+   *
+   * @todo Directly set the field permissions rather than using the UI.
+   */
+  protected function setNodeFieldPermissions($perm = FIELD_PERMISSIONS_PUBLIC, $custom_permission = []) {
+    $current_user = $this->loggedInUser;
+    $this->drupalLogin($this->adminUser);
     $this->drupalGet('admin/structure/types/manage/article/fields/node.article.body');
     if ($perm == FIELD_PERMISSIONS_PUBLIC || $perm == FIELD_PERMISSIONS_PRIVATE) {
-      $edit = array('type' => $perm);
+      $edit = ['type' => $perm];
       $this->drupalPostForm(NULL, $edit, t('Save settings'));
     }
     elseif ($perm == FIELD_PERMISSIONS_CUSTOM && !empty($custom_permission)) {
       $custom_permission['type'] = $perm;
       $this->drupalPostForm(NULL, $custom_permission, t('Save settings'));
     }
-    drupal_static_reset('user_access');
-    drupal_static_reset('user_role_permissions');
+    if ($current_user) {
+      $this->drupalLogin($current_user);
+    }
   }
 
   /**
-   * Support node add by api.
+   * Create a node directly via the API.
    */
-  public function TestNodeAdd() {
-    $this->nodeTest = $this->drupalCreateNode(array('type' => 'article', 'uid' => $this->limitedUser->id()));
-    $this->drupalGet('node/' . $this->nodeTest->id());
-    $node_body = $this->nodeTest->getFields()['body']->getValue();
+  protected function addNode() {
+    $this->node = $this->drupalCreateNode(['type' => 'article', 'uid' => $this->limitedUser->id()]);
+    $this->drupalGet('node/' . $this->node->id());
+    $node_body = $this->node->getFields()['body']->getValue();
     $this->assertText($node_body[0]['value']);
   }
 
   /**
-   * Test node add form..
+   * Create a node through the UI.
    */
-  public function TestNodeAddForm() {
+  protected function addNodeUi() {
     $this->drupalGet('node/add/article');
     $this->assertText('Body');
-    $edit = array();
+    $edit = [];
     $node_name = $this->randomMachineName();
     $edit['body[0][value]'] = $this->randomString();
     $edit['title[0][value]'] = $node_name;
     $this->drupalPostForm(NULL, $edit, t('Save'));
-    $this->assertText(t('Article @name has been created.', array('@name' => $node_name)));
+    $this->assertText(t('Article @name has been created.', ['@name' => $node_name]));
   }
 
   /**
-   * Test case view node.
+   * Asserts that the body field is visible.
    */
-  public function TestViewNodeField($test = TRUE) {
-    $field_value = $this->nodeTest->getFields()['body']->getValue();
-    $this->drupalGet('node/' . $this->nodeTest->id());
-    if ($test == TRUE) {
-      $this->assertText($field_value[0]['value']);
-    }
-    else {
-      $this->assertNoText($field_value[0]['value']);
-    }
+  protected function assertNodeFieldVisible() {
+    $field_value = $this->node->getFields()['body']->getValue();
+    $this->drupalGet('node/' . $this->node->id());
+    $this->assertText($field_value[0]['value']);
   }
 
   /**
-   * Test case edit field.
+   * Asserts that the body field is not visible.
    */
-  public function TestEditNodeField($test = TRUE) {
-    $this->drupalGet('node/' . $this->nodeTest->id() . '/edit');
+  protected function assertNodeFieldHidden() {
+    $field_value = $this->node->getFields()['body']->getValue();
+    $this->drupalGet('node/' . $this->node->id());
+    $this->assertResponse(200);
+    $this->assertNoText($field_value[0]['value']);
+  }
+
+  /**
+   * Asserts that the node field is editable.
+   */
+  protected function assertNodeFieldEditAccess() {
+    $this->drupalGet('node/' . $this->node->id() . '/edit');
     $this->assertText('Title');
-    if ($test == TRUE) {
-      $this->assertText('Body');
-    }
-    else {
-      $this->assertNoText('Body');
-    }
+    $this->assertText('Body');
   }
 
   /**
-   * Test case.
+   * Asserts that the node field is not editable.
    */
-  function TestChangeCustomPermission($custom_permission) {
-    $this->drupalLogin($this->adminUser);
-    $this->TestFieldChangePermissionField(FIELD_PERMISSIONS_CUSTOM, $custom_permission);
-    $this->drupalLogout();
+  protected function assertNodeFieldEditNoAccess() {
+    $this->drupalGet('node/' . $this->node->id() . '/edit');
+    $this->assertResponse(200);
+    $this->assertText('Title');
+    $this->assertNoText('Body');
   }
 
   /**
-   * Test case.
+   * Test field permission configuration access.
    */
-  public function TestFieldEdit() {
-    $this->drupalLogin($this->adminUser);
-    // Test page without permissin [admin_field_permissions].
+  protected function _testFieldPermissionConfigurationEdit() {
+    $this->drupalLogin($this->webUser);
+    // Test page without admin field permission.
     $this->drupalGet('admin/structure/types/manage/article/fields/node.article.body');
+    $this->assertResponse(200);
     $this->assertNoText('Field visibility and permissions');
-    $this->TestPremissionFormUi($this->adminUserRole, "admin_field_permissions");
-    // Test page width permissin [admin_field_permissions].
+    $this->webUserRole->grantPermission('admin_field_permissions')->save();
+    // Test page with admin field permission.
     $this->drupalGet('admin/structure/types/manage/article/fields/node.article.body');
     $this->assertText('Field visibility and permissions');
     $this->drupalLogout();
   }
 
   /**
-   * Test permiossion page.
-   * nota : admin/people/permissions.
+   * Test permissions page.
    */
-  public function TestPermissionPage() {
+  protected function _testPermissionPage() {
     $this->drupalLogin($this->adminUser);
-    $this->drupalGet('admin/people/permissions');
+    $this->drupalGet(Url::fromRoute('user.admin_permissions'));
     $this->assertText('Access other users private fields');
     $this->assertText('Administer field permissions');
     $this->drupalLogout();
@@ -140,70 +164,69 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
   /**
    * Test create content.
    */
-  function TestInitAddNode() {
+  protected function _testInitAddNode() {
     $this->drupalLogin($this->limitedUser);
-    $this->TestNodeAddForm();
-    $this->TestNodeAdd();
+    $this->addNodeUi();
+    $this->addNode();
     $this->drupalLogout();
   }
 
   /**
    * Test PUBLIC - PRIVATE EDIT - VIEW.
    */
-  function TestChengeToPrivateField() {
-    $this->drupalLogin($this->adminUser);
+  protected function _testChengeToPrivateField() {
+    $this->drupalLogin($this->webUser);
 
-    $this->TestViewNodeField(TRUE);
+    $this->assertNodeFieldVisible();
 
-    $this->TestPremissionFormUi($this->adminUserRole, "admin_field_permissions");
-    $this->TestFieldChangePermissionField(FIELD_PERMISSIONS_PRIVATE, NULL);
-    $this->TestViewNodeField(FALSE);
+    $this->webUserRole->grantPermission('admin_field_permissions')->save();
+    $this->setNodeFieldPermissions(FIELD_PERMISSIONS_PRIVATE, NULL);
+    $this->assertNodeFieldHidden();
 
-    $this->TestPremissionFormUi($this->adminUserRole, "access_user_private_field");
-    // debug($this->adminUserRole);.
-    $this->TestViewNodeField(TRUE);
+    $this->webUserRole->grantPermission('access_user_private_field')->save();
+    $this->assertNodeFieldVisible();
     $this->drupalLogout();
   }
 
   /**
    * Test PUBLIC - view own field.
    */
-  function TestViewOwnField() {
-    $permission = array();
-    $permission = $this->TestCreateCustomPermission($this->limitUserRole, array("view_own_body"), $permission);
-    $this->TestChangeCustomPermission($permission);
+  protected function _testViewOwnField() {
+    $permission = [];
+    $permission = $this->grantCustomPermissions($this->limitUserRole, ["view_own_body"], $permission);
+    $this->setNodeFieldPermissions(FIELD_PERMISSIONS_CUSTOM, $permission);
 
     // Login width author node.
     $this->drupalLogin($this->limitedUser);
-    $this->TestViewNodeField(TRUE);
-    $this->TestEditNodeField(FALSE);
+    $this->assertNodeFieldVisible();
+    $this->assertNodeFieldEditNoAccess();
     $this->drupalLogout();
 
     // Login webuser.
     $this->drupalLogin($this->webUser);
-    $this->TestViewNodeField(FALSE);
-    $this->TestEditNodeField(FALSE);
+    $this->assertNodeFieldHidden();
+    $this->assertNodeFieldEditNoAccess();
     $this->drupalLogout();
   }
 
   /**
    * Test PUBLIC - view own field.
    */
-  function TestViewEditOwnField() {
-    $permission = array();
-    $permission = $this->TestCreateCustomPermission($this->limitUserRole, array("view_own_body", "edit_own_body"), $permission);
-    $this->TestChangeCustomPermission($permission);
+  protected function _testViewEditOwnField() {
+    $permission = [];
+    $permission = $this->grantCustomPermissions($this->limitUserRole, ["view_own_body", "edit_own_body"], $permission);
+    $this->setNodeFieldPermissions(FIELD_PERMISSIONS_CUSTOM, $permission);
 
     // Login width author node.
     $this->drupalLogin($this->limitedUser);
-    $this->TestViewNodeField(TRUE);
-    $this->TestEditNodeField(TRUE);
+    $this->assertNodeFieldVisible();
+    $this->assertNodeFieldEditAccess();
     $this->drupalLogout();
 
     // Login webuser.
     $this->drupalLogin($this->webUser);
-    $this->TestViewNodeField(FALSE);
-    $this->TestEditNodeField(FALSE);
+    $this->assertNodeFieldHidden();
+    $this->assertNodeFieldEditNoAccess();
     $this->drupalLogout();
 
   }
@@ -211,45 +234,19 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
   /**
    * Test - view edit all field.
    */
-  public function TestViewEditAllField() {
-
-    $this->drupalLogin($this->adminUser);
-    $this->TestViewNodeField(FALSE);
-    $this->TestEditNodeField(FALSE);
-    $this->drupalLogout($this->adminUser);
-    $permission = array();
-    $permission = $this->TestCreateCustomPermission($this->adminUserRole, array("view_body", "edit_body"), $permission);
-    $this->TestChangeCustomPermission($permission);
-
-    $this->drupalLogin($this->adminUser);
-    $this->TestViewNodeField(TRUE);
-    $this->TestEditNodeField(TRUE);
+  protected function _testViewEditAllField() {
+    $this->drupalLogin($this->webUser);
+    $this->assertNodeFieldHidden();
+    $this->assertNodeFieldEditNoAccess();
     $this->drupalLogout();
-  }
+    $permission = [];
+    $permission = $this->grantCustomPermissions($this->webUserRole, ["view_body", "edit_body"], $permission);
+    $this->setNodeFieldPermissions(FIELD_PERMISSIONS_CUSTOM, $permission);
 
-  /**
-   * Test execute().
-   */
-  public function testTestPremissionUi() {
-
-    $this->TestPermissionPage();
-    $this->TestFieldEdit();
-    $this->TestInitAddNode();
-
-    debug("Test Private field");
-    $this->TestChengeToPrivateField();
-    debug("Test View own field");
-
-    $this->TestViewOwnField();
-
-    debug("Test View own and edit own field");
-    $this->TestViewEditOwnField();
-    debug("Test View any and edit any field");
-    $this->TestViewEditAllField();
-
-    $this->drupalLogin($this->adminUser);
-    $this->drupalGet('admin/people/permissions');
-
+    $this->drupalLogin($this->webUser);
+    $this->assertNodeFieldVisible();
+    $this->assertNodeFieldEditAccess();
+    $this->drupalLogout();
   }
 
 }

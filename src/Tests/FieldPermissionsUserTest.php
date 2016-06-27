@@ -1,248 +1,270 @@
 <?php
-/**
- * @file
- *  Contains FieldPermissionsTest.php
- */
 
 namespace Drupal\field_permissions\Tests;
 
+use Drupal\Component\Utility\Unicode;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\user\UserInterface;
 
 /**
- * A generic field testing class.
- *
- * Subclass this one to test your specific field type
- * and get some basic unit testing for free.
- *
- * Since Simpletest only looks through one class definition
- * to find test functions, we define generic tests as
- * 'code_testWhatever' or 'form_testWhatever'. Subclasses
- * can then implement shim test methods that just call the
- * generic tests.
- *
- * 'code_' and 'form_' prefixes denote the type of test:
- * using code only, or through Drupal page forms.
+ * Test field permissions on users.
  *
  * @group field_permission
  */
 class FieldPermissionsUserTest extends FieldPermissionsTestBase {
 
   /**
-   * Modules to install.
+   * {@inheritdoc}
    *
-   * @var array
-   */
-  // public static $modules = ['node', 'field', 'field_ui', 'user', 'field_permissions'];
-
-  /**
-   * Simpletest's setUp().
+   * @todo Current code requires the comment module.
    *
-   * We want to be able to subclass this class, so we jump
-   * through a few hoops in order to get the modules from args
-   * and add our own.
+   * @see https://www.drupal.org/node/2757299
    */
-  public function setUp() {
-    parent::setUp();
-    $this->field_name = 'field_text';
-    $this->field_text = "TEST BOSY IN USER PAGE";
-  }
+  public static $modules = ['comment'];
 
   /**
    * {@inheritdoc}
    */
-  protected function getModule() {
-    return 'field_permission';
-  }
+  public function setUp() {
+    parent::setUp();
+    $this->fieldName = Unicode::strtolower($this->randomMachineName());
+    // Remove the '@' symbol so it isn't converted to an email link.
+    $this->fieldText = str_replace('@', '', $this->randomString(42));
 
-  private function TestUserAddField() {
-    FieldStorageConfig::create(array(
-      'field_name' => $this->field_name,
-      'entity_type' => 'user',
-      'type' => 'text',
-    ))->save();
-
-    FieldConfig::create(array(
-      'field_name' => $this->field_name,
-      'entity_type' => 'user',
-      'label' => 'Textfield',
-      'bundle' => 'user',
-    ))->save();
-
-    entity_get_form_display('user', 'user', 'default')
-      ->setComponent($this->field_name)
+    // Allow the web user to administer user profiles.
+    $this->webUserRole
+      ->grantPermission('access user profiles')
+      ->grantPermission('administer users')
       ->save();
 
-    entity_get_form_display('user', 'user', 'register')
-      ->setComponent($this->field_name)
-      ->save();
-
-    entity_get_display('user', 'user', 'default')
-      ->setComponent($this->field_name)
-      ->save();
-  }
-
-  private function TestUserFieldAdminFieldPermission() {
-    // Control permission on field page.
-    $this->drupalGet('admin/config/people/accounts/fields/user.user.' . $this->field_name);
-    $this->assertNoText('Field visibility and permissions');
-    // Add perm to user.
-    $this->TestPremissionFormUi($this->adminUserRole, "admin_field_permissions");
-    $this->drupalGet('admin/config/people/accounts/fields/user.user.' . $this->field_name);
-    $this->assertText('Field visibility and permissions');
-  }
-
-  private function TestUserFieldFormAdd($user) {
-    $this->drupalGet('user/' . $user->id() . '/edit');
-    $this->assertText('Textfield');
-    $edit = array();
-    $edit[$this->field_name . '[0][value]'] = $this->field_text;
-    $this->drupalPostForm(NULL, $edit, t('Save'));
-    $this->drupalGet('user/' . $user->id());
-    $this->assertText($this->field_text);
-  }
-
-  private function TestViewUserField($flag, $user) {
-    $this->drupalGet('user/' . $user->id());
-    if ($flag == TRUE) {
-      $this->assertText("Textfield");
-    }
-    else {
-      $this->assertNoText("Textfield");
-    }
-  }
-
-  private function TestEditUser($flag, $user) {
-    $this->drupalGet('user/' . $user->id() . '/edit');
-    if ($flag == TRUE) {
-      $this->assertText("Textfield");
-    }
-    else {
-      $this->assertNoText("Textfield");
-    }
+    $this->addUserField();
   }
 
   /**
-   * Test chanege parmission field enable perm by rule.
+   * Test field permissions on user entities.
    */
-  private function TestFieldChangePermissionUserField($perm = FIELD_PERMISSIONS_PUBLIC, $custom_permission = array()) {
-    $this->drupalGet('admin/config/people/accounts/fields/user.user.' . $this->field_name);
+  public function testUserFieldPermissions() {
+
+    $this->drupalLogin($this->adminUser);
+    // Compila il campo per l'utente admin.
+    $this->_testUserFieldEdit($this->adminUser);
+    $this->drupalLogout();
+
+    // Controllo che si visibile ad altri utenti.
+    $this->drupalLogin($this->limitedUser);
+    $this->assertUserFieldAccess($this->adminUser);
+    $this->drupalLogout();
+
+    $this->_testPrivateField();
+    $this->_testUserViewEditOwnField();
+    $this->_testUserViewEditField();
+
+  }
+
+  /**
+   * Adds a text field to the user entity.
+   */
+  protected function addUserField() {
+    FieldStorageConfig::create([
+      'field_name' => $this->fieldName,
+      'entity_type' => 'user',
+      'type' => 'text',
+    ])->save();
+
+    FieldConfig::create([
+      'field_name' => $this->fieldName,
+      'entity_type' => 'user',
+      'label' => 'Textfield',
+      'bundle' => 'user',
+    ])->save();
+
+    entity_get_form_display('user', 'user', 'default')
+      ->setComponent($this->fieldName)
+      ->save();
+
+    entity_get_form_display('user', 'user', 'register')
+      ->setComponent($this->fieldName)
+      ->save();
+
+    entity_get_display('user', 'user', 'default')
+      ->setComponent($this->fieldName)
+      ->save();
+  }
+
+  /**
+   * Tests field permissions on the user edit form for a given account.
+   *
+   * @param \Drupal\user\UserInterface $account
+   *   The user account to edit.
+   */
+  protected function _testUserFieldEdit(UserInterface $account) {
+    $this->drupalGet($account->toUrl('edit-form'));
+    $this->assertText('Textfield');
+    $edit = [];
+    $edit[$this->fieldName . '[0][value]'] = $this->fieldText;
+    $this->drupalPostForm(NULL, $edit, t('Save'));
+    $this->drupalGet($account->toUrl());
+    $this->assertEscaped($this->fieldText);
+  }
+
+  /**
+   * Verify the test field is accessible when viewing the given user.
+   *
+   * @param \Drupal\user\UserInterface $account
+   *   The account to verify field permissions for viewing.
+   */
+  protected function assertUserFieldAccess(UserInterface $account) {
+    $this->drupalGet($account->toUrl());
+    $this->assertText('Textfield');
+  }
+
+  /**
+   * Verify the test field is not accessible when viewing the given user.
+   *
+   * @param \Drupal\user\UserInterface $account
+   *   The account to verify field permissions for viewing.
+   */
+  protected function assertUserFieldNoAccess(UserInterface $account) {
+    $this->drupalGet($account->toUrl());
+    $this->assertResponse(200);
+    $this->assertNoText('Textfield');
+  }
+
+  /**
+   * Verifies that the current logged in user can edit the user field.
+   *
+   * @param \Drupal\user\UserInterface $account
+   *   The user account to edit.
+   */
+  protected function assertUserEditFieldAccess(UserInterface $account) {
+    $this->drupalGet($account->toUrl('edit-form'));
+    $this->assertText('Textfield');
+  }
+
+  /**
+   * Verifies that the current logged in user cannot edit the user field.
+   *
+   * @param \Drupal\user\UserInterface $account
+   *   The user account to edit.
+   */
+  protected function assertUserEditFieldNoAccess(UserInterface $account) {
+    $this->drupalGet($account->toUrl('edit-form'));
+    $this->assertResponse(200);
+    $this->assertNoText('Textfield');
+  }
+
+  /**
+   * Set user field permissions to the given type.
+   *
+   * @param int $perm
+   *   The permission type to set.
+   * @param array $custom_permission
+   *   An array of custom permissions.
+   */
+  private function setUserFieldPermission($perm = FIELD_PERMISSIONS_PUBLIC, $custom_permission = []) {
+    $current_user = $this->loggedInUser;
+    $this->drupalLogin($this->adminUser);
+    $this->drupalGet('admin/config/people/accounts/fields/user.user.' . $this->fieldName);
     if ($perm == FIELD_PERMISSIONS_PUBLIC || $perm == FIELD_PERMISSIONS_PRIVATE) {
-      $edit = array('type' => $perm);
+      $edit = ['type' => $perm];
       $this->drupalPostForm(NULL, $edit, t('Save settings'));
     }
     elseif ($perm == FIELD_PERMISSIONS_CUSTOM && !empty($custom_permission)) {
       $custom_permission['type'] = $perm;
       $this->drupalPostForm(NULL, $custom_permission, t('Save settings'));
     }
-    drupal_static_reset('user_access');
-    drupal_static_reset('user_role_permissions');
+    if ($current_user) {
+      $this->drupalLogin($current_user);
+    }
   }
 
   /**
    * Test PUBLIC - view_own and edit_own field.
    */
-  private function TestUserViewEditOwnField() {
-    $permission = array();
+  protected function _testUserViewEditOwnField() {
+    $permission = [];
     // AGGIUNGE I PERMESSI DI VIEW_OWN. all'utente limitato.
-    $this->drupalLogin($this->adminUser);
-    $perm = array('view_own_' . $this->field_name);
-    $permission = $this->TestCreateCustomPermission($this->limitUserRole, $perm, $permission);
-    $this->TestFieldChangePermissionUserField(FIELD_PERMISSIONS_CUSTOM, $permission);
+    $this->drupalLogin($this->webUser);
+    $perm = ['view_own_' . $this->fieldName];
+    $permission = $this->grantCustomPermissions($this->limitUserRole, $perm, $permission);
+    $this->setUserFieldPermission(FIELD_PERMISSIONS_CUSTOM, $permission);
     debug("[admin] view/edit profile limit user (false)");
-    $this->TestViewUserField(FALSE, $this->limitedUser);
-    $this->TestEditUser(FALSE, $this->limitedUser);
+    $this->assertUserFieldNoAccess($this->limitedUser);
+    $this->assertUserEditFieldNoAccess($this->limitedUser);
     debug("[admin] view/edit your profile (false)");
-    $this->TestEditUser(FALSE, $this->adminUser);
-    $this->TestViewUserField(FALSE, $this->adminUser);
+    $this->assertUserEditFieldNoAccess($this->adminUser);
+    $this->assertUserFieldNoAccess($this->adminUser);
     $this->drupalLogout();
 
     $this->drupalLogin($this->limitedUser);
     debug("[Limituser] view your profile (true)");
-    $this->TestViewUserField(TRUE, $this->limitedUser);
+    $this->assertUserFieldAccess($this->limitedUser);
     debug("[Limituser] view admin profile (false)");
-    $this->TestViewUserField(FALSE, $this->adminUser);
+    $this->assertUserFieldNoAccess($this->adminUser);
     debug("[Limituser] edit your profile false");
-    $this->TestEditUser(FALSE, $this->limitedUser);
+    $this->assertUserEditFieldNoAccess($this->limitedUser);
     $this->drupalLogout();
 
     // AGGIUNGE I PERMESSI DI EDIT_OWN to limitUserRole.
-    $this->drupalLogin($this->adminUser);
-    $permission = $this->TestCreateCustomPermission($this->limitUserRole, array('edit_own_' . $this->field_name), $permission);
-    $this->TestFieldChangePermissionUserField(FIELD_PERMISSIONS_CUSTOM, $permission);
+    $this->drupalLogin($this->webUser);
+    $permission = $this->grantCustomPermissions($this->limitUserRole, ['edit_own_' . $this->fieldName], $permission);
+    $this->setUserFieldPermission(FIELD_PERMISSIONS_CUSTOM, $permission);
     debug("[admin] edit your profile (false)");
-    $this->TestEditUser(FALSE, $this->adminUser);
+    $this->assertUserEditFieldNoAccess($this->adminUser);
     debug("[admin] edit limit profile (false)");
-    $this->TestEditUser(FALSE, $this->limitedUser);
+    $this->assertUserEditFieldNoAccess($this->limitedUser);
     $this->drupalLogout();
 
     $this->drupalLogin($this->limitedUser);
     debug("[Limituser] edit your profile (true)");
-    $this->TestEditUser(TRUE, $this->limitedUser);
+    $this->assertUserEditFieldAccess($this->limitedUser);
     $this->drupalLogout();
 
   }
 
-  private function TestUserViewEditAllField() {
+  /**
+   * Tests custom permissions.
+   */
+  protected function _testUserViewEditField() {
 
-    $permission = array();
+    $permission = [];
     // AGGIUNGE I PERMESSI DI VIEW_OWN. all'utente limitato.
-    $this->drupalLogin($this->adminUser);
-    $perm = array('view_' . $this->field_name);
-    $permission = $this->TestCreateCustomPermission($this->adminUserRole, $perm, $permission);
-    $this->TestFieldChangePermissionUserField(FIELD_PERMISSIONS_CUSTOM, $permission);
-    $this->TestViewUserField(TRUE, $this->limitedUser);
+    $this->drupalLogin($this->webUser);
+    $perm = ['view_' . $this->fieldName];
+    $permission = $this->grantCustomPermissions($this->webUserRole, $perm, $permission);
+    $this->setUserFieldPermission(FIELD_PERMISSIONS_CUSTOM, $permission);
+    $this->assertUserFieldAccess($this->limitedUser);
 
-    $perm = array('edit_' . $this->field_name);
-    $permission = $this->TestCreateCustomPermission($this->adminUserRole, $perm, $permission);
-    $this->TestFieldChangePermissionUserField(FIELD_PERMISSIONS_CUSTOM, $permission);
-    $this->TestEditUser(TRUE, $this->limitedUser);
+    $perm = ['edit_' . $this->fieldName];
+    $permission = $this->grantCustomPermissions($this->webUserRole, $perm, $permission);
+    $this->setUserFieldPermission(FIELD_PERMISSIONS_CUSTOM, $permission);
+    $this->assertUserEditFieldAccess($this->limitedUser);
 
-    $this->drupalLogout();
-  }
-
-  public function TestFieldPrivate() {
-    $this->drupalLogin($this->adminUser);
-    $this->TestFieldChangePermissionUserField(FIELD_PERMISSIONS_PRIVATE);
-    $this->drupalLogout();
-
-    $this->drupalLogin($this->limitedUser);
-    // Controlla il perofilo dell'utente admin e non deve vedere il campo.
-    $this->TestViewUserField(FALSE, $this->adminUser);
-    // Compila il campo per l'utente Limited.
-    $this->TestUserFieldFormAdd($this->limitedUser);
-    // Controlla che sia visibile.
-    $this->TestViewUserField(TRUE, $this->limitedUser);
-    $this->drupalLogout();
-
-    $this->drupalLogin($this->adminUser);
-    $this->TestViewUserField(FALSE, $this->limitedUser);
-    $this->TestEditUser(FALSE, $this->limitedUser);
     $this->drupalLogout();
   }
 
   /**
-   * Test execute().
+   * Test field access with private permissions.
    */
-  public function testFieldPremissionUser() {
-
-    $this->drupalLogin($this->adminUser);
-    // setup.
-    $this->TestUserAddField();
-    $this->TestUserFieldAdminFieldPermission();
-    // Compila il campo per l'utente admin.
-    $this->TestUserFieldFormAdd($this->adminUser);
+  protected function _testPrivateField() {
+    $this->drupalLogin($this->webUser);
+    $this->setUserFieldPermission(FIELD_PERMISSIONS_PRIVATE);
     $this->drupalLogout();
 
-    // Controllo che si visibile ad altri utenti.
     $this->drupalLogin($this->limitedUser);
-    $this->TestViewUserField(TRUE, $this->adminUser);
+    // Controlla il perofilo dell'utente admin e non deve vedere il campo.
+    $this->assertUserFieldNoAccess($this->adminUser);
+    // Compila il campo per l'utente Limited.
+    $this->_testUserFieldEdit($this->limitedUser);
+    // Controlla che sia visibile.
+    $this->assertUserFieldAccess($this->limitedUser);
     $this->drupalLogout();
 
-    $this->TestFieldPrivate();
-    $this->TestUserViewEditOwnField();
-    $this->TestUserViewEditAllField();
-
+    $this->drupalLogin($this->webUser);
+    $this->assertUserFieldNoAccess($this->limitedUser);
+    $this->assertUserEditFieldNoAccess($this->limitedUser);
+    $this->drupalLogout();
   }
 
 }

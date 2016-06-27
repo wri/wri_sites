@@ -7,145 +7,136 @@ use Drupal\field_permissions\FieldPermissionsService;
 use Drupal\simpletest\WebTestBase;
 
 /**
- * A generic field testing class.
- *
- * Subclass this one to test your specific field type
- * and get some basic unit testing for free.
- *
- * Since Simpletest only looks through one class definition
- * to find test functions, we define generic tests as
- * 'code_testWhatever' or 'form_testWhatever'. Subclasses
- * can then implement shim test methods that just call the
- * generic tests.
- *
- * 'code_' and 'form_' prefixes denote the type of test:
- * using code only, or through Drupal page forms.
+ * A base class for field permissions web tests to extend.
  */
 abstract class FieldPermissionsTestBase extends WebTestBase {
-
-  // Our tests will generate some random field instance
-  // names. We store them here so many functions can act on them.
-  protected $instanceNames;
 
   /**
    * An administrative user with permission to configure comment settings.
    *
-   * @var \Drupal\user\AccountInterface
+   * @var \Drupal\user\UserInterface
    */
   protected $adminUser;
+
   /**
    * An limit user.
    *
-   * @var \Drupal\user\AccountInterface
+   * @var \Drupal\user\UserInterface
    */
   protected $limitedUser;
+
   /**
    * A normal user with permission.
    *
    * @var \Drupal\user\UserInterface
    */
   protected $webUser;
-  protected $adminUserRole;
-  protected $limitUserRole;
-  protected $nodeTest;
-
 
   /**
-   * Modules to install.
+   * The role for the admin user.
    *
-   * @var array
+   * @var \Drupal\user\RoleInterface
    */
-  public static $modules = ['node', 'field', 'comment', 'field_ui', 'user', 'field_permissions'];
+  protected $adminUserRole;
 
   /**
-   * Simpletest's setUp().
+   * The role for the authenticated user.
    *
-   * We want to be able to subclass this class, so we jump
-   * through a few hoops in order to get the modules from args
-   * and add our own.
+   * @var \Drupal\user\RoleInterface
+   */
+  protected $limitUserRole;
+
+  /**
+   * The role for the anonymous user.
+   *
+   * @var \Drupal\user\RoleInterface
+   */
+  protected $webUserRole;
+
+  /**
+   * A node to test with.
+   *
+   * @var \Drupal\node\NodeInterface
+   */
+  protected $node;
+
+  /**
+   * Field name to test field permissions on.
+   *
+   * @var string
+   */
+  protected $fieldName;
+
+  /**
+   * Contents of a field with permissions.
+   *
+   * @var string
+   */
+  protected $fieldText;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static $modules = [
+    'node',
+    'field',
+    'field_ui',
+    'user',
+    'field_permissions',
+  ];
+
+  /**
+   * {@inheritdoc}
    */
   public function setUp() {
     parent::setUp();
 
     // Create node type.
-    $this->drupalCreateContentType(array(
+    $this->drupalCreateContentType([
       'type' => 'article',
       'name' => 'Article',
-    ));
-    $this->checkPermissions(array("create article content"), TRUE);
-    $this->adminUser = $this->drupalCreateUser(array(
-      'administer content types',
-      'access user profiles',
-      'access content',
-      'administer users',
-      'administer user fields',
-      'administer account settings',
-      'administer permissions',
-      'administer node fields',
-      'bypass node access',
-      'administer nodes',
-      'create article content',
-      'administer comment types',
-      'administer comment fields',
-      'administer comments',
-      'post comments',
-      'skip comment approval',
-      'access comments',
+    ]);
+    $this->checkPermissions(['create article content']);
+    $this->adminUser = $this->drupalCreateUser([], NULL, TRUE);
 
-    ));
-
-    $this->limitedUser = $this->drupalCreateUser(array(
+    $this->limitedUser = $this->drupalCreateUser([
       'access content',
       'access user profiles',
       'create article content',
       'edit any article content',
-      'post comments',
-      'skip comment approval',
-      'access comments',
-      'edit own comments',
-    ));
+    ]);
 
-    $this->webUser = $this->drupalCreateUser(array(
+    $this->webUser = $this->drupalCreateUser([
       'access content',
       'create article content',
       'edit any article content',
-    ));
+    ]);
 
-    $this->adminUserRole = Role::load($this->adminUser->getRoles(array('authenticated'))[0]);
-    $this->limitUserRole = Role::load($this->limitedUser->getRoles(array('authenticated'))[0]);
-    $this->webUserRole = Role::load($this->limitedUser->getRoles(array('authenticated'))[0]);
-
+    $this->adminUserRole = Role::load($this->adminUser->getRoles(['authenticated'])[0]);
+    $this->limitUserRole = Role::load($this->limitedUser->getRoles(['authenticated'])[0]);
+    $this->webUserRole = Role::load($this->webUser->getRoles(['authenticated'])[0]);
   }
 
   /**
-   * {@inheritdoc}
-   * protected function getModule() {
-   * return 'field_permission';
-   * }.
+   * Fill out a custom permission matrix for a given role.
+   *
+   * @param string $role
+   *   The role to grant permissions for. Other roles will not have any
+   *   permissions.
+   * @param array $field_perm
+   *   Permissions to grant the given role.
+   *
+   * @return array
+   *   The complete custom permissions matrix, keyed by {OP}_{FIELD_NAME} and
+   *   then role ID, with a value of TRUE if the permission is granted, FALSE
+   *   otherwise.
    */
-
-  /**
-   * Test Send form permission page width enable permission by rules.
-   */
-  public function TestPremissionFormUi($rule, $perm) {
-    $edit = array();
-    $edit[$rule->id() . '[' . $perm . ']'] = TRUE;
-    $this->drupalGet('admin/people/permissions');
-    $this->drupalPostForm(NULL, $edit, t('Save permissions'));
-    drupal_static_reset('user_access');
-    drupal_static_reset('user_role_permissions');
-    $this->assertText(t('The changes have been saved.'), t('Successful save message displayed.'));
-  }
-
-  /**
-   * Test case.
-   */
-  function TestGetCustomPemrission($role, $field_perm = array()) {
-    $custom_perm = array();
+  protected function getCustomPermissionGrid($role, array $field_perm = []) {
+    $custom_perm = [];
     $permission_list = FieldPermissionsService::permissions();
     $permission_list = array_keys($permission_list);
     $permission_role = array_keys(user_roles());
-    $remove_perm = array();
+
     // Set all check to false.
     foreach ($permission_role as $rname) {
       foreach ($permission_list as $perm) {
@@ -162,28 +153,26 @@ abstract class FieldPermissionsTestBase extends WebTestBase {
   }
 
   /**
-   * Test case.
+   * Appends existing permissions grid with new permissions.
+   *
+   * @param string $role
+   *   The role ID to grant permissions for.
+   * @param array $new_permissions
+   *   An array of new permissions to grant.
+   * @param array $existing_custom_permission
+   *   The existing custom permissions grid.
+   *
+   * @return array
+   *   The complete custom permissions matrix.
    */
-  function TestCreateCustomPermission($role, $permissions = array(), $custom_permission = array()) {
-    // debug($custom_permission);
-    $tmp = $this->TestGetCustomPemrission($role, $permissions);
-    foreach ($tmp as $key => $val) {
-      if (isset($custom_permission[$key]) && $custom_permission[$key] === TRUE) {
-        $tmp[$key] = TRUE;
+  protected function grantCustomPermissions($role, array $new_permissions = [], array $existing_custom_permission = []) {
+    $permissions_grid = $this->getCustomPermissionGrid($role, $new_permissions);
+    foreach ($permissions_grid as $key => $val) {
+      if (isset($existing_custom_permission[$key]) && $existing_custom_permission[$key] === TRUE) {
+        $permissions_grid[$key] = TRUE;
       }
     }
-    return $tmp;
-    // debug(array_merge($this->TestGetCustomPemrission($role, $permissions), $custom_permission));
-    //  return array_merge($this->TestGetCustomPemrission($role, $permissions), $custom_permission);.
+    return $permissions_grid;
   }
-
-  /**
-   * Test case.
-   *    * Function TestChangeCustomPermission($custom_permission) {
-   * $this->drupalLogin($this->adminUser);
-   * $this->TestFieldChangePermissionField(FIELD_PERMISSIONS_CUSTOM, $custom_permission);
-   * $this->drupalLogout();
-   * }.
-  */
 
 }

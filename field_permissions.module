@@ -32,7 +32,6 @@ define('FIELD_PERMISSIONS_PRIVATE', 1);
  */
 define('FIELD_PERMISSIONS_CUSTOM', 2);
 
-
 /**
  * Implements hook_help().
  */
