@@ -146,8 +146,12 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface {
    * {@inheritdoc}
    */
   public static function fieldIsCommentField(FieldDefinitionInterface $field_definition) {
+    if (!\Drupal::hasService('comment.manager')) {
+      // Comment module isn't enabled.
+      return FALSE;
+    }
     $field_name = $field_definition->getName();
-    $field_names = \Drupal::service('comment.manager')->getFields('node');
+    $field_names = \Drupal::service('comment.manager')->getFields($field_definition->getTargetEntityTypeId());
     // Comment field.
     if (in_array($field_name, array_keys($field_names))) {
       return TRUE;

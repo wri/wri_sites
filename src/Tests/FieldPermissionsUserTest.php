@@ -16,15 +16,6 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
 
   /**
    * {@inheritdoc}
-   *
-   * @todo Current code requires the comment module.
-   *
-   * @see https://www.drupal.org/node/2757299
-   */
-  public static $modules = ['comment'];
-
-  /**
-   * {@inheritdoc}
    */
   public function setUp() {
     parent::setUp();
