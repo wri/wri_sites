@@ -1,7 +1,8 @@
 <?php
 
-namespace Drupal\field_permissions\Tests;
+namespace Drupal\Tests\field_permissions\Functional;
 use Drupal\Core\Url;
+use Drupal\Tests\field_permissions\Functional\FieldPermissionsTestBase;
 
 /**
  * Test field permissions on nodes.
@@ -102,7 +103,7 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
   protected function assertNodeFieldHidden() {
     $field_value = $this->node->getFields()['body']->getValue();
     $this->drupalGet('node/' . $this->node->id());
-    $this->assertResponse(200);
+    $this->assertSession()->statusCodeEquals(200);
     $this->assertNoText($field_value[0]['value']);
   }
 

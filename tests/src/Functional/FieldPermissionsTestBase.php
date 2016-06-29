@@ -1,15 +1,14 @@
 <?php
 
-namespace Drupal\field_permissions\Tests;
+namespace Drupal\Tests\field_permissions\Functional;
 
+use Drupal\Tests\BrowserTestBase;
 use Drupal\user\Entity\Role;
-use Drupal\field_permissions\FieldPermissionsService;
-use Drupal\simpletest\WebTestBase;
 
 /**
  * A base class for field permissions web tests to extend.
  */
-abstract class FieldPermissionsTestBase extends WebTestBase {
+abstract class FieldPermissionsTestBase extends BrowserTestBase {
 
   /**
    * An administrative user with permission to configure comment settings.
@@ -97,7 +96,15 @@ abstract class FieldPermissionsTestBase extends WebTestBase {
       'name' => 'Article',
     ]);
     $this->checkPermissions(['create article content']);
-    $this->adminUser = $this->drupalCreateUser([], NULL, TRUE);
+    // @todo The `drupalCreateUser` method doesn't support the admin flag, so
+    // it is manually performed here.
+    // @see https://www.drupal.org/node/2758067
+    $this->adminUser = $this->drupalCreateUser([], NULL);
+    $this->adminUserRole = Role::load($this->drupalCreateRole([]));
+    $this->adminUserRole->setIsAdmin(TRUE);
+    $this->adminUserRole->save();
+    $this->adminUser->addRole($this->adminUserRole->id());
+    $this->adminUser->save();
 
     $this->limitedUser = $this->drupalCreateUser([
       'access content',
@@ -112,7 +119,6 @@ abstract class FieldPermissionsTestBase extends WebTestBase {
       'edit any article content',
     ]);
 
-    $this->adminUserRole = Role::load($this->adminUser->getRoles(['authenticated'])[0]);
     $this->limitUserRole = Role::load($this->limitedUser->getRoles(['authenticated'])[0]);
     $this->webUserRole = Role::load($this->webUser->getRoles(['authenticated'])[0]);
   }

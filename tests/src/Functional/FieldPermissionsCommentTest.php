@@ -1,8 +1,9 @@
 <?php
 
-namespace Drupal\field_permissions\Tests;
+namespace Drupal\Tests\field_permissions\Functional;
 
 use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\Tests\field_permissions\Functional\FieldPermissionsTestBase;
 
 /**
  * Test field permissions with the comment module and fields.

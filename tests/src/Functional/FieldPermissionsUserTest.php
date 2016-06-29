@@ -1,10 +1,11 @@
 <?php
 
-namespace Drupal\field_permissions\Tests;
+namespace Drupal\Tests\field_permissions\Functional;
 
 use Drupal\Component\Utility\Unicode;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\Tests\field_permissions\Functional\FieldPermissionsTestBase;
 use Drupal\user\UserInterface;
 
 /**
@@ -118,7 +119,7 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
    */
   protected function assertUserFieldNoAccess(UserInterface $account) {
     $this->drupalGet($account->toUrl());
-    $this->assertResponse(200);
+    $this->assertSession()->statusCodeEquals(200);
     $this->assertNoText('Textfield');
   }
 
@@ -180,20 +181,20 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
     $perm = ['view_own_' . $this->fieldName];
     $permission = $this->grantCustomPermissions($this->limitUserRole, $perm, $permission);
     $this->setUserFieldPermission(FIELD_PERMISSIONS_CUSTOM, $permission);
-    debug("[admin] view/edit profile limit user (false)");
+    // [admin] view/edit profile limit user (false).
     $this->assertUserFieldNoAccess($this->limitedUser);
     $this->assertUserEditFieldNoAccess($this->limitedUser);
-    debug("[admin] view/edit your profile (false)");
+    // [admin] view/edit your profile (false).
     $this->assertUserEditFieldNoAccess($this->adminUser);
     $this->assertUserFieldNoAccess($this->adminUser);
     $this->drupalLogout();
 
     $this->drupalLogin($this->limitedUser);
-    debug("[Limituser] view your profile (true)");
+    // [Limited user] view your profile (true).
     $this->assertUserFieldAccess($this->limitedUser);
-    debug("[Limituser] view admin profile (false)");
+    // [Limited user] view admin profile (false).
     $this->assertUserFieldNoAccess($this->adminUser);
-    debug("[Limituser] edit your profile false");
+    // [Limited user] edit your profile false.
     $this->assertUserEditFieldNoAccess($this->limitedUser);
     $this->drupalLogout();
 
@@ -201,14 +202,14 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
     $this->drupalLogin($this->webUser);
     $permission = $this->grantCustomPermissions($this->limitUserRole, ['edit_own_' . $this->fieldName], $permission);
     $this->setUserFieldPermission(FIELD_PERMISSIONS_CUSTOM, $permission);
-    debug("[admin] edit your profile (false)");
+    // [admin] edit your profile (false).
     $this->assertUserEditFieldNoAccess($this->adminUser);
-    debug("[admin] edit limit profile (false)");
+    // [admin] edit limit profile (false).
     $this->assertUserEditFieldNoAccess($this->limitedUser);
     $this->drupalLogout();
 
     $this->drupalLogin($this->limitedUser);
-    debug("[Limituser] edit your profile (true)");
+    // [Limited user] edit your profile (true).
     $this->assertUserEditFieldAccess($this->limitedUser);
     $this->drupalLogout();
 
