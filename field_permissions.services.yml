@@ -2,4 +2,4 @@
 services:
   field_permissions.permissions_service:
     class: Drupal\field_permissions\FieldPermissionsService
-    # arguments: ['@http_client']
+    arguments: ['@entity_type.manager', '@config.factory']

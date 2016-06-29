@@ -52,7 +52,7 @@ function field_permissions_entity_field_access($operation, FieldDefinitionInterf
   if (!$field_definition->isDisplayConfigurable($context) || empty($items)) {
     return AccessResult::neutral();
   }
-  $access_field = FieldPermissionsService::getFieldAccess($operation, $items, $account, $field_definition);
+  $access_field = \Drupal::service('field_permissions.permissions_service')->getFieldAccess($operation, $items, $account, $field_definition);
   if (!$access_field) {
     return AccessResult::forbidden();
   }
@@ -68,14 +68,14 @@ function field_permissions_form_field_config_edit_form_alter(&$form, FormStateIn
   $account = \Drupal::currentUser();
   /** @var FieldDefinitionInterface $field */
   $field = $form_state->getBuildInfo()['callback_object']->getEntity();
-  if (!FieldPermissionsService::getAccessAdminFieldPermissions($account)) {
+  if (!$account->hasPermission('admin_field_permissions')) {
     return $form;
   }
   // Remove on comment field.
   if (FieldPermissionsService::fieldIsCommentField($field)) {
     return $form;
   }
-  $default_type = FieldPermissionsService::fieldGetPermissionType($field->getFieldStorageDefinition());
+  $default_type = \Drupal::service('field_permissions.permissions_service')->fieldGetPermissionType($field->getFieldStorageDefinition());
   $form['fid'] = array('#type' => 'hidden', '#value' => $field->id());
   $form['field']['field_permissions'] = array(
     '#weight' => -10,
@@ -128,7 +128,7 @@ function field_permissions_permissions_matrix(FieldStorageDefinitionInterface $f
       'class' => array('checkbox'),
     );
   }
-  $test = FieldPermissionsService::GetPermissionValue();
+  $test = \Drupal::service('field_permissions.permissions_service')->getPermissionValue();
   foreach ($permissions as $provider => $permission) {
     $form['permissions'][$provider]['description'] = array(
       '#type' => 'inline_template',
@@ -167,7 +167,7 @@ function field_permission_field_config_edit_form_submit(array &$form, FormStateI
   $type_permission = $form_state->getValue("type");
   $field_name = $field->getName();
   // Save Permissions type for field.
-  FieldPermissionsService::fieldSetPermissionType($field->getFieldStorageDefinition(), $type_permission);
+  \Drupal::service('field_permissions.permissions_service')->fieldSetPermissionType($field->getFieldStorageDefinition(), $type_permission);
 
   $perm_settings = [];
   // Set all perm.

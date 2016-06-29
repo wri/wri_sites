@@ -133,7 +133,7 @@ abstract class FieldPermissionsTestBase extends WebTestBase {
    */
   protected function getCustomPermissionGrid($role, array $field_perm = []) {
     $custom_perm = [];
-    $permission_list = FieldPermissionsService::permissions();
+    $permission_list = $this->container->get('field_permissions.permissions_service')->permissions();
     $permission_list = array_keys($permission_list);
     $permission_role = array_keys(user_roles());
 

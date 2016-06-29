@@ -37,12 +37,12 @@ interface FieldPermissionsServiceInterface {
   /**
    * Get default value for checkbox role permission.
    */
-  public static function getPermissionValue();
+  public function getPermissionValue();
 
   /**
    * Returns permissions implements in field_permissions.
    */
-  public static function permissions();
+  public function permissions();
 
   /**
    * Get default value for checkbox  role permission.
@@ -50,7 +50,7 @@ interface FieldPermissionsServiceInterface {
    * @param \Drupal\field\FieldStorageConfigInterface $field
    *   The field to return permissions for.
    */
-  public static function fieldGetPermissionType(FieldStorageConfigInterface $field);
+  public function fieldGetPermissionType(FieldStorageConfigInterface $field);
 
   /**
    * Get default value for checkbox  role permission.
@@ -60,29 +60,7 @@ interface FieldPermissionsServiceInterface {
    * @param string $type_permission
    *   The field permission type.
    */
-  public static function fieldSetPermissionType(FieldStorageConfigInterface $field, $type_permission);
-
-  /**
-   * Return permissions to grant access to admin field perm.
-   *
-   * @param AccountInterface $account
-   *   User to grant permissions.
-   *
-   * @return bool
-   *   Grant or negate access.
-   */
-  public static function getAccessAdminFieldPermissions(AccountInterface $account);
-
-  /**
-   * Return permissions to garenat access to private field.
-   *
-   * @param AccountInterface $account
-   *   User to garant permissions.
-   *
-   * @return bool
-   *   Garant or negate access.
-   */
-  public static function getAccessPrivateFieldPermissions(AccountInterface $account);
+  public function fieldSetPermissionType(FieldStorageConfigInterface $field, $type_permission);
 
   /**
    * Field is attached to comment entity.
@@ -107,100 +85,6 @@ interface FieldPermissionsServiceInterface {
    * @param FieldDefinitionInterface $field_definition
    *   Fields to get permissions.
    */
-  public static function getFieldAccess($operation, FieldItemListInterface $items, AccountInterface $account, FieldDefinitionInterface $field_definition);
-
-  /**
-   * Access to field on items and operations with FIELD_PERMISSIONS_PRIVATE.
-   *
-   * @param string $operation
-   *    String operation on field.
-   * @param EntityInterface $entity
-   *   The entity field object on which to check access.
-   * @param AccountInterface $account
-   *    Account to get permissions.
-   * @param string $field_name
-   *   Field name to get permissions.
-   *
-   * @return bool
-   *   Check permission.
-   */
-  public static function getFieldAccessPrivate($operation, EntityInterface $entity, AccountInterface $account, $field_name);
-
-  /**
-   * Access to field on items VIEW and FIELD_PERMISSIONS_PRIVATE.
-   *
-   * @param EntityInterface $entity
-   *   The entity field object on which to check access.
-   * @param AccountInterface $account
-   *    Account to get permissions.
-   * @param string $field_name
-   *   Field name to get permissions.
-   *
-   * @return bool
-   *   Check permission.
-   */
-  public static function getFieldAccessPrivateView(EntityInterface $entity, AccountInterface $account, $field_name);
-
-  /**
-   * Access to field on items EDIT and FIELD_PERMISSIONS_PRIVATE.
-   *
-   * @param EntityInterface $entity
-   *   The entity field object on which to check access.
-   * @param AccountInterface $account
-   *    Account to get permissions.
-   * @param string $field_name
-   *   Field name to get permissions.
-   *
-   * @return bool
-   *   Check permission.
-   */
-  public static function getFieldAccessPrivateEdit(EntityInterface $entity, AccountInterface $account, $field_name);
-
-  /**
-   * Access to field on items and operations with FIELD_PERMISSIONS_CUSTOM.
-   *
-   * @param string $operation
-   *    String operation on field.
-   * @param EntityInterface $entity
-   *   The entity field object on which to check access.
-   * @param AccountInterface $account
-   *    Account to get permissions.
-   * @param string $field_name
-   *   Field name to get permissions.
-   *
-   * @return bool
-   *   Check permission.
-   */
-  public static function getFieldAccessCustom($operation, EntityInterface $entity, AccountInterface $account, $field_name);
-
-  /**
-   * Access to field on items VIEW and FIELD_PERMISSIONS_CUSTOM.
-   *
-   * @param EntityInterface $entity
-   *   The entity field object on which to check access.
-   * @param AccountInterface $account
-   *    Account to get permissions.
-   * @param string $field_name
-   *   Field name to get permissions.
-   *
-   * @return bool
-   *   Check permission.
-   */
-  public static function getFieldAccessCustomView(EntityInterface $entity, AccountInterface $account, $field_name);
-
-  /**
-   * Access to field on items EDIT and FIELD_PERMISSIONS_CUSTOM.
-   *
-   * @param EntityInterface $entity
-   *   The entity field object on which to check access.
-   * @param AccountInterface $account
-   *    Account to get permissions.
-   * @param string $field_name
-   *   Field name to get permissions.
-   *
-   * @return bool
-   *   Check permission.
-   */
-  public static function getFieldAccessCustomEdit(EntityInterface $entity, AccountInterface $account, $field_name);
+  public function getFieldAccess($operation, FieldItemListInterface $items, AccountInterface $account, FieldDefinitionInterface $field_definition);
 
 }
