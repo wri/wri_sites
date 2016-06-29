@@ -26,23 +26,13 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
   protected $entityTypeManager;
 
   /**
-   * The config factory.
-   *
-   * @var \Drupal\Core\Config\ConfigFactoryInterface
-   */
-  protected $configFactory;
-
-  /**
    * Construct the field permission service.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager service.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   The config factory service.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, ConfigFactoryInterface $config_factory) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
     $this->entityTypeManager = $entity_type_manager;
-    $this->configFactory = $config_factory;
   }
 
   /**
@@ -50,8 +40,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('entity_type.manager'),
-      $container->get('config.factory')
+      $container->get('entity_type.manager')
     );
   }
 
@@ -156,20 +145,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
    * {@inheritdoc}
    */
   public function fieldGetPermissionType(FieldStorageConfigInterface $field) {
-    $config = $this->configFactory->get('field_permissions.settings');
-    $settings_name = 'type.field:' . $field->getName();
-    $field_settings_perm = $config->get($settings_name);
-    return $field_settings_perm ?: FIELD_PERMISSIONS_PUBLIC;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function fieldSetPermissionType(FieldStorageConfigInterface $field, $type_permission) {
-    $field_name = $field->getName();
-    $config = $this->configFactory->getEditable('field_permissions.settings');
-    $config->set('type.field:' . $field_name, $type_permission);
-    $config->save();
+    return $field->getThirdPartySetting('field_permissions', 'permission_type', FIELD_PERMISSIONS_PUBLIC);
   }
 
   /**

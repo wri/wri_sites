@@ -45,22 +45,12 @@ interface FieldPermissionsServiceInterface {
   public function permissions();
 
   /**
-   * Get default value for checkbox  role permission.
+   * Get the permission type for a given field.
    *
    * @param \Drupal\field\FieldStorageConfigInterface $field
    *   The field to return permissions for.
    */
   public function fieldGetPermissionType(FieldStorageConfigInterface $field);
-
-  /**
-   * Get default value for checkbox  role permission.
-   *
-   * @param \Drupal\field\FieldStorageConfigInterface $field
-   *   The field to return permissions for.
-   * @param string $type_permission
-   *   The field permission type.
-   */
-  public function fieldSetPermissionType(FieldStorageConfigInterface $field, $type_permission);
 
   /**
    * Field is attached to comment entity.
