@@ -68,7 +68,7 @@ function field_permissions_form_field_config_edit_form_alter(&$form, FormStateIn
   $account = \Drupal::currentUser();
   /** @var \Drupal\field\FieldConfigInterface $field */
   $field = $form_state->getFormObject()->getEntity();
-  if (!$account->hasPermission('admin_field_permissions')) {
+  if (!$account->hasPermission('administer field permissions')) {
     return $form;
   }
   // Remove on comment field.
@@ -203,7 +203,7 @@ function field_permission_field_config_edit_form_submit(array &$form, FormStateI
     $no_role = array('anonymous', 'authenticated');
     foreach ($custom_permissions as $perm_name => $field_perm) {
       foreach ($field_perm as $role_name => $role_permission) {
-        if (in_array($role_name, $no_role) || $perm_name != 'view_own_' . $field_name && $perm_name != 'edit_own_' . $field_name) {
+        if (in_array($role_name, $no_role) || $perm_name != 'view own ' . $field_name && $perm_name != 'edit own ' . $field_name) {
           $role_permission = 0;
         }
         else {

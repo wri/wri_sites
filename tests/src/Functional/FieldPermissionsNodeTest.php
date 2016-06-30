@@ -135,7 +135,7 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
     $this->drupalGet('admin/structure/types/manage/article/fields/node.article.body');
     $this->assertResponse(200);
     $this->assertNoText('Field visibility and permissions');
-    $this->webUserRole->grantPermission('admin_field_permissions')->save();
+    $this->webUserRole->grantPermission('administer field permissions')->save();
     // Test page with admin field permission.
     $this->drupalGet('admin/structure/types/manage/article/fields/node.article.body');
     $this->assertText('Field visibility and permissions');
@@ -171,11 +171,11 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
 
     $this->assertNodeFieldVisible();
 
-    $this->webUserRole->grantPermission('admin_field_permissions')->save();
+    $this->webUserRole->grantPermission('administer field permissions')->save();
     $this->setNodeFieldPermissions(FIELD_PERMISSIONS_PRIVATE, NULL);
     $this->assertNodeFieldHidden();
 
-    $this->webUserRole->grantPermission('access_user_private_field')->save();
+    $this->webUserRole->grantPermission('access private fields')->save();
     $this->assertNodeFieldVisible();
     $this->drupalLogout();
   }
@@ -185,7 +185,7 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
    */
   protected function _testViewOwnField() {
     $permission = [];
-    $permission = $this->grantCustomPermissions($this->limitUserRole, ["view_own_body"], $permission);
+    $permission = $this->grantCustomPermissions($this->limitUserRole, ['view own body'], $permission);
     $this->setNodeFieldPermissions(FIELD_PERMISSIONS_CUSTOM, $permission);
 
     // Login width author node.
@@ -206,7 +206,7 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
    */
   protected function _testViewEditOwnField() {
     $permission = [];
-    $permission = $this->grantCustomPermissions($this->limitUserRole, ["view_own_body", "edit_own_body"], $permission);
+    $permission = $this->grantCustomPermissions($this->limitUserRole, ['view own body', 'edit own body'], $permission);
     $this->setNodeFieldPermissions(FIELD_PERMISSIONS_CUSTOM, $permission);
 
     // Login width author node.
@@ -232,7 +232,7 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
     $this->assertNodeFieldEditNoAccess();
     $this->drupalLogout();
     $permission = [];
-    $permission = $this->grantCustomPermissions($this->webUserRole, ["view_body", "edit_body"], $permission);
+    $permission = $this->grantCustomPermissions($this->webUserRole, ['view body', 'edit body'], $permission);
     $this->setNodeFieldPermissions(FIELD_PERMISSIONS_CUSTOM, $permission);
 
     $this->drupalLogin($this->webUser);

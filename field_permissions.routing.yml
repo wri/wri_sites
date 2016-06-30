@@ -4,4 +4,4 @@ field_permissions.reports:
     _controller: '\Drupal\field_permissions\Controller\FieldPermissionsController::content'
     _title: 'Field permissions'
   requirements:
-    _permission: 'admin_field_permissions'
+    _permission: 'administer field permissions'

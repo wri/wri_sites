@@ -220,7 +220,7 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
     $permission = [];
     $this->drupalLogin($this->adminUser);
     // Add perm to admin (admin field permissions).
-    $this->adminUserRole->grantPermission('admin_field_permissions')->save();
+    $this->adminUserRole->grantPermission('administer field permissions')->save();
 
     // Set Private field to comment body.
     $this->setCommentFieldPermissions(FIELD_PERMISSIONS_PRIVATE, $permission, $path);
@@ -253,7 +253,7 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
     $permission = [];
     $this->drupalLogin($this->adminUser);
     // Change custom permission view own field body.
-    $perm = ['view_own_' . $this->fieldName];
+    $perm = ['view own ' . $this->fieldName];
     $permission = $this->grantCustomPermissions($this->limitUserRole, $perm, $permission);
     $this->setCommentFieldPermissions(FIELD_PERMISSIONS_CUSTOM, $permission, $path);
     $this->drupalLogout();
@@ -273,7 +273,7 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
 
     $this->drupalLogin($this->adminUser);
     // Custom permission add edit_own field body.
-    $perm = ['edit_own_' . $this->fieldName];
+    $perm = ['edit own ' . $this->fieldName];
     $permission = $this->grantCustomPermissions($this->limitUserRole, $perm, $permission);
     $this->setCommentFieldPermissions(FIELD_PERMISSIONS_CUSTOM, $permission, $path);
     $this->drupalLogout();
@@ -286,7 +286,7 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
 
     $this->drupalLogin($this->adminUser);
     // Add edit and view all comment.
-    $perm = ['edit_' . $this->fieldName, 'view_' . $this->fieldName];
+    $perm = ['edit ' . $this->fieldName, 'view ' . $this->fieldName];
     $permission = $this->grantCustomPermissions($this->adminUserRole, $perm, $permission);
     $this->setCommentFieldPermissions(FIELD_PERMISSIONS_CUSTOM, $permission, $path);
     // view.
@@ -317,7 +317,7 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
     $this->drupalGet('comment/2/edit');
     $this->assertNoText('Limit User comment body');
     // Add permission access user private field.
-    $this->webUserRole->grantPermission('access_user_private_field')->save();
+    $this->webUserRole->grantPermission('access private fields')->save();
     // View.
     $this->drupalGet('node/' . $this->node->id());
     $this->assertText('Limit User comment body');

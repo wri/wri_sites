@@ -35,7 +35,7 @@ class FieldReportTest extends BrowserTestBase {
     parent::setUp();
 
     $admin = $this->drupalCreateUser([
-      'admin_field_permissions',
+      'administer field permissions',
       'access site reports'
     ]);
     $this->drupalLogin($admin);

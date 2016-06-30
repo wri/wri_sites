@@ -82,7 +82,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
     $permissions = [];
     $permission_list = $this->getList($field->getName());
     foreach ($permission_list as $permission_type => $permission_info) {
-      $permission = str_replace(' ', '_', $permission_type) . '_' . $field->getName();
+      $permission = $permission_type . ' ' . $field->getName();
       $permissions[$permission] = [
         'title' => $permission_info['title'],
         'description' => $permission_info['label'],
@@ -134,7 +134,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
         $permission_list = $this->getList($field_name);
         $perms_name = array_keys($permission_list);
         foreach ($perms_name as $perm_name) {
-          $name = str_replace(' ', '_', $perm_name) . '_' . $field_name;
+          $name = $perm_name . ' ' . $field_name;
           $permissions[$name] = $permission_list[$perm_name];
         }
       }
@@ -211,7 +211,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
    *   Check permission.
    */
   protected function getFieldAccessPrivate($operation, EntityInterface $entity, AccountInterface $account, $field_name) {
-    if ($account->hasPermission('access_user_private_field')) {
+    if ($account->hasPermission('access private fields')) {
       return TRUE;
     }
     if ($operation === 'view') {
@@ -309,16 +309,16 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
    *   Check permission.
    */
   protected function getFieldAccessCustomView(EntityInterface $entity, AccountInterface $account, $field_name) {
-    if ($account->hasPermission("view_" . $field_name)) {
-      return $account->hasPermission("view_" . $field_name);
+    if ($account->hasPermission('view ' . $field_name)) {
+      return $account->hasPermission('view ' . $field_name);
     }
     else {
       // User entities don't implement `EntityOwnerInterface`.
       if ($entity->getEntityTypeId() == 'user') {
-        return $entity->id() == $account->id() && $account->hasPermission("view_own_" . $field_name);
+        return $entity->id() == $account->id() && $account->hasPermission('view own ' . $field_name);
       }
       else {
-        return $entity->getOwnerId() == $account->id() && $account->hasPermission("view_own_" . $field_name);
+        return $entity->getOwnerId() == $account->id() && $account->hasPermission('view own ' . $field_name);
       }
     }
   }
@@ -338,18 +338,18 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
    */
   protected function getFieldAccessCustomEdit(EntityInterface $entity, AccountInterface $account, $field_name) {
     if ($entity->isNew()) {
-      return $account->hasPermission("create_" . $field_name);
+      return $account->hasPermission('create ' . $field_name);
     }
-    if ($account->hasPermission("edit_" . $field_name)) {
-      return $account->hasPermission("edit_" . $field_name);
+    if ($account->hasPermission('edit ' . $field_name)) {
+      return $account->hasPermission('edit ' . $field_name);
     }
     else {
       // User entities don't implement `EntityOwnerInterface`.
       if ($entity->getEntityTypeId() == 'user') {
-        return $entity->id() == $account->id() && $account->hasPermission("edit_own_" . $field_name);
+        return $entity->id() == $account->id() && $account->hasPermission('edit own ' . $field_name);
       }
       else {
-        return $entity->getOwnerId() == $account->id() && $account->hasPermission("edit_own_" . $field_name);
+        return $entity->getOwnerId() == $account->id() && $account->hasPermission('edit own ' . $field_name);
       }
     }
   }

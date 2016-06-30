@@ -178,7 +178,7 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
     $permission = [];
     // AGGIUNGE I PERMESSI DI VIEW_OWN. all'utente limitato.
     $this->drupalLogin($this->webUser);
-    $perm = ['view_own_' . $this->fieldName];
+    $perm = ['view own ' . $this->fieldName];
     $permission = $this->grantCustomPermissions($this->limitUserRole, $perm, $permission);
     $this->setUserFieldPermission(FIELD_PERMISSIONS_CUSTOM, $permission);
     // [admin] view/edit profile limit user (false).
@@ -200,7 +200,7 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
 
     // AGGIUNGE I PERMESSI DI EDIT_OWN to limitUserRole.
     $this->drupalLogin($this->webUser);
-    $permission = $this->grantCustomPermissions($this->limitUserRole, ['edit_own_' . $this->fieldName], $permission);
+    $permission = $this->grantCustomPermissions($this->limitUserRole, ['edit own ' . $this->fieldName], $permission);
     $this->setUserFieldPermission(FIELD_PERMISSIONS_CUSTOM, $permission);
     // [admin] edit your profile (false).
     $this->assertUserEditFieldNoAccess($this->adminUser);
@@ -223,12 +223,12 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
     $permission = [];
     // AGGIUNGE I PERMESSI DI VIEW_OWN. all'utente limitato.
     $this->drupalLogin($this->webUser);
-    $perm = ['view_' . $this->fieldName];
+    $perm = ['view ' . $this->fieldName];
     $permission = $this->grantCustomPermissions($this->webUserRole, $perm, $permission);
     $this->setUserFieldPermission(FIELD_PERMISSIONS_CUSTOM, $permission);
     $this->assertUserFieldAccess($this->limitedUser);
 
-    $perm = ['edit_' . $this->fieldName];
+    $perm = ['edit ' . $this->fieldName];
     $permission = $this->grantCustomPermissions($this->webUserRole, $perm, $permission);
     $this->setUserFieldPermission(FIELD_PERMISSIONS_CUSTOM, $permission);
     $this->assertUserEditFieldAccess($this->limitedUser);
