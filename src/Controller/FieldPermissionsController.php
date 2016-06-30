@@ -131,11 +131,11 @@ class FieldPermissionsController extends ControllerBase {
     $default_type = $this->fieldPermissions->fieldGetPermissionType($field_storage);
     $field_permissions = $this->fieldPermissions->getPermissionValue();
     if ($default_type == FIELD_PERMISSIONS_PUBLIC) {
-      $row[4]['data'] = t("Public field (author and administrators can edit, everyone can view)");
+      $row[4]['data'] = $this->t('Public field (author and administrators can edit, everyone can view)');
       $row[4]['colspan'] = 5;
     }
     elseif ($default_type == FIELD_PERMISSIONS_PRIVATE) {
-      $row[4]['data'] = t("Private field (only author and administrators can edit and view)");
+      $row[4]['data'] = $this->t('Private field (only author and administrators can edit and view)');
       $row[4]['colspan'] = 5;
     }
     elseif ($default_type == FIELD_PERMISSIONS_CUSTOM) {
