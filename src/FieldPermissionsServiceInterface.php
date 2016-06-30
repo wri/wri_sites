@@ -20,35 +20,43 @@ interface FieldPermissionsServiceInterface {
    *   The human readable name of the field to use when constructing permission
    *   names. Usually this will be derived from one or more of the field
    *   instance labels.
+   *
+   * @return array
+   *   An array keyed by the permission machine name, with label and description
+   *   keys. Note that this machine name doesn't include the field name.
    */
-  public static function getList($field_label = '');
+  public function getList($field_label = '');
 
   /**
-   * Returns field permissions in format suitable for use in hook_permission.
+   * Returns permissions for a given field.
    *
    * @param \Drupal\field\FieldStorageConfigInterface $field
    *   The field to return permissions for.
    *
    * @return array
-   *   An array of permission information.
-   *
-   * @todo Rename this for clarity.
+   *   An array of permissions for a given field, keyed by the permission
+   *   machine name.
    */
-  public static function listFieldPermissionSupport(FieldStorageConfigInterface $field, $label = '');
+  public function getPermissionList(FieldStorageConfigInterface $field);
 
   /**
-   * Get default value for checkbox role permission.
+   * Get all field permissions keyed by role ID.
    *
-   * @todo Rename this for clarity.
+   * @return array
+   *   An array of permission information keyed by role ID.
    */
-  public function getPermissionValue();
+  public function getPermissionsByRole();
 
   /**
-   * Returns permissions implements in field_permissions.
+   * Returns permissions for all fields that are using custom permissions.
    *
-   * @todo Rename this for clarity.
+   * This is suitable for use as a permission callback.
+   *
+   * @return array
+   *   An array of all permissions for all fields that implement the custom
+   *   permission type.
    */
-  public function permissions();
+  public function getAllPermissions();
 
   /**
    * Get the permission type for a given field.

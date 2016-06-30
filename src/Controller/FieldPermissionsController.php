@@ -129,7 +129,7 @@ class FieldPermissionsController extends ControllerBase {
     $row[3]['data'] = implode(",", $field_storage->getBundles());
 
     $default_type = $this->fieldPermissions->fieldGetPermissionType($field_storage);
-    $field_permissions = $this->fieldPermissions->getPermissionValue();
+    $field_permissions = $this->fieldPermissions->getPermissionsByRole();
     if ($default_type == FIELD_PERMISSIONS_PUBLIC) {
       $row[4]['data'] = $this->t('Public field (author and administrators can edit, everyone can view)');
       $row[4]['colspan'] = 5;
@@ -142,7 +142,7 @@ class FieldPermissionsController extends ControllerBase {
       // This is a field with custom permissions. Link the field to the
       // appropriate row of the permissions page, and theme it based on
       // whether all users have access.
-      foreach (array_keys($this->fieldPermissions->listFieldPermissionSupport($field_storage)) as $index => $permission) {
+      foreach (array_keys($this->fieldPermissions->getPermissionList($field_storage)) as $index => $permission) {
         $all_access = in_array($permission, $field_permissions[RoleInterface::ANONYMOUS_ID]) && in_array($permission, $field_permissions[RoleInterface::AUTHENTICATED_ID]);
         $class = $all_access ? 'field-permissions-status-on' : 'field-permissions-status-off';
         $text = $all_access ? $this->t('All users have this permission') : $this->t('Not all users have this permission');

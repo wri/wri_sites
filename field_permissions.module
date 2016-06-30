@@ -123,8 +123,7 @@ function field_permissions_permissions_matrix(FieldStorageDefinitionInterface $f
     '#type' => 'value',
     '#value' => $role_names,
   );
-  $label = $field->getName();
-  $permissions = FieldPermissionsService::listFieldPermissionSupport($field, $label);
+  $permissions = \Drupal::service('field_permissions.permissions_service')->getPermissionList($field);
   $options = array_keys($permissions);
   /*header theme table */
   $form['permissions'] = array(
@@ -140,7 +139,7 @@ function field_permissions_permissions_matrix(FieldStorageDefinitionInterface $f
       'class' => array('checkbox'),
     );
   }
-  $test = \Drupal::service('field_permissions.permissions_service')->getPermissionValue();
+  $test = \Drupal::service('field_permissions.permissions_service')->getPermissionsByRole();
   foreach ($permissions as $provider => $permission) {
     $form['permissions'][$provider]['description'] = array(
       '#type' => 'inline_template',

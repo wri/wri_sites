@@ -9,6 +9,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\field\FieldStorageConfigInterface;
 use Drupal\user\EntityOwnerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -17,6 +18,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * The field permission service.
  */
 class FieldPermissionsService implements FieldPermissionsServiceInterface, ContainerInjectionInterface {
+
+  use StringTranslationTrait;
 
   /**
    * The entity type manager.
@@ -46,30 +49,28 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
 
   /**
    * {@inheritdoc}
-   *
-   * @todo Use `StringTranslationTrait::t()`.
    */
-  public static function getList($field_label = '') {
+  public function getList($field_label = '') {
     return [
       'create' => [
-        'label' => t('Create field'),
-        'title' => t('Create own value for field @field', ['@field' => $field_label]),
+        'label' => $this->t('Create field'),
+        'title' => $this->t('Create own value for field @field', ['@field' => $field_label]),
       ],
       'edit own' => [
-        'label' => t('Edit own field'),
-        'title' => t('Edit own value for field @field', ['@field' => $field_label]),
+        'label' => $this->t('Edit own field'),
+        'title' => $this->t('Edit own value for field @field', ['@field' => $field_label]),
       ],
       'edit' => [
-        'label' => t('Edit field'),
-        'title' => t("Edit anyone's value for field @field", ['@field' => $field_label]),
+        'label' => $this->t('Edit field'),
+        'title' => $this->t("Edit anyone's value for field @field", ['@field' => $field_label]),
       ],
       'view own' => [
-        'label' => t('View own field'),
-        'title' => t('View own value for field @field', ['@field' => $field_label]),
+        'label' => $this->t('View own field'),
+        'title' => $this->t('View own value for field @field', ['@field' => $field_label]),
       ],
       'view' => [
-        'label' => t('View field'),
-        'title' => t("View anyone's value for field @field", ['@field' => $field_label]),
+        'label' => $this->t('View field'),
+        'title' => $this->t("View anyone's value for field @field", ['@field' => $field_label]),
       ],
     ];
   }
@@ -77,9 +78,9 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
   /**
    * {@inheritdoc}
    */
-  public static function listFieldPermissionSupport(FieldStorageConfigInterface $field, $label = '') {
+  public function getPermissionList(FieldStorageConfigInterface $field) {
     $permissions = [];
-    $permission_list = static::getList($label);
+    $permission_list = $this->getList($field->getName());
     foreach ($permission_list as $permission_type => $permission_info) {
       $permission = str_replace(' ', '_', $permission_type) . '_' . $field->getName();
       $permissions[$permission] = [
@@ -93,11 +94,11 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
   /**
    * {@inheritdoc}
    */
-  public function getPermissionValue() {
+  public function getPermissionsByRole() {
     /** @var \Drupal\user\RoleInterface[] $roles */
     $roles = $this->entityTypeManager->getStorage('user_role')->loadMultiple();
     $field_field_permissions = [];
-    $field_permission_perm = $this->permissions();
+    $field_permission_perm = $this->getAllPermissions();
     foreach ($roles as $role_name => $role) {
       $role_permissions = $role->getPermissions();
       $field_field_permissions[$role_name] = [];
@@ -121,7 +122,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
   /**
    * {@inheritdoc}
    */
-  public function permissions() {
+  public function getAllPermissions() {
     $permissions = [];
     /** @var FieldStorageConfigInterface[] $fields */
     $fields = $this->entityTypeManager->getStorage('field_storage_config')->loadMultiple();
@@ -130,7 +131,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
       // Check if permissionType is not default, before creating permissions.
       $type = static::fieldGetPermissionType($field);
       if ($type <> FIELD_PERMISSIONS_PUBLIC) {
-        $permission_list = static::getList($field_name);
+        $permission_list = $this->getList($field_name);
         $perms_name = array_keys($permission_list);
         foreach ($perms_name as $perm_name) {
           $name = str_replace(' ', '_', $perm_name) . '_' . $field_name;

@@ -1,5 +1,5 @@
 permission_callbacks:
-  - Drupal\field_permissions\FieldPermissionsService::permissions
+  - Drupal\field_permissions\FieldPermissionsService::getAllPermissions
 admin_field_permissions:
   title: 'Administer field permissions'
   description: 'Manage field permissions and field permissions settings.'
