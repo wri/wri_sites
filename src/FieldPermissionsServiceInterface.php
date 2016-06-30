@@ -30,17 +30,23 @@ interface FieldPermissionsServiceInterface {
    *   The field to return permissions for.
    *
    * @return array
-   *   An array of permission information,
+   *   An array of permission information.
+   *
+   * @todo Rename this for clarity.
    */
   public static function listFieldPermissionSupport(FieldStorageConfigInterface $field, $label = '');
 
   /**
    * Get default value for checkbox role permission.
+   *
+   * @todo Rename this for clarity.
    */
   public function getPermissionValue();
 
   /**
    * Returns permissions implements in field_permissions.
+   *
+   * @todo Rename this for clarity.
    */
   public function permissions();
 
