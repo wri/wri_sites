@@ -1,0 +1,7 @@
+name: 'Field permissions test module'
+type: module
+description: 'Provides a test field permission plugin type.'
+package: Testing
+core: '8.x'
+dependencies:
+  - field_permissions

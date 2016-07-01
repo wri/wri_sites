@@ -5,7 +5,6 @@ namespace Drupal\Tests\field_permissions\Functional;
 use Drupal\Core\Url;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
-use Drupal\field\FieldStorageConfigInterface;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\user\RoleInterface;
 
@@ -19,12 +18,17 @@ class FieldReportTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['field_permissions', 'entity_test', 'field_ui', 'text'];
+  public static $modules = [
+    'field_permissions',
+    'entity_test',
+    'field_ui',
+    'text',
+  ];
 
   /**
    * Field storage.
    *
-   * @var FieldStorageConfigInterface
+   * @var \Drupal\field\FieldStorageConfigInterface
    */
   protected $fieldStorage;
 
@@ -36,7 +40,7 @@ class FieldReportTest extends BrowserTestBase {
 
     $admin = $this->drupalCreateUser([
       'administer field permissions',
-      'access site reports'
+      'access site reports',
     ]);
     $this->drupalLogin($admin);
 

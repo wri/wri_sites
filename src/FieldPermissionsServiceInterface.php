@@ -1,11 +1,10 @@
 <?php
 
 namespace Drupal\field_permissions;
-use Drupal\Core\Entity\EntityInterface;
+
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\field\FieldConfigInterface;
 use Drupal\field\FieldStorageConfigInterface;
 
 /**
@@ -24,8 +23,13 @@ interface FieldPermissionsServiceInterface {
    * @return array
    *   An array keyed by the permission machine name, with label and description
    *   keys. Note that this machine name doesn't include the field name.
+   *
+   * @todo This is really only releavant to the custom field permission type
+   *   plugin. However, since it is used in the report page, it would be
+   *   difficult to abstract down to the plugin level the way the report
+   *   currently works.
    */
-  public function getList($field_label = '');
+  public static function getList($field_label = '');
 
   /**
    * Returns permissions for a given field.

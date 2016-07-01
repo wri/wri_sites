@@ -16,21 +16,29 @@ use Drupal\field_permissions\FieldPermissionsService;
 
 /**
  * Indicates that a field does not have any access control.
+ *
+ * Public field access is not implemented as a plugin because it effectively
+ * means this module does not process any access control for fields with this
+ * type of permission.
  */
-define('FIELD_PERMISSIONS_PUBLIC', 0);
+define('FIELD_PERMISSIONS_PUBLIC', 'public');
 
 /**
  * Indicates that a field is private.
  *
  * Private fields are never displayed, and are only editable by the author (and
  * by site administrators with the 'access private fields' permission).
+ *
+ * @todo remove this.
  */
-define('FIELD_PERMISSIONS_PRIVATE', 1);
+define('FIELD_PERMISSIONS_PRIVATE', 'private');
 
 /**
  * Indicates that a field has custom permissions.
+ *
+ * @todo remove this and check plugin ID directly.
  */
-define('FIELD_PERMISSIONS_CUSTOM', 2);
+define('FIELD_PERMISSIONS_CUSTOM', 'custom');
 
 /**
  * Implements hook_help().
@@ -76,27 +84,47 @@ function field_permissions_form_field_config_edit_form_alter(&$form, FormStateIn
     return $form;
   }
 
-  $form['fid'] = array('#type' => 'hidden', '#value' => $field->id());
-  $form['field']['field_permissions'] = array(
+  $form['fid'] = ['#type' => 'hidden', '#value' => $field->id()];
+  $form['field']['field_permissions'] = [
     '#weight' => -10,
-  );
-  $form['field']['field_permissions']['type'] = array(
+  ];
+
+  // Always add the public option, which isn't implemented as a plugin.
+  $options = [
+    FIELD_PERMISSIONS_PUBLIC => t('Public'),
+  ];
+  $descriptions = [
+    FIELD_PERMISSIONS_PUBLIC => [
+      '#description' => t('Author and administrators can edit, everyone can view.'),
+    ],
+  ];
+  $definitions = \Drupal::service('plugin.field_permissions.types.manager')->getDefinitions();
+  foreach ($definitions as $id => $plugin) {
+    $options[$id] = $plugin['title'];
+    $descriptions[$id] = [
+      '#description' => $plugin['description'],
+    ];
+  }
+
+  $form['field']['field_permissions']['type'] = [
     '#title' => t('Field visibility and permissions'),
     '#type' => 'radios',
-    '#options' => array(
-      FIELD_PERMISSIONS_PUBLIC => t('Public (author and administrators can edit, everyone can view)'),
-      FIELD_PERMISSIONS_PRIVATE => t('Private (only author and administrators can edit and view)'),
-      FIELD_PERMISSIONS_CUSTOM => t('Custom permissions'),
-    ),
+    '#options' => $options,
     '#default_value' => $field->getFieldStorageDefinition()->getThirdPartySetting('field_permissions', 'permission_type', FIELD_PERMISSIONS_PUBLIC),
-  );
+  ];
 
-  field_permissions_permissions_matrix($field->getFieldStorageDefinition(), $form, $form_state);
-  $form['#attached']['library'][] = 'user/drupal.user.permissions';
-  $form['#attached']['library'][] = 'field_permissions/field_permissions';
+  // Add in the descriptions.
+  $form['field']['field_permissions']['type'] += $descriptions;
 
   $form['actions']['submit']['#submit'][] = 'field_permission_field_config_edit_form_submit';
   $form['#entity_builders'][] = 'field_permissions_field_config_edit_form_builder';
+
+  // Allow each plugin to add to or alter the form.
+  foreach ($definitions as $definition) {
+    /** @var \Drupal\field_permissions\Plugin\FieldPermissionTypeInterface $instance */
+    $instance = \Drupal::service('plugin.field_permissions.types.manager')->createInstance($definition['id'], [], $field->getFieldStorageDefinition());
+    $instance->buildAdminForm($form, $form_state, \Drupal::service('entity_type.manager')->getStorage('user_role'));
+  }
 }
 
 /**
@@ -111,109 +139,18 @@ function field_permissions_field_config_edit_form_builder($entity_type, \Drupal\
 }
 
 /**
- * Return Matrix field permission.
- *
- * @param FieldStorageDefinitionInterface $field
- *   Field to implement permissions.
- */
-function field_permissions_permissions_matrix(FieldStorageDefinitionInterface $field, array &$form, FormStateInterface $form_state) {
-  $roles = user_roles();
-  $role_names = array_keys($roles);
-  $form['role_names'] = array(
-    '#type' => 'value',
-    '#value' => $role_names,
-  );
-  $permissions = \Drupal::service('field_permissions.permissions_service')->getPermissionList($field);
-  $options = array_keys($permissions);
-  /*header theme table */
-  $form['permissions'] = array(
-    '#type' => 'table',
-    '#header' => array(t('Permission')),
-    '#id' => 'permissions',
-    '#attributes' => ['class' => ['permissions', 'js-permissions']],
-    '#sticky' => TRUE,
-  );
-  foreach ($role_names as $name) {
-    $form['permissions']['#header'][] = array(
-      'data' => $name,
-      'class' => array('checkbox'),
-    );
-  }
-  $test = \Drupal::service('field_permissions.permissions_service')->getPermissionsByRole();
-  foreach ($permissions as $provider => $permission) {
-    $form['permissions'][$provider]['description'] = array(
-      '#type' => 'inline_template',
-      '#template' => '<div class="permission"><span class="title">{{ title }}</span>{% if description or warning %}<div class="description">{% if warning %}<em class="permission-warning">{{ warning }}</em> {% endif %}{{ description }}</div>{% endif %}</div>',
-      '#context' => array(
-        'title' => $permission["title"],
-      ),
-    );
-    $options[$provider] = '';
-    foreach ($role_names as $rid => $name) {
-      $form['permissions'][$provider][$name] = array(
-        '#title' => $name . ': ' . $permission["title"],
-        '#title_display' => 'invisible',
-        '#type' => 'checkbox',
-        '#attributes' => array('class' => array('rid-' . $name, 'js-rid-' . $name)),
-        '#wrapper_attributes' => array(
-          'class' => array('checkbox'),
-        ),
-      );
-      if (!empty($test[$name]) && in_array($provider, $test[$name])) {
-        $form['permissions'][$provider][$name]['#default_value'] = in_array($provider, $test[$name]);
-      }
-    }
-  }
-}
-
-/**
  * Implements hook_form_submit().
  */
 function field_permission_field_config_edit_form_submit(array &$form, FormStateInterface $form_state) {
-
   /** @var FieldDefinitionInterface $field */
-  $field = $form_state->getBuildInfo()['callback_object']->getEntity();
-  $custom_permissions = $form_state->getValue('permissions');
-  $type_permission = $form_state->getValue("type");
-  $field_name = $field->getName();
+  $field = $form_state->getFormObject()->getEntity();
+  $type_permission = $form_state->getValue('type');
 
-  $perm_settings = [];
-  // Set all perm.
-  if ($type_permission == FIELD_PERMISSIONS_CUSTOM) {
-    foreach ($custom_permissions as $perm_name => $field_perm) {
-      foreach ($field_perm as $role_name => $role_permission) {
-        $perm_settings[$role_name][$perm_name] = $role_permission;
-      }
-    }
+  if ($type_permission !== FIELD_PERMISSIONS_PUBLIC) {
+    /** @var \Drupal\field_permissions\Plugin\FieldPermissionType\Manager $manager */
+    $manager = \Drupal::service('plugin.field_permissions.types.manager');
+    $plugin = $manager->createInstance($type_permission, [], $field->getFieldStorageDefinition());
+    $plugin->submitAdminForm($form, $form_state, \Drupal::service('entity_type.manager')->getStorage('user_role'));
   }
-  elseif ($type_permission == FIELD_PERMISSIONS_PUBLIC) {
-    foreach ($custom_permissions as $perm_name => $field_perm) {
-      foreach ($field_perm as $role_name => $role_permission) {
-        if ($perm_name != 'view_' . $field_name) {
-          $role_permission = 0;
-        }
-        else {
-          $role_permission = 1;
-        }
-        $perm_settings[$role_name][$perm_name] = $role_permission;
-      }
-    }
-  }
-  elseif ($type_permission == FIELD_PERMISSIONS_PRIVATE) {
-    $no_role = array('anonymous', 'authenticated');
-    foreach ($custom_permissions as $perm_name => $field_perm) {
-      foreach ($field_perm as $role_name => $role_permission) {
-        if (in_array($role_name, $no_role) || $perm_name != 'view own ' . $field_name && $perm_name != 'edit own ' . $field_name) {
-          $role_permission = 0;
-        }
-        else {
-          $role_permission = 1;
-        }
-        $perm_settings[$role_name][$perm_name] = $role_permission;
-      }
-    }
-  }
-  foreach ($perm_settings as $roule_name => $perm) {
-    user_role_change_permissions($roule_name, $perm);
-  }
+
 }

@@ -5,5 +5,5 @@ field.storage.*.*.third_party.field_permissions:
   label: 'Field permission settings'
   mapping:
     permission_type:
-      type: integer
+      type: string
       label: 'Permission type'

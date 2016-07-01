@@ -11,7 +11,7 @@ use Drupal\user\UserInterface;
 /**
  * Test field permissions on users.
  *
- * @group field_permission
+ * @group field_permissions
  */
 class FieldPermissionsUserTest extends FieldPermissionsTestBase {
 
@@ -149,12 +149,12 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
   /**
    * Set user field permissions to the given type.
    *
-   * @param int $perm
+   * @param string $perm
    *   The permission type to set.
    * @param array $custom_permission
    *   An array of custom permissions.
    */
-  private function setUserFieldPermission($perm = FIELD_PERMISSIONS_PUBLIC, $custom_permission = []) {
+  private function setUserFieldPermission($perm = FIELD_PERMISSIONS_PUBLIC, array $custom_permission = []) {
     $current_user = $this->loggedInUser;
     $this->drupalLogin($this->adminUser);
     $this->drupalGet('admin/config/people/accounts/fields/user.user.' . $this->fieldName);

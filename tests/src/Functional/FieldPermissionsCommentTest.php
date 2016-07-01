@@ -8,7 +8,7 @@ use Drupal\Tests\field_permissions\Functional\FieldPermissionsTestBase;
 /**
  * Test field permissions with the comment module and fields.
  *
- * @group field_permission
+ * @group field_permissions
  */
 class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
 

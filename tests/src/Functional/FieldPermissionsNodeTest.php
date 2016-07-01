@@ -7,7 +7,7 @@ use Drupal\Tests\field_permissions\Functional\FieldPermissionsTestBase;
 /**
  * Test field permissions on nodes.
  *
- * @group field_permission
+ * @group field_permissions
  */
 class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
 
