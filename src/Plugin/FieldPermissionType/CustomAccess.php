@@ -2,7 +2,6 @@
 
 namespace Drupal\field_permissions\Plugin\FieldPermissionType;
 
-use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
@@ -82,7 +81,7 @@ class CustomAccess extends Base implements HasCustomPermissionsInterface {
   protected function hasViewFieldAccess(EntityInterface $entity, AccountInterface $account) {
     $field_name = $this->fieldStorage->getName();
     if ($account->hasPermission('view ' . $field_name)) {
-      return AccessResult::allowed();
+      return TRUE;
     }
     else {
       // User entities don't implement `EntityOwnerInterface`.
@@ -93,7 +92,10 @@ class CustomAccess extends Base implements HasCustomPermissionsInterface {
         return $entity->getOwnerId() == $account->id() && $account->hasPermission('view own ' . $field_name);
       }
     }
-    return TRUE;
+
+    // Default to deny since access can be explicitly granted (view field_name),
+    // even if this entity type doesn't implement the EntityOwnerInterface.
+    return FALSE;
   }
 
   /**
