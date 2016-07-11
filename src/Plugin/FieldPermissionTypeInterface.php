@@ -15,6 +15,42 @@ use Drupal\user\RoleStorageInterface;
 interface FieldPermissionTypeInterface extends PluginInspectionInterface, DerivativeInspectionInterface {
 
   /**
+   * Indicates that a field does not have any access control.
+   *
+   * Public field access is not implemented as a plugin because it effectively
+   * means this module does not process any access control for fields with this
+   * type of permission.
+   */
+  const ACCESS_PUBLIC = 'public';
+
+  /**
+   * Indicates that a field is using the private access permission type.
+   *
+   * Private fields are never displayed, and are only editable by the author (and
+   * by site administrators with the 'access private fields' permission).
+   *
+   * @internal
+   *
+   * This is here as a helper since there are still special handling of the
+   * various plugins throughout this module.
+   *
+   * @see \Drupal\field_permissions\Plugin\FieldPermissionType\PrivateAccess
+   */
+  const ACCESS_PRIVATE = 'private';
+
+  /**
+   * Indicates that a field is using the custom permission type.
+   *
+   * @internal
+   *
+   * This is here as a helper since there are still special handling of the
+   * various plugins throughout this module.
+   *
+   * @see \Drupal\field_permissions\Plugin\FieldPermissionType\CustomAccess
+   */
+  const ACCESS_CUSTOM = 'custom';
+
+  /**
    * The permission type label.
    *
    * @return string

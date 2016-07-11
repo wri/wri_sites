@@ -5,6 +5,7 @@ namespace Drupal\Tests\field_permissions\Functional;
 use Drupal\Core\Url;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field_permissions\Plugin\FieldPermissionTypeInterface;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\user\RoleInterface;
 
@@ -69,20 +70,20 @@ class FieldReportTest extends BrowserTestBase {
     $this->assertSession()->statusCodeEquals(200);
 
     // Initially, no fields should be private or custom.
-    $this->assertSession()->pageTextContains('Public field (author and administrators can edit, everyone can view)');
-    $this->assertSession()->pageTextNotContains('Private field (only author and administrators can edit and view)');
+    $this->assertSession()->pageTextContains('Public (Author and administrators can edit, everyone can view.)');
+    $this->assertSession()->pageTextNotContains('Private (Only author and administrators can edit and view.)');
     $this->assertSession()->pageTextNotContains('Not all users have this permission');
     $this->assertSession()->pageTextNotContains('All users have this permission');
 
     // Set to private.
-    $this->fieldStorage->setThirdPartySetting('field_permissions', 'permission_type', FIELD_PERMISSIONS_PRIVATE);
+    $this->fieldStorage->setThirdPartySetting('field_permissions', 'permission_type', FieldPermissionTypeInterface::ACCESS_PRIVATE);
     $this->fieldStorage->save();
     $this->drupalGet(Url::fromRoute('field_permissions.reports'));
     $this->assertSession()->statusCodeEquals(200);
-    $this->assertSession()->pageTextContains('Private field (only author and administrators can edit and view)');
+    $this->assertSession()->pageTextContains('Private (Only author and administrators can edit and view.)');
 
     // Set custom, and grant no permissions initially.
-    $this->fieldStorage->setThirdPartySetting('field_permissions', 'permission_type', FIELD_PERMISSIONS_CUSTOM);
+    $this->fieldStorage->setThirdPartySetting('field_permissions', 'permission_type', FieldPermissionTypeInterface::ACCESS_CUSTOM);
     $this->fieldStorage->save();
     $this->drupalGet(Url::fromRoute('field_permissions.reports'));
     $this->assertSession()->statusCodeEquals(200);

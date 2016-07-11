@@ -3,6 +3,7 @@
 namespace Drupal\Tests\field_permissions\Functional;
 
 use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field_permissions\Plugin\FieldPermissionTypeInterface;
 use Drupal\Tests\field_permissions\Functional\FieldPermissionsTestBase;
 
 /**
@@ -152,25 +153,23 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
   }
 
   /**
-   * Change the field permission to a given type.
+   * Change the field permission to a given type via the UI.
    *
-   * @param int $perm
+   * @param string $perm
    *   The permission type to set.
    * @param array $custom_permission
    *   The permissions to set.
    * @param string $path
    *   The path for the field edit form.
-   *
-   * @todo change this permission directly.
    */
   protected function setCommentFieldPermissions($perm, array $custom_permission, $path) {
 
     $this->drupalGet($path);
-    if ($perm == FIELD_PERMISSIONS_PUBLIC || $perm == FIELD_PERMISSIONS_PRIVATE) {
+    if ($perm === FieldPermissionTypeInterface::ACCESS_PUBLIC || $perm === FieldPermissionTypeInterface::ACCESS_PRIVATE) {
       $edit = ['type' => $perm];
       $this->drupalPostForm(NULL, $edit, t('Save settings'));
     }
-    elseif ($perm == FIELD_PERMISSIONS_CUSTOM && !empty($custom_permission)) {
+    elseif ($perm === FieldPermissionTypeInterface::ACCESS_CUSTOM && !empty($custom_permission)) {
       $custom_permission['type'] = $perm;
       $this->drupalPostForm(NULL, $custom_permission, t('Save settings'));
     }
@@ -223,7 +222,7 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
     $this->adminUserRole->grantPermission('administer field permissions')->save();
 
     // Set Private field to comment body.
-    $this->setCommentFieldPermissions(FIELD_PERMISSIONS_PRIVATE, $permission, $path);
+    $this->setCommentFieldPermissions(FieldPermissionTypeInterface::ACCESS_PRIVATE, $permission, $path);
     $this->drupalLogout();
     $this->drupalLogin($this->limitedUser);
     $this->drupalGet('node/' . $this->node->id());
@@ -255,7 +254,7 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
     // Change custom permission view own field body.
     $perm = ['view own ' . $this->fieldName];
     $permission = $this->grantCustomPermissions($this->limitUserRole, $perm, $permission);
-    $this->setCommentFieldPermissions(FIELD_PERMISSIONS_CUSTOM, $permission, $path);
+    $this->setCommentFieldPermissions(FieldPermissionTypeInterface::ACCESS_CUSTOM, $permission, $path);
     $this->drupalLogout();
 
     $this->drupalLogin($this->limitedUser);
@@ -275,7 +274,7 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
     // Custom permission add edit_own field body.
     $perm = ['edit own ' . $this->fieldName];
     $permission = $this->grantCustomPermissions($this->limitUserRole, $perm, $permission);
-    $this->setCommentFieldPermissions(FIELD_PERMISSIONS_CUSTOM, $permission, $path);
+    $this->setCommentFieldPermissions(FieldPermissionTypeInterface::ACCESS_CUSTOM, $permission, $path);
     $this->drupalLogout();
 
     $this->drupalLogin($this->limitedUser);
@@ -288,7 +287,7 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
     // Add edit and view all comment.
     $perm = ['edit ' . $this->fieldName, 'view ' . $this->fieldName];
     $permission = $this->grantCustomPermissions($this->adminUserRole, $perm, $permission);
-    $this->setCommentFieldPermissions(FIELD_PERMISSIONS_CUSTOM, $permission, $path);
+    $this->setCommentFieldPermissions(FieldPermissionTypeInterface::ACCESS_CUSTOM, $permission, $path);
     // view.
     $this->drupalGet('node/' . $this->node->id());
     $this->assertText('Limit User comment body');
@@ -305,7 +304,7 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
     $path = 'admin/structure/comment/manage/comment/fields/comment.comment.' . $this->fieldName;
     $permission = [];
     $this->drupalLogin($this->adminUser);
-    $this->setCommentFieldPermissions(FIELD_PERMISSIONS_PRIVATE, $permission, $path);
+    $this->setCommentFieldPermissions(FieldPermissionTypeInterface::ACCESS_PRIVATE, $permission, $path);
 
     // Login a user that didn't author the node.
     $this->drupalLogin($this->webUser);

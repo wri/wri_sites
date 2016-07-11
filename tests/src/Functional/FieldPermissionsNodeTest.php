@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\field_permissions\Functional;
 use Drupal\Core\Url;
+use Drupal\field_permissions\Plugin\FieldPermissionTypeInterface;
 use Drupal\Tests\field_permissions\Functional\FieldPermissionsTestBase;
 
 /**
@@ -40,22 +41,22 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
   /**
    * Set the bode body field permissions to the given type.
    *
-   * @param int $perm
+   * @param string $perm
    *   The permission type.
    * @param array $custom_permission
    *   An array of custom permissions.
    *
    * @todo Directly set the field permissions rather than using the UI.
    */
-  protected function setNodeFieldPermissions($perm = FIELD_PERMISSIONS_PUBLIC, $custom_permission = []) {
+  protected function setNodeFieldPermissions($perm, $custom_permission = []) {
     $current_user = $this->loggedInUser;
     $this->drupalLogin($this->adminUser);
     $this->drupalGet('admin/structure/types/manage/article/fields/node.article.body');
-    if ($perm == FIELD_PERMISSIONS_PUBLIC || $perm == FIELD_PERMISSIONS_PRIVATE) {
+    if ($perm === FieldPermissionTypeInterface::ACCESS_PUBLIC || $perm === FieldPermissionTypeInterface::ACCESS_PRIVATE) {
       $edit = ['type' => $perm];
       $this->drupalPostForm(NULL, $edit, t('Save settings'));
     }
-    elseif ($perm == FIELD_PERMISSIONS_CUSTOM && !empty($custom_permission)) {
+    elseif ($perm === FieldPermissionTypeInterface::ACCESS_CUSTOM && !empty($custom_permission)) {
       $custom_permission['type'] = $perm;
       $this->drupalPostForm(NULL, $custom_permission, t('Save settings'));
     }
@@ -172,7 +173,7 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
     $this->assertNodeFieldVisible();
 
     $this->webUserRole->grantPermission('administer field permissions')->save();
-    $this->setNodeFieldPermissions(FIELD_PERMISSIONS_PRIVATE, NULL);
+    $this->setNodeFieldPermissions(FieldPermissionTypeInterface::ACCESS_PRIVATE);
     $this->assertNodeFieldHidden();
 
     $this->webUserRole->grantPermission('access private fields')->save();
@@ -186,7 +187,7 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
   protected function _testViewOwnField() {
     $permission = [];
     $permission = $this->grantCustomPermissions($this->limitUserRole, ['view own body'], $permission);
-    $this->setNodeFieldPermissions(FIELD_PERMISSIONS_CUSTOM, $permission);
+    $this->setNodeFieldPermissions(FieldPermissionTypeInterface::ACCESS_CUSTOM, $permission);
 
     // Login width author node.
     $this->drupalLogin($this->limitedUser);
@@ -207,7 +208,7 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
   protected function _testViewEditOwnField() {
     $permission = [];
     $permission = $this->grantCustomPermissions($this->limitUserRole, ['view own body', 'edit own body'], $permission);
-    $this->setNodeFieldPermissions(FIELD_PERMISSIONS_CUSTOM, $permission);
+    $this->setNodeFieldPermissions(FieldPermissionTypeInterface::ACCESS_CUSTOM, $permission);
 
     // Login width author node.
     $this->drupalLogin($this->limitedUser);
@@ -233,7 +234,7 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
     $this->drupalLogout();
     $permission = [];
     $permission = $this->grantCustomPermissions($this->webUserRole, ['view body', 'edit body'], $permission);
-    $this->setNodeFieldPermissions(FIELD_PERMISSIONS_CUSTOM, $permission);
+    $this->setNodeFieldPermissions(FieldPermissionTypeInterface::ACCESS_CUSTOM, $permission);
 
     $this->drupalLogin($this->webUser);
     $this->assertNodeFieldVisible();

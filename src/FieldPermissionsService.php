@@ -9,6 +9,7 @@ use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\field\FieldStorageConfigInterface;
 use Drupal\field_permissions\Plugin\FieldPermissionType\Manager;
+use Drupal\field_permissions\Plugin\FieldPermissionTypeInterface;
 use Drupal\field_permissions\Plugin\HasCustomPermissionsInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -136,7 +137,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
     foreach ($fields as $key => $field) {
       // Check if this plugin defines custom permissions.
       $permission_type = static::fieldGetPermissionType($field);
-      if ($permission_type !== FIELD_PERMISSIONS_PUBLIC) {
+      if ($permission_type !== FieldPermissionTypeInterface::ACCESS_PUBLIC) {
         $plugin = $this->permissionTypeManager->createInstance($permission_type, [], $field);
         if ($plugin instanceof HasCustomPermissionsInterface) {
           $permissions += $plugin->getPermissions();
@@ -150,7 +151,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
    * {@inheritdoc}
    */
   public function fieldGetPermissionType(FieldStorageConfigInterface $field) {
-    return $field->getThirdPartySetting('field_permissions', 'permission_type', FIELD_PERMISSIONS_PUBLIC);
+    return $field->getThirdPartySetting('field_permissions', 'permission_type', FieldPermissionTypeInterface::ACCESS_PUBLIC);
   }
 
   /**
@@ -175,7 +176,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
    */
   public function getFieldAccess($operation, FieldItemListInterface $items, AccountInterface $account, FieldDefinitionInterface $field_definition) {
     $permission_type = $this->fieldGetPermissionType($field_definition->getFieldStorageDefinition());
-    if (in_array('administrator', $account->getRoles()) || $permission_type == FIELD_PERMISSIONS_PUBLIC) {
+    if (in_array('administrator', $account->getRoles()) || $permission_type == FieldPermissionTypeInterface::ACCESS_PUBLIC) {
       return TRUE;
     }
     // Field add to comment entity.

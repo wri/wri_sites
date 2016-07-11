@@ -7,6 +7,9 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Link;
 use Drupal\field\FieldStorageConfigInterface;
 use Drupal\field_permissions\FieldPermissionsServiceInterface;
+use Drupal\field_permissions\Plugin\FieldPermissionType\Manager;
+use Drupal\field_permissions\Plugin\FieldPermissionTypeInterface;
+use Drupal\field_permissions\Plugin\HasCustomPermissionsInterface;
 use Drupal\user\RoleInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -30,14 +33,26 @@ class FieldPermissionsController extends ControllerBase {
   protected $fieldPermissions;
 
   /**
+   * The field permission type plugin manager.
+   *
+   * @var \Drupal\field_permissions\Plugin\FieldPermissionType\Manager
+   */
+  protected $permissionTypeManager;
+
+  /**
    * Construct the field permission controller.
    *
    * @param FieldPermissionsServiceInterface $field_permissions_service
    *   Field permissions services.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager service.
+   * @param \Drupal\field_permissions\Plugin\FieldPermissionType\Manager $permission_type_manager
+   *   The permission type plugin manager.
    */
-  public function __construct(FieldPermissionsServiceInterface $field_permissions_service, EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(FieldPermissionsServiceInterface $field_permissions_service, EntityTypeManagerInterface $entity_type_manager, Manager $permission_type_manager) {
     $this->entityTypeManager = $entity_type_manager;
     $this->fieldPermissions = $field_permissions_service;
+    $this->permissionTypeManager = $permission_type_manager;
   }
 
   /**
@@ -49,7 +64,8 @@ class FieldPermissionsController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('field_permissions.permissions_service'),
-      $container->get('entity_type.manager')
+      $container->get('entity_type.manager'),
+      $container->get('plugin.field_permissions.types.manager')
     );
   }
 
@@ -130,28 +146,32 @@ class FieldPermissionsController extends ControllerBase {
 
     $default_type = $this->fieldPermissions->fieldGetPermissionType($field_storage);
     $field_permissions = $this->fieldPermissions->getPermissionsByRole();
-    if ($default_type == FIELD_PERMISSIONS_PUBLIC) {
-      $row[4]['data'] = $this->t('Public field (author and administrators can edit, everyone can view)');
+    if ($default_type === FieldPermissionTypeInterface::ACCESS_PUBLIC) {
+      $row[4]['data'] = $this->t('Public (Author and administrators can edit, everyone can view.)');
       $row[4]['colspan'] = 5;
     }
-    elseif ($default_type == FIELD_PERMISSIONS_PRIVATE) {
-      $row[4]['data'] = $this->t('Private field (only author and administrators can edit and view)');
-      $row[4]['colspan'] = 5;
-    }
-    elseif ($default_type == FIELD_PERMISSIONS_CUSTOM) {
-      // This is a field with custom permissions. Link the field to the
-      // appropriate row of the permissions page, and theme it based on
-      // whether all users have access.
-      foreach (array_keys($this->fieldPermissions->getPermissionList($field_storage)) as $index => $permission) {
-        $all_access = in_array($permission, $field_permissions[RoleInterface::ANONYMOUS_ID]) && in_array($permission, $field_permissions[RoleInterface::AUTHENTICATED_ID]);
-        $class = $all_access ? 'field-permissions-status-on' : 'field-permissions-status-off';
-        $text = $all_access ? $this->t('All users have this permission') : $this->t('Not all users have this permission');
-        $link = Link::createFromRoute($text, 'user.admin_permissions', [], ['fragment' => 'module-field_permissions'])->toRenderable();
-        $link['#options']['attributes']['title'] = $text;
-        $row[4 + $index]['data'] = $link;
-        $row[4 + $index]['class'] = [$class];
-      }
+    else {
+      $plugin = $this->permissionTypeManager->createInstance($default_type, [], $field_storage);
+      if ($plugin instanceof HasCustomPermissionsInterface) {
+        // This is a field with custom permissions. Link the field to the
+        // appropriate row of the permissions page, and theme it based on
+        // whether all users have access.
+        foreach (array_keys($plugin->getPermissions()) as $index => $permission) {
+          $all_access = in_array($permission, $field_permissions[RoleInterface::ANONYMOUS_ID]) && in_array($permission, $field_permissions[RoleInterface::AUTHENTICATED_ID]);
+          $class = $all_access ? 'field-permissions-status-on' : 'field-permissions-status-off';
+          $text = $all_access ? $this->t('All users have this permission') : $this->t('Not all users have this permission');
+          $link = Link::createFromRoute($text, 'user.admin_permissions', [], ['fragment' => 'module-field_permissions'])->toRenderable();
+          $link['#options']['attributes']['title'] = $text;
+          $row[4 + $index]['data'] = $link;
+          $row[4 + $index]['class'] = [$class];
+        }
 
+      }
+      else {
+        // Use the label and description.
+        $row[4]['data'] = $this->t('@label (@description)', ['@label' => $plugin->getLabel(), '@description' => $plugin->getDescription()]);
+        $row[4]['colspan'] = 5;
+      }
     }
     return $row;
   }

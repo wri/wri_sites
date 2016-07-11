@@ -7,38 +7,12 @@
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Field\FieldDefinitionInterface;
-use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\field_permissions\FieldPermissionsService;
+use Drupal\field_permissions\Plugin\FieldPermissionTypeInterface;
 
-
-/**
- * Indicates that a field does not have any access control.
- *
- * Public field access is not implemented as a plugin because it effectively
- * means this module does not process any access control for fields with this
- * type of permission.
- */
-define('FIELD_PERMISSIONS_PUBLIC', 'public');
-
-/**
- * Indicates that a field is private.
- *
- * Private fields are never displayed, and are only editable by the author (and
- * by site administrators with the 'access private fields' permission).
- *
- * @todo remove this.
- */
-define('FIELD_PERMISSIONS_PRIVATE', 'private');
-
-/**
- * Indicates that a field has custom permissions.
- *
- * @todo remove this and check plugin ID directly.
- */
-define('FIELD_PERMISSIONS_CUSTOM', 'custom');
 
 /**
  * Implements hook_help().
@@ -91,10 +65,10 @@ function field_permissions_form_field_config_edit_form_alter(&$form, FormStateIn
 
   // Always add the public option, which isn't implemented as a plugin.
   $options = [
-    FIELD_PERMISSIONS_PUBLIC => t('Public'),
+    FieldPermissionTypeInterface::ACCESS_PUBLIC => t('Public'),
   ];
   $descriptions = [
-    FIELD_PERMISSIONS_PUBLIC => [
+    FieldPermissionTypeInterface::ACCESS_PUBLIC => [
       '#description' => t('Author and administrators can edit, everyone can view.'),
     ],
   ];
@@ -110,7 +84,7 @@ function field_permissions_form_field_config_edit_form_alter(&$form, FormStateIn
     '#title' => t('Field visibility and permissions'),
     '#type' => 'radios',
     '#options' => $options,
-    '#default_value' => $field->getFieldStorageDefinition()->getThirdPartySetting('field_permissions', 'permission_type', FIELD_PERMISSIONS_PUBLIC),
+    '#default_value' => $field->getFieldStorageDefinition()->getThirdPartySetting('field_permissions', 'permission_type', FieldPermissionTypeInterface::ACCESS_PUBLIC),
   ];
 
   // Add in the descriptions.
@@ -146,7 +120,7 @@ function field_permission_field_config_edit_form_submit(array &$form, FormStateI
   $field = $form_state->getFormObject()->getEntity();
   $type_permission = $form_state->getValue('type');
 
-  if ($type_permission !== FIELD_PERMISSIONS_PUBLIC) {
+  if ($type_permission !== FieldPermissionTypeInterface::ACCESS_PUBLIC) {
     /** @var \Drupal\field_permissions\Plugin\FieldPermissionType\Manager $manager */
     $manager = \Drupal::service('plugin.field_permissions.types.manager');
     $plugin = $manager->createInstance($type_permission, [], $field->getFieldStorageDefinition());

@@ -5,6 +5,7 @@ namespace Drupal\Tests\field_permissions\Functional;
 use Drupal\Component\Utility\Unicode;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field_permissions\Plugin\FieldPermissionTypeInterface;
 use Drupal\Tests\field_permissions\Functional\FieldPermissionsTestBase;
 use Drupal\user\UserInterface;
 
@@ -154,15 +155,15 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
    * @param array $custom_permission
    *   An array of custom permissions.
    */
-  private function setUserFieldPermission($perm = FIELD_PERMISSIONS_PUBLIC, array $custom_permission = []) {
+  private function setUserFieldPermission($perm, array $custom_permission = []) {
     $current_user = $this->loggedInUser;
     $this->drupalLogin($this->adminUser);
     $this->drupalGet('admin/config/people/accounts/fields/user.user.' . $this->fieldName);
-    if ($perm == FIELD_PERMISSIONS_PUBLIC || $perm == FIELD_PERMISSIONS_PRIVATE) {
+    if ($perm === FieldPermissionTypeInterface::ACCESS_PUBLIC || $perm === FieldPermissionTypeInterface::ACCESS_PRIVATE) {
       $edit = ['type' => $perm];
       $this->drupalPostForm(NULL, $edit, t('Save settings'));
     }
-    elseif ($perm == FIELD_PERMISSIONS_CUSTOM && !empty($custom_permission)) {
+    elseif ($perm === FieldPermissionTypeInterface::ACCESS_CUSTOM && !empty($custom_permission)) {
       $custom_permission['type'] = $perm;
       $this->drupalPostForm(NULL, $custom_permission, t('Save settings'));
     }
@@ -180,7 +181,7 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
     $this->drupalLogin($this->webUser);
     $perm = ['view own ' . $this->fieldName];
     $permission = $this->grantCustomPermissions($this->limitUserRole, $perm, $permission);
-    $this->setUserFieldPermission(FIELD_PERMISSIONS_CUSTOM, $permission);
+    $this->setUserFieldPermission(FieldPermissionTypeInterface::ACCESS_CUSTOM, $permission);
     // [admin] view/edit profile limit user (false).
     $this->assertUserFieldNoAccess($this->limitedUser);
     $this->assertUserEditFieldNoAccess($this->limitedUser);
@@ -201,7 +202,7 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
     // AGGIUNGE I PERMESSI DI EDIT_OWN to limitUserRole.
     $this->drupalLogin($this->webUser);
     $permission = $this->grantCustomPermissions($this->limitUserRole, ['edit own ' . $this->fieldName], $permission);
-    $this->setUserFieldPermission(FIELD_PERMISSIONS_CUSTOM, $permission);
+    $this->setUserFieldPermission(FieldPermissionTypeInterface::ACCESS_CUSTOM, $permission);
     // [admin] edit your profile (false).
     $this->assertUserEditFieldNoAccess($this->adminUser);
     // [admin] edit limit profile (false).
@@ -225,12 +226,12 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
     $this->drupalLogin($this->webUser);
     $perm = ['view ' . $this->fieldName];
     $permission = $this->grantCustomPermissions($this->webUserRole, $perm, $permission);
-    $this->setUserFieldPermission(FIELD_PERMISSIONS_CUSTOM, $permission);
+    $this->setUserFieldPermission(FieldPermissionTypeInterface::ACCESS_CUSTOM, $permission);
     $this->assertUserFieldAccess($this->limitedUser);
 
     $perm = ['edit ' . $this->fieldName];
     $permission = $this->grantCustomPermissions($this->webUserRole, $perm, $permission);
-    $this->setUserFieldPermission(FIELD_PERMISSIONS_CUSTOM, $permission);
+    $this->setUserFieldPermission(FieldPermissionTypeInterface::ACCESS_CUSTOM, $permission);
     $this->assertUserEditFieldAccess($this->limitedUser);
 
     $this->drupalLogout();
@@ -241,7 +242,7 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
    */
   protected function _testPrivateField() {
     $this->drupalLogin($this->webUser);
-    $this->setUserFieldPermission(FIELD_PERMISSIONS_PRIVATE);
+    $this->setUserFieldPermission(FieldPermissionTypeInterface::ACCESS_PRIVATE);
     $this->drupalLogout();
 
     $this->drupalLogin($this->limitedUser);
