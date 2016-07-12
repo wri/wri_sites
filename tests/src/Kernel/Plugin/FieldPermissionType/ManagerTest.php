@@ -6,7 +6,6 @@ use Drupal\entity_test\Entity\EntityTest;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\simpletest\UserCreationTrait;
-use Drupal\user\Entity\Role;
 
 /**
  * Integration tests for the field permission type plugin manager.

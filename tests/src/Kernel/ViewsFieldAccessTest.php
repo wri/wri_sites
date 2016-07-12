@@ -56,7 +56,13 @@ class ViewsFieldAccessTest extends ViewsKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['field_permissions', 'entity_test', 'text', 'field', 'filter'];
+  public static $modules = [
+    'field_permissions',
+    'entity_test',
+    'text',
+    'field',
+    'filter',
+  ];
 
   /**
    * A field to test with.

@@ -1,9 +1,9 @@
 <?php
 
 namespace Drupal\Tests\field_permissions\Functional;
+
 use Drupal\Core\Url;
 use Drupal\field_permissions\Plugin\FieldPermissionTypeInterface;
-use Drupal\Tests\field_permissions\Functional\FieldPermissionsTestBase;
 
 /**
  * Test field permissions on nodes.
@@ -29,13 +29,15 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
    * Test field permissions on nodes.
    */
   public function testNodeFieldPermissions() {
-    $this->_testPermissionPage();
-    $this->_testFieldPermissionConfigurationEdit();
-    $this->_testInitAddNode();
-    $this->_testChengeToPrivateField();
-    $this->_testViewOwnField();
-    $this->_testViewEditOwnField();
-    $this->_testViewEditAllField();
+    // These are all run within a single test method to avoid unnecessary site
+    // installs.
+    $this->checkPermissionPage();
+    $this->checkFieldPermissionConfigurationEdit();
+    $this->checkInitAddNode();
+    $this->checkChengeToPrivateField();
+    $this->checkViewOwnField();
+    $this->checkViewEditOwnField();
+    $this->checkViewEditAllField();
   }
 
   /**
@@ -130,7 +132,7 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
   /**
    * Test field permission configuration access.
    */
-  protected function _testFieldPermissionConfigurationEdit() {
+  protected function checkFieldPermissionConfigurationEdit() {
     $this->drupalLogin($this->webUser);
     // Test page without admin field permission.
     $this->drupalGet('admin/structure/types/manage/article/fields/node.article.body');
@@ -146,7 +148,7 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
   /**
    * Test permissions page.
    */
-  protected function _testPermissionPage() {
+  protected function checkPermissionPage() {
     $this->drupalLogin($this->adminUser);
     $this->drupalGet(Url::fromRoute('user.admin_permissions'));
     $this->assertText('Access other users private fields');
@@ -157,7 +159,7 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
   /**
    * Test create content.
    */
-  protected function _testInitAddNode() {
+  protected function checkInitAddNode() {
     $this->drupalLogin($this->limitedUser);
     $this->addNodeUi();
     $this->addNode();
@@ -167,7 +169,7 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
   /**
    * Test PUBLIC - PRIVATE EDIT - VIEW.
    */
-  protected function _testChengeToPrivateField() {
+  protected function checkChengeToPrivateField() {
     $this->drupalLogin($this->webUser);
 
     $this->assertNodeFieldVisible();
@@ -184,7 +186,7 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
   /**
    * Test PUBLIC - view own field.
    */
-  protected function _testViewOwnField() {
+  protected function checkViewOwnField() {
     $permission = [];
     $permission = $this->grantCustomPermissions($this->limitUserRole, ['view own body'], $permission);
     $this->setNodeFieldPermissions(FieldPermissionTypeInterface::ACCESS_CUSTOM, $permission);
@@ -205,7 +207,7 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
   /**
    * Test PUBLIC - view own field.
    */
-  protected function _testViewEditOwnField() {
+  protected function checkViewEditOwnField() {
     $permission = [];
     $permission = $this->grantCustomPermissions($this->limitUserRole, ['view own body', 'edit own body'], $permission);
     $this->setNodeFieldPermissions(FieldPermissionTypeInterface::ACCESS_CUSTOM, $permission);
@@ -227,7 +229,7 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
   /**
    * Test - view edit all field.
    */
-  protected function _testViewEditAllField() {
+  protected function checkViewEditAllField() {
     $this->drupalLogin($this->webUser);
     $this->assertNodeFieldHidden();
     $this->assertNodeFieldEditNoAccess();

@@ -38,7 +38,9 @@ class PrivateAccessTest extends UnitTestCase {
   }
 
   /**
-   * ::covers hasFieldAccess
+   * Test for `hasFieldAccess`.
+   *
+   * @covers ::hasFieldAccess
    *
    * @dataProvider providerTestHasFieldAccess
    */

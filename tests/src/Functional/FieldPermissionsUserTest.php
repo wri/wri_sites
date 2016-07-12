@@ -6,7 +6,6 @@ use Drupal\Component\Utility\Unicode;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field_permissions\Plugin\FieldPermissionTypeInterface;
-use Drupal\Tests\field_permissions\Functional\FieldPermissionsTestBase;
 use Drupal\user\UserInterface;
 
 /**
@@ -41,7 +40,7 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
 
     $this->drupalLogin($this->adminUser);
     // Compila il campo per l'utente admin.
-    $this->_testUserFieldEdit($this->adminUser);
+    $this->checkUserFieldEdit($this->adminUser);
     $this->drupalLogout();
 
     // Controllo che si visibile ad altri utenti.
@@ -49,9 +48,11 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
     $this->assertUserFieldAccess($this->adminUser);
     $this->drupalLogout();
 
-    $this->_testPrivateField();
-    $this->_testUserViewEditOwnField();
-    $this->_testUserViewEditField();
+    // These are all run within a single test method to avoid unnecessary site
+    // installs.
+    $this->checkPrivateField();
+    $this->checkUserViewEditOwnField();
+    $this->checkUserViewEditField();
 
   }
 
@@ -91,7 +92,7 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
    * @param \Drupal\user\UserInterface $account
    *   The user account to edit.
    */
-  protected function _testUserFieldEdit(UserInterface $account) {
+  protected function checkUserFieldEdit(UserInterface $account) {
     $this->drupalGet($account->toUrl('edit-form'));
     $this->assertText('Textfield');
     $edit = [];
@@ -175,7 +176,7 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
   /**
    * Test PUBLIC - view_own and edit_own field.
    */
-  protected function _testUserViewEditOwnField() {
+  protected function checkUserViewEditOwnField() {
     $permission = [];
     // AGGIUNGE I PERMESSI DI VIEW_OWN. all'utente limitato.
     $this->drupalLogin($this->webUser);
@@ -219,7 +220,7 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
   /**
    * Tests custom permissions.
    */
-  protected function _testUserViewEditField() {
+  protected function checkUserViewEditField() {
 
     $permission = [];
     // AGGIUNGE I PERMESSI DI VIEW_OWN. all'utente limitato.
@@ -240,7 +241,7 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
   /**
    * Test field access with private permissions.
    */
-  protected function _testPrivateField() {
+  protected function checkPrivateField() {
     $this->drupalLogin($this->webUser);
     $this->setUserFieldPermission(FieldPermissionTypeInterface::ACCESS_PRIVATE);
     $this->drupalLogout();
@@ -249,7 +250,7 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
     // Controlla il perofilo dell'utente admin e non deve vedere il campo.
     $this->assertUserFieldNoAccess($this->adminUser);
     // Compila il campo per l'utente Limited.
-    $this->_testUserFieldEdit($this->limitedUser);
+    $this->checkUserFieldEdit($this->limitedUser);
     // Controlla che sia visibile.
     $this->assertUserFieldAccess($this->limitedUser);
     $this->drupalLogout();

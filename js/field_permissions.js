@@ -16,7 +16,7 @@
         PemTable.hide();
       }
       /*change*/
-      PermInputType.on('change', function() {
+      PermInputType.on('change', function () {
         var typeVal = $(this).val();
         if (typeVal != 'custom') {
           PemTable.hide();

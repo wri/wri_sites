@@ -4,7 +4,6 @@ namespace Drupal\Tests\field_permissions\Functional;
 
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field_permissions\Plugin\FieldPermissionTypeInterface;
-use Drupal\Tests\field_permissions\Functional\FieldPermissionsTestBase;
 
 /**
  * Test field permissions with the comment module and fields.
@@ -59,11 +58,13 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
    * Test field permissions on comments.
    */
   public function testFieldPermissionComment() {
+    // These are all run within a single test method to avoid unnecessary site
+    // installs.
     $this->addCommentField();
-    $this->_testBaseCommentFieldFunctionality();
-    $this->_testPrivateCommentField();
-    $this->_testPrivateFieldPermission();
-    $this->_testCustomCommentField();
+    $this->checkBaseCommentFieldFunctionality();
+    $this->checkPrivateCommentField();
+    $this->checkPrivateFieldPermission();
+    $this->checkCustomCommentField();
   }
 
   /**
@@ -178,7 +179,7 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
   /**
    * Ensures basic field functionality is working without field permissions.
    */
-  protected function _testBaseCommentFieldFunctionality() {
+  protected function checkBaseCommentFieldFunctionality() {
     $edit = [];
     $this->drupalLogin($this->adminUser);
     // Node add.
@@ -214,7 +215,7 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
   /**
    * Tests the comment field when set to private.
    */
-  protected function _testPrivateCommentField() {
+  protected function checkPrivateCommentField() {
     $path = 'admin/structure/comment/manage/comment/fields/comment.comment.' . $this->fieldName;
     $permission = [];
     $this->drupalLogin($this->adminUser);
@@ -247,7 +248,7 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
   /**
    * Tests the comment field with custom permissions.
    */
-  protected function _testCustomCommentField() {
+  protected function checkCustomCommentField() {
     $path = 'admin/structure/comment/manage/comment/fields/comment.comment.' . $this->fieldName;
     $permission = [];
     $this->drupalLogin($this->adminUser);
@@ -300,7 +301,7 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
   /**
    * Tests access to private field permission.
    */
-  protected function _testPrivateFieldPermission() {
+  protected function checkPrivateFieldPermission() {
     $path = 'admin/structure/comment/manage/comment/fields/comment.comment.' . $this->fieldName;
     $permission = [];
     $this->drupalLogin($this->adminUser);
