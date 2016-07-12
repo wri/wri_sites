@@ -79,7 +79,7 @@ interface FieldPermissionsServiceInterface {
    * @return bool
    *   TRUE if in a comment entity.
    */
-  public static function fieldIsCommentField(FieldDefinitionInterface $field_definition);
+  public static function isCommentField(FieldDefinitionInterface $field_definition);
 
   /**
    * Get access for field by operations and account permisisons.

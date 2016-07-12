@@ -10,6 +10,7 @@ use Drupal\field_permissions\Plugin\AdminFormSettingsInterface;
 use Drupal\field_permissions\Plugin\CustomPermissionsInterface;
 use Drupal\user\EntityOwnerInterface;
 use Drupal\user\RoleStorageInterface;
+use Drupal\user\UserInterface;
 
 /**
  * Defines custom access for fields.
@@ -28,73 +29,25 @@ class CustomAccess extends Base implements CustomPermissionsInterface, AdminForm
    */
   public function hasFieldAccess($operation, EntityInterface $entity, AccountInterface $account) {
     assert('in_array($operation, ["edit", "view"])', 'The operation is either "edit" or "view", "' . $operation . '" given instead.');
-    if ($operation === 'edit') {
-      return $this->hasEditFieldAccess($entity, $account);
-    }
-    elseif ($operation === 'view') {
-      return $this->hasViewFieldAccess($entity, $account);
-    }
-    return TRUE;
-  }
 
-  /**
-   * Determine if a given user can edit this field for a given entity.
-   *
-   * @param \Drupal\Core\Entity\EntityInterface $entity
-   *   The entity that has the field to check access for.
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   The user to check access for.
-   *
-   * @return bool
-   *   The access result.
-   */
-  protected function hasEditFieldAccess(EntityInterface $entity, AccountInterface $account) {
     $field_name = $this->fieldStorage->getName();
-    if ($entity->isNew()) {
+    if ($operation === 'edit' && $entity->isNew()) {
       return $account->hasPermission('create ' . $field_name);
     }
-    if ($account->hasPermission('edit ' . $field_name)) {
+    if ($account->hasPermission($operation . ' ' . $field_name)) {
       return TRUE;
     }
     else {
       // User entities don't implement `EntityOwnerInterface`.
-      if ($entity->getEntityTypeId() == 'user') {
-        return $entity->id() == $account->id() && $account->hasPermission('edit own ' . $field_name);
+      if ($entity instanceof UserInterface) {
+        return $entity->id() == $account->id() && $account->hasPermission($operation . ' own ' . $field_name);
       }
       elseif ($entity instanceof EntityOwnerInterface) {
-        return $entity->getOwnerId() == $account->id() && $account->hasPermission('edit own ' . $field_name);
-      }
-    }
-    return TRUE;
-  }
-
-  /**
-   * Determine if a given user can view this field for a given entity.
-   *
-   * @param \Drupal\Core\Entity\EntityInterface $entity
-   *   The entity that has the field to check access for.
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   The user to check access for.
-   *
-   * @return bool
-   *   The access result.
-   */
-  protected function hasViewFieldAccess(EntityInterface $entity, AccountInterface $account) {
-    $field_name = $this->fieldStorage->getName();
-    if ($account->hasPermission('view ' . $field_name)) {
-      return TRUE;
-    }
-    else {
-      // User entities don't implement `EntityOwnerInterface`.
-      if ($entity->getEntityTypeId() == 'user') {
-        return $entity->id() == $account->id() && $account->hasPermission('view own ' . $field_name);
-      }
-      elseif ($entity instanceof EntityOwnerInterface) {
-        return $entity->getOwnerId() == $account->id() && $account->hasPermission('view own ' . $field_name);
+        return $entity->getOwnerId() == $account->id() && $account->hasPermission($operation . ' own ' . $field_name);
       }
     }
 
-    // Default to deny since access can be explicitly granted (view field_name),
+    // Default to deny since access can be explicitly granted (edit field_name),
     // even if this entity type doesn't implement the EntityOwnerInterface.
     return FALSE;
   }

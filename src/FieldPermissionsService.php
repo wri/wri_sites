@@ -157,7 +157,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
   /**
    * {@inheritdoc}
    */
-  public static function fieldIsCommentField(FieldDefinitionInterface $field_definition) {
+  public static function isCommentField(FieldDefinitionInterface $field_definition) {
     if (!\Drupal::hasService('comment.manager')) {
       // Comment module isn't enabled.
       return FALSE;
@@ -180,7 +180,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
       return TRUE;
     }
     // Field add to comment entity.
-    if (static::fieldIsCommentField($field_definition)) {
+    if (static::isCommentField($field_definition)) {
       return TRUE;
     }
 

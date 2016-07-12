@@ -55,7 +55,7 @@ function field_permissions_form_field_config_edit_form_alter(&$form, FormStateIn
     return $form;
   }
   // Remove on comment field.
-  if (FieldPermissionsService::fieldIsCommentField($field)) {
+  if (FieldPermissionsService::isCommentField($field)) {
     return $form;
   }
 
