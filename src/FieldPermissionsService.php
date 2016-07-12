@@ -10,7 +10,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\field\FieldStorageConfigInterface;
 use Drupal\field_permissions\Plugin\FieldPermissionType\Manager;
 use Drupal\field_permissions\Plugin\FieldPermissionTypeInterface;
-use Drupal\field_permissions\Plugin\HasCustomPermissionsInterface;
+use Drupal\field_permissions\Plugin\CustomPermissionsInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -139,7 +139,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
       $permission_type = static::fieldGetPermissionType($field);
       if ($permission_type !== FieldPermissionTypeInterface::ACCESS_PUBLIC) {
         $plugin = $this->permissionTypeManager->createInstance($permission_type, [], $field);
-        if ($plugin instanceof HasCustomPermissionsInterface) {
+        if ($plugin instanceof CustomPermissionsInterface) {
           $permissions += $plugin->getPermissions();
         }
       }

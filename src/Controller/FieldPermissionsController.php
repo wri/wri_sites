@@ -9,7 +9,7 @@ use Drupal\field\FieldStorageConfigInterface;
 use Drupal\field_permissions\FieldPermissionsServiceInterface;
 use Drupal\field_permissions\Plugin\FieldPermissionType\Manager;
 use Drupal\field_permissions\Plugin\FieldPermissionTypeInterface;
-use Drupal\field_permissions\Plugin\HasCustomPermissionsInterface;
+use Drupal\field_permissions\Plugin\CustomPermissionsInterface;
 use Drupal\user\RoleInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -152,7 +152,7 @@ class FieldPermissionsController extends ControllerBase {
     }
     else {
       $plugin = $this->permissionTypeManager->createInstance($default_type, [], $field_storage);
-      if ($plugin instanceof HasCustomPermissionsInterface) {
+      if ($plugin instanceof CustomPermissionsInterface) {
         // This is a field with custom permissions. Link the field to the
         // appropriate row of the permissions page, and theme it based on
         // whether all users have access.

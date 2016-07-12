@@ -5,7 +5,7 @@ namespace Drupal\field_permissions\Plugin;
 /**
  * Denotes that this field permission type generates custom permissions.
  */
-interface HasCustomPermissionsInterface {
+interface CustomPermissionsInterface {
 
   /**
    * Returns an array of permissions suitable for use in a permission callback.

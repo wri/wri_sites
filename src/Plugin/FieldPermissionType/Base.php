@@ -2,12 +2,10 @@
 
 namespace Drupal\field_permissions\Plugin\FieldPermissionType;
 
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Plugin\PluginBase;
 use Drupal\field\FieldStorageConfigInterface;
 use Drupal\field_permissions\Plugin\FieldPermissionTypeInterface;
-use Drupal\user\RoleStorageInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -57,22 +55,6 @@ abstract class Base extends PluginBase implements FieldPermissionTypeInterface, 
    */
   public function getDescription() {
     return $this->pluginDefinition['description'];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function buildAdminForm(array &$form, FormStateInterface $form_state, RoleStorageInterface $role_storage) {
-    // Nothing to do here. Individual plugins can override this method as
-    // needed.
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function submitAdminForm(array &$form, FormStateInterface $form_state, RoleStorageInterface $role_storage) {
-    // Nothing to do here. Individual plugins can override this method as
-    // needed.
   }
 
 }

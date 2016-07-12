@@ -12,6 +12,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\field_permissions\FieldPermissionsService;
 use Drupal\field_permissions\Plugin\FieldPermissionTypeInterface;
+use Drupal\field_permissions\Plugin\AdminFormSettingsInterface;
 
 
 /**
@@ -95,9 +96,10 @@ function field_permissions_form_field_config_edit_form_alter(&$form, FormStateIn
 
   // Allow each plugin to add to or alter the form.
   foreach ($definitions as $definition) {
-    /** @var \Drupal\field_permissions\Plugin\FieldPermissionTypeInterface $instance */
-    $instance = \Drupal::service('plugin.field_permissions.types.manager')->createInstance($definition['id'], [], $field->getFieldStorageDefinition());
-    $instance->buildAdminForm($form, $form_state, \Drupal::service('entity_type.manager')->getStorage('user_role'));
+    $plugin = \Drupal::service('plugin.field_permissions.types.manager')->createInstance($definition['id'], [], $field->getFieldStorageDefinition());
+    if ($plugin instanceof AdminFormSettingsInterface) {
+      $plugin->buildAdminForm($form, $form_state, \Drupal::service('entity_type.manager')->getStorage('user_role'));
+    }
   }
 }
 
@@ -118,13 +120,15 @@ function field_permissions_field_config_edit_form_builder($entity_type, \Drupal\
 function field_permission_field_config_edit_form_submit(array &$form, FormStateInterface $form_state) {
   /** @var FieldDefinitionInterface $field */
   $field = $form_state->getFormObject()->getEntity();
-  $type_permission = $form_state->getValue('type');
 
-  if ($type_permission !== FieldPermissionTypeInterface::ACCESS_PUBLIC) {
-    /** @var \Drupal\field_permissions\Plugin\FieldPermissionType\Manager $manager */
-    $manager = \Drupal::service('plugin.field_permissions.types.manager');
-    $plugin = $manager->createInstance($type_permission, [], $field->getFieldStorageDefinition());
-    $plugin->submitAdminForm($form, $form_state, \Drupal::service('entity_type.manager')->getStorage('user_role'));
+  // Allow all plugin types to react to the submitted form.
+  $definitions = \Drupal::service('plugin.field_permissions.types.manager')->getDefinitions();
+  $manager = \Drupal::service('plugin.field_permissions.types.manager');
+  foreach ($definitions as $definition) {
+    $plugin = $manager->createInstance($definition['id'], [], $field->getFieldStorageDefinition());
+    if ($plugin instanceof AdminFormSettingsInterface) {
+      $plugin->submitAdminForm($form, $form_state, \Drupal::service('entity_type.manager')->getStorage('user_role'));
+    }
   }
 
 }

@@ -5,7 +5,7 @@ namespace Drupal\field_permissions_test\Plugin\FieldPermissionType;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\field_permissions\Plugin\FieldPermissionType\Base;
-use Drupal\field_permissions\Plugin\HasCustomPermissionsInterface;
+use Drupal\field_permissions\Plugin\CustomPermissionsInterface;
 
 /**
  * A test field permission type plugin.
@@ -17,7 +17,7 @@ use Drupal\field_permissions\Plugin\HasCustomPermissionsInterface;
  *   weight = 42
  * )
  */
-class TestAccess extends Base implements HasCustomPermissionsInterface {
+class TestAccess extends Base implements CustomPermissionsInterface {
 
   /**
    * {@inheritdoc}

@@ -6,7 +6,8 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\field_permissions\FieldPermissionsService;
-use Drupal\field_permissions\Plugin\HasCustomPermissionsInterface;
+use Drupal\field_permissions\Plugin\AdminFormSettingsInterface;
+use Drupal\field_permissions\Plugin\CustomPermissionsInterface;
 use Drupal\user\EntityOwnerInterface;
 use Drupal\user\RoleStorageInterface;
 
@@ -20,7 +21,7 @@ use Drupal\user\RoleStorageInterface;
  *   weight = 50
  * )
  */
-class CustomAccess extends Base implements HasCustomPermissionsInterface {
+class CustomAccess extends Base implements CustomPermissionsInterface, AdminFormSettingsInterface {
 
   /**
    * {@inheritdoc}
