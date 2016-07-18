@@ -96,15 +96,9 @@ abstract class FieldPermissionsTestBase extends BrowserTestBase {
       'name' => 'Article',
     ]);
     $this->checkPermissions(['create article content']);
-    // @todo The `drupalCreateUser` method doesn't support the admin flag, so
-    // it is manually performed here.
-    // @see https://www.drupal.org/node/2758067
-    $this->adminUser = $this->drupalCreateUser([], NULL);
-    $this->adminUserRole = Role::load($this->drupalCreateRole([]));
-    $this->adminUserRole->setIsAdmin(TRUE);
-    $this->adminUserRole->save();
-    $this->adminUser->addRole($this->adminUserRole->id());
-    $this->adminUser->save();
+
+    $this->adminUser = $this->drupalCreateUser([], NULL, TRUE);
+    $this->adminUserRole = Role::load($this->adminUser->getRoles(TRUE)[0]);
 
     $this->limitedUser = $this->drupalCreateUser([
       'access content',
@@ -119,8 +113,8 @@ abstract class FieldPermissionsTestBase extends BrowserTestBase {
       'edit any article content',
     ]);
 
-    $this->limitUserRole = Role::load($this->limitedUser->getRoles(['authenticated'])[0]);
-    $this->webUserRole = Role::load($this->webUser->getRoles(['authenticated'])[0]);
+    $this->limitUserRole = Role::load($this->limitedUser->getRoles(TRUE)[0]);
+    $this->webUserRole = Role::load($this->webUser->getRoles(TRUE)[0]);
   }
 
   /**
