@@ -1,19 +1,18 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Field Permissions module
-;;
-;; Original author: markus_petrux (http://drupal.org/user/39593)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-CONTENTS OF THIS FILE
-=====================
+# Field Permissions module
+
+Original author: [markus_petrux](http://drupal.org/user/39593)
+
+
+## CONTENTS OF THIS FILE
+
 * OVERVIEW
 * USAGE
 * REQUIREMENTS
 * INSTALLATION
 
 
-OVERVIEW
-========
+## OVERVIEW
 
 The Field Permissions module allows site administrators to set field-level
 permissions for fields that are attached to any kind of entity (such as nodes
@@ -28,8 +27,7 @@ can enable these permissions explicitly for the fields where this feature is
 needed.
 
 
-USAGE
-=====
+## USAGE
 
 Once Field Permissions module is installed, you need to edit the field settings
 form to enable permissions for each field where you need this feature. You can
@@ -61,8 +59,7 @@ These permissions will also be available on the standard permissions page at
 Administer -> People -> Permissions.
 
 
-INSTALLATION
-============
+## INSTALLATION
 
 1) Copy all contents of this package to your modules directory preserving
    subdirectory structure.
@@ -81,4 +78,3 @@ INSTALLATION
 
 5) Get an overview of the Field Permissions at:
    Administer -> Reports -> Field list -> Permissions
-
