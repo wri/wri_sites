@@ -21,9 +21,9 @@ use Drupal\field_permissions\Plugin\AdminFormSettingsInterface;
 function field_permissions_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
     case 'help.page.field_permissions':
-      return '<p>' . t('Set field-level permissions to edit or view fields in any node, edit field during node creation, and edit or view permissions for nodes owned by the current user.') . '</p>';
-
-    default:
+      $output = '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Set field-level permissions to edit or view fields in any entity type (content, users, taxonomy, etc), edit field during entity creation, and edit or view permissions for content owned by the current user.') . '</p>';
+      return $output;
   }
 }
 
