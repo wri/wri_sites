@@ -32,18 +32,6 @@ interface FieldPermissionsServiceInterface {
   public static function getList($field_label = '');
 
   /**
-   * Returns permissions for a given field.
-   *
-   * @param \Drupal\field\FieldStorageConfigInterface $field
-   *   The field to return permissions for.
-   *
-   * @return array
-   *   An array of permissions for a given field, keyed by the permission
-   *   machine name.
-   */
-  public function getPermissionList(FieldStorageConfigInterface $field);
-
-  /**
    * Get all field permissions keyed by role ID.
    *
    * @return array

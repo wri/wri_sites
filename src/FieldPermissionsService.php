@@ -86,22 +86,6 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
   /**
    * {@inheritdoc}
    */
-  public function getPermissionList(FieldStorageConfigInterface $field) {
-    $permissions = [];
-    $permission_list = $this->getList($field->getName());
-    foreach ($permission_list as $permission_type => $permission_info) {
-      $permission = $permission_type . ' ' . $field->getName();
-      $permissions[$permission] = [
-        'title' => $permission_info['title'],
-        'description' => $permission_info['label'],
-      ];
-    }
-    return $permissions;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function getPermissionsByRole() {
     /** @var \Drupal\user\RoleInterface[] $roles */
     $roles = $this->entityTypeManager->getStorage('user_role')->loadMultiple();
@@ -136,7 +120,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
     $fields = $this->entityTypeManager->getStorage('field_storage_config')->loadMultiple();
     foreach ($fields as $key => $field) {
       // Check if this plugin defines custom permissions.
-      $permission_type = static::fieldGetPermissionType($field);
+      $permission_type = $this->fieldGetPermissionType($field);
       if ($permission_type !== FieldPermissionTypeInterface::ACCESS_PUBLIC) {
         $plugin = $this->permissionTypeManager->createInstance($permission_type, [], $field);
         if ($plugin instanceof CustomPermissionsInterface) {

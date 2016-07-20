@@ -85,7 +85,7 @@ function field_permissions_form_field_config_edit_form_alter(&$form, FormStateIn
     '#title' => t('Field visibility and permissions'),
     '#type' => 'radios',
     '#options' => $options,
-    '#default_value' => $field->getFieldStorageDefinition()->getThirdPartySetting('field_permissions', 'permission_type', FieldPermissionTypeInterface::ACCESS_PUBLIC),
+    '#default_value' => \Drupal::service('field_permissions.permissions_service')->fieldGetPermissionType($field->getFieldStorageDefinition()),
   ];
 
   // Add in the descriptions.
@@ -115,7 +115,9 @@ function field_permissions_field_config_edit_form_builder($entity_type, \Drupal\
 }
 
 /**
- * Implements hook_form_submit().
+ * Submit handler for the field configuration form.
+ *
+ * @see field_permissions_form_field_config_edit_form_alter()
  */
 function field_permission_field_config_edit_form_submit(array &$form, FormStateInterface $form_state) {
   /** @var FieldDefinitionInterface $field */
