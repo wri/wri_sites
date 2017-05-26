@@ -83,6 +83,7 @@ function field_permissions_form_field_config_edit_form_alter(&$form, FormStateIn
 
   $form['field']['field_permissions']['type'] = [
     '#title' => t('Field visibility and permissions'),
+    '#description' => t('<strong>These permissions apply to all instances of this field.</strong>'),
     '#type' => 'radios',
     '#options' => $options,
     '#default_value' => \Drupal::service('field_permissions.permissions_service')->fieldGetPermissionType($field->getFieldStorageDefinition()),
