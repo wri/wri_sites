@@ -8,6 +8,8 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Plugin\DefaultPluginManager;
 use Drupal\field\FieldStorageConfigInterface;
+use Drupal\field_permissions\Annotation\FieldPermissionType;
+use Drupal\field_permissions\Plugin\FieldPermissionTypeInterface;
 
 /**
  * Field permission type plugin manager.
@@ -26,7 +28,7 @@ class Manager extends DefaultPluginManager {
    *   The module handler to invoke the alter hook with.
    */
   public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler) {
-    parent::__construct('Plugin/FieldPermissionType', $namespaces, $module_handler, 'Drupal\field_permissions\Plugin\FieldPermissionTypeInterface', 'Drupal\field_permissions\Annotation\FieldPermissionType');
+    parent::__construct('Plugin/FieldPermissionType', $namespaces, $module_handler, FieldPermissionTypeInterface::class, FieldPermissionType::class);
     $this->setCacheBackend($cache_backend, 'field_permission_type_plugins');
   }
 
