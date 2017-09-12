@@ -13,7 +13,7 @@ use Drupal\Core\Session\AccountInterface;
 interface FieldPermissionTypeInterface extends PluginInspectionInterface, DerivativeInspectionInterface {
 
   /**
-   * Indicates that a field does not have any access control.
+   * Indicates that a field does not have field-specific access control.
    *
    * Public field access is not implemented as a plugin because it effectively
    * means this module does not process any access control for fields with this

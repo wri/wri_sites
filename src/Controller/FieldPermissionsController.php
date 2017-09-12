@@ -147,7 +147,7 @@ class FieldPermissionsController extends ControllerBase {
     $default_type = $this->fieldPermissions->fieldGetPermissionType($field_storage);
     $field_permissions = $this->fieldPermissions->getPermissionsByRole();
     if ($default_type === FieldPermissionTypeInterface::ACCESS_PUBLIC) {
-      $row[4]['data'] = $this->t('Public (Author and administrators can edit, everyone can view.)');
+      $row[4]['data'] = $this->t('Not set (Field inherits content permissions.)');
       $row[4]['colspan'] = 5;
     }
     else {

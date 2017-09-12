@@ -33,7 +33,7 @@ Once Field Permissions module is installed, you need to edit the field settings
 form to enable permissions for each field where you need this feature. You can
 choose from three options:
 
-  * Public (author and administrators can edit, everyone can view)
+  * Not set (Field inherits content permissions.)
   * Private (only author and administrators can edit and view)
   * Custom permissions
 

@@ -70,7 +70,7 @@ class FieldReportTest extends BrowserTestBase {
     $this->assertSession()->statusCodeEquals(200);
 
     // Initially, no fields should be private or custom.
-    $this->assertSession()->pageTextContains('Public (Author and administrators can edit, everyone can view.)');
+    $this->assertSession()->pageTextContains('Not set (Field inherits content permissions.)');
     $this->assertSession()->pageTextNotContains('Private (Only author and administrators can edit and view.)');
     $this->assertSession()->pageTextNotContains('Not all users have this permission');
     $this->assertSession()->pageTextNotContains('All users have this permission');

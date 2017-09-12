@@ -64,13 +64,13 @@ function field_permissions_form_field_config_edit_form_alter(&$form, FormStateIn
     '#weight' => -10,
   ];
 
-  // Always add the public option, which isn't implemented as a plugin.
+  // Always add the 'not set' option, which isn't implemented as a plugin.
   $options = [
-    FieldPermissionTypeInterface::ACCESS_PUBLIC => t('Public'),
+    FieldPermissionTypeInterface::ACCESS_PUBLIC => t('Not set'),
   ];
   $descriptions = [
     FieldPermissionTypeInterface::ACCESS_PUBLIC => [
-      '#description' => t('Author and administrators can edit, everyone can view.'),
+      '#description' => t('Field inherits content permissions.'),
     ],
   ];
   $definitions = \Drupal::service('plugin.field_permissions.types.manager')->getDefinitions();
