@@ -128,9 +128,9 @@ class CustomAccess extends Base implements CustomPermissionsInterface, AdminForm
       '#attributes' => ['class' => ['permissions', 'js-permissions']],
       '#sticky' => TRUE,
     ];
-    foreach (array_keys($roles) as $name) {
+    foreach ($roles as $role) {
       $form['permissions']['#header'][] = [
-        'data' => $name,
+        'data' => $role->label(),
         'class' => ['checkbox'],
       ];
     }
