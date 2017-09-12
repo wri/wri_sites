@@ -34,7 +34,7 @@ class FieldPermissionSettings extends ProcessPluginBase {
         $permission_type = FieldPermissionTypeInterface::ACCESS_CUSTOM;
         break;
     }
-    return array('field_permissions' => array('permission_type' => $permission_type));
+    return ['field_permissions' => ['permission_type' => $permission_type]];
   }
 
 }

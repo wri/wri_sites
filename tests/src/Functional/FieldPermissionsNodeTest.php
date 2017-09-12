@@ -50,7 +50,7 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
    *
    * @todo Directly set the field permissions rather than using the UI.
    */
-  protected function setNodeFieldPermissions($perm, $custom_permission = []) {
+  protected function setNodeFieldPermissions($perm, array $custom_permission = []) {
     $current_user = $this->loggedInUser;
     $this->drupalLogin($this->adminUser);
     $this->drupalGet('admin/structure/types/manage/article/fields/node.article.body');

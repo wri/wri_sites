@@ -86,8 +86,6 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
       'description' => 'Default comment field',
     ])->save();
 
-    $comment_type = $comment_type_storage->load($comment_type_id);
-
     $entity_manager->getStorage('field_storage_config')->create([
       'entity_type' => $entity_type,
       'field_name' => $field_name,

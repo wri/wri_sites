@@ -53,14 +53,12 @@ class CustomAccessTest extends UnitTestCase {
    * Test an invalid operation.
    *
    * @covers ::hasFieldAccess
-   *
-   * @expectedException \AssertionError
-   * @expectedExceptionMessage The operation is either "edit" or "view", "bad operation" given instead.
    */
   public function testInvalidOperation() {
     // Edit|view access allowed.
     $account = $this->prophesize(AccountInterface::class);
     $entity = $this->prophesize(EntityInterface::class);
+    $this->setExpectedException(\AssertionError::class, 'The operation is either "edit" or "view", "bad operation" given instead.');
     $this->plugin->hasFieldAccess('bad operation', $entity->reveal(), $account->reveal());
   }
 

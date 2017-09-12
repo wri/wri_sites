@@ -21,7 +21,7 @@ class FieldPermissionsController extends ControllerBase {
   /**
    * The entity type manager service.
    *
-   * @var EntityTypeManagerInterface
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
 
@@ -42,7 +42,7 @@ class FieldPermissionsController extends ControllerBase {
   /**
    * Construct the field permission controller.
    *
-   * @param FieldPermissionsServiceInterface $field_permissions_service
+   * @param \Drupal\field_permissions\FieldPermissionsServiceInterface $field_permissions_service
    *   Field permissions services.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager service.
@@ -113,7 +113,7 @@ class FieldPermissionsController extends ControllerBase {
    * Build table rows.
    */
   protected function buildRows() {
-    /** @var FieldStorageConfigInterface $instances */
+    /** @var \Drupal\field\FieldStorageConfigInterface $instances */
     $instances = $this->entityTypeManager->getStorage('field_storage_config')->loadMultiple();
     $rows = [];
     foreach ($instances as $key => $instance) {
@@ -125,7 +125,7 @@ class FieldPermissionsController extends ControllerBase {
   /**
    * Build a single row.
    *
-   * @param FieldStorageConfigInterface $field_storage
+   * @param \Drupal\field\FieldStorageConfigInterface $field_storage
    *   Field to populate row.
    *
    * @return array

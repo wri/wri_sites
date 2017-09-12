@@ -81,7 +81,7 @@ class ViewsFieldAccessTest extends ViewsKernelTestBase {
   /**
    * An entity to test with.
    *
-   * @var EntityTest
+   * @var \Drupal\entity_test\Entity\EntityTest
    */
   protected $entity;
 

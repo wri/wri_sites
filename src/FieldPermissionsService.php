@@ -116,7 +116,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
    */
   public function getAllPermissions() {
     $permissions = [];
-    /** @var FieldStorageConfigInterface[] $fields */
+    /** @var \Drupal\field\FieldStorageConfigInterface[] $fields */
     $fields = $this->entityTypeManager->getStorage('field_storage_config')->loadMultiple();
     foreach ($fields as $key => $field) {
       // Check if this plugin defines custom permissions.

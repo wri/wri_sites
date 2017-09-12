@@ -4,4 +4,4 @@ description: 'Provides a test field permission plugin type.'
 package: Testing
 core: '8.x'
 dependencies:
-  - field_permissions
+  - field_permissions:field_permissions

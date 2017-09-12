@@ -16,14 +16,20 @@ abstract class Base extends PluginBase implements FieldPermissionTypeInterface, 
   /**
    * The field storage.
    *
-   * @var FieldStorageConfigInterface
+   * @var \Drupal\field\FieldStorageConfigInterface
    */
   protected $fieldStorage;
 
   /**
-   * {@inheritdoc}
+   * Constructs the plugin.
    *
-   * @param FieldStorageConfigInterface $field_storage
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin_id for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\field\FieldStorageConfigInterface $field_storage
    *   The field storage.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, FieldStorageConfigInterface $field_storage) {

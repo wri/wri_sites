@@ -13,7 +13,7 @@ use Drupal\field_permissions\Plugin\CustomPermissionsInterface;
  * @FieldPermissionType(
  *   id = "test_access",
  *   title = "Test type",
- *   description = "Denies access if the field name starts with 'test_' and this is an edit operation.",
+ *   description = "Denies access with 'test_' and this is an edit operation.",
  *   weight = 42
  * )
  */

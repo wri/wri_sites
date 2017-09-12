@@ -91,7 +91,7 @@ class FieldReportTest extends BrowserTestBase {
 
     // Grant anonymous and authenticated view permission.
     foreach ([RoleInterface::ANONYMOUS_ID, RoleInterface::AUTHENTICATED_ID] as $role_id) {
-      /** @var RoleInterface $role */
+      /** @var \Drupal\user\RoleInterface $role */
       $role = $this->container->get('entity_type.manager')
         ->getStorage('user_role')
         ->load($role_id);

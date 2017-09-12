@@ -109,8 +109,6 @@ class FieldPermissionsServiceTest extends UnitTestCase {
       TRUE,
     ];
 
-    // @todo More complex cases.
-
     return $cases;
   }
 

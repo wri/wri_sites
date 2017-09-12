@@ -33,15 +33,19 @@ class Manager extends DefaultPluginManager {
   }
 
   /**
-   * {@inheritdoc}
-   *
    * Allow the field storage to be passed into the plugin.
    *
+   * @param string $plugin_id
+   *   The plugin ID.
+   * @param array $configuration
+   *   The plugin configuration.
    * @param \Drupal\field\FieldStorageConfigInterface $field_storage
    *   The field storage.
    *
    * @return \Drupal\field_permissions\Plugin\FieldPermissionTypeInterface
    *   The field permission type plugin instance.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\PluginException
    */
   public function createInstance($plugin_id, array $configuration = [], FieldStorageConfigInterface $field_storage = NULL) {
     $plugin_definition = $this->getDefinition($plugin_id);

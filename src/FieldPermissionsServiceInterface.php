@@ -67,7 +67,7 @@ interface FieldPermissionsServiceInterface {
   /**
    * Field is attached to comment entity.
    *
-   * @param FieldDefinitionInterface $field_definition
+   * @param \Drupal\Core\Field\FieldDefinitionInterface $field_definition
    *   Fields to get permissions.
    *
    * @return bool
@@ -79,12 +79,12 @@ interface FieldPermissionsServiceInterface {
    * Get access for field by operations and account permisisons.
    *
    * @param string $operation
-   *    String operation on field.
-   * @param FieldItemListInterface $items
+   *   String operation on field.
+   * @param \Drupal\Core\Field\FieldItemListInterface $items
    *   The entity field object on which to check access.
-   * @param AccountInterface $account
-   *    Account to get permissions.
-   * @param FieldDefinitionInterface $field_definition
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Account to get permissions.
+   * @param \Drupal\Core\Field\FieldDefinitionInterface $field_definition
    *   Fields to get permissions.
    */
   public function getFieldAccess($operation, FieldItemListInterface $items, AccountInterface $account, FieldDefinitionInterface $field_definition);
