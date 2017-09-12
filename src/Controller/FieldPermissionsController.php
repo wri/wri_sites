@@ -135,7 +135,7 @@ class FieldPermissionsController extends ControllerBase {
     $row = [];
     if ($field_storage->isLocked()) {
       $row[0]['class'] = ['menu-disabled'];
-      $row[0]['data']['id'] = $this->t('@field_name (Locked)', ['@field_name' => $field_storage->getName()]);
+      $row[0]['data'] = $this->t('@field_name (Locked)', ['@field_name' => $field_storage->getName()]);
     }
     else {
       $row[0]['data'] = $field_storage->getName();
