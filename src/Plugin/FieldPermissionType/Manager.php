@@ -30,6 +30,7 @@ class Manager extends DefaultPluginManager {
   public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler) {
     parent::__construct('Plugin/FieldPermissionType', $namespaces, $module_handler, FieldPermissionTypeInterface::class, FieldPermissionType::class);
     $this->setCacheBackend($cache_backend, 'field_permission_type_plugins');
+    $this->alterInfo('field_permission_type_plugin');
   }
 
   /**
