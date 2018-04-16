@@ -28,7 +28,7 @@ class CustomAccess extends Base implements CustomPermissionsInterface, AdminForm
    * {@inheritdoc}
    */
   public function hasFieldAccess($operation, EntityInterface $entity, AccountInterface $account) {
-    assert('in_array($operation, ["edit", "view"])', 'The operation is either "edit" or "view", "' . $operation . '" given instead.');
+    assert(in_array($operation, ["edit", "view"]), 'The operation is either "edit" or "view", "' . $operation . '" given instead.');
 
     $field_name = $this->fieldStorage->getName();
     if ($operation === 'edit' && $entity->isNew()) {
