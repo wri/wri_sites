@@ -11,6 +11,7 @@ use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\field_permissions\FieldPermissionsService;
 use Drupal\field_permissions\Plugin\FieldPermissionTypeInterface;
 use Drupal\field_permissions\Plugin\AdminFormSettingsInterface;
@@ -40,6 +41,27 @@ function field_permissions_entity_field_access($operation, FieldDefinitionInterf
     return AccessResult::forbidden();
   }
   return AccessResult::neutral();
+}
+
+/**
+ * Implements hook_jsonapi_entity_field_filter_access().
+ */
+function field_permissions_jsonapi_entity_field_filter_access(FieldDefinitionInterface $field_definition, AccountInterface $account) {
+  if (!$field_definition->isDisplayConfigurable('display')) {
+    return AccessResult::neutral();
+  }
+
+  /** @var \Drupal\field_permissions\FieldPermissionsServiceInterface $service */
+  $service = \Drupal::service('field_permissions.permissions_service');
+  if ($service instanceof FieldPermissionsService) {
+    $access = $service->hasFieldViewAccessForEveryEntity($account, $field_definition);
+  }
+  else {
+    $permission_type = $service->fieldGetPermissionType($field_definition->getFieldStorageDefinition());
+    $access = ($permission_type == FieldPermissionTypeInterface::ACCESS_PUBLIC);
+  }
+
+  return $access ? AccessResult::neutral() : AccessResult::forbidden();
 }
 
 /**

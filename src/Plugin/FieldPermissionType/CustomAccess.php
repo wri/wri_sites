@@ -55,6 +55,14 @@ class CustomAccess extends Base implements CustomPermissionsInterface, AdminForm
   /**
    * {@inheritdoc}
    */
+  public function hasFieldViewAccessForEveryEntity(AccountInterface $account) {
+    $field_name = $this->fieldStorage->getName();
+    return $account->hasPermission('view ' . $field_name);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function buildAdminForm(array &$form, FormStateInterface $form_state, RoleStorageInterface $role_storage) {
     $this->addPermissionsGrid($form, $form_state, $role_storage);
 

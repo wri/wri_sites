@@ -8,6 +8,7 @@ use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\field\FieldStorageConfigInterface;
+use Drupal\field_permissions\Plugin\FieldPermissionType\Base;
 use Drupal\field_permissions\Plugin\FieldPermissionType\Manager;
 use Drupal\field_permissions\Plugin\FieldPermissionTypeInterface;
 use Drupal\field_permissions\Plugin\CustomPermissionsInterface;
@@ -171,6 +172,46 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
     // Pass access control to the plugin.
     $plugin = $this->permissionTypeManager->createInstance($permission_type, [], $field_definition->getFieldStorageDefinition());
     return $plugin->hasFieldAccess($operation, $items->getEntity(), $account);
+  }
+
+  /**
+   * Determines if the given account may view the field, regardless of entity.
+   *
+   * This should only return TRUE if
+   * @code
+   * $this->getFieldAccess('view', $items, $account, $field_definition);
+   * @endcode
+   * returns TRUE for all possible values of $items.
+   *
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Account for which to check access.
+   * @param \Drupal\Core\Field\FieldDefinitionInterface $field_definition
+   *   Field for which to check access.
+   *
+   * @return bool
+   *   The access result.
+   *
+   * @todo Move this to an interface: either FieldPermissionsServiceInterface
+   *   or a new one.
+   */
+  public function hasFieldViewAccessForEveryEntity(AccountInterface $account, FieldDefinitionInterface $field_definition) {
+    $permission_type = $this->fieldGetPermissionType($field_definition->getFieldStorageDefinition());
+    if (in_array('administrator', $account->getRoles()) || $permission_type == FieldPermissionTypeInterface::ACCESS_PUBLIC) {
+      return TRUE;
+    }
+    // Field add to comment entity.
+    if (static::isCommentField($field_definition)) {
+      return TRUE;
+    }
+
+    // Pass access control to the plugin.
+    $plugin = $this->permissionTypeManager->createInstance($permission_type, [], $field_definition->getFieldStorageDefinition());
+    if ($plugin instanceof Base) {
+      return $plugin->hasFieldViewAccessForEveryEntity($account);
+    }
+    else {
+      return FALSE;
+    }
   }
 
 }

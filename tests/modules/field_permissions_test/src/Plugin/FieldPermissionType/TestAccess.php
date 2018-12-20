@@ -32,6 +32,13 @@ class TestAccess extends Base implements CustomPermissionsInterface {
   /**
    * {@inheritdoc}
    */
+  public function hasFieldViewAccessForEveryEntity(AccountInterface $account) {
+    return $account->hasPermission('foo access');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getPermissions() {
     return [
       'foo access' => [

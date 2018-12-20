@@ -43,4 +43,11 @@ class PrivateAccess extends Base {
     return TRUE;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function hasFieldViewAccessForEveryEntity(AccountInterface $account) {
+    return $account->hasPermission('access private fields');
+  }
+
 }
