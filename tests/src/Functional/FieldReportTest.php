@@ -27,6 +27,11 @@ class FieldReportTest extends BrowserTestBase {
   ];
 
   /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * Field storage.
    *
    * @var \Drupal\field\FieldStorageConfigInterface

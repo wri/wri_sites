@@ -6,5 +6,10 @@
   "support": {
     "issues": "https://www.drupal.org/project/issues/field_permissions"
   },
-  "license": "GPL-2.0+"
+  "license": "GPL-2.0-or-later",
+  "extra": {
+    "branch-alias": {
+      "dev-8.x-1.x": "1.x-dev"
+    }
+  }
 }

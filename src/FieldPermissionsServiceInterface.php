@@ -29,7 +29,7 @@ interface FieldPermissionsServiceInterface {
    *   difficult to abstract down to the plugin level the way the report
    *   currently works.
    *
-   * @deprecated This function will be removed before 8.x-1.0
+   * @deprecated This function will be removed before 8.x-2.0
    */
   public static function getList($field_label = '');
 
@@ -39,7 +39,7 @@ interface FieldPermissionsServiceInterface {
    * @return array
    *   An array of permission information keyed by role ID.
    *
-   * @deprecated This function will be removed before 8.x-1.0
+   * @deprecated This function will be removed before 8.x-2.0
    */
   public function getPermissionsByRole();
 
@@ -52,7 +52,7 @@ interface FieldPermissionsServiceInterface {
    *   An array of all permissions for all fields that implement the custom
    *   permission type.
    *
-   * @deprecated This function will be removed before 8.x-1.0
+   * @deprecated This function will be removed before 8.x-2.0
    */
   public function getAllPermissions();
 

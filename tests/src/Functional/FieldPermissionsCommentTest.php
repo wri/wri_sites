@@ -25,6 +25,13 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
   protected $commentSubject;
 
   /**
+   * The entity display repository.
+   *
+   * @var \Drupal\Core\Entity\EntityDisplayRepositoryInterface
+   */
+  protected $entityDisplayRepository;
+
+  /**
    * {@inheritdoc}
    */
   public function setUp() {
@@ -52,6 +59,8 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
     $this->fieldName = 'comment_body';
     $this->commentSubject = 'Test subject comment';
     $this->fieldText = 'A comment';
+
+    $this->entityDisplayRepository = $this->container->get('entity_display.repository');
   }
 
   /**
@@ -113,7 +122,7 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
     ])->save();
     // Entity form displays: assign widget settings for the 'default' form
     // mode, and hide the field in all other form modes.
-    entity_get_form_display($entity_type, $bundle, 'default')
+    $this->entityDisplayRepository->getFormDisplay($entity_type, $bundle, 'default')
       ->setComponent($field_name, [
         'type' => 'comment_default',
         'weight' => 20,
@@ -121,7 +130,7 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
       ->save();
     // Entity view displays: assign widget settings for the 'default' view
     // mode, and hide the field in all other view modes.
-    entity_get_display($entity_type, $bundle, 'default')
+    $this->entityDisplayRepository->getViewDisplay($entity_type, $bundle)
       ->setComponent($field_name, [
         'label' => 'above',
         'type' => 'comment_default',
@@ -136,13 +145,13 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
     ]);
     $field->save();
     // Assign widget settings for the 'default' form mode.
-    entity_get_form_display('comment', $comment_type_id, 'default')
+    $this->entityDisplayRepository->getFormDisplay('comment', $comment_type_id, 'default')
       ->setComponent($this->fieldName, [
         'type' => 'text_textarea',
       ])
       ->save();
     // Assign display settings for the 'default' view mode.
-    entity_get_display('comment', $comment_type_id, 'default')
+    $this->entityDisplayRepository->getViewDisplay('comment', $comment_type_id)
       ->setComponent($this->fieldName, [
         'label' => 'hidden',
         'type' => 'text_default',
@@ -189,15 +198,15 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
     $edit[$this->fieldName . '[0][value]'] = $this->fieldText;
     $this->drupalPostForm(NULL, $edit, t('Save'));
     $this->drupalGet('node/' . $this->node->id());
-    $this->assertEscaped($this->fieldText);
-    $this->assertEscaped($this->commentSubject);
+    $this->assertSession()->assertEscaped($this->fieldText);
+    $this->assertSession()->assertEscaped($this->commentSubject);
     $this->drupalLogout();
 
     $this->drupalLogin($this->limitedUser);
     // Test visibility first comment by admin.
     $this->drupalGet('node/' . $this->node->id());
-    $this->assertEscaped($this->fieldText);
-    $this->assertText($this->commentSubject);
+    $this->assertSession()->assertEscaped($this->fieldText);
+    $this->assertSession()->pageTextContains($this->commentSubject);
     // Add second comment to node.
     $edit = [];
     $edit['subject[0][value]'] = 'Limit User comment subject';
@@ -205,8 +214,8 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
     $this->drupalPostForm(NULL, $edit, t('Save'));
     $this->drupalGet('node/' . $this->node->id());
     // Test visibility second comment by limituser..
-    $this->assertText('Limit User comment subject');
-    $this->assertText('Limit User comment body');
+    $this->assertSession()->pageTextContains('Limit User comment subject');
+    $this->assertSession()->pageTextContains('Limit User comment body');
     $this->drupalLogout();
   }
 
@@ -226,20 +235,20 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
     $this->drupalLogin($this->limitedUser);
     $this->drupalGet('node/' . $this->node->id());
     // Test hide body comment post by Adminuser but display subject..
-    $this->assertText($this->commentSubject);
-    $this->assertNoText($this->fieldText);
+    $this->assertSession()->pageTextContains($this->commentSubject);
+    $this->assertSession()->pageTextNotContains($this->fieldText);
     // Test view your comment.
-    $this->assertText('Limit User comment subject');
-    $this->assertText('Limit User comment body');
+    $this->assertSession()->pageTextContains('Limit User comment subject');
+    $this->assertSession()->pageTextContains('Limit User comment body');
     // Test edit your comment.
     $this->drupalGet('comment/2/edit');
-    $this->assertText('Limit User comment body');
+    $this->assertSession()->pageTextContains('Limit User comment body');
 
     // Logout and access as anonymous.
     $this->drupalLogin($this->webUser);
     $this->drupalGet('comment/2/edit');
     // Comment body should be hidden.
-    $this->assertNoText('Limit User comment body');
+    $this->assertSession()->pageTextNotContains('Limit User comment body');
     $this->drupalLogout();
   }
 
@@ -260,13 +269,13 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
     // View your comment but not view field body comment post by admin.
     $this->drupalGet('node/' . $this->node->id());
     // Hide body comment post by Adminuser.
-    $this->assertNoText($this->fieldText);
-    $this->assertText($this->commentSubject);
-    $this->assertText('Limit User comment subject');
-    $this->assertText('Limit User comment body');
+    $this->assertSession()->pageTextNotContains($this->fieldText);
+    $this->assertSession()->pageTextContains($this->commentSubject);
+    $this->assertSession()->pageTextContains('Limit User comment subject');
+    $this->assertSession()->pageTextContains('Limit User comment body');
     // Edit your comment not accesss to body field.
     $this->drupalGet('comment/2/edit');
-    $this->assertNoText('Limit User comment body');
+    $this->assertSession()->pageTextNotContains('Limit User comment body');
     $this->drupalLogout();
 
     $this->drupalLogin($this->adminUser);
@@ -279,7 +288,7 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
     $this->drupalLogin($this->limitedUser);
     // Test edit your comment edit field body.
     $this->drupalGet('comment/2/edit');
-    $this->assertText('Limit User comment body');
+    $this->assertSession()->pageTextContains('Limit User comment body');
     $this->drupalLogout();
 
     $this->drupalLogin($this->adminUser);
@@ -289,10 +298,10 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
     $this->setCommentFieldPermissions(FieldPermissionTypeInterface::ACCESS_CUSTOM, $permission, $path);
     // view.
     $this->drupalGet('node/' . $this->node->id());
-    $this->assertText('Limit User comment body');
+    $this->assertSession()->pageTextContains('Limit User comment body');
     // edit.
     $this->drupalGet('comment/2/edit');
-    $this->assertText('Limit User comment body');
+    $this->assertSession()->pageTextContains('Limit User comment body');
     $this->drupalLogout();
   }
 
@@ -310,18 +319,18 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
 
     // View.
     $this->drupalGet('node/' . $this->node->id());
-    $this->assertNoText('Limit User comment body');
+    $this->assertSession()->pageTextNotContains('Limit User comment body');
     // Edit.
     $this->drupalGet('comment/2/edit');
-    $this->assertNoText('Limit User comment body');
+    $this->assertSession()->pageTextNotContains('Limit User comment body');
     // Add permission access user private field.
     $this->webUserRole->grantPermission('access private fields')->save();
     // View.
     $this->drupalGet('node/' . $this->node->id());
-    $this->assertText('Limit User comment body');
+    $this->assertSession()->pageTextContains('Limit User comment body');
     // Edit.
     $this->drupalGet('comment/2/edit');
-    $this->assertText('Limit User comment body');
+    $this->assertSession()->pageTextContains('Limit User comment body');
 
     $this->drupalLogout();
   }

@@ -5,7 +5,7 @@ namespace Drupal\Tests\field_permissions\Kernel\Plugin\FieldPermissionType;
 use Drupal\entity_test\Entity\EntityTest;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\KernelTests\KernelTestBase;
-use Drupal\simpletest\UserCreationTrait;
+use Drupal\Tests\user\Traits\UserCreationTrait;
 
 /**
  * Integration tests for the field permission type plugin manager.

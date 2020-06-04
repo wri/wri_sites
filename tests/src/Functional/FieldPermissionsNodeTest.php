@@ -74,7 +74,7 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
     $this->node = $this->drupalCreateNode(['type' => 'article', 'uid' => $this->limitedUser->id()]);
     $this->drupalGet('node/' . $this->node->id());
     $node_body = $this->node->getFields()['body']->getValue();
-    $this->assertText($node_body[0]['value']);
+    $this->assertSession()->responseContains($node_body[0]['value']);
   }
 
   /**
@@ -82,13 +82,13 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
    */
   protected function addNodeUi() {
     $this->drupalGet('node/add/article');
-    $this->assertText('Body');
+    $this->assertSession()->pageTextContains('Body');
     $edit = [];
     $node_name = $this->randomMachineName();
     $edit['body[0][value]'] = $this->randomString();
     $edit['title[0][value]'] = $node_name;
     $this->drupalPostForm(NULL, $edit, t('Save'));
-    $this->assertText(t('Article @name has been created.', ['@name' => $node_name]));
+    $this->assertSession()->pageTextContains(t('Article @name has been created.', ['@name' => $node_name]));
   }
 
   /**
@@ -97,7 +97,7 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
   protected function assertNodeFieldVisible() {
     $field_value = $this->node->getFields()['body']->getValue();
     $this->drupalGet('node/' . $this->node->id());
-    $this->assertText($field_value[0]['value']);
+    $this->assertSession()->pageTextContains($field_value[0]['value']);
   }
 
   /**
@@ -107,7 +107,7 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
     $field_value = $this->node->getFields()['body']->getValue();
     $this->drupalGet('node/' . $this->node->id());
     $this->assertSession()->statusCodeEquals(200);
-    $this->assertNoText($field_value[0]['value']);
+    $this->assertSession()->pageTextNotContains($field_value[0]['value']);
   }
 
   /**
@@ -115,8 +115,8 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
    */
   protected function assertNodeFieldEditAccess() {
     $this->drupalGet('node/' . $this->node->id() . '/edit');
-    $this->assertText('Title');
-    $this->assertText('Body');
+    $this->assertSession()->pageTextContains('Title');
+    $this->assertSession()->pageTextContains('Body');
   }
 
   /**
@@ -124,9 +124,9 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
    */
   protected function assertNodeFieldEditNoAccess() {
     $this->drupalGet('node/' . $this->node->id() . '/edit');
-    $this->assertResponse(200);
-    $this->assertText('Title');
-    $this->assertNoText('Body');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->pageTextContains('Title');
+    $this->assertSession()->pageTextNotContains('Body');
   }
 
   /**
@@ -136,12 +136,12 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
     $this->drupalLogin($this->webUser);
     // Test page without admin field permission.
     $this->drupalGet('admin/structure/types/manage/article/fields/node.article.body');
-    $this->assertResponse(200);
-    $this->assertNoText('Field visibility and permissions');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->pageTextNotContains('Field visibility and permissions');
     $this->webUserRole->grantPermission('administer field permissions')->save();
     // Test page with admin field permission.
     $this->drupalGet('admin/structure/types/manage/article/fields/node.article.body');
-    $this->assertText('Field visibility and permissions');
+    $this->assertSession()->pageTextContains('Field visibility and permissions');
     $this->drupalLogout();
   }
 
@@ -151,8 +151,8 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
   protected function checkPermissionPage() {
     $this->drupalLogin($this->adminUser);
     $this->drupalGet(Url::fromRoute('user.admin_permissions'));
-    $this->assertText('Access other users private fields');
-    $this->assertText('Administer field permissions');
+    $this->assertSession()->pageTextContains('Access other users private fields');
+    $this->assertSession()->pageTextContains('Administer field permissions');
     $this->drupalLogout();
   }
 

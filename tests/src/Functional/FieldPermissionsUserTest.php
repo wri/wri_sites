@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\field_permissions\Functional;
 
-use Drupal\Component\Utility\Unicode;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field_permissions\Plugin\FieldPermissionTypeInterface;
@@ -16,11 +15,18 @@ use Drupal\user\UserInterface;
 class FieldPermissionsUserTest extends FieldPermissionsTestBase {
 
   /**
+   * The entity display repository.
+   *
+   * @var \Drupal\Core\Entity\EntityDisplayRepositoryInterface
+   */
+  protected $entityDisplayRepository;
+
+  /**
    * {@inheritdoc}
    */
   public function setUp() {
     parent::setUp();
-    $this->fieldName = Unicode::strtolower($this->randomMachineName());
+    $this->fieldName = mb_strtolower($this->randomMachineName());
     // Remove the '@' symbol so it isn't converted to an email link.
     $this->fieldText = str_replace('@', '', $this->randomString(42));
 
@@ -29,6 +35,8 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
       ->grantPermission('access user profiles')
       ->grantPermission('administer users')
       ->save();
+
+    $this->entityDisplayRepository = $this->container->get('entity_display.repository');
 
     $this->addUserField();
   }
@@ -73,15 +81,15 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
       'bundle' => 'user',
     ])->save();
 
-    entity_get_form_display('user', 'user', 'default')
+    $this->entityDisplayRepository->getFormDisplay('user', 'user', 'default')
       ->setComponent($this->fieldName)
       ->save();
 
-    entity_get_form_display('user', 'user', 'register')
+    $this->entityDisplayRepository->getFormDisplay('user', 'user', 'register')
       ->setComponent($this->fieldName)
       ->save();
 
-    entity_get_display('user', 'user', 'default')
+    $this->entityDisplayRepository->getViewDisplay('user', 'user')
       ->setComponent($this->fieldName)
       ->save();
   }
@@ -94,12 +102,12 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
    */
   protected function checkUserFieldEdit(UserInterface $account) {
     $this->drupalGet($account->toUrl('edit-form'));
-    $this->assertText('Textfield');
+    $this->assertSession()->pageTextContains('Textfield');
     $edit = [];
     $edit[$this->fieldName . '[0][value]'] = $this->fieldText;
     $this->drupalPostForm(NULL, $edit, t('Save'));
     $this->drupalGet($account->toUrl());
-    $this->assertEscaped($this->fieldText);
+    $this->assertSession()->assertEscaped($this->fieldText);
   }
 
   /**
@@ -110,7 +118,7 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
    */
   protected function assertUserFieldAccess(UserInterface $account) {
     $this->drupalGet($account->toUrl());
-    $this->assertText('Textfield');
+    $this->assertSession()->pageTextContains('Textfield');
   }
 
   /**
@@ -122,7 +130,7 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
   protected function assertUserFieldNoAccess(UserInterface $account) {
     $this->drupalGet($account->toUrl());
     $this->assertSession()->statusCodeEquals(200);
-    $this->assertNoText('Textfield');
+    $this->assertSession()->pageTextNotContains('Textfield');
   }
 
   /**
@@ -133,7 +141,7 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
    */
   protected function assertUserEditFieldAccess(UserInterface $account) {
     $this->drupalGet($account->toUrl('edit-form'));
-    $this->assertText('Textfield');
+    $this->assertSession()->pageTextContains('Textfield');
   }
 
   /**
@@ -144,8 +152,8 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
    */
   protected function assertUserEditFieldNoAccess(UserInterface $account) {
     $this->drupalGet($account->toUrl('edit-form'));
-    $this->assertResponse(200);
-    $this->assertNoText('Textfield');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->pageTextNotContains('Textfield');
   }
 
   /**
