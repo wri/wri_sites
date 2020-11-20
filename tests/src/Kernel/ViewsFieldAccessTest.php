@@ -224,7 +224,7 @@ class ViewsFieldAccessTest extends ViewsKernelTestBase {
     $this->setRawContent($renderer->renderRoot($build));
 
     $this->assertText($field_content);
-    $this->assertTrue(isset($executable->field[$field_name]));
+    $this->assertArrayHasKey($field_name, $executable->field);
 
     $account_switcher->switchTo($this->userWithoutAccess);
     $executable = Views::getView($view_id);
