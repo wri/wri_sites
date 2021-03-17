@@ -13,7 +13,7 @@ source: 'oembed:video'
 queue_thumbnail_downloads: false
 new_revision: false
 source_configuration:
-  thumbnails_directory: 's3://oembed_thumbnails'
+  thumbnails_directory: 'public://oembed_thumbnails'
   providers:
     - YouTube
     - Vimeo
