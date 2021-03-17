@@ -1,0 +1,49 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.featured_statement.field_link
+    - field.field.paragraph.featured_statement.field_text
+    - field.field.paragraph.featured_statement.field_title
+    - field.field.paragraph.featured_statement.field_updated
+    - paragraphs.paragraphs_type.featured_statement
+  module:
+    - link
+id: paragraph.featured_statement.default
+targetEntityType: paragraph
+bundle: featured_statement
+mode: default
+content:
+  field_link:
+    weight: 3
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_text:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_title:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_updated:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_timestamp
+    region: content
+hidden:
+  created: true
+  status: true

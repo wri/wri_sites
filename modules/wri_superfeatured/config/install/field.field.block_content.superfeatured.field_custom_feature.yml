@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.superfeatured
+    - field.storage.block_content.field_custom_feature
+id: block_content.superfeatured.field_custom_feature
+field_name: field_custom_feature
+entity_type: block_content
+bundle: superfeatured
+label: 'Default featured item'
+description: 'By default, the most recently published superfeatured item will appear here. You may override this with a custom item using this field. This will only show for the non-filtered version of the site.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: content_by_type
+      display_name: entity_reference_1
+      arguments:
+        - data+article+project_detail+publication
+field_type: entity_reference

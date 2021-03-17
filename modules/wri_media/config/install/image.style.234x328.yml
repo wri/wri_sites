@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 234x328
+label: 234x328
+effects:
+  ef0f94cc-e782-47d3-9cad-ed71a45f300c:
+    uuid: ef0f94cc-e782-47d3-9cad-ed71a45f300c
+    id: image_scale
+    weight: 1
+    data:
+      width: 234
+      height: 328
+      upscale: false

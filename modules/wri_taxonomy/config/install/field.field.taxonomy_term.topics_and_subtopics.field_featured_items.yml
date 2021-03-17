@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_featured_items
+    - taxonomy.vocabulary.topics_and_subtopics
+id: taxonomy_term.topics_and_subtopics.field_featured_items
+field_name: field_featured_items
+entity_type: taxonomy_term
+bundle: topics_and_subtopics
+label: 'Featured Items'
+description: 'Choose items tagged with this term to be featured on the Insights, Research, Data, and Initiatives pages. '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: tagged_with
+      display_name: entity_reference_1
+      arguments:
+        - '[term:tid]'
+field_type: entity_reference

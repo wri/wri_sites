@@ -1,0 +1,5 @@
+entity.wri_office.add_form:
+  route_name: entity.wri_office.add_form
+  title: 'Add WRI office'
+  appears_on:
+    - entity.wri_office.collection

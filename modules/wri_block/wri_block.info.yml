@@ -1,0 +1,40 @@
+name: 'WRI block'
+type: module
+description: 'Modules related to blocks on WRI'
+core_version_requirement: '^8.8.0 || ^9'
+package: WRI
+dependencies:
+  - block_content
+  - link
+  - paragraphs
+  - viewfield
+  - views_arg_order_sort
+config_devel:
+  install:
+    - core.entity_view_mode.block_content.preview
+    - field.storage.block_content.field_content_types
+    - field.storage.block_content.field_cta_background
+    - field.storage.block_content.field_custom_feature
+    - field.storage.block_content.field_custom_results
+    - field.storage.block_content.field_custom_trending
+    - field.storage.block_content.field_custom_tweet
+    - field.storage.block_content.field_featured
+    - field.storage.block_content.field_filter_by_region
+    - field.storage.block_content.field_filter_by_resource_type
+    - field.storage.block_content.field_filter_by_tag
+    - field.storage.block_content.field_hero_background
+    - field.storage.block_content.field_hero_type
+    - field.storage.block_content.field_image
+    - field.storage.block_content.field_image_cta_background
+    - field.storage.block_content.field_image_full_width
+    - field.storage.block_content.field_image_inset
+    - field.storage.block_content.field_impacts
+    - field.storage.block_content.field_intro
+    - field.storage.block_content.field_link
+    - field.storage.block_content.field_listing
+    - field.storage.block_content.field_more_link
+    - field.storage.block_content.field_overlay_color
+    - field.storage.block_content.field_tag
+    - field.storage.block_content.field_title
+    - field.storage.block_content.field_title_logo
+    - field.storage.paragraph.field_block

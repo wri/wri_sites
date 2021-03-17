@@ -1,0 +1,86 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.partner_logo.field_link
+    - field.field.paragraph.partner_logo.field_partner_logo
+    - paragraphs.paragraphs_type.partner_logo
+    - responsive_image.styles.full_content
+  module:
+    - blazy
+    - ds
+    - link
+    - wri_media
+id: paragraph.partner_logo.default
+targetEntityType: paragraph
+bundle: partner_logo
+mode: default
+content:
+  field_link:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: true
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    type: link_separate
+    region: content
+  field_partner_logo:
+    type: blazy_media
+    weight: 0
+    label: hidden
+    settings:
+      image_style: ''
+      responsive_image_style: full_content
+      media_switch: ''
+      thumbnail_style: ''
+      ratio: ''
+      view_mode: default
+      current_view_mode: default
+      background: false
+      caption:
+        title: '0'
+        alt: '0'
+      class: ''
+      id: ''
+      image: ''
+      link: ''
+      overlay: ''
+      title: ''
+      vanilla: false
+      icon: ''
+      layout: ''
+      cache: 0
+      skin: ''
+      fx: ''
+      style: ''
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      box_style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
+      grid: 0
+      grid_medium: 0
+      grid_small: 0
+    third_party_settings:
+      wri_media:
+        min_width: ''
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    region: content
+hidden:
+  search_api_excerpt: true

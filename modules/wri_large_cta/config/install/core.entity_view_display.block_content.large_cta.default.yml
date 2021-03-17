@@ -1,0 +1,121 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.large_cta
+    - field.field.block_content.large_cta.field_cta_background
+    - field.field.block_content.large_cta.field_image
+    - field.field.block_content.large_cta.field_link
+    - responsive_image.styles.large_cta
+  module:
+    - blazy
+    - ds
+    - element_class_formatter
+    - entity_class_formatter
+    - wri_media
+third_party_settings:
+  ds:
+    layout:
+      id: 'single_file_component_layout:wri_large_cta'
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        component_context: {  }
+    regions:
+      content:
+        - block_label
+        - field_cta_background
+        - field_link
+        - field_image
+    fields:
+      block_label:
+        plugin_id: block_label
+        weight: 0
+        label: hidden
+        formatter: default
+id: block_content.large_cta.default
+targetEntityType: block_content
+bundle: large_cta
+mode: default
+content:
+  field_cta_background:
+    weight: 1
+    label: hidden
+    settings:
+      prefix: ''
+      suffix: ''
+      attr: ''
+    third_party_settings: {  }
+    type: entity_class_formatter
+    region: content
+  field_image:
+    weight: 3
+    label: hidden
+    settings:
+      image_style: ''
+      responsive_image_style: large_cta
+      media_switch: ''
+      thumbnail_style: ''
+      ratio: ''
+      view_mode: default
+      current_view_mode: default
+      background: false
+      caption:
+        field_tags: '0'
+        title: '0'
+        alt: '0'
+      class: ''
+      id: ''
+      image: ''
+      link: ''
+      overlay: ''
+      title: ''
+      vanilla: false
+      icon: ''
+      layout: ''
+      cache: 0
+      skin: ''
+      fx: ''
+      style: ''
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      box_style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
+      grid: 0
+      grid_medium: 0
+      grid_small: 0
+    third_party_settings:
+      wri_media:
+        min_width: ''
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    type: blazy_media
+    region: content
+  field_link:
+    weight: 2
+    label: hidden
+    settings:
+      trim_length: 80
+      class: 'button gold margin-bottom-md'
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    type: link_class
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.1024x500
+    - image.style.1440x500
+    - image.style.2000x695
+    - image.style.500x240
+    - image.style.768x460
+  module:
+    - wri_media
+id: unique_feature
+label: 'Unique feature'
+image_style_mappings:
+  -
+    breakpoint_id: wrin.xlarge
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 2000x695
+  -
+    breakpoint_id: wrin.large
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 1440x500
+  -
+    breakpoint_id: wrin.medium
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 1024x500
+  -
+    breakpoint_id: wrin.phablet
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 768x460
+  -
+    breakpoint_id: wrin.small
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 500x240
+breakpoint_group: wri_media
+fallback_image_style: 500x240

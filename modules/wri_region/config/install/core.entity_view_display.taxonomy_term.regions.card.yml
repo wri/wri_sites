@@ -1,0 +1,139 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.card
+    - field.field.taxonomy_term.regions.field_intro
+    - field.field.taxonomy_term.regions.field_landing_page
+    - field.field.taxonomy_term.regions.field_main_image
+    - responsive_image.styles.card
+    - taxonomy.vocabulary.regions
+  module:
+    - blazy
+    - ds
+    - layout_builder
+    - text
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+  ds:
+    layout:
+      id: layout_card
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      image:
+        - field_main_image
+      title:
+        - taxonomy_term_title
+      intro:
+        - field_intro
+    fields:
+      taxonomy_term_title:
+        plugin_id: taxonomy_term_title
+        weight: 1
+        label: hidden
+        formatter: default
+        settings:
+          wrapper: div
+          class: h3
+          link: false
+        ft:
+          id: reset
+          settings:
+            lb: ''
+id: taxonomy_term.regions.card
+targetEntityType: taxonomy_term
+bundle: regions
+mode: card
+content:
+  field_intro:
+    type: text_default
+    weight: 2
+    region: intro
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fi: true
+            fi-el: ''
+            fi-cl: secondary
+            fi-at: ''
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi-def-at: false
+  field_main_image:
+    type: blazy_media
+    weight: 0
+    region: image
+    label: hidden
+    settings:
+      image_style: ''
+      responsive_image_style: card
+      media_switch: ''
+      thumbnail_style: ''
+      ratio: ''
+      view_mode: default
+      current_view_mode: card
+      background: false
+      caption:
+        title: '0'
+        alt: '0'
+      class: ''
+      id: ''
+      image: ''
+      link: ''
+      overlay: ''
+      title: ''
+      vanilla: false
+      icon: ''
+      layout: ''
+      cache: 0
+      skin: ''
+      fx: ''
+      style: ''
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      box_style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
+      grid: 0
+      grid_medium: 0
+      grid_small: 0
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+hidden:
+  description: true
+  field_landing_page: true
+  search_api_excerpt: true

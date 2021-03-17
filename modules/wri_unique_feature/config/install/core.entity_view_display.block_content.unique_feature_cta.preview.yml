@@ -1,0 +1,164 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.unique_feature_cta
+    - core.entity_view_mode.block_content.preview
+    - field.field.block_content.unique_feature_cta.field_image
+    - field.field.block_content.unique_feature_cta.field_intro
+    - field.field.block_content.unique_feature_cta.field_link
+    - field.field.block_content.unique_feature_cta.field_overlay_color
+    - field.field.block_content.unique_feature_cta.field_tag
+    - image.style.thumbnail
+  module:
+    - ds
+    - layout_builder
+    - link
+    - media
+    - options
+    - text
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+  ds:
+    layout:
+      id: layout_twocol_section
+      library: layout_builder/twocol_section
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+        column_widths: 50-50
+    regions:
+      first:
+        - block_label
+        - field_intro
+        - field_tag
+        - field_link
+        - field_overlay_color
+      second:
+        - field_image
+    fields:
+      block_label:
+        plugin_id: block_label
+        weight: -1
+        label: hidden
+        formatter: default
+id: block_content.unique_feature_cta.preview
+targetEntityType: block_content
+bundle: unique_feature_cta
+mode: preview
+content:
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: thumbnail
+      image_link: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    type: media_thumbnail
+    region: second
+  field_intro:
+    weight: 0
+    label: hidden
+    settings:
+      trim_length: 300
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fi-el: ''
+            fi-cl: intro
+            fi-at: ''
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi: false
+            fi-def-at: false
+    type: text_trimmed
+    region: first
+  field_link:
+    weight: 3
+    label: above
+    settings:
+      trim_length: 80
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    type: link
+    region: first
+  field_overlay_color:
+    weight: 5
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: first
+  field_tag:
+    weight: 1
+    label: above
+    settings:
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow-el: div
+            ow-cl: topic-tag
+            ow-at: ''
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi: false
+            fi-def-at: false
+    type: entity_reference_label
+    region: first
+hidden:
+  search_api_excerpt: true

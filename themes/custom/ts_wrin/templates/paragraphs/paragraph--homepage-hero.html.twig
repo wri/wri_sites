@@ -1,0 +1,29 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display the hompeage hero paragraph.
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'grid',
+    'homepage-hero',
+  ]
+%}
+{% block paragraph %}
+  {% block content %}
+    <div{{ attributes.addClass(classes) }}>
+      <div class="hero-text-area content-side-padding">
+        {{ content.field_hero_intro }}
+        {{ content.field_hero_title }}
+        {{ content.field_featured_items }}
+      </div>
+
+      {{ content.field_hero_image }}
+    </div>
+    {{ content.field_featured_statement }}
+  {% endblock %}
+{% endblock paragraph %}

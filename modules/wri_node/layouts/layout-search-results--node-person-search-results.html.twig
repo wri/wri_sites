@@ -1,0 +1,32 @@
+{#
+/**
+ * @file
+ * Display Suite Search Results template.
+ *
+ * Available variables:
+ * - ds_content_wrapper: wrapper around content
+ * - attributes: content region attributes
+ * - ds_content: content region
+ */
+#}
+
+<div {{ attributes.addClass('ds-1col', 'clearfix', 'search-results', 'search-results-people', 'margin-bottom-sm') }}>
+  {{ title_suffix.contextual_links }}
+  {% if content %}
+    <div class="search-results-text">
+      {% if content.node_title %}
+        {{ content.node_title }}
+      {% endif %}
+      {% if content.field_title  %}
+        <div class="tags">
+          {{ content.field_title }}
+        </div>
+      {% endif %}
+    </div>
+    <div class="search-results-image">
+      {% if content.field_profile_image %}
+        {{ content.field_profile_image }}
+      {% endif %}
+    </div>
+  {% endif %}
+</div>

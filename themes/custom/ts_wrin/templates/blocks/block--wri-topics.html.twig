@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * Theme override to display the WRI Topics block.
+ * @see template_preprocess_block()
+ */
+#}
+{%
+  set classes = [
+    'block-' ~ configuration.provider|clean_class,
+    'container',
+    'grid',
+    'unfriendly-block',
+    'columns-25-75'
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {% if label %}
+    <h2 class="h3 layout__region layout__region--header top-border-thick margin-bottom-md">{{ label }}</h2>
+  {% endif %}
+  {{ title_suffix }}
+  {% block content %}
+    {{ content }}
+  {% endblock %}
+</div>

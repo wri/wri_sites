@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_is_featured
+    - taxonomy.vocabulary.featured
+id: taxonomy_term.featured.field_is_featured
+field_name: field_is_featured
+entity_type: taxonomy_term
+bundle: featured
+label: 'Is Featured'
+description: 'Check this box if this taxonomy term will indicate that an item is Featured on the Resources page'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,0 +1,207 @@
+// All views like this
+.content-listing {
+  ul.listing-items {
+    @include mq($ph) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  .listing-items li {
+    list-style-type: none;
+    margin-bottom: $padding-vertical;
+    margin-left: 0;
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @include mq($md) {
+      margin-bottom: $space-lg;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// Default layout -- full width
+.layout__region--header,
+.layout__region--listing {
+  @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+
+  @include mq($ph) {
+    @include center-columns($grid-columns, $grid-columns);
+  }
+}
+// Content listing, 1/2 version
+.columns-50-50 {
+  .layout__region--header,
+  .layout__region--intro,
+  .layout__region--listing {
+    @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+
+    @include mq($ph) {
+      @include center-columns($grid-columns, $grid-columns);
+    }
+  }
+
+  .layout__region--header {
+    @include mq($lg) {
+      @include column-width(1, $grid-columns/2 + 1);
+    }
+  }
+  .layout__region--intro {
+    @include mq($lg) {
+      @include column-width($grid-columns/2 + 1, $grid-columns + 1);
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+// Content Listing, 3/4 version
+.teasers-content_listing,
+.teasers-content_listing_a_to_z,
+.podcasts-content_listing,
+.trending_topic-trending_topics,
+.columns-25-75 {
+  .layout__region--header,
+  .layout__region--intro,
+  .layout__region--listing {
+    @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+
+    @include mq($ph) {
+      @include center-columns($grid-columns, $grid-columns);
+    }
+  }
+
+  .layout__region--header {
+    @include mq($lg) {
+      @include column-width(1, $grid-columns-mobile);
+    }
+  }
+
+  .layout__region--intro {
+    @include mq($lg) {
+      @include column-width($grid-columns-mobile, $grid-columns);
+    }
+  }
+
+  .layout__region--listing {
+    @include mq($lg) {
+      @include column-width($grid-columns-mobile, $grid-columns + 1);
+    }
+  }
+
+  ul.listing-items {
+    max-width: 100%;
+    @include mq($md) {
+      margin-right: calc(#{$grid-gutter-mobile} * -1);
+    }
+  }
+
+  .listing-items li {
+    box-sizing: border-box;
+    list-style-type: none;
+    margin-bottom: $space-xs;
+    margin-left: 0;
+
+    @include mq($ph) {
+      flex: 0 1 33.333%;
+      padding-right: $grid-gutter-mobile;
+      &:nth-child(3n) {
+        padding-right: 0;
+      }
+      &:nth-last-child(-n + 3) {
+        margin-bottom: 0;
+      }
+    }
+
+    @include mq($lg) {
+      padding-right: $grid-gutter;
+    }
+  }
+}
+
+.persons {
+  .listing-items li {
+    list-style-type: none;
+    margin-bottom: $padding-vertical;
+
+    &:last-child {
+      margin-bottom: $padding-vertical;
+    }
+
+    @include mq($md) {
+      flex-basis: calc(50% - #{$grid-gutter-mobile});
+      margin-right: $space-xs;
+
+      &:first-of-type {
+        margin-left: 0;
+      }
+    }
+
+    @include mq($lg) {
+      flex-basis: calc(33.3% - #{$grid-gutter});
+      margin-right: $space-md;
+    }
+  }
+}
+
+.tiles {
+  ul.listing-items {
+    @include mq($md) {
+      margin-right: -$grid-gutter-mobile;
+    }
+
+    @include mq($lg) {
+      margin-right: -$grid-gutter;
+    }
+  }
+
+  .listing-items li {
+    width: 100%;
+
+    @include mq($md) {
+      flex: 0 0 calc(50% - #{$grid-gutter-mobile});
+      margin-right: $grid-gutter-mobile;
+      &:nth-last-child(-n + 2) {
+        margin-bottom: 0;
+      }
+    }
+
+    @include mq($lg) {
+      flex: 0 0 calc(50% - #{$grid-gutter});
+      margin-right: $grid-gutter;
+    }
+  }
+}
+
+.layout__region--more-link,
+.more-link {
+  @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+
+  @include mq($ph) {
+    @include center-columns($grid-columns, $grid-columns);
+  }
+
+  .more-link__line {
+    background-color: $light-grey;
+    height: 1px;
+    width: 100%;
+  }
+
+  a {
+    @extend .button;
+    @extend .small;
+    flex-shrink: 0;
+    margin-left: $grid-gutter-mobile; // Creates white space between line and button.
+    margin-right: 0;
+  }
+}

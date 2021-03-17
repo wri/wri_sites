@@ -1,0 +1,91 @@
+<?php
+
+/**
+ * @file
+ * Contains wri_author.module.
+ */
+
+use Drupal\wri_author\Entity\WRIAuthor;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function wri_author_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the wri_author module.
+    case 'help.page.wri_author':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function wri_author_theme() {
+  $theme = [];
+  $theme['wri_author'] = [
+    'render element' => 'elements',
+    'file' => 'wri_author.page.inc',
+    'template' => 'wri_author',
+  ];
+  $theme['wri_author_content_add_list'] = [
+    'render element' => 'content',
+    'variables' => ['content' => NULL],
+    'file' => 'wri_author.page.inc',
+  ];
+  return $theme;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function wri_author_theme_suggestions_wri_author(array $variables) {
+  $suggestions = [];
+  $entity = $variables['elements']['#wri_author'];
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+
+  $suggestions[] = 'wri_author__' . $sanitized_view_mode;
+  $suggestions[] = 'wri_author__' . $entity->bundle();
+  $suggestions[] = 'wri_author__' . $entity->bundle() . '__' . $sanitized_view_mode;
+  $suggestions[] = 'wri_author__' . $entity->id();
+  $suggestions[] = 'wri_author__' . $entity->id() . '__' . $sanitized_view_mode;
+  return $suggestions;
+}
+
+/**
+ * Implements hook_entity_delete().
+ */
+function wri_author_node_delete(EntityInterface $node) {
+  if ($node->bundle() == 'person') {
+    // Find any authors with this person as their reference.
+    $related_author_ids = \Drupal::entityQuery('wri_author')
+      ->condition('type', 'internal')
+      ->condition('field_person', $node->id())
+      ->execute();
+
+    if ($related_author_ids) {
+      $related_authors = WRIAuthor::loadMultiple($related_author_ids);
+
+      // Change the related author(s) to be external with name and <nolink>.
+      foreach ($related_authors as $author) {
+        $new_external_author = WRIAuthor::create([
+          'type' => 'external',
+          'field_person_link' => [
+            'title' => str_replace(' (WRI)', '', $author->label()),
+            'uri' => 'route:<nolink>',
+          ],
+          'id' => $author->id(),
+        ]);
+
+        $author->delete();
+        $new_external_author->save();
+      }
+    }
+  }
+}

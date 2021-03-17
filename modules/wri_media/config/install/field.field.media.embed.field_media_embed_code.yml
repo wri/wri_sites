@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_embed_code
+    - media.type.embed
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    unrestricted_text: unrestricted_text
+    full_html: '0'
+    basic_html: '0'
+    plain_text: '0'
+id: media.embed.field_media_embed_code
+field_name: field_media_embed_code
+entity_type: media
+bundle: embed
+label: 'Embed code'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

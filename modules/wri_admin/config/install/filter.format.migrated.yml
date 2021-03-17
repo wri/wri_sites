@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - token_filter
+name: Migrated
+format: migrated
+weight: 8
+filters:
+  media_embed:
+    id: media_embed
+    provider: media
+    status: true
+    weight: 100
+    settings:
+      default_view_mode: default
+      allowed_view_modes: {  }
+      allowed_media_types: {  }
+  token_filter:
+    id: token_filter
+    provider: token_filter
+    status: false
+    weight: 0
+    settings:
+      replace_empty: '0'

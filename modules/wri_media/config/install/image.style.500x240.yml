@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 500x240
+label: 500x240
+effects:
+  52d31a80-3dea-46a9-b8f7-08bf2739159c:
+    uuid: 52d31a80-3dea-46a9-b8f7-08bf2739159c
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 500
+      height: 240
+      crop_type: focal_point

@@ -1,0 +1,272 @@
+.person__detail {
+  .landing-page__hero {
+    padding-top: 0;
+    .leadership {
+      margin-bottom: $space-md;
+      text-align: center;
+
+      @include mq($md) {
+        margin-bottom: 0;
+        margin-top: $space-lg;
+        text-align: left;
+      }
+    }
+
+    .hero__text {
+      .hero__left {
+        @include mq($md) {
+          margin-top: 72px;
+        }
+
+        h1,
+        p {
+          text-align: center;
+
+          @include mq($md) {
+            text-align: left;
+          }
+        }
+
+        h1 {
+          margin-bottom: $space-xs;
+        }
+        p {
+          @include font($acumin-semi-cond, "light");
+          @include mq($md) {
+            margin-bottom: $space-lg;
+          }
+        }
+      }
+
+      .hero__right {
+        display: flex;
+        justify-content: center;
+
+        img {
+          border-radius: 100%;
+          height: 180px;
+          width: 180px;
+          @include mq($md) {
+            height: 230px;
+            width: 230px;
+          }
+        }
+      }
+    }
+  }
+
+  .buttons {
+    text-align: center;
+
+    @include mq($md) {
+      text-align: left;
+      margin-top: $space-lg;
+      margin-bottom: $space-lg;
+    }
+
+    a {
+      margin-bottom: 0;
+    }
+  }
+
+  .button-holder {
+    display: block;
+
+    @include mq($md) {
+      display: inline;
+    }
+  }
+
+  .twitter,
+  .int-office {
+    display: inline-block;
+    position: relative;
+    margin-left: $space-xs;
+
+    &:before {
+      content: "";
+      display: inline-block;
+      height: 16px;
+      line-height: 1.5rem;
+      padding-right: 15px;
+      position: relative;
+      transition: background $transition-defaults;
+      text-decoration: none;
+    }
+
+    a {
+      @include font($acumin-semi-cond, "bold");
+      @include text-underline(transparent, $black);
+      background-position: left 100%;
+      padding-bottom: 5px;
+    }
+  }
+
+  .twitter {
+    &:before {
+      background: transparent url("../img/svgs/twitter-black.svg") no-repeat
+        center center / contain;
+    }
+  }
+
+  .int-office {
+    &:before {
+      background: transparent url("../img/svgs/pin-black.svg") no-repeat center
+        center / contain;
+    }
+  }
+
+  .quote {
+    border-top: 3px solid $black;
+    display: block;
+    @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+
+    @include mq($ph) {
+      @include center-columns($grid-columns, $grid-columns);
+    }
+
+    @include mq($lg) {
+      @include center-columns(10, $grid-columns);
+    }
+
+    .quote-inner {
+      border-bottom: 3px solid $black;
+      padding-bottom: $space-lg;
+      padding-top: $space-lg;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    p {
+      display: inline;
+      padding: 0 $space-xs;
+    }
+
+    .tweet {
+      @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+      @include mq($ph) {
+        @include center-columns($grid-columns, $grid-columns);
+      }
+
+      @include mq($lg) {
+        @include center-columns(10, $grid-columns);
+      }
+
+      &::after {
+        background: transparent url("../img/svgs/quote.svg") no-repeat;
+        background-size: contain;
+        content: "";
+        display: inline-block;
+        height: 30px;
+        width: 30px;
+        transform: scaleX(-1);
+      }
+    }
+  }
+
+  .publication__main .sidebar {
+    .field-label-above {
+      color: $med-grey;
+      margin-bottom: 5px;
+    }
+
+    .field-label-above:not(:first-of-type) {
+      @extend .margin-top-sm;
+    }
+
+    .field-label-inline {
+      display: inline-block;
+      @include font($acumin-semi-cond, "light");
+      @include font-line-height(15, 26);
+    }
+
+    .languages {
+      @include font($acumin-semi-cond, "bold");
+      @include font-line-height(15, 20);
+    }
+
+    .programs a {
+      color: $green;
+      @include font($acumin-pro, "semibold");
+      @include font-line-height(15, 20);
+    }
+
+    .expertise {
+      a,
+      span {
+        display: block;
+        @include font($acumin-pro, "semibold");
+        @include font-line-height(14, 24);
+        color: $green;
+      }
+    }
+  }
+}
+
+.person-teaser-item {
+  min-width: 280px;
+  @include mq($ph) {
+    min-width: 350px;
+  }
+
+  img {
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .person-teaser__inner-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .right-section {
+    margin-left: $space-sm;
+  }
+
+  .right-section a {
+    @include font($acumin-semi-cond, light);
+    @include font-line-height(32, 38);
+  }
+
+  .right-section p {
+    margin: 0;
+    @include font-line-height(15, 21);
+  }
+}
+
+.search-results.search-results-people {
+  .search-results-text {
+    border: none;
+  }
+  .search-results-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 1 120px;
+    box-sizing: border-box;
+    padding: 0 10px 0 20px;
+    img {
+      border-radius: 50%;
+    }
+  }
+  .leadership {
+    @include font($caslon, "italic");
+    @include font-line-height(15, 16);
+  }
+  h2 {
+    @include font($acumin-semi-cond, "bold", "normal");
+    @include font-line-height(24, 30);
+    margin-bottom: 2px;
+    margin-top: 12px;
+    a {
+      text-decoration: none;
+    }
+  }
+  .job_title p {
+    margin: 0;
+    @include font($acumin-semi-cond, "light", "normal");
+    @include font-line-height(15, 21);
+  }
+}

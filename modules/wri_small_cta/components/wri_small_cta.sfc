@@ -1,0 +1,20 @@
+<template>
+  <div{{ attributes.addClass('container', 'small-cta-wrapper') }}>
+    {{ content.content|without('block_label') }}
+  </div>
+</template>
+
+<style>
+{# TODO add styles here. #}
+</style>
+
+
+<?php
+
+$definition['layout'] = [
+  'label' => 'Small CTA Block',
+  'regions' => [
+    'content' => ['label' => 'Content'],
+  ],
+];
+

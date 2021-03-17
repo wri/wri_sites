@@ -1,0 +1,63 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.impact.field_reference
+    - field.field.paragraph.impact.field_text
+    - paragraphs.paragraphs_type.impact
+  module:
+    - ds
+    - element_class_formatter
+third_party_settings:
+  ds:
+    layout:
+      id: layout_impact-block
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      title:
+        - field_text
+      content:
+        - field_reference
+id: paragraph.impact.default
+targetEntityType: paragraph
+bundle: impact
+mode: default
+content:
+  field_reference:
+    type: entity_reference_entity_view
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      view_mode: impact
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  field_text:
+    weight: 0
+    label: hidden
+    settings:
+      link_class: ''
+      tag: h4
+      class: impact-text
+      link: false
+      summary: false
+      trim: 200
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    type: wrapper_class
+    region: title
+hidden:
+  search_api_excerpt: true

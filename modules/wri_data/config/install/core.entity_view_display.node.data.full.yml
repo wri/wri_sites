@@ -1,0 +1,306 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.data.body
+    - field.field.node.data.field_authors
+    - field.field.node.data.field_featured
+    - field.field.node.data.field_featured_headline
+    - field.field.node.data.field_featured_text
+    - field.field.node.data.field_files
+    - field.field.node.data.field_intro
+    - field.field.node.data.field_license
+    - field.field.node.data.field_media
+    - field.field.node.data.field_metatags
+    - field.field.node.data.field_narrative_taxonomy
+    - field.field.node.data.field_platform_link
+    - field.field.node.data.field_primary_contacts
+    - field.field.node.data.field_primary_topic
+    - field.field.node.data.field_projects
+    - field.field.node.data.field_region
+    - field.field.node.data.field_related_resources
+    - field.field.node.data.field_tags
+    - field.field.node.data.field_type
+    - field.field.node.data.layout_builder__layout
+    - node.type.data
+  module:
+    - ctools
+    - element_class_formatter
+    - field_group
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_discovery
+    - taxonomy
+    - text
+    - user
+    - wri_block
+third_party_settings:
+  layout_builder:
+    allow_custom: true
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          9533b12c-7cef-4495-ae2f-445d3f4efd9d:
+            uuid: 9533b12c-7cef-4495-ae2f-445d3f4efd9d
+            region: content
+            configuration:
+              id: 'field_block:node:data:field_primary_contacts'
+              label: 'Primary contacts'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: entity_reference_entity_view
+                settings:
+                  view_mode: teaser
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: -7
+          00f1ffd1-da77-4d4b-9cc3-d1487d936958:
+            uuid: 00f1ffd1-da77-4d4b-9cc3-d1487d936958
+            region: content
+            configuration:
+              id: 'field_block:node:data:field_projects'
+              label: 'Projects that Include this Data Set'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: entity_reference_entity_view
+                settings:
+                  view_mode: card
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: -8
+          3e34bc2c-8a93-47b9-9743-407f22f313c4:
+            uuid: 3e34bc2c-8a93-47b9-9743-407f22f313c4
+            region: content
+            configuration:
+              id: 'field_block:node:data:field_related_resources'
+              label: 'Connected to This Data Set'
+              provider: layout_builder
+              label_display: visible
+              formatter:
+                label: hidden
+                type: related_field_formatter
+                settings:
+                  view_mode: teaser
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: -9
+          896827be-fa61-4dbd-a2b5-9d3152d11ff0:
+            uuid: 896827be-fa61-4dbd-a2b5-9d3152d11ff0
+            region: content
+            configuration:
+              id: 'entity_view:node'
+              label: 'Entity view (Content)'
+              provider: ctools
+              label_display: '0'
+              view_mode: main_content
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: -10
+        third_party_settings: {  }
+  layout_builder_restrictions:
+    allowed_block_categories:
+      - 'Chaos Tools'
+      - Components
+      - 'Content fields'
+      - 'Custom block types'
+      - 'Custom blocks'
+      - Facets
+      - 'Facets summary (Experimental)'
+      - Forms
+      - 'Inline blocks'
+      - 'Lists (Views)'
+      - Menus
+      - System
+      - User
+      - 'WRI block'
+      - core
+    entity_view_mode_restriction:
+      whitelisted_blocks:
+        'Chaos Tools':
+          - 'entity_view:node'
+        Components: {  }
+        'Content fields':
+          - 'field_block:node:data:field_projects'
+          - 'field_block:node:data:field_related_resources'
+        Facets: {  }
+        'Facets summary (Experimental)': {  }
+        Forms: {  }
+        'Lists (Views)':
+          - 'views_block:related_content-block_1'
+        Menus: {  }
+        System: {  }
+        User: {  }
+        'WRI block': {  }
+        core: {  }
+      blacklisted_blocks: {  }
+      allowed_layouts:
+        - layout_onecol
+  field_group:
+    group_image:
+      children: {  }
+      parent_name: ''
+      weight: 20
+      format_type: details_sidebar
+      region: hidden
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        open: false
+        weight: 0
+        required_fields: false
+      label: Image
+id: node.data.full
+targetEntityType: node
+bundle: data
+mode: full
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 8
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  content_moderation_control:
+    weight: -20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_featured_project:
+    weight: 109
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_intro:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: hero_image
+  field_primary_contacts:
+    weight: 108
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_primary_topic:
+    type: entity_reference_rss_category
+    weight: 4
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_projects:
+    label: above
+    type: entity_reference_entity_view
+    settings:
+      view_mode: card
+      link: false
+    third_party_settings: {  }
+    weight: 110
+    region: content
+  field_region:
+    type: entity_reference_rss_category
+    weight: 5
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_related_resources:
+    label: hidden
+    type: related_field_formatter
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    weight: 111
+    region: content
+  field_twitter_account:
+    weight: 102
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_type:
+    type: entity_reference_label_class
+    weight: 2
+    region: hero_text
+    label: hidden
+    settings:
+      class: ''
+      link: true
+      tag: ''
+    third_party_settings: {  }
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  changed: true
+  default_langcode: true
+  field_authors: true
+  field_cover_image: true
+  field_doi: true
+  field_featured: true
+  field_featured_headline: true
+  field_featured_text: true
+  field_files: true
+  field_isbn: true
+  field_lead_in: true
+  field_license: true
+  field_long_title: true
+  field_media: true
+  field_metatags: true
+  field_narrative_taxonomy: true
+  field_platform_link: true
+  field_statistics: true
+  field_tags: true
+  field_total_pages: true
+  layout_builder__layout: true
+  nid: true
+  promote: true
+  revision_default: true
+  revision_log: true
+  revision_timestamp: true
+  revision_translation_affected: true
+  revision_uid: true
+  search_api_excerpt: true
+  status: true
+  sticky: true
+  type: true
+  uuid: true
+  vid: true
+  wri_social_sharing_block: true

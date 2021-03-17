@@ -1,0 +1,30 @@
+wrin.small:
+  label: Small
+  mediaQuery: "(min-width: 0px) and (max-width: 500px)"
+  weight: 0
+  multipliers:
+    - 1x
+wrin.phablet:
+  label: Phablet
+  mediaQuery: "(min-width: 501px) and (max-width: 767px)"
+  weight: 1
+  multipliers:
+    - 1x
+wrin.medium:
+  label: Medium
+  mediaQuery: "(min-width: 768px) and (max-width: 1023px)"
+  weight: 2
+  multipliers:
+    - 1x
+wrin.large:
+  label: Large
+  mediaQuery: "(min-width: 1024px) and (max-width: 1440px)"
+  weight: 4
+  multipliers:
+    - 1x
+wrin.xlarge:
+  label: XLarge
+  mediaQuery: "(min-width: 1440px)"
+  weight: 5
+  multipliers:
+    - 1x

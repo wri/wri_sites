@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_narrative_taxonomy
+    - node.type.project_detail
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    basic_html: basic_html
+    full_html: '0'
+    migrated: '0'
+    unrestricted_text: '0'
+    plain_text: '0'
+id: node.project_detail.field_narrative_taxonomy
+field_name: field_narrative_taxonomy
+entity_type: node
+bundle: project_detail
+label: 'Narrative Taxonomy'
+description: 'If you want to use the default value, choose "Source" and paste: <code>&lt;p&gt;WRI&#39;s &#91;node:title&#93; is part of &#91;wri_tokens:topic_and_sub_topic_links_list&#93;. Contact an initiative &lt;a href=&quot;/experts&quot;&gt;Expert&lt;/a&gt; for more details or media inquiries.&lt;/p&gt;</code>'
+required: false
+translatable: true
+default_value:
+  -
+    value: "<p>WRI's [node:title] is part of [wri_tokens:topic_and_sub_topic_links_list]. Contact an initiative <a href=\"/experts\">Expert</a> for more details or media inquiries.</p>\r\n"
+    format: basic_html
+default_value_callback: ''
+settings: {  }
+field_type: text_long

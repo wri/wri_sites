@@ -1,0 +1,23 @@
+name: 'WRI Unique Feature'
+type: module
+description: 'Provides Unique Feature Topics block functionality'
+core_version_requirement: '^8.8.0 || ^9'
+package: WRI
+dependencies:
+  - block_content
+config_devel:
+  install:
+    - block_content.type.unique_feature_cta
+    - core.entity_form_display.block_content.unique_feature_cta.default
+    - core.entity_form_display.paragraph.unique_feature_cta.default
+    - core.entity_view_display.block_content.unique_feature_cta.default
+    - core.entity_view_display.block_content.unique_feature_cta.preview
+    - core.entity_view_display.paragraph.unique_feature_cta.default
+    - core.entity_view_display.paragraph.unique_feature_cta.preview
+    - field.field.block_content.unique_feature_cta.field_image
+    - field.field.block_content.unique_feature_cta.field_intro
+    - field.field.block_content.unique_feature_cta.field_link
+    - field.field.block_content.unique_feature_cta.field_overlay_color
+    - field.field.block_content.unique_feature_cta.field_tag
+    - field.field.paragraph.unique_feature_cta.field_block
+    - paragraphs.paragraphs_type.unique_feature_cta

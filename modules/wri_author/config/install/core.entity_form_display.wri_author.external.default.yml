@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.wri_author.external.field_person_link
+    - wri_author.wri_author_type.external
+  module:
+    - link
+id: wri_author.external.default
+targetEntityType: wri_author
+bundle: external
+mode: default
+content:
+  field_person_link:
+    weight: 0
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

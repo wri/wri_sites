@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 150_tall
+label: '150 tall, max width 200'
+effects:
+  e391e0e5-7b10-4ee4-9f0e-744f46538431:
+    uuid: e391e0e5-7b10-4ee4-9f0e-744f46538431
+    id: image_scale
+    weight: 1
+    data:
+      width: 200
+      height: 150
+      upscale: false

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="11px" height="17px" viewBox="0 0 11 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>iconmonstr-location-2 (1)</title>
+    <g id="Person" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Person-Detail-Robust---Desktop" transform="translate(-321.000000, -465.000000)" fill="#000000" fill-rule="nonzero">
+            <g id="masthead" transform="translate(162.000000, 221.000000)">
+                <g id="primary-info" transform="translate(0.000000, 233.000000)">
+                    <g id="iconmonstr-location-2-(1)" transform="translate(159.000000, 11.000000)">
+                        <path d="M5.5,1.375 C7.69725,1.375 9.625,3.174875 9.625,5.226375 C9.625,7.3528125 7.9110625,10.129625 5.5,13.9308125 C3.0889375,10.129625 1.375,7.3528125 1.375,5.226375 C1.375,3.174875 3.30275,1.375 5.5,1.375 M5.5,0 C2.613875,0 0,2.3395625 0,5.226375 C0,8.1125 2.3849375,11.55825 5.5,16.5 C8.6150625,11.55825 11,8.1125 11,5.226375 C11,2.3395625 8.3868125,0 5.5,0 Z M5.5,7.5625 C4.3608125,7.5625 3.4375,6.6391875 3.4375,5.5 C3.4375,4.3608125 4.3608125,3.4375 5.5,3.4375 C6.6391875,3.4375 7.5625,4.3608125 7.5625,5.5 C7.5625,6.6391875 6.6391875,7.5625 5.5,7.5625 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

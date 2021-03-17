@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.wri_office.field_telephone
+  module:
+    - telephone
+    - wri_io_content
+id: wri_office.wri_office.field_telephone
+field_name: field_telephone
+entity_type: wri_office
+bundle: wri_office
+label: Tel
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

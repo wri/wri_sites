@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.listing_block.field_block
+    - paragraphs.paragraphs_type.listing_block
+  module:
+    - inline_entity_form
+id: paragraph.listing_block.default
+targetEntityType: paragraph
+bundle: listing_block
+mode: default
+content:
+  field_block:
+    type: inline_entity_form_simple
+    weight: 0
+    region: content
+    settings:
+      form_mode: default
+      revision: false
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      collapsible: false
+      collapsed: false
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

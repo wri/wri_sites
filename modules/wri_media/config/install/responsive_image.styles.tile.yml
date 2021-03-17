@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.350x250
+    - image.style.451x322
+    - image.style.463x330
+    - image.style.646x464
+  module:
+    - wri_media
+id: tile
+label: Tile
+image_style_mappings:
+  -
+    breakpoint_id: wrin.large
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 646x464
+  -
+    breakpoint_id: wrin.medium
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 451x322
+  -
+    breakpoint_id: wrin.phablet
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 350x250
+breakpoint_group: wri_media
+fallback_image_style: 463x330

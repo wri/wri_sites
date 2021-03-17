@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @file
+ * Subpage module hook implementations.
+ */
+
+use Drupal\menu_link_content\Entity\MenuLinkContent;
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ */
+function wri_subpage_node_update(EntityInterface $entity) {
+  if (isset($entity->field_parent_page)) {
+    $parent = $entity->field_parent_page->entity;
+    if ($parent) {
+      $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
+
+      // Save the parent at the root of the Page Heirarchy menu, if not already
+      // there.
+      $parent_link_menu = array_key_first($menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $parent->id()], 'page-hierarchies'));
+      if (!$parent_link_menu) {
+        $parent_link_menu = MenuLinkContent::create([
+          'title' => $parent->label(),
+          'link' => ['uri' => 'entity:node/' . $parent->id()],
+          'menu_name' => 'page-hierarchies',
+          'expanded' => TRUE,
+        ]);
+        $parent_link_menu->save();
+      }
+
+      // Save the current page as a child of the parent in the Page Hierarchy
+      // menu.
+      $current_link_menu_menu = $menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $entity->id()], 'page-hierarchies');
+      if (!$current_link_menu_menu) {
+        $current_link_menu = MenuLinkContent::create([
+          'title' => $entity->label(),
+          'link' => ['uri' => 'entity:node/' . $entity->id()],
+          'menu_name' => 'page-hierarchies',
+          'parent' => $parent_link_menu,
+          'expanded' => TRUE,
+        ]);
+      }
+      else {
+        $current_link_menu_id = current($current_link_menu_menu)->getPluginDefinition()["metadata"]["entity_id"];
+        $current_link_menu = MenuLinkContent::load($current_link_menu_id);
+        $current_link_menu->set('parent', $parent_link_menu);
+        $current_link_menu->set('enabled', 1);
+      }
+      $current_link_menu->save();
+    }
+  }
+}

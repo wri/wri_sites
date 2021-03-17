@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 700x405
+label: 700x405
+effects:
+  d1a9cc27-dba8-480a-942b-95482d8a9ae3:
+    uuid: d1a9cc27-dba8-480a-942b-95482d8a9ae3
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 700
+      height: 405
+      crop_type: focal_point

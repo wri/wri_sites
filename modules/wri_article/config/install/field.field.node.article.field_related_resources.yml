@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_related_resources
+    - node.type.article
+id: node.article.field_related_resources
+field_name: field_related_resources
+entity_type: node
+bundle: article
+label: 'Related Resources and Data'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: content_by_type
+      display_name: entity_reference_1
+      arguments:
+        - article+data+publication
+field_type: entity_reference

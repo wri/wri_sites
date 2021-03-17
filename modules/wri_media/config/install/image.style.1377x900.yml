@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 1377x900
+label: 1377x900
+effects:
+  b88b8ea6-f1ac-4f4b-ba5b-2cf39f2386f8:
+    uuid: b88b8ea6-f1ac-4f4b-ba5b-2cf39f2386f8
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1377
+      height: 900
+      crop_type: focal_point

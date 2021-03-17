@@ -1,0 +1,128 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.impact_in_action
+    - field.field.block_content.impact_in_action.field_impacts
+    - field.field.block_content.impact_in_action.field_title
+  module:
+    - ds
+    - entity_reference_revisions
+    - field_group
+third_party_settings:
+  ds:
+    layout:
+      id: ds_1col
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+        wrappers:
+          ds_content: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+        classes:
+          layout_class: {  }
+    regions:
+      ds_content:
+        - group_grid_wrapper
+        - block_label
+        - group_impact_list
+        - field_impacts
+    fields:
+      block_label:
+        plugin_id: block_label
+        weight: 5
+        label: hidden
+        formatter: default
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow: true
+            ow-el: h2
+            ow-cl: h3
+            ow-at: ''
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi: false
+            fi-def-at: false
+  field_group:
+    group_grid_wrapper:
+      children:
+        - block_label
+        - group_impact_list
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      region: ds_content
+      format_settings:
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: 'grid top-border-thick'
+      label: 'Grid Wrapper'
+    group_impact_list:
+      children:
+        - field_impacts
+      parent_name: group_grid_wrapper
+      weight: 6
+      format_type: html_element
+      region: ds_content
+      format_settings:
+        id: ''
+        classes: impact-list
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Impact List'
+id: block_content.impact_in_action.default
+targetEntityType: block_content
+bundle: impact_in_action
+mode: default
+content:
+  field_impacts:
+    type: entity_reference_revisions_entity_view
+    weight: 6
+    region: ds_content
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: reset
+          settings:
+            lb: ''
+hidden:
+  field_title: true
+  search_api_excerpt: true

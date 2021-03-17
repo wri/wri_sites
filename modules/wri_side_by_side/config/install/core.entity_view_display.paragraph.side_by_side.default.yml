@@ -1,0 +1,50 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.side_by_side.field_body
+    - field.field.paragraph.side_by_side.field_title
+    - paragraphs.paragraphs_type.side_by_side
+  module:
+    - ds
+    - element_class_formatter
+    - text
+id: paragraph.side_by_side.default
+targetEntityType: paragraph
+bundle: side_by_side
+mode: default
+content:
+  field_body:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: default
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    type: text_default
+    region: content
+  field_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_class: ''
+      tag: h2
+      class: h2
+      link: false
+      summary: false
+      trim: 200
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    type: wrapper_class
+    region: content
+hidden:
+  search_api_excerpt: true

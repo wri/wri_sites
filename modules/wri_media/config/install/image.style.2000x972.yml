@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 2000x972
+label: 2000x972
+effects:
+  7e4328f7-4710-40c9-a576-3222717db873:
+    uuid: 7e4328f7-4710-40c9-a576-3222717db873
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 2000
+      height: 972
+      crop_type: focal_point

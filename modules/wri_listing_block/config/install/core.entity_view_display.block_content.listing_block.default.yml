@@ -1,0 +1,117 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.listing_block
+    - field.field.block_content.listing_block.field_content_types
+    - field.field.block_content.listing_block.field_featured
+    - field.field.block_content.listing_block.field_filter_by_region
+    - field.field.block_content.listing_block.field_filter_by_resource_type
+    - field.field.block_content.listing_block.field_filter_by_tag
+    - field.field.block_content.listing_block.field_intro
+    - field.field.block_content.listing_block.field_listing
+    - field.field.block_content.listing_block.field_more_link
+    - field.field.block_content.listing_block.field_tag
+  module:
+    - ds
+    - text
+    - wri_admin
+    - wri_common
+third_party_settings:
+  ds:
+    layout:
+      id: 'single_file_component_layout:wri_listing'
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        component_context: {  }
+    regions:
+      header:
+        - block_label
+      listing:
+        - field_listing
+        - field_more_link
+      intro:
+        - field_intro
+    fields:
+      block_label:
+        plugin_id: block_label
+        weight: 0
+        label: hidden
+        formatter: default
+id: block_content.listing_block.default
+targetEntityType: block_content
+bundle: listing_block
+mode: default
+content:
+  field_intro:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi: false
+            fi-def-at: false
+    type: text_default
+    region: intro
+  field_listing:
+    weight: 0
+    label: hidden
+    settings:
+      view_title: hidden
+      always_build_output: false
+      empty_view_title: hidden
+    third_party_settings: {  }
+    type: viewfield_token
+    region: listing
+  field_more_link:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    type: tokenized_link_field_formatter
+    region: listing
+hidden:
+  field_content_types: true
+  field_featured: true
+  field_filter_by_region: true
+  field_filter_by_resource_type: true
+  field_filter_by_tag: true
+  field_tag: true
+  search_api_excerpt: true

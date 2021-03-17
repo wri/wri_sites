@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 125x95
+label: 125x95
+effects:
+  062436ab-0318-456d-b31a-4e3dcf4a19c6:
+    uuid: 062436ab-0318-456d-b31a-4e3dcf4a19c6
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 125
+      height: 95
+      crop_type: focal_point

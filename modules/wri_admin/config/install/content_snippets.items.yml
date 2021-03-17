@@ -1,0 +1,8 @@
+gtm_id:
+  label: 'GTM ID'
+  id: gtm_id
+  type: textfield
+  filter: plain_text
+  description: 'Your Google Tag Manager ID'
+  group: '3rd Party'
+  weight: '10'

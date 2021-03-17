@@ -1,0 +1,7 @@
+wri_taxonomy.move_term_form:
+  path: '/admin/structure/taxonomy/move'
+  defaults:
+    _form: '\Drupal\wri_taxonomy\Form\MoveTermForm'
+    _title: 'MoveTermForm'
+  requirements:
+    _permission: 'administer taxonomy'

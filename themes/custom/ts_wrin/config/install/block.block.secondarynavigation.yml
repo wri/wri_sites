@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.secondary
+  module:
+    - system
+  theme:
+    - ts_wrin
+id: secondarynavigation
+theme: ts_wrin
+region: secondary_nav
+weight: -7
+provider: null
+plugin: 'system_menu_block:secondary'
+settings:
+  id: 'system_menu_block:secondary'
+  label: 'Secondary Navigation'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  request_path:
+    id: request_path
+    pages: "/research\r\n/data\r\n/initiatives\r\n/insights\r\n/research/*\r\n/data/*\r\n/initiatives/*\r\n/insights/*"
+    negate: true
+    context_mapping: {  }

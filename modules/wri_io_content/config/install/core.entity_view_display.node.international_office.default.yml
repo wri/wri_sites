@@ -1,0 +1,109 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.international_office.body
+    - field.field.node.international_office.field_featured_experts
+    - field.field.node.international_office.field_intro
+    - field.field.node.international_office.field_io_link
+    - field.field.node.international_office.field_main_image
+    - field.field.node.international_office.field_map_image
+    - field.field.node.international_office.field_metatags
+    - field.field.node.international_office.field_offices
+    - field.field.node.international_office.field_region
+    - field.field.node.international_office.layout_builder__layout
+    - node.type.international_office
+  module:
+    - layout_builder
+    - metatag
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: node.international_office.default
+targetEntityType: node
+bundle: international_office
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            fis: true
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: true
+            fi: true
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: true
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow: false
+            ow-def-at: false
+            ow-def-cl: false
+    region: content
+  content_moderation_control:
+    weight: -20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_intro:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_map_image:
+    type: entity_reference_entity_view
+    weight: -1
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    region: content
+  field_metatags:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+    region: content
+  field_offices:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden:
+  field_featured_experts: true
+  field_io_link: true
+  field_main_image: true
+  field_region: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

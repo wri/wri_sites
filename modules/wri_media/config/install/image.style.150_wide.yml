@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 150_wide
+label: '150 wide'
+effects:
+  e55fe71f-5d10-41ea-8b68-134aecac81d4:
+    uuid: e55fe71f-5d10-41ea-8b68-134aecac81d4
+    id: image_scale
+    weight: 1
+    data:
+      width: 150
+      height: null
+      upscale: false

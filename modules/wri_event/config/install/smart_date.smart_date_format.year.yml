@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+id: year
+label: Year
+date_format: 'Y'
+time_format: ''
+time_hour_format: ''
+allday_label: 'All day'
+separator: ' - '
+join: ', '
+ampm_reduce: '1'
+date_first: '1'
+site_time_toggle: '0'

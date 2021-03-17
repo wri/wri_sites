@@ -1,0 +1,82 @@
+.card-listing {
+  ul.listing-items,
+  .field--name-field-featured-project {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0;
+
+    @include mq($ph) {
+      flex-direction: row;
+    }
+  }
+
+  ul.listing-items {
+    @include mq($ph) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  .listing-items li {
+    list-style-type: none;
+    margin-bottom: $padding-vertical;
+    margin-left: 0;
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @include mq($md) {
+      margin-bottom: $space-lg;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .listing-items li,
+  .field__item {
+    box-sizing: border-box;
+    flex: 0 1 auto;
+    list-style: none;
+
+    @include mq($ph) {
+      flex: 0 1 calc(50% - (#{$grid-gutter-mobile} / 2));
+      margin-right: $grid-gutter-mobile;
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+      &:nth-last-child(-n + 2) {
+        margin-bottom: 0;
+      }
+    }
+
+    @include mq($md) {
+      flex: 0 1
+        calc(25% - (#{$grid-gutter-mobile} - (#{$grid-gutter-mobile} / 4)));
+      margin-right: $grid-gutter-mobile;
+      &:nth-child(2n) {
+        margin-right: $grid-gutter-mobile;
+      }
+      &:nth-child(4n) {
+        margin-right: 0;
+      }
+      &:nth-last-child(-n + 4) {
+        margin-bottom: 0;
+      }
+    }
+
+    @include mq($lg) {
+      flex: 0 1 calc(25% - (#{$grid-gutter} - (#{$grid-gutter} / 4)));
+      margin-right: $grid-gutter;
+      &:nth-child(2n) {
+        margin-right: $grid-gutter;
+      }
+      &:nth-child(4n) {
+        margin-right: 0;
+      }
+      &:nth-last-child(-n + 4) {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

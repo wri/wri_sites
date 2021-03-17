@@ -1,0 +1,115 @@
+<?php
+
+/**
+ * @file
+ * Contains hsus_search.module.
+ */
+
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\search_api\Plugin\views\query\SearchApiQuery;
+use Drupal\views\ViewExecutable;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function wri_search_entity_base_field_info(EntityTypeInterface $entity_type) {
+  if ($entity_type->id() === 'taxonomy_term') {
+    $fields = [];
+
+    // Add a field that shows the parent of the term, or itself if no parent.
+    $fields['term_parent_or_self'] = BaseFieldDefinition::create('term_parent_or_self')
+      ->setName('term_parent_or_self')
+      ->setLabel(t('Parent or Self'))
+      ->setSetting('target_type', 'taxonomy_term')
+      ->setComputed(TRUE)
+      ->setClass('\Drupal\wri_search\WriCalculatedTexts')
+      ->setDisplayConfigurable('view', FALSE)
+      ->setCardinality(-1);
+
+    // Add a field that shows the term only if a parent set.
+    $fields['term_child_of_parent'] = BaseFieldDefinition::create('term_child_of_parent')
+      ->setName('term_child_of_parent')
+      ->setLabel(t('Is Child'))
+      ->setSetting('target_type', 'taxonomy_term')
+      ->setComputed(TRUE)
+      ->setClass('\Drupal\wri_search\WriCalculatedTexts')
+      ->setDisplayConfigurable('view', FALSE)
+      ->setCardinality(-1);
+
+    return $fields;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for views_exposed_form().
+ */
+function wri_search_form_views_exposed_form_alter(&$form, FormStateInterface $form_state) {
+  // Custom integration for facets. When a Views exposed filter is modified on a
+  // search results page it will lose any selected facets.
+  // This adds hidden fields for each facet so their values are retained.
+  // See: https://www.drupal.org/project/facets_pretty_paths/issues/3041314
+  $storage = $form_state->getStorage();
+  if (!isset($storage['view'])) {
+    return;
+  }
+  $view = $storage['view'];
+  if (!($view instanceof ViewExecutable)) {
+    return;
+  }
+  $query_plugin = $view->getQuery();
+  // Make sure the view is based on Search API and has the "Preserve facets"
+  // option enabled, and that the Facets module is installed.
+  $preserve_facets = !empty($query_plugin->options['preserve_facet_query_args'])
+    && $query_plugin instanceof
+  SearchApiQuery    && \Drupal::moduleHandler()->moduleExists('facets');
+  if ($preserve_facets) {
+    // Retrieve the facet source.
+    $query = $query_plugin->getSearchApiQuery();
+    $display_id = $query->getSearchId(FALSE);
+    $facet_source_id = str_replace(':', '__', 'search_api:' . $display_id);
+    $facet_source = \Drupal::entityTypeManager()
+      ->getStorage('facets_facet_source')
+      ->load($facet_source_id);
+    if (!$facet_source) {
+      return;
+    }
+    if ('facets_pretty_paths' == $facet_source->getUrlProcessorName()) {
+      $form['#action'] = NULL;
+    }
+  }
+}
+
+/**
+ * Implements hook_token_info_alter().
+ */
+function wri_search_token_info_alter(&$info) {
+  $info['types']['term']['non_orphan'] = [
+    'name' => 'TID if Child',
+    'description' => t('The term id if this term is a child.'),
+  ];
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function wri_search_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+  $replacements = [];
+  if ($type == 'term' && !empty($data['term'])) {
+    $term = $data['term'];
+
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+
+        case 'non_orphan':
+          if ($term->parent->target_id) {
+            $replacements[$original] = $term->id();
+          }
+          break;
+      }
+    }
+  }
+  return $replacements;
+}

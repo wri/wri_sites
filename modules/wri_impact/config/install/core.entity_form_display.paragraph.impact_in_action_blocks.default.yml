@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.impact_in_action_blocks.field_block
+    - paragraphs.paragraphs_type.impact_in_action_blocks
+  module:
+    - wri_block
+id: paragraph.impact_in_action_blocks.default
+targetEntityType: paragraph
+bundle: impact_in_action_blocks
+mode: default
+content:
+  field_block:
+    weight: 1
+    settings:
+      form_mode: default
+      label_singular: ''
+      label_plural: ''
+      collapsible: true
+      revision: false
+      override_labels: false
+      collapsed: false
+    third_party_settings: {  }
+    type: inline_block_field_widget
+    region: content
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,72 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.small_cta
+    - core.entity_view_mode.block_content.preview
+    - field.field.block_content.small_cta.field_cta_background
+    - field.field.block_content.small_cta.field_link
+  module:
+    - ds
+    - layout_builder
+    - link
+    - options
+third_party_settings:
+  ds:
+    layout:
+      id: layout_onecol
+      library: layout_discovery/onecol
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      content:
+        - block_label
+        - field_link
+        - field_cta_background
+    fields:
+      block_label:
+        plugin_id: block_label
+        weight: 0
+        label: hidden
+        formatter: default
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: block_content.small_cta.preview
+targetEntityType: block_content
+bundle: small_cta
+mode: preview
+content:
+  field_cta_background:
+    weight: 4
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_link:
+    weight: 3
+    label: inline
+    settings:
+      trim_length: 80
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    type: link
+    region: content
+hidden:
+  body: true
+  search_api_excerpt: true

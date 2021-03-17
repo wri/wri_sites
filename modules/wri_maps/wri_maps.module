@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * Contains wri_maps.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function wri_maps_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the wri_maps module.
+    case 'help.page.wri_maps':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Map config and code') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function wri_maps_theme() {
+  return [
+    'wri_region_map' => [
+      'variables' => [
+        'attributes' => NULL,
+        'svg_url' => NULL,
+      ],
+    ],
+    'wri_region_map_popup' => [
+      'variables' => [
+        'attributes' => NULL,
+        'region_link' => NULL,
+        'international_office_links' => [],
+      ],
+    ],
+  ];
+}

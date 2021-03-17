@@ -1,0 +1,96 @@
+{% if is_node %}
+  {{ drupal_block('local_tasks_block') }}
+{% endif %}
+{% if page.wrin_custom.wrinfilterstatus %}
+  {% include 'wrin-filter-status' %}
+{% endif %}
+<div id="tray-nav-wrapper">
+  <div id="tray-nav-canvas">
+    <header>
+      <div class="container header-wrapper">
+        {% if page.primary_nav %}
+          {{ page.primary_nav }}
+        {% endif %}
+
+        <div class="header-right {{ menu_color }}">
+          {% if page.secondary_nav %}
+            {{ page.secondary_nav }}
+          {% endif %}
+
+          {% if page.wrin_custom.wrinsearch %}
+            {% include 'wrin-search-button' %}
+          {% endif %}
+
+          {% if page.wrin_custom.wrinfilter %}
+            {% include 'wrin-filter-button' %}
+          {% endif %}
+
+          {% include '@ts_custom/ts-hamburger-nav.html.twig' %}
+        </div>
+      </div>
+    </header>
+
+    <div class="mobile-menu-target">
+      <div class="ts-mobile-menu__wrapper">
+        {% if page.hamburger_nav %}
+          {{ page.hamburger_nav }}
+        {% endif %}
+      </div>
+    </div>
+
+    {# Start - Off-canvas elements: Filter, Search, Mega-menu #}
+    <div id="tray-nav">
+      {% if page.wrin_custom %}
+        {{ page.wrin_custom }}
+      {% endif %}
+    </div>
+    {# End - Off-canvas elements #}
+
+    {% if page.admin %}
+      {{ page.admin }}
+    {% endif %}
+
+    {% if page.content %}
+      {% if is_node %}
+        {{page.content}}
+      {% else %}
+      <div class="landing-page__content container margin-top-md margin-bottom-md">
+        <div class="content__inner">
+          {{ drupal_block('local_tasks_block') }}
+          {{page.content}}
+        </div>
+      </div>
+      {% endif %}
+    {% endif %}
+
+    {% if page.footer_top %}
+      {{page.footer_top}}
+    {% endif %}
+
+    {% if page.footer_left or page.footer_right %}
+      <div class="region-footer">
+        <div class="container">
+          <div class="footer-padding">
+            <div class="footer-logo margin-bottom-md">
+              <a href="/">
+                {{ 'Home'|t }}
+              </a>
+            </div>
+            {% if page.footer_left %}
+              {{page.footer_left}}
+            {% endif %}
+
+            {% if page.footer_right %}
+              {{page.footer_right}}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if page.modals %}
+      {{ page.modals }}
+    {% endif %}
+
+  </div>
+</div>

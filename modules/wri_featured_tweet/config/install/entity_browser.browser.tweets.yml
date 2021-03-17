@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.featured_tweets_entity_browser
+  module:
+    - views
+name: tweets
+label: Tweets
+display: modal
+display_configuration:
+  width: ''
+  height: ''
+  link_text: 'Select Tweets'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: single
+widget_selector_configuration: {  }
+widgets:
+  f816674c-258f-4843-910f-7ebdbaaebd22:
+    settings:
+      view: featured_tweets_entity_browser
+      view_display: entity_browser_1
+      submit_text: 'Select Tweet'
+      auto_select: false
+    uuid: f816674c-258f-4843-910f-7ebdbaaebd22
+    weight: 1
+    label: 'Featured Tweet'
+    id: view

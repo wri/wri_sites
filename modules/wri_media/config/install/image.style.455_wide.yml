@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 455_wide
+label: '455 wide'
+effects:
+  f5783a0b-c594-4304-9596-66d122fe1b52:
+    uuid: f5783a0b-c594-4304-9596-66d122fe1b52
+    id: image_scale
+    weight: 1
+    data:
+      width: 455
+      height: null
+      upscale: false

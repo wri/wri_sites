@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 965_wide
+label: '965 wide'
+effects:
+  ac05979c-25b9-4656-a914-f59b994f1394:
+    uuid: ac05979c-25b9-4656-a914-f59b994f1394
+    id: image_scale
+    weight: 1
+    data:
+      width: 965
+      height: null
+      upscale: false

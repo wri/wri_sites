@@ -1,0 +1,70 @@
+name: 'WRI sites administration'
+type: module
+description: 'Helper functions for the WRI site profile admin area'
+package: WRI
+core_version_requirement: '^8.8.0 || ^9'
+dependencies:
+  - access_unpublished
+  - asset_injector
+  - admin_toolbar
+  - admin_toolbar_links_access_filter
+  - admin_toolbar_search
+  - admin_toolbar_tools
+  - allowed_formats
+  - blazy
+  - block
+  - block_list_override
+  - ckeditor
+  - ckeditor_templates
+  - ckeditor_templates_ui
+  - config
+  - config_sync
+  - content_moderation
+  - content_snippets
+  - contextual
+  - ctools_views
+  - diff
+  - dblog
+  - draggableviews
+  - ds
+  - ds_extras
+  - editor
+  - editor_advanced_link
+  - element_class_formatter
+  - entity_browser
+  - entity_class_formatter
+  - field_group
+  - field_ui
+  - file_replace
+  - layout_builder
+  - layout_builder_restrictions
+  - layout_discovery
+  - link_attributes
+  - menu_ui
+  - paragraphs
+  - responsive_tables_filter
+  - scheduled_transitions
+  - token_filter
+  - telephone
+  - textfield_counter
+  - toolbar
+  - views_bulk_edit
+  - views_bulk_operations
+  - views_ui
+  - workflows
+libraries:
+  - wri_admin/admin
+config_devel:
+  install:
+    - ckeditor_templates_ui.ckeditor_template.callout_center
+    - ckeditor_templates_ui.ckeditor_template.callout_left
+    - ckeditor_templates_ui.ckeditor_template.callout_right
+    - content_snippets.items
+    - editor.editor.basic_html
+    - filter.format.basic_html
+    - filter.format.migrated
+    - filter.format.unrestricted_text
+    - user.role.administrator
+    - user.role.content_editor
+    - user.role.editorial
+    - user.role.hr

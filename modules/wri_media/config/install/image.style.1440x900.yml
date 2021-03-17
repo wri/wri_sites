@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 1440x900
+label: 1440x900
+effects:
+  c9fd99da-0b63-424a-b31b-7b95499eda2d:
+    uuid: c9fd99da-0b63-424a-b31b-7b95499eda2d
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1440
+      height: 900
+      crop_type: focal_point

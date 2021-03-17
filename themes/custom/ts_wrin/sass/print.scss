@@ -1,0 +1,25 @@
+@media print {
+  .block-local-tasks-block,
+  #block-ts-wrin-main-menu,
+  .header-wrapper .header-right,
+  #social-sharing-block,
+  .region-admin,
+  .contextual-region .contextual,
+  .region-footer-top,
+  .region-footer,
+  .more-on {
+    display: none !important;
+  }
+
+  .layout__region--hero img {
+    max-height: 200px;
+  }
+
+  header {
+    position: relative;
+  }
+
+  #tray-nav-canvas {
+    padding-top: 0;
+  }
+}

@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.hero_on_a_subpage
+label: 'Hero on a Subpage'
+targetEntityType: node
+cache: true

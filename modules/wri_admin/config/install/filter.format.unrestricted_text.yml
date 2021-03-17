@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - token_filter
+name: 'Unrestricted text'
+format: unrestricted_text
+weight: 9
+filters:
+  token_filter:
+    id: token_filter
+    provider: token_filter
+    status: false
+    weight: 0
+    settings:
+      replace_empty: '0'

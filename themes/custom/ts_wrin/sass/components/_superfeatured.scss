@@ -1,0 +1,110 @@
+.superfeatured {
+  .image-wrapper {
+    @include center-columns(4, 4);
+
+    @include mq($ph) {
+      @include center-columns(12, 12);
+    }
+
+    @include mq($md) {
+      min-height: rem(50);
+    }
+
+    @include mq($lg) {
+      @include column-width(2, 12);
+    }
+
+    img {
+      display: block;
+      max-height: rem(500);
+      object-fit: cover;
+      object-position: center;
+      width: 100%;
+    }
+  }
+
+  .left-text-wrapper {
+    background: $white;
+    margin-top: rem(-25);
+    width: 93%;
+    max-width: 87%;
+    z-index: 1;
+
+    @include center-columns(4, 4);
+
+    @include mq($ph) {
+      @include center-columns(12, 12);
+    }
+
+    @include mq($md) {
+      @include column-width(1, 8);
+      margin-top: rem(-50);
+      width: 100%;
+    }
+
+    @include mq($lg) {
+      @include column-width(2, 7);
+    }
+
+    .button-wrapper {
+      display: none;
+
+      @include mq($lg) {
+        display: block;
+      }
+    }
+
+    h2 {
+      margin-bottom: rem(20);
+      margin-top: rem(15);
+
+      @include mq($md) {
+        margin-right: $grid-gutter-mobile;
+      }
+
+      @include mq($lg) {
+        margin-bottom: revert;
+      }
+
+      a {
+        text-decoration: none;
+        @include hocus {
+          color: $green;
+        }
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  .right-text-wrapper {
+    @include center-columns(4, 4);
+
+    @include mq($ph) {
+      @include center-columns(12, 12);
+    }
+
+    @include mq($md) {
+      @include column-width(8, 13);
+      margin-top: 2rem;
+    }
+
+    @include mq($lg) {
+      @include column-width(7, 12);
+    }
+
+    p:first-child {
+      margin-top: 0;
+    }
+
+    .button-wrapper {
+      display: block;
+
+      @include mq($lg) {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Featured tweet module hook implementations.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function wri_featured_tweet_form_layout_builder_configure_block_alter(&$form, FormStateInterface &$form_state, $form_id) {
+  // Hide the block title if this is a featured tweet.
+  wri_common_change_block_settings($form, 'featured_tweet');
+}

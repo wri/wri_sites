@@ -1,0 +1,138 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.listing_block
+    - core.entity_view_mode.node.full
+    - field.field.node.region.field_intro
+    - field.field.node.region.field_map_image
+    - field.field.node.region.field_metatags
+    - field.field.node.region.field_narrative_taxonomy
+    - field.field.node.region.field_region
+    - field.field.node.region.layout_builder__layout
+    - node.type.region
+  module:
+    - ctools
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_discovery
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: true
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          3d6c9f85-ce2b-4282-ac0e-9d8d5cd1e093:
+            uuid: 3d6c9f85-ce2b-4282-ac0e-9d8d5cd1e093
+            region: content
+            configuration:
+              id: 'entity_view:node'
+              label: 'Entity view (Content)'
+              provider: ctools
+              label_display: '0'
+              view_mode: main_content
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: -10
+          b3620eff-5c8a-4807-87ac-8a88ff2c3198:
+            uuid: b3620eff-5c8a-4807-87ac-8a88ff2c3198
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'extra_field_block:node:region:content_moderation_control'
+            additional: {  }
+            weight: -9
+          9fe4fd9b-8687-456a-af58-7244e4fb06dd:
+            uuid: 9fe4fd9b-8687-456a-af58-7244e4fb06dd
+            region: content
+            configuration:
+              id: 'inline_block:listing_block'
+              label: 'International Offices'
+              provider: layout_builder
+              label_display: visible
+              view_mode: full
+              block_revision_id: 100187
+              block_serialized: null
+              context_mapping: {  }
+            additional: {  }
+            weight: -8
+        third_party_settings: {  }
+  layout_builder_restrictions:
+    allowed_block_categories:
+      - 'Chaos Tools'
+      - Components
+      - 'Content fields'
+      - 'Custom block types'
+      - 'Custom blocks'
+      - Devel
+      - Forms
+      - 'Inline blocks'
+      - 'Lists (Views)'
+      - Menus
+      - System
+      - User
+      - 'WRI block'
+      - core
+    entity_view_mode_restriction:
+      whitelisted_blocks:
+        'Chaos Tools':
+          - 'entity_view:node'
+        Components: {  }
+        'Content fields': {  }
+        Devel: {  }
+        Forms: {  }
+        'Lists (Views)': {  }
+        Menus: {  }
+        System: {  }
+        User: {  }
+        'WRI block': {  }
+        core: {  }
+      blacklisted_blocks: {  }
+      allowed_layouts:
+        - layout_onecol
+id: node.region.full
+targetEntityType: node
+bundle: region
+mode: full
+content:
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_intro:
+    type: text_default
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_main_image:
+    type: media_thumbnail
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+hidden:
+  field_featured: true
+  field_map_image: true
+  field_metatags: true
+  field_narrative_taxonomy: true
+  field_region: true
+  field_transparent_header: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

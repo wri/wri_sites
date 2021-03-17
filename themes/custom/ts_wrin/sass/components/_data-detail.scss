@@ -1,0 +1,16 @@
+.page-node-type-data {
+  .layout__region--main_content {
+    @include font($acumin-semi-cond, "light");
+    @include font-line-height(18, 30);
+
+    p:first-of-type {
+      margin-top: 0;
+    }
+  }
+
+  .publication__detail .publication__meta-inner .layout__region {
+    @include mq($md) {
+      align-items: baseline;
+    }
+  }
+}

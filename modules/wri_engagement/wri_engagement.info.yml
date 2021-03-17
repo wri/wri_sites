@@ -1,0 +1,22 @@
+name: 'WRI Engagement'
+type: module
+description: 'Engagement functionality and fields'
+core_version_requirement: '^8.8.0 || ^9'
+package: WRI
+dependencies:
+  - webform_ui
+config_devel:
+  install:
+    - block_content.type.modal
+    - core.entity_form_display.block_content.modal.default
+    - core.entity_view_display.block_content.modal.default
+    - field.field.block_content.modal.field_cta_background
+    - field.field.block_content.modal.field_image_full_width
+    - field.field.block_content.modal.field_image_inset
+    - field.field.block_content.modal.field_intro
+    - field.field.block_content.modal.field_link
+    - field.field.block_content.modal.field_title
+    - field.field.block_content.modal.field_webform
+    - field.storage.block_content.field_webform
+    - webform.webform.call_to_action
+    - webform.webform.test_pardot_1

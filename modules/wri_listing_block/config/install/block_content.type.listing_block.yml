@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: listing_block
+label: 'Listing block'
+revision: 1
+description: 'Block that pulls in listings'

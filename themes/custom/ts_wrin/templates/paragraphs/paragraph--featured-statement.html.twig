@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display the featured statement paragraph.
+ *
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'container',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'margin-bottom-lg',
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      <a href="{{ content.field_link.0 }}">
+        <div class="intro-wrapper">
+          <div class="italic-tiny">{{ "Featured Statement"|t }}</div>
+          <div class="date">{{ content.field_updated.0 }}</div>
+        </div>
+        <div class="body-wrapper">
+          <h3 class="h3">{{ content.field_title.0 }}</h3>
+          {{ content.field_text }}
+        </div>
+      </a>
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

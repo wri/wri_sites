@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.image_cta
+    - field.storage.block_content.field_title_logo
+    - media.type.image
+id: block_content.image_cta.field_title_logo
+field_name: field_title_logo
+entity_type: block_content
+bundle: image_cta
+label: 'Title replacement logo'
+description: 'Replace the title of this block with a logo.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

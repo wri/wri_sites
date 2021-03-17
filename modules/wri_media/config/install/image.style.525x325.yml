@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 525x325
+label: 525x325
+effects:
+  8e93e25e-c350-4bad-8e30-a1d605271db4:
+    uuid: 8e93e25e-c350-4bad-8e30-a1d605271db4
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 525
+      height: 325
+      crop_type: focal_point

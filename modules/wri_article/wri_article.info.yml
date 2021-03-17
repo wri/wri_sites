@@ -1,0 +1,48 @@
+name: 'WRI article'
+type: module
+description: 'Modules related to articles on WRI'
+core_version_requirement: '^8.8.0 || ^9'
+package: WRI
+dependencies:
+  - sfc
+  - wri_author
+  - wri_media
+  - wri_data
+  - wri_node
+  - wri_project
+  - wri_publication
+  - wri_taxonomy
+config_devel:
+  install:
+    - core.entity_form_display.node.article.default
+    - core.entity_view_display.node.article.card
+    - core.entity_view_display.node.article.default
+    - core.entity_view_display.node.article.full
+    - core.entity_view_display.node.article.impact
+    - core.entity_view_display.node.article.large_image_teaser
+    - core.entity_view_display.node.article.main_content
+    - core.entity_view_display.node.article.search_results
+    - core.entity_view_display.node.article.small_image_teaser
+    - core.entity_view_display.node.article.teaser
+    - core.entity_view_display.node.article.tile
+    - core.entity_view_display.node.article.type_title
+    - field.field.node.article.body
+    - field.field.node.article.field_authors
+    - field.field.node.article.field_exclude_from_blog_feed
+    - field.field.node.article.field_featured
+    - field.field.node.article.field_featured_headline
+    - field.field.node.article.field_featured_media
+    - field.field.node.article.field_featured_text
+    - field.field.node.article.field_featured_tweet
+    - field.field.node.article.field_main_image
+    - field.field.node.article.field_metatags
+    - field.field.node.article.field_primary_topic
+    - field.field.node.article.field_projects
+    - field.field.node.article.field_region
+    - field.field.node.article.field_related_resources
+    - field.field.node.article.field_tags
+    - field.field.node.article.field_type
+    - field.field.node.article.layout_builder__layout
+    - metatag.metatag_defaults.node__article
+    - node.type.article
+    - xmlsitemap.settings.node.article

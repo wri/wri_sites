@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.unique_feature_cta
+    - field.storage.block_content.field_tag
+    - taxonomy.vocabulary.topics_and_subtopics
+id: block_content.unique_feature_cta.field_tag
+field_name: field_tag
+entity_type: block_content
+bundle: unique_feature_cta
+label: Tag
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      topics_and_subtopics: topics_and_subtopics
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

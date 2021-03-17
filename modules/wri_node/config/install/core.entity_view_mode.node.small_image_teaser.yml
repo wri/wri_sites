@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.small_image_teaser
+label: 'Small image teaser'
+targetEntityType: node
+cache: true

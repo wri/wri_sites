@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 760_wide
+label: '760 Wide'
+effects:
+  ed372d9a-247f-45c0-a736-3e9a885507c4:
+    uuid: ed372d9a-247f-45c0-a736-3e9a885507c4
+    id: image_scale
+    weight: 1
+    data:
+      width: 760
+      height: null
+      upscale: false

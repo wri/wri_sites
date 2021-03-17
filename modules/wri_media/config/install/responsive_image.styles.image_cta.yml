@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.1000x625
+    - image.style.500x375
+    - image.style.512x320
+    - image.style.720x450
+    - image.style.768x720
+  module:
+    - wri_media
+id: image_cta
+label: 'Image CTA'
+image_style_mappings:
+  -
+    breakpoint_id: wrin.xlarge
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 1000x625
+  -
+    breakpoint_id: wrin.large
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 720x450
+  -
+    breakpoint_id: wrin.medium
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 512x320
+  -
+    breakpoint_id: wrin.phablet
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 768x720
+  -
+    breakpoint_id: wrin.small
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 500x375
+breakpoint_group: wri_media
+fallback_image_style: 500x375

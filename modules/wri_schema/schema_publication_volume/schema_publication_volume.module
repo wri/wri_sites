@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains schema_publication_volume.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function schema_publication_volume_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the schema_publication_volume module.
+    case 'help.page.schema_publication_volume':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Schema Plugins for the PublicationVolume tags') . '</p>';
+      return $output;
+
+    default:
+  }
+}

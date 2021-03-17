@@ -1,0 +1,66 @@
+<template>
+  <div class="search-tray tray-contents">
+    {% if search_nav_title %}
+      <h2 class="h2 white">{{ search_nav_title }}</h2>
+    {% endif %}
+    {% if search_nav_description %}
+      <p class="tray-nav-description">{{ search_nav_description }}</p>
+    {% endif %}
+    <form class="single-border" action="/search">
+      <div class="input-wrapper">
+        <label for="{{ search_nav_id }}">{{ search_nav_label }}</label>
+        <input class="ghost" type="text" name="keys" id="{{ search_nav_id }}">
+      </div>
+      <input class="button ghost form" type="submit" value="{{ search_nav_submit }}">
+    </form>
+
+    <button class="tray-nav__close" aria-label="Toggle Search Menu" title="Close Search Menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ffffff">
+        <path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/>
+      </svg>
+    </button>
+    {{ drupal_menu('search') }}
+  </div>
+</template>
+
+<?php
+
+$definition['block']['admin_label'] = 'WRIN Search';
+$definition['aliases'] = [
+  'wrin-search'
+];
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\EntityFormInterface;
+
+$buildContextForm = function (array $form, FormStateInterface $form_state, array $default_values = []) {
+  $form['search_nav_title'] = [
+    '#type'   => 'textfield',
+    '#title'  => $this->t('Search box title'),
+    '#default_value' => isset($default_values['search_nav_title']) ? $default_values['search_nav_title']  : 'Search WRI.org',
+  ];
+  $form['search_nav_description'] = [
+    '#type'   => 'textfield',
+    '#title'  => $this->t('Search box description'),
+    '#default_value' => isset($default_values['search_nav_description']) ? $default_values['search_nav_description']  : 'Not sure where to find something? Search all of the site\'s content.'
+  ];
+  $form['search_nav_label'] = [
+    '#type'   => 'textfield',
+    '#title'  => $this->t('Input label'),
+    '#default_value' => isset($default_values['search_nav_label']) ? $default_values['search_nav_label']  : 'What can we help you find?',
+  ];
+
+  if ($form_state->getFormObject() instanceOf EntityFormInterface) {
+    $nid = $form_state->getformObject()->getEntity()->id();
+  }
+  $form['search_nav_id'] = [
+    '#type'   => 'hidden',
+    '#default_value' => $nid,
+  ];
+  $form['search_nav_submit'] = [
+    '#type'   => 'textfield',
+    '#title'  => $this->t('Submit button text'),
+    '#default_value' => isset($default_values['search_nav_submit']) ? $default_values['search_nav_submit']  : 'Search',
+  ];
+  return $form;
+};

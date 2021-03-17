@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: trending_topics
+label: 'Trending topics'
+revision: 0
+description: ''

@@ -1,0 +1,53 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.superfeatured
+    - field.field.block_content.superfeatured.field_content_types
+    - field.field.block_content.superfeatured.field_custom_feature
+    - field.field.block_content.superfeatured.field_intro
+    - field.field.block_content.superfeatured.field_listing
+  module:
+    - ds
+    - text
+    - wri_admin
+third_party_settings:
+  ds:
+    layout:
+      id: 'single_file_component_layout:wri_superfeatured_block'
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        component_context: {  }
+    regions:
+      phrase:
+        - field_intro
+      main_content:
+        - field_listing
+id: block_content.superfeatured.default
+targetEntityType: block_content
+bundle: superfeatured
+mode: default
+content:
+  field_intro:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: phrase
+  field_listing:
+    weight: 1
+    label: hidden
+    settings:
+      view_title: hidden
+      always_build_output: false
+      empty_view_title: hidden
+    third_party_settings: {  }
+    type: viewfield_token
+    region: main_content
+hidden:
+  field_content_types: true
+  field_custom_feature: true
+  search_api_excerpt: true

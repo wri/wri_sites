@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: footer-main
+label: 'Footer menu - main'
+description: ''
+locked: false

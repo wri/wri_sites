@@ -1,0 +1,8 @@
+name: 'WRI performance'
+type: module
+description: 'Modules to improve site speed and performance.'
+core_version_requirement: ^8.8.0 || ^9
+package: 'WRI'
+dependencies:
+  - dynamic_page_cache
+  - redis

@@ -1,0 +1,153 @@
+body.user-logged-in {
+  .block-local-tasks-block .tabs {
+    background-color: $black;
+    border-radius: 0 rem(3) rem(3) 0;
+    box-shadow: rem(3) rem(5) rem(5) rgba($black, 0.4);
+    padding-top: $space-sm;
+    padding-bottom: $space-sm;
+    position: fixed;
+    width: rem(200);
+    left: -200px;
+    top: 40%;
+    z-index: 1000;
+
+    .tabs-toggle {
+      background: $black;
+      box-shadow: rem(3) rem(5) rem(5) rgba($black, 0.4);
+      color: $brand-gold;
+      cursor: pointer;
+      display: block;
+      padding-top: 4px;
+      position: absolute;
+      top: 0.3rem;
+      right: rem(-40);
+      width: rem(40);
+      height: rem(60);
+      text-align: center;
+
+      .arrow {
+        background: $black url("../img/tabs/chevron-right.svg") no-repeat center
+          center;
+        background-size: 50%;
+        display: block;
+        width: rem(40);
+        height: rem(40);
+      }
+
+      &.open {
+        .arrow {
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    ul li {
+      display: block;
+      margin: 0;
+    }
+
+    ul li a {
+      color: $brand-gold;
+      font-size: rem(18);
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+
+      &:focus,
+      &.is-active,
+      &:hover {
+        background-color: rgba($black, 0.4);
+        text-decoration: underline;
+        text-underline-position: under;
+      }
+    }
+
+    // first link defaults to view
+    ul li a {
+      background: url("../img/tabs/view.svg") no-repeat 95% center;
+      background-size: rem(20);
+
+      @include hocus {
+        background: rgba($black, 0.4) url("../img/tabs/view.svg") no-repeat 95%
+          center;
+        background-size: rem(20);
+      }
+    }
+
+    ul li a[href*="shortcut"] {
+      background: url("../img/tabs/shortcut.svg") no-repeat 95% center;
+      background-size: rem(20);
+
+      @include hocus {
+        background: rgba($black, 0.4) url("../img/tabs/shortcut.svg") no-repeat
+          95% center;
+        background-size: rem(20);
+      }
+    }
+
+    ul li a[href*="edit"] {
+      background: url("../img/tabs/edit.svg") no-repeat 95% center;
+      background-size: rem(20);
+
+      @include hocus {
+        background: rgba($black, 0.4) url("../img/tabs/edit.svg") no-repeat 95%
+          center;
+        background-size: rem(20);
+      }
+    }
+
+    ul li a[href*="delete"] {
+      background: url("../img/tabs/delete.svg") no-repeat 95% center;
+      background-size: rem(20);
+
+      @include hocus {
+        background: rgba($black, 0.4) url("../img/tabs/delete.svg") no-repeat
+          95% center;
+        background-size: rem(20);
+      }
+    }
+
+    ul li a[href*="manage"] {
+      background: url("../img/tabs/manage-display.svg") no-repeat 95% center;
+      background-size: rem(20);
+
+      @include hocus {
+        background: rgba($black, 0.4) url("../img/tabs/manage-display.svg")
+          no-repeat 95% center;
+        background-size: rem(20);
+      }
+    }
+
+    ul li a[href*="revisions"] {
+      background: url("../img/tabs/revisions.svg") no-repeat 95% center;
+      background-size: rem(20);
+
+      @include hocus {
+        background: rgba($black, 0.4) url("../img/tabs/revisions.svg") no-repeat
+          95% center;
+        background-size: rem(20);
+      }
+    }
+
+    ul li a[href*="devel"] {
+      background: url("../img/tabs/devel.svg") no-repeat 95% center;
+      background-size: rem(20);
+
+      @include hocus {
+        background: rgba($black, 0.4) url("../img/tabs/devel.svg") no-repeat 95%
+          center;
+        background-size: rem(20);
+      }
+    }
+
+    ul li a[href*="translations"] {
+      background: url("../img/tabs/translations.svg") no-repeat 95% center;
+      background-size: rem(20);
+
+      @include hocus {
+        background: rgba($black, 0.4) url("../img/tabs/translations.svg")
+          no-repeat 95% center;
+        background-size: rem(20);
+      }
+    }
+  }
+}

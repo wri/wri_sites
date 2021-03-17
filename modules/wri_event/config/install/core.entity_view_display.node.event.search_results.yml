@@ -1,0 +1,211 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_results
+    - field.field.node.event.body
+    - field.field.node.event.field_date_time
+    - field.field.node.event.field_event_display
+    - field.field.node.event.field_featured
+    - field.field.node.event.field_files
+    - field.field.node.event.field_intro
+    - field.field.node.event.field_languages_spoken
+    - field.field.node.event.field_location
+    - field.field.node.event.field_location_detail
+    - field.field.node.event.field_main_image
+    - field.field.node.event.field_metatag
+    - field.field.node.event.field_primary_contacts
+    - field.field.node.event.field_primary_topic
+    - field.field.node.event.field_projects
+    - field.field.node.event.field_region
+    - field.field.node.event.field_register
+    - field.field.node.event.field_related_events
+    - field.field.node.event.field_related_resources
+    - field.field.node.event.field_social_media_links
+    - field.field.node.event.field_tags
+    - field.field.node.event.field_type
+    - field.field.node.event.layout_builder__layout
+    - image.style.150_tall
+    - node.type.event
+  module:
+    - blazy
+    - ds
+    - element_class_formatter
+    - hierarchical_term_formatter
+    - layout_builder
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+  ds:
+    layout:
+      id: layout_search-results
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      left_section:
+        - field_primary_topic
+        - field_region
+        - field_type
+      main_section:
+        - node_post_date
+        - node_title
+        - field_tags
+      right_section:
+        - field_main_image
+    fields:
+      node_post_date:
+        plugin_id: node_post_date
+        weight: 3
+        label: hidden
+        formatter: ds_post_date_short_day
+        ft:
+          id: reset
+          settings:
+            lb: ''
+      node_title:
+        plugin_id: node_title
+        weight: 4
+        label: hidden
+        formatter: default
+        settings:
+          link: true
+          wrapper: h3
+          class: h3
+        ft:
+          id: reset
+          settings:
+            lb: ''
+id: node.event.search_results
+targetEntityType: node
+bundle: event
+mode: search_results
+content:
+  field_main_image:
+    type: blazy_media
+    weight: 6
+    region: right_section
+    label: hidden
+    settings:
+      image_style: 150_tall
+      responsive_image_style: ''
+      media_switch: ''
+      thumbnail_style: ''
+      ratio: ''
+      view_mode: default
+      current_view_mode: search_results
+      background: false
+      caption:
+        title: '0'
+        alt: '0'
+      class: ''
+      id: ''
+      image: ''
+      link: ''
+      overlay: ''
+      title: ''
+      vanilla: false
+      icon: ''
+      layout: ''
+      cache: 0
+      skin: ''
+      fx: ''
+      style: ''
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      box_style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
+      grid: 0
+      grid_medium: 0
+      grid_small: 0
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  field_primary_topic:
+    weight: 0
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: left_section
+  field_region:
+    weight: 1
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: left_section
+  field_tags:
+    weight: 5
+    label: hidden
+    settings:
+      link: false
+      class: ''
+      list_type: ul
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    type: entity_reference_list_label_class
+    region: main_section
+  field_type:
+    type: hierarchical_term_formatter
+    weight: 2
+    region: left_section
+    label: hidden
+    settings:
+      display: root
+      wrap: none
+      separator: ' » '
+      link: false
+      reverse: false
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+hidden:
+  body: true
+  content_moderation_control: true
+  field_authors: true
+  field_date_time: true
+  field_event_display: true
+  field_exclude_from_blog_feed: true
+  field_featured: true
+  field_featured_headline: true
+  field_featured_media: true
+  field_featured_text: true
+  field_featured_tweet: true
+  field_files: true
+  field_intro: true
+  field_languages_spoken: true
+  field_location: true
+  field_location_detail: true
+  field_metatag: true
+  field_primary_contacts: true
+  field_projects: true
+  field_register: true
+  field_related_events: true
+  field_related_resources: true
+  field_social_media_links: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

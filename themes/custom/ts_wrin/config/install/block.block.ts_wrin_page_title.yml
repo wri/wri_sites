@@ -1,0 +1,17 @@
+langcode: en
+status: false
+dependencies:
+  theme:
+    - ts_wrin
+id: ts_wrin_page_title
+theme: ts_wrin
+region: disabled
+weight: -3
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  provider: core
+  label_display: '0'
+visibility: {  }

@@ -1,0 +1,16 @@
+{#
+/**
+ * @file
+ * Theme override for a the centers block view template.
+ *
+ * @see template_preprocess_views_view()
+ */
+#}
+<div class="views-row centers-block">
+  {% if header %}
+    {{ header }}
+  {% endif %}
+  {% if rows %}
+    {{ rows }}
+  {% endif %}
+</div>

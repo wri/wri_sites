@@ -1,0 +1,143 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.homepage_hero.field_featured_items
+    - field.field.paragraph.homepage_hero.field_featured_statement
+    - field.field.paragraph.homepage_hero.field_hero_image
+    - field.field.paragraph.homepage_hero.field_hero_intro
+    - field.field.paragraph.homepage_hero.field_hero_title
+    - paragraphs.paragraphs_type.homepage_hero
+    - responsive_image.styles.homepage_hero
+  module:
+    - blazy
+    - ds
+    - entity_reference_revisions
+    - layout_builder
+    - layout_builder_restrictions
+    - text
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      whitelisted_blocks: {  }
+      blacklisted_blocks: {  }
+      allowed_layouts: {  }
+id: paragraph.homepage_hero.default
+targetEntityType: paragraph
+bundle: homepage_hero
+mode: default
+content:
+  field_featured_items:
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: type_title
+      link: false
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_featured_statement:
+    type: entity_reference_revisions_entity_view
+    weight: 4
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    region: content
+  field_hero_image:
+    type: blazy_media
+    weight: 3
+    label: hidden
+    settings:
+      image_style: ''
+      responsive_image_style: homepage_hero
+      media_switch: ''
+      thumbnail_style: ''
+      ratio: ''
+      view_mode: default
+      current_view_mode: default
+      background: false
+      caption:
+        title: '0'
+        alt: '0'
+      class: ''
+      id: ''
+      image: ''
+      link: ''
+      overlay: ''
+      title: ''
+      vanilla: false
+      icon: ''
+      layout: ''
+      cache: 0
+      skin: ''
+      fx: ''
+      style: ''
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      box_style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
+      grid: 0
+      grid_medium: 0
+      grid_small: 0
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    region: content
+  field_hero_intro:
+    type: text_default
+    weight: 0
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+  field_hero_title:
+    type: text_default
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+hidden:
+  search_api_excerpt: true

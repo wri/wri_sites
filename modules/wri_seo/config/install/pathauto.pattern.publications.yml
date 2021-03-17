@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: publications
+label: Publications
+type: 'canonical_entities:node'
+pattern: '/[node:field_type:entity:parent]/[node:field_type]/[node:title]'
+selection_criteria:
+  e95bf1c1-f7de-4c7f-aaee-2e8bc15654b3:
+    id: node_type
+    bundles:
+      publication: publication
+    negate: false
+    context_mapping:
+      node: node
+    uuid: e95bf1c1-f7de-4c7f-aaee-2e8bc15654b3
+selection_logic: and
+weight: -5
+relationships: {  }

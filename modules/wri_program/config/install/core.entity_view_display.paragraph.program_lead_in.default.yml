@@ -1,0 +1,48 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.program_lead_in.field_leadin_paragraph
+    - field.field.paragraph.program_lead_in.field_leadin_title
+    - paragraphs.paragraphs_type.program_lead_in
+  module:
+    - ds
+    - element_class_formatter
+    - text
+id: paragraph.program_lead_in.default
+targetEntityType: paragraph
+bundle: program_lead_in
+mode: default
+content:
+  field_leadin_paragraph:
+    type: text_default
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  field_leadin_title:
+    type: wrapper_class
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      link_class: ''
+      tag: h2
+      class: ''
+      link: false
+      summary: false
+      trim: 200
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+hidden:
+  search_api_excerpt: true

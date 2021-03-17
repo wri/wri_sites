@@ -1,0 +1,20 @@
+add wri office entities:
+  title: 'Create new WRI office entities'
+
+administer wri office entities:
+  title: 'Administer WRI office entities'
+  description: 'Allow to access the administration form to configure WRI office entities.'
+  restrict access: true
+
+delete wri office entities:
+  title: 'Delete WRI office entities'
+
+edit wri office entities:
+  title: 'Edit WRI office entities'
+
+view published wri office entities:
+  title: 'View published WRI office entities'
+
+view unpublished wri office entities:
+  title: 'View unpublished WRI office entities'
+

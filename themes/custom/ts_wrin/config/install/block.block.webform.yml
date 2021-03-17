@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - webform.webform.test_pardot_1
+  module:
+    - webform
+  theme:
+    - ts_wrin
+id: webform
+theme: ts_wrin
+region: footer_top
+weight: 0
+provider: null
+plugin: webform_block
+settings:
+  id: webform_block
+  label: 'Stay Informed'
+  provider: webform
+  label_display: visible
+  webform_id: test_pardot_1
+  default_data: ''
+  redirect: false
+visibility: {  }

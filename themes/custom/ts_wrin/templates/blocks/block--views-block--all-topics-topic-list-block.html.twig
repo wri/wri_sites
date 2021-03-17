@@ -1,0 +1,19 @@
+{#
+/**
+ * @file
+ * Theme override to display the Topics View Block Wrapper.
+ *
+ * @see template_preprocess_block()
+ */
+#}
+{%
+  set classes = [
+    'topics-view-block',
+    'container',
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {% block content %}
+    {{ content }}
+  {% endblock %}
+</div>

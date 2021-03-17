@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_long_title
+    - node.type.program_center
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    basic_html: basic_html
+    full_html: '0'
+    plain_text: '0'
+id: node.program_center.field_long_title
+field_name: field_long_title
+entity_type: node
+bundle: program_center
+label: 'Long Title'
+description: 'This longer title will display in the page''s hero'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

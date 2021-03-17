@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.215x145
+    - image.style.300x200
+    - image.style.350x235
+    - image.style.363x245
+  module:
+    - wri_media
+id: card
+label: Card
+image_style_mappings:
+  -
+    breakpoint_id: wrin.xlarge
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 300x200
+  -
+    breakpoint_id: wrin.large
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 300x200
+  -
+    breakpoint_id: wrin.medium
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 215x145
+  -
+    breakpoint_id: wrin.phablet
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 350x235
+  -
+    breakpoint_id: wrin.small
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 363x245
+breakpoint_group: wri_media
+fallback_image_style: 215x145

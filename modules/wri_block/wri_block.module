@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * @file
+ * Functions for wri custom blocks.
+ */
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function wri_block_preprocess_block(array &$variables) {
+  // Custom Blocks added through layout builder are missing classes and
+  // contextual links. This preprocess hook adds them back.
+  // @see https://www.drupal.org/project/drupal/issues/2407761#comment-13414693
+  if (isset($variables["content"]["#block_content"])) {
+    if (isset($variables['content']['#attributes'])) {
+      foreach ($variables['content']['#attributes'] as $key => $content_attribute) {
+        if (isset($variables['attributes'][$key])) {
+          $variables['attributes'][$key] = array_merge($variables['attributes'][$key], $content_attribute);
+        }
+        else {
+          $variables['attributes'][$key] = $content_attribute;
+        }
+      }
+    }
+    // We're only adding contextual links for reusable blocks. Might be nice
+    // To add a link to the layout builder for non-contextuals...
+    if ($variables["content"]["#block_content"]->isReusable() && isset($variables["content"]["#contextual_links"])) {
+      $variables['attributes']['class'][] = 'contextual-region';
+
+      $variables['title_suffix']['contextual_links'] = [
+        '#type' => 'contextual_links_placeholder',
+        '#id' => _contextual_links_to_id($variables["content"]['#contextual_links']),
+      ];
+    }
+
+    // Cheap way to get the block label into the block_content render.
+    if (isset($variables["content"]["block_label"][0][0])) {
+      $variables["content"]["block_label"][0][0]['#markup'] = $variables["label"];
+      unset($variables['label']);
+    }
+  }
+
+  // Add title_attributes from this block into the title_attributes variable.
+  if (isset($variables['content']['#title_attributes'])) {
+    foreach ($variables['content']['#title_attributes'] as $key => $title_attribute) {
+      if (isset($variables['title_attributes'][$key])) {
+        $variables['title_attributes'][$key] = array_merge($variables['title_attributes'][$key], $title_attribute);
+      }
+      else {
+        $variables['title_attributes'][$key] = $title_attribute;
+      }
+    }
+  }
+}

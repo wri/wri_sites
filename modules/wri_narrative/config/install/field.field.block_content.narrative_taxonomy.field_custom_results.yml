@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.narrative_taxonomy
+    - field.storage.block_content.field_custom_results
+    - node.type.project_detail
+id: block_content.narrative_taxonomy.field_custom_results
+field_name: field_custom_results
+entity_type: block_content
+bundle: narrative_taxonomy
+label: 'Custom results'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      project_detail: project_detail
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

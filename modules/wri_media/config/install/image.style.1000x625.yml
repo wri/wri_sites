@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 1000x625
+label: 1000x625
+effects:
+  58cb0f6c-a1a9-4df6-b84e-3b5e1b63d1c9:
+    uuid: 58cb0f6c-a1a9-4df6-b84e-3b5e1b63d1c9
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1000
+      height: 625
+      crop_type: focal_point

@@ -1,0 +1,7 @@
+name: 'WRIN Topics'
+type: module
+description: 'Custom topics block.'
+core_version_requirement: '^8.8.0 || ^9'
+dependencies:
+  - sfc
+config_devel: {  }

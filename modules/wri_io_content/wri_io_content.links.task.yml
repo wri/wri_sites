@@ -1,0 +1,21 @@
+# WRI office routing definition
+wri_office.settings_tab:
+  route_name: wri_office.settings
+  title: 'Settings'
+  base_route: wri_office.settings
+
+entity.wri_office.canonical:
+  route_name: entity.wri_office.canonical
+  base_route: entity.wri_office.canonical
+  title: 'View'
+
+entity.wri_office.edit_form:
+  route_name: entity.wri_office.edit_form
+  base_route: entity.wri_office.canonical
+  title: 'Edit'
+
+entity.wri_office.delete_form:
+  route_name:  entity.wri_office.delete_form
+  base_route:  entity.wri_office.canonical
+  title: Delete
+  weight: 10

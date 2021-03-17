@@ -1,0 +1,19 @@
+name: 'WRI Narrative Taxonomy'
+type: module
+description: 'Provides Narrative Taxonomy block functionality'
+core_version_requirement: '^8.8.0 || ^9'
+package: WRI
+dependencies:
+  - block_content
+  - views
+  - wri_block
+config_devel:
+  install:
+    - block_content.type.narrative_taxonomy
+    - core.entity_form_display.block_content.narrative_taxonomy.default
+    - core.entity_view_display.block_content.narrative_taxonomy.default
+    - field.field.block_content.narrative_taxonomy.field_custom_results
+    - field.field.block_content.narrative_taxonomy.field_filter_by_region
+    - field.field.block_content.narrative_taxonomy.field_intro
+    - field.field.block_content.narrative_taxonomy.field_listing
+    - field.field.block_content.narrative_taxonomy.field_tag

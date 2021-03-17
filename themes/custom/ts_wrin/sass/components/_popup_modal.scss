@@ -1,0 +1,189 @@
+.region-modals .block {
+  display: none;
+}
+
+.block-modal,
+.simple-popup-blocks-global {
+  @include font($acumin-semi-cond, "light");
+  @include font-line-height(15, 21);
+
+  &.has-blue-background-color,
+  &.has-green-background-color,
+  &.has-black-background-color {
+    color: $white;
+
+    .field--name-field-webform {
+      color: $black;
+    }
+
+    @include mq($md) {
+      .spb_center & {
+        background: $white;
+        color: $black;
+      }
+    }
+  }
+
+  img {
+    display: none;
+
+    @include mq($md) {
+      display: block;
+    }
+  }
+
+  .top-image {
+    img {
+      object-fit: contain;
+      height: auto;
+      width: 100%;
+    }
+  }
+
+  .modal_inner {
+    padding: $space-xs;
+    @include mq($md) {
+      padding: $space-md;
+    }
+  }
+
+  .modal_inner_wrapper {
+    @include mq($md) {
+      display: flex;
+    }
+  }
+
+  .full-width-text {
+    padding: rem(24) rem(50);
+  }
+
+  .left-text {
+    margin-bottom: $space-xs;
+
+    p {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    @include mq($md) {
+      @include font-line-height(18, 28);
+      padding-right: rem(23);
+      margin-bottom: $space-sm;
+    }
+  }
+
+  .field--name-field-title {
+    @include font($acumin-semi-cond, "bold");
+    @include font-line-height(24, 30);
+    @include mq($md) {
+      @include font-line-height(32, 40);
+    }
+  }
+
+  input:not([type="submit"]) {
+    border: solid 1px #757575;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 13px 15px;
+    max-width: 100%;
+  }
+
+  .form-item {
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+  }
+
+  .webform-flexbox {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0;
+  }
+
+  .webform-flex {
+    min-width: 0;
+  }
+
+  .webform-flex--1 {
+    flex: 1;
+    max-width: 49%;
+  }
+}
+
+.simple-popup-blocks-global {
+  .spb-popup-main-wrapper {
+    max-width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  .spb_close {
+    color: #fff;
+    font-size: rem(25px);
+  }
+
+  .spb_center .spb_close {
+    @include mq($md) {
+      font-size: rem(50px);
+      margin: rem(-48);
+    }
+  }
+
+  .spb_minimize {
+    display: none;
+  }
+
+  .spb_overlay {
+    display: none;
+    @include mq($md) {
+      display: block;
+    }
+  }
+
+  .spb_center {
+    display: none;
+    @include mq($md) {
+      display: block;
+    }
+    margin-top: -25rem;
+  }
+}
+//Download files modal
+.files-modal {
+  display: none;
+  margin: $space-xs;
+  max-height: 50vh;
+  overflow: auto;
+
+  @include mq($md) {
+    margin: 36px 50px;
+  }
+}
+
+.files-modal-modal {
+  .spb_top_center {
+    top: 10%;
+  }
+
+  .spb_center {
+    margin-top: rem(-20);
+  }
+
+  .spb_close {
+    color: $black;
+  }
+
+  .button {
+    box-sizing: border-box;
+    display: block;
+    text-align: left;
+  }
+
+  .field--name-name {
+    display: inline;
+    font-weight: 700;
+  }
+
+  span {
+    font-weight: 100;
+  }
+}

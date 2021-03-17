@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.463x285
+    - image.style.525x325
+    - image.style.715x445
+    - image.style.875x540
+  module:
+    - wri_media
+id: large_image_teaser
+label: 'Large Image Teaser'
+image_style_mappings:
+  -
+    breakpoint_id: wrin.xlarge
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 875x540
+  -
+    breakpoint_id: wrin.large
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 875x540
+  -
+    breakpoint_id: wrin.medium
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 525x325
+  -
+    breakpoint_id: wrin.phablet
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 715x445
+breakpoint_group: wri_media
+fallback_image_style: 463x285

@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: io
+label: IO
+type: 'canonical_entities:node'
+pattern: '[node:field_region:entity:parents]/[node:title]'
+selection_criteria:
+  5cda381f-1170-4eb1-aa33-006c6a4c6ea0:
+    id: node_type
+    bundles:
+      international_office: international_office
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 5cda381f-1170-4eb1-aa33-006c6a4c6ea0
+selection_logic: and
+weight: -8
+relationships: {  }

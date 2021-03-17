@@ -1,0 +1,239 @@
+//GLOBAL PARAGRAPH PADDING SETTINGS
+//
+// See the wiki for more details: https://github.com/thinkshout/ts_grid/wiki/Vertical-Spacing
+// The logic in this file is as such:
+// There are three kinds of block-level items. All sizes here listed for desktop:
+// Unfriendly: Items that should appear $padding-vertical-[breakpoint] apart from each other
+// Friendly: The last item in a Friendly block should have $grid-gutter-[breakpoint], and that's how far two
+// Friendly blocks should be from each other.
+// Lovey: Items that should appear 0 rems apart from each other
+//
+// Lovey blocks provide no bottom padding -- they want other Lovey blocks to snuggle right up against them.
+//
+// Friendly also have no bottom padding -- the assumption is that the last element within this block will provide a
+// bottom padding equal to the gutter width of the grid.
+//
+// Unfriendly blocks provide a large amount of bottom padding -- they have a personal bubble and want it obeyed.
+//
+// Except for Unfriendly blocks, the rules above only apply when like follows like (Lovey + Lovey, Friendly + Friendly).
+//
+// If Lovey follows anything that ISN'T Lovey, Lovey provides enough top padding to equal $padding-vertical-[breakpoint]
+// top padding. Lovey loves other blocks, but it also wants them to be comfortable.
+//
+// If Friendly follows anything that ISN'T Friendly, Friendly provides enough top padding to equal
+// $padding-vertical-[breakpoint] for the same reason.
+//
+// If Unfriendly follows anything that ISN'T Unfriendly, it also provides the $padding-vertical-[breakpoint] top padding
+// to keep itself comfortable. It doesn't need to apply padding if it follows another Unfriendly block - the first block
+// adds the correct amount of bottom padding instead.
+//
+
+//
+// Start of Unfriendly blocks:
+//
+// These blocks should always be $padding-vertical-[breakpoint].
+//
+.unfriendly-block {
+  @extend .margin-top-xl;
+  @extend .margin-bottom-xl;
+}
+
+//
+// Start of Friendly blocks:
+//
+// Items that pretend to be one item, so padding is set by the inner elements.
+// Useful for things that appear in multiple columns on desktop, but in a
+// single column on mobile, like card views.
+//
+.friendly-block {
+  // The margin-bottom needs to match the grid gutters.
+  @extend .margin-top-xl;
+  @extend .margin-bottom-lg;
+}
+
+//
+// Start of Lovey blocks:
+//
+.lovey-block {
+  @extend .margin-zero;
+}
+
+//Applies consistent padding
+//Use classes whenever possible
+.padding-top,
+%padding-top {
+  padding-top: $padding-vertical;
+}
+
+.padding-bottom,
+%padding-bottom {
+  padding-bottom: $padding-vertical;
+}
+
+.padding-vertical,
+%padding-vertical {
+  @extend %padding-top;
+  @extend %padding-bottom;
+}
+
+// Nice for resetting header elements
+.margin-zero {
+  margin: 0;
+}
+
+.margin-top-zero,
+p.margin-top-zero {
+  margin-top: 0;
+}
+
+.margin-bottom-zero,
+p.margin-bottom-zero {
+  margin-bottom: 0;
+}
+
+// Top margin
+.margin-top-xs {
+  margin-top: $space-xs;
+}
+
+.margin-top-sm {
+  margin-top: $space-sm;
+}
+
+.margin-top-md {
+  margin-top: $space-md;
+}
+
+.margin-top-lg {
+  margin-top: $space-lg;
+}
+
+.margin-top-xl {
+  margin-top: 80px;
+
+  @include mq($md) {
+    margin-top: 84px;
+  }
+
+  @include mq($lg) {
+    margin-top: 102px;
+  }
+
+  @include mq($xl) {
+    margin-top: $space-xl;
+  }
+}
+
+.margin-top-xxl {
+  margin-top: 100px;
+
+  @include mq($md) {
+    margin-top: 108px;
+  }
+
+  @include mq($lg) {
+    margin-top: 130px;
+  }
+
+  @include mq($xl) {
+    margin-top: $space-xxl;
+  }
+}
+
+// Bottom margin
+.margin-bottom-xs {
+  margin-bottom: $space-xs;
+}
+
+.margin-bottom-sm {
+  margin-bottom: $space-sm;
+}
+
+.margin-bottom-md {
+  margin-bottom: $space-md;
+}
+
+.margin-bottom-lg {
+  margin-bottom: $space-lg;
+}
+
+.margin-bottom-xl {
+  margin-bottom: 80px;
+
+  @include mq($md) {
+    margin-bottom: 84px;
+  }
+
+  @include mq($lg) {
+    margin-bottom: 102px;
+  }
+
+  @include mq($xl) {
+    margin-bottom: $space-xl;
+  }
+}
+
+.margin-bottom-xxl {
+  margin-bottom: 100px;
+
+  @include mq($md) {
+    margin-bottom: 108px;
+  }
+
+  @include mq($lg) {
+    margin-bottom: 130px;
+  }
+
+  @include mq($xl) {
+    margin-bottom: $space-xxl;
+  }
+}
+
+// Right margin
+.margin-right-xs {
+  margin-right: $space-xs;
+}
+
+.margin-right-sm {
+  margin-right: $space-sm;
+}
+
+.margin-right-md {
+  margin-right: $space-md;
+}
+
+.margin-right-lg {
+  margin-right: $space-lg;
+}
+
+.margin-right-xl {
+  margin-right: 80px;
+
+  @include mq($md) {
+    margin-right: 84px;
+  }
+
+  @include mq($lg) {
+    margin-right: 102px;
+  }
+
+  @include mq($xl) {
+    margin-right: $space-xl;
+  }
+}
+
+.margin-right-xxl {
+  margin-right: 100px;
+
+  @include mq($md) {
+    margin-right: 108px;
+  }
+
+  @include mq($lg) {
+    margin-right: 130px;
+  }
+
+  @include mq($xl) {
+    margin-right: $space-xxl;
+  }
+}

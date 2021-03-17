@@ -1,0 +1,52 @@
+<!--
+  Components can provide field formatters by adding the "field_formatter" key
+  to their definition, which maps to an array of field formatter definition
+  values.
+-->
+
+<template>
+  {% if item.value == 1 %}
+  {{ attach_library('wri_toc/tocjs') }}
+  <nav role="navigation" id="menu-toc" aria-label="Page sub navigation" class="toc">
+
+    <div class="menu-wrapper">
+      <div class="menu">
+        <ul class="toc-list-wrapper">
+          <li class="menu-item menu-item--expanded menu-item--active-trail"><a class="menu-title" href="#">{{ node_title }}</a>
+            <ul class="toc-list" data-toc="div.main-content" data-toc-headings="h2"></ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <a href="#scroll" aria-hidden="true" tabindex="-1" class="nav-arrow"><svg aria-hidden="true" data-prefix="far" data-icon="chevron-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" class="svg-inline--fa fa-chevron-right fa-w-8 fa-3x"><path d="M24.707 38.101L4.908 57.899c-4.686 4.686-4.686 12.284 0 16.971L185.607 256 4.908 437.13c-4.686 4.686-4.686 12.284 0 16.971L24.707 473.9c4.686 4.686 12.284 4.686 16.971 0l209.414-209.414c4.686-4.686 4.686-12.284 0-16.971L41.678 38.101c-4.687-4.687-12.285-4.687-16.971 0z"/><title>{{ "Click to see more"|t }}</title></svg></a>
+  </nav>
+  {% elseif item.value == 'menu' %}
+  {{ contextual_links('menu:menu=page-hierarchies:langcode=en') }}
+  {{ drupal_block('menu_block:page-hierarchies', {level: 1, depth: 0, parent: 'page-hierarchies:' ~ menu_link, render_parent: 1, follow_parent: 'child', follow: 0, label: 'Table of Contents', label_display: 0, id:'toc', suggestion: 'toc'}) }}
+  {% endif %}
+</template>
+
+<?php
+
+$definition['field_formatter'] = [
+  'label' => 'Table of Contents',
+  'description' => 'Enables or disables a table of contents',
+  'field_types' => ['list_string'],
+];
+
+$prepareContext = function (&$context) {
+  $context['menu_link'] = '';
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof \Drupal\node\NodeInterface) {
+    $context['node_title'] = $node->getTitle();
+  }
+  // Get the menu link of the current node.
+  if($context['item']->value == 'menu' && $entity = $context['item']->getEntity()) {
+    $node_id = $context['item']->getEntity()->id();
+    if ($node_id) {
+      $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
+      $context['menu_link'] = array_key_first($menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $node_id], 'page-hierarchies'));
+    }
+  }
+};
+

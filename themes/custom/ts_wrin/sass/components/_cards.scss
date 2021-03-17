@@ -1,0 +1,86 @@
+// Large card (3 + 1 block)
+.card {
+  .card-text {
+    background-color: $white;
+    margin-top: -30px;
+    max-width: 87%;
+    padding-right: 16px;
+    padding-top: $space-xs;
+    position: relative;
+    z-index: 1;
+
+    @include mq($md) {
+      margin-top: -30px;
+    }
+
+    h2 {
+      margin-top: rem(-17);
+      margin-bottom: 0;
+      z-index: 2;
+    }
+
+    .topic-tag {
+      margin-top: 0;
+    }
+
+    .bundle {
+      margin-top: rem(15);
+      text-transform: capitalize;
+      margin-right: 8px;
+    }
+    .secondary p,
+    .secondary h3 {
+      margin-bottom: 0;
+    }
+  }
+
+  &.small-text {
+    @include font($acumin-semi-cond, "semi-bold");
+    @include font-line-height(15);
+
+    &.light {
+      @include font($acumin-semi-cond, "light");
+    }
+  }
+
+  .card-image {
+    img {
+      width: 100%;
+    }
+  }
+
+  .button.small {
+    margin-left: 0;
+    margin-top: $space-xs/2;
+  }
+}
+
+.card-h2 {
+  @include font($acumin-semi-cond, "semi-bold");
+  @include font-line-height(40, 44);
+
+  @include mq($lg) {
+    @include font-line-height(48, 55);
+  }
+}
+
+.card-teaser-text {
+  @include font($acumin-semi-cond, light);
+  @include font-line-height(18, 28);
+}
+
+.card-headline {
+  @include font($acumin-semi-cond, "light");
+  @include font-line-height(32);
+
+  a {
+    @include text-underline(transparent, $black);
+    background-position: left 100%;
+    color: $black;
+    text-decoration: none;
+  }
+
+  &.medium {
+    font-weight: 700;
+  }
+}

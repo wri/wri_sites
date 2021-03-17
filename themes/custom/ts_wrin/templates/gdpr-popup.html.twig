@@ -1,0 +1,19 @@
+<div id="gdpr-popup" class="{{data.popup_position}}" {{data.popup_color|raw}}>
+  <div class="gdpr-popup-content">
+    <div class="grid">
+      <div class="gdpr-popup-text {{data.popup_text}}">
+        <p class="gdpr-popup-cookies">{{data.text_cookies}}</p>
+        <a class="privacy-policy" href="{{ data.popup_morelink }}">{{ data.btn_findmore }}</a>
+        {#      <p class="gdpr-popup-analytics">{{data.text_analytics}}</p>#}
+      </div>
+      <div class="gdpr-popup-buttons {{data.button_text}}">
+        <button type="button" id="gdpr-agree" class="button small" {{data.button_color|raw}}>
+          {{data.btn_agree}}
+        </button>
+        {#      <button type="button" id="gdpr-find-more" data-morelink="{{data.popup_morelink}}" {{data.button_color|raw}}>#}
+        {#        {{data.btn_findmore}}#}
+        {#      </button>#}
+      </div>
+    </div>
+  </div>
+</div>

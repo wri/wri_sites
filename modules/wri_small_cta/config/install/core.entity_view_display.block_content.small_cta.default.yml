@@ -1,0 +1,71 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.small_cta
+    - field.field.block_content.small_cta.field_cta_background
+    - field.field.block_content.small_cta.field_link
+  module:
+    - ds
+    - element_class_formatter
+    - entity_class_formatter
+third_party_settings:
+  ds:
+    layout:
+      id: 'single_file_component_layout:wri_small_cta'
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        component_context: {  }
+    regions:
+      content:
+        - block_label
+        - field_link
+        - field_cta_background
+    fields:
+      block_label:
+        plugin_id: block_label
+        weight: 0
+        label: hidden
+        formatter: default
+        ft:
+          id: reset
+          settings:
+            lb: ''
+id: block_content.small_cta.default
+targetEntityType: block_content
+bundle: small_cta
+mode: default
+content:
+  field_cta_background:
+    weight: 4
+    label: hidden
+    settings:
+      prefix: ''
+      suffix: ''
+      attr: ''
+    third_party_settings: {  }
+    type: entity_class_formatter
+    region: content
+  field_link:
+    weight: 3
+    label: hidden
+    settings:
+      trim_length: 80
+      class: arrow-link
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    type: link_class
+    region: content
+hidden:
+  body: true
+  search_api_excerpt: true

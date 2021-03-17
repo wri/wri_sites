@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies: {  }
+id: node__publication
+label: 'Content: Publication'
+tags:
+  citation_pdf_url: '[node:field_files:0:entity:field_media_file:entity:url]'
+  citation_isbn: '[node:field_isbn]'
+  citation_author: '[node:field_authors]'
+  citation_title: '[node:title]'
+  citation_publication_date: '[node:created:custom:Y-d-m]'

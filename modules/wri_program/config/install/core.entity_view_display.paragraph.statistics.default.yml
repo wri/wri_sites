@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.statistics.field_statistics
+    - field.field.paragraph.statistics.field_statistics_title
+    - paragraphs.paragraphs_type.statistics
+  module:
+    - entity_reference_revisions
+id: paragraph.statistics.default
+targetEntityType: paragraph
+bundle: statistics
+mode: default
+content:
+  field_statistics:
+    type: entity_reference_revisions_entity_view
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+  field_statistics_title:
+    type: string
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  search_api_excerpt: true

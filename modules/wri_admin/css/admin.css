@@ -1,0 +1,181 @@
+/* Fix for layout. */
+.toolbar-fixed header {
+  position: static;
+}
+
+/* Hide some confusing arguments for layout builder block builder. */
+#drupal-off-canvas .layout-builder-configure-block .field--type-viewfield div[class*="-arguments"],
+#drupal-off-canvas .block-content-form .field--type-viewfield div[class*="-arguments"] {
+  display: none !important;
+  visibility: hidden;
+  height: 1px;
+}
+
+.layout-builder__add-section {
+  display: none;
+}
+
+.ui-front {
+  z-index: 1000;
+}
+
+.ui-dialog .media-library-views-form .form-actions {
+  display: none;
+}
+
+#drupal-off-canvas .ui-autocomplete li,
+#drupal-off-canvas .ui-autocomplete li a {
+  background: #ffffff;
+  line-height: 200%;
+  display: block;
+}
+
+#drupal-off-canvas .ui-autocomplete li a:hover,
+#drupal-off-canvas .ui-autocomplete li a:focus {
+  background: #ddd;
+}
+
+#drupal-off-canvas .tabledrag-toggle-weight-wrapper {
+  text-align: left;
+}
+
+#drupal-off-canvas table {
+  text-align: left;
+  margin: 0 -20px 10px -20px;
+}
+#drupal-off-canvas th:first-child,
+#drupal-off-canvas td:first-child {
+  width: 20px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+#drupal-off-canvas td {
+  padding: 2px 8px 8px 4px;
+}
+
+#drupal-off-canvas input[type="text"] {
+  width: calc(100% - 10px);
+}
+#drupal-off-canvas .field--name-field-custom-happening-nows .description {
+  margin-bottom: 10px;
+}
+
+/* Override for paragraph admin theming */
+.js .field--widget-entity-reference-paragraphs .dropbutton-wrapper {
+  display: inline-flex;
+  padding-right: 0em;
+  margin-right: 0em;
+  /* Override 600px breakpoint from core. */
+  width: auto;
+}
+
+.js .field--widget-entity-reference-paragraphs .dropbutton-widget {
+  position: relative;
+}
+
+.js .field--widget-entity-reference-paragraphs .field-multiple-table {
+  margin-bottom: 10px;
+}
+
+.js .field--widget-entity-reference-paragraphs td {
+  padding: 10px 0px 10px 0px;
+}
+
+.js .field--widget-entity-reference-paragraphs .field-multiple-drag {
+  vertical-align: top;
+}
+.js .field--widget-entity-reference-paragraphs .draggable .tabledrag-handle {
+  padding-right: 0;
+  margin-left: 0;
+}
+.js .field--widget-entity-reference-paragraphs .tabledrag-handle .handle {
+  margin-left: 0;
+  margin-right: 0;
+  padding-right: 0.2em;
+}
+
+.js .paragraph-type-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  position: relative;
+  margin-top: 25px;
+}
+.js .paragraphs-collapsed-description {
+  height: 1.538em;
+  padding-left: 1em;
+  padding-right: 1em;
+  position: relative;
+  width: 100%;
+
+  color: #777;
+  overflow: hidden;
+  word-break: break-all;
+}
+.js .paragraphs-collapsed-description:after {
+  content: '\00a0';
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 1em;
+  width: 3em;
+
+  background: #fff;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, #fff 100%);
+}
+.js .draggable:hover .paragraphs-collapsed-description:after,
+.js .draggable:hover .paragraphs-collapsed-description:after {
+  background: #f7fcff;
+  background: linear-gradient(to right, rgba(247, 252, 255, 0) 0%, #f7fcff 100%);
+}
+.js .drag-previous .paragraphs-collapsed-description:after {
+  background: #ffd;
+  background: linear-gradient(to right, rgba(255, 255, 221, 0) 0%, #ffd 100%);
+}
+.js .paragraph-type-title {
+  flex-basis: 100%;
+  min-width: 80px;
+  white-space: normal;
+  text-overflow: unset;
+  overflow: visible;
+  margin-bottom: 8px;
+}
+
+/* Hide the 'Edit' button on the Hero paragraph selector -- it makes no sense. */
+#drupal-off-canvas input[data-drupal-selector='edit-settings-block-form-field-hero-type-entities-0-actions-ief-entity-edit'].button {
+   display: none;
+}
+
+#drupal-off-canvas .dropbutton-multiple .dropbutton-widget {
+  display: block;
+  overflow: visible;
+  width: auto;
+  min-width: 0;
+  max-width: none;
+  height: auto;
+  padding: 0;
+}
+#drupal-off-canvas span.dropbutton-arrow {
+  top: 4px;
+  right: 2px;
+  background: transparent;
+}
+#drupal-off-canvas .dropbutton-multiple.open .dropbutton-widget {
+  box-shadow: none;
+}
+#drupal-off-canvas td .dropbutton-multiple .dropbutton,
+#drupal-off-canvas .dropbutton-multiple .dropbutton .secondary-action {
+  display: block;
+  width: auto;
+  height: auto;
+  padding-right: 1em;
+}
+
+.js .field--widget-entity-reference-paragraphs .delta-order {
+  padding-right: 10px;
+  text-align: right;
+}
+
+form .fieldset {
+  border: 1px solid #FFFFFF;
+}

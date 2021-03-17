@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_exclude_from_blog_feed
+    - node.type.article
+id: node.article.field_exclude_from_blog_feed
+field_name: field_exclude_from_blog_feed
+entity_type: node
+bundle: article
+label: 'Exclude From Blog Feed?'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: '1'
+  off_label: '0'
+field_type: boolean

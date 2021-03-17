@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Default theme implementation for the facets summary item list.
+ * @see facets_summary_preprocess_facets_summary_item_list()
+ *
+ * @ingroup themeable
+ */
+#}
+{% if context.list_style %}
+  {%- set attributes = attributes.addClass('item-list__' ~ context.list_style) %}
+{% endif %}
+{% if items or empty %}
+
+  {%- if items -%}
+    <div class="facet-summary-list" {{ attributes }}>
+      {%- for item in items -%}
+        {{ item.value }}
+      {%- endfor -%}
+    </div>
+  {%- else -%}
+    {{- empty -}}
+  {%- endif -%}
+{%- endif %}

@@ -1,0 +1,42 @@
+.wri-region-map-popup {
+  display: none;
+  background-color: $black;
+
+  .region-section {
+    text-align: center;
+    border-top: 1px solid $med-light-grey;
+    padding: 1rem;
+
+    &:first-child {
+      border-top: 0 none;
+    }
+  }
+
+  .region-section-label {
+    color: $white;
+    @include font($caslon, "semibold", "italic");
+    @include font-line-height(15, 18);
+  }
+
+  .region-section-link a {
+    color: $brand-gold;
+    @include font($acumin-semi-cond, "bold");
+    @include font-line-height(20, 24);
+    text-decoration: none;
+
+    @include hocus {
+      color: $gold-hover;
+      text-decoration: underline;
+    }
+  }
+}
+
+.wri-region-map-popup-button {
+  display: none;
+}
+
+.wri-region-map-popup-modal {
+  .spb_close {
+    color: $white;
+  }
+}

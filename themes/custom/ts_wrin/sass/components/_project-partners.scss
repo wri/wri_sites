@@ -1,0 +1,22 @@
+.logo-listing {
+  .content-listing .listing-items {
+    align-items: center;
+    li {
+      margin-bottom: $padding-vertical;
+      margin-right: 0;
+
+      @include mq($md) {
+        flex-basis: calc(33% - #{$grid-gutter-mobile});
+        margin-right: $space-xs;
+      }
+      @include mq($lg) {
+        flex-basis: calc(16.667% - #{$grid-gutter});
+        margin-right: $space-md;
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

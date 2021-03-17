@@ -1,0 +1,88 @@
+.has-gold-background-color .image-cta .button {
+  background-color: $white;
+  border-color: $white;
+  transition: background-color $transition-defaults,
+    border-color $transition-defaults;
+
+  @include hocus() {
+    background-color: $light-grey;
+    border-color: $light-grey;
+  }
+}
+
+.image-cta {
+  position: relative;
+
+  .block-wrapper {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    @include mq($md) {
+      justify-content: center;
+      position: relative;
+    }
+  }
+
+  .cta-text-wrapper {
+    @include font("acumin-pro-semi-condensed", "light");
+
+    p {
+      margin: 0;
+    }
+
+    @include mq($md) {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .cta-text-wrapper__inner {
+      @include mq($md) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 450px;
+        width: calc(50% - #{$grid-gutter});
+      }
+
+      @include mq($lg) {
+        width: calc(35% - #{$padding-vertical}* 2);
+      }
+    }
+
+    p {
+      @include font-line-height(18, 28);
+    }
+  }
+
+  .image-wrapper {
+    @include mq($md) {
+      bottom: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 50%;
+
+      div,
+      article,
+      picture {
+        height: 100%;
+      }
+
+      img {
+        display: block;
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+
+        @include mq($md) {
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

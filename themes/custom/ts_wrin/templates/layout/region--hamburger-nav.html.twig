@@ -1,0 +1,57 @@
+{#
+/**
+ * @file
+ * Theme override to display a region.
+ *
+ * Available variables:
+ * - content: The content for this region, typically blocks.
+ * - attributes: HTML attributes for the region div.
+ * - region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
+ *
+ * @see template_preprocess_region()
+ */
+#}
+
+{%
+  set classes = [
+    'region',
+    'region-' ~ region|clean_class,
+    'container',
+  ]
+%}
+
+<div {{ regionId }}{{ attributes.addClass(classes) }}>
+  <div class="hamburger-header">
+    <a href="{{ path('<front>') }}" rel="home" class="site-logo">
+      <img class="logo-white" src="/profiles/contrib/wri_sites/themes/custom/ts_wrin/img/svgs/nav_logo_white.svg" alt="{{ 'Home'|t }}" />
+    </a>
+    <div class="donate-menu">{{ drupal_menu('donate') }}</div>
+    <button class="mega_menu_close" aria-label="Toggle Mega Menu" title="Close Filter Menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ffffff">
+        <path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/>
+      </svg>
+    </button>
+  </div>
+  <div class="hamburger-content">
+    {{ content }}
+  </div>
+  <div class="hamburger-slider">
+    <div class="our-work-submenu">
+      <a href="#" class="back">{{ "Back"|t }}</a>
+      {{ drupal_menu('footer-secondary') }}
+    </div>
+    <div class="about-us-submenu">
+      <a href="#" class="back">{{ "Back"|t }}</a>
+        {{ drupal_block('menu_block:mega-menu', {level: 1, depth: 1, parent: 'mega-menu:menu_link_content:4ed8cbfc-ce46-4255-bbbc-629aabcf7caf', render_parent: true, label_display: "0", label: "About Us"}) }}
+    </div>
+    <div class="our-approach-submenu">
+      <a href="#" class="back">{{ "Back"|t }}</a>
+        {{ drupal_block('menu_block:mega-menu', {level: 1, depth: 1, parent: 'mega-menu:menu_link_content:440342dd-bcc9-44d2-a414-4e7fadd32439', render_parent: true, label_display: "0", label: "Our approach"}) }}
+    </div>
+    <div class="join-us-submenu">
+      <a href="#" class="back">{{ "Back"|t }}</a>
+        {{ drupal_block('menu_block:mega-menu', {level: 1, depth: 1, parent: 'mega-menu:menu_link_content:cd17726d-72ed-4523-80e1-12585c5ebfcc', render_parent: true, label_display: "0", label: "Join Us"}) }}
+    </div>
+  </div>
+</div>

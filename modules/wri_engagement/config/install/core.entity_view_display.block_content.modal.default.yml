@@ -1,0 +1,109 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.modal
+    - field.field.block_content.modal.field_cta_background
+    - field.field.block_content.modal.field_image_full_width
+    - field.field.block_content.modal.field_image_inset
+    - field.field.block_content.modal.field_intro
+    - field.field.block_content.modal.field_link
+    - field.field.block_content.modal.field_title
+    - field.field.block_content.modal.field_webform
+    - image.style.136x176
+  module:
+    - ds
+    - element_class_formatter
+    - entity_class_formatter
+    - media
+    - text
+    - webform
+id: block_content.modal.default
+targetEntityType: block_content
+bundle: modal
+mode: default
+content:
+  field_cta_background:
+    type: entity_class_formatter
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      prefix: ''
+      suffix: ''
+      attr: ''
+    third_party_settings: {  }
+  field_image_full_width:
+    type: media_thumbnail
+    weight: 8
+    label: hidden
+    settings:
+      image_style: 646x251
+      image_link: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    region: content
+  field_image_inset:
+    type: media_thumbnail
+    weight: 9
+    label: hidden
+    settings:
+      image_style: 136x176
+      image_link: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    region: content
+  field_intro:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_link:
+    weight: 4
+    label: hidden
+    settings:
+      trim_length: 80
+      class: button
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      ds:
+        ft:
+          id: default
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    type: link_class
+    region: content
+  field_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_webform:
+    weight: 6
+    label: hidden
+    settings:
+      source_entity: true
+    third_party_settings: {  }
+    type: webform_entity_reference_entity_view
+    region: content
+hidden:
+  field_image_cta_background: true
+  search_api_excerpt: true

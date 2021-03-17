@@ -1,0 +1,119 @@
+.page-node-type-project-detail,
+.page-node-type-subpage,
+.subpage {
+  .landing-page__hero.has-image {
+    .intro p {
+      @include font($acumin-semi-cond, "semibold");
+      @include font-line-height(24, 38);
+
+      @include mq($ph) {
+        max-width: 530px;
+      }
+
+      @include mq($md) {
+        @include font-line-height(30, 43);
+      }
+
+      @include mq($xl) {
+        max-width: 775px;
+      }
+    }
+  }
+  .hero__text--inner {
+    .h1 p {
+      margin-bottom: $space-xs;
+    }
+
+    h1 {
+      @include mq($lg) {
+        padding-bottom: 40px;
+      }
+    }
+
+    .intro p {
+      margin-top: 0;
+    }
+  }
+
+  .hero__text .intro-text {
+    @include font($acumin-semi-cond, "semibold");
+    @include font-line-height(30, 43);
+  }
+
+  .publication__detail .publication__meta-inner {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .publication__detail .publication__main {
+    .publication__image {
+      img {
+        width: 100%;
+      }
+
+      @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+
+      @include mq($ph) {
+        @include center-columns($grid-columns, $grid-columns);
+      }
+
+      @include mq($md) {
+        @include column-width(2, 4);
+      }
+    }
+
+    .main-content {
+      @include mq($md) {
+        @include column-width(4, 10);
+      }
+    }
+
+    .sidebar {
+      @include mq($lg) {
+        @include column-width(10, 13);
+      }
+    }
+
+    .sidebar {
+      @include mq($lg) {
+        @include column-width(10, 13);
+      }
+    }
+  }
+
+  .visit-on-twitter {
+    @include font($caslon, "italic");
+    @include font-line-height(15, 16);
+    display: block;
+    margin-bottom: $space-xs;
+    text-decoration: none;
+    white-space: nowrap;
+
+    @include hocus() {
+      text-decoration: underline;
+    }
+
+    &::after {
+      background: transparent url("../img/svgs/twitter-black.svg") no-repeat
+        center center / contain;
+      content: "";
+      display: inline-block;
+      height: 19px;
+      margin-left: rem(8);
+      vertical-align: middle;
+      width: 20px;
+    }
+
+    @include mq($lg) {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.subpage {
+  .landing-page__hero .hero__text .hero__text--inner,
+  .landing-page__hero.has-image .hero__text,
+  .landing-page__hero.has-image .hero__text .grid {
+    min-height: 550px;
+  }
+}

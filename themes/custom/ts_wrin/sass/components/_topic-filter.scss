@@ -1,0 +1,132 @@
+.sitewide-filter-applied #main-content {
+  margin-top: rem(31);
+}
+
+.sitewide-filter-status {
+  background: $brand-gold;
+  padding: rem(7) 0 rem(5);
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  z-index: 51;
+
+  @include mq($md) {
+    position: fixed;
+  }
+
+  h2.h2 {
+    @include font-line-height(36, 44);
+  }
+
+  .header.sticky & {
+    top: rem(-31);
+  }
+
+  .sitewide-content-filter-remove {
+    font-size: 0;
+    padding: rem(5);
+    position: relative;
+    display: inline-block;
+
+    &::after {
+      background: url(../img/svgs/close-black.svg) no-repeat;
+      background-size: contain;
+      content: "";
+      display: inline-block;
+      height: 8px;
+      position: relative;
+      width: 8px;
+    }
+  }
+}
+
+.toolbar-fixed {
+  .sitewide-filter-status {
+    top: 39px;
+  }
+
+  &.toolbar-tray-open.toolbar-horizontal .sitewide-filter-status {
+    top: 79px;
+  }
+}
+
+.filter-tray {
+  .header {
+    margin-bottom: rem(30);
+
+    p {
+      @include font($acumin-semi-cond, "light");
+      @include font-line-height(18, 28);
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      padding: 0;
+      white-space: nowrap;
+
+      .sitewide-content-filter {
+        display: block;
+        padding: rem(9) 0 rem(9) rem(9);
+        margin-bottom: rem(2px);
+        text-decoration: none;
+        border-radius: 5px;
+
+        .filter-remove,
+        .filter-description {
+          margin-left: rem(9);
+        }
+
+        .filter-description {
+          color: $black;
+          white-space: nowrap;
+        }
+
+        &:hover,
+        &:active,
+        &:focus,
+        &.active {
+          background-color: $brand-gold;
+          color: $black !important;
+        }
+
+        &.active .filter-description {
+          display: none;
+        }
+
+        &.all-topics {
+          .filter-remove {
+            display: inline-block;
+          }
+
+          &.active {
+            color: $brand-gold;
+
+            @include hocus() {
+              background-color: $black;
+              color: $brand-gold !important;
+            }
+
+            .filter-remove {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Hides topic filter status block from custom WRI region.
+// @see wri_filter_status.sfc
+.region-wrin-custom .sitewide-filter-status {
+  display: none;
+}

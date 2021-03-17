@@ -1,0 +1,59 @@
+.narrative-taxonomy {
+  @include center-columns(4, 4);
+
+  @include mq($ph) {
+    @include center-columns(12, 12);
+  }
+
+  @include font($acumin-semi-cond);
+  @include font-line-height(24, 30);
+
+  @include mq($md) {
+    @include font-line-height(36, 50);
+  }
+
+  p {
+    margin-top: 0;
+  }
+
+  a {
+    @include text-underline(transparent, $green);
+    background-position: left 90%;
+
+    @include hocus {
+      color: $green;
+    }
+  }
+}
+
+.block-inline-blocksuperfeatured {
+  .narrative-taxonomy {
+    @include mq($lg) {
+      @include column-width(2, 12);
+    }
+
+    a {
+      color: $black;
+      @include text-underline(transparent, $black);
+      background-size: 100% 0, 100% 2px;
+      background-position: left 90%;
+
+      @include hocus {
+        background-size: 100% 2px, 0 2px;
+      }
+    }
+  }
+}
+
+// Sidebar and meta display.
+.detail__meta-secondary,
+.layout__region--sidebar {
+  .narrative-taxonomy {
+    @include font-line-height(20, 25);
+
+    @include mq($lg) {
+      @include font-line-height(24, 30);
+      padding-bottom: $space-sm;
+    }
+  }
+}

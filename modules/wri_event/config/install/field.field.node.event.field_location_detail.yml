@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_location_detail
+    - node.type.event
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    basic_html: basic_html
+    migrated: migrated
+    unrestricted_text: '0'
+    full_html: '0'
+    plain_text: '0'
+id: node.event.field_location_detail
+field_name: field_location_detail
+entity_type: node
+bundle: event
+label: 'Location detail'
+description: 'More details about the location.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

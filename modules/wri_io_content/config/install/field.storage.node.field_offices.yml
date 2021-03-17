@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - wri_io_content
+id: node.field_offices
+field_name: field_offices
+entity_type: node
+type: entity_reference
+settings:
+  target_type: wri_office
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

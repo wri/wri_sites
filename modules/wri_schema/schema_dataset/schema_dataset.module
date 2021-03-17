@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains schema_dataset.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function schema_dataset_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the schema_dataset module.
+    case 'help.page.schema_dataset':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Schema Plugins for the Dataset tags') . '</p>';
+      return $output;
+
+    default:
+  }
+}

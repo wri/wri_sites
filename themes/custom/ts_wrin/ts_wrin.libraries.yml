@@ -1,0 +1,28 @@
+main:
+  version: VERSION
+  css:
+    theme:
+      https://use.typekit.net/nls1pjk.css: { type: external }
+      dist/main.css: {}
+  js:
+    dist/main.min.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    - core/drupal.tabbingmanager
+    - core/drupal.announce
+
+dev:
+  version: VERSION
+  css:
+    theme:
+      dist_dev/main.css: {}
+  js:
+    dist_dev/main.min.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once

@@ -1,0 +1,96 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.impact
+    - field.field.node.international_office.body
+    - field.field.node.international_office.field_featured_experts
+    - field.field.node.international_office.field_intro
+    - field.field.node.international_office.field_io_link
+    - field.field.node.international_office.field_main_image
+    - field.field.node.international_office.field_map_image
+    - field.field.node.international_office.field_metatags
+    - field.field.node.international_office.field_offices
+    - field.field.node.international_office.field_region
+    - field.field.node.international_office.layout_builder__layout
+    - node.type.international_office
+  module:
+    - ds
+    - hierarchical_term_formatter
+    - layout_builder
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+  ds:
+    layout:
+      id: layout_impact
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      tag:
+        - field_region
+      title:
+        - node_title
+    fields:
+      node_title:
+        plugin_id: node_title
+        weight: 1
+        label: hidden
+        formatter: default
+        settings:
+          link: true
+          wrapper: h2
+          class: teaser-title
+        ft:
+          id: reset
+          settings:
+            lb: ''
+id: node.international_office.impact
+targetEntityType: node
+bundle: international_office
+mode: impact
+content:
+  field_region:
+    type: hierarchical_term_formatter
+    weight: 0
+    region: tag
+    label: hidden
+    settings:
+      display: root
+      link: true
+      wrap: none
+      separator: ' » '
+      reverse: false
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: reset
+          settings:
+            lb: 'Part of'
+hidden:
+  body: true
+  content_moderation_control: true
+  field_featured: true
+  field_featured_experts: true
+  field_featured_project: true
+  field_intro: true
+  field_io_link: true
+  field_lead_in: true
+  field_long_title: true
+  field_main_image: true
+  field_map_image: true
+  field_metatags: true
+  field_offices: true
+  field_primary_contacts: true
+  field_statistics: true
+  field_twitter_account: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

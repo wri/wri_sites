@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.3_1_articles
+    - field.storage.block_content.field_content_types
+id: block_content.3_1_articles.field_content_types
+field_name: field_content_types
+entity_type: block_content
+bundle: 3_1_articles
+label: 'Filter by Content Type'
+description: 'Only Article, Data, Project, and Publication are supported.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node_type'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference

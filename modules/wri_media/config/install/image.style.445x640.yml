@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 445x640
+label: 445x640
+effects:
+  75f32f95-b1c5-4ab2-a4f9-37a5488fe013:
+    uuid: 75f32f95-b1c5-4ab2-a4f9-37a5488fe013
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 445
+      height: 640
+      crop_type: focal_point

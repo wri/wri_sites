@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Theme override to display the resources page search block.
+ *
+ * @see template_preprocess_block()
+ */
+#}
+{%
+  set classes = [
+    'resources-wrapper',
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {% block content %}
+    {{ content }}
+  {% endblock %}
+</div>

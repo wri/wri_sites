@@ -1,0 +1,54 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.hero
+    - field.storage.block_content.field_hero_type
+    - paragraphs.paragraphs_type.happening_now
+  module:
+    - entity_reference_revisions
+id: block_content.hero.field_hero_type
+field_name: field_hero_type
+entity_type: block_content
+bundle: hero
+label: 'Hero type'
+description: 'Choose a type of hero to display, or leave empty to display the default hero.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      happening_now: happening_now
+    target_bundles_drag_drop:
+      featured_statement:
+        weight: 7
+        enabled: false
+      happening_now:
+        enabled: true
+        weight: 3
+      homepage_hero:
+        weight: 4
+        enabled: false
+      impact:
+        weight: 15
+        enabled: false
+      impact_in_action_blocks:
+        weight: 16
+        enabled: false
+      partner_logo:
+        weight: 17
+        enabled: false
+      program_lead_in:
+        weight: 18
+        enabled: false
+      statistic:
+        weight: 10
+        enabled: false
+      statistics:
+        weight: 20
+        enabled: false
+field_type: entity_reference_revisions

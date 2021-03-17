@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_full_name
+    - taxonomy.vocabulary.topics_and_subtopics
+id: taxonomy_term.topics_and_subtopics.field_full_name
+field_name: field_full_name
+entity_type: taxonomy_term
+bundle: topics_and_subtopics
+label: 'Full Name'
+description: 'Enter the full name of the Topic/Subtopic. This will be displayed in Narrative Taxonomy blocks. '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

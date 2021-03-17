@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - footer-secondary
+    parent: 'footer-secondary:menu_link_content:e4ccf69b-9de6-4f16-b24b-b59f5f3143d9'
+name: Program/Center
+type: program_center
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

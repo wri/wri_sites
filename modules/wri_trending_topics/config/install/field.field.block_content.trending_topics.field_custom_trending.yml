@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.trending_topics
+    - field.storage.block_content.field_custom_trending
+    - taxonomy.vocabulary.topics_and_subtopics
+id: block_content.trending_topics.field_custom_trending
+field_name: field_custom_trending
+entity_type: block_content
+bundle: trending_topics
+label: 'Custom Trending values'
+description: 'If you don''t like the generated trending results, you can add your own values. These will appear in order at the front of the list.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      topics_and_subtopics: topics_and_subtopics
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

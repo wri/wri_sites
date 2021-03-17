@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_statistic_text
+    - paragraphs.paragraphs_type.statistic
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    basic_html: basic_html
+    full_html: '0'
+    plain_text: '0'
+id: paragraph.statistic.field_statistic_text
+field_name: field_statistic_text
+entity_type: paragraph
+bundle: statistic
+label: 'Statistic Text'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

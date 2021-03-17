@@ -1,0 +1,10 @@
+entity.wri_author.add_form:
+  route_name: entity.wri_author.add_page
+  title: 'Add Author'
+  appears_on:
+    - entity.wri_author.collection
+entity.wri_author_type.add_form:
+  route_name: entity.wri_author_type.add_form
+  title: 'Add Author type'
+  appears_on:
+    - entity.wri_author_type.collection

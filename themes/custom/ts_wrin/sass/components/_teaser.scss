@@ -1,0 +1,17 @@
+.teaser-item {
+  border-top: 1px solid $black;
+
+  .teaser__inner-wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    .right-section {
+      flex-shrink: 0;
+      margin-left: 16px;
+    }
+  }
+
+  .bundle {
+    margin-right: 8px;
+  }
+}

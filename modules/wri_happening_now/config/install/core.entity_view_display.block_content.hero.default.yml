@@ -1,0 +1,50 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.hero
+    - field.field.block_content.hero.field_hero_background
+    - field.field.block_content.hero.field_hero_type
+  module:
+    - ds
+    - entity_class_formatter
+    - entity_reference_revisions
+third_party_settings:
+  ds:
+    layout:
+      id: 'single_file_component_layout:wri_page_hero'
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        component_context: {  }
+    regions:
+      content:
+        - field_hero_type
+        - field_hero_background
+id: block_content.hero.default
+targetEntityType: block_content
+bundle: hero
+mode: default
+content:
+  field_hero_background:
+    weight: 1
+    label: hidden
+    settings:
+      prefix: ''
+      suffix: ''
+      attr: ''
+    third_party_settings: {  }
+    type: entity_class_formatter
+    region: content
+  field_hero_type:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+hidden:
+  search_api_excerpt: true

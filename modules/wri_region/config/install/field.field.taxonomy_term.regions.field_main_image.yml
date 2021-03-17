@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_main_image
+    - media.type.image
+    - taxonomy.vocabulary.regions
+id: taxonomy_term.regions.field_main_image
+field_name: field_main_image
+entity_type: taxonomy_term
+bundle: regions
+label: 'Main Image'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: name
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

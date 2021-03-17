@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.listing_block.field_block
+    - paragraphs.paragraphs_type.listing_block
+  module:
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: paragraph.listing_block.default
+targetEntityType: paragraph
+bundle: listing_block
+mode: default
+content:
+  field_block:
+    type: entity_reference_entity_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+hidden:
+  search_api_excerpt: true

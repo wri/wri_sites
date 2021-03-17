@@ -1,0 +1,277 @@
+/**
+ * @file
+ * BUTTONS - global button styling.
+ *
+ * 'wp-block-button' = Gutenberg buttons
+ */
+ button,
+ .button,
+ [type="button"],
+ [type="reset"],
+ [type="upload"],
+ [type="submit"] {
+   -moz-appearance: none;
+   -webkit-appearance: none;
+   border: 0;
+   font-family: inherit;
+   font-size: 100%;
+   font-weight: 400;
+   line-height: 1.15;
+   margin: 0;
+   overflow: visible;
+   padding: 0;
+   transition: color $transition-defaults, border-color $transition-defaults, background-color $transition-defaults;
+ }
+
+// Default is "Large button" w/ brand-gold background.
+.wp-block-button a,
+.button,
+input[type="submit"] {
+  @include font($acumin-semi-cond, "bold");
+  @include font-line-height(16, 18);
+  background-color: $brand-gold;
+  border-radius: 3px;
+  color: $black;
+  display: inline-block;
+  margin: 0;
+  padding: 20px 40px;
+  text-align: center;
+  text-decoration: none;
+
+  @include hocus() {
+    background-color: $gold-hover;
+    background-image: none;
+    color: $black;
+  }
+}
+
+// White button
+.wp-block-button.white a,
+.button.white {
+  background-color: $white;
+  border: 2px solid $brand-gold;
+
+  @include hocus() {
+    background-color: $light-grey;
+  }
+}
+
+// Gold button
+.wp-block-button.gold a,
+.button.gold {
+  background-color: $brand-gold;
+
+  @include hocus() {
+    background-color: $gold-hover;
+    color: $black;
+  }
+}
+
+// Small button
+.wp-block-button.small a,
+.button.small {
+  @include font-line-height(13, 16);
+  padding: 12px 20px;
+}
+
+.wp-block-button.small.white a,
+.button.small.white {
+  border: 2px solid $brand-gold;
+  padding: 10px 20px;
+}
+
+
+// G-G-G-Ghost button!
+.wp-block-button.ghost a,
+.button.ghost,
+input[type="submit"].ghost {
+  @include font($acumin-semi-cond, "bold", "normal");
+  @include font-line-height(16, 16);
+  border: 1px solid $light-grey;
+  background-color: transparent;
+  color: $brand-gold;
+  height: 40px;
+  box-sizing: border-box;
+  padding: 8px 14px;
+  @include mq($md) {
+    height: 50px;
+    padding: 12px 20px;
+  }
+  @include mq($lg) {
+    height: 60px;
+    padding: 18px 25px;
+  }
+
+  @include hocus() {
+    border-color: $white;
+    background-color: $true-black;
+    outline: none;
+  }
+}
+
+// Black button
+.wp-block-button.black a,
+.button.black,
+input[type="submit"].black {
+  @include font($acumin-semi-cond, "semibold", "normal");
+  @include font-line-height(13, 16);
+  border: 1px solid $black;
+  background-color: $black;
+  color: $white;
+  height: 40px;
+  box-sizing: border-box;
+  padding: 8px 14px;
+  @include mq($lg) {
+    height: 60px;
+    padding: 18px 25px;
+  }
+
+  @include hocus() {
+    border-color: $true-black;;
+    background-color: $true-black;
+    outline: none;
+  }
+}
+
+// Shared Offsite and Download buttons
+.wp-block-button.offsite a,
+.wp-block-button.download a,
+.button.offsite,
+.button.download {
+  padding-right: 56px;
+  position: relative;
+
+  &::after {
+    background-image: url(../img/svgs/arrow-thin.svg);
+    background-repeat: no-repeat;
+    background-position: center -1px;
+    background-size: 16px;
+    content: "";
+    display: inline-block;
+    position: absolute;
+  }
+
+  &.small {
+    padding-right: 36px;
+  }
+
+  &.small a {
+    text-decoration: none;
+  }
+}
+
+.wp-block-button.offsite.small a,
+.wp-block-button.download.small a {
+  padding-right: 36px;
+}
+
+// Offsite button
+.wp-block-button.offsite a,
+.button.offsite {
+  &::after {
+    background-image: url(../img/svgs/external-link-arrow.svg);
+    height: 20px;
+    width: 20px;
+    background-size: 22px;
+    margin-left: 4px;
+    background-position: center -3px;
+  }
+
+  &.small::after {
+    background-size: 18px;
+    background-position: center -2px
+  }
+}
+
+// Download button
+.wp-block-button.download a,
+.button.download {
+  background-color: $white;
+  border: 1px solid $brand-gold;
+
+  @include hocus() {
+    background-color: $brand-gold;
+  }
+
+  &::after {
+    height: 18px;
+    transform: rotate(90deg);
+    width: 18px;
+    bottom: 9px;
+    right: 10px;
+  }
+
+  &.small::after {
+    background-position-y: 3px;
+    background-size: 12px;
+  }
+}
+
+.wp-block-button__link.no-border-radius {
+  border-radius: 3px !important;
+}
+
+// Arrow link.
+a.arrow-link {
+  @include font("acumin-pro-semi-condensed");
+  color: $black;
+  display: flex;
+  padding-right: 40px;
+  position: relative;
+  text-decoration: none;
+
+  svg {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 2px;
+    width: 22px;
+  }
+
+
+  @include hocus {
+    svg {
+      @include keyframes_animate(float, 400ms, infinite, alternate);
+      fill: $black;
+    }
+    @keyframes float {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(0.25em);
+      }
+    }
+    &:before {
+      visibility: hidden;
+    }
+  }
+}
+
+input[type="submit"].search-icon {
+  @include font($acumin-semi-cond, "bold");
+  @include font-line-height(16, 18);
+  background-color: transparent;
+  background-image: url('../img/svgs/search_icon_black.svg');
+  background-size: cover;
+  width: 17px;
+  height: 18px;
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+  left: -40px;
+  top: -1px;
+  text-indent: -9999px;
+  color: $black;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  text-decoration: none;
+
+  @include hocus() {
+    background-color: transparent;
+    background-image: url('../img/svgs/search_icon_black.svg');
+    color: $black;
+  }
+}

@@ -1,0 +1,113 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.impact
+    - field.field.node.data.body
+    - field.field.node.data.field_authors
+    - field.field.node.data.field_featured
+    - field.field.node.data.field_featured_headline
+    - field.field.node.data.field_featured_text
+    - field.field.node.data.field_files
+    - field.field.node.data.field_intro
+    - field.field.node.data.field_license
+    - field.field.node.data.field_media
+    - field.field.node.data.field_metatags
+    - field.field.node.data.field_narrative_taxonomy
+    - field.field.node.data.field_platform_link
+    - field.field.node.data.field_primary_contacts
+    - field.field.node.data.field_primary_topic
+    - field.field.node.data.field_projects
+    - field.field.node.data.field_region
+    - field.field.node.data.field_related_resources
+    - field.field.node.data.field_tags
+    - field.field.node.data.field_type
+    - field.field.node.data.layout_builder__layout
+    - node.type.data
+  module:
+    - ds
+    - hierarchical_term_formatter
+    - layout_builder
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+  ds:
+    layout:
+      id: layout_impact
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      content_type:
+        - field_type
+      title:
+        - node_title
+    fields:
+      node_title:
+        plugin_id: node_title
+        weight: 1
+        label: hidden
+        formatter: default
+        settings:
+          link: true
+          wrapper: h2
+          class: teaser-title
+        ft:
+          id: reset
+          settings:
+            lb: ''
+id: node.data.impact
+targetEntityType: node
+bundle: data
+mode: impact
+content:
+  field_type:
+    type: hierarchical_term_formatter
+    weight: 0
+    region: content_type
+    label: hidden
+    settings:
+      display: root
+      wrap: none
+      separator: ' » '
+      link: false
+      reverse: false
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+hidden:
+  body: true
+  content_moderation_control: true
+  field_authors: true
+  field_featured: true
+  field_featured_headline: true
+  field_featured_project: true
+  field_featured_text: true
+  field_files: true
+  field_intro: true
+  field_lead_in: true
+  field_license: true
+  field_long_title: true
+  field_media: true
+  field_metatags: true
+  field_narrative_taxonomy: true
+  field_platform_link: true
+  field_primary_contacts: true
+  field_primary_topic: true
+  field_projects: true
+  field_region: true
+  field_related_resources: true
+  field_statistics: true
+  field_tags: true
+  field_twitter_account: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

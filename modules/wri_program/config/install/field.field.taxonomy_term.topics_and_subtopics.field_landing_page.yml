@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_landing_page
+    - node.type.program_center
+    - node.type.project_detail
+    - taxonomy.vocabulary.topics_and_subtopics
+id: taxonomy_term.topics_and_subtopics.field_landing_page
+field_name: field_landing_page
+entity_type: taxonomy_term
+bundle: topics_and_subtopics
+label: 'Landing page'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      program_center: program_center
+      project_detail: project_detail
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: program_center
+field_type: entity_reference

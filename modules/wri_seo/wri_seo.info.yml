@@ -1,0 +1,34 @@
+name: 'WRI SEO'
+type: module
+description: 'Modules to improve SEO'
+core_version_requirement: '^8.8.0 || ^9'
+package: WRI
+dependencies:
+  - metatag
+  - metatag_google_scholar
+  - metatag_facebook
+  - metatag_open_graph
+  - metatag_twitter_cards
+  - path
+  - pathauto
+  - redirect
+  - schema_article
+  - schema_dataset
+  - schema_metatag
+  - schema_person
+  - schema_project
+  - schema_publication_volume
+  - schema_web_site
+  - wri_schema
+  - xmlsitemap
+config_devel:
+  install:
+    - metatag.settings
+    - pathauto.pattern.articles
+    - pathauto.pattern.events
+    - pathauto.pattern.pages
+    - pathauto.pattern.person
+    - pathauto.pattern.publications
+    - pathauto.pattern.simple_page
+    - pathauto.pattern.subpage
+    - pathauto.pattern.title_only

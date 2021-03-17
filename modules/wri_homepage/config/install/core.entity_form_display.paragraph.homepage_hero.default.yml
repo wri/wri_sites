@@ -1,0 +1,74 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.homepage_hero.field_featured_items
+    - field.field.paragraph.homepage_hero.field_featured_statement
+    - field.field.paragraph.homepage_hero.field_hero_image
+    - field.field.paragraph.homepage_hero.field_hero_intro
+    - field.field.paragraph.homepage_hero.field_hero_title
+    - paragraphs.paragraphs_type.homepage_hero
+  module:
+    - media_library
+    - paragraphs
+    - text
+id: paragraph.homepage_hero.default
+targetEntityType: paragraph
+bundle: homepage_hero
+mode: default
+content:
+  field_featured_items:
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_featured_statement:
+    type: paragraphs
+    weight: 4
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: closed
+      closed_mode: preview
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: featured_statement
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
+    region: content
+  field_hero_image:
+    type: media_library_widget
+    weight: 3
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_hero_intro:
+    type: text_textarea
+    weight: 0
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_hero_title:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

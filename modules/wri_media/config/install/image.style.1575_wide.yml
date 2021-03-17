@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 1575_wide
+label: '1575 Wide'
+effects:
+  7f41faa3-fe47-4362-8520-433d7cf47eed:
+    uuid: 7f41faa3-fe47-4362-8520-433d7cf47eed
+    id: image_scale
+    weight: 1
+    data:
+      width: 1575
+      height: null
+      upscale: false

@@ -1,0 +1,181 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.international_office.body
+    - field.field.node.international_office.field_featured_experts
+    - field.field.node.international_office.field_intro
+    - field.field.node.international_office.field_io_link
+    - field.field.node.international_office.field_main_image
+    - field.field.node.international_office.field_map_image
+    - field.field.node.international_office.field_metatags
+    - field.field.node.international_office.field_offices
+    - field.field.node.international_office.field_region
+    - field.field.node.international_office.layout_builder__layout
+    - node.type.international_office
+  module:
+    - ctools
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_discovery
+    - media
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: true
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          bd2ccb44-07bb-4543-b037-e549d994bec0:
+            uuid: bd2ccb44-07bb-4543-b037-e549d994bec0
+            region: content
+            configuration:
+              id: 'field_block:node:international_office:field_featured_experts'
+              label: 'Featured Experts'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: entity_reference_entity_view
+                settings:
+                  view_mode: teaser
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 3
+          004311b9-a661-46b8-bea5-a2bc9a24e338:
+            uuid: 004311b9-a661-46b8-bea5-a2bc9a24e338
+            region: content
+            configuration:
+              id: 'field_block:node:international_office:field_offices'
+              label: Offices
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: entity_reference_entity_view
+                settings:
+                  view_mode: default
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 2
+          6b6f1dde-5ded-4fc6-8d02-f8922e7077e8:
+            uuid: 6b6f1dde-5ded-4fc6-8d02-f8922e7077e8
+            region: content
+            configuration:
+              id: 'entity_view:node'
+              label: 'Entity view (Content)'
+              provider: ctools
+              label_display: '0'
+              view_mode: main_content
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 1
+          bf03f5d7-9d47-48cd-b08c-b69731b685cb:
+            uuid: bf03f5d7-9d47-48cd-b08c-b69731b685cb
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'extra_field_block:node:international_office:content_moderation_control'
+            additional: {  }
+            weight: 4
+        third_party_settings: {  }
+  layout_builder_restrictions:
+    allowed_block_categories:
+      - 'Chaos Tools'
+      - Components
+      - 'Content fields'
+      - 'Custom block types'
+      - 'Custom blocks'
+      - Devel
+      - Facets
+      - 'Facets summary (Experimental)'
+      - Forms
+      - 'Inline blocks'
+      - 'Lists (Views)'
+      - Menus
+      - System
+      - User
+      - 'WRI block'
+      - core
+    entity_view_mode_restriction:
+      whitelisted_blocks:
+        'Chaos Tools':
+          - 'entity_view:node'
+        Components: {  }
+        'Content fields':
+          - 'field_block:node:international_office:field_featured_experts'
+          - 'field_block:node:international_office:field_offices'
+        Devel: {  }
+        Facets: {  }
+        'Facets summary (Experimental)': {  }
+        Forms: {  }
+        'Lists (Views)': {  }
+        Menus: {  }
+        System: {  }
+        User: {  }
+        'WRI block': {  }
+        core: {  }
+      blacklisted_blocks: {  }
+      allowed_layouts:
+        - layout_onecol
+id: node.international_office.full
+targetEntityType: node
+bundle: international_office
+mode: full
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_intro:
+    type: text_default
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_main_image:
+    type: media_thumbnail
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+hidden:
+  field_featured: true
+  field_featured_experts: true
+  field_io_link: true
+  field_map_image: true
+  field_metatags: true
+  field_offices: true
+  field_region: true
+  field_transparent_header: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: subpage
+label: Subpage
+type: 'canonical_entities:node'
+pattern: '[node:menu-link:parent:url:relative]/[node:title]'
+selection_criteria:
+  b4db7ea8-938a-4b0e-9f79-222b2bcba247:
+    id: node_type
+    bundles:
+      subpage: subpage
+    negate: false
+    context_mapping:
+      node: node
+    uuid: b4db7ea8-938a-4b0e-9f79-222b2bcba247
+selection_logic: and
+weight: -5
+relationships: {  }

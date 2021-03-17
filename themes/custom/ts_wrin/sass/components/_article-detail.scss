@@ -1,0 +1,193 @@
+.article {
+  .layout__region--hero div {
+    max-height: 240px;
+    overflow: hidden;
+    @include mq($ph) {
+      max-height: 550px;
+    }
+  }
+  .layout__region--hero img {
+    transform: translate(-50%, -50%);
+    margin-left: 50%;
+    margin-top: 25%;
+    @include mq($ph) {
+      transform: translateX(-50%);
+      margin-left: 50%;
+      margin-top: 0;
+    }
+  }
+  .layout__region--title,
+  .layout__region--byline {
+    @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+
+    @include mq($ph) {
+      @include center-columns($grid-columns, $grid-columns);
+      .article-date {
+        margin-right: $space-xs;
+      }
+    }
+  }
+
+  .layout__region--title,
+  .layout__region--byline {
+    @include mq($lg) {
+      @include center-columns(10, $grid-columns);
+    }
+  }
+
+  .layout__region--byline {
+    @include font($acumin-semi-cond, light);
+    @include font-line-height(16, 23);
+    padding-bottom: $padding-vertical;
+    border-bottom: 6px solid $black;
+
+    a {
+      font-weight: bold;
+      text-decoration: none;
+
+      @include hocus {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .article__meta {
+    .field-label-inline {
+      @extend .italic-tiny;
+      display: inline;
+      margin-right: 2px;
+    }
+
+    .taxonomy {
+      margin-right: 20px;
+    }
+
+    & > div {
+      margin-bottom: 20px;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+
+      @include mq($md) {
+        margin-bottom: 0;
+      }
+    }
+
+    .layout__region--share {
+      display: flex;
+      justify-content: space-between;
+
+      @include mq($md) {
+        display: block;
+        position: relative;
+      }
+
+      .left-sidebar.mobile {
+        display: block;
+        margin: 0;
+        max-width: rem(200);
+
+        @include mq($md) {
+          display: none;
+        }
+
+        .field-label {
+          @include font($acumin-semi-cond, "normal");
+          border-radius: 3px;
+          border: 1px solid $black;
+          display: flex;
+          font-style: normal;
+          justify-content: space-between;
+          margin-bottom: 0;
+          margin-left: rem(10);
+          padding: rem(10);
+
+          &::after {
+            background: url(../img/svgs/arrow-thin.svg) no-repeat center -1px /16px;
+            content: "";
+            display: block;
+            height: 16px;
+            transform: rotate(90deg);
+            width: 16px;
+          }
+        }
+
+        .more-on__items ul {
+          background-color: $white;
+          border: 1px solid $light-grey;
+          box-sizing: border-box;
+          display: none;
+          left: $grid-gutter-mobile;
+          opacity: 0;
+          padding: rem(15) rem(20);
+          position: absolute;
+          transition: all 0.5s ease;
+          visibility: hidden;
+          width: calc(100% - (#{$grid-gutter-mobile}) * 2);
+
+          li {
+            margin: 0 0 rem(7);
+
+            &:last-of-type {
+              margin-bottom: 0;
+            }
+          }
+
+          a {
+            @include font-line-height(18, 24);
+          }
+        }
+
+        .field-label:hover + .more-on__items ul,
+        .field-label:focus-visible + .more-on__items ul,
+        .more-on__items ul:hover {
+          display: block;
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+  }
+
+  .layout__region--left_sidebar {
+    margin-top: 1em; // Matches top of main-content text
+    display: none;
+
+    @include mq($md) {
+      display: block;
+    }
+
+    .field-label {
+      margin-bottom: rem(7);
+      @include font($caslon, "italic");
+      @include font-line-height(15, 16);
+
+      a {
+        text-decoration: none;
+      }
+    }
+
+    .more-on__items {
+      ul {
+        list-style: none;
+        margin: 0;
+
+        li {
+          margin: 0 0 rem(3);
+        }
+      }
+
+      ul li {
+        @include font($acumin-pro, "semibold");
+        @include font-line-height(14, 21);
+        color: $green;
+      }
+      ul li a {
+        @include text-underline();
+        background-position: left 100%;
+        text-decoration: none;
+      }
+    }
+  }
+}

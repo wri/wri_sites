@@ -1,0 +1,92 @@
+.block-content--type-impact-in-action .grid {
+  .h3 {
+    @include column-width(1, 13);
+    @include font($acumin-semi-cond, bold);
+    margin-top: 0;
+
+    @include mq($md) {
+      @include column-width(1, 4);
+    }
+  }
+
+  .impact-list {
+    @include column-width(1, 13);
+    @include mq($md) {
+      @include column-width(4, 13);
+    }
+  }
+
+  .impact-item {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: $space-xs;
+    border-top: 3px solid $black;
+
+    &:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  .impact-item .impact-title {
+    margin-bottom: $space-sm;
+    width: 100%;
+
+    @include mq($ph) {
+      margin-bottom: 0;
+      width: 48%;
+    }
+    @include mq($md) {
+      width: 58%;
+    }
+    @include mq($lg) {
+      width: 64%;
+    }
+  }
+
+  .impact-text {
+    @include font($acumin-semi-cond, light);
+    @include font-line-height(36, 42);
+    margin: 0;
+
+    @include mq($md) {
+      @include font-line-height(48, 58);
+    }
+  }
+
+  .impact {
+    width: 100%;
+
+    @include mq($ph) {
+      margin-left: $space-xs;
+      width: calc(48% - #{$space-xs});
+    }
+    @include mq($md) {
+      width: calc(42% - #{$space-xs});
+    }
+    @include mq($lg) {
+      width: calc(36% - #{$space-xs});
+    }
+
+    .title,
+    .teaser-title {
+      margin-top: 0;
+    }
+
+    .topic-tag span,
+    .topic-tag a {
+      text-transform: none;
+      color: $black;
+    }
+
+    .topic-tag a {
+      @include hocus() {
+        color: $green;
+      }
+    }
+  }
+}

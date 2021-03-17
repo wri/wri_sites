@@ -1,0 +1,51 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.happening_now.field_custom_happening_nows
+    - field.field.paragraph.happening_now.field_filter_by_resource_type
+    - field.field.paragraph.happening_now.field_listing
+    - field.field.paragraph.happening_now.field_tag
+    - paragraphs.paragraphs_type.happening_now
+  module:
+    - viewfield
+id: paragraph.happening_now.default
+targetEntityType: paragraph
+bundle: happening_now
+mode: default
+content:
+  field_custom_happening_nows:
+    weight: 1
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_filter_by_resource_type:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_listing:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: viewfield_select
+    region: content
+  field_tag:
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tags
+    - node.type.article
+    - taxonomy.vocabulary.tags
+    - taxonomy.vocabulary.topics_and_subtopics
+id: node.article.field_tags
+field_name: field_tags
+entity_type: node
+bundle: article
+label: 'Tags & Other Topics'
+description: 'Associate this content with a tag or additional Topics (other than the primary topic)'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tags: tags
+      topics_and_subtopics: topics_and_subtopics
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: tags
+field_type: entity_reference

@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: hero
+label: Hero
+revision: 0
+description: 'Takes items from the current page and displays it in a hero style.'

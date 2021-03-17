@@ -1,0 +1,46 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.large_cta
+    - field.field.block_content.large_cta.field_cta_background
+    - field.field.block_content.large_cta.field_image
+    - field.field.block_content.large_cta.field_link
+  module:
+    - link_attributes
+    - media_library
+id: block_content.large_cta.default
+targetEntityType: block_content
+bundle: large_cta
+mode: default
+content:
+  field_cta_background:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_image:
+    weight: 2
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+    type: media_library_widget
+    region: content
+  field_link:
+    weight: 1
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      enabled_attributes:
+        id: false
+        name: false
+        target: true
+        rel: true
+        class: true
+        accesskey: false
+    third_party_settings: {  }
+    type: link_attributes
+    region: content
+hidden:
+  info: true

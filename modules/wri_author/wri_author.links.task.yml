@@ -1,0 +1,22 @@
+# Author routing definition
+
+entity.wri_author.canonical:
+  route_name: entity.wri_author.canonical
+  base_route: entity.wri_author.canonical
+  title: 'View'
+
+entity.wri_author.edit_form:
+  route_name: entity.wri_author.edit_form
+  base_route: entity.wri_author.canonical
+  title: 'Edit'
+
+entity.wri_author.version_history:
+  route_name: entity.wri_author.version_history
+  base_route: entity.wri_author.canonical
+  title: 'Revisions'
+
+entity.wri_author.delete_form:
+  route_name:  entity.wri_author.delete_form
+  base_route:  entity.wri_author.canonical
+  title: Delete
+  weight: 10

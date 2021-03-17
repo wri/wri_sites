@@ -1,0 +1,46 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.superfeatured
+    - field.field.media.embed.field_media_embed_code
+    - field.field.media.embed.field_media_image
+    - field.field.media.embed.field_tags
+    - image.style.700x405
+    - media.type.embed
+  module:
+    - ds
+    - image
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: media.embed.superfeatured
+targetEntityType: media
+bundle: embed
+mode: superfeatured
+content:
+  thumbnail:
+    type: image
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: 700x405
+      image_link: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+hidden:
+  created: true
+  field_media_audio_file: true
+  field_media_embed_code: true
+  field_media_image: true
+  field_tags: true
+  name: true
+  search_api_excerpt: true
+  uid: true

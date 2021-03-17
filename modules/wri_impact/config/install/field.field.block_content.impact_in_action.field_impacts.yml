@@ -1,0 +1,51 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.impact_in_action
+    - field.storage.block_content.field_impacts
+    - paragraphs.paragraphs_type.impact
+  module:
+    - entity_reference_revisions
+id: block_content.impact_in_action.field_impacts
+field_name: field_impacts
+entity_type: block_content
+bundle: impact_in_action
+label: Impacts
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      impact: impact
+    target_bundles_drag_drop:
+      default_hero:
+        weight: 9
+        enabled: false
+      featured_statement:
+        weight: 10
+        enabled: false
+      happening_now:
+        weight: 11
+        enabled: false
+      homepage_hero:
+        weight: 12
+        enabled: false
+      impact:
+        enabled: true
+        weight: 13
+      program_lead_in:
+        weight: 14
+        enabled: false
+      statistic:
+        weight: 15
+        enabled: false
+      statistics:
+        weight: 16
+        enabled: false
+field_type: entity_reference_revisions

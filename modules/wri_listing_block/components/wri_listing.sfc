@@ -1,0 +1,63 @@
+<template>
+  {% if content.intro|render %}
+  {% set listing_type = listing_type ~ " columns-50-50" %}
+  {% set header_type = 'h2' %}
+  {% else %}
+  {% set header_type = 'h3' %}
+  {% endif %}
+  {% if content %}
+  <div{{ attributes.addClass(listing_type, 'grid', 'margin-bottom-lg', 'unfriendly-block') }}>
+
+    {% if content.header %}
+    <h2 {{ region_attributes.header.addClass(header_type, 'layout__region', 'layout__region--header', 'top-border-thick', 'margin-bottom-md') }}>
+    {{ content.header }}
+    </h2>
+    {% endif %}
+
+    {% if content.intro|render %}
+    <div {{ region_attributes.intro.addClass('layout__region', 'layout__region--intro', 'intro', 'margin-bottom-lg') }}>
+    {{ content.intro }}
+    </div>
+    {% endif %}
+
+    {% if content.listing.field_listing %}
+    <div {{ region_attributes.listing.addClass('layout__region', 'layout__region--listing') }}>
+    {{ content.listing.field_listing }}
+    </div>
+    {% endif %}
+
+    {% if content.listing.field_more_link|render %}
+    <div class="layout__region--more-link">
+      <span class="more-link__line"></span>
+      {{ content.listing.field_more_link }}
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+</template>
+
+<?php
+
+$definition['layout'] = [
+  'label' => 'Content Listings',
+  'regions' => [
+    'header' => ['label' => 'Header'],
+    'intro' => ['label' => 'Intro'],
+    'listing' => ['label' => 'Listing'],
+  ],
+  'icon_map' => [
+    ['header', 'intro'],
+    ['listing']
+  ],
+  'default_section' => 'listing'
+];
+
+$prepareContext = function (&$context) {
+  if (!isset($context['listing_type']) && isset($context["content"]["listing"]["field_listing"][0])) {
+    $context['listing_type'] = $context["content"]["listing"]["field_listing"][0]["#content"]["#display_id"] . '-' . $context["content"]["listing"]["field_listing"][0]["#content"]["#name"];
+  }
+  else {
+    $context['listing_type'] = '';
+  }
+};
+

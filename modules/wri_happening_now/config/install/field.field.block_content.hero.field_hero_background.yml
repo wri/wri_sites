@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.hero
+    - field.storage.block_content.field_hero_background
+  module:
+    - options
+id: block_content.hero.field_hero_background
+field_name: field_hero_background
+entity_type: block_content
+bundle: hero
+label: 'Hero background'
+description: 'Choose a background color for the hero. This will only show if there is no hero image.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

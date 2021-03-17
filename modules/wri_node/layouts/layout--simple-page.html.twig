@@ -1,0 +1,55 @@
+{#
+/**
+ * @file
+ * Display Suite Simple Page template.
+ *
+ * Available variables:
+ * - ds_content_wrapper: wrapper around content
+ * - attributes: content region attributes
+ * - ds_content: content region
+ */
+#}
+{% set text_class = '' %}
+{% if content.menu|render|striptags|trim is not empty %}
+  {% set text_class = 'has-menu' %}
+{% endif %}
+<div {{ attributes.addClass('ds-1col', 'clearfix') }}>
+  {% if content %}
+      <div class="simple-page">
+        {% if content.hero_image %}
+          <div {{ region_attributes.hero.addClass('layout__region', 'layout__region--hero') }}>
+            {{ content.hero_image }}
+          </div>
+        {% endif %}
+          <div{{ attributes.addClass('grid','simple-page__title') }}>
+            {% if content.hero_text|render|striptags|trim is not empty %}
+              <div {{ region_attributes.title.addClass('layout__region', 'layout__region--title', text_class) }}>
+                {{ content.hero_text }}
+              </div>
+            {% endif %}
+            {% if content.menu|render|striptags|trim is not empty %}
+              <div {{ region_attributes.menu.addClass('layout__region', 'layout__region--menu') }}>
+                {{ content.menu }}
+              </div>
+            {% endif %}
+        </div>
+      </div>
+
+    <div>
+      {% if content.intro %}
+        {{ content.intro}}
+      {% endif %}
+    </div>
+
+    <div class="simple-page__content grid margin-top-md margin-bottom-md">
+      {% if content.content|render|striptags|trim is not empty %}
+               <div class="content__inner main-content layout__region--main_content">
+                 {{ content.content }}
+               </div>
+         {% endif %}
+
+       </div>
+
+  {% endif %}
+
+</div>

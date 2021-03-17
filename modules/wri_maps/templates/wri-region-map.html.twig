@@ -1,0 +1,16 @@
+{#
+/**
+ * @file
+ * Theme template for the region map.
+ *
+ * Available variables:
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ * - svg_url: region map svg file url.
+ */
+#}
+<div{{ attributes }}>
+  {% include svg_url ignore missing %}
+  <div class="wri-region-map-popup"></div>
+  <button class="wri-region-map-popup-button"></button>
+</div>

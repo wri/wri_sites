@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512px" height="448px" viewBox="0 0 512 448" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="view" fill="#f3b229" fill-rule="nonzero">
+            <path d="M416,16 C416,7.16 408.84,0 400,0 L336,0 C327.16,0 320,7.16 320,16 L320,64 L416,64 L416,16 Z M63.91,127.99 C61.4,221.84 3.46,242.22 0,372 L0,416 C0,433.67 14.33,448 32,448 L128,448 C145.67,448 160,433.67 160,416 L160,256 L192,256 L192,96 L95.84,96 C78.21,96 64.39,110.37 63.91,127.99 Z M448.09,127.99 C447.61,110.37 433.79,96 416.16,96 L320,96 L320,256 L352,256 L352,416 C352,433.67 366.33,448 384,448 L480,448 C497.67,448 512,433.67 512,416 L512,372 C508.54,242.22 450.6,221.84 448.09,127.99 Z M176,0 L112,0 C103.16,0 96,7.16 96,16 L96,64 L192,64 L192,16 C192,7.16 184.84,0 176,0 Z M224,256 L288,256 L288,96 L224,96 L224,256 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>

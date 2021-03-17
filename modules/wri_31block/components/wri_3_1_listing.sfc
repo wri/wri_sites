@@ -1,0 +1,50 @@
+<template>
+  {% if content %}
+  <div{{ attributes.addClass(listing_type) }}>
+
+    {% if content.header %}
+    <div class="grid">
+      <h2 {{ region_attributes.header.addClass('layout__region', 'layout__region--header', 'h3', 'top-border-thick') }}>
+      {{ content.header }}
+      </h2>
+    </div>
+    {% endif %}
+
+    {% if content.intro %}
+    <div {{ region_attributes.intro.addClass('layout__region', 'layout__region--intro') }}>
+    {{ content.intro }}
+    </div>
+    {% endif %}
+
+    {% if content.listing.field_listing %}
+    <div {{ region_attributes.listing.addClass('layout__region', 'layout__region--listing') }}>
+    {{ content.listing.field_listing }}
+    </div>
+    {% endif %}
+
+    {% if content.listing.field_more_link %}
+    <div class="layout__region--more-link">
+      <span class="more-link__line"></span>
+      {{ content.listing.field_more_link }}
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+</template>
+
+<?php
+
+$definition['layout'] = [
+  'label' => '3+ 1 Content Listings',
+  'regions' => [
+    'header' => ['label' => 'Header'],
+    'intro' => ['label' => 'Intro'],
+    'listing' => ['label' => 'Listing'],
+  ],
+  'icon_map' => [
+    ['header', 'intro'],
+    ['listing']
+  ],
+  'default_section' => 'listing'
+];
+

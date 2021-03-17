@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_narrative_taxonomy
+    - node.type.program_center
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    basic_html: basic_html
+    full_html: '0'
+    migrated: '0'
+    unrestricted_text: '0'
+    plain_text: '0'
+id: node.program_center.field_narrative_taxonomy
+field_name: field_narrative_taxonomy
+entity_type: node
+bundle: program_center
+label: 'Narrative Taxonomy'
+description: 'If you want to use the default value, choose "Source" and paste: <code>&lt;p&gt;&#91;node:field_type:entity&#93; focuses on a number of specific Initiatives including &#91;wri_tokens:sub_topic_links_list&#93;. &lt;a href=&quot;/resources/topic/&#91;node:field_primary_topic:target_id&#93;/type/initiatives-30003&quot;&gt;Explore all Projects&lt;/a&gt; in depth.&lt;/p&gt;</code>'
+required: false
+translatable: false
+default_value:
+  -
+    value: "<p>[node:field_type:entity] focuses on a number of specific Initiatives including [wri_tokens:sub_topic_links_list]. <a href=\"/resources/topic/[node:field_primary_topic:target_id]/type/[node:field_type:target_id]\">Explore all Projects</a> in depth.</p>\r\n"
+    format: basic_html
+default_value_callback: ''
+settings: {  }
+field_type: text_long

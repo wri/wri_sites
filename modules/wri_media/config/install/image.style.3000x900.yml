@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 3000x900
+label: 3000x900
+effects:
+  40a4f385-cdc8-4a32-82d5-42bce3f4323d:
+    uuid: 40a4f385-cdc8-4a32-82d5-42bce3f4323d
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 3000
+      height: 900
+      crop_type: focal_point

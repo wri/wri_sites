@@ -1,0 +1,63 @@
+/**
+ * @file
+ * FORMS - global form element styling.
+ */
+input,
+textarea {
+  transition: color $transition-defaults, border-color $transition-defaults, background-color $transition-defaults;
+}
+
+input[type="text"].ghost {
+  @include font($acumin-semi-cond, "regular", "normal");
+  @include font-line-height(16, 22);
+  background-color: transparent;
+  border: 1px solid $light-grey;
+  color: $white;
+  height: 40px;
+  padding: 8px 15px;
+  border-radius: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  @include mq($md) {
+    height: 50px;
+    padding: 12px 20px;
+  }
+  @include mq($lg) {
+    height: 60px;
+    padding: 18px 25px;
+  }
+  @include hocus() {
+    border-color: $white;
+    background-color: $true-black;
+    outline: none;
+  }
+}
+
+.single-border {
+  border: 1px solid $light-grey;
+  input[type="text"].ghost {
+    border: none;
+    border-right: 1px solid $light-grey;
+  }
+  input[type="submit"].ghost {
+    border: none;
+  }
+}
+.webform-submission-form .form-item {
+  position: relative;
+  label {
+    left: 10px;
+    position: absolute;
+    top: 25%;
+    transition: top 0.3s ease-in, left 0.3s ease-in, font-size 0.3s ease-in;
+  }
+  &.move-label label,
+  &.has-value label {
+    font-size: rem(10);
+    top: 2px;
+    transition: top 0.3s ease-out, left 0.3s ease-out, font-size 0.3s ease-out;
+  }
+}
+

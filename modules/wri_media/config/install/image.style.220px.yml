@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 220px
+label: 220px
+effects:
+  73a54e02-0ba9-475b-a795-e0c71a219816:
+    uuid: 73a54e02-0ba9-475b-a795-e0c71a219816
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 220
+      height: 220
+      crop_type: focal_point

@@ -1,0 +1,66 @@
+#gdpr-popup {
+  padding: $space-xs 0;
+
+  p.gdpr-popup-cookies,
+  a.privacy-policy {
+    color: $white;
+    @include font($acumin-semi-cond, "Regular");
+    @include font-line-height(16, 20);
+    text-align: left;
+    display: inline;
+  }
+
+  .gdpr-popup-content {
+    max-width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    padding-right: 0;
+    padding-left: 0;
+
+    .gdpr-popup-text,
+    .gdpr-popup-buttons {
+      @include column-width(1, -1);
+    }
+
+    .gdpr-popup-text {
+      text-align: left;
+      @include mq($ph) {
+        @include column-width(1, 10);
+      }
+      @include mq($md) {
+        @include column-width(3, 9);
+      }
+      @include mq($xl) {
+        @include column-width(3, 10);
+      }
+    }
+
+    .gdpr-popup-buttons {
+      text-align: left;
+      @include mq($ph) {
+        text-align: right;
+        @include column-width(10, 13);
+      }
+      @include mq($md) {
+        @include column-width(9, 11);
+      }
+      @include mq($xl) {
+        @include column-width(10, 11);
+      }
+    }
+
+    .gdpr-popup-text {
+      max-width: 100%;
+      float: none;
+    }
+
+    .gdpr-popup-buttons {
+      max-width: 100%;
+      float: none;
+
+      button {
+        border-radius: 3px;
+      }
+    }
+  }
+}

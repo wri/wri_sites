@@ -1,0 +1,43 @@
+.trending_topic-trending_topics {
+  .view-content {
+    ul.listing-items {
+      @include mq($ph) {
+        margin-right: calc(#{$grid-gutter-mobile} * -1);
+      }
+    }
+
+    .listing-items li {
+      @include font($acumin-semi-cond, "semibold");
+      @include font-line-height(18, 20);
+      margin-bottom: rem(8);
+
+      @include mq($ph) {
+        flex-basis: calc(50% - 10px);
+        margin-right: 10px;
+      }
+
+      @include mq($md) {
+        flex-basis: calc(33.3% - 16px);
+        margin-right: 16px;
+      }
+
+      a {
+        border: 3px solid $green;
+        border-radius: 3px;
+        display: block;
+        padding: rem(20) rem(25);
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+          background: $green;
+          color: $white;
+        }
+      }
+    }
+  }
+
+  .listing-items li {
+    padding-right: 0;
+  }
+}

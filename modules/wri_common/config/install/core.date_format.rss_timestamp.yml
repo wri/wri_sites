@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: rss_timestamp
+label: "RSS Timestamp\t"
+locked: false
+pattern: 'D, d M Y H:i:s T'

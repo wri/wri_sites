@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.embed.field_media_embed_code
+    - field.field.media.embed.field_media_image
+    - field.field.media.embed.field_tags
+    - image.style.medium
+    - media.type.embed
+  module:
+    - image
+id: media.embed.media_library
+targetEntityType: media
+bundle: embed
+mode: media_library
+content:
+  thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_style: medium
+      image_link: ''
+    weight: 0
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  field_media_audio_file: true
+  field_media_embed_code: true
+  field_media_image: true
+  field_tags: true
+  name: true
+  search_api_excerpt: true
+  uid: true

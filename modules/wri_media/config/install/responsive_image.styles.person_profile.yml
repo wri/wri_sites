@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.220px
+id: person_profile
+label: 'Person Profile'
+image_style_mappings: {  }
+breakpoint_group: responsive_image
+fallback_image_style: 220px

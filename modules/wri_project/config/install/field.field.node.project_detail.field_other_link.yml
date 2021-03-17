@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_other_link
+    - node.type.project_detail
+  module:
+    - link
+id: node.project_detail.field_other_link
+field_name: field_other_link
+entity_type: node
+bundle: project_detail
+label: 'Other link'
+description: 'Another link  for this  project'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 2
+field_type: link

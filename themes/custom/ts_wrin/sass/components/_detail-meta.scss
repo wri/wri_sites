@@ -1,0 +1,138 @@
+// Styles for detail page metadata (data displayed just below header region
+// Topics, regions, countries, etc..
+.detail__meta-inner {
+  display: block;
+
+  @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+  @include mq($ph) {
+    @include center-columns($grid-columns, $grid-columns);
+  }
+
+  @include mq($lg) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  @include mq($lg) {
+    flex-direction: row;
+    justify-content: space-between;
+    @include center-columns(10, $grid-columns);
+  }
+
+  .layout__region {
+    display: block;
+
+    @include mq($lg) {
+      display: flex;
+      align-items: baseline;
+      margin-top: 0;
+      width: auto;
+
+      &.layout__region--share {
+        justify-content: flex-end;
+      }
+    }
+
+    .category-wrapper,
+    .article-date,
+    .article-page-count {
+      display: block;
+      margin-bottom: $space-xs;
+      margin-right: $space-xs;
+
+      & > .field-label-inline {
+        display: block;
+        margin-right: 4px;
+        @extend .italic-tiny;
+
+        @include mq($lg) {
+          display: inline-block;
+        }
+      }
+
+      @include mq($lg) {
+        display: inline-block;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .article-date,
+  .article-page-count {
+    @include font($acumin-semi-cond, light);
+    @include font-line-height(16, 23);
+  }
+
+  .article-page-count {
+    &::after {
+      content: " Pages";
+    }
+  }
+
+  .category-wrapper.topic-tag-wrapper {
+    & > a::after {
+      content: ", ";
+      display: inline;
+    }
+
+    & a:last-of-type::after {
+      content: "";
+    }
+  }
+
+  &.two-column {
+    @include column-width(1, 2);
+
+    @include mq($ph) {
+      @include column-width(1, 5);
+    }
+    @include mq($lg) {
+      @include column-width(2, 12);
+    }
+  }
+}
+
+.detail__meta-secondary {
+  @include column-width(3, 5);
+
+  @include mq($ph) {
+    @include column-width(5, 13);
+  }
+
+  @include mq($lg) {
+    display: none;
+  }
+}
+
+// Set the top border for mobile and dt.
+.simple-display .detail__meta {
+  // At mobile set to parent
+  border-top: 3px solid $black;
+  padding-top: $space-sm;
+
+  @include mq($lg) {
+    // Desktop, hide this border and show child.
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .detail__meta-inner {
+    padding-top: 0;
+    border-top: 0 solid $black;
+
+    @include mq($lg) {
+      border-width: 3px;
+      padding-top: $space-sm;
+    }
+  }
+}
+
+// Show/hide narrative taxonomy in sidebar.
+.layout__region--sidebar .narrative-taxonomy {
+  display: none;
+
+  @include mq($lg) {
+    display: block;
+  }
+}

@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains schema_project.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function schema_project_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the schema_project module.
+    case 'help.page.schema_project':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Schema Plugins for the Project tags') . '</p>';
+      return $output;
+
+    default:
+  }
+}

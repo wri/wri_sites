@@ -1,0 +1,192 @@
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.type_title
+    - field.field.node.project_detail.body
+    - field.field.node.project_detail.field_featured
+    - field.field.node.project_detail.field_featured_headline
+    - field.field.node.project_detail.field_featured_related_resources
+    - field.field.node.project_detail.field_featured_text
+    - field.field.node.project_detail.field_intro
+    - field.field.node.project_detail.field_logo
+    - field.field.node.project_detail.field_main_image
+    - field.field.node.project_detail.field_metatags
+    - field.field.node.project_detail.field_narrative_taxonomy
+    - field.field.node.project_detail.field_other_link
+    - field.field.node.project_detail.field_platform_link
+    - field.field.node.project_detail.field_primary_contacts
+    - field.field.node.project_detail.field_primary_topic
+    - field.field.node.project_detail.field_project_partners
+    - field.field.node.project_detail.field_region
+    - field.field.node.project_detail.field_tags
+    - field.field.node.project_detail.field_toc
+    - field.field.node.project_detail.field_twitter_account
+    - field.field.node.project_detail.field_type
+    - field.field.node.project_detail.layout_builder__layout
+    - node.type.project_detail
+  module:
+    - ds
+    - hierarchical_term_formatter
+    - layout_builder
+    - link
+    - metatag
+    - text
+    - user
+    - wri_common
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: node.project_detail.type_title
+targetEntityType: node
+bundle: project_detail
+mode: type_title
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  content_moderation_control:
+    weight: -20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_featured:
+    weight: 9
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_intro:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_metatags:
+    weight: 109
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+    region: content
+  field_other_link:
+    weight: 108
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_platform_link:
+    weight: 102
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: tokenized_link_field_formatter
+    region: content
+  field_primary_contacts:
+    weight: 107
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_primary_topic:
+    weight: 5
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_region:
+    weight: 106
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_tags:
+    weight: 8
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_toc:
+    weight: 105
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_twitter_account:
+    weight: 104
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_type:
+    weight: 0
+    label: hidden
+    settings:
+      display: root
+      wrap: none
+      separator: ' » '
+      link: false
+      reverse: false
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    type: hierarchical_term_formatter
+    region: ds_content
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_featured_headline: true
+  field_featured_related_resources: true
+  field_featured_text: true
+  field_logo: true
+  field_main_image: true
+  field_narrative_taxonomy: true
+  field_project_partners: true
+  layout_builder__layout: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

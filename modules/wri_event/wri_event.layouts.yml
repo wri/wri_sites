@@ -1,0 +1,21 @@
+layout_event:
+  label: 'Event'
+  path: layouts
+  template: layout--event
+  category: 'WRI Custom'
+  default_region: main_content
+  regions:
+    hero:
+      label: Hero
+    buttons:
+      label: Buttons
+    info:
+      label: Info
+    category:
+      label: Category
+    share:
+      label: Share
+    main_content:
+      label: Main Content
+    sidebar_left:
+      label: Left Sidebar

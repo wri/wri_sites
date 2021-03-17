@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - wri_block
+  theme:
+    - ts_wrin
+id: addressblock
+theme: ts_wrin
+region: footer_right
+weight: -7
+provider: null
+plugin: address_block
+settings:
+  id: address_block
+  label: 'Address block'
+  provider: wri_block
+  label_display: '0'
+  address:
+    value: "<p><strong>World Resources Institute</strong><br />\r\n10 G Street NE<br />\r\nSuite 800<br />\r\nWashington DC 20002</br />\r\n+1 (202) 729-7600\r\n</p>\r\n"
+    format: basic_html
+visibility: {  }

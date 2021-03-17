@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * People Search Results template.
+ */
+#}
+
+<div {{ attributes.addClass('search-results', 'search-results-people', 'margin-bottom-sm', 'search-results-container') }}>
+  {{ title_suffix.contextual_links }}
+  {% if content %}
+    <div class="search-results-text">
+      {% if content.field_leadership[0]|render %}
+        <div class="leadership">
+          {{ content.field_leadership[0]['#markup'] }}
+        </div>
+      {% endif %}
+      {% if label %}
+         <h2{{ title_attributes }}><a href="{{ url }}">{{ label }}</a></h2>
+      {% endif %}
+      {% if content.field_title|render  %}
+        <div class="job_title">
+          {{ content.field_title }}
+        </div>
+      {% endif %}
+    </div>
+    <div class="search-results-image">
+      {% if content.field_profile_image|render %}
+        {{ content.field_profile_image }}
+      {% else %}
+        <img src="/profiles/contrib/wri_sites/themes/custom/ts_wrin/img/svgs/circle_grey_solid.svg" alt="{{ 'Person default'|t }}" width="100" height="100" typeof="foaf:Image" class="image-style-_00x100">
+      {% endif %}
+    </div>
+  {% endif %}
+</div>

@@ -1,0 +1,32 @@
+{#
+/**
+ * @file
+ * Default theme implementation for the All Topics facet list.
+ * @see facets_preprocess_facets_item_list()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+  'margin-bottom-xs',
+  'facets-widget-' ~ facet.widget.type
+]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {% if items or empty %}
+    {%- if items -%}
+      <div>
+        {%- if title is not empty -%}
+          <h4 class="visually-hidden">{{ title }}</h4>
+          <a class="title" href="/resources">{{ title }}</a>
+        {%- endif -%}
+        {%- for item in items -%}
+          {{ item.value }}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      {{- empty -}}
+    {%- endif -%}
+  {%- endif %}
+</div>

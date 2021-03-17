@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: small_cta
+label: 'Small CTA'
+revision: 0
+description: ''

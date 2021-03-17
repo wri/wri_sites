@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.1024x640
+    - image.style.1440x700
+    - image.style.3000x900
+    - image.style.500x700
+    - image.style.768x640
+  module:
+    - wri_media
+id: landing_page_hero
+label: 'Landing page hero'
+image_style_mappings:
+  -
+    breakpoint_id: wrin.xlarge
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 3000x900
+  -
+    breakpoint_id: wrin.large
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 1440x700
+  -
+    breakpoint_id: wrin.medium
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 1024x640
+  -
+    breakpoint_id: wrin.phablet
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 768x640
+  -
+    breakpoint_id: wrin.small
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 500x700
+breakpoint_group: wri_media
+fallback_image_style: '_empty image_'

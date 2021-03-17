@@ -1,0 +1,20 @@
+field.widget.settings.tokenized_entit_reference:
+  type: mapping
+  label: 'Tokenized entit reference widget settings'
+  mapping:
+    size:
+      type: integer
+      label: 'Size'
+    placeholder:
+      type: textfield
+      label: 'Placeholder'
+field.widget.settings.blazy_with_tokens:
+  type: mapping
+  label: 'Blazy with tokens widget settings'
+  mapping:
+    size:
+      type: integer
+      label: 'Size'
+    placeholder:
+      type: textfield
+      label: 'Placeholder'

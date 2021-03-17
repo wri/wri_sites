@@ -1,0 +1,59 @@
+{#
+/**
+ * @file
+ * Theme override to display a media item.
+ *
+ * Available variables:
+ * - name: Name of the media.
+ * - content: Media content.
+ *
+ * @see template_preprocess_media()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+  'media',
+  'media--type-' ~ media.bundle()|clean_class,
+  not media.isPublished() ? 'media--unpublished',
+  view_mode ? 'media--view-mode-' ~ view_mode|clean_class,
+]
+%}
+
+{% macro bytesToSize(bytes) %}
+  {% spaceless %}
+    {% set kilobyte = 1024 %}
+    {% set megabyte = kilobyte * 1024 %}
+    {% set gigabyte = megabyte * 1024 %}
+    {% set terabyte = gigabyte * 1024 %}
+    {% if bytes < kilobyte %}
+      {{ bytes ~ ' B' }}
+    {% elseif bytes < megabyte %}
+      {{ (bytes / kilobyte)|number_format(2, '.') ~ ' KiB' }}
+    {% elseif bytes < gigabyte %}
+      {{ (bytes / megabyte)|number_format(2, '.') ~ ' MiB' }}
+    {% elseif bytes < terabyte %}
+      {{ (bytes / gigabyte)|number_format(2, '.') ~ ' GiB' }}
+    {% else %}
+      {{ (bytes / terabyte)|number_format(2, '.') ~ ' TiB' }}
+    {% endif %}
+  {% endspaceless %}
+{% endmacro %}
+
+
+{% if content.name|render %}
+  {% set name = content.name %}
+{% else %}
+  {% set name = content.field_media_file['#items'].entity.filename.value %}
+{% endif %}
+{% set size = content.field_media_file['#items'].entity.filesize.value %}
+{% set type = content.field_media_file['#items'].entity.filemime.value %}
+<article{{ attributes.addClass(classes) }}>
+  {{ title_suffix.contextual_links }}
+  {% if content %}
+    <a class="button small download document-inline margin-bottom-xs" href="{{ file_url(content
+      .field_media_file['#items'].entity.uri.value) }}">{{ name }}
+      <span>{{  _self.bytesToSize(size) }}  {{ type }}</span></a>
+  {% endif %}
+</article>

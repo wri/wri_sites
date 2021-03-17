@@ -1,0 +1,171 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.listing_block
+    - core.entity_view_mode.block_content.preview
+    - field.field.block_content.listing_block.field_content_types
+    - field.field.block_content.listing_block.field_featured
+    - field.field.block_content.listing_block.field_filter_by_region
+    - field.field.block_content.listing_block.field_filter_by_resource_type
+    - field.field.block_content.listing_block.field_filter_by_tag
+    - field.field.block_content.listing_block.field_intro
+    - field.field.block_content.listing_block.field_listing
+    - field.field.block_content.listing_block.field_more_link
+    - field.field.block_content.listing_block.field_tag
+  module:
+    - ds
+    - layout_builder
+    - text
+third_party_settings:
+  ds:
+    layout:
+      id: layout_onecol
+      library: layout_discovery/onecol
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      content:
+        - block_label
+        - field_content_types
+        - field_featured
+        - field_filter_by_region
+        - field_filter_by_resource_type
+        - field_filter_by_tag
+        - field_tag
+        - field_intro
+    fields:
+      block_label:
+        plugin_id: block_label
+        weight: -1
+        label: hidden
+        formatter: default
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: block_content.listing_block.preview
+targetEntityType: block_content
+bundle: listing_block
+mode: preview
+content:
+  field_content_types:
+    type: entity_reference_label
+    weight: 0
+    region: content
+    label: inline
+    settings:
+      link: false
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  field_featured:
+    type: entity_reference_label
+    weight: 0
+    region: content
+    label: inline
+    settings:
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  field_filter_by_region:
+    type: entity_reference_label
+    weight: 0
+    region: content
+    label: inline
+    settings:
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  field_filter_by_resource_type:
+    type: entity_reference_label
+    weight: 0
+    region: content
+    label: inline
+    settings:
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  field_filter_by_tag:
+    type: entity_reference_label
+    weight: 0
+    region: content
+    label: inline
+    settings:
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  field_intro:
+    weight: 3
+    label: above
+    settings:
+      trim_length: 300
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi: false
+            fi-def-at: false
+    type: text_trimmed
+    region: content
+  field_tag:
+    type: entity_reference_label
+    weight: 0
+    region: content
+    label: inline
+    settings:
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+hidden:
+  field_listing: true
+  field_more_link: true
+  search_api_excerpt: true

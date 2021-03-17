@@ -1,0 +1,11 @@
+{#
+/**
+ * @file
+ * Keeps empty paragraphs from displaying the parent field block.
+ *
+ * @see template_preprocess_block()
+ */
+#}
+{% if content|render|striptags|trim %}
+{% include "@classy/block/block.html.twig" %}
+{% endif %}

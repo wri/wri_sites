@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * Install and update hooks for the wri_maps.
+ */
+
+use Drupal\simple_popup_blocks\SimplePopupBlocksStorage;
+
+/**
+ * Implements hook_install().
+ */
+function wri_maps_install() {
+  $entry = [
+    'identifier' => 'wri-region-map-popup',
+    'type' => 1,
+    'css_selector' => 0,
+    'layout' => 7,
+    'visit_counts' => serialize(['0']),
+    'overlay' => 0,
+    'escape' => 1,
+    'trigger_method' => 1,
+    'trigger_selector' => '.wri-region-map-popup-button',
+    'delay' => 0,
+    'minimize' => 0,
+    'close' => 1,
+    'width' => 500,
+    'cookie_expiry' => 0,
+    'status' => 1,
+  ];
+  SimplePopupBlocksStorage::insert($entry, \Drupal::database(), \Drupal::service('messenger'));
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function wri_maps_uninstall($is_syncing) {
+  $blocks = SimplePopupBlocksStorage::loadCountByIdentifier('wri-region-map-popup', \Drupal::database(), \Drupal::service('messenger'));
+  foreach ($blocks as $block) {
+    SimplePopupBlocksStorage::delete($block->pid, \Drupal::database());
+  }
+}

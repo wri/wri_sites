@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: small_cta
+label: 'Small CTA'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

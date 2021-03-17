@@ -1,0 +1,54 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.featured_tweet
+    - field.storage.block_content.field_listing
+  module:
+    - viewfield
+id: block_content.featured_tweet.field_listing
+field_name: field_listing
+entity_type: block_content
+bundle: featured_tweet
+label: Listing
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    token_help: ''
+    display_id: block_1
+    arguments: '[block_content:field_custom_tweet:target_id]'
+    items_to_display: ''
+    target_uuid: 94b83af6-d1a6-4557-a04e-6d42e1e5422b
+default_value_callback: ''
+settings:
+  force_default: true
+  allowed_views:
+    featured_tweet: featured_tweet
+    content: '0'
+    content_listing: '0'
+    block_content: '0'
+    featured_tweets: '0'
+    featured_tweets_entity_browser: '0'
+    files: '0'
+    frontpage: '0'
+    media: '0'
+    media_library: '0'
+    user_admin_people: '0'
+    content_recent: '0'
+    redirect: '0'
+    reusable_blocks: '0'
+    taxonomy_term: '0'
+    watchdog: '0'
+    who_s_new: '0'
+    who_s_online: '0'
+  allowed_display_types:
+    block: block
+    entity_browser: '0'
+    feed: '0'
+    default: '0'
+    page: '0'
+  handler: 'default:view'
+  handler_settings: {  }
+field_type: viewfield

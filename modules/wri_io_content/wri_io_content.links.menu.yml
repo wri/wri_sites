@@ -1,0 +1,14 @@
+
+# WRI office menu items definition
+entity.wri_office.collection:
+  title: 'WRI office list'
+  route_name: entity.wri_office.collection
+  description: 'List WRI office entities'
+  parent: system.admin_content
+  weight: 100
+
+wri_office.admin.structure.settings:
+  title: 'WRI office settings'
+  description: 'Configure WRI office entities'
+  route_name: wri_office.settings
+  parent: system.admin_structure

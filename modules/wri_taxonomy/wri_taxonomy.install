@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall hooks for the wri_sites install profile.
+ */
+
+use Drupal\taxonomy\Entity\Term;
+
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for this profile.
+ *
+ * @see system_install()
+ */
+function wri_taxonomy_install() {
+  // Add terms needed for different configs.
+  // Article: 49b8dec4-f95c-4b9f-8ad7-3dd51706da53.
+  $article = Term::create([
+    'name' => 'Article',
+    'vid' => 'resource_type',
+    'uuid' => '49b8dec4-f95c-4b9f-8ad7-3dd51706da53',
+  ]);
+  $article->save();
+  // Podcasts: taxonomy_term:resource_type:721a8bb1-b5a4-49dc-ad12-e65066833beb.
+  Term::create([
+    'name' => 'Podcast',
+    'parent' => $article->id(),
+    'vid' => 'resource_type',
+    'uuid' => '721a8bb1-b5a4-49dc-ad12-e65066833beb',
+  ])->save();
+}

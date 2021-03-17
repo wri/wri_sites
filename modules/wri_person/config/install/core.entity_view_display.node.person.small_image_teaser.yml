@@ -1,0 +1,91 @@
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.small_image_teaser
+    - field.field.node.person.body
+    - field.field.node.person.field_alternate_contact
+    - field.field.node.person.field_areas_of_expertise
+    - field.field.node.person.field_email
+    - field.field.node.person.field_first_name
+    - field.field.node.person.field_international_office
+    - field.field.node.person.field_languages_spoken
+    - field.field.node.person.field_last_name
+    - field.field.node.person.field_leadership
+    - field.field.node.person.field_metatags
+    - field.field.node.person.field_phone
+    - field.field.node.person.field_profile_image
+    - field.field.node.person.field_project_expert
+    - field.field.node.person.field_quote
+    - field.field.node.person.field_title
+    - field.field.node.person.field_topics
+    - field.field.node.person.field_twitter_account
+    - field.field.node.person.field_type
+    - field.field.node.person.layout_builder__layout
+    - node.type.person
+  module:
+    - layout_builder
+    - metatag
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: node.person.small_image_teaser
+targetEntityType: node
+bundle: person
+mode: small_image_teaser
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_metatags:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+    region: content
+  field_profile_image:
+    type: entity_reference_entity_view
+    weight: 102
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_alternate_contact: true
+  field_areas_of_expertise: true
+  field_email: true
+  field_first_name: true
+  field_international_office: true
+  field_languages_spoken: true
+  field_last_name: true
+  field_leadership: true
+  field_phone: true
+  field_project_expert: true
+  field_quote: true
+  field_title: true
+  field_topics: true
+  field_twitter_account: true
+  field_type: true
+  layout_builder__layout: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

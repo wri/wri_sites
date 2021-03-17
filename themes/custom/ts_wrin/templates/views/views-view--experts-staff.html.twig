@@ -1,0 +1,64 @@
+{%
+  set classes = [
+    'view',
+    'view-' ~ id|clean_class,
+    'view-id-' ~ id,
+    'experts-container',
+    'topics-view-block',
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+<div class="container">
+  <h1 class="h1 padding-top">{{ view.title|raw }}</h1>
+  {% if header %}{{ header|without('extra_result') }}{% endif %}
+  </div>
+  {{ drupal_block('facet_block:experts_all_topics') }}
+  <div class="resources-wrapper">
+    <div class="container">
+      {% if exposed %}
+        <div class="view-filters">
+          <button class="button black filters">{{ "Filters"|t }}</button>
+          {{ exposed }}
+        </div>
+      {% endif %}
+
+      <div class="grid results-wrapper">
+        <div class="results-sidebar padding-bottom">
+          {{ drupal_block('facet_block:international_office') }}
+          {{ drupal_block('facet_block:languages_spoken_taxonomy_term_name') }}
+        </div>
+
+        <div class="results-body padding-bottom">
+          {% if header %}
+            <div class="view-header">
+              {{ header.extra_result }}
+              {{ drupal_block('facets_summary_block:experts_summary') }}
+            </div>
+          {% endif %}
+          {% if rows %}
+            <div class="view-content">
+              {{ rows }}
+            </div>
+          {% elseif empty %}
+            <div class="view-empty">
+              {{ empty }}
+            </div>
+          {% endif %}
+
+          {% if pager %}
+            {{ pager }}
+          {% endif %}
+          {% if more %}
+            {{ more }}
+          {% endif %}
+        </div>
+      </div>
+
+      {% if footer %}
+        <div class="view-footer">
+          {{ footer }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

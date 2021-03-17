@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_twitter_account
+    - node.type.program_center
+  module:
+    - link
+id: node.program_center.field_twitter_account
+field_name: field_twitter_account
+entity_type: node
+bundle: program_center
+label: 'Visit on Twitter'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

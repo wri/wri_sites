@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: superfeatured
+label: 'Superfeatured Item'
+revision: 0
+description: ''

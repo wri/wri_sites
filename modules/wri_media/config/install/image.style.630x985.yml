@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 630x985
+label: 630x985
+effects:
+  ea6d3771-8cef-41d9-949c-96e8d0f68c6b:
+    uuid: ea6d3771-8cef-41d9-949c-96e8d0f68c6b
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 630
+      height: 985
+      crop_type: focal_point

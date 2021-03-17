@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.1260_wide
+    - image.style.1575_wide
+    - image.style.455_wide
+    - image.style.760_wide
+    - image.style.965_wide
+  module:
+    - wri_media
+id: full_content
+label: 'Full Content'
+image_style_mappings:
+  -
+    breakpoint_id: wrin.xlarge
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 1575_wide
+  -
+    breakpoint_id: wrin.large
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 1260_wide
+  -
+    breakpoint_id: wrin.medium
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 965_wide
+  -
+    breakpoint_id: wrin.phablet
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 760_wide
+  -
+    breakpoint_id: wrin.small
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: 455_wide
+breakpoint_group: wri_media
+fallback_image_style: 455_wide

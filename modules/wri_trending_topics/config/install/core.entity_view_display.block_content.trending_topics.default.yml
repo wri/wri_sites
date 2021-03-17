@@ -1,0 +1,50 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.trending_topics
+    - field.field.block_content.trending_topics.field_content_types
+    - field.field.block_content.trending_topics.field_custom_trending
+    - field.field.block_content.trending_topics.field_listing
+  module:
+    - ds
+    - wri_admin
+third_party_settings:
+  ds:
+    layout:
+      id: 'single_file_component_layout:wri_listing'
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        component_context: {  }
+    regions:
+      header:
+        - block_label
+      listing:
+        - field_listing
+    fields:
+      block_label:
+        plugin_id: block_label
+        weight: 0
+        label: hidden
+        formatter: default
+id: block_content.trending_topics.default
+targetEntityType: block_content
+bundle: trending_topics
+mode: default
+content:
+  field_listing:
+    weight: 1
+    label: hidden
+    settings:
+      view_title: hidden
+      always_build_output: false
+      empty_view_title: hidden
+    third_party_settings: {  }
+    type: viewfield_token
+    region: listing
+hidden:
+  field_content_types: true
+  field_custom_trending: true
+  search_api_excerpt: true

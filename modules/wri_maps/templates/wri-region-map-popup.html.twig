@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * Theme template for the region map popup.
+ *
+ * Available variables:
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ * - region_link: the region link.
+ * - international_office_links: the io links.
+ */
+#}
+<div{{ attributes }}>
+  {% if region_link %}
+    <div class="region-section">
+      <div class="region-section-label">{{ 'Learn more about our work in' | t }}</div>
+      <div class="region-section-link">{{ region_link }}</div>
+    </div>
+  {% endif %}
+  {% for international_office_link in international_office_links %}
+    <div class="region-section">
+      <div class="region-section-label">{{ 'Visit' | t }}</div>
+      <div class="region-section-link">{{ international_office_link }}</div>
+    </div>
+  {% endfor %}
+</div>

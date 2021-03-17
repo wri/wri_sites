@@ -1,0 +1,15 @@
+{#
+/**
+ * @file
+ * Theme override to display the homepage node.
+ */
+#}
+{%
+  set classes = [
+    'node',
+  ]
+%}
+{{ attach_library('classy/node') }}
+<article{{ attributes.addClass(classes) }}>
+  {{ content }}
+</article>

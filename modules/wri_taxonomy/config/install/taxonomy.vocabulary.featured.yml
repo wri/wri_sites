@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: Featured
+vid: featured
+description: 'Tags to determine a piece of content''s level of featuredness.'
+weight: 0

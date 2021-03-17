@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_expert
+    - node.type.person
+id: node.person.field_project_expert
+field_name: field_project_expert
+entity_type: node
+bundle: person
+label: Projects
+description: 'Which project(s) is this person an expert in?'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: content_by_type
+      display_name: entity_reference_1
+      arguments:
+        - project_detail
+field_type: entity_reference

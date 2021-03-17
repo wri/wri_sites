@@ -1,0 +1,9 @@
+status: 1
+pattern: '[wri_author:field_person:entity:title]'
+escape: false
+dependencies:
+  config:
+    - wri_author.wri_author_type.internal
+preserve_titles: false
+save: 0
+chunk: '50'

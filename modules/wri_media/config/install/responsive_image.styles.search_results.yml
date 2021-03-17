@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.150_wide
+id: search_results
+label: 'Search Results'
+image_style_mappings: {  }
+breakpoint_group: responsive_image
+fallback_image_style: 150_wide

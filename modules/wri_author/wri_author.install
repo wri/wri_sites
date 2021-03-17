@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * Contains wri_author install and update hooks.
+ */
+
+/**
+ * Remove (WRI) from internal author titles.
+ */
+function wri_author_update_8900() {
+  // UPDATE wri_author_field_data SET name=REPLACE(name,' (WRI)','');.
+  $database = \Drupal::database();
+  $query = $database->query("UPDATE wri_author_field_data SET name=REPLACE(name,' (WRI)','')");
+  $query->execute();
+
+  $query = $database->query("UPDATE wri_author_field_revision SET name=REPLACE(name,' (WRI)','')");
+  $query->execute();
+}

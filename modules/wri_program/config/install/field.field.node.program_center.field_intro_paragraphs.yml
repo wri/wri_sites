@@ -1,0 +1,59 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_intro_paragraphs
+    - node.type.program_center
+    - paragraphs.paragraphs_type.program_lead_in
+    - paragraphs.paragraphs_type.statistics
+  module:
+    - entity_reference_revisions
+id: node.program_center.field_intro_paragraphs
+field_name: field_intro_paragraphs
+entity_type: node
+bundle: program_center
+label: 'Intro Paragraphs'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      program_lead_in: program_lead_in
+      statistics: statistics
+    target_bundles_drag_drop:
+      default_hero:
+        weight: 11
+        enabled: false
+      featured_statement:
+        weight: 12
+        enabled: false
+      happening_now:
+        weight: 13
+        enabled: false
+      homepage_hero:
+        weight: 14
+        enabled: false
+      impact:
+        weight: 15
+        enabled: false
+      impact_in_action_blocks:
+        weight: 16
+        enabled: false
+      partner_logo:
+        weight: 17
+        enabled: false
+      program_lead_in:
+        enabled: true
+        weight: 18
+      statistic:
+        weight: 19
+        enabled: false
+      statistics:
+        enabled: true
+        weight: 20
+field_type: entity_reference_revisions

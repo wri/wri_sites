@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.125x95
+id: teaser_view_mode
+label: 'Teaser View Mode'
+image_style_mappings: {  }
+breakpoint_group: responsive_image
+fallback_image_style: 125x95

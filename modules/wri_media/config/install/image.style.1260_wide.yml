@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 1260_wide
+label: '1260 wide'
+effects:
+  a1d29ded-58c8-49b6-9b1e-6c966b20e063:
+    uuid: a1d29ded-58c8-49b6-9b1e-6c966b20e063
+    id: image_scale
+    weight: 1
+    data:
+      width: 1260
+      height: null
+      upscale: false

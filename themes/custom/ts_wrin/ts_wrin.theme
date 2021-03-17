@@ -1,0 +1,282 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the ts_grid theme.
+ */
+
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeInterface;
+use Drupal\Component\Utility\Html;
+use Drupal\wri_node\General;
+
+/**
+ * Implements hook_preprocess_HOOK() for html.html.twig.
+ */
+function ts_wrin_preprocess_html(array &$variables) {
+  // Adds a URL query (?show-grid=1) that makes the theming grid guide visible.
+  $variables['show_grid'] = \Drupal::request()->query->get('show-grid');
+  $current_classes = isset($variables['attributes']['class']) ? $variables['attributes']['class'] : [];
+  // Is field_transparent_header checked?
+  $variables['attributes']['class'] = array_merge($current_classes, General::$htmlClasses);
+
+  if ($node = \Drupal::request()->attributes->get('node')) {
+    if ($node instanceof NodeInterface) {
+      // Throw the node title in b/c it's useful.
+      $variables['attributes']['class'][] = Html::getClass($node->getTitle());
+
+      switch ($node->getType()) {
+        case 'program_center':
+        case 'project_detail':
+          $variables['attributes']['class'][] = 'transparent-header white';
+          break;
+
+        case 'publication':
+          if ($node->get('field_toc')->getValue() && $node->get('field_publication_display')->getString() == 'robust') {
+            $variables['attributes']['class'][] = 'transparent-header white';
+          }
+          break;
+
+        case 'event':
+          if ($node->get('field_event_display')->getString() == 'robust') {
+            $variables['attributes']['class'][] = 'transparent-header white';
+          }
+
+          if (isset($node->get('field_date_time')->getValue()[0]['end_value'])) {
+            $today = DrupalDateTime::createFromTimestamp(time());
+            $end_date = DrupalDateTime::createFromTimestamp($node->get('field_date_time')->getValue()[0]['end_value']);
+            if ($today->diff($end_date)->invert) {
+              $variables['attributes']['class'][] = 'event-status-past';
+            }
+            else {
+              $variables['attributes']['class'][] = 'event-status-future';
+            }
+          }
+          break;
+
+        case 'region':
+          $variables['attributes']['class'][] = 'transparent-header';
+          break;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function ts_wrin_form_views_exposed_form_alter(&$form, FormStateInterface $form_state) {
+
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function ts_wrin_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+}
+
+/**
+ * Implements hook_theme_suggestions_form_element_alter().
+ *
+ * Allows us to theme selects.
+ */
+function ts_wrin_theme_suggestions_form_element_alter(array &$suggestions, array $variables, $hook) {
+
+}
+
+/**
+ * Implements hook_theme_suggestions_container_alter().
+ *
+ * Make Views containers available for theme sugestions.
+ */
+function ts_wrin_theme_suggestions_container_alter(array &$suggestions, array $variables) {
+  if (isset($variables['element']['#type']) && isset($variables['element']['#name']) && isset($variables['element']['#display_id'])) {
+    $pieces = [
+      $variables['element']['#type'],
+      $variables['element']['#name'],
+      $variables['element']['#display_id'],
+    ];
+    $suggestions[] = 'container__' . implode('_', $pieces);
+  }
+}
+
+/**
+ * Implements hook_preprocess_page() for page.html.twig.
+ */
+function ts_wrin_preprocess_page(array &$variables) {
+  $current_route_name = \Drupal::service('current_route_match')->getRouteName();
+  if (str_starts_with($current_route_name, 'view.')) {
+    $variables['is_node'] = TRUE;
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_page_alter().
+ */
+function ts_wrin_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+
+}
+
+/**
+ * Implements hook_theme_suggestions_node_alter().
+ */
+function ts_wrin_theme_suggestions_node_alter(array &$suggestions, array $variables) {
+  /*$node = $variables['elements']['#node'];
+
+  if ($variables['elements']['#view_mode'] == "full") {
+
+  }*/
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for Field templates.
+ */
+function ts_wrin_preprocess_field(array &$variables) {
+  // If the field is a reference to a block, add the block classes to the field.
+  if ($variables['field_type'] == 'entity_reference' && isset($variables["items"][0]["content"]["#block_content"]) && isset($variables["element"][0]["#attributes"]["class"])) {
+    $variables["attributes"]["class"] = $variables["element"][0]["#attributes"]["class"];
+    $variables["attributes"]["class"][] = 'block';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for Block document templates.
+ */
+function ts_wrin_preprocess_block(array &$variables) {
+  $unfriendly_block_types = [
+    '3_1_articles',
+    'impact_in_action',
+  ];
+  if ($variables['plugin_id'] == 'menu_block:main' && isset($variables["content"]["#items"])) {
+    foreach ($variables["content"]["#items"] as $item) {
+      if ($item['in_active_trail']) {
+        $variables['attributes']['class'][] = 'has-active-trail';
+        break;
+      }
+    }
+  }
+  // Handle the case of a hero with a transparent background.
+  if (isset($variables["content"]['#entity']->field_hero_background->value)) {
+    General::$htmlClasses[] = 'transparent-header';
+  }
+  if (in_array($variables['derivative_plugin_id'], $unfriendly_block_types)) {
+    $variables['attributes']['class'][] = 'unfriendly-block';
+  }
+  // Adds the field name as a class on a block.
+  if ($variables['base_plugin_id'] == 'field_block' && isset($variables["content"][0]["#field_name"])) {
+    $variables['attributes']['class'][] = Html::getClass($variables["content"][0]["#field_name"]);
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_block_alter().
+ */
+function ts_wrin_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+  if (isset($variables['elements']['content']["#block_content"])) {
+    array_splice($suggestions, 1, 0, 'block__bundle__' . $variables['elements']['content']['#block_content']->bundle());
+  }
+  if (isset($variables["elements"]["content"]["#name"]) && $variables["elements"]["content"]["#name"] == 'authored_by') {
+    $suggestions[] = 'block__views_block__authored_by_shared';
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_field_alter().
+ */
+function ts_wrin_theme_suggestions_field_alter(array &$suggestions, array $variables) {
+  /*$element = $variables['element'];
+  $suggestions[] = 'field__' . $element['#view_mode'];
+  $suggestions[] = 'field__' . $element['#view_mode'] . '__' . $element['#field_name'];*/
+}
+
+/**
+ * Implements hook_theme_suggestions_field_alter().
+ */
+function ts_wrin_theme_suggestions_fieldset_alter(array &$suggestions, array $variables) {
+  /*$element = $variables['element'];
+  if (isset($element['#attributes']['class']) &&
+  in_array('form-composite', $element['#attributes']['class'])) {
+  $suggestions[] = 'fieldset__form_composite';
+  }*/
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function ts_wrin_preprocess_node(array &$variables) {
+  // Default to turning off byline/submitted.
+  // $variables['display_submitted'] = FALSE;.
+}
+
+/**
+ * Implements hook_theme_suggestions_views_view_alter().
+ */
+function ts_wrin_theme_suggestions_views_view_alter(array &$suggestions, array $variables) {
+  $current_view = $variables['view']->current_display;
+  $current_id = $variables['view']->id();
+  $current_display_type = $variables["view"]->display_handler->getPluginId();
+  $suggestions[] = 'views_view__' . $current_display_type;
+  $suggestions[] = 'views_view__' . $current_id;
+  $suggestions[] = 'views_view__' . $current_id . '__' . $current_view;
+}
+
+/**
+ * Implements hook_preprocess_views_view().
+ */
+function ts_wrin_preprocess_views_view(array &$variables) {
+  $view_id = $variables['id'];
+  $display_id = $variables['display_id'];
+
+  if ($view_id == '3_1' && $display_id == 'block_1') {
+    $variables['attributes']['class'] = 'grid';
+  }
+}
+
+/**
+ * Implements hook_preprocess_form().
+ */
+function ts_wrin_preprocess_form(array &$variables) {
+  // $variables['attributes']['novalidate'] = 'novalidate';.
+}
+
+/**
+ * Implements hook_preprocess_select().
+ */
+function ts_wrin_preprocess_select(array &$variables) {
+  // $variables['attributes']['class'][] = 'select-chosen';.
+}
+
+/**
+ * Implements hook_preprocess_details().
+ */
+function ts_wrin_preprocess_details(array &$variables) {
+  /*$variables['attributes']['class'][] = 'details';
+  $variables['summary_attributes']['class'] = 'summary';*/
+}
+
+/**
+ * Implements hook_theme_suggestions_details_alter().
+ */
+function ts_wrin_theme_suggestions_details_alter(array &$suggestions, array $variables) {
+
+}
+
+/**
+ * Implements hook_preprocess_menu_local_task().
+ */
+function ts_wrin_preprocess_menu_local_task(array &$variables) {
+
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function ts_wrin_page_attachments_alter(array &$attachments) {
+  // Use the dev library if we're developing locally.
+  if (in_array('ts_wrin/main', $attachments['#attached']['library']) && file_exists(__DIR__ . '/dist_dev')) {
+    $index = array_search('ts_wrin/main', $attachments['#attached']['library']);
+    $attachments['#attached']['library'][$index] = 'ts_wrin/dev';
+  }
+}

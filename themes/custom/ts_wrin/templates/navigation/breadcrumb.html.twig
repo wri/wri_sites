@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * Theme override for a breadcrumb trail. Only shows the parent of the current page.
+ *
+ * Available variables:
+ * - breadcrumb: Breadcrumb trail items.
+ */
+#}
+{% if breadcrumb and breadcrumb.1 %}
+  <nav class="breadcrumb" role="navigation" aria-labelledby="system-breadcrumb">
+    <h2 id="system-breadcrumb" class="visually-hidden">{{ 'Breadcrumb'|t }}</h2>
+    <ol>
+    {% for item in breadcrumb %}
+      {% if loop.last and not loop.first %}
+      <li>
+        {% if item.url %}
+          <a href="{{ item.url }}">{{ item.text }}</a>
+        {% else %}
+          {{ item.text }}
+        {% endif %}
+      </li>
+      {% endif %}
+    {% endfor %}
+    </ol>
+  </nav>
+{% endif %}

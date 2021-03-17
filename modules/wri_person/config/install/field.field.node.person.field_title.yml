@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_title
+    - node.type.person
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    basic_html: basic_html
+    full_html: '0'
+    unrestricted_text: '0'
+    plain_text: '0'
+id: node.person.field_title
+field_name: field_title
+entity_type: node
+bundle: person
+label: 'Job Title'
+description: 'The title of this person.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

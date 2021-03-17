@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.small_cta
+    - field.field.block_content.small_cta.field_cta_background
+    - field.field.block_content.small_cta.field_link
+  module:
+    - link_attributes
+id: block_content.small_cta.default
+targetEntityType: block_content
+bundle: small_cta
+mode: default
+content:
+  field_cta_background:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_link:
+    weight: 1
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      enabled_attributes:
+        id: false
+        name: false
+        target: true
+        rel: true
+        class: true
+        accesskey: false
+    third_party_settings: {  }
+    type: link_attributes
+    region: content
+hidden:
+  body: true
+  info: true

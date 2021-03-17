@@ -1,0 +1,744 @@
+/*
+ * Global Header Nav styles go here.
+ *
+ * Note on code style: if one or two properties are different for certain pages,
+ * we use the trailing ampersand selector at the end of the Sass block:
+ * '.transparent-header & {}'
+ *
+ * For larger blocks of Sass we use a more conventional approach such as:
+ * '.transparent-header nav.menu--main {}'
+ */
+
+.block-system-branding-block .site-name {
+  display: none;
+}
+
+.white {
+  .logo-white {
+    display: block;
+  }
+  .logo-color {
+    display: none;
+  }
+}
+
+header {
+  background-color: $white;
+  padding-bottom: 50px;
+  padding-top: 0;
+  position: absolute;
+  top: 0;
+  transition: all 0.2s linear;
+  width: 100%;
+  z-index: 10;
+
+  @include mq($md) {
+    padding-bottom: $space-sm;
+    padding-top: 32px;
+  }
+
+  .path-frontpage & {
+    background-color: transparent;
+    padding-bottom: 22px;
+    @include mq($md) {
+      padding-bottom: $space-sm;
+    }
+  }
+
+  .transparent-header &,
+  .path-frontpage & .header-right {
+    background-color: transparent;
+  }
+
+  @media (max-width: rem(768)) {
+    .site-logo {
+      display: inline-block;
+      margin-top: 17px;
+    }
+    .site-logo img {
+      max-width: 120px;
+    }
+  }
+}
+
+.region-primary-nav {
+  align-items: flex-end;
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.header-wrapper {
+  @include container-padding;
+  border-bottom: 1px solid $light-grey;
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: space-between;
+  max-width: calc(100% - (#{$grid-gutter-mobile} * 2));
+  min-width: 0;
+  padding-bottom: 5px;
+  top: 2px;
+  transition: background-color $transition-defaults;
+
+  @include mq($md) {
+    border-bottom: none;
+    padding-bottom: 0;
+    top: 0;
+  }
+  @include mq($lg) {
+    max-width: calc(100% - (#{$grid-gutter} * 2));
+  }
+  @include mq($grid-max-width + ($grid-gutter * 4)) {
+    max-width: $grid-max-width + ($grid-gutter * 2);
+  }
+  @include mq($xxl) {
+    max-width: $grid-max-width-xxl + ($grid-gutter * 2);
+  }
+
+  .header-right {
+    align-items: center;
+    display: flex;
+    flex: 0 0 auto;
+    margin-bottom: -22px;
+    @include mq($md) {
+      margin-bottom: -34px;
+    }
+  }
+  @include header-right($black, $brand-gold);
+
+  &.menu-open {
+    background-color: $black;
+
+    svg path {
+      fill: $white;
+    }
+  }
+
+  .tray-toggle {
+    background-color: transparent;
+    border: none;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    margin-left: 5px;
+    margin-right: 5px;
+    position: relative;
+    top: 2px;
+    width: 35px;
+    &.toggled {
+      background-color: $true-black;
+    }
+  }
+}
+
+.white .header-wrapper {
+  @include header-right($white, $brand-gold);
+}
+
+// Filter button
+.header-wrapper {
+  .tray-toggle.search-toggle svg {
+    width: 20px;
+  }
+  .tray-toggle.filter-toggle {
+    position: relative;
+    border-radius: 5px;
+    transition: 0.5s;
+
+    .filter-icon {
+      transition: 5s;
+      height: 23px;
+      svg path {
+        fill: transparent !important;
+        width: 21px;
+      }
+
+      &::before {
+        @include font($acumin-semi-cond, "regular");
+        @include font-line-height(14, 22);
+        background: $black;
+        border-radius: 5px 0 0 5px;
+        color: $brand-gold;
+        content: "Filter Site by Topic";
+        height: 30px;
+        left: -30px;
+        opacity: 0;
+        overflow: hidden;
+        padding: rem(5) rem(20) 0;
+        position: absolute;
+        text-align: left;
+        top: 0;
+        transition: left 0.65s ease-in-out, width 0.65s ease-in-out;
+        white-space: nowrap;
+        width: 0;
+        z-index: -1;
+      }
+    }
+
+    &:hover,
+    &:focus {
+      .filter-icon {
+        &::before {
+          opacity: 1;
+          left: rem(-145);
+          width: rem(110);
+          z-index: 1;
+        }
+      }
+    }
+    @include hocus() {
+      background-color: $black;
+
+      .filter-icon {
+        svg path {
+          stroke: $brand-gold;
+        }
+      }
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.sitewide-filter-applied .header-wrapper .tray-toggle.filter-toggle {
+  &:hover {
+    .filter-icon {
+      &::before {
+        background-color: $brand-gold;
+        color: $black;
+      }
+    }
+  }
+}
+
+.white .header-wrapper {
+  .tray-toggle.filter-toggle {
+    svg path {
+      fill: transparent;
+      stroke: $white;
+    }
+  }
+}
+
+// Sitewide filter applied filter toggle button.
+.sitewide-filter-applied .header-wrapper .tray-toggle.filter-toggle,
+.sitewide-filter-applied .header-wrapper .tray-toggle.filter-toggle:hover,
+.sitewide-filter-applied .header-wrapper .tray-toggle.filter-toggle:focus,
+.sitewide-filter-applied.path-frontpage
+  .header-wrapper
+  .tray-toggle.filter-toggle,
+.sitewide-filter-applied.path-frontpage
+  .header-wrapper
+  .tray-toggle.filter-toggle:hover,
+.sitewide-filter-applied.path-frontpage
+  .header-wrapper
+  .tray-toggle.filter-toggle:focus {
+  background-color: $brand-gold;
+  svg path {
+    fill: transparent;
+    stroke: $black;
+  }
+}
+
+.path-frontpage .header-wrapper {
+  @include mq($md) {
+    @include header-right($white, $brand-gold);
+  }
+}
+
+header nav.menu--main {
+  display: none;
+  @include mq(900px) {
+    bottom: 2px;
+    display: block;
+    flex: 0 1 auto;
+    margin-left: $space-sm;
+    width: auto;
+  }
+  @include mq($lg) {
+    margin-left: $space-md;
+  }
+  .path-frontpage & {
+    @include mq(900px) {
+      display: none;
+    }
+    @include mq(1275px) {
+      display: block;
+    }
+  }
+}
+
+.nav-arrow,
+.back-arrow {
+  display: none;
+}
+
+header nav.menu--main.has-active-trail {
+  bottom: 0;
+  display: block;
+  margin-left: 0;
+  max-width: calc(100% - (#{$grid-gutter-mobile} * 2));
+  padding-top: 2px;
+  position: absolute;
+
+  .nav-arrow,
+  .back-arrow {
+    bottom: 8px;
+    display: inline-block;
+    font-weight: 600;
+    height: 16px;
+    line-height: 1;
+    padding: 2px 2px 2px 5px;
+    position: absolute;
+    right: -14px;
+    width: 7px;
+    @include mq($md) {
+      bottom: 0;
+      right: -15px;
+      width: 8px;
+    }
+  }
+  .back-arrow {
+    left: -14px;
+    right: auto;
+    transform: scaleX(-1);
+    @include mq($md) {
+      left: $space-sm;
+      right: auto;
+    }
+  }
+  .back-arrow svg path,
+  .nav-arrow svg path {
+    fill: $black;
+    stroke: $black;
+  }
+  @include mq($md) {
+    border-top: none;
+    display: block;
+    flex: 1 1 auto;
+    left: auto;
+    max-height: 34px;
+    max-width: calc(100% - (170px + 37px));
+    min-width: 0;
+    position: relative;
+  }
+}
+
+header nav.menu--main .menu-wrapper > ul.menu {
+  display: flex;
+  justify-content: space-between;
+  @include mq($md) {
+    padding-bottom: 0;
+    padding-left: 12px;
+    padding-top: 2px;
+  }
+  li.menu-item {
+    align-items: flex-end;
+    display: flex;
+    list-style-image: none;
+    list-style-type: none;
+    margin-right: $space-xs;
+    padding-top: 0;
+  }
+  li a {
+    @include font($acumin-pro, "bold", "normal");
+    @include font-line-height(15, 18);
+    color: $black;
+    letter-spacing: 0.91px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.2s linear;
+    @include hocus {
+      color: $med-grey;
+      outline: none;
+    }
+  }
+}
+
+header nav.menu--main.has-active-trail .menu-wrapper {
+  height: 37px;
+  overflow: hidden;
+  width: calc(100% - #{$grid-gutter-mobile});
+  @include mq($md) {
+    height: 34px;
+    margin-left: 48px;
+    width: calc(100% - #{$grid-gutter-mobile} * 3);
+  }
+}
+header nav.menu--main.has-active-trail .menu-wrapper > ul.menu {
+  box-sizing: border-box;
+  margin-bottom: -10px;
+  margin-top: 10px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  padding-bottom: $space-sm;
+  width: 100%;
+  @include mq($md) {
+    border-left: 1px solid $black;
+    border-top: none;
+    margin-top: 0;
+    padding-bottom: $space-xs;
+    padding-left: $space-xs;
+    padding-right: 0;
+    padding-top: 2px;
+    width: calc(100% - #{$grid-gutter-mobile});
+  }
+  &:after {
+    background-color: transparent;
+    bottom: 3px;
+    color: $black;
+    content: "...";
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    height: 18px;
+    line-height: 1;
+    padding: 2px 2px 2px 5px;
+    position: absolute;
+    right: 1px;
+    width: 12px;
+    @include mq($md) {
+      bottom: -6px;
+    }
+  }
+
+  ul.menu {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0;
+    margin-left: 0;
+    width: auto;
+  }
+  li.menu-item {
+    margin-right: $grid-gutter-mobile;
+    white-space: nowrap;
+    @include mq($md) {
+      align-items: flex-start;
+      flex-direction: column;
+      justify-content: flex-end;
+      margin-right: $grid-gutter-mobile;
+    }
+  }
+  li a {
+    @include font($acumin-semi-cond, "bold", "normal");
+    @include font-line-height(14, 17);
+    color: $black;
+    letter-spacing: normal;
+    text-transform: capitalize;
+    @include hocus {
+      color: $med-grey;
+      outline: none;
+    }
+  }
+  & > li > a {
+    @include font($caslon, "normal", "italic");
+    @include font-line-height(15, 15);
+    margin-right: $space-xs;
+    position: relative;
+    top: 2px;
+    @include mq($md) {
+      margin-right: 0;
+      top: 0;
+    }
+  }
+  // When we're on a landing page with an active trail, hide sibling menu paths.
+  & > li.menu-item:not(.menu-item--active-trail) {
+    display: none;
+  }
+}
+.white nav.menu--main.has-active-trail .menu-wrapper > ul.menu {
+  &:after,
+  li a {
+    color: $white;
+  }
+  @include mq($md) {
+    border-left: 1px solid $white;
+  }
+}
+
+.white header nav.menu--main .menu-wrapper > ul.menu li a {
+  color: $white;
+  @include hocus {
+    color: $brand-gold;
+    outline: none;
+  }
+}
+
+.white nav.menu--main.has-active-trail .back-arrow svg,
+.white nav.menu--main.has-active-trail .nav-arrow svg,
+.white nav.menu--main.has-active-trail .back-arrow svg path,
+.white nav.menu--main.has-active-trail .nav-arrow svg path {
+  fill: $white;
+  stroke: $white;
+  outline: none;
+  transition: all 0.2s linear;
+}
+.white nav.menu--main.has-active-trail .back-arrow,
+.white nav.menu--main.has-active-trail .nav-arrow {
+  @include hocus {
+    outline: none;
+    svg,
+    svg path {
+      fill: $brand-gold;
+      stroke: $brand-gold;
+      outline: none;
+    }
+  }
+}
+
+header nav.menu--main.has-active-trail.no-scroll {
+  .menu-wrapper > ul.menu:after {
+    content: none;
+  }
+  .nav-arrow,
+  .back-arrow {
+    display: none;
+  }
+}
+
+.region-secondary-nav {
+  display: none;
+  @include mq($md) {
+    align-items: flex-end;
+    display: flex;
+    justify-content: space-between;
+    .menu-item {
+      line-height: 1;
+      padding-top: 0;
+    }
+  }
+  @include mq($md) {
+    nav#block-secondarynavigation {
+      display: none;
+    }
+  }
+  @include mq(1200px) {
+    nav#block-secondarynavigation {
+      display: block;
+    }
+  }
+}
+header nav.menu--secondary > ul.menu {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 40px;
+  width: 190px;
+  li a {
+    @include font($acumin-pro, "bold", "normal");
+    @include font-line-height(15, 17);
+    letter-spacing: normal;
+    text-decoration: none;
+    text-transform: capitalize;
+    position: relative;
+    bottom: 1px;
+    transition: color 0.2s linear;
+    @include hocus {
+      color: $med-grey;
+      outline: none;
+    }
+
+    .path-frontpage &,
+    .white & {
+      color: $white;
+      @include hocus {
+        color: $brand-gold;
+        outline: none;
+      }
+    }
+  }
+}
+
+header nav.menu--donate > ul.menu {
+  margin-bottom: -10px;
+  margin-left: 0;
+  margin-right: $space-xs;
+  li a {
+    @include font($acumin-semi-cond, "bold", "normal");
+    @include font-line-height(12, 17);
+    align-items: center;
+    background-color: transparent;
+    border-radius: 3px;
+    border: 1px solid $brand-gold;
+    color: $black;
+    display: flex;
+    height: 32px;
+    justify-content: center;
+    letter-spacing: 0.43px;
+    padding: 1px 0 0 0;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.2s linear;
+    top: -3px;
+    width: 76px;
+
+    .path-frontpage &,
+    .white & {
+      border: 1px solid $light-grey;
+      color: $white;
+    }
+    @include hocus {
+      background-color: $brand-gold;
+      border: 1px solid $brand-gold;
+      color: $black;
+      outline: none;
+    }
+  }
+}
+
+@include mq($md) {
+  header.sticky {
+    align-items: center;
+    background-color: $white;
+    border-bottom: none;
+    display: flex;
+    height: 60px;
+    max-width: 3000px;
+    opacity: 1;
+    padding-bottom: 0;
+    padding-top: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 50;
+
+    .header-wrapper {
+      border-bottom: 1px solid $light-grey;
+      height: 60px;
+    }
+    .header-wrapper .header-right {
+      margin-bottom: 2px;
+    }
+    .site-logo img {
+      height: 36px;
+      width: auto;
+    }
+    .logo-white {
+      display: none;
+    }
+    .logo-color {
+      display: block;
+    }
+    nav.menu--main .menu-wrapper > ul.menu {
+      margin-top: 0;
+    }
+    nav.menu--main .menu-wrapper > ul.menu li.menu-item {
+      align-items: flex-start;
+    }
+    .region-primary-nav {
+      align-items: center;
+    }
+    .region-secondary-nav {
+      background-color: transparent;
+    }
+
+    // Change top for various contexts.
+    .user-logged-in & {
+      top: rem(39);
+    }
+    .user-logged-in.toolbar-tray-open & {
+      top: rem(79);
+    }
+    .sitewide-filter-applied & {
+      top: rem(31);
+    }
+    .sitewide-filter-applied.user-logged-in & {
+      top: rem(70);
+    }
+    .sitewide-filter-applied.user-logged-in.toolbar-tray-open & {
+      top: rem(110);
+    }
+  }
+
+  .path-frontpage header.sticky,
+  .transparent-header header.sticky {
+    .header-right {
+      background-color: transparent;
+    }
+    nav.menu--main .menu-wrapper > ul.menu li.menu-item {
+      align-items: flex-start;
+    }
+    nav.menu--main.has-active-trail .menu-wrapper > ul:before,
+    nav.menu--main .menu-wrapper > ul:before {
+      border-color: $black;
+    }
+    nav.menu--main.has-active-trail
+      .menu-wrapper
+      > ul:after
+      nav.menu--main
+      .menu-wrapper
+      > ul:after {
+      color: $black;
+      background-color: $white;
+    }
+    .header-right .tray-toggle svg,
+    .header-right .tray-toggle svg path {
+      fill: $black;
+      stroke: $black;
+    }
+    .header-right .tray-toggle.toggled svg,
+    .header-right .tray-toggle.toggled svg path {
+      fill: $brand-gold;
+      stroke: $brand-gold;
+    }
+
+    .header-right .tray-toggle.filter-toggle {
+      svg path {
+        fill: transparent;
+      }
+      @include hocus() {
+        svg path {
+          stroke: $brand-gold;
+        }
+      }
+    }
+    .header-right .menu-toggle div span,
+    .header-right .menu-toggle div span:before,
+    .header-right .menu-toggle div span:after {
+      background-color: $black;
+    }
+    nav.menu--main.has-active-trail .menu-wrapper > ul.menu:after {
+      color: $black;
+    }
+    nav.menu--main.has-active-trail .menu-wrapper > ul.menu li a,
+    nav.menu--main.has-active-trail .menu-wrapper > ul li a,
+    nav.menu--main .menu-wrapper > ul li a,
+    nav.menu--secondary > ul.menu li a {
+      color: $black;
+      transition: all 0.2s linear;
+      @include hocus {
+        color: $med-gray;
+        outline: none;
+      }
+    }
+    nav.menu--main.has-active-trail .back-arrow svg,
+    nav.menu--main.has-active-trail .nav-arrow svg,
+    nav.menu--main.has-active-trail .back-arrow svg path,
+    nav.menu--main.has-active-trail .nav-arrow svg path {
+      fill: $black;
+      stroke: $black;
+    }
+    nav.menu--main.has-active-trail .back-arrow,
+    nav.menu--main.has-active-trail .nav-arrow {
+      @include hocus {
+        outline: none;
+        svg,
+        svg path {
+          fill: $med-gray;
+          stroke: $med-gray;
+          outline: none;
+        }
+      }
+    }
+    nav.menu--donate > ul li a {
+      border-color: $brand-gold;
+      color: $black;
+    }
+  }
+}

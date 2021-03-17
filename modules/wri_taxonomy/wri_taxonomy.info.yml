@@ -1,0 +1,35 @@
+name: 'WRI taxonomy'
+type: module
+description: 'Modules handle taxonomy'
+core_version_requirement: '^8.8.0 || ^9'
+package: WRI
+dependencies:
+  - cer
+  - taxonomy
+config_devel:
+  install:
+    - core.entity_form_display.taxonomy_term.tags.default
+    - core.entity_view_display.taxonomy_term.tags.default
+    - core.entity_view_mode.taxonomy_term.card
+    - field.field.taxonomy_term.featured.field_is_featured
+    - field.field.taxonomy_term.tags.field_landing_page
+    - field.field.taxonomy_term.topics_and_subtopics.field_featured_items
+    - field.field.taxonomy_term.topics_and_subtopics.field_full_name
+    - field.storage.taxonomy_term.field_featured_items
+    - field.storage.taxonomy_term.field_full_name
+    - field.storage.taxonomy_term.field_intro
+    - field.storage.taxonomy_term.field_is_featured
+    - field.storage.taxonomy_term.field_landing_page
+    - field.storage.taxonomy_term.field_main_image
+    - taxonomy.vocabulary.embed_types
+    - taxonomy.vocabulary.featured
+    - taxonomy.vocabulary.languages
+    - taxonomy.vocabulary.media_tags
+    - taxonomy.vocabulary.person_title_deprecated_
+    - taxonomy.vocabulary.publication_series
+    - taxonomy.vocabulary.regions
+    - taxonomy.vocabulary.resource_type
+    - taxonomy.vocabulary.tags
+    - taxonomy.vocabulary.topics_and_subtopics
+    - views.view.resource_types
+    - views.view.tagged_with

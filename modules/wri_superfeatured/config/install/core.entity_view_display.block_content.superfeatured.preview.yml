@@ -1,0 +1,75 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.superfeatured
+    - core.entity_view_mode.block_content.preview
+    - field.field.block_content.superfeatured.field_content_types
+    - field.field.block_content.superfeatured.field_custom_feature
+    - field.field.block_content.superfeatured.field_intro
+    - field.field.block_content.superfeatured.field_listing
+  module:
+    - ds
+    - layout_builder
+    - text
+third_party_settings:
+  ds:
+    layout:
+      id: layout_onecol
+      library: layout_discovery/onecol
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      content:
+        - block_label
+        - field_intro
+        - field_content_types
+        - field_custom_feature
+    fields:
+      block_label:
+        plugin_id: block_label
+        weight: -1
+        label: hidden
+        formatter: default
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: block_content.superfeatured.preview
+targetEntityType: block_content
+bundle: superfeatured
+mode: preview
+content:
+  field_content_types:
+    type: entity_reference_label
+    weight: 1
+    region: content
+    label: above
+    settings:
+      link: false
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  field_custom_feature:
+    type: entity_reference_label
+    weight: 2
+    region: content
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+  field_intro:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden:
+  field_listing: true
+  search_api_excerpt: true

@@ -1,0 +1,192 @@
+<?php
+
+/**
+ * @file
+ * WRI media functions.
+ */
+
+use Drupal\file\Entity\File;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Component\Utility\Html;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+use Drupal\Core\Field\FormatterInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function wri_media_theme() {
+  $items['details__media'] = [
+    'base hook' => 'details',
+  ];
+  return $items;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function wri_media_theme_suggestions_details(array $variables) {
+  $suggestions = [];
+  $suggestions[] = 'details__media';
+  return $suggestions;
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function wri_media_preprocess_details(&$variables) {
+  $variables['replacement_link'] = '';
+
+  if (!empty($variables["element"]["#files"])) {
+    $file = reset($variables["element"]["#files"]);
+    if ($file && $file->status->value) {
+      $url_options = [
+        'attributes' => [
+          'target' => '_blank',
+        ],
+      ];
+      $file_url = $file->url();
+      $replace_url = Url::fromRoute('entity.file.replace_form', ['file' => $file->id()], $url_options);
+      $variables['replacement_link'] = Link::fromTextAndUrl('Overwrite the file at ' . $file_url, $replace_url);
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function wri_media_preprocess_media(&$variables) {
+  $current_route = \Drupal::routeMatch()->getRouteName();
+  if ($current_route == 'media.filter.preview') {
+    // Unset embed when we're previewing within the CKeditor.
+    $variables["content"]["field_media_embed_code"]['#access'] = FALSE;
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function wri_media_form_editor_media_dialog_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Hide view align options unless using half_content view mode.
+  $form['align']['#states'] = [
+    'visible' => [
+      'select[name="attributes[data-view-mode]"]' => ['value' => 'half_content'],
+    ],
+  ];
+  // Reorder fields.
+  $form['align']['#weight'] = 10;
+  $form['caption']['#weight'] = 11;
+
+  // Set appropriate default and remove unnecessary align options.
+  $form["align"]["#default_value"] = $form["align"]["#default_value"] == 'center' ? 'none' : $form["align"]["#default_value"];
+  unset($form['align']['#options']['center']);
+}
+
+/**
+ * Implements hook_field_formatter_third_party_settings_form().
+ */
+function wri_media_field_formatter_third_party_settings_form(FormatterInterface $plugin) {
+  $element = [];
+  if (property_exists($plugin, 'blazyEntity')) {
+    // Add a min_width setting for images.
+    $element['min_width'] = [
+      '#type' => 'textfield',
+      '#title' => t('Min width'),
+      '#size' => 5,
+      '#description' => t("Images whose width is below this will not be rendered. Leave empty to ignore."),
+      '#default_value' => $plugin->getThirdPartySetting('wri_media', 'min_width', FALSE),
+    ];
+  }
+  return $element;
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary_alter().
+ */
+function wri_media_field_formatter_settings_summary_alter(&$summary, $context) {
+  $on = $context['formatter']->getThirdPartySetting('wri_media', 'min_width', FALSE);
+  if ($on) {
+    // Display the min_width setting.
+    $summary[] = 'Min width: ' . Html::escape($on);
+  }
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function wri_media_preprocess_field(&$variables) {
+  $element = &$variables['element'];
+
+  if (!empty($element['#third_party_settings']['wri_media']['min_width'])) {
+    foreach ($variables['items'] as &$item) {
+      if (empty($item['content'])) {
+        continue;
+      }
+
+      // If the media image is smaller than the min_width, hide this.
+      if ($item["content"]["#build"]["item"]->width < $element['#third_party_settings']['wri_media']['min_width']) {
+        $item['content'] = [];
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_media_presave().
+ */
+function wri_media_media_presave(EntityInterface $entity) {
+  if ($entity->bundle() == 'embed') {
+    if ($entity->get('field_media_image')->target_id) {
+      // Hack to regenerate embed thumbnails on save.
+      $entity->thumbnail->target_id = $entity->get('field_media_image')->target_id;
+    }
+    else {
+      // Set to default image.
+      $default_thumbnail_filename = $entity->getSource()->getPluginDefinition()['default_thumbnail_filename'];
+      $url = \Drupal::config('media.settings')->get('icon_base_uri') . '/' . $default_thumbnail_filename;
+      $existing = \Drupal::entityTypeManager()->getStorage('file')->loadByProperties(['uri' => $url]);
+      if ($existing) {
+        $file = reset($existing);
+      }
+      else {
+        /** @var \Drupal\file\FileInterface $file */
+        $file = File::create(['uri' => $url]);
+        if ($owner = $entity->getOwner()) {
+          $file->setOwner($owner);
+        }
+        $file->setPermanent();
+        $file->save();
+      }
+      $entity->thumbnail->target_id = $file->id();
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_filter_caption().
+ */
+function wri_media_preprocess_filter_caption(&$variables) {
+  // Tell the figure wrapping around a media entity what view mode it is.
+  $xmlEl = simplexml_load_string($variables['node']);
+  $view_mode = $xmlEl->attributes()->{'data-view-mode'};
+  $variables['classes'] .= ' ' . $view_mode;
+}
+
+/**
+ * Implements hook_preprocess_hook().
+ */
+function wri_media_preprocess_views_view_grid__entity_browser_1(array &$variables) {
+  foreach ($variables['items'] as &$item) {
+    foreach ($item['content'] as &$column) {
+      $column['attributes']['data-selectable'] = 'true';
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function wri_media_form_entity_browser_files_form_alter(array &$form, FormStateInterface $form_state) {
+  $form['#attached']['library'][] = 'wri_media/browser.styling';
+}

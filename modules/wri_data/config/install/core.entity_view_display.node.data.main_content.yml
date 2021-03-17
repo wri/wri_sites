@@ -1,0 +1,464 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.main_content
+    - field.field.node.data.body
+    - field.field.node.data.field_authors
+    - field.field.node.data.field_featured
+    - field.field.node.data.field_featured_headline
+    - field.field.node.data.field_featured_text
+    - field.field.node.data.field_files
+    - field.field.node.data.field_intro
+    - field.field.node.data.field_license
+    - field.field.node.data.field_media
+    - field.field.node.data.field_metatags
+    - field.field.node.data.field_narrative_taxonomy
+    - field.field.node.data.field_platform_link
+    - field.field.node.data.field_primary_contacts
+    - field.field.node.data.field_primary_topic
+    - field.field.node.data.field_projects
+    - field.field.node.data.field_region
+    - field.field.node.data.field_related_resources
+    - field.field.node.data.field_tags
+    - field.field.node.data.field_type
+    - field.field.node.data.layout_builder__layout
+    - node.type.data
+  module:
+    - ds
+    - element_class_formatter
+    - hierarchical_term_formatter
+    - layout_builder
+    - options
+    - text
+    - user
+    - wri_author
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+  ds:
+    layout:
+      id: 'single_file_component_layout:wri_publication_columns'
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        component_context: {  }
+    regions:
+      hero:
+        - field_type
+        - node_title
+      buttons:
+        - field_platform_link
+        - field_files
+      category:
+        - field_primary_topic
+        - field_region
+        - node_post_date
+      share:
+        - wri_social_sharing_block
+      featured_image:
+        - field_media
+      main_content:
+        - body
+      sidebar:
+        - field_narrative_taxonomy
+        - field_authors
+        - field_primary_contacts
+        - field_license
+    fields:
+      node_post_date:
+        plugin_id: node_post_date
+        weight: 5
+        label: hidden
+        formatter: ds_post_date_short_day
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow: true
+            ow-el: span
+            ow-cl: 'article-date category-wrapper'
+            ow-at: ''
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi: false
+            fi-def-at: false
+      node_title:
+        plugin_id: node_title
+        weight: 1
+        label: hidden
+        formatter: default
+        settings:
+          wrapper: h1
+          class: h1
+          link: false
+        ft:
+          id: reset
+          settings:
+            lb: ''
+id: node.data.main_content
+targetEntityType: node
+bundle: data
+mode: main_content
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 8
+    settings: {  }
+    third_party_settings: {  }
+    region: main_content
+  field_authors:
+    type: list_of_authors
+    weight: 10
+    region: sidebar
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+  field_cover_image:
+    type: blazy_media
+    weight: 3
+    region: hero
+    label: hidden
+    settings:
+      image_style: 234x328
+      responsive_image_style: ''
+      media_switch: ''
+      thumbnail_style: ''
+      ratio: ''
+      view_mode: default
+      current_view_mode: main_content
+      background: false
+      caption:
+        title: '0'
+        alt: '0'
+      class: ''
+      id: ''
+      image: ''
+      link: ''
+      overlay: ''
+      title: ''
+      vanilla: false
+      icon: ''
+      layout: ''
+      cache: 0
+      skin: ''
+      fx: ''
+      style: ''
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      box_style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
+      grid: 0
+      grid_medium: 0
+      grid_small: 0
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  field_doi:
+    type: string
+    weight: 5
+    region: hero
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_files:
+    type: entity_reference_entity_view
+    weight: 1
+    region: buttons
+    label: hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+  field_isbn:
+    type: string
+    weight: 4
+    region: hero
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_license:
+    type: list_default
+    weight: 12
+    region: sidebar
+    label: above
+    settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+  field_media:
+    type: entity_reference_entity_view
+    weight: 7
+    region: featured_image
+    label: hidden
+    settings:
+      view_mode: full
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  field_narrative_taxonomy:
+    type: text_default
+    weight: 9
+    region: sidebar
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow: true
+            ow-el: div
+            ow-cl: narrative-taxonomy
+            ow-at: ''
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi: false
+            fi-def-at: false
+  field_platform_link:
+    type: link_class
+    weight: 0
+    region: buttons
+    label: hidden
+    settings:
+      trim_length: 80
+      class: 'button small'
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  field_primary_contacts:
+    type: entity_reference_label
+    weight: 11
+    region: sidebar
+    label: above
+    settings:
+      link: true
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow: true
+            ow-el: div
+            ow-cl: field
+            ow-at: ''
+            fis: true
+            fis-el: ul
+            fis-cl: ''
+            fis-at: ''
+            fi: true
+            fi-el: li
+            fi-cl: ''
+            fi-at: ''
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis-def-at: false
+            fi-def-at: false
+  field_primary_topic:
+    type: entity_reference_label_class
+    weight: 3
+    region: category
+    label: inline
+    settings:
+      link: true
+      tag: span
+      class: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow: true
+            ow-el: div
+            ow-cl: category-wrapper
+            ow-at: ''
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fi: true
+            fi-el: span
+            fi-cl: topic-tag
+            fi-at: ''
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi-def-at: false
+  field_region:
+    type: hierarchical_term_formatter
+    weight: 4
+    region: category
+    label: inline
+    settings:
+      display: root
+      link: true
+      wrap: none
+      separator: ' » '
+      reverse: false
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow: true
+            ow-el: span
+            ow-cl: 'category-wrapper topic-tag-wrapper'
+            ow-at: ''
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi: false
+            fi-def-at: false
+  field_type:
+    type: entity_reference_label_class
+    weight: 0
+    region: hero
+    label: hidden
+    settings:
+      tag: div
+      class: 'h4 white'
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  wri_social_sharing_block:
+    weight: 6
+    region: share
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  changed: true
+  content_moderation_control: true
+  default_langcode: true
+  field_countries: true
+  field_featured: true
+  field_featured_headline: true
+  field_featured_text: true
+  field_intro: true
+  field_metatags: true
+  field_projects: true
+  field_related_resources: true
+  field_tags: true
+  field_title: true
+  field_total_pages: true
+  field_transparent_header: true
+  layout_builder__layout: true
+  links: true
+  nid: true
+  promote: true
+  revision_default: true
+  revision_log: true
+  revision_timestamp: true
+  revision_translation_affected: true
+  revision_uid: true
+  search_api_excerpt: true
+  status: true
+  sticky: true
+  type: true
+  uuid: true
+  vid: true

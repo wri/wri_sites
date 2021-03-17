@@ -1,0 +1,226 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.main_content
+    - field.field.node.international_office.body
+    - field.field.node.international_office.field_featured_experts
+    - field.field.node.international_office.field_intro
+    - field.field.node.international_office.field_io_link
+    - field.field.node.international_office.field_main_image
+    - field.field.node.international_office.field_map_image
+    - field.field.node.international_office.field_metatags
+    - field.field.node.international_office.field_offices
+    - field.field.node.international_office.field_region
+    - field.field.node.international_office.layout_builder__layout
+    - node.type.international_office
+    - responsive_image.styles.half_content
+  module:
+    - blazy
+    - ds
+    - element_class_formatter
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+  ds:
+    layout:
+      id: layout_hero-5050-and-content
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      hero_text:
+        - node_title
+        - field_intro
+        - field_io_link
+      content:
+        - field_main_image
+        - body
+      hero_image:
+        - field_map_image
+    fields:
+      node_title:
+        plugin_id: node_title
+        weight: 0
+        label: hidden
+        formatter: default
+        settings:
+          wrapper: h1
+          class: h1
+          link: false
+        ft:
+          id: reset
+          settings:
+            lb: ''
+id: node.international_office.main_content
+targetEntityType: node
+bundle: international_office
+mode: main_content
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 10
+    settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow: true
+            ow-el: ''
+            ow-cl: io-body
+            ow-at: ''
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi: false
+            fi-def-at: false
+    region: content
+  field_intro:
+    type: text_default
+    weight: 1
+    region: hero_text
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fi: true
+            fi-el: ''
+            fi-cl: intro
+            fi-at: ''
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi-def-at: false
+  field_io_link:
+    type: link_class
+    weight: 2
+    region: hero_text
+    label: hidden
+    settings:
+      trim_length: 80
+      class: button
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  field_main_image:
+    type: entity_reference_entity_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      view_mode: full_width
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  field_map_image:
+    type: blazy_media
+    weight: 0
+    region: hero_image
+    label: hidden
+    settings:
+      image_style: ''
+      responsive_image_style: half_content
+      media_switch: ''
+      thumbnail_style: ''
+      ratio: ''
+      view_mode: default
+      current_view_mode: main_content
+      background: false
+      caption:
+        title: '0'
+        alt: '0'
+      class: ''
+      id: ''
+      image: ''
+      link: ''
+      overlay: ''
+      title: ''
+      vanilla: false
+      icon: ''
+      layout: ''
+      cache: 0
+      skin: ''
+      fx: ''
+      style: ''
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      box_style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
+      grid: 0
+      grid_medium: 0
+      grid_small: 0
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+hidden:
+  content_moderation_control: true
+  field_featured: true
+  field_featured_experts: true
+  field_metatags: true
+  field_offices: true
+  field_region: true
+  field_transparent_header: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

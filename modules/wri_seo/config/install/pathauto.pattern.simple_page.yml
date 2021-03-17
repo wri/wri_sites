@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: simple_page
+label: 'Simple Page'
+type: 'canonical_entities:node'
+pattern: '[node:menu-link:parent:url:relative]/[node:title]'
+selection_criteria:
+  28fcb300-c621-47ff-b67d-788c23a9c467:
+    id: node_type
+    bundles:
+      simple_page: simple_page
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 28fcb300-c621-47ff-b67d-788c23a9c467
+selection_logic: and
+weight: -5
+relationships: {  }

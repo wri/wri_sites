@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.featured_tweet
+    - field.storage.block_content.field_custom_tweet
+    - node.type.article
+id: block_content.featured_tweet.field_custom_tweet
+field_name: field_custom_tweet
+entity_type: block_content
+bundle: featured_tweet
+label: 'Custom Tweet'
+description: 'By default, this block will pull in the most recently-updated article with a Featured Tweet. To override that logic, select a custom tweet here.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      article: article
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

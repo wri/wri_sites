@@ -1,0 +1,98 @@
+<?php
+
+/**
+ * @file
+ * Contains wri_taxonomy.module.
+ */
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\taxonomy\TermInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function wri_taxonomy_entity_type_alter(array &$entity_types) {
+  // Create a custom callback for the term uri.
+  $entity_types['taxonomy_term']->setUriCallback('wri_taxonomy_term_uri');
+  // Disable the default cononical link.
+  $links = $entity_types['taxonomy_term']->get('links');
+  unset($links['canonical']);
+  $entity_types['taxonomy_term']->set('links', $links);
+}
+
+/**
+ * Sets the url of a taxonomy term to be its landing page, or nothing.
+ */
+function wri_taxonomy_term_uri(TermInterface $term) {
+  if ($term->field_landing_page && $term->field_landing_page->isEmpty() === FALSE && isset($term->field_landing_page->entity)) {
+    return $term->field_landing_page->entity->toUrl();
+  }
+
+  if (!empty(\Drupal::hasService('wri_search.pretty_facets_helper'))) {
+
+    switch ($term->bundle()) {
+      case 'regions':
+        // See if this is a child.
+        // If so, get parent and do region&country.
+        if ($term->parent->target_id) {
+          $filter_by = [
+            'region' => [$term->parent->target_id],
+            'country' => [$term->id()],
+          ];
+        }
+        else {
+          $filter_by = [
+            'region' => [$term->id()],
+          ];
+        }
+        break;
+
+      case 'tags':
+        // Link to the tags.
+        $filter_by = [
+          'tags' => [$term->id()],
+        ];
+        break;
+
+      case 'topics_and_subtopics':
+        // See if this is a child.
+        // If so, get parent and do topic&subtopic.
+        if ($term->parent->target_id) {
+          $filter_by = [
+            'all_topics' => [$term->parent->target_id],
+            'within_this_topic' => [$term->id()],
+          ];
+        }
+        else {
+          $filter_by = [
+            'all_topics' => [$term->id()],
+          ];
+        }
+        break;
+    }
+
+    if (isset($filter_by)) {
+      $paths_helper = \Drupal::service('wri_search.pretty_facets_helper');
+      if ($paths_helper) {
+        return Url::fromUri('internal:/resources' . $paths_helper->getPrettyPaths($filter_by));
+      }
+    }
+  }
+
+  return new Url('<nolink>');
+}
+
+/**
+ * Implements hook_entity_field_access().
+ */
+function wri_taxonomy_entity_field_access($operation, FieldDefinitionInterface $field_definition, AccountInterface $account, FieldItemListInterface $items = NULL) {
+  // Disable the Url Alias field.
+  if ($field_definition->getTargetEntityTypeId() == 'taxonomy_term' && $field_definition->getName() == 'path' && $operation == 'edit') {
+    return AccessResult::forbidden();
+  }
+  return AccessResult::neutral();
+}

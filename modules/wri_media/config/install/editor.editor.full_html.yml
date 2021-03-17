@@ -1,0 +1,76 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.full_html
+  module:
+    - ckeditor
+format: full_html
+editor: ckeditor
+settings:
+  toolbar:
+    rows:
+      -
+        -
+          name: Formatting
+          items:
+            - Bold
+            - Italic
+            - Strike
+            - Superscript
+            - Subscript
+            - '-'
+            - RemoveFormat
+        -
+          name: 'Text Align'
+          items:
+            - JustifyLeft
+            - JustifyCenter
+            - JustifyRight
+        -
+          name: Linking
+          items:
+            - DrupalLink
+            - DrupalUnlink
+        -
+          name: Lists
+          items:
+            - BulletedList
+            - NumberedList
+        -
+          name: Media
+          items:
+            - Blockquote
+            - DrupalMediaLibrary
+            - HorizontalRule
+        -
+          name: 'Block Formatting'
+          items:
+            - Format
+            - '-'
+            - Styles
+        -
+          name: Tools
+          items:
+            - ShowBlocks
+            - Source
+            - Templates
+            - Table
+  plugins:
+    stylescombo:
+      styles: "a.button|Button\r\nspan.drop-cap|Drop Cap\r\np.secondary|Secondary"
+    language:
+      language_list: un
+    templates:
+      template_path: ''
+      replace_content: 0
+    tokenbrowser:
+      token_types: {  }
+image_upload:
+  status: false
+  scheme: public
+  directory: inline-images
+  max_size: ''
+  max_dimensions:
+    width: null
+    height: null

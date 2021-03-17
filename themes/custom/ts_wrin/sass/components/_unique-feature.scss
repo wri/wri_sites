@@ -1,0 +1,175 @@
+.unique-feature {
+  .image-wrapper {
+    position: relative;
+
+    .inner-box {
+      @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+      position: relative;
+
+      @include mq($ph) {
+        @include center-columns($grid-columns, $grid-columns);
+      }
+
+      @include mq($md) {
+        @include center-columns(10, $grid-columns);
+      }
+
+      &::before,
+      &::after {
+        content: "";
+        display: block;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        width: 100vw;
+      }
+
+      &::before {
+        left: -100vw;
+      }
+
+      &::after {
+        right: -100vw;
+      }
+    }
+
+    .white-corners,
+    .image-box {
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    .white-corners {
+      .inner-box {
+        &::before,
+        &::after {
+          background-color: $white;
+          height: 30px;
+          z-index: 2;
+
+          @include mq($ph) {
+            height: $padding-vertical;
+          }
+        }
+      }
+    }
+
+    .image-box {
+      .inner-box {
+        &::before,
+        &::after {
+          background-color: rgba($blue, 0.7);
+          z-index: 1;
+        }
+
+        &.green::before,
+        &.green::after {
+          background-color: rgba($green, 0.7);
+        }
+      }
+    }
+  }
+
+  img {
+    display: block;
+    width: 100%;
+  }
+
+  .left-text-wrapper {
+    @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+    background-color: $white;
+    margin-top: -30px;
+    padding-top: 30px;
+    position: relative;
+    width: 93%;
+    z-index: 3;
+
+    @include mq($ph) {
+      @include center-columns($grid-columns, $grid-columns);
+      margin-top: calc(#{$padding-vertical} * -1);
+    }
+
+    @include mq($md) {
+      @include column-width(2, 6);
+      padding-right: $grid-gutter;
+      width: 100%;
+    }
+
+    &::before {
+      background-color: $white;
+      content: "";
+      display: block;
+      height: 100%;
+      left: -100vw;
+      position: absolute;
+      top: 0;
+      width: 100vw;
+      z-index: 3;
+    }
+
+    .h2 {
+      margin: 2px 0 30px;
+      @include mq($md) {
+        @include font-line-height(48, 55);
+      }
+    }
+
+    a.block_label {
+      text-decoration: none;
+      @include text-underline(transparent, $black);
+      background-position: left 100%;
+    }
+
+    a.button {
+      display: none;
+
+      @include mq($md) {
+        display: inline-block;
+      }
+    }
+  }
+
+  .right-text-wrapper {
+    @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+    z-index: 10;
+    position: relative;
+
+    @include mq($ph) {
+      @include center-columns($grid-columns, $grid-columns);
+    }
+
+    @include mq($md) {
+      @include column-width(7, 12);
+    }
+
+    &::after {
+      background-color: $white;
+      content: "";
+      display: block;
+      height: 100%;
+      right: -100vw;
+      position: absolute;
+      top: calc(#{$padding-vertical} * -1);
+      width: 100vw;
+      z-index: 3;
+    }
+
+    .intro p {
+      @include font-line-height(18, 28);
+      margin-top: 0;
+
+      @include mq($md) {
+        margin-top: 18px;
+      }
+    }
+
+    a.button {
+      @include mq($md) {
+        display: none;
+      }
+    }
+  }
+}

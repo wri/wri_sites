@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 215x153
+label: 215x153
+effects:
+  64007174-afa2-4ffd-8ae8-8509a4288a34:
+    uuid: 64007174-afa2-4ffd-8ae8-8509a4288a34
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 215
+      height: 153
+      crop_type: focal_point

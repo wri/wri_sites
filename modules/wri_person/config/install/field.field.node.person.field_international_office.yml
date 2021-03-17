@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_international_office
+    - node.type.international_office
+    - node.type.person
+id: node.person.field_international_office
+field_name: field_international_office
+entity_type: node
+bundle: person
+label: 'International Office'
+description: 'Does this person work at an international office?'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      international_office: international_office
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

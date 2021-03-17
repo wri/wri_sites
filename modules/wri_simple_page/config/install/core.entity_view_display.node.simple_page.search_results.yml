@@ -1,0 +1,123 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_results
+    - field.field.node.simple_page.field_intro
+    - field.field.node.simple_page.field_intro_paragraphs
+    - field.field.node.simple_page.field_main_image
+    - field.field.node.simple_page.field_metatags
+    - field.field.node.simple_page.layout_builder__layout
+    - image.style.150_tall
+    - node.type.simple_page
+  module:
+    - blazy
+    - ds
+    - layout_builder
+    - user
+third_party_settings:
+  ds:
+    layout:
+      id: layout_search-results
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      left_section:
+        - 'bundle_field:node'
+      main_section:
+        - node_post_date
+        - node_title
+      right_section:
+        - field_main_image
+    fields:
+      'bundle_field:node':
+        plugin_id: 'bundle_field:node'
+        weight: 0
+        label: hidden
+        formatter: default
+      node_post_date:
+        plugin_id: node_post_date
+        weight: 1
+        label: hidden
+        formatter: ds_post_date_short_day
+      node_title:
+        plugin_id: node_title
+        weight: 2
+        label: hidden
+        formatter: default
+        settings:
+          link: true
+          wrapper: h3
+          class: h3
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: node.simple_page.search_results
+targetEntityType: node
+bundle: simple_page
+mode: search_results
+content:
+  field_main_image:
+    type: blazy_media
+    weight: 3
+    region: right_section
+    label: hidden
+    settings:
+      image_style: 150_tall
+      responsive_image_style: ''
+      media_switch: ''
+      thumbnail_style: ''
+      ratio: ''
+      view_mode: default
+      current_view_mode: search_results
+      background: false
+      caption:
+        title: '0'
+        alt: '0'
+      class: ''
+      id: ''
+      image: ''
+      link: ''
+      overlay: ''
+      title: ''
+      vanilla: false
+      icon: ''
+      layout: ''
+      cache: 0
+      skin: ''
+      fx: ''
+      style: ''
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      box_style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
+      grid: 0
+      grid_medium: 0
+      grid_small: 0
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+hidden:
+  content_moderation_control: true
+  field_intro: true
+  field_intro_paragraphs: true
+  field_long_title: true
+  field_metatags: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

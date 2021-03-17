@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: unique_feature_cta
+label: 'Unique Feature CTA'
+revision: 0
+description: 'A CTA that contains an image with colorful overlay on the sides, title, intro, and link.'

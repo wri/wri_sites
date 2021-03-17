@@ -1,0 +1,77 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.main_content
+    - field.field.node.program_center.body
+    - field.field.node.program_center.field_featured_experts
+    - field.field.node.program_center.field_featured_project
+    - field.field.node.program_center.field_intro
+    - field.field.node.program_center.field_intro_paragraphs
+    - field.field.node.program_center.field_long_title
+    - field.field.node.program_center.field_main_image
+    - field.field.node.program_center.field_metatag
+    - field.field.node.program_center.field_narrative_taxonomy
+    - field.field.node.program_center.field_primary_contacts
+    - field.field.node.program_center.field_primary_topic
+    - field.field.node.program_center.field_twitter_account
+    - field.field.node.program_center.field_type
+    - field.field.node.program_center.layout_builder__layout
+    - node.type.program_center
+  module:
+    - ds
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+  ds:
+    layout:
+      id: layout_hero-and-content
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      content:
+        - body
+id: node.program_center.main_content
+targetEntityType: node
+bundle: program_center
+mode: main_content
+content:
+  body:
+    type: text_default
+    weight: 0
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+hidden:
+  content_moderation_control: true
+  field_featured_experts: true
+  field_featured_project: true
+  field_intro: true
+  field_intro_paragraphs: true
+  field_lead_in: true
+  field_long_title: true
+  field_main_image: true
+  field_metatag: true
+  field_narrative_taxonomy: true
+  field_primary_contacts: true
+  field_primary_topic: true
+  field_statistics: true
+  field_twitter_account: true
+  field_type: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

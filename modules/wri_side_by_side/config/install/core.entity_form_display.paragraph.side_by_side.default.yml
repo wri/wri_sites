@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.side_by_side.field_body
+    - field.field.paragraph.side_by_side.field_title
+    - paragraphs.paragraphs_type.side_by_side
+  module:
+    - text
+id: paragraph.side_by_side.default
+targetEntityType: paragraph
+bundle: side_by_side
+mode: default
+content:
+  field_body:
+    weight: 1
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true

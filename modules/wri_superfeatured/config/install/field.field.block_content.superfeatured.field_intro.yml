@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.superfeatured
+    - field.storage.block_content.field_intro
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    basic_html: basic_html
+    unrestricted_text: '0'
+    full_html: '0'
+    migrated: '0'
+    plain_text: '0'
+id: block_content.superfeatured.field_intro
+field_name: field_intro
+entity_type: block_content
+bundle: superfeatured
+label: Intro
+description: 'Some introductory text.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

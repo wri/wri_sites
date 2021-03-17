@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 250_wide
+label: '250 wide'
+effects:
+  844519aa-d9be-412f-addd-ead183369d7e:
+    uuid: 844519aa-d9be-412f-addd-ead183369d7e
+    id: image_scale
+    weight: 1
+    data:
+      width: 250
+      height: null
+      upscale: false

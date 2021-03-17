@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.large_image_teaser
+label: 'Large image teaser'
+targetEntityType: node
+cache: true

@@ -1,0 +1,12 @@
+{#
+/**
+ * @file
+ * Removes the (-) prefix for links on active facets.
+ *
+ * @ingroup themeable
+ */
+#}
+<span class="facet-item__value">{{ value }}</span>
+{% if show_count %}
+  <span class="facet-item__count">({{ count }})</span>
+{% endif %}

@@ -1,0 +1,46 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.hero
+    - field.field.block_content.hero.field_hero_background
+    - field.field.block_content.hero.field_hero_type
+  module:
+    - inline_entity_form
+id: block_content.hero.default
+targetEntityType: block_content
+bundle: hero
+mode: default
+content:
+  field_hero_background:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_hero_type:
+    type: inline_entity_form_complex
+    weight: 1
+    settings:
+      form_mode: default
+      override_labels: true
+      label_singular: 'Hero style'
+      label_plural: 'Hero styles'
+      allow_new: true
+      match_operator: CONTAINS
+      revision: false
+      collapsible: false
+      collapsed: false
+      allow_existing: false
+      allow_duplicate: false
+    third_party_settings: {  }
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

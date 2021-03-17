@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.image_cta.field_block
+    - paragraphs.paragraphs_type.image_cta
+id: paragraph.image_cta.default
+targetEntityType: paragraph
+bundle: image_cta
+mode: default
+content:
+  field_block:
+    type: entity_reference_entity_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+hidden:
+  search_api_excerpt: true

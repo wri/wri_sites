@@ -1,0 +1,68 @@
+name: wri_sites
+type: profile
+description: 'WRI site profile'
+core_version_requirement: '^8.9.3 || ^9'
+install:
+  - block
+  - block_content
+  - components
+  - gdpr_compliance
+  - metatag
+  - node
+  - options
+  - responsive_image
+  - taxonomy
+  - token_filter
+  - views_extras
+  - twig_tweak
+  - wri_31block
+  - wri_admin
+  - wri_article
+  - wri_author
+  - wri_common
+  - wri_data
+  - wri_event
+  - wri_engagement
+  - wri_featured_tweet
+  - wri_media
+  - wri_menus
+  - wri_happening_now
+  - wri_homepage
+  - wri_image_cta
+  - wri_impact
+  - wri_io_content
+  - wri_large_cta
+  - wri_listing_block
+  - wri_maps
+  - wri_menus
+  - wri_narrative
+  - wri_small_cta
+  - wri_side_by_side
+  - wri_simple_page
+  - wri_subpage
+  - wri_page
+  - wri_performance
+  - wri_person
+  - wri_program
+  - wri_project
+  - wri_publication
+  - wri_region
+  - wri_search
+  - wri_seo
+  - wri_superfeatured
+  - wri_taxonomy
+  - wri_toc
+  - wri_topics
+  - wri_trending_topics
+  - wri_unique_feature
+themes:
+  - claro
+config_devel:
+  install:
+    - facets_summary.facets_summary.summary
+    - gdpr_compliance.settings
+    - metatag.metatag_defaults.global
+    - metatag.metatag_defaults.node
+    - system.theme
+    - user.role.anonymous
+    - user.role.authenticated

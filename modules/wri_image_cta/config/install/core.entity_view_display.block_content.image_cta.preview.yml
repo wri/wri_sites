@@ -1,0 +1,108 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.image_cta
+    - core.entity_view_mode.block_content.preview
+    - field.field.block_content.image_cta.field_image
+    - field.field.block_content.image_cta.field_image_cta_background
+    - field.field.block_content.image_cta.field_intro
+    - field.field.block_content.image_cta.field_link
+    - field.field.block_content.image_cta.field_title_logo
+    - image.style.thumbnail
+  module:
+    - ds
+    - layout_builder
+    - link
+    - media
+    - options
+    - text
+third_party_settings:
+  ds:
+    layout:
+      id: layout_twocol_section
+      library: layout_builder/twocol_section
+      disable_css: false
+      entity_classes: no_classes
+      settings:
+        label: ''
+        column_widths: 50-50
+    regions:
+      second:
+        - field_image
+      first:
+        - field_title_logo
+        - field_intro
+        - field_link
+        - field_image_cta_background
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: block_content.image_cta.preview
+targetEntityType: block_content
+bundle: image_cta
+mode: preview
+content:
+  field_image:
+    type: media_thumbnail
+    weight: 0
+    label: above
+    settings:
+      image_style: thumbnail
+      image_link: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    region: second
+  field_image_cta_background:
+    type: list_default
+    weight: 4
+    region: first
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  field_intro:
+    weight: 2
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: first
+  field_link:
+    weight: 3
+    label: above
+    settings:
+      trim_length: 80
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      ds:
+        ft:
+          id: default
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    type: link
+    region: first
+  field_title_logo:
+    type: media_thumbnail
+    weight: 1
+    label: above
+    settings:
+      image_style: thumbnail
+      image_link: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    region: first
+hidden:
+  search_api_excerpt: true

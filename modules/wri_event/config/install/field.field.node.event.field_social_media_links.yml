@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_social_media_links
+    - node.type.event
+  module:
+    - link
+id: node.event.field_social_media_links
+field_name: field_social_media_links
+entity_type: node
+bundle: event
+label: 'Social media links'
+description: 'Places where visitors can find out more about the event on social media.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

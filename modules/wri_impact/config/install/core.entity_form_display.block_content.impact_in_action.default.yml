@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.impact_in_action
+    - field.field.block_content.impact_in_action.field_impacts
+    - field.field.block_content.impact_in_action.field_title
+  module:
+    - paragraphs
+id: block_content.impact_in_action.default
+targetEntityType: block_content
+bundle: impact_in_action
+mode: default
+content:
+  field_impacts:
+    type: entity_reference_paragraphs
+    weight: 1
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  field_title: true

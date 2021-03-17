@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: featured_tweet
+label: 'Featured Tweet'
+revision: 0
+description: ''

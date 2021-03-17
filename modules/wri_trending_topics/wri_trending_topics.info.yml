@@ -1,0 +1,19 @@
+name: 'WRI Tredning Topics'
+type: module
+description: 'Provides Trending Topics block functionality'
+core_version_requirement: '^8.8.0 || ^9'
+package: WRI
+dependencies:
+  - block_content
+  - viewfield
+  - views
+  - views_arg_order_sort
+config_devel:
+  install:
+    - block_content.type.trending_topics
+    - core.entity_form_display.block_content.trending_topics.default
+    - core.entity_view_display.block_content.trending_topics.default
+    - field.field.block_content.trending_topics.field_content_types
+    - field.field.block_content.trending_topics.field_custom_trending
+    - field.field.block_content.trending_topics.field_listing
+    - views.view.trending_topics

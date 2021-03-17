@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.mega-menu
+  module:
+    - menu_block
+  theme:
+    - ts_wrin
+id: megamenu
+theme: ts_wrin
+region: hamburger_nav
+weight: 0
+provider: null
+plugin: 'menu_block:mega-menu'
+settings:
+  id: 'menu_block:mega-menu'
+  label: 'Mega Menu'
+  provider: menu_block
+  label_display: '0'
+  follow: false
+  follow_parent: child
+  level: 1
+  depth: 0
+  expand: false
+  parent: 'mega-menu:'
+  render_parent: false
+  suggestion: mega_menu
+visibility: {  }

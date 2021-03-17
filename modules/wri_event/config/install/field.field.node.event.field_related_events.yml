@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_related_events
+    - node.type.event
+id: node.event.field_related_events
+field_name: field_related_events
+entity_type: node
+bundle: event
+label: 'Related Events'
+description: 'Add related events here if you''d like to feature any in particular. Leave empty to have the system auto-generate related events.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: content_by_type
+      display_name: entity_reference_1
+      arguments:
+        - event
+field_type: entity_reference

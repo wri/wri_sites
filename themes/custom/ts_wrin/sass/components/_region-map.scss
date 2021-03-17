@@ -1,0 +1,112 @@
+.block-wri-region-map-block {
+  .h3 {
+    @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+
+    @include mq($ph) {
+      @include center-columns($grid-columns, $grid-columns);
+    }
+
+    @include mq($lg) {
+      @include column-width(1, 4);
+    }
+  }
+
+  .intro {
+    @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+    /* line text up with border. */
+    margin-top: -0.5rem;
+
+    @include mq($ph) {
+      @include center-columns($grid-columns, $grid-columns);
+    }
+
+    @include mq($lg) {
+      @include column-width(4, 13);
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &.has-white-background-color svg > g.region {
+    path,
+    polyline,
+    polygon {
+      fill: #e6e6e6;
+    }
+  }
+
+  &.has-light-gray-background-color svg > g.region {
+    path,
+    polyline,
+    polygon {
+      fill: $white;
+    }
+  }
+}
+
+.wri-region-map {
+  @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+
+  @include mq($ph) {
+    @include center-columns($grid-columns, $grid-columns);
+  }
+
+  svg > g.region,
+  svg > g.international_office {
+    outline: 0;
+
+    path,
+    polyline,
+    polygon,
+    circle,
+    text {
+      cursor: pointer;
+      transition: fill $transition-defaults;
+    }
+  }
+
+  svg > g.region {
+    text {
+      @include font($caslon, "italic");
+      color: $black;
+    }
+  }
+
+  svg > g.region:hover,
+  svg > g.region:focus {
+    path,
+    polyline,
+    polygon {
+      fill: #b3b3b3;
+    }
+  }
+
+  svg > g.international_office {
+    circle {
+      fill: $brand-gold;
+    }
+
+    text {
+      display: none;
+      @include font($acumin-semi-cond, "medium");
+      color: $black;
+
+      @include mq($md) {
+        display: block;
+      }
+    }
+
+    text:last-of-type {
+      @include font($acumin-semi-cond, "semibold");
+    }
+  }
+
+  svg > g.international_office:hover,
+  svg > g.international_office:focus {
+    circle {
+      fill: $gold-hover;
+    }
+  }
+}

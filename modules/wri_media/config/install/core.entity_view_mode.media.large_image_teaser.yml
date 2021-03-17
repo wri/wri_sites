@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.large_image_teaser
+label: 'Large image teaser'
+targetEntityType: media
+cache: true

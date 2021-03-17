@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.modal
+    - field.storage.block_content.field_cta_background
+  module:
+    - options
+id: block_content.modal.field_cta_background
+field_name: field_cta_background
+entity_type: block_content
+bundle: modal
+label: Background
+description: 'For modals of type "Center" this setting only applies to mobile modals.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

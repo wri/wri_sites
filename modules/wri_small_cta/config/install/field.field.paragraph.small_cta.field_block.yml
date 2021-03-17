@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.small_cta
+    - field.storage.paragraph.field_block
+    - paragraphs.paragraphs_type.small_cta
+id: paragraph.small_cta.field_block
+field_name: field_block
+entity_type: paragraph
+bundle: small_cta
+label: Block
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:block_content'
+  handler_settings:
+    target_bundles:
+      small_cta: small_cta
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

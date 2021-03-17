@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.narrative_taxonomy
+    - field.storage.block_content.field_intro
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    basic_html: basic_html
+    full_html: '0'
+    migrated: '0'
+    unrestricted_text: '0'
+    plain_text: '0'
+id: block_content.narrative_taxonomy.field_intro
+field_name: field_intro
+entity_type: block_content
+bundle: narrative_taxonomy
+label: Content
+description: 'Leave this section blank to pull in the Narrative Taxonomy value on the current node.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

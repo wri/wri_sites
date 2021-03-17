@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: max_height_700
+label: 'Max height 700'
+effects:
+  1a8886b5-0554-4429-ace2-e7c795097445:
+    uuid: 1a8886b5-0554-4429-ace2-e7c795097445
+    id: image_scale
+    weight: 1
+    data:
+      width: null
+      height: 700
+      upscale: false

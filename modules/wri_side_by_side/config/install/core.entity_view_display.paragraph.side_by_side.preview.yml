@@ -1,0 +1,57 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.side_by_side.field_body
+    - field.field.paragraph.side_by_side.field_title
+    - paragraphs.paragraphs_type.side_by_side
+  module:
+    - ds
+    - element_class_formatter
+    - layout_builder
+    - text
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: paragraph.side_by_side.preview
+targetEntityType: paragraph
+bundle: side_by_side
+mode: preview
+content:
+  field_body:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings:
+      ds:
+        ft:
+          id: default
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    type: text_trimmed
+    region: content
+  field_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_class: ''
+      tag: h2
+      class: h2
+      link: false
+      summary: false
+      trim: 200
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    type: wrapper_class
+    region: content
+hidden:
+  search_api_excerpt: true

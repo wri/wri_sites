@@ -1,0 +1,30 @@
+<div id="social-sharing-block">
+  <nav role="navigation">
+    <ul class="">
+      <li><a class="share-icon icon-social" href="#" aria-haspopup="true">Social</a>
+        <ul class="dropdown" aria-label="submenu">
+          <li><a href="https://twitter.com/intent/tweet?text={{ items.title }}+{{ items.page_url }}" title="{{ 'Share to'|t }} Twitter" aria-label="{{ 'Share to'|t }} Twitter" class="social-sharing-buttons__button" rel="noopener">
+              Twitter
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ items.page_url }}&title={{ items.title }}&source={{ items.base_url }}" title="{{ 'Share to'|t }} Linkedin" aria-label="{{ 'Share to'|t }} Linkedin" class="social-sharing-buttons__button" rel="noopener">
+              LinkedIn
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ items.page_url }}&title={{ items.title }}" title="{{ 'Share to'|t }} Facebook" aria-label="{{ 'Share to'|t }} Facebook" class="social-sharing-buttons__button" rel="noopener">
+              Facebook
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a class="share-icon icon-email social-sharing-buttons__button" href="mailto:?subject={{ items.title }}&body={{ items.page_url }}" title="{{ 'Share to'|t }} E-mail" aria-label="{{ 'Share to'|t }} E-mail"  target="_blank" rel="noopener">
+          Email
+        </a>
+      </li>
+      <li><a class="share-icon icon-print" href="javascript:window.print()">Print</a></li>
+    </ul>
+  </nav>
+</div>

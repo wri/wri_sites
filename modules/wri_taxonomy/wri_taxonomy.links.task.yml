@@ -1,0 +1,4 @@
+entity.taxonomy_vocabulary.merge_form:
+  title: 'Switch Vocabulary'
+  route_name: wri_taxonomy.move_term_form
+  base_route: entity.taxonomy_vocabulary.collection

@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Publication Series'
+vid: publication_series
+description: ''
+weight: 0

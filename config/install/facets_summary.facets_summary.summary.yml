@@ -1,0 +1,60 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.sitewide
+    - views.view.resources
+  module:
+    - search_api
+id: summary
+name: Summary
+facets:
+  all_topics:
+    checked: true
+    label: 'All Topics'
+    separator: ', '
+    weight: 0
+    show_count: false
+  country:
+    checked: true
+    label: Country
+    separator: ', '
+    weight: 0
+    show_count: false
+  region:
+    checked: true
+    label: Region
+    separator: ', '
+    weight: 0
+    show_count: false
+  subtype:
+    checked: true
+    label: 'Subtype of Resource'
+    separator: ', '
+    weight: 0
+    show_count: false
+  tags:
+    checked: true
+    label: Tags
+    separator: ', '
+    weight: 0
+    show_count: false
+  type_of_resource:
+    checked: true
+    label: 'Type of Resource'
+    separator: ', '
+    weight: 0
+    show_count: false
+  within_this_topic:
+    checked: true
+    label: 'Within This Topic'
+    separator: ', '
+    weight: 0
+    show_count: false
+facet_source_id: 'search_api:views_page__resources__resources_page'
+processor_configs:
+  hide_when_not_rendered:
+    processor_id: hide_when_not_rendered
+    weights:
+      build: '45'
+    settings: {  }

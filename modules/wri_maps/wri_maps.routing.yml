@@ -1,0 +1,14 @@
+wri_maps.settings:
+  path: '/admin/config/wri_maps'
+  defaults:
+    _form: '\Drupal\wri_maps\Form\MapsConfigForm'
+    _title: 'WRI Maps settings'
+  requirements:
+    _permission: 'administer site configuration'
+wri_maps.region_map.json:
+  path: '/wri_maps/region-map/json'
+  defaults:
+    _controller: '\Drupal\wri_maps\Controller\MapsController::regionMapJson'
+    _title: 'Region Map JSON'
+  requirements:
+    _permission: 'access content'

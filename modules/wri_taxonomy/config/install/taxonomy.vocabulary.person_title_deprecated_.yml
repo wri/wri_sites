@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Person Title (deprecated)'
+vid: person_title_deprecated_
+description: 'D7 person title taxonomy, to be removed post-migration'
+weight: 0

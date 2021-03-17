@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.wri_author.field_person
+    - wri_author.wri_author_type.internal
+id: wri_author.internal.field_person
+field_name: field_person
+entity_type: wri_author
+bundle: internal
+label: Person
+description: 'Choose a person at WRI'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: content_by_type
+      display_name: entity_reference_1
+      arguments:
+        - person
+field_type: entity_reference

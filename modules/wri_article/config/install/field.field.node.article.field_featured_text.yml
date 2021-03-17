@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_featured_text
+    - node.type.article
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    basic_html: basic_html
+    full_html: '0'
+    plain_text: '0'
+id: node.article.field_featured_text
+field_name: field_featured_text
+entity_type: node
+bundle: article
+label: 'Featured Text'
+description: 'If you would like the text that shows when featuring this item to differ from the body summary, overwrite this here. The default value should be <code>&#91;wri_tokens:summary&#93;</code>'
+required: false
+translatable: false
+default_value:
+  -
+    value: "<p>[wri_tokens:summary]</p>\r\n"
+    format: basic_html
+default_value_callback: ''
+settings: {  }
+field_type: text_long

@@ -1,0 +1,4 @@
+services:
+  wri_search.pretty_facets_helper:
+    class: Drupal\wri_search\PrettyFacetsHelper
+    arguments: ['@plugin.manager.facets_pretty_paths.coder']

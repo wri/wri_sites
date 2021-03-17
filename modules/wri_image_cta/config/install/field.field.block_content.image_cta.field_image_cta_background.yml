@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.image_cta
+    - field.storage.block_content.field_image_cta_background
+  module:
+    - options
+id: block_content.image_cta.field_image_cta_background
+field_name: field_image_cta_background
+entity_type: block_content
+bundle: image_cta
+label: Background
+description: 'Select a background color for this CTA'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

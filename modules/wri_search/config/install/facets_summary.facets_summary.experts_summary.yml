@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.sitewide
+    - views.view.experts_staff
+  module:
+    - search_api
+id: experts_summary
+name: 'Experts Summary'
+facets:
+  experts_all_topics:
+    checked: true
+    label: 'All Topics'
+    separator: ', '
+    weight: 0
+    show_count: false
+  international_office:
+    checked: true
+    label: 'International Office'
+    separator: ', '
+    weight: 0
+    show_count: false
+  languages_spoken_taxonomy_term_name:
+    checked: true
+    label: Languages
+    separator: ', '
+    weight: 0
+    show_count: false
+facet_source_id: 'search_api:views_page__experts_staff__experts_staff1'
+processor_configs:
+  hide_when_not_rendered:
+    processor_id: hide_when_not_rendered
+    weights:
+      build: '45'
+    settings: {  }

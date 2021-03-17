@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 715x445
+label: 715x445
+effects:
+  67634194-1a79-47e1-818a-599c7db5276d:
+    uuid: 67634194-1a79-47e1-818a-599c7db5276d
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 715
+      height: 445
+      crop_type: focal_point

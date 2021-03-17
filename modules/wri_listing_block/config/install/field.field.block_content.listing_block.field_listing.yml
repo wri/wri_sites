@@ -1,0 +1,79 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.listing_block
+    - field.storage.block_content.field_listing
+    - views.view.content_listing
+  module:
+    - viewfield
+id: block_content.listing_block.field_listing
+field_name: field_listing
+entity_type: block_content
+bundle: listing_block
+label: Listing
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    token_help: ''
+    display_id: teasers
+    arguments: '[bc:field_content_types:array:target_id:join:+]/[bc:field_featured:array:target_id:join:+]/[bc:field_filter_by_region:target_id]/[bc:field_filter_by_resource_type:target_id]/[bc:field_tag:target_id]/[bc:field_filter_by_tag:target_id]'
+    items_to_display: '6'
+    target_uuid: d89739db-d1b0-4213-929d-6fff4b760c8c
+default_value_callback: ''
+settings:
+  force_default: false
+  allowed_views:
+    content_listing: content_listing
+    content_listing_a_to_z: content_listing_a_to_z
+    countries: countries
+    '3_1': '0'
+    all_topics: '0'
+    authored_by: '0'
+    content: '0'
+    content_by_type: '0'
+    content_cleanup: '0'
+    content_css_js: '0'
+    block_content: '0'
+    tmp: '0'
+    featured_experts: '0'
+    featured_tweet: '0'
+    featured_tweets_entity_browser: '0'
+    files: '0'
+    files_browser: '0'
+    frontpage: '0'
+    happening_now: '0'
+    media: '0'
+    media_library: '0'
+    moderated_content: '0'
+    user_admin_people: '0'
+    people_at_this_io: '0'
+    programs_centers: '0'
+    homepage_projects: '0'
+    content_recent: '0'
+    redirect: '0'
+    related_content: '0'
+    resources: '0'
+    resource_types: '0'
+    scheduled_transitions: '0'
+    search: '0'
+    superfeatured_content: '0'
+    tagged_with: '0'
+    taxonomy_term: '0'
+    trending_topics: '0'
+    watchdog: '0'
+    who_s_new: '0'
+    who_s_online: '0'
+  allowed_display_types:
+    block: block
+    attachment: '0'
+    entity_browser: '0'
+    entity_reference: '0'
+    feed: '0'
+    default: '0'
+    page: '0'
+  handler: 'default:view'
+  handler_settings: {  }
+field_type: viewfield

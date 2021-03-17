@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 768x400
+label: 768x400
+effects:
+  4d9c3fd4-3376-4063-a6cd-8c19e47e66cc:
+    uuid: 4d9c3fd4-3376-4063-a6cd-8c19e47e66cc
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 768
+      height: 400
+      crop_type: focal_point

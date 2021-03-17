@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.trending_topics
+    - field.field.block_content.trending_topics.field_content_types
+    - field.field.block_content.trending_topics.field_custom_trending
+    - field.field.block_content.trending_topics.field_listing
+  module:
+    - viewfield
+id: block_content.trending_topics.default
+targetEntityType: block_content
+bundle: trending_topics
+mode: default
+content:
+  field_content_types:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_custom_trending:
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_listing:
+    type: viewfield_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  info: true

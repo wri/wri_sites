@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - wri_search
+  theme:
+    - ts_wrin
+id: wrinsearch_2
+theme: ts_wrin
+region: hamburger_nav
+weight: 0
+provider: null
+plugin: 'single_file_component_block:wri_search_menu'
+settings:
+  id: 'single_file_component_block:wri_search_menu'
+  label: 'WRIN Search'
+  provider: wri_search
+  label_display: '0'
+  component_context:
+    search_nav_title: ''
+    search_nav_description: ''
+    search_nav_label: 'What can we help you find?'
+    search_nav_id: wrinsearch_2
+    search_nav_submit: Search
+visibility: {  }

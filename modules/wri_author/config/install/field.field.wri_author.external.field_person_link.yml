@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.wri_author.field_person_link
+    - wri_author.wri_author_type.external
+  module:
+    - link
+id: wri_author.external.field_person_link
+field_name: field_person_link
+entity_type: wri_author
+bundle: external
+label: 'Person Link'
+description: 'The author, external to WRI, with an optional link. If there is no link for this person, use &lt;nolink&gt;.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 2
+field_type: link

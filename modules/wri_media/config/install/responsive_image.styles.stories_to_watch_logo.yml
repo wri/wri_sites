@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.250_wide
+id: stories_to_watch_logo
+label: 'Stories to Watch Logo'
+image_style_mappings: {  }
+breakpoint_group: responsive_image
+fallback_image_style: 250_wide

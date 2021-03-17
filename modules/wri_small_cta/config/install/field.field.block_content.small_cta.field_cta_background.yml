@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.small_cta
+    - field.storage.block_content.field_cta_background
+  module:
+    - options
+id: block_content.small_cta.field_cta_background
+field_name: field_cta_background
+entity_type: block_content
+bundle: small_cta
+label: Background
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

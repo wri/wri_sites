@@ -1,0 +1,9 @@
+name: 'WRI common'
+type: module
+description: 'General functions and config for WRI sites'
+core_version_requirement: '^8.8.0 || ^9'
+package: WRI
+config_devel:
+  install:
+    - core.date_format.rss_timestamp
+    - core.date_format.short_day

@@ -1,0 +1,312 @@
+.page-node-type-program-center,
+.page-node-type-simple-page {
+  .landing-page__hero__field-listing__mobile {
+    background-color: $teal;
+  }
+
+  header nav .menu-wrapper > ul.menu li a {
+    color: $white;
+  }
+
+  .layout--onecol {
+    @extend .margin-bottom-xl;
+  }
+
+  .landing-page__hero.has-image {
+    .hero__image,
+    .hero__text,
+    .hero__text .grid {
+      min-height: 700px;
+      @include mq($ph) {
+        min-height: 640px;
+      }
+      @include mq($xl) {
+        min-height: 700px;
+      }
+    }
+
+    .intro p {
+      @include font($acumin-semi-cond, "semibold");
+      @include font-line-height(24, 38);
+
+      @include mq($ph) {
+        max-width: 530px;
+      }
+
+      @include mq($md) {
+        @include font-line-height(30, 43);
+        max-width: 620px;
+      }
+
+      @include mq($xl) {
+        max-width: 825px;
+      }
+    }
+  }
+
+  .hero__text--inner {
+    .h1 p {
+      margin-bottom: 0;
+    }
+
+    h1 {
+      @include mq($lg) {
+        padding-bottom: 40px;
+      }
+    }
+
+    .intro p {
+      margin-top: 0;
+    }
+  }
+
+  .block-inline-blockhero {
+    z-index: 1;
+  }
+}
+.block-field-blocknodeprogram-centerfield-twitter-account {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -50px;
+  z-index: 2;
+  position: relative;
+
+  @include mq($lg) {
+    margin-right: $space-xxl;
+  }
+
+  .field--name-field-twitter-account {
+    @include font($caslon, "regular", "italic");
+    @include font-line-height(15, 16);
+    background-color: $white;
+    height: 50px;
+    width: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-indent: -9999px;
+
+    @include mq($lg) {
+      text-indent: 0;
+      width: 185px;
+    }
+
+    a {
+      background: transparent url("../img/svgs/twitter-black.svg") no-repeat
+        center center / contain;
+      display: inline-block;
+      height: 20px;
+      line-height: 1.5rem;
+      padding-right: 35px;
+      position: relative;
+      transition: background $transition-defaults;
+      text-decoration: none;
+
+      @include hocus {
+        background-image: url("../img/svgs/twitter-grey.svg");
+        text-decoration: underline;
+      }
+
+      @include mq($lg) {
+        background-position: right center;
+      }
+    }
+  }
+}
+
+.block-field-blocknodeprogram-centerbody,
+.block-field-blocknodeprogram-centerfield-intro-paragraphs
+  .paragraph--type--program-lead-in,
+.block-field-blocknodesimple-pagefield-intro-paragraphs
+  .paragraph--type--program-lead-in,
+.paragraph--type--statistics {
+  @extend .grid;
+  position: relative;
+}
+
+.block-field-blocknodeprogram-centerbody {
+  .field__item {
+    @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+
+    @include mq($md) {
+      @include column-width(4, 10);
+      margin-top: $space-md;
+    }
+    @include mq($xl) {
+      @include column-width(4, 10);
+    }
+  }
+
+  h2,
+  h3,
+  h4 {
+    @include font($acumin-semi-cond, "bold");
+  }
+}
+
+.field--name-field-leadin-title,
+.field--name-field-leadin-paragraph,
+.field--name-field-statistics-title,
+.paragraph .field--name-field-statistics,
+.block-field-blocknodeprogram-centerbody .field--name-body,
+.page-node-type-program-center .grid .layout__region {
+  @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+
+  @include mq($ph) {
+    @include center-columns($grid-columns, $grid-columns);
+  }
+}
+
+.field--name-field-leadin-title {
+  h2 {
+    @include font($caslon, "regular", "italic");
+    @include font-line-height(36, 40);
+    margin: 0;
+  }
+
+  @include mq($md) {
+    @include column-width(1, 4);
+  }
+
+  @include mq($lg) {
+    @include column-width(2, 4);
+  }
+}
+
+.field--name-field-leadin-paragraph {
+  @extend .intro;
+  @include font-line-height(18, 30);
+
+  margin-bottom: $space-md;
+
+  @include mq($md) {
+    @include column-width(4, 11);
+
+    p {
+      margin-top: 0;
+    }
+  }
+  @include mq($xl) {
+    @include column-width(4, 10);
+  }
+}
+
+.paragraph--type--statistics {
+  @extend .top-border-thick;
+
+  .field--name-field-statistics-title {
+    @include mq($md) {
+      @include column-width(2, 4);
+    }
+
+    @extend .italic-tiny;
+    @include font-line-height(24, 28);
+    @include mq($md) {
+      padding-top: 0;
+    }
+  }
+
+  .field--name-field-statistics {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 45px;
+    border-bottom: 2px solid $black;
+    position: relative;
+
+    @include mq($md) {
+      &:after {
+        content: "";
+        height: 2px;
+        width: 100%;
+        background-color: black;
+        position: absolute;
+        bottom: -2px;
+        left: 30%;
+        z-index: 1;
+      }
+    }
+
+    @include mq($md) {
+      @include column-width(4, 11);
+    }
+    @include mq($xl) {
+      @include column-width(4, 10);
+    }
+
+    .field__item {
+      flex: 0 0 50%;
+
+      .field--name-field-statistic-text {
+        width: 95%;
+      }
+
+      @include mq($md) {
+        flex: 0 0 25%;
+
+        .field--name-field-statistic-text {
+          width: 80%;
+        }
+      }
+    }
+
+    .field__item:nth-child(even) {
+      .paragraph.paragraph--type--statistic.paragraph--view-mode--default {
+        padding-left: 10px;
+
+        @include mq($md) {
+          padding-left: 0;
+        }
+      }
+    }
+
+    .field--name-field-statistic-number {
+      @extend .h1;
+      @include font-line-height(48, 55);
+      margin-bottom: 0;
+      position: relative;
+    }
+
+    .field--name-field-statistic-text p {
+      @include font($acumin-semi-cond, "medium");
+      @include font-line-height(16, 18);
+      color: $green;
+      text-transform: none;
+    }
+  }
+}
+
+.block-field-blocknodeprogram-centerbody {
+  padding-top: 0;
+
+  .field--name-body {
+    @extend .top-border-thick;
+    padding-top: $space-md;
+
+    @include mq($md) {
+      @include column-width(4, 11);
+    }
+    @include mq($xl) {
+      @include column-width(4, 10);
+    }
+
+    p {
+      @extend .intro;
+      @include font-line-height(18, 30);
+      strong {
+        @include font($acumin-semi-cond, bold);
+        @include font-line-height(24, 30);
+      }
+    }
+
+    .field--name-field-media-image img {
+      max-width: 100%;
+      height: auto;
+      background-size: cover;
+    }
+  }
+}
+
+.block-field-blocknodeprogram-centerfield-featured-project {
+  @extend .top-border-thick;
+  @extend .margin-top-sm;
+}

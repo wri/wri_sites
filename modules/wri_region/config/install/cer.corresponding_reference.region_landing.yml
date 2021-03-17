@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies: {  }
+id: region_landing
+label: 'Region landing'
+enabled: true
+first_field: field_region
+second_field: field_landing_page
+bundles:
+  node:
+    - region
+  taxonomy_term:
+    - regions

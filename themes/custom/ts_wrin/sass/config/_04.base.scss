@@ -1,0 +1,308 @@
+/***
+ * @file
+ * BASE - Base element styles
+ */
+
+/* FONT SMOOTHING */
+body {
+  @include font($caslon, "regular");
+  @include font-line-height(20, 24);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  color: $black;
+}
+
+.h1,
+.h2,
+.h3,
+.h4 {
+  @include font($acumin-semi-cond);
+}
+
+.h1 {
+  @include font-line-height(42, 46);
+
+  @include mq($ph) {
+    @include font-line-height(48, 54);
+  }
+
+  @include mq($md) {
+    @include font-line-height(64, 72);
+  }
+
+  &.xl {
+    @include mq($lg) {
+      @include font-line-height(74,80);
+    }
+  }
+
+  &.white {
+    color: $white;
+  }
+}
+
+.h2 {
+  @include font-line-height(38, 38);
+
+  @include mq($md) {
+    @include font-line-height(42, 42);
+  }
+
+  &.white {
+    color: $white;
+  }
+}
+
+.h3 {
+  @include font-line-height(24, 30);
+
+  &.white {
+    color: $white;
+  }
+}
+
+.h4 {
+  @include font-line-height(20, 20);
+
+  &.white {
+    color: $white;
+  }
+}
+
+a {
+  color: inherit;
+  font-family: inherit;
+}
+
+p a {
+  color: $green;
+
+  @include hocus {
+    color: $black;
+  }
+}
+
+img {
+  display: block;
+}
+
+figcaption {
+  @include font($acumin-semi-cond, 'regular');
+  @include font-line-height(13,18);
+
+  margin-top: rem(13);
+
+  &::before {
+    content: "Above: ";
+    @include font($caslon, 'italic');
+    @include font-line-height(15,16);
+  }
+}
+
+.intro {
+  @include font($acumin-semi-cond, light);
+  @include font-line-height(20, 31);
+
+  @include mq($lg) {
+    @include font-line-height(24, 36);
+  }
+
+  &.white {
+    color: $white;
+  }
+}
+
+.italic-tiny {
+  @include font($caslon, 'regular', 'italic');
+  @include font-line-height(15,19);
+}
+
+.italic-xtra-tiny {
+  @include font($caslon, 'regular', 'italic');
+  @include font-line-height(13,15);
+}
+
+.teaser-title {
+  @include font($acumin-semi-cond, 'light');
+  @include font-line-height(20,26);
+
+  &.large {
+    @include font-line-height(24,30);
+
+    @include mq($md) {
+      @include font-line-height(36,42);
+    }
+  }
+
+  a {
+    background-position: left 100%;
+    color: $black;
+    text-decoration: none;
+
+    @include hocus {
+      color: $green;
+    }
+  }
+}
+
+.topic-tag,
+.topic-tag a {
+  @include font($acumin-pro, 'bold');
+  @include font-line-height(15, 18);
+  color: $green;
+  letter-spacing: 0.9px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.topic-tag a {
+  @include text-underline(transparent, $green);
+  background-position: left 100%;
+}
+
+.taxonomy,
+.topic-tag-wrapper a {
+  @include font($acumin-pro, 'semibold');
+  @include font-line-height(18,24);
+  @include text-underline(transparent, $green);
+  background-position: left 100%;
+  color: $green;
+
+  &.small-text {
+    @include font-line-height(14,18);
+  }
+}
+
+.subtext a {
+  text-decoration: none;
+
+  @include hocus {
+    text-decoration: underline;
+  }
+}
+
+
+.secondary.link,
+.secondary.link a{
+  @include font($acumin-pro, 'bold');
+  @include font-line-height(13, 15);
+  color: $black;
+  text-decoration: none;
+}
+
+.bundle {
+  @include font($acumin-semi-cond, 'regular');
+  @include font-line-height(11, 14);
+  background-color: $light-grey;
+  border-radius: 3px;
+  display: inline-block;
+  padding: 4px 8px;
+}
+
+.date {
+  @include font($acumin-semi-cond, 'light');
+  @include font-line-height(11, 16);
+  text-transform: uppercase;
+
+  &.white {
+    color: $white;
+  }
+}
+
+.secondary {
+  @include font($acumin-semi-cond, "light");
+  @include font-line-height(16, 22);
+
+  &.body-link {
+    @include font($acumin-semi-cond, "semibold");
+  }
+}
+
+.top-border-thick {
+  border-top: 6px solid $black;
+  margin-top: 0;
+  padding-top: 24px;
+}
+
+.top-border-medium {
+  border-top: 3px solid $black;
+}
+
+.top-border-small {
+  border-top: 1px solid $black;
+}
+
+.top-border-tiny {
+  border-top: 1px solid $light-grey;
+  padding-top: $space-xs;
+}
+
+ul.menu {
+  margin: 0;
+}
+
+.menu-item--expanded {
+  list-style-image: none;
+  list-style-type: none;
+}
+
+.dark-overlay {
+  @include gradient_setup();
+  background-color: rgba($black, 0.5);
+}
+
+.label {
+  @include font($acumin-semi-cond, "semi-bold");
+  @include font-line-height(18);
+
+  &.small {
+    @include font-line-height(13);
+  }
+}
+.has-white-background-color {
+  background: $white;
+}
+
+.has-black-background-color {
+  background-color:$black
+}
+
+.has-light-gray-color {
+  color:$light-grey
+}
+.has-light-gray-background-color {
+  background-color:$light-grey
+}
+.has-white-color {
+  color:$white
+}
+.has-white-background-color {
+  background-color:$white
+}
+.has-blue-color {
+  color:$blue
+}
+.has-blue-background-color {
+  background-color:$blue
+}
+.has-teal-color {
+  color:$teal
+}
+.has-teal-background-color {
+  background-color:$teal
+}
+.has-green-color {
+  color:$green
+}
+.has-green-background-color {
+  background-color:$green
+}
+.has-gold-color {
+  color:$brand-gold
+}
+.has-gold-background-color {
+  background-color:$brand-gold
+}
+.has-text-align-center {
+  text-align: center;
+}

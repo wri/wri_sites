@@ -1,0 +1,24 @@
+name: 'WRI Featured Tweet'
+type: module
+description: 'Provides Featured Tweet functionality'
+core_version_requirement: '^8.8.0 || ^9'
+package: WRI
+dependencies:
+  - block_content
+  - entity_browser
+  - link
+  - views
+  - wri_block
+  - wri_common
+config_devel:
+  install:
+    - block_content.type.featured_tweet
+    - core.entity_form_display.block_content.featured_tweet.default
+    - core.entity_view_display.block_content.featured_tweet.default
+    - core.entity_view_display.node.article.featured_tweet
+    - core.entity_view_mode.node.featured_tweet
+    - entity_browser.browser.tweets
+    - field.field.block_content.featured_tweet.field_custom_tweet
+    - field.field.block_content.featured_tweet.field_listing
+    - views.view.featured_tweet
+    - views.view.featured_tweets_entity_browser

@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: narrative_taxonomy
+label: 'Narrative Taxonomy'
+revision: 0
+description: ''

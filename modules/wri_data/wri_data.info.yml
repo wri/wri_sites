@@ -1,0 +1,49 @@
+name: 'WRI Data'
+type: module
+description: 'Data node functionality and fields'
+core_version_requirement: '^8.8.0 || ^9'
+package: WRI
+dependencies:
+  - pathauto
+  - wri_common
+  - wri_node
+  - wri_region
+config_devel:
+  install:
+    - core.entity_form_display.node.data.default
+    - core.entity_view_display.node.data.card
+    - core.entity_view_display.node.data.default
+    - core.entity_view_display.node.data.full
+    - core.entity_view_display.node.data.impact
+    - core.entity_view_display.node.data.large_image_teaser
+    - core.entity_view_display.node.data.main_content
+    - core.entity_view_display.node.data.search_results
+    - core.entity_view_display.node.data.small_image_teaser
+    - core.entity_view_display.node.data.superfeatured
+    - core.entity_view_display.node.data.teaser
+    - core.entity_view_display.node.data.tile
+    - core.entity_view_display.node.data.type_title
+    - field.field.node.data.body
+    - field.field.node.data.field_authors
+    - field.field.node.data.field_featured
+    - field.field.node.data.field_featured_headline
+    - field.field.node.data.field_featured_text
+    - field.field.node.data.field_files
+    - field.field.node.data.field_intro
+    - field.field.node.data.field_license
+    - field.field.node.data.field_media
+    - field.field.node.data.field_metatags
+    - field.field.node.data.field_narrative_taxonomy
+    - field.field.node.data.field_platform_link
+    - field.field.node.data.field_primary_contacts
+    - field.field.node.data.field_primary_topic
+    - field.field.node.data.field_projects
+    - field.field.node.data.field_region
+    - field.field.node.data.field_related_resources
+    - field.field.node.data.field_tags
+    - field.field.node.data.field_type
+    - field.field.node.data.layout_builder__layout
+    - metatag.metatag_defaults.node__data
+    - node.type.data
+    - pathauto.pattern.data
+    - xmlsitemap.settings.node.data

@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * Custom theme implementation to display a happening now teasers.
+ *
+ * @see template_preprocess_viewfield_item()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+set classes = [
+  'field__item',
+  'field__item-label-' ~ label_display,
+  'happening-now-teasers'
+]
+%}
+{%
+set title_classes = [
+  'field__item__label',
+  label_display == 'visually_hidden' ? 'visually-hidden',
+]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {% if not label_hidden and label %}
+    <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
+  {% endif %}
+  {{ title_suffix }}
+  {% block content %}
+    {{ content }}
+  {% endblock %}
+</div>

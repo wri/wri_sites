@@ -1,0 +1,108 @@
+#social-sharing-block {
+  @include font("acumin-pro", "regular");
+
+  ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+    width: rem(125);
+
+    & > li {
+      border-radius: 3px;
+      border: 1px solid $light-grey;
+      color: $black;
+      display: block;
+      padding: 0;
+      position: relative;
+      text-decoration: none;
+      transition-duration: 0.5s;
+
+      &:hover,
+      &:focus-within {
+        background-color: $brand-gold;
+        cursor: pointer;
+      }
+    }
+  }
+
+  ul > li > a {
+    @include hocus() {
+      background: none;
+      text-decoration: underline;
+    }
+    @include font-line-height(15, 40);
+
+    color: #fff;
+    display: block;
+    text-decoration: none;
+
+    &.share-icon {
+      background: transparent url("../img/svgs/share.svg") no-repeat;
+      background-size: 15px, 16px;
+      background-position: center, center;
+      height: rem(36);
+      overflow: hidden;
+      text-indent: 100%;
+      white-space: nowrap;
+      width: rem(36);
+
+      &.icon-email {
+        background-image: url("../img/svgs/email.svg");
+      }
+      &.icon-print {
+        background-image: url("../img/svgs/print.svg");
+      }
+    }
+  }
+
+  // Sub-nav
+  ul > li > ul {
+    background: $light-grey;
+    border-top: 3px solid $white;
+    display: none;
+    left: rem(-2);
+    margin-top: 0;
+    opacity: 0;
+    padding-bottom: rem(10);
+    position: absolute;
+    text-align: center;
+    transition: all 0.5s ease;
+    visibility: hidden;
+    z-index: 1;
+    @include mq($lg) {
+      left: rem(-52);
+      width: rem(140);
+    }
+
+    & > li {
+      background-color: transparent;
+      border-radius: 0;
+      border: none;
+      padding: rem(5) 0;
+      width: 100%;
+
+      &:hover,
+      &:focus-within {
+        background-color: transparent;
+      }
+
+      a {
+        color: $black;
+      }
+    }
+  }
+
+  // Sub-nav hover visibility.
+  ul li:hover > ul,
+  ul li:focus-within > ul,
+  ul li ul:hover,
+  ul li ul:focus {
+    visibility: visible;
+    opacity: 1;
+    display: flex;
+    flex-direction: column;
+  }
+}

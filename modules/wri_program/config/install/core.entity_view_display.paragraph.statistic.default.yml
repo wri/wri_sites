@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.statistic.field_statistic_number
+    - field.field.paragraph.statistic.field_statistic_text
+    - paragraphs.paragraphs_type.statistic
+  module:
+    - text
+id: paragraph.statistic.default
+targetEntityType: paragraph
+bundle: statistic
+mode: default
+content:
+  field_statistic_number:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_statistic_text:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden:
+  search_api_excerpt: true

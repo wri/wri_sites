@@ -1,0 +1,80 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.3_1_articles
+    - field.storage.block_content.field_listing
+    - views.view.3_1
+  module:
+    - viewfield
+id: block_content.3_1_articles.field_listing
+field_name: field_listing
+entity_type: block_content
+bundle: 3_1_articles
+label: Listing
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    token_help: ''
+    display_id: block_1
+    arguments: '[block_content:field_tag:target_id]/[block_content:field_custom_results:array:target_id:join:+]/[block_content:field_content_types:array:target_id:join:+]'
+    items_to_display: ''
+    target_uuid: ba985f1d-01bd-42cb-ab9c-1f4243795b9c
+default_value_callback: ''
+settings:
+  force_default: true
+  allowed_views:
+    '3_1': '3_1'
+    all_topics: '0'
+    authored_by: '0'
+    content: '0'
+    content_by_type: '0'
+    content_cleanup: '0'
+    content_css_js: '0'
+    content_listing: '0'
+    content_listing_a_to_z: '0'
+    countries: '0'
+    block_content: '0'
+    tmp: '0'
+    featured_experts: '0'
+    featured_tweet: '0'
+    featured_tweets_entity_browser: '0'
+    files: '0'
+    files_browser: '0'
+    frontpage: '0'
+    happening_now: '0'
+    media: '0'
+    media_library: '0'
+    moderated_content: '0'
+    other_publications_in_this_series: '0'
+    user_admin_people: '0'
+    people_at_this_io: '0'
+    programs_centers: '0'
+    homepage_projects: '0'
+    content_recent: '0'
+    redirect: '0'
+    related_content: '0'
+    resources: '0'
+    resource_types: '0'
+    scheduled_transitions: '0'
+    search: '0'
+    superfeatured_content: '0'
+    tagged_with: '0'
+    taxonomy_term: '0'
+    trending_topics: '0'
+    watchdog: '0'
+    who_s_new: '0'
+    who_s_online: '0'
+  allowed_display_types:
+    block: block
+    attachment: '0'
+    entity_browser: '0'
+    entity_reference: '0'
+    feed: '0'
+    default: '0'
+    page: '0'
+  handler: 'default:view'
+  handler_settings: {  }
+field_type: viewfield

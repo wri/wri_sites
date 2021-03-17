@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies: {  }
+id: program_landing
+label: 'Program Landing'
+enabled: true
+first_field: field_primary_topic
+second_field: field_landing_page
+bundles:
+  node:
+    - program_center
+  taxonomy_term:
+    - topics_and_subtopics

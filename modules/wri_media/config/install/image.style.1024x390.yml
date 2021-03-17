@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 1024x390
+label: 1024x390
+effects:
+  2678771a-48d2-4425-a535-adcf86a05461:
+    uuid: 2678771a-48d2-4425-a535-adcf86a05461
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1024
+      height: 390
+      crop_type: focal_point

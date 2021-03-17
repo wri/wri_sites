@@ -1,0 +1,158 @@
+.page-node-type-simple-page {
+  .layout__region--title {
+    @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+    @include mq($ph) {
+      @include center-columns($grid-columns, $grid-columns);
+    }
+    @include mq($md) {
+      @include column-width(2, -2);
+    }
+  }
+  .has-menu {
+    @include mq($md) {
+      @include column-width(2, -4);
+    }
+  }
+
+  .layout__region--menu {
+    @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+    @include mq($ph) {
+      @include center-columns($grid-columns, $grid-columns);
+    }
+    @include mq($md) {
+      @include column-width(10, 12);
+    }
+  }
+
+  .simple-page__content .main-content {
+    @include mq($md) {
+      @include column-width(2, -2);
+    }
+  }
+
+  .intro-wrapper {
+    @include font($acumin-semi-cond, "semibold");
+    @include font-line-height(20, 24);
+    margin-bottom: $space-lg;
+
+    @include mq($md) {
+      @include font-line-height(24, 32);
+      margin-bottom: $space-xl;
+    }
+  }
+
+  .paragraph--type--side-by-side {
+    @extend .grid;
+    @extend .margin-top-xl;
+    @extend .margin-bottom-xl;
+    position: relative;
+
+    &:before {
+      content: "";
+      @extend .top-border-thick;
+      display: block;
+      @include column-width(1, -1);
+      margin: $space-xs 0 0;
+      padding-top: $space-xs;
+      grid-row: 1;
+
+      @include mq($md) {
+        @include column-width(2, 6);
+      }
+    }
+
+    .field--name-field-title {
+      @include column-width(1, -1);
+      grid-row: 2;
+      margin-top: 0;
+
+      @include mq($md) {
+        @include column-width(2, 6);
+        grid-row: 1;
+        margin-top: $space-md;
+      }
+
+      h2 {
+        @include font($acumin-semi-cond, bold);
+        @include font-line-height(32, 40);
+        margin: 0;
+      }
+    }
+
+    .field--name-field-body {
+      @include column-width(1, -1);
+      grid-row: 3;
+
+      @include mq($md) {
+        @include column-width(6, 12);
+        grid-row: 1;
+      }
+
+      p {
+        @include font($acumin-semi-cond, light);
+        @include font-line-height(18, 30);
+
+        &:first-of-type {
+          @include mq($md) {
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+
+    a {
+      background-position: left 100%;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .paragraph--type--statistics {
+    .field--name-field-statistics {
+      @include mq($md) {
+        @include column-width(6, 12);
+
+        &::after {
+          left: 18%;
+        }
+      }
+    }
+
+    .field--name-field-statistics-title {
+      @include mq($md) {
+        @include column-width(2, 6);
+      }
+    }
+  }
+}
+
+.menu--page-hierarchies {
+  @include font($acumin-pro, "regular");
+  @include font-line-height(14, 18);
+
+  @include mq($md) {
+    border-left: 1px solid #1a1919;
+    margin: $space-lg 0;
+    padding-left: $space-xs;
+  }
+
+  li {
+    margin-bottom: 12px;
+
+    &.menu-item--collapsed {
+      list-style: none;
+    }
+  }
+
+  a {
+    color: $green;
+    text-decoration: none;
+
+    @include hocus {
+      color: $black;
+    }
+  }
+}

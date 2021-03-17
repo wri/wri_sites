@@ -1,0 +1,8 @@
+{#
+/**
+ * @file
+ * Template to to show the child page menu of the current page.
+ */
+#}
+{{ contextual_links('menu:menu=page-hierarchies:langcode=en') }}
+{{ drupal_block('menu_block:page-hierarchies', {level: 1, depth: 0, parent: 'page-hierarchies:', render_parent: false, follow_parent: 'child', follow: 1, label: 'Child pages', label_display: 0, id:'page-hierarchies'}) }}

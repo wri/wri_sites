@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.unique_feature_cta
+    - field.storage.block_content.field_overlay_color
+  module:
+    - options
+id: block_content.unique_feature_cta.field_overlay_color
+field_name: field_overlay_color
+entity_type: block_content
+bundle: unique_feature_cta
+label: 'Overlay color'
+description: 'Select the color to go over the image on the sides of this element.'
+required: true
+translatable: false
+default_value:
+  -
+    value: blue
+default_value_callback: ''
+settings: {  }
+field_type: list_string

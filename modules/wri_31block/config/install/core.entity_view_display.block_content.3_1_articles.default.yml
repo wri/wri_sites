@@ -1,0 +1,95 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.3_1_articles
+    - field.field.block_content.3_1_articles.field_content_types
+    - field.field.block_content.3_1_articles.field_custom_results
+    - field.field.block_content.3_1_articles.field_listing
+    - field.field.block_content.3_1_articles.field_tag
+  module:
+    - ds
+    - wri_admin
+third_party_settings:
+  ds:
+    layout:
+      id: 'single_file_component_layout:wri_3_1_listing'
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        component_context: {  }
+        wrappers:
+          header: div
+          intro: div
+          listing: div
+    regions:
+      header:
+        - block_label
+      listing:
+        - field_listing
+    fields:
+      block_label:
+        plugin_id: block_label
+        weight: 0
+        label: hidden
+        formatter: default
+        ft:
+          id: reset
+          settings:
+            lb: ''
+id: block_content.3_1_articles.default
+targetEntityType: block_content
+bundle: 3_1_articles
+mode: default
+content:
+  field_content_types:
+    weight: 1
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_listing:
+    weight: 0
+    label: hidden
+    settings:
+      view_title: hidden
+      empty_view_title: hidden
+      always_build_output: 0
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi: false
+            fi-def-at: false
+    type: viewfield_token
+    region: listing
+hidden:
+  field_custom_results: true
+  field_tag: true
+  search_api_excerpt: true

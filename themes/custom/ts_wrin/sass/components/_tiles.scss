@@ -1,0 +1,130 @@
+.tile {
+  .h3,
+  .secondary {
+    margin-bottom: $space-xs;
+
+    a {
+      text-decoration: none;
+
+      @include hocus {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .card-image {
+    position: relative;
+    min-height: $space-md;
+    z-index: 1;
+
+    @include mq($lg) {
+      min-height: 157px;
+    }
+
+    @include mq($xl) {
+      min-height: 257px;
+    }
+  }
+
+  .card-image img {
+    width: 100%;
+    object-fit: cover;
+    min-height: 260px;
+  }
+
+  .card-text {
+    max-width: calc(100% - 70px);
+    position: relative;
+    margin-top: -$space-md;
+    z-index: 2;
+
+    @include mq($lg) {
+      max-width: calc(100% - 135px);
+      margin-top: -157px;
+      min-height: 157px;
+    }
+
+    @include mq($xl) {
+      max-width: 50%;
+      min-height: 257px;
+      margin-top: -257px;
+    }
+  }
+
+  .has-white-background-color {
+    border: 1px solid $white;
+  }
+
+  .tile-buttons {
+    margin-bottom: $space-xs/2;
+  }
+
+  .button.small {
+    margin-left: 0;
+    margin-bottom: $space-xs/2;
+  }
+}
+
+// International Office Tiles
+.tile.international_office {
+  position: relative;
+  box-sizing: border-box;
+  padding-top: 250px;
+  background-color: black;
+
+  @include mq($md) {
+    padding-top: 175px;
+  }
+
+  @include mq($lg) {
+    padding-top: 0;
+  }
+
+  .card-image::after {
+    content: "";
+    @include hero_bottom_gradient_heavy(to bottom, $true-black);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+
+    @include mq($lg) {
+      @include hero_bottom_gradient_heavy(to bottom, $black);
+      opacity: 0.9;
+      top: 0;
+    }
+  }
+
+  .card-text {
+    background-color: transparent;
+    border: none;
+    color: $white;
+    margin-top: 0;
+    max-width: 100%;
+    padding: $space-xs;
+    position: absolute;
+    top: 0;
+
+    @include mq($lg) {
+      padding: 0 $space-xs * 2 0;
+    }
+
+    h3 {
+      @extend .white;
+      @extend .card-headline;
+      @include font($acumin-semi-cond, "bold");
+      @include font-line-height(32, 40);
+      margin: 0;
+
+      a {
+        color: $white;
+        @include text-underline(transparent, $white);
+        background-position: left 100%;
+      }
+    }
+
+    p {
+      @extend .teaser-title;
+    }
+  }
+}

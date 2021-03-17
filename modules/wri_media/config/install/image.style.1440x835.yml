@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 1440x835
+label: 1440x835
+effects:
+  03832996-42ba-486b-b232-6ebda9c8b56a:
+    uuid: 03832996-42ba-486b-b232-6ebda9c8b56a
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1440
+      height: 835
+      crop_type: focal_point

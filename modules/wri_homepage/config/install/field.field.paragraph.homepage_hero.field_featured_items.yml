@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_featured_items
+    - node.type.article
+    - node.type.publication
+    - paragraphs.paragraphs_type.homepage_hero
+id: paragraph.homepage_hero.field_featured_items
+field_name: field_featured_items
+entity_type: paragraph
+bundle: homepage_hero
+label: 'Featured items'
+description: 'Similar to the <em>Happening Now</em> features, there are the two featured items under the hero title.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      article: article
+      publication: publication
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: article
+field_type: entity_reference

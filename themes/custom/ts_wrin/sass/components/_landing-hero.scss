@@ -1,0 +1,226 @@
+.landing-page__hero {
+  position: relative;
+
+  &.has-image .hero__image {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    &:before {
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0) 100%
+      );
+      content: "";
+      height: 30%;
+      max-height: 177px;
+      left: 0;
+      opacity: 0.6;
+      position: absolute;
+      top: 0;
+      width: 1000%;
+      z-index: -1;
+    }
+
+    div.media {
+      height: 100%;
+    }
+
+    img {
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      width: 100%;
+    }
+  }
+
+  &.has-image .hero__text {
+    color: $white;
+    min-height: 700px;
+
+    @include mq($ph) {
+      min-height: 640px;
+    }
+    @include mq($xl) {
+      min-height: 700px;
+    }
+
+    .grid {
+      height: 100%;
+      min-height: 700px;
+
+      @include mq($ph) {
+        min-height: 640px;
+      }
+      @include mq($xl) {
+        min-height: 700px;
+      }
+    }
+  }
+
+  .hero__text {
+    position: relative;
+    z-index: 2;
+
+    h1 {
+      margin-bottom: $space-xs;
+
+      @include mq($lg) {
+        margin-bottom: 0;
+      }
+      p {
+        margin: 0;
+      }
+    }
+
+    .hero__text--inner {
+      @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+
+      @include mq($ph) {
+        @include center-columns($grid-columns, $grid-columns);
+        max-width: 75%;
+      }
+      @include mq($md) {
+        @include column-width(1, 10);
+        max-width: 650px;
+      }
+      @include mq($lg) {
+        @include column-width(2, 12);
+        max-width: 800px;
+      }
+    }
+
+    // Different styles for simple displays (data, publications, events).
+    &.display-type-simple {
+      .hero__text--inner {
+        @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+
+        @include mq($ph) {
+          @include center-columns($grid-columns, $grid-columns);
+        }
+
+        @include mq($lg) {
+          @include column-width(2, 12);
+        }
+      }
+    }
+  }
+  .landing-page__hero__content {
+    margin-top: auto;
+  }
+}
+
+.white .landing-page__hero {
+  position: relative;
+
+  &.has-image .hero__image {
+    &:before {
+      z-index: 1;
+    }
+  }
+}
+
+// Happening now
+.hero__text .hero__text--inner .field--name-field-listing,
+.landing-page__hero__field-listing__mobile .field--name-field-listing {
+  .field__label {
+    @include font($caslon, "bold", "italic");
+    @include font-line-height(15, 18);
+  }
+
+  .happening-now-teasers ul.listing-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    li {
+      @include font($acumin-pro, "bold", "normal");
+      @include font-line-height(14, 18);
+      border-top: 1px solid rgba(#e8e8e7, 0.5);
+      flex: 0 1 33%;
+      list-style-image: none;
+      list-style-type: none;
+      margin-left: 0;
+      margin-right: 28px;
+      margin-top: 10px;
+      padding-top: 10px;
+      text-decoration: none;
+    }
+    li:last-of-type {
+      margin-right: 0;
+    }
+    li a {
+      @include text-underline-thin(transparent, $white);
+      text-decoration: none;
+      background-position: left 100%;
+    }
+  }
+}
+
+// Hide header version on mobile.
+.hero__text .hero__text--inner .field--name-field-listing {
+  display: none;
+
+  @include mq($md) {
+    display: block;
+  }
+}
+
+// Mobile version styles and overrides.
+.landing-page__hero__field-listing__mobile {
+  background-color: $blue;
+  color: $white;
+  display: block;
+
+  @include mq($md) {
+    display: none;
+  }
+
+  .field--name-field-listing {
+    .field__label {
+      padding-bottom: $space-xs;
+    }
+
+    .happening-now-teasers ul.listing-items {
+      display: block;
+      margin-bottom: 0;
+
+      li {
+        @include font($acumin-pro, "bold", "normal");
+        @include font-line-height(14, 18);
+        flex: none;
+        margin-right: 0;
+        padding-bottom: $space-xs;
+      }
+      li:last-of-type {
+        padding-bottom: 0;
+      }
+      li a {
+        color: $white;
+      }
+    }
+  }
+}
+
+.tall-hero .has-image {
+  .hero__image,
+  .hero__text,
+  .hero__text .grid {
+    min-height: 700px;
+    @include mq($ph) {
+      min-height: 640px;
+    }
+    @include mq($lg) {
+      min-height: 800px;
+    }
+    @include mq($xxl) {
+      min-height: 900px;
+    }
+  }
+}

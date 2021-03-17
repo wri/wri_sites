@@ -1,0 +1,58 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.3_1_articles
+    - field.field.block_content.3_1_articles.field_content_types
+    - field.field.block_content.3_1_articles.field_custom_results
+    - field.field.block_content.3_1_articles.field_listing
+    - field.field.block_content.3_1_articles.field_tag
+  module:
+    - viewfield
+id: block_content.3_1_articles.default
+targetEntityType: block_content
+bundle: 3_1_articles
+mode: default
+content:
+  field_content_types:
+    weight: 27
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_custom_results:
+    weight: 29
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_listing:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: viewfield_select
+    region: content
+  field_tag:
+    weight: 27
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  body: true

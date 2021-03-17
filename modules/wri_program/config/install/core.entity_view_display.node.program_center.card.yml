@@ -1,0 +1,186 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.card
+    - field.field.node.program_center.body
+    - field.field.node.program_center.field_featured_experts
+    - field.field.node.program_center.field_featured_project
+    - field.field.node.program_center.field_intro
+    - field.field.node.program_center.field_intro_paragraphs
+    - field.field.node.program_center.field_long_title
+    - field.field.node.program_center.field_main_image
+    - field.field.node.program_center.field_metatag
+    - field.field.node.program_center.field_narrative_taxonomy
+    - field.field.node.program_center.field_primary_contacts
+    - field.field.node.program_center.field_primary_topic
+    - field.field.node.program_center.field_twitter_account
+    - field.field.node.program_center.field_type
+    - field.field.node.program_center.layout_builder__layout
+    - node.type.program_center
+    - responsive_image.styles.card_tall
+  module:
+    - blazy
+    - ds
+    - layout_builder
+    - text
+    - user
+    - wri_media
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+  ds:
+    layout:
+      id: layout_card
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      image:
+        - field_main_image
+      title:
+        - node_title
+      intro:
+        - field_intro
+        - node_link_token
+    fields:
+      node_link_token:
+        plugin_id: node_link_token
+        weight: 3
+        label: hidden
+        formatter: default
+        settings:
+          'link text': 'Visit the [node:title] [node:field_type]'
+          'link class': 'button small'
+          wrapper: ''
+          class: ''
+        ft:
+          id: reset
+          settings:
+            lb: ''
+      node_title:
+        plugin_id: node_title
+        weight: 1
+        label: hidden
+        formatter: default
+        settings:
+          link: true
+          wrapper: ''
+          class: h3
+        ft:
+          id: reset
+          settings:
+            lb: ''
+id: node.program_center.card
+targetEntityType: node
+bundle: program_center
+mode: card
+content:
+  field_intro:
+    type: text_trimmed
+    weight: 2
+    region: intro
+    label: hidden
+    settings:
+      trim_length: 300
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fi: true
+            fi-el: ''
+            fi-cl: secondary
+            fi-at: ''
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi-def-at: false
+  field_main_image:
+    type: blazy_media
+    weight: 0
+    region: image
+    label: hidden
+    settings:
+      image_style: ''
+      responsive_image_style: card_tall
+      media_switch: ''
+      thumbnail_style: ''
+      ratio: ''
+      view_mode: default
+      current_view_mode: card
+      background: false
+      caption:
+        field_tags: '0'
+        title: '0'
+        alt: '0'
+      class: ''
+      id: ''
+      image: ''
+      link: ''
+      overlay: ''
+      title: ''
+      vanilla: false
+      icon: ''
+      layout: ''
+      cache: 0
+      skin: ''
+      fx: ''
+      style: ''
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      box_style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
+      grid: 0
+      grid_medium: 0
+      grid_small: 0
+    third_party_settings:
+      wri_media:
+        min_width: ''
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+hidden:
+  body: true
+  content_moderation_control: true
+  field_featured_experts: true
+  field_featured_project: true
+  field_intro_paragraphs: true
+  field_lead_in: true
+  field_long_title: true
+  field_metatag: true
+  field_narrative_taxonomy: true
+  field_primary_contacts: true
+  field_primary_topic: true
+  field_statistics: true
+  field_twitter_account: true
+  field_type: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

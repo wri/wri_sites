@@ -1,0 +1,88 @@
+<?php
+
+/**
+ * @file
+ * WRI admin functions.
+ */
+
+/**
+ * Implements hook_page_attachments().
+ */
+
+use Drupal\node\Entity\Node;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_page_attachments().
+ */
+function wri_admin_page_attachments(array &$attachments) {
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+  if ($theme == 'claro') {
+    // A few css/js changes to make the backend easier to use.
+    $attachments['#attached']['library'][] = 'wri_admin/admin';
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function wri_admin_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $layout_forms = [
+    'layout_builder_configure_block',
+    'node_layout_builder_form',
+    'entity_view_display_layout_builder_form',
+    'layout_builder_revert_overrides',
+    'layout_builder_discard_changes',
+  ];
+  $build_info = $form_state->getBuildInfo();
+  if (isset($build_info['base_form_id']) && in_array($build_info['base_form_id'], $layout_forms)) {
+    $form['#attached']['library'][] = 'wri_admin/admin';
+  }
+  elseif (in_array($form_id, $layout_forms)) {
+    $form['#attached']['library'][] = 'wri_admin/admin';
+  }
+  if ($form_id == 'content_moderation_entity_moderation_form') {
+    $node = $form_state->get('entity');
+    if ($node) {
+      $published_node = Node::load($node->id());
+      $form['link_to_revision'] = [
+        '#title' => t('Compare to published'),
+        '#type' => 'link',
+        '#attributes' => [
+          'target' => '_blank',
+        ],
+        '#url' => Url::fromRoute('diff.revisions_diff',
+          [
+            'node' => $node->id(),
+            'left_revision' => $published_node->getLoadedRevisionId(),
+            'right_revision' => $node->getLoadedRevisionId(),
+            'filter' => 'visual_inline',
+          ]
+        ),
+      ];
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function wri_admin_theme() {
+  $theme['entity_moderation_form__diff'] = [
+    'base hook' => 'entity_moderation_form',
+  ];
+
+  return $theme;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function wri_admin_theme_suggestions_entity_moderation_form(array $variables) {
+  $suggestions = [];
+
+  $suggestions[] = 'entity_moderation_form__diff';
+
+  return $suggestions;
+}

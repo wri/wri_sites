@@ -1,0 +1,39 @@
+name: 'WRI homepage'
+type: module
+description: 'Homepage node functionality and fields'
+core_version_requirement: '^8.8.0 || ^9'
+package: WRI
+dependencies:
+  - wri_node
+  - wri_paragraph
+  - wri_topics
+  - onlyone
+config_devel:
+  install:
+    - core.entity_form_display.node.homepage.default
+    - core.entity_form_display.paragraph.featured_statement.default
+    - core.entity_form_display.paragraph.homepage_hero.default
+    - core.entity_view_display.media.image.homepage_hero
+    - core.entity_view_display.node.homepage.default
+    - core.entity_view_display.node.homepage.full
+    - core.entity_view_display.node.homepage.impact
+    - core.entity_view_display.node.homepage.teaser
+    - core.entity_view_display.paragraph.featured_statement.default
+    - core.entity_view_display.paragraph.homepage_hero.default
+    - core.entity_view_mode.media.homepage_hero
+    - field.field.node.homepage.field_homepage_hero
+    - field.field.node.homepage.layout_builder__layout
+    - field.field.paragraph.featured_statement.field_link
+    - field.field.paragraph.featured_statement.field_text
+    - field.field.paragraph.featured_statement.field_title
+    - field.field.paragraph.featured_statement.field_updated
+    - field.field.paragraph.homepage_hero.field_featured_items
+    - field.field.paragraph.homepage_hero.field_featured_statement
+    - field.field.paragraph.homepage_hero.field_hero_image
+    - field.field.paragraph.homepage_hero.field_hero_intro
+    - field.field.paragraph.homepage_hero.field_hero_title
+    - field.storage.node.field_homepage_hero
+    - node.type.homepage
+    - paragraphs.paragraphs_type.featured_statement
+    - paragraphs.paragraphs_type.homepage_hero
+    - xmlsitemap.settings.node.homepage

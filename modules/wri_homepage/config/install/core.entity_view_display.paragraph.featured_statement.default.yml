@@ -1,0 +1,83 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.featured_statement.field_link
+    - field.field.paragraph.featured_statement.field_text
+    - field.field.paragraph.featured_statement.field_title
+    - field.field.paragraph.featured_statement.field_updated
+    - paragraphs.paragraphs_type.featured_statement
+  module:
+    - ds
+    - link
+id: paragraph.featured_statement.default
+targetEntityType: paragraph
+bundle: featured_statement
+mode: default
+content:
+  field_link:
+    type: link
+    weight: 3
+    region: content
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  field_text:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    type: string
+    region: content
+  field_title:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    type: string
+    region: content
+  field_updated:
+    weight: 0
+    label: hidden
+    settings:
+      date_format: custom
+      custom_date_format: 'F d, Y'
+      timezone: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    type: timestamp
+    region: content
+hidden:
+  search_api_excerpt: true

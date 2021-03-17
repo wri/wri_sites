@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 600_wide
+label: '600 wide'
+effects:
+  33d8498e-3058-4d74-af4d-fb911fabb931:
+    uuid: 33d8498e-3058-4d74-af4d-fb911fabb931
+    id: image_scale
+    weight: 1
+    data:
+      width: 600
+      height: null
+      upscale: false

@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.small_cta.field_block
+    - paragraphs.paragraphs_type.small_cta
+  module:
+    - wri_block
+id: paragraph.small_cta.default
+targetEntityType: paragraph
+bundle: small_cta
+mode: default
+content:
+  field_block:
+    type: inline_block_field_widget
+    weight: 0
+    region: content
+    settings:
+      form_mode: default
+      revision: false
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      collapsible: false
+      collapsed: false
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

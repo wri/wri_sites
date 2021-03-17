@@ -1,0 +1,21 @@
+<template>
+  <div class="unfriendly-block">
+   <div class="grid"><div class="narrative-taxonomy">{{ content.phrase }}</div></div>
+   <div class="content">{{ content.main_content }}</div>
+  </div>
+</template>
+
+<?php
+
+  $definition['layout'] = [
+    'label' => 'Superfeatured block',
+    'regions' => [
+      'phrase' => ['label' => 'Phrase'],
+      'main_content'  => ['label' => 'Content'],
+    ],
+    'icon_map' => [
+      ['phrase'],
+      ['main_content'],
+    ],
+    'default_section' => 'main_content'
+  ];

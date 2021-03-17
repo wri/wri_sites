@@ -1,0 +1,45 @@
+{#
+/**
+ * @file
+ * Display Suite Card template.
+ *
+ * Available variables:
+ * - ds_content_wrapper: wrapper around content
+ * - attributes: content region attributes
+ * - ds_content: content region
+ */
+#}
+<div {{ attributes.addClass('tile', content['#bundle'] ~ '') }}>
+  {% if content %}
+    <div class="card-image">
+      {% if content.image %}
+        {{ content.image }}
+      {% endif %}
+    </div>
+    <div class="card-text has-white-background-color">
+      <div class="margin-right-sm margin-top-sm">
+        {% if content.title %}
+          {{ content.title }}
+        {% endif %}
+
+        {% if content.intro %}
+          {{ content.intro}}
+        {% endif %}
+
+
+        {% if content.link %}
+          <div class="tile-buttons">
+            {{ content.link }}
+          </div>
+        {% endif %}
+
+        {% if content.subtext|render %}
+          <div class="subtext top-border-tiny">
+            <span class="italic-xtra-tiny">{{ "Part of"|t }}</span> {{ content.subtext }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+  {% endif %}
+</div>

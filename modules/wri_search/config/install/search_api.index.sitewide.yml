@@ -1,0 +1,567 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+    - token
+    - wri_search
+    - search_api
+    - search_api_exclude_entity
+  config:
+    - field.storage.node.field_areas_of_expertise
+    - field.storage.node.body
+    - field.storage.node.field_email
+    - field.storage.node.field_featured
+    - field.storage.node.field_featured_headline
+    - field.storage.node.field_featured_media
+    - field.storage.node.field_featured_text
+    - field.storage.node.field_featured_tweet
+    - field.storage.taxonomy_term.field_is_featured
+    - field.storage.node.field_first_name
+    - field.storage.node.field_international_office
+    - field.storage.node.field_intro
+    - field.storage.node.field_title
+    - field.storage.node.field_languages_spoken
+    - field.storage.node.field_last_name
+    - field.storage.node.field_leadership
+    - field.storage.node.field_main_image
+    - field.storage.node.field_topics
+    - field.storage.node.field_project_expert
+    - field.storage.node.field_quote
+    - field.storage.node.field_projects
+    - field.storage.node.field_region
+    - field.storage.node.field_tags
+    - field.storage.node.field_primary_topic
+    - field.storage.node.field_type
+    - search_api.server.pantheon
+id: sitewide
+name: Sitewide
+description: ''
+read_only: false
+field_settings:
+  body:
+    label: Body
+    datasource_id: 'entity:node'
+    property_path: body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.body
+  changed:
+    label: Changed
+    datasource_id: 'entity:node'
+    property_path: changed
+    type: date
+    dependencies:
+      module:
+        - node
+  child_topic_term:
+    label: 'Topic » Taxonomy term » Is Child'
+    datasource_id: 'entity:node'
+    property_path: 'field_primary_topic:entity:term_child_of_parent'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_primary_topic
+      module:
+        - taxonomy
+        - wri_search
+  child_type_term:
+    label: 'Type » Taxonomy term » Is Child'
+    datasource_id: 'entity:node'
+    property_path: 'field_type:entity:term_child_of_parent'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_type
+      module:
+        - taxonomy
+        - wri_search
+  created:
+    label: 'Authored on'
+    datasource_id: 'entity:node'
+    property_path: created
+    type: date
+    dependencies:
+      module:
+        - node
+  field_email:
+    label: Email
+    datasource_id: 'entity:node'
+    property_path: field_email
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_email
+  field_featured:
+    label: Featured
+    datasource_id: 'entity:node'
+    property_path: field_featured
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_featured
+  field_featured_headline:
+    label: 'Featured Headline'
+    datasource_id: 'entity:node'
+    property_path: field_featured_headline
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_featured_headline
+  field_featured_media:
+    label: 'Featured Media'
+    datasource_id: 'entity:node'
+    property_path: field_featured_media
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_featured_media
+  field_featured_text:
+    label: 'Featured Text'
+    datasource_id: 'entity:node'
+    property_path: field_featured_text
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_featured_text
+  field_featured_tweet:
+    label: 'Featured Tweet'
+    datasource_id: 'entity:node'
+    property_path: field_featured_tweet
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_featured_tweet
+  field_first_name:
+    label: 'First Name'
+    datasource_id: 'entity:node'
+    property_path: field_first_name
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_first_name
+  field_international_office:
+    label: 'International Office'
+    datasource_id: 'entity:node'
+    property_path: field_international_office
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_international_office
+  field_intro:
+    label: Intro
+    datasource_id: 'entity:node'
+    property_path: field_intro
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_intro
+  field_is_featured:
+    label: 'Featured » Taxonomy term » Is Featured'
+    datasource_id: 'entity:node'
+    property_path: 'field_featured:entity:field_is_featured'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_featured
+        - field.storage.taxonomy_term.field_is_featured
+      module:
+        - taxonomy
+  field_last_name:
+    label: 'Last name'
+    datasource_id: 'entity:node'
+    property_path: field_last_name
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_last_name
+  field_leadership:
+    label: Leadership
+    datasource_id: 'entity:node'
+    property_path: field_leadership
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.node.field_leadership
+  field_main_image:
+    label: 'Main Image'
+    datasource_id: 'entity:node'
+    property_path: field_main_image
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_main_image
+  field_project_expert:
+    label: Projects
+    datasource_id: 'entity:node'
+    property_path: field_project_expert
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_project_expert
+  field_projects:
+    label: Projects
+    datasource_id: 'entity:node'
+    property_path: field_projects
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_projects
+  field_region:
+    label: Region
+    datasource_id: 'entity:node'
+    property_path: field_region
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_region
+  field_tags:
+    label: Tags
+    datasource_id: 'entity:node'
+    property_path: field_tags
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_tags
+  field_type:
+    label: Type
+    datasource_id: 'entity:node'
+    property_path: field_type
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_type
+  langcode:
+    label: Language
+    datasource_id: 'entity:node'
+    property_path: langcode
+    type: string
+    dependencies:
+      module:
+        - node
+  langcode_1:
+    label: Language
+    datasource_id: 'entity:node'
+    property_path: langcode
+    type: string
+    dependencies:
+      module:
+        - node
+  menu_link:
+    label: 'Menu link'
+    datasource_id: 'entity:node'
+    property_path: menu_link
+    type: integer
+    dependencies:
+      module:
+        - token
+  name:
+    label: 'Topic » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_primary_topic:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_primary_topic
+      module:
+        - taxonomy
+  name_1:
+    label: 'Languages Spoken » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_languages_spoken:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_languages_spoken
+      module:
+        - taxonomy
+  name_2:
+    label: 'Areas of Expertise » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_areas_of_expertise:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_areas_of_expertise
+      module:
+        - taxonomy
+  nid:
+    label: ID
+    datasource_id: 'entity:node'
+    property_path: nid
+    type: integer
+    dependencies:
+      module:
+        - node
+  node_grants:
+    label: 'Node access information'
+    property_path: search_api_node_grants
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  processed:
+    label: 'Job Title » Processed text'
+    datasource_id: 'entity:node'
+    property_path: 'field_title:processed'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_title
+  processed_1:
+    label: 'Quote » Processed text'
+    datasource_id: 'entity:node'
+    property_path: 'field_quote:processed'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_quote
+  promote:
+    label: 'Promoted to front page'
+    datasource_id: 'entity:node'
+    property_path: promote
+    type: boolean
+    dependencies:
+      module:
+        - node
+  status:
+    label: Published
+    datasource_id: 'entity:node'
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  term_child_of_parent:
+    label: 'Region » Taxonomy term » Is Child'
+    datasource_id: 'entity:node'
+    property_path: 'field_region:entity:term_child_of_parent'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_region
+      module:
+        - taxonomy
+        - wri_search
+  term_parent_or_self:
+    label: 'Region » Taxonomy term » Parent or Self'
+    datasource_id: 'entity:node'
+    property_path: 'field_region:entity:term_parent_or_self'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_region
+      module:
+        - taxonomy
+        - wri_search
+  term_parent_or_self_1:
+    label: 'Program(s) » Taxonomy term » Parent or Self'
+    datasource_id: 'entity:node'
+    property_path: 'field_topics:entity:term_parent_or_self'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_topics
+      module:
+        - taxonomy
+        - wri_search
+  title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: string
+    dependencies:
+      module:
+        - node
+  top_level_topic:
+    label: 'Topic » Taxonomy term » Parent or Self'
+    datasource_id: 'entity:node'
+    property_path: 'field_primary_topic:entity:term_parent_or_self'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_primary_topic
+      module:
+        - taxonomy
+        - wri_search
+  type:
+    label: 'Content type'
+    datasource_id: 'entity:node'
+    property_path: type
+    type: string
+    dependencies:
+      module:
+        - node
+  uid:
+    label: 'Authored by'
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  content_access:
+    weights:
+      preprocess_query: -30
+  entity_status: {  }
+  hierarchy:
+    fields:
+      field_type: taxonomy_term-parent
+    weights:
+      preprocess_index: -45
+  highlight:
+    highlight: always
+    highlight_partial: true
+    excerpt: true
+    excerpt_length: 256
+    exclude_fields: {  }
+    prefix: '<strong>'
+    suffix: '</strong>'
+    weights:
+      postprocess_query: 0
+  html_filter:
+    all_fields: false
+    fields:
+      - body
+      - field_intro
+      - langcode
+      - title
+      - type
+    title: true
+    alt: true
+    tags:
+      b: 2
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+    weights:
+      preprocess_index: -15
+      preprocess_query: -15
+  ignore_character:
+    all_fields: false
+    fields:
+      - body
+      - field_featured_headline
+      - field_featured_text
+      - field_featured_tweet
+      - field_intro
+      - langcode
+      - name
+      - title
+    ignorable: '[''¿¡!?,.:;]'
+    ignorable_classes:
+      - Pc
+      - Pd
+      - Pe
+      - Pf
+      - Pi
+      - Po
+      - Ps
+    weights:
+      preprocess_index: -10
+      preprocess_query: -10
+  ignorecase:
+    all_fields: false
+    fields:
+      - body
+      - field_featured_headline
+      - field_featured_text
+      - field_featured_tweet
+      - field_intro
+      - langcode
+      - title
+      - type
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
+  language_with_fallback: {  }
+  rendered_item: {  }
+  search_api_exclude_entity_processor:
+    fields:
+      node: {  }
+  stopwords:
+    all_fields: false
+    fields:
+      - body
+      - field_featured_headline
+      - field_featured_text
+      - field_featured_tweet
+      - field_intro
+    stopwords:
+      - a
+      - an
+      - and
+      - are
+      - as
+      - at
+      - be
+      - but
+      - by
+      - for
+      - if
+      - in
+      - into
+      - is
+      - it
+      - 'no'
+      - not
+      - of
+      - 'on'
+      - or
+      - s
+      - such
+      - t
+      - that
+      - the
+      - their
+      - then
+      - there
+      - these
+      - they
+      - this
+      - to
+      - was
+      - will
+      - with
+    weights:
+      preprocess_index: -5
+      preprocess_query: -2
+  transliteration:
+    all_fields: false
+    fields:
+      - body
+      - field_featured_headline
+      - field_featured_text
+      - field_featured_tweet
+      - field_intro
+      - langcode
+      - title
+      - type
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  index_directly: true
+  cron_limit: 50
+server: localhost

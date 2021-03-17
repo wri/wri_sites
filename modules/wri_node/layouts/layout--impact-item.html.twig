@@ -1,0 +1,45 @@
+{#
+/**
+ * @file
+ * Theme override to display a region.
+ *
+ * Available variables:
+ * - content: The content for this region, typically blocks.
+ * - attributes: HTML attributes for the region div.
+ * - region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
+ *
+ * @see template_preprocess_region()
+ */
+#}
+
+{#This view mode will have two or three sections, depending on your preference, which will contain the Title of the node, the "Type" value of the node, and the "Topic" field. On Projects, the "Type" field will not be shown. You'll be using this view mode to show the content on the right of the Impact paragraph type.#}
+
+{% if content %}
+<div class="impact-outter-wrapper">
+  <div class="impact__inner-wrapper">
+    {% if content.title %}
+      <div class="title margin-top-xs">
+        {{ content.title }}
+      </div>
+    {% endif %}
+
+    {% if content.intro %}
+      {{ content.intro}}
+    {% endif %}
+
+    {% if content.content_type|render %}
+      <span class="content-type-region bundle">
+        {{ content.content_type }}
+      </span>
+    {% endif %}
+
+    {% if content.tag|render or content.topic|render %}
+      <div class="subtext margin-top-xs top-border-tiny">
+        <span class="italic-xtra-tiny">{{ "Part of"|t }}</span>
+        <span class="small label">{{ content.tag }}</span>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endif %}

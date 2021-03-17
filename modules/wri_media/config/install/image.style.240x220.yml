@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 240x220
+label: 240x220
+effects:
+  03b865b5-bd27-4308-927b-d1d8be3dedf7:
+    uuid: 03b865b5-bd27-4308-927b-d1d8be3dedf7
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 240
+      height: 220
+      crop_type: focal_point

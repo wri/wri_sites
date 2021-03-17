@@ -1,0 +1,43 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.superfeatured
+    - field.field.block_content.superfeatured.field_content_types
+    - field.field.block_content.superfeatured.field_custom_feature
+    - field.field.block_content.superfeatured.field_intro
+    - field.field.block_content.superfeatured.field_listing
+  module:
+    - text
+id: block_content.superfeatured.default
+targetEntityType: block_content
+bundle: superfeatured
+mode: default
+content:
+  field_content_types:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_custom_feature:
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_intro:
+    weight: 0
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+hidden:
+  field_listing: true
+  info: true

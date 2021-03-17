@@ -1,0 +1,3 @@
+event:
+  js:
+    https://addevent.com/libs/atc/1.6.1/atc.min.js: { type: external, minified: true }

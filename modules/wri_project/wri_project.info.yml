@@ -1,0 +1,61 @@
+name: 'WRI project'
+type: module
+description: 'Project node functionality and fields'
+core_version_requirement: '^8.8.0 || ^9'
+package: WRI
+dependencies:
+  - wri_block
+  - wri_common
+  - wri_person
+  - wri_paragraph
+  - wri_toc
+config_devel:
+  install:
+    - core.base_field_override.node.project_detail.promote
+    - core.entity_form_display.node.project_detail.default
+    - core.entity_form_display.paragraph.partner_logo.default
+    - core.entity_view_display.node.project_detail.card
+    - core.entity_view_display.node.project_detail.default
+    - core.entity_view_display.node.project_detail.full
+    - core.entity_view_display.node.project_detail.hero_on_a_subpage
+    - core.entity_view_display.node.project_detail.impact
+    - core.entity_view_display.node.project_detail.large_image_teaser
+    - core.entity_view_display.node.project_detail.main_content
+    - core.entity_view_display.node.project_detail.search_results
+    - core.entity_view_display.node.project_detail.small_image_teaser
+    - core.entity_view_display.node.project_detail.teaser
+    - core.entity_view_display.node.project_detail.tile
+    - core.entity_view_display.node.project_detail.type_title
+    - core.entity_view_display.paragraph.partner_logo.default
+    - field.field.node.project_detail.body
+    - field.field.node.project_detail.field_featured
+    - field.field.node.project_detail.field_featured_headline
+    - field.field.node.project_detail.field_featured_related_resources
+    - field.field.node.project_detail.field_featured_text
+    - field.field.node.project_detail.field_intro
+    - field.field.node.project_detail.field_logo
+    - field.field.node.project_detail.field_main_image
+    - field.field.node.project_detail.field_metatags
+    - field.field.node.project_detail.field_narrative_taxonomy
+    - field.field.node.project_detail.field_other_link
+    - field.field.node.project_detail.field_platform_link
+    - field.field.node.project_detail.field_primary_contacts
+    - field.field.node.project_detail.field_primary_topic
+    - field.field.node.project_detail.field_project_partners
+    - field.field.node.project_detail.field_region
+    - field.field.node.project_detail.field_tags
+    - field.field.node.project_detail.field_toc
+    - field.field.node.project_detail.field_twitter_account
+    - field.field.node.project_detail.field_type
+    - field.field.node.project_detail.layout_builder__layout
+    - field.field.paragraph.partner_logo.field_link
+    - field.field.paragraph.partner_logo.field_partner_logo
+    - field.storage.paragraph.field_partner_logo
+    - metatag.metatag_defaults.node__project_detail
+    - node.type.project_detail
+    - paragraphs.paragraphs_type.partner_logo
+    - pathauto.pattern.projects
+    - views.view.featured_experts
+    - views.view.homepage_projects
+    - views.view.related_to_this_project
+    - xmlsitemap.settings.node.project_detail

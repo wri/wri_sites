@@ -1,0 +1,60 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.trending_topics
+    - field.storage.block_content.field_listing
+  module:
+    - viewfield
+id: block_content.trending_topics.field_listing
+field_name: field_listing
+entity_type: block_content
+bundle: trending_topics
+label: Listing
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    token_help: ''
+    display_id: trending_topic
+    arguments: '[block_content:field_content_types:target_id]/[block_content:field_custom_trending:array:target_id:join:+]'
+    items_to_display: ''
+    target_uuid: 9faa9454-ba2a-4f4d-a56f-da2394865bed
+default_value_callback: ''
+settings:
+  force_default: false
+  allowed_views:
+    trending_topics: trending_topics
+    '3_1': '0'
+    content: '0'
+    content_listing: '0'
+    block_content: '0'
+    featured_tweet: '0'
+    featured_tweets_entity_browser: '0'
+    files: '0'
+    frontpage: '0'
+    media: '0'
+    media_library: '0'
+    user_admin_people: '0'
+    content_recent: '0'
+    redirect: '0'
+    resource_types: '0'
+    superfeatured_content: '0'
+    tagged_with: '0'
+    taxonomy_term: '0'
+    trending_topics_b: '0'
+    watchdog: '0'
+    who_s_new: '0'
+    who_s_online: '0'
+  allowed_display_types:
+    block: block
+    attachment: '0'
+    entity_browser: '0'
+    entity_reference: '0'
+    feed: '0'
+    default: '0'
+    page: '0'
+  handler: 'default:view'
+  handler_settings: {  }
+field_type: viewfield

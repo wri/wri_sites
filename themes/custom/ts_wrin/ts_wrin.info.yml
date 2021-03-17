@@ -1,0 +1,63 @@
+name: 'Ts Wrin'
+type: theme
+description: 'A base theme for ThinkShout D8 sites'
+package: Other
+core_version_requirement: '^8.8.0 || ^9'
+libraries:
+  - ts_wrin/main
+'base theme': classy
+regions:
+  primary_nav: 'Primary Nav'
+  secondary_nav: 'Secondary Nav'
+  hamburger_nav: 'Hamburger Nav'
+  admin: 'Admin Tools'
+  content: Content
+  footer_top: 'Footer Top'
+  footer_left: 'Footer Left'
+  footer_right: 'Footer Right'
+  wrin_custom: 'WRIN Custom'
+  disabled: Disabled
+  modals: Modals
+component-libraries:
+  ts_custom:
+    paths:
+      - templates/ts_custom
+ckeditor_stylesheets:
+  - dist/ckeditor.css
+config_devel:
+  install:
+    - block.block.addressblock
+    - block.block.claro_breadcrumbs
+    - block.block.claro_content
+    - block.block.claro_local_actions
+    - block.block.claro_messages
+    - block.block.claro_page_title
+    - block.block.claro_primary_local_tasks
+    - block.block.claro_secondary_local_tasks
+    - block.block.copyrightblock
+    - block.block.donate
+    - block.block.footermenuadditional
+    - block.block.footermenumain
+    - block.block.footermenuoffices
+    - block.block.footermenusecondary
+    - block.block.footermenusecondary_2
+    - block.block.howyoucanhelpblock
+    - block.block.mainnavigation
+    - block.block.megamenu
+    - block.block.quicklinks
+    - block.block.secondarynavigation
+    - block.block.socialmenu
+    - block.block.ts_wrin_account_menu
+    - block.block.ts_wrin_branding
+    - block.block.ts_wrin_breadcrumbs
+    - block.block.ts_wrin_content
+    - block.block.ts_wrin_local_actions
+    - block.block.ts_wrin_local_tasks
+    - block.block.ts_wrin_main_menu
+    - block.block.ts_wrin_messages
+    - block.block.ts_wrin_page_title
+    - block.block.ts_wrin_powered
+    - block.block.webform
+    - block.block.wrinsearch
+    - block.block.wrinsearch_2
+    - ts_wrin.settings

@@ -1,0 +1,101 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.wri_office.wri_office.field_address
+    - field.field.wri_office.wri_office.field_telephone
+  module:
+    - address
+    - ds
+    - telephone
+    - wri_io_content
+third_party_settings:
+  ds:
+    layout:
+      id: ds_1col
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+        wrappers:
+          ds_content: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+        classes:
+          layout_class: {  }
+    regions:
+      ds_content:
+        - name
+        - field_address
+        - field_telephone
+id: wri_office.wri_office.default
+targetEntityType: wri_office
+bundle: wri_office
+mode: default
+content:
+  field_address:
+    weight: -3
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fi: true
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: true
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+    type: address_default
+    region: ds_content
+  field_telephone:
+    weight: -2
+    label: inline
+    settings:
+      title: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: Tel
+    type: telephone_link
+    region: ds_content
+  name:
+    label: hidden
+    type: string
+    weight: -4
+    region: ds_content
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+hidden:
+  search_api_excerpt: true

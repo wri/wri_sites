@@ -1,0 +1,198 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.tile
+    - field.field.node.region.field_intro
+    - field.field.node.region.field_map_image
+    - field.field.node.region.field_metatags
+    - field.field.node.region.field_narrative_taxonomy
+    - field.field.node.region.field_region
+    - field.field.node.region.layout_builder__layout
+    - node.type.region
+    - responsive_image.styles.image_cta
+  module:
+    - blazy
+    - ds
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  ds:
+    layout:
+      id: layout_tile
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      image:
+        - field_map_image
+      title:
+        - node_title
+      link:
+        - node_links
+        - node_link_token
+      intro:
+        - field_intro
+    fields:
+      node_link_token:
+        plugin_id: node_link_token
+        weight: 3
+        label: hidden
+        formatter: default
+        settings:
+          'link text': 'Read [node:title]'
+          'link class': button
+          wrapper: ''
+          class: read-more
+        ft:
+          id: reset
+          settings:
+            lb: ''
+      node_links:
+        plugin_id: node_links
+        weight: 2
+        label: hidden
+        formatter: default
+      node_title:
+        plugin_id: node_title
+        weight: 0
+        label: hidden
+        formatter: default
+        settings:
+          link: true
+          wrapper: h3
+          class: h3
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: node.region.tile
+targetEntityType: node
+bundle: region
+mode: tile
+content:
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_intro:
+    type: text_default
+    weight: 2
+    region: intro
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_main_image:
+    type: blazy_media
+    weight: 0
+    region: image
+    label: hidden
+    settings:
+      image_style: ''
+      responsive_image_style: tile
+      media_switch: ''
+      thumbnail_style: ''
+      ratio: ''
+      view_mode: default
+      current_view_mode: tile
+      background: false
+      caption:
+        field_tags: '0'
+        field_media_embed_code: '0'
+      class: ''
+      id: ''
+      image: ''
+      link: ''
+      overlay: ''
+      title: ''
+      vanilla: false
+      icon: ''
+      layout: ''
+      cache: 0
+      skin: ''
+      fx: ''
+      style: ''
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      box_style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
+      grid: 0
+      grid_medium: 0
+      grid_small: 0
+    third_party_settings:
+      wri_media:
+        min_width: ''
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  field_map_image:
+    type: blazy_media
+    weight: 0
+    region: image
+    label: hidden
+    settings:
+      image_style: ''
+      responsive_image_style: image_cta
+      media_switch: ''
+      thumbnail_style: ''
+      ratio: ''
+      view_mode: default
+      current_view_mode: tile
+      background: false
+      caption:
+        title: '0'
+        alt: '0'
+      class: ''
+      id: ''
+      image: ''
+      link: ''
+      overlay: ''
+      title: ''
+      vanilla: false
+      icon: ''
+      layout: ''
+      cache: 0
+      skin: ''
+      fx: ''
+      style: ''
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      box_style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
+      grid: 0
+      grid_medium: 0
+      grid_small: 0
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+hidden:
+  field_featured: true
+  field_main_image: true
+  field_metatags: true
+  field_narrative_taxonomy: true
+  field_region: true
+  field_transparent_header: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

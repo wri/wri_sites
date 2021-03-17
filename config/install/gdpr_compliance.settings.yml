@@ -1,0 +1,32 @@
+from-morelink: /about/privacy-policy
+user-register: 1
+user-login: 0
+contact_message-mode: null
+contact_message-bundles: null
+node-mode: disable
+node-bundles:
+  article: article
+  data: data
+  homepage: homepage
+  international_office: international_office
+  page: page
+  person: person
+  program_center: program_center
+  project_detail: project_detail
+  publication: publication
+  region: region
+webform-mode: null
+webform-bundles: null
+popup-guests: 1
+popup-users: 1
+popup-position: bottom
+popup-morelink: /gdpr-compliance/policy
+popup-custom-color: 1
+popup-color: '#1a1919'
+popup-text: white
+button-color: '#f3b229'
+button-text: black
+popup-text-cookies: 'This website uses cookies to provide you with an improved user experience. By continuing to browse this site, you consent to the use of cookies and similar technologies. For further details please visit our '
+popup-text-analytics: ''
+popup-btn-agree: Okay
+popup-btn-findmore: 'privacy policy'

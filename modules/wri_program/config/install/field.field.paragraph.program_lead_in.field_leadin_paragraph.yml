@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_leadin_paragraph
+    - paragraphs.paragraphs_type.program_lead_in
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    basic_html: basic_html
+    full_html: '0'
+    plain_text: '0'
+id: paragraph.program_lead_in.field_leadin_paragraph
+field_name: field_leadin_paragraph
+entity_type: paragraph
+bundle: program_lead_in
+label: 'Lead-in Paragraph'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

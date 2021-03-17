@@ -1,0 +1,7 @@
+services:
+  logger.channel.wri_node:
+    parent: logger.channel_base
+    arguments: ['wri_node']
+  wri_node.general:
+    class: Drupal\wri_node\General
+    arguments: []

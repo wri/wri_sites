@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.happening_now.field_custom_happening_nows
+    - field.field.paragraph.happening_now.field_filter_by_resource_type
+    - field.field.paragraph.happening_now.field_listing
+    - field.field.paragraph.happening_now.field_tag
+    - paragraphs.paragraphs_type.happening_now
+  module:
+    - wri_admin
+id: paragraph.happening_now.default
+targetEntityType: paragraph
+bundle: happening_now
+mode: default
+content:
+  field_listing:
+    weight: 3
+    label: above
+    settings:
+      view_title: hidden
+      always_build_output: false
+      empty_view_title: hidden
+    third_party_settings: {  }
+    type: viewfield_token
+    region: content
+hidden:
+  field_custom_happening_nows: true
+  field_filter_by_resource_type: true
+  field_tag: true
+  search_api_excerpt: true

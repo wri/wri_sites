@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: featured_statement
+label: 'Featured statement'
+icon_uuid: null
+icon_default: null
+description: 'Home page feature that is directly under the hero. '
+behavior_plugins: {  }

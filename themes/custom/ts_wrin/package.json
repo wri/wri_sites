@@ -1,0 +1,42 @@
+{
+  "name": "ts_wrin",
+  "version": "1.0.0",
+  "description": "CSS Grid Layout with Webpack",
+  "dependencies": {
+    "svg-url-loader": "^6.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.0",
+    "@babel/preset-env": "^7.8.2",
+    "autoprefixer": "^9.7.3",
+    "babel-loader": "^8.0.5",
+    "browser-sync": "^2.26.10",
+    "browser-sync-webpack-plugin": "^2.2.2",
+    "css-loader": "^2.1.1",
+    "husky": "^2.2.0",
+    "mini-css-extract-plugin": "^0.6.0",
+    "node-sass": "^4.14.1",
+    "node-sass-glob-importer": "^5.3.1",
+    "postcss-loader": "^3.0.0",
+    "prettier": "1.17.0",
+    "pretty-quick": "^1.10.0",
+    "sass-loader": "^7.3.1",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "build:dev": "webpack --config webpack.config.js --mode development",
+    "start": "webpack --watch",
+    "start:dev": "webpack --watch --mode development",
+    "pretty-quick": "pretty-quick",
+    "prettier": "prettier --write sass/**/*.scss js/**/*.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --pattern '**/ts_wrin/**' --staged"
+    }
+  },
+  "author": "ThinkShout, Inc",
+  "license": "GPL-3.0"
+}

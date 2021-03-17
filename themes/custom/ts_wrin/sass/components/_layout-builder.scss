@@ -1,0 +1,23 @@
+.ui-dialog.ui-dialog-off-canvas {
+  font-size: 14px;
+}
+
+.layout-builder {
+  .layout-builder-block {
+    padding: 0;
+    min-height: 30px;
+  }
+}
+
+#drupal-off-canvas input[type="submit"].button.js-hide {
+  display: none;
+}
+
+#drupal-off-canvas *:not(div),
+#drupal-off-canvas *:not(svg *),
+#drupal-off-canvas *:after,
+#drupal-off-canvas *:before {
+  display: revert;
+  font-family: revert;
+  color: #ddd;
+}

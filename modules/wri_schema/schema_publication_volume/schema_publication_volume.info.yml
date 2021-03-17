@@ -1,0 +1,7 @@
+name: 'Schema PublicationVolume'
+type: module
+description: 'Schema Plugins for the PublicationVolume tags'
+core: 8.x
+package: 'WRI'
+dependencies:
+  - schema_metatag

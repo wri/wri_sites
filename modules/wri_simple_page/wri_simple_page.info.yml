@@ -1,0 +1,27 @@
+name: 'WRI simple page'
+type: module
+description: 'Simple page node functionality and fields'
+core_version_requirement: '^8.8.0 || ^9'
+package: WRI
+dependencies:
+  - wri_node
+  - wri_small_cta
+  - wri_superfeatured
+  - wri_unique_feature
+config_devel:
+  install:
+    - core.entity_form_display.node.simple_page.default
+    - core.entity_view_display.node.simple_page.card
+    - core.entity_view_display.node.simple_page.default
+    - core.entity_view_display.node.simple_page.full
+    - core.entity_view_display.node.simple_page.impact
+    - core.entity_view_display.node.simple_page.main_content
+    - core.entity_view_display.node.simple_page.search_results
+    - core.entity_view_display.node.simple_page.teaser
+    - field.field.node.simple_page.field_intro
+    - field.field.node.simple_page.field_intro_paragraphs
+    - field.field.node.simple_page.field_main_image
+    - field.field.node.simple_page.field_metatags
+    - field.field.node.simple_page.layout_builder__layout
+    - node.type.simple_page
+    - xmlsitemap.settings.node.simple_page

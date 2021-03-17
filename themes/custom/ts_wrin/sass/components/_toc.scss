@@ -1,0 +1,159 @@
+.publication__toc {
+  @include font($acumin-semi-cond, "bold");
+  @include font-line-height(14, 18);
+  background: $black;
+  position: relative;
+  z-index: 51;
+
+  &.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    max-width: $site-max-width;
+
+    .user-logged-in & {
+      top: rem(39);
+    }
+    .user-logged-in.toolbar-tray-open & {
+      top: rem(79);
+    }
+  }
+
+  .toc,
+  .block-menu {
+    margin: $space-xs 0;
+    position: relative;
+    @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+
+    @include mq($ph) {
+      @include center-columns($grid-columns, $grid-columns);
+    }
+
+    @include mq($lg) {
+      @include column-width(2, 11);
+    }
+
+    li {
+      margin-bottom: 0;
+    }
+
+    .menu-title,
+    .menu > ul > li > a {
+      @include font($caslon, "bold", "italic");
+      @include font-line-height(15, 15);
+      color: $brand-gold;
+      display: block;
+      margin-bottom: 5px;
+      position: relative;
+      text-decoration: none;
+
+      @include mq($md) {
+        margin-right: 0;
+        top: 0;
+      }
+    }
+
+    .menu-wrapper {
+      overflow: scroll;
+      -ms-overflow-style: none; /* Internet Explorer 10+ */
+      scrollbar-width: none;
+      overflow: -moz-scrollbars-none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      > .menu {
+        display: inline-block;
+        width: auto;
+
+        .toc-list-wrapper {
+          margin: 0;
+          padding: 0;
+        }
+      }
+    }
+
+    .menu-wrapper > .menu > ul > li > ul {
+      display: flex;
+      justify-content: flex-start;
+      margin: 0;
+      padding: 0;
+      width: auto;
+      z-index: 1;
+      background: $black;
+      position: relative;
+
+      li {
+        list-style-image: none;
+        list-style-type: none;
+        margin-right: $space-sm;
+        padding-top: 0;
+        white-space: nowrap;
+
+        a {
+          color: $white;
+          text-decoration: none;
+
+          @include hocus() {
+            color: $med-light-gray;
+          }
+
+          &.active,
+          &.is-active {
+            color: $med-light-gray;
+          }
+        }
+      }
+    }
+
+    .nav-arrow,
+    .back-arrow {
+      bottom: 0;
+      display: inline-block;
+      font-weight: 600;
+      height: 16px;
+      line-height: 1;
+      padding: 2px 2px 2px 5px;
+      position: absolute;
+      right: -20px;
+      width: 8px;
+    }
+    .back-arrow {
+      left: -20px;
+      right: auto;
+      transform: scaleX(-1);
+    }
+    .back-arrow svg path,
+    .nav-arrow svg path {
+      fill: $white;
+    }
+  }
+}
+
+.publication__toc nav.toc.no-scroll {
+  .menu-wrapper > ul.menu:after {
+    content: none;
+  }
+  .nav-arrow,
+  .back-arrow {
+    display: none;
+  }
+}
+
+// Fix jump link offset to account for fixed header.
+.publication__main h2[id] {
+  &::before {
+    display: block;
+    content: " ";
+    margin-top: -85px;
+    height: 85px;
+    visibility: hidden;
+    pointer-events: none;
+
+    .user-logged-in & {
+      margin-top: -150px;
+      height: 150px;
+    }
+  }
+}

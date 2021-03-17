@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+id: compact_dot
+label: 'Compact dot'
+date_format: 'F d, Y'
+time_format: 'g:ia T'
+time_hour_format: 'ga T'
+allday_label: 'All day'
+separator: ' - '
+join: '<span>•</span>'
+ampm_reduce: '1'
+date_first: '1'
+site_time_toggle: '0'

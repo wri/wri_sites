@@ -1,0 +1,41 @@
+.field-related-resources {
+  margin-bottom: $padding-vertical;
+
+  h2 {
+    @extend .top-border-thick;
+    @extend .h3;
+    max-width: calc(100% - (#{$grid-gutter-mobile}* 2));
+    margin: 0 auto $space-md;
+
+    @include mq($lg) {
+      max-width: calc(100% - (#{$grid-gutter} * 2));
+    }
+    @include mq($grid-max-width + ($grid-gutter * 4)) {
+      max-width: $grid-max-width + ($grid-gutter * 2);
+    }
+    @include mq($xxl) {
+      max-width: $grid-max-width-xxl + ($grid-gutter * 2);
+    }
+  }
+  .view-content,
+  .items-wrapper,
+  .field--name-field-related-resources {
+    @extend .grid;
+    @include mq($md) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .views-row,
+    & > .field__item {
+      @include center-columns(4, 4);
+
+      @include mq($ph) {
+        @include center-columns(12, 12);
+      }
+
+      @include mq($md) {
+        grid-column: inherit;
+      }
+    }
+  }
+}

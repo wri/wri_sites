@@ -1,0 +1,266 @@
+layout_teaser:
+  label: 'Teaser'
+  path: layouts
+  template: layout--teaser
+  category: 'WRI Custom'
+  default_region: title
+  icon_map:
+    - [tag]
+    - [title, title, image]
+    - [content_type, date]
+  regions:
+    tag:
+      label: Tag
+    title:
+      label: Title
+    image:
+      label: Image
+    content_type:
+      label: Content type
+    date:
+      label: Date
+
+layout_small_image_teaser:
+  label: 'Small image teaser'
+  path: layouts
+  template: layout--teaser
+  category: 'WRI Custom'
+  default_region: title
+  icon_map:
+    - [tag]
+    - [title, title, image]
+    - [content_type, date]
+  regions:
+    tag:
+      label: Tag
+    title:
+      label: Title
+    image:
+      label: Image
+    content_type:
+      label: Content type
+    date:
+      label: Date
+
+layout_tile:
+  label: 'Tile'
+  path: layouts
+  template: layout--tile
+  category: 'WRI Custom'
+  default_region: title
+  icon_map:
+    - [image]
+    - [title]
+    - [intro]
+    - [link]
+  regions:
+    image:
+      label: Image
+    title:
+      label: Title
+    intro:
+      label: Intro
+    link:
+      label: Link
+    subtext:
+      label: Subtext
+
+layout_card:
+  label: 'Card'
+  path: layouts
+  template: layout--card
+  category: 'WRI Custom'
+  default_region: card
+  icon_map:
+    - [image]
+    - [tag]
+    - [title]
+    - [intro]
+    - [content_type, date]
+  regions:
+    image:
+      label: Image
+    tag:
+      label: Tag
+    title:
+      label: Title
+    intro:
+      label: Intro
+    content_type:
+      label: Content type
+    date:
+      label: Date
+    subtext:
+      label: Subtext
+
+layout_large_image_teaser:
+  label: 'Large image teaser'
+  path: layouts
+  template: layout--card
+  category: 'WRI Custom'
+  default_region: title
+  icon_map:
+    - [image]
+    - [tag]
+    - [title]
+    - [content_type, date]
+  regions:
+    image:
+      label: Image
+    tag:
+      label: Tag
+    title:
+      label: Title
+    content_type:
+      label: Content type
+    date:
+      label: Date
+
+layout_search-results:
+  label: 'Search results'
+  path: layouts
+  template: layout--search-results
+  category: 'WRI Custom'
+  default_region: search-results
+  icon_map:
+    - [left_section]
+    - [main_section]
+    - [right_section]
+  regions:
+    left_section:
+      label: Left section
+    main_section:
+      label: Main section
+    right_section:
+      label: Right section
+
+layout_hero-and-content:
+  label: 'Hero & Content'
+  path: layouts
+  template: layout--hero-and-content
+  category: 'WRI Custom'
+  default_region: hero-and-content
+  icon_map:
+    - [hero]
+    - [content]
+  regions:
+    hero_image:
+      label: Hero Image
+    hero_text:
+      label: Hero Text
+    content:
+      label: Content
+
+layout_simple-page:
+  label: 'Simple Page'
+  path: layouts
+  template: layout--simple-page
+  category: 'WRI Custom'
+  default_region: simple-page
+  icon_map:
+    - [hero_image]
+    - [hero_text, menu]
+    - [intro]
+    - [content]
+  regions:
+    hero_image:
+      label: Hero Image
+    hero_text:
+      label: Hero Text
+    menu:
+      label: Menu
+    intro:
+      label: Intro
+    content:
+      label: Content
+
+layout_hero-5050-and-content:
+  label: 'Hero 50/50 & Content'
+  path: layouts
+  template: layout--hero-5050-and-content
+  category: 'WRI Custom'
+  default_region: hero-5050-and-content
+  icon_map:
+    - [hero]
+    - [content]
+  regions:
+    hero_text:
+      label: Hero Text
+    hero_image:
+      label: Hero Image
+    content:
+      label: Content
+
+
+layout_person:
+  label: 'Person'
+  path: layouts
+  template: layout--person
+  category: 'WRI Custom'
+  default_region: main_content
+  regions:
+    hero:
+      label: Hero
+    buttons:
+      label: Buttons
+    featured_image:
+      label: Featured Image
+    quote:
+      label: Quote
+    main_content:
+      label: Main Content
+    sidebar_contact:
+      label: Contact Sidebar
+    sidebar:
+      label: More Sidebar
+
+layout_unique_feature:
+  label: 'Unique Feature'
+  path: layouts
+  template: layout--unique-feature
+  category: 'WRI Custom'
+  default_region: unique-feature
+  icon_map:
+    - [image]
+    - [left_text]
+    - [right_text]
+  regions:
+    image:
+      label: Image
+    left_text:
+      label: Left Text
+    right_text:
+      label: Right Text
+
+layout_impact:
+  label: 'Impact Item'
+  path: layouts
+  template: layout--impact-item
+  category: 'WRI Custom'
+  default_region: title
+  icon_map:
+    - [tag]
+    - [title, title]
+    - [content_type]
+  regions:
+    tag:
+      label: Tag
+    title:
+      label: Title
+    content_type:
+      label: Content type
+
+layout_impact-block:
+  label: 'Impact Block'
+  path: layouts
+  template: layout--impact-block
+  category: 'WRI Custom'
+  default_region: title
+  icon_map:
+    - [title, title]
+    - [content]
+  regions:
+    title:
+      label: Title
+    content:
+      label: Content

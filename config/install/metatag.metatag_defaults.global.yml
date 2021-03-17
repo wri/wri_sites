@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies: {  }
+id: global
+label: Global
+tags:
+  title: '[current-page:title] | [site:name]'
+  canonical_url: '[current-page:url]'
+  schema_web_site_url: '[site:url]'
+  schema_web_site_publisher: 'a:6:{s:5:"@type";s:12:"Organization";s:3:"@id";s:20:"https://www.wri.org/";s:4:"name";s:24:"World Resource Institute";s:3:"url";s:20:"https://www.wri.org/";s:6:"sameAs";s:204:"http://www.facebook.com/pages/World-Resources-Institute/61863318139,http://twitter.comworldresources, http://www.youtube.com/WorldResourcesInst, https://www.linkedin.com/company/world-resources-institute/";s:4:"logo";a:5:{s:5:"@type";s:11:"ImageObject";s:20:"representativeOfPage";s:4:"True";s:3:"url";s:77:"https://www.wri.org/profiles/contrib/wri_sites/themes/custom/ts_wrin/logo.png";s:5:"width";s:3:"150";s:6:"height";s:2:"53";}}'
+  schema_web_site_type: WebSite
+  schema_web_site_id: '[site:url]'
+  schema_web_site_name: '[site:name]'

@@ -1,0 +1,35 @@
+name: 'WRI region'
+type: module
+description: 'Region node functionality and fields'
+core_version_requirement: '^8.8.0 || ^9'
+package: WRI
+dependencies:
+  - wri_node
+  - wri_listing_block
+  - wri_taxonomy
+config_devel:
+  install:
+    - cer.corresponding_reference.region_landing
+    - core.entity_form_display.node.region.default
+    - core.entity_form_display.taxonomy_term.regions.default
+    - core.entity_view_display.node.region.card
+    - core.entity_view_display.node.region.default
+    - core.entity_view_display.node.region.full
+    - core.entity_view_display.node.region.impact
+    - core.entity_view_display.node.region.main_content
+    - core.entity_view_display.node.region.search_results
+    - core.entity_view_display.node.region.teaser
+    - core.entity_view_display.node.region.tile
+    - core.entity_view_display.taxonomy_term.regions.card
+    - core.entity_view_display.taxonomy_term.regions.default
+    - field.field.node.region.field_intro
+    - field.field.node.region.field_map_image
+    - field.field.node.region.field_metatags
+    - field.field.node.region.field_narrative_taxonomy
+    - field.field.node.region.field_region
+    - field.field.node.region.layout_builder__layout
+    - field.field.taxonomy_term.regions.field_intro
+    - field.field.taxonomy_term.regions.field_landing_page
+    - field.field.taxonomy_term.regions.field_main_image
+    - node.type.region
+    - xmlsitemap.settings.node.region

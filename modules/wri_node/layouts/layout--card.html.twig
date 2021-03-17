@@ -1,0 +1,61 @@
+{#
+/**
+ * @file
+ * Display Suite Card template.
+ *
+ * Available variables:
+ * - ds_content_wrapper: wrapper around content
+ * - attributes: content region attributes
+ * - ds_content: content region
+ */
+#}
+<div class="{{ content["#bundle"] }}">
+  <div {{ attributes.addClass('ds-1col', 'clearfix', 'card') }}>
+    {{ title_suffix.contextual_links }}
+    {% if content %}
+      <div class="card-image">
+        {% if content.image|render|striptags('<img>')|trim %}
+          {{ content.image }}
+        {% else %}
+          <img src="/profiles/contrib/wri_sites/modules/wri_node/images/{{ (content.tag|render|lower|replace({' ': '-'})) ? content.tag.field_primary_topic.0['#title']|lower|replace({' ': '-'}) : 'default' }}.jpg" alt="">
+        {% endif %}
+      </div>
+      <div class="card-text">
+        {% if content.tag or content.topic %}
+          <div class="tags topic-tag margin-top-xs">
+            {{ content.tag }}
+            {{ content.topic }}
+          </div>
+        {% endif %}
+        {% if content.title %}
+          {% if layout.id == 'layout_large_image_teaser' %}
+            {% set textClass = 'large' %}
+          {% else %}
+            {% set textClass = '' %}
+          {% endif %}
+          <h3 class="teaser-title margin-top-xs {{ textClass }}">
+            {{ content.title }}
+          </h3>
+        {% endif %}
+        {% if content.intro %}
+          {{ content.intro }}
+        {% endif %}
+        {% if content.content_type %}
+          <span class="content-type-region bundle">
+          {{ content.content_type }}
+        </span>
+        {% endif %}
+        {% if content.date %}
+          <span class="date-region date">
+          {{ content.date }}
+        </span>
+        {% endif %}
+        {% if content.subtext|render %}
+          <div class="subtext margin-top-xs top-border-tiny">
+            <span class="italic-xtra-tiny">{{ "Part of"|t }}</span> {{ content.subtext }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>

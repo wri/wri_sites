@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: title_only
+label: 'Title only'
+type: 'canonical_entities:node'
+pattern: '[node:title]'
+selection_criteria:
+  36c52d2f-45d1-47ae-987f-6fb096c7ca73:
+    id: node_type
+    bundles:
+      program_center: program_center
+      region: region
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 36c52d2f-45d1-47ae-987f-6fb096c7ca73
+selection_logic: and
+weight: -10
+relationships: {  }

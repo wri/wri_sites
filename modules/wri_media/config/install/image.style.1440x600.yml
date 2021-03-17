@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 1440x600
+label: 1440x600
+effects:
+  55dd9953-d6cb-4e98-974e-8813a6c0c6bb:
+    uuid: 55dd9953-d6cb-4e98-974e-8813a6c0c6bb
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1440
+      height: 600
+      crop_type: focal_point

@@ -1,0 +1,4 @@
+name: 'WRIN Schema'
+type: module
+description: 'Custom search menu.'
+core_version_requirement: '^8.8.0 || ^9'

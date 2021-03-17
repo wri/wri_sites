@@ -1,0 +1,42 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.download_listing
+    - field.field.media.document.field_media_file
+    - field.field.media.document.field_tags
+    - media.type.document
+  module:
+    - file
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: media.document.download_listing
+targetEntityType: media
+bundle: document
+mode: download_listing
+content:
+  field_media_file:
+    label: hidden
+    weight: 0
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
+    region: content
+  name:
+    type: string
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_tags: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

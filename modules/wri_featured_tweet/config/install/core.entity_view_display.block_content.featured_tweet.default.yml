@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.featured_tweet
+    - field.field.block_content.featured_tweet.field_custom_tweet
+    - field.field.block_content.featured_tweet.field_listing
+  module:
+    - ds
+    - wri_admin
+third_party_settings:
+  ds:
+    layout:
+      id: layout_onecol
+      library: layout_discovery/onecol
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      content:
+        - field_listing
+id: block_content.featured_tweet.default
+targetEntityType: block_content
+bundle: featured_tweet
+mode: default
+content:
+  field_listing:
+    weight: 0
+    label: hidden
+    settings:
+      view_title: hidden
+      always_build_output: false
+      empty_view_title: hidden
+    third_party_settings: {  }
+    type: viewfield_token
+    region: content
+hidden:
+  field_custom_tweet: true

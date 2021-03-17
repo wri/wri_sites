@@ -1,0 +1,45 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.featured_tweet
+    - entity_browser.browser.tweets
+    - field.field.block_content.featured_tweet.field_custom_tweet
+    - field.field.block_content.featured_tweet.field_listing
+  module:
+    - entity_browser
+    - viewfield
+id: block_content.featured_tweet.default
+targetEntityType: block_content
+bundle: featured_tweet
+mode: default
+content:
+  field_custom_tweet:
+    weight: 27
+    settings:
+      entity_browser: tweets
+      field_widget_display: label
+      field_widget_remove: true
+      field_widget_replace: true
+      open: true
+      selection_mode: selection_append
+      field_widget_edit: false
+      field_widget_display_settings: {  }
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_listing:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: viewfield_select
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }
