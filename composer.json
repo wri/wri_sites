@@ -2,6 +2,7 @@
     "name": "wri/wri_sites",
     "description": "WRI Drupal 8 profile",
     "type": "drupal-profile",
+    "license": "GPL-2.0+",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "repositories": [
