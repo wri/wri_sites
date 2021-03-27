@@ -39,6 +39,7 @@ config_devel:
     - core.entity_view_display.media.image.full
     - core.entity_view_display.media.image.full_width
     - core.entity_view_display.media.image.half_content
+    - core.entity_view_display.media.image.landing_page_hero
     - core.entity_view_display.media.image.media_library
     - core.entity_view_display.media.video.default
     - core.entity_view_display.media.video.media_library
@@ -46,6 +47,7 @@ config_devel:
     - core.entity_view_mode.media.download_listing
     - core.entity_view_mode.media.full_width
     - core.entity_view_mode.media.half_content
+    - core.entity_view_mode.media.landing_page_hero
     - core.entity_view_mode.media.large_image_teaser
     - core.entity_view_mode.media.superfeatured
     - core.entity_view_mode.media.tile

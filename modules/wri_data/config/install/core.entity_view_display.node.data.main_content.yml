@@ -199,13 +199,19 @@ content:
     third_party_settings: {  }
   field_files:
     type: entity_reference_entity_view
-    weight: 1
+    weight: 9
     region: buttons
     label: hidden
     settings:
-      link: true
-      view_mode: default
-    third_party_settings: {  }
+      view_mode: download_listing
+      link: false
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: reset
+          settings:
+            lb: ''
   field_isbn:
     type: string
     weight: 4

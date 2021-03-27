@@ -72,12 +72,16 @@ bundle: article
 mode: teaser
 content:
   field_primary_topic:
-    type: entity_reference_label
+    type: hierarchical_term_formatter
     weight: 0
     region: tag
     label: hidden
     settings:
+      display: root
       link: true
+      wrap: none
+      separator: ' » '
+      reverse: false
     third_party_settings:
       ds:
         ft:

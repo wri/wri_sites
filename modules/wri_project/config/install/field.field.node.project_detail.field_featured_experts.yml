@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_featured_experts
+    - node.type.person
+    - node.type.project_detail
+id: node.project_detail.field_featured_experts
+field_name: field_featured_experts
+entity_type: node
+bundle: project_detail
+label: 'Featured Experts'
+description: 'There are many experts who work on this project. To feature a subset of experts on the project''s main page, choose them here.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      person: person
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -468,13 +468,13 @@ display:
           use_taxonomy_term_path: false
           entity_type: node
           plugin_id: taxonomy_index_tid_depth
-        tid:
-          id: tid
-          table: taxonomy_index
-          field: tid
+        term_node_tid_depth_1:
+          id: term_node_tid_depth_1
+          table: node_field_data
+          field: term_node_tid_depth
           relationship: none
           group_type: group
-          admin_label: Topic
+          admin_label: 'Topic + subtopics'
           default_action: 'not found'
           exception:
             value: all
@@ -500,11 +500,11 @@ display:
             type: none
             fail: 'not found'
           validate_options: {  }
+          depth: 1
           break_phrase: false
-          add_table: false
-          require_value: false
-          reduce_duplicates: false
-          plugin_id: taxonomy_index_tid
+          use_taxonomy_term_path: false
+          entity_type: node
+          plugin_id: taxonomy_index_tid_depth
     cache_metadata:
       max-age: -1
       contexts:

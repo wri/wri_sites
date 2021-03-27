@@ -125,4 +125,19 @@
       }
     }
   }
+
+  .media--view-mode-landing-page-hero img {
+    min-height: 640px;
+    width: auto;
+    max-width: none;
+    position: relative;
+    left: 50%;
+    transform: translatex(-50%);
+    @include mq($lg) {
+      min-height: 700px;
+    }
+    @include mq($xl) {
+      min-height: 865px;
+    }
+  }
 }

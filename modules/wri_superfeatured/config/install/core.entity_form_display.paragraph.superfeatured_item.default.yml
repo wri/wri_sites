@@ -5,14 +5,14 @@ dependencies:
     - field.field.paragraph.superfeatured_item.field_block
     - paragraphs.paragraphs_type.superfeatured_item
   module:
-    - inline_entity_form
+    - wri_block
 id: paragraph.superfeatured_item.default
 targetEntityType: paragraph
 bundle: superfeatured_item
 mode: default
 content:
   field_block:
-    type: inline_entity_form_simple
+    type: inline_block_field_widget
     weight: 0
     region: content
     settings:

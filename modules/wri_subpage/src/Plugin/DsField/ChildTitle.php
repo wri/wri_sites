@@ -26,7 +26,9 @@ class ChildTitle extends DsFieldBase {
     $request = \Drupal::request();
     if ($route = $request->attributes->get(RouteObjectInterface::ROUTE_OBJECT)) {
       $title = \Drupal::service('title_resolver')->getTitle($request, $route);
-      $info['#markup'] = '<h1 class="intro-text">' . $title . '</h1>';
+      if (!is_null($title)) {
+        $info['#markup'] = '<h1 class="intro-text">' . $title . '</h1>';
+      }
     }
 
     return $info;

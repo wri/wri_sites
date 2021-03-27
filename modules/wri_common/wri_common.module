@@ -117,6 +117,10 @@ function wri_common_token_info() {
     'name' => 'Sub Topic Links List',
     'description' => 'A comma separated list of Sub topic links for the node\'s primary topic.',
   ];
+  $info['tokens']['wri_tokens']['child_topic_links_list'] = [
+    'name' => 'Child Topic Links List',
+    'description' => 'A comma separated list of Topics that are children of the node\'s primary topic.',
+  ];
 
   return $info;
 }
@@ -174,6 +178,11 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
             $terms = wri_common_get_node_topics($node, TRUE);
             $replacements[$original] = _wri_common_format_list($terms);
             break;
+
+          case 'child_topic_links_list':
+            $terms = wri_common_get_node_topic_children($node);
+            $replacements[$original] = _wri_common_format_list($terms);
+            break;
         }
       }
     }
@@ -212,6 +221,33 @@ function wri_common_get_node_topics(Node $node, $secondary_only = FALSE) {
 }
 
 /**
+ * Get child topics for a given node.
+ *
+ * @param \Drupal\node\Entity\Node $node
+ *   The node object.
+ *
+ * @return array
+ *   Array of Taxonomy Term objects.
+ */
+function wri_common_get_node_topic_children(Node $node) {
+  $topics = [];
+  if ($node->hasField('field_primary_topic') && ($items = $node->get('field_primary_topic')) && !$items->isEmpty()) {
+    $item = $items->first()->entity;
+    if ($item) {
+      $vid = $item->vid->getString();
+      $parent_tid = $item->tid->getString();
+      $child_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid, $parent_tid, 1, TRUE);
+      if ($child_terms) {
+        foreach ($child_terms as $term) {
+          $topics[] = $term;
+        }
+      }
+    }
+  }
+  return $topics;
+}
+
+/**
  * Formats a comma separated list of passed items with and.
  *
  * @param array $terms
@@ -225,14 +261,16 @@ function _wri_common_format_list(array $terms) {
   if ($terms) {
     foreach ($terms as $term) {
       $term_url = $term->toUrl();
-      $term_label = $term->get('field_full_name')->getString() ? $term->get('field_full_name')->getString() : $term->name->getString();
-      if ($term_url->toString()) {
-        $term_name = Link::fromTextAndUrl($term_label, $term_url)->toRenderable();
-        $renderer = \Drupal::service('renderer');
-        $term_name = $renderer->render($term_name);
+      if ($term->hasField('field_full_name') && $term_label = $term->get('field_full_name')->getString()) {
+        if ($term_url->toString()) {
+          $term_name = Link::fromTextAndUrl($term_label, $term_url)
+            ->toRenderable();
+          $renderer = \Drupal::service('renderer');
+          $term_name = $renderer->render($term_name);
+        }
       }
       else {
-        $term_name = $term_label;
+        $term_name = $term->link();
       }
 
       // If there is more than 1 term, build a list.

@@ -4,16 +4,16 @@ dependencies: {  }
 open: null
 close: null
 weight: 0
-uid: 1
+uid: 385
 template: false
 archive: false
-id: test_pardot_1
-title: 'Test pardot 1'
-description: 'Example that submits directly to a remote URL'
+id: sign_up_for_wri_digest
+title: 'Sign up for the WRI Digest'
+description: 'Main sign-up form for the Digest'
 category: ''
-elements: "flexbox:\n  '#type': webform_flexbox\n  email:\n    '#type': email\n    '#title': Email\n    '#title_display': before\n    '#required': true\n    '#wrapper_attributes':\n      class:\n        - input-wrapper\n  last_name:\n    '#type': textfield\n    '#title': 'Last Name'\n    '#required': true"
+elements: "processed_text:\n  '#type': processed_text\n  '#text': |\n    <style type=\"text/css\">label.option{\n    position: relative !important;\n    }\n    label.label-above{\n    display: block !important;\n    left: unset !important;\n    position: relative !important;\n    top: unset !important;\n    }\n    input{\n    max-width: 100%;\n    }\n    </style>\n    <h1>Sign up for WRI Digest</h1>\n    \n    <p>The&nbsp;<strong>WRI Digest</strong>, WRI's weekly newsletter, delivers news, commentary and our latest publications, maps and data to your inbox.</p>\n    \n    <p>For other WRI project-specific newsletters,&nbsp;<a href=\"https://connect.wri.org/l/120942/2016-01-11/2sjxx6\">subscribe here</a>.</p>\n    \n  '#format': full_html\nsalutation:\n  '#type': radios\n  '#title': Salutation\n  '#options':\n    Dr.: Dr.\n    Prof.: Prof.\n    Mr.: Mr.\n    Mrs.: Mrs.\n    Ms.: Ms.\n    Miss: Miss\n  '#options_display': side_by_side\nfirst_name:\n  '#type': textfield\n  '#title': 'First Name'\n  '#required': true\n  '#required_error': 'Please provide your first name'\n  '#label_attributes':\n    class:\n      - label-above\nmiddle_name:\n  '#type': textfield\n  '#title': 'Middle Name'\n  '#label_attributes':\n    class:\n      - label-above\nlast_name:\n  '#type': textfield\n  '#title': 'Last Name'\n  '#required': true\n  '#required_error': 'Please provide your last name'\n  '#label_attributes':\n    class:\n      - label-above\nsuffix:\n  '#type': textfield\n  '#title': 'Suffix (PhD, Jr., etc.)'\n  '#label_attributes':\n    class:\n      - label-above\nemail:\n  '#type': email\n  '#title': Email\n  '#required': true\n  '#required_error': 'Please provide your email address'\n  '#label_attributes':\n    class:\n      - label-above\ncompany:\n  '#type': textfield\n  '#title': Company\n  '#required': true\n  '#required_error': 'Please provide your company or organization name'\n  '#label_attributes':\n    class:\n      - label-above\njob_title:\n  '#type': textfield\n  '#title': 'Job Title'\n  '#required': true\n  '#required_error': 'Please provide your job title, or n/a if not applicable'\n  '#label_attributes':\n    class:\n      - label-above\ncity:\n  '#type': textfield\n  '#title': City\n  '#required': true\n  '#required_error': 'Please provide your city of residence or work'\n  '#label_attributes':\n    class:\n      - label-above\ncountry:\n  '#type': select\n  '#title': Country\n  '#options': country_names\n  '#required': true\n  '#required_error': 'Please provide your country of residence or work'\n  '#label_attributes':\n    class:\n      - label-above\ninterests:\n  '#type': checkboxes\n  '#title': Interests\n  '#options':\n    Climate: Climate\n    Energy: Energy\n    Food: Food\n    Water: Water\n    Forests: Forests\n    Cities: Cities\n    Governance: Governance\n    Business: Business\n    Finance: Finance\n    Economics: Economics\n  '#options_display': three_columns\n  '#required': true\n  '#required_error': 'Please select at least one area of interest'\nwater:\n  '#type': webform_select_other\n  '#title': 'Test Interests'\n  '#multiple': true\n  '#options':\n    Climate: Climate\n    Energy: Energy\n    Food: Food\n  '#select2': true\n  '#format_items': custom\n  '#format_items_html': '{{ elements_flattened }}'\n  '#format_items_text': '{{ elements_flattened }}'"
 css: ''
-javascript: ''
+javascript: "jQuery(document).ready(function($) {\r\n    $('.webform-submission-form').addClass('pardot-form-gtm');\r\n});"
 settings:
   ajax: false
   ajax_scroll_top: form
@@ -21,10 +21,10 @@ settings:
   ajax_effect: ''
   ajax_speed: null
   page: true
-  page_submit_path: ''
+  page_submit_path: /sign-wri-digest
   page_confirm_path: ''
-  page_theme_name: ''
-  form_title: both
+  page_theme_name: ts_wrin
+  form_title: source_entity_webform
   form_submit_once: false
   form_exception_message: ''
   form_open_message: ''
@@ -46,7 +46,7 @@ settings:
   form_unsaved: false
   form_disable_back: false
   form_submit_back: false
-  form_autofocus: false
+  form_autofocus: true
   form_details_toggle: false
   form_access_denied: default
   form_access_denied_title: ''
@@ -78,7 +78,7 @@ settings:
   autofill: false
   autofill_message: ''
   autofill_excluded_elements: {  }
-  wizard_progress_bar: true
+  wizard_progress_bar: false
   wizard_progress_pages: false
   wizard_progress_percentage: false
   wizard_progress_link: false
@@ -93,7 +93,7 @@ settings:
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: false
+  wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   preview: 0
@@ -193,8 +193,8 @@ access:
 handlers:
   remote_post:
     id: remote_post
-    label: 'Post remotely'
-    notes: ''
+    label: 'Pardot Form Handler'
+    notes: 'Submits to Pardot endpoint'
     handler_id: remote_post
     status: true
     conditions: {  }
@@ -226,7 +226,7 @@ handlers:
       custom_options: ''
       cast: false
       debug: true
-      completed_url: 'https://connect.wri.org/l/120942/2020-12-11/4y3l9b'
+      completed_url: 'https://connect.wri.org/l/120942/2019-03-07/46s6pk'
       completed_custom_data: ''
       updated_url: ''
       updated_custom_data: ''

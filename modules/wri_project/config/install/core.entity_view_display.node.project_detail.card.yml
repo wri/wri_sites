@@ -5,6 +5,7 @@ dependencies:
     - core.entity_view_mode.node.card
     - field.field.node.project_detail.body
     - field.field.node.project_detail.field_featured
+    - field.field.node.project_detail.field_featured_experts
     - field.field.node.project_detail.field_featured_headline
     - field.field.node.project_detail.field_featured_related_resources
     - field.field.node.project_detail.field_featured_text
@@ -232,6 +233,7 @@ hidden:
   body: true
   content_moderation_control: true
   field_featured: true
+  field_featured_experts: true
   field_featured_headline: true
   field_featured_related_resources: true
   field_featured_text: true

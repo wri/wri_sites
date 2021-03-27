@@ -35,6 +35,10 @@ function wri_admin_form_alter(&$form, FormStateInterface $form_state, $form_id) 
     'layout_builder_revert_overrides',
     'layout_builder_discard_changes',
   ];
+  $simple_popup_forms = [
+    'simple_popup_blocks_add_form',
+    'simple_popup_blocks_edit_form',
+  ];
   $build_info = $form_state->getBuildInfo();
   if (isset($build_info['base_form_id']) && in_array($build_info['base_form_id'], $layout_forms)) {
     $form['#attached']['library'][] = 'wri_admin/admin';
@@ -42,7 +46,15 @@ function wri_admin_form_alter(&$form, FormStateInterface $form_state, $form_id) 
   elseif (in_array($form_id, $layout_forms)) {
     $form['#attached']['library'][] = 'wri_admin/admin';
   }
-  if ($form_id == 'content_moderation_entity_moderation_form') {
+  elseif (in_array($form_id, $simple_popup_forms)) {
+    // Hiding the minimize option -- it's confusing.
+    $form['minimize']['#access'] = FALSE;
+    // Adding help text about the Center option being preferred.
+    $form["layout"]['#description'] = t('For most cases for WRI, the recommended option is "Center"');
+    // Adding a note about a cache clear.
+    $form['submit']['#suffix'] = t('Note: You may need to clear the cache to see this change on the front end.');
+  }
+  elseif ($form_id == 'content_moderation_entity_moderation_form') {
     $node = $form_state->get('entity');
     if ($node) {
       $published_node = Node::load($node->id());
@@ -63,6 +75,7 @@ function wri_admin_form_alter(&$form, FormStateInterface $form_state, $form_id) 
       ];
     }
   }
+
 }
 
 /**

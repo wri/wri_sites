@@ -1,13 +1,6 @@
 langcode: en
 status: true
 dependencies:
-  module:
-    - node
-    - taxonomy
-    - token
-    - wri_search
-    - search_api
-    - search_api_exclude_entity
   config:
     - field.storage.node.field_areas_of_expertise
     - field.storage.node.body
@@ -27,14 +20,21 @@ dependencies:
     - field.storage.node.field_leadership
     - field.storage.node.field_main_image
     - field.storage.node.field_topics
+    - field.storage.node.field_projects
     - field.storage.node.field_project_expert
     - field.storage.node.field_quote
-    - field.storage.node.field_projects
     - field.storage.node.field_region
     - field.storage.node.field_tags
     - field.storage.node.field_primary_topic
     - field.storage.node.field_type
     - search_api.server.pantheon
+  module:
+    - taxonomy
+    - node
+    - token
+    - wri_search
+    - search_api
+    - search_api_exclude_entity
 id: sitewide
 name: Sitewide
 description: ''
@@ -385,6 +385,17 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_primary_topic
+      module:
+        - taxonomy
+        - wri_search
+  top_level_type:
+    label: 'Type » Taxonomy term » Parent or Self'
+    datasource_id: 'entity:node'
+    property_path: 'field_type:entity:term_parent_or_self'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_type
       module:
         - taxonomy
         - wri_search

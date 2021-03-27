@@ -21,5 +21,5 @@ settings:
       view_name: resource_types
       display_name: entity_reference_1
       arguments:
-        - 'Research+Other Publications'
+        - Research+Publications
 field_type: entity_reference

@@ -14,7 +14,7 @@
     {{ title_suffix.contextual_links }}
     {% if content %}
       <div class="card-image">
-        {% if content.image|render|striptags('<img>')|trim %}
+        {% if content.image|render|striptags('<img>')|trim or content.image|render|striptags('<iframe>')|trim %}
           {{ content.image }}
         {% else %}
           <img src="/profiles/contrib/wri_sites/modules/wri_node/images/{{ (content.tag|render|lower|replace({' ': '-'})) ? content.tag.field_primary_topic.0['#title']|lower|replace({' ': '-'}) : 'default' }}.jpg" alt="">

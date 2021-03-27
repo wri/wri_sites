@@ -20,7 +20,7 @@
 
   li {
     @include font("acumin-pro", "normal");
-    @include font-line-height(12, 18);
+    @include font-line-height(12, 26);
 
     a {
       text-decoration: none;

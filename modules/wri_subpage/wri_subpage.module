@@ -7,6 +7,14 @@
 
 use Drupal\menu_link_content\Entity\MenuLinkContent;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function wri_subpage_node_insert(EntityInterface $entity) {
+  wri_subpage_node_update($entity);
+}
 
 /**
  * Implements hook_ENTITY_TYPE_update().
@@ -19,8 +27,8 @@ function wri_subpage_node_update(EntityInterface $entity) {
 
       // Save the parent at the root of the Page Heirarchy menu, if not already
       // there.
-      $parent_link_menu = array_key_first($menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $parent->id()], 'page-hierarchies'));
-      if (!$parent_link_menu) {
+      $parent_link_menu_id = array_key_first($menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $parent->id()], 'page-hierarchies'));
+      if (!$parent_link_menu_id) {
         $parent_link_menu = MenuLinkContent::create([
           'title' => $parent->label(),
           'link' => ['uri' => 'entity:node/' . $parent->id()],
@@ -28,6 +36,7 @@ function wri_subpage_node_update(EntityInterface $entity) {
           'expanded' => TRUE,
         ]);
         $parent_link_menu->save();
+        $parent_link_menu_id = $parent_link_menu->getPluginId();
       }
 
       // Save the current page as a child of the parent in the Page Hierarchy
@@ -38,17 +47,34 @@ function wri_subpage_node_update(EntityInterface $entity) {
           'title' => $entity->label(),
           'link' => ['uri' => 'entity:node/' . $entity->id()],
           'menu_name' => 'page-hierarchies',
-          'parent' => $parent_link_menu,
+          'parent' => $parent_link_menu_id,
           'expanded' => TRUE,
         ]);
       }
       else {
         $current_link_menu_id = current($current_link_menu_menu)->getPluginDefinition()["metadata"]["entity_id"];
         $current_link_menu = MenuLinkContent::load($current_link_menu_id);
-        $current_link_menu->set('parent', $parent_link_menu);
         $current_link_menu->set('enabled', 1);
+        $current_link_menu->set('parent', $parent_link_menu_id);
       }
       $current_link_menu->save();
     }
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter() for \Drupal\node\NodeForm.
+ */
+function wri_subpage_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $node = $form_state->getFormObject()->getEntity();
+  if (isset($node->field_parent_page)) {
+    $value = '';
+    if (isset($node->field_parent_page->entity)) {
+      $value = $node->field_parent_page->entity->label();
+    }
+    $form['menu']['link']['menu_parent']['#type'] = 'item';
+    $form['menu']['link']['menu_parent']['#markup'] = $value;
+    $form['menu']['link']['menu_parent']['#description'] = t('Parent will be pulled from the "Parent page" field.');
+    $form['menu']['link']['menu_parent']['#default_value'] = ':';
   }
 }

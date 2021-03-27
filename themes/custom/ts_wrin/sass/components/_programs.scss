@@ -1,5 +1,4 @@
-.page-node-type-program-center,
-.page-node-type-simple-page {
+.page-node-type-program-center {
   .landing-page__hero__field-listing__mobile {
     background-color: $teal;
   }
@@ -269,7 +268,7 @@
     .field--name-field-statistic-text p {
       @include font($acumin-semi-cond, "medium");
       @include font-line-height(16, 18);
-      color: $green;
+      color: $blue;
       text-transform: none;
     }
   }

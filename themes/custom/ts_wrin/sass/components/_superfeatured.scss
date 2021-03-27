@@ -79,6 +79,14 @@
     }
   }
 
+  .field--name-field-media-oembed-video.playing {
+    margin-bottom: rem(25);
+
+    @include mq($md) {
+      margin-bottom: rem(50);
+    }
+  }
+
   .right-text-wrapper {
     @include center-columns(4, 4);
 

@@ -36,7 +36,12 @@ content:
     label: hidden
     settings:
       link: true
-    third_party_settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
     type: entity_reference_label
     region: ds_content
 hidden:

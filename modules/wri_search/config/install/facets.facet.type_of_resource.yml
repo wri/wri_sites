@@ -16,7 +16,7 @@ url_alias: type
 weight: 0
 min_count: 1
 show_only_one_result: false
-field_identifier: field_type
+field_identifier: top_level_type
 facet_source_id: 'search_api:views_page__resources__resources_page'
 widget:
   type: checkbox
@@ -30,13 +30,20 @@ widget:
     reset_text: 'Show all'
     hide_reset_when_no_selection: false
 query_operator: or
-use_hierarchy: true
+use_hierarchy: false
 expand_hierarchy: false
 enable_parent_when_child_gets_disabled: true
 hard_limit: 0
 exclude: false
 only_visible_when_facet_source_is_visible: false
 processor_configs:
+  exclude_specified_items:
+    processor_id: exclude_specified_items
+    weights:
+      build: 50
+    settings:
+      exclude: 'Publications,Update,Outcomes'
+      regex: false
   hide_1_result_facet:
     processor_id: hide_1_result_facet
     weights:

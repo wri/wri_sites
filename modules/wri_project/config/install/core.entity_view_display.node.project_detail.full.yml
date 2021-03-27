@@ -5,6 +5,7 @@ dependencies:
     - core.entity_view_mode.node.full
     - field.field.node.project_detail.body
     - field.field.node.project_detail.field_featured
+    - field.field.node.project_detail.field_featured_experts
     - field.field.node.project_detail.field_featured_headline
     - field.field.node.project_detail.field_featured_related_resources
     - field.field.node.project_detail.field_featured_text
@@ -26,7 +27,6 @@ dependencies:
     - field.field.node.project_detail.layout_builder__layout
     - node.type.project_detail
     - responsive_image.styles.program_landing_page_hero
-    - views.view.featured_experts
     - views.view.related_to_this_project
   module:
     - blazy
@@ -332,19 +332,6 @@ third_party_settings:
                 view_mode: view_mode
             additional: {  }
             weight: -5
-          cadb5733-3867-488a-8351-959c82e4f675:
-            uuid: cadb5733-3867-488a-8351-959c82e4f675
-            region: content
-            configuration:
-              id: 'views_block:featured_experts-block_1'
-              label: ''
-              provider: views
-              label_display: visible
-              views_label: ''
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
-            weight: -7
           a1c32609-f9f9-469f-8afc-86e509c3b92a:
             uuid: a1c32609-f9f9-469f-8afc-86e509c3b92a
             region: content
@@ -387,6 +374,23 @@ third_party_settings:
               id: 'extra_field_block:node:project_detail:content_moderation_control'
             additional: {  }
             weight: -9
+          11aff077-a1e9-4b73-8903-3bad7fb7baba:
+            uuid: 11aff077-a1e9-4b73-8903-3bad7fb7baba
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:project_detail:field_featured_experts'
+              formatter:
+                label: above
+                type: entity_reference_entity_view
+                settings:
+                  view_mode: teaser
+                  link: false
+                third_party_settings: {  }
+            additional: {  }
+            weight: 8
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories: {  }
@@ -397,6 +401,7 @@ third_party_settings:
         Components: {  }
         'Content fields':
           - 'field_block:node:project_detail:field_region'
+          - 'field_block:node:project_detail:field_featured_experts'
           - 'field_block:node:project_detail:field_featured_related_resources'
           - 'field_block:node:project_detail:field_logo'
           - 'extra_field_block:node:project_detail:content_moderation_control'
@@ -440,6 +445,15 @@ content:
     label: above
     settings: {  }
     third_party_settings: {  }
+  field_featured_experts:
+    label: above
+    type: entity_reference_entity_view
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    weight: 10
+    region: content
   field_intro:
     weight: 1
     label: hidden

@@ -11,9 +11,15 @@ config_devel:
   install:
     - block_content.type.narrative_taxonomy
     - core.entity_form_display.block_content.narrative_taxonomy.default
+    - core.entity_form_display.paragraph.narrative_taxonomy.default
     - core.entity_view_display.block_content.narrative_taxonomy.default
+    - core.entity_view_display.block_content.narrative_taxonomy.preview
+    - core.entity_view_display.paragraph.narrative_taxonomy.default
+    - core.entity_view_display.paragraph.narrative_taxonomy.preview
     - field.field.block_content.narrative_taxonomy.field_custom_results
     - field.field.block_content.narrative_taxonomy.field_filter_by_region
     - field.field.block_content.narrative_taxonomy.field_intro
     - field.field.block_content.narrative_taxonomy.field_listing
     - field.field.block_content.narrative_taxonomy.field_tag
+    - field.field.paragraph.narrative_taxonomy.field_block
+    - paragraphs.paragraphs_type.narrative_taxonomy

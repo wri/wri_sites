@@ -4,6 +4,7 @@ dependencies:
   config:
     - field.field.node.project_detail.body
     - field.field.node.project_detail.field_featured
+    - field.field.node.project_detail.field_featured_experts
     - field.field.node.project_detail.field_featured_headline
     - field.field.node.project_detail.field_featured_related_resources
     - field.field.node.project_detail.field_featured_text
@@ -89,6 +90,7 @@ third_party_settings:
     group_experts:
       children:
         - field_primary_contacts
+        - field_featured_experts
       parent_name: group_more
       weight: 20
       format_type: details
@@ -143,6 +145,16 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
+    region: content
+  field_featured_experts:
+    weight: 16
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_featured_headline:
     weight: 5

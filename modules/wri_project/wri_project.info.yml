@@ -29,6 +29,7 @@ config_devel:
     - core.entity_view_display.paragraph.partner_logo.default
     - field.field.node.project_detail.body
     - field.field.node.project_detail.field_featured
+    - field.field.node.project_detail.field_featured_experts
     - field.field.node.project_detail.field_featured_headline
     - field.field.node.project_detail.field_featured_related_resources
     - field.field.node.project_detail.field_featured_text

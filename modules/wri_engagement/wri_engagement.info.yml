@@ -19,4 +19,5 @@ config_devel:
     - field.field.block_content.modal.field_webform
     - field.storage.block_content.field_webform
     - webform.webform.call_to_action
-    - webform.webform.test_pardot_1
+    - webform.webform.sign_up_for_wri_digest
+    - webform.webform.simple_email_submit

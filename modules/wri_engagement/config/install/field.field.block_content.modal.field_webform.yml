@@ -4,7 +4,6 @@ dependencies:
   config:
     - block_content.type.modal
     - field.storage.block_content.field_webform
-    - webform.webform.contact
   module:
     - webform
 id: block_content.modal.field_webform

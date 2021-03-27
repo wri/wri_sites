@@ -14,7 +14,9 @@
           <div class="hero__text--inner padding-vertical">
             <div class="margin-top-xl"></div>
             {{ content.hero.node_title }}
-            {{ content.hero.childtitle }}
+            {% if content.hero.childtitle %}
+              {{ content.hero.childtitle }}
+            {% endif %}
           </div>
         </div>
       </div>

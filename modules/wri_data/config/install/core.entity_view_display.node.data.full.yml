@@ -88,7 +88,7 @@ third_party_settings:
             region: content
             configuration:
               id: 'field_block:node:data:field_related_resources'
-              label: 'Connected to This Data Set'
+              label: 'Related to this Resource'
               provider: layout_builder
               label_display: visible
               formatter:

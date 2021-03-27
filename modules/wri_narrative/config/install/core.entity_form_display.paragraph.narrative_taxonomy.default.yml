@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.narrative_taxonomy.field_block
+    - paragraphs.paragraphs_type.narrative_taxonomy
+  module:
+    - inline_entity_form
+id: paragraph.narrative_taxonomy.default
+targetEntityType: paragraph
+bundle: narrative_taxonomy
+mode: default
+content:
+  field_block:
+    type: inline_entity_form_simple
+    weight: 0
+    region: content
+    settings:
+      form_mode: default
+      revision: false
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      collapsible: false
+      collapsed: false
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

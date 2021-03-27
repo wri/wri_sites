@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: narrative_taxonomy
+label: 'Narrative Taxonomy'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

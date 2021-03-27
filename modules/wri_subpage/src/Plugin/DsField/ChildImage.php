@@ -35,28 +35,26 @@ class ChildImage extends DsFieldBase {
       $node_id = str_replace('node.', '', $node_route);
       $node = Node::load($node_id);
     }
-    if ($node instanceof NodeInterface) {
-      $uri = FALSE;
-      if (isset($node->field_main_image->entity->field_media_image->entity->uri->value)) {
-        $uri = $node->field_main_image->entity->field_media_image->entity->uri->value;
-      }
-      elseif (isset($entity->field_main_image->entity->field_media_image->entity->uri->value)) {
-        $uri = $entity->field_main_image->entity->field_media_image->entity->uri->value;
-      }
+    $uri = FALSE;
+    if (($node instanceof NodeInterface) && isset($node->field_main_image->entity->field_media_image->entity->uri->value)) {
+      $uri = $node->field_main_image->entity->field_media_image->entity->uri->value;
+    }
+    elseif (isset($entity->field_main_image->entity->field_media_image->entity->uri->value)) {
+      $uri = $entity->field_main_image->entity->field_media_image->entity->uri->value;
+    }
 
-      if ($uri) {
-        $settings = [
-          'uri' => $uri,
-          'lazy' => 'blazy',
-          'responsive_image_style_id' => 'article_hero_large_cta',
-        ];
+    if ($uri) {
+      $settings = [
+        'uri' => $uri,
+        'lazy' => 'blazy',
+        'responsive_image_style_id' => 'article_hero_large_cta',
+      ];
 
-        $build = [
-          '#theme' => 'blazy',
-          '#settings' => $settings,
-          '#attached' => ['library' => ['blazy/load']],
-        ];
-      }
+      $build = [
+        '#theme' => 'blazy',
+        '#settings' => $settings,
+        '#attached' => ['library' => ['blazy/load']],
+      ];
     }
 
     General::$htmlClasses[] = 'transparent-header white';

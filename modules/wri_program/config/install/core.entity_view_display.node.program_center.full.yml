@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - block_content.type.hero
+    - block_content.type.narrative_taxonomy
     - core.entity_view_mode.node.full
     - field.field.node.program_center.body
     - field.field.node.program_center.field_featured_experts
@@ -44,14 +45,14 @@ third_party_settings:
             region: content
             configuration:
               id: 'field_block:node:program_center:field_twitter_account'
-              label: 'Visit on Twitter'
+              label: 'Follow on Twitter'
               provider: layout_builder
               label_display: '0'
               formatter:
                 label: hidden
                 type: link_ally_class
                 settings:
-                  link_text: 'Visit on Twitter'
+                  link_text: 'Follow on Twitter'
                   screenreader_text: ''
                   tag: ''
                   class: ''
@@ -144,7 +145,7 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 8
+            weight: 9
           f1699151-e710-4123-b8c5-6d27274ffc97:
             uuid: f1699151-e710-4123-b8c5-6d27274ffc97
             region: content
@@ -163,26 +164,21 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 9
-          71d28509-401d-4d2d-9f68-011b91e17825:
-            uuid: 71d28509-401d-4d2d-9f68-011b91e17825
+            weight: 10
+          d0de1562-68de-47bb-9665-b4a8887bcf5d:
+            uuid: d0de1562-68de-47bb-9665-b4a8887bcf5d
             region: content
             configuration:
-              id: 'field_block:node:program_center:field_featured_project'
-              label: 'Featured Projects'
+              id: 'inline_block:narrative_taxonomy'
+              label: 'Narrative Taxonomy'
               provider: layout_builder
-              label_display: '0'
-              formatter:
-                label: hidden
-                type: entity_reference_entity_view
-                settings:
-                  view_mode: tile
-                third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
+              label_display: ''
+              view_mode: default
+              block_revision_id: 100380
+              block_serialized: null
+              context_mapping: {  }
             additional: {  }
-            weight: 7
+            weight: 8
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories:

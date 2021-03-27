@@ -51,14 +51,22 @@
 
   input:not([type="submit"]) {
     background: none;
-    box-sizing: border-box;
     border: 1px solid #e8e8e7;
-    padding: 12px 10px;
+    box-sizing: border-box;
+    letter-spacing: 0.3px;
     max-width: 100%;
+    padding: 16px 10px 8px;
+    height: 42px;
+    width: 100%;
   }
 
   .button {
     @extend .small;
+  }
+
+  p {
+    -webkit-font-smoothing: auto;
+    letter-spacing: 0.5px;
   }
 }
 
@@ -79,8 +87,10 @@
   .block-copyright-block p,
   .block-address-block p,
   li.menu-item span {
+    -webkit-font-smoothing: auto;
     color: #898989;
     font-weight: 300;
+    letter-spacing: 0.3px;
   }
 
   li,
@@ -117,13 +127,16 @@
 
   .block-menu:not(.menu--social-menu) ul.menu a {
     @include text-underline-thin(transparent, $white);
+    -webkit-font-smoothing: auto;
     background-position: left 100%;
     font-weight: 300;
+    letter-spacing: 0.5px;
   }
 
   .menu--footer-main ul.menu li.menu-item a,
   .menu--footer-secondary > ul.menu > li.menu-item > a {
     @include text-underline(transparent, $white);
+    -webkit-font-smoothing: antialiased;
     background-position: left 100%;
     font-weight: 700;
   }

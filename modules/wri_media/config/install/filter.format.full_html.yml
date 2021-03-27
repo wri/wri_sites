@@ -18,10 +18,10 @@ filters:
   filter_html:
     id: filter_html
     provider: filter
-    status: true
+    status: false
     weight: -50
     settings:
-      allowed_html: '<em> <strong class=""> <cite> <code> <ul type> <ol start type> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <img src alt data-entity-type data-entity-uuid height width style> <s> <sup> <sub> <drupal-media data-entity-type data-entity-uuid data-view-mode data-align data-caption alt title> <hr> <a href hreflang target id rel class="button"> <figure class=""> <blockquote cite class=""> <div class=""> <figcaption> <p class="*"> <span class="*"> <table> <caption> <tbody> <thead scope> <tfoot> <th colspan rowspan abbr headers scope> <td colspan headers rowspan> <tr>'
+      allowed_html: '<em> <strong class=""> <cite> <code> <ul type> <ol start type> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <img src alt data-entity-type data-entity-uuid height width style align> <s> <sup> <sub> <drupal-media data-entity-type data-entity-uuid data-view-mode data-align data-caption alt title> <hr> <a href hreflang target id rel class="button"> <figure class=""> <blockquote cite class=""> <div class=""> <figcaption> <p class="*"> <span class="*"> <table> <caption> <tbody> <thead> <tfoot> <th> <td> <tr>'
       filter_html_help: false
       filter_html_nofollow: false
   filter_htmlcorrector:

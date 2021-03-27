@@ -313,6 +313,46 @@
   }
 }
 // Transparent at the top.
+@mixin hero_bottom_gradient_medium($direction: to top, $color: $black) {
+  background: transparent
+    linear-gradient(
+      $direction,
+      rgba($color, 1) 0%,
+      rgba($color, 0) 40%
+    );
+  @include mq($md) {
+    background: transparent
+      linear-gradient(
+        $direction,
+        rgba($color, 1) 0%,
+        rgba($color, 0.70) 15%,
+        rgba($color, 0.5) 30%,
+        rgba($color, 0) 50%
+      );
+  }
+
+  @include mq($lg) {
+    background: transparent
+      linear-gradient(
+        $direction,
+        rgba($color, 1) 0%,
+        rgba($color, 0.6) 15%,
+        rgba($color, 0.4) 30%,
+        rgba($color, 0.2) 45%,
+        rgba($color, 0) 60%
+      );
+  }
+  @include mq($xl) {
+    background: transparent
+      linear-gradient(
+        $direction,
+        rgba($color, 0.6) 0%,
+        rgba($color, 0.3) 25%,
+        rgba($color, 0) 50%
+      );
+  }
+}
+// Transparent at the top.
 @mixin hero_bottom_gradient_heavy($direction: to top, $color: $black) {
   background: transparent
     linear-gradient($direction, rgba($color, 1) 0%, rgba($color, 0) 30%);

@@ -10,7 +10,7 @@ field_name: field_main_image
 entity_type: node
 bundle: international_office
 label: 'Main Image'
-description: ''
+description: 'Ideal Size: 3000x900px'
 required: false
 translatable: false
 default_value: {  }

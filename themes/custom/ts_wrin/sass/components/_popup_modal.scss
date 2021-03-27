@@ -114,6 +114,9 @@
   .spb-popup-main-wrapper {
     max-width: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+    max-height: calc(100% - 40px);
+    overflow: auto;
+    top: 150px;
   }
 
   .spb_close {
@@ -147,21 +150,31 @@
     margin-top: -25rem;
   }
 }
+
 //Download files modal
 .files-modal {
   display: none;
   margin: $space-xs;
-  max-height: 50vh;
+  max-height: calc(100% - 40px);
   overflow: auto;
 
   @include mq($md) {
     margin: 36px 50px;
+    max-height: calc(100% - (36px * 2));
   }
 }
 
 .files-modal-modal {
   .spb_top_center {
     top: 10%;
+    @include mq($md) {
+      height: calc(100vh - 180px);
+      margin-top: 150px;
+      top: 0;
+    }
+    @include mq($lg) {
+      height: calc(100vh - 280px);
+    }
   }
 
   .spb_center {
@@ -176,6 +189,7 @@
     box-sizing: border-box;
     display: block;
     text-align: left;
+    overflow: hidden;
   }
 
   .field--name-name {
@@ -185,5 +199,12 @@
 
   span {
     font-weight: 100;
+  }
+}
+.toolbar-tray-open .files-modal-modal {
+  .spb_top_center {
+    @include mq($md) {
+      margin-top: 210px;
+    }
   }
 }

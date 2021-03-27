@@ -42,16 +42,24 @@ third_party_settings:
       intro:
         - field_intro_paragraphs
     fields:
-      child_pages:
-        plugin_id: child_pages
-        weight: 0
-        label: hidden
-        formatter: default
       breadcrumb:
         plugin_id: breadcrumb
         weight: 0
         label: hidden
         formatter: default
+        ft:
+          id: reset
+          settings:
+            lb: ''
+      child_pages:
+        plugin_id: child_pages
+        weight: 0
+        label: hidden
+        formatter: default
+        ft:
+          id: reset
+          settings:
+            lb: ''
       node_title:
         plugin_id: node_title
         weight: 1

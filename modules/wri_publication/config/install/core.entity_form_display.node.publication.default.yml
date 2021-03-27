@@ -85,7 +85,6 @@ third_party_settings:
       label: Category
     group_more:
       children:
-        - group_featured
         - group_category
         - group_publishing
         - group_experts
@@ -148,9 +147,9 @@ third_party_settings:
       label: Related
     group_featured:
       children:
-        - field_narrative_taxonomy
         - field_featured_headline
         - field_featured_text
+        - field_narrative_taxonomy
       parent_name: group_more
       weight: 21
       format_type: details
@@ -399,6 +398,12 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_toc:
+    type: options_select
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_total_pages:
     weight: 17
     settings:
@@ -475,5 +480,4 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden:
-  field_toc: true
+hidden: {  }

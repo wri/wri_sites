@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.landing_page_hero
+label: 'Landing Page Hero'
+targetEntityType: media
+cache: true

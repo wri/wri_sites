@@ -53,6 +53,7 @@ third_party_settings:
         label: ''
     regions:
       hero:
+        - content_moderation_control
         - field_main_image
         - field_type
         - node_title
@@ -107,6 +108,11 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: main_content
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   field_date_time:
     weight: 6
     label: hidden
@@ -160,7 +166,7 @@ content:
     region: sidebar_left
     label: above
     settings:
-      view_mode: default
+      view_mode: download_listing
       link: false
     third_party_settings:
       ds:

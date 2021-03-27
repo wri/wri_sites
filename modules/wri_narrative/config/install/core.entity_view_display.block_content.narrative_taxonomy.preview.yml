@@ -1,0 +1,85 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.narrative_taxonomy
+    - core.entity_view_mode.block_content.preview
+    - field.field.block_content.narrative_taxonomy.field_custom_results
+    - field.field.block_content.narrative_taxonomy.field_filter_by_region
+    - field.field.block_content.narrative_taxonomy.field_intro
+    - field.field.block_content.narrative_taxonomy.field_listing
+    - field.field.block_content.narrative_taxonomy.field_tag
+  module:
+    - ds
+    - layout_builder
+    - text
+    - viewfield
+third_party_settings:
+  ds:
+    layout:
+      id: layout_onecol
+      library: layout_discovery/onecol
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      content:
+        - field_intro
+        - field_listing
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: block_content.narrative_taxonomy.preview
+targetEntityType: block_content
+bundle: narrative_taxonomy
+mode: preview
+content:
+  field_intro:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_listing:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi: false
+            fi-def-at: false
+    type: viewfield_title
+    region: content
+hidden:
+  field_custom_results: true
+  field_filter_by_region: true
+  field_filter_by_resource_type: true
+  field_tag: true
+  search_api_excerpt: true

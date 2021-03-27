@@ -10,6 +10,7 @@ import tsForms from "./components/ts_forms.js";
 import tsFacets from "./components/ts_facets.js";
 import wriMaps from "./components/wri_maps.js";
 import wriModals from "./components/wri_modals.js";
+import wriMedia from "./components/wri_media.js";
 import tsExternalLinks from "./components/ts_external_links.js";
 
 (($, Drupal) => {
@@ -46,6 +47,10 @@ import tsExternalLinks from "./components/ts_external_links.js";
 
   Drupal.behaviors.wriModals = {
     attach: wriModals
+  };
+
+  Drupal.behaviors.wriMedia = {
+    attach: wriMedia
   };
 
   Drupal.behaviors.tsExternalLinks = {

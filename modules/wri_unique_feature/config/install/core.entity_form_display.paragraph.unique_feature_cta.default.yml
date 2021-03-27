@@ -5,14 +5,14 @@ dependencies:
     - field.field.paragraph.unique_feature_cta.field_block
     - paragraphs.paragraphs_type.unique_feature_cta
   module:
-    - inline_entity_form
+    - wri_block
 id: paragraph.unique_feature_cta.default
 targetEntityType: paragraph
 bundle: unique_feature_cta
 mode: default
 content:
   field_block:
-    type: inline_entity_form_simple
+    type: inline_block_field_widget
     weight: 0
     region: content
     settings:

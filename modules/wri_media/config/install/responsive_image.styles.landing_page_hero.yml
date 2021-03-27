@@ -38,4 +38,4 @@ image_style_mappings:
     image_mapping_type: image_style
     image_mapping: 500x700
 breakpoint_group: wri_media
-fallback_image_style: '_empty image_'
+fallback_image_style: 500x700

@@ -7,6 +7,7 @@ dependencies:
     - paragraphs.paragraphs_type.image_cta
     - paragraphs.paragraphs_type.impact_in_action_blocks
     - paragraphs.paragraphs_type.listing_block
+    - paragraphs.paragraphs_type.narrative_taxonomy
     - paragraphs.paragraphs_type.side_by_side
     - paragraphs.paragraphs_type.small_cta
     - paragraphs.paragraphs_type.statistics
@@ -34,6 +35,7 @@ settings:
       statistics: statistics
       image_cta: image_cta
       listing_block: listing_block
+      narrative_taxonomy: narrative_taxonomy
       small_cta: small_cta
       superfeatured_item: superfeatured_item
       unique_feature_cta: unique_feature_cta
@@ -56,10 +58,10 @@ settings:
       impact_in_action_blocks:
         enabled: true
         weight: 14
-      large_cta:
-        enabled: true
-        weight: 23
       listing_block:
+        enabled: true
+        weight: 24
+      narrative_taxonomy:
         enabled: true
         weight: 24
       partner_logo:

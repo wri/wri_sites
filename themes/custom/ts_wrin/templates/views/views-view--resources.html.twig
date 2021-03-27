@@ -15,11 +15,14 @@
   ]
 %}
 
-{% if header %}{{ header|without('extra_result') }}{% endif %}
+{% if header %}
+  {{ header|without('extra_result') }}
+{% endif %}
 <div{{ attributes.addClass(classes) }}>
-  <div class="container"><h1 class="h1 padding-vertical">{{ view.title }}</h1>
-  </div>
   {% if display_id == 'resources_page' %}
+    <div class="container">
+      <h1 class="h1 padding-vertical">{{ view.title }}</h1>
+    </div>
   {{ drupal_block('facet_block:all_topics') }}
   {% endif %}
   <div class="resources-wrapper">
@@ -46,7 +49,9 @@
         <div class="results-body padding-bottom">
             <div class="view-header">
               {{ header.extra_result }}
+              {% if display_id == 'resources_page' %}
               {{ drupal_block('facets_summary_block:summary') }}
+              {% endif %}
             </div>
           {% if rows %}
             <div class="view-content">

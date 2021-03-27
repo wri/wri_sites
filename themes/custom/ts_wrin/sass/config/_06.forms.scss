@@ -35,6 +35,10 @@ input[type="text"].ghost {
   }
 }
 
+.form-required:after {
+  background-image: url('../img/svgs/required.svg');
+}
+
 .single-border {
   border: 1px solid $light-grey;
   input[type="text"].ghost {
@@ -45,6 +49,8 @@ input[type="text"].ghost {
     border: none;
   }
 }
+
+#wri-stay-informed-footer .form-item,
 .webform-submission-form .form-item {
   position: relative;
   label {
@@ -55,9 +61,137 @@ input[type="text"].ghost {
   }
   &.move-label label,
   &.has-value label {
-    font-size: rem(10);
+    font-size: 10px;
     top: 2px;
     transition: top 0.3s ease-out, left 0.3s ease-out, font-size 0.3s ease-out;
   }
+}
+
+#wri-stay-informed-footer {
+  position: relative;
+  -webkit-font-smoothing: auto;
+  letter-spacing: 0.3px;
+  div[id^=edit-actions] {
+    margin: 0;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    z-index: 10;
+    input {
+      border-radius: 0;
+    }
+  }
+}
+
+form.webform-submission-form {
+  .fieldset-legend {
+    @include font($acumin-semi-cond, "semibold", "normal");
+    @include font-line-height(20, 20);
+  }
+
+  label {
+    @include font($acumin-semi-cond, "regular", "normal");
+    @include font-line-height(16, 22);
+  }
+  input[type="text"],
+  input[type="email"],
+  select {
+    @include font($acumin-semi-cond, "regular", "normal");
+    @include font-line-height(16, 22);
+    background-color: transparent;
+    border: 1px solid $med-grey;
+    color: $black;
+    height: 40px;
+    padding: 12px 15px 4px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    max-width: 100%;
+    border-radius: 3px;
+    @include mq($md) {
+      height: 50px;
+      padding: 16px 20px 8px 10px;
+    }
+    @include mq($lg) {
+      height: 60px;
+      padding: 24px 25px 12px 10px;
+    }
+    @include hocus() {
+      border-color: $true-black;
+      outline: none;
+    }
+  }
+
+  .form-type-select {
+    label {
+      top: -4px;
+      left: auto;
+      position: relative;
+    }
+    select {
+      padding: 8px 15px 8px 8px;
+      @include mq($md) {
+        padding: 12px 20px 12px 10px;
+      }
+      @include mq($lg) {
+        padding: 18px 25px 18px 10px;
+      }
+      @include hocus() {
+        border-color: $true-black;
+        outline: none;
+      }
+    }
+  }
+
+  .form-type-checkbox,
+  .form-type-radio {
+    margin-bottom: 8px;
+
+    input[type="checkbox"] {
+      border: 1px solid $med-grey;
+      border-radius: 20%;
+      height: 18px;
+      width: 18px;
+
+      &:checked,
+      &:focus,
+      &:hover,
+      &.selected {
+        background: $black;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    input[type="radio"] {
+      border: 1px solid $med-grey;
+      border-radius: 50%;
+      height: 18px;
+      margin-bottom: -2px;
+      width: 18px;
+
+      &:checked,
+      &.selected {
+        background: $black;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    label {
+      @include font($acumin-semi-cond, "regular", "normal");
+      @include font-line-height(15, 15);
+      color: $black;
+      top: -4px;
+      left: auto;
+      position: relative;
+    }
+  }
+
 }
 

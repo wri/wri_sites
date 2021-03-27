@@ -73,26 +73,22 @@
   background-color: black;
 
   @include mq($md) {
-    padding-top: 175px;
+    padding-top: 185px;
   }
-
   @include mq($lg) {
+    padding-top: 95px;
+  }
+  @include mq($xl) {
     padding-top: 0;
   }
 
   .card-image::after {
     content: "";
-    @include hero_bottom_gradient_heavy(to bottom, $true-black);
+    @include hero_bottom_gradient_medium(to bottom, $true-black);
     height: 100%;
     width: 100%;
     position: absolute;
     top: 0;
-
-    @include mq($lg) {
-      @include hero_bottom_gradient_heavy(to bottom, $black);
-      opacity: 0.9;
-      top: 0;
-    }
   }
 
   .card-text {

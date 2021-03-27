@@ -33,11 +33,11 @@
   .intro-wrapper {
     @include font($acumin-semi-cond, "semibold");
     @include font-line-height(20, 24);
-    margin-bottom: $space-lg;
+    margin-bottom: 0;
 
     @include mq($md) {
       @include font-line-height(24, 32);
-      margin-bottom: $space-xl;
+      margin-bottom: 0;
     }
   }
 
@@ -97,6 +97,15 @@
             margin-top: 10px;
           }
         }
+      }
+    }
+    .media--view-mode-half-content {
+      width: 100%;
+    }
+    .media--view-mode-full {
+      @include mq($md) {
+        margin-left: -75%;
+        width: 175%;
       }
     }
 

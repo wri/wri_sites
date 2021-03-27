@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - webform.webform.test_pardot_1
+    - webform.webform.simple_email_submit
   module:
     - webform
   theme:
@@ -18,7 +18,7 @@ settings:
   label: 'Stay Informed'
   provider: webform
   label_display: visible
-  webform_id: test_pardot_1
+  webform_id: simple_email_submit
   default_data: ''
   redirect: false
 visibility: {  }
