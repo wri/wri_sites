@@ -144,6 +144,7 @@
         "drupal/components": "^1.1",
         "drupal/config_sync": "^2.0@beta",
         "drupal/content_snippets": "^1.4",
+        "drupal/csv_importer": "^1.10",
         "drupal/diff": "^1.0",
         "drupal/draggableviews": "^2.0",
         "drupal/ds": "^3.9",
