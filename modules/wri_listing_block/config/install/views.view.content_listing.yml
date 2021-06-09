@@ -9,7 +9,9 @@ dependencies:
     - taxonomy.vocabulary.topics_and_subtopics
   content:
     - 'taxonomy_term:resource_type:12c8244e-5388-4ac9-b358-ca3bdce8f438'
+    - 'taxonomy_term:resource_type:22f93aca-f487-4bc1-b766-e5eec240288c'
     - 'taxonomy_term:resource_type:4f501335-0a05-4117-979c-de874745c767'
+    - 'taxonomy_term:resource_type:d48febc8-abf5-427f-8109-7813204b4002'
   module:
     - node
     - taxonomy
@@ -459,7 +461,7 @@ display:
           field: term_node_tid_depth
           relationship: none
           group_type: group
-          admin_label: ''
+          admin_label: 'Sitewide filter'
           default_action: default
           exception:
             value: all
@@ -1047,6 +1049,8 @@ display:
           value:
             - 30016
             - 29
+            - 30051
+            - 30052
           group: 1
           exposed: false
           expose:

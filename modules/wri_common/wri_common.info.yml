@@ -3,6 +3,9 @@ type: module
 description: 'General functions and config for WRI sites'
 core_version_requirement: '^8.8.0 || ^9'
 package: WRI
+dependencies:
+  - wri_seo
+  - content_snippets
 config_devel:
   install:
     - core.date_format.rss_timestamp

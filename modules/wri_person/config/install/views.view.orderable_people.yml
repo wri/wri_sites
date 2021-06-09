@@ -4,8 +4,8 @@ dependencies:
   config:
     - node.type.person
   module:
-    - draggableviews
     - node
+    - sortableviews
     - user
 id: orderable_people
 label: 'Orderable People'
@@ -51,8 +51,9 @@ display:
         options:
           offset: 0
       style:
-        type: table
+        type: sortable_table
         options:
+          weight_field: field_weight
           grouping: {  }
           row_class: ''
           default_row_class: true
@@ -63,7 +64,7 @@ display:
           description: ''
           columns:
             title: title
-            weight: weight
+            field_weight: field_weight
           info:
             title:
               sortable: false
@@ -72,14 +73,14 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            weight:
+            field_weight:
               sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-          default: '-1'
+          default: field_weight
           empty_table: false
       row:
         type: fields
@@ -136,14 +137,14 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        draggableviews:
-          id: draggableviews
+        sortable_handle:
+          id: sortable_handle
           table: node_field_data
-          field: draggableviews
+          field: sortable_handle
           relationship: none
           group_type: group
           admin_label: ''
-          label: ''
+          label: Weight
           exclude: false
           alter:
             alter_text: false
@@ -176,7 +177,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -184,12 +185,8 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          action_title: Action
-          include_exclude: exclude
-          selected_actions: null
           entity_type: node
-          entity_field: nid
-          plugin_id: draggable_views_field
+          plugin_id: sortable_views_handle
       filters:
         status:
           value: '1'
@@ -255,10 +252,10 @@ display:
             group_items: {  }
           plugin_id: boolean
       sorts:
-        weight:
-          id: weight
-          table: draggableviews_structure
-          field: weight
+        field_weight_value:
+          id: field_weight_value
+          table: node__field_weight
+          field: field_weight_value
           relationship: none
           group_type: group
           admin_label: ''
@@ -280,14 +277,24 @@ display:
             label: ''
           plugin_id: standard
       header: {  }
-      footer: {  }
+      footer:
+        save_sortable_changes:
+          id: save_sortable_changes
+          table: node_field_data
+          field: save_sortable_changes
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          entity_type: node
+          plugin_id: save_sortable_changes
       empty: {  }
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
       title: 'Leadership order'
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -301,9 +308,18 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: admin/leadership-sort
+      path: admin/content/leadership-sort
+      menu:
+        type: tab
+        title: 'Leadership sort'
+        description: ''
+        expanded: false
+        parent: system.admin_content
+        weight: 0
+        context: '0'
+        menu_name: admin
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'

@@ -1,5 +1,5 @@
 langcode: en
-status: false
+status: true
 dependencies:
   config:
     - core.entity_view_mode.node.small_image_teaser
@@ -21,11 +21,15 @@ dependencies:
     - field.field.node.person.field_topics
     - field.field.node.person.field_twitter_account
     - field.field.node.person.field_type
+    - field.field.node.person.field_weight
     - field.field.node.person.layout_builder__layout
+    - image.style.100x100
     - node.type.person
   module:
+    - blazy
+    - ds
+    - hierarchical_term_formatter
     - layout_builder
-    - metatag
     - text
     - user
 third_party_settings:
@@ -37,40 +41,94 @@ targetEntityType: node
 bundle: person
 mode: small_image_teaser
 content:
-  body:
-    label: hidden
-    type: text_default
-    weight: 101
-    settings: {  }
-    third_party_settings: {  }
-    region: content
-  content_moderation_control:
-    weight: -20
-    settings: {  }
-    third_party_settings: {  }
-    region: content
-  field_metatags:
+  field_leadership:
+    type: boolean
     weight: 1
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: metatag_empty_formatter
     region: content
-  field_profile_image:
-    type: entity_reference_entity_view
-    weight: 102
-    label: above
+    label: hidden
     settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
+      format: custom
+      format_custom_true: Leadership
+      format_custom_false: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  field_profile_image:
+    type: blazy_media
+    weight: 3
     region: content
-  links:
-    weight: 100
+    label: hidden
+    settings:
+      image_style: 100x100
+      class: ''
+      id: ''
+      image: ''
+      link: ''
+      overlay: ''
+      title: ''
+      vanilla: false
+      icon: ''
+      layout: ''
+      view_mode: ''
+      cache: 0
+      current_view_mode: ''
+      skin: ''
+      fx: ''
+      style: ''
+      background: false
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      caption: {  }
+      responsive_image_style: ''
+      box_style: ''
+      media_switch: ''
+      ratio: ''
+      thumbnail_style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
+      grid: 0
+      grid_medium: 0
+      grid_small: 0
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  field_title:
+    type: text_default
+    weight: 2
     region: content
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+  field_topics:
+    type: hierarchical_term_formatter
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      display: root
+      link: true
+      wrap: none
+      separator: ' » '
+      reverse: false
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: reset
+          settings:
+            lb: ''
 hidden:
+  body: true
+  content_moderation_control: true
   field_alternate_contact: true
   field_areas_of_expertise: true
   field_email: true
@@ -78,14 +136,14 @@ hidden:
   field_international_office: true
   field_languages_spoken: true
   field_last_name: true
-  field_leadership: true
+  field_metatags: true
   field_phone: true
   field_project_expert: true
   field_quote: true
-  field_title: true
-  field_topics: true
   field_twitter_account: true
   field_type: true
+  field_weight: true
   layout_builder__layout: true
+  links: true
   search_api_excerpt: true
   wri_social_sharing_block: true

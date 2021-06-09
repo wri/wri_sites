@@ -23,9 +23,11 @@
     {% endif %}
 
     {% if content.listing.field_more_link %}
-    <div class="layout__region--more-link">
-      <span class="more-link__line"></span>
-      {{ content.listing.field_more_link }}
+    <div class="grid">
+      <div class="layout__region--more-link">
+        <span class="more-link__line"></span>
+        {{ content.listing.field_more_link }}
+      </div>
     </div>
     {% endif %}
   </div>

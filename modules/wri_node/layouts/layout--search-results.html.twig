@@ -13,12 +13,19 @@
 <div {{ attributes.addClass('ds-1col', 'clearfix', 'search-results-container', 'margin-bottom-sm') }}>
   {{ title_suffix.contextual_links }}
   {% if content %}
+  {% if content.left_section %}
     <div class="search-results-tags">
-      {% if content.field_region|render or content.field_primary_topic|render %}
         <div class="tags">
+          {% if content.field_region|render or content.field_primary_topic|render or content.field_topics|render %}
           <div class="topic-tag">{{ content.field_primary_topic }}</div>
           <div class="topic-tag">{{ content.field_region }}</div>
+            <div class="topic-tag">{{ content.field_topics }}</div>
+          {% endif %}
         </div>
+      {% if content['bundle_field:node'] %}
+        <span class="content-type-region bundle">
+          {{ content['bundle_field:node'] }}
+        </span>
       {% endif %}
       {% if content.field_type %}
         <span class="content-type-region bundle">
@@ -26,17 +33,22 @@
         </span>
       {% endif %}
     </div>
+    {% endif %}
     <div class="search-results-text">
-      {% if content.field_resource_type or content.node_post_date %}
-        <div>
-          {% if content.field_resource_type %}
-              {{ content.field_resource_type }}
-          {% endif %}
-          {% if content.node_post_date %}
-              <span class="post-date">{{ content.node_post_date }}</span>
-          {% endif %}
-        </div>
-      {% endif %}
+      <div>
+        {% if content.field_resource_type %}
+            {{ content.field_resource_type }}
+        {% endif %}
+        {% if content.is_past %}
+          {{ content.is_past }}
+        {% endif %}
+        {% if content.node_post_date %}
+            <span class="post-date">{{ content.node_post_date }}</span>
+        {% endif %}
+        {% if content.field_date_time %}
+          <span class="post-date">{{ content.field_date_time }}</span>
+        {% endif %}
+      </div>
       {% if content.node_title %}
         {{ content.node_title }}
       {% endif %}
@@ -45,11 +57,12 @@
           {{ content.field_tags }}
         </div>
       {% endif %}
+      {% if content.field_register  %}
+          {{ content.field_register }}
+      {% endif %}
     </div>
     <div class="search-results-image">
-      {% if content.field_main_image %}
-        {{ content.field_main_image }}
-      {% endif %}
+      {{ content.right_section }}
       <div class="tags">
         {{ content.field_tags }}
       </div>

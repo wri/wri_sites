@@ -20,6 +20,7 @@ config_devel:
     - field.field.block_content.narrative_taxonomy.field_filter_by_region
     - field.field.block_content.narrative_taxonomy.field_intro
     - field.field.block_content.narrative_taxonomy.field_listing
+    - field.field.block_content.narrative_taxonomy.field_more_link
     - field.field.block_content.narrative_taxonomy.field_tag
     - field.field.paragraph.narrative_taxonomy.field_block
     - paragraphs.paragraphs_type.narrative_taxonomy

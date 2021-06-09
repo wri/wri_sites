@@ -203,17 +203,16 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
  */
 function wri_common_get_node_topics(Node $node, $secondary_only = FALSE) {
   $topics = [];
-  if (!$secondary_only && $node->hasField('field_primary_topic') && ($items = $node->get('field_primary_topic')) && !$items->isEmpty()) {
-    $item = $items->first()->entity;
-    if ($item) {
-      $topics[] = $item;
+  if (!$secondary_only && $node->hasField('field_primary_topic') && ($topic_items = $node->get('field_primary_topic')) && !$topic_items->isEmpty()) {
+    $topic_item = $topic_items->first()->entity;
+    if ($topic_item) {
+      $topics[] = $topic_item;
     }
   }
-
-  if ($node->hasField('field_tags') && ($items = $node->get('field_tags')) && !$items->isEmpty()) {
-    foreach ($items as $item) {
-      if ($item->entity->bundle() == 'topics_and_subtopics') {
-        $topics[] = $item->entity;
+  if ($node->hasField('field_tags') && ($tag_items = $node->get('field_tags')) && !$tag_items->isEmpty()) {
+    foreach ($tag_items as $tag_item) {
+      if (isset($tag_item->entity) && $tag_item->entity->bundle() == 'topics_and_subtopics') {
+        $topics[] = $tag_item->entity;
       }
     }
   }
@@ -290,4 +289,11 @@ function _wri_common_format_list(array $terms) {
   }
 
   return Markup::create($list);
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function wri_common_page_attachments_alter(array &$attachments) {
+  $attachments['#attached']['drupalSettings']['wri_common']['gtm_id'] = content_snippets_retrieve('gtm_id');
 }

@@ -58,6 +58,7 @@
   background-color: $light-grey;
 }
 
+.view-events div.form--inline,
 .view-resources div.form--inline,
 .view-experts-staff div.form--inline {
   @extend .grid;
@@ -65,6 +66,7 @@
   max-width: 100%;
   width: 100%;
 }
+.view-events #edit-actions,
 .view-resources #edit-actions,
 .view-experts-staff #edit-actions {
   clip: rect(1px, 1px, 1px, 1px);
@@ -82,8 +84,10 @@
 }
 
 .results-sidebar,
+.view-events .form-type-textfield,
 .view-resources .form-type-textfield,
-.view-experts-staff .form-type-textfield {
+.view-experts-staff .form-type-textfield,
+.view-events .form-item-date {
   @include column-width(1, 5);
 
   @include mq($ph) {
@@ -152,13 +156,41 @@
   &::after {
     background: transparent url("../img/svgs/search.svg") no-repeat center
       center / cover;
-    bottom: 13px;
+    bottom: 12px;
     content: "";
     display: block;
     height: 18px;
     position: absolute;
     right: 15px;
     width: 18px;
+  }
+}
+
+.view-events .form-type-select {
+  margin-right: 0;
+  width: 100%;
+  @include mq($xl) {
+    width: calc(100% - 55px);
+  }
+
+  label {
+    @include font($acumin-semi-cond, "semibold", "normal");
+    @include font-line-height(14, 18);
+    border-top: 1px solid $black;
+    color: $true-black;
+    display: block;
+    padding-top: 10px;
+  }
+  select {
+    @include font($acumin-semi-cond, "normal", "normal");
+    @include font-line-height(14, 18);
+    border-radius: 3px;
+    border: 1px solid #757575;
+    box-sizing: border-box;
+    margin-right: 55px;
+    margin-top: 16px;
+    padding: 12px 15px;
+    width: 100%;
   }
 }
 
@@ -176,6 +208,7 @@
     @include column-width(4, 13);
   }
 }
+.view-events .results-header,
 .view-search .results-header {
   @include column-width(1, 5);
 
@@ -292,6 +325,11 @@
     margin-top: -98px;
   }
 }
+.view-events .view-header {
+  @include mq($lg) {
+    margin-top: -238px;
+  }
+}
 
 .results-sidebar,
 .facet-filters {
@@ -395,6 +433,16 @@
   }
 }
 
+.form-item-date {
+  label {
+    @include font($acumin-semi-cond, "normal", "normal");
+    @include font-line-height(14, 18);
+    color: $black;
+    cursor: pointer;
+    position: relative;
+  }
+}
+
 // Mobile/Tablet 'filters block'
 @media (max-width: rem(1023px)) {
   .view-filters {
@@ -447,6 +495,7 @@
     }
   }
   .view-filters .form-type-textfield,
+  .form-item-date,
   .results-sidebar {
     height: 0;
     margin-top: 0;
@@ -454,8 +503,10 @@
     transition: all 0.3s;
   }
   .view-resources.open,
-  .view-experts-staff.open {
-    .view-filters .form-type-textfield {
+  .view-experts-staff.open,
+  .view-events.open {
+    .view-filters .form-type-textfield,
+    .form-item-date {
       height: auto;
       margin-top: 30px;
       opacity: 1;

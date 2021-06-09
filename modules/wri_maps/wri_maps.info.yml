@@ -2,7 +2,10 @@ name: 'WRI Maps'
 type: module
 description: 'Map config and code'
 core: 8.x
-package: 'WRI'
+package: WRI
 dependencies:
   - simple_popup_blocks
 configure: wri_maps.settings
+config_devel:
+  install:
+    - simple_popup_blocks.popup_wri_region_map_popup

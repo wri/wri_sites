@@ -76,6 +76,7 @@ a {
 
 p a {
   color: $green;
+  transition: color $transition-defaults;
 
   @include hocus {
     color: $black;

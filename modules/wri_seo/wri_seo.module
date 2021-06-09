@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ * WRI SEO related hooks.
+ */
+
+/**
+ * Implements hook_page_attachments().
+ */
+function wri_seo_page_attachments(array &$attachments) {
+  $attachments['#attached']['library'][] = 'wri_seo/wri-seo';
+  $node = \Drupal::request()->attributes->get('node');
+  $admin = \Drupal::service('router.admin_context')->isAdminRoute();
+  if ($node && !$admin) {
+    $attachments['#attached']['drupalSettings']['wri_seo']['node_type'] = $node->bundle();
+    $topic = $node->field_primary_topic ? $node->field_primary_topic->entity : NULL;
+    $type = $node->field_type ? $node->field_type->entity : NULL;
+
+    switch ($node->bundle()) {
+      case 'article':
+        $article_details = [
+          'insights topic' => $topic ? $topic->get('name')->getString() : '',
+          'insights region' => '',
+          'insights type' => $type ? $type->get('name')->getString() : '',
+          'insights publish date' => date('Y-m-d', $node->getCreatedTime()),
+        ];
+        $attachments['#attached']['drupalSettings']['wri_seo']['article_details'] = $article_details;
+        break;
+
+      case 'project_detail':
+        $project_details = [
+          'topic' => $topic ? $topic->get('name')->getString() : '',
+        ];
+        $attachments['#attached']['drupalSettings']['wri_seo']['project_details'] = $project_details;
+        break;
+    }
+  }
+
+}

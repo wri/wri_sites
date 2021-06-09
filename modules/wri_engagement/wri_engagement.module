@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Contains wri_engagement.module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function wri_engagement_theme() {
+  $theme = [];
+  $theme['download_modal'] = [
+    'variables' => ['content' => []],
+    'template' => 'download-modal',
+  ];
+  return $theme;
+}

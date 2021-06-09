@@ -1,0 +1,16 @@
+identifier: wri-region-map-popup
+uid: wri_region_map_popup
+type: '1'
+css_selector: '0'
+layout: '7'
+visit_counts: 'a:1:{i:0;s:1:"0";}'
+overlay: 0
+trigger_method: '1'
+trigger_selector: .wri-region-map-popup-button
+escape: 1
+delay: 0
+minimize: 0
+close: 1
+width: '500'
+cookie_expiry: '100'
+status: 1

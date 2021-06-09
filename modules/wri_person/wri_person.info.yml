@@ -12,8 +12,11 @@ dependencies:
   - wri_taxonomy
 config_devel:
   install:
+    - block_content.type.person_listing
     - core.base_field_override.node.person.title
+    - core.entity_form_display.block_content.person_listing.default
     - core.entity_form_display.node.person.default
+    - core.entity_view_display.block_content.person_listing.default
     - core.entity_view_display.node.person.default
     - core.entity_view_display.node.person.full
     - core.entity_view_display.node.person.impact
@@ -21,6 +24,7 @@ config_devel:
     - core.entity_view_display.node.person.search_results
     - core.entity_view_display.node.person.small_image_teaser
     - core.entity_view_display.node.person.teaser
+    - field.field.block_content.person_listing.field_featured_experts
     - field.field.node.person.body
     - field.field.node.person.field_alternate_contact
     - field.field.node.person.field_areas_of_expertise
@@ -39,6 +43,7 @@ config_devel:
     - field.field.node.person.field_topics
     - field.field.node.person.field_twitter_account
     - field.field.node.person.field_type
+    - field.field.node.person.field_weight
     - field.field.node.person.layout_builder__layout
     - metatag.metatag_defaults.node__person
     - node.type.person

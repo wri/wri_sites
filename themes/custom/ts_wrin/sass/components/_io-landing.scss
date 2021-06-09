@@ -4,6 +4,7 @@
 
     @include mq($md) {
       padding-top: 0;
+      max-height: 528px;
     }
 
     &.has-image {
@@ -34,6 +35,8 @@
         img {
           object-fit: contain;
           height: auto;
+          max-height: 500px;
+          padding-bottom: 28px;
           width: 100%;
         }
       }
@@ -57,6 +60,15 @@
           @include mq($md) {
             margin-top: 0;
           }
+        }
+      }
+      .margin-top-xl {
+        @include mq($lg) {
+          margin-top: $padding-vertical;
+        }
+
+        @include mq($xl) {
+          margin-top: $padding-vertical;
         }
       }
     }

@@ -57,10 +57,18 @@ function wri_media_preprocess_details(&$variables) {
  * Implements hook_preprocess_HOOK().
  */
 function wri_media_preprocess_media(&$variables) {
+  // We've set the thumbnail to show during ckeditor use, and the embed code
+  // to show other times. This keeps the embed code from interfering with the
+  // js on the ckeditor page.
   $current_route = \Drupal::routeMatch()->getRouteName();
   if ($current_route == 'media.filter.preview') {
     // Unset embed when we're previewing within the CKeditor.
     $variables["content"]["field_media_embed_code"]['#access'] = FALSE;
+  }
+  elseif (isset($variables["content"]["field_media_embed_code"])) {
+    // If both the thumbnail and the embed code are set to show, hide the
+    // thumbnail.
+    $variables["content"]["thumbnail"]['#access'] = FALSE;
   }
 }
 

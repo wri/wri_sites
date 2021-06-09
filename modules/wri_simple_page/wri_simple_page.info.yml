@@ -24,4 +24,5 @@ config_devel:
     - field.field.node.simple_page.field_metatags
     - field.field.node.simple_page.layout_builder__layout
     - node.type.simple_page
+    - paragraphs.paragraphs_type.image
     - xmlsitemap.settings.node.simple_page

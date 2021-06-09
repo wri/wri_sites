@@ -19,6 +19,7 @@ config_devel:
     - field.storage.block_content.field_custom_trending
     - field.storage.block_content.field_custom_tweet
     - field.storage.block_content.field_featured
+    - field.storage.block_content.field_featured_experts
     - field.storage.block_content.field_filter_by_region
     - field.storage.block_content.field_filter_by_resource_type
     - field.storage.block_content.field_filter_by_tag

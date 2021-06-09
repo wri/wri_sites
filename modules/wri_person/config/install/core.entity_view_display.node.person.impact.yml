@@ -21,6 +21,7 @@ dependencies:
     - field.field.node.person.field_topics
     - field.field.node.person.field_twitter_account
     - field.field.node.person.field_type
+    - field.field.node.person.field_weight
     - field.field.node.person.layout_builder__layout
     - node.type.person
   module:
@@ -108,6 +109,7 @@ hidden:
   field_title: true
   field_topics: true
   field_twitter_account: true
+  field_weight: true
   layout_builder__layout: true
   links: true
   search_api_excerpt: true

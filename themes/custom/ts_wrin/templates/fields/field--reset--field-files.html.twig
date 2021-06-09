@@ -13,14 +13,10 @@
  */
 #}
 {% if not label_hidden %}
-  <div class="field-label-{{ element['#label_display']|clean_class }}">
+  <div class="h3 margin-bottom-xs">
     {{- label }}{% if show_colon %}:{% endif -%}
   </div>
 {% endif %}
-<a class="files-overlay-trigger button">{{ "Download"|t }}</a>
-<div class="files-modal">
-  <div class="h3 margin-bottom-xs">{{ "Download Options"|t }}</div>
 {% for item in items %}
   {{ item.content }}
 {% endfor %}
-</div>

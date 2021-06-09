@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.narrative_taxonomy
+    - field.storage.block_content.field_more_link
+  module:
+    - link
+id: block_content.narrative_taxonomy.field_more_link
+field_name: field_more_link
+entity_type: block_content
+bundle: narrative_taxonomy
+label: 'More link'
+description: 'Below this listing, link to a page for more info.'
+required: false
+translatable: false
+default_value:
+  -
+    attributes: {  }
+    use_default: 1
+    uri: 'internal:/resources?all_topics=[block_content:field_tag:entity:root:tid]&within_this_topic=[block_content:field_tag:entity:non_orphan]&type_of_resource=30003&tags=[block_content:field_filter_by_tag:target_id]&region=[block_content:field_filter_by_region:entity:root:tid]&country=[block_content:field_filter_by_region:entity:non_orphan]'
+    title: 'View all Initiatives'
+    options: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 2
+field_type: link

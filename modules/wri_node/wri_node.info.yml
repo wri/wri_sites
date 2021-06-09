@@ -93,6 +93,7 @@ config_devel:
     - field.storage.node.field_total_pages
     - field.storage.node.field_twitter_account
     - field.storage.node.field_type
+    - field.storage.node.field_weight
     - field.storage.node.layout_builder__layout
     - views.view.content_by_type
     - workflows.workflow.content_publishing

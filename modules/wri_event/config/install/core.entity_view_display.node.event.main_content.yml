@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.event.field_event_display
     - field.field.node.event.field_featured
     - field.field.node.event.field_files
+    - field.field.node.event.field_international_office
     - field.field.node.event.field_intro
     - field.field.node.event.field_languages_spoken
     - field.field.node.event.field_location
@@ -60,12 +61,13 @@ third_party_settings:
         - field_intro
         - field_featured
         - links
+      info:
+        - is_past
+        - field_date_time
+        - field_location
       buttons:
         - field_register
         - addtocal
-      info:
-        - field_date_time
-        - field_location
       category:
         - field_primary_topic
         - field_region
@@ -78,6 +80,11 @@ third_party_settings:
         - field_social_media_links
         - field_files
     fields:
+      is_past:
+        plugin_id: is_past
+        weight: 0
+        label: hidden
+        formatter: default
       addtocal:
         plugin_id: addtocal
         weight: 5
@@ -110,9 +117,9 @@ content:
     region: main_content
   content_moderation_control:
     weight: -20
+    region: hero
     settings: {  }
     third_party_settings: {  }
-    region: content
   field_date_time:
     weight: 6
     label: hidden
@@ -521,6 +528,7 @@ content:
     third_party_settings: {  }
 hidden:
   field_event_display: true
+  field_international_office: true
   field_location_detail: true
   field_metatag: true
   field_primary_contacts: true

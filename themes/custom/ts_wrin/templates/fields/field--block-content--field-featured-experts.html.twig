@@ -1,0 +1,9 @@
+{#
+/**
+ * @file
+ * Pull in the featured expert template with no link.
+ */
+#}
+{% set label = element['#object'].info.0.value %}
+{% extends "@ts_wrin/fields/field--node--field-featured-experts.html.twig" %}
+{% block link %}{% endblock %}

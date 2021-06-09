@@ -82,7 +82,7 @@
   }
 
   &.two-column {
-    @include column-width(1, 2);
+    @include column-width(1, 5);
 
     @include mq($ph) {
       @include column-width(1, 5);
@@ -94,10 +94,14 @@
 }
 
 .detail__meta-secondary {
-  @include column-width(3, 5);
+  @include column-width(1, 5);
+  margin-top: $space-xs;
+  margin-bottom: -45px;
 
   @include mq($ph) {
     @include column-width(5, 13);
+    margin-top: 0;
+    margin-bottom: 45px;
   }
 
   @include mq($lg) {

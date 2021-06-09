@@ -8,6 +8,7 @@ dependencies:
     - field.field.block_content.narrative_taxonomy.field_filter_by_region
     - field.field.block_content.narrative_taxonomy.field_intro
     - field.field.block_content.narrative_taxonomy.field_listing
+    - field.field.block_content.narrative_taxonomy.field_more_link
     - field.field.block_content.narrative_taxonomy.field_tag
   module:
     - ds
@@ -81,5 +82,6 @@ hidden:
   field_custom_results: true
   field_filter_by_region: true
   field_filter_by_resource_type: true
+  field_more_link: true
   field_tag: true
   search_api_excerpt: true

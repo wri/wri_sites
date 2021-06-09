@@ -4,6 +4,8 @@ dependencies:
   config:
     - field.storage.node.field_type
     - node.type.event
+  content:
+    - 'taxonomy_term:resource_type:c9625837-b60b-4b2e-8603-4deac16bab39'
 id: node.event.field_type
 field_name: field_type
 entity_type: node
@@ -12,7 +14,9 @@ label: Type
 description: ''
 required: true
 translatable: false
-default_value: {  }
+default_value:
+  -
+    target_uuid: c9625837-b60b-4b2e-8603-4deac16bab39
 default_value_callback: ''
 settings:
   handler: views

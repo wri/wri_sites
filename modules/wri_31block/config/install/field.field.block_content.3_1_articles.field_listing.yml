@@ -19,7 +19,7 @@ default_value:
   -
     token_help: ''
     display_id: block_1
-    arguments: '[block_content:field_tag:target_id]/[block_content:field_custom_results:array:target_id:join:+]/[block_content:field_content_types:array:target_id:join:+]'
+    arguments: '[bc:field_custom_results:array:target_id:join:+]/[bc:field_content_types:array:target_id:join:+]/[bc:field_filter_by_region:target_id]/[bc:field_filter_by_resource_type:target_id]/[bc:field_tag:target_id]/[bc:field_filter_by_tag:target_id]'
     items_to_display: ''
     target_uuid: ba985f1d-01bd-42cb-ab9c-1f4243795b9c
 default_value_callback: ''
@@ -38,6 +38,7 @@ settings:
     countries: '0'
     block_content: '0'
     tmp: '0'
+    experts_staff: '0'
     featured_experts: '0'
     featured_tweet: '0'
     featured_tweets_entity_browser: '0'
@@ -48,6 +49,7 @@ settings:
     media: '0'
     media_library: '0'
     moderated_content: '0'
+    orderable_people: '0'
     other_publications_in_this_series: '0'
     user_admin_people: '0'
     people_at_this_io: '0'
@@ -56,8 +58,10 @@ settings:
     content_recent: '0'
     redirect: '0'
     related_content: '0'
+    related_to_this_project: '0'
     resources: '0'
     resource_types: '0'
+    rss_feeds: '0'
     scheduled_transitions: '0'
     search: '0'
     superfeatured_content: '0'
@@ -65,11 +69,13 @@ settings:
     taxonomy_term: '0'
     trending_topics: '0'
     watchdog: '0'
+    webform_submissions: '0'
     who_s_new: '0'
     who_s_online: '0'
   allowed_display_types:
     block: block
     attachment: '0'
+    embed: '0'
     entity_browser: '0'
     entity_reference: '0'
     feed: '0'

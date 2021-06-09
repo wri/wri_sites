@@ -1,0 +1,8 @@
+modal_cookie:
+  version: VERSION
+  js:
+    js/modal-cookie.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/js-cookie

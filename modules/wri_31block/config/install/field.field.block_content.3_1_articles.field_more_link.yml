@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.3_1_articles
+    - field.storage.block_content.field_more_link
+  module:
+    - link
+id: block_content.3_1_articles.field_more_link
+field_name: field_more_link
+entity_type: block_content
+bundle: 3_1_articles
+label: 'More link'
+description: 'Below this listing, link to a page for more info.'
+required: false
+translatable: false
+default_value:
+  -
+    attributes: {  }
+    use_default: 1
+    uri: 'internal:/resources?all_topics=[block_content:field_tag:entity:root:tid]&within_this_topic=[block_content:field_tag:entity:non_orphan]&type_of_resource=[block_content:field_filter_by_resource_type:entity:root:tid]&subtype=[block_content:field_filter_by_resource_type:entity:non_orphan]&tags=[block_content:field_filter_by_tag:target_id]&region=[block_content:field_filter_by_region:entity:root:tid]&country=[block_content:field_filter_by_region:entity:non_orphan]'
+    title: 'View more'
+    options: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 2
+field_type: link

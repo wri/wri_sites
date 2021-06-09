@@ -82,6 +82,11 @@
       margin-bottom: 0;
       order: unset;
     }
+    .event-info-item-past {
+      @include font($acumin-semi-cond, "bold", "normal");
+      @include font-line-height(14, 18);
+      color: $blue;
+    }
     .post-date {
       @include font($acumin-semi-cond, "light", "normal");
       @include font-line-height(11, 14);
@@ -120,6 +125,7 @@
       flex: 0 0 225px;
       order: unset;
       padding-left: 25px;
+      text-align: right;
     }
     .tags {
       display: block;
@@ -129,7 +135,8 @@
       }
     }
   }
-  .search-results-image .media--bundle--image {
+  .search-results-image .media--bundle--image,
+  .search-results-image img {
     display: none;
     @include mq($md) {
       display: block;

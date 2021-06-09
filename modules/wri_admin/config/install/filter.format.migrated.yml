@@ -3,6 +3,7 @@ status: true
 dependencies:
   module:
     - media
+    - responsive_tables_filter
     - token_filter
 name: Migrated
 format: migrated
@@ -15,8 +16,8 @@ filters:
     weight: 100
     settings:
       default_view_mode: default
-      allowed_view_modes: {  }
       allowed_media_types: {  }
+      allowed_view_modes: {  }
   token_filter:
     id: token_filter
     provider: token_filter
@@ -24,3 +25,11 @@ filters:
     weight: 0
     settings:
       replace_empty: '0'
+  filter_responsive_tables_filter:
+    id: filter_responsive_tables_filter
+    provider: responsive_tables_filter
+    status: true
+    weight: 0
+    settings:
+      tablesaw_type: stack
+      tablesaw_persist: '1'

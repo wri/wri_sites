@@ -162,7 +162,8 @@ body {
 }
 
 .layout__region--main_content,
-.layout__region--category {
+.layout__region--category,
+.layout__region--content .block-webform .webform-outer {
   @include center-columns($grid-columns-mobile, $grid-columns-mobile);
 
   @include mq($ph) {
