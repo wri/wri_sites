@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.event.field_event_display
     - field.field.node.event.field_featured
     - field.field.node.event.field_files
+    - field.field.node.event.field_international_office
     - field.field.node.event.field_intro
     - field.field.node.event.field_languages_spoken
     - field.field.node.event.field_location
@@ -25,6 +26,7 @@ dependencies:
     - field.field.node.event.field_type
     - field.field.node.event.layout_builder__layout
     - node.type.event
+    - workflows.workflow.content_publishing
   module:
     - content_moderation
     - field_group
@@ -38,6 +40,7 @@ third_party_settings:
   field_group:
     group_category:
       children:
+        - field_international_office
         - field_primary_topic
         - field_region
         - field_tags
@@ -152,6 +155,12 @@ content:
       media_types: {  }
     third_party_settings: {  }
     type: media_library_widget
+    region: content
+  field_international_office:
+    weight: 133
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
     region: content
   field_intro:
     weight: 3

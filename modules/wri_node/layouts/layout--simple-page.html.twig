@@ -40,16 +40,12 @@
         {{ content.intro}}
       {% endif %}
     </div>
-
-    <div class="simple-page__content grid margin-top-md margin-bottom-md">
-      {% if content.content|render|striptags|trim is not empty %}
-               <div class="content__inner main-content layout__region--main_content">
-                 {{ content.content }}
-               </div>
-         {% endif %}
-
-       </div>
-
+    {% if content.content|render|striptags|trim is not empty %}
+      <div class="simple-page__content margin-top-md margin-bottom-md grid">
+        <div class="content__inner main-content layout__region--main_content">
+          {{ content.content }}
+        </div>
+      </div>
+    {% endif %}
   {% endif %}
-
 </div>

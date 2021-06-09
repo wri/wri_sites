@@ -5,11 +5,16 @@ dependencies:
     - block_content.type.3_1_articles
     - field.field.block_content.3_1_articles.field_content_types
     - field.field.block_content.3_1_articles.field_custom_results
+    - field.field.block_content.3_1_articles.field_filter_by_region
+    - field.field.block_content.3_1_articles.field_filter_by_resource_type
+    - field.field.block_content.3_1_articles.field_filter_by_tag
     - field.field.block_content.3_1_articles.field_listing
+    - field.field.block_content.3_1_articles.field_more_link
     - field.field.block_content.3_1_articles.field_tag
   module:
     - ds
     - wri_admin
+    - wri_common
 third_party_settings:
   ds:
     layout:
@@ -19,15 +24,12 @@ third_party_settings:
       entity_classes: all_classes
       settings:
         component_context: {  }
-        wrappers:
-          header: div
-          intro: div
-          listing: div
     regions:
       header:
         - block_label
       listing:
         - field_listing
+        - field_more_link
     fields:
       block_label:
         plugin_id: block_label
@@ -43,14 +45,6 @@ targetEntityType: block_content
 bundle: 3_1_articles
 mode: default
 content:
-  field_content_types:
-    weight: 1
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   field_listing:
     weight: 0
     label: hidden
@@ -89,7 +83,23 @@ content:
             fi-def-at: false
     type: viewfield_token
     region: listing
+  field_more_link:
+    type: tokenized_link_field_formatter
+    weight: 1
+    region: listing
+    label: hidden
+    settings:
+      trim_length: '80'
+      url_only: ''
+      url_plain: ''
+      rel: ''
+      target: ''
+    third_party_settings: {  }
 hidden:
+  field_content_types: true
   field_custom_results: true
+  field_filter_by_region: true
+  field_filter_by_resource_type: true
+  field_filter_by_tag: true
   field_tag: true
   search_api_excerpt: true

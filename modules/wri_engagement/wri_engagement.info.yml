@@ -4,6 +4,7 @@ description: 'Engagement functionality and fields'
 core_version_requirement: '^8.8.0 || ^9'
 package: WRI
 dependencies:
+  - simple_recaptcha_webform
   - webform_ui
 config_devel:
   install:
@@ -18,6 +19,9 @@ config_devel:
     - field.field.block_content.modal.field_title
     - field.field.block_content.modal.field_webform
     - field.storage.block_content.field_webform
+    - simple_popup_blocks.popup_beforefilesmodal
+    - simple_popup_blocks.popup_files_modal
+    - simple_recaptcha.config
     - webform.webform.call_to_action
     - webform.webform.sign_up_for_wri_digest
     - webform.webform.simple_email_submit

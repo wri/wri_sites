@@ -25,7 +25,6 @@ dependencies:
   - ctools_views
   - diff
   - dblog
-  - draggableviews
   - ds
   - ds_extras
   - editor
@@ -44,6 +43,7 @@ dependencies:
   - paragraphs
   - responsive_tables_filter
   - scheduled_transitions
+  - sortableviews
   - token_filter
   - telephone
   - textfield_counter

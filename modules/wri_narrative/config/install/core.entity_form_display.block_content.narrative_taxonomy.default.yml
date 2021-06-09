@@ -7,11 +7,13 @@ dependencies:
     - field.field.block_content.narrative_taxonomy.field_filter_by_region
     - field.field.block_content.narrative_taxonomy.field_intro
     - field.field.block_content.narrative_taxonomy.field_listing
+    - field.field.block_content.narrative_taxonomy.field_more_link
     - field.field.block_content.narrative_taxonomy.field_tag
   module:
     - allowed_formats
     - text
     - viewfield
+    - wri_common
 id: block_content.narrative_taxonomy.default
 targetEntityType: block_content
 bundle: narrative_taxonomy
@@ -49,6 +51,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: viewfield_select
+    region: content
+  field_more_link:
+    weight: 8
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: tokenized_link_field_widget
     region: content
   field_tag:
     weight: 2

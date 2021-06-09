@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.event.field_event_display
     - field.field.node.event.field_featured
     - field.field.node.event.field_files
+    - field.field.node.event.field_international_office
     - field.field.node.event.field_intro
     - field.field.node.event.field_languages_spoken
     - field.field.node.event.field_location
@@ -132,6 +133,16 @@ third_party_settings:
                 third_party_settings: {  }
             additional: {  }
             weight: -6
+          4afeb9ae-b988-4507-92d3-521af213474a:
+            uuid: 4afeb9ae-b988-4507-92d3-521af213474a
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'extra_field_block:node:event:content_moderation_control'
+            additional: {  }
+            weight: -4
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories: {  }
@@ -166,6 +177,11 @@ content:
     label: hidden
     type: text_default
     weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  content_moderation_control:
+    weight: -20
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -316,6 +332,7 @@ content:
     third_party_settings: {  }
 hidden:
   field_event_display: true
+  field_international_office: true
   field_location: true
   field_location_detail: true
   field_metatag: true

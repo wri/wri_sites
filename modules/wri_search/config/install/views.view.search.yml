@@ -225,8 +225,10 @@ display:
             article: article
             data: data
             event: event
+            person: person
             project_detail: project_detail
             publication: publication
+            simple_page: simple_page
           group: 1
           exposed: false
           expose:

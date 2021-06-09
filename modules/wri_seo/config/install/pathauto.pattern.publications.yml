@@ -4,18 +4,21 @@ dependencies:
   module:
     - node
 id: publications
-label: Publications
+label: 'Resource Type/Title'
 type: 'canonical_entities:node'
-pattern: '/[node:field_type:entity:parent]/[node:field_type]/[node:title]'
+pattern: '[node:field_type:entity:root]/[node:title]'
 selection_criteria:
-  e95bf1c1-f7de-4c7f-aaee-2e8bc15654b3:
+  adfca15b-c9db-494b-9768-126e4e0cab86:
     id: node_type
     bundles:
+      article: article
+      data: data
+      project_detail: project_detail
       publication: publication
     negate: false
     context_mapping:
       node: node
-    uuid: e95bf1c1-f7de-4c7f-aaee-2e8bc15654b3
+    uuid: adfca15b-c9db-494b-9768-126e4e0cab86
 selection_logic: and
 weight: -5
 relationships: {  }

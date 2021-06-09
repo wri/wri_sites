@@ -3,9 +3,7 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_related_resources
-    - node.type.data
     - node.type.event
-    - node.type.publication
 id: node.event.field_related_resources
 field_name: field_related_resources
 entity_type: node
@@ -17,13 +15,11 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:node'
+  handler: views
   handler_settings:
-    target_bundles:
-      data: data
-      publication: publication
-    sort:
-      field: _none
-    auto_create: false
-    auto_create_bundle: data
+    view:
+      view_name: content_by_type
+      display_name: entity_reference_1
+      arguments:
+        - article+data+publication
 field_type: entity_reference

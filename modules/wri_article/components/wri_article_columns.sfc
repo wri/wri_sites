@@ -80,7 +80,6 @@
 </template>
 
 <?php
-
 $definition['layout'] = [
   'label' => 'Article columns',
   'regions' => [
@@ -103,5 +102,20 @@ $definition['layout'] = [
   ],
   'default_section' => 'main_content'
 ];
+
+$prepareContext = function (&$context) {
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof \Drupal\node\NodeInterface) {
+    if (isset($node->field_main_image->entity)) {
+      $media = $node->field_main_image->entity;
+      if ($media->hasField('field_attribution') && ($attribution = $media->get('field_attribution')) && !$attribution->isEmpty()) {
+        $context['content']['byline']['attribution'] = [
+          '#markup' => '<span class="cover-attribution">' . t('Cover Image by: ') . $attribution->getString() . '</span>',
+          '#weight' => 10,
+        ];
+      }
+    }
+  }
+};
 
 

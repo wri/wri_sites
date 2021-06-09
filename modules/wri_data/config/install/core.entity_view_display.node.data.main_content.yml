@@ -33,6 +33,7 @@ dependencies:
     - text
     - user
     - wri_author
+    - wri_engagement
 third_party_settings:
   layout_builder:
     allow_custom: false
@@ -198,12 +199,12 @@ content:
       link_to_entity: false
     third_party_settings: {  }
   field_files:
-    type: entity_reference_entity_view
+    type: modal_engage_field_formatter
     weight: 9
     region: buttons
-    label: hidden
+    label: above
     settings:
-      view_mode: download_listing
+      view_mode: default
       link: false
     third_party_settings:
       ds:
@@ -211,7 +212,7 @@ content:
         ft:
           id: reset
           settings:
-            lb: ''
+            lb: 'Download Options'
   field_isbn:
     type: string
     weight: 4

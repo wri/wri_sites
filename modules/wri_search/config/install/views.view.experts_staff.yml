@@ -88,14 +88,17 @@ display:
             'entity:node':
               article: default
               data: default
+              event: default
               homepage: default
               international_office: default
               page: default
-              person: search_results
+              person: small_image_teaser
               program_center: default
               project_detail: default
               publication: default
               region: default
+              simple_page: default
+              subpage: default
       fields:
         field_leadership:
           id: field_leadership
@@ -363,6 +366,18 @@ display:
           expose:
             label: ''
           plugin_id: search_api
+        field_weight:
+          id: field_weight
+          table: search_api_index_sitewide
+          field: field_weight
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
         field_last_name:
           id: field_last_name
           table: search_api_index_sitewide
@@ -397,7 +412,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: "<p class=\"experts-header-text padding-bottom\">WRI brings together almost 1,000 experts and staff in climate, energy, food, forests, water, cities and transport, governance, business, economics and finance. Our staff and researchers work globally to produce data-based solutions that generate real change on the ground.</p>\r\n"
+            value: "<p class=\"experts-header-text padding-bottom\">WRI brings together 1,400 experts and other staff in working in seven programs: food, forests, water, energy, cities, climate and the ocean and four centers of excellence for business, economics, finance and governance. Our staff and researchers work globally to produce data-based solutions that generate real change on the ground.</p>\r\n"
             format: unrestricted_text
           plugin_id: text
       footer: {  }

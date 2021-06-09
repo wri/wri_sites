@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.3_1_articles
+    - field.storage.block_content.field_filter_by_resource_type
+    - taxonomy.vocabulary.resource_type
+id: block_content.3_1_articles.field_filter_by_resource_type
+field_name: field_filter_by_resource_type
+entity_type: block_content
+bundle: 3_1_articles
+label: 'Filter by Resource Type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      resource_type: resource_type
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

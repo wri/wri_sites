@@ -19,8 +19,11 @@
       @include mq($ph) {
         min-height: 640px;
       }
-      @include mq($xl) {
-        min-height: 700px;
+      @include mq($lg) {
+        min-height: 800px;
+      }
+      @include mq($xxl) {
+        min-height: 900px;
       }
     }
 
@@ -265,11 +268,17 @@
       position: relative;
     }
 
-    .field--name-field-statistic-text p {
+    .field--name-field-statistic-text p,
+    .field--name-field-statistic-text p a {
       @include font($acumin-semi-cond, "medium");
       @include font-line-height(16, 18);
       color: $blue;
       text-transform: none;
+    }
+    .field--name-field-statistic-text p a {
+      @include hocus {
+        color: $black;
+      }
     }
   }
 }

@@ -24,12 +24,6 @@
       margin-bottom: $space-xs;
     }
 
-    h1 {
-      @include mq($lg) {
-        padding-bottom: 40px;
-      }
-    }
-
     .intro p {
       margin-top: 0;
     }

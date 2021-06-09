@@ -1,0 +1,7 @@
+wri-gtm:
+  header: true
+  js:
+    js/wri_gtm.js: {}
+  dependency:
+    - core/drupalSettings
+    - wri_seo/wri-seo

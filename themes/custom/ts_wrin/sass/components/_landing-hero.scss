@@ -78,7 +78,7 @@
       @include center-columns($grid-columns-mobile, $grid-columns-mobile);
       display: flex;
       flex-direction: column;
-      justify-content: start;
+      justify-content: flex-end;
 
       @include mq($ph) {
         @include center-columns($grid-columns, $grid-columns);
@@ -86,11 +86,19 @@
       }
       @include mq($md) {
         @include column-width(1, 10);
+        justify-content: flex-start;
         max-width: 650px;
       }
       @include mq($lg) {
         @include column-width(2, 12);
         max-width: 800px;
+      }
+
+      .margin-top-xl:last-of-type {
+        display: none;
+        @include mq($md) {
+          display: inline-flex;
+        }
       }
     }
 
@@ -100,20 +108,33 @@
         @include center-columns($grid-columns-mobile, $grid-columns-mobile);
         display: flex;
         flex-direction: column;
-        justify-content: start;
+        justify-content: flex-end;
 
         @include mq($ph) {
           @include center-columns($grid-columns, $grid-columns);
+          justify-content: flex-start;
         }
 
         @include mq($lg) {
           @include column-width(2, 12);
+        }
+
+        .margin-top-xl {
+          display: none;
+          @include mq($md) {
+            display: inline-flex;
+          }
         }
       }
     }
   }
   .landing-page__hero__content {
     margin-top: auto;
+    display: none;
+
+    @include mq($md) {
+      display: block;
+    }
   }
 }
 
@@ -216,11 +237,8 @@
     @include mq($ph) {
       min-height: 640px;
     }
-    @include mq($lg) {
-      min-height: 800px;
-    }
-    @include mq($xxl) {
-      min-height: 900px;
+    @include mq($xl) {
+      min-height: 700px;
     }
   }
 }

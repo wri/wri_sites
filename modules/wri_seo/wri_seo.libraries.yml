@@ -1,0 +1,7 @@
+wri-seo:
+  header: true
+  js:
+    js/wri_seo.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings

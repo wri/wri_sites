@@ -192,6 +192,12 @@ form.webform-submission-form {
       position: relative;
     }
   }
-
 }
 
+.block-webform .webform-outer {
+  @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+
+  @include mq($ph) {
+    @include center-columns($grid-columns, $grid-columns);
+  }
+}

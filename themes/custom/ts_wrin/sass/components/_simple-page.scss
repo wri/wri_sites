@@ -100,12 +100,15 @@
       }
     }
     .media--view-mode-half-content {
-      width: 100%;
+      width: 50%;
     }
-    .media--view-mode-full {
+    .media--view-mode-full,
+    .media--view-mode-full-width {
       @include mq($md) {
-        margin-left: -75%;
-        width: 175%;
+        margin: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
       }
     }
 
@@ -136,6 +139,25 @@
       }
     }
   }
+
+  .paragraph--type--image {
+    @extend .grid;
+    .field--name-field-image {
+      @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+
+      @include mq($ph) {
+        @include center-columns($grid-columns, $grid-columns);
+      }
+      @include mq($md) {
+        @include column-width(2, 12);
+      }
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
 }
 
 .menu--page-hierarchies {
@@ -162,6 +184,126 @@
 
     @include hocus {
       color: $black;
+    }
+  }
+}
+
+.experts-staff-header {
+  .left {
+    @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+
+    @include mq($ph) {
+      @include center-columns($grid-columns, $grid-columns);
+    }
+
+    @include mq($md) {
+      @include column-width(1, 8);
+    }
+  }
+
+  .right {
+    @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+    margin-top: $space-sm;
+    margin-bottom: $space-sm;
+
+    @include mq($ph) {
+      @include center-columns($grid-columns, $grid-columns);
+    }
+
+    @include mq($md) {
+      margin-top: $space-lg;
+      @include column-width(9, 13);
+    }
+  }
+}
+
+// Sub menu styles for simple page and experts page.
+.experts-staff-header,
+.page-node-type-simple-page {
+  .menu-wrapper {
+    display: block;
+    margin: 0;
+    width: 100%;
+    position: relative;
+
+    .field-label {
+      @include font($acumin-semi-cond, "normal");
+      border-radius: 3px;
+      border: 1px solid $black;
+      display: flex;
+      font-style: normal;
+      justify-content: space-between;
+      margin-bottom: 0;
+      margin-left: 0;
+      padding: rem(10);
+
+      & > a {
+        color: $black;
+      }
+
+      &::after {
+        background: url(../img/svgs/arrow-thin.svg) no-repeat center -1px /16px;
+        content: "";
+        display: block;
+        height: 16px;
+        transform: rotate(90deg);
+        width: 16px;
+      }
+
+      @include mq($md) {
+        display: none;
+      }
+    }
+
+    .menu__items ul {
+      background-color: $white;
+      border: 1px solid $light-grey;
+      box-sizing: border-box;
+      opacity: 0;
+      padding: rem(15) rem(20);
+      position: absolute;
+      transition: all 0.5s ease;
+      visibility: hidden;
+      width: 100%;
+      z-index: 10;
+
+      @include mq($md) {
+        border: none;
+        box-sizing: border-box;
+        display: block;
+        opacity: 100;
+        padding: 0;
+        position: relative;
+        transition: none;
+        visibility: visible;
+        width: auto;
+        left: 0;
+        z-index: 10;
+      }
+
+      li {
+        margin: 0 0 rem(7);
+
+        @include mq($md) {
+          margin-bottom: rem(12);
+        }
+
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
+
+      a {
+        @include font-line-height(18, 24);
+      }
+    }
+
+    &:hover,
+    &:focus-within {
+      ul {
+        opacity: 1;
+        visibility: visible;
+      }
     }
   }
 }

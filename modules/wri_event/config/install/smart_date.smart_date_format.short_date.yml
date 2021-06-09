@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+id: short_date
+label: 'Short Date'
+date_format: 'F j, Y'
+time_format: ''
+time_hour_format: ''
+allday_label: 'All day'
+separator: '-'
+join: '-'
+ampm_reduce: '1'
+date_first: '1'
+site_time_toggle: '0'

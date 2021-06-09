@@ -1,0 +1,78 @@
+{#
+/**
+ * @file
+ * Theme override for the resources view template.
+ *
+ * @see template_preprocess_views_view()
+ */
+#}
+{%
+  set classes = [
+    'view',
+    'view-' ~ id|clean_class,
+    'view-id-' ~ id,
+    'resources-container',
+  ]
+%}
+
+{% if header %}{{ header|without('extra_result') }}{% endif %}
+<div{{ attributes.addClass(classes) }}>
+  <div class="container"><h1 class="h1 padding-vertical">{{ view.title }}</h1>
+  </div>
+  {% if display_id == 'resources_page' %}
+  {{ drupal_block('facet_block:all_event_topics') }}
+  {% endif %}
+  <div class="resources-wrapper">
+    <div class="container">
+      {% if exposed %}
+        <div class="view-filters">
+          <button class="button black filters">{{ "Filters"|t }}</button>
+          {{ exposed }}
+        </div>
+      {% endif %}
+
+      <div class="grid results-wrapper">
+        <div class="results-sidebar padding-bottom">
+          {% if display_id == 'resources_page' %}
+          {{ drupal_block('facet_block:international_office_event') }}
+          {{ drupal_block('facet_block:event_type') }}
+          {{ drupal_block('facet_block:event_languages') }}
+          {% endif %}
+        </div>
+
+        <div class="results-body padding-bottom">
+            <div class="view-header">
+              {{ header.extra_result }}
+              {% if display_id == 'resources_page' %}
+              {{ drupal_block('facets_summary_block:event_facet_summary') }}
+              {% endif %}
+            </div>
+          {% if rows %}
+            <div class="view-content">
+              {{ rows }}
+            </div>
+          {% elseif empty %}
+            <div class="view-empty">
+              {{ empty }}
+            </div>
+          {% endif %}
+
+          {% if pager %}
+            {{ pager }}
+          {% endif %}
+          {% if more %}
+            {{ more }}
+          {% endif %}
+        </div>
+      </div>
+
+      {% if footer %}
+        <div class="view-footer">
+          {{ footer }}
+        </div>
+      {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,16 +4,13 @@ dependencies:
   config:
     - block_content.type.3_1_articles
     - field.storage.block_content.field_tag
-    - taxonomy.vocabulary.featured
-    - taxonomy.vocabulary.regions
-    - taxonomy.vocabulary.tags
     - taxonomy.vocabulary.topics_and_subtopics
 id: block_content.3_1_articles.field_tag
 field_name: field_tag
 entity_type: block_content
 bundle: 3_1_articles
-label: Tag
-description: 'Filter results by a tag.'
+label: 'Filter by Topic'
+description: 'Filter results by a topic.'
 required: false
 translatable: true
 default_value: {  }
@@ -22,13 +19,10 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      featured: featured
-      regions: regions
-      tags: tags
       topics_and_subtopics: topics_and_subtopics
     sort:
       field: name
       direction: asc
     auto_create: false
-    auto_create_bundle: tags
+    auto_create_bundle: regions
 field_type: entity_reference

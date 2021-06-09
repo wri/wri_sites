@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.3_1_articles
+    - field.storage.block_content.field_filter_by_region
+    - taxonomy.vocabulary.regions
+id: block_content.3_1_articles.field_filter_by_region
+field_name: field_filter_by_region
+entity_type: block_content
+bundle: 3_1_articles
+label: 'Filter by Region'
+description: 'Choosing a top-level value, like "Latin America" will also show content for child terms, like "Brazil". If this is a Region page, you can leave this blank -- the value will be pulled from the page.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      regions: regions
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

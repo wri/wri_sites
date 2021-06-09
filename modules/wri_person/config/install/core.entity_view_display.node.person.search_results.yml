@@ -21,17 +21,50 @@ dependencies:
     - field.field.node.person.field_topics
     - field.field.node.person.field_twitter_account
     - field.field.node.person.field_type
+    - field.field.node.person.field_weight
     - field.field.node.person.layout_builder__layout
-    - image.style.100x100
+    - image.style.150_tall
     - node.type.person
   module:
     - blazy
     - ds
-    - hierarchical_term_formatter
     - layout_builder
-    - text
     - user
+    - wri_media
 third_party_settings:
+  ds:
+    layout:
+      id: layout_search-results
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      right_section:
+        - field_profile_image
+      main_section:
+        - node_post_date
+        - node_title
+    fields:
+      node_post_date:
+        plugin_id: node_post_date
+        weight: 1
+        label: hidden
+        formatter: ds_post_date_short_day
+      node_title:
+        plugin_id: node_title
+        weight: 2
+        label: hidden
+        formatter: default
+        settings:
+          link: true
+          wrapper: h3
+          class: h3
+        ft:
+          id: reset
+          settings:
+            lb: ''
   layout_builder:
     allow_custom: false
     enabled: false
@@ -40,28 +73,23 @@ targetEntityType: node
 bundle: person
 mode: search_results
 content:
-  field_leadership:
-    type: boolean
-    weight: 1
-    region: content
-    label: hidden
-    settings:
-      format: custom
-      format_custom_true: Leadership
-      format_custom_false: ''
-    third_party_settings:
-      ds:
-        ft:
-          id: reset
-          settings:
-            lb: ''
-  field_profile_image:
+  field_main_image:
     type: blazy_media
     weight: 3
-    region: content
+    region: right_section
     label: hidden
     settings:
-      image_style: 100x100
+      image_style: 150_tall
+      responsive_image_style: ''
+      media_switch: ''
+      thumbnail_style: ''
+      ratio: ''
+      view_mode: default
+      current_view_mode: search_results
+      background: false
+      caption:
+        title: '0'
+        alt: '0'
       class: ''
       id: ''
       image: ''
@@ -71,22 +99,14 @@ content:
       vanilla: false
       icon: ''
       layout: ''
-      view_mode: ''
       cache: 0
-      current_view_mode: ''
       skin: ''
       fx: ''
       style: ''
-      background: false
       box_caption: ''
       box_caption_custom: ''
       box_media_style: ''
-      caption: {  }
-      responsive_image_style: ''
       box_style: ''
-      media_switch: ''
-      ratio: ''
-      thumbnail_style: ''
       _uri: ''
       breakpoints: {  }
       sizes: ''
@@ -100,27 +120,52 @@ content:
           id: reset
           settings:
             lb: ''
-  field_title:
-    type: text_default
-    weight: 2
-    region: content
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-  field_topics:
-    type: hierarchical_term_formatter
+  field_profile_image:
+    type: blazy_media
     weight: 0
-    region: content
+    region: right_section
     label: hidden
     settings:
-      display: root
-      link: true
-      wrap: none
-      separator: ' » '
-      reverse: false
+      image_style: 150_tall
+      responsive_image_style: ''
+      media_switch: ''
+      thumbnail_style: ''
+      ratio: ''
+      view_mode: default
+      current_view_mode: search_results
+      background: false
+      caption:
+        field_tags: '0'
+        title: '0'
+        alt: '0'
+      class: ''
+      id: ''
+      image: ''
+      link: ''
+      overlay: ''
+      title: ''
+      vanilla: false
+      icon: ''
+      layout: ''
+      cache: 0
+      skin: ''
+      fx: ''
+      style: ''
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      box_style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
+      grid: 0
+      grid_medium: 0
+      grid_small: 0
     third_party_settings:
+      wri_media:
+        min_width: ''
       ds:
-        ds_limit: ''
         ft:
           id: reset
           settings:
@@ -133,14 +178,20 @@ hidden:
   field_email: true
   field_first_name: true
   field_international_office: true
+  field_intro: true
   field_languages_spoken: true
   field_last_name: true
+  field_leadership: true
+  field_long_title: true
   field_metatags: true
   field_phone: true
   field_project_expert: true
   field_quote: true
+  field_title: true
+  field_topics: true
   field_twitter_account: true
   field_type: true
+  field_weight: true
   layout_builder__layout: true
   links: true
   search_api_excerpt: true

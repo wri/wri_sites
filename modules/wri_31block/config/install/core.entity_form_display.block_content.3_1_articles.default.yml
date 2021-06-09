@@ -5,23 +5,28 @@ dependencies:
     - block_content.type.3_1_articles
     - field.field.block_content.3_1_articles.field_content_types
     - field.field.block_content.3_1_articles.field_custom_results
+    - field.field.block_content.3_1_articles.field_filter_by_region
+    - field.field.block_content.3_1_articles.field_filter_by_resource_type
+    - field.field.block_content.3_1_articles.field_filter_by_tag
     - field.field.block_content.3_1_articles.field_listing
+    - field.field.block_content.3_1_articles.field_more_link
     - field.field.block_content.3_1_articles.field_tag
   module:
     - viewfield
+    - wri_common
 id: block_content.3_1_articles.default
 targetEntityType: block_content
 bundle: 3_1_articles
 mode: default
 content:
   field_content_types:
-    weight: 27
+    weight: 1
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_custom_results:
-    weight: 29
+    weight: 7
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -30,14 +35,44 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_filter_by_region:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_filter_by_resource_type:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_filter_by_tag:
+    type: entity_reference_autocomplete
+    weight: 6
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_listing:
-    weight: 26
+    weight: 8
     settings: {  }
     third_party_settings: {  }
     type: viewfield_select
     region: content
+  field_more_link:
+    weight: 9
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: tokenized_link_field_widget
+    region: content
   field_tag:
-    weight: 27
+    weight: 5
     settings:
       match_operator: CONTAINS
       match_limit: 10

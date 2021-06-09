@@ -36,7 +36,7 @@ export default function(context) {
     .off("click")
     .on("click", function() {
       $(this)
-        .closest(".view-resources, .view-experts-staff")
+        .closest(".view-resources, .view-experts-staff, .view-events")
         .toggleClass("open");
     });
 

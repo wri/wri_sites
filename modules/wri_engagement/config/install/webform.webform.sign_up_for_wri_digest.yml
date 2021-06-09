@@ -1,6 +1,8 @@
 langcode: en
 status: open
-dependencies: {  }
+dependencies:
+  module:
+    - simple_recaptcha_webform
 open: null
 close: null
 weight: 0
@@ -241,4 +243,16 @@ handlers:
       message: ''
       messages: {  }
       error_url: ''
+  recaptcha:
+    id: simple_recaptcha
+    label: reCAPTCHA
+    notes: ''
+    handler_id: recaptcha
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      recaptcha_type: v3
+      v3_score: '90'
+      v3_error_message: 'There was an error during validation of your form submission, please try to reload the page and submit form again.'
 variants: {  }

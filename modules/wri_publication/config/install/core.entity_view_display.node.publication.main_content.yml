@@ -45,6 +45,7 @@ dependencies:
     - user
     - viewfield
     - wri_author
+    - wri_engagement
     - wri_media
     - wri_toc
 third_party_settings:
@@ -223,10 +224,10 @@ content:
       target: ''
     third_party_settings: {  }
   field_files:
-    type: entity_reference_entity_view
+    type: modal_engage_field_formatter
     weight: 9
     region: buttons
-    label: hidden
+    label: above
     settings:
       view_mode: download_listing
       link: false
@@ -236,7 +237,7 @@ content:
         ft:
           id: reset
           settings:
-            lb: ''
+            lb: 'Download Options'
   field_in_this_series:
     type: viewfield_default
     weight: 20

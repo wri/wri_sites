@@ -7,11 +7,13 @@ dependencies:
     - field.field.block_content.narrative_taxonomy.field_filter_by_region
     - field.field.block_content.narrative_taxonomy.field_intro
     - field.field.block_content.narrative_taxonomy.field_listing
+    - field.field.block_content.narrative_taxonomy.field_more_link
     - field.field.block_content.narrative_taxonomy.field_tag
   module:
     - ds
     - text
     - wri_admin
+    - wri_common
 third_party_settings:
   ds:
     layout:
@@ -26,6 +28,8 @@ third_party_settings:
         - field_intro
       main_content:
         - field_listing
+      listing:
+        - field_more_link
 id: block_content.narrative_taxonomy.default
 targetEntityType: block_content
 bundle: narrative_taxonomy
@@ -76,6 +80,18 @@ content:
             fi-def-at: false
     type: viewfield_token
     region: main_content
+  field_more_link:
+    type: tokenized_link_field_formatter
+    weight: 1
+    region: listing
+    label: hidden
+    settings:
+      trim_length: '80'
+      url_only: ''
+      url_plain: ''
+      rel: ''
+      target: ''
+    third_party_settings: {  }
 hidden:
   field_custom_results: true
   field_filter_by_region: true

@@ -96,6 +96,10 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  margin-bottom: 48px;
+  @include mq($md) {
+    margin-bottom: 0;
+  }
   .field__item {
     @include font($acumin-pro, "bold", "normal");
     @include font-line-height(14, 18);
@@ -116,8 +120,11 @@
     margin-right: 0;
   }
   .field__item a {
-    background-position: left 100%;
     text-decoration: none;
+    transition: color 0.5s;
+    @include hocus {
+      color: $green;
+    }
   }
   .field-name-field-type {
     font-weight: 400;
@@ -127,6 +134,13 @@
     @include font($acumin-pro, "bold", "normal");
     @include font-line-height(20, 24);
     margin-top: 4px;
+  }
+}
+
+.homepage-hero > .field--name-field-hero-image {
+  display: none;
+  @include mq($md) {
+    display: block;
   }
 }
 
@@ -153,6 +167,15 @@
   }
   img {
     min-width: 100%;
+  }
+}
+
+.hero-text-area .field--name-field-hero-image {
+  margin-bottom: 48px;
+  margin-top: 0;
+  margin-left: -20px;
+  @include mq($md) {
+    display: none;
   }
 }
 
@@ -189,18 +212,27 @@
   .body-wrapper:before {
     border-left: 1px solid $white;
     content: "";
-    height: 92%;
+    height: 100%;
     left: 0;
     position: absolute;
-    top: 8px;
+    top: 0;
   }
 
   h3 {
-    @include font-line-height(24, 30);
-    margin: 3px 0 2px 0;
+    @include font-line-height(24, 32);
+    display: inline;
+    background-position: left 94%;
   }
   .field--name-field-text {
     @include font-line-height(18, 28);
+  }
+  a {
+    @include hocus {
+      h3 {
+        @include text-underline(transparent, $white);
+        background-position: left 94%;
+      }
+    }
   }
 }
 

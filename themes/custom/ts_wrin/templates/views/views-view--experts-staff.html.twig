@@ -10,12 +10,17 @@
 {% if header %}{{ header.entity_node }}{% endif %}
 <div{{ attributes.addClass(classes) }}>
   {% if display_id == 'experts_staff1' %}
-  <div class="container">
-  <h1 class="h1 padding-top">{{ view.title|raw }}</h1>
+
+  <div class="grid experts-staff-header">
+    <div class="left">
+    {{ drupal_breadcrumb() }}
+    <h1 class="h1 padding-top">{{ view.title|raw }}</h1>
     {% if header %}{{ header.area }}{% endif %}
+    </div>
+    <div class="right">
+    {{ drupal_block('menu_block:page-hierarchies', {level: 1, depth: 0, parent: 'page-hierarchies:menu_link_content:4f92d155-0924-4c24-8dce-7b650d42485f', render_parent: false, follow_parent: 'child', follow: 0, label: 'Child pages', label_display: 0, id:'page-hierarchies'}) }}
+    </div>
   </div>
-  {% endif %}
-  {% if display_id == 'experts_staff1' %}
   {{ drupal_block('facet_block:experts_all_topics') }}
   {% endif %}
   <div class="resources-wrapper">

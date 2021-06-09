@@ -1,0 +1,50 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.sitewide
+    - views.view.events
+  module:
+    - search_api
+id: event_facet_summary
+name: 'Event facet summary'
+facets:
+  all_event_topics:
+    checked: true
+    label: 'All Topics'
+    separator: ', '
+    weight: 0
+    show_count: false
+  event_languages:
+    checked: true
+    label: 'Event Languages'
+    separator: ', '
+    weight: 0
+    show_count: false
+  international_office_event:
+    checked: true
+    label: 'International Office Event'
+    separator: ', '
+    weight: 0
+    show_count: false
+  type_of_event:
+    checked: true
+    label: 'Type of Event'
+    separator: ', '
+    weight: 0
+    show_count: false
+facet_source_id: 'search_api:views_page__events__resources_page'
+processor_configs:
+  hide_when_not_rendered:
+    processor_id: hide_when_not_rendered
+    weights:
+      build: '45'
+    settings: {  }
+  show_text_when_empty:
+    processor_id: show_text_when_empty
+    weights:
+      build: '10'
+    settings:
+      text:
+        value: 'No results found.'
+        format: plain_text
