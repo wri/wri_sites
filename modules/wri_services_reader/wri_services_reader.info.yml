@@ -1,0 +1,8 @@
+name: WRI Services Reader
+type: module
+description: Endpoints for WRI Reader.
+package: WRI
+core: 8.x
+core_version_requirement: ^8 || ^9
+dependencies:
+  - rest

@@ -86,10 +86,12 @@
             </div>
             {% endif %}
           </div>
-          {% if content.sidebar.field_narrative_taxonomy|render %}
-            <div class="detail__meta-secondary">
-              {{ content.sidebar.field_narrative_taxonomy }}
-            </div>
+          {% if show_narrative_taxonomy == true %}
+            {% if content.sidebar.field_narrative_taxonomy|render %}
+              <div class="detail__meta-secondary">
+                {{ content.sidebar.field_narrative_taxonomy }}
+              </div>
+            {% endif %}
           {% endif %}
         </div>
       {% endif %}
@@ -98,7 +100,11 @@
 
         {% if content.sidebar %}
           <div {{ region_attributes.sidebar.addClass('layout__region', 'layout__region--sidebar', 'sidebar') }}>
-            {{ content.sidebar }}
+          {% if show_narrative_taxonomy == true %}
+              {{ content.sidebar.field_narrative_taxonomy }}
+            {% endif %}
+            {{ content.sidebar|without('field_narrative_taxonomy') }}
+
             {# If robust display show isbn and doi in sidebar #}
             {% if display_type == 'robust' %}
               <div class="publication-reference margin-top-xs">

@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: vMhmnfvy2g_8xG-DS2zHAY8JRWuMLhMEQVLkc6MzfkQ
+id: anonymous
+label: 'Anonymous user'
+weight: 0
+is_admin: false
+permissions:
+  - 'access content'
+  - 'access_unpublished node article'
+  - 'access_unpublished node international_office'
+  - 'access_unpublished node page'
+  - 'access_unpublished node program_center'
+  - 'access_unpublished node project_detail'
+  - 'restful get wri_reader_retrieve_node'
+  - 'view media'
+  - 'view published author entities'
+  - 'view published wri office entities'

@@ -1,0 +1,28 @@
+{% block listing %}
+  <ul class="listing-items">
+    {% for publication in publications %}
+      {# Markup from wri_sites/modules/wri_node/layouts/layout--teaser.html.twig #}
+      <li class="field__publication external__publications">
+        <div class="teaser-item">
+          <div class="teaser__inner-wrapper">
+            <div class="left-section margin-bottom-xs">
+              <h3 class="teaser-title margin-top-xs">
+                <strong>"{{ publication.title }}"</strong>
+              </h3>
+              <p><small>
+                {% trans %}By {% endtrans %}
+                {{ publication.authors }} <br>
+                <em>"{{ publication.container_title }}"</em> {{ publication.volume }}
+                ({{ publication.issued }}): {{ publication.page }}
+                {% if publication.doi is not empty %}
+                  DOI: <a href="{{ publication.doi_url }}{{ publication.doi }}" target="_blank">
+                  {{ publication.doi }}</a>
+                {% endif %}
+              </small></p>
+            </div>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,3 @@
+.card-listing .listing-items li.external__publications {
+  flex: 0 1 calc(48% - (48px - (48px / 2)))
+}
