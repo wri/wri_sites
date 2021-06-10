@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Provides hook implementations for wri_external_pub.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function wri_external_pub_theme($existing, $type, $theme, $path) {
+  return [
+    'wri_external_pub_person_block' => [
+      'variables' => [
+        'publications' => [],
+        'author_name' => '',
+      ],
+      'template' => 'wri-external-pub-person-block',
+      'path' => $path . '/templates',
+    ],
+    'block__wri_external_pub_block' => [
+      'render element' => 'elements',
+      'template' => 'block--wri-external-pub-block',
+      'base hook' => 'block',
+    ],
+  ];
+}

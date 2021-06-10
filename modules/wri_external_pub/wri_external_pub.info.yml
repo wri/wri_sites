@@ -1,0 +1,7 @@
+name: WRI External Publications
+type: module
+description: Gets external publications for authors.
+core: 8.x
+package: WRI
+dependencies:
+  - block
