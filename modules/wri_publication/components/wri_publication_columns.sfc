@@ -100,7 +100,7 @@
 
         {% if content.sidebar %}
           <div {{ region_attributes.sidebar.addClass('layout__region', 'layout__region--sidebar', 'sidebar') }}>
-          {% if show_narrative_taxonomy == true %}
+            {% if show_narrative_taxonomy == true %}
               {{ content.sidebar.field_narrative_taxonomy }}
             {% endif %}
             {{ content.sidebar|without('field_narrative_taxonomy') }}
@@ -161,16 +161,31 @@ $definition['layout'] = [
 $prepareContext = function (&$context) {
 
   $node = \Drupal::routeMatch()->getParameter('node');
+  $context['show_narrative_taxonomy'] = TRUE;
   if ($node instanceof \Drupal\node\NodeInterface) {
+    $cutOffDate = strtotime('01/01/2020');
+    $created = $node->getCreatedTime();
     $context['display_type'] = 'simple';
     $context['node_type'] = $node->getType();
+
     switch ($node->getType()) {
       case 'project_detail':
         $context['display_type'] = 'robust';
         break;
+
       case 'publication':
         if ($node->get('field_publication_display')->getString() == 'robust') {
           $context['display_type'] = 'robust';
+        }
+
+        if ($cutOffDate > $created) {
+          $context['show_narrative_taxonomy'] = FALSE;
+        }
+        break;
+
+      case 'data':
+        if ($cutOffDate > $created) {
+          $context['show_narrative_taxonomy'] = FALSE;
         }
         break;
     }
