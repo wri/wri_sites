@@ -1,7 +1,5 @@
 <?php
-
 namespace Drupal\wri_services_reader\Plugin\rest\resource;
-
 use Drupal\Component\Plugin\DependentPluginInterface;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -14,6 +12,8 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Drupal\media\Entity\Media;
+use Drupal\file\Entity\File;
 
 /**
  * Represents WRI Reader Node Retrieve records as resources.
@@ -95,7 +95,6 @@ class WriReaderRetrieveNodeResource extends ResourceBase {
     // Validate id.
     $node = $this->entityTypeManager->getStorage('node')->load($id);
     // validate node is node interface.
-
     $node_array = [];
     $language = $node->langcode->value;
     $special_fields = ['metatag',
@@ -132,7 +131,7 @@ class WriReaderRetrieveNodeResource extends ResourceBase {
             break;
 
           case 'type':
-            $node_array['uid'] = $node->uid->target_id;
+            $node_array['publication_type']['name'] = $node->get('type')->getValue()[0]['target_id'];
             break;
 
           case 'revision_uid':
@@ -150,15 +149,51 @@ class WriReaderRetrieveNodeResource extends ResourceBase {
         }
       }
       elseif (strpos($field_name, 'field_') !== FALSE) {
-        if (empty($node->get($field_name)->getValue())) {
-          $node_array[$field_name] = [];
+        if ($field_name == 'field_files') {
+          // Format and load URLs for files
+          $files = [];
+          $mids = $node->get('field_files')->getValue();
+          foreach($mids as $mid) {
+            $media = Media::load($mid['target_id']);
+            $fid = $media->field_media_file->target_id;
+            $file = File::load($fid);
+            $files[]['url'] = $file->url();
+          }
+          $node_array[$field_name] = [
+            $language => $files,
+          ];
+
+        } else if ($field_name == 'field_authors') {
+          // Format and load Person references.
+          $authors = $node->get($field_name)->referencedEntities();
+
+          foreach($authors as $author) {
+            if (method_exists($author->field_person_link, 'getValue')) {
+              $authorData = $author->field_person_link->getValue()[0];
+
+              $node_array['authors'][] = [
+                  'non_wri_author' => [$authorData['title']],
+                  'non_wri_author_link' => (str_contains($authorData['uri'], 'nolink')) ? [''] : [$authorData['uri']],
+                ];
+            } else {
+              $node_array['authors'][] = [
+                $author->get('field_person')->referencedEntities()[0]->toArray(),
+              ];
+            }
+
+          }
         }
         else {
-          $node_array[$field_name] = [
-            $language => [
-              $node->get($field_name)->getValue()[0]
-            ],
-          ];
+          if (empty($node->get($field_name)->getValue())) {
+            $node_array[$field_name] = [];
+          }
+          else {
+            $node_array[$field_name] = [
+              $language => [
+                $node->get($field_name)->getValue()[0]
+              ],
+            ];
+          }
         }
       }
       else {
@@ -172,44 +207,5 @@ class WriReaderRetrieveNodeResource extends ResourceBase {
     $response->addCacheableDependency($url);
     return $response;
   }
-
-  /**
-   * {@inheritdoc}
-   */
-  // protected function getBaseRoute($canonical_path, $method) {
-  //   $route = parent::getBaseRoute($canonical_path, $method);
-
-  //   // Change ID validation pattern.
-  //   if ($method != 'POST') {
-  //     $route->setRequirement('id', '\d+');
-  //   }
-
-  //   return $route;
-  // }
-
-  // /**
-  //  * {@inheritdoc}
-  //  */
-  // public function calculateDependencies() {
-  //   return [];
-  // }
-
-  /**
-   * {@inheritdoc}
-   */
-  // public function routes() {
-  //   $collection = parent::routes();
-
-  //   // Take out BC routes added in base class.
-  //   // @see https://www.drupal.org/node/2865645
-  //   // @todo Remove this in Drupal 9.
-  //   foreach ($collection as $route_name => $route) {
-  //     if ($route instanceof BcRoute) {
-  //       $collection->remove($route_name);
-  //     }
-  //   }
-
-  //   return $collection;
-  // }
 
 }
