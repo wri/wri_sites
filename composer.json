@@ -72,7 +72,8 @@
                 "Taxonomy Name infinite loop https://www.drupal.org/project/drupal/issues/2693787": "https://git.drupalcode.org/project/drupal/-/merge_requests/234.diff",
                 "Formatters for empty fields do not render with layout builder enabled": "https://www.drupal.org/files/issues/2020-01-24/3067982-8.patch",
                 "Plugin blocks cannot set their own attributes when put in the layout": "https://www.drupal.org/files/issues/2020-04-11/plugin-block-attributes-fix-3077734-13.patch",
-                "Views RSS feeds have validation issues https://www.drupal.org/project/drupal/issues/1337894": "https://www.drupal.org/files/issues/d8-rss-validation-atom-link-missing-1337894-25.patch"
+                "Views RSS feeds have validation issues https://www.drupal.org/project/drupal/issues/1337894": "https://www.drupal.org/files/issues/d8-rss-validation-atom-link-missing-1337894-25.patch",
+                "Add missing enclosure to Views RSS - 2511878-30": "https://www.drupal.org/files/issues/2020-07-24/views-rss-fields-enclosure-2511878-30.patch"
             },
             "drupal/config_devel": {
                 "Add a tool for manipulating module info files https://www.drupal.org/project/config_devel/issues/2392929": "https://www.drupal.org/files/issues/2020-05-15/2392929-11.patch"
