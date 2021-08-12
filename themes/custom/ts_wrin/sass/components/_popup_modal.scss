@@ -181,6 +181,24 @@
       }
     }
   }
+  .files-modal-unregistered {
+    p {
+      font-size: 1.3em;
+    }
+    input {
+      &.registration {
+        width: 48%;
+        margin: 0 10px 10px 0;
+        border: 2px solid #aaa;
+      }
+      &.pardot-submission {
+        margin: 15px 0;
+      }
+    }
+    #skip-registration {
+      font-size: 1.2em;
+    }
+  }
 }
 
 //Download files modal
