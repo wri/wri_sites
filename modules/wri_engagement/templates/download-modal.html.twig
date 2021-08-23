@@ -1,4 +1,4 @@
-<a class="files-overlay-trigger button">{{ "Download"|t }}</a>
+{# <a class="files-overlay-trigger button">{{ "Download"|t }}</a>
 <div class="files-modal">
   <div class="files-modal-unregistered">
     <h1>{{ "Access the Full Report"|t }} {{ content['#object'].values.nid }}</h1>
@@ -20,4 +20,9 @@
   </div>
   <div class="files-modal-registered">
     {{ content }}
-  </div>
+  </div> #}
+
+<a class="files-overlay-trigger-webform button">{{ "Download"|t }}</a>
+<div class="files-modal">
+ {{ content }}
+</div>
