@@ -1,6 +1,9 @@
-{# <a class="files-overlay-trigger button">{{ "Download"|t }}</a>
+<a class="files-overlay-trigger-webform button">{{ "Download"|t }}</a>
 <div class="files-modal">
-  <div class="files-modal-unregistered">
+  <div id="files-modal-list">
+    {{ content }}
+  </div>
+  <div id="files-registration-form">
     <h1>{{ "Access the Full Report"|t }} {{ content['#object'].values.nid }}</h1>
     <p>{{ "Download the free full report! By accessing the full PDF, you agree to receive communications from WRI and P4G. You can unsubscribe at any time."|t  }}</p>
     <form id="pardot-subscription">
@@ -13,16 +16,9 @@
       <input type="email" id="email" name="email" class="registration" placeholder="{{ "Email"|t }}">
       <label for="organization" class="visually-hidden">{{  "Organization"|t }}</label>
       <input type="text" id="organization" name="organization" class="registration" placeholder="{{ "Organization"|t }}">
-      <input type="hidden" id="file_path" name="file_path" value="{{ url("<current>") }}">
+      <input type="hidden" id="file_path" name="file_path" value="">
       <br><input class="pardot-submission" type="submit" value="Submit">
       <br><a id="skip-registration" href="#">{{ "No thanks, show me the files"|t }}</a>
     </form>
   </div>
-  <div class="files-modal-registered">
-    {{ content }}
-  </div> #}
-
-<a class="files-overlay-trigger-webform button">{{ "Download"|t }}</a>
-<div class="files-modal">
- {{ content }}
 </div>
