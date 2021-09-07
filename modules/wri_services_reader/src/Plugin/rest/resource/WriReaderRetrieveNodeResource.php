@@ -8,6 +8,7 @@ use Drupal\Core\Routing\BcRoute;
 use Drupal\rest\ModifiedResourceResponse;
 use Drupal\rest\Plugin\ResourceBase;
 use Drupal\rest\ResourceResponse;
+use Drupal\taxonomy\Entity\Term;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -131,7 +132,8 @@ class WriReaderRetrieveNodeResource extends ResourceBase {
             break;
 
           case 'type':
-            $node_array['publication_type']['name'] = $node->get('type')->getValue()[0]['target_id'];
+            $term = Term::load($node->get('field_type')->getValue()[0]['target_id']);
+            $node_array['publication_type']['name'] = strtolower($term->getName());
             break;
 
           case 'revision_uid':
