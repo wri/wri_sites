@@ -28,6 +28,7 @@ config_devel:
     - field.field.node.person.body
     - field.field.node.person.field_alternate_contact
     - field.field.node.person.field_areas_of_expertise
+    - field.field.node.person.field_department
     - field.field.node.person.field_email
     - field.field.node.person.field_first_name
     - field.field.node.person.field_international_office

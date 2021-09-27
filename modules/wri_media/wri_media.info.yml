@@ -60,10 +60,12 @@ config_devel:
     - field.field.media.embed.field_media_embed_code
     - field.field.media.embed.field_media_image
     - field.field.media.embed.field_tags
+    - field.field.media.image.field_attribution
     - field.field.media.image.field_media_image
     - field.field.media.image.field_tags
     - field.field.media.video.field_media_oembed_video
     - field.field.media.video.field_tags
+    - field.storage.media.field_attribution
     - field.storage.media.field_media_embed_code
     - field.storage.media.field_media_file
     - field.storage.media.field_media_image

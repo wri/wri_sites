@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_topic_filter_excluded
+    - taxonomy.vocabulary.topics_and_subtopics
+id: taxonomy_term.topics_and_subtopics.field_topic_filter_excluded
+field_name: field_topic_filter_excluded
+entity_type: taxonomy_term
+bundle: topics_and_subtopics
+label: 'Exclude from topic filter list'
+description: 'Check to prevent this term from showing in the site-wide topic filter list. Note: only top level topics are currently included in this list, so this setting is unnecessary for child topics.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

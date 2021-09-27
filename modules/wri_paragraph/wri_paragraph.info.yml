@@ -7,9 +7,6 @@ dependencies:
   - paragraphs
 config_devel:
   install:
-    - core.entity_form_display.paragraph.image.default
-    - core.entity_view_display.paragraph.image.default
-    - field.field.paragraph.image.field_image
     - field.storage.paragraph.field_body
     - field.storage.paragraph.field_featured_items
     - field.storage.paragraph.field_featured_statement

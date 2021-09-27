@@ -66,3 +66,4 @@ config_devel:
     - system.theme
     - user.role.anonymous
     - user.role.authenticated
+    - views.view.staff_list
