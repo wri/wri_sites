@@ -5,25 +5,3 @@ core_version_requirement: '^8.8.0 || ^9'
 package: WRI
 dependencies:
   - paragraphs
-config_devel:
-  install:
-    - core.entity_form_display.paragraph.image.default
-    - core.entity_view_display.paragraph.image.default
-    - field.field.paragraph.image.field_image
-    - field.storage.paragraph.field_body
-    - field.storage.paragraph.field_featured_items
-    - field.storage.paragraph.field_featured_statement
-    - field.storage.paragraph.field_filter_by_resource_type
-    - field.storage.paragraph.field_image
-    - field.storage.paragraph.field_impact_in_action_blocks
-    - field.storage.paragraph.field_leadin_paragraph
-    - field.storage.paragraph.field_leadin_title
-    - field.storage.paragraph.field_link
-    - field.storage.paragraph.field_statistic_number
-    - field.storage.paragraph.field_statistic_text
-    - field.storage.paragraph.field_statistics
-    - field.storage.paragraph.field_statistics_title
-    - field.storage.paragraph.field_tag
-    - field.storage.paragraph.field_text
-    - field.storage.paragraph.field_title
-    - field.storage.paragraph.field_updated

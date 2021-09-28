@@ -5,19 +5,3 @@ core_version_requirement: '^8.8.0 || ^9'
 package: WRI
 dependencies:
   - auto_entitylabel
-config_devel:
-  install:
-    - auto_entitylabel.settings.wri_author.external
-    - auto_entitylabel.settings.wri_author.internal
-    - core.entity_form_display.wri_author.external.default
-    - core.entity_form_display.wri_author.internal.default
-    - core.entity_view_display.wri_author.external.default
-    - core.entity_view_display.wri_author.internal.default
-    - field.field.wri_author.external.field_person_link
-    - field.field.wri_author.internal.field_person
-    - field.storage.node.field_authors
-    - field.storage.wri_author.field_person
-    - field.storage.wri_author.field_person_link
-    - views.view.authored_by
-    - wri_author.wri_author_type.external
-    - wri_author.wri_author_type.internal
