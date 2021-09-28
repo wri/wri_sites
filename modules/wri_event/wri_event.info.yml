@@ -19,7 +19,6 @@ config_devel:
     - core.entity_view_display.node.event.search_results
     - core.entity_view_display.node.event.teaser
     - core.entity_view_display.node.event.type_title
-    - facets_summary.facets_summary.event_facet_summary
     - field.field.node.event.body
     - field.field.node.event.field_date_time
     - field.field.node.event.field_event_display
@@ -48,5 +47,4 @@ config_devel:
     - smart_date.smart_date_format.month
     - smart_date.smart_date_format.short_date
     - smart_date.smart_date_format.year
-    - views.view.events
     - xmlsitemap.settings.node.event
