@@ -4,7 +4,7 @@ dependencies:
   config:
     - field.field.paragraph.image.field_image
     - paragraphs.paragraphs_type.image
-    - responsive_image.styles.landing_page_hero
+    - responsive_image.styles.full_content
   module:
     - blazy
     - ds
@@ -20,7 +20,7 @@ content:
     label: hidden
     settings:
       image_style: ''
-      responsive_image_style: landing_page_hero
+      responsive_image_style: full_content
       media_switch: ''
       thumbnail_style: ''
       ratio: ''

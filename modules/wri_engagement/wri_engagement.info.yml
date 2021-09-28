@@ -5,4 +5,5 @@ core_version_requirement: '^8.8.0 || ^9'
 package: WRI
 dependencies:
   - simple_recaptcha_webform
+  - wri_block
   - webform_ui

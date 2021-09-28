@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: Department
+vid: department
+description: 'Staff departments'
+weight: 0

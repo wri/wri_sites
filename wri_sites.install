@@ -45,6 +45,7 @@ function wri_sites_install() {
   _install_default_hero_block();
   _install_io_and_country_blocks();
   _install_default_program_hero();
+  _install_narrative_taxonomy();
 }
 
 /**
@@ -186,9 +187,24 @@ function _install_default_program_hero() {
     'info' => 'Happening Now',
     'type' => 'hero',
     'langcode' => 'en',
-    'revision_id' => 100000,
+    'revision_id' => 100070,
     'reusable' => FALSE,
     'field_hero_type' => $paragraph,
+  ]);
+  $block->save();
+}
+
+/**
+ * Installs the Narrative Taxonomy block.
+ */
+function _install_narrative_taxonomy() {
+  // Adds a default Node hero block so the layout builder can use it.
+  $block = BlockContent::create([
+    'info' => 'Narrative Taxonomy',
+    'type' => 'narrative_taxonomy',
+    'langcode' => 'en',
+    'revision_id' => 100482,
+    'reusable' => FALSE,
   ]);
   $block->save();
 }

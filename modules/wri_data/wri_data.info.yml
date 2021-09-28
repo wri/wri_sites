@@ -7,4 +7,5 @@ dependencies:
   - pathauto
   - wri_common
   - wri_node
+  - wri_engagement
   - wri_region

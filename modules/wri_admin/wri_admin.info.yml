@@ -18,7 +18,6 @@ dependencies:
   - ckeditor_templates
   - ckeditor_templates_ui
   - config
-  - config_sync
   - content_moderation
   - content_snippets
   - contextual
