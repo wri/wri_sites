@@ -410,6 +410,7 @@ display:
         cache: false
       cache:
         type: none
+      display_comment: 'This view is altered by the wri_event_views_query_alter function, which sets the order do "DESC" if the "View Past Events" option is chosen.'
     cache_metadata:
       max-age: -1
       contexts:
