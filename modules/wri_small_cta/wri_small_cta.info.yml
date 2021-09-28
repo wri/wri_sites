@@ -6,16 +6,3 @@ package: WRI
 dependencies:
   - block_content
   - link
-config_devel:
-  install:
-    - block_content.type.small_cta
-    - core.entity_form_display.block_content.small_cta.default
-    - core.entity_form_display.paragraph.small_cta.default
-    - core.entity_view_display.block_content.small_cta.default
-    - core.entity_view_display.block_content.small_cta.preview
-    - core.entity_view_display.paragraph.small_cta.default
-    - core.entity_view_display.paragraph.small_cta.preview
-    - field.field.block_content.small_cta.field_cta_background
-    - field.field.block_content.small_cta.field_link
-    - field.field.paragraph.small_cta.field_block
-    - paragraphs.paragraphs_type.small_cta

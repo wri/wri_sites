@@ -57,12 +57,3 @@ install:
   - wri_unique_feature
 themes:
   - claro
-config_devel:
-  install:
-    - facets_summary.facets_summary.summary
-    - gdpr_compliance.settings
-    - metatag.metatag_defaults.global
-    - metatag.metatag_defaults.node
-    - system.theme
-    - user.role.anonymous
-    - user.role.authenticated

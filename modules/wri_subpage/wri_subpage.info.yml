@@ -5,20 +5,3 @@ core_version_requirement: '^8.8.0 || ^9'
 package: WRI
 dependencies:
   - ds
-config_devel:
-  install:
-    - core.entity_form_display.node.subpage.default
-    - core.entity_view_display.node.subpage.default
-    - core.entity_view_display.node.subpage.full
-    - core.entity_view_display.node.subpage.hero_on_a_subpage
-    - core.entity_view_display.node.subpage.impact
-    - core.entity_view_display.node.subpage.main_content
-    - core.entity_view_display.node.subpage.search_results
-    - core.entity_view_display.node.subpage.teaser
-    - field.field.node.subpage.body
-    - field.field.node.subpage.field_main_image
-    - field.field.node.subpage.field_metatags
-    - field.field.node.subpage.field_parent_page
-    - field.field.node.subpage.layout_builder__layout
-    - node.type.subpage
-    - xmlsitemap.settings.node.subpage

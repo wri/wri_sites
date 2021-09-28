@@ -6,16 +6,3 @@ package: WRI
 dependencies:
   - menu_block
   - menu_position
-config_devel:
-  install:
-    - system.menu.donate
-    - system.menu.footer-additional
-    - system.menu.footer-main
-    - system.menu.footer-offices
-    - system.menu.footer-secondary
-    - system.menu.how-you-can-help
-    - system.menu.mega-menu
-    - system.menu.page-hierarchies
-    - system.menu.quick-links
-    - system.menu.secondary
-    - system.menu.social-menu
