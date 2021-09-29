@@ -68,7 +68,7 @@
                 "There is no way to delete or update file entities of other users incl. user/1":"https://www.drupal.org/files/issues/2019-12-12/2949017-59.patch",
                 "Add reusable option to inline block creation https://www.drupal.org/project/drupal/issues/2999491": "https://www.drupal.org/files/issues/2020-05-21/2999491--reusable-title-display--49.patch",
                 "Allow field blocks to display the configuration label when set in Layout Builder https://www.drupal.org/project/drupal/issues/3039185": "https://www.drupal.org/files/issues/2020-07-17/3039185-block_title-33.patch",
-                "Hyphens and forward slashes (-/) break Views contextual filters https://www.drupal.org/node/672606": "https://www.drupal.org/files/issues/672606-43.patch",
+                "Hyphens and forward slashes (-/) break Views contextual filters https://www.drupal.org/node/672606": "https://www.drupal.org/files/issues/2021-03-03/672606-56.patch",
                 "Taxonomy Name infinite loop https://www.drupal.org/project/drupal/issues/2693787": "https://git.drupalcode.org/project/drupal/-/merge_requests/234.diff",
                 "Formatters for empty fields do not render with layout builder enabled": "https://www.drupal.org/files/issues/2020-01-24/3067982-8.patch",
                 "Plugin blocks cannot set their own attributes when put in the layout": "https://www.drupal.org/files/issues/2020-04-11/plugin-block-attributes-fix-3077734-13.patch",
@@ -80,10 +80,6 @@
             },
             "drupal/diff": {
                 "No local tasks on compare revisions page https://www.drupal.org/project/diff/issues/3169729": "https://www.drupal.org/files/issues/2020-09-08/diff_add-local-tasks-3169729-2.patch"
-            },
-            "drupal/facets": {
-                "Drupal site install from existing config is broken (summary) https://www.drupal.org/project/facets/issues/3199156": "https://www.drupal.org/files/issues/2021-02-23/3199156--facet-summary-coverage.patch",
-                "Drupal site install from existing config is broken (facet) https://www.drupal.org/project/facets/issues/3199156": "https://git.drupalcode.org/project/facets/-/merge_requests/12.diff"
             },
             "drupal/menu_block": {
                 "https://www.drupal.org/project/menu_block/issues/3082445 https://www.drupal.org/project/menu_block/issues/3082445": "https://www.drupal.org/files/issues/2019-09-20/menu_block-render-parent-menu-item-3082445-4.patch"
@@ -98,14 +94,8 @@
                 "Add a [current-page:object:?] dynamic token https://www.drupal.org/project/token/issues/919760": "https://www.drupal.org/files/issues/2020-09-08/token--current_page_object_token--919760--83.patch",
                 "Provide array of primitive property values on multivalue field https://www.drupal.org/project/token/issues/3115486": "https://www.drupal.org/files/issues/2020-12-11/token-provide_primitive_type_arrays_for_properties_of_multivalue_fields-3115486-12.patch"
             },
-            "drupal/field_tools": {
-                "TypeError: Argument 2 passed to Drupal\\field_tools\\FieldCloner...": "https://www.drupal.org/files/issues/2020-08-04/3160564-wrong-parameters-for-service-classes.patch"
-            },
             "drupal/hierarchical_term_formatter": {
                 "Use the toUrl to create the link (compatibility with Forum module)": "https://git.drupalcode.org/project/hierarchical_term_formatter/-/merge_requests/1.diff"
-            },
-            "drupal/schema_metatag": {
-                "Illegal offset type in Drupal\\schema_metatag\\SchemaMetatagClient->objectInfo()" : "https://www.drupal.org/files/issues/2020-09-30/schema_metatag-undefined_index_objectinfo-3174103-2.patch"
             },
             "drupal/search_api_pantheon": {
                 "Fixing More Like This for D8 on Pantheon https://github.com/pantheon-systems/search_api_pantheon/pull/69": "https://patch-diff.githubusercontent.com/raw/pantheon-systems/search_api_pantheon/pull/69.diff"
