@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Test to ensure theme compatibility with managed files.
+ * Theme settings override file.
  */
 
 use Drupal\Core\File\Exception\FileException;
@@ -13,9 +13,11 @@ use Drupal\Core\StreamWrapper\StreamWrapperManager;
  * Implements hook_form_system_theme_settings_alter().
  */
 function ts_wrin_form_system_theme_settings_alter(&$form, FormStateInterface $form_state) {
+  // Set it up so we can add a .svg logo.
   $form["logo"]["settings"]["logo_upload"]["#upload_validators"] = [
     'file_validate_extensions' => ['jpg jpeg gif png svg'],
   ];
+  // Set up the white logo form.
   $form['white_logo'] = [
     '#type' => 'details',
     '#title' => t('White Logo image'),
@@ -49,7 +51,7 @@ function ts_wrin_form_system_theme_settings_alter(&$form, FormStateInterface $fo
 }
 
 /**
- * Test theme form settings submission handler.
+ * Validate the settings form.
  */
 function ts_wrin_settings_form_system_theme_settings_validate(&$form, FormStateInterface $form_state) {
 
@@ -73,7 +75,7 @@ function ts_wrin_settings_form_system_theme_settings_validate(&$form, FormStateI
 }
 
 /**
- * Test theme form settings submission handler.
+ * Submit the settings form.
  */
 function ts_wrin_settings_form_system_theme_settings_submit(&$form, FormStateInterface $form_state) {
   $values = $form_state->getValues();
