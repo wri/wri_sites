@@ -105,6 +105,35 @@ function wri_sites_update_8904() {
 }
 
 /**
+ * Adds a default narrative taxonomy blocks for programs.
+ */
+function wri_sites_update_8905() {
+  // If there's not already a block with revision_id 100482, create it.
+  $existing_block =  \Drupal::entityTypeManager()
+    ->getStorage('block_content')
+    ->loadRevision(100482);
+
+  if (!$existing_block) {
+    _install_narrative_taxonomy();
+  }
+}
+
+
+/**
+ * Updates the revisionid of the hero block, if it does not match.
+ */
+function wri_sites_update_8906() {
+  $existing_block =  \Drupal::entityTypeManager()
+    ->getStorage('block_content')
+    ->loadRevision(100000);
+
+  if ($existing_block) {
+    $existing_block->set('revision_id', 100070);
+    $existing_block->save();
+  }
+}
+
+/**
  * Installs the default hero block for pages.
  */
 function _install_default_hero_block() {
