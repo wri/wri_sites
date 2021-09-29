@@ -17,6 +17,10 @@
             {{ page.secondary_nav }}
           {% endif %}
 
+          {% if page.wrin_custom.languageswitcher %}
+            {% include 'wrin-language-button' %}
+          {% endif %}
+
           {% if page.wrin_custom.wrinsearch %}
             {% include 'wrin-search-button' %}
           {% endif %}

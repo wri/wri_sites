@@ -1,0 +1,63 @@
+<template>
+  <button class="tray-toggle language-toggle" aria-label="Toggle Language Menu" title="Language Menu" data-tray="language-tray">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 25.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 100 100"
+   style="enable-background:new 0 0 100 100;"
+   xml:space="preserve"
+   sodipodi:docname="noun_Globe_1977475.svg"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06"><metadata
+     id="metadata11"><rdf:RDF><cc:Work
+         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+     id="defs9" /><sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="742"
+     inkscape:window-height="480"
+     id="namedview7"
+     showgrid="false"
+     inkscape:zoom="2.36"
+     inkscape:cx="50"
+     inkscape:cy="50"
+     inkscape:window-x="175"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="Layer_1" /><style
+     type="text/css"
+     id="style2">
+</style><path
+     class="st0"
+     d="M82,26c-7.3-9.7-18.9-16-32-16c-12.9,0-24.5,6.2-31.8,15.7c0,0-0.1,0.1-0.1,0.1C13,32.6,10,40.9,10,50  c0,9,3,17.3,8,23.9c0,0,0,0,0,0C25.3,83.7,36.9,90,50,90c13,0,24.5-6.2,31.8-15.8c0.1-0.1,0.1-0.1,0.1-0.2c5-6.7,8-15,8-24  C90,41,87,32.7,82,26C82,26.1,82,26.1,82,26z M38.8,15.1c-3.3,3.2-6,7.8-8,13.4c-2.9-0.7-5.7-1.5-8.6-2.4  C26.6,21,32.3,17.2,38.8,15.1z M20.1,28.9c3.2,1.1,6.4,2,9.7,2.8c-1.4,5-2.3,10.7-2.4,16.7h-14C13.7,41.1,16.1,34.4,20.1,28.9z   M13.4,51.7h14c0.1,5.9,0.9,11.3,2.3,16.2c-3.4,0.8-6.6,1.7-9.8,2.9C16,65.3,13.7,58.7,13.4,51.7z M21.9,73.6c2.8-1,5.7-1.8,8.7-2.5  c2,5.8,4.8,10.5,8.1,13.8C32.1,82.8,26.3,78.8,21.9,73.6z M48.3,86.5c-6-1-11.2-7.1-14.4-16.1c4.7-0.8,9.5-1.2,14.4-1.2V86.5z   M48.3,65.9c-5.2,0-10.4,0.5-15.4,1.4c-1.3-4.7-2.1-10-2.3-15.6h17.7V65.9z M48.3,48.3H30.7c0.1-5.8,1-11.2,2.4-16  c5.1,1,10.2,1.6,15.3,1.7V48.3z M48.3,30.7c-4.7-0.2-9.5-0.7-14.2-1.6c3.2-8.7,8.3-14.7,14.2-15.7V30.7z M78.1,26.4  c-2.8,1-5.7,1.8-8.7,2.5c-2-5.8-4.8-10.5-8.1-13.8C67.9,17.2,73.7,21.2,78.1,26.4z M51.7,13.5c6,1,11.2,7.1,14.4,16.1  c-4.7,0.8-9.5,1.2-14.4,1.2V13.5z M51.7,34.1c5.2,0,10.4-0.5,15.4-1.4c1.3,4.7,2.1,10,2.3,15.6H51.7V34.1z M51.7,51.7h17.7  c-0.1,5.8-1,11.2-2.4,16c-5.1-1-10.2-1.6-15.3-1.7V51.7z M51.7,86.5V69.3c4.7,0.2,9.5,0.7,14.2,1.6C62.7,79.6,57.6,85.6,51.7,86.5z   M61.2,84.9c3.3-3.2,6-7.8,8-13.4c2.9,0.7,5.7,1.5,8.6,2.4C73.4,79,67.7,82.8,61.2,84.9z M79.9,71.1c-3.2-1.1-6.4-2-9.7-2.8  c1.4-5,2.3-10.6,2.4-16.7h14C86.3,58.9,83.9,65.6,79.9,71.1z M72.7,48.3c-0.1-5.9-0.9-11.3-2.3-16.2c3.4-0.8,6.6-1.7,9.8-2.9  c3.8,5.5,6.1,12,6.4,19.1H72.7z"
+     id="path4" /></svg>
+  </button>
+</template>
+
+<style>
+.tray-contents ul.links a.is-active {
+  color: #ffffff;
+}
+</style>
+<?php
+  $definition['aliases'] = [
+    'wrin-language-button'
+  ];
