@@ -5,4 +5,4 @@ core_version_requirement: '^8.8.0 || ^9'
 package: WRI
 dependencies:
   - wri_seo
-  - content_snippet
+  - content_snippets
