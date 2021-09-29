@@ -4,4 +4,3 @@ description: 'Custom language menu.'
 core_version_requirement: '^8.8.0 || ^9'
 dependencies:
   - sfc
-  - ts_wrin
