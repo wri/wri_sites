@@ -133,6 +133,27 @@ function wri_sites_update_8906() {
 }
 
 /**
+ * Updates the theme to have a white logo field.
+ */
+function wri_sites_update_8907() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('ts_wrin.settings');
+
+  if (empty($config->getRawData()['white_logo'])) {
+    $white_logo = [
+      'use_default' => 0,
+      'path' => 'profiles/contrib/wri_sites/themes/custom/ts_wrin/img/svgs/nav_logo_white.svg',
+    ];
+
+    $config->set('white_logo', $white_logo);
+
+    $config->save(TRUE);
+    $message = 'Updated the theme settings to ask for a white logo, and set the default';
+    return $message;
+  }
+}
+
+/**
  * Installs the default hero block for pages.
  */
 function _install_default_hero_block() {
