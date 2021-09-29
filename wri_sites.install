@@ -125,11 +125,10 @@ function wri_sites_update_8905() {
 function wri_sites_update_8906() {
   $existing_block =  \Drupal::entityTypeManager()
     ->getStorage('block_content')
-    ->loadRevision(100000);
+    ->loadRevision(100070);
 
-  if ($existing_block) {
-    $existing_block->set('revision_id', 100070);
-    $existing_block->save();
+  if (!$existing_block) {
+    _install_default_program_hero();
   }
 }
 
