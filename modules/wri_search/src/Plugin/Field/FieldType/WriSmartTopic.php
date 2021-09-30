@@ -2,9 +2,8 @@
 
 namespace Drupal\wri_search\Plugin\Field\FieldType;
 
-
 /**
- * Variant of the topic field that includes all fields that could contain the topic.
+ * Topic field that includes all fields that could contain the topic.
  *
  * @FieldType(
  *   id = "smart_topic_parent",
@@ -27,19 +26,20 @@ class WriSmartTopic extends WriCalculatedField {
       $this->isCalculated = TRUE;
     }
   }
+
   /**
    * Compute the values.
    */
-  protected function computeValue(){
+  protected function computeValue() {
     // Add field_primary_topic.
     // Add field_topics
     // Add field_tags
-    // Add field_areas_of_expertise
+    // Add field_areas_of_expertise.
     $node = $this->getEntity();
     $field_primary_topics = $node->field_primary_topic ? $node->field_primary_topic->referencedEntities() : [];
-    $field_topics = $node->field_topics ? $node->field_topics->referencedEntities(): [];
-    $field_tags = $node->field_tags ? $node->field_tags->referencedEntities(): [];
-    $field_areas_of_expertise =  $node->field_areas_of_expertise ? $node->field_areas_of_expertise->referencedEntities() : [];
+    $field_topics = $node->field_topics ? $node->field_topics->referencedEntities() : [];
+    $field_tags = $node->field_tags ? $node->field_tags->referencedEntities() : [];
+    $field_areas_of_expertise = $node->field_areas_of_expertise ? $node->field_areas_of_expertise->referencedEntities() : [];
 
     $all_tags = $field_primary_topics + $field_topics + $field_tags + $field_areas_of_expertise;
     $index = 0;

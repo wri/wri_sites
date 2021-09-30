@@ -5,15 +5,8 @@
  * Update hooks for search
  */
 
-use Drupal\Core\Render\BubbleableMetadata;
-use Drupal\search_api\Plugin\views\query\SearchApiQuery;
-use Drupal\views\ViewExecutable;
-use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\Core\Form\FormStateInterface;
-
 /**
- * Implements hook_entity_base_field_info().
+ * Adds the new Smart Topic index field and sets All Topic facets to use it.
  */
 function wri_search_update_8901() {
   $search_index = \Drupal::configFactory()->getEditable('search_api.index.sitewide');
