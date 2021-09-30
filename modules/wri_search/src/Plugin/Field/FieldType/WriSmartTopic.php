@@ -2,8 +2,9 @@
 
 namespace Drupal\wri_search\Plugin\Field\FieldType;
 
+
 /**
- * Variant of the 'text' field that calculates the related animal.
+ * Variant of the topic field that includes all fields that could contain the topic.
  *
  * @FieldType(
  *   id = "smart_topic_parent",
@@ -20,30 +21,42 @@ class WriSmartTopic extends WriCalculatedField {
     if (!$this->isCalculated) {
       $entity = $this->getEntity();
       if (!$entity->isNew()) {
-        $parent = $this->getAllTopics();
-        $this->parent->setValue($parent);
+        $is_child = $this->computeValue();
+        $this->parent->setValue($is_child);
       }
       $this->isCalculated = TRUE;
     }
   }
-
   /**
-   * Returns the parent id, or the term id if no parent set.
+   * Compute the values.
    */
-  private function getAllTopics() {
+  protected function computeValue(){
     // Add field_primary_topic.
     // Add field_topics
     // Add field_tags
     // Add field_areas_of_expertise
-    $entity = $this->getEntity();
-    if ($entity->parent->target_id == 0) {
-      $parent = $entity->id();
-    }
-    else {
-      $parent = $entity->parent->target_id;
+    $node = $this->getEntity();
+    $field_primary_topics = $node->field_primary_topic ? $node->field_primary_topic->referencedEntities() : [];
+    $field_topics = $node->field_topics ? $node->field_topics->referencedEntities(): [];
+    $field_tags = $node->field_tags ? $node->field_tags->referencedEntities(): [];
+    $field_areas_of_expertise =  $node->field_areas_of_expertise ? $node->field_areas_of_expertise->referencedEntities() : [];
+
+    $all_tags = $field_primary_topics + $field_topics + $field_tags + $field_areas_of_expertise;
+    $index = 0;
+    $results = [];
+    foreach ($all_tags as $tag) {
+      if ($tag->bundle() == 'topics_and_subtopics') {
+        if ($tag->parent->target_id == 0) {
+          $results[$index] = $tag->id();
+        }
+        else {
+          $results[$index] = $tag->parent->target_id;
+        }
+        $index++;
+      }
     }
 
-    return $parent;
+    return $results;
   }
 
 }
