@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @file
+ * Update hooks for search
+ */
+
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\search_api\Plugin\views\query\SearchApiQuery;
+use Drupal\views\ViewExecutable;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function wri_search_update_8901() {
+  $search_index = \Drupal::configFactory()->getEditable('search_api.index.sitewide');
+  $smart_topic_parent = [
+    'label' => 'Smart Topic',
+    'datasource_id' => 'entity:node',
+    'property_path' => 'smart_topic_parent',
+    'type' => 'integer',
+    'dependencies' => [
+      'module' => ['wri_search']
+    ],
+  ];
+  $search_index->set('field_settings.smart_topic_parent', $smart_topic_parent);
+  $search_index->save(TRUE);
+
+  foreach(['facets.facet.experts_all_topics', 'facets.facet.all_event_topics', 'facets.facet.all_topics'] as $config_name) {
+    $experts = \Drupal::configFactory()->getEditable($config_name);
+    $experts->set('field_identifier', 'smart_topic_parent');
+    $experts->save(TRUE);
+  }
+}
