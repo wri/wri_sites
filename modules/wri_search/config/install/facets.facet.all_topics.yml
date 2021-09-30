@@ -16,7 +16,7 @@ url_alias: topic
 weight: -2
 min_count: 0
 show_only_one_result: true
-field_identifier: top_level_topic
+field_identifier: smart_topic_parent
 facet_source_id: 'search_api:views_page__resources__resources_page'
 widget:
   type: links

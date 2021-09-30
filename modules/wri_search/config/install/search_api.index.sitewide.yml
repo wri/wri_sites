@@ -344,6 +344,14 @@ field_settings:
     dependencies:
       module:
         - node
+  smart_topic_parent:
+    label: 'Smart Topic'
+    datasource_id: 'entity:node'
+    property_path: smart_topic_parent
+    type: integer
+    dependencies:
+      module:
+        - wri_search
   status:
     label: Published
     datasource_id: 'entity:node'
