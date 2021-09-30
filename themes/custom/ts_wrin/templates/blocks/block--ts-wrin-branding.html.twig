@@ -16,8 +16,8 @@
 {% block content %}
   {% if site_logo %}
     <a href="{{ path('<front>') }}" rel="home" class="site-logo">
-      <img class="logo-white hidden" src="/profiles/contrib/wri_sites/themes/custom/ts_wrin/img/svgs/nav_logo_white.svg" alt="{{ 'Home'|t }}" />
-      <img class="logo-color" src="/profiles/contrib/wri_sites/themes/custom/ts_wrin/img/svgs/nav_logo_color.svg" alt="{{ 'Home'|t }}" />
+      <img class="logo-white hidden" src="{{ white_logo }}" alt="{{ 'Home'|t }}" />
+      <img class="logo-color" src="{{ site_logo }}" alt="{{ 'Home'|t }}" />
     </a>
   {% endif %}
   {% if site_name %}
