@@ -4,31 +4,33 @@
  */
 function wri_event_update_8901() {
   // Update the views.view.events view.
-  $config_factory = \Drupal::configFactory();
+  // $config_factory = \Drupal::configFactory();
 
-  // Load the view.
-  $view = $config_factory->getEditable('views.view.events');
+  // // Load the view.
+  // $view = $config_factory->getEditable('views.view.events');
 
-  // Go through each display on each view.
-  $displays = $view->get('display');
-  foreach ($displays as $display_name => $display) {
+  // // Go through each display on each view.
+  // $displays = $view->get('display');
+  // foreach ($displays as $display_name => $display) {
 
-    $base = "display.$display_name.display_options";
-    // Go through all the entity fields on each display and find ones currently using 'date' as the plugin.
-    if (!empty($display['display_options'])) {
-      // Make sure the comment is added.
-      $view->set($base . '.display_comment', 'This view is altered by the wri_event_views_query_alter function, which sets the order do "DESC" if the "View Past Events" option is chosen.');
-    }
-    if (!empty($display['display_options']['sorts']['field_date_time'])) {
-      // Make sure the sort is ASC.
+  //   $base = "display.$display_name.display_options";
+  //   // Go through all the entity fields on each display and find ones currently using 'date' as the plugin.
+  //   if (!empty($display['display_options'])) {
+  //     // Make sure the comment is added.
+  //     $view->set($base . '.display_comment', 'This view is altered by the wri_event_views_query_alter function, which sets the order do "DESC" if the "View Past Events" option is chosen.');
+  //   }
+  //   if (!empty($display['display_options']['sorts']['field_date_time'])) {
+  //     // Make sure the sort is ASC.
 
-      $view->set($base . '.sorts.field_date_time.order', 'ASC');
-    }
-  }
+  //     $view->set($base . '.sorts.field_date_time.order', 'ASC');
+  //   }
+  // }
 
-  $view->save(TRUE);
-  // Compose a message about what was done.
-  // Omitted in this example.
-  $message = 'Updated the Events view to sort past events DESC and future events ASC.';
-  return $message;
+  // $view->save(TRUE);
+  // // Compose a message about what was done.
+  // // Omitted in this example.
+  // $message = 'Updated the Events view to sort past events DESC and future events ASC.';
+  // return $message;
+
+  print 'Commenting out for now due to causing issue with config import.';
 }
