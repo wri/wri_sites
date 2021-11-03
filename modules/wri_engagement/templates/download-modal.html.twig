@@ -1,24 +1,29 @@
-<a class="files-overlay-trigger-webform button">{{ "Download"|t }}</a>
+<a class="files-overlay-trigger button">{{ "Download"|t }}</a>
 <div class="files-modal">
-  <div id="files-modal-list">
-    {{ content }}
-  </div>
-  <div id="files-registration-form">
-    <h1>{{ "Access the Full Report"|t }} {{ content['#object'].values.nid }}</h1>
-    <p>{{ "Download the free full report! By accessing the full PDF, you agree to receive communications from WRI and P4G. You can unsubscribe at any time."|t  }}</p>
+  <div class="files-modal-unregistered">
+    <h1>{{ "Download the Publication"|t }} {{ content['#object'].values.nid }}</h1>
     <form id="pardot-subscription">
       <label for="first_name" class="visually-hidden">{{ "First Name"|t }}</label>
       <input type="text" id="first_name" name="first_name" class="registration" placeholder="{{ "First Name"|t }}">
       <label for="last_name" class="visually-hidden">{{ "Last Name"|t }}</label>
-      <input type="text" id="last_name" name="last_name" class="registration" placeholder="{{ "Last Name"|t }}">
+      <input type="text" id="last_name" name="last_name" class="registration" placeholder="{{ "Last Name*"|t }}">
       <br>
       <label for="email" class="visually-hidden">{{ "Email"|t }}</label>
-      <input type="email" id="email" name="email" class="registration" placeholder="{{ "Email"|t }}">
+      <input type="email" id="email" name="email" class="registration" placeholder="{{ "Email*"|t }}">
       <label for="organization" class="visually-hidden">{{  "Organization"|t }}</label>
       <input type="text" id="organization" name="organization" class="registration" placeholder="{{ "Organization"|t }}">
-      <input type="hidden" id="file_path" name="file_path" value="">
-      <br><input class="pardot-submission" type="submit" value="Submit">
-      <br><a id="skip-registration" href="#">{{ "No thanks, show me the files"|t }}</a>
+      <input type="hidden" id="file_path" name="file_path" value="{{ url("<current>") }}">
+      <input type="hidden" id="primary_topic" name="primary_topic" value="{{ primary_topic }}">
+      <p><i>{{ "By sharing your information you agree to receive updates from WRI. We'll also email you a copy of the publication. You can unsubscribe or change your email preferences at any time."|t  }}</i></p>
+      <input class="pardot-submission" type="submit" value="Download">
+      <div class="direct-download-link"><p><i>If you'd rather download the publication directly, <a id="skip-registration" href="#">{{ "click here."|t }}</a></i></p></div>
     </form>
+  </div>
+  <div class="files-modal-registered">
+    <div class="files-modal-confirmation">
+      <h1>Thank you for downloading this publication from WRI!</h1>
+      <p>You should receive an email confirmation and copy of the report shortly.</p>
+    </div>
+    {{ content }}
   </div>
 </div>
