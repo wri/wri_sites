@@ -83,6 +83,15 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  langcode:
+    type: language
+    weight: 0
+    region: content
+    label: above
+    settings:
+      link_to_entity: false
+      native_language: false
+    third_party_settings: {  }
 hidden:
   body: true
   field_featured_experts: true

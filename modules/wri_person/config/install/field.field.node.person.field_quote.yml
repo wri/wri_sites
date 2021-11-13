@@ -19,7 +19,7 @@ bundle: person
 label: Quote
 description: 'Enter a quote for Leadership team members only.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

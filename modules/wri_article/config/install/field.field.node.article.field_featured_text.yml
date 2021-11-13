@@ -19,7 +19,7 @@ bundle: article
 label: 'Featured Text'
 description: 'If you would like the text that shows when featuring this item to differ from the body summary, overwrite this here. The default value should be <code>&#91;wri_tokens:summary&#93;</code>'
 required: false
-translatable: false
+translatable: true
 default_value:
   -
     value: "<p>[wri_tokens:summary]</p>\r\n"

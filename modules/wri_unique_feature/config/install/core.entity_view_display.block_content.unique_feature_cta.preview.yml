@@ -161,4 +161,5 @@ content:
     type: entity_reference_label
     region: first
 hidden:
+  langcode: true
   search_api_excerpt: true

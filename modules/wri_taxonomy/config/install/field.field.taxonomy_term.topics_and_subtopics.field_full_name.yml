@@ -11,7 +11,7 @@ bundle: topics_and_subtopics
 label: 'Full Name'
 description: 'Enter the full name of the Topic/Subtopic. This will be displayed in Narrative Taxonomy blocks. '
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

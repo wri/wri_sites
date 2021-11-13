@@ -4,6 +4,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.homepage.field_homepage_hero
+    - field.field.node.homepage.field_metatags
     - field.field.node.homepage.layout_builder__layout
     - node.type.homepage
   module:
@@ -26,6 +27,8 @@ content:
 hidden:
   content_moderation_control: true
   field_homepage_hero: true
+  field_metatags: true
+  langcode: true
   layout_builder__layout: true
   search_api_excerpt: true
   wri_social_sharing_block: true

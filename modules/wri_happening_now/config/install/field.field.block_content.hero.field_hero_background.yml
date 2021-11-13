@@ -13,7 +13,7 @@ bundle: hero
 label: 'Hero background'
 description: 'Choose a background color for the hero. This will only show if there is no hero image.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

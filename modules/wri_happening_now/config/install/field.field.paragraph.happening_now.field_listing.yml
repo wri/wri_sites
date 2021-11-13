@@ -19,7 +19,7 @@ default_value:
   -
     token_help: ''
     display_id: teasers
-    arguments: '[paragraph:field_filter_by_resource_type:target_id]/[paragraph:field_tag:target_id]/[paragraph:field_custom_happening_nows:array:target_id:join:+]'
+    arguments: '[paragraph:field_filter_by_resource_type:array:target_id:join:+]/[paragraph:field_tag:target_id]/[paragraph:field_custom_happening_nows:array:target_id:join:+]'
     items_to_display: '3'
     target_uuid: 1d2fb920-f85d-4de8-945b-3e9736ccf16b
 default_value_callback: ''

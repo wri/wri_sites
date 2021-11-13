@@ -24,4 +24,5 @@ hidden:
   field_intro: true
   field_landing_page: true
   field_main_image: true
+  langcode: true
   search_api_excerpt: true

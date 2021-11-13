@@ -11,7 +11,7 @@ bundle: person
 label: Projects
 description: 'Which project(s) is this person an expert in?'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

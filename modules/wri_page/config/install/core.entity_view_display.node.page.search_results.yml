@@ -25,19 +25,12 @@ third_party_settings:
       settings:
         label: ''
     regions:
-      left_section:
-        - 'bundle_field:node'
       main_section:
         - node_post_date
         - node_title
       right_section:
         - field_main_image
     fields:
-      'bundle_field:node':
-        plugin_id: 'bundle_field:node'
-        weight: 0
-        label: hidden
-        formatter: default
       node_post_date:
         plugin_id: node_post_date
         weight: 1
@@ -114,6 +107,7 @@ hidden:
   field_intro: true
   field_long_title: true
   field_metatags: true
+  langcode: true
   layout_builder__layout: true
   links: true
   search_api_excerpt: true

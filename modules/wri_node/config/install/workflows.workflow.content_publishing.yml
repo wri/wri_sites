@@ -64,6 +64,7 @@ type_settings:
     submit_for_review:
       label: 'Submit for Review'
       from:
+        - archived
         - draft
       to: in_review
       weight: 2

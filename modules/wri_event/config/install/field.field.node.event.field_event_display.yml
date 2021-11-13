@@ -13,7 +13,7 @@ bundle: event
 label: 'Event display'
 description: 'Robust: with a header image, title overlay. Simple: no hero image.'
 required: true
-translatable: false
+translatable: true
 default_value:
   -
     value: simple

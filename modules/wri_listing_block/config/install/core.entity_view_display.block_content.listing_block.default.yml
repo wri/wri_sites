@@ -114,4 +114,5 @@ hidden:
   field_filter_by_resource_type: true
   field_filter_by_tag: true
   field_tag: true
+  langcode: true
   search_api_excerpt: true

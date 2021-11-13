@@ -32,12 +32,12 @@ settings:
     negate: 0
     target_bundles:
       impact_in_action_blocks: impact_in_action_blocks
-      statistics: statistics
       side_by_side: side_by_side
-      image_cta: image_cta
+      statistics: statistics
       image: image
-      narrative_taxonomy: narrative_taxonomy
+      image_cta: image_cta
       listing_block: listing_block
+      narrative_taxonomy: narrative_taxonomy
       small_cta: small_cta
       superfeatured_item: superfeatured_item
       unique_feature_cta: unique_feature_cta

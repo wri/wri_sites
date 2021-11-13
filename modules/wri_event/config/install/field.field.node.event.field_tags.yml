@@ -13,7 +13,7 @@ bundle: event
 label: 'Tags & Other Topics'
 description: 'Associate this content with a tag or additional Topics (other than the primary topic)'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

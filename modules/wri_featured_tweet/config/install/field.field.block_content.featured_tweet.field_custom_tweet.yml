@@ -12,7 +12,7 @@ bundle: featured_tweet
 label: 'Custom Tweet'
 description: 'By default, this block will pull in the most recently-updated article with a Featured Tweet. To override that logic, select a custom tweet here.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

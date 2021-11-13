@@ -13,7 +13,7 @@ bundle: image_cta
 label: Background
 description: 'Select a background color for this CTA'
 required: true
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

@@ -11,7 +11,7 @@ bundle: featured
 label: 'Is Featured'
 description: 'Check this box if this taxonomy term will indicate that an item is Featured on the Resources page'
 required: false
-translatable: false
+translatable: true
 default_value:
   -
     value: 0

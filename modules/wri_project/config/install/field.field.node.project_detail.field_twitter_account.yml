@@ -10,7 +10,7 @@ id: node.project_detail.field_twitter_account
 field_name: field_twitter_account
 entity_type: node
 bundle: project_detail
-label: 'Visit on Twitter'
+label: 'Follow on Twitter'
 description: ''
 required: false
 translatable: true

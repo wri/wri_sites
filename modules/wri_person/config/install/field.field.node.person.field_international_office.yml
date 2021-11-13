@@ -12,7 +12,7 @@ bundle: person
 label: 'International Office'
 description: 'Does this person work at an international office?'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

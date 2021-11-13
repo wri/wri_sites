@@ -9,7 +9,7 @@ id: node.project_detail.field_primary_contacts
 field_name: field_primary_contacts
 entity_type: node
 bundle: project_detail
-label: 'Primary contacts'
+label: 'Media Contacts'
 description: 'Note that the "Featured Experts" view also on Projects is automatically generated from the list of all Persons who have this project listed in their "Projects" field. Add Persons to this project by finding and editing them <a href="/admin/content?title=&type=person&status=All&langcode=All" target="_blank">here</a>.'
 required: false
 translatable: true
