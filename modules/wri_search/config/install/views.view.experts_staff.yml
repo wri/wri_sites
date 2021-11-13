@@ -450,7 +450,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: "<p class=\"experts-header-text padding-bottom\">WRI brings together 1,400 experts and other staff in working in seven programs: food, forests, water, energy, cities, climate and the ocean and four centers of excellence for business, economics, finance and equity. Our staff and researchers work globally to produce data-based solutions that generate real change on the ground.\r\n</br> </br>\r\n<a href=\"https://www.wri.org/media-contacts\">Contact our media team</a> to arrange an interview with any of our experts.\r\n\r\n</p>\r\n"
+            value: "<p class=\"experts-header-text padding-bottom\">WRI brings together 1,400 experts and other staff in working in seven programs: food, forests, water, energy, cities, climate and the ocean and four centers of excellence for business, economics, finance and equity. Our staff and researchers work globally to produce data-based solutions that generate real change on the ground.</p>\r\n"
             format: unrestricted_text
           plugin_id: text
       footer: {  }
