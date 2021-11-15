@@ -24,9 +24,7 @@ dependencies:
     - field.field.node.person.field_weight
     - field.field.node.person.layout_builder__layout
     - node.type.person
-    - workflows.workflow.content_publishing
   module:
-    - content_moderation
     - field_group
     - link
     - media_library
@@ -127,6 +125,16 @@ content:
     region: content
   field_areas_of_expertise:
     weight: 134
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_department:
+    weight: 137
     settings:
       match_operator: CONTAINS
       match_limit: 10
