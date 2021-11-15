@@ -9,9 +9,7 @@ dependencies:
     - field.field.node.page.field_metatags
     - field.field.node.page.layout_builder__layout
     - node.type.page
-    - workflows.workflow.content_publishing
   module:
-    - content_moderation
     - media_library
     - metatag
     - path
