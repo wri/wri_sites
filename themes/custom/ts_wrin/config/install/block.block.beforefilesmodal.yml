@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:modal:d21dee48-13ad-4782-abcd-68b8582a5c3e'
+  module:
+    - block_content
+    - node
+  theme:
+    - ts_wrin
+id: beforefilesmodal
+theme: ts_wrin
+region: modals
+weight: 0
+provider: null
+plugin: 'block_content:d21dee48-13ad-4782-abcd-68b8582a5c3e'
+settings:
+  id: 'block_content:d21dee48-13ad-4782-abcd-68b8582a5c3e'
+  label: 'File download interrupter'
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      data: data
+      publication: publication
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

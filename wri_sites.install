@@ -44,6 +44,7 @@ function wri_sites_install() {
 
   _install_default_hero_block();
   _install_io_and_country_blocks();
+  _install_filedownload_blocks();
   _install_default_program_hero();
   _install_narrative_taxonomy();
 }
@@ -217,6 +218,24 @@ function _install_io_and_country_blocks() {
       'arguments' => '[block_content:field_content_types:target_id]/[block_content:field_featured:*:target_id:join:+]/[block_content:field_filter_by_region:target_id]+[current-page:node:field_region:target_id]',
       'items_to_display' => 24,
     ],
+  ]);
+  $block->save();
+}
+
+/**
+ * Installs the file interrupter block.
+ */
+function _install_default_hero_block() {
+  // Adds a default Node hero block so the layout builder can use it.
+  $block = BlockContent::create([
+    'info' => 'File download interrupter',
+    'type' => 'modal',
+    'field_title' => 'Tell us about yourself',
+    'field_webform' => 'call_to_action',
+    'field_cta_background' => 'has-blue-background-color',
+    'langcode' => 'en',
+    'reusable' => FALSE,
+    'uuid' => 'd21dee48-13ad-4782-abcd-68b8582a5c3e'
   ]);
   $block->save();
 }
