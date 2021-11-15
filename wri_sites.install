@@ -236,7 +236,7 @@ function _install_filedownload_blocks() {
     'field_webform' => 'call_to_action',
     'field_cta_background' => 'has-blue-background-color',
     'langcode' => 'en',
-    'reusable' => FALSE,
+    'reusable' => TRUE,
     'uuid' => 'd21dee48-13ad-4782-abcd-68b8582a5c3e'
   ]);
   $block->save();

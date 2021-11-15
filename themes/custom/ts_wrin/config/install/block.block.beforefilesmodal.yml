@@ -1,10 +1,7 @@
 langcode: en
 status: true
 dependencies:
-  content:
-    - 'block_content:modal:d21dee48-13ad-4782-abcd-68b8582a5c3e'
   module:
-    - block_content
     - ctools
   theme:
     - ts_wrin
