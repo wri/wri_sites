@@ -5,7 +5,7 @@ dependencies:
     - 'block_content:modal:d21dee48-13ad-4782-abcd-68b8582a5c3e'
   module:
     - block_content
-    - node
+    - ctools
   theme:
     - ts_wrin
 id: beforefilesmodal
@@ -23,8 +23,8 @@ settings:
   info: ''
   view_mode: full
 visibility:
-  node_type:
-    id: node_type
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
     bundles:
       data: data
       publication: publication

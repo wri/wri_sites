@@ -225,7 +225,7 @@ function _install_io_and_country_blocks() {
 /**
  * Installs the file interrupter block.
  */
-function _install_default_hero_block() {
+function _install_filedownload_blocks() {
   // Adds a default Node hero block so the layout builder can use it.
   $block = BlockContent::create([
     'info' => 'File download interrupter',
