@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.person.body
     - field.field.node.person.field_alternate_contact
     - field.field.node.person.field_areas_of_expertise
+    - field.field.node.person.field_department
     - field.field.node.person.field_email
     - field.field.node.person.field_first_name
     - field.field.node.person.field_international_office
@@ -95,6 +96,7 @@ hidden:
   body: true
   field_alternate_contact: true
   field_areas_of_expertise: true
+  field_department: true
   field_email: true
   field_first_name: true
   field_international_office: true
@@ -109,6 +111,7 @@ hidden:
   field_twitter_account: true
   field_type: true
   field_weight: true
+  langcode: true
   layout_builder__layout: true
   links: true
   search_api_excerpt: true
