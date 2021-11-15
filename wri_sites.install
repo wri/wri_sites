@@ -22,6 +22,9 @@ function wri_sites_install() {
     ->set('register', 'admin_only')
     ->save();
 
+  // Adds a block content the theme will need.
+  _install_filedownload_blocks();
+
   // We have to install our theme after claro, or the admin theme is messed up.
   \Drupal::service('theme_installer')->install(['ts_wrin'], TRUE);
 
@@ -44,7 +47,6 @@ function wri_sites_install() {
 
   _install_default_hero_block();
   _install_io_and_country_blocks();
-  _install_filedownload_blocks();
   _install_default_program_hero();
   _install_narrative_taxonomy();
 }
