@@ -16,12 +16,33 @@ use Drupal\Core\Url;
  * Implements hook_entity_type_alter().
  */
 function wri_taxonomy_entity_type_alter(array &$entity_types) {
+  $moduleHandler = \Drupal::service('module_handler');
   // Create a custom callback for the term uri.
   $entity_types['taxonomy_term']->setUriCallback('wri_taxonomy_term_uri');
   // Disable the default cononical link.
   $links = $entity_types['taxonomy_term']->get('links');
   unset($links['canonical']);
   $entity_types['taxonomy_term']->set('links', $links);
+
+  // This bit is necessary because the content_translation module requires
+  // there be a canonical link, which we just unset.
+  if ($moduleHandler->moduleExists('content_translation')) {
+    // Provide default route names for the translation paths.
+    $entity_type = $entity_types['taxonomy_term'];
+    if (!$entity_type->hasLinkTemplate('drupal:content-translation-overview')) {
+      $translations_path = '/taxonomy/term/{taxonomy_term}/translations';
+      $entity_type->setLinkTemplate('drupal:content-translation-overview', $translations_path);
+      $entity_type->setLinkTemplate('drupal:content-translation-add', $translations_path . '/add/{source}/{target}');
+      $entity_type->setLinkTemplate('drupal:content-translation-edit', $translations_path . '/edit/{language}');
+      $entity_type->setLinkTemplate('drupal:content-translation-delete', $translations_path . '/delete/{language}');
+    }
+    // @todo Remove this as soon as menu access checks rely on the
+    //   controller. See https://www.drupal.org/node/2155787.
+    $translation['content_translation'] = [
+      'access_callback' => 'content_translation_translate_access',
+    ];
+    $entity_types['taxonomy_term']->set('translation', $translation);
+  }
 }
 
 /**
