@@ -106,4 +106,5 @@ content:
     region: content
 hidden:
   field_image_cta_background: true
+  langcode: true
   search_api_excerpt: true

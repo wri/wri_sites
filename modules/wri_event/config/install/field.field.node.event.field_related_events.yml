@@ -11,7 +11,7 @@ bundle: event
 label: 'Related Events'
 description: 'Add related events here if you''d like to feature any in particular. Leave empty to have the system auto-generate related events.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

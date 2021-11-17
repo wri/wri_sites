@@ -12,7 +12,7 @@ bundle: happening_now
 label: 'Filter by Resource Type'
 description: 'Note: Only Articles, Data, Publications, and Projects will show in happening now. You can further refine the Type of resource to show using this field.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

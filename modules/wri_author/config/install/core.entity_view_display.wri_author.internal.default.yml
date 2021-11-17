@@ -6,6 +6,7 @@ dependencies:
     - wri_author.wri_author_type.internal
   module:
     - ds
+    - wri_author
 third_party_settings:
   ds:
     layout:
@@ -42,8 +43,9 @@ content:
           id: reset
           settings:
             lb: ''
-    type: entity_reference_label
+    type: entity_reference_label_unpublished
     region: ds_content
 hidden:
+  langcode: true
   name: true
   search_api_excerpt: true

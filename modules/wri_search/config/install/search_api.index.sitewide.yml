@@ -2,39 +2,41 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.body
-    - field.storage.node.field_date_time
-    - field.storage.node.field_primary_topic
-    - field.storage.node.field_type
-    - field.storage.node.field_email
-    - field.storage.node.field_featured
-    - field.storage.node.field_featured_headline
-    - field.storage.node.field_featured_media
-    - field.storage.node.field_featured_text
-    - field.storage.node.field_featured_tweet
-    - field.storage.node.field_first_name
-    - field.storage.node.field_international_office
-    - field.storage.node.field_intro
-    - field.storage.taxonomy_term.field_is_featured
-    - field.storage.node.field_last_name
-    - field.storage.node.field_leadership
-    - field.storage.node.field_main_image
-    - field.storage.node.field_project_expert
-    - field.storage.node.field_projects
-    - field.storage.node.field_region
-    - field.storage.node.field_tags
-    - field.storage.node.field_weight
-    - field.storage.node.field_languages_spoken
-    - field.storage.node.field_areas_of_expertise
-    - field.storage.node.field_title
-    - field.storage.node.field_quote
-    - field.storage.node.field_topics
-    - search_api.server.localhost
+  - field.storage.node.body
+  - field.storage.node.field_areas_of_expertise
+  - field.storage.node.field_date_time
+  - field.storage.node.field_department
+  - field.storage.node.field_email
+  - field.storage.node.field_featured
+  - field.storage.node.field_featured_headline
+  - field.storage.node.field_featured_media
+  - field.storage.node.field_featured_text
+  - field.storage.node.field_featured_tweet
+  - field.storage.node.field_first_name
+  - field.storage.node.field_international_office
+  - field.storage.node.field_intro
+  - field.storage.node.field_languages_spoken
+  - field.storage.node.field_last_name
+  - field.storage.node.field_leadership
+  - field.storage.node.field_main_image
+  - field.storage.node.field_primary_topic
+  - field.storage.node.field_project_expert
+  - field.storage.node.field_projects
+  - field.storage.node.field_quote
+  - field.storage.node.field_region
+  - field.storage.node.field_tags
+  - field.storage.node.field_title
+  - field.storage.node.field_topics
+  - field.storage.node.field_type
+  - field.storage.node.field_weight
+  - field.storage.taxonomy_term.field_is_featured
+  - search_api.server.localhost
+
   module:
-    - node
     - taxonomy
-    - wri_search
+    - node
     - token
+    - wri_search
     - search_api
     - search_api_exclude_entity
 id: sitewide
@@ -96,6 +98,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_date_time
+  field_department:
+    label: Department
+    datasource_id: 'entity:node'
+    property_path: field_department
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_department
   field_email:
     label: Email
     datasource_id: 'entity:node'

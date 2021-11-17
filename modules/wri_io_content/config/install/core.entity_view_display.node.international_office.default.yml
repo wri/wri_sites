@@ -103,6 +103,7 @@ hidden:
   field_io_link: true
   field_main_image: true
   field_region: true
+  langcode: true
   layout_builder__layout: true
   links: true
   search_api_excerpt: true

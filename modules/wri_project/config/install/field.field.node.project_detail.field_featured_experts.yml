@@ -12,7 +12,7 @@ bundle: project_detail
 label: 'Featured Experts'
 description: 'There are many experts who work on this project. To feature a subset of experts on the project''s main page, choose them here.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

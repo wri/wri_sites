@@ -9,10 +9,10 @@ id: node.program_center.field_primary_contacts
 field_name: field_primary_contacts
 entity_type: node
 bundle: program_center
-label: 'Primary Contacts'
+label: 'Media Contacts'
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

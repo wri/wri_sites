@@ -13,7 +13,7 @@ bundle: external
 label: 'Person Link'
 description: 'The author, external to WRI, with an optional link. If there is no link for this person, use &lt;nolink&gt;.'
 required: true
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

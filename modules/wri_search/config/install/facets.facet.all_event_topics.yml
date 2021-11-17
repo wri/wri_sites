@@ -43,6 +43,13 @@ processor_configs:
       sort: 40
     settings:
       sort: ASC
+  exclude_specified_items:
+    processor_id: exclude_specified_items
+    weights:
+      build: 50
+    settings:
+      exclude: 'Asia,Europe,Africa,Latin America,North America'
+      regex: false
   translate_entity:
     processor_id: translate_entity
     weights:

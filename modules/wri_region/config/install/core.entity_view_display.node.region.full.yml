@@ -139,6 +139,7 @@ hidden:
   field_narrative_taxonomy: true
   field_region: true
   field_transparent_header: true
+  langcode: true
   layout_builder__layout: true
   links: true
   search_api_excerpt: true

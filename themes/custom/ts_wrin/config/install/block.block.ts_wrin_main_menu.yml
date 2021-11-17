@@ -22,9 +22,11 @@ settings:
   follow_parent: active
   level: 1
   depth: 2
-  expand: false
+  expand_all_items: false
   parent: 'main:'
   render_parent: true
   suggestion: main
-  expand_all_items: false
+  label_type: block
+  label_link: false
+  expand: false
 visibility: {  }

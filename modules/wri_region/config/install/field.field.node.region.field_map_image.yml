@@ -12,7 +12,7 @@ bundle: region
 label: 'Map Image'
 description: 'Full-width white png with a clear background to show the region. Should fit in a box 760px wide.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

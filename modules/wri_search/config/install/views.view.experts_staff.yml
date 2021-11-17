@@ -6,10 +6,7 @@ dependencies:
     - search_api.index.sitewide
     - taxonomy.vocabulary.resource_type
   content:
-    - 'taxonomy_term:resource_type:29fab1ac-dae8-4d92-8648-d423c5bb35ec'
-    - 'taxonomy_term:resource_type:72dba463-6f7a-4eac-b0fe-689f63ce617f'
-    - 'taxonomy_term:resource_type:82b34476-e9dd-414b-b131-e32f2a78b981'
-    - 'taxonomy_term:resource_type:b779eb34-cefd-4a38-b243-cac1f9904869'
+    - 'taxonomy_term:resource_type:24b09a57-3cb3-47c7-97f0-d2047eefa25f'
   module:
     - search_api
     - views_extras
@@ -31,8 +28,12 @@ display:
         type: none
         options: {  }
       cache:
-        type: search_api_tag
-        options: {  }
+        type: time
+        options:
+          results_lifespan: 3600
+          results_lifespan_custom: 0
+          output_lifespan: 21600
+          output_lifespan_custom: 0
       query:
         type: views_query
         options:
@@ -311,12 +312,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          operator: or
+          operator: not
           value:
-            - 37
-            - 35
-            - 30047
-            - 30049
+            - 36
           group: 1
           exposed: false
           expose:
@@ -353,6 +351,46 @@ display:
           hierarchy: false
           error_message: true
           plugin_id: search_api_term
+        search_api_language:
+          id: search_api_language
+          table: search_api_index_sitewide
+          field: search_api_language
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_language
       sorts:
         field_leadership:
           id: field_leadership
@@ -400,7 +438,7 @@ display:
           group_type: group
           admin_label: ''
           empty: false
-          content: '<span class=''totals''>@total Experts</span>'
+          content: '<span class=''totals''>@total Featured Experts</span>'
           plugin_id: extra_result
         area:
           id: area
@@ -412,7 +450,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: "<p class=\"experts-header-text padding-bottom\">WRI brings together 1,400 experts and other staff in working in seven programs: food, forests, water, energy, cities, climate and the ocean and four centers of excellence for business, economics, finance and governance. Our staff and researchers work globally to produce data-based solutions that generate real change on the ground.</p>\r\n"
+            value: "<p class=\"experts-header-text padding-bottom\">WRI brings together 1,400 experts and other staff in working in seven programs: food, forests, water, energy, cities, climate and the ocean and four centers of excellence for business, economics, finance and equity. Our staff and researchers work globally to produce data-based solutions that generate real change on the ground.</p>\r\n"
             format: unrestricted_text
           plugin_id: text
       footer: {  }
@@ -440,9 +478,7 @@ display:
     display_options:
       display_extenders: {  }
       display_description: ''
-      path: experts
-      cache:
-        type: none
+      path: about/experts-staff
       defaults:
         cache: false
     cache_metadata:

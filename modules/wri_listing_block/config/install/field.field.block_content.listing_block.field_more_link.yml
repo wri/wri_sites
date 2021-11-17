@@ -13,7 +13,7 @@ bundle: listing_block
 label: 'More link'
 description: 'Below this listing, link to a page for more info.'
 required: false
-translatable: false
+translatable: true
 default_value:
   -
     attributes: {  }

@@ -11,7 +11,7 @@ bundle: 3_1_articles
 label: 'Custom results'
 description: 'By default, the most recently published items will appear here. You may override this with a custom item using this field.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

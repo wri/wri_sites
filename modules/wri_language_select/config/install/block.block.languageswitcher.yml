@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   module:
-    - ctools
     - language
   theme:
     - ts_wrin
@@ -18,25 +17,6 @@ settings:
   provider: language
   label_display: visible
 visibility:
-  'entity_bundle:node':
-    id: 'entity_bundle:node'
-    bundles:
-      article: article
-      data: data
-      event: event
-      homepage: homepage
-      international_office: international_office
-      page: page
-      person: person
-      program_center: program_center
-      project_detail: project_detail
-      publication: publication
-      region: region
-      simple_page: simple_page
-      subpage: subpage
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
   language:
     id: language
     langcodes:

@@ -6,7 +6,7 @@ dependencies:
 id: person
 label: Person
 type: 'canonical_entities:node'
-pattern: '/about/experts-staff/[node:title]'
+pattern: '/profile/[node:title]'
 selection_criteria:
   b67cb5f7-2cb7-4ed2-8c10-02c22d00edae:
     id: node_type

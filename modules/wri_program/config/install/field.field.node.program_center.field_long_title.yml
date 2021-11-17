@@ -19,7 +19,7 @@ bundle: program_center
 label: 'Long Title'
 description: 'This longer title will display in the page''s hero'
 required: true
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

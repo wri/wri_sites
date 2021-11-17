@@ -13,7 +13,7 @@ bundle: project_detail
 label: 'Show Table of Contents?'
 description: 'Choose "Generated from H2s" if you want to link to anchors on this page. Choose "Generated from subpages" if you want the menu to link to this page''s child pages.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

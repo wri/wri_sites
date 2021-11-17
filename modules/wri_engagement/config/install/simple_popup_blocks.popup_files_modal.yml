@@ -14,3 +14,8 @@ close: 1
 width: '600'
 cookie_expiry: '100'
 status: 1
+enable_escape: 0
+trigger_width: null
+use_time_frequency: 0
+time_frequency: '86400'
+show_minimized_button: 0

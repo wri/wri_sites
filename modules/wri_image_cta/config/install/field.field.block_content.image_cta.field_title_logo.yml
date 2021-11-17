@@ -12,7 +12,7 @@ bundle: image_cta
 label: 'Title replacement logo'
 description: 'Replace the title of this block with a logo.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

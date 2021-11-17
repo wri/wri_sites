@@ -21,7 +21,7 @@ bundle: event
 label: 'Location detail'
 description: 'More details about the location.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

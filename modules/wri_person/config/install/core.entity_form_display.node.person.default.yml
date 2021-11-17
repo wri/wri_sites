@@ -5,6 +5,7 @@ dependencies:
     - field.field.node.person.body
     - field.field.node.person.field_alternate_contact
     - field.field.node.person.field_areas_of_expertise
+    - field.field.node.person.field_department
     - field.field.node.person.field_email
     - field.field.node.person.field_first_name
     - field.field.node.person.field_international_office
@@ -23,9 +24,7 @@ dependencies:
     - field.field.node.person.field_weight
     - field.field.node.person.layout_builder__layout
     - node.type.person
-    - workflows.workflow.content_publishing
   module:
-    - content_moderation
     - field_group
     - link
     - media_library
@@ -126,6 +125,16 @@ content:
     region: content
   field_areas_of_expertise:
     weight: 134
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_department:
+    weight: 137
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -263,6 +272,13 @@ content:
     third_party_settings: {  }
     type: number
     region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
     weight: 100
@@ -297,6 +313,7 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_department: true
   layout_builder__layout: true
   promote: true
   sticky: true

@@ -11,7 +11,7 @@ bundle: person
 label: 'Alternate Contact'
 description: 'Who should a person reach out to if this person is not available?'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

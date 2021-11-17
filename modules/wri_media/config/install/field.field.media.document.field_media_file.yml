@@ -17,8 +17,8 @@ translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  file_extensions: 'txt doc docx pdf'
   file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'csv xls xlsx txt doc docx pdf svg'
   max_filesize: ''
   description_field: false
   handler: 'default:file'

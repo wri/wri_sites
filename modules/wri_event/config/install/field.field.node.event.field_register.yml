@@ -13,7 +13,7 @@ bundle: event
 label: Register
 description: 'A place to register for this event. Button text will be "Register".'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

@@ -11,9 +11,9 @@ third_party_settings:
   facets_pretty_paths:
     coder: taxonomy_term_coder
 id: experts_all_topics
-name: 'All Topics'
+name: 'All Staff'
 url_alias: topic
-weight: -2
+weight: -3
 min_count: 0
 show_only_one_result: true
 field_identifier: smart_topic_parent
@@ -37,10 +37,17 @@ hard_limit: 0
 exclude: false
 only_visible_when_facet_source_is_visible: false
 processor_configs:
-  display_value_widget_order:
-    processor_id: display_value_widget_order
+  exclude_specified_items:
+    processor_id: exclude_specified_items
     weights:
-      sort: 40
+      build: 50
+    settings:
+      exclude: 'Asia,Europe'
+      regex: false
+  term_weight_widget_order:
+    processor_id: term_weight_widget_order
+    weights:
+      sort: 60
     settings:
       sort: ASC
   translate_entity:

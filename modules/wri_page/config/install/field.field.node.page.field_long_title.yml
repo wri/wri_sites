@@ -19,7 +19,7 @@ bundle: page
 label: 'Long Title'
 description: 'This longer title will display in the page''s hero'
 required: true
-translatable: false
+translatable: true
 default_value:
   -
     value: "<p>[current-page:node:title]</p>\r\n"

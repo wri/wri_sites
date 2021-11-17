@@ -1,3 +1,4 @@
+uuid: 1d2fb920-f85d-4de8-945b-3e9736ccf16b
 langcode: en
 status: true
 dependencies:
@@ -25,8 +26,12 @@ display:
         options:
           perm: 'access content'
       cache:
-        type: tag
-        options: {  }
+        type: time
+        options:
+          results_lifespan: 21600
+          results_lifespan_custom: 0
+          output_lifespan: 21600
+          output_lifespan_custom: 0
       query:
         type: views_query
         options:
@@ -267,7 +272,7 @@ display:
             fail: 'not found'
           validate_options: {  }
           depth: 3
-          break_phrase: false
+          break_phrase: true
           use_taxonomy_term_path: false
           entity_type: node
           plugin_id: taxonomy_index_tid_depth

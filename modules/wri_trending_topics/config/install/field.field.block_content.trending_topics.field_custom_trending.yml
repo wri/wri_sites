@@ -12,7 +12,7 @@ bundle: trending_topics
 label: 'Custom Trending values'
 description: 'If you don''t like the generated trending results, you can add your own values. These will appear in order at the front of the list.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

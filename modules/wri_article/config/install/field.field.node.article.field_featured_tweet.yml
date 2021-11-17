@@ -19,7 +19,7 @@ bundle: article
 label: 'Featured Tweet'
 description: 'Pull out a tweetable phrase from this content. It will be pulled into the Insights page.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

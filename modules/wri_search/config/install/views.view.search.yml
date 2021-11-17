@@ -225,6 +225,7 @@ display:
             article: article
             data: data
             event: event
+            page: page
             person: person
             project_detail: project_detail
             publication: publication

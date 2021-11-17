@@ -11,7 +11,7 @@ bundle: international_office
 label: 'Featured Experts'
 description: 'Feature people who work at this IO. Only people assigned to this IO will be searchable here. <a href="/admin/content?type=person" target="_blank">Add a person to this IO.</a>'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

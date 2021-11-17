@@ -11,7 +11,7 @@ bundle: event
 label: Location
 description: '1-5 world, like "Online" or "Washington, DC" to describe the general location of this event.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

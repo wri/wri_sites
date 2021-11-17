@@ -19,7 +19,7 @@ bundle: article
 label: 'Featured Headline'
 description: 'If you would like the headline that shows when featuring this item to differ from the Title, overwrite this here. The default value should be <code>&#91;node:title&#93;</code>'
 required: false
-translatable: false
+translatable: true
 default_value:
   -
     value: "<p>[node:title]</p>\r\n"

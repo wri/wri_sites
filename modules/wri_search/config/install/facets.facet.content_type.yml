@@ -44,7 +44,7 @@ processor_configs:
     weights:
       build: 50
     settings:
-      exclude: 'Simple Page'
+      exclude: 'Simple Page,Page'
       regex: false
   list_item:
     processor_id: list_item

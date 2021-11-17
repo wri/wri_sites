@@ -14,7 +14,7 @@ bundle: publication
 label: 'In This Series'
 description: ''
 required: true
-translatable: false
+translatable: true
 default_value:
   -
     token_help: ''

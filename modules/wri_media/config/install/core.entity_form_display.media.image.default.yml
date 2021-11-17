@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.image.field_attribution
     - field.field.media.image.field_media_image
     - field.field.media.image.field_tags
     - image.style.250_wide
@@ -13,8 +14,16 @@ targetEntityType: media
 bundle: image
 mode: default
 content:
+  field_attribution:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_media_image:
-    weight: 0
+    weight: 1
     settings:
       preview_image_style: 250_wide
       offsets: '50,50'
@@ -24,7 +33,7 @@ content:
     type: image_focal_point
     region: content
   field_tags:
-    weight: 1
+    weight: 2
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -33,9 +42,16 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete_tags
     region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
   name:
     type: string_textfield
-    weight: -5
+    weight: 0
     region: content
     settings:
       size: 60

@@ -237,7 +237,12 @@ display:
     display_options:
       display_extenders: {  }
       cache:
-        type: none
+        type: time
+        options:
+          results_lifespan: 3600
+          results_lifespan_custom: 0
+          output_lifespan: 518400
+          output_lifespan_custom: 0
       defaults:
         cache: false
     cache_metadata:
