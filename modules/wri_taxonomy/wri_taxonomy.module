@@ -50,7 +50,7 @@ function wri_taxonomy_entity_type_alter(array &$entity_types) {
  */
 function wri_taxonomy_term_uri(TermInterface $term) {
   if ($term->field_landing_page && $term->field_landing_page->isEmpty() === FALSE && isset($term->field_landing_page->entity)) {
-    return $term->field_landing_page->entity->toUrl();
+    return $term->field_landing_page->entity->toUrl('canonical', ['language' => $term->language()]);
   }
 
   if (!empty(\Drupal::hasService('wri_search.pretty_facets_helper'))) {
