@@ -1,0 +1,27 @@
+single_file_component_layout:wri_article_columns:
+  label: "Article columns"
+  template: templates/wri-article-columns
+  regions:
+    hero:
+      label: Hero
+    title:
+      label: Title
+    byline:
+      label: Byline
+    buttons:
+      label: Buttons
+    category:
+      label: Category
+    share:
+      label: Share
+    main_content :
+      label: "Main Content"
+    sidebar :
+      label: Sidebar
+  icon_map:
+    - [hero]
+    - [title]
+    - [byline]
+    - [bundle,category,share]
+    - [left_sidebar,main_content,right_sidebar']
+  default_section: main_content
