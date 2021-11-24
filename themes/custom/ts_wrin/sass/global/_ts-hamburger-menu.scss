@@ -499,6 +499,9 @@ body.fixed {
     background-position-y: 100%;
     color: $brand-gold;
   }
+  & .menu-wrapper > ul.menu li a.button {
+    color: $black;
+  }
   & .menu-wrapper > ul.menu li:first-of-type {
     @include font($caslon, "regular", "italic");
     @include font-line-height(15, 15);
