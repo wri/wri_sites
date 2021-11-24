@@ -50,7 +50,7 @@ export default function(context) {
     // Mega-Menu sliders.
     var hamburgerContent = $(".hamburger-content"),
       hamburgerSlider = $(".hamburger-slider"),
-      flexibleRowsClass = "our-work-submenu";
+      flexibleRowsClass = "flexible-row-submenu";
 
     function slideOut(menuParent) {
       var clone = $(menuParent.target)

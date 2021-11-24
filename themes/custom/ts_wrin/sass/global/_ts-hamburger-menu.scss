@@ -682,16 +682,16 @@ body.fixed {
   }
 }
 
-.our-work-submenu > ul > li > ul {
+.flexible-row-submenu > ul > li > ul {
   align-items: flex-start;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.our-work-submenu > ul > li > ul > li {
+.flexible-row-submenu > ul > li > ul > li {
   flex: 0 1 48%;
 }
-.our-work-submenu > ul > li > ul > li:first-child {
+.flexible-row-submenu > ul > li > ul > li:first-child {
   flex: 0 1 100%;
 }
