@@ -483,7 +483,7 @@ body.fixed {
   & .menu-wrapper > ul.menu li {
     margin-right: 25px;
   }
-  & .menu-wrapper > ul.menu li:not(:last-of-type) {
+  & .menu-wrapper > ul.menu li {
     @include font($acumin-semi-cond, "regular", "normal");
     @include font-line-height(16, 19);
     letter-spacing: 1.5px;
@@ -494,7 +494,7 @@ body.fixed {
       margin-right: $space-sm;
     }
   }
-  & .menu-wrapper > ul.menu li:not(:last-of-type) a {
+  & .menu-wrapper > ul.menu li a {
     @include text-underline(transparent, $brand-gold);
     background-position-y: 100%;
     color: $brand-gold;
@@ -511,7 +511,8 @@ body.fixed {
     position: absolute;
     text-transform: capitalize;
   }
-  & .menu-wrapper > ul.menu li:last-of-type {
+  & .menu-wrapper > ul.menu li .button {
+    background-image: none;
     display: none;
     @include mq(1080px) {
       bottom: 1px;
@@ -519,9 +520,6 @@ body.fixed {
       position: relative;
       right: auto;
       top: auto;
-    }
-    a {
-      background-image: none;
     }
   }
 }
