@@ -434,7 +434,7 @@ header nav.menu--main.has-active-trail .menu-wrapper > ul.menu {
       outline: none;
     }
   }
-  & > li > a {
+  & > li > .menu-item-title a {
     @include font($caslon, "normal", "italic");
     @include font-line-height(15, 15);
     margin-right: $space-xs;

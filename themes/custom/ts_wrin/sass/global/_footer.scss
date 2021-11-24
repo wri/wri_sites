@@ -134,7 +134,7 @@
   }
 
   .menu--footer-main ul.menu li.menu-item a,
-  .menu--footer-secondary > ul.menu > li.menu-item > a {
+  .menu--footer-secondary > ul.menu > li.menu-item > .menu-item-title a {
     @include text-underline(transparent, $white);
     -webkit-font-smoothing: antialiased;
     background-position: left 100%;

@@ -316,12 +316,12 @@ body.fixed {
         margin-top: 24px;
       }
     }
-    & > ul.menu > li > a {
+    & > ul.menu > li > .menu-item-title {
       display: block;
       margin-bottom: 22px;
       position: relative;
     }
-    & > ul.menu > li > a:after {
+    & > ul.menu > li > .menu-item-title:after {
       background: transparent url("../img/svgs/arrow-gold.svg") no-repeat center
         center / cover;
       color: $brand-gold;
@@ -351,7 +351,7 @@ body.fixed {
     & > ul li > ul li > ul li {
       padding-top: 6px;
     }
-    & > ul li > ul span {
+    & > ul li > ul span span {
       @include font($caslon, "regular", "italic");
       @include font-line-height(15, 15);
       color: $white;
@@ -396,7 +396,7 @@ body.fixed {
         margin-right: 0;
       }
     }
-    & > li > a {
+    & > li > .menu-item-title {
       display: block;
       margin-bottom: 18px;
       position: relative;
@@ -405,7 +405,7 @@ body.fixed {
         margin-bottom: 22px;
       }
     }
-    & > li > a:after {
+    & > li > .menu-item-title:after {
       background: transparent url("../img/svgs/arrow-gold.svg") no-repeat center
         center / cover;
       color: $brand-gold;
@@ -628,7 +628,7 @@ body.fixed {
     @include font-line-height(24, 30);
     font-weight: 600;
   }
-  & > ul.menu > li > a {
+  & > ul.menu > li > .menu-item-title a {
     display: block;
     margin-bottom: $space-xs;
     position: relative;
@@ -658,7 +658,7 @@ body.fixed {
     @include font-line-height(24, 30);
     font-weight: 600;
   }
-  & > ul.menu > li > a {
+  & > ul.menu > li > .menu-item-title a {
     display: block;
     margin-bottom: $space-xs;
     position: relative;

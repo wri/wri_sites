@@ -76,25 +76,25 @@ export default function(context) {
       if (windowWidth <= 768) {
         var burger = $(".hamburger-content");
         burger
-          .find(".menu--footer-secondary > ul > li > a")
+          .find(".menu--footer-secondary > ul > li > .menu-item-title")
           .on("click", function(e) {
             e.preventDefault();
             slideOut(ourWorkSubmenu);
           });
         burger
-          .find(".menu--mega-menu > ul > li:nth-child(1) > a")
+          .find(".menu--mega-menu > ul > li:nth-child(1) > .menu-item-title")
           .on("click", function(e) {
             e.preventDefault();
             slideOut(aboutUsSubmenu);
           });
         burger
-          .find(".menu--mega-menu > ul > li:nth-child(2) > a")
+          .find(".menu--mega-menu > ul > li:nth-child(2) > .menu-item-title")
           .on("click", function(e) {
             e.preventDefault();
             slideOut(ourApproachSubmenu);
           });
         burger
-          .find(".menu--mega-menu > ul > li:nth-child(3) > a")
+          .find(".menu--mega-menu > ul > li:nth-child(3) > .menu-item-title")
           .on("click", function(e) {
             e.preventDefault();
             slideOut(joinUsSubmenu);
