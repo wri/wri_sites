@@ -1,10 +1,20 @@
 <?php
-function wri_publication_preprocess_wri_publication_columns(&$context)
-{
+
+/**
+ * @file
+ * Publication module code.
+ */
+
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_preprocess_hook().
+ */
+function wri_publication_preprocess_wri_publication_columns(&$context) {
 
   $node = \Drupal::routeMatch()->getParameter('node');
   $context['show_narrative_taxonomy'] = TRUE;
-  if ($node instanceof \Drupal\node\NodeInterface) {
+  if ($node instanceof NodeInterface) {
     $cutOffDate = strtotime('01/01/2020');
     $created = $node->getCreatedTime();
     $context['display_type'] = 'simple';
