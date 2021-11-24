@@ -50,13 +50,23 @@ export default function(context) {
     // Mega-Menu sliders.
     var hamburgerContent = $(".hamburger-content"),
       hamburgerSlider = $(".hamburger-slider"),
-      ourWorkSubmenu = $(".our-work-submenu"),
-      aboutUsSubmenu = $(".about-us-submenu"),
-      ourApproachSubmenu = $(".our-approach-submenu"),
-      joinUsSubmenu = $(".join-us-submenu");
+      flexibleRowsClass = "our-work-submenu";
 
-    function slideOut(menuName) {
-      menuName.addClass("active");
+    function slideOut(menuParent) {
+      var clone = $(menuParent.target)
+        .parents("li")
+        .clone();
+      $(".hamburger-slider-contents ul", hamburgerSlider).html(clone);
+      $(".hamburger-slider-contents").addClass("active");
+      // Hack to get the our-work link to have flexed rows.
+      if (
+        $(menuParent.target).hasClass(flexibleRowsClass) ||
+        $(menuParent.target)
+          .children("a")
+          .hasClass(flexibleRowsClass)
+      ) {
+        $(".hamburger-slider-contents").addClass(flexibleRowsClass);
+      }
       hamburgerContent.addClass("left");
       hamburgerSlider.addClass("active");
     }
@@ -64,11 +74,9 @@ export default function(context) {
     function sliderCleanUp() {
       hamburgerContent.removeClass("left");
       hamburgerSlider.removeClass("active");
+      $(".hamburger-slider-contents").removeClass(flexibleRowsClass);
       setTimeout(function() {
-        ourWorkSubmenu.removeClass("active");
-        aboutUsSubmenu.removeClass("active");
-        ourApproachSubmenu.removeClass("active");
-        joinUsSubmenu.removeClass("active");
+        $(".hamburger-slider-contents ul", hamburgerSlider).html("");
       }, 500);
     }
 
@@ -79,26 +87,15 @@ export default function(context) {
           .find(".menu--footer-secondary > ul > li > .menu-item-title")
           .on("click", function(e) {
             e.preventDefault();
-            slideOut(ourWorkSubmenu);
+            slideOut(e);
           });
         burger
-          .find(".menu--mega-menu > ul > li:nth-child(1) > .menu-item-title")
+          .find(".menu--mega-menu > ul > li > .menu-item-title")
           .on("click", function(e) {
             e.preventDefault();
-            slideOut(aboutUsSubmenu);
+            slideOut(e);
           });
-        burger
-          .find(".menu--mega-menu > ul > li:nth-child(2) > .menu-item-title")
-          .on("click", function(e) {
-            e.preventDefault();
-            slideOut(ourApproachSubmenu);
-          });
-        burger
-          .find(".menu--mega-menu > ul > li:nth-child(3) > .menu-item-title")
-          .on("click", function(e) {
-            e.preventDefault();
-            slideOut(joinUsSubmenu);
-          });
+
         // Close the sliders, then reset.
         $(".hamburger-slider .back").on("click", function(e) {
           e.preventDefault();

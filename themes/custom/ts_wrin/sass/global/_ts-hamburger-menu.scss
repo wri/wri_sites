@@ -584,10 +584,7 @@ body.fixed {
   left: calc(-100% - 40px);
 }
 
-.our-work-submenu,
-.about-us-submenu,
-.our-approach-submenu,
-.join-us-submenu {
+.hamburger-slider-contents {
   background-color: $black;
   display: none;
   padding: $space-xs;
@@ -623,17 +620,17 @@ body.fixed {
   }
 }
 
-.our-work-submenu {
+.hamburger-slider-contents {
   & > ul.menu > li {
     @include font-line-height(24, 30);
     font-weight: 600;
   }
-  & > ul.menu > li > .menu-item-title a {
+  & > ul.menu > li > .menu-item-title {
     display: block;
     margin-bottom: $space-xs;
     position: relative;
   }
-  & > ul li > ul span {
+  & > ul li > ul span span {
     @include font($caslon, "regular", "italic");
     @include font-line-height(15, 18);
     color: #b1b1b1;
@@ -651,9 +648,7 @@ body.fixed {
   }
 }
 
-.about-us-submenu nav,
-.our-approach-submenu nav,
-.join-us-submenu nav {
+.hamburger-slider-contents {
   & > ul.menu > li {
     @include font-line-height(24, 30);
     font-weight: 600;
@@ -663,7 +658,7 @@ body.fixed {
     margin-bottom: $space-xs;
     position: relative;
   }
-  & > ul li > ul span {
+  & > ul li > ul span span {
     @include font($caslon, "regular", "italic");
     @include font-line-height(15, 18);
     color: #b1b1b1;
