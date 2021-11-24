@@ -8,16 +8,18 @@ single_file_component_layout:wri_article_columns:
       label: Title
     byline:
       label: Byline
-    buttons:
-      label: Buttons
+    bundle:
+      label: Bundle
     category:
       label: Category
     share:
       label: Share
+    left_sidebar:
+      label: "Left"
     main_content :
       label: "Main Content"
-    sidebar :
-      label: Sidebar
+    right_sidebar :
+      label: "Right"
   icon_map:
     - [hero]
     - [title]
