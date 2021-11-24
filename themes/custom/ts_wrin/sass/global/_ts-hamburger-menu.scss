@@ -374,7 +374,6 @@ body.fixed {
     justify-content: flex-start;
     @include mq(768px) {
       flex-direction: row;
-      justify-content: space-between;
     }
     & > li {
       @include font-line-height(20, 39);
