@@ -1,0 +1,12 @@
+single_file_component_layout:wri_superfeatured:
+  label: 'Superfeatured Node'
+  template: templates/wri-superfeatured
+  regions:
+    image:
+      label: 'Image'
+    left_text:
+      label: 'Left Text'
+    right_text:
+      label: 'Right Text'
+    button:
+      label: 'Button'
