@@ -134,7 +134,7 @@
   }
 
   .menu--footer-main ul.menu li.menu-item a,
-  .menu--footer-secondary > ul.menu > li.menu-item > a {
+  .menu--footer-secondary > ul.menu > li.menu-item > .menu-item-title a {
     @include text-underline(transparent, $white);
     -webkit-font-smoothing: antialiased;
     background-position: left 100%;
@@ -277,10 +277,11 @@
       @include mq($md) {
         & > ul.menu {
           display: flex;
-          justify-content: space-between;
+          justify-content: flex-start;
 
           & > li.menu-item {
-            flex-basis: 30%;
+            flex: 0 1 calc(33% - 30px);
+            margin-right: 30px;
           }
         }
       }

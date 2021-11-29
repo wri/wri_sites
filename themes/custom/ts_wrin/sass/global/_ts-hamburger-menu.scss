@@ -316,12 +316,12 @@ body.fixed {
         margin-top: 24px;
       }
     }
-    & > ul.menu > li > a {
+    & > ul.menu > li > .menu-item-title {
       display: block;
       margin-bottom: 22px;
       position: relative;
     }
-    & > ul.menu > li > a:after {
+    & > ul.menu > li > .menu-item-title:after {
       background: transparent url("../img/svgs/arrow-gold.svg") no-repeat center
         center / cover;
       color: $brand-gold;
@@ -351,7 +351,7 @@ body.fixed {
     & > ul li > ul li > ul li {
       padding-top: 6px;
     }
-    & > ul li > ul span {
+    & > ul li > ul span span {
       @include font($caslon, "regular", "italic");
       @include font-line-height(15, 15);
       color: $white;
@@ -374,7 +374,6 @@ body.fixed {
     justify-content: flex-start;
     @include mq(768px) {
       flex-direction: row;
-      justify-content: space-between;
     }
     & > li {
       @include font-line-height(20, 39);
@@ -397,7 +396,7 @@ body.fixed {
         margin-right: 0;
       }
     }
-    & > li > a {
+    & > li > .menu-item-title {
       display: block;
       margin-bottom: 18px;
       position: relative;
@@ -406,7 +405,7 @@ body.fixed {
         margin-bottom: 22px;
       }
     }
-    & > li > a:after {
+    & > li > .menu-item-title:after {
       background: transparent url("../img/svgs/arrow-gold.svg") no-repeat center
         center / cover;
       color: $brand-gold;
@@ -483,7 +482,7 @@ body.fixed {
   & .menu-wrapper > ul.menu li {
     margin-right: 25px;
   }
-  & .menu-wrapper > ul.menu li:not(:last-of-type) {
+  & .menu-wrapper > ul.menu li {
     @include font($acumin-semi-cond, "regular", "normal");
     @include font-line-height(16, 19);
     letter-spacing: 1.5px;
@@ -494,10 +493,13 @@ body.fixed {
       margin-right: $space-sm;
     }
   }
-  & .menu-wrapper > ul.menu li:not(:last-of-type) a {
+  & .menu-wrapper > ul.menu li a {
     @include text-underline(transparent, $brand-gold);
     background-position-y: 100%;
     color: $brand-gold;
+  }
+  & .menu-wrapper > ul.menu li a.button {
+    color: $black;
   }
   & .menu-wrapper > ul.menu li:first-of-type {
     @include font($caslon, "regular", "italic");
@@ -511,7 +513,8 @@ body.fixed {
     position: absolute;
     text-transform: capitalize;
   }
-  & .menu-wrapper > ul.menu li:last-of-type {
+  & .menu-wrapper > ul.menu li .button {
+    background-image: none;
     display: none;
     @include mq(1080px) {
       bottom: 1px;
@@ -519,9 +522,6 @@ body.fixed {
       position: relative;
       right: auto;
       top: auto;
-    }
-    a {
-      background-image: none;
     }
   }
 }
@@ -584,10 +584,7 @@ body.fixed {
   left: calc(-100% - 40px);
 }
 
-.our-work-submenu,
-.about-us-submenu,
-.our-approach-submenu,
-.join-us-submenu {
+.hamburger-slider-contents {
   background-color: $black;
   display: none;
   padding: $space-xs;
@@ -623,17 +620,17 @@ body.fixed {
   }
 }
 
-.our-work-submenu {
+.hamburger-slider-contents {
   & > ul.menu > li {
     @include font-line-height(24, 30);
     font-weight: 600;
   }
-  & > ul.menu > li > a {
+  & > ul.menu > li > .menu-item-title {
     display: block;
     margin-bottom: $space-xs;
     position: relative;
   }
-  & > ul li > ul span {
+  & > ul li > ul span span {
     @include font($caslon, "regular", "italic");
     @include font-line-height(15, 18);
     color: #b1b1b1;
@@ -651,19 +648,17 @@ body.fixed {
   }
 }
 
-.about-us-submenu nav,
-.our-approach-submenu nav,
-.join-us-submenu nav {
+.hamburger-slider-contents {
   & > ul.menu > li {
     @include font-line-height(24, 30);
     font-weight: 600;
   }
-  & > ul.menu > li > a {
+  & > ul.menu > li > .menu-item-title a {
     display: block;
     margin-bottom: $space-xs;
     position: relative;
   }
-  & > ul li > ul span {
+  & > ul li > ul span span {
     @include font($caslon, "regular", "italic");
     @include font-line-height(15, 18);
     color: #b1b1b1;
@@ -687,16 +682,16 @@ body.fixed {
   }
 }
 
-.our-work-submenu > ul > li > ul {
+.flexible-row-submenu > ul > li > ul {
   align-items: flex-start;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.our-work-submenu > ul > li > ul > li {
+.flexible-row-submenu > ul > li > ul > li {
   flex: 0 1 48%;
 }
-.our-work-submenu > ul > li > ul > li:first-child {
+.flexible-row-submenu > ul > li > ul > li:first-child {
   flex: 0 1 100%;
 }
