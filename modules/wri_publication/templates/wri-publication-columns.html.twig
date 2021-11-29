@@ -1,4 +1,3 @@
-<template>
   {% if hero.content.field_toc %}
     {{ attach_library('wri_toc/tocjs') }}
   {% endif %}
@@ -134,62 +133,5 @@
       </div>
     </div>
   {% endif %}
-</template>
-
-<?php
-
-$definition['layout'] = [
-  'label' => 'Publications',
-  'regions' => [
-    'hero' => ['label' => 'Hero'],
-    'buttons' => ['label' => 'Buttons'],
-    'category' => ['label' => 'Category'],
-    'share' => ['label' => 'Share'],
-    'featured_image' => ['label' => 'Featured Image'],
-    'main_content'  => ['label' => 'Main Content'],
-    'sidebar'  => ['label' => 'Sidebar'],
-  ],
-  'icon_map' => [
-    ['hero'],
-    ['buttons','featured_image'],
-    ['category','share'],
-    ['main_content','sidebar']
-  ],
-  'default_section' => 'main_content'
-];
-
-$prepareContext = function (&$context) {
-
-  $node = \Drupal::routeMatch()->getParameter('node');
-  $context['show_narrative_taxonomy'] = TRUE;
-  if ($node instanceof \Drupal\node\NodeInterface) {
-    $cutOffDate = strtotime('01/01/2020');
-    $created = $node->getCreatedTime();
-    $context['display_type'] = 'simple';
-    $context['node_type'] = $node->getType();
-
-    switch ($node->getType()) {
-      case 'project_detail':
-        $context['display_type'] = 'robust';
-        break;
-
-      case 'publication':
-        if ($node->get('field_publication_display')->getString() == 'robust') {
-          $context['display_type'] = 'robust';
-        }
-
-        if ($cutOffDate > $created) {
-          $context['show_narrative_taxonomy'] = FALSE;
-        }
-        break;
-
-      case 'data':
-        if ($cutOffDate > $created) {
-          $context['show_narrative_taxonomy'] = FALSE;
-        }
-        break;
-    }
-  }
-};
 
 
