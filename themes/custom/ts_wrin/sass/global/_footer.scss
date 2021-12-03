@@ -310,7 +310,7 @@
     }
   }
 
-  $social-icons: facebook twitter linkedin youtube instagram;
+  $social-icons: facebook twitter linkedin youtube instagram wechat weibo;
   @each $icon in $social-icons {
     a.#{$icon} {
       background: transparent
