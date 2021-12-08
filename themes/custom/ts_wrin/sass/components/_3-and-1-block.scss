@@ -2,10 +2,6 @@
   li {
     list-style-type: none;
     margin-left: 0;
-
-    &::before {
-      content: "";
-    }
   }
 
   img {
