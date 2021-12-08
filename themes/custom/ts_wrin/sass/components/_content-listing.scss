@@ -11,6 +11,11 @@
     list-style-type: none;
     margin-bottom: $padding-vertical;
     margin-left: 0;
+
+    &::before {
+      content: "";
+    }
+
     &:last-child {
       margin-bottom: 0;
     }
@@ -108,6 +113,10 @@
     margin-bottom: $space-xs;
     margin-left: 0;
 
+    &::before {
+      content: "";
+    }
+
     @include mq($ph) {
       flex: 0 1 33.333%;
       padding-right: $grid-gutter-mobile;
@@ -129,6 +138,10 @@
   .listing-items li {
     list-style-type: none;
     margin-bottom: $padding-vertical;
+
+    &::before {
+      content: "";
+    }
 
     &:last-child {
       margin-bottom: $padding-vertical;

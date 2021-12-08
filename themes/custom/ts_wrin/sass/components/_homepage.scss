@@ -111,6 +111,11 @@
     margin-right: 56px;
     padding-top: 10px;
     text-decoration: none;
+
+    &::before {
+      content: "";
+    }
+
     @include mq($lg) {
       flex: 0 1 calc(50% - 56px);
       margin-top: 10px;

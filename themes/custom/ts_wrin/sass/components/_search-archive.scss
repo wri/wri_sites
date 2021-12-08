@@ -371,6 +371,11 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
+
+    &::before {
+      content: "";
+    }
+
     @include mq($lg) {
       margin: 1rem 0;
     }
@@ -378,6 +383,10 @@
   .block-facets li {
     list-style-type: none;
     margin: 0;
+
+    &::before {
+      content: "";
+    }
   }
   .block-facets .open li {
     margin-bottom: 7px;

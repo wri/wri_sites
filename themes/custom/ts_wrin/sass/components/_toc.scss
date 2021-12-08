@@ -95,6 +95,10 @@
         padding-top: 0;
         white-space: nowrap;
 
+        &::before {
+          content: "";
+        }
+
         a {
           color: $white;
           text-decoration: none;

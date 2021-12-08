@@ -21,6 +21,11 @@
     list-style-type: none;
     margin-bottom: $padding-vertical;
     margin-left: 0;
+
+    &::before {
+      content: "";
+    }
+
     &:last-child {
       margin-bottom: 0;
     }

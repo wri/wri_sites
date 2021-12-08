@@ -30,7 +30,7 @@
 
   $prepareContext = function(&$context) {
     // If this is the homepage display.
-    if (isset($context["content"]["main_content"]["field_listing"][0]) && $context["content"]["main_content"]["field_listing"][0]["#display_id"] == 'cards') {
+    if (isset($context["content"]["main_content"]["field_listing"][0]) && $context["content"]["main_content"]["field_listing"][0]["#display_id"] == 'cards' && !empty(\Drupal::hasService('wri_filter.filter'))) {
       // Check for an applied content filter.
       $current_filter = \Drupal::service('wri_filter.filter')->getCurrentFilter(TRUE);
       // If filter is found set value to narrative tax field from landing page node.

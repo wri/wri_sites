@@ -172,6 +172,10 @@
       margin-top: 10px;
       padding-top: 10px;
       text-decoration: none;
+
+      &::before {
+        content: "";
+      }
     }
     li:last-of-type {
       margin-right: 0;
