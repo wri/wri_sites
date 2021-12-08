@@ -1,0 +1,24 @@
+single_file_component_layout:wri_publication_columns:
+  label: Publications
+  template: templates/wri-publication-columns
+  regions:
+    hero:
+      label: Hero
+    buttons:
+      label: Buttons
+    category:
+      label: Category
+    share:
+      label: Share
+    featured_image:
+      label: "Featured Image"
+    main_content :
+      label: "Main Content"
+    sidebar :
+      label: Sidebar
+  icon_map:
+    - [hero]
+    - [buttons,featured_image]
+    - [category,share]
+    - [main_content,sidebar]
+  default_section: main_content
