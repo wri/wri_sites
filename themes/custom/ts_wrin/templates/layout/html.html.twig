@@ -25,56 +25,56 @@
 #}
 {%
   set body_classes = [
-  logged_in ? 'user-logged-in',
-  not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
-  node_type ? 'page-node-type-' ~ node_type|clean_class,
-  db_offline ? 'db-offline'
-]
+    logged_in ? 'user-logged-in',
+    not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
+    node_type ? 'page-node-type-' ~ node_type|clean_class,
+    db_offline ? 'db-offline'
+  ]
 %}
 <!DOCTYPE html>
 <html{{ html_attributes }}>
-<head>
-  <head-placeholder token="{{ placeholder_token|raw }}">
+  <head>
+    <head-placeholder token="{{ placeholder_token|raw }}">
     <title>{{ head_title|safe_join(' | ') }}</title>
     <css-placeholder token="{{ placeholder_token|raw }}">
-      <js-placeholder token="{{ placeholder_token|raw }}">
-        {{ attach_library('wri_common/wri-gtm') }}
-        </head>
-<body{{ attributes.addClass(body_classes) }}>
-<!-- Google Tag Manager (noscript) -->
-{#    TODO: replace GTM-XXXX with your container ID.#}
-<noscript>
-  <iframe src="https://www.googletagmanager.com/ns.html?id={{ contentSnippets.gtm_id }}" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-</noscript>
-<!-- End Google Tag Manager (noscript) -->
-<!-- Grid Layout Checker -->
-{% if show_grid %}
-  {% include '@ts_custom/ts-grid-checker.html.twig' %}
-{% endif %}
-<!-- END Grid Layout Checker -->
+    <js-placeholder token="{{ placeholder_token|raw }}">
+    {{ attach_library('wri_common/wri-gtm') }}
+  </head>
+  <body{{ attributes.addClass(body_classes) }}>
+    <!-- Google Tag Manager (noscript) -->
+    {#    TODO: replace GTM-XXXX with your container ID.#}
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id={{ contentSnippets.gtm_id }}" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Grid Layout Checker -->
+    {% if show_grid %}
+      {% include '@ts_custom/ts-grid-checker.html.twig' %}
+    {% endif %}
+    <!-- END Grid Layout Checker -->
 
-<a href="#main-content" class="visually-hidden focusable skip-link">
-  {{ 'Skip to main content'|t }}
-</a>
+    <a href="#main-content" class="visually-hidden focusable skip-link">
+      {{ 'Skip to main content'|t }}
+    </a>
 
-<div id="accessibility-url">
-  <a href="/accessibility" class="visually-hidden focusable skip-link">
-    {{ 'Accessibility'|t }}
-  </a>
-</div>
-{{ page_top }}
-{{ page }}
-{{ page_bottom }}
-<js-bottom-placeholder token="{{ placeholder_token|raw }}">
-  <!-- Twitter universal website tag code -->
-  <script>
-    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
-    },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',
-            a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
-    // Insert Twitter Pixel ID and Standard Event data below
-    twq('init','o2tss');
-    twq('track','PageView');
-  </script>
-  <!-- End Twitter universal website tag code -->
-</body>
+    <div id="accessibility-url">
+      <a href="/accessibility" class="visually-hidden focusable skip-link">
+		    {{ 'Accessibility'|t }}
+      </a>
+    </div>
+      {{ page_top }}
+      {{ page }}
+      {{ page_bottom }}
+    <js-bottom-placeholder token="{{ placeholder_token|raw }}">
+    <!-- Twitter universal website tag code -->
+    <script>
+      !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+      },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',
+        a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+      // Insert Twitter Pixel ID and Standard Event data below
+      twq('init','o2tss');
+      twq('track','PageView');
+    </script>
+    <!-- End Twitter universal website tag code -->
+  </body>
 </html>

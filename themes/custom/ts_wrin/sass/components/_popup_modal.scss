@@ -229,13 +229,13 @@
     top: 10%;
     @include mq($md) {
       max-height: calc(100vh - 180px);
-      height: fit-content;
+      height: auto;
       margin-top: 150px;
       top: 0;
     }
     @include mq($lg) {
       max-height: calc(100vh - 280px);
-      height: fit-content;
+      height: auto;
     }
   }
 
