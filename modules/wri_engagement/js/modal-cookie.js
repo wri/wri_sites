@@ -72,15 +72,20 @@
         if (validateEmail(document.getElementById('email').value) && $('input#last_name').val() !== '' && $('input#email').val() !== '') {
           window.open(href, '_blank');
           $.post('https://connect.wri.org/l/120942/2021-04-06/528nh6', $(this).serialize(), function (data) {
-            $('.files-modal-unregistered').hide();
-            $('.files-modal-confirmation').show();
-            Cookies.set('skip_registration', true)
+            console.log('registration successful');
           }).fail(function () {
-            // This is executed when the call to mail.php failed.
-            if (!$('span.registration-failed').length) {
-              $('input.pardot-submission').after('<span class="registration-failed">Registration failed, please try again.</span>');
-            }
+            console.log('registration failed');
           });
+          $('.files-modal-unregistered').hide();
+          $('.files-modal-confirmation').show();
+          Cookies.set('skip_registration', true);
+          // Once we test posting the registration above, we can also include a message when it fails.
+          //   .fail(function () {
+          //   // This is executed when the call to mail.php failed.
+          //   if (!$('span.registration-failed').length) {
+          //     $('input.pardot-submission').after('<span class="registration-failed">Registration failed, please try again.</span>');
+          //   }
+          // });
         }
         else {
           $('input#last_name').css({"border":"2px solid red"});
