@@ -145,7 +145,7 @@ header {
   }
   .tray-toggle.language-toggle svg {
     width: 28px;
-  }  
+  }
   .tray-toggle.filter-toggle {
     position: relative;
     border-radius: 5px;
@@ -280,7 +280,7 @@ header nav.menu--main {
   display: none;
 }
 
-header nav.menu--main.has-active-trail {
+header nav.menu--main.menu-item--expanded {
   bottom: 0;
   display: block;
   margin-left: 0;
@@ -362,7 +362,7 @@ header nav.menu--main .menu-wrapper > ul.menu {
   }
 }
 
-header nav.menu--main.has-active-trail .menu-wrapper {
+header nav.menu--main.menu-item--expanded .menu-wrapper {
   height: 37px;
   overflow: hidden;
   width: calc(100% - #{$grid-gutter-mobile});
@@ -372,7 +372,7 @@ header nav.menu--main.has-active-trail .menu-wrapper {
     width: calc(100% - #{$grid-gutter-mobile} * 3);
   }
 }
-header nav.menu--main.has-active-trail .menu-wrapper > ul.menu {
+header nav.menu--main.menu-item--expanded .menu-wrapper > ul.menu {
   box-sizing: border-box;
   margin-bottom: -10px;
   margin-top: 10px;
@@ -437,7 +437,7 @@ header nav.menu--main.has-active-trail .menu-wrapper > ul.menu {
       outline: none;
     }
   }
-  & > li > .menu-item-title a {
+  & > li > a {
     @include font($caslon, "normal", "italic");
     @include font-line-height(15, 15);
     margin-right: $space-xs;
@@ -453,7 +453,7 @@ header nav.menu--main.has-active-trail .menu-wrapper > ul.menu {
     display: none;
   }
 }
-.white nav.menu--main.has-active-trail .menu-wrapper > ul.menu {
+.white nav.menu--main.menu-item--expanded .menu-wrapper > ul.menu {
   &:after,
   li a {
     color: $white;
@@ -471,17 +471,17 @@ header nav.menu--main.has-active-trail .menu-wrapper > ul.menu {
   }
 }
 
-.white nav.menu--main.has-active-trail .back-arrow svg,
-.white nav.menu--main.has-active-trail .nav-arrow svg,
-.white nav.menu--main.has-active-trail .back-arrow svg path,
-.white nav.menu--main.has-active-trail .nav-arrow svg path {
+.white nav.menu--main.menu-item--expanded .back-arrow svg,
+.white nav.menu--main.menu-item--expanded .nav-arrow svg,
+.white nav.menu--main.menu-item--expanded .back-arrow svg path,
+.white nav.menu--main.menu-item--expanded .nav-arrow svg path {
   fill: $white;
   stroke: $white;
   outline: none;
   transition: all 0.2s linear;
 }
-.white nav.menu--main.has-active-trail .back-arrow,
-.white nav.menu--main.has-active-trail .nav-arrow {
+.white nav.menu--main.menu-item--expanded .back-arrow,
+.white nav.menu--main.menu-item--expanded .nav-arrow {
   @include hocus {
     outline: none;
     svg,
@@ -493,7 +493,7 @@ header nav.menu--main.has-active-trail .menu-wrapper > ul.menu {
   }
 }
 
-header nav.menu--main.has-active-trail.no-scroll {
+header nav.menu--main.menu-item--expanded.no-scroll {
   .menu-wrapper > ul.menu:after {
     content: none;
   }
@@ -667,11 +667,11 @@ header nav.menu--donate > ul.menu {
     nav.menu--main .menu-wrapper > ul.menu li.menu-item {
       align-items: flex-start;
     }
-    nav.menu--main.has-active-trail .menu-wrapper > ul:before,
+    nav.menu--main.menu-item--expanded .menu-wrapper > ul:before,
     nav.menu--main .menu-wrapper > ul:before {
       border-color: $black;
     }
-    nav.menu--main.has-active-trail
+    nav.menu--main.menu-item--expanded
       .menu-wrapper
       > ul:after
       nav.menu--main
@@ -706,11 +706,11 @@ header nav.menu--donate > ul.menu {
     .header-right .menu-toggle div span:after {
       background-color: $black;
     }
-    nav.menu--main.has-active-trail .menu-wrapper > ul.menu:after {
+    nav.menu--main.menu-item--expanded .menu-wrapper > ul.menu:after {
       color: $black;
     }
-    nav.menu--main.has-active-trail .menu-wrapper > ul.menu li a,
-    nav.menu--main.has-active-trail .menu-wrapper > ul li a,
+    nav.menu--main.menu-item--expanded .menu-wrapper > ul.menu li a,
+    nav.menu--main.menu-item--expanded .menu-wrapper > ul li a,
     nav.menu--main .menu-wrapper > ul li a,
     nav.menu--secondary > ul.menu li a {
       color: $black;
@@ -720,15 +720,15 @@ header nav.menu--donate > ul.menu {
         outline: none;
       }
     }
-    nav.menu--main.has-active-trail .back-arrow svg,
-    nav.menu--main.has-active-trail .nav-arrow svg,
-    nav.menu--main.has-active-trail .back-arrow svg path,
-    nav.menu--main.has-active-trail .nav-arrow svg path {
+    nav.menu--main.menu-item--expanded .back-arrow svg,
+    nav.menu--main.menu-item--expanded .nav-arrow svg,
+    nav.menu--main.menu-item--expanded .back-arrow svg path,
+    nav.menu--main.menu-item--expanded .nav-arrow svg path {
       fill: $black;
       stroke: $black;
     }
-    nav.menu--main.has-active-trail .back-arrow,
-    nav.menu--main.has-active-trail .nav-arrow {
+    nav.menu--main.menu-item--expanded .back-arrow,
+    nav.menu--main.menu-item--expanded .nav-arrow {
       @include hocus {
         outline: none;
         svg,
