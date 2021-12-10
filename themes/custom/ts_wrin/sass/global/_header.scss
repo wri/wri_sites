@@ -437,7 +437,7 @@ header nav.menu--main.menu-item--expanded .menu-wrapper > ul.menu {
       outline: none;
     }
   }
-  & > li > .menu-item-title a {
+  & > li > a {
     @include font($caslon, "normal", "italic");
     @include font-line-height(15, 15);
     margin-right: $space-xs;

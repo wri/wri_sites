@@ -151,7 +151,7 @@ function ts_wrin_preprocess_block(array &$variables) {
   ];
   if ($variables['plugin_id'] == 'menu_block:main' && isset($variables["content"]["#items"])) {
     foreach ($variables["content"]["#items"] as $item) {
-      if ($item['in_active_trail'] && $item['is_expanded']) {
+      if ($item['in_active_trail']) {
         $variables['attributes']['class'][] = 'has-active-trail';
         break;
       }
