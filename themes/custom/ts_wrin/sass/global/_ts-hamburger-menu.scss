@@ -316,7 +316,7 @@ body.fixed {
         margin-top: 24px;
       }
     }
-    & > ul.menu > li > .menu-item-title {
+    & > ul.menu > li > .menu-item-title a {
       display: block;
       margin-bottom: 22px;
       position: relative;
@@ -326,6 +326,7 @@ body.fixed {
         center / cover;
       color: $brand-gold;
       content: "";
+      cursor: pointer;
       display: block;
       height: 14px;
       position: absolute;
@@ -404,12 +405,17 @@ body.fixed {
         display: block;
         margin-bottom: 22px;
       }
+
+      a {
+        display: block;
+      }
     }
     & > li > .menu-item-title:after {
       background: transparent url("../img/svgs/arrow-gold.svg") no-repeat center
         center / cover;
       color: $brand-gold;
       content: "";
+      cursor: pointer;
       display: block;
       height: 14px;
       position: absolute;
