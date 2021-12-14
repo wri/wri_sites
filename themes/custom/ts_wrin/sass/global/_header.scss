@@ -145,7 +145,7 @@ header {
   }
   .tray-toggle.language-toggle svg {
     width: 28px;
-  }  
+  }
   .tray-toggle.filter-toggle {
     position: relative;
     border-radius: 5px;
@@ -437,7 +437,7 @@ header nav.menu--main.has-active-trail .menu-wrapper > ul.menu {
       outline: none;
     }
   }
-  & > li > .menu-item-title a {
+  & > li > a {
     @include font($caslon, "normal", "italic");
     @include font-line-height(15, 15);
     margin-right: $space-xs;
