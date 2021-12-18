@@ -1,0 +1,35 @@
+<div {{ attributes.addClass('ds-1col', 'clearfix') }}>
+
+  {{ title_suffix.contextual_links }}
+  <div class="landing-page__hero {{ ((content.hero_image|render) ? 'has-image' : '') }}">
+    {% if content.hero_image %}
+      <div class="hero__image">
+        {{ content.hero_image }}
+      </div>
+    {% endif %}
+
+    <div class="hero__text">
+      <div class="grid">
+        <div class="hero__text--inner padding-vertical">
+          <div class="margin-top-xl"></div>
+          <h1 class="h1 {{ ((content.hero_image|render) ? 'xl white' : '') }}">{{ content.title }}</h1>
+          <div class="intro">{{ content.intro }}</div>
+          {% if content.content|render|striptags|trim is not empty %}
+            <div class="landing-page__hero__content">
+              {{ content.content }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    {% if content.hero_image|render %}
+      <div class="dark-overlay"></div>
+    {% endif %}
+  </div>
+</div>
+{% if content.content|render|striptags|trim is not empty %}
+  <div class="landing-page__hero__field-listing__mobile container content-side-padding padding-vertical white">
+    {{ content.content }}
+  </div>
+{% endif %}
