@@ -264,3 +264,13 @@ layout_impact-block:
       label: Title
     content:
       label: Content
+
+single_file_component_layout:wri_page_hero:
+  label: "Page hero"
+  template: templates/wri-page-hero
+  regions:
+    content:
+      label: Content
+  icon_map:
+    - [content]
+  default_section: content
