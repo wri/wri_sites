@@ -1,7 +1,7 @@
 name: 'Schema Dataset'
 type: module
 description: 'Schema Plugins for the Dataset tags'
-core: 8.x
+core_version_requirement: '^8.8.0 || ^9'
 package: 'WRI'
 dependencies:
   - schema_metatag
