@@ -37,4 +37,27 @@ function wri_seo_page_attachments(array &$attachments) {
     }
   }
 
+  // Exclude certain paths from crawlers per WRIN issue #323.
+  $current_path = \Drupal::service('path.current')->getPath();
+
+  $noindex = [
+    '/project-resources/',
+    '/project-experts/',
+  ];
+
+  foreach ($noindex as $index) {
+    if (substr($current_path, 0, strlen($index)) === $index) {
+      $metatag = [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'name' => 'robots',
+          'content' => 'noindex, nofollow',
+        ],
+      ];
+
+      $attachments['#attached']['html_head'][] = [$metatag, 'robots'];
+      break;
+    }
+  }
+
 }

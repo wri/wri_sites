@@ -2,7 +2,7 @@ main:
   version: VERSION
   css:
     theme:
-      https://use.typekit.net/nls1pjk.css: { type: external }
+      https://use.typekit.net/xrt8xkt.css: { type: external }
       dist/main.css: {}
   js:
     dist/main.min.js: {}
