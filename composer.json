@@ -194,11 +194,11 @@
         "solarium/solarium": "3.8.*"
     },
     "require-dev": {
-        "drupal/config_devel": "1.7.0",
+        "drupal/config_devel": "^1.8",
         "drupal/config_suite": "^1.4",
-        "drupal/stage_file_proxy": "^1.0",
         "drupal/devel": "^4.0",
-        "drupal/field_tools": "1.x-dev"
+        "drupal/field_tools": "1.x-dev",
+        "drupal/stage_file_proxy": "^1.0"
     },
     "config": {
         "sort-packages": true
