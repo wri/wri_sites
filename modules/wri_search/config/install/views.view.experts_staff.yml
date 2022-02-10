@@ -493,10 +493,10 @@ display:
       tags:
         - 'config:field.storage.node.field_leadership'
         - 'config:search_api.index.sitewide'
-  page_1:
+  project_experts:
     display_plugin: page
-    id: page_1
-    display_title: Page
+    id: project_experts
+    display_title: 'Project Experts'
     position: 2
     display_options:
       display_extenders: {  }
@@ -536,6 +536,7 @@ display:
       defaults:
         arguments: false
         header: false
+        title: true
       header:
         extra_result:
           id: extra_result
@@ -560,6 +561,7 @@ display:
           view_mode: hero_on_a_subpage
           bypass_access: false
           plugin_id: entity
+      display_description: ''
     cache_metadata:
       max-age: -1
       contexts:
