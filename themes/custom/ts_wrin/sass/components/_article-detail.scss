@@ -105,7 +105,8 @@
           padding: rem(10);
 
           &::after {
-            background: url(../img/svgs/arrow-thin.svg) no-repeat center center /contain;
+            background: url(../img/svgs/arrow-thin.svg) no-repeat center center /
+              contain;
             content: "";
             display: block;
             height: 16px;
