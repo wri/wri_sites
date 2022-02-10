@@ -96,6 +96,7 @@
           @include font($acumin-semi-cond, "normal");
           border-radius: 3px;
           border: 1px solid $black;
+          cursor: pointer;
           display: flex;
           font-style: normal;
           justify-content: space-between;
@@ -104,11 +105,12 @@
           padding: rem(10);
 
           &::after {
-            background: url(../img/svgs/arrow-thin.svg) no-repeat center -1px /16px;
+            background: url(../img/svgs/arrow-thin.svg) no-repeat center center /contain;
             content: "";
             display: block;
             height: 16px;
             transform: rotate(90deg);
+            transition: transform 0.2s ease;
             width: 16px;
           }
         }
@@ -117,7 +119,6 @@
           background-color: $white;
           border: 1px solid $light-grey;
           box-sizing: border-box;
-          display: none;
           left: $grid-gutter-mobile;
           opacity: 0;
           padding: rem(15) rem(20);
@@ -139,12 +140,15 @@
           }
         }
 
-        .field-label:hover + .more-on__items ul,
-        .field-label:focus-visible + .more-on__items ul,
-        .more-on__items ul:hover {
-          display: block;
+        &.active ul {
           opacity: 1;
           visibility: visible;
+          z-index: 1;
+          transition: all 0.2s ease;
+        }
+
+        &.active .field-label::after {
+          transform: rotate(-90deg);
         }
       }
     }
