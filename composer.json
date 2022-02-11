@@ -109,9 +109,6 @@
             },
             "drupal/simple_popup_blocks": {
                 "Modal hops user down the page to the first text input https://www.drupal.org/project/simple_popup_blocks/issues/3202060#comment-14021232": "https://git.drupalcode.org/project/simple_popup_blocks/-/merge_requests/2.diff"
-            },
-            "drupal/blazy": {
-                "Incompatible with Drupal 8, release 2.6 - app.root error https://www.drupal.org/project/blazy/issues/3263027": "https://www.drupal.org/files/issues/2022-02-09/3263027-app-root-10.patch"
             }
         }
     },

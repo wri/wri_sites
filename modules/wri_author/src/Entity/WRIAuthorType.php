@@ -36,7 +36,7 @@ use Drupal\Core\Config\Entity\ConfigEntityBundleBase;
  *     "edit-form" = "/admin/structure/wri_author_type/{wri_author_type}/edit",
  *     "delete-form" = "/admin/structure/wri_author_type/{wri_author_type}/delete",
  *     "collection" = "/admin/structure/wri_author_type"
- *   }
+ *   },
  *   config_export = {
  *     "id",
  *     "label",
