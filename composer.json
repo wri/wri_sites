@@ -100,9 +100,6 @@
             "drupal/search_api_pantheon": {
                 "Fixing More Like This for D8 on Pantheon https://github.com/pantheon-systems/search_api_pantheon/pull/69": "https://patch-diff.githubusercontent.com/raw/pantheon-systems/search_api_pantheon/pull/69.diff"
             },
-            "drupal/views_extras": {
-                "Why does Views Extras require Drupal_Visitors to be part of the cookie name?" : "https://www.drupal.org/files/issues/2021-02-03/3054202-08.patch"
-            },
             "drupal/textfield_counter": {
                 "'Prevent form submission when character limit exceeded' option does not work https://www.drupal.org/project/textfield_counter/issues/3004457": "https://www.drupal.org/files/issues/2018-10-04/textfield_counter-prevent_form_submission_does_not_work-3004457-2.patch",
                 "Issue #3182675: Incompatibilities with Claro theme, which duplicates the field selector class": "https://git.drupalcode.org/project/textfield_counter/-/merge_requests/1.patch"
