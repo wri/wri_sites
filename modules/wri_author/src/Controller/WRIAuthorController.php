@@ -7,7 +7,6 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
-use Drupal\Core\EntityInterface;
 use Drupal\wri_author\Entity\WRIAuthorInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
