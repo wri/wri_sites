@@ -6,6 +6,8 @@ use Drupal\Component\Utility\Xss;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Url;
+use Drupal\Core\Link;
+use Drupal\Core\EntityInterface;
 use Drupal\wri_author\Entity\WRIAuthorInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -121,13 +123,13 @@ class WRIAuthorController extends ControllerBase implements ContainerInjectionIn
         // Use revision link to link to revisions that are not active.
         $date = $this->dateFormatter->format($revision->getRevisionCreationTime(), 'short');
         if ($vid != $wri_author->getRevisionId()) {
-          $link = $this->l($date, new Url('entity.wri_author.revision', [
+          $link = Link::fromTextAndUrl($date, new Url('entity.wri_author.revision', [
             'wri_author' => $wri_author->id(),
             'wri_author_revision' => $vid,
-          ]));
+          ]))->toString();
         }
         else {
-          $link = $wri_author->link($date);
+          $link = $wri_author->toLink($date)->toString();
         }
 
         $row = [];

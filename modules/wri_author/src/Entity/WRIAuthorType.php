@@ -37,6 +37,10 @@ use Drupal\Core\Config\Entity\ConfigEntityBundleBase;
  *     "delete-form" = "/admin/structure/wri_author_type/{wri_author_type}/delete",
  *     "collection" = "/admin/structure/wri_author_type"
  *   }
+ *   config_export = {
+ *     "id",
+ *     "label",
+ *   }
  * )
  */
 class WRIAuthorType extends ConfigEntityBundleBase implements WRIAuthorTypeInterface {

@@ -29,7 +29,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
  *       "default" = "Drupal\wri_author\Form\WRIAuthorForm",
  *       "add" = "Drupal\wri_author\Form\WRIAuthorForm",
  *       "edit" = "Drupal\wri_author\Form\WRIAuthorForm",
- *       "delete" = "Drupal\wri_author\Form\WRIAuthorDeleteForm",
+ *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm",
  *     },
  *     "route_provider" = {
  *       "html" = "Drupal\wri_author\WRIAuthorHtmlRouteProvider",

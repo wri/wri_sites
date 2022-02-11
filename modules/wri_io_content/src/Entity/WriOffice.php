@@ -26,7 +26,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
  *       "default" = "Drupal\wri_io_content\Form\WriOfficeForm",
  *       "add" = "Drupal\wri_io_content\Form\WriOfficeForm",
  *       "edit" = "Drupal\wri_io_content\Form\WriOfficeForm",
- *       "delete" = "Drupal\wri_io_content\Form\WriOfficeDeleteForm",
+ *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm",
  *     },
  *     "route_provider" = {
  *       "html" = "Drupal\wri_io_content\WriOfficeHtmlRouteProvider",
