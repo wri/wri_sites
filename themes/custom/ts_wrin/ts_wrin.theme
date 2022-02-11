@@ -286,6 +286,11 @@ function ts_wrin_page_attachments_alter(array &$attachments) {
  * Implements hook_preprocess_HOOK.
  */
 function ts_wrin_preprocess_download_modal(&$variables) {
-  // Add hidden field with primary topic.
-  $variables['primary_topic'] = Term::load($variables['content']['#object']->field_primary_topic->target_id)->getName();
+  // Add hidden field with primary topic, if set.
+  if ($variables['content']['#object']->field_primary_topic->target_id) {
+    $variables['primary_topic'] = Term::load($variables['content']['#object']->field_primary_topic->target_id)->getName();
+  }
+  else {
+    $variables['primary_topic'] = 'Not set';
+  }
 }
