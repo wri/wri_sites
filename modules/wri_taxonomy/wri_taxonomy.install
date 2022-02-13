@@ -30,4 +30,11 @@ function wri_taxonomy_install() {
     'vid' => 'resource_type',
     'uuid' => '721a8bb1-b5a4-49dc-ad12-e65066833beb',
   ])->save();
+  // Case studies: taxonomy_term:resource_type:c242e989-b3cb-4769-8fa8-ed58347a1b7a.
+  Term::create([
+    'name' => 'Case study',
+    'parent' => $article->id(),
+    'vid' => 'resource_type',
+    'uuid' => 'c242e989-b3cb-4769-8fa8-ed58347a1b7a',
+  ])->save();
 }

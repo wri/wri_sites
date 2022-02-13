@@ -5,15 +5,14 @@ dependencies:
   config:
     - field.storage.node.field_leadership
     - search_api.index.sitewide
-    - system.menu.page-hierarchies
     - taxonomy.vocabulary.resource_type
   content:
-    - 'taxonomy_term:resource_type:a234adba-2849-40d0-b892-a4ba8d0dbdcd'
+    - 'taxonomy_term:resource_type:c242e989-b3cb-4769-8fa8-ed58347a1b7a'
   module:
     - search_api
     - views_extras
 _core:
-  default_config_hash: xsEEaGwJ2o2jxdI8Ma-eEzhd4aWxR1xoi3FRSJA5rUg
+  default_config_hash: 2cTxPUogsB2KtRp8DHXqlEt01VU0OnJkfLsoY_bZ7YA
 id: project_experts
 label: 'Project Experts'
 module: views
@@ -442,7 +441,7 @@ display:
           group_type: group
           admin_label: ''
           empty: false
-          content: '<span class=''totals''>@total Featured Experts</span>'
+          content: '<span class=''totals''>@total Experts</span>'
           plugin_id: extra_result
         area:
           id: area
@@ -460,26 +459,6 @@ display:
       footer: {  }
       empty: {  }
       relationships: {  }
-      arguments: {  }
-      display_extenders: {  }
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - url.query_args
-        - user
-      tags:
-        - 'config:field.storage.node.field_leadership'
-  page_1:
-    display_plugin: page
-    id: page_1
-    display_title: Page
-    position: 2
-    display_options:
-      display_extenders: {  }
-      path: project-experts/%
       arguments:
         field_project_expert:
           id: field_project_expert
@@ -512,33 +491,7 @@ display:
           break_phrase: false
           not: false
           plugin_id: search_api
-      defaults:
-        arguments: false
-        header: false
-      header:
-        extra_result:
-          id: extra_result
-          table: views
-          field: extra_result
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          content: '<span class=''totals''>@total Experts</span>'
-          plugin_id: extra_result
-        entity_node:
-          id: entity_node
-          table: views
-          field: entity_node
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: true
-          target: '{{ raw_arguments. field_project_expert }}'
-          view_mode: hero_on_a_subpage
-          bypass_access: false
-          plugin_id: entity
+      display_extenders: {  }
     cache_metadata:
       max-age: -1
       contexts:
@@ -547,5 +500,30 @@ display:
         - url
         - url.query_args
         - user
+        - 'user.node_grants:view'
       tags:
         - 'config:field.storage.node.field_leadership'
+        - 'config:search_api.index.sitewide'
+  page_1:
+    display_plugin: page
+    id: page_1
+    display_title: Page
+    position: 2
+    display_options:
+      display_extenders: {  }
+      path: project-experts/%
+      defaults:
+        arguments: true
+        header: true
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user
+        - 'user.node_grants:view'
+      tags:
+        - 'config:field.storage.node.field_leadership'
+        - 'config:search_api.index.sitewide'
