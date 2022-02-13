@@ -30,3 +30,41 @@ function wri_search_update_8901() {
 
   print 'Commenting out for now due to causing issue with config import.';
 }
+
+/**
+ * Splits the Experts and Staff views up to avoid facet caching issues.
+ */
+function wri_search_update_8902() {
+  // Step 1: Remove the page_1 display from the experts_staff view.
+  $config_factory = \Drupal::configFactory();
+
+  // Load the view.
+  $view = $config_factory->getEditable('views.view.experts_staff');
+
+  // Go through each display on each view.
+  $displays = $view->get('display');
+  unset($displays['page_1']);
+  $view->set('display', $displays);
+  $view->save(TRUE);
+
+  // Add the new view.
+  \Drupal::service('distro_helper.updates')->installConfig('views.view.project_experts', 'wri_search');
+
+  $message = 'Split the Experts view into Staff and Project experts.';
+   return $message;
+}
+
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function hsus_common_update_dependencies() {
+  // Indicate that the mymodule_update_8001() function provided by this module
+  // must run after the another_module_update_8003() function provided by the
+  // 'another_module' module.
+  $dependencies['wri_search'][8902] = [
+    'wri_sites' => 8908,
+  ];
+
+  return $dependencies;
+}
