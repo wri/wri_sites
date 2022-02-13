@@ -47,6 +47,9 @@ function wri_search_update_8902() {
   $view->set('display', $displays);
   $view->save(TRUE);
 
+  // Add the Type Name field to search.
+  \Drupal::service('distro_helper.updates')->updateConfig('search_api.index.sitewide', 'field_settings#type_name', 'wri_search');
+
   // Add the new view.
   \Drupal::service('distro_helper.updates')->installConfig('views.view.project_experts', 'wri_search');
 
