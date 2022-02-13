@@ -4,7 +4,6 @@ dependencies:
   config:
     - field.storage.node.field_leadership
     - search_api.index.sitewide
-    - taxonomy.vocabulary.resource_type
   module:
     - search_api
     - views_extras
@@ -440,10 +439,10 @@ display:
           break_phrase: false
           not: false
           plugin_id: search_api
-        field_type:
-          id: field_type
+        type_name:
+          id: type_name
           table: search_api_index_sitewide
-          field: field_type
+          field: type_name
           relationship: none
           group_type: group
           admin_label: ''
@@ -463,19 +462,14 @@ display:
             sort_order: asc
             number_of_records: 0
             format: default_summary
-          specify_validation: true
+          specify_validation: false
           validate:
-            type: taxonomy_term_name
+            type: none
             fail: 'not found'
-          validate_options:
-            bundles:
-              resource_type: resource_type
-            operation: view
-            access: false
-            transform: false
+          validate_options: {  }
           break_phrase: false
           not: true
-          plugin_id: search_api_term
+          plugin_id: search_api
       display_extenders: {  }
     cache_metadata:
       max-age: -1
