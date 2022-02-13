@@ -492,3 +492,4 @@ display:
         - 'user.node_grants:view'
       tags:
         - 'config:field.storage.node.field_leadership'
+        - 'config:search_api.index.sitewide'
