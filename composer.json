@@ -188,7 +188,7 @@
         "drupal/xmlsitemap": "^1.0",
         "npm-asset/jquery.toc": "^0.4.0",
         "oomphinc/composer-installers-extender": "^2.0",
-        "solarium/solarium": "3.8.*"
+        "solarium/solarium": "^6.1.5"
     },
     "require-dev": {
         "drupal/config_devel": "^1.8",
