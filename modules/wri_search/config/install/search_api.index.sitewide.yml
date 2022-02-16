@@ -2,36 +2,35 @@ langcode: en
 status: true
 dependencies:
   config:
-  - field.storage.node.body
-  - field.storage.node.field_areas_of_expertise
-  - field.storage.node.field_date_time
-  - field.storage.node.field_department
-  - field.storage.node.field_email
-  - field.storage.node.field_featured
-  - field.storage.node.field_featured_headline
-  - field.storage.node.field_featured_media
-  - field.storage.node.field_featured_text
-  - field.storage.node.field_featured_tweet
-  - field.storage.node.field_first_name
-  - field.storage.node.field_international_office
-  - field.storage.node.field_intro
-  - field.storage.node.field_languages_spoken
-  - field.storage.node.field_last_name
-  - field.storage.node.field_leadership
-  - field.storage.node.field_main_image
-  - field.storage.node.field_primary_topic
-  - field.storage.node.field_project_expert
-  - field.storage.node.field_projects
-  - field.storage.node.field_quote
-  - field.storage.node.field_region
-  - field.storage.node.field_tags
-  - field.storage.node.field_title
-  - field.storage.node.field_topics
-  - field.storage.node.field_type
-  - field.storage.node.field_weight
-  - field.storage.taxonomy_term.field_is_featured
-  - search_api.server.localhost
-
+    - field.storage.node.field_areas_of_expertise
+    - field.storage.node.body
+    - field.storage.node.field_date_time
+    - field.storage.node.field_department
+    - field.storage.node.field_email
+    - field.storage.node.field_featured
+    - field.storage.node.field_featured_headline
+    - field.storage.node.field_featured_media
+    - field.storage.node.field_featured_text
+    - field.storage.node.field_featured_tweet
+    - field.storage.taxonomy_term.field_is_featured
+    - field.storage.node.field_first_name
+    - field.storage.node.field_international_office
+    - field.storage.node.field_intro
+    - field.storage.node.field_title
+    - field.storage.node.field_languages_spoken
+    - field.storage.node.field_last_name
+    - field.storage.node.field_leadership
+    - field.storage.node.field_main_image
+    - field.storage.node.field_topics
+    - field.storage.node.field_projects
+    - field.storage.node.field_project_expert
+    - field.storage.node.field_quote
+    - field.storage.node.field_region
+    - field.storage.node.field_tags
+    - field.storage.node.field_primary_topic
+    - field.storage.node.field_type
+    - field.storage.node.field_weight
+    - search_api.server.pantheon
   module:
     - taxonomy
     - node
@@ -452,6 +451,16 @@ field_settings:
     dependencies:
       module:
         - node
+  type_name:
+    label: 'Type » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_type:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_type
+      module:
+        - taxonomy
   uid:
     label: 'Authored by'
     datasource_id: 'entity:node'
