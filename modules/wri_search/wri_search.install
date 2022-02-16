@@ -30,3 +30,33 @@ function wri_search_update_8901() {
 
   print 'Commenting out for now due to causing issue with config import.';
 }
+
+/**
+ * Update the language.entity.en file.
+ */
+function wri_search_update_8902() {
+  // If the language.entity.en config exists,
+  // update its uuid in the system to match what's in our config
+  // f57cf3c1-2952-471b-b65e-d476bc4c0f36.
+  $saved_config = \Drupal::configFactory()->getEditable('language.entity.en');
+  if (!$saved_config->isNew()) {
+    \Drupal::configFactory()
+      ->getEditable('language.entity.en')
+      ->set('uuid', 'f57cf3c1-2952-471b-b65e-d476bc4c0f36')
+      ->save();
+  }
+  else {
+    throwException('This update should run after the update that creates the language.entity.en file');
+  }
+}
+
+function wri_search_update_dependencies() {
+  // Indicate that the mymodule_update_8902() function provided by this module
+  // must run after the search_api_solr_update_8409() function. Update the
+  // "my_module" and "8902" to match the update hook above.
+  $dependencies['my_module'][8902] = array(
+    'search_api_solr' => 8409,
+  );
+
+  return $dependencies;
+}
