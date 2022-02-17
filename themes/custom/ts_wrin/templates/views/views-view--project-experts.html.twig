@@ -9,18 +9,6 @@
 %}
 {% if header %}{{ header.entity_node }}{% endif %}
 <div{{ attributes.addClass(classes) }}>
-
-  <div class="grid experts-staff-header">
-    <div class="left">
-    {{ drupal_breadcrumb() }}
-    <h1 class="h1 padding-top">{{ view.title|raw }}</h1>
-    {% if header %}{{ header.area }}{% endif %}
-    </div>
-    <div class="right">
-    {{ drupal_block('menu_block:page-hierarchies', {level: 1, depth: 0, parent: 'page-hierarchies:menu_link_content:4f92d155-0924-4c24-8dce-7b650d42485f', render_parent: false, follow_parent: 'child', follow: 0, label: 'Child pages', label_display: 0, id:'page-hierarchies'}) }}
-    </div>
-  </div>
-  {{ drupal_block('facet_block:experts_all_topics') }}
   <div class="resources-wrapper">
     <div class="container">
       {% if exposed %}
@@ -32,17 +20,12 @@
 
       <div class="grid results-wrapper">
         <div class="results-sidebar padding-bottom">
-          {{ drupal_block('facet_block:international_office') }}
-          {{ drupal_block('facet_block:languages_spoken_taxonomy_term_name') }}
-          {{ drupal_block('facet_block:department') }}
         </div>
 
         <div class="results-body padding-bottom">
           {% if header %}
             <div class="view-header">
               {{ header.extra_result }}
-              {{ drupal_block('facets_summary_block:experts_summary') }}
-              {% endif %}
             </div>
           {% endif %}
           {% if rows %}

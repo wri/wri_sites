@@ -157,6 +157,13 @@ function wri_sites_update_8907() {
 }
 
 /**
+ * Installs the distro_helper module.
+ */
+function wri_sites_update_8908() {
+  \Drupal::service('module_installer')->install(['distro_helper']);
+}
+
+/**
  * Installs the default hero block for pages.
  */
 function _install_default_hero_block() {

@@ -60,7 +60,7 @@
 
 .view-events div.form--inline,
 .view-resources div.form--inline,
-.view-experts-staff div.form--inline {
+.experts-container div.form--inline {
   @extend .grid;
   margin: 0;
   max-width: 100%;
@@ -68,7 +68,7 @@
 }
 .view-events #edit-actions,
 .view-resources #edit-actions,
-.view-experts-staff #edit-actions {
+.experts-container #edit-actions {
   clip: rect(1px, 1px, 1px, 1px);
   height: 1px;
   overflow: hidden;
@@ -86,7 +86,7 @@
 .results-sidebar,
 .view-events .form-type-textfield,
 .view-resources .form-type-textfield,
-.view-experts-staff .form-type-textfield,
+.experts-container .form-type-textfield,
 .view-events .form-item-date {
   @include column-width(1, 5);
 
@@ -128,7 +128,7 @@
 }
 
 .view .form-type-textfield,
-.view-experts-staff .form-type-textfield {
+.experts-container .form-type-textfield {
   margin-top: 55px;
   position: relative;
   width: 100%;
@@ -320,7 +320,7 @@
 }
 
 .view-resources .view-header,
-.view-experts-staff .view-header {
+.experts-container .view-header {
   @include mq($lg) {
     margin-top: -98px;
   }
@@ -503,7 +503,7 @@
     transition: all 0.3s;
   }
   .view-resources.open,
-  .view-experts-staff.open,
+  .experts-container.open,
   .view-events.open {
     .view-filters .form-type-textfield,
     .form-item-date {
@@ -517,7 +517,7 @@
     }
   }
   .view-resources .view-header,
-  .view-experts-staff .view-header {
+  .experts-container .view-header {
     margin-bottom: 30px;
     margin-top: 20px;
   }
@@ -540,7 +540,7 @@
   }
 }
 
-.view-experts-staff {
+.experts-container {
   .view-content {
     display: flex;
     flex-wrap: wrap;
