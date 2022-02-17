@@ -188,7 +188,7 @@
     },
     "require-dev": {
         "drupal/config_devel": "^1.8",
-        "drupal/config_suite": "^1.7",
+        "drupal/config_suite": "^2.0",
         "drupal/devel": "^4.1",
         "drupal/field_tools": "^1.0@alpha",
         "drupal/stage_file_proxy": "^1.2"
