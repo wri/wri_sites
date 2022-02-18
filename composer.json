@@ -136,6 +136,8 @@
         "drupal/config_partial_export": "^1.6",
         "drupal/config_sync": "^2.0@beta",
         "drupal/content_snippets": "^1.4",
+        "drupal/core-composer-scaffold": "^8.8.1",
+        "drupal/core-recommended": "^8.8",
         "drupal/csv_importer": "^1.10",
         "drupal/ctools": "^3.7",
         "drupal/diff": "^1.0",
