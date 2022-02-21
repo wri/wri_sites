@@ -114,6 +114,7 @@ class ViewsFieldAccessTest extends ViewsKernelTestBase {
     // revoke permissions as needed.
     $role_with_access = Role::create([
       'id' => 'with_access',
+      'label' => $this->randomString(),
       'permissions' => ['view test entity'],
     ]);
     $role_with_access->save();
@@ -121,6 +122,7 @@ class ViewsFieldAccessTest extends ViewsKernelTestBase {
 
     $role_without_access = Role::create([
       'id' => 'without_access',
+      'label' => $this->randomString(),
       'permissions' => ['view test entity'],
     ]);
     $role_without_access->save();
