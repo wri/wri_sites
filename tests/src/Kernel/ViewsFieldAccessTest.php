@@ -56,7 +56,7 @@ class ViewsFieldAccessTest extends ViewsKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'field_permissions',
     'entity_test',
     'text',
@@ -88,7 +88,7 @@ class ViewsFieldAccessTest extends ViewsKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp($import_test_views = TRUE) {
+  public function setUp($import_test_views = TRUE):void {
     parent::setUp($import_test_views);
 
     $this->installEntitySchema('entity_test');

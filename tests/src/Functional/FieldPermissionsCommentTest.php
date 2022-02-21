@@ -15,7 +15,7 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['comment'];
+  protected static $modules = ['comment'];
 
   /**
    * Test comment subject.
@@ -34,7 +34,7 @@ class FieldPermissionsCommentTest extends FieldPermissionsTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp():void {
     parent::setUp();
 
     // Add comment permissions to authenticated user.

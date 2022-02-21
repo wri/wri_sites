@@ -15,7 +15,7 @@ class FieldPermissionsNodeTest extends FieldPermissionsTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp():void {
     parent::setUp();
 
     // Grant the web user permission to administer node fields.

@@ -26,7 +26,7 @@ class FieldPermissionsMigrationTest extends MigrateDrupal7TestBase {
    */
   protected function getFixtureFilePath() {
     return implode(DIRECTORY_SEPARATOR, [
-      drupal_get_path('module', 'field_permissions'),
+      \Drupal::service('extension.list.module')->getPath('field_permissions'),
       'tests',
       'fixtures',
       'drupal7.php',

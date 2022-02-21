@@ -24,7 +24,7 @@ class FieldPermissionsUserTest extends FieldPermissionsTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp():void {
     parent::setUp();
     $this->fieldName = mb_strtolower($this->randomMachineName());
     // Remove the '@' symbol so it isn't converted to an email link.

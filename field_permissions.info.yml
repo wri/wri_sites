@@ -3,5 +3,4 @@ type: module
 description: 'Set field-level permissions to create, update or view fields.'
 configure: field_permissions.reports
 package: field
-core: '8.x'
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9 || ^10

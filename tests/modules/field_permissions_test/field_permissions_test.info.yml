@@ -2,7 +2,5 @@ name: 'Field permissions test module'
 type: module
 description: 'Provides a test field permission plugin type.'
 package: Testing
-core: '8.x'
-core_version_requirement: ^8 || ^9
 dependencies:
   - field_permissions:field_permissions

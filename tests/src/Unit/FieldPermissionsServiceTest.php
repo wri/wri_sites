@@ -48,7 +48,7 @@ class FieldPermissionsServiceTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp():void {
     parent::setUp();
 
     $entity_type_manager = $this->prophesize(EntityTypeManagerInterface::class);
