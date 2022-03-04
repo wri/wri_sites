@@ -7,6 +7,7 @@ use Drupal\Component\Utility\Tags;
 use Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface;
 use Drupal\Core\Entity\EntityAutocompleteMatcher as EntityAutocompleteMatcherOrig;
 use Drupal\Core\Entity\EntityManager;
+use Drupal\Core\Entity\EntityRepository;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 
 /**
@@ -19,15 +20,15 @@ class EntityAutocompleteMatcher extends EntityAutocompleteMatcherOrig {
    *
    * @param \Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface $selection_manager
    *   The entity reference selection handler plugin manager.
-   * @param \Drupal\Core\Entity\EntityManager $entity_manager
+   * @param \Drupal\Core\Entity\EntityRepository $entity_repository
    *   The Drupal entity.manager service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The Drupal entity_type.manager service.
    */
-  public function __construct(SelectionPluginManagerInterface $selection_manager, EntityManager $entity_manager, EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(SelectionPluginManagerInterface $selection_manager, EntityRepository $entity_repository, EntityTypeManagerInterface $entity_type_manager) {
     $this->selectionManager = $selection_manager;
     $this->entityTypeManager = $entity_type_manager;
-    $this->entityManager = $entity_manager;
+    $this->entityRepository = $entity_repository;
   }
 
   /**
@@ -55,7 +56,7 @@ class EntityAutocompleteMatcher extends EntityAutocompleteMatcherOrig {
         foreach ($values as $entity_id => $label) {
 
           $entity = $this->entityTypeManager->getStorage($target_type)->load($entity_id);
-          $entity = $this->entityManager->getTranslationFromContext($entity);
+          $entity = $this->entityRepository->getTranslationFromContext($entity);
 
           $type = !empty($entity->type->entity) ? $entity->type->entity->label() : $entity->bundle();
           $status = '';
