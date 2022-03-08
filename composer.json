@@ -73,7 +73,7 @@
                 "Add missing enclosure to Views RSS - 2511878-30": "https://www.drupal.org/files/issues/2020-07-24/views-rss-fields-enclosure-2511878-30.patch"
             },
             "drupal/config_sync":{
-                "Remove core requirement from config_sync_test https://www.drupal.org/project/config_sync/issues/3176955": "https://git.drupalcode.org/project/config_sync/-/commit/0300189.diff"
+                "Remove core requirement from config_sync_test https://www.drupal.org/project/config_sync/issues/3176955": "https://www.drupal.org/files/issues/2021-03-19/config_sync-config-sync-test-core-3176955-4.patch"
             },
             "drupal/diff": {
                 "No local tasks on compare revisions page https://www.drupal.org/project/diff/issues/3169729": "https://www.drupal.org/files/issues/2020-09-08/diff_add-local-tasks-3169729-2.patch"
