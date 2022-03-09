@@ -357,7 +357,7 @@
       }
     }
 
-    @include mq($md) {
+    @include mq($lg) {
       display: table;
       max-width: 100%;
     }
