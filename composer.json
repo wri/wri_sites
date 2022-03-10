@@ -106,6 +106,9 @@
             },
             "drupal/search_api_pantheon": {
                 "Solr MLT on pantheon": "web/profiles/contrib/wri_sites/patches/mlt-sapi-panth-3.patch"
+            },
+            "drupal/views_extras": {
+                "Why does Views Extras require Drupal_Visitors to be part of the cookie name?" : "https://www.drupal.org/files/issues/2021-02-03/3054202-08.patch"
             }
         }
     },
