@@ -75,7 +75,7 @@
             "drupal/config_sync":{
                 "Remove core requirement from config_sync_test https://www.drupal.org/project/config_sync/issues/3176955": "https://www.drupal.org/files/issues/2021-03-19/config_sync-config-sync-test-core-3176955-4.patch"
             },
-            "drupal/content_snippet": {
+            "drupal/content_snippets": {
                 "Error: Cannot unset string offsets... https://www.drupal.org/project/content_snippets/issues/3268757": "https://git.drupalcode.org/issue/content_snippets-3268757/-/merge_requests/1.diff"
             },
             "drupal/diff": {
