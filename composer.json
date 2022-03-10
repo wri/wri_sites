@@ -189,7 +189,7 @@
         "drupal/views_arg_order_sort": "dev-1.x#5d13cfca5749294d127ebc06348827f775342b37",
         "drupal/views_autosubmit": "^1.4",
         "drupal/views_bulk_edit": "^2.6",
-        "drupal/views_bulk_operations": "^3.13",
+        "drupal/views_bulk_operations": "^4.0",
         "drupal/views_extras": "^2.0@alpha",
         "drupal/webform": "^6.1",
         "drupal/xmlsitemap": "^1.2",
