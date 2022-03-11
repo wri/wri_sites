@@ -34,7 +34,8 @@
       <div class="landing-page__content container margin-top-md margin-bottom-md">
         <div class="content__inner" style="text-align: center;">
           {{ drupal_block('local_tasks_block') }}
-          <img class="logo-color" src="/sites/default/files/nav_logo_color.svg" alt="Home" style="margin: 40px auto;"> {{page.content}}
+          {{ drupal_block('system_branding_block') }}
+          {{page.content}}
         </div>
       </div>
       {% endif %}
