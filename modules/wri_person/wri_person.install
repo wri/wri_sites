@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @file
+ * Update hooks for person config
+ */
+
+/**
+ * Add the Person Listing paragraph.
+ */
+function wri_person_update_9301() {
+
+  // Add the new paragraph configs.
+  \Drupal::service('distro_helper.updates')->installConfig('paragraphs.paragraphs_type.person_listing', 'wri_person');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.paragraph.person_listing.field_block', 'wri_person');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.paragraph.person_listing.default', 'wri_person');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.paragraph.person_listing.default', 'wri_person');
+
+  $message = 'Person Listing paragraph.';
+   return $message;
+}
+
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_person_update_dependencies() {
+  // We must have the distro_helper module before we can run the 8902 update hook.
+  $dependencies['wri_search'][8902] = [
+    'wri_sites' => 9301,
+  ];
+
+  return $dependencies;
+}
