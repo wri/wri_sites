@@ -25,9 +25,9 @@ function wri_person_update_9301() {
  * Implements hook_update_dependencies().
  */
 function wri_person_update_dependencies() {
-  // We must have the distro_helper module before we can run the 8902 update hook.
-  $dependencies['wri_search'][8902] = [
-    'wri_sites' => 9301,
+  // We must have the distro_helper before we can run the 9301 update hook.
+  $dependencies['wri_person'][9301] = [
+    'wri_sites' => 8908,
   ];
 
   return $dependencies;
