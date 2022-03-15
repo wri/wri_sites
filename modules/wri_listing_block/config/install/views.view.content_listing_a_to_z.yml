@@ -370,7 +370,7 @@ display:
       link_url: '/resources?type={{ raw_arguments.type }}&featured={{ raw_arguments.field_featured_target_id }}'
       link_display: '0'
       use_more: false
-      use_more_always: true
+      use_more_always: false
       use_more_text: 'View all'
       css_class: content-listing
     cache_metadata:

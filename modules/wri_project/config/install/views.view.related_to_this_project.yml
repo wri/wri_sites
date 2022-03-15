@@ -255,7 +255,7 @@ display:
       link_display: custom_url
       link_url: '/project-resources/{{ arguments.field_projects_target_id }}'
       use_more: true
-      use_more_always: true
+      use_more_always: false
       use_more_text: 'View all Related'
     cache_metadata:
       max-age: -1

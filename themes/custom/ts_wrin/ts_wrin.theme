@@ -139,6 +139,14 @@ function ts_wrin_preprocess_field(array &$variables) {
     $variables["attributes"]["class"] = $variables["element"][0]["#attributes"]["class"];
     $variables["attributes"]["class"][] = 'block';
   }
+  // Add 'Show More Link' value to Featured Experts field.
+
+  if ($variables['element']['#field_name'] == 'field_featured_experts') {
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if ($node instanceof \Drupal\node\NodeInterface && $node->field_show_more_link) {
+      $variables["show_more_link"] = $node->field_show_more_link->value;
+    }
+  }
 }
 
 /**
