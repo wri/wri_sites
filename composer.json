@@ -112,7 +112,7 @@
             },
             "drupal/simple_popup_blocks": {
                 "Modal hops user down the page to the first text input https://www.drupal.org/project/simple_popup_blocks/issues/3202060#comment-14021232": "https://git.drupalcode.org/project/simple_popup_blocks/-/merge_requests/2.diff",
-                "Warning: htmlspecialchars() expects parameter 1 to be string, array given https://www.drupal.org/project/simple_popup_blocks/issues/3267864":"https://git.drupalcode.org/project/simple_popup_blocks/-/merge_requests/4.diff"
+                "Warning: htmlspecialchars() expects parameter 1 to be string, array given https://www.drupal.org/files/issues/2022-03-09/simple_popup_blocks-n3267864-5.patch":"https://git.drupalcode.org/project/simple_popup_blocks/-/merge_requests/4.diff"
             }
         }
     },
