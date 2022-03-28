@@ -187,12 +187,6 @@ function wri_sites_update_8909() {
  * Installs the default hero block for pages.
  */
 function _install_default_hero_block() {
-  // Create the default hero paragraph.
-  $paragraph = Paragraph::create([
-    'type' => 'default_hero',
-  ]);
-  $paragraph->save();
-
   // Adds a default Node hero block so the layout builder can use it.
   $block = BlockContent::create([
     'info' => 'Node Hero',
@@ -200,7 +194,6 @@ function _install_default_hero_block() {
     'langcode' => 'en',
     'revision_id' => 8,
     'reusable' => FALSE,
-    'field_hero_type' => $paragraph,
   ]);
   $block->save();
 }
