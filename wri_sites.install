@@ -112,7 +112,7 @@ function wri_sites_update_8904() {
  */
 function wri_sites_update_8905() {
   // If there's not already a block with revision_id 100482, create it.
-  $existing_block =  \Drupal::entityTypeManager()
+  $existing_block = \Drupal::entityTypeManager()
     ->getStorage('block_content')
     ->loadRevision(100482);
 
@@ -121,12 +121,11 @@ function wri_sites_update_8905() {
   }
 }
 
-
 /**
  * Updates the revisionid of the hero block, if it does not match.
  */
 function wri_sites_update_8906() {
-  $existing_block =  \Drupal::entityTypeManager()
+  $existing_block = \Drupal::entityTypeManager()
     ->getStorage('block_content')
     ->loadRevision(100070);
 
@@ -164,15 +163,30 @@ function wri_sites_update_8908() {
 }
 
 /**
+ * Clear cached entity definitions to remove reporting errors.
+ */
+function wri_sites_update_8909() {
+
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $entity_type_manager->clearCachedDefinitions();
+
+  $entity_type_ids = [];
+  $change_summary = \Drupal::service('entity.definition_update_manager')->getChangeSummary();
+  foreach ($change_summary as $entity_type_id => $change_list) {
+    $entity_type = $entity_type_manager->getDefinition($entity_type_id);
+    \Drupal::entityDefinitionUpdateManager()->installEntityType($entity_type);
+    $entity_type_ids[] = $entity_type_id;
+  }
+
+  return t("Installed/Updated the entity type(s): @entity_type_ids", [
+    '@entity_type_ids' => implode(', ', $entity_type_ids),
+  ]);
+}
+
+/**
  * Installs the default hero block for pages.
  */
 function _install_default_hero_block() {
-  // Create the default hero paragraph.
-  $paragraph = Paragraph::create([
-    'type' => 'default_hero',
-  ]);
-  $paragraph->save();
-
   // Adds a default Node hero block so the layout builder can use it.
   $block = BlockContent::create([
     'info' => 'Node Hero',
@@ -180,7 +194,6 @@ function _install_default_hero_block() {
     'langcode' => 'en',
     'revision_id' => 8,
     'reusable' => FALSE,
-    'field_hero_type' => $paragraph,
   ]);
   $block->save();
 }
@@ -244,7 +257,7 @@ function _install_filedownload_blocks() {
     'field_cta_background' => 'has-blue-background-color',
     'langcode' => 'en',
     'reusable' => TRUE,
-    'uuid' => 'd21dee48-13ad-4782-abcd-68b8582a5c3e'
+    'uuid' => 'd21dee48-13ad-4782-abcd-68b8582a5c3e',
   ]);
   $block->save();
 }

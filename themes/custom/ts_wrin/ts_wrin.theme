@@ -110,6 +110,11 @@ function ts_wrin_preprocess_page(array &$variables) {
   if (str_starts_with($current_route_name, 'view.')) {
     $variables['is_node'] = TRUE;
   }
+
+  $status = \Drupal::requestStack()->getCurrentRequest()->attributes->get('exception');
+  if ($status && ($status->getStatusCode() == 403 || $status->getStatusCode() == 404)) {
+    $variables['is_node'] = TRUE;
+  }
 }
 
 /**
