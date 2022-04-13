@@ -54,7 +54,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
  *   revision_metadata_keys = {
  *     "revision_user" = "revision_user",
  *     "revision_created" = "revision_created",
- *     "revision_log_message" = "revision_log",
+ *     "revision_log_message" = "revision_log_message",
  *   },
  *   links = {
  *     "canonical" = "/admin/content/wri_author/{wri_author}",
