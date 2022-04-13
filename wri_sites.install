@@ -165,7 +165,7 @@ function wri_sites_update_8908() {
 /**
  * Clear cached entity definitions to remove reporting errors.
  */
-function wri_sites_update_8909() {
+function wri_sites_update_9100() {
 
   $entity_type_manager = \Drupal::entityTypeManager();
   $entity_type_manager->clearCachedDefinitions();
