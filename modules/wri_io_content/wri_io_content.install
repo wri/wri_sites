@@ -11,8 +11,8 @@
 function wri_io_content_update_9301() {
 
   // Add the new field configs.
-  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.international_office.field_show_more_link', 'wri_io_content');
   \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_show_more_link', 'wri_io_content');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.international_office.field_show_more_link', 'wri_io_content');
 
   $message = 'Add the Show More Link? field.';
    return $message;
