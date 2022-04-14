@@ -28,7 +28,8 @@ function wri_project_update_9301() {
 
   // Add the new field configs.
   \Drupal::service('distro_helper.updates')->installConfig('field.field.node.project_detail.field_show_more_link', 'wri_project');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.node.project_detail.default', 'wri_project');
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.project_detail.default', ['dependencies#
+  config','third_party_settings#field_group#group_experts#children','content#field_show_more_link'], 'wri_project');
 
   $message = 'Add the Show More Link? field.';
    return $message;
