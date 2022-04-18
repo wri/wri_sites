@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * @file
+ * Update hooks for wri_article
+ */
+
+
+/**
+ * Update the article display configs to remove blazy.
+ */
+function wri_article_update_9301() {
+
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.article.large_image_teaser', 'wri_article', 'install', 'TRUE');
+
+  $message = 'Remove blazy';
+   return $message;
+}
+
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_article_update_dependencies() {
+  // We must have the distro_helper module before we can run the 8902 update hook.
+  $dependencies['wri_article'][9301] = [
+    'wri_sites' => 8908,
+  ];
+
+  return $dependencies;
+}

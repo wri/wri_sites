@@ -17,8 +17,6 @@ function wri_media_update_9301() {
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.image.half_content', 'wri_media', 'install', 'TRUE');
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.image.homepage_hero', 'wri_media', 'install', 'TRUE');
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.image.landing_page_hero', 'wri_media', 'install', 'TRUE');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.article.large_image_teaser', 'wri_media', 'install', 'TRUE');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.paragraph.homepage_hero.default', 'wri_media', 'install', 'TRUE');
 
   $message = 'Remove blazy';
    return $message;
