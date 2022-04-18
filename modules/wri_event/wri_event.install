@@ -33,4 +33,28 @@ function wri_event_update_8901() {
   // return $message;
 
   print 'Commenting out for now due to causing issue with config import.';
+
+  /**
+   * Update the event display configs to remove blazy.
+   */
+  function wri_event_update_9301() {
+
+    \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.event.card', 'wri_event', 'install', 'TRUE');
+
+    $message = 'Remove blazy, responsive image';
+     return $message;
+  }
+
+  /**
+   * Implements hook_update_dependencies().
+   */
+  function wri_event_update_dependencies() {
+    // We must have the distro_helper module before we can run the 9301 update hook.
+    $dependencies['wri_event'][9301] = [
+      'wri_sites' => 8908,
+    ];
+
+    return $dependencies;
+  }
+
 }
