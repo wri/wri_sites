@@ -75,7 +75,7 @@ function wri_search_form_views_exposed_form_alter(&$form, FormStateInterface $fo
   // option enabled, and that the Facets module is installed.
   $preserve_facets = !empty($query_plugin->options['preserve_facet_query_args'])
     && $query_plugin instanceof
-  SearchApiQuery    && \Drupal::moduleHandler()->moduleExists('facets');
+    SearchApiQuery    && \Drupal::moduleHandler()->moduleExists('facets');
   if ($preserve_facets) {
     // Retrieve the facet source.
     $query = $query_plugin->getSearchApiQuery();

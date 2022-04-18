@@ -320,6 +320,10 @@
 
   /* Tables */
   table {
+    display: block;
+    max-width: fit-content;
+    overflow: auto;
+
     td {
       @include font($acumin-semi-cond, "light");
       @include font-line-height(16, 22);
@@ -351,6 +355,11 @@
       tr:nth-of-type(even) {
         background-color: $light-grey;
       }
+    }
+
+    @include mq($lg) {
+      display: table;
+      max-width: 100%;
     }
   }
 }

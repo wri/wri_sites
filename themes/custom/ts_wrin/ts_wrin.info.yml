@@ -18,9 +18,5 @@ regions:
   wrin_custom: 'WRIN Custom'
   disabled: Disabled
   modals: Modals
-component-libraries:
-  ts_custom:
-    paths:
-      - templates/ts_custom
 ckeditor_stylesheets:
   - dist/ckeditor.css

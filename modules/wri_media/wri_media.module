@@ -46,7 +46,7 @@ function wri_media_preprocess_details(&$variables) {
           'target' => '_blank',
         ],
       ];
-      $file_url = $file->url();
+      $file_url = $file->createFileUrl();
       $replace_url = Url::fromRoute('entity.file.replace_form', ['file' => $file->id()], $url_options);
       $variables['replacement_link'] = Link::fromTextAndUrl('Overwrite the file at ' . $file_url, $replace_url);
     }

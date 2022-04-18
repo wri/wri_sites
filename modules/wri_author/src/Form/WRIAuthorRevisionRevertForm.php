@@ -133,9 +133,10 @@ class WRIAuthorRevisionRevertForm extends ConfirmFormBase {
    *   The prepared revision ready to be stored.
    */
   protected function prepareRevertedRevision(WRIAuthorInterface $revision, FormStateInterface $form_state) {
+    $request_time = \Drupal::time()->getRequestTime();
     $revision->setNewRevision();
     $revision->isDefaultRevision(TRUE);
-    $revision->setRevisionCreationTime(REQUEST_TIME);
+    $revision->setRevisionCreationTime($request_time);
 
     return $revision;
   }

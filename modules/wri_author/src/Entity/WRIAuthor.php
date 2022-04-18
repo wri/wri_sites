@@ -29,7 +29,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
  *       "default" = "Drupal\wri_author\Form\WRIAuthorForm",
  *       "add" = "Drupal\wri_author\Form\WRIAuthorForm",
  *       "edit" = "Drupal\wri_author\Form\WRIAuthorForm",
- *       "delete" = "Drupal\wri_author\Form\WRIAuthorDeleteForm",
+ *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm",
  *     },
  *     "route_provider" = {
  *       "html" = "Drupal\wri_author\WRIAuthorHtmlRouteProvider",
@@ -50,6 +50,11 @@ use Drupal\Core\Entity\EntityTypeInterface;
  *     "uuid" = "uuid",
  *     "langcode" = "langcode",
  *     "published" = "status",
+ *   },
+ *   revision_metadata_keys = {
+ *     "revision_user" = "revision_user",
+ *     "revision_created" = "revision_created",
+ *     "revision_log_message" = "revision_log_message",
  *   },
  *   links = {
  *     "canonical" = "/admin/content/wri_author/{wri_author}",
