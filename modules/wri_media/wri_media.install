@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Update hooks for wri_media
+ */
+
+
+/**
+ * Update the media display configs to remove blazy.
+ */
+function wri_media_update_9301() {
+
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.image.default', 'wri_media', '', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.image.full', 'wri_media', '', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.image.full_width', 'wri_media', '', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.image.half_content', 'wri_media', '', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.image.homepage_hero', 'wri_media', '', '');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.image.landing_page_hero', 'wri_media', '', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.article.large_image_teaser', 'wri_media', '', '');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.paragraph.homepage_hero.default', 'wri_media', '', '');
+
+  $message = 'Remove blazy';
+   return $message;
+}
+
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_media_update_dependencies() {
+  // We must have the distro_helper module before we can run the 8902 update hook.
+  $dependencies['wri_media'][9301] = [
+    'wri_sites' => 8908,
+  ];
+
+  return $dependencies;
+}

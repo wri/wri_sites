@@ -2,12 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.media.half_content
+    - core.entity_view_mode.media.homepage_hero
     - field.field.media.image.field_attribution
     - field.field.media.image.field_media_image
     - field.field.media.image.field_tags
     - media.type.image
-    - responsive_image.styles.half_content
+    - responsive_image.styles.homepage_hero
   module:
     - ds
     - layout_builder
@@ -16,25 +16,27 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-id: media.image.half_content
+id: media.image.homepage_hero
 targetEntityType: media
 bundle: image
-mode: half_content
+mode: homepage_hero
 content:
   field_media_image:
     type: responsive_image
     label: hidden
     settings:
-      responsive_image_style: half_content
+      responsive_image_style: homepage_hero
       image_link: ''
       image_loading:
-        attribute: lazy
+        attribute: eager
     third_party_settings:
       ds:
         ft:
-          id: reset
+          id: minimal
           settings:
             lb: ''
+            lb-col: false
+            classes: {  }
     weight: 0
     region: content
 hidden:
