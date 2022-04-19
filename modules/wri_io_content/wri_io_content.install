@@ -13,8 +13,7 @@ function wri_io_content_update_9301() {
   // Add the new field configs.
   \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_show_more_link', 'wri_io_content');
   \Drupal::service('distro_helper.updates')->installConfig('field.field.node.international_office.field_show_more_link', 'wri_io_content');
-  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.international_office.default', ['dependencies#
-  config','content#field_show_more_link'], 'wri_io_content');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.node.international_office.default', 'wri_io_content', 'install', 'TRUE');
 
   $message = 'Add the Show More Link? field.';
    return $message;

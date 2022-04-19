@@ -12,8 +12,7 @@ function wri_program_update_9301() {
 
   // Add the new field configs.
   \Drupal::service('distro_helper.updates')->installConfig('field.field.node.program_center.field_show_more_link', 'wri_program');
-  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.program_center.default', ['dependencies#
-  config','third_party_settings#field_group#group_experts#children','content#field_show_more_link'], 'wri_program');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.node.program_center.default', 'wri_program', 'install', 'TRUE');
 
 
   $message = 'Add the Show More Link? field.';
