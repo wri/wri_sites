@@ -159,7 +159,7 @@ class WriReaderRetrieveNodeResource extends ResourceBase {
             $media = Media::load($mid['target_id']);
             $fid = $media->field_media_file->target_id;
             $file = File::load($fid);
-            $files[]['url'] = $file->toUrl();
+            $files[]['url'] = \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri());
           }
           $node_array[$field_name] = [
             $language => $files,
