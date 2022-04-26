@@ -116,12 +116,14 @@
     }
 
     a {
-      background: url("../img/svgs/nav_logo_white.svg") no-repeat center center /
-        cover;
       display: inline-block;
       height: 50px;
       text-indent: -9999px;
-      width: 140px;
+      min-width: 140px;
+      width: auto;
+      img.logo-white {
+        max-width: 100%;
+      }
     }
   }
 
