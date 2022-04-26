@@ -72,12 +72,13 @@
 
 .region-footer .footer-padding {
   display: flex;
-  flex-wrap: wrap;
   padding-bottom: $padding-vertical;
   padding-top: $padding-vertical;
+  flex-wrap: wrap;
 
   @include mq($md) {
     flex-direction: column;
+    flex-wrap: nowrap;
   }
 
   @include mq($lg) {
