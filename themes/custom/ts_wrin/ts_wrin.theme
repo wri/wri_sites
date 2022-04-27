@@ -115,6 +115,11 @@ function ts_wrin_preprocess_page(array &$variables) {
   if ($status && ($status->getStatusCode() == 403 || $status->getStatusCode() == 404)) {
     $variables['is_node'] = TRUE;
   }
+
+  if (null != theme_get_setting('white_logo.path')) {
+    $logo_path = theme_get_setting('white_logo.path');
+    $variables['footer_logo'] = file_url_transform_relative(file_create_url($logo_path));
+  }
 }
 
 /**
