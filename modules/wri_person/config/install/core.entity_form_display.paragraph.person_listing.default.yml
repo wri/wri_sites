@@ -6,8 +6,6 @@ dependencies:
     - paragraphs.paragraphs_type.person_listing
   module:
     - wri_block
-_core:
-  default_config_hash: 6qw37XxuunBk7y0wwuAn7n7CM9D0GZVA-t9XXKV7AxU
 id: paragraph.person_listing.default
 targetEntityType: paragraph
 bundle: person_listing
