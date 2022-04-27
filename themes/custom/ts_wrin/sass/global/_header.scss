@@ -434,7 +434,7 @@ header nav.menu--main.has-active-trail .menu-wrapper > ul.menu {
     @include font-line-height(14, 17);
     color: $black;
     letter-spacing: normal;
-    text-transform: capitalize;
+    text-transform: none;
     @include hocus {
       color: $med-grey;
       outline: none;
