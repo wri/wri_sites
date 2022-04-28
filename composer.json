@@ -131,7 +131,7 @@
         "drupal/allowed_formats": "^1.4",
         "drupal/asset_injector": "^2.9",
         "drupal/auto_entitylabel": "^3.0@beta",
-        "drupal/blazy": "^2.6",
+        "drupal/blazy": "2.6",
         "drupal/block_list_override": "^1.0",
         "drupal/cer": "^4.0@alpha",
         "drupal/ckeditor_templates": "^1.2",
