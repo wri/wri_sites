@@ -79,7 +79,7 @@ third_party_settings:
     group_featured:
       children:
         - field_narrative_taxonomy
-      label: 特别关注
+      label: Featured
       region: content
       parent_name: group_more
       weight: 20

@@ -63,7 +63,7 @@ third_party_settings:
         - field_project_partners
         - field_narrative_taxonomy
         - field_featured_related_resources
-      label: 特别关注
+      label: Featured
       region: content
       parent_name: group_more
       weight: 7
