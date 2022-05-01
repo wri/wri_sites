@@ -48,6 +48,7 @@ jobs:
             export PATH="./vendor/bin:../vendor/bin:/root/.composer/vendor/bin:$PATH"
             composer self-update --2
             COMPOSER_MEMORY_LIMIT=-1 composer install --prefer-dist
+            phpcs --config-set installed_paths ../../drupal/coder/coder_sniffer/
             phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,info,txt,md,profile --ignore="*.css,*/node_modules/*,*/dist/*,README.md,web/*,*.js" modules themes wri_sites.install wri_sites.profile
             rm -r web
 workflows:
