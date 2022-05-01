@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Install and update hooks for wri_io_content.
+ */
+
+/**
+ * Add the 'Show More Link' field to the International Office content type.
+ */
+function wri_io_content_update_9301() {
+
+  // Add the new field configs.
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_show_more_link', 'wri_io_content');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.international_office.field_show_more_link', 'wri_io_content');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.node.international_office.default', 'wri_io_content', 'install', 'TRUE');
+
+  $message = 'Add the Show More Link? field.';
+   return $message;
+}
+
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_io_content_update_dependencies() {
+  // We must have the distro_helper before we can run the 9301 update hook.
+  $dependencies['wri_io_content'][9301] = [
+    'wri_sites' => 8908,
+  ];
+
+  return $dependencies;
+}

@@ -19,3 +19,31 @@ function wri_project_update_8901() {
     $block->delete();
   }
 }
+
+
+/**
+ * Add the 'Show More Link' field to the Project Detail content type.
+ */
+function wri_project_update_9301() {
+
+  // Add the new field configs.
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.project_detail.field_show_more_link', 'wri_project');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.node.project_detail.default', 'wri_project', 'install', 'TRUE');
+
+  $message = 'Add the Show More Link? field.';
+   return $message;
+}
+
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_project_update_dependencies() {
+  // We must have the distro_helper before we can run the 9301 update hook.
+  $dependencies['wri_project'][9301] = [
+    'wri_sites' => 8908,
+    'wri_io_content' => 9301,
+  ];
+
+  return $dependencies;
+}
