@@ -112,7 +112,7 @@
                 "Warning: htmlspecialchars() expects parameter 1 to be string, array given https://www.drupal.org/files/issues/2022-03-09/simple_popup_blocks-n3267864-5.patch":"https://git.drupalcode.org/project/simple_popup_blocks/-/merge_requests/4.diff"
             },
             "drupal/search_api_pantheon": {
-                "Solr MLT on pantheon": "web/profiles/contrib/wri_sites/patches/mlt-sapi-panth-3.patch"
+                "Solr MLT on pantheon": "./patches/mlt-sapi-panth-3.patch"
             },
             "drupal/views_extras": {
                 "Why does Views Extras require Drupal_Visitors to be part of the cookie name?" : "https://www.drupal.org/files/issues/2021-12-27/3054202-09.patch"
