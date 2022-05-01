@@ -203,6 +203,7 @@
         "thinkshout/distro_helper": "^1.0"
     },
     "require-dev": {
+        "drupal/coder": "^8.3",
         "drupal/config_devel": "^1.8",
         "drupal/config_suite": "^2.0",
         "drupal/devel": "^4.1",
