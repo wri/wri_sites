@@ -118,7 +118,7 @@ function ts_wrin_preprocess_page(array &$variables) {
 
   if (null != theme_get_setting('white_logo.path')) {
     $logo_path = theme_get_setting('white_logo.path');
-    $variables['footer_logo'] = file_url_transform_relative(file_create_url($logo_path));
+    $variables['footer_logo'] = \Drupal::service('file_url_generator')->transformRelative(file_create_url($logo_path));
   }
 }
 
@@ -187,9 +187,9 @@ function ts_wrin_preprocess_block(array &$variables) {
     $variables['attributes']['class'][] = Html::getClass($variables["content"][0]["#field_name"]);
   }
 
-  if (isset($variables['site_logo'])) {
+  if (null != theme_get_setting('white_logo.path')) {
     $logo_path = theme_get_setting('white_logo.path');
-    $variables['white_logo'] = file_url_transform_relative(file_create_url($logo_path));
+    $variables['white_logo'] = \Drupal::service('file_url_generator')->transformRelative(file_create_url($logo_path));
   }
 }
 
