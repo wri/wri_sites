@@ -17,7 +17,7 @@ function wri_article_preprocess_wri_article_columns(&$context) {
       $media = $node->field_main_image->entity;
       if ($media->hasField('field_attribution') && ($attribution = $media->get('field_attribution')) && !$attribution->isEmpty()) {
         $context['content']['byline']['attribution'] = [
-          '#markup' => '<span class="cover-attribution">' . t('Cover Image by: ') . $attribution->getString() . '</span>',
+          '#markup' => '<span class="cover-attribution">' . t('Cover Image by: @attribution', ['@attribution' => $attribution->getString()]) . '</span>',
           '#weight' => 10,
         ];
       }

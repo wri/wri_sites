@@ -2,6 +2,7 @@
 
 /**
  * @file
+ * Wri_event.
  */
 
 use Drupal\views\ViewExecutable;
@@ -12,7 +13,7 @@ use Drupal\views\Plugin\views\query\QueryPluginBase;
  */
 function wri_event_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
   // On the Events view, if the "date" is set to "Show past Events" (value = 2)
-  // change the date sort to DESC (so older events are at the bottom of the list).
+  // change the date sort to DESC (so older events are at the bottom).
   if ($view->id() == 'events' && is_numeric($view->exposed_raw_input['date']) && $view->exposed_raw_input['date'] == 2) {
     $sort = &$query->getSort();
     $sort['field_date_time'] = 'DESC';
