@@ -117,6 +117,37 @@
             "drupal/views_extras": {
                 "Why does Views Extras require Drupal_Visitors to be part of the cookie name?" : "https://www.drupal.org/files/issues/2021-12-27/3054202-09.patch"
             }
+        },
+        "drupal-scaffold": {
+            "locations": {
+                "project-root": "./web",
+                "web-root": "./web"
+            }
+        },
+        "installer-paths": {
+            "web/core": [
+                "type:drupal-core"
+            ],
+            "web/libraries/{$name}": [
+                "type:drupal-library",
+                "type:bower-asset",
+                "type:npm-asset"
+            ],
+            "web/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "web/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "web/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/Commands/contrib/{$name}": [
+                "type:drupal-drush"
+            ],
+            "web/private/scripts/quicksilver/{$name}/": [
+                "type:quicksilver-script"
+            ]
         }
     },
     "require": {
