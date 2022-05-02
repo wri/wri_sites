@@ -61,7 +61,7 @@ class CopyrightBlock extends BlockBase implements ContainerFactoryPluginInterfac
       '#type' => 'textfield',
       '#title' => $this->t('Copyright Message'),
       '#description' => $this->t('This field supports tokens, including the current year ([current-date:html_year]), and links.'),
-      '#default_value' => isset($this->configuration['copyright_message']) ? $this->configuration['copyright_message'] : '&copy; ' . date("Y") . ' World Resources Institute',
+      '#default_value' => $this->configuration['copyright_message'] ?? '&copy; ' . date("Y") . ' World Resources Institute',
       '#maxlength' => 256,
       '#size' => 64,
       '#weight' => '1',

@@ -4,12 +4,9 @@ namespace Drupal\wri_external_pub\Plugin\Block;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\node\NodeInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a block with a simple text.
@@ -121,10 +118,8 @@ class ExternalPubBlock extends BlockBase {
   //  */
   // public function blockForm($form, FormStateInterface $form_state) {
   //   $config = $this->getConfiguration();
-
-  //   return $form;
-  // }
-
+  // return $form;
+  // }.
   // /**
   //  * {@inheritdoc}
   //  */

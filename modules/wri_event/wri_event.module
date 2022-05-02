@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @file
+ */
+
 use Drupal\views\ViewExecutable;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 

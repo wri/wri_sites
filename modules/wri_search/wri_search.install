@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Update hooks for search
+ * Update hooks for search.
  */
 
 /**
@@ -21,13 +21,11 @@ function wri_search_update_8901() {
   // ];
   // $search_index->set('field_settings.smart_topic_parent', $smart_topic_parent);
   // $search_index->save(TRUE);
-
   // foreach(['facets.facet.experts_all_topics', 'facets.facet.all_event_topics', 'facets.facet.all_topics'] as $config_name) {
   //   $experts = \Drupal::configFactory()->getEditable($config_name);
   //   $experts->set('field_identifier', 'smart_topic_parent');
   //   $experts->save(TRUE);
   // }
-
   print 'Commenting out for now due to causing issue with config import.';
 }
 
@@ -54,9 +52,8 @@ function wri_search_update_8902() {
   \Drupal::service('distro_helper.updates')->installConfig('views.view.project_experts', 'wri_search');
 
   $message = 'Split the Experts view into Staff and Project experts.';
-   return $message;
+  return $message;
 }
-
 
 /**
  * Implements hook_update_dependencies().

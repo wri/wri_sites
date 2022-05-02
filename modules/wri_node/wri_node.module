@@ -1,8 +1,13 @@
 <?php
 
 /**
- * @file Wri Node module code.
+ * @file
+ * Wri Node module code.
  */
+
+use Drupal\wri_node\General;
+use Drupal\node\NodeInterface;
+use Drupal\node\Entity\Node;
 
 /**
  * Implements hook_preprocess_hook().
@@ -12,9 +17,9 @@ function wri_node_preprocess_wri_page_hero(&$context) {
   if (!$node) {
     $node_route = \Drupal::routeMatch()->getRawParameter('section_storage');
     $node_id = str_replace('node.', '', $node_route);
-    $node = \Drupal\node\Entity\Node::load($node_id);
+    $node = Node::load($node_id);
   }
-  if ($node instanceof \Drupal\node\NodeInterface) {
+  if ($node instanceof NodeInterface) {
     if (isset($node->field_main_image->entity->field_media_image->entity->uri->value)) {
       $uri = $node->field_main_image->entity->field_media_image->entity->uri->value;
       $settings = [
@@ -29,7 +34,7 @@ function wri_node_preprocess_wri_page_hero(&$context) {
         '#attached' => ['library' => ['blazy/load']],
       ];
       $context['content']['hero_image'] = $build;
-      \Drupal\wri_node\General::$htmlClasses[] = 'transparent-header white';
+      General::$htmlClasses[] = 'transparent-header white';
     }
     else {
       $context['content']['hero_image'] = [];
