@@ -169,6 +169,13 @@
     min-width: 100%;
   }
 }
+// Fix for https://bugzilla.mozilla.org/show_bug.cgi?id=1694741
+@-moz-document url-prefix() {
+  .field--name-field-hero-image img {
+    height: auto;
+    width: auto;
+  }
+}
 
 .hero-text-area .field--name-field-hero-image {
   margin-bottom: 48px;
