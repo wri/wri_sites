@@ -115,6 +115,11 @@ function ts_wrin_preprocess_page(array &$variables) {
   if ($status && ($status->getStatusCode() == 403 || $status->getStatusCode() == 404)) {
     $variables['is_node'] = TRUE;
   }
+
+  if (null != theme_get_setting('white_logo.path')) {
+    $logo_path = theme_get_setting('white_logo.path');
+    $variables['footer_logo'] = \Drupal::service('file_url_generator')->transformRelative(file_create_url($logo_path));
+  }
 }
 
 /**
@@ -143,6 +148,14 @@ function ts_wrin_preprocess_field(array &$variables) {
   if ($variables['field_type'] == 'entity_reference' && isset($variables["items"][0]["content"]["#block_content"]) && isset($variables["element"][0]["#attributes"]["class"])) {
     $variables["attributes"]["class"] = $variables["element"][0]["#attributes"]["class"];
     $variables["attributes"]["class"][] = 'block';
+  }
+  // Add 'Show More Link' value to Featured Experts field.
+
+  if ($variables['element']['#field_name'] == 'field_featured_experts') {
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if ($node instanceof \Drupal\node\NodeInterface && $node->field_show_more_link) {
+      $variables["show_more_link"] = $node->field_show_more_link->value;
+    }
   }
 }
 
@@ -174,9 +187,9 @@ function ts_wrin_preprocess_block(array &$variables) {
     $variables['attributes']['class'][] = Html::getClass($variables["content"][0]["#field_name"]);
   }
 
-  if (isset($variables['site_logo'])) {
+  if (null != theme_get_setting('white_logo.path')) {
     $logo_path = theme_get_setting('white_logo.path');
-    $variables['white_logo'] = file_url_transform_relative(file_create_url($logo_path));
+    $variables['white_logo'] = \Drupal::service('file_url_generator')->transformRelative(file_create_url($logo_path));
   }
 }
 

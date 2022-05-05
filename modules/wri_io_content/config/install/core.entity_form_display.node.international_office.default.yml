@@ -11,9 +11,12 @@ dependencies:
     - field.field.node.international_office.field_metatags
     - field.field.node.international_office.field_offices
     - field.field.node.international_office.field_region
+    - field.field.node.international_office.field_show_more_link
     - field.field.node.international_office.layout_builder__layout
     - node.type.international_office
+    - workflows.workflow.content_publishing
   module:
+    - content_moderation
     - inline_entity_form
     - link
     - media_library
@@ -27,35 +30,35 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 5
+    weight: 6
+    region: content
     settings:
       rows: 9
       summary_rows: 3
       placeholder: ''
       show_summary: false
     third_party_settings: {  }
-    region: content
   field_featured_experts:
-    weight: 8
+    type: entity_reference_autocomplete
+    weight: 9
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_intro:
-    weight: 0
+    type: text_textarea
+    weight: 2
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_io_link:
     type: link_default
-    weight: 1
+    weight: 3
     region: content
     settings:
       placeholder_url: ''
@@ -63,88 +66,96 @@ content:
     third_party_settings: {  }
   field_main_image:
     type: media_library_widget
-    weight: 4
+    weight: 5
     region: content
     settings:
       media_types: {  }
     third_party_settings: {  }
   field_map_image:
     type: media_library_widget
-    weight: -6
+    weight: 0
+    region: content
     settings:
       media_types: {  }
     third_party_settings: {  }
-    region: content
   field_metatags:
-    weight: 26
+    type: metatag_firehose
+    weight: 12
+    region: content
     settings:
       sidebar: true
+      use_details: true
     third_party_settings: {  }
-    type: metatag_firehose
-    region: content
   field_offices:
-    weight: 7
+    type: inline_entity_form_complex
+    weight: 8
+    region: content
     settings:
       form_mode: default
+      override_labels: false
       label_singular: ''
       label_plural: ''
-      collapsible: true
       allow_new: true
       allow_existing: true
       match_operator: CONTAINS
       allow_duplicate: true
-      revision: false
-      override_labels: false
+      collapsible: true
       collapsed: false
+      revision: false
     third_party_settings: {  }
-    type: inline_entity_form_complex
-    region: content
   field_region:
-    weight: 6
+    type: entity_reference_autocomplete
+    weight: 7
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+  field_show_more_link:
+    type: boolean_checkbox
+    weight: 10
     region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 2
+    weight: 4
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 100
-    settings: {  }
+    weight: 15
     region: content
+    settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
+    weight: 16
+    region: content
     settings:
       display_label: true
-    weight: 120
-    region: content
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: -5
+    weight: 1
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
