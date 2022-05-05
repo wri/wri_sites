@@ -21,13 +21,27 @@ function wri_media_update_9301() {
   $message = 'Remove blazy';
    return $message;
 }
+/**
+ * Update the media display configs to add all the display modes.
+ */
+function wri_media_update_9302() {
+
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.image.default', 'wri_media', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.image.card', 'wri_media', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.image.large_image_teaser', 'wri_media', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.image.superfeatured', 'wri_media', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.image.tile', 'wri_media', 'install', 'TRUE');
+
+  $message = 'Add Media display modes';
+   return $message;
+}
 
 
 /**
  * Implements hook_update_dependencies().
  */
 function wri_media_update_dependencies() {
-  // We must have the distro_helper module before we can run the 8902 update hook.
+  // We must have the distro_helper module before we can run the 9301 update hook.
   $dependencies['wri_media'][9301] = [
     'wri_sites' => 8908,
   ];
