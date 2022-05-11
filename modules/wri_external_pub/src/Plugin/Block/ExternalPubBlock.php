@@ -4,12 +4,9 @@ namespace Drupal\wri_external_pub\Plugin\Block;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\node\NodeInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a block with a simple text.
@@ -116,19 +113,4 @@ class ExternalPubBlock extends BlockBase {
     return AccessResult::allowedIfHasPermission($account, 'access content');
   }
 
-  // /**
-  //  * {@inheritdoc}
-  //  */
-  // public function blockForm($form, FormStateInterface $form_state) {
-  //   $config = $this->getConfiguration();
-
-  //   return $form;
-  // }
-
-  // /**
-  //  * {@inheritdoc}
-  //  */
-  // public function blockSubmit($form, FormStateInterface $form_state) {
-  //   $this->configuration['my_block_settings'] = $form_state->getValue('my_block_settings');
-  // }
 }

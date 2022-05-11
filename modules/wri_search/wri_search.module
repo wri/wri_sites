@@ -40,18 +40,18 @@ function wri_search_entity_base_field_info(EntityTypeInterface $entity_type) {
       ->setCardinality(-1);
 
   }
-    if ($entity_type->id() === "node") {
-      $fields['smart_topic_parent'] = BaseFieldDefinition::create('smart_topic_parent')
-        ->setName('smart_topic_parent')
-        ->setLabel(t('Smart Topic'))
-        ->setSetting('target_type', 'taxonomy_term')
-        ->setComputed(TRUE)
-        ->setClass('\Drupal\wri_search\WriCalculatedTexts')
-        ->setDisplayConfigurable('view', FALSE)
-        ->setCardinality(-1);
-    }
+  if ($entity_type->id() === "node") {
+    $fields['smart_topic_parent'] = BaseFieldDefinition::create('smart_topic_parent')
+      ->setName('smart_topic_parent')
+      ->setLabel(t('Smart Topic'))
+      ->setSetting('target_type', 'taxonomy_term')
+      ->setComputed(TRUE)
+      ->setClass('\Drupal\wri_search\WriCalculatedTexts')
+      ->setDisplayConfigurable('view', FALSE)
+      ->setCardinality(-1);
+  }
 
-    return $fields;
+  return $fields;
 }
 
 /**

@@ -6,7 +6,6 @@ use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\Tags;
 use Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface;
 use Drupal\Core\Entity\EntityAutocompleteMatcher as EntityAutocompleteMatcherOrig;
-use Drupal\Core\Entity\EntityManager;
 use Drupal\Core\Entity\EntityRepository;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 
@@ -38,9 +37,9 @@ class EntityAutocompleteMatcher extends EntityAutocompleteMatcherOrig {
     $matches = [];
 
     $options = $selection_settings + [
-        'target_type' => $target_type,
-        'handler' => $selection_handler,
-      ];
+      'target_type' => $target_type,
+      'handler' => $selection_handler,
+    ];
     $handler = $this->selectionManager->getInstance($options);
 
     if (isset($string)) {
