@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Install and update hooks for wri_admin.
+ */
+
+/**
+ * Extend the cache time to the Pantheon suggested time.
+ */
+function wri_admin_update_9301() {
+
+  // Add the new field configs.
+  \Drupal::service('distro_helper.updates')->installConfig('system.performance', 'wri_admin', 'install', 'TRUE');
+
+
+  $message = 'Set cache control headers to 1 hour';
+   return $message;
+}
+
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_admin_update_dependencies() {
+  // We must have the distro_helper before we can run the 9301 update hook.
+  $dependencies['wri_admin'][9301] = [
+    'wri_sites' => 8908,
+  ];
+
+  return $dependencies;
+}
