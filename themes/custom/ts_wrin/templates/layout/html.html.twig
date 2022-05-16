@@ -34,6 +34,15 @@
 <!DOCTYPE html>
 <html{{ html_attributes }}>
   <head>
+    <link rel="preconnect" href="https://use.typekit.net/xrt8xkt.css" as="font" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://js-agent.newrelic.com/nr-1216.min.js" as="script" />
+    <link rel="preconnect" href="https://connect.facebook.net/signals/config/386658258422744" as="script" />
+    <link rel="preload" href="https://connect.facebook.net/en_US/fbevents.js" as="script" />
+    <link rel="preload" href="https://snap.licdn.com/li.lms-analytics/insight.min.js" as="script" />
+    <link rel="preload" href="https://static.ads-twitter.com/uwt.js" as="script" />
+    <link rel="preload" href="https://www.googleadservices.com/pagead/conversion_async.js" as="script" />
+    <link rel="preload" href="https://www.googletagmanager.com/gtm.js?id=GTM-WGH5WB9" as="script" />
+
     <head-placeholder token="{{ placeholder_token|raw }}">
     <title>{{ head_title|safe_join(' | ') }}</title>
     <css-placeholder token="{{ placeholder_token|raw }}">
