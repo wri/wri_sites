@@ -11,7 +11,7 @@
 function wri_admin_update_9301() {
 
   // Add the new field configs.
-  \Drupal::service('distro_helper.updates')->installConfig('system.performance', 'wri_admin', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('system.performance', 'wri_admin');
 
 
   $message = 'Set cache control headers to 1 hour';
