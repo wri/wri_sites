@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * @file
+ * Install and update hooks for wri_performance.
+ */
+
+/**
+ * Add the 'Minify JS' module configs.
+ */
+function wri_performance_update_9301() {
+
+  // Add the new field configs.
+  \Drupal::service('distro_helper.updates')->installConfig('minifyjs.config', 'wri_performance');
+
+  $message = 'Add the minifyjs module configs.';
+   return $message;
+}
+
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_performance_update_dependencies() {
+  // We must have the distro_helper before we can run the 9301 update hook.
+  $dependencies['wri_performance'][9301] = [
+    'wri_sites' => 8908,
+  ];
+
+  return $dependencies;
+}
