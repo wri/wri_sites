@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Install and update hooks for wri_media.
+ */
+
+/**
+ * Use the oembed_lazyload display mode for videos.
+ */
+function wri_media_update_9301() {
+
+  // Add the new field configs.
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.video.default', 'wri_media', 'install', 'TRUE');
+
+
+  $message = 'Use the oembed_lazyload display mode for videos';
+   return $message;
+}
+
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_media_update_dependencies() {
+  // We must have the distro_helper before we can run the 9301 update hook.
+  $dependencies['wri_media'][9301] = [
+    'wri_sites' => 8908,
+  ];
+
+  return $dependencies;
+}

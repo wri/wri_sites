@@ -165,6 +165,7 @@
         "drupal/menu_position": "^1.0@beta",
         "drupal/metatag": "^1.19",
         "drupal/metatag_google_scholar": "^1.0",
+        "drupal/oembed_lazyload": "^1.0@alpha",
         "drupal/onlyone": "^1.10",
         "drupal/paragraphs": "^1.12",
         "drupal/pathauto": "^1.9",
