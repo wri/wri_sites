@@ -47,15 +47,14 @@ third_party_settings:
       settings:
         label: ''
     regions:
-      image:
-        - content_moderation_control
-        - field_main_image
       title:
         - node_title
       content_type:
         - field_type
       date:
         - node_post_date
+      image:
+        - field_main_image
       tag:
         - field_primary_topic
     fields:
@@ -109,11 +108,6 @@ targetEntityType: node
 bundle: event
 mode: card
 content:
-  content_moderation_control:
-    settings: {  }
-    third_party_settings: {  }
-    weight: -20
-    region: image
   field_main_image:
     type: media_thumbnail
     label: hidden
@@ -155,6 +149,7 @@ content:
     region: content_type
 hidden:
   body: true
+  content_moderation_control: true
   field_authors: true
   field_date_time: true
   field_event_display: true
