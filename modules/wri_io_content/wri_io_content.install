@@ -6,20 +6,9 @@
  */
 
 /**
- * Update the international_office display configs to remove blazy.
- */
-function wri_io_content_update_9301() {
-
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.international_office.card', 'wri_io_content', 'install', 'TRUE');
-
-  $message = 'Remove blazy, responsive image';
-   return $message;
-}
-
-/**
  * Add the 'Show More Link' field to the International Office content type.
  */
-function wri_io_content_update_9302() {
+function wri_io_content_update_9301() {
 
   // Add the new field configs.
   \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_show_more_link', 'wri_io_content');
@@ -27,6 +16,17 @@ function wri_io_content_update_9302() {
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.node.international_office.default', 'wri_io_content', 'install', 'TRUE');
 
   $message = 'Add the Show More Link? field.';
+  return $message;
+}
+
+/**
+ * Update the international_office display configs to remove blazy.
+ */
+function wri_io_content_update_9302() {
+
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.international_office.card', 'wri_io_content', 'install', 'TRUE');
+
+  $message = 'Remove blazy, responsive image';
    return $message;
 }
 
