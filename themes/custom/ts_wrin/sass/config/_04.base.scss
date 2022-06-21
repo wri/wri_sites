@@ -87,6 +87,16 @@ img {
   display: block;
 }
 
+/**
+Blazy overrides.
+ */
+.b-lazy, .b-responsive {
+  display: block;
+  height: auto;
+  min-height: 1px;
+  width: 100%;
+}
+
 figcaption {
   @include font($acumin-semi-cond, 'regular');
   @include font-line-height(13,18);
