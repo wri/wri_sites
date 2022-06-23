@@ -83,7 +83,7 @@
                 "No local tasks on compare revisions page https://www.drupal.org/project/diff/issues/3169729": "https://www.drupal.org/files/issues/2020-09-08/diff_add-local-tasks-3169729-2.patch"
             },
             "drupal/facets_pretty_paths": {
-                "Cannot filter properly when using facet pretty paths https://www.drupal.org/project/facets_pretty_paths/issues/3254600": "https://www.drupal.org/files/issues/2022-01-11/url-duplication.patch"
+                "Cannot filter properly when using facet pretty paths https://www.drupal.org/project/facets_pretty_paths/issues/3254600": "https://www.drupal.org/files/issues/2022-06-22/3254600-30.patch"
             },
             "drupal/menu_block": {
                 "https://www.drupal.org/project/menu_block/issues/3082445 https://www.drupal.org/project/menu_block/issues/3082445": "https://www.drupal.org/files/issues/2019-09-20/menu_block-render-parent-menu-item-3082445-4.patch"
