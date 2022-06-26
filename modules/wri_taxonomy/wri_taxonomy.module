@@ -99,8 +99,8 @@ function wri_taxonomy_term_uri(TermInterface $term) {
     if (isset($filter_by)) {
       $paths_helper = \Drupal::service('wri_search.pretty_facets_helper');
       if ($paths_helper) {
-        $path = Url::fromRoute('view.resources.resources_page');
-        return Url::fromUri('internal:/resources' . $paths_helper->getPrettyPaths($filter_by), ['language' => $term->language()]);
+        $internal_path = Url::fromRoute('view.resources.resources_page')->getInternalPath();
+        return Url::fromUri('internal:/' . $internal_path . $paths_helper->getPrettyPaths($filter_by), ['language' => $term->language()]);
       }
     }
   }
