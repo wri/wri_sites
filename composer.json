@@ -117,6 +117,9 @@
             },
             "drupal/views_extras": {
                 "Why does Views Extras require Drupal_Visitors to be part of the cookie name?" : "https://www.drupal.org/files/issues/2021-12-27/3054202-09.patch"
+            },
+            "drupal/minifyjs": {
+                "PHP Fatal Error Argument 4 passed to MinifyJs (line 58)" : "https://www.drupal.org/files/issues/2022-03-14/fix-fileSystem-14032022.patch"
             }
         }
     },
@@ -165,6 +168,7 @@
         "drupal/menu_position": "^1.0@beta",
         "drupal/metatag": "^1.19",
         "drupal/metatag_google_scholar": "^1.0",
+        "drupal/minifyjs": "^2.2",
         "drupal/onlyone": "^1.10",
         "drupal/paragraphs": "^1.12",
         "drupal/pathauto": "^1.9",
