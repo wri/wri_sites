@@ -12,6 +12,16 @@ use Drupal\Component\Utility\Html;
 use Drupal\wri_node\General;
 
 /**
+ * Implements hook_preprocess_region() *.html.twig.
+ */
+function ts_wrin_preprocess(array &$variables) {
+  if (null != theme_get_setting('white_logo.path')) {
+    $logo_path = theme_get_setting('white_logo.path');
+    $variables['footer_logo'] = \Drupal::service('file_url_generator')->transformRelative(file_create_url($logo_path));
+  }
+}
+
+/**
  * Implements hook_preprocess_HOOK() for html.html.twig.
  */
 function ts_wrin_preprocess_html(array &$variables) {
@@ -114,11 +124,6 @@ function ts_wrin_preprocess_page(array &$variables) {
   $status = \Drupal::requestStack()->getCurrentRequest()->attributes->get('exception');
   if ($status && ($status->getStatusCode() == 403 || $status->getStatusCode() == 404)) {
     $variables['is_node'] = TRUE;
-  }
-
-  if (null != theme_get_setting('white_logo.path')) {
-    $logo_path = theme_get_setting('white_logo.path');
-    $variables['footer_logo'] = \Drupal::service('file_url_generator')->transformRelative(file_create_url($logo_path));
   }
 }
 

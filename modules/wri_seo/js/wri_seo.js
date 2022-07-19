@@ -5,6 +5,13 @@
  */
 (function ($, drupalSettings) {
 
+  // Get region values from current page
+  function getRegions() {
+    return $(".regions a").map(function () {
+      return $(this).text();
+    }).get().join(', ');
+  }
+
   let dataLayer = window.dataLayer = window.dataLayer || [];
   // Check variables before using them. The "!= null" checks for null or undefined.
   if (drupalSettings.wri_seo != null && drupalSettings.wri_seo.node_type != null) {
@@ -13,10 +20,7 @@
       case 'article':
         $(document).ready(function () {
           let articleSettings = drupalSettings.wri_seo.article_details
-          let regions = $(".regions a").map(function () {
-            return $(this).text();
-          }).get().join(', ');
-          articleSettings['insights region'] = regions;
+          articleSettings['insights region'] = getRegions();
           dataLayer.push(articleSettings);
         });
         break;
@@ -26,14 +30,13 @@
         // Regions are formatted at the field display level and as a result, not easy to
         // get from the backend.
         $(document).ready(function () {
-          let regions = $(".regions a").map(function () {
-            return $(this).text();
-          }).get().join(', ');
-          dataLayer.push({
-            "project topic": drupalSettings.wri_seo.project_details.topic ,
-            "project region": regions,
-          });
+          let projectSettings = drupalSettings.wri_seo.project_details;
+          projectSettings['project region'] = getRegions();
+          dataLayer.push(projectSettings);
         });
+        break;
+      default:
+        dataLayer.push(drupalSettings.wri_seo.default_details);
         break;
 
     }
