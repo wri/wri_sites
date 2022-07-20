@@ -6,61 +6,36 @@ dependencies:
     - field.field.media.image.field_attribution
     - field.field.media.image.field_media_image
     - field.field.media.image.field_tags
-    - image.style.2000x765
     - media.type.image
     - responsive_image.styles.article_hero_large_cta
   module:
-    - blazy
     - ds
     - layout_builder
+    - responsive_image
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: media.image.full_width
 targetEntityType: media
 bundle: image
 mode: full_width
 content:
   field_media_image:
+    type: responsive_image
     label: hidden
-    weight: 0
     settings:
-      image_style: 2000x765
       responsive_image_style: article_hero_large_cta
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      current_view_mode: full_width
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      icon: ''
-      layout: ''
-      view_mode: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_link: ''
+      image_loading:
+        attribute: lazy
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
-    type: blazy
+    weight: 0
     region: content
 hidden:
   created: true
