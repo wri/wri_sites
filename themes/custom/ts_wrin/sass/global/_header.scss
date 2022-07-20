@@ -88,9 +88,11 @@ header {
   padding-bottom: 5px;
   top: 2px;
   transition: background-color $transition-defaults;
+  height: 72px;
 
   @include mq($md) {
     border-bottom: none;
+    height: 60px;
     padding-bottom: 0;
     top: 0;
   }

@@ -166,7 +166,14 @@
     z-index: 1;
   }
   img {
+    height: 660px;
     min-width: 100%;
+    @include mq($md) {
+      height: 640px;
+    }
+    @include mq($lg) {
+      height: 900px;
+    }
   }
 }
 
