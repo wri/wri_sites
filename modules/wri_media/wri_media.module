@@ -20,6 +20,16 @@ function wri_media_theme() {
   $items['details__media'] = [
     'base hook' => 'details',
   ];
+  $items['media__responsive_visualization'] = [
+    'base hook' => 'media'
+  ];
+  $items['custom_responsive_image'] = [
+    'variables' => [
+      'image' => NULL,
+      'sources' => [],
+    ],
+    'render element' => 'children',
+  ];
   return $items;
 }
 
@@ -69,6 +79,31 @@ function wri_media_preprocess_media(&$variables) {
     // If both the thumbnail and the embed code are set to show, hide the
     // thumbnail.
     $variables["content"]["thumbnail"]['#access'] = FALSE;
+  }
+
+  // Preprocess responsive visualizations.
+  if ($variables['elements']['#media']->bundle() === 'responsive_visualization') {
+
+    // Setup fallback image Large
+    $variables['content']['img_element'] = [
+      '#theme' => 'image',
+      '#uri' => $variables["elements"]["#media"]->field_media_image->first()->entity->getFileUri(),
+    ];
+
+    // Build an array of all available images.
+    // Process each item
+    //   - Get image dimensions (
+    //     $image = \Drupal::service('image.factory')->get($variables['uri']);
+    //    $width = $image->getWidth();
+    //    $height = $image->getHeight();)
+    //   - build up the srcset attribute
+
+    $test = '';
+    $variables['content']['visualization'] = '<p>It works!</p>';
+    // Transform large image to url.
+    $file_url_generator = \Drupal::service('file_url_generator');
+
+
   }
 }
 
