@@ -8,6 +8,7 @@ dependencies:
   - media_library
   - blazy
   - focal_point
+  - oembed_lazyload
   - s3fs
   - wri_taxonomy
 theme:

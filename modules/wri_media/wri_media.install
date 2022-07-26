@@ -36,6 +36,19 @@ function wri_media_update_9302() {
    return $message;
 }
 
+/**
+ * Use the oembed_lazyload display mode for videos.
+ */
+function wri_media_update_9303() {
+  \Drupal::service('module_installer')->install(['oembed_lazyload']);
+
+  // Add the new field configs.
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.video.default', 'wri_media', 'install', 'TRUE');
+
+
+  $message = 'Use the oembed_lazyload display mode for videos';
+  return $message;
+}
 
 /**
  * Implements hook_update_dependencies().
