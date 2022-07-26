@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\field_permissions\Unit;
 
+use Prophecy\PhpUnit\ProphecyTrait;
 use Drupal\comment\CommentManagerInterface;
 use Drupal\Core\DependencyInjection\Container;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -24,6 +25,7 @@ use Prophecy\Argument;
  */
 class FieldPermissionsServiceTest extends UnitTestCase {
 
+  use ProphecyTrait;
   /**
    * Mock entity type manager.
    *

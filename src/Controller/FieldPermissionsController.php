@@ -14,7 +14,7 @@ use Drupal\user\RoleInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Define FieldPermissionsController.
+ * Field Permissions Controller/Page.
  */
 class FieldPermissionsController extends ControllerBase {
 
