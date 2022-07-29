@@ -323,6 +323,7 @@
 .experts-container .view-header {
   @include mq($lg) {
     margin-top: -98px;
+    margin-right: 230px;
   }
 }
 .view-events .view-header {
