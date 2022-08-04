@@ -59,7 +59,7 @@ third_party_settings:
       disable_css: false
       entity_classes: all_classes
       settings:
-        component_context: {  }
+        label: ''
     regions:
       hero:
         - field_main_image
@@ -559,7 +559,7 @@ content:
             lbw-at: ''
             ow: true
             ow-el: span
-            ow-cl: 'article-page-count category-wrapper'
+            ow-cl: article-page-count
             ow-at: ''
             fis-el: ''
             fis-cl: ''
@@ -567,7 +567,7 @@ content:
             fi-el: ''
             fi-cl: ''
             fi-at: ''
-            suffix: ''
+            suffix: '<span class="article-page-count category-wrapper">&nbsp;Pages</span>'
             lbw: false
             lb-col: false
             ow-def-at: false
