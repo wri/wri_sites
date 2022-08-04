@@ -14,7 +14,7 @@
       <input class="button ghost form" type="submit" value="{{ search_nav_submit }}">
     </form>
 
-    <button class="tray-nav__close" aria-label="Toggle Search Menu" title="Close Search Menu">
+    <button class="tray-nav__close" aria-label="{{ 'Toggle Search Menu'|t }}" title="{{ 'Close Search Menu'|t }}">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ffffff">
         <path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/>
       </svg>
