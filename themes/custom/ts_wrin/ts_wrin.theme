@@ -131,7 +131,16 @@ function ts_wrin_preprocess_page(array &$variables) {
  * Implements hook_theme_suggestions_page_alter().
  */
 function ts_wrin_theme_suggestions_page_alter(array &$suggestions, array $variables) {
-
+  // Allow page-level template suggestions.
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    $suggestions[] = 'page__' . $node->bundle();
+  }
+  if (isset($node->field_parent_page)) {
+    $parent = $node->field_parent_page->entity;
+    if ('microsite' == $parent->bundle()) {
+     $suggestions[] = 'page__microsite';
+    }
+  }
 }
 
 /**
