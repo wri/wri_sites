@@ -114,6 +114,9 @@
             "drupal/search_api_pantheon": {
                 "Solr MLT on pantheon": "./patches/mlt-sapi-panth-3.patch"
             },
+            "drupal/views_arg_order_sort": {
+                "Set as compatible with Drupal 9 https://www.drupal.org/project/views_arg_order_sort/issues/3142079" : "https://git.drupalcode.org/project/views_arg_order_sort/-/commit/be5de28bb9f137b8bdf464091ef2f44fc22d10ab.patch"
+            },
             "drupal/views_extras": {
                 "Why does Views Extras require Drupal_Visitors to be part of the cookie name?" : "https://www.drupal.org/files/issues/2021-12-27/3054202-09.patch"
             }
