@@ -112,7 +112,7 @@
                 "Warning: htmlspecialchars() expects parameter 1 to be string, array given https://www.drupal.org/files/issues/2022-03-09/simple_popup_blocks-n3267864-5.patch":"https://git.drupalcode.org/project/simple_popup_blocks/-/merge_requests/4.diff"
             },
             "drupal/search_api_pantheon": {
-                "Solr MLT on pantheon": "./web/profiles/contrib/wri_sites/patches/mlt-sapi-panth-3.patch"
+                "Solr MLT on pantheon": "./patches/mlt-sapi-panth-3.patch"
             },
             "drupal/views_arg_order_sort": {
                 "Set as compatible with Drupal 9 https://www.drupal.org/project/views_arg_order_sort/issues/3142079" : "https://git.drupalcode.org/project/views_arg_order_sort/-/commit/be5de28bb9f137b8bdf464091ef2f44fc22d10ab.patch"
