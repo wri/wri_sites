@@ -1,9 +1,0 @@
-langcode: en
-status: true
-dependencies:
-  module:
-    - media
-id: media.homepage_hero
-label: 'Homepage hero'
-targetEntityType: media
-cache: true
