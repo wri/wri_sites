@@ -22,7 +22,7 @@ jobs:
       - run:
           name: Test site install works.
           command: |
-            echo "memory_limit = 512M"  >> ${php_vars}
+            echo "memory_limit = 256M"  >> ${php_vars}
             export PATH="./vendor/bin:../vendor/bin:/root/.composer/vendor/bin:$PATH"
             composer self-update --2
             COMPOSER_MEMORY_LIMIT=-1 composer create-project wri/wri-starter-kit:dev-views_arg_fix circletest
