@@ -27,7 +27,7 @@ function ts_wrin_preprocess(array &$variables) {
 function ts_wrin_preprocess_html(array &$variables) {
   // Adds a URL query (?show-grid=1) that makes the theming grid guide visible.
   $variables['show_grid'] = \Drupal::request()->query->get('show-grid');
-  $current_classes = isset($variables['attributes']['class']) ? $variables['attributes']['class'] : [];
+  $current_classes = $variables['attributes']['class'] ?? [];
   // Is field_transparent_header checked?
   $variables['attributes']['class'] = array_merge($current_classes, General::$htmlClasses);
 

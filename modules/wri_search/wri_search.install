@@ -2,34 +2,8 @@
 
 /**
  * @file
- * Update hooks for search
+ * Update hooks for search.
  */
-
-/**
- * Adds the new Smart Topic index field and sets All Topic facets to use it.
- */
-function wri_search_update_8901() {
-  // $search_index = \Drupal::configFactory()->getEditable('search_api.index.sitewide');
-  // $smart_topic_parent = [
-  //   'label' => 'Smart Topic',
-  //   'datasource_id' => 'entity:node',
-  //   'property_path' => 'smart_topic_parent',
-  //   'type' => 'integer',
-  //   'dependencies' => [
-  //     'module' => ['wri_search']
-  //   ],
-  // ];
-  // $search_index->set('field_settings.smart_topic_parent', $smart_topic_parent);
-  // $search_index->save(TRUE);
-
-  // foreach(['facets.facet.experts_all_topics', 'facets.facet.all_event_topics', 'facets.facet.all_topics'] as $config_name) {
-  //   $experts = \Drupal::configFactory()->getEditable($config_name);
-  //   $experts->set('field_identifier', 'smart_topic_parent');
-  //   $experts->save(TRUE);
-  // }
-
-  print 'Commenting out for now due to causing issue with config import.';
-}
 
 /**
  * Splits the Experts and Staff views up to avoid facet caching issues.
@@ -54,15 +28,15 @@ function wri_search_update_8902() {
   \Drupal::service('distro_helper.updates')->installConfig('views.view.project_experts', 'wri_search');
 
   $message = 'Split the Experts view into Staff and Project experts.';
-   return $message;
+  return $message;
 }
-
 
 /**
  * Implements hook_update_dependencies().
  */
 function wri_search_update_dependencies() {
-  // We must have the distro_helper module before we can run the 8902 update hook.
+  // We must have the distro_helper module
+  // before we can run the 8902 update hook.
   $dependencies['wri_search'][8902] = [
     'wri_sites' => 8908,
   ];

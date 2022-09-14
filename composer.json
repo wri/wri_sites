@@ -7,6 +7,19 @@
     "prefer-stable": true,
     "repositories": [
         {
+            "type": "package",
+            "package": {
+                "name": "drupal/views_arg_order_sort",
+                "type": "drupal-module",
+                "version": "dev-8.x-1.x",
+                "source": {
+                    "type": "git",
+                    "url": "https://git.drupalcode.org/project/views_arg_order_sort.git",
+                    "reference": "5d13cfca5749294d127ebc06348827f775342b37"
+                }
+            }
+        },
+        {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
@@ -113,11 +126,45 @@
                 "Warning: htmlspecialchars() expects parameter 1 to be string, array given https://www.drupal.org/files/issues/2022-03-09/simple_popup_blocks-n3267864-5.patch":"https://git.drupalcode.org/project/simple_popup_blocks/-/merge_requests/4.diff"
             },
             "drupal/search_api_pantheon": {
-                "Solr MLT on pantheon": "web/profiles/contrib/wri_sites/patches/mlt-sapi-panth-3.patch"
+                "Solr MLT on pantheon": "./web/profiles/contrib/wri_sites/patches/mlt-sapi-panth-3.patch"
+            },
+            "drupal/views_arg_order_sort": {
+                "Set as compatible with Drupal 9 https://www.drupal.org/project/views_arg_order_sort/issues/3142079" : "https://git.drupalcode.org/project/views_arg_order_sort/-/commit/be5de28bb9f137b8bdf464091ef2f44fc22d10ab.patch"
             },
             "drupal/views_extras": {
                 "Why does Views Extras require Drupal_Visitors to be part of the cookie name?" : "https://www.drupal.org/files/issues/2021-12-27/3054202-09.patch"
             }
+        },
+        "drupal-scaffold": {
+            "locations": {
+                "project-root": "./web",
+                "web-root": "./web"
+            }
+        },
+        "installer-paths": {
+            "web/core": [
+                "type:drupal-core"
+            ],
+            "web/libraries/{$name}": [
+                "type:drupal-library",
+                "type:bower-asset",
+                "type:npm-asset"
+            ],
+            "web/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "web/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "web/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/Commands/contrib/{$name}": [
+                "type:drupal-drush"
+            ],
+            "web/private/scripts/quicksilver/{$name}/": [
+                "type:quicksilver-script"
+            ]
         }
     },
     "require": {
@@ -192,7 +239,7 @@
         "drupal/token_filter": "^1.3",
         "drupal/twig_tweak": "^2.9",
         "drupal/viewfield": "^3.0@beta",
-        "drupal/views_arg_order_sort": "dev-1.x#5d13cfca5749294d127ebc06348827f775342b37",
+        "drupal/views_arg_order_sort": "dev-8.x-1.x",
         "drupal/views_autosubmit": "^1.4",
         "drupal/views_bulk_edit": "^2.6",
         "drupal/views_bulk_operations": "^4.0",
@@ -205,6 +252,7 @@
         "thinkshout/distro_helper": "^1.0"
     },
     "require-dev": {
+        "drupal/coder": "^8.3",
         "drupal/config_devel": "^1.8",
         "drupal/config_suite": "^2.0",
         "drupal/devel": "^4.1",
@@ -212,6 +260,13 @@
         "drupal/stage_file_proxy": "^1.2"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "cweagans/composer-patches": true,
+            "drupal/core-composer-scaffold": true,
+            "composer/installers": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "oomphinc/composer-installers-extender": true
+        }
     }
 }
