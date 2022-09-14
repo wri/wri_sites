@@ -1,5 +1,5 @@
 <template>
-  <button class="tray-toggle search-toggle" aria-label="Toggle Search Menu" title="Search Menu" data-tray="search-tray">
+  <button class="tray-toggle search-toggle" aria-label="{{ 'Toggle Search Menu'|t }}" title="{{ 'Search Menu'|t }}" data-tray="search-tray">
     <svg viewBox="0 0 18 19" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <g transform="translate(1 1)" stroke-width="2" fill="none" fill-rule="evenodd">
         <circle cx="7.69047619" cy="7.69047619" r="7.69047619" shape-rendering="geometricPrecision"/>

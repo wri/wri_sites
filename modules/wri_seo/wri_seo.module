@@ -24,16 +24,26 @@ function wri_seo_page_attachments(array &$attachments) {
           'insights region' => '',
           'insights type' => $type ? $type->get('name')->getString() : '',
           'insights publish date' => date('Y-m-d', $node->getCreatedTime()),
+          'primary topic' => $topic ? $topic->get('name')->getString() : '',
         ];
         $attachments['#attached']['drupalSettings']['wri_seo']['article_details'] = $article_details;
         break;
 
       case 'project_detail':
         $project_details = [
-          'topic' => $topic ? $topic->get('name')->getString() : '',
+          'project topic' => $topic ? $topic->get('name')->getString() : '',
+          'primary topic' => $topic ? $topic->get('name')->getString() : '',
         ];
         $attachments['#attached']['drupalSettings']['wri_seo']['project_details'] = $project_details;
         break;
+
+      default:
+        $default_details = [
+          'primary topic' => $topic ? $topic->get('name')->getString() : '',
+        ];
+        $attachments['#attached']['drupalSettings']['wri_seo']['default_details'] = $default_details;
+        break;
+
     }
   }
 

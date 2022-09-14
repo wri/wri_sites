@@ -8,6 +8,8 @@
 use Drupal\wri_node\General;
 use Drupal\node\NodeInterface;
 use Drupal\node\Entity\Node;
+use Drupal\image\Entity\ImageStyle;
+use Drupal\responsive_image\Entity\ResponsiveImageStyle;
 
 /**
  * Implements hook_preprocess_hook().
@@ -22,16 +24,24 @@ function wri_node_preprocess_wri_page_hero(&$context) {
   if ($node instanceof NodeInterface) {
     if (isset($node->field_main_image->entity->field_media_image->entity->uri->value)) {
       $uri = $node->field_main_image->entity->field_media_image->entity->uri->value;
-      $settings = [
-        'uri' => $uri,
-        'lazy' => 'blazy',
-        'responsive_image_style_id' => 'landing_page_hero',
-      ];
+      $alt = $node->field_main_image->entity->field_media_image->alt;
+      $responsive_image_style = ResponsiveImageStyle::load('landing_page_hero');
+      $image_style = ImageStyle::load($responsive_image_style->getFallbackImageStyle());
+      $build_uri = $image_style->buildUri($uri);
+      $image_factory = \Drupal::service('image.factory')->get($build_uri);
+      $height = $image_factory->getToolkit()->getHeight();
+      $width = $image_factory->getToolkit()->getWidth();
 
       $build = [
-        '#theme' => 'blazy',
-        '#settings' => $settings,
-        '#attached' => ['library' => ['blazy/load']],
+        '#uri' => $uri,
+        '#attributes' => [
+          'alt'   => $alt,
+          'loading' => 'eager',
+          'width' => $height,
+          'height' => $width,
+        ],
+        '#theme' => 'responsive_image',
+        '#responsive_image_style_id' => 'landing_page_hero',
       ];
       $context['content']['hero_image'] = $build;
       General::$htmlClasses[] = 'transparent-header white';

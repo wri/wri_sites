@@ -20,6 +20,7 @@
 ## Site-level pull requests for testing. Only merge when these PRs are approved:
 
 <!-- List any open pull requests where a reviewer might check code -->
+Create or update any site-level pull requests following [the documentation](https://github.com/wri/WRIN/wiki/WRI-Dev-Workflow-(Thinkshout)#generating-a-multidev-for-wri_sites-work-review)
 
 - [ ] Flagship PR:
 - [ ] China PR:
