@@ -20,7 +20,7 @@ jobs:
       - checkout
       - add_ssh_keys
       - run:
-          name: Test site install works
+          name: Test site install works.
           command: |
             echo "memory_limit = 512M"  >> ${php_vars}
             export PATH="./vendor/bin:../vendor/bin:/root/.composer/vendor/bin:$PATH"
