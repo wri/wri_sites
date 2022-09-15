@@ -9,7 +9,6 @@ dependencies:
   - blazy
   - focal_point
   - oembed_lazyload
-  - s3fs
   - wri_taxonomy
 theme:
   - ts_wrin
