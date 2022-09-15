@@ -54,7 +54,6 @@ install:
   - wri_taxonomy
   - wri_toc
   - wri_topics
-  - wri_trending_topics
   - wri_unique_feature
 themes:
   - claro
