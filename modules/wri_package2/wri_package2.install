@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Install, update and uninstall hooks for the wri_package install profile.
+ * Install, update and uninstall hooks for the wri_package2 install profile.
  */
 
 use Drupal\block_content\Entity\BlockContent;
@@ -16,7 +16,7 @@ use Drupal\Core\Config\FileStorage;
  *
  * @see system_install()
  */
-function wri_package_install() {
+function wri_package2_install() {
   \Drupal::configFactory()
     ->getEditable('user.settings')
     ->set('register', 'admin_only')
