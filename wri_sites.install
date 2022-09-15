@@ -26,7 +26,8 @@ function wri_sites_install() {
   _install_filedownload_blocks();
 
   // We have to install our theme after claro, or the admin theme is messed up.
-  \Drupal::service('theme_installer')->install(['ts_wrin'], TRUE);
+  // Explicitly install the base themes so we avoid memory errors.
+  \Drupal::service('theme_installer')->install(['stable', 'classy', 'ts_wrin'], TRUE);
 
   \Drupal::configFactory()
     ->getEditable('node.settings')
