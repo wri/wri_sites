@@ -39,7 +39,6 @@ install:
   - wri_narrative
   - wri_small_cta
   - wri_side_by_side
-  - wri_simple_page
   - wri_subpage
   - wri_page
   - wri_performance
