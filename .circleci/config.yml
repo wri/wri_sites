@@ -30,7 +30,8 @@ jobs:
             COMPOSER_MEMORY_LIMIT=-1 composer require wri/wri_sites:dev-${CIRCLE_BRANCH} --update-with-dependencies
             composer code-sniff
             drush si wri_sites -y --verbose --db-url=mysql://drupal:drupal@127.0.0.1:3306/circletest
-            drush en wri_package wri_package2 -y
+            drush en wri_package -y
+            drush en wri_package2 -y
 workflows:
   version: 2
   build-and-test:
