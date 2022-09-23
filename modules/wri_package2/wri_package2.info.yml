@@ -1,0 +1,17 @@
+name: 'WRI package, part 2'
+type: module
+description: 'A module that requires a bunch of other modules, for install purposes.'
+core_version_requirement: '^8.8.0 || ^9'
+package: WRI
+dependencies:
+  - wri_narrative
+  - wri_program
+  - wri_package
+  - wri_search
+  - wri_performance
+  - wri_side_by_side
+  - wri_simple_page
+  - wri_small_cta
+  - wri_subpage
+  - wri_superfeatured
+  - wri_unique_feature

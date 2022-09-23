@@ -1,0 +1,38 @@
+name: 'WRI package'
+type: module
+description: 'A module that requires a bunch of other modules, for install purposes.'
+core_version_requirement: '^8.8.0 || ^9'
+package: WRI
+dependencies:
+  - wri_admin
+  - wri_author
+  - wri_taxonomy
+  - wri_media
+  - wri_schema
+  - wri_seo
+  - wri_common
+  - wri_node
+  - wri_block
+  - wri_engagement
+  - wri_listing_block
+  - wri_region
+  - wri_data
+  - wri_io_content
+  - wri_person
+  - wri_paragraph
+  - wri_toc
+  - wri_project
+  - wri_publication
+  - wri_article
+  - wri_31block
+  - wri_event
+  - wri_featured_tweet
+  - wri_happening_now
+  - wri_topics
+  - wri_homepage
+  - wri_image_cta
+  - wri_page
+  - wri_impact
+  - wri_large_cta
+  - wri_maps
+  - wri_menus
