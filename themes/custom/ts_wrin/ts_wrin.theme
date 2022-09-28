@@ -205,6 +205,10 @@ function ts_wrin_preprocess_block(array &$variables) {
     $logo_path = theme_get_setting('white_logo.path');
     $variables['white_logo'] = \Drupal::service('file_url_generator')->transformRelative(file_create_url($logo_path));
   }
+
+  if ($variables['plugin_id'] == 'inline_block:person_listing') {
+    $variables["content"]["field_featured_experts"]["#title"] = $variables["elements"]["#configuration"]["label"];
+  }
 }
 
 /**
