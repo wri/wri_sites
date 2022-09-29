@@ -33,6 +33,7 @@ dependencies:
     - hierarchical_term_formatter
     - layout_builder
     - media
+    - smart_date
     - user
 third_party_settings:
   layout_builder:
@@ -47,49 +48,17 @@ third_party_settings:
       settings:
         label: ''
     regions:
+      date:
+        - field_date_time
       title:
         - node_title
       content_type:
         - field_type
-      date:
-        - node_post_date
       image:
         - field_main_image
       tag:
         - field_primary_topic
     fields:
-      node_post_date:
-        plugin_id: node_post_date
-        weight: 0
-        label: hidden
-        formatter: ds_post_date_short_day
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: false
-            lbw-el: ''
-            lbw-cl: ''
-            lbw-at: ''
-            lb-col: false
-            ow: false
-            ow-el: ''
-            ow-cl: ''
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fis-def-at: false
-            fi: false
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
       node_title:
         plugin_id: node_title
         weight: 0
@@ -108,12 +77,32 @@ targetEntityType: node
 bundle: event
 mode: card
 content:
+  field_date_time:
+    type: smartdate_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: medium
+      format: short_date
+      force_chronological: false
+      add_classes: false
+      time_wrapper: true
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 0
+    region: date
   field_main_image:
     type: media_thumbnail
     label: hidden
     settings:
       image_link: ''
       image_style: 363x245
+      image_loading:
+        attribute: lazy
     third_party_settings:
       ds:
         ft:
@@ -151,7 +140,6 @@ hidden:
   body: true
   content_moderation_control: true
   field_authors: true
-  field_date_time: true
   field_event_display: true
   field_exclude_from_blog_feed: true
   field_featured: true

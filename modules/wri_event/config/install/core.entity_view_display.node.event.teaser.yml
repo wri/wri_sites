@@ -31,6 +31,7 @@ dependencies:
     - ds
     - hierarchical_term_formatter
     - layout_builder
+    - smart_date
     - user
 third_party_settings:
   ds:
@@ -46,20 +47,11 @@ third_party_settings:
         - field_primary_topic
       content_type:
         - field_type
+      date:
+        - field_date_time
       title:
         - node_title
-      date:
-        - node_post_date
     fields:
-      node_post_date:
-        plugin_id: node_post_date
-        weight: 4
-        label: hidden
-        formatter: ds_post_date_short_day
-        ft:
-          id: reset
-          settings:
-            lb: ''
       node_title:
         plugin_id: node_title
         weight: 2
@@ -81,6 +73,24 @@ targetEntityType: node
 bundle: event
 mode: teaser
 content:
+  field_date_time:
+    type: smartdate_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: medium
+      format: short_date
+      force_chronological: false
+      add_classes: false
+      time_wrapper: true
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 0
+    region: date
   field_primary_topic:
     type: entity_reference_label
     weight: 0
@@ -115,7 +125,6 @@ hidden:
   body: true
   content_moderation_control: true
   field_authors: true
-  field_date_time: true
   field_event_display: true
   field_exclude_from_blog_feed: true
   field_featured: true
