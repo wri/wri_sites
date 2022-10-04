@@ -2,6 +2,7 @@
 
 namespace Drupal\field_permissions\Plugin\FieldPermissionType;
 
+use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Plugin\PluginBase;
 use Drupal\Core\Session\AccountInterface;
@@ -62,6 +63,13 @@ abstract class Base extends PluginBase implements FieldPermissionTypeInterface, 
    */
   public function getDescription() {
     return $this->pluginDefinition['description'];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function appliesToField(FieldDefinitionInterface $field_definition): bool {
+    return TRUE;
   }
 
   /**

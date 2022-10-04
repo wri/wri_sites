@@ -171,7 +171,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
 
     // Pass access control to the plugin.
     $plugin = $this->permissionTypeManager->createInstance($permission_type, [], $field_definition->getFieldStorageDefinition());
-    return $plugin->hasFieldAccess($operation, $items->getEntity(), $account);
+    return $plugin->appliesToField($field_definition) && $plugin->hasFieldAccess($operation, $items->getEntity(), $account);
   }
 
   /**
@@ -207,7 +207,7 @@ class FieldPermissionsService implements FieldPermissionsServiceInterface, Conta
     // Pass access control to the plugin.
     $plugin = $this->permissionTypeManager->createInstance($permission_type, [], $field_definition->getFieldStorageDefinition());
     if ($plugin instanceof Base) {
-      return $plugin->hasFieldViewAccessForEveryEntity($account);
+      return $plugin->appliesToField($field_definition) && $plugin->hasFieldViewAccessForEveryEntity($account);
     }
     else {
       return FALSE;

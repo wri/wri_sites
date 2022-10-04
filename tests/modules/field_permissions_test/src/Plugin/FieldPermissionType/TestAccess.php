@@ -3,6 +3,7 @@
 namespace Drupal\field_permissions_test\Plugin\FieldPermissionType;
 
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\field_permissions\Plugin\FieldPermissionType\Base;
 use Drupal\field_permissions\Plugin\CustomPermissionsInterface;
@@ -23,6 +24,10 @@ class TestAccess extends Base implements CustomPermissionsInterface {
    * {@inheritdoc}
    */
   public function hasFieldAccess($operation, EntityInterface $entity, AccountInterface $account) {
+    // Flag that this method was called.
+    // @see \Drupal\Tests\field_permissions\Kernel\Plugin\FieldPermissionType\ManagerTest::testAppliesToField()
+    \Drupal::state()->set('field_permissions_test.called_TestAccess::hasFieldAccess', TRUE);
+
     if ($operation === 'view') {
       return $account->hasPermission('foo access');
     }
@@ -45,6 +50,15 @@ class TestAccess extends Base implements CustomPermissionsInterface {
         'title' => 'Test access custom permission',
       ],
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function appliesToField(FieldDefinitionInterface $field_definition): bool {
+    // The state variable is used in tests as a switch.
+    // @see \Drupal\Tests\field_permissions\Functional\FieldPermissionsFieldConfigEditFormTest::testAppiesToField()
+    return \Drupal::state()->get('field_permissions_test.applies_to_field', TRUE);
   }
 
 }

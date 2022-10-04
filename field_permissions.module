@@ -95,12 +95,18 @@ function field_permissions_form_field_config_edit_form_alter(&$form, FormStateIn
       '#description' => t('Field inherits content permissions.'),
     ],
   ];
-  $definitions = \Drupal::service('plugin.field_permissions.types.manager')->getDefinitions();
-  foreach ($definitions as $id => $plugin) {
-    $options[$id] = $plugin['title'];
-    $descriptions[$id] = [
-      '#description' => $plugin['description'],
-    ];
+
+  $plugin_manager = \Drupal::service('plugin.field_permissions.types.manager');
+  $definitions = $plugin_manager->getDefinitions();
+  /** @var \Drupal\field_permissions\Plugin\FieldPermissionTypeInterface[] $plugins */
+  $plugins = [];
+  foreach ($definitions as $id => $definition) {
+    $plugin = $plugin_manager->createInstance($id, [], $field->getFieldStorageDefinition());
+    if ($plugin->appliesToField($field)) {
+      $options[$id] = $definition['title'];
+      $descriptions[$id] = ['#description' => $definition['description']];
+      $plugins[$id] = $plugin;
+    }
   }
 
   $form['field']['field_permissions']['type'] = [
@@ -117,11 +123,11 @@ function field_permissions_form_field_config_edit_form_alter(&$form, FormStateIn
   $form['actions']['submit']['#submit'][] = 'field_permission_field_config_edit_form_submit';
   $form['#entity_builders'][] = 'field_permissions_field_config_edit_form_builder';
 
+  $user_role_storage = \Drupal::service('entity_type.manager')->getStorage('user_role');
   // Allow each plugin to add to or alter the form.
-  foreach ($definitions as $definition) {
-    $plugin = \Drupal::service('plugin.field_permissions.types.manager')->createInstance($definition['id'], [], $field->getFieldStorageDefinition());
+  foreach ($plugins as $plugin) {
     if ($plugin instanceof AdminFormSettingsInterface) {
-      $plugin->buildAdminForm($form, $form_state, \Drupal::service('entity_type.manager')->getStorage('user_role'));
+      $plugin->buildAdminForm($form, $form_state, $user_role_storage);
     }
   }
 }

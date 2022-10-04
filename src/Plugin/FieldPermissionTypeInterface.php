@@ -5,6 +5,7 @@ namespace Drupal\field_permissions\Plugin;
 use Drupal\Component\Plugin\DerivativeInspectionInterface;
 use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Session\AccountInterface;
 
 /**
@@ -78,5 +79,16 @@ interface FieldPermissionTypeInterface extends PluginInspectionInterface, Deriva
    *   The access result.
    */
   public function hasFieldAccess($operation, EntityInterface $entity, AccountInterface $account);
+
+  /**
+   * Checks whether this plugin can be applied to a certain field.
+   *
+   * @param \Drupal\Core\Field\FieldDefinitionInterface $field_definition
+   *   The field definition.
+   *
+   * @return bool
+   *   Whether this plugin can be applied to a certain field.
+   */
+  public function appliesToField(FieldDefinitionInterface $field_definition): bool;
 
 }
