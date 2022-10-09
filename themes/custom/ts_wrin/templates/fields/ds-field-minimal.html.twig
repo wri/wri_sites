@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Template to provide minimal HTML for the field.
+ *
+ * Fixes bug where the attributes array is remembered, so the
+ * wrapper div and label div have the same classes.
+ */
+#}
+{% set title_attributes = create_attribute() %}
+{%
+  set classes = [
+    'field',
+    'field-name-' ~ element['#field_name']|clean_class,
+  ]
+%}
+{%
+  set title_classes = [
+    'field-label-' ~ element['#label_display']|clean_class,
+    (element['#label_display'] == 'visually_hidden' ? 'visually-hidden'),
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {%- if not label_hidden -%}
+    <div{{ title_attributes.addClass(title_classes) }}>
+      {{- label }}{% if settings['lb-col'] %}:{% endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- for item in items -%}
+    {{ item.content }}
+  {%- endfor -%}
+</div>
