@@ -125,9 +125,6 @@
                 "Modal hops user down the page to the first text input https://www.drupal.org/project/simple_popup_blocks/issues/3202060#comment-14021232": "https://git.drupalcode.org/project/simple_popup_blocks/-/merge_requests/2.diff",
                 "Warning: htmlspecialchars() expects parameter 1 to be string, array given https://www.drupal.org/files/issues/2022-03-09/simple_popup_blocks-n3267864-5.patch":"https://git.drupalcode.org/project/simple_popup_blocks/-/merge_requests/4.diff"
             },
-            "drupal/search_api_pantheon": {
-                "Solr MLT on pantheon": "./web/profiles/contrib/wri_sites/patches/mlt-sapi-panth-3.patch"
-            },
             "drupal/views_arg_order_sort": {
                 "Set as compatible with Drupal 9 https://www.drupal.org/project/views_arg_order_sort/issues/3142079" : "https://git.drupalcode.org/project/views_arg_order_sort/-/commit/be5de28bb9f137b8bdf464091ef2f44fc22d10ab.patch"
             },
@@ -226,9 +223,8 @@
         "drupal/search_api": "1.20.0",
         "drupal/search_api_autocomplete": "^1.6",
         "drupal/search_api_exclude_entity": "^1.3",
-        "drupal/search_api_pantheon": "^3.0",
+        "drupal/search_api_pantheon": "^8.0",
         "drupal/search_api_solr": "^4.2.1",
-        "drupal/search_api_solr_legacy": "^4.2",
         "drupal/sendgrid_integration": "^1.7",
         "drupal/sfc": "^1.3",
         "drupal/simple_popup_blocks": "^2.8",
