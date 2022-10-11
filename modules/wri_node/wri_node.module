@@ -53,3 +53,20 @@ function wri_node_preprocess_wri_page_hero(&$context) {
     $context['content']['intro']['#markup'] = isset($node->field_intro->value) ? check_markup($node->field_intro->value, 'basic_html') : '';
   }
 }
+
+function wri_node_preprocess_layout__card(&$variables) {
+  // <img src="/profiles/contrib/wri_sites/modules/wri_node/images/{{ (content.tag|render|lower|replace({' ': '-'})) ? content.tag.field_primary_topic.0['#title']|lower|replace({' ': '-'}) : 'default' }}.jpg" alt="">
+  $variables['default_image'] = [];
+
+  if (isset($variables["content"]["field_primary_topic"][0]["#title"])) {
+    $image_url = \Drupal::service('extension.list.module')->getPath('wri_node') . '/images/' . strtolower(str_replace(' ', '-', $variables["content"]["field_primary_topic"][0]["#title"])) . '.jpg';
+    if(!file_exists($image_url)) {
+      $image_url = \Drupal::service('extension.list.module')->getPath('wri_node') . '/images/default.jpg';
+    }
+    $variables['default_image'] = [
+      '#theme' => 'image',
+      '#uri' => $image_url,
+      '#alt' => '',
+    ];
+  }
+}
