@@ -53,3 +53,7 @@ function wri_block_preprocess_block(array &$variables) {
     }
   }
 }
+
+function wri_block_field_info_alter(&$info) {
+  print "";
+}
