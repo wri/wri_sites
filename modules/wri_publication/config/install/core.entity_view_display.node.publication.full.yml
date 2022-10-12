@@ -45,6 +45,7 @@ dependencies:
     - taxonomy
     - text
     - user
+    - wri_block
 third_party_settings:
   layout_builder:
     allow_custom: true
@@ -171,21 +172,13 @@ third_party_settings:
             uuid: e5af764a-5a05-4bdf-bbcd-6eb98a56c605
             region: content
             configuration:
-              id: 'field_block:node:publication:field_related_resources'
+              id: related_resources_fallback
               label: 'Connected to this report'
-              provider: layout_builder
               label_display: visible
-              formatter:
-                label: hidden
-                type: related_field_formatter
-                settings:
-                  view_mode: teaser
-                third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
+              provider: wri_block
+              context_mapping: {  }
             weight: -8
+            additional: {  }
           de1e5b47-2b96-44ae-b809-cb8c5064adc6:
             uuid: de1e5b47-2b96-44ae-b809-cb8c5064adc6
             region: content
@@ -209,14 +202,16 @@ third_party_settings:
   layout_builder_restrictions:
     allowed_block_categories: {  }
     entity_view_mode_restriction:
-      whitelisted_blocks:
+      allowed_layouts:
+        - layout_onecol
+      denylisted_blocks: {  }
+      allowlisted_blocks:
         'Chaos Tools':
           - 'entity_view:node'
         Components: {  }
         'Content fields':
           - 'field_block:node:publication:field_primary_contacts'
           - 'field_block:node:publication:field_projects'
-          - 'field_block:node:publication:field_related_resources'
         Devel: {  }
         Facets: {  }
         'Facets summary (Experimental)': {  }
@@ -225,11 +220,9 @@ third_party_settings:
         Menus: {  }
         System: {  }
         User: {  }
-        'WRI block': {  }
+        'WRI block':
+          - related_resources_fallback
         core: {  }
-      blacklisted_blocks: {  }
-      allowed_layouts:
-        - layout_onecol
 id: node.publication.full
 targetEntityType: node
 bundle: publication
