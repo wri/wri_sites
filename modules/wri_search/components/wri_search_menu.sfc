@@ -36,17 +36,17 @@ use Drupal\Core\Entity\EntityFormInterface;
 $buildContextForm = function (array $form, FormStateInterface $form_state, array $default_values = []) {
   $form['search_nav_title'] = [
     '#type'   => 'textfield',
-    '#title'  => $this->t('Search box title'),
+    '#title'  => t('Search box title'),
     '#default_value' => isset($default_values['search_nav_title']) ? $default_values['search_nav_title']  : 'Search WRI.org',
   ];
   $form['search_nav_description'] = [
     '#type'   => 'textfield',
-    '#title'  => $this->t('Search box description'),
+    '#title'  => t('Search box description'),
     '#default_value' => isset($default_values['search_nav_description']) ? $default_values['search_nav_description']  : 'Not sure where to find something? Search all of the site\'s content.'
   ];
   $form['search_nav_label'] = [
     '#type'   => 'textfield',
-    '#title'  => $this->t('Input label'),
+    '#title'  => t('Input label'),
     '#default_value' => isset($default_values['search_nav_label']) ? $default_values['search_nav_label']  : 'What can we help you find?',
   ];
 
@@ -59,7 +59,7 @@ $buildContextForm = function (array $form, FormStateInterface $form_state, array
   ];
   $form['search_nav_submit'] = [
     '#type'   => 'textfield',
-    '#title'  => $this->t('Submit button text'),
+    '#title'  => t('Submit button text'),
     '#default_value' => isset($default_values['search_nav_submit']) ? $default_values['search_nav_submit']  : 'Search',
   ];
   return $form;
