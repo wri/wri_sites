@@ -58,17 +58,21 @@ function wri_node_preprocess_wri_page_hero(&$context) {
  * Implements hook_preprocess_hook().
  */
 function wri_node_preprocess_layout__card(&$variables) {
-  $variables['default_image'] = [];
-
   if (isset($variables["content"]["field_primary_topic"][0]["#title"])) {
-    $image_url = \Drupal::service('extension.list.module')->getPath('wri_node') . '/images/' . strtolower(str_replace(' ', '-', $variables["content"]["field_primary_topic"][0]["#title"])) . '.jpg';
-    if(!file_exists($image_url)) {
-      $image_url = \Drupal::service('extension.list.module')->getPath('wri_node') . '/images/default.jpg';
+    $image_url = \Drupal::service('extension.list.module')
+        ->getPath('wri_node') . '/images/' . strtolower(str_replace(' ', '-', $variables["content"]["field_primary_topic"][0]["#title"])) . '.jpg';
+    if (!file_exists($image_url)) {
+      $image_url = \Drupal::service('extension.list.module')
+          ->getPath('wri_node') . '/images/default.jpg';
     }
-    $variables['default_image'] = [
-      '#theme' => 'image',
-      '#uri' => $image_url,
-      '#alt' => '',
-    ];
   }
+  else {
+    $image_url = \Drupal::service('extension.list.module')
+        ->getPath('wri_node') . '/images/default.jpg';
+  }
+  $variables['default_image'] = [
+    '#theme' => 'image',
+    '#uri' => $image_url,
+    '#alt' => '',
+  ];
 }
