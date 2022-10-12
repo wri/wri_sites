@@ -24,12 +24,12 @@ use Drupal\Core\Form\FormStateInterface;
 $buildContextForm = function (array $form, FormStateInterface $form_state, array $default_values = []) {
   $form['topic_intro_text'] = [
     '#type'   => 'textarea',
-    '#title'  => $this->t('Intro Text'),
+    '#title'  => t('Intro Text'),
     '#default_value' => isset($default_values['topic_intro_text']) ? $default_values['topic_intro_text']  : '',
   ];
   $form['hide_centers'] = [
     '#type' => 'checkbox',
-    '#title' => $this->t('Hide Centers'),
+    '#title' => t('Hide Centers'),
     '#default_value' => $default_values['hide_centers'] ?? '',
   ];
   return $form;
