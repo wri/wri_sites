@@ -137,7 +137,7 @@ function ts_wrin_theme_suggestions_page_alter(array &$suggestions, array $variab
   }
   if (isset($node->field_parent_page)) {
     $parent = $node->field_parent_page->entity;
-    if ('microsite' == $parent->bundle()) {
+    if ($parent && 'microsite' == $parent->bundle()) {
      $suggestions[] = 'page__microsite';
     }
   }

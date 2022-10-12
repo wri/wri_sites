@@ -1,0 +1,7 @@
+wri_node.settings:
+  path: '/admin/config/content/wri-settings'
+  defaults:
+    _title: 'WRI settings'
+    _form: 'Drupal\wri_node\Form\SettingsForm'
+  requirements:
+    _permission: 'administer site configuration'
