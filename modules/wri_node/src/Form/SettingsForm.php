@@ -4,8 +4,6 @@ namespace Drupal\wri_node\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Link;
-use Drupal\Core\Url;
 
 /**
  * Configure WRI nodes settings for this site.
@@ -30,7 +28,7 @@ class SettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $url =  '/' . \Drupal::service('extension.list.module')->getPath('wri_node') . '/images/default.jpg';
+    $url = '/' . \Drupal::service('extension.list.module')->getPath('wri_node') . '/images/default.jpg';
     $form['use_fallback_image'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Use a fallback image?'),
@@ -39,6 +37,7 @@ class SettingsForm extends ConfigFormBase {
     ];
     return parent::buildForm($form, $form_state);
   }
+
   /**
    * {@inheritdoc}
    */

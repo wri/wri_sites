@@ -2,9 +2,8 @@
 
 /**
  * @file
- * Update hooks for wri_media
+ * Update hooks for wri_media.
  */
-
 
 /**
  * Update the media display configs to remove blazy.
@@ -19,8 +18,9 @@ function wri_media_update_9301() {
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.image.landing_page_hero', 'wri_media', 'install', 'TRUE');
 
   $message = 'Remove blazy';
-   return $message;
+  return $message;
 }
+
 /**
  * Update the media display configs to add all the display modes.
  */
@@ -33,7 +33,7 @@ function wri_media_update_9302() {
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.image.tile', 'wri_media', 'install', 'TRUE');
 
   $message = 'Add Media display modes';
-   return $message;
+  return $message;
 }
 
 /**
@@ -44,7 +44,6 @@ function wri_media_update_9303() {
 
   // Add the new field configs.
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.video.default', 'wri_media', 'install', 'TRUE');
-
 
   $message = 'Use the oembed_lazyload display mode for videos';
   return $message;

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Update hooks for person config
+ * Update hooks for person config.
  */
 
 /**
@@ -17,9 +17,8 @@ function wri_person_update_9301() {
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.paragraph.person_listing.default', 'wri_person');
 
   $message = 'Person Listing paragraph.';
-   return $message;
+  return $message;
 }
-
 
 /**
  * Implements hook_update_dependencies().

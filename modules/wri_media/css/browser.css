@@ -1,28 +1,107 @@
-nav.eb-tabs ul {border-bottom-color: #d0d0d0}
-nav.eb-tabs ul li a {border-radius: 1em 1em 0 0}
-nav.eb-tabs ul li.active {border-bottom-width: 0}
-nav.eb-tabs ul li.active a {background-color: #d6d6d6}
-.view.view-files-browser .views-exposed-form {padding: 1.5em;background-color: #efefef}
-.view.view-files-browser .views-exposed-form .form--inline .form-item, .view.view-files-browser .views-exposed-form .form--inline .form-actions {margin-top: 0;margin-bottom: 0;display: inline-block}
-.view.view-files-browser .view-content {margin: 2em 0}
-.view.view-files-browser .views-row {margin-bottom: 1em;display: -webkit-flex;display: flex;-webkit-align-items: flex-start;align-items: flex-start}
-.view.view-files-browser .views-col {margin: 0 0 0 1em;position: relative;border: 10px solid #ebebeb;-moz-transition: border-color .6s;-o-transition: border-color .6s;-webkit-transition: border-color .6s;transition: border-color .6s; text-align: center; word-break: break-word}
-.view.view-files-browser .views-col img {display: inline-block}
-html[dir="rtl"] .view.view-files-browser .views-col {margin: 0 1em 0 0}
-.view.view-files-browser .views-col:hover {cursor: pointer}
-.view.view-files-browser .views-col.disabled {filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);opacity: .3;-webkit-filter: saturate(10%);filter: saturate(10%)}
-.view.view-files-browser .views-col.selected {border-color: #ed5}
-.view.view-files-browser .views-col.selected::before {content: "";width: 100%;height: 100%;position: absolute;background: transparent url(../../../../../../hsus/web/modules/contrib/bene_media/images/selected.svg) no-repeat center;-moz-animation: selected 1.5s 1;-webkit-animation: selected 1.5s 1;animation: selected 1.5s 1;filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);opacity: 0}
+nav.eb-tabs ul {
+  border-bottom-color: #d0d0d0
+}
+nav.eb-tabs ul li a {
+  border-radius: 1em 1em 0 0
+}
+nav.eb-tabs ul li.active {
+  border-bottom-width: 0
+}
+nav.eb-tabs ul li.active a {
+  background-color: #d6d6d6
+}
+.view.view-files-browser .views-exposed-form {
+  padding: 1.5em;
+  background-color: #efefef
+}
+.view.view-files-browser .views-exposed-form .form--inline .form-item,
+.view.view-files-browser .views-exposed-form .form--inline .form-actions {
+  margin-top: 0;
+  margin-bottom: 0;
+  display: inline-block
+}
+.view.view-files-browser .view-content {
+  margin: 2em 0
+}
+.view.view-files-browser .views-row {
+  margin-bottom: 1em;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: flex-start;
+  align-items: flex-start
+}
+.view.view-files-browser .views-col {
+  margin: 0 0 0 1em;
+  position: relative;
+  border: 10px solid #ebebeb;
+  -moz-transition: border-color .6s;
+  -o-transition: border-color .6s;
+  -webkit-transition: border-color .6s;
+  transition: border-color .6s;
+  text-align: center;
+  word-break: break-word
+}
+.view.view-files-browser .views-col img {
+  display: inline-block
+}
+html[dir="rtl"] .view.view-files-browser .views-col {
+  margin: 0 1em 0 0
+}
+.view.view-files-browser .views-col:hover {
+  cursor: pointer
+}
+.view.view-files-browser .views-col.disabled {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+  opacity: .3;
+  -webkit-filter: saturate(10%);
+  filter: saturate(10%)
+}
+.view.view-files-browser .views-col.selected {
+  border-color: #ed5
+}
+.view.view-files-browser .views-col.selected::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: transparent url(../../../../../../hsus/web/modules/contrib/bene_media/images/selected.svg) no-repeat center;
+  -moz-animation: selected 1.5s 1;
+  -webkit-animation: selected 1.5s 1;
+  animation: selected 1.5s 1;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0
+}
 @-moz-keyframes selected {
-  0% {opacity: 1;background-size: 70%}
-  100% {opacity: 0;background-size: 55%}
+  0% {
+    opacity: 1;
+    background-size: 70%
+}
+  100% {
+    opacity: 0;
+    background-size: 55%
+}
 }
 @-webkit-keyframes selected {
-  0% {opacity: 1;background-size: 70%}
-  100% {opacity: 0;background-size: 55%}
+  0% {
+    opacity: 1;
+    background-size: 70%
+}
+  100% {
+    opacity: 0;
+    background-size: 55%
+}
 }
 @keyframes selected {
-  0% {opacity: 1;background-size: 70%}
-  100% {opacity: 0;background-size: 55%}
+  0% {
+    opacity: 1;
+    background-size: 70%
 }
-.bene-media-browser-file-name.views-field.views-field-name {background-color: #ebebeb;padding-top: 10px}
+  100% {
+    opacity: 0;
+    background-size: 55%
+}
+}
+.bene-media-browser-file-name.views-field.views-field-name {
+  background-color: #ebebeb;
+  padding-top: 10px
+}
