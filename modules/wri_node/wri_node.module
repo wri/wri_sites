@@ -54,8 +54,10 @@ function wri_node_preprocess_wri_page_hero(&$context) {
   }
 }
 
+/**
+ * Implements hook_preprocess_hook().
+ */
 function wri_node_preprocess_layout__card(&$variables) {
-  // <img src="/profiles/contrib/wri_sites/modules/wri_node/images/{{ (content.tag|render|lower|replace({' ': '-'})) ? content.tag.field_primary_topic.0['#title']|lower|replace({' ': '-'}) : 'default' }}.jpg" alt="">
   $variables['default_image'] = [];
 
   if (isset($variables["content"]["field_primary_topic"][0]["#title"])) {
