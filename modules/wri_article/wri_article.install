@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Update hooks for wri_article
+ * Update hooks for wri_article.
  */
 
 /**
@@ -14,7 +14,7 @@ function wri_article_update_9301() {
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.article.card', 'wri_article', 'install', 'TRUE');
 
   $message = 'Remove blazy';
-   return $message;
+  return $message;
 }
 
 /**

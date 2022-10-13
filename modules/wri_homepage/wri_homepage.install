@@ -2,9 +2,8 @@
 
 /**
  * @file
- * Update hooks for wri_homepage
+ * Update hooks for wri_homepage.
  */
-
 
 /**
  * Update the homepage display configs to remove blazy.
@@ -14,9 +13,8 @@ function wri_homepage_update_9301() {
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.paragraph.homepage_hero.default', 'wri_homepage', 'install', 'TRUE');
 
   $message = 'Remove blazy';
-   return $message;
+  return $message;
 }
-
 
 /**
  * Implements hook_update_dependencies().

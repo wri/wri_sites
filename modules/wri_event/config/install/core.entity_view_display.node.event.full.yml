@@ -36,6 +36,7 @@ dependencies:
     - smart_date
     - text
     - user
+    - wri_block
 third_party_settings:
   layout_builder:
     allow_custom: true
@@ -50,21 +51,13 @@ third_party_settings:
             uuid: 1b1b039f-13a9-4b80-bc51-ddce8d62c0a2
             region: content
             configuration:
-              id: 'field_block:node:event:field_related_resources'
+              id: related_resources_fallback
               label: 'Related to this Event'
-              provider: layout_builder
               label_display: visible
-              formatter:
-                label: hidden
-                type: entity_reference_entity_view
-                settings:
-                  view_mode: teaser
-                third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
+              provider: wri_block
+              context_mapping: {  }
             weight: -9
+            additional: {  }
           440300b2-4b41-4061-9a83-96c5fd87f8a0:
             uuid: 440300b2-4b41-4061-9a83-96c5fd87f8a0
             region: content
@@ -147,14 +140,16 @@ third_party_settings:
   layout_builder_restrictions:
     allowed_block_categories: {  }
     entity_view_mode_restriction:
-      whitelisted_blocks:
+      allowed_layouts:
+        - layout_onecol
+      denylisted_blocks: {  }
+      allowlisted_blocks:
         'Chaos Tools':
           - 'entity_view:node'
         Components: {  }
         'Content fields':
           - 'field_block:node:event:field_primary_contacts'
           - 'field_block:node:event:field_related_events'
-          - 'field_block:node:event:field_related_resources'
         Devel: {  }
         Facets: {  }
         'Facets summary (Experimental)': {  }
@@ -163,11 +158,9 @@ third_party_settings:
         Menus: {  }
         System: {  }
         User: {  }
-        'WRI block': {  }
+        'WRI block':
+          - related_resources_fallback
         core: {  }
-      blacklisted_blocks: {  }
-      allowed_layouts:
-        - layout_onecol
 id: node.event.full
 targetEntityType: node
 bundle: event

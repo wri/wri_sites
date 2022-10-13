@@ -2,8 +2,9 @@
 
 /**
  * @file
- * Update hooks for wri_program
+ * Update hooks for wri_program.
  */
+
 /**
  * Add the 'Show More Link' field to the Program Center content type.
  */
@@ -25,7 +26,7 @@ function wri_program_update_9302() {
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.card', 'wri_program', 'install', 'TRUE');
 
   $message = 'Remove blazy, responsive image';
-   return $message;
+  return $message;
 }
 
 /**

@@ -30,6 +30,7 @@ dependencies:
     - layout_builder_restrictions
     - layout_discovery
     - user
+    - wri_block
 third_party_settings:
   layout_builder:
     enabled: true
@@ -83,19 +84,11 @@ third_party_settings:
             uuid: 3e34bc2c-8a93-47b9-9743-407f22f313c4
             region: content
             configuration:
-              id: 'field_block:node:data:field_related_resources'
+              id: related_resources_fallback
               label: 'Related to this Resource'
               label_display: visible
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: related_field_formatter
-                label: hidden
-                settings:
-                  view_mode: teaser
-                third_party_settings: {  }
+              provider: wri_block
+              context_mapping: {  }
             weight: -9
             additional: {  }
           896827be-fa61-4dbd-a2b5-9d3152d11ff0:
@@ -140,7 +133,6 @@ third_party_settings:
         Components: {  }
         'Content fields':
           - 'field_block:node:data:field_projects'
-          - 'field_block:node:data:field_related_resources'
         Facets: {  }
         'Facets summary (Experimental)': {  }
         Forms: {  }
@@ -149,7 +141,8 @@ third_party_settings:
         Menus: {  }
         System: {  }
         User: {  }
-        'WRI block': {  }
+        'WRI block':
+          - related_resources_fallback
         core: {  }
       restricted_categories:
         - Devel

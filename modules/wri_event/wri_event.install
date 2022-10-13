@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * @file
+ */
+
+/**
  * Update the event display configs to remove blazy.
  */
 function wri_event_update_9301() {
@@ -8,7 +12,7 @@ function wri_event_update_9301() {
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.event.card', 'wri_event', 'install', 'TRUE');
 
   $message = 'Remove blazy, responsive image';
-   return $message;
+  return $message;
 }
 
 /**

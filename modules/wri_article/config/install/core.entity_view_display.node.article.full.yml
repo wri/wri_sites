@@ -28,6 +28,7 @@ dependencies:
     - layout_discovery
     - text
     - user
+    - wri_block
 third_party_settings:
   layout_builder:
     allow_custom: true
@@ -65,9 +66,9 @@ third_party_settings:
             uuid: 1318f40a-3bb2-4fd1-a9a2-bdb7dfc8734f
             region: content
             configuration:
-              id: 'field_block:node:article:field_related_resources'
+              id: 'related_resources_fallback'
               label: 'Relevant Work'
-              provider: layout_builder
+              provider: wri_block
               label_display: visible
               formatter:
                 label: hidden
@@ -75,9 +76,7 @@ third_party_settings:
                 settings:
                   view_mode: teaser
                 third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
+              context_mapping: { }
             additional: {  }
             weight: -5
         third_party_settings: {  }
@@ -88,8 +87,7 @@ third_party_settings:
         'Chaos Tools':
           - 'entity_view:node'
         Components: {  }
-        'Content fields':
-          - 'field_block:node:article:field_related_resources'
+        'Content fields': {  }
         Facets: {  }
         'Facets summary (Experimental)': {  }
         Forms: {  }
@@ -102,7 +100,8 @@ third_party_settings:
         Menus: {  }
         System: {  }
         User: {  }
-        'WRI block': {  }
+        'WRI block':
+          - related_resources_fallback
         core: {  }
       blacklisted_blocks: {  }
       allowed_layouts:
