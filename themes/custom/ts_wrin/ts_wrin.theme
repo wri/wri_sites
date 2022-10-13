@@ -38,6 +38,7 @@ function ts_wrin_preprocess_html(array &$variables) {
 
       switch ($node->getType()) {
         case 'program_center':
+        case 'microsite':
         case 'project_detail':
           $variables['attributes']['class'][] = 'transparent-header white';
           break;
