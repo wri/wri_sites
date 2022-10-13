@@ -53,7 +53,7 @@ function wri_media_update_9303() {
  * Implements hook_update_dependencies().
  */
 function wri_media_update_dependencies() {
-  // We must have the distro_helper module before we can run the 9301 update hook.
+  // We must have the distro_helper module before we can run the 9301 update.
   $dependencies['wri_media'][9301] = [
     'wri_sites' => 8908,
   ];

@@ -25,10 +25,13 @@ jobs:
             echo "memory_limit = 256M"  >> ${php_vars}
             export PATH="./vendor/bin:../vendor/bin:/root/.composer/vendor/bin:$PATH"
             composer self-update --2
-            COMPOSER_MEMORY_LIMIT=-1 composer create-project wri/wri-starter-kit:dev-views_arg_fix circletest
+            COMPOSER_MEMORY_LIMIT=-1 composer create-project wri/wri-starter-kit circletest
             cd circletest
             COMPOSER_MEMORY_LIMIT=-1 composer require wri/wri_sites:dev-${CIRCLE_BRANCH} --update-with-dependencies
-            composer code-sniff
+            ./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/modules
+            ./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/themes/custom
+            ./vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/modules
+            ./vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/themes/custom
             drush si wri_sites -y --verbose --db-url=mysql://drupal:drupal@127.0.0.1:3306/circletest
             drush en wri_package -y
             drush en wri_package2 -y
