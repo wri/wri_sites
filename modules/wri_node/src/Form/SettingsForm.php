@@ -6,7 +6,6 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\language\ConfigurableLanguageManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
