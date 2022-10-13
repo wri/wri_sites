@@ -72,7 +72,11 @@ class RelatedResourcesFallback extends BlockBase implements ContainerFactoryPlug
     if ($node) {
       $delta = $node->field_related_resources;
       if (isset($delta)) {
-        $view_properties = ['type' => 'related_field_formatter', 'settings' => ['view_mode' => 'teaser'], 'label' => 'hidden'];
+        $view_properties = [
+          'type' => 'related_field_formatter',
+          'settings' => ['view_mode' => 'teaser'],
+          'label' => 'hidden',
+        ];
         $build = $delta->view($view_properties);
       }
       // Respect the title setting.

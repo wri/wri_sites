@@ -20,7 +20,7 @@ function wri_homepage_update_9301() {
  * Implements hook_update_dependencies().
  */
 function wri_homepage_update_dependencies() {
-  // We must have the distro_helper module before we can run the 8902 update hook.
+  // We must have the distro_helper module before we can run the 8902 update.
   $dependencies['wri_homepage'][9301] = [
     'wri_sites' => 8908,
   ];

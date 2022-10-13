@@ -2,13 +2,42 @@
 
 namespace Drupal\wri_node\Form;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\language\ConfigurableLanguageManagerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Configure WRI nodes settings for this site.
  */
 class SettingsForm extends ConfigFormBase {
+
+  /**
+   * The module extension list.
+   *
+   * @var \Drupal\Core\Extension\ModuleExtensionList
+   */
+  protected $moduleExtensionList;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(ConfigFactoryInterface $config_factory, ModuleExtensionList $module_extension_list) {
+    parent::__construct($config_factory);
+    $this->moduleExtensionList = $module_extension_list;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('config.factory'),
+      $container->get('extension.list.module')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -28,7 +57,7 @@ class SettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $url = '/' . \Drupal::service('extension.list.module')->getPath('wri_node') . '/images/default.jpg';
+    $url = '/' . $this->moduleExtensionList->getPath('wri_node') . '/images/default.jpg';
     $form['use_fallback_image'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Use a fallback image?'),

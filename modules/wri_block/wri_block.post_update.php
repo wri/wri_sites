@@ -5,6 +5,8 @@
  * Functions for wri custom blocks.
  */
 
+use Drupal\node\Entity\Node;
+
 /**
  * Converts related resource field blocks into a custom block type.
  */
@@ -15,13 +17,13 @@ function wri_block_post_update_empty_layout_fields(&$sandbox) {
     ->fields('u')
     ->execute();
   // Loop through each layout.
-  foreach($nodes as $result) {
-    $node = \Drupal\node\Entity\Node::load($result->entity_id);
+  foreach ($nodes as $result) {
+    $node = Node::load($result->entity_id);
     $layout = $node->get('layout_builder__layout');
     $sections = $layout->getSections();
     $components = $sections[0]->getComponents();
 
-    foreach($components as $uuid => $component) {
+    foreach ($components as $component) {
       $configuration = $component->get('configuration');
       // Find the correct field.
       // Replace its configuration with ours.

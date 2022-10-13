@@ -30,6 +30,8 @@ jobs:
             COMPOSER_MEMORY_LIMIT=-1 composer require wri/wri_sites:dev-${CIRCLE_BRANCH} --update-with-dependencies
             ./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/modules
             ./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/themes/custom
+            ./vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/modules
+            ./vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/themes/custom
             drush si wri_sites -y --verbose --db-url=mysql://drupal:drupal@127.0.0.1:3306/circletest
             drush en wri_package -y
             drush en wri_package2 -y
