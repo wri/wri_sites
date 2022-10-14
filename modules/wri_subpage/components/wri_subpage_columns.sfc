@@ -22,11 +22,7 @@
       </div>
       <div class="dark-overlay"></div>
       {% if content.hero.field_toc is not empty %}
-      <div class="publication__toc black-bar">
-        <div class="grid publication__toc-inner black-bar-inner">
           {{ content.hero.field_toc }}
-        </div>
-      </div>
       {% endif %}
     </div>
     {% endif %}

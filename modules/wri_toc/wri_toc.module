@@ -14,7 +14,13 @@ use Drupal\Core\Url;
 
 function wri_toc_theme() {
   $items['table_of_contents'] = [
-    'render element' => 'elements',
+    'variables' => [
+      'value' => '',
+      'menu_link' => '',
+      'menu_title' => 'page-hierarchies',
+      'node_title' => '',
+      'color_class' => 'black-bar'
+    ],
     'template' => 'toc',
   ];
   return $items;

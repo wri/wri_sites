@@ -24,7 +24,8 @@ class TableofcontentsFormatter extends FormatterBase {
    */
   public static function defaultSettings() {
     return [
-      'menu' => '',
+      'menu' => 'page-hierarchies',
+      'color_class' => 'black-bar'
     ] + parent::defaultSettings();
   }
 
@@ -39,6 +40,12 @@ class TableofcontentsFormatter extends FormatterBase {
       '#description' => $this->t('The dash-case name of the menu: ie page-hierarchies'),
       '#default_value' => $this->getSetting('menu') ?? 'page-hierarchies',
     ];
+    $elements['color_class'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Color class'),
+      '#description' => $this->t('The background color class to apply. Example: black-bar, teal-bar'),
+      '#default_value' => $this->getSetting('color_class') ?? 'black-bar',
+    ];
 
     return $elements;
   }
@@ -48,6 +55,7 @@ class TableofcontentsFormatter extends FormatterBase {
    */
   public function settingsSummary() {
     $summary[] = $this->t('Menu: @menu', ['@menu' => $this->getSetting('menu')]);
+    $summary[] = $this->t('Class: @color_class', ['@color_class' => $this->getSetting('color_class')]);
     return $summary;
   }
 
@@ -55,31 +63,33 @@ class TableofcontentsFormatter extends FormatterBase {
    * {@inheritdoc}
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
-    $element = [];
-
+    $value = $menu_link = $node_title = '';
     foreach ($items as $delta => $item) {
-      $variables['menu_link'] = '';
-      $variables['menu_title'] = $this->getSetting('menu') ?? 'page-hierarchies';
+      $value = $item->value;
+
       $node = \Drupal::routeMatch()->getParameter('node');
       if ($node instanceof \Drupal\node\NodeInterface) {
-        $variables['node_title'] = $node->getTitle();
+        $node_title = $node->getTitle();
       }
       // Get the menu link of the current node.
-      if($item->value == 'menu' && $entity = $item->getEntity()) {
+      if($value == 'menu' && $entity = $item->getEntity()) {
         $node_id = $item->getEntity()->id();
         if ($node_id) {
           $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
-          $variables['menu_link'] = array_key_first($menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $node_id], $this->getSetting('menu')));
+          $menu_link = array_key_first($menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $node_id], $this->getSetting('menu')));
         }
       }
-      $element[$delta] = [
-        '#theme' => 'table_of_contents',
-        '#elements' => $variables
-      ];
+
     }
 
-
-    return $element;
+    return [
+      '#theme' => 'table_of_contents',
+      '#menu_title' => empty($this->getSetting('menu')) ? 'page-hierarchies' : $this->getSetting('menu'),
+      '#value' => $value,
+      '#menu_link' => $menu_link,
+      '#node_title' => $node_title,
+      '#color_bar' => $this->getSetting('color_class'),
+    ];
   }
 
 }
