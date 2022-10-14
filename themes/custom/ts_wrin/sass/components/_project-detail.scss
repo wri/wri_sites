@@ -1,5 +1,4 @@
-.page-node-type-project-detail,
-.page-node-type-subpage,
+.publication__detail,
 .subpage {
   .landing-page__hero.has-image {
     .intro p {
@@ -32,47 +31,6 @@
   .hero__text .intro-text {
     @include font($acumin-semi-cond, "semibold");
     @include font-line-height(30, 43);
-  }
-
-  .publication__detail .publication__meta-inner {
-    border-top: none;
-    padding-top: 0;
-  }
-
-  .publication__detail .publication__main {
-    .publication__image {
-      img {
-        width: 100%;
-      }
-
-      @include center-columns($grid-columns-mobile, $grid-columns-mobile);
-
-      @include mq($ph) {
-        @include center-columns($grid-columns, $grid-columns);
-      }
-
-      @include mq($md) {
-        @include column-width(2, 4);
-      }
-    }
-
-    .main-content {
-      @include mq($md) {
-        @include column-width(4, 10);
-      }
-    }
-
-    .sidebar {
-      @include mq($lg) {
-        @include column-width(10, 13);
-      }
-    }
-
-    .sidebar {
-      @include mq($lg) {
-        @include column-width(10, 13);
-      }
-    }
   }
 
   .visit-on-twitter {
@@ -109,5 +67,46 @@
   .landing-page__hero.has-image .hero__text,
   .landing-page__hero.has-image .hero__text .grid {
     min-height: 550px;
+  }
+}
+
+.publication__detail .publication__meta-inner {
+  border-top: none;
+  padding-top: 0;
+}
+
+.publication__detail .publication__main {
+  .publication__image {
+    img {
+      width: 100%;
+    }
+
+    @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+
+    @include mq($ph) {
+      @include center-columns($grid-columns, $grid-columns);
+    }
+
+    @include mq($md) {
+      @include column-width(2, 4);
+    }
+  }
+
+  .main-content {
+    @include mq($md) {
+      @include column-width(4, 10);
+    }
+  }
+
+  .sidebar {
+    @include mq($lg) {
+      @include column-width(10, 13);
+    }
+  }
+
+  .sidebar {
+    @include mq($lg) {
+      @include column-width(10, 13);
+    }
   }
 }
