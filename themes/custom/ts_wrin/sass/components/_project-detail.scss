@@ -79,6 +79,7 @@
   .publication__image {
     img {
       width: 100%;
+      height: auto;
     }
 
     @include center-columns($grid-columns-mobile, $grid-columns-mobile);
