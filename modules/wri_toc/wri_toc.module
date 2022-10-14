@@ -19,19 +19,3 @@ function wri_toc_theme() {
   ];
   return $items;
 }
-
-function wri_toc_preprocess_table_of_contents($context) {
-  $context['menu_link'] = '';
-  $node = \Drupal::routeMatch()->getParameter('node');
-  if ($node instanceof \Drupal\node\NodeInterface) {
-    $context['node_title'] = $node->getTitle();
-  }
-  // Get the menu link of the current node.
-  if($context['item']->value == 'menu' && $entity = $context['item']->getEntity()) {
-    $node_id = $context['item']->getEntity()->id();
-    if ($node_id) {
-      $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
-      $context['menu_link'] = array_key_first($menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $node_id], 'page-hierarchies'));
-    }
-  }
-}
