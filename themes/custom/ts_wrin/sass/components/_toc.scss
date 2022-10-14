@@ -1,7 +1,43 @@
+.black-bar {
+  background: $black;
+  color: $white;
+  a {
+    color: $white;
+    text-decoration: none;
+
+    @include hocus() {
+      color: $med-light-gray;
+    }
+
+    &.active,
+    &.is-active {
+      color: $med-light-gray;
+    }
+  }
+  ul.menu a.is-active {
+    color: $med-light-gray;
+  }
+}
+.teal-bar {
+  background: $microsite-teal;
+  color: $black;
+  a {
+    color: $black;
+    text-decoration: none;
+
+    @include hocus() {
+      color: $true-black;
+    }
+
+    &.active,
+    &.is-active {
+      color: $true-black;
+    }
+  }
+}
 .publication__toc {
   @include font($acumin-semi-cond, "bold");
-  @include font-line-height(14, 18);
-  background: $black;
+  @include font-line-height(18, 21);
   position: relative;
   z-index: 51;
 
@@ -40,8 +76,7 @@
     .menu-title,
     .menu > ul > li > a {
       @include font($caslon, "bold", "italic");
-      @include font-line-height(15, 15);
-      color: $brand-gold;
+      @include font-line-height(18, 18);
       display: block;
       margin-bottom: 5px;
       position: relative;
@@ -85,7 +120,6 @@
       padding: 0;
       width: auto;
       z-index: 1;
-      background: $black;
       position: relative;
 
       li {
@@ -94,20 +128,6 @@
         margin-right: $space-sm;
         padding-top: 0;
         white-space: nowrap;
-
-        a {
-          color: $white;
-          text-decoration: none;
-
-          @include hocus() {
-            color: $med-light-gray;
-          }
-
-          &.active,
-          &.is-active {
-            color: $med-light-gray;
-          }
-        }
       }
     }
 

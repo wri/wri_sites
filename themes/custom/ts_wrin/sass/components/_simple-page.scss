@@ -162,7 +162,6 @@
 
 .menu--page-hierarchies {
   @include font($acumin-pro, "regular");
-  @include font-line-height(14, 18);
 
   @include mq($md) {
     border-left: 1px solid #1a1919;

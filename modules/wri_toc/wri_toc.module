@@ -19,7 +19,7 @@ function wri_toc_theme() {
       'menu_link' => '',
       'menu_title' => 'page-hierarchies',
       'node_title' => '',
-      'color_class' => 'black-bar'
+      'color_bar' => 'black-bar'
     ],
     'template' => 'toc',
   ];
