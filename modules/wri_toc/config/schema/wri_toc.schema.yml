@@ -1,0 +1,7 @@
+field.formatter.settings.wri_toc_tableofcontents:
+  type: mapping
+  label: TableOfContents formatter settings
+  mapping:
+    foo:
+      type: string
+      label: Foo

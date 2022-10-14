@@ -22,6 +22,7 @@ function wri_publication_preprocess_wri_publication_columns(&$context) {
 
     switch ($node->getType()) {
       case 'project_detail':
+      case 'microsite':
         $context['display_type'] = 'robust';
         break;
 
