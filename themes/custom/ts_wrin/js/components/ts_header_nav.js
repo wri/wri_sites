@@ -260,20 +260,6 @@ export default function(context) {
         { scrollLeft: leftPos + mainParent.width() / 2 },
         500
       );
-      $(this)
-        .once()
-        .clone()
-        .prependTo("nav.toc")
-        .removeClass("nav-arrow")
-        .addClass("back-arrow")
-        .click(function(f) {
-          f.preventDefault();
-          var leftPosBack = tocScrollMenu.scrollLeft();
-          tocScrollMenu.animate(
-            { scrollLeft: leftPosBack - mainParent.width() / 2 },
-            500
-          );
-        });
     });
 
     const tocStickyNav = document.querySelector(".publication__toc");

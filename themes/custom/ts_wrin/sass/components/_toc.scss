@@ -21,6 +21,7 @@
 .teal-bar {
   background: $microsite-teal;
   color: $black;
+
   a {
     color: $black;
     text-decoration: none;
@@ -35,6 +36,7 @@
     }
   }
 }
+
 .publication__toc {
   @include font($acumin-semi-cond, "bold");
   @include font-line-height(18, 21);
@@ -156,11 +158,10 @@
 }
 
 .publication__toc nav.toc.no-scroll {
-  .menu-wrapper > ul.menu:after {
+  .toc-list-wrapper .continue {
     content: none;
   }
-  .nav-arrow,
-  .back-arrow {
+  .nav-arrow {
     display: none;
   }
 }
