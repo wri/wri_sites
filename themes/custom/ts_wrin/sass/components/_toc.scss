@@ -17,6 +17,11 @@
   ul.menu a.is-active {
     color: $med-light-gray;
   }
+
+  .back-arrow svg path,
+  .nav-arrow svg path {
+    fill: $white;
+  }
 }
 .teal-bar {
   background: $microsite-teal;
@@ -34,6 +39,11 @@
     &.is-active {
       color: $true-black;
     }
+  }
+
+  .back-arrow svg path,
+  .nav-arrow svg path {
+    fill: $black;
   }
 }
 
@@ -95,6 +105,7 @@
       -ms-overflow-style: none; /* Internet Explorer 10+ */
       scrollbar-width: none;
       overflow: -moz-scrollbars-none;
+      margin-right: 15px;
 
       &::-webkit-scrollbar {
         display: none;
@@ -143,16 +154,16 @@
       padding: 2px 2px 2px 5px;
       position: absolute;
       right: -20px;
-      width: 8px;
+      width: 30px;
     }
     .back-arrow {
       left: -20px;
       right: auto;
       transform: scaleX(-1);
     }
-    .back-arrow svg path,
-    .nav-arrow svg path {
-      fill: $white;
+    .back-arrow svg,
+    .nav-arrow svg {
+      width: 8px;
     }
   }
 }
