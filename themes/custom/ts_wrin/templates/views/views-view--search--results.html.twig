@@ -44,7 +44,7 @@
   {{ title_prefix }}
   <div class="container">
     <h1 class="h1 padding-vertical">{{ view.title }}</h1>
-    <form class="search-page-main-input padding-bottom margin-bottom-lg" action="/search">
+    <form class="search-page-main-input padding-bottom margin-bottom-lg" action="{{ exposed['#action'] }}">
       <div class="input-wrapper">
         <label class="visually-hidden" for="search_page_search">{{ "Search"|t }}</label>
         <input class="search-input" type="text" name="keys" id="search_page_search" value="{{ url_keys }}">
