@@ -77,7 +77,8 @@
     margin-right: $space-xxl;
   }
 
-  .field--name-field-twitter-account {
+  .field--name-field-twitter-account,
+  .field-name-field-twitter-account {
     @include font($caslon, "regular", "italic");
     @include font-line-height(15, 16);
     background-color: $white;
