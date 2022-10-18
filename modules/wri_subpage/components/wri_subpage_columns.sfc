@@ -21,6 +21,11 @@
         </div>
       </div>
       <div class="dark-overlay"></div>
+       {% if content.hero.field_twitter_account %}
+          <div class="block-field-blocknodeprogram-centerfield-twitter-account">
+            {{ content.hero.field_twitter_account }}
+          </div>
+        {% endif %}
       {% if content.hero.field_toc is not empty %}
           {{ content.hero.field_toc }}
       {% endif %}
