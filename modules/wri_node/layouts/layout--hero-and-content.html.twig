@@ -42,13 +42,9 @@
   {% if content.content|render is not empty and content.featured_image|render is not empty %}
     <div class="landing-page__content grid margin-top-md margin-bottom-md">
       {% if content.featured_image|render %}
-      <div class="publication__image margin-bottom-lg">
-        <div class="publication__image-inner">
         <div class="layout__region layout__region--featured-image">
           {{ content.featured_image }}
         </div>
-        </div>
-      </div>
       {% endif %}
       <div class="content__inner main-content layout__region--main_content">
         {{ content.content }}

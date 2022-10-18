@@ -18,7 +18,7 @@ use Drupal\node\Entity\Node;
  *   id = "childlogo",
  *   title = @Translation("Add Logo"),
  *   entity_type = "node",
- *   ui_limit = {"microsite|*"}
+ *   ui_limit = {"subpage|*"}
  * )
  */
 class ChildLogo extends DsFieldBase {
@@ -29,34 +29,20 @@ class ChildLogo extends DsFieldBase {
   public function build() {
     $entity = $this->entity();
     $build = [];
-    $node = \Drupal::routeMatch()->getParameter('node');
-    if (!$node) {
-      $node_route = \Drupal::routeMatch()->getRawParameter('section_storage');
-      $node_id = str_replace('node.', '', $node_route);
-      $node = Node::load($node_id);
-    }
+    $node = $entity->field_parent_page->entity;
     $uri = FALSE;
     if (($node instanceof NodeInterface) && isset($node->field_logo->entity->field_media_image->entity->uri->value)) {
       $uri = $node->field_logo->entity->field_media_image->entity->uri->value;
     }
-    elseif (isset($entity->field_logo->entity->field_media_image->entity->uri->value)) {
-      $uri = $entity->field_logo->entity->field_media_image->entity->uri->value;
-    }
 
     if ($uri) {
-      $settings = [
-        'uri' => $uri,
-        'loading' => 'lazy',
-        'image_style' => '250_wide',
-      ];
-
       $build = [
-        '#theme' => 'thumbnail',
-        '#settings' => $settings,
+        '#theme' => 'image_style',
+        '#uri' => $uri,
+        '#style_name' => '250_wide',
       ];
     }
 
-    General::$htmlClasses[] = 'transparent-header white';
     return $build;
   }
 
