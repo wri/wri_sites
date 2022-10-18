@@ -18,7 +18,7 @@ use Drupal\node\Entity\Node;
  *   id = "childimg",
  *   title = @Translation("Add Image"),
  *   entity_type = "node",
- *   ui_limit = {"project_detail|*"}
+ *   ui_limit = {"project_detail|*","microsite|*"}
  * )
  */
 class ChildImage extends DsFieldBase {
