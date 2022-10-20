@@ -14,7 +14,7 @@
     {{ content.header }}
     </h2>
     {% if content.subheader %}
-    <div class="intro">
+    <div class="subheader">
     {{ content.subheader }}
     </div>
     {% endif %}

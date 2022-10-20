@@ -104,6 +104,11 @@ figcaption {
   margin-top: rem(13);
 }
 
+.subheader {
+  @include font($acumin-pro, 'regular');
+  @include font-line-height(18, 24);
+}
+
 .intro {
   @include font($acumin-semi-cond, light);
   @include font-line-height(20, 31);
