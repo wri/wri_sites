@@ -14,6 +14,11 @@
           <div class="hero__text--inner padding-vertical">
             <div class="margin-top-xl"></div>
             {{ content.hero.node_title }}
+            {% if content.hero.field_long_title %}
+            <div class="h1 xl white">
+            {{ content.hero.field_long_title }}
+            </div>
+            {% endif %}
             {% if content.hero.childtitle %}
               {{ content.hero.childtitle }}
             {% endif %}
