@@ -14,6 +14,9 @@
       color: $med-light-gray;
     }
   }
+  .menu-item--expanded > a {
+    color: $brand-gold;
+  }
   ul.menu a.is-active {
     color: $med-light-gray;
   }
