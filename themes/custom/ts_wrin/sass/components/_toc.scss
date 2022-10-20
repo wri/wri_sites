@@ -35,12 +35,12 @@
     text-decoration: none;
 
     @include hocus() {
-      color: $true-black;
+      color: $hover-black;
     }
 
     &.active,
     &.is-active {
-      color: $true-black;
+      color: $hover-black;
     }
   }
 
