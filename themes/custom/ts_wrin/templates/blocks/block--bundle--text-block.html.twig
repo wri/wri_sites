@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Theme for an rich text block embedded on the page.
+ */
+#}
+{%
+  set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    'landing-page__content',
+    'grid'
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  <div class="main-content">
+  {{ title_prefix }}
+  {{ title_suffix }}
+  {% block content %}
+    {{ content }}
+  {% endblock %}
+  </div>
+</div>
