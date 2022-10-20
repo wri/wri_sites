@@ -321,3 +321,15 @@ function ts_wrin_page_attachments_alter(array &$attachments) {
     $attachments['#attached']['library'][$index] = 'ts_wrin/dev';
   }
 }
+
+/**
+ * Implements hook_theme_suggestions_views_view_alter().
+ */
+function ts_wrin_theme_suggestions_views_view_list_alter(array &$suggestions, array $variables) {
+  $current_view = $variables['view']->current_display;
+  $current_id = $variables['view']->id();
+  $current_display_type = $variables["view"]->display_handler->getPluginId();
+  $suggestions[] = 'views_view_list__' . $current_display_type;
+  $suggestions[] = 'views_view_list__' . $current_id;
+  $suggestions[] = 'views_view_list__' . $current_id . '__' . $current_view;
+}

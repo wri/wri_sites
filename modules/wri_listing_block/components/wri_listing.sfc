@@ -9,9 +9,16 @@
   <div{{ attributes.addClass(listing_type, 'grid', 'margin-bottom-lg', 'unfriendly-block') }}>
 
     {% if content.header %}
-    <h2 {{ region_attributes.header.addClass(header_type, 'layout__region', 'layout__region--header', 'top-border-thick', 'margin-bottom-md') }}>
+    <div {{ region_attributes.header.addClass('layout__region', 'layout__region--header', 'top-border-thick', 'margin-bottom-md') }}>
+    <h2 class={{ header_type }}>
     {{ content.header }}
     </h2>
+    {% if content.subheader %}
+    <div class="intro">
+    {{ content.subheader }}
+    </div>
+    {% endif %}
+    </div>
     {% endif %}
 
     {% if content.intro|render %}
@@ -42,11 +49,13 @@ $definition['layout'] = [
   'label' => 'Content Listings',
   'regions' => [
     'header' => ['label' => 'Header'],
+    'subheader' => ['label' => 'Subheader'],
     'intro' => ['label' => 'Intro'],
     'listing' => ['label' => 'Listing'],
   ],
   'icon_map' => [
     ['header', 'intro'],
+    ['subheader'],
     ['listing']
   ],
   'default_section' => 'listing'
@@ -54,7 +63,7 @@ $definition['layout'] = [
 
 $prepareContext = function (&$context) {
   if (!isset($context['listing_type']) && isset($context["content"]["listing"]["field_listing"][0])) {
-    $context['listing_type'] = $context["content"]["listing"]["field_listing"][0]["#content"]["#display_id"] . '-' . $context["content"]["listing"]["field_listing"][0]["#content"]["#name"];
+    $context['listing_type'] = $context["content"]["listing"]["field_listing"][0]["#content"]["#display_id"] . '-' . $context["content"]["listing"]["field_listing"][0]["#content"]["#name"] . " " . $context["content"]["listing"]["field_listing"][0]["#content"]["#name"];
   }
   else {
     $context['listing_type'] = '';
