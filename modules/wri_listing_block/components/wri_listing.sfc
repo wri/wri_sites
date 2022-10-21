@@ -10,7 +10,7 @@
 
     {% if content.header %}
     <div {{ region_attributes.header.addClass('layout__region', 'layout__region--header', 'top-border-thick', 'margin-bottom-md') }}>
-    <h2 class="{{ header_type }}">
+    <h2 class="{{ header_type }} margin-zero">
     {{ content.header }}
     </h2>
     {% if content.subheader %}
