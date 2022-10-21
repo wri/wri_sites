@@ -2,9 +2,16 @@
 
 namespace Drupal\wri_toc\Plugin\Field\FieldFormatter;
 
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\FormatterInterface;
+use Drupal\Core\Menu\MenuLinkManagerInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\node\NodeInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Plugin implementation of the 'TableOfContents' formatter.
@@ -17,7 +24,46 @@ use Drupal\Core\Form\FormStateInterface;
  *   }
  * )
  */
-class TableofcontentsFormatter extends FormatterBase {
+class TableofcontentsFormatter extends FormatterBase implements ContainerFactoryPluginInterface {
+  /**
+   * The route match.
+   *
+   * @var \Drupal\Core\Routing\RouteMatchInterface
+   */
+  protected $routeMatch;
+
+  /**
+   * The menu link manager.
+   *
+   * @var \Drupal\Core\Menu\MenuLinkManagerInterface
+   */
+  protected $linkManager;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct($plugin_id, $plugin_definition, FieldDefinitionInterface $field_definition, array $settings, $label, $view_mode, array $third_party_settings, RouteMatchInterface $route_match, MenuLinkManagerInterface $menu_link_manager) {
+    parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings);
+    $this->routeMatch = $route_match;
+    $this->linkManager = $menu_link_manager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $plugin_id,
+      $plugin_definition,
+      $configuration['field_definition'],
+      $configuration['settings'],
+      $configuration['label'],
+      $configuration['view_mode'],
+      $configuration['third_party_settings'],
+      $container->get('current_route_match'),
+      $container->get('plugin.manager.menu.link'),
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -25,7 +71,7 @@ class TableofcontentsFormatter extends FormatterBase {
   public static function defaultSettings() {
     return [
       'menu' => 'page-hierarchies',
-      'color_class' => 'black-bar'
+      'color_class' => 'black-bar',
     ] + parent::defaultSettings();
   }
 
@@ -64,18 +110,18 @@ class TableofcontentsFormatter extends FormatterBase {
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
     $value = $menu_link = $node_title = '';
-    foreach ($items as $delta => $item) {
+    foreach ($items as $item) {
       $value = $item->value;
 
-      $node = \Drupal::routeMatch()->getParameter('node');
-      if ($node instanceof \Drupal\node\NodeInterface) {
+      $node = $this->routeMatch->getParameter('node');
+      if ($node instanceof NodeInterface) {
         $node_title = $node->getTitle();
       }
       // Get the menu link of the current node.
-      if($value == 'menu' && $entity = $item->getEntity()) {
+      if ($value == 'menu' && $entity = $item->getEntity()) {
         $node_id = $item->getEntity()->id();
         if ($node_id) {
-          $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
+          $menu_link_manager = $this->linkManager;
           $menu_link = array_key_first($menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $node_id], $this->getSetting('menu')));
         }
       }
