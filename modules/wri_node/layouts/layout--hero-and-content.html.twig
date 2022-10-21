@@ -37,9 +37,7 @@
       {% endif %}
     </div>
   {% endif %}
-
-
-  {% if content.content|render is not empty and content.featured_image|render is not empty %}
+  {% if content.content|render is not empty or content.featured_image|render is not empty %}
     <div class="landing-page__content grid margin-top-md margin-bottom-md">
       {% if content.featured_image|render %}
         <div class="layout__region layout__region--featured-image">
