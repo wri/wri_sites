@@ -200,3 +200,9 @@
     line-height: rem(30);
   }
 }
+
+// Make text blocks match the font of their parent node.
+.block-inline-blocktext-block {
+  @include font($acumin-semi-cond, "light");
+  @include font-line-height(18, 30);
+}
