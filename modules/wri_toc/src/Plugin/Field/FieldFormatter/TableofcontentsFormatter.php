@@ -117,7 +117,7 @@ class TableofcontentsFormatter extends FormatterBase implements ContainerFactory
         $node_title = $node->getTitle();
       }
       // Get the menu link of the current node.
-      if ($value == 'menu' && $entity = $item->getEntity()) {
+      if ($value == 'menu' && $item->getEntity()) {
         $node_id = $item->getEntity()->id();
         if ($node_id) {
           $menu_link_manager = $this->linkManager;
