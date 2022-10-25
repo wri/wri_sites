@@ -29,7 +29,7 @@ class TokenizedLinkFieldFormatter extends LinkFormatter {
     $item_url = \Drupal::token()->replace($untokenized_url, [$entity->getEntityTypeId() => $entity], ['clear' => TRUE]);
     $url = Url::fromUri($item_url);
 
-    if (empty(\Drupal::hasService('wri_search.pretty_facets_helper'))) {
+    if (empty(\Drupal::hasService('wri_search.pretty_facets_helper')) || !$url->isRouted()) {
       return $url;
     }
 
