@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Update hooks for wri_article.
+ */
+
+/**
+ * Enable the wri_text_block module.
+ */
+function wri_common_update_9401() {
+  \Drupal::service('module_installer')->install(['wri_text_block'], TRUE);
+}
