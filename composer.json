@@ -76,6 +76,9 @@
     ],
     "extra": {
         "patches": {
+            "drupal/ckeditor": {
+                "Changes to a block's text field not saved when ckeditor source mode is active https://www.drupal.org/project/ckeditor/issues/3095304": "https://git.drupalcode.org/project/ckeditor/-/merge_requests/10.diff"
+            },
             "drupal/core": {
                 "Dynamic Views Arguments via Tokens https://www.drupal.org/project/drupal/issues/1699378": "https://www.drupal.org/files/issues/2021-12-21/1699378-235.patch",
                 "There is no way to delete or update file entities of other users incl. user/1":"https://www.drupal.org/files/issues/2019-12-12/2949017-59.patch",
@@ -204,6 +207,7 @@
         "drupal/hierarchical_term_formatter": "^1.2",
         "drupal/inline_entity_form": "^1.0@RC",
         "drupal/layout_builder_restrictions": "^2.12",
+        "drupal/layout_builder_modal": "^1.1",
         "drupal/link_attributes": "^1.11",
         "drupal/menu_block": "^1.7",
         "drupal/menu_position": "^1.0@beta",
