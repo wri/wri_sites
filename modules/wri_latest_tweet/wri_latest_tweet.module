@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for wri_latest_tweet module.
+ *
+ * @DCG
+ * This file is no longer required in Drupal 8.
+ * @see https://www.drupal.org/node/2217931
+ */
+
+/**
+ * Implements hook_preprocess_tweet().
+ */
+function wri_latest_tweet_preprocess_tweet(&$variables) {
+  $tweet = $variables['tweet'] = $variables['elements']['#tweet'] ?? [];
+
+  // Use our custom service to render the tweet so it can be centered and hide
+  // media elements.
+  if ($variables['elements']['#oembed'] ?? FALSE) {
+    $variables['oembed'] = \Drupal::service('wri_latest_tweet_block.twitter')
+      ->renderTweet($tweet);
+    $variables['#attached']['library'][] = 'twitter_api_block/embed';
+  }
+}

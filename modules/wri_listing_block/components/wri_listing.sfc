@@ -27,9 +27,9 @@
     </div>
     {% endif %}
 
-    {% if content.listing.field_listing %}
+    {% if content.listing %}
     <div {{ region_attributes.listing.addClass('layout__region', 'layout__region--listing') }}>
-    {{ content.listing.field_listing }}
+    {{ content.listing|without('field_more_link') }}
     </div>
     {% endif %}
 
