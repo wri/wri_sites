@@ -112,10 +112,10 @@ class WriAuthorCustomCommands extends DrushCommands {
           $author_one = WRIAuthor::load($duplicate_authors[0]);
           $author_two = WRIAuthor::load($duplicate_authors[1]);
           if ('internal' == $author_two->bundle()) {
-            $first_author_id = $duplicate_authors[1];
+            $internal_author_id = $duplicate_authors[1];
           }
           else {
-            $first_author_id = $duplicate_authors[0];
+            $internal_author_id = $duplicate_authors[0];
           }
         }
         else {
@@ -123,21 +123,21 @@ class WriAuthorCustomCommands extends DrushCommands {
         }
 
         foreach ($duplicate_authors as $author_id) {
-          // Load all the nodes referencing the bad id.
+          // Load all the nodes referencing the external id.
           $author_nodes = \Drupal::entityQuery('node')
             ->condition('field_authors', $author_id, 'IN')
             ->execute();
 
-          // Switch that bad id out with the good (first) id.
-          if ($author_nodes && ($author_id !== $first_author_id)) {
+          // Switch that external id out with the internal id.
+          if ($author_nodes && ($author_id !== $internal_author_id)) {
             foreach ($author_nodes as $node_id) {
               $node = Node::load($node_id);
               $author_list = $node->get('field_authors')->getValue();
               $key = array_search($author_id, array_column($author_list, 'target_id'));
               $node->get('field_authors')->removeItem($key);
-              $node->field_authors[] = ['target_id' => $first_author_id];
+              $node->field_authors[] = ['target_id' => $internal_author_id];
               $node->save();
-              echo 'First Author: ' . $first_author_id . '
+              echo 'Internal Author: ' . $internal_author_id . '
 ';
               echo 'Duplicate: ' . $author_id . '
 ';
@@ -147,10 +147,10 @@ class WriAuthorCustomCommands extends DrushCommands {
           }
           // Delete duplicate author.
           $excess_author = WRIAuthor::load($author_id);
-          if ($author_id !== $first_author_id) {
+          if ($author_id !== $internal_author_id) {
             echo 'Duplicate Deleted: ' . $author_id . '
 
-// ';
+';
             $excess_author->delete();
           }
         }
