@@ -159,16 +159,57 @@ class WriAuthorCustomCommands extends DrushCommands {
   }
 
   /**
-   * Drush command that deleted broken references.
+   * Drush command to delete broken author references.
    *
    * @command wri_author:delete-missing-references
    * @usage wri_author:delete-missing-references
    */
   public function deleteMissingReferences() {
     // Find any field_author values that reference non-existent authors.
-    // Load the node
-    // Remove the bad references.
-    // Save the node.
+    $author_list = \Drupal::entityQueryAggregate('wri_author')
+      ->groupBy('name')
+      ->conditionAggregate('name', 'COUNT', '1', '>')
+      ->execute();
+
+    // Get author IDs without a name.
+    foreach ($author_list as $author) {
+      if (!$author['name']) {
+        $empty_authors = \Drupal::entityQuery('wri_author')
+          ->condition('name', $author['name'])
+          ->range(0, 50)
+          ->execute();
+      }
+      // Remove authors from nodes/delete the author.
+      if ($empty_authors) {
+        foreach ($empty_authors as $author_id) {
+          // Load all the nodes referencing the id.
+          $author_nodes = \Drupal::entityQuery('node')
+            ->condition('field_authors', $author_id, 'IN')
+            ->execute();
+
+          // Remove the broken author ID from nodes.
+          if ($author_nodes) {
+            foreach ($author_nodes as $node_id) {
+              $node = Node::load($node_id);
+              $author_list = $node->get('field_authors')->getValue();
+              $key = array_search($author_id, array_column($author_list, 'target_id'));
+              $node->get('field_authors')->removeItem($key);
+              $node->save();
+              echo 'Empty Author ID: ' . $author_id . '
+';
+              echo 'Node Updated: ' . $node_id . '
+';
+            }
+          }
+          // Delete broken author.
+          $empty_author = WRIAuthor::load($author_id);
+          echo 'Empty Author Deleted: ' . $author_id . '
+
+';
+          $empty_author->delete();
+        }
+      }
+    }
   }
 
 }
