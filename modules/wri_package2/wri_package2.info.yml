@@ -16,3 +16,4 @@ dependencies:
   - wri_superfeatured
   - wri_unique_feature
   - wri_text_block
+  - wri_latest_tweet
