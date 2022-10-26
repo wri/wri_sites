@@ -24,7 +24,7 @@ third_party_settings:
       subheader:
         - field_intro
         - link_to_twitter
-      listing:
+      intro:
         - field_twitter_user
     fields:
       block_label:
@@ -62,7 +62,7 @@ content:
             lb-col: false
             classes: {  }
     weight: 0
-    region: listing
+    region: intro
 hidden:
   langcode: true
   search_api_excerpt: true
