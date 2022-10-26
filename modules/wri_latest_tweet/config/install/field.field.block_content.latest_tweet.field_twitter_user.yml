@@ -1,0 +1,19 @@
+uuid: 602bd728-0771-433b-8dac-748201e6f429
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.latest_tweet
+    - field.storage.block_content.field_twitter_user
+id: block_content.latest_tweet.field_twitter_user
+field_name: field_twitter_user
+entity_type: block_content
+bundle: latest_tweet
+label: 'Twitter timeline'
+description: "Add the name of the twitter feed whose most recent tweet you want to feature. Do not include an @ symbol, or the url. \r\nGood: worldresources\r\nBad: https://twitter.com/worldresources or @worldresources"
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,8 +1,7 @@
-name: wri_latest_tweet
+name: 'WRI Latest Tweet'
 type: module
-description: Pull in the latest tweet from a given twitter user timeline.
+description: 'Provides the latest tweet block'
+core_version_requirement: '^8.8.0 || ^9'
 package: WRI
-core: 8.x
-core_version_requirement: ^8 || ^9
 dependencies:
   - twitter_api_block
