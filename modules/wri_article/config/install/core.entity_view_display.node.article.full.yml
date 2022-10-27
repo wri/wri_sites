@@ -66,17 +66,12 @@ third_party_settings:
             uuid: 1318f40a-3bb2-4fd1-a9a2-bdb7dfc8734f
             region: content
             configuration:
-              id: 'related_resources_fallback'
+              id: related_resources_fallback
               label: 'Relevant Work'
-              provider: wri_block
               label_display: visible
-              formatter:
-                label: hidden
-                type: related_field_formatter
-                settings:
-                  view_mode: teaser
-                third_party_settings: {  }
-              context_mapping: { }
+              provider: wri_block
+              context_mapping: {  }
+            weight: -3
             additional: {  }
             weight: -5
         third_party_settings: {  }
