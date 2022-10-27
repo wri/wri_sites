@@ -23,3 +23,9 @@
 Create or update any site-level pull requests following [the documentation](https://github.com/wri/WRIN/wiki/WRI-Dev-Workflow-(Thinkshout)#generating-a-multidev-for-wri_sites-work-review)
 
 - [ ] Flagship PR:
+
+## Checked on develop (TA to do)
+<!-- a TA will pull the latest release to develop after this PR is merged, then do the update hooks and config import needed to apply this code to the site. -->
+- [ ] Brasil
+- [ ] China
+- [ ] Indonesia
