@@ -1,3 +1,5 @@
+# Do not delete the uuid for this view.
+uuid: ba985f1d-01bd-42cb-ab9c-1f4243795b9c
 langcode: en
 status: true
 dependencies:
@@ -25,7 +27,7 @@ display:
   default:
     display_plugin: default
     id: default
-    display_title: Master
+    display_title: Default
     position: 0
     display_options:
       access:

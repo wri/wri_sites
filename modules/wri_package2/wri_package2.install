@@ -2,12 +2,11 @@
 
 /**
  * @file
- * Install, update and uninstall hooks for the wri_sites install profile.
+ * Install, update and uninstall hooks for the wri_package2 install profile.
  */
 
 use Drupal\block_content\Entity\BlockContent;
 use Drupal\paragraphs\Entity\Paragraph;
-use Drupal\Core\Config\FileStorage;
 
 /**
  * Implements hook_install().
@@ -16,7 +15,7 @@ use Drupal\Core\Config\FileStorage;
  *
  * @see system_install()
  */
-function wri_sites_install() {
+function wri_package2_install() {
   \Drupal::configFactory()
     ->getEditable('user.settings')
     ->set('register', 'admin_only')
@@ -49,138 +48,6 @@ function wri_sites_install() {
   _install_io_and_country_blocks();
   _install_default_program_hero();
   _install_narrative_taxonomy();
-}
-
-/**
- * Enables the Happening Now module and gives it starter content.
- */
-function wri_sites_update_8901() {
-  \Drupal::service('module_installer')->install(['paragraphs']);
-  // Ensure the `field.storage.block_content.field_hero_type` config exists.
-  // Obtain configuration from yaml files.
-  $module_handler = \Drupal::service('module_handler');
-  $module_path    = $module_handler->getModule('wri_block')->getPath();
-  $config_path    = $module_path . '/config/install';
-  $source         = new FileStorage($config_path);
-
-  // Obtain the storage manager for field storage bases
-  // Create a new field from the yaml configuration and save.
-  \Drupal::entityTypeManager()->getStorage('field_storage_config')
-    ->create($source->read('field.storage.block_content.field_hero_type'))
-    ->save();
-
-  \Drupal::service('module_installer')->install(['wri_happening_now']);
-
-  _install_default_hero_block();
-}
-
-/**
- * Disables Gutenberg.
- */
-function wri_sites_update_8902() {
-  \Drupal::configFactory()->getEditable('filter.format.gutenberg')->delete();
-
-  // Get the editable storage for all filters.
-  \Drupal::configFactory()
-    ->getEditable('filter.format.basic_html')->delete();
-
-  \Drupal::configFactory()
-    ->getEditable('filter.format.plain_text')->delete();
-
-  \Drupal::configFactory()->getEditable('editor.editor.gutenberg')->delete();
-
-  // Uninstall the module.
-  \Drupal::service('module_installer')->uninstall(['gutenberg']);
-}
-
-/**
- * Adds a default listing blocks for regions.
- */
-function wri_sites_update_8903() {
-  _install_io_and_country_blocks();
-}
-
-/**
- * Adds a default hero blocks for programs.
- */
-function wri_sites_update_8904() {
-  _install_default_program_hero();
-}
-
-/**
- * Adds a default narrative taxonomy blocks for programs.
- */
-function wri_sites_update_8905() {
-  // If there's not already a block with revision_id 100482, create it.
-  $existing_block = \Drupal::entityTypeManager()
-    ->getStorage('block_content')
-    ->loadRevision(100482);
-
-  if (!$existing_block) {
-    _install_narrative_taxonomy();
-  }
-}
-
-/**
- * Updates the revisionid of the hero block, if it does not match.
- */
-function wri_sites_update_8906() {
-  $existing_block = \Drupal::entityTypeManager()
-    ->getStorage('block_content')
-    ->loadRevision(100070);
-
-  if (!$existing_block) {
-    _install_default_program_hero();
-  }
-}
-
-/**
- * Updates the theme to have a white logo field.
- */
-function wri_sites_update_8907() {
-  $config_factory = \Drupal::configFactory();
-  $config = $config_factory->getEditable('ts_wrin.settings');
-
-  if (empty($config->getRawData()['white_logo'])) {
-    $white_logo = [
-      'use_default' => 0,
-      'path' => 'profiles/contrib/wri_sites/themes/custom/ts_wrin/img/svgs/nav_logo_white.svg',
-    ];
-
-    $config->set('white_logo', $white_logo);
-
-    $config->save(TRUE);
-    $message = 'Updated the theme settings to ask for a white logo, and set the default';
-    return $message;
-  }
-}
-
-/**
- * Installs the distro_helper module.
- */
-function wri_sites_update_8908() {
-  \Drupal::service('module_installer')->install(['distro_helper']);
-}
-
-/**
- * Clear cached entity definitions to remove reporting errors.
- */
-function wri_sites_update_9100() {
-
-  $entity_type_manager = \Drupal::entityTypeManager();
-  $entity_type_manager->clearCachedDefinitions();
-
-  $entity_type_ids = [];
-  $change_summary = \Drupal::service('entity.definition_update_manager')->getChangeSummary();
-  foreach ($change_summary as $entity_type_id => $change_list) {
-    $entity_type = $entity_type_manager->getDefinition($entity_type_id);
-    \Drupal::entityDefinitionUpdateManager()->installEntityType($entity_type);
-    $entity_type_ids[] = $entity_type_id;
-  }
-
-  return t("Installed/Updated the entity type(s): @entity_type_ids", [
-    '@entity_type_ids' => implode(', ', $entity_type_ids),
-  ]);
 }
 
 /**

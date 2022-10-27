@@ -24,5 +24,7 @@ Create or update any site-level pull requests following [the documentation](http
 
 - [ ] Flagship PR:
 - [ ] China PR:
+- [ ] Brasil PR:
+- [ ] Indonesia PR:
 
 <!-- add more environments to this section in the future -->

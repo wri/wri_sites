@@ -26,24 +26,21 @@ dependencies:
     - node.type.data
   module:
     - ctools
-    - element_class_formatter
-    - field_group
     - layout_builder
     - layout_builder_restrictions
     - layout_discovery
-    - taxonomy
-    - text
     - user
     - wri_block
 third_party_settings:
   layout_builder:
-    allow_custom: true
     enabled: true
+    allow_custom: true
     sections:
       -
         layout_id: layout_onecol
         layout_settings:
           label: ''
+          context_mapping: {  }
         components:
           9533b12c-7cef-4495-ae2f-445d3f4efd9d:
             uuid: 9533b12c-7cef-4495-ae2f-445d3f4efd9d
@@ -51,70 +48,62 @@ third_party_settings:
             configuration:
               id: 'field_block:node:data:field_primary_contacts'
               label: 'Primary contacts'
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: above
-                type: entity_reference_entity_view
-                settings:
-                  view_mode: teaser
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: teaser
+                third_party_settings: {  }
             weight: -7
+            additional: {  }
           00f1ffd1-da77-4d4b-9cc3-d1487d936958:
             uuid: 00f1ffd1-da77-4d4b-9cc3-d1487d936958
             region: content
             configuration:
               id: 'field_block:node:data:field_projects'
               label: 'Projects that Include this Data Set'
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: above
-                type: entity_reference_entity_view
-                settings:
-                  view_mode: card
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: card
+                third_party_settings: {  }
             weight: -8
+            additional: {  }
           3e34bc2c-8a93-47b9-9743-407f22f313c4:
             uuid: 3e34bc2c-8a93-47b9-9743-407f22f313c4
             region: content
             configuration:
-              id: 'field_block:node:data:field_related_resources'
+              id: related_resources_fallback
               label: 'Related to this Resource'
-              provider: layout_builder
               label_display: visible
-              formatter:
-                label: hidden
-                type: related_field_formatter
-                settings:
-                  view_mode: teaser
-                third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
+              provider: wri_block
+              context_mapping: {  }
             weight: -9
+            additional: {  }
           896827be-fa61-4dbd-a2b5-9d3152d11ff0:
             uuid: 896827be-fa61-4dbd-a2b5-9d3152d11ff0
             region: content
             configuration:
               id: 'entity_view:node'
               label: 'Entity view (Content)'
-              provider: ctools
               label_display: '0'
+              provider: ctools
               view_mode: main_content
               context_mapping:
                 entity: layout_builder.entity
-            additional: {  }
             weight: -10
+            additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories:
@@ -132,15 +121,18 @@ third_party_settings:
       - System
       - User
       - 'WRI block'
+      - Webform
       - core
     entity_view_mode_restriction:
-      whitelisted_blocks:
+      allowed_layouts:
+        - layout_onecol
+      denylisted_blocks: {  }
+      allowlisted_blocks:
         'Chaos Tools':
           - 'entity_view:node'
         Components: {  }
         'Content fields':
           - 'field_block:node:data:field_projects'
-          - 'field_block:node:data:field_related_resources'
         Facets: {  }
         'Facets summary (Experimental)': {  }
         Forms: {  }
@@ -149,126 +141,31 @@ third_party_settings:
         Menus: {  }
         System: {  }
         User: {  }
-        'WRI block': {  }
+        'WRI block':
+          - related_resources_fallback
         core: {  }
-      blacklisted_blocks: {  }
-      allowed_layouts:
-        - layout_onecol
-  field_group:
-    group_image:
-      children: {  }
-      parent_name: ''
-      weight: 20
-      format_type: details_sidebar
-      region: hidden
-      format_settings:
-        id: ''
-        classes: ''
-        description: ''
-        open: false
-        weight: 0
-        required_fields: false
-      label: Image
+      restricted_categories:
+        - Devel
+        - 'WRI Data Viz'
+        - 'WRI External Publications'
+        - Webform
 id: node.data.full
 targetEntityType: node
 bundle: data
 mode: full
 content:
-  body:
-    label: hidden
-    type: text_default
-    weight: 8
+  content_moderation_control:
     settings: {  }
     third_party_settings: {  }
-    region: content
-  content_moderation_control:
     weight: -20
     region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_featured_project:
-    weight: 109
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_intro:
-    weight: 1
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    type: text_default
-    region: hero_image
-  field_primary_contacts:
-    weight: 108
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_primary_topic:
-    type: entity_reference_rss_category
-    weight: 4
-    region: content
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-  field_projects:
-    label: above
-    type: entity_reference_entity_view
-    settings:
-      view_mode: card
-      link: false
-    third_party_settings: {  }
-    weight: 110
-    region: content
-  field_region:
-    type: entity_reference_rss_category
-    weight: 5
-    region: content
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-  field_related_resources:
-    label: hidden
-    type: related_field_formatter
-    settings:
-      view_mode: teaser
-      link: false
-    third_party_settings: {  }
-    weight: 111
-    region: content
-  field_twitter_account:
-    weight: 102
-    label: above
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-    type: link
-    region: content
-  field_type:
-    type: entity_reference_label_class
-    weight: 2
-    region: hero_text
-    label: hidden
-    settings:
-      class: ''
-      link: true
-      tag: ''
-    third_party_settings: {  }
   links:
+    settings: {  }
+    third_party_settings: {  }
     weight: 100
     region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
+  body: true
   changed: true
   default_langcode: true
   field_authors: true
@@ -278,6 +175,7 @@ hidden:
   field_featured_headline: true
   field_featured_text: true
   field_files: true
+  field_intro: true
   field_isbn: true
   field_lead_in: true
   field_license: true
@@ -286,9 +184,15 @@ hidden:
   field_metatags: true
   field_narrative_taxonomy: true
   field_platform_link: true
+  field_primary_contacts: true
+  field_primary_topic: true
+  field_projects: true
+  field_region: true
+  field_related_resources: true
   field_statistics: true
   field_tags: true
   field_total_pages: true
+  field_type: true
   langcode: true
   layout_builder__layout: true
   nid: true

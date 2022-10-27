@@ -107,7 +107,6 @@
   padding-right: 1em;
   position: relative;
   width: 100%;
-
   color: #777;
   overflow: hidden;
   word-break: break-all;
@@ -119,7 +118,6 @@
   top: 0;
   right: 1em;
   width: 3em;
-
   background: #fff;
   background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, #fff 100%);
 }
@@ -143,7 +141,7 @@
 
 /* Hide the 'Edit' button on the Hero paragraph selector -- it makes no sense. */
 #drupal-off-canvas input[data-drupal-selector='edit-settings-block-form-field-hero-type-entities-0-actions-ief-entity-edit'].button {
-   display: none;
+  display: none;
 }
 
 #drupal-off-canvas .dropbutton-multiple .dropbutton-widget {
@@ -177,5 +175,5 @@
 }
 
 form .fieldset {
-  border: 1px solid #FFFFFF;
+  border: 1px solid #ffffff;
 }

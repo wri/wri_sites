@@ -35,8 +35,7 @@
     }
 
     .category-wrapper,
-    .article-date,
-    .article-page-count {
+    .article-date {
       display: block;
       margin-bottom: $space-xs;
       margin-right: $space-xs;
@@ -62,12 +61,6 @@
   .article-page-count {
     @include font($acumin-semi-cond, light);
     @include font-line-height(16, 23);
-  }
-
-  .article-page-count {
-    &::after {
-      content: " Pages";
-    }
   }
 
   .category-wrapper.topic-tag-wrapper {

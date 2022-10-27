@@ -12,10 +12,10 @@ use Drupal\Component\Utility\Html;
 use Drupal\wri_node\General;
 
 /**
- * Implements hook_preprocess_region() *.html.twig.
+ * Implements hook_preprocess().
  */
 function ts_wrin_preprocess(array &$variables) {
-  if (null != theme_get_setting('white_logo.path')) {
+  if (NULL != theme_get_setting('white_logo.path')) {
     $logo_path = theme_get_setting('white_logo.path');
     $variables['footer_logo'] = \Drupal::service('file_url_generator')->transformRelative(file_create_url($logo_path));
   }
@@ -27,7 +27,7 @@ function ts_wrin_preprocess(array &$variables) {
 function ts_wrin_preprocess_html(array &$variables) {
   // Adds a URL query (?show-grid=1) that makes the theming grid guide visible.
   $variables['show_grid'] = \Drupal::request()->query->get('show-grid');
-  $current_classes = isset($variables['attributes']['class']) ? $variables['attributes']['class'] : [];
+  $current_classes = $variables['attributes']['class'] ?? [];
   // Is field_transparent_header checked?
   $variables['attributes']['class'] = array_merge($current_classes, General::$htmlClasses);
 
@@ -131,7 +131,16 @@ function ts_wrin_preprocess_page(array &$variables) {
  * Implements hook_theme_suggestions_page_alter().
  */
 function ts_wrin_theme_suggestions_page_alter(array &$suggestions, array $variables) {
-
+  // Allow page-level template suggestions.
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    $suggestions[] = 'page__' . $node->bundle();
+  }
+  if (isset($node->field_parent_page)) {
+    $parent = $node->field_parent_page->entity;
+    if ($parent && 'microsite' == $parent->bundle()) {
+      $suggestions[] = 'page__microsite';
+    }
+  }
 }
 
 /**
@@ -155,10 +164,9 @@ function ts_wrin_preprocess_field(array &$variables) {
     $variables["attributes"]["class"][] = 'block';
   }
   // Add 'Show More Link' value to Featured Experts field.
-
   if ($variables['element']['#field_name'] == 'field_featured_experts') {
     $node = \Drupal::routeMatch()->getParameter('node');
-    if ($node instanceof \Drupal\node\NodeInterface && $node->field_show_more_link) {
+    if ($node instanceof NodeInterface && $node->field_show_more_link) {
       $variables["show_more_link"] = $node->field_show_more_link->value;
     }
   }
@@ -192,9 +200,13 @@ function ts_wrin_preprocess_block(array &$variables) {
     $variables['attributes']['class'][] = Html::getClass($variables["content"][0]["#field_name"]);
   }
 
-  if (null != theme_get_setting('white_logo.path')) {
+  if (NULL != theme_get_setting('white_logo.path')) {
     $logo_path = theme_get_setting('white_logo.path');
     $variables['white_logo'] = \Drupal::service('file_url_generator')->transformRelative(file_create_url($logo_path));
+  }
+
+  if ($variables['plugin_id'] == 'inline_block:person_listing') {
+    $variables["content"]["field_featured_experts"]["#title"] = $variables["elements"]["#configuration"]["label"];
   }
 }
 

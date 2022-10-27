@@ -1,5 +1,5 @@
 <template>
-  <button class="tray-toggle language-toggle" aria-label="Toggle Language Menu" title="Language Menu" data-tray="language-tray">
+  <button class="tray-toggle language-toggle" aria-label="{{ 'Toggle Language Menu'|t }}" title="{{ 'Language Menu'|t }}" data-tray="language-tray">
 <!-- Generator: Adobe Illustrator 25.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 
 <svg viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">

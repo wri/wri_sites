@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Install and update hooks for wri_program.
+ * Update hooks for wri_program.
  */
 
 /**
@@ -14,11 +14,20 @@ function wri_program_update_9301() {
   \Drupal::service('distro_helper.updates')->installConfig('field.field.node.program_center.field_show_more_link', 'wri_program');
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.node.program_center.default', 'wri_program', 'install', 'TRUE');
 
-
   $message = 'Add the Show More Link? field.';
-   return $message;
+  return $message;
 }
 
+/**
+ * Update the program display configs to remove blazy.
+ */
+function wri_program_update_9302() {
+
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.card', 'wri_program', 'install', 'TRUE');
+
+  $message = 'Remove blazy, responsive image';
+  return $message;
+}
 
 /**
  * Implements hook_update_dependencies().

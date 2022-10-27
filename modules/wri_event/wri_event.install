@@ -1,36 +1,29 @@
 <?php
+
 /**
- * Provide a different sort on past events than future events.
+ * @file
+ * Event install hooks.
  */
-function wri_event_update_8901() {
-  // Update the views.view.events view.
-  // $config_factory = \Drupal::configFactory();
 
-  // // Load the view.
-  // $view = $config_factory->getEditable('views.view.events');
+/**
+ * Update the event display configs to remove blazy.
+ */
+function wri_event_update_9301() {
 
-  // // Go through each display on each view.
-  // $displays = $view->get('display');
-  // foreach ($displays as $display_name => $display) {
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.event.card', 'wri_event', 'install', 'TRUE');
 
-  //   $base = "display.$display_name.display_options";
-  //   // Go through all the entity fields on each display and find ones currently using 'date' as the plugin.
-  //   if (!empty($display['display_options'])) {
-  //     // Make sure the comment is added.
-  //     $view->set($base . '.display_comment', 'This view is altered by the wri_event_views_query_alter function, which sets the order do "DESC" if the "View Past Events" option is chosen.');
-  //   }
-  //   if (!empty($display['display_options']['sorts']['field_date_time'])) {
-  //     // Make sure the sort is ASC.
+  $message = 'Remove blazy, responsive image';
+  return $message;
+}
 
-  //     $view->set($base . '.sorts.field_date_time.order', 'ASC');
-  //   }
-  // }
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_event_update_dependencies() {
+  // We must have the distro_helper module before we can run the 9301 update.
+  $dependencies['wri_event'][9301] = [
+    'wri_sites' => 8908,
+  ];
 
-  // $view->save(TRUE);
-  // // Compose a message about what was done.
-  // // Omitted in this example.
-  // $message = 'Updated the Events view to sort past events DESC and future events ASC.';
-  // return $message;
-
-  print 'Commenting out for now due to causing issue with config import.';
+  return $dependencies;
 }
