@@ -86,7 +86,10 @@ class RelatedResourcesFallback extends BlockBase implements ContainerFactoryPlug
       else {
         $build['#title'] = '';
       }
-      return $build;
+      if (isset($build[0]) || isset($build["#rows"][0]["#rows"][0])) {
+        // Only build blocks with stuff in them.
+        return $build;
+      }
     }
     return [];
   }
