@@ -4,12 +4,26 @@ namespace Drupal\wri_author\Commands;
 
 use Drush\Commands\DrushCommands;
 use Drupal\wri_author\Entity\WRIAuthor;
-use Drupal\node\Entity\Node;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 
 /**
  * Drush commands for cleaning up wri_author references.
  */
 class WriAuthorCustomCommands extends DrushCommands {
+
+  /**
+   * An instance of the entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
+    $this->entityTypeManager = $entity_type_manager;
+  }
 
   /**
    * Drush command that consolidates authors by type.
@@ -25,17 +39,18 @@ class WriAuthorCustomCommands extends DrushCommands {
   public function mergeAuthorsByType($type = 'internal', $number = 5) {
     // Find any authors that have the same name, within bundle.
     // SELECT name FROM wri_author_field_data GROUP BY name HAVING count(name)>1
-    $query = \Drupal::entityQueryAggregate('wri_author')
-      ->groupBy('name')
+    $query = $this->entityTypeManager->getStorage('wri_author')->getAggregateQuery();
+    $author_list = $query->groupBy('name')
       ->condition('type', $type)
       ->conditionAggregate('name', 'COUNT', '1', '>')
-      ->range(0, $number);
-    $author_list = $query->execute();
+      ->range(0, $number)
+      ->execute();
 
     // Get duplicate author IDs by type.
     foreach ($author_list as $author) {
       if ($author['name']) {
-        $duplicate_authors = \Drupal::entityQuery('wri_author')
+        $query = $this->entityTypeManager->getStorage('wri_author');
+        $duplicate_authors = $query->getQuery()
           ->condition('type', $type)
           ->condition('name', $author['name'])
           ->execute();
@@ -46,14 +61,16 @@ class WriAuthorCustomCommands extends DrushCommands {
 
         foreach ($duplicate_authors as $author_id) {
           // Load all the nodes referencing the bad id.
-          $author_nodes = \Drupal::entityQuery('node')
+          $query = $this->entityTypeManager->getStorage('node');
+          $author_nodes = $query->getQuery()
             ->condition('field_authors', $author_id, 'IN')
             ->execute();
 
           // Switch that bad id out with the good (first) id.
           if ($author_nodes && ($author_id !== $first_author_id)) {
             foreach ($author_nodes as $node_id) {
-              $node = Node::load($node_id);
+              $node_storage = $this->entityTypeManager->getStorage('node');
+              $node = $node_storage->load($node_id);
               $author_list = $node->get('field_authors')->getValue();
               $key = array_search($author_id, array_column($author_list, 'target_id'));
               $node->get('field_authors')->removeItem($key);
@@ -92,8 +109,8 @@ class WriAuthorCustomCommands extends DrushCommands {
   public function mergeAuthors($number = 50) {
     // Find any authors that have the same name, within bundle.
     // SELECT name FROM wri_author_field_data GROUP BY name HAVING count(name)>1
-    $author_list = \Drupal::entityQueryAggregate('wri_author')
-      ->groupBy('name')
+    $query = $this->entityTypeManager->getStorage('wri_author')->getAggregateQuery();
+    $author_list = $query->groupBy('name')
       ->conditionAggregate('name', 'COUNT', '1', '>')
       ->range(0, $number)
       ->execute();
@@ -101,7 +118,8 @@ class WriAuthorCustomCommands extends DrushCommands {
     // Get duplicate author IDs by type.
     foreach ($author_list as $author) {
       if ($author['name']) {
-        $duplicate_authors = \Drupal::entityQuery('wri_author')
+        $query = $this->entityTypeManager->getStorage('wri_author');
+        $duplicate_authors = $query->getQuery()
           ->condition('name', $author['name'])
           ->execute();
       }
@@ -109,7 +127,6 @@ class WriAuthorCustomCommands extends DrushCommands {
       if ($duplicate_authors) {
         if (2 == count($duplicate_authors)) {
           $duplicate_authors = array_values($duplicate_authors);
-          $author_one = WRIAuthor::load($duplicate_authors[0]);
           $author_two = WRIAuthor::load($duplicate_authors[1]);
           if ('internal' == $author_two->bundle()) {
             $internal_author_id = $duplicate_authors[1];
@@ -124,14 +141,16 @@ class WriAuthorCustomCommands extends DrushCommands {
 
         foreach ($duplicate_authors as $author_id) {
           // Load all the nodes referencing the external id.
-          $author_nodes = \Drupal::entityQuery('node')
+          $query = $this->entityTypeManager->getStorage('node');
+          $author_nodes = $query->getQuery()
             ->condition('field_authors', $author_id, 'IN')
             ->execute();
 
           // Switch that external id out with the internal id.
           if ($author_nodes && ($author_id !== $internal_author_id)) {
             foreach ($author_nodes as $node_id) {
-              $node = Node::load($node_id);
+              $node_storage = $this->entityTypeManager->getStorage('node');
+              $node = $node_storage->load($node_id);
               $author_list = $node->get('field_authors')->getValue();
               $key = array_search($author_id, array_column($author_list, 'target_id'));
               $node->get('field_authors')->removeItem($key);
@@ -166,15 +185,16 @@ class WriAuthorCustomCommands extends DrushCommands {
    */
   public function deleteMissingReferences() {
     // Find any field_author values that reference non-existent authors.
-    $author_list = \Drupal::entityQueryAggregate('wri_author')
-      ->groupBy('name')
+    $query = $this->entityTypeManager->getStorage('wri_author')->getAggregateQuery();
+    $author_list = $query->groupBy('name')
       ->conditionAggregate('name', 'COUNT', '1', '>')
       ->execute();
 
     // Get author IDs without a name.
     foreach ($author_list as $author) {
       if (!$author['name']) {
-        $empty_authors = \Drupal::entityQuery('wri_author')
+        $query = $this->entityTypeManager->getStorage('wri_author');
+        $empty_authors = $query->getQuery()
           ->condition('name', $author['name'])
           ->range(0, 50)
           ->execute();
@@ -183,14 +203,16 @@ class WriAuthorCustomCommands extends DrushCommands {
       if ($empty_authors) {
         foreach ($empty_authors as $author_id) {
           // Load all the nodes referencing the id.
-          $author_nodes = \Drupal::entityQuery('node')
+          $query = $this->entityTypeManager->getStorage('node');
+          $author_nodes = $query->getQuery()
             ->condition('field_authors', $author_id, 'IN')
             ->execute();
 
           // Remove the broken author ID from nodes.
           if ($author_nodes) {
             foreach ($author_nodes as $node_id) {
-              $node = Node::load($node_id);
+              $node_storage = $this->entityTypeManager->getStorage('node');
+              $node = $node_storage->load($node_id);
               $author_list = $node->get('field_authors')->getValue();
               $key = array_search($author_id, array_column($author_list, 'target_id'));
               $node->get('field_authors')->removeItem($key);
@@ -200,13 +222,15 @@ class WriAuthorCustomCommands extends DrushCommands {
               echo 'Node Updated: ' . $node_id . '
 ';
             }
-          }
-          // Delete broken author.
-          $empty_author = WRIAuthor::load($author_id);
-          echo 'Empty Author Deleted: ' . $author_id . '
+            // Delete broken author.
+            $empty_author = WRIAuthor::load($author_id);
+            if (isset($empty_author)) {
+              echo 'Empty Author Deleted: ' . $author_id . '
 
 ';
-          $empty_author->delete();
+              $empty_author->delete();
+            }
+          }
         }
       }
     }
