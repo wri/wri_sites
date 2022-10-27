@@ -71,7 +71,6 @@ third_party_settings:
               label_display: visible
               provider: wri_block
               context_mapping: {  }
-            weight: -3
             additional: {  }
             weight: -5
         third_party_settings: {  }
