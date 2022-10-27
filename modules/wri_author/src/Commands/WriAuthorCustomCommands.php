@@ -25,12 +25,12 @@ class WriAuthorCustomCommands extends DrushCommands {
   public function mergeAuthorsByType($type = 'internal', $number = 5) {
     // Find any authors that have the same name, within bundle.
     // SELECT name FROM wri_author_field_data GROUP BY name HAVING count(name)>1
-    $author_list = \Drupal::entityQueryAggregate('wri_author')
+    $query = \Drupal::entityQueryAggregate('wri_author')
       ->groupBy('name')
       ->condition('type', $type)
       ->conditionAggregate('name', 'COUNT', '1', '>')
-      ->range(0, $number)
-      ->execute();
+      ->range(0, $number);
+    $author_list = $query->execute();
 
     // Get duplicate author IDs by type.
     foreach ($author_list as $author) {
