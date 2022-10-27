@@ -47,17 +47,6 @@ third_party_settings:
         layout_settings:
           label: ''
         components:
-          1b1b039f-13a9-4b80-bc51-ddce8d62c0a2:
-            uuid: 1b1b039f-13a9-4b80-bc51-ddce8d62c0a2
-            region: content
-            configuration:
-              id: related_resources_fallback
-              label: 'Related to this Event'
-              label_display: visible
-              provider: wri_block
-              context_mapping: {  }
-            weight: -9
-            additional: {  }
           440300b2-4b41-4061-9a83-96c5fd87f8a0:
             uuid: 440300b2-4b41-4061-9a83-96c5fd87f8a0
             region: content
@@ -130,12 +119,31 @@ third_party_settings:
             uuid: 4afeb9ae-b988-4507-92d3-521af213474a
             region: content
             configuration:
+              id: 'extra_field_block:node:event:content_moderation_control'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'extra_field_block:node:event:content_moderation_control'
-            additional: {  }
             weight: -4
+            additional: {  }
+          fa953d7a-54c8-4b9e-9d26-2fc96dc923be:
+            uuid: fa953d7a-54c8-4b9e-9d26-2fc96dc923be
+            region: content
+            configuration:
+              id: 'field_block:node:event:field_related_resources'
+              label: 'Related to this Event'
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: teaser
+                third_party_settings: {  }
+            weight: -9
+            additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories: {  }
@@ -150,6 +158,7 @@ third_party_settings:
         'Content fields':
           - 'field_block:node:event:field_primary_contacts'
           - 'field_block:node:event:field_related_events'
+          - 'field_block:node:event:field_related_resources'
         Devel: {  }
         Facets: {  }
         'Facets summary (Experimental)': {  }
