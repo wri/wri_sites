@@ -23,8 +23,3 @@
 Create or update any site-level pull requests following [the documentation](https://github.com/wri/WRIN/wiki/WRI-Dev-Workflow-(Thinkshout)#generating-a-multidev-for-wri_sites-work-review)
 
 - [ ] Flagship PR:
-- [ ] China PR:
-- [ ] Brasil PR:
-- [ ] Indonesia PR:
-
-<!-- add more environments to this section in the future -->
