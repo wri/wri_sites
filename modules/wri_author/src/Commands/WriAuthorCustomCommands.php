@@ -57,42 +57,10 @@ class WriAuthorCustomCommands extends DrushCommands {
       }
       // Set all references to that author to the first result, i.e.:
       if ($duplicate_authors) {
-        $first_author_id = array_shift(array_slice($duplicate_authors, 0, 1));
+        $primary_author_id = array_shift(array_slice($duplicate_authors, 0, 1));
 
-        foreach ($duplicate_authors as $author_id) {
-          // Load all the nodes referencing the bad id.
-          $query = $this->entityTypeManager->getStorage('node');
-          $author_nodes = $query->getQuery()
-            ->condition('field_authors', $author_id, 'IN')
-            ->execute();
-
-          // Switch that bad id out with the good (first) id.
-          if ($author_nodes && ($author_id !== $first_author_id)) {
-            foreach ($author_nodes as $node_id) {
-              $node_storage = $this->entityTypeManager->getStorage('node');
-              $node = $node_storage->load($node_id);
-              $author_list = $node->get('field_authors')->getValue();
-              $key = array_search($author_id, array_column($author_list, 'target_id'));
-              $node->get('field_authors')->removeItem($key);
-              $node->field_authors[] = ['target_id' => $first_author_id];
-              $node->save();
-              echo 'First Author: ' . $first_author_id . '
-';
-              echo 'Duplicate: ' . $author_id . '
-';
-              echo 'Node Updated: ' . $node_id . '
-';
-            }
-          }
-          // Delete duplicate author.
-          $excess_author = WRIAuthor::load($author_id);
-          if ($author_id !== $first_author_id) {
-            echo 'Duplicate Deleted: ' . $author_id . '
-
-';
-            $excess_author->delete();
-          }
-        }
+        // Helper function to replace & remove duplicate authors.
+        $this->replaceDuplicateAuthors($duplicate_authors, $primary_author_id);
       }
     }
   }
@@ -123,56 +91,24 @@ class WriAuthorCustomCommands extends DrushCommands {
           ->condition('name', $author['name'])
           ->execute();
       }
-      // Prefer the internal author:
+      // Set the internal author as primary:
       if ($duplicate_authors) {
         if (2 == count($duplicate_authors)) {
           $duplicate_authors = array_values($duplicate_authors);
           $author_two = WRIAuthor::load($duplicate_authors[1]);
           if ('internal' == $author_two->bundle()) {
-            $internal_author_id = $duplicate_authors[1];
+            $primary_author_id = $duplicate_authors[1];
           }
           else {
-            $internal_author_id = $duplicate_authors[0];
+            $primary_author_id = $duplicate_authors[0];
           }
         }
         else {
           return;
         }
 
-        foreach ($duplicate_authors as $author_id) {
-          // Load all the nodes referencing the external id.
-          $query = $this->entityTypeManager->getStorage('node');
-          $author_nodes = $query->getQuery()
-            ->condition('field_authors', $author_id, 'IN')
-            ->execute();
-
-          // Switch that external id out with the internal id.
-          if ($author_nodes && ($author_id !== $internal_author_id)) {
-            foreach ($author_nodes as $node_id) {
-              $node_storage = $this->entityTypeManager->getStorage('node');
-              $node = $node_storage->load($node_id);
-              $author_list = $node->get('field_authors')->getValue();
-              $key = array_search($author_id, array_column($author_list, 'target_id'));
-              $node->get('field_authors')->removeItem($key);
-              $node->field_authors[] = ['target_id' => $internal_author_id];
-              $node->save();
-              echo 'Internal Author: ' . $internal_author_id . '
-';
-              echo 'Duplicate: ' . $author_id . '
-';
-              echo 'Node Updated: ' . $node_id . '
-';
-            }
-          }
-          // Delete duplicate author.
-          $excess_author = WRIAuthor::load($author_id);
-          if ($author_id !== $internal_author_id) {
-            echo 'Duplicate Deleted: ' . $author_id . '
-
-';
-            $excess_author->delete();
-          }
-        }
+        // Helper function to replace & remove duplicate authors.
+        $this->replaceDuplicateAuthors($duplicate_authors, $primary_author_id);
       }
     }
   }
@@ -217,21 +153,57 @@ class WriAuthorCustomCommands extends DrushCommands {
               $key = array_search($author_id, array_column($author_list, 'target_id'));
               $node->get('field_authors')->removeItem($key);
               $node->save();
-              echo 'Empty Author ID: ' . $author_id . '
-';
-              echo 'Node Updated: ' . $node_id . '
-';
+              echo "Empty Author ID: " . $author_id . "\n";
+              echo "Node Updated: " . $node_id . "\n";
             }
             // Delete broken author.
             $empty_author = WRIAuthor::load($author_id);
             if (isset($empty_author)) {
-              echo 'Empty Author Deleted: ' . $author_id . '
-
-';
+              echo "Empty Author Deleted: " . $author_id . "\n\n";
               $empty_author->delete();
             }
           }
         }
+      }
+    }
+  }
+
+  /**
+   * Replaces duplicate author IDs with a designated 'primary' ID.
+   *
+   * @param array $duplicate_authors
+   *   The array of duplicate author IDs.
+   * @param string $primary_author_id
+   *   The Author ID designated as primary.
+   */
+  public function replaceDuplicateAuthors(array $duplicate_authors, $primary_author_id) {
+    foreach ($duplicate_authors as $author_id) {
+      // Load all the nodes referencing $author_id.
+      $query = $this->entityTypeManager->getStorage('node');
+      $author_nodes = $query->getQuery()
+        ->condition('field_authors', $author_id, 'IN')
+        ->execute();
+
+      // Switch duplicate ids out with the primary id.
+      if ($author_nodes && ($author_id !== $primary_author_id)) {
+        foreach ($author_nodes as $node_id) {
+          $node_storage = $this->entityTypeManager->getStorage('node');
+          $node = $node_storage->load($node_id);
+          $author_list = $node->get('field_authors')->getValue();
+          $key = array_search($author_id, array_column($author_list, 'target_id'));
+          $node->get('field_authors')->removeItem($key);
+          $node->field_authors[] = ['target_id' => $primary_author_id];
+          $node->save();
+          echo "Primary Author: " . $primary_author_id . "\n";
+          echo "Duplicate: " . $author_id . "\n";
+          echo "Node Updated: " . $node_id . "\n";
+        }
+      }
+      // Delete duplicate author.
+      $excess_author = WRIAuthor::load($author_id);
+      if ($author_id !== $primary_author_id) {
+        echo "Duplicate Deleted: " . $author_id . "\n\n";
+        $excess_author->delete();
       }
     }
   }
