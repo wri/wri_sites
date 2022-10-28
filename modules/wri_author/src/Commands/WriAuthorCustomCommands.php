@@ -191,8 +191,7 @@ class WriAuthorCustomCommands extends DrushCommands {
           $node = $node_storage->load($node_id);
           $author_list = $node->get('field_authors')->getValue();
           $key = array_search($author_id, array_column($author_list, 'target_id'));
-          $node->get('field_authors')->removeItem($key);
-          $node->field_authors[] = ['target_id' => $primary_author_id];
+          $node->field_authors[$key] = ['target_id' => $primary_author_id];
           $node->save();
           echo "Primary Author: " . $primary_author_id . "\n";
           echo "Duplicate: " . $author_id . "\n";
