@@ -41,7 +41,7 @@ class LatesttweetFormatter extends FormatterBase {
           'sort_order' => 'recency',
         ],
         'cache' => [
-          'max_age' => 1,
+          'max_age' => 3600,
         ]
       ];
       $plugin_block = $block_manager->createInstance('twitter_api_block_search', $config);
