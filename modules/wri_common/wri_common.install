@@ -9,6 +9,9 @@
  * Enable the wri_text_block module.
  */
 function wri_common_update_9401() {
+  // Import the config from core.
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.block_content.body', 'block_content', 'install');
+
   $moduleHandler = \Drupal::service('module_handler');
   if (!$moduleHandler->moduleExists('wri_text_block')) {
     \Drupal::service('module_installer')->install(['wri_text_block'], TRUE);
