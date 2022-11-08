@@ -2,9 +2,12 @@
 
 namespace Drupal\wri_latest_tweet\Plugin\Field\FieldFormatter;
 
+use Drupal\Core\Block\BlockManagerInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
+use Drupal\Core\Session\AccountInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Plugin implementation of the 'LatestTweet' formatter.
@@ -17,7 +20,45 @@ use Drupal\Core\Field\FormatterBase;
  *   }
  * )
  */
-class LatesttweetFormatter extends FormatterBase {
+class LatesttweetFormatter extends FormatterBase implements ContainerFactoryPluginInterface {
+  /**
+   * The block manager.
+   *
+   * @var \Drupal\Core\Block\BlockManagerInterface
+   */
+  protected $blockManager;
+
+  /**
+   * The current user.
+   *
+   * @var \Drupal\Core\Session\AccountInterface
+   */
+  protected $currentUser;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct($plugin_id, $plugin_definition, FieldDefinitionInterface $field_definition, array $settings, $label, $view_mode, array $third_party_settings, BlockManagerInterface $block_manager, AccountInterface $current_user) {
+    parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings);
+
+    $this->blockManager = $block_manager;
+    $this->currentUser = $current_user;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static($plugin_id, $plugin_definition,
+      $configuration['field_definition'],
+      $configuration['settings'],
+      $configuration['label'],
+      $configuration['view_mode'],
+      $configuration['third_party_settings'],
+      $container->get('plugin.manager.block'),
+      $container->get('current_user')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -26,7 +67,7 @@ class LatesttweetFormatter extends FormatterBase {
     $element = [];
 
     foreach ($items as $delta => $item) {
-      $block_manager = \Drupal::service('plugin.manager.block');
+      $block_manager = $this->blockManager;
       // You can hard code configuration or you load from settings.
       $config = [
         'id' => 'twitter_api_block_search',
@@ -42,13 +83,13 @@ class LatesttweetFormatter extends FormatterBase {
         ],
         'cache' => [
           'max_age' => 3600,
-        ]
+        ],
       ];
       $plugin_block = $block_manager->createInstance('twitter_api_block_search', $config);
       // Some blocks might implement access check.
-      $access_result = $plugin_block->access(\Drupal::currentUser());
+      $access_result = $plugin_block->access($this->currentUser);
       // Return empty render array if user doesn't have access.
-      // $access_result can be boolean or an AccessResult class
+      // $access_result can be boolean or an AccessResult class.
       if (is_object($access_result) && $access_result->isForbidden() || is_bool($access_result) && !$access_result) {
         // You might need to add some cache tags/contexts.
         $element[$delta] = [];
@@ -68,4 +109,5 @@ class LatesttweetFormatter extends FormatterBase {
     // Only to this for twitter timeline strings.
     return ($field_definition->getName() == 'field_twitter_user');
   }
+
 }

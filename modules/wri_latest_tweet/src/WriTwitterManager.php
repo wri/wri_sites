@@ -10,6 +10,7 @@ use Drupal\twitter_api_block\TwitterManager;
  * Default Twitter manager communicator.
  */
 class WriTwitterManager extends TwitterManager {
+
   /**
    * {@inheritdoc}
    *
@@ -20,9 +21,7 @@ class WriTwitterManager extends TwitterManager {
       $id = $tweet['id'] ?? NULL;
       $username = $tweet['username'] ?? NULL;
       if (!$id || !$username) {
-        throw new \Exception($this->t('Missing ID or username to render the tweet @data.', [
-          '@data' => '<pre>' . Json::encode($tweet) . '</pre>',
-        ]));
+        throw new \Exception("Missing ID or username to render the tweet <pre>" . Json::encode($tweet) . "</pre>'");
       }
 
       $tweet_uri = sprintf('https://twitter.com/%s/status/%s', $tweet['username'] ?? NULL, $tweet['id'] ?? NULL);
@@ -34,10 +33,12 @@ class WriTwitterManager extends TwitterManager {
 
       $response = $this->httpClient->request('GET', $tweet_url);
       return Json::decode($response->getBody()->getContents());
-    } catch (\Exception $e) {
+    }
+    catch (\Exception $e) {
       $this->logger->error($e->getMessage());
     }
 
     return [];
   }
+
 }

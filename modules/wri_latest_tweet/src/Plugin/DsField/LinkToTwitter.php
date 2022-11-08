@@ -2,7 +2,6 @@
 
 namespace Drupal\wri_latest_tweet\Plugin\DsField;
 
-use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\ds\Plugin\DsField\DsFieldBase;
 
