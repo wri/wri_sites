@@ -4,15 +4,4 @@
  * Theme override for the heirarchy menu.
  */
 #}
-{%
-  set classes = [
-  configuration.id
-]
-%}
-{% set heading_id = 'menu-toc' %}
-<nav role="navigation" id="{{ heading_id }}" aria-labelledby="{{ heading_id }}"{{ attributes.addClass(classes)|without('role', 'aria-labelledby','id') }}>
-  {% block content %}
-    {{ content }}
-  {% endblock %}
-  {% if configuration.id == 'toc' %}{% include "@ts_wrin/_includes/scroll-right.html.twig" %}{% endif %}
-</nav>
+{% extends '@ts_wrin/_includes/toc.html.twig' %}
