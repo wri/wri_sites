@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Superfeatured module hook implementations.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function wri_text_block_form_layout_builder_configure_block_alter(&$form, FormStateInterface &$form_state, $form_id) {
+  // Hide the block title if this is a text block.
+  wri_common_change_block_settings($form, 'text_block');
+}
