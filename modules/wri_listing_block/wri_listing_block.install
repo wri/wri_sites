@@ -1,14 +1,19 @@
 <?php
+
 /**
- * Updates Listing arguments to allow multiple values in
+ * @file
  */
-function wri_listing_block_update_9400() {
+
+/**
+ * Updates Listing arguments to allow multiple values in.
+ */
+function wri_listing_block_update_9401() {
   // Import the updated value:
   \Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.listing_block.field_listing', ['default_value', 'arguments'], 'wri_listing_block');
 
-  // Import the updated views:
-  \Drupal::service('distro_helper.updates')->updateConfig('views.view.content_listing', ['display','default','display_options','arguments','term_node_tid_depth_1', 'break_phrase'], 'wri_listing_block');
-  \Drupal::service('distro_helper.updates')->updateConfig('views.view.content_listing_a_to_z', ['display','default','display_options','arguments','field_type_target_id','break_phrase'], 'wri_listing_block');
+  // Import the updated views to allow multiples for the "Type" field:
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.content_listing', ['display', 'default', 'display_options', 'arguments', 'term_node_tid_depth_1', 'break_phrase'], 'wri_listing_block');
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.content_listing_a_to_z', ['display', 'default', 'display_options', 'arguments', 'field_type_target_id', 'break_phrase'], 'wri_listing_block');
 
   // Load all projects with the listing_block having the old value.
   $old_value = '[bc:field_content_types:array:target_id:join:+]/[bc:field_featured:array:target_id:join:+]/[bc:field_filter_by_region:target_id]/[bc:field_filter_by_resource_type:target_id]/[bc:field_tag:target_id]/[bc:field_filter_by_tag:target_id]';
