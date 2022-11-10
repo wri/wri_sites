@@ -369,7 +369,7 @@ display:
             fail: 'not found'
           validate_options: {  }
           depth: 3
-          break_phrase: false
+          break_phrase: true
           use_taxonomy_term_path: false
           entity_type: node
           plugin_id: taxonomy_index_tid_depth
