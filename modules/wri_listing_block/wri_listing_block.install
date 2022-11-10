@@ -3,9 +3,13 @@
  * Updates Listing arguments.
  */
 function wri_listing_block_update_9400() {
+  // Import the updated value:
+  \Drupal::service('distro_helper.updates')->updateConfig('block_content.listing_block.field_listing', ['default_value', 'arguments'], 'wri_listing_block');
+
   // Load all projects with the listing_block having the old value.
   $old_value = '[bc:field_content_types:array:target_id:join:+]/[bc:field_featured:array:target_id:join:+]/[bc:field_filter_by_region:target_id]/[bc:field_filter_by_resource_type:target_id]/[bc:field_tag:target_id]/[bc:field_filter_by_tag:target_id]';
 
+  // Save all existing blocks with the new value.
   $definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('block_content', 'listing_block');
   if (isset($definitions['field_listing'])) {
     $default_value = $definitions['field_listing']->getDefaultValueLiteral();
