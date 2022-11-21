@@ -50,7 +50,7 @@ class WriAuthorCustomCommands extends DrushCommands {
 
     // Get duplicate author IDs by type.
     foreach ($author_list as $author) {
-      if ($author['name']) {
+      if (isset($author['name'])) {
         $query = $this->entityTypeManager->getStorage('wri_author');
         $duplicate_authors = $query->getQuery()
           ->condition('type', $type)
@@ -60,54 +60,6 @@ class WriAuthorCustomCommands extends DrushCommands {
       // Set all references to that author to the first result, i.e.:
       if ($duplicate_authors) {
         $primary_author_id = array_shift(array_slice($duplicate_authors, 0, 1));
-
-        // Helper function to replace & remove duplicate authors.
-        $this->replaceDuplicateAuthors($duplicate_authors, $primary_author_id);
-      }
-    }
-  }
-
-  /**
-   * Drush command that to consolidate authors to internal.
-   *
-   * @param int $number
-   *   Number of Authors to process.
-   *
-   * @command wri_author:merge-authors
-   * @usage wri_author:merge-authors
-   */
-  public function mergeAuthors($number = 50) {
-    // Find any authors that have the same name, regardless of bundle.
-    // SELECT name FROM wri_author_field_data GROUP BY name HAVING count(name)>1
-    $query = $this->entityTypeManager->getStorage('wri_author')->getAggregateQuery();
-    $author_list = $query->groupBy('name')
-      ->conditionAggregate('name', 'COUNT', '1', '>')
-      ->range(0, $number)
-      ->execute();
-
-    // Get duplicate author IDs by type.
-    foreach ($author_list as $author) {
-      if ($author['name']) {
-        $query = $this->entityTypeManager->getStorage('wri_author');
-        $duplicate_authors = $query->getQuery()
-          ->condition('name', $author['name'])
-          ->execute();
-      }
-      // Set the internal author as primary:
-      if ($duplicate_authors) {
-        if (2 == count($duplicate_authors)) {
-          $duplicate_authors = array_values($duplicate_authors);
-          $author_two = WRIAuthor::load($duplicate_authors[1]);
-          if ('internal' == $author_two->bundle()) {
-            $primary_author_id = $duplicate_authors[1];
-          }
-          else {
-            $primary_author_id = $duplicate_authors[0];
-          }
-        }
-        else {
-          return;
-        }
 
         // Helper function to replace & remove duplicate authors.
         $this->replaceDuplicateAuthors($duplicate_authors, $primary_author_id);
