@@ -41,6 +41,8 @@ class WriAuthorCustomCommands extends DrushCommands {
     // SELECT name FROM wri_author_field_data GROUP BY name HAVING count(name)>1
     $query = $this->entityTypeManager->getStorage('wri_author')->getAggregateQuery();
     $author_list = $query->groupBy('name')
+      ->groupBy('field_person')
+      ->groupBy('field_person_link')
       ->condition('type', $type)
       ->conditionAggregate('name', 'COUNT', '1', '>')
       ->range(0, $number)
@@ -75,7 +77,7 @@ class WriAuthorCustomCommands extends DrushCommands {
    * @usage wri_author:merge-authors
    */
   public function mergeAuthors($number = 50) {
-    // Find any authors that have the same name, within bundle.
+    // Find any authors that have the same name, regardless of bundle.
     // SELECT name FROM wri_author_field_data GROUP BY name HAVING count(name)>1
     $query = $this->entityTypeManager->getStorage('wri_author')->getAggregateQuery();
     $author_list = $query->groupBy('name')
