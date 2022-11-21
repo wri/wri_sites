@@ -17,3 +17,10 @@ function wri_author_update_8900() {
   $query = $database->query("UPDATE wri_author_field_revision SET name=REPLACE(name,' (WRI)','')");
   $query->execute();
 }
+
+/**
+ * Improve the author listing page by turning it into a view.
+ */
+function wri_author_update_9400() {
+  \Drupal::service('distro_helper.updates')->installConfig('views.view.authors', 'wri_author');
+}
