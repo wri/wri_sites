@@ -2,6 +2,7 @@
 
 namespace Drupal\wri_author\Commands;
 
+use Drupal\Core\Database\Connection;
 use Drush\Commands\DrushCommands;
 use Drupal\wri_author\Entity\WRIAuthor;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -19,10 +20,18 @@ class WriAuthorCustomCommands extends DrushCommands {
   protected $entityTypeManager;
 
   /**
+   * An instance of the database.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $database;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, Connection $database) {
     $this->entityTypeManager = $entity_type_manager;
+    $this->database = $database;
   }
 
   /**
@@ -76,14 +85,12 @@ class WriAuthorCustomCommands extends DrushCommands {
   public function deleteMissingReferences() {
     // Find any field_author values that reference non-existent authors.
     // SELECT * FROM node__field_authors LEFT JOIN  wri_author ON
-    // (field_authors_target_id=id) WHERE uuid IS NULL
-    // GROUP BY field_authors_target_id.
-    $empty_authors = \Drupal::database()->select('node__field_authors','node_auths')
-      ->fields('node_auths',['field_authors_target_id'])
-      ->groupBy('field_authors_target_id');
-    $empty_authors->leftJoin('wri_author','auths','node_auths.field_authors_target_id=auths.id');
-    $empty_authors->isNull('auths.uuid')
-      ->execute();
+    // (field_authors_target_id=id) WHERE uuid IS NULL.
+    $query = $this->database->select('node__field_authors', 'node_auths')
+      ->fields('node_auths', ['field_authors_target_id']);
+    $query->leftJoin('wri_author', 'auths', 'node_auths.field_authors_target_id=auths.id');
+    $empty_authors = $query->isNull('auths.uuid')
+      ->execute()->fetchCol();
 
     // Get author IDs without a name.
     if ($empty_authors) {
