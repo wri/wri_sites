@@ -2,6 +2,7 @@
 
 namespace Drupal\wri_author\Commands;
 
+use Drupal\Core\Database\Connection;
 use Drush\Commands\DrushCommands;
 use Drupal\wri_author\Entity\WRIAuthor;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -19,10 +20,18 @@ class WriAuthorCustomCommands extends DrushCommands {
   protected $entityTypeManager;
 
   /**
+   * An instance of the database.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $database;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, Connection $database) {
     $this->entityTypeManager = $entity_type_manager;
+    $this->database = $database;
   }
 
   /**
@@ -41,6 +50,8 @@ class WriAuthorCustomCommands extends DrushCommands {
     // SELECT name FROM wri_author_field_data GROUP BY name HAVING count(name)>1
     $query = $this->entityTypeManager->getStorage('wri_author')->getAggregateQuery();
     $author_list = $query->groupBy('name')
+      ->groupBy('field_person')
+      ->groupBy('field_person_link')
       ->condition('type', $type)
       ->conditionAggregate('name', 'COUNT', '1', '>')
       ->range(0, $number)
@@ -48,7 +59,7 @@ class WriAuthorCustomCommands extends DrushCommands {
 
     // Get duplicate author IDs by type.
     foreach ($author_list as $author) {
-      if ($author['name']) {
+      if (isset($author['name'])) {
         $query = $this->entityTypeManager->getStorage('wri_author');
         $duplicate_authors = $query->getQuery()
           ->condition('type', $type)
@@ -66,54 +77,6 @@ class WriAuthorCustomCommands extends DrushCommands {
   }
 
   /**
-   * Drush command that to consolidate authors to internal.
-   *
-   * @param int $number
-   *   Number of Authors to process.
-   *
-   * @command wri_author:merge-authors
-   * @usage wri_author:merge-authors
-   */
-  public function mergeAuthors($number = 50) {
-    // Find any authors that have the same name, within bundle.
-    // SELECT name FROM wri_author_field_data GROUP BY name HAVING count(name)>1
-    $query = $this->entityTypeManager->getStorage('wri_author')->getAggregateQuery();
-    $author_list = $query->groupBy('name')
-      ->conditionAggregate('name', 'COUNT', '1', '>')
-      ->range(0, $number)
-      ->execute();
-
-    // Get duplicate author IDs by type.
-    foreach ($author_list as $author) {
-      if ($author['name']) {
-        $query = $this->entityTypeManager->getStorage('wri_author');
-        $duplicate_authors = $query->getQuery()
-          ->condition('name', $author['name'])
-          ->execute();
-      }
-      // Set the internal author as primary:
-      if ($duplicate_authors) {
-        if (2 == count($duplicate_authors)) {
-          $duplicate_authors = array_values($duplicate_authors);
-          $author_two = WRIAuthor::load($duplicate_authors[1]);
-          if ('internal' == $author_two->bundle()) {
-            $primary_author_id = $duplicate_authors[1];
-          }
-          else {
-            $primary_author_id = $duplicate_authors[0];
-          }
-        }
-        else {
-          return;
-        }
-
-        // Helper function to replace & remove duplicate authors.
-        $this->replaceDuplicateAuthors($duplicate_authors, $primary_author_id);
-      }
-    }
-  }
-
-  /**
    * Drush command to delete broken author references.
    *
    * @command wri_author:delete-missing-references
@@ -121,47 +84,40 @@ class WriAuthorCustomCommands extends DrushCommands {
    */
   public function deleteMissingReferences() {
     // Find any field_author values that reference non-existent authors.
-    $query = $this->entityTypeManager->getStorage('wri_author')->getAggregateQuery();
-    $author_list = $query->groupBy('name')
-      ->conditionAggregate('name', 'COUNT', '1', '>')
-      ->execute();
+    // SELECT * FROM node__field_authors LEFT JOIN  wri_author ON
+    // (field_authors_target_id=id) WHERE uuid IS NULL.
+    $query = $this->database->select('node__field_authors', 'node_auths')
+      ->fields('node_auths', ['field_authors_target_id']);
+    $query->leftJoin('wri_author', 'auths', 'node_auths.field_authors_target_id=auths.id');
+    $empty_authors = $query->isNull('auths.uuid')
+      ->execute()->fetchCol();
 
     // Get author IDs without a name.
-    foreach ($author_list as $author) {
-      if (!$author['name']) {
-        $query = $this->entityTypeManager->getStorage('wri_author');
-        $empty_authors = $query->getQuery()
-          ->condition('name', $author['name'])
-          ->range(0, 50)
+    if ($empty_authors) {
+      foreach ($empty_authors as $author_id) {
+        // Load all the nodes referencing the id.
+        $query = $this->entityTypeManager->getStorage('node');
+        $author_nodes = $query->getQuery()
+          ->condition('field_authors', $author_id, 'IN')
           ->execute();
-      }
-      // Remove authors from nodes/delete the author.
-      if ($empty_authors) {
-        foreach ($empty_authors as $author_id) {
-          // Load all the nodes referencing the id.
-          $query = $this->entityTypeManager->getStorage('node');
-          $author_nodes = $query->getQuery()
-            ->condition('field_authors', $author_id, 'IN')
-            ->execute();
 
-          // Remove the broken author ID from nodes.
-          if ($author_nodes) {
-            foreach ($author_nodes as $node_id) {
-              $node_storage = $this->entityTypeManager->getStorage('node');
-              $node = $node_storage->load($node_id);
-              $author_list = $node->get('field_authors')->getValue();
-              $key = array_search($author_id, array_column($author_list, 'target_id'));
-              $node->get('field_authors')->removeItem($key);
-              $node->save();
-              echo "Empty Author ID: " . $author_id . "\n";
-              echo "Node Updated: " . $node_id . "\n";
-            }
-            // Delete broken author.
-            $empty_author = WRIAuthor::load($author_id);
-            if (isset($empty_author)) {
-              echo "Empty Author Deleted: " . $author_id . "\n\n";
-              $empty_author->delete();
-            }
+        // Remove the broken author ID from nodes.
+        if ($author_nodes) {
+          foreach ($author_nodes as $node_id) {
+            $node_storage = $this->entityTypeManager->getStorage('node');
+            $node = $node_storage->load($node_id);
+            $author_list = $node->get('field_authors')->getValue();
+            $key = array_search($author_id, array_column($author_list, 'target_id'));
+            $node->get('field_authors')->removeItem($key);
+            $node->save();
+            echo "Empty Author ID: " . $author_id . "\n";
+            echo "Node Updated: " . $node_id . "\n";
+          }
+          // Delete broken author.
+          $empty_author = WRIAuthor::load($author_id);
+          if (isset($empty_author)) {
+            echo "Empty Author Deleted: " . $author_id . "\n\n";
+            $empty_author->delete();
           }
         }
       }

@@ -11,6 +11,6 @@ services:
     arguments: ['wri_author']
   wri_author.commands:
     class: Drupal\wri_author\Commands\WriAuthorCustomCommands
-    arguments: ['@entity_type.manager']
+    arguments: ['@entity_type.manager', '@database']
     tags:
       - { name: drush.command }
