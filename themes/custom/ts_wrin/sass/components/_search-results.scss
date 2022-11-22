@@ -173,11 +173,10 @@ li.search-results {
     height: 26px;
     justify-content: center;
     letter-spacing: 0.75px;
-    padding: 0;
+    padding: 0 10px;
     position: relative;
     text-align: center;
     text-transform: uppercase;
-    width: 47px;
     a {
       @include font-line-height(12, 12);
     }
