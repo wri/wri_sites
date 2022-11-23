@@ -8,7 +8,6 @@ dependencies:
   - facets
   - facets_pretty_paths
   - facets_summary
-  - search_api_autocomplete
   - search_api_exclude_entity
   - search_api_pantheon
   - wri_taxonomy
