@@ -14,7 +14,7 @@ id: experts_all_topics
 name: 'All Staff'
 url_alias: topic
 weight: -3
-min_count: 0
+min_count: 1
 show_only_one_result: true
 field_identifier: smart_topic_parent
 facet_source_id: 'search_api:views_page__experts_staff__experts_staff1'
