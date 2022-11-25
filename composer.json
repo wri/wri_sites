@@ -208,7 +208,7 @@
         "drupal/inline_entity_form": "^1.0@RC",
         "drupal/layout_builder_restrictions": "^2.12",
         "drupal/link_attributes": "^1.11",
-        "drupal/menu_block": "1.9",
+        "drupal/menu_block": "1.8",
         "drupal/menu_position": "^1.0@beta",
         "drupal/metatag": "^1.19",
         "drupal/metatag_google_scholar": "^1.0",
