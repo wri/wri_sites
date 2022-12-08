@@ -135,16 +135,13 @@
       }
     }
   }
-  .search-results-image .media--bundle--image,
   .search-results-image img {
     display: none;
+    max-width: 200px;
+    margin: 0 auto;
     @include mq($md) {
       display: block;
     }
-  }
-  .search-results-image img {
-    max-width: 200px;
-    margin: 0 auto;
   }
 }
 
