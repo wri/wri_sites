@@ -36,7 +36,7 @@ display:
         options:
           bypass_access: false
           skip_access: false
-          preserve_facet_query_args: false
+          preserve_facet_query_args: true
       exposed_form:
         type: basic
         options:
