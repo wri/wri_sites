@@ -124,3 +124,19 @@ function wri_search_tokens($type, $tokens, array $data, array $options, Bubbleab
   }
   return $replacements;
 }
+
+/**
+ * Implements hook_theme().
+ */
+function wri_search_theme() {
+  return [
+    'wri_search_menu' => [
+      'variables' => [
+        'search_nav_title' => '',
+        'search_nav_description' => '',
+        'search_nav_label' => '',
+        'search_nav_id' => '',
+        'search_nav_submit' => ''],
+    ],
+  ];
+}
