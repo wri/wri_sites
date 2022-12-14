@@ -22,11 +22,13 @@ class WrinSearchBlock extends BlockBase {
    */
   public function defaultConfiguration() {
     return [
-      'search_nav_title' => '',
-      'search_nav_description' => '',
-      'search_nav_label' => '',
-      'search_nav_id' => '',
-      'search_nav_submit' => '',
+      'component_context' => [
+        'search_nav_title' => '',
+        'search_nav_description' => '',
+        'search_nav_label' => '',
+        'search_nav_id' => '',
+        'search_nav_submit' => '',
+      ],
     ];
   }
 
@@ -34,7 +36,7 @@ class WrinSearchBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function blockForm($form, FormStateInterface $form_state) {
-    $default_values = $this->configuration;
+    $default_values = $this->configuration['component_context'];
     $form['search_nav_title'] = [
       '#type'   => 'textfield',
       '#title'  => $this->t('Search box title'),
@@ -70,9 +72,9 @@ class WrinSearchBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
-    foreach ($this->defaultConfiguration() as $key => $default) {
+    foreach ($this->defaultConfiguration()['component_context'] as $key => $default) {
       $value = $form_state->getValue($key);
-      $this->configuration[$key] = $value;
+      $this->configuration['component_context'][$key] = $value;
     }
   }
 
@@ -82,11 +84,11 @@ class WrinSearchBlock extends BlockBase {
   public function build() {
     $build['content'] = [
       '#theme' => 'wri_search_menu',
-      '#search_nav_title' => $this->configuration['search_nav_title'],
-      '#search_nav_description' => $this->configuration['search_nav_description'],
-      '#search_nav_label' => $this->configuration['search_nav_label'],
-      '#search_nav_id' => $this->configuration['search_nav_id'],
-      '#search_nav_submit' => $this->configuration['search_nav_submit'],
+      '#search_nav_title' => $this->configuration['component_context']['search_nav_title'],
+      '#search_nav_description' => $this->configuration['component_context']['search_nav_description'],
+      '#search_nav_label' => $this->configuration['component_context']['search_nav_label'],
+      '#search_nav_id' => $this->configuration['component_context']['search_nav_id'],
+      '#search_nav_submit' => $this->configuration['component_context']['search_nav_submit'],
     ];
     return $build;
   }
