@@ -1,7 +1,0 @@
-block.settings.wri_search_wrin_search:
-  type: block_settings
-  label: 'WRIN Search block'
-  mapping:
-    foo:
-      type: string
-      label: Foo
