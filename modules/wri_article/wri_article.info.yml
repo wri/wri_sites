@@ -4,7 +4,6 @@ description: 'Modules related to articles on WRI'
 core_version_requirement: '^8.8.0 || ^9'
 package: WRI
 dependencies:
-  - sfc
   - wri_author
   - wri_media
   - wri_data
