@@ -40,20 +40,20 @@ class WrinSearchBlock extends BlockBase {
     $form['search_nav_title'] = [
       '#type'   => 'textfield',
       '#title'  => $this->t('Search box title'),
-      '#default_value' => isset($default_values['search_nav_title']) ? $default_values['search_nav_title']  : 'Search WRI.org',
+      '#default_value' => $default_values['search_nav_title'] ?? 'Search WRI.org',
     ];
     $form['search_nav_description'] = [
       '#type'   => 'textfield',
       '#title'  => $this->t('Search box description'),
-      '#default_value' => isset($default_values['search_nav_description']) ? $default_values['search_nav_description']  : 'Not sure where to find something? Search all of the site\'s content.'
+      '#default_value' => $default_values['search_nav_description'] ?? 'Not sure where to find something? Search all of the site\'s content.',
     ];
     $form['search_nav_label'] = [
       '#type'   => 'textfield',
       '#title'  => $this->t('Input label'),
-      '#default_value' => isset($default_values['search_nav_label']) ? $default_values['search_nav_label']  : 'What can we help you find?',
+      '#default_value' => $default_values['search_nav_label'] ?? 'What can we help you find?',
     ];
 
-    if ($form_state->getFormObject() instanceOf EntityFormInterface) {
+    if ($form_state->getFormObject() instanceof EntityFormInterface) {
       $nid = $form_state->getformObject()->getEntity()->id();
     }
     $form['search_nav_id'] = [
@@ -63,7 +63,7 @@ class WrinSearchBlock extends BlockBase {
     $form['search_nav_submit'] = [
       '#type'   => 'textfield',
       '#title'  => $this->t('Submit button text'),
-      '#default_value' => isset($default_values['search_nav_submit']) ? $default_values['search_nav_submit']  : 'Search',
+      '#default_value' => $default_values['search_nav_submit'] ?? 'Search',
     ];
     return $form;
   }
