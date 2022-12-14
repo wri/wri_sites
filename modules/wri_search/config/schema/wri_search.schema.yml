@@ -1,7 +1,23 @@
-block.settings.wri_search_wrin_search:
+block.settings.single_file_component_block:wri_search_menu:
   type: block_settings
   label: 'WRIN Search block'
   mapping:
-    foo:
-      type: string
-      label: Foo
+    component_context:
+      type: mapping
+      label: 'Context'
+      mapping:
+        search_nav_title:
+          type: string
+          label: 'Search box title'
+        search_nav_description:
+          type: string
+          label: 'Search box description'
+        search_nav_label:
+          type: string
+          label: 'Input label'
+        search_nav_id:
+          type: string
+          label: 'Block ID'
+        search_nav_submit:
+          type: string
+          label: 'Submit button text'
