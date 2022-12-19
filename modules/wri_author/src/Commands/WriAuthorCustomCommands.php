@@ -77,6 +77,44 @@ class WriAuthorCustomCommands extends DrushCommands {
   }
 
   /**
+   * Drush command to merge empty external authors
+   *
+   * @param int $number
+   *   Number of Authors to process.
+   *
+   * @command wri_author:merge-empty-external-authors
+   * @usage wri_author:merge-empty-external-authors 50
+   */
+  public function mergeEmptyExternalAuthors($number = 5) {
+    // Find any authors that have the same name, within bundle.
+    $query = $this->entityTypeManager->getStorage('wri_author')->getAggregateQuery();
+    $author_list = $query->groupBy('name')
+      ->condition('type', 'external')
+      ->condition('field_person_link', '', '<>')
+      ->conditionAggregate('name', 'COUNT', '1', '>')
+      ->range(0, $number)
+      ->execute();
+
+    // Get duplicate author IDs by type.
+    foreach ($author_list as $author) {
+      if (isset($author['name'])) {
+        $query = $this->entityTypeManager->getStorage('wri_author');
+        $duplicate_authors = $query->getQuery()
+          ->condition('type', 'external')
+          ->condition('name', $author['name'])
+          ->execute();
+      }
+      // Set all references to that author to the first result, i.e.:
+      if ($duplicate_authors) {
+        $primary_author_id = array_shift(array_slice($duplicate_authors, 0, 1));
+
+        // Helper function to replace & remove duplicate authors.
+        $this->replaceDuplicateAuthors($duplicate_authors, $primary_author_id);
+      }
+    }
+  }
+
+  /**
    * Drush command to delete broken author references.
    *
    * @command wri_author:delete-missing-references
