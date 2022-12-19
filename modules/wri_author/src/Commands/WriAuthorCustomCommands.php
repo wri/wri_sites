@@ -77,6 +77,46 @@ class WriAuthorCustomCommands extends DrushCommands {
   }
 
   /**
+   * Drush command to merge empty external authors.
+   *
+   * @param int $number
+   *   Number of Authors to process.
+   *
+   * @command wri_author:merge-empty-external-authors
+   * @usage wri_author:merge-empty-external-authors 50
+   */
+  public function mergeEmptyExternalAuthors($number = 5) {
+    // Find any authors with no link value.
+    // SELECT d1.id  FROM wri_author_field_data d1
+    // LEFT JOIN wri_author__field_person_link on (id=entity_id)
+    // LEFT JOIN wri_author_field_data d2 USING(name)
+    // WHERE d1.type='external'
+    // AND d2.type='external'
+    // AND field_person_link_uri IS NULL
+    // AND d1.id <> d2.id;.
+    $query = $this->database->select('wri_author_field_data', 'd1')
+      ->fields('d1', ['id', 'name']);
+    $query->leftJoin('wri_author__field_person_link', 'link', 'd1.id=link.entity_id');
+    $query->leftJoin('wri_author_field_data', 'd2', 'd1.name=d2.name');
+    $query->addField('d2', 'id', 'primary_id');
+    $query->condition('d1.type', 'external')
+      ->condition('d2.type', 'external')
+      ->where('d2.id <> d1.id');
+    $author_list = $query->isNull('link.field_person_link_uri')
+      ->execute();
+
+    // Get duplicate author IDs by type.
+    foreach ($author_list as $author) {
+      if ($duplicate_authors = $author->id) {
+        $primary_author_id = $author->primary_id;
+
+        // Helper function to replace & remove duplicate authors.
+        $this->replaceDuplicateAuthors([$duplicate_authors], $primary_author_id);
+      }
+    }
+  }
+
+  /**
    * Drush command to delete broken author references.
    *
    * @command wri_author:delete-missing-references
