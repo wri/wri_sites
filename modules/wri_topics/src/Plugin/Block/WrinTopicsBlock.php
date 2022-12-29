@@ -60,9 +60,7 @@ class WrinTopicsBlock extends BlockBase {
 
     $build['content'] = [
       '#theme' => 'wri_topics_block',
-      '#topic_intro_text' => $this->t('@topic_intro_text', [
-        '@topic_intro_text' => $values['topic_intro_text'],
-      ]),
+      '#topic_intro_text' => $values['topic_intro_text'],
       '#hide_centers' => $values['hide_centers'],
     ];
     return $build;
