@@ -1,0 +1,10 @@
+block.settings.wri_topics_wrin_topics:
+  type: block_settings
+  label: 'WRIN Topics block'
+  mapping:
+    topic_intro_text:
+      type: string
+      label: Intro Text
+    hide_centers:
+      type: bool
+      label: Hide Centers
