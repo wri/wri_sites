@@ -30,6 +30,7 @@ class WrinTopicsBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function blockForm($form, FormStateInterface $form_state) {
+    $default_values = $this->configuration['component_context'] ?? $this->configuration;
     $form['topic_intro_text'] = [
       '#type'   => 'textarea',
       '#title'  => $this->t('Intro Text'),
@@ -55,8 +56,14 @@ class WrinTopicsBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
+    $values = $this->configuration['component_context'] ?? $this->configuration;
+
     $build['content'] = [
-      '#markup' => $this->t('It works!'),
+      '#theme' => 'wri_topics_block',
+      '#topic_intro_text' => $this->t('@topic_intro_text', [
+        '@topic_intro_text' => $values['topic_intro_text'],
+      ]),
+      '#hide_centers' => $values['hide_centers'],
     ];
     return $build;
   }
