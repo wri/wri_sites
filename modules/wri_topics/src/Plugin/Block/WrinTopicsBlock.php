@@ -34,7 +34,7 @@ class WrinTopicsBlock extends BlockBase {
     $form['topic_intro_text'] = [
       '#type'   => 'textarea',
       '#title'  => $this->t('Intro Text'),
-      '#default_value' => isset($default_values['topic_intro_text']) ? $default_values['topic_intro_text']  : '',
+      '#default_value' => $default_values['topic_intro_text'] ?? '',
     ];
     $form['hide_centers'] = [
       '#type' => 'checkbox',
