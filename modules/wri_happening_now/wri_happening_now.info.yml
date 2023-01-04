@@ -4,7 +4,6 @@ description: 'Happening Now block config and functions'
 core_version_requirement: '^8.8.0 || ^9'
 package: WRI
 dependencies:
-  - sfc
   - paragraphs
   - wri_block
   - wri_node

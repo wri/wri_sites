@@ -1,0 +1,19 @@
+block.settings.single_file_component_block:wri_search_menu:
+  type: block_settings
+  label: 'WRIN Search block'
+  mapping:
+    search_nav_title:
+      type: text
+      label: 'Search box title'
+    search_nav_description:
+      type: text
+      label: 'Search box description'
+    search_nav_label:
+      type: text
+      label: 'Input label'
+    search_nav_id:
+      type: string
+      label: 'Block ID'
+    search_nav_submit:
+      type: text
+      label: 'Submit button text'
