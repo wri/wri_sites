@@ -22,13 +22,11 @@ class WrinSearchBlock extends BlockBase {
    */
   public function defaultConfiguration() {
     return [
-      'component_context' => [
-        'search_nav_title' => '',
-        'search_nav_description' => '',
-        'search_nav_label' => '',
-        'search_nav_id' => '',
-        'search_nav_submit' => '',
-      ],
+      'search_nav_title' => '',
+      'search_nav_description' => '',
+      'search_nav_label' => '',
+      'search_nav_id' => '',
+      'search_nav_submit' => '',
     ];
   }
 
@@ -36,7 +34,7 @@ class WrinSearchBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function blockForm($form, FormStateInterface $form_state) {
-    $default_values = $this->configuration['component_context'];
+    $default_values = $this->configuration['component_context'] ?? $this->configuration;
     $form['search_nav_title'] = [
       '#type'   => 'textfield',
       '#title'  => $this->t('Search box title'),
@@ -82,13 +80,14 @@ class WrinSearchBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
+    $default_values = $this->configuration['component_context'] ?? $this->configuration;
     $build['content'] = [
       '#theme' => 'wri_search_menu',
-      '#search_nav_title' => $this->configuration['component_context']['search_nav_title'],
-      '#search_nav_description' => $this->configuration['component_context']['search_nav_description'],
-      '#search_nav_label' => $this->configuration['component_context']['search_nav_label'],
-      '#search_nav_id' => $this->configuration['component_context']['search_nav_id'],
-      '#search_nav_submit' => $this->configuration['component_context']['search_nav_submit'],
+      '#search_nav_title' => $default_values['search_nav_title'],
+      '#search_nav_description' => $default_values['search_nav_description'],
+      '#search_nav_label' => $default_values['search_nav_label'],
+      '#search_nav_id' => $default_values['search_nav_id'],
+      '#search_nav_submit' => $default_values['search_nav_submit'],
     ];
     return $build;
   }
