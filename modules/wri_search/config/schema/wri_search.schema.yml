@@ -3,17 +3,17 @@ block.settings.single_file_component_block:wri_search_menu:
   label: 'WRIN Search block'
   mapping:
     search_nav_title:
-      type: string
+      type: text
       label: 'Search box title'
     search_nav_description:
-      type: string
+      type: text
       label: 'Search box description'
     search_nav_label:
-      type: string
+      type: text
       label: 'Input label'
     search_nav_id:
       type: string
       label: 'Block ID'
     search_nav_submit:
-      type: string
+      type: text
       label: 'Submit button text'

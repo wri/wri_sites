@@ -70,9 +70,9 @@ class WrinSearchBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
-    foreach ($this->defaultConfiguration()['component_context'] as $key => $default) {
+    foreach ($this->defaultConfiguration() as $key => $default) {
       $value = $form_state->getValue($key);
-      $this->configuration['component_context'][$key] = $value;
+      $this->configuration[$key] = $value;
     }
   }
 
