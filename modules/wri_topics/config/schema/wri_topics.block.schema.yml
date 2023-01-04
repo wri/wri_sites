@@ -1,0 +1,10 @@
+block.settings.single_file_component_block:wri_topics_block:
+  type: block_settings
+  label: 'Settings'
+  mapping:
+    topic_intro_text:
+      type: text
+      label: 'Intro Text'
+    hide_centers:
+      type: boolean
+      label: 'Hide Centers'

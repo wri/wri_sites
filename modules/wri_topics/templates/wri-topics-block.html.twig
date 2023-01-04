@@ -1,0 +1,11 @@
+<div class="layout__region layout__region--listing">
+  {% if topic_intro_text %}
+    <div class="intro margin-bottom-md">{{ topic_intro_text }}</div>
+  {% endif %}
+  <div class="program-center-wrapper">
+    {{ drupal_view('programs_centers', 'programs_block') }}
+    {% if hide_centers == 0 %}
+      {{ drupal_view('programs_centers', 'centers_block') }}
+    {% endif %}
+  </div>
+</div>
