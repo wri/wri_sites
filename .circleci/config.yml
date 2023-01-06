@@ -18,7 +18,6 @@ jobs:
     working_directory: /var/www/html/drupal-project
     steps:
       - checkout
-      - add_ssh_keys
       - run:
           name: Test site install works.
           command: |
