@@ -263,7 +263,7 @@ display:
             limit: true
             vids:
               publication_series: publication_series
-            anyall: ','
+            anyall: '+'
           default_argument_skip_url: false
           summary_options:
             base_path: ''
@@ -279,7 +279,7 @@ display:
             type: none
             fail: 'not found'
           validate_options: {  }
-          break_phrase: false
+          break_phrase: true
           not: false
           plugin_id: numeric
         nid:
