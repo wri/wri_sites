@@ -6,7 +6,7 @@
     text-decoration: none;
 
     @include hocus() {
-      color: $med-light-gray;
+      text-decoration: underline;
     }
 
     &.active,
@@ -16,9 +16,14 @@
   }
   .menu-item--expanded > a {
     color: $brand-gold;
+
+    @include hocus() {
+      text-decoration: underline;
+    }
   }
   ul.menu a.is-active {
-    color: $med-light-gray;
+    color: $white;
+    text-decoration: underline;
   }
 
   .back-arrow svg path,
@@ -35,16 +40,11 @@
     text-decoration: none;
 
     @include hocus() {
-      color: $hover-black;
-    }
-
-    &.active,
-    &.is-active {
-      color: $hover-black;
+      text-decoration: underline;
     }
   }
   ul.menu a.is-active {
-    color: $hover-black;
+    text-decoration: underline;
   }
 
   .back-arrow svg path,
@@ -98,7 +98,6 @@
       display: block;
       margin-bottom: 5px;
       position: relative;
-      text-decoration: none;
 
       @include mq($md) {
         margin-right: 0;
