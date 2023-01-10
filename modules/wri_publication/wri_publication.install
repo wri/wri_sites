@@ -23,10 +23,8 @@ function wri_publication_update_9401() {
   \Drupal::service('distro_helper.updates')->updateConfig('field.storage.node.field_publication_series', ['cardinality'], 'wri_node');
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.other_publications_in_this_series', ['display#default#display_options#fields#field_publication_series',
     'display#default#display_options#style#options#grouping',
-    ], 'wri_publication');
-  die();
+  ], 'wri_publication');
 }
-
 
 /**
  * Implements hook_update_dependencies().
