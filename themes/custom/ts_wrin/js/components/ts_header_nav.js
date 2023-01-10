@@ -239,11 +239,11 @@ export default function(context) {
 
     // TOC Menus.
     let tocMainParent = $("#menu-toc");
-    let tocMenuItem = $("#menu-toc > .menu-wrapper .menu");
-    let tocScrollMenu = $("#menu-toc > .menu-wrapper");
+    let tocMenuItem = $("#menu-toc .menu-item--active-trail .menu");
+    let tocScrollMenu = $("#menu-toc .menu-item--active-trail .menu");
 
     let tocDebouncedSideScroll = debounce(function() {
-      if (tocMainParent.width() > tocMenuItem.width() - 30) {
+      if (tocMainParent.width() > tocMenuItem[0].scrollWidth - 30) {
         tocMainParent.addClass("no-scroll");
       } else {
         tocMainParent.removeClass("no-scroll");

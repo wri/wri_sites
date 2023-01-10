@@ -84,7 +84,7 @@
     }
 
     @include mq($lg) {
-      @include column-width(2, 11);
+      @include column-width(2, 12);
     }
 
     li {
@@ -105,7 +105,12 @@
       }
     }
 
-    .menu-wrapper {
+    .toc-list-wrapper {
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu-item--active-trail .menu {
       overflow: scroll;
       -ms-overflow-style: none; /* Internet Explorer 10+ */
       scrollbar-width: none;

@@ -40,5 +40,8 @@
       </li>
     {% endfor %}
     </ul>
+    {% if menu_level == 1 %}
+      {% include "@ts_wrin/_includes/scroll-right.html.twig" %}
+    {% endif %}
   {% endif %}
 {% endmacro %}
