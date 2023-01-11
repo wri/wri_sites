@@ -5,19 +5,16 @@ dependencies:
     - field.storage.node.field_staff_group
     - node.type.person
     - taxonomy.vocabulary.staff_groups
-  content:
-    - 'taxonomy_term:staff_groups:6b4cc890-4d75-42a9-83aa-54409979b916'
+  content: { }
 id: node.person.field_staff_group
 field_name: field_staff_group
 entity_type: node
 bundle: person
 label: 'Staff group'
 description: ''
-required: true
+required: false
 translatable: false
-default_value:
-  -
-    target_uuid: 6b4cc890-4d75-42a9-83aa-54409979b916
+default_value: { }
 default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'
