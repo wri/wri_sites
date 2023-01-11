@@ -26,6 +26,7 @@ dependencies:
     - field.storage.node.field_project_expert
     - field.storage.node.field_quote
     - field.storage.node.field_region
+    - field.storage.node.field_staff_group
     - field.storage.node.field_tags
     - field.storage.node.field_primary_topic
     - field.storage.node.field_type
@@ -236,6 +237,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_region
+  field_staff_group:
+    label: 'Staff group'
+    datasource_id: 'entity:node'
+    property_path: field_staff_group
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_staff_group
   field_tags:
     label: Tags
     datasource_id: 'entity:node'
