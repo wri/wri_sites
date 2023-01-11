@@ -50,6 +50,7 @@ class WrinTopicsBlock extends BlockBase {
   public function blockSubmit($form, FormStateInterface $form_state) {
     $this->configuration['topic_intro_text'] = $form_state->getValue('topic_intro_text');
     $this->configuration['hide_centers'] = $form_state->getValue('hide_centers');
+    unset($this->configuration['component_context']);
   }
 
   /**
@@ -61,7 +62,7 @@ class WrinTopicsBlock extends BlockBase {
     $build['content'] = [
       '#theme' => 'wri_topics_block',
       '#topic_intro_text' => $values['topic_intro_text'],
-      '#hide_centers' => $values['hide_centers'],
+      '#hide_centers' => $values['hide_centers'] ?? FALSE,
     ];
     return $build;
   }
