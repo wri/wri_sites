@@ -28,7 +28,7 @@ function wri_person_update_9400() {
   \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.taxonomy_term.staff_groups', 'wri_person');
   \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_staff_group', 'wri_node');
   \Drupal::service('distro_helper.updates')->installConfig('field.field.node.person.field_staff_group', 'wri_person');
-  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.person.default', ['content#field_staff_group'], 'wri_person');
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.person.default', ['content#field_staff_group'], 'wri_person');
   \Drupal::service('distro_helper.updates')->updateConfig('search_api.index.sitewide', ['field_settings#field_staff_group'], 'wri_search');
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.experts_staff', [
     'display#default#display_options#style#options#grouping[0]#field',
@@ -37,7 +37,6 @@ function wri_person_update_9400() {
     'display#default#display_options#sorts#field_staff_group',
     'display#default#display_options#sorts#field_leadership'
     ], 'wri_search');
-  die();
 }
 
 /**
