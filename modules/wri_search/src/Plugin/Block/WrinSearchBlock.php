@@ -74,6 +74,7 @@ class WrinSearchBlock extends BlockBase {
       $value = $form_state->getValue($key);
       $this->configuration[$key] = $value;
     }
+    unset($this->configuration['component_context']);
   }
 
   /**
