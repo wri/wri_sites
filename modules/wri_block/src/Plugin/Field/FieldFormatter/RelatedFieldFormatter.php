@@ -70,6 +70,9 @@ class RelatedFieldFormatter extends EntityReferenceEntityFormatter {
         $view->setArguments([$node->id()]);
         $build = $view->render();
         $build['#field_name'] = $items->getName();
+        if(empty($view->result)) {
+          $build['#cache']['max-age'] = 60;
+        }
         return $build;
       }
     }
