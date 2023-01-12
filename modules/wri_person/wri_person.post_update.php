@@ -55,7 +55,7 @@ function wri_person_post_update_person_grouping(&$sandbox) {
   }
 
   \Drupal::messenger()
-    ->addMessage($sandbox['current'] . ' users processed.');
+    ->addMessage($sandbox['current'] . ' persons processed.');
 
   if ($sandbox['current'] >= $sandbox['total']) {
     $sandbox['#finished'] = 1;
