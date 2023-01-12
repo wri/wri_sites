@@ -44,7 +44,7 @@ function wri_person_update_9400() {
     'field_settings#staff_group_weight',
   ], 'wri_search');
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.experts_staff', [
-    'display#default#display_options#style#options#grouping[0]#field',
+    'display#default#display_options#style#options#grouping',
     'display#default#display_options#fields#field_staff_group',
     'display#default#display_options#fields#field_leadership',
     'display#default#display_options#sorts#staff_group_weight',
