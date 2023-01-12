@@ -10,8 +10,8 @@ function wri_person_post_update_person_grouping(&$sandbox) {
   // Work through Persons.
   if (!isset($sandbox['total'])) {
     $nids = \Drupal::entityQuery('node')
-      ->condition('bundle', 'person')
-      ->condition('field_staff_group', '', 'IS NULL')
+      ->condition('type', 'person')
+      ->notExists('field_staff_group')
       ->execute();
     $sandbox['total'] = count($nids);
     $sandbox['current'] = 0;
@@ -24,8 +24,8 @@ function wri_person_post_update_person_grouping(&$sandbox) {
 
   $users_per_batch = 25;
   $nids = \Drupal::entityQuery('node')
-    ->condition('bundle', 'person')
-    ->condition('field_staff_group', '', 'IS NULL')
+    ->condition('type', 'person')
+    ->notExists('field_staff_group')
     ->range(0, $users_per_batch)
     ->execute();
   if (empty($nids)) {
@@ -44,12 +44,11 @@ function wri_person_post_update_person_grouping(&$sandbox) {
 
   foreach ($nids as $nid) {
     $node = \Drupal\node\Entity\Node::load($nid);
-    // ... do something with the loaded node entity ...
     if ($node->field_leadership->value == '1') {
-      $node->field_staff_group->set($leader_id);
+      $node->field_staff_group->set(0, current($leader_id));
     }
     else {
-      $node->field_staff_group->set($staff_id);
+      $node->field_staff_group->set(0, current($staff_id));
     }
     $node->save();
     $sandbox['current']++;
