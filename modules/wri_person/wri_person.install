@@ -8,7 +8,7 @@
 use Drupal\taxonomy\Entity\Term;
 
 /**
- *
+ * Implements hook_install().
  */
 function wri_person_install() {
   wri_person_create_person_group();

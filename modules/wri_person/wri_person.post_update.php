@@ -8,7 +8,7 @@
 use Drupal\node\Entity\Node;
 
 /**
- *
+ * Adds a default Staff Grouping for all Persons.
  */
 function wri_person_post_update_person_grouping(&$sandbox) {
   // Fill sandbox.
