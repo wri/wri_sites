@@ -413,18 +413,19 @@ display:
             group_items: {  }
           plugin_id: search_api_language
       sorts:
-        field_staff_group:
-          id: field_staff_group
+        staff_group_weight:
+          id: staff_group_weight
           table: search_api_index_sitewide
-          field: field_staff_group
+          field: staff_group_weight
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api
           order: ASC
-          exposed: false
           expose:
             label: ''
-          plugin_id: search_api
+            field_identifier: ''
+          exposed: false
         field_weight:
           id: field_weight
           table: search_api_index_sitewide
