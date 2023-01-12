@@ -4,8 +4,12 @@
  * @file
  * Update hooks for person config.
  */
+
 use Drupal\taxonomy\Entity\Term;
 
+/**
+ *
+ */
 function wri_person_install() {
   wri_person_create_person_group();
 }
@@ -37,14 +41,15 @@ function wri_person_update_9400() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.person.default', ['content#field_staff_group'], 'wri_person');
   \Drupal::service('distro_helper.updates')->updateConfig('search_api.index.sitewide', [
     'field_settings#field_staff_group',
-    'field_settings#staff_group_weight'], 'wri_search');
+    'field_settings#staff_group_weight',
+  ], 'wri_search');
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.experts_staff', [
     'display#default#display_options#style#options#grouping[0]#field',
     'display#default#display_options#fields#field_staff_group',
     'display#default#display_options#fields#field_leadership',
     'display#default#display_options#sorts#staff_group_weight',
-    'display#default#display_options#sorts#field_leadership'
-    ], 'wri_search');
+    'display#default#display_options#sorts#field_leadership',
+  ], 'wri_search');
   // Post-install hook, update all Leaders and Non-leaders.
 }
 
@@ -71,7 +76,7 @@ function wri_person_create_person_group() {
     'name' => 'Global Executive Team',
     'vid' => 'staff_groups',
     'uuid' => '51a8936a-2d62-4452-b5c2-1fd0b542e39e',
-    'weight' => 0
+    'weight' => 0,
   ])->save();
 
   Term::create([

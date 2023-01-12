@@ -5,6 +5,11 @@
  * Person module post_update implementations.
  */
 
+use Drupal\node\Entity\Node;
+
+/**
+ *
+ */
 function wri_person_post_update_person_grouping(&$sandbox) {
   // Fill sandbox.
   // Work through Persons.
@@ -43,7 +48,7 @@ function wri_person_post_update_person_grouping(&$sandbox) {
     ->execute();
 
   foreach ($nids as $nid) {
-    $node = \Drupal\node\Entity\Node::load($nid);
+    $node = Node::load($nid);
     if ($node->field_leadership->value == '1') {
       $node->field_staff_group->set(0, current($leader_id));
     }
