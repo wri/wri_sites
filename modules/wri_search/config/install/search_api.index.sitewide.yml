@@ -370,6 +370,16 @@ field_settings:
     dependencies:
       module:
         - wri_search
+  staff_group_weight:
+    label: 'Staff group Weight'
+    datasource_id: 'entity:node'
+    property_path: 'field_staff_group:entity:weight'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_staff_group
+      module:
+        - taxonomy
   status:
     label: Published
     datasource_id: 'entity:node'
