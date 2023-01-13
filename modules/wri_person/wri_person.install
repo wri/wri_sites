@@ -47,8 +47,7 @@ function wri_person_update_9400() {
     'display#default#display_options#style#options#grouping',
     'display#default#display_options#fields#field_staff_group',
     'display#default#display_options#fields#field_leadership',
-    'display#default#display_options#sorts#staff_group_weight',
-    'display#default#display_options#sorts#field_leadership',
+    'display#default#display_options#sorts',
   ], 'wri_search');
   // Post-install hook, update all Leaders and Non-leaders.
 }
