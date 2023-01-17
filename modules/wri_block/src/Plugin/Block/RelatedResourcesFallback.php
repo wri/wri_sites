@@ -91,7 +91,7 @@ class RelatedResourcesFallback extends BlockBase implements ContainerFactoryPlug
         return $build;
       }
     }
-    return [];
+    return ['#cache' => ['max-age' => 60]];
   }
 
 }
