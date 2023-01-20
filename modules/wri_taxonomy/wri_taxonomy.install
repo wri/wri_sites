@@ -36,5 +36,5 @@ function wri_taxonomy_install() {
  * Update the argument for the resource type to allow spaces.
  */
 function wri_taxonomy_update_9501 () {
-  \Drupal::service('distro_helper.updates')->updateConfig('views.view.resource_types', 'wri_taxonomy', ['display#default#display_options#arguments']);
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.resource_types', ['display#default#display_options#arguments'], 'wri_taxonomy');
 }
