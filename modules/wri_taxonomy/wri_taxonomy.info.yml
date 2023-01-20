@@ -6,3 +6,4 @@ package: WRI
 dependencies:
   - cer
   - taxonomy
+  - wri_common
