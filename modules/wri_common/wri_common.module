@@ -309,9 +309,7 @@ function wri_common_views_data_alter(&$data) {
     $data['taxonomy_term_field_data']['spaced_name'] = [
       'title' => t('Custom: Taxonomy name with spaces'),
       'title short' => t('Name (spaces)'),
-      'field' => $term_name['field'],
       'argument' => $term_name['argument'],
-      'entity field' => $term_name['entity field'],
     ];
 
     $data['taxonomy_term_field_data']['spaced_name']['argument']['id'] = 'string_with_space';
