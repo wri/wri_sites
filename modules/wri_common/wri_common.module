@@ -302,21 +302,17 @@ function wri_common_page_attachments_alter(array &$attachments) {
  * Implements hook_views_data_alter().
  */
 function wri_common_views_data_alter(&$data) {
-  // Works only if "field_slug" is defined on taxonomy terms.
   if (isset($data['taxonomy_term_field_data'])) {
     $term_name = $data['taxonomy_term_field_data']['name'];
 
-    // Create a new views argument for reading slug arguments and interpreting
-    // them as taxonomy terms.
+    // Create a new views argument for reading taxonomy term names with spaces.
     $data['taxonomy_term_field_data']['spaced_name'] = [
-      'group' => $term_name['group'],
       'title' => t('Custom: Taxonomy name with spaces'),
       'title short' => t('Name (spaces)'),
-      'help' => $term_name['help'],
-      // We override the argument. This is where we do our tricks!
       'argument' => $term_name['argument'],
     ];
 
     $data['taxonomy_term_field_data']['spaced_name']['argument']['id'] = 'string_with_space';
+    $data['taxonomy_term_field_data']['spaced_name']['argument']['real field'] = 'name';
   }
 }
