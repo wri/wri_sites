@@ -39,7 +39,7 @@
 
       {# Add mobile more items menu #}
       {% if content.left_sidebar|render|striptags|trim is not empty %}
-        <div {{ region_attributes.left_sidebar.addClass('layout__region', 'layout__region--left_sidebar', 'left-sidebar', 'mobile', 'more-on') }}>
+        <div class="layout__region layout__region--left_sidebar left-sidebar mobile more-on">
           <div class="field-label"><a href="#">{{ "More on"|t }}</a></div>
           <div class="more-on__items">
             {{ content.left_sidebar }}
@@ -54,7 +54,7 @@
 
   <div class="article__main grid margin-top-md">
     {% if content.left_sidebar|render|striptags|trim is not empty %}
-    <div {{ region_attributes.left_sidebar.addClass('layout__region', 'layout__region--left_sidebar', 'left-sidebar', 'more-on') }}>
+      <div class="layout__region layout__region--left_sidebar left-sidebar">
       <div class="field-label">{{ "More on"|t }}</div>
       <div class="more-on__items">
         {{ content.left_sidebar }}

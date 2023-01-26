@@ -82,76 +82,6 @@
         display: block;
         position: relative;
       }
-
-      .left-sidebar.mobile {
-        display: block;
-        margin: 0;
-        max-width: rem(200);
-
-        @include mq($md) {
-          display: none;
-        }
-
-        .field-label {
-          @include font($acumin-semi-cond, "normal");
-          border-radius: 3px;
-          border: 1px solid $black;
-          cursor: pointer;
-          display: flex;
-          font-style: normal;
-          justify-content: space-between;
-          margin-bottom: 0;
-          margin-left: rem(10);
-          padding: rem(10);
-
-          &::after {
-            background: url(../img/svgs/arrow-thin.svg) no-repeat center center /
-              contain;
-            content: "";
-            display: block;
-            height: 16px;
-            transform: rotate(90deg);
-            transition: transform 0.2s ease;
-            width: 16px;
-          }
-        }
-
-        .more-on__items ul {
-          background-color: $white;
-          border: 1px solid $light-grey;
-          box-sizing: border-box;
-          left: $grid-gutter-mobile;
-          opacity: 0;
-          padding: rem(15) rem(20);
-          position: absolute;
-          transition: all 0.5s ease;
-          visibility: hidden;
-          width: calc(100% - (#{$grid-gutter-mobile}) * 2);
-
-          li {
-            margin: 0 0 rem(7);
-
-            &:last-of-type {
-              margin-bottom: 0;
-            }
-          }
-
-          a {
-            @include font-line-height(18, 24);
-          }
-        }
-
-        &.active ul {
-          opacity: 1;
-          visibility: visible;
-          z-index: 1;
-          transition: all 0.2s ease;
-        }
-
-        &.active .field-label::after {
-          transform: rotate(-90deg);
-        }
-      }
     }
   }
 
@@ -172,27 +102,19 @@
         text-decoration: none;
       }
     }
+  }
 
-    .more-on__items {
-      ul {
-        list-style: none;
-        margin: 0;
+  .more-on__items {
+    ul li {
+      @include font($acumin-pro, "semibold");
+      @include font-line-height(14, 21);
+      color: $green;
+    }
 
-        li {
-          margin: 0 0 rem(3);
-        }
-      }
-
-      ul li {
-        @include font($acumin-pro, "semibold");
-        @include font-line-height(14, 21);
-        color: $green;
-      }
-      ul li a {
-        @include text-underline();
-        background-position: left 100%;
-        text-decoration: none;
-      }
+    ul li a {
+      @include text-underline();
+      background-position: left 100%;
+      text-decoration: none;
     }
   }
 }
