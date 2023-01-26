@@ -26,13 +26,6 @@
     }
   }
 
-  &.active ul {
-    opacity: 1;
-    visibility: visible;
-    z-index: 1;
-    transition: all 0.2s ease;
-  }
-
   &.active .field-label::after {
     transform: rotate(-90deg);
   }
@@ -50,6 +43,13 @@
   transition: all 0.5s ease;
   visibility: hidden;
   width: calc(100% - (#{$grid-gutter-mobile}) * 2);
+
+  .active & {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+    transition: all 0.2s ease;
+  }
 
   ul {
     list-style: none;
