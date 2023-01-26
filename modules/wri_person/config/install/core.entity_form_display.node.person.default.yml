@@ -17,6 +17,7 @@ dependencies:
     - field.field.node.person.field_profile_image
     - field.field.node.person.field_project_expert
     - field.field.node.person.field_quote
+    - field.field.node.person.field_staff_group
     - field.field.node.person.field_title
     - field.field.node.person.field_topics
     - field.field.node.person.field_twitter_account
@@ -229,6 +230,12 @@ content:
     third_party_settings: {  }
     type: text_textarea
     region: content
+  field_staff_group:
+    type: options_select
+    weight: 130
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_title:
     weight: -7
     settings:

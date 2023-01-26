@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_leadership
+    - field.storage.node.field_staff_group
     - search_api.index.sitewide
     - taxonomy.vocabulary.resource_type
   content:
@@ -76,7 +76,7 @@ display:
         options:
           grouping:
             -
-              field: field_leadership
+              field: field_staff_group
               rendered: true
               rendered_strip: false
           row_class: ''
@@ -101,13 +101,15 @@ display:
               simple_page: default
               subpage: default
       fields:
-        field_leadership:
-          id: field_leadership
+        field_staff_group:
+          id: field_staff_group
           table: search_api_datasource_sitewide_entity_node
-          field: field_leadership
+          field: field_staff_group
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
           label: ''
           exclude: false
           alter:
@@ -149,13 +151,11 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: boolean
+          click_sort_column: target_id
+          type: entity_reference_label
           settings:
-            format: default
-            format_custom_true: ''
-            format_custom_false: ''
-          group_column: value
+            link: false
+          group_column: target_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -165,19 +165,40 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          field_rendering: false
-          fallback_handler: search_api_boolean
+          field_rendering: true
+          fallback_handler: search_api_entity
           fallback_options:
-            type: custom
-            type_custom_true: Leadership
-            type_custom_false: 'Program Experts & Staff'
-            not: false
             link_to_item: false
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: node
-          plugin_id: search_api_field
+            display_methods:
+              department:
+                display_method: label
+              embed_types:
+                display_method: label
+              featured:
+                display_method: label
+                view_mode: default
+              languages:
+                display_method: label
+              media_tags:
+                display_method: label
+              publication_series:
+                display_method: label
+              regions:
+                display_method: label
+                view_mode: default
+              resource_type:
+                display_method: label
+              staff_groups:
+                display_method: label
+              tags:
+                display_method: label
+                view_mode: default
+              topics_and_subtopics:
+                display_method: label
+                view_mode: default
       filters:
         status:
           id: status
@@ -392,18 +413,19 @@ display:
             group_items: {  }
           plugin_id: search_api_language
       sorts:
-        field_leadership:
-          id: field_leadership
+        staff_group_weight:
+          id: staff_group_weight
           table: search_api_index_sitewide
-          field: field_leadership
+          field: staff_group_weight
           relationship: none
           group_type: group
           admin_label: ''
-          order: DESC
-          exposed: false
+          plugin_id: search_api
+          order: ASC
           expose:
             label: ''
-          plugin_id: search_api
+            field_identifier: ''
+          exposed: false
         field_weight:
           id: field_weight
           table: search_api_index_sitewide
@@ -468,7 +490,7 @@ display:
         - user
         - 'user.node_grants:view'
       tags:
-        - 'config:field.storage.node.field_leadership'
+        - 'config:field.storage.node.field_staff_group'
         - 'config:search_api.index.sitewide'
   experts_staff1:
     display_plugin: page
@@ -491,5 +513,5 @@ display:
         - user
         - 'user.node_grants:view'
       tags:
-        - 'config:field.storage.node.field_leadership'
+        - 'config:field.storage.node.field_staff_group'
         - 'config:search_api.index.sitewide'

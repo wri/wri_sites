@@ -5,6 +5,15 @@
  * Update hooks for person config.
  */
 
+use Drupal\taxonomy\Entity\Term;
+
+/**
+ * Implements hook_install().
+ */
+function wri_person_install() {
+  wri_person_create_person_group();
+}
+
 /**
  * Add the Person Listing paragraph.
  */
@@ -21,6 +30,29 @@ function wri_person_update_9301() {
 }
 
 /**
+ * Add the Person Grouping field, and sort by it.
+ */
+function wri_person_update_9400() {
+  \Drupal::service('distro_helper.updates')->installConfig('taxonomy.vocabulary.staff_groups', 'wri_taxonomy');
+  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.taxonomy_term.staff_groups', 'wri_person');
+  wri_person_create_person_group();
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_staff_group', 'wri_node');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.person.field_staff_group', 'wri_person');
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.person.default', ['content#field_staff_group'], 'wri_person');
+  \Drupal::service('distro_helper.updates')->updateConfig('search_api.index.sitewide', [
+    'field_settings#field_staff_group',
+    'field_settings#staff_group_weight',
+  ], 'wri_search');
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.experts_staff', [
+    'display#default#display_options#style#options#grouping',
+    'display#default#display_options#fields#field_staff_group',
+    'display#default#display_options#fields#field_leadership',
+    'display#default#display_options#sorts',
+  ], 'wri_search');
+  // Post-install hook, update all Leaders and Non-leaders.
+}
+
+/**
  * Implements hook_update_dependencies().
  */
 function wri_person_update_dependencies() {
@@ -30,4 +62,26 @@ function wri_person_update_dependencies() {
   ];
 
   return $dependencies;
+}
+
+/**
+ * Create some person group terms.
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function wri_person_create_person_group() {
+  // Enter our terms into the new taxonomy.
+  Term::create([
+    'name' => 'Global Executive Team',
+    'vid' => 'staff_groups',
+    'uuid' => '51a8936a-2d62-4452-b5c2-1fd0b542e39e',
+    'weight' => 0,
+  ])->save();
+
+  Term::create([
+    'name' => 'Program Experts & Staff',
+    'vid' => 'staff_groups',
+    'uuid' => '7bc441ea-af16-42b2-8111-7f202c979e28',
+    'weight' => 1,
+  ])->save();
 }

@@ -248,7 +248,7 @@
         "npm-asset/jquery.toc": "^0.4.0",
         "oomphinc/composer-installers-extender": "^2.0",
         "solarium/solarium": "^6.1.5",
-        "thinkshout/distro_helper": "^1.0"
+        "thinkshout/distro_helper": "dev-early-exit"
     },
     "require-dev": {
         "drupal/coder": "^8.3",

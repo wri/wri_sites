@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_staff_group
+    - node.type.person
+    - taxonomy.vocabulary.staff_groups
+  content:
+    - 'taxonomy_term:staff_groups:7bc441ea-af16-42b2-8111-7f202c979e28'
+id: node.person.field_staff_group
+field_name: field_staff_group
+entity_type: node
+bundle: person
+label: 'Staff group'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    target_uuid: 7bc441ea-af16-42b2-8111-7f202c979e28
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      staff_groups: staff_groups
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

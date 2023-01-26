@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.staff_groups
+id: taxonomy_term.staff_groups
+target_entity_type_id: taxonomy_term
+target_bundle: staff_groups
+default_langcode: site_default
+language_alterable: false
