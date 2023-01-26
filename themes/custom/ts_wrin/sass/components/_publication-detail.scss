@@ -119,11 +119,22 @@
       @include hocus {
         text-decoration: underline;
       }
+
+      &.more-open-close {
+        font-weight: normal;
+      }
     }
 
     .field-label-above,
     .field-label-inline {
       @extend .italic-tiny;
+    }
+
+    .field-label-above a {
+      @include mq($lg) {
+        @include font($caslon, "regular", "italic");
+        @include font-line-height(15, 19);
+      }
     }
 
     .field-label-above.top-border-medium {

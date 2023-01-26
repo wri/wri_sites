@@ -6,11 +6,11 @@
 export default function(context) {
   const $ = jQuery;
 
-  $(".more-on .field-label a").click(function(e) {
+  $(".more-on .field-label a", context).click(function(e) {
     e.preventDefault();
   });
 
-  $(".more-on .field-label").click(function() {
+  $(".more-on .field-label", context).click(function() {
     var el = $(this).parent();
     if (el.hasClass("active")) {
       el.removeClass("active");

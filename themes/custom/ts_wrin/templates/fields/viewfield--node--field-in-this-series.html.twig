@@ -49,6 +49,7 @@
 {%
   set title_classes = [
     'field-label',
+    'field-label-above',
     'margin-bottom-sm',
     'top-border-medium',
     label_display == 'visually_hidden' ? 'visually-hidden',
@@ -58,7 +59,7 @@
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if not label_hidden and label %}
-    <div{{ title_attributes.addClass(title_classes) }}><a href="#">{{ label }}</a></div>
+    <div{{ title_attributes.addClass(title_classes) }}><a class="more-open-close" href="#">{{ label }}</a></div>
   {% endif %}
   {{ title_suffix }}
   <div class="more-on__items">
