@@ -344,6 +344,7 @@ display:
           entity_type: node
           entity_field: nid
           plugin_id: node_nid
+      use_ajax: true
       display_extenders: {  }
     cache_metadata:
       max-age: -1
