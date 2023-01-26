@@ -297,3 +297,22 @@ function _wri_common_format_list(array $terms) {
 function wri_common_page_attachments_alter(array &$attachments) {
   $attachments['#attached']['drupalSettings']['wri_common']['gtm_id'] = content_snippets_retrieve('gtm_id');
 }
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function wri_common_views_data_alter(&$data) {
+  if (isset($data['taxonomy_term_field_data'])) {
+    $term_name = $data['taxonomy_term_field_data']['name'];
+
+    // Create a new views argument for reading taxonomy term names with spaces.
+    $data['taxonomy_term_field_data']['spaced_name'] = [
+      'title' => t('Custom: Taxonomy name with spaces'),
+      'title short' => t('Name (spaces)'),
+      'argument' => $term_name['argument'],
+    ];
+
+    $data['taxonomy_term_field_data']['spaced_name']['argument']['id'] = 'string_with_space';
+    $data['taxonomy_term_field_data']['spaced_name']['argument']['real field'] = 'name';
+  }
+}
