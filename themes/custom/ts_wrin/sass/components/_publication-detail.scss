@@ -148,6 +148,11 @@
         }
       }
     }
+
+    .pager .pager__item--next,
+    .pager .pager__item--previous {
+      display: inline-block;
+    }
   }
 }
 
