@@ -124,7 +124,9 @@
   }
 
   .more-on__items a {
+    @include font($acumin-pro, "semibold");
     @include font-line-height(18, 24);
+    color: $green;
     @include text-underline();
     background-position: left 100%;
     text-decoration: none;

@@ -40,7 +40,7 @@
       {# Add mobile more items menu #}
       {% if content.left_sidebar|render|striptags|trim is not empty %}
         <div class="mobile more-on">
-          <div class="field-label"><a href="#">{{ "More on"|t }}</a></div>
+          <div class="field-label"><a href="#" class="more-open-close">{{ "More on"|t }}</a></div>
           <div class="more-on__items">
             {{ content.left_sidebar }}
           </div>
