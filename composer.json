@@ -189,7 +189,6 @@
         "drupal/content_snippets": "^2.0",
         "drupal/core-composer-scaffold": "^9.3",
         "drupal/core-recommended": "^9.3",
-        "drupal/csv_importer": "^1.14",
         "drupal/ctools": "^3.7",
         "drupal/custom_robots": "1.x-dev",
         "drupal/diff": "^1.0",
