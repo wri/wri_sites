@@ -77,7 +77,7 @@
     "extra": {
         "patches": {
             "drupal/core": {
-                "Dynamic Views Arguments via Tokens https://www.drupal.org/project/drupal/issues/1699378": "https://git.drupalcode.org/project/drupal/-/merge_requests/1501.diff",
+                "Dynamic Views Arguments via Tokens https://www.drupal.org/project/drupal/issues/1699378": "https://www.drupal.org/files/issues/2023-01-27/1699378-247.patch",
                 "There is no way to delete or update file entities of other users incl. user/1":"https://www.drupal.org/files/issues/2019-12-12/2949017-59.patch",
                 "Add reusable option to inline block creation https://www.drupal.org/project/drupal/issues/2999491": "https://www.drupal.org/files/issues/2020-05-21/2999491--reusable-title-display--49.patch",
                 "Allow field blocks to display the configuration label when set in Layout Builder https://www.drupal.org/project/drupal/issues/3039185": "https://www.drupal.org/files/issues/2020-07-17/3039185-block_title-33.patch",
