@@ -28,7 +28,7 @@ function wri_publication_update_9401() {
     'display#default#display_options#sorts',
     'display#default#display_options#arguments#field_publication_series_target_id#break_phrase',
     'display#default#display_options#arguments#field_publication_series_target_id#default_argument_options#anyall',
-    'display#default#display_options#use_ajax'
+    'display#default#display_options#use_ajax',
   ], 'wri_publication');
 }
 
