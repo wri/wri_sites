@@ -11,6 +11,9 @@ block.settings.single_file_component_block:wri_search_menu:
     search_nav_label:
       type: text
       label: 'Input label'
+    search_nav_destination:
+      type: text
+      label: 'Form destination url'
     search_nav_id:
       type: string
       label: 'Block ID'

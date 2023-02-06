@@ -27,6 +27,7 @@ class WrinSearchBlock extends BlockBase {
       'search_nav_label' => '',
       'search_nav_id' => '',
       'search_nav_submit' => '',
+      'search_nav_destination' => '/search',
     ];
   }
 
@@ -49,6 +50,12 @@ class WrinSearchBlock extends BlockBase {
       '#type'   => 'textfield',
       '#title'  => $this->t('Input label'),
       '#default_value' => $default_values['search_nav_label'] ?? 'What can we help you find?',
+    ];
+
+    $form['search_nav_destination'] = [
+      '#type'   => 'textfield',
+      '#title'  => $this->t('Form destionation'),
+      '#default_value' => $default_values['search_nav_destination'] ?? '/search',
     ];
 
     if ($form_state->getFormObject() instanceof EntityFormInterface) {
@@ -84,6 +91,7 @@ class WrinSearchBlock extends BlockBase {
     $default_values = $this->configuration['component_context'] ?? $this->configuration;
     $build['content'] = [
       '#theme' => 'wri_search_menu',
+      '#search_nav_destination' => $default_values['search_nav_destination'],
       '#search_nav_title' => $default_values['search_nav_title'],
       '#search_nav_description' => $default_values['search_nav_description'],
       '#search_nav_label' => $default_values['search_nav_label'],
