@@ -137,6 +137,7 @@ function wri_search_theme() {
         'search_nav_label' => '',
         'search_nav_id' => '',
         'search_nav_submit' => '',
+        'search_nav_destination' => '/search',
       ],
     ],
   ];
