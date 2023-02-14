@@ -1,0 +1,11 @@
+services:
+  wri_latest_tweet_block.twitter:
+    class: '\Drupal\wri_latest_tweet\WriTwitterManager'
+    arguments:
+      [
+        "@http_client_factory",
+        "@logger.channel.twitter_api_block",
+        "@key.repository",
+        "@token",
+        "@current_user",
+      ]

@@ -14,6 +14,11 @@
           <div class="hero__text--inner padding-vertical">
             <div class="margin-top-xl"></div>
             {{ content.hero.node_title }}
+            {% if content.hero.field_long_title %}
+            <div class="h1 xl white">
+            {{ content.hero.field_long_title }}
+            </div>
+            {% endif %}
             {% if content.hero.childtitle %}
               {{ content.hero.childtitle }}
             {% endif %}
@@ -21,12 +26,13 @@
         </div>
       </div>
       <div class="dark-overlay"></div>
+       {% if content.hero.field_twitter_account %}
+          <div class="block-field-blocknodeprogram-centerfield-twitter-account">
+            {{ content.hero.field_twitter_account }}
+          </div>
+        {% endif %}
       {% if content.hero.field_toc is not empty %}
-      <div class="publication__toc black-bar">
-        <div class="grid publication__toc-inner black-bar-inner">
           {{ content.hero.field_toc }}
-        </div>
-      </div>
       {% endif %}
     </div>
     {% endif %}

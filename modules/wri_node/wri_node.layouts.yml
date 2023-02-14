@@ -142,12 +142,15 @@ layout_hero-and-content:
   default_region: hero-and-content
   icon_map:
     - [hero]
-    - [content]
+    - [hero_text]
+    - [featured_image, content]
   regions:
     hero_image:
       label: Hero Image
     hero_text:
       label: Hero Text
+    featured_image:
+      label: Logo
     content:
       label: Content
 

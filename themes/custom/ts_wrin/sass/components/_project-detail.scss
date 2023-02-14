@@ -1,5 +1,6 @@
 .page-node-type-project-detail,
 .page-node-type-subpage,
+.page-node-type-microsite,
 .subpage {
   .landing-page__hero.has-image {
     .intro p {
@@ -39,10 +40,13 @@
     padding-top: 0;
   }
 
-  .publication__detail .publication__main {
-    .publication__image {
+  .publication__detail .publication__main,
+  .landing-page__content {
+    .publication__image,
+    .layout__region--featured-image {
       img {
         width: 100%;
+        height: auto;
       }
 
       @include center-columns($grid-columns-mobile, $grid-columns-mobile);
@@ -59,12 +63,6 @@
     .main-content {
       @include mq($md) {
         @include column-width(4, 10);
-      }
-    }
-
-    .sidebar {
-      @include mq($lg) {
-        @include column-width(10, 13);
       }
     }
 

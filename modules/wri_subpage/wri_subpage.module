@@ -22,7 +22,7 @@ function wri_subpage_node_insert(EntityInterface $entity) {
 function wri_subpage_node_update(EntityInterface $entity) {
   if (isset($entity->field_parent_page)) {
     $parent = $entity->field_parent_page->entity;
-    if ($parent) {
+    if ($parent && $parent->id()) {
       // Set the correct menu for microsites vs all others.
       'microsite' == $parent->bundle() ? $menu_name = 'microsites' : $menu_name = 'page-hierarchies';
       $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
@@ -67,7 +67,7 @@ function wri_subpage_node_update(EntityInterface $entity) {
  */
 function wri_subpage_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $node = $form_state->getFormObject()->getEntity();
-  if (isset($node->field_parent_page)) {
+  if (isset($node->field_parent_page->value)) {
     $value = '';
     if (isset($node->field_parent_page->entity)) {
       $value = $node->field_parent_page->entity->label();

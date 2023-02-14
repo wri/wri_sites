@@ -1,7 +1,61 @@
+.black-bar {
+  background: $black;
+  color: $white;
+  a {
+    color: $white;
+    text-decoration: none;
+
+    @include hocus() {
+      text-decoration: underline;
+    }
+
+    &.active,
+    &.is-active {
+      color: $med-light-gray;
+    }
+  }
+  .menu-item--expanded > a {
+    color: $brand-gold;
+
+    @include hocus() {
+      text-decoration: underline;
+    }
+  }
+  ul.menu a.is-active {
+    color: $white;
+    text-decoration: underline;
+  }
+
+  .back-arrow svg path,
+  .nav-arrow svg path {
+    fill: $white;
+  }
+}
+.gold-bar {
+  background: $brand-gold;
+  color: $black;
+
+  a {
+    color: $black;
+    text-decoration: none;
+
+    @include hocus() {
+      text-decoration: underline;
+    }
+  }
+  ul.menu a.is-active {
+    text-decoration: underline;
+  }
+
+  .back-arrow svg path,
+  .nav-arrow svg path {
+    fill: $black;
+  }
+}
+
 .publication__toc {
   @include font($acumin-semi-cond, "bold");
-  @include font-line-height(14, 18);
-  background: $black;
+  @include font-line-height(18, 21);
   position: relative;
   z-index: 51;
 
@@ -30,7 +84,7 @@
     }
 
     @include mq($lg) {
-      @include column-width(2, 11);
+      @include column-width(2, 12);
     }
 
     li {
@@ -40,12 +94,10 @@
     .menu-title,
     .menu > ul > li > a {
       @include font($caslon, "bold", "italic");
-      @include font-line-height(15, 15);
-      color: $brand-gold;
+      @include font-line-height(18, 18);
       display: block;
       margin-bottom: 5px;
       position: relative;
-      text-decoration: none;
 
       @include mq($md) {
         margin-right: 0;
@@ -53,11 +105,17 @@
       }
     }
 
-    .menu-wrapper {
+    .toc-list-wrapper {
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu-item--active-trail .menu {
       overflow: scroll;
       -ms-overflow-style: none; /* Internet Explorer 10+ */
       scrollbar-width: none;
       overflow: -moz-scrollbars-none;
+      margin-right: 15px;
 
       &::-webkit-scrollbar {
         display: none;
@@ -85,7 +143,6 @@
       padding: 0;
       width: auto;
       z-index: 1;
-      background: $black;
       position: relative;
 
       li {
@@ -94,20 +151,6 @@
         margin-right: $space-sm;
         padding-top: 0;
         white-space: nowrap;
-
-        a {
-          color: $white;
-          text-decoration: none;
-
-          @include hocus() {
-            color: $med-light-gray;
-          }
-
-          &.active,
-          &.is-active {
-            color: $med-light-gray;
-          }
-        }
       }
     }
 
@@ -121,26 +164,25 @@
       padding: 2px 2px 2px 5px;
       position: absolute;
       right: -20px;
-      width: 8px;
+      width: 30px;
     }
     .back-arrow {
       left: -20px;
       right: auto;
       transform: scaleX(-1);
     }
-    .back-arrow svg path,
-    .nav-arrow svg path {
-      fill: $white;
+    .back-arrow svg,
+    .nav-arrow svg {
+      width: 8px;
     }
   }
 }
 
 .publication__toc nav.toc.no-scroll {
-  .menu-wrapper > ul.menu:after {
+  .toc-list-wrapper .continue {
     content: none;
   }
-  .nav-arrow,
-  .back-arrow {
+  .nav-arrow {
     display: none;
   }
 }

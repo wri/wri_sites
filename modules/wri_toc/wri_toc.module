@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Contains wri_taxonomy.module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function wri_toc_theme() {
+  $items['table_of_contents'] = [
+    'variables' => [
+      'value' => '',
+      'menu_link' => '',
+      'menu_title' => 'page-hierarchies',
+      'node_title' => '',
+      'color_bar' => 'black-bar',
+    ],
+    'template' => 'toc',
+  ];
+  return $items;
+}
