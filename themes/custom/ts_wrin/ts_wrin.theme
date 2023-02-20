@@ -166,9 +166,9 @@ function ts_wrin_preprocess_field(array &$variables) {
   }
   // Add 'Show More Link' value to Featured Experts field.
   if ($variables['element']['#field_name'] == 'field_featured_experts') {
-    $node = \Drupal::routeMatch()->getParameter('node');
-    if ($node instanceof NodeInterface && $node->field_show_more_link) {
-      $variables["show_more_link"] = $node->field_show_more_link->value;
+    $object = $variables['element']['#object'];
+    if (isset($object->field_show_more_link)) {
+      $variables["show_more_link"] = $object->field_show_more_link->value;
     }
   }
 }
