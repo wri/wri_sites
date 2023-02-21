@@ -4,5 +4,12 @@
  * Pull in the featured expert template with no link.
  */
 #}
-{% extends "@ts_wrin/fields/field--node--field-featured-experts.html.twig" %}
-
+{% set link_attributes = create_attribute(element['#object'].field_more_link[0].options.attributes ?? []) %}
+{% set show_more_link = element['#object'].field_more_link[0].uri ? 'custom' : '0' %}
+{% set show_more_link_value %}
+  <div class="layout__region--more-link">
+    <span class="more-link__line"></span>
+    {{ link(element['#object'].field_more_link[0].title, element['#object'].field_more_link[0].uri, link_attributes.addClass('button small')) }}
+  </div>
+{% endset %}
+{% include "@ts_wrin/fields/field--node--field-featured-experts.html.twig" %}

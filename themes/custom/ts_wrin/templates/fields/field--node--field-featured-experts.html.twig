@@ -37,5 +37,12 @@
       <a href="/about/experts-staff" class="button small">{{ "View all Experts"|t }}</a>
     </div>
     {% endblock %}
+  {% elseif show_more_link == 'custom' %}
+    {# Bit cheap -- the field--block-content--field-featured-experts field
+    needed a way to pass the show_more_link variable to this template and that
+    isn't possible with an extend, so it's including it instead.
+    TODO: set this field and all elements that use it to use an included
+    partial template instead. #}
+    {{ show_more_link_value }}
   {% endif %}
 </div>
