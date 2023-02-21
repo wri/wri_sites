@@ -52,7 +52,6 @@ function wri_person_update_9400() {
   // Post-install hook, update all Leaders and Non-leaders.
 }
 
-
 /**
  * Add the Person Listing block more link.
  */
