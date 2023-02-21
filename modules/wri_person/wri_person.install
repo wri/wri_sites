@@ -52,6 +52,15 @@ function wri_person_update_9400() {
   // Post-install hook, update all Leaders and Non-leaders.
 }
 
+
+/**
+ * Add the Person Listing block more link.
+ */
+function wri_person_update_9500() {
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.person_listing.field_more_link', 'wri_person');
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.block_content.person_listing.default', ['content#field_more_link'], 'wri_person');
+}
+
 /**
  * Implements hook_update_dependencies().
  */
