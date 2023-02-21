@@ -4,6 +4,9 @@ dependencies:
   config:
     - block_content.type.person_listing
     - field.field.block_content.person_listing.field_featured_experts
+    - field.field.block_content.person_listing.field_more_link
+  module:
+    - link_attributes
 id: block_content.person_listing.default
 targetEntityType: block_content
 bundle: person_listing
@@ -18,6 +21,23 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_more_link:
+    type: link_attributes
+    weight: 2
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      enabled_attributes:
+        target: true
+        rel: true
+        id: false
+        name: false
+        class: false
+        accesskey: false
+        aria-label: false
+        title: false
     third_party_settings: {  }
   info:
     type: string_textfield
