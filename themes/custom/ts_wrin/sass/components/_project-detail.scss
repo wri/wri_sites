@@ -62,6 +62,9 @@
 
     .main-content {
       @include mq($md) {
+        @include column-width(3, 11);
+      }
+      @include mq($lg) {
         @include column-width(4, 10);
       }
     }
