@@ -4,4 +4,8 @@
  * Theme override for the heirarchy menu.
  */
 #}
-{% extends '@ts_wrin/_includes/_toc.html.twig' %}
+<div class="internal-menu-pages">
+  <div class="field-label" tabindex="0"><a tabindex="-1" href="#">{{ "Menu"|t }}</a></div>
+  {% include '@ts_wrin/_includes/_toc.html.twig' %}
+  </div>
+</div>
