@@ -243,7 +243,10 @@ export default function(context) {
     let tocScrollMenu = $("#menu-toc .menu-item--active-trail .menu");
 
     let tocDebouncedSideScroll = debounce(function() {
-      if (tocMainParent.width() > tocMenuItem[0].scrollWidth - 30) {
+      if (
+        tocMenuItem[0] &&
+        tocMainParent.width() > tocMenuItem[0].scrollWidth - 30
+      ) {
         tocMainParent.addClass("no-scroll");
       } else {
         tocMainParent.removeClass("no-scroll");
