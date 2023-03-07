@@ -2,7 +2,8 @@ name: Field Permissions
 type: module
 description: 'Set field-level permissions to create, update or view fields.'
 configure: field_permissions.reports
-package: field
+package: Fields
 core_version_requirement: '>=8.9 <11'
 dependencies:
   - drupal:field
+  
