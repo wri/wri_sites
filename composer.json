@@ -136,6 +136,9 @@
             },
             "drupal/views_extras": {
                 "Why does Views Extras require Drupal_Visitors to be part of the cookie name?" : "https://www.drupal.org/files/issues/2021-12-27/3054202-09.patch"
+            },
+            "drupal/layout_builder_modal": {
+                "incompatibility with layout_builder_st, contextual links broken https://www.drupal.org/project/layout_builder_modal/issues/3133695": "https://www.drupal.org/files/issues/2022-12-15/3133695-13.patch"
             }
         },
         "drupal-scaffold": {
