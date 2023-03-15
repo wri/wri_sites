@@ -1,0 +1,38 @@
+{% set title_attributes = create_attribute() %}
+  {%
+    set titleClasses = [
+    'h2',
+    'margin-bottom-sm'
+  ]
+  %}
+  {% if content.content.field_title_logo|render %}
+    {% set title = content.content.field_title_logo %}
+  {% else %}
+    {% set title = content.content.block_label %}
+  {% endif %}
+
+<div class="block-wrapper image-cta">
+  <div class="cta-text-wrapper container padding-vertical">
+    <div class="cta-text-wrapper__inner">
+      {{ title_prefix }}
+      {% if title %}
+        <div {{ title_attributes.addClass(titleClasses) }}>{{ title }}</div>
+      {% endif %}
+      {{ title_suffix }}
+      {% block content %}
+        <div class="margin-bottom-sm {{ textColor }}">
+          {{ content.content.field_intro }}
+        </div>
+        <div class="button-wrapper">
+          {{ content.content.field_link }}
+        </div>
+      {% endblock %}
+    </div>
+  </div>
+
+  {% block image %}
+    <div class="image-wrapper">
+      {{ content.image }}
+    </div>
+  {% endblock %}
+</div>
