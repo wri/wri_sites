@@ -1,0 +1,18 @@
+{{ attach_library('wri_filter/wri_filter.filter') }}
+<div class="filter-tray tray-contents content-side-padding">
+  <div class="header">
+    <h2 class="h2 white">Filter Your Site Experience by Topic</h2>
+    <p class="white">Applying the filters below will filter all articles, data, insights and projects by the topic area you select.</p>
+  </div>
+  <ul>
+    <li><a class="sitewide-content-filter all-topics active h4 white" href="/content-filter/remove">All Topics <span class="filter-remove italic-tiny white">Remove filter</span></a></li>
+    {% for filter in get_all_filters() %}
+      <li><a class="sitewide-content-filter white h4" data-filter="{{ filter.name|lower }}" href="/content-filter/{{ filter.id }}">{{ filter.name|title }} <span class="filter-description italic-tiny black">filter site by {{ filter.name|title }}</span></a></li>
+    {% endfor %}
+  </ul>
+  <button class="tray-nav__close" aria-label="Toggle filter Menu" title="Close Filter Menu">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ffffff">
+      <path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/>
+    </svg>
+  </button>
+</div>
