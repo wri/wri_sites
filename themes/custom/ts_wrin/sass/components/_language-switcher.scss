@@ -1,0 +1,41 @@
+.tray-contents ul.links a.is-active {
+  color: $white;
+}
+.block-language ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.language-link {
+  color: $white;
+  font-size: 1.25rem;
+  line-height: 1;
+  font-family: "acumin-pro-semi-condensed", sans-serif;
+  font-weight: 700;
+}
+.block-language ul li .language-link.is-active {
+  color: $brand-gold;
+}
+.block-language ul li .language-link:hover,
+.block-language ul li .language-link:active,
+.block-language ul li .language-link:focus,
+.block-language ul li .language-link.is-active {
+  background-color: $brand-gold;
+  color: $black !important;
+}
+.block-language ul li .language-link {
+  display: block;
+  padding: 0.5625rem 0 0.5625rem 0.5625rem;
+  margin-bottom: 0.125rem;
+  text-decoration: none;
+  border-radius: 5px;
+}
+.block-language ul li .language-link.is-active:active,
+.block-language ul li .language-link.is-active:hover,
+.block-language ul li .language-link.is-active:focus {
+  background-color: $black;
+  color: $brand-gold !important;
+}
+.block-language ul li .language-link.is-active {
+  color: $brand-gold;
+}
