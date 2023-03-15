@@ -276,4 +276,14 @@ single_file_component_layout:wri_page_hero:
       label: Content
   icon_map:
     - [content]
-  default_section: content
+  default_region: content
+
+single_file_component_layout:wri_main_page_content:
+  label: "Main page content"
+  template: templates/wri-main-page-content
+  regions:
+    content:
+      label: Content
+  icon_map:
+    - [content]
+  default_region: content
