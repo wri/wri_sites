@@ -1,0 +1,9 @@
+single_file_component_layout:wri_large_cta:
+  label: "Small CTA Block"
+  template: templates/wri-small-cta
+  default_region: content
+  regions:
+    content:
+      label: Content
+  icon_map:
+    - [ content ]
