@@ -1,3 +1,5 @@
+{% extends "block.html.twig" %}
+{% block content %}
 {{ attach_library('wri_filter/wri_filter.filter') }}
 <div class="filter-tray tray-contents content-side-padding">
   <div class="header">
@@ -16,3 +18,4 @@
     </svg>
   </button>
 </div>
+{% endblock %}
