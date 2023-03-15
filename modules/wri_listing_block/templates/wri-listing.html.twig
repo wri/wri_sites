@@ -1,0 +1,42 @@
+{% if content.intro|render %}
+  {% set listing_type = listing_type ~ " columns-50-50" %}
+  {% set header_type = 'h2' %}
+{% else %}
+  {% set header_type = 'h3' %}
+{% endif %}
+{% if content %}
+  <div{{ attributes.addClass(listing_type, 'grid', 'margin-bottom-lg', 'unfriendly-block') }}>
+
+    {% if content.header %}
+      <div {{ region_attributes.header.addClass('layout__region', 'layout__region--header', 'top-border-thick', 'margin-bottom-md') }}>
+        <h2 class="{{ header_type }} margin-zero">
+          {{ content.header }}
+        </h2>
+        {% if content.subheader %}
+          <div class="subheader">
+            {{ content.subheader }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if content.intro|render %}
+      <div {{ region_attributes.intro.addClass('layout__region', 'layout__region--intro', 'intro', 'margin-bottom-lg') }}>
+        {{ content.intro }}
+      </div>
+    {% endif %}
+
+    {% if content.listing %}
+      <div {{ region_attributes.listing.addClass('layout__region', 'layout__region--listing') }}>
+        {{ content.listing|without('field_more_link') }}
+      </div>
+    {% endif %}
+
+    {% if content.listing.field_more_link|render %}
+      <div class="layout__region--more-link">
+        <span class="more-link__line"></span>
+        {{ content.listing.field_more_link }}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}
