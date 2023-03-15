@@ -1,0 +1,14 @@
+single_file_component_layout:wri_person_teaser:
+  label: "Person Teaser"
+  template: templates/wri-person-teaser
+  default_region: additional_info
+  regions:
+    image:
+      label: Image
+    name:
+      label: Name
+    additional_info:
+      label: 'Additional info'
+  icon_map:
+    - [ image, name ]
+    - [ additional_info ]
