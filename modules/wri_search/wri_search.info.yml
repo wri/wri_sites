@@ -3,7 +3,6 @@ type: module
 description: 'Custom search menu.'
 core_version_requirement: '^8.8.0 || ^9'
 dependencies:
-  - sfc
   - search_api
   - facets
   - facets_pretty_paths

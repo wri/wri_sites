@@ -4,7 +4,6 @@ description: 'Modules related to people on WRI'
 core_version_requirement: '^8.8.0 || ^9'
 package: WRI
 dependencies:
-  - sfc
   - wri_author
   - wri_io_content
   - wri_media
