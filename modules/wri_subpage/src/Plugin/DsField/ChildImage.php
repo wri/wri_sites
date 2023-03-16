@@ -36,24 +36,24 @@ class ChildImage extends DsFieldBase {
       $node = Node::load($node_id);
     }
     $uri = FALSE;
+    $alt = '';
     if (($node instanceof NodeInterface) && isset($node->field_main_image->entity->field_media_image->entity->uri->value)) {
       $uri = $node->field_main_image->entity->field_media_image->entity->uri->value;
+      $alt = $node->field_main_image->entity->field_media_image->alt;
     }
     elseif (isset($entity->field_main_image->entity->field_media_image->entity->uri->value)) {
       $uri = $entity->field_main_image->entity->field_media_image->entity->uri->value;
+      $alt = $entity->field_main_image->entity->field_media_image->alt;
     }
 
     if ($uri) {
-      $settings = [
-        'uri' => $uri,
-        'lazy' => 'blazy',
-        'responsive_image_style_id' => 'article_hero_large_cta',
-      ];
-
       $build = [
-        '#theme' => 'blazy',
-        '#settings' => $settings,
-        '#attached' => ['library' => ['blazy/load']],
+        '#type' => 'responsive_image',
+        '#responsive_image_style_id' => 'article_hero_large_cta',
+        '#uri' => $uri,
+        '#attributes' => [
+          'alt' => $alt,
+        ],
       ];
     }
 

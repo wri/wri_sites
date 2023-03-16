@@ -12,22 +12,19 @@ dependencies:
     - image.style.max_height_700
     - node.type.region
   module:
-    - blazy
     - ds
     - layout_builder
+    - media
     - text
     - user
     - wri_media
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   ds:
     layout:
       id: layout_hero-and-content
-      library: null
-      disable_css: false
-      entity_classes: all_classes
       settings:
         label: ''
     regions:
@@ -43,9 +40,9 @@ third_party_settings:
         label: hidden
         formatter: default
         settings:
+          link: false
           wrapper: h1
           class: h1
-          link: false
         ft:
           id: reset
           settings:
@@ -57,8 +54,6 @@ mode: main_content
 content:
   field_intro:
     type: text_default
-    weight: 2
-    region: hero_text
     label: hidden
     settings: {  }
     third_party_settings:
@@ -67,71 +62,39 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
             fis-el: ''
             fis-cl: ''
             fis-at: ''
+            fis-def-at: false
             fi: true
             fi-el: ''
             fi-cl: intro
             fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow: false
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-def-at: false
             fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 2
+    region: hero_text
   field_map_image:
-    type: blazy_media
-    weight: 0
-    region: hero_image
+    type: media_thumbnail
     label: hidden
     settings:
+      image_link: ''
       image_style: max_height_700
-      responsive_image_style: ''
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: main_content
-      background: false
-      caption:
-        field_tags: '0'
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_loading:
+        attribute: lazy
     third_party_settings:
       wri_media:
         min_width: ''
@@ -140,6 +103,8 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: hero_image
 hidden:
   content_moderation_control: true
   field_featured: true

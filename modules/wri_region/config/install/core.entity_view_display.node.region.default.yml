@@ -11,8 +11,8 @@ dependencies:
     - image.style.max_height_700
     - node.type.region
   module:
-    - blazy
     - ds
+    - media
     - metatag
     - text
     - user
@@ -23,58 +23,25 @@ bundle: region
 mode: default
 content:
   content_moderation_control:
-    weight: 0
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
   field_intro:
-    weight: 2
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 2
     region: content
   field_map_image:
-    type: blazy_media
-    weight: 1
-    label: above
+    type: media_thumbnail
+    label: hidden
     settings:
+      image_link: ''
       image_style: max_height_700
-      responsive_image_style: ''
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: default
-      background: false
-      caption:
-        field_tags: '0'
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_loading:
+        attribute: lazy
     third_party_settings:
       wri_media:
         min_width: ''
@@ -83,13 +50,14 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 1
     region: content
   field_metatags:
-    weight: 3
+    type: metatag_empty_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: metatag_empty_formatter
+    weight: 3
     region: content
 hidden:
   field_narrative_taxonomy: true

@@ -6,23 +6,20 @@ dependencies:
     - field.field.taxonomy_term.regions.field_intro
     - field.field.taxonomy_term.regions.field_landing_page
     - field.field.taxonomy_term.regions.field_main_image
-    - responsive_image.styles.card
+    - image.style.363x245
     - taxonomy.vocabulary.regions
   module:
-    - blazy
     - ds
     - layout_builder
+    - media
     - text
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   ds:
     layout:
       id: layout_card
-      library: null
-      disable_css: false
-      entity_classes: all_classes
       settings:
         label: ''
     regions:
@@ -39,9 +36,9 @@ third_party_settings:
         label: hidden
         formatter: default
         settings:
+          link: false
           wrapper: div
           class: h3
-          link: false
         ft:
           id: reset
           settings:
@@ -53,8 +50,6 @@ mode: card
 content:
   field_intro:
     type: text_default
-    weight: 2
-    region: intro
     label: hidden
     settings: {  }
     third_party_settings:
@@ -63,76 +58,47 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
             fis-el: ''
             fis-cl: ''
             fis-at: ''
+            fis-def-at: false
             fi: true
             fi-el: ''
             fi-cl: secondary
             fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow: false
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-def-at: false
             fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 2
+    region: intro
   field_main_image:
-    type: blazy_media
-    weight: 0
-    region: image
+    type: media_thumbnail
     label: hidden
     settings:
-      image_style: ''
-      responsive_image_style: card
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: card
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_link: ''
+      image_style: 363x245
+      image_loading:
+        attribute: lazy
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: image
 hidden:
   description: true
   field_landing_page: true
