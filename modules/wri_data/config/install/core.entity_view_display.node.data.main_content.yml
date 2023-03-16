@@ -143,53 +143,6 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
-  field_cover_image:
-    type: blazy_media
-    weight: 3
-    region: hero
-    label: hidden
-    settings:
-      image_style: 234x328
-      responsive_image_style: ''
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: main_content
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
-    third_party_settings:
-      ds:
-        ft:
-          id: reset
-          settings:
-            lb: ''
   field_doi:
     type: string
     weight: 5

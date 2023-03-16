@@ -23,11 +23,10 @@ dependencies:
     - node.type.article
     - responsive_image.styles.tile
   module:
-    - blazy
     - ds
     - layout_builder
+    - media_responsive_thumbnail
     - user
-    - wri_media
 third_party_settings:
   layout_builder:
     allow_custom: false
