@@ -22,11 +22,6 @@ targetEntityType: node
 bundle: region
 mode: default
 content:
-  content_moderation_control:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 0
-    region: content
   field_intro:
     type: text_default
     label: hidden
@@ -60,6 +55,7 @@ content:
     weight: 3
     region: content
 hidden:
+  content_moderation_control: true
   field_narrative_taxonomy: true
   field_region: true
   langcode: true

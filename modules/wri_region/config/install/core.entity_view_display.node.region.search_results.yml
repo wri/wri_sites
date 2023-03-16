@@ -24,7 +24,6 @@ third_party_settings:
         label: ''
     regions:
       left_section:
-        - content_moderation_control
         - field_region
       main_section:
         - 'bundle_field:node'
@@ -64,11 +63,6 @@ targetEntityType: node
 bundle: region
 mode: search_results
 content:
-  content_moderation_control:
-    settings: {  }
-    third_party_settings: {  }
-    weight: -20
-    region: left_section
   field_main_image:
     type: entity_reference_entity_id
     label: above
@@ -101,6 +95,7 @@ content:
     weight: 0
     region: left_section
 hidden:
+  content_moderation_control: true
   field_featured: true
   field_intro: true
   field_metatags: true
