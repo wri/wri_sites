@@ -199,7 +199,7 @@
         "drupal/ctools": "^3.7",
         "drupal/custom_robots": "1.x-dev",
         "drupal/diff": "^1.0",
-        "drupal/ds": "^3.13",
+        "drupal/ds": "^5.0.0",
         "drupal/editor_advanced_link": "^1.9",
         "drupal/element_class_formatter": "^1.4",
         "drupal/entity_browser": "^2.6",
