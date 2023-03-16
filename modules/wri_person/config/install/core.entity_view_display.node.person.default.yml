@@ -26,9 +26,9 @@ dependencies:
     - image.style.100x100
     - node.type.person
   module:
-    - blazy
     - ds
     - layout_builder
+    - media
     - text
     - user
 third_party_settings:
@@ -78,50 +78,21 @@ content:
     type: entity_reference_label
     region: content
   field_profile_image:
-    type: blazy_media
-    weight: 0
-    region: image
+    type: media_thumbnail
     label: hidden
     settings:
+      image_link: ''
       image_style: 100x100
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      view_mode: ''
-      cache: 0
-      current_view_mode: ''
-      skin: ''
-      fx: ''
-      style: ''
-      background: false
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      caption: {  }
-      responsive_image_style: ''
-      box_style: ''
-      media_switch: ''
-      ratio: ''
-      thumbnail_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_loading:
+        attribute: lazy
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: image
   field_title:
     type: text_default
     weight: 2
