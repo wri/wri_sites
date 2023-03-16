@@ -35,7 +35,6 @@ dependencies:
     - node.type.publication
     - responsive_image.styles.program_landing_page_hero
   module:
-    - blazy
     - ctools
     - ds
     - element_class_formatter
@@ -45,139 +44,58 @@ dependencies:
     - taxonomy
     - text
     - user
-    - wri_block
 third_party_settings:
   layout_builder:
-    allow_custom: true
     enabled: true
+    allow_custom: true
     sections:
       -
         layout_id: layout_onecol
         layout_settings:
           label: ''
+          context_mapping: {  }
         components:
-          a227c900-78ea-4508-939d-5b06f44b7ffa:
-            uuid: a227c900-78ea-4508-939d-5b06f44b7ffa
-            region: hero_image
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:publication:field_main_image'
-              formatter:
-                label: hidden
-                settings:
-                  image_style: ''
-                  responsive_image_style: program_landing_page_hero
-                  media_switch: ''
-                  thumbnail_style: ''
-                  ratio: ''
-                  view_mode: default
-                  current_view_mode: full
-                  background: false
-                  caption:
-                    title: '0'
-                    alt: '0'
-                  class: ''
-                  id: ''
-                  image: ''
-                  link: ''
-                  overlay: ''
-                  title: ''
-                  vanilla: false
-                  icon: ''
-                  layout: ''
-                  cache: 0
-                  skin: ''
-                  fx: ''
-                  style: ''
-                  box_caption: ''
-                  box_caption_custom: ''
-                  box_media_style: ''
-                  box_style: ''
-                  _uri: ''
-                  breakpoints: {  }
-                  sizes: ''
-                  grid_header: ''
-                  grid: 0
-                  grid_medium: 0
-                  grid_small: 0
-                third_party_settings:
-                  ds:
-                    ft:
-                      id: reset
-                      settings:
-                        lb: ''
-                type: blazy_media
-            additional: {  }
-            weight: 0
-          f7cfafed-623d-42e8-8ab3-54eff414d2cf:
-            uuid: f7cfafed-623d-42e8-8ab3-54eff414d2cf
-            region: hero_image
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:publication:field_intro'
-              formatter:
-                label: hidden
-                settings: {  }
-                third_party_settings: {  }
-                type: text_default
-            additional: {  }
-            weight: 1
           60b9c12e-4773-40dd-9339-eaf9036816aa:
             uuid: 60b9c12e-4773-40dd-9339-eaf9036816aa
             region: content
             configuration:
               id: 'entity_view:node'
               label: 'Entity view (Content)'
-              provider: ctools
               label_display: '0'
+              provider: ctools
               view_mode: main_content
               context_mapping:
                 entity: layout_builder.entity
-            additional: {  }
             weight: -10
+            additional: {  }
           92d9873f-5e02-42fa-bd07-7fe52b58c08c:
             uuid: 92d9873f-5e02-42fa-bd07-7fe52b58c08c
             region: content
             configuration:
+              id: 'extra_field_block:node:publication:content_moderation_control'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'extra_field_block:node:publication:content_moderation_control'
-            additional: {  }
             weight: -9
+            additional: {  }
           e4314601-6301-482b-9289-b066a382766d:
             uuid: e4314601-6301-482b-9289-b066a382766d
             region: content
             configuration:
               id: 'field_block:node:publication:field_projects'
               label: Projects
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: above
-                type: entity_reference_entity_view
-                settings:
-                  view_mode: card
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: card
+                third_party_settings: {  }
             weight: -7
-          e5af764a-5a05-4bdf-bbcd-6eb98a56c605:
-            uuid: e5af764a-5a05-4bdf-bbcd-6eb98a56c605
-            region: content
-            configuration:
-              id: related_resources_fallback
-              label: 'Connected to this report'
-              label_display: visible
-              provider: wri_block
-              context_mapping: {  }
-            weight: -8
             additional: {  }
           de1e5b47-2b96-44ae-b809-cb8c5064adc6:
             uuid: de1e5b47-2b96-44ae-b809-cb8c5064adc6
@@ -185,19 +103,38 @@ third_party_settings:
             configuration:
               id: 'field_block:node:publication:field_primary_contacts'
               label: 'Primary contacts'
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: above
-                type: entity_reference_entity_view
-                settings:
-                  view_mode: teaser
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: teaser
+                third_party_settings: {  }
             weight: -6
+            additional: {  }
+          9a3dd6c3-5fb7-4f9b-ae27-12cb57be1b11:
+            uuid: 9a3dd6c3-5fb7-4f9b-ae27-12cb57be1b11
+            region: content
+            configuration:
+              id: 'field_block:node:publication:field_related_resources'
+              label: 'Connected to this report'
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: teaser
+                third_party_settings: {  }
+            weight: -8
+            additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories: {  }
@@ -212,6 +149,7 @@ third_party_settings:
         'Content fields':
           - 'field_block:node:publication:field_primary_contacts'
           - 'field_block:node:publication:field_projects'
+          - 'field_block:node:publication:field_related_resources'
         Devel: {  }
         Facets: {  }
         'Facets summary (Experimental)': {  }
@@ -223,114 +161,16 @@ third_party_settings:
         'WRI block':
           - related_resources_fallback
         core: {  }
+      restricted_categories: {  }
 id: node.publication.full
 targetEntityType: node
 bundle: publication
 mode: full
-content:
-  body:
-    label: hidden
-    type: text_default
-    weight: 8
-    settings: {  }
-    third_party_settings: {  }
-    region: content
-  content_moderation_control:
-    weight: -20
-    settings: {  }
-    third_party_settings: {  }
-    region: content
-  field_authors:
-    type: author
-    weight: 9
-    region: content
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-  field_intro:
-    weight: 1
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    type: text_default
-    region: hero_image
-  field_main_image:
-    weight: 0
-    label: hidden
-    settings:
-      image_style: ''
-      responsive_image_style: program_landing_page_hero
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: full
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
-    third_party_settings:
-      ds:
-        ft:
-          id: reset
-          settings:
-            lb: ''
-    type: blazy_media
-    region: hero_image
-  field_primary_topic:
-    type: entity_reference_rss_category
-    weight: 4
-    region: content
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-  field_region:
-    type: entity_reference_rss_category
-    weight: 5
-    region: content
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-  field_type:
-    type: entity_reference_label_class
-    weight: 2
-    region: hero_text
-    label: hidden
-    settings:
-      class: ''
-      link: false
-      tag: ''
-    third_party_settings: {  }
-  wri_social_sharing_block:
-    weight: 7
-    region: content
-    settings: {  }
-    third_party_settings: {  }
+content: {  }
 hidden:
+  body: true
+  content_moderation_control: true
+  field_authors: true
   field_cover_image: true
   field_doi: true
   field_exclude_from_blog_feed: true
@@ -339,20 +179,26 @@ hidden:
   field_featured_text: true
   field_files: true
   field_in_this_series: true
+  field_intro: true
   field_isbn: true
   field_license: true
+  field_main_image: true
   field_metatag: true
   field_narrative_taxonomy: true
   field_platform_link: true
   field_primary_contacts: true
+  field_primary_topic: true
   field_projects: true
   field_publication_display: true
   field_publication_series: true
+  field_region: true
   field_related_resources: true
   field_tags: true
   field_toc: true
   field_total_pages: true
+  field_type: true
   langcode: true
   layout_builder__layout: true
   links: true
   search_api_excerpt: true
+  wri_social_sharing_block: true
