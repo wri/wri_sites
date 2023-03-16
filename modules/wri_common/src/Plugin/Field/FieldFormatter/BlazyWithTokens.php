@@ -17,6 +17,8 @@ use Drupal\media\Entity\Media;
  *     "entity_reference"
  *   }
  * )
+ *
+ * @deprecated Remove Blazy, then delete this plugin.
  */
 class BlazyWithTokens extends BlazyMediaFormatter {
 
