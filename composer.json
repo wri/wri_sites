@@ -215,6 +215,7 @@
         "drupal/layout_builder_restrictions": "^2.12",
         "drupal/layout_builder_modal": "^1.1",
         "drupal/link_attributes": "^1.11",
+        "drupal/media_responsive_thumbnail": "^1.2",
         "drupal/menu_block": "1.8",
         "drupal/menu_position": "^1.0@beta",
         "drupal/metatag": "^1.19",
