@@ -11,7 +11,6 @@ dependencies:
   - admin_toolbar_search
   - admin_toolbar_tools
   - allowed_formats
-  - blazy
   - block
   - block_list_override
   - ckeditor
@@ -39,6 +38,7 @@ dependencies:
   - layout_builder_restrictions
   - layout_discovery
   - link_attributes
+  - media_responsive_thumbnail
   - menu_ui
   - paragraphs
   - responsive_tables_filter

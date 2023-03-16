@@ -23,11 +23,11 @@ dependencies:
     - node.type.article
     - responsive_image.styles.article_hero_large_cta
   module:
-    - blazy
     - ds
     - element_class_formatter
     - hierarchical_term_formatter
     - layout_builder
+    - media_responsive_thumbnail
     - text
     - user
     - wri_author
@@ -166,46 +166,13 @@ content:
             fi: false
             fi-def-at: false
   field_main_image:
-    type: blazy_media
+    type: media_responsive_thumbnail
     weight: 1
     region: hero
     label: hidden
     settings:
-      image_style: ''
       responsive_image_style: article_hero_large_cta
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: full_width
-      current_view_mode: main_content
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_link: ''
     third_party_settings:
       wri_media:
         min_width: '1500'
