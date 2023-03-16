@@ -75,11 +75,6 @@ targetEntityType: node
 bundle: region
 mode: tile
 content:
-  content_moderation_control:
-    settings: {  }
-    third_party_settings: {  }
-    weight: -20
-    region: image
   field_intro:
     type: text_default
     label: hidden
@@ -87,55 +82,6 @@ content:
     third_party_settings: {  }
     weight: 2
     region: intro
-  field_main_image:
-    type: blazy_media
-    label: hidden
-    settings:
-      caption:
-        field_tags: '0'
-        field_media_embed_code: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      view_mode: default
-      cache: 0
-      current_view_mode: tile
-      skin: ''
-      fx: ''
-      style: ''
-      background: false
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      responsive_image_style: tile
-      box_style: ''
-      image_style: ''
-      media_switch: ''
-      ratio: ''
-      thumbnail_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: ''
-      grid_medium: ''
-      grid_small: ''
-    third_party_settings:
-      wri_media:
-        min_width: ''
-      ds:
-        ft:
-          id: reset
-          settings:
-            lb: ''
-    weight: 0
-    region: image
   field_map_image:
     type: media_responsive_thumbnail
     label: hidden
@@ -151,6 +97,7 @@ content:
     weight: 0
     region: image
 hidden:
+  content_moderation_control: true
   field_featured: true
   field_metatags: true
   field_narrative_taxonomy: true
