@@ -28,13 +28,12 @@ third_party_settings:
       settings:
         label: ''
     regions:
-      image:
-        - content_moderation_control
-        - field_main_image
-      date:
-        - node_post_date
       title:
         - node_title
+      date:
+        - node_post_date
+      image:
+        - field_main_image
     fields:
       node_post_date:
         plugin_id: node_post_date
@@ -86,11 +85,6 @@ targetEntityType: node
 bundle: simple_page
 mode: card
 content:
-  content_moderation_control:
-    settings: {  }
-    third_party_settings: {  }
-    weight: -20
-    region: image
   field_main_image:
     type: media_thumbnail
     label: hidden
@@ -127,6 +121,7 @@ content:
     weight: 0
     region: content_type
 hidden:
+  content_moderation_control: true
   field_authors: true
   field_exclude_from_blog_feed: true
   field_featured: true
