@@ -1,0 +1,13 @@
+layout_impact:
+  label: 'Impact in Action'
+  path: layouts
+  template: layout--impact
+  category: 'WRI Custom'
+  default_region: impacts
+  icon_map:
+    - [title, impacts]
+  regions:
+    title:
+      label: Title
+    impacts:
+      label: Impact List
