@@ -40,8 +40,8 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   ds:
     layout:
       id: ds_1col
@@ -49,17 +49,17 @@ third_party_settings:
       disable_css: false
       entity_classes: all_classes
       settings:
-        label: ''
+        classes:
+          layout_class: {  }
         wrappers:
-          ds_content: div
+          content: div
         outer_wrapper: div
         attributes: ''
         link_attribute: ''
         link_custom: ''
-        classes:
-          layout_class: {  }
+        label: ''
     regions:
-      ds_content:
+      content:
         - field_type
         - node_title
     fields:
@@ -84,13 +84,13 @@ bundle: publication
 mode: type_title
 content:
   field_type:
-    weight: 0
+    type: hierarchical_term_formatter
     label: hidden
     settings:
       display: root
+      link: false
       wrap: none
       separator: ' » '
-      link: false
       reverse: false
     third_party_settings:
       ds:
@@ -100,8 +100,8 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
-    type: hierarchical_term_formatter
-    region: ds_content
+    weight: 0
+    region: content
 hidden:
   body: true
   content_moderation_control: true

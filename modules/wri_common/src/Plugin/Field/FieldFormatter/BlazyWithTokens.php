@@ -2,8 +2,8 @@
 
 namespace Drupal\wri_common\Plugin\Field\FieldFormatter;
 
-use Drupal\blazy\Plugin\Field\FieldFormatter\BlazyMediaFormatter;
 use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Field\Plugin\Field\FieldFormatter\EntityReferenceFormatterBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\media\Entity\Media;
 
@@ -20,7 +20,7 @@ use Drupal\media\Entity\Media;
  *
  * @deprecated Remove Blazy, then delete this plugin.
  */
-class BlazyWithTokens extends BlazyMediaFormatter {
+class BlazyWithTokens extends EntityReferenceFormatterBase {
 
   /**
    * {@inheritdoc}
