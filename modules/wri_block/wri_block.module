@@ -4,6 +4,7 @@
  * @file
  * Functions for wri custom blocks.
  */
+use Drupal\Component\Utility\Html;
 
 /**
  * Implements hook_preprocess_block().
@@ -13,16 +14,8 @@ function wri_block_preprocess_block(array &$variables) {
   // contextual links. This preprocess hook adds them back.
   // @see https://www.drupal.org/project/drupal/issues/2407761#comment-13414693
   if (isset($variables["content"]["#block_content"])) {
-    if (isset($variables['content']['#attributes'])) {
-      foreach ($variables['content']['#attributes'] as $key => $content_attribute) {
-        if (isset($variables['attributes'][$key])) {
-          $variables['attributes'][$key] = array_merge($variables['attributes'][$key], $content_attribute);
-        }
-        else {
-          $variables['attributes'][$key] = $content_attribute;
-        }
-      }
-    }
+    // Add the block bundle.
+    $variables['attributes']['class'][] = 'block-content--type-' . Html::getClass($variables["derivative_plugin_id"]);
     // We're only adding contextual links for reusable blocks. Might be nice
     // To add a link to the layout builder for non-contextuals...
     if ($variables["content"]["#block_content"]->isReusable() && isset($variables["content"]["#contextual_links"])) {
