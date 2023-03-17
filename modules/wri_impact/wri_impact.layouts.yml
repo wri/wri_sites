@@ -1,7 +1,7 @@
-layout_impact:
+layout_impact_in_action:
   label: 'Impact in Action'
   path: layouts
-  template: layout--impact
+  template: layout--impacts
   category: 'WRI Custom'
   default_region: impacts
   icon_map:
