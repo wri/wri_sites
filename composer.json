@@ -76,6 +76,9 @@
     ],
     "extra": {
         "patches": {
+            "drupal/block_list_override": {
+                "trim(): Passing null to parameter #1 ($string) of type string is deprecated in block_list_override_block_alter() https://www.drupal.org/project/block_list_override/issues/3276297": "https://www.drupal.org/files/issues/2023-02-08/block_list_override-php-81-3276297-8.patch"
+            },
             "drupal/ckeditor": {
                 "Changes to a block's text field not saved when ckeditor source mode is active https://www.drupal.org/project/ckeditor/issues/3095304": "https://git.drupalcode.org/project/ckeditor/-/merge_requests/10.diff"
             },
