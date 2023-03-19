@@ -14,57 +14,58 @@
   {{ title_suffix.contextual_links }}
   {% if content %}
   {% if content.left_section %}
+    {{ drupal_breakpoint() }}
     <div class="search-results-tags">
         <div class="tags">
-          {% if content.field_region|render or content.field_primary_topic|render or content.field_topics|render %}
-          <div class="topic-tag">{{ content.field_primary_topic }}</div>
-          <div class="topic-tag">{{ content.field_region }}</div>
-            <div class="topic-tag">{{ content.field_topics }}</div>
+          {% if content.left_section.field_region|render or content.left_section.field_primary_topic|render or content.left_section.field_topics|render %}
+          <div class="topic-tag">{{ content.left_section.field_primary_topic }}</div>
+          <div class="topic-tag">{{ content.left_section.field_region }}</div>
+            <div class="topic-tag">{{ content.left_section.field_topics }}</div>
           {% endif %}
         </div>
-      {% if content['bundle_field:node'] %}
+      {% if content.main_section['bundle_field:node'] %}
         <span class="content-type-region bundle">
-          {{ content['bundle_field:node'] }}
+          {{ content.main_section['bundle_field:node'] }}
         </span>
       {% endif %}
-      {% if content.field_type %}
+      {% if content.left_section.field_type %}
         <span class="content-type-region bundle">
-          {{ content.field_type }}
+          {{ content.left_section.field_type }}
         </span>
       {% endif %}
     </div>
     {% endif %}
     <div class="search-results-text">
       <div>
-        {% if content.field_resource_type %}
-            {{ content.field_resource_type }}
+        {% if content.main_section.field_resource_type %}
+            {{ content.main_section.field_resource_type }}
         {% endif %}
-        {% if content.is_past %}
-          {{ content.is_past }}
+        {% if content.main_section.is_past %}
+          {{ content.main_section.is_past }}
         {% endif %}
-        {% if content.node_post_date %}
-            <span class="post-date">{{ content.node_post_date }}</span>
+        {% if content.main_section.node_post_date %}
+            <span class="post-date">{{ content.main_section.node_post_date }}</span>
         {% endif %}
-        {% if content.field_date_time %}
-          <span class="post-date">{{ content.field_date_time }}</span>
+        {% if content.main_section.field_date_time %}
+          <span class="post-date">{{ content.main_section.field_date_time }}</span>
         {% endif %}
       </div>
-      {% if content.node_title %}
-        {{ content.node_title }}
+      {% if content.main_section.node_title %}
+        {{ content.main_section.node_title }}
       {% endif %}
-      {% if content.field_tags  %}
+      {% if content.main_section.field_tags  %}
         <div class="tags">
-          {{ content.field_tags }}
+          {{ content.main_section.field_tags }}
         </div>
       {% endif %}
-      {% if content.field_register  %}
-          {{ content.field_register }}
+      {% if content.main_section.field_register  %}
+          {{ content.main_section.field_register }}
       {% endif %}
     </div>
     <div class="search-results-image">
       {{ content.right_section }}
       <div class="tags">
-        {{ content.field_tags }}
+        {{ content.main_section.field_tags }}
       </div>
     </div>
   {% endif %}
