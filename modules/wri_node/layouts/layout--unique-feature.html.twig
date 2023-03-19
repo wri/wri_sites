@@ -30,7 +30,7 @@
     {% if content.left_text %}
       <div class="left-text-wrapper">
         {{ content.left_text|without('field_link', 'block_label') }}
-        <a href="{{ content.left_text.field_link.0['#url'].toString }}"  class="block_label" aria-hidden="true" tabindex="-1" >{{ content.block_label }}</a>
+        <a href="{{ content.left_text.field_link.0['#url'].toString }}"  class="block_label" aria-hidden="true" tabindex="-1" >{{ content.left_text.block_label }}</a>
         {% if content.left_text.field_link|render %}
           <a href="{{ content.left_text.field_link.0['#url'].toString }}" class="button">
             {{ content.left_text.field_link.0['#title'] }}
