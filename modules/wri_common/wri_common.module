@@ -54,6 +54,7 @@ function wri_common_node_view(array &$build, EntityInterface $entity, EntityView
   if ($display->getComponent('wri_social_sharing_block')) {
     global $base_url;
     $request = \Drupal::request();
+    $title = '';
     if ($route = $request->attributes->get(RouteObjectInterface::ROUTE_OBJECT)) {
       $title = \Drupal::service('title_resolver')->getTitle($request, $route);
     }
