@@ -8,3 +8,24 @@ dependencies:
   - wri_small_cta
   - wri_superfeatured
   - wri_unique_feature
+config_devel:
+  install:
+    - core.entity_form_display.node.simple_page.default
+    - core.entity_form_display.paragraph.image.default
+    - core.entity_view_display.node.simple_page.card
+    - core.entity_view_display.node.simple_page.default
+    - core.entity_view_display.node.simple_page.full
+    - core.entity_view_display.node.simple_page.impact
+    - core.entity_view_display.node.simple_page.main_content
+    - core.entity_view_display.node.simple_page.search_results
+    - core.entity_view_display.node.simple_page.teaser
+    - core.entity_view_display.paragraph.image.default
+    - field.field.node.simple_page.field_intro
+    - field.field.node.simple_page.field_intro_paragraphs
+    - field.field.node.simple_page.field_main_image
+    - field.field.node.simple_page.field_metatags
+    - field.field.node.simple_page.layout_builder__layout
+    - field.field.paragraph.image.field_image
+    - node.type.simple_page
+    - paragraphs.paragraphs_type.image
+    - xmlsitemap.settings.node.simple_page

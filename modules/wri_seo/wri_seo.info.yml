@@ -21,3 +21,11 @@ dependencies:
   - schema_web_site
   - wri_schema
   - xmlsitemap
+config_devel:
+  install:
+    - metatag.settings
+    - pathauto.pattern.events
+    - pathauto.pattern.pages
+    - pathauto.pattern.person
+    - pathauto.pattern.publications
+    - pathauto.pattern.title_only

@@ -7,3 +7,21 @@ dependencies:
   - block_content
   - views
   - wri_block
+config_devel:
+  install:
+    - block_content.type.superfeatured
+    - core.entity_form_display.block_content.superfeatured.default
+    - core.entity_form_display.paragraph.superfeatured_item.default
+    - core.entity_view_display.block_content.superfeatured.default
+    - core.entity_view_display.block_content.superfeatured.preview
+    - core.entity_view_display.node.article.superfeatured
+    - core.entity_view_display.node.project_detail.superfeatured
+    - core.entity_view_display.paragraph.superfeatured_item.default
+    - core.entity_view_display.paragraph.superfeatured_item.preview
+    - field.field.block_content.superfeatured.field_content_types
+    - field.field.block_content.superfeatured.field_custom_feature
+    - field.field.block_content.superfeatured.field_intro
+    - field.field.block_content.superfeatured.field_listing
+    - field.field.paragraph.superfeatured_item.field_block
+    - paragraphs.paragraphs_type.superfeatured_item
+    - views.view.superfeatured_content

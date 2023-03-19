@@ -6,3 +6,7 @@ package: WRI
 dependencies:
   - wri_seo
   - content_snippets
+config_devel:
+  install:
+    - core.date_format.rss_timestamp
+    - core.date_format.short_day

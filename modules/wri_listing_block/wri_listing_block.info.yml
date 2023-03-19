@@ -7,3 +7,25 @@ dependencies:
   - wri_block
   - wri_node
   - wri_taxonomy
+config_devel:
+  install:
+    - block_content.type.listing_block
+    - core.entity_form_display.block_content.listing_block.default
+    - core.entity_form_display.paragraph.listing_block.default
+    - core.entity_view_display.block_content.listing_block.default
+    - core.entity_view_display.block_content.listing_block.preview
+    - core.entity_view_display.paragraph.listing_block.default
+    - core.entity_view_display.paragraph.listing_block.preview
+    - field.field.block_content.listing_block.field_content_types
+    - field.field.block_content.listing_block.field_featured
+    - field.field.block_content.listing_block.field_filter_by_region
+    - field.field.block_content.listing_block.field_filter_by_resource_type
+    - field.field.block_content.listing_block.field_filter_by_tag
+    - field.field.block_content.listing_block.field_intro
+    - field.field.block_content.listing_block.field_listing
+    - field.field.block_content.listing_block.field_more_link
+    - field.field.block_content.listing_block.field_tag
+    - field.field.paragraph.listing_block.field_block
+    - paragraphs.paragraphs_type.listing_block
+    - views.view.content_listing
+    - views.view.content_listing_a_to_z

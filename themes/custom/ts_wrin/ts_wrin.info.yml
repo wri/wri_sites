@@ -20,3 +20,34 @@ regions:
   modals: Modals
 ckeditor_stylesheets:
   - dist/ckeditor.css
+config_devel:
+  install:
+    - block.block.addressblock
+    - block.block.beforefilesmodal
+    - block.block.copyrightblock
+    - block.block.donate
+    - block.block.footermenuadditional
+    - block.block.footermenumain
+    - block.block.footermenuoffices
+    - block.block.footermenusecondary
+    - block.block.footermenusecondary_2
+    - block.block.howyoucanhelpblock
+    - block.block.mainnavigation
+    - block.block.megamenu
+    - block.block.quicklinks
+    - block.block.secondarynavigation
+    - block.block.socialmenu
+    - block.block.ts_wrin_account_menu
+    - block.block.ts_wrin_branding
+    - block.block.ts_wrin_breadcrumbs
+    - block.block.ts_wrin_content
+    - block.block.ts_wrin_local_actions
+    - block.block.ts_wrin_local_tasks
+    - block.block.ts_wrin_main_menu
+    - block.block.ts_wrin_messages
+    - block.block.ts_wrin_page_title
+    - block.block.ts_wrin_powered
+    - block.block.webform
+    - block.block.wrinsearch
+    - block.block.wrinsearch_2
+    - ts_wrin.settings

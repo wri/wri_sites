@@ -5,3 +5,11 @@ core_version_requirement: '^8.8.0 || ^9'
 package: WRI
 dependencies:
   - wri_paragraph
+config_devel:
+  install:
+    - core.entity_form_display.paragraph.side_by_side.default
+    - core.entity_view_display.paragraph.side_by_side.default
+    - core.entity_view_display.paragraph.side_by_side.preview
+    - field.field.paragraph.side_by_side.field_body
+    - field.field.paragraph.side_by_side.field_title
+    - paragraphs.paragraphs_type.side_by_side

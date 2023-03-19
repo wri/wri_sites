@@ -6,3 +6,20 @@ package: WRI
 dependencies:
   - wri_block
   - wri_page
+config_devel:
+  install:
+    - block_content.type.impact_in_action
+    - core.entity_form_display.block_content.impact_in_action.default
+    - core.entity_form_display.paragraph.impact.default
+    - core.entity_form_display.paragraph.impact_in_action_blocks.default
+    - core.entity_view_display.block_content.impact_in_action.default
+    - core.entity_view_display.paragraph.impact.default
+    - core.entity_view_display.paragraph.impact_in_action_blocks.default
+    - field.field.block_content.impact_in_action.field_impacts
+    - field.field.block_content.impact_in_action.field_title
+    - field.field.paragraph.impact.field_reference
+    - field.field.paragraph.impact.field_text
+    - field.field.paragraph.impact_in_action_blocks.field_block
+    - field.storage.paragraph.field_reference
+    - paragraphs.paragraphs_type.impact
+    - paragraphs.paragraphs_type.impact_in_action_blocks
