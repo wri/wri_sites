@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * @file
+ * Hooks related to Listing Blocks.
+ */
+
 /**
  * Implements hook_preprocess_hook().
  */

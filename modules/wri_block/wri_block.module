@@ -4,6 +4,8 @@
  * @file
  * Functions for wri custom blocks.
  */
+
+use Drupal\Core\Render\Element;
 use Drupal\Component\Utility\Html;
 
 /**
@@ -29,7 +31,7 @@ function wri_block_preprocess_block(array &$variables) {
 
     // Cheap way to get the block label into the block_content render.
     if (isset($variables["content"]['#ds_variables'])) {
-      foreach (\Drupal\Core\Render\Element::children($variables["content"]['#ds_variables']) as $region) {
+      foreach (Element::children($variables["content"]['#ds_variables']) as $region) {
         if (in_array('block_label', $variables["content"]['#ds_variables'][$region])) {
           $variables["content"][$region]["block_label"][0][0]['#markup'] = $variables["label"];
           unset($variables['label']);

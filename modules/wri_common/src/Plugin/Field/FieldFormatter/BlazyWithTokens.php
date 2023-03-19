@@ -18,7 +18,9 @@ use Drupal\media\Entity\Media;
  *   }
  * )
  *
- * @deprecated Remove Blazy, then delete this plugin.
+ * @deprecated in drupal:9.1.4 and is removed from drupal:9.1.5. Remove Blazy, then delete this plugin.
+ * @see https://www.drupal.org/node/0
+ * @see https://github.com/wri/wri_sites/pull/149
  */
 class BlazyWithTokens extends EntityReferenceFormatterBase {
 
