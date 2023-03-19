@@ -133,7 +133,8 @@ function wri_media_preprocess_field(&$variables) {
       }
 
       // If the media image is smaller than the min_width, hide this.
-      if ($item["content"]["#build"]["item"]->width < $element['#third_party_settings']['wri_media']['min_width']) {
+      $item_values = $item["content"]["#item"]->getValue();
+      if ($item_values["width"] < $element['#third_party_settings']['wri_media']['min_width']) {
         $item['content'] = [];
       }
     }
