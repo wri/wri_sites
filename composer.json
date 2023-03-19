@@ -193,7 +193,6 @@
         "drupal/cer": "^4.0@alpha",
         "drupal/ckeditor_templates": "^1.2",
         "drupal/ckeditor_templates_ui": "^1.4",
-        "drupal/components": "^3.0@beta",
         "drupal/config_partial_export": "^1.6",
         "drupal/config_sync": "^2.0@beta",
         "drupal/content_snippets": "^2.0",
