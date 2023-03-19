@@ -24,7 +24,7 @@ jobs:
             echo "memory_limit = 256M"  >> ${php_vars}
             export PATH="./vendor/bin:../vendor/bin:/root/.composer/vendor/bin:$PATH"
             composer self-update --2
-            COMPOSER_MEMORY_LIMIT=-1 composer create-project wri/wri-starter-kit php-81
+            COMPOSER_MEMORY_LIMIT=-1 composer create-project --prefer-dist --stability=dev wri/wri-starter-kit:dev-php-81
             cd circletest
             COMPOSER_MEMORY_LIMIT=-1 composer require wri/wri_sites:dev-${CIRCLE_BRANCH} --update-with-dependencies
             ./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/modules
