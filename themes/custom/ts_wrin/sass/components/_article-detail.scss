@@ -1,4 +1,21 @@
 .article {
+  .layout__region--hero div {
+    max-height: 240px;
+    overflow: hidden;
+    @include mq($ph) {
+      max-height: 550px;
+    }
+  }
+  .layout__region--hero img {
+    transform: translate(-50%, -50%);
+    margin-left: 50%;
+    margin-top: 25%;
+    @include mq($ph) {
+      transform: translateX(-50%);
+      margin-left: 50%;
+      margin-top: 0;
+    }
+  }
   .layout__region--title,
   .layout__region--byline {
     @include center-columns($grid-columns-mobile, $grid-columns-mobile);
