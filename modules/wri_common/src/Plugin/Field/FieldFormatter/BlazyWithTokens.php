@@ -2,10 +2,9 @@
 
 namespace Drupal\wri_common\Plugin\Field\FieldFormatter;
 
-use Drupal\blazy\Plugin\Field\FieldFormatter\BlazyMediaFormatter;
 use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Field\Plugin\Field\FieldFormatter\EntityReferenceFormatterBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\media\Entity\Media;
 
 /**
  * Plugin implementation of the 'blazy_with_tokens' widget.
@@ -17,8 +16,12 @@ use Drupal\media\Entity\Media;
  *     "entity_reference"
  *   }
  * )
+ *
+ * @deprecated in drupal:9.1.4 and is removed from drupal:9.1.5. Remove Blazy, then delete this plugin.
+ * @see https://www.drupal.org/node/0
+ * @see https://github.com/wri/wri_sites/pull/149
  */
-class BlazyWithTokens extends BlazyMediaFormatter {
+class BlazyWithTokens extends EntityReferenceFormatterBase {
 
   /**
    * {@inheritdoc}
@@ -35,32 +38,7 @@ class BlazyWithTokens extends BlazyMediaFormatter {
    * {@inheritdoc}
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
-    $token_entities = [];
-    $hide_if_empty = $this->getSetting('hide_if_token_empty');
-    // If there's a value in the tokenized version of the default value,
-    // use that, otherwise use the default value (or hide).
-    foreach ($items as $item) {
-      $entity = $item->getEntity();
-      $token_entity = $this->getSetting('default_value');
-      $token_entities = \Drupal::token()->replace($token_entity, [$entity->getEntityTypeId() => $entity], ['clear' => TRUE]);
-      if ($token_entities) {
-        $entities[] = Media::load($token_entities);
-      }
-    }
-
-    if (empty($token_entities) && !$hide_if_empty) {
-      $entities = $this->getEntitiesToView($items, $langcode);
-    }
-
-    // Early opt-out if the field is empty.
-    if (empty($entities)) {
-      return [];
-    }
-
-    $render = $this->commonViewElements($items, $langcode, $entities);
-    // If this token is based on "current-page", this value will vary by url.
-    $render['#cache']['contexts'][] = 'url';
-    return $render;
+    return [];
   }
 
   /**

@@ -29,10 +29,10 @@ dependencies:
     - node.type.event
     - responsive_image.styles.large_image_teaser
   module:
-    - blazy
     - ds
     - hierarchical_term_formatter
     - layout_builder
+    - media_responsive_thumbnail
     - smart_date
     - user
     - wri_media
@@ -97,45 +97,11 @@ content:
     weight: 0
     region: date
   field_main_image:
-    weight: 0
+    type: media_responsive_thumbnail
     label: hidden
     settings:
-      image_style: ''
       responsive_image_style: large_image_teaser
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: large_image_teaser
-      background: false
-      caption:
-        field_tags: '0'
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_link: ''
     third_party_settings:
       wri_media:
         min_width: ''
@@ -144,7 +110,7 @@ content:
           id: reset
           settings:
             lb: ''
-    type: blazy_media
+    weight: 0
     region: image
   field_primary_topic:
     weight: 1

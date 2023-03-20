@@ -11,19 +11,19 @@ dependencies:
     - image.style.150_tall
     - node.type.simple_page
   module:
-    - blazy
     - ds
     - layout_builder
+    - media
     - user
 third_party_settings:
   ds:
     layout:
       id: layout_search-results
+      settings:
+        label: ''
       library: null
       disable_css: false
       entity_classes: all_classes
-      settings:
-        label: ''
     regions:
       main_section:
         - node_post_date
@@ -50,60 +50,29 @@ third_party_settings:
           settings:
             lb: ''
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: node.simple_page.search_results
 targetEntityType: node
 bundle: simple_page
 mode: search_results
 content:
   field_main_image:
-    type: blazy_media
-    weight: 3
-    region: right_section
+    type: media_thumbnail
     label: hidden
     settings:
+      image_link: ''
       image_style: 150_tall
-      responsive_image_style: ''
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: search_results
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_loading:
+        attribute: lazy
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 3
+    region: right_section
 hidden:
   content_moderation_control: true
   field_intro: true

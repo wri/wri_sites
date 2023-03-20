@@ -11,7 +11,6 @@ dependencies:
   - admin_toolbar_search
   - admin_toolbar_tools
   - allowed_formats
-  - blazy
   - block
   - block_list_override
   - ckeditor
@@ -39,6 +38,7 @@ dependencies:
   - layout_builder_restrictions
   - layout_discovery
   - link_attributes
+  - media_responsive_thumbnail
   - menu_ui
   - paragraphs
   - responsive_tables_filter
@@ -54,3 +54,17 @@ dependencies:
   - workflows
 libraries:
   - wri_admin/admin
+config_devel:
+  install:
+    - ckeditor_templates_ui.ckeditor_template.callout_center
+    - ckeditor_templates_ui.ckeditor_template.callout_left
+    - ckeditor_templates_ui.ckeditor_template.callout_right
+    - content_snippets.items
+    - editor.editor.basic_html
+    - filter.format.basic_html
+    - filter.format.migrated
+    - filter.format.unrestricted_text
+    - user.role.administrator
+    - user.role.content_editor
+    - user.role.editorial
+    - user.role.hr

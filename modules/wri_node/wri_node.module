@@ -60,9 +60,9 @@ function wri_node_preprocess_wri_page_hero(&$context) {
 function wri_node_preprocess_layout__card(&$variables) {
   $variables['default_image'] = [];
   if (Drupal::config('wri_node.settings')->get('use_fallback_image')) {
-    if (isset($variables["content"]["field_primary_topic"][0]["#title"])) {
+    if (isset($variables["content"]['tag']["field_primary_topic"][0]["#title"])) {
       $image_url = \Drupal::service('extension.list.module')
-        ->getPath('wri_node') . '/images/' . strtolower(str_replace(' ', '-', $variables["content"]["field_primary_topic"][0]["#title"])) . '.jpg';
+        ->getPath('wri_node') . '/images/' . strtolower(str_replace(' ', '-', $variables["content"]['tag']["field_primary_topic"][0]["#title"])) . '.jpg';
       if (!file_exists($image_url)) {
         $image_url = \Drupal::service('extension.list.module')
           ->getPath('wri_node') . '/images/default.jpg';

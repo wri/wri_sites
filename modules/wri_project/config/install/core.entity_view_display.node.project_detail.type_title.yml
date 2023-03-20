@@ -20,6 +20,7 @@ dependencies:
     - field.field.node.project_detail.field_primary_topic
     - field.field.node.project_detail.field_project_partners
     - field.field.node.project_detail.field_region
+    - field.field.node.project_detail.field_show_more_link
     - field.field.node.project_detail.field_tags
     - field.field.node.project_detail.field_toc
     - field.field.node.project_detail.field_twitter_account
@@ -37,49 +38,49 @@ dependencies:
     - wri_common
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: node.project_detail.type_title
 targetEntityType: node
 bundle: project_detail
 mode: type_title
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 101
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 101
     region: content
   content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
     weight: -20
     region: content
-    settings: {  }
-    third_party_settings: {  }
   field_featured:
-    weight: 9
+    type: entity_reference_label
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 9
     region: content
   field_intro:
-    weight: 0
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 0
     region: content
   field_metatags:
-    weight: 109
+    type: metatag_empty_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: metatag_empty_formatter
+    weight: 109
     region: content
   field_other_link:
-    weight: 108
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -88,10 +89,10 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 108
     region: content
   field_platform_link:
-    weight: 102
+    type: tokenized_link_field_formatter
     label: above
     settings:
       trim_length: 80
@@ -100,52 +101,52 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: tokenized_link_field_formatter
+    weight: 102
     region: content
   field_primary_contacts:
-    weight: 107
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 107
     region: content
   field_primary_topic:
-    weight: 5
+    type: entity_reference_label
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 5
     region: content
   field_region:
-    weight: 106
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 106
     region: content
   field_tags:
-    weight: 8
+    type: entity_reference_label
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 8
     region: content
   field_toc:
-    weight: 105
+    type: boolean
     label: above
     settings:
       format: default
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    type: boolean
+    weight: 105
     region: content
   field_twitter_account:
-    weight: 104
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -154,16 +155,16 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 104
     region: content
   field_type:
-    weight: 0
+    type: hierarchical_term_formatter
     label: hidden
     settings:
       display: root
+      link: false
       wrap: none
       separator: ' » '
-      link: false
       reverse: false
     third_party_settings:
       ds:
@@ -173,13 +174,13 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
-    type: hierarchical_term_formatter
-    region: ds_content
-  links:
-    weight: 100
+    weight: 0
     region: content
+  links:
     settings: {  }
     third_party_settings: {  }
+    weight: 100
+    region: content
 hidden:
   field_featured_experts: true
   field_featured_headline: true
@@ -189,6 +190,7 @@ hidden:
   field_main_image: true
   field_narrative_taxonomy: true
   field_project_partners: true
+  field_show_more_link: true
   langcode: true
   layout_builder__layout: true
   search_api_excerpt: true

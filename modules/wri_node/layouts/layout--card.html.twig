@@ -9,7 +9,7 @@
  * - ds_content: content region
  */
 #}
-<div class="{{ content["#bundle"] }}">
+<div class="{{ content["#node"].type.target_id }}{{ content["#taxonomy_term"].type.target_id }}">
   <div {{ attributes.addClass('ds-1col', 'clearfix', 'card') }}>
     {{ title_suffix.contextual_links }}
     {% if content %}

@@ -12,17 +12,14 @@ dependencies:
     - image.style.100x100
     - node.type.region
   module:
-    - blazy
     - ds
     - layout_builder
+    - media
     - user
 third_party_settings:
   ds:
     layout:
       id: layout_search-results
-      library: null
-      disable_css: false
-      entity_classes: all_classes
       settings:
         label: ''
     regions:
@@ -59,81 +56,46 @@ third_party_settings:
           settings:
             lb: ''
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: node.region.search_results
 targetEntityType: node
 bundle: region
 mode: search_results
 content:
-  content_moderation_control:
-    weight: -20
-    settings: {  }
-    third_party_settings: {  }
-    region: content
   field_main_image:
     type: entity_reference_entity_id
-    weight: 2
-    region: right_section
     label: above
     settings: {  }
     third_party_settings: {  }
-  field_map_image:
-    type: blazy_media
-    weight: 4
+    weight: 2
     region: right_section
+  field_map_image:
+    type: media_thumbnail
     label: hidden
     settings:
+      image_link: ''
       image_style: 100x100
-      responsive_image_style: ''
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: search_results
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_loading:
+        attribute: lazy
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 4
+    region: right_section
   field_region:
     type: entity_reference_label
-    weight: 0
-    region: left_section
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
+    weight: 0
+    region: left_section
 hidden:
+  content_moderation_control: true
   field_featured: true
   field_intro: true
   field_metatags: true

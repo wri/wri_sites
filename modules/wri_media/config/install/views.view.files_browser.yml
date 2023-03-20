@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   module:
-    - blazy
     - entity_browser
     - file
     - user
@@ -85,18 +84,21 @@ display:
           hide_empty: false
           default_field_elements: true
       fields:
-        blazy_file:
-          id: blazy_file
+        uri:
+          id: uri
           table: file_managed
-          field: blazy_file
+          field: uri
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: file
+          entity_field: uri
+          plugin_id: field
           label: ''
           exclude: false
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '{{ drupal_image(uri, ''media_library'') }}'
             make_link: false
             path: ''
             absolute: false
@@ -133,15 +135,21 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          box_style: ''
-          box_media_style: ''
-          image_style: media_library
-          media_switch: media
-          ratio: ''
-          thumbnail_style: media_library
-          view_mode: default
-          entity_type: file
-          plugin_id: blazy_file
+          click_sort_column: value
+          type: file_uri
+          settings:
+            link_to_file: false
+            file_download_path: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         filename:
           id: filename
           table: file_managed

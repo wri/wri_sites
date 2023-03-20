@@ -11,11 +11,11 @@ dependencies:
     - image.style.250_wide
     - responsive_image.styles.image_cta
   module:
-    - blazy
     - ds
     - element_class_formatter
     - entity_class_formatter
     - media
+    - media_responsive_thumbnail
     - text
 third_party_settings:
   ds:
@@ -47,51 +47,18 @@ bundle: image_cta
 mode: default
 content:
   field_image:
-    type: blazy_media
-    weight: 5
+    type: media_responsive_thumbnail
     label: hidden
     settings:
-      image_style: ''
       responsive_image_style: image_cta
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: image_cta
-      current_view_mode: default
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_link: ''
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 5
     region: image
   field_image_cta_background:
     type: entity_class_formatter

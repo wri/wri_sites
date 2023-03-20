@@ -23,10 +23,10 @@ dependencies:
     - image.style.125x95
     - node.type.article
   module:
-    - blazy
     - ds
     - hierarchical_term_formatter
     - layout_builder
+    - media
     - user
 third_party_settings:
   layout_builder:
@@ -103,51 +103,20 @@ bundle: article
 mode: small_image_teaser
 content:
   field_main_image:
-    weight: 2
+    type: media_thumbnail
     label: hidden
     settings:
+      image_link: ''
       image_style: 125x95
-      responsive_image_style: ''
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: small_image_teaser
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_loading:
+        attribute: lazy
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
-    type: blazy_media
+    weight: 2
     region: image
   field_primary_topic:
     weight: 0

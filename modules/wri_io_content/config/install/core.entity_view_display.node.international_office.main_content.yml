@@ -16,10 +16,10 @@ dependencies:
     - node.type.international_office
     - responsive_image.styles.half_content
   module:
-    - blazy
     - ds
     - element_class_formatter
     - layout_builder
+    - media_responsive_thumbnail
     - text
     - user
 third_party_settings:
@@ -39,11 +39,11 @@ third_party_settings:
         - node_title
         - field_intro
         - field_io_link
+      hero_image:
+        - field_map_image
       content:
         - field_main_image
         - body
-      hero_image:
-        - field_map_image
     fields:
       node_title:
         plugin_id: node_title
@@ -166,52 +166,19 @@ content:
           settings:
             lb: ''
   field_map_image:
-    type: blazy_media
-    weight: 0
-    region: hero_image
+    type: media_responsive_thumbnail
     label: hidden
     settings:
-      image_style: ''
       responsive_image_style: half_content
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: main_content
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_link: ''
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: hero_image
 hidden:
   content_moderation_control: true
   field_featured: true

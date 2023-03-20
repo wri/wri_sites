@@ -5,6 +5,7 @@
  * Superfeatured module hook implementations.
  */
 
+use Drupal\node\NodeInterface;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
@@ -13,4 +14,33 @@ use Drupal\Core\Form\FormStateInterface;
 function wri_narrative_form_layout_builder_configure_block_alter(&$form, FormStateInterface &$form_state, $form_id) {
   // Hide the block title if this is a narrative taxonomy.
   wri_common_change_block_settings($form, 'narrative_taxonomy');
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function wri_narrative_preprocess_wri_narrative_tax(&$context) {
+  // If this is the homepage display.
+  if (isset($context["content"]["main_content"]["field_listing"][0]) && $context["content"]["main_content"]["field_listing"][0]["#display_id"] == 'cards' && !empty(\Drupal::hasService('wri_filter.filter'))) {
+    // Check for an applied content filter.
+    $current_filter = \Drupal::service('wri_filter.filter')->getCurrentFilter(TRUE);
+    // If filter is found set value to narrative tax field
+    // from landing page node.
+    if ($current_filter) {
+      $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($current_filter);
+      $landing_narrative_tax = $term->get('field_landing_page')->entity->get('field_narrative_taxonomy')->view(['label' => 'hidden']);
+      $context["content"]["phrase"] = $landing_narrative_tax;
+    }
+  }
+  // This is not the homepage display.
+  else {
+    // If the field intro is not set, get the narrative tax field value
+    // from the node.
+    if (isset($context["content"]["main_content"]["field_listing"]['#entity']) && !$context["content"]["main_content"]["field_listing"]['#entity']->get('field_intro')->value) {
+      $node = \Drupal::routeMatch()->getParameter('node');
+      if ($node instanceof NodeInterface) {
+        $context["content"]["phrase"] = $node->get('field_narrative_taxonomy')->view(['label' => 'hidden']);
+      }
+    }
+  }
 }

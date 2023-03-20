@@ -20,6 +20,7 @@ dependencies:
     - field.field.node.project_detail.field_primary_topic
     - field.field.node.project_detail.field_project_partners
     - field.field.node.project_detail.field_region
+    - field.field.node.project_detail.field_show_more_link
     - field.field.node.project_detail.field_tags
     - field.field.node.project_detail.field_toc
     - field.field.node.project_detail.field_twitter_account
@@ -28,41 +29,38 @@ dependencies:
     - node.type.project_detail
     - responsive_image.styles.superfeatured
   module:
-    - blazy
     - ds
     - element_class_formatter
     - layout_builder
+    - media_responsive_thumbnail
     - text
     - user
     - wri_media
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   ds:
     layout:
       id: 'single_file_component_layout:wri_superfeatured'
-      library: null
-      disable_css: false
-      entity_classes: all_classes
       settings:
-        component_context: {  }
+        label: ''
     regions:
       image:
         - field_main_image
       left_text:
         - field_featured_headline
-      right_text:
-        - field_featured_text
       button:
         - field_platform_link
+      right_text:
+        - field_featured_text
 id: node.project_detail.superfeatured
 targetEntityType: node
 bundle: project_detail
 mode: superfeatured
 content:
   field_featured_headline:
-    weight: 1
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings:
@@ -71,78 +69,44 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
             fis: true
             fis-el: h2
             fis-cl: card-h2
             fis-at: ''
+            fis-def-at: false
             fi: true
             fi-el: a
             fi-cl: ''
             fi-at: 'href="[node:url]"'
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow: false
-            ow-def-at: false
-            ow-def-cl: false
-            fis-def-at: false
             fi-def-at: false
-    type: text_default
+            prefix: ''
+            suffix: ''
+    weight: 1
     region: left_text
   field_featured_text:
-    weight: 2
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 2
     region: right_text
   field_main_image:
-    weight: 0
+    type: media_responsive_thumbnail
     label: hidden
     settings:
-      image_style: ''
       responsive_image_style: superfeatured
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: superfeatured
-      background: false
-      caption:
-        field_tags: '0'
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_link: ''
     third_party_settings:
       wri_media:
         min_width: ''
@@ -151,35 +115,33 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
             fis-el: ''
             fis-cl: ''
             fis-at: ''
+            fis-def-at: false
             fi: true
             fi-el: a
             fi-cl: ''
             fi-at: 'href="[node:url]" aria-hidden="true" tabindex="-1"'
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow: false
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-def-at: false
             fi-def-at: false
-    type: blazy_media
+            prefix: ''
+            suffix: ''
+    weight: 0
     region: image
   field_media:
     type: entity_reference_entity_view
-    weight: 0
-    region: image
     label: hidden
     settings:
       view_mode: full
@@ -190,22 +152,24 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: image
   field_platform_link:
     type: link_ally_class
-    weight: 1
-    region: intro
     label: hidden
     settings:
+      class: button
       link_text: 'Launch Platform'
       screenreader_text: 'Launch Platform'
       tag: ''
-      class: button
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 1
+    region: button
 hidden:
   body: true
   content_moderation_control: true
@@ -229,6 +193,7 @@ hidden:
   field_projects: true
   field_region: true
   field_related_resources: true
+  field_show_more_link: true
   field_tags: true
   field_toc: true
   field_twitter_account: true

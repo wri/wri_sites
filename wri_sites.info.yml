@@ -5,7 +5,6 @@ core_version_requirement: '^8.9.3 || ^9'
 install:
   - block
   - block_content
-  - components
   - distro_helper
   - gdpr_compliance
   - metatag

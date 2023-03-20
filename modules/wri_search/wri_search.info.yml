@@ -3,7 +3,6 @@ type: module
 description: 'Custom search menu.'
 core_version_requirement: '^8.8.0 || ^9'
 dependencies:
-  - sfc
   - search_api
   - facets
   - facets_pretty_paths
@@ -15,3 +14,41 @@ dependencies:
   - wri_node
   - views_autosubmit
   - views_extras
+config_devel:
+  install:
+    - facets.facet.all_event_topics
+    - facets.facet.all_topics
+    - facets.facet.content_type
+    - facets.facet.country
+    - facets.facet.department
+    - facets.facet.event_languages
+    - facets.facet.event_type
+    - facets.facet.experts_all_topics
+    - facets.facet.international_office
+    - facets.facet.international_office_event
+    - facets.facet.languages_spoken_taxonomy_term_name
+    - facets.facet.region
+    - facets.facet.subtype
+    - facets.facet.tags
+    - facets.facet.type_of_event
+    - facets.facet.type_of_resource
+    - facets.facet.within_this_topic
+    - facets.facet_source.search_api__views_block__experts_staff__experts_staff
+    - facets.facet_source.search_api__views_block__related_content__block_1
+    - facets.facet_source.search_api__views_page__events__resources_page
+    - facets.facet_source.search_api__views_page__experts_staff__experts_staff1
+    - facets.facet_source.search_api__views_page__resources__resources_page
+    - facets.facet_source.search_api__views_page__search__results
+    - facets_summary.facets_summary.event_facet_summary
+    - facets_summary.facets_summary.experts_summary
+    - facets_summary.facets_summary.summary
+    - search_api.index.sitewide
+    - search_api.server.localhost
+    - search_api.server.pantheon
+    - system.menu.search
+    - views.view.events
+    - views.view.experts_staff
+    - views.view.project_experts
+    - views.view.related_content
+    - views.view.resources
+    - views.view.search

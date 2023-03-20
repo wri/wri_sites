@@ -2,7 +2,9 @@
 <div class="article">
   {% if content.hero %}
   <div {{ region_attributes.hero.addClass('layout__region', 'layout__region--hero') }}>
+    <div class="centering">
     {{ content.hero }}
+    </div>
   </div>
   {% endif %}
   <div{{ attributes.addClass('grid','article__title', 'margin-bottom-sm') }}>

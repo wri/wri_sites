@@ -20,9 +20,9 @@ dependencies:
     - node.type.program_center
     - responsive_image.styles.tile
   module:
-    - blazy
     - ds
     - layout_builder
+    - media_responsive_thumbnail
     - text
     - user
     - wri_media
@@ -116,46 +116,11 @@ content:
             fis-def-at: false
             fi-def-at: false
   field_main_image:
-    type: blazy_media
-    weight: 0
-    region: image
+    type: media_responsive_thumbnail
     label: hidden
     settings:
-      image_style: ''
       responsive_image_style: tile
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: tile
-      background: false
-      caption:
-        field_tags: '0'
-        field_media_embed_code: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_link: ''
     third_party_settings:
       wri_media:
         min_width: ''
@@ -164,6 +129,8 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: image
 hidden:
   body: true
   content_moderation_control: true

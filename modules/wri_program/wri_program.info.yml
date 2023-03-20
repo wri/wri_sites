@@ -9,3 +9,53 @@ dependencies:
   - wri_happening_now
   - wri_paragraph
   - wri_taxonomy
+config_devel:
+  install:
+    - cer.corresponding_reference.program_landing
+    - core.entity_form_display.node.program_center.default
+    - core.entity_form_display.paragraph.program_lead_in.default
+    - core.entity_form_display.paragraph.statistic.default
+    - core.entity_form_display.paragraph.statistics.default
+    - core.entity_form_display.taxonomy_term.topics_and_subtopics.default
+    - core.entity_view_display.node.program_center.card
+    - core.entity_view_display.node.program_center.default
+    - core.entity_view_display.node.program_center.full
+    - core.entity_view_display.node.program_center.impact
+    - core.entity_view_display.node.program_center.main_content
+    - core.entity_view_display.node.program_center.search_results
+    - core.entity_view_display.node.program_center.teaser
+    - core.entity_view_display.node.program_center.tile
+    - core.entity_view_display.paragraph.program_lead_in.default
+    - core.entity_view_display.paragraph.program_lead_in.preview
+    - core.entity_view_display.paragraph.statistic.default
+    - core.entity_view_display.paragraph.statistics.default
+    - core.entity_view_display.taxonomy_term.topics_and_subtopics.default
+    - field.field.node.program_center.body
+    - field.field.node.program_center.field_featured_experts
+    - field.field.node.program_center.field_featured_project
+    - field.field.node.program_center.field_intro
+    - field.field.node.program_center.field_intro_paragraphs
+    - field.field.node.program_center.field_long_title
+    - field.field.node.program_center.field_main_image
+    - field.field.node.program_center.field_metatag
+    - field.field.node.program_center.field_narrative_taxonomy
+    - field.field.node.program_center.field_primary_contacts
+    - field.field.node.program_center.field_primary_topic
+    - field.field.node.program_center.field_show_more_link
+    - field.field.node.program_center.field_twitter_account
+    - field.field.node.program_center.field_type
+    - field.field.node.program_center.layout_builder__layout
+    - field.field.paragraph.program_lead_in.field_leadin_paragraph
+    - field.field.paragraph.program_lead_in.field_leadin_title
+    - field.field.paragraph.statistic.field_statistic_number
+    - field.field.paragraph.statistic.field_statistic_text
+    - field.field.paragraph.statistics.field_statistics
+    - field.field.paragraph.statistics.field_statistics_title
+    - field.field.taxonomy_term.topics_and_subtopics.field_landing_page
+    - node.type.program_center
+    - paragraphs.paragraphs_type.program_lead_in
+    - paragraphs.paragraphs_type.statistic
+    - paragraphs.paragraphs_type.statistics
+    - views.view.all_topics
+    - views.view.programs_centers
+    - xmlsitemap.settings.node.program_center

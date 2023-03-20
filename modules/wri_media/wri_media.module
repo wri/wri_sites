@@ -96,7 +96,7 @@ function wri_media_form_editor_media_dialog_alter(&$form, FormStateInterface $fo
  */
 function wri_media_field_formatter_third_party_settings_form(FormatterInterface $plugin) {
   $element = [];
-  if (property_exists($plugin, 'blazyEntity')) {
+  if ($plugin->getPluginId() == 'media_responsive_thumbnail') {
     // Add a min_width setting for images.
     $element['min_width'] = [
       '#type' => 'textfield',
@@ -133,7 +133,8 @@ function wri_media_preprocess_field(&$variables) {
       }
 
       // If the media image is smaller than the min_width, hide this.
-      if ($item["content"]["#build"]["item"]->width < $element['#third_party_settings']['wri_media']['min_width']) {
+      $item_values = $item["content"]["#item"]->getValue();
+      if (isset($item_values["width"]) && ($item_values["width"] < $element['#third_party_settings']['wri_media']['min_width'])) {
         $item['content'] = [];
       }
     }

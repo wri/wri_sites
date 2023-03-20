@@ -7,3 +7,23 @@ dependencies:
   - paragraphs
   - wri_block
   - wri_node
+config_devel:
+  install:
+    - block_content.type.hero
+    - core.entity_form_display.block_content.hero.default
+    - core.entity_form_display.paragraph.happening_now.default
+    - core.entity_view_display.block_content.hero.default
+    - core.entity_view_display.paragraph.happening_now.default
+    - field.field.block_content.hero.field_hero_background
+    - field.field.block_content.hero.field_hero_type
+    - field.field.paragraph.happening_now.field_custom_happening_nows
+    - field.field.paragraph.happening_now.field_filter_by_resource_type
+    - field.field.paragraph.happening_now.field_listing
+    - field.field.paragraph.happening_now.field_tag
+    - field.storage.paragraph.field_custom_happening_nows
+    - field.storage.paragraph.field_hero_image
+    - field.storage.paragraph.field_hero_intro
+    - field.storage.paragraph.field_hero_title
+    - field.storage.paragraph.field_listing
+    - paragraphs.paragraphs_type.happening_now
+    - views.view.happening_now

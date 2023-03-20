@@ -11,23 +11,20 @@ dependencies:
     - node.type.simple_page
     - responsive_image.styles.article_hero_large_cta
   module:
-    - blazy
     - ds
     - element_class_formatter
     - entity_reference_revisions
     - layout_builder
+    - media_responsive_thumbnail
     - user
     - wri_media
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   ds:
     layout:
       id: layout_simple-page
-      library: null
-      disable_css: false
-      entity_classes: all_classes
       settings:
         label: ''
     regions:
@@ -66,9 +63,9 @@ third_party_settings:
         label: hidden
         formatter: default
         settings:
+          link: false
           wrapper: h1
           class: h1
-          link: false
         ft:
           id: reset
           settings:
@@ -80,14 +77,12 @@ mode: main_content
 content:
   field_intro:
     type: wrapper_class
-    weight: 2
-    region: hero_text
     label: hidden
     settings:
-      link_class: ''
-      tag: div
       class: intro-wrapper
+      tag: div
       link: false
+      link_class: ''
       summary: false
       trim: 200
     third_party_settings:
@@ -96,33 +91,33 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: intro-wrapper
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow: false
             ow-def-at: false
             ow-def-cl: false
             fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
             fis-def-at: false
             fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
             fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 2
+    region: hero_text
   field_intro_paragraphs:
     type: entity_reference_revisions_entity_view
-    weight: 3
-    region: intro
     label: hidden
     settings:
       view_mode: default
@@ -134,48 +129,14 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 3
+    region: intro
   field_main_image:
-    type: blazy_media
-    weight: 0
-    region: hero_image
+    type: media_responsive_thumbnail
     label: hidden
     settings:
-      image_style: ''
       responsive_image_style: article_hero_large_cta
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: full_width
-      current_view_mode: main_content
-      background: false
-      caption:
-        field_tags: '0'
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_link: ''
     third_party_settings:
       wri_media:
         min_width: '1500'
@@ -184,6 +145,8 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: hero_image
 hidden:
   content_moderation_control: true
   field_metatags: true

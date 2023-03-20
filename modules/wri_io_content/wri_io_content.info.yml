@@ -9,3 +9,37 @@ dependencies:
   - wri_media
   - wri_node
   - wri_taxonomy
+config_devel:
+  install:
+    - core.entity_form_display.node.international_office.default
+    - core.entity_form_display.wri_office.wri_office.default
+    - core.entity_view_display.node.international_office.card
+    - core.entity_view_display.node.international_office.default
+    - core.entity_view_display.node.international_office.full
+    - core.entity_view_display.node.international_office.impact
+    - core.entity_view_display.node.international_office.main_content
+    - core.entity_view_display.node.international_office.search_results
+    - core.entity_view_display.node.international_office.teaser
+    - core.entity_view_display.node.international_office.tile
+    - core.entity_view_display.wri_office.wri_office.default
+    - field.field.node.international_office.body
+    - field.field.node.international_office.field_featured_experts
+    - field.field.node.international_office.field_intro
+    - field.field.node.international_office.field_io_link
+    - field.field.node.international_office.field_main_image
+    - field.field.node.international_office.field_map_image
+    - field.field.node.international_office.field_metatags
+    - field.field.node.international_office.field_offices
+    - field.field.node.international_office.field_region
+    - field.field.node.international_office.field_show_more_link
+    - field.field.node.international_office.layout_builder__layout
+    - field.field.wri_office.wri_office.field_address
+    - field.field.wri_office.wri_office.field_telephone
+    - field.storage.node.field_international_office
+    - field.storage.node.field_offices
+    - field.storage.wri_office.field_address
+    - field.storage.wri_office.field_telephone
+    - node.type.international_office
+    - pathauto.pattern.io
+    - views.view.countries
+    - xmlsitemap.settings.node.international_office

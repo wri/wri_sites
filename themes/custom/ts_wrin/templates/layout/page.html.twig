@@ -2,7 +2,7 @@
   {{ drupal_block('local_tasks_block') }}
 {% endif %}
 {% if page.wrin_custom.wrinfilterstatus %}
-  {% include 'wrin-filter-status' %}
+  {% include '@ts_wrin/ts_custom/wrin-filter-status.html.twig' %}
 {% endif %}
 <div id="tray-nav-wrapper">
   <div id="tray-nav-canvas">
@@ -18,15 +18,15 @@
           {% endif %}
 
           {% if page.wrin_custom.languageswitcher %}
-            {% include 'wrin-language-button' %}
+            {% include '@ts_wrin/ts_custom/wrin-language-button.html.twig' %}
           {% endif %}
 
           {% if page.wrin_custom.wrinsearch %}
-            {% include 'wrin-search-button' %}
+            {% include '@ts_wrin/ts_custom/wrin-search-button.html.twig' %}
           {% endif %}
 
           {% if page.wrin_custom.wrinfilter %}
-            {% include 'wrin-filter-button' %}
+            {% include '@ts_wrin/ts_custom/wrin-filter-button.html.twig' %}
           {% endif %}
 
           {% include '@ts_wrin/ts_custom/ts-hamburger-nav.html.twig' %}

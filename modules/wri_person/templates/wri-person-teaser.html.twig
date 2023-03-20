@@ -1,0 +1,25 @@
+{% if content %}
+  <div class="person-teaser-item">
+    <div class="person-teaser__inner-wrapper">
+      <div class="left-section">
+        {% if content.image|render %}
+          {{ content.image }}
+        {% else %}
+          <img src="/profiles/contrib/wri_sites/themes/custom/ts_wrin/img/svgs/circle_grey_solid.svg" alt="{{ 'Person default'|t }}" width="100" height="100" typeof="foaf:Image" class="image-style-_00x100">
+        {% endif %}
+      </div>
+      <div class="right-section">
+        {% if content.name|render %}
+          <div class="card-headline">
+            {{ content.name }}
+          </div>
+        {% endif %}
+        {% if content.additional_info|render %}
+          <div class="card small-text light">
+            {{ content.additional_info }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endif %}

@@ -18,6 +18,7 @@ dependencies:
     - field.field.node.person.field_profile_image
     - field.field.node.person.field_project_expert
     - field.field.node.person.field_quote
+    - field.field.node.person.field_staff_group
     - field.field.node.person.field_title
     - field.field.node.person.field_topics
     - field.field.node.person.field_twitter_account
@@ -27,16 +28,16 @@ dependencies:
     - image.style.100x100
     - node.type.person
   module:
-    - blazy
     - ds
     - hierarchical_term_formatter
     - layout_builder
+    - media
     - text
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: node.person.small_image_teaser
 targetEntityType: node
 bundle: person
@@ -44,8 +45,6 @@ mode: small_image_teaser
 content:
   field_leadership:
     type: boolean
-    weight: 1
-    region: content
     label: hidden
     settings:
       format: custom
@@ -57,62 +56,33 @@ content:
           id: reset
           settings:
             lb: ''
-  field_profile_image:
-    type: blazy_media
-    weight: 3
+    weight: 1
     region: content
+  field_profile_image:
+    type: media_thumbnail
     label: hidden
     settings:
+      image_link: ''
       image_style: 100x100
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      view_mode: ''
-      cache: 0
-      current_view_mode: ''
-      skin: ''
-      fx: ''
-      style: ''
-      background: false
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      caption: {  }
-      responsive_image_style: ''
-      box_style: ''
-      media_switch: ''
-      ratio: ''
-      thumbnail_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_loading:
+        attribute: lazy
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 3
+    region: content
   field_title:
     type: text_default
-    weight: 2
-    region: content
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 2
+    region: content
   field_topics:
     type: hierarchical_term_formatter
-    weight: 0
-    region: content
     label: hidden
     settings:
       display: root
@@ -127,6 +97,8 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: content
 hidden:
   body: true
   content_moderation_control: true
@@ -142,6 +114,7 @@ hidden:
   field_phone: true
   field_project_expert: true
   field_quote: true
+  field_staff_group: true
   field_twitter_account: true
   field_type: true
   field_weight: true

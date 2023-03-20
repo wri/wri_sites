@@ -12,30 +12,28 @@ dependencies:
     - node.type.region
     - responsive_image.styles.image_cta
   module:
-    - blazy
     - ds
     - layout_builder
+    - media_responsive_thumbnail
     - text
     - user
 third_party_settings:
   ds:
     layout:
       id: layout_tile
-      library: null
-      disable_css: false
-      entity_classes: all_classes
       settings:
         label: ''
     regions:
       image:
+        - content_moderation_control
         - field_map_image
       title:
         - node_title
+      intro:
+        - field_intro
       link:
         - node_links
         - node_link_token
-      intro:
-        - field_intro
     fields:
       node_link_token:
         plugin_id: node_link_token
@@ -70,124 +68,37 @@ third_party_settings:
           settings:
             lb: ''
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: node.region.tile
 targetEntityType: node
 bundle: region
 mode: tile
 content:
-  content_moderation_control:
-    weight: -20
-    settings: {  }
-    third_party_settings: {  }
-    region: content
   field_intro:
     type: text_default
-    weight: 2
-    region: intro
     label: hidden
     settings: {  }
     third_party_settings: {  }
-  field_main_image:
-    type: blazy_media
-    weight: 0
-    region: image
-    label: hidden
-    settings:
-      image_style: ''
-      responsive_image_style: tile
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: tile
-      background: false
-      caption:
-        field_tags: '0'
-        field_media_embed_code: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
-    third_party_settings:
-      wri_media:
-        min_width: ''
-      ds:
-        ft:
-          id: reset
-          settings:
-            lb: ''
+    weight: 2
+    region: intro
   field_map_image:
-    type: blazy_media
-    weight: 0
-    region: image
+    type: media_responsive_thumbnail
     label: hidden
     settings:
-      image_style: ''
       responsive_image_style: image_cta
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: tile
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_link: ''
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: image
 hidden:
+  content_moderation_control: true
   field_featured: true
-  field_main_image: true
   field_metatags: true
   field_narrative_taxonomy: true
   field_region: true

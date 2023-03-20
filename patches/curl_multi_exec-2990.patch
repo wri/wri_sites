@@ -1,0 +1,13 @@
+diff --git a/src/Handler/CurlMultiHandler.php b/src/Handler/CurlMultiHandler.php
+index 564c95f4..01684696 100644
+--- a/src/Handler/CurlMultiHandler.php
++++ b/src/Handler/CurlMultiHandler.php
+@@ -20,7 +20,7 @@ class CurlMultiHandler
+     /** @var CurlFactoryInterface */
+     private $factory;
+     private $selectTimeout;
+-    private $active;
++    private $active = 0;
+     private $handles = [];
+     private $delays = [];
+     private $options = [];

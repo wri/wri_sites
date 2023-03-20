@@ -8,53 +8,27 @@ dependencies:
     - media.type.embed
     - responsive_image.styles.superfeatured
   module:
-    - blazy
     - ds
+    - responsive_image
 id: media.embed.default
 targetEntityType: media
 bundle: embed
 mode: default
 content:
   thumbnail:
-    type: blazy
-    weight: 0
-    region: content
+    type: responsive_image
     label: hidden
     settings:
-      image_style: ''
       responsive_image_style: superfeatured
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      current_view_mode: default
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      icon: ''
-      layout: ''
-      view_mode: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_link: ''
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: content
 hidden:
   created: true
   field_media_audio_file: true

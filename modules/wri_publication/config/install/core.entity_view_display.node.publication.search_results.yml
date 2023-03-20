@@ -35,20 +35,20 @@ dependencies:
     - image.style.150_tall
     - node.type.publication
   module:
-    - blazy
     - ds
     - hierarchical_term_formatter
     - layout_builder
+    - media
     - user
 third_party_settings:
   ds:
     layout:
       id: layout_search-results
+      settings:
+        label: ''
       library: null
       disable_css: false
       entity_classes: all_classes
-      settings:
-        label: ''
     regions:
       left_section:
         - field_primary_topic
@@ -79,64 +79,31 @@ third_party_settings:
           settings:
             lb: ''
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: node.publication.search_results
 targetEntityType: node
 bundle: publication
 mode: search_results
 content:
   field_main_image:
-    type: blazy_media
-    weight: 6
-    region: right_section
+    type: media_thumbnail
     label: hidden
     settings:
+      image_link: ''
       image_style: 150_tall
-      responsive_image_style: ''
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: search_results
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_loading:
+        attribute: lazy
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 6
+    region: right_section
   field_primary_topic:
     type: hierarchical_term_formatter
-    weight: 0
-    region: left_section
     label: hidden
     settings:
       display: root
@@ -150,10 +117,10 @@ content:
           id: reset
           settings:
             lb: ''
-  field_region:
-    type: hierarchical_term_formatter
     weight: 0
     region: left_section
+  field_region:
+    type: hierarchical_term_formatter
     label: hidden
     settings:
       display: root
@@ -168,16 +135,16 @@ content:
           id: reset
           settings:
             lb: ''
-  field_type:
-    type: hierarchical_term_formatter
     weight: 0
     region: left_section
+  field_type:
+    type: hierarchical_term_formatter
     label: hidden
     settings:
       display: root
+      link: false
       wrap: none
       separator: ' » '
-      link: false
       reverse: false
     third_party_settings:
       ds:
@@ -185,6 +152,8 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: left_section
 hidden:
   body: true
   content_moderation_control: true
@@ -207,7 +176,6 @@ hidden:
   field_projects: true
   field_publication_display: true
   field_publication_series: true
-  field_region: true
   field_related_resources: true
   field_tags: true
   field_toc: true

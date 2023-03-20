@@ -1,6 +1,6 @@
 field.widget.settings.tokenized_entit_reference:
   type: mapping
-  label: 'Tokenized entit reference widget settings'
+  label: 'Tokenized entity reference widget settings'
   mapping:
     size:
       type: integer

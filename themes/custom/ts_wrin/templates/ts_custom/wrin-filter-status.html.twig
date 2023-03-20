@@ -1,0 +1,3 @@
+{% if get_current_filter() %}
+  <div class="sitewide-filter-status filter-active italic-tiny"><strong>{{ get_current_filter()|title }}</strong> filter active <a href="/content-filter/remove" class="sitewide-content-filter-remove">remove</a></div>
+{% endif %}

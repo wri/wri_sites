@@ -26,22 +26,19 @@ dependencies:
     - field.field.node.project_detail.field_type
     - field.field.node.project_detail.layout_builder__layout
     - node.type.project_detail
-    - responsive_image.styles.card
+    - responsive_image.styles.large_image_teaser
   module:
-    - blazy
     - ds
     - layout_builder
+    - media_responsive_thumbnail
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   ds:
     layout:
       id: layout_large_image_teaser
-      library: null
-      disable_css: false
-      entity_classes: all_classes
       settings:
         label: ''
     regions:
@@ -70,29 +67,29 @@ third_party_settings:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow: false
             ow-def-at: false
             ow-def-cl: false
             fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
             fis-def-at: false
             fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
             fi-def-at: false
+            prefix: ''
+            suffix: ''
       node_title:
         plugin_id: node_title
         weight: 2
@@ -111,68 +108,31 @@ targetEntityType: node
 bundle: project_detail
 mode: large_image_teaser
 content:
-  content_moderation_control:
-    weight: -20
-    settings: {  }
-    third_party_settings: {  }
-    region: content
   field_main_image:
-    weight: 0
+    type: media_responsive_thumbnail
     label: hidden
     settings:
-      image_style: ''
-      responsive_image_style: card
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: large_image_teaser
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      responsive_image_style: large_image_teaser
+      image_link: ''
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
-    type: blazy_media
+    weight: 0
     region: image
   field_primary_topic:
-    weight: 1
+    type: entity_reference_label
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 1
     region: tag
 hidden:
   body: true
+  content_moderation_control: true
   field_authors: true
   field_exclude_from_blog_feed: true
   field_featured: true

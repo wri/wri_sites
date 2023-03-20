@@ -1,0 +1,15 @@
+single_file_component_layout:wri_3_1_listing:
+  label: "3 + 1 Content Listings"
+  template: templates/wri-31
+  default_region: listing
+  regions:
+    header:
+      label: Header
+    intro:
+      label: Intro
+    listing:
+      label: Listing
+  icon_map:
+    - [ header, intro ]
+    - [ listing ]
+

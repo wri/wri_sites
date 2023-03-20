@@ -10,3 +10,15 @@ single_file_component_layout:wri_superfeatured:
       label: 'Right Text'
     button:
       label: 'Button'
+single_file_component_layout:wri_superfeatured_block:
+  label: 'Superfeatured block'
+  template: templates/wri-superfeatured-block
+  default_region: main_content
+  regions:
+    phrase:
+      label: 'Phrase'
+    main_content:
+      label: Content
+  icon_map:
+    - [ phrase ]
+    - [ content ]

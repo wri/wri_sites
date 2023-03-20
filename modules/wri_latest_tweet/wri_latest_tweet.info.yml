@@ -5,3 +5,11 @@ core_version_requirement: '^8.8.0 || ^9'
 package: WRI
 dependencies:
   - twitter_api_block
+config_devel:
+  install:
+    - block_content.type.latest_tweet
+    - core.entity_form_display.block_content.latest_tweet.default
+    - core.entity_view_display.block_content.latest_tweet.default
+    - field.field.block_content.latest_tweet.field_intro
+    - field.field.block_content.latest_tweet.field_twitter_user
+    - field.storage.block_content.field_twitter_user
