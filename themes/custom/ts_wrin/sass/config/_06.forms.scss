@@ -59,6 +59,20 @@ input[type="text"].ghost {
     top: 25%;
     transition: top 0.3s ease-in, left 0.3s ease-in, font-size 0.3s ease-in;
   }
+  &.form-item-textarea label,
+  &.form-item-date label,
+  &.form-item-time label,
+  &.form-item-week label,
+  &.form-no-label label
+  {
+    top: 10px;
+  }
+  &.form-item-datetime label,
+  &.form-item-range label,
+  &.form-item-color label {
+    position: static;
+  }
+
   &.move-label label,
   &.has-value label {
     font-size: 10px;
@@ -95,6 +109,17 @@ form.webform-submission-form {
   }
   input[type="text"],
   input[type="email"],
+  input[type="phone"],
+  input[type="date"],
+  input[type="time"],
+  input[type="number"],
+  input[type="url"],
+  input[type="week"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="datetime-local"],
+  input[type="month"],
   select {
     @include font($acumin-semi-cond, "regular", "normal");
     @include font-line-height(16, 22);
@@ -121,6 +146,10 @@ form.webform-submission-form {
       border-color: $true-black;
       outline: none;
     }
+  }
+
+  .form-type-datetime input {
+    display: inline;
   }
 
   .form-type-select {
