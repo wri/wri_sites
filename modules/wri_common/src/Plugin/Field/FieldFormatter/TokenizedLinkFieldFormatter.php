@@ -34,7 +34,7 @@ class TokenizedLinkFieldFormatter extends LinkFormatter {
     }
 
     // Break up item_url into the set of facets, and pass to getPrettyPaths().
-    $query_items = $url->getOptions()['query'];
+    $query_items = $url->getOptions()['query'] ?? [];
 
     // Full query looks like: /resources/topic/governance-227/type/65/subtype/15401/region/8934/country/8898.
     foreach ($query_items as $key => $value) {

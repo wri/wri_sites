@@ -64,18 +64,21 @@ class ExternalPubBlock extends BlockBase {
           }
         }
         if ($publicationIsFromAuthor) {
-          $publication_date = $publication_entry['issued']['date-parts'][0][0] . (isset($publication_entry['issued']['date-parts'][0][1]) ? "-" . $publication_entry['issued']['date-parts'][0][1] : "");
-          $publication_date = new DrupalDateTime($publication_date);
+          if (isset($publication_entry['issued']['date-parts'])) {
+            $publication_date = $publication_entry['issued']['date-parts'][0][0] . (isset($publication_entry['issued']['date-parts'][0][1]) ? "-" . $publication_entry['issued']['date-parts'][0][1] : "");
+            $publication_date = new DrupalDateTime($publication_date);
+            $date = $publication_date->getTimestamp();
+          }
           $author_publications_array[] = [
-            'title' => $publication_entry['title'],
+            'title' => $publication_entry['title'] ?? '',
             'authors' => implode(', ', $authors),
             'container_title' => $publication_entry['container-title'] ?? '',
-            'volume' => $publication_entry['volume'],
-            'issued' => $publication_entry['issued']['date-parts'][0][0],
-            'page' => $publication_entry['page'],
+            'volume' => $publication_entry['volume'] ?? '',
+            'issued' => $publication_entry['issued']['date-parts'][0][0] ?? '',
+            'page' => $publication_entry['page'] ?? '',
             'doi' => $publication_entry['DOI'] ?? '',
             'doi_url' => 'https://doi.org/',
-            'date' => $publication_date->getTimestamp(),
+            'date' => $date ?? '',
           ];
         }
       }
