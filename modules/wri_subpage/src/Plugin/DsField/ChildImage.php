@@ -32,8 +32,8 @@ class ChildImage extends DsFieldBase {
     $node = \Drupal::routeMatch()->getParameter('node');
     if (!$node) {
       $node_route = \Drupal::routeMatch()->getRawParameter('section_storage');
-      $node_id = str_replace('node.', '', $node_route);
-      $node = Node::load($node_id);
+      $node_id = str_replace('node.', '', $node_route ?? '');
+      $node = $node_id ? Node::load($node_id) : '';
     }
     $uri = FALSE;
     $alt = '';
