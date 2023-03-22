@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\wri_block\Plugin\LayoutBuilderRestriction;
+namespace Drupal\wri_admin\Plugin\LayoutBuilderRestriction;
 
 use Drupal\layout_builder_restrictions\Plugin\LayoutBuilderRestrictionBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
