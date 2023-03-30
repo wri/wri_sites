@@ -166,7 +166,7 @@ class WriReaderRetrieveNodeResource extends ResourceBase {
           $authors = $node->get($field_name)->referencedEntities();
 
           foreach ($authors as $author) {
-            if (method_exists($author->field_person_link, 'getValue')) {
+            if (isset($author->field_person_link) && method_exists($author->field_person_link, 'getValue')) {
               $authorData = $author->field_person_link->getValue()[0];
 
               $node_array['authors'][] = [
