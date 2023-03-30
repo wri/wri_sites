@@ -42,7 +42,6 @@ class EmbedDataForm extends AddFormBase {
       '#type' => 'submit',
       '#value' => $this->t('Add'),
       '#button_type' => 'primary',
-      '#validate' => ['::validateUrl'],
       '#submit' => ['::addButtonSubmit'],
       '#ajax' => [
         'callback' => '::updateFormCallback',
