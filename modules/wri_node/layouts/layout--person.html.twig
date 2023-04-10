@@ -22,10 +22,10 @@
            <div class="hero__left">
              {{ content.hero|without('field_first_name')|without('field_leadership') }}
              <div class="buttons">
-               {% if content.field_email.0['#title'] %}
+               {% if content.sidebar_contact.field_email.0['#title'] %}
                  <div class="button-holder">
-               <a class="button small contact-btn" href="mailto:{{ content.field_email.0['#title'] }}">
-                 {{ 'Contact'|t }}{{ content.field_first_name }}
+               <a class="button small contact-btn" href="mailto:{{ content.sidebar_contact.field_email.0['#title'] }}">
+                 {{ 'Contact'|t }}{{ content.hero.field_first_name }}
                </a>
                  </div>
               {% endif %}
