@@ -120,9 +120,6 @@
             "drupal/hierarchical_term_formatter": {
                 "Use the toUrl to create the link (compatibility with Forum module)": "https://git.drupalcode.org/project/hierarchical_term_formatter/-/merge_requests/1.diff"
             },
-            "drupal/search_api_pantheon": {
-                "ArgumentCountError when trying to post schema https://www.drupal.org/project/search_api_pantheon/issues/3320326": "https://www.drupal.org/files/issues/2022-11-17/3320326_fix.patch"
-            },
             "drupal/textfield_counter": {
                 "'Prevent form submission when character limit exceeded' option does not work https://www.drupal.org/project/textfield_counter/issues/3004457": "https://www.drupal.org/files/issues/2018-10-04/textfield_counter-prevent_form_submission_does_not_work-3004457-2.patch",
                 "Issue #3182675: Incompatibilities with Claro theme, which duplicates the field selector class": "https://git.drupalcode.org/project/textfield_counter/-/merge_requests/1.patch"
