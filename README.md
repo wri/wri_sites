@@ -1,5 +1,6 @@
 # wri_sites
 WRI profile
+Style Guide https://www.figma.com/proto/mIAtFYxBsWI4CU4gIHRymm/WRI-styleguide 
 
 ## How to use this profile
 
