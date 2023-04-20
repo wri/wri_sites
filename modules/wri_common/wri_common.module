@@ -206,13 +206,13 @@ function wri_common_get_node_topics(Node $node, $secondary_only = FALSE) {
   $topics = [];
   if (!$secondary_only && $node->hasField('field_primary_topic') && ($topic_items = $node->get('field_primary_topic')) && !$topic_items->isEmpty()) {
     $topic_item = $topic_items->first()->entity;
-    if ($topic_item) {
+    if ($topic_item && $topic_item->isPublished()) {
       $topics[] = $topic_item;
     }
   }
   if ($node->hasField('field_tags') && ($tag_items = $node->get('field_tags')) && !$tag_items->isEmpty()) {
     foreach ($tag_items as $tag_item) {
-      if (isset($tag_item->entity) && $tag_item->entity->bundle() == 'topics_and_subtopics') {
+      if (isset($tag_item->entity) && $tag_item->entity->bundle() == 'topics_and_subtopics' && $tag_item->entity->isPublished()) {
         $topics[] = $tag_item->entity;
       }
     }
