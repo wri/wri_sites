@@ -43,3 +43,13 @@ function wri_search_update_dependencies() {
 
   return $dependencies;
 }
+
+/**
+ * Adds relevance to the person search, and filters by all phrases.
+ */
+function wri_person_update_9400() {
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.experts_staff', [
+    'display#default#display_options#filters#search_api_fulltext',
+    'display#default#display_options#sorts#search_api_relevance',
+  ], 'wri_search');
+}
