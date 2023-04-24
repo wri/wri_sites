@@ -19,87 +19,12 @@ base_table: search_api_index_sitewide
 base_field: search_api_id
 display:
   default:
-    display_plugin: default
     id: default
-    display_title: Default
+    display_title: Master
+    display_plugin: default
     position: 0
     display_options:
-      access:
-        type: none
-        options: {  }
-      cache:
-        type: time
-        options:
-          results_lifespan: 3600
-          results_lifespan_custom: 0
-          output_lifespan: 21600
-          output_lifespan_custom: 0
-      query:
-        type: views_query
-        options:
-          bypass_access: false
-          skip_access: false
-          preserve_facet_query_args: true
-      exposed_form:
-        type: basic
-        options:
-          submit_button: Search
-          reset_button: false
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      pager:
-        type: full
-        options:
-          items_per_page: 40
-          offset: 0
-          id: 0
-          total_pages: null
-          tags:
-            previous: '‹ Previous'
-            next: 'Next ›'
-            first: '« First'
-            last: 'Last »'
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-          quantity: 9
-      style:
-        type: default
-        options:
-          grouping:
-            -
-              field: field_staff_group
-              rendered: true
-              rendered_strip: false
-          row_class: ''
-          default_row_class: true
-          uses_fields: true
-      row:
-        type: search_api
-        options:
-          view_modes:
-            'entity:node':
-              article: default
-              data: default
-              event: default
-              homepage: default
-              international_office: default
-              page: default
-              person: small_image_teaser
-              program_center: default
-              project_detail: default
-              publication: default
-              region: default
-              simple_page: default
-              subpage: default
+      title: 'Experts & Staff'
       fields:
         field_staff_group:
           id: field_staff_group
@@ -199,6 +124,98 @@ display:
               topics_and_subtopics:
                 display_method: label
                 view_mode: default
+      pager:
+        type: full
+        options:
+          offset: 0
+          items_per_page: 40
+          total_pages: null
+          id: 0
+          tags:
+            next: 'Next ›'
+            previous: '‹ Previous'
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Search
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      access:
+        type: none
+        options: {  }
+      cache:
+        type: none
+        options: {  }
+      empty: {  }
+      sorts:
+        search_api_relevance:
+          id: search_api_relevance
+          table: search_api_index_sitewide
+          field: search_api_relevance
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        staff_group_weight:
+          id: staff_group_weight
+          table: search_api_index_sitewide
+          field: staff_group_weight
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        field_weight:
+          id: field_weight
+          table: search_api_index_sitewide
+          field: field_weight
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: field_weight
+          exposed: false
+        field_last_name:
+          id: field_last_name
+          table: search_api_index_sitewide
+          field: field_last_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: field_last_name
+          exposed: false
+      arguments: {  }
       filters:
         status:
           id: status
@@ -207,6 +224,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_boolean
           operator: '='
           value: '1'
           group: 1
@@ -237,7 +255,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: search_api_boolean
         search_api_fulltext:
           id: search_api_fulltext
           table: search_api_index_sitewide
@@ -245,7 +262,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          operator: or
+          plugin_id: search_api_fulltext
+          operator: and
           value: ''
           group: 1
           exposed: true
@@ -268,7 +286,9 @@ display:
               content_editor: '0'
               editorial: '0'
               administrator: '0'
+            expose_fields: false
             placeholder: ''
+            searched_fields_id: ''
           is_grouped: false
           group_info:
             label: ''
@@ -284,7 +304,6 @@ display:
           parse_mode: terms
           min_length: null
           fields: {  }
-          plugin_id: search_api_fulltext
         type:
           id: type
           table: search_api_index_sitewide
@@ -292,6 +311,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_options
           operator: or
           value:
             person: person
@@ -325,7 +345,6 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-          plugin_id: search_api_options
         field_type:
           id: field_type
           table: search_api_index_sitewide
@@ -366,91 +385,47 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: true
-          type: textfield
-          limit: true
           vid: resource_type
+          type: textfield
           hierarchy: false
+          limit: true
           error_message: true
-          plugin_id: search_api_term
-        search_api_language:
-          id: search_api_language
-          table: search_api_index_sitewide
-          field: search_api_language
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: in
-          value:
-            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: search_api_language
-      sorts:
-        staff_group_weight:
-          id: staff_group_weight
-          table: search_api_index_sitewide
-          field: staff_group_weight
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api
-          order: ASC
-          expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
-        field_weight:
-          id: field_weight
-          table: search_api_index_sitewide
-          field: field_weight
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: ''
-          plugin_id: search_api
-        field_last_name:
-          id: field_last_name
-          table: search_api_index_sitewide
-          field: field_last_name
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: ''
-          plugin_id: search_api
-      title: 'Experts & Staff'
+      style:
+        type: default
+        options:
+          grouping:
+            -
+              field: field_staff_group
+              rendered: true
+              rendered_strip: false
+          row_class: ''
+          default_row_class: true
+          uses_fields: true
+      row:
+        type: search_api
+        options:
+          view_modes:
+            'entity:node':
+              article: default
+              data: default
+              event: default
+              homepage: default
+              international_office: default
+              page: default
+              person: small_image_teaser
+              program_center: default
+              project_detail: default
+              publication: default
+              region: default
+              simple_page: default
+              subpage: default
+      query:
+        type: search_api_query
+        options:
+          bypass_access: false
+          skip_access: false
+          preserve_facet_query_args: true
+      relationships: {  }
       header:
         extra_result:
           id: extra_result
@@ -459,9 +434,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: extra_result
           empty: false
           content: '<span class=''totals''>@total Featured Experts</span>'
-          plugin_id: extra_result
         area:
           id: area
           table: views
@@ -469,17 +444,18 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: text
           empty: false
-          tokenize: false
           content:
             value: "<p class=\"experts-header-text padding-bottom\">WRI brings together 1,400 experts and other staff in working in seven programs: food, forests, water, energy, cities, climate and the ocean and four centers of excellence for business, economics, finance and equity. Our staff and researchers work globally to produce data-based solutions that generate real change on the ground.</p>\r\n"
             format: unrestricted_text
-          plugin_id: text
+          tokenize: false
       footer: {  }
-      empty: {  }
-      relationships: {  }
-      arguments: {  }
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender:
+          metatags:
+            robots: noindex
+          tokenize: false
     cache_metadata:
       max-age: -1
       contexts:
@@ -492,17 +468,31 @@ display:
       tags:
         - 'config:field.storage.node.field_staff_group'
         - 'config:search_api.index.sitewide'
+        - 'search_api_list:sitewide'
   experts_staff1:
-    display_plugin: page
     id: experts_staff1
     display_title: 'Experts & Staff'
+    display_plugin: page
     position: 2
     display_options:
-      display_extenders: {  }
-      display_description: ''
-      path: about/experts-staff
       defaults:
-        cache: false
+        cache: true
+      display_description: ''
+      display_extenders:
+        metatag_display_extender:
+          metatags:
+            robots: noindex
+          tokenize: false
+      path: about/experts-staff
+      menu:
+        type: normal
+        title: 'Experts & Staff'
+        description: ''
+        weight: -85
+        expanded: false
+        menu_name: page-hierarchies
+        parent: 'menu_link_content:4f92d155-0924-4c24-8dce-7b650d42485f'
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:
@@ -515,3 +505,4 @@ display:
       tags:
         - 'config:field.storage.node.field_staff_group'
         - 'config:search_api.index.sitewide'
+        - 'search_api_list:sitewide'
