@@ -5,8 +5,6 @@ dependencies:
     - field.storage.node.field_staff_group
     - search_api.index.sitewide
     - taxonomy.vocabulary.resource_type
-  content:
-    - 'taxonomy_term:resource_type:24b09a57-3cb3-47c7-97f0-d2047eefa25f'
   module:
     - search_api
     - views_extras
