@@ -40,14 +40,16 @@ function wri_narrative_post_update_rewrite_narrative_taxonomies(&$sandbox) {
   // Loop through each node.
   foreach ($nids as $result) {
     $node = Node::load($result->entity_id);
+    $taxonomy_value = $node->field_narrative_taxonomy->getValue();
     // Replace link strings with new values.
-    $node->field_narrative_taxonomy->setValue(str_replace(
+    $taxonomy_value[0]['value'] = str_replace(
       ['<a href="/node/[node:field_projects:target_id]">[node:field_projects:entity]</a>',
         '<a href="/node/[node:field_primary_contacts:target_id]">[node:field_primary_contacts:entity]</a>'],
       ['[node:field_projects:entity:link]',
         '[node:field_primary_contacts:entity:link]'],
-      $node->field_narrative_taxonomy->getValue()
-    ));
+      $taxonomy_value[0]['value']
+    );
+    $node->field_narrative_taxonomy->setValue($taxonomy_value);
 
     // Save the node.
     $node->save();
