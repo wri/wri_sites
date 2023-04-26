@@ -325,20 +325,21 @@ function _wri_common_format_list(array $terms) {
 /**
  * Determines whether or not to print an entity's title with link or without.
  *
- * @param $entity
+ * @param \Drupal\Core\Entity\EntityInterface $entity
  *   The entity.
+ *
  * @return string
  *   A string representing the entity with or without a link.
  */
-function wri_common_link_or_text($entity) {
+function wri_common_link_or_text(EntityInterface $entity) {
   $link = '';
   if (isset($entity)) {
-      if ($entity->isPublished()) {
-        $link = $entity->toLink()->toString();
-      }
-      else {
-        $link = $entity->label();
-      }
+    if ($entity->isPublished()) {
+      $link = $entity->toLink()->toString();
+    }
+    else {
+      $link = $entity->label();
+    }
   }
   return $link;
 }
