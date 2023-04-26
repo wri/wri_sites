@@ -44,9 +44,11 @@ function wri_narrative_post_update_rewrite_narrative_taxonomies(&$sandbox) {
     // Replace link strings with new values.
     $taxonomy_value[0]['value'] = str_replace(
       ['<a href="/node/[node:field_projects:target_id]">[node:field_projects:entity]</a>',
-        '<a href="/node/[node:field_primary_contacts:target_id]">[node:field_primary_contacts:entity]</a>'],
+        '<a href="/node/[node:field_primary_contacts:target_id]">[node:field_primary_contacts:entity]</a>',
+      ],
       ['[node:field_projects:entity:link]',
-        '[node:field_primary_contacts:entity:link]'],
+        '[node:field_primary_contacts:entity:link]',
+      ],
       $taxonomy_value[0]['value']
     );
     $node->field_narrative_taxonomy->setValue($taxonomy_value);
@@ -55,7 +57,6 @@ function wri_narrative_post_update_rewrite_narrative_taxonomies(&$sandbox) {
     $node->save();
     $sandbox['current']++;
   }
-
 
   \Drupal::messenger()
     ->addMessage($sandbox['current'] . ' persons processed.');
