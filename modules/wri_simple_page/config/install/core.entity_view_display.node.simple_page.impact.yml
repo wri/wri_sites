@@ -15,8 +15,8 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   ds:
     layout:
       id: layout_impact
@@ -56,8 +56,6 @@ mode: impact
 content:
   field_type:
     type: entity_reference_label
-    weight: 0
-    region: content_type
     label: hidden
     settings:
       link: false
@@ -67,6 +65,8 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: content_type
 hidden:
   content_moderation_control: true
   field_featured_experts: true

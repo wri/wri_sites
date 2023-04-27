@@ -42,16 +42,16 @@ dependencies:
     - wri_media
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   ds:
     layout:
       id: layout_event
+      settings:
+        label: ''
       library: null
       disable_css: false
       entity_classes: all_classes
-      settings:
-        label: ''
     regions:
       hero:
         - content_moderation_control
@@ -96,9 +96,9 @@ third_party_settings:
         label: hidden
         formatter: default
         settings:
+          link: false
           wrapper: h1
           class: 'h1 xl'
-          link: false
         ft:
           id: reset
           settings:
@@ -109,68 +109,68 @@ bundle: event
 mode: main_content
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 12
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 12
     region: main_content
   content_moderation_control:
-    weight: -20
-    region: hero
     settings: {  }
     third_party_settings: {  }
+    weight: -20
+    region: hero
   field_date_time:
-    weight: 6
+    type: smartdate_default
     label: hidden
     settings:
       timezone_override: ''
+      format_type: medium
       format: compact_dot
       force_chronological: false
       add_classes: false
-      format_type: medium
+      time_wrapper: true
+      localize: false
     third_party_settings:
       ds:
         ft:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
             ow: true
             ow-el: span
             ow-cl: 'event-info-item event-info-date'
             ow-at: ''
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
             ow-def-at: false
             ow-def-cl: false
             fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
             fis-def-at: false
             fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
             fi-def-at: false
-    type: smartdate_default
+            prefix: ''
+            suffix: ''
+    weight: 6
     region: info
   field_featured:
     type: entity_reference_rss_category
-    weight: 25
-    region: hero
     label: above
     settings: {  }
     third_party_settings: {  }
+    weight: 25
+    region: hero
   field_files:
     type: entity_reference_entity_view
-    weight: 14
-    region: sidebar_left
     label: above
     settings:
       view_mode: download_listing
@@ -182,31 +182,33 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
             lbw: true
             lbw-el: div
             lbw-cl: italic-tiny
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            suffix: ''
-            lb-col: false
-            ow: false
             ow-def-at: false
             ow-def-cl: false
             fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
             fis-def-at: false
             fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
             fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 14
+    region: sidebar_left
   field_intro:
-    weight: 3
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings:
@@ -215,39 +217,39 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
             ow: true
             ow-el: div
             ow-cl: intro
             ow-at: ''
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
             ow-def-at: false
             ow-def-cl: false
             fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
             fis-def-at: false
             fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
             fi-def-at: false
-    type: text_default
+            prefix: ''
+            suffix: ''
+    weight: 3
     region: hero
   field_languages_spoken:
-    weight: 10
+    type: hierarchical_term_formatter
     label: inline
     settings:
       display: all
+      link: false
       wrap: none
       separator: ' » '
-      link: false
       reverse: false
     third_party_settings:
       ds:
@@ -256,35 +258,33 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
             ow: true
             ow-el: span
             ow-cl: 'category-wrapper topic-tag-wrapper languages'
             ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
             fis-el: ''
             fis-cl: ''
             fis-at: ''
+            fis-def-at: false
             fi: true
             fi-el: span
             fi-cl: language-item
             fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-def-at: false
             fi-def-at: false
-    type: hierarchical_term_formatter
+            prefix: ''
+            suffix: ''
+    weight: 10
     region: category
   field_location:
     type: string
-    weight: 7
-    region: info
     label: hidden
     settings:
       link_to_entity: false
@@ -294,29 +294,31 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
             ow: true
             ow-el: span
             ow-cl: 'event-info-item event-info-location'
             ow-at: ''
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
             ow-def-at: false
             ow-def-cl: false
             fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
             fis-def-at: false
             fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
             fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 7
+    region: info
   field_main_image:
     type: media_responsive_thumbnail
     label: hidden
@@ -334,45 +336,45 @@ content:
     weight: 0
     region: hero
   field_primary_topic:
-    weight: 8
+    type: entity_reference_label_class
     label: inline
     settings:
       link: true
-      tag: span
       class: ''
+      tag: span
     third_party_settings:
       ds:
         ft:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
             ow: true
             ow-el: div
             ow-cl: category-wrapper
             ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
             fis-el: ''
             fis-cl: ''
             fis-at: ''
+            fis-def-at: false
             fi: true
             fi-el: span
             fi-cl: topic-tag
             fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-def-at: false
             fi-def-at: false
-    type: entity_reference_label_class
+            prefix: ''
+            suffix: ''
+    weight: 8
     region: category
   field_region:
-    weight: 9
+    type: hierarchical_term_formatter
     label: inline
     settings:
       display: root
@@ -387,49 +389,49 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
             ow: true
             ow-el: div
             ow-cl: 'category-wrapper topic-tag-wrapper regions'
             ow-at: ''
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
             ow-def-at: false
             ow-def-cl: false
             fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
             fis-def-at: false
             fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
             fi-def-at: false
-    type: hierarchical_term_formatter
+            prefix: ''
+            suffix: ''
+    weight: 9
     region: category
   field_register:
-    weight: 4
+    type: link_ally_class
     label: hidden
     settings:
+      class: button
       link_text: Register
       screenreader_text: Register
       tag: ''
-      class: button
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
-    type: link_ally_class
+    weight: 4
     region: buttons
   field_social_media_links:
-    weight: 13
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -444,33 +446,33 @@ content:
           id: expert
           settings:
             lb: 'Join the Conversation'
-            prefix: ''
             lbw: true
             lbw-el: div
             lbw-cl: italic-tiny
             lbw-at: ''
+            lb-col: false
             ow: true
             ow-el: div
             ow-cl: join-the-conversation
             ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
             fis-el: a
             fis-cl: taxonomy
             fis-at: ''
+            fis-def-at: false
             fi: true
             fi-el: div
             fi-cl: conversation-item
             fi-at: ''
-            suffix: ''
-            lb-col: false
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-def-at: false
             fi-def-at: false
-    type: link
+            prefix: ''
+            suffix: ''
+    weight: 13
     region: sidebar_left
   field_type:
-    weight: 1
+    type: entity_reference_label
     label: hidden
     settings:
       link: false
@@ -480,18 +482,18 @@ content:
           id: reset
           settings:
             lb: ''
-    type: entity_reference_label
+    weight: 1
     region: hero
   links:
+    settings: {  }
+    third_party_settings: {  }
     weight: 26
     region: hero
+  wri_social_sharing_block:
     settings: {  }
     third_party_settings: {  }
-  wri_social_sharing_block:
     weight: 11
     region: share
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   field_event_display: true
   field_international_office: true

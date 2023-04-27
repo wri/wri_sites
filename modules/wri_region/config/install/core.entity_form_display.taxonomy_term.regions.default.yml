@@ -20,8 +20,8 @@ content:
     weight: 3
     region: content
     settings:
-      placeholder: ''
       rows: 5
+      placeholder: ''
     third_party_settings: {  }
   field_intro:
     type: text_textarea
@@ -32,15 +32,15 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_landing_page:
+    type: entity_reference_autocomplete
     weight: 6
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_main_image:
     type: media_library_widget
     weight: 0
@@ -71,9 +71,9 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 5
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
 hidden: {  }

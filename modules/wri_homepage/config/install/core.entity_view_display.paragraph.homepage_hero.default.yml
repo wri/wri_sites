@@ -22,8 +22,8 @@ third_party_settings:
     allowed_block_categories: {  }
     entity_view_mode_restriction:
       allowed_layouts: {  }
-      blacklisted_blocks: {  }
-      whitelisted_blocks: {  }
+      denylisted_blocks: {  }
+      allowlisted_blocks: {  }
 id: paragraph.homepage_hero.default
 targetEntityType: paragraph
 bundle: homepage_hero
@@ -39,11 +39,9 @@ content:
       ds:
         ds_limit: ''
         ft:
-          id: minimal
+          id: reset
           settings:
             lb: ''
-            lb-col: false
-            classes: {  }
     weight: 2
     region: content
   field_featured_statement:

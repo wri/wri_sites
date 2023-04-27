@@ -38,16 +38,16 @@ dependencies:
     - wri_media
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   ds:
     layout:
       id: layout_large_image_teaser
+      settings:
+        label: ''
       library: null
       disable_css: false
       entity_classes: all_classes
-      settings:
-        label: ''
     regions:
       image:
         - field_main_image
@@ -88,6 +88,7 @@ content:
       force_chronological: false
       add_classes: false
       time_wrapper: true
+      localize: false
     third_party_settings:
       ds:
         ft:
@@ -113,23 +114,21 @@ content:
     weight: 0
     region: image
   field_primary_topic:
-    weight: 1
+    type: entity_reference_label
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 1
     region: tag
   field_type:
     type: hierarchical_term_formatter
-    weight: 0
-    region: content_type
     label: hidden
     settings:
       display: root
+      link: false
       wrap: none
       separator: ' » '
-      link: false
       reverse: false
     third_party_settings:
       ds:
@@ -137,6 +136,8 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: content_type
 hidden:
   body: true
   content_moderation_control: true

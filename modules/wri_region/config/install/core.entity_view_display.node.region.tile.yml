@@ -25,7 +25,6 @@ third_party_settings:
         label: ''
     regions:
       image:
-        - content_moderation_control
         - field_map_image
       title:
         - node_title

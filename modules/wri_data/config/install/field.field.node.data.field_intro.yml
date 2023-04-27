@@ -9,10 +9,8 @@ dependencies:
     - text
 third_party_settings:
   allowed_formats:
-    basic_html: basic_html
-    full_html: '0'
-    unrestricted_text: '0'
-    plain_text: '0'
+    allowed_formats:
+      - basic_html
 id: node.data.field_intro
 field_name: field_intro
 entity_type: node

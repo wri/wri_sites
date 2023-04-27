@@ -37,11 +37,11 @@ third_party_settings:
   ds:
     layout:
       id: layout_teaser
+      settings:
+        label: ''
       library: null
       disable_css: false
       entity_classes: all_classes
-      settings:
-        label: ''
     regions:
       tag:
         - field_primary_topic
@@ -66,8 +66,8 @@ third_party_settings:
           settings:
             lb: ''
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: node.event.teaser
 targetEntityType: node
 bundle: event
@@ -93,8 +93,6 @@ content:
     region: date
   field_primary_topic:
     type: entity_reference_label
-    weight: 0
-    region: tag
     label: hidden
     settings:
       link: true
@@ -104,16 +102,16 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: tag
   field_type:
     type: hierarchical_term_formatter
-    weight: 0
-    region: content_type
     label: hidden
     settings:
       display: root
+      link: false
       wrap: none
       separator: ' » '
-      link: false
       reverse: false
     third_party_settings:
       ds:
@@ -121,6 +119,8 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: content_type
 hidden:
   body: true
   content_moderation_control: true

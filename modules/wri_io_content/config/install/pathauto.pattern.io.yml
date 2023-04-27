@@ -9,13 +9,13 @@ type: 'canonical_entities:node'
 pattern: '[node:field_region:entity:parents]/[node:title]'
 selection_criteria:
   5cda381f-1170-4eb1-aa33-006c6a4c6ea0:
-    id: node_type
-    bundles:
-      international_office: international_office
+    id: 'entity_bundle:node'
     negate: false
+    uuid: 5cda381f-1170-4eb1-aa33-006c6a4c6ea0
     context_mapping:
       node: node
-    uuid: 5cda381f-1170-4eb1-aa33-006c6a4c6ea0
+    bundles:
+      international_office: international_office
 selection_logic: and
 weight: -8
 relationships: {  }

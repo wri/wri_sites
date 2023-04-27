@@ -20,6 +20,7 @@ dependencies:
     - field.field.node.project_detail.field_primary_topic
     - field.field.node.project_detail.field_project_partners
     - field.field.node.project_detail.field_region
+    - field.field.node.project_detail.field_show_more_link
     - field.field.node.project_detail.field_tags
     - field.field.node.project_detail.field_toc
     - field.field.node.project_detail.field_twitter_account
@@ -37,8 +38,8 @@ dependencies:
     - wri_toc
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   ds:
     layout:
       id: 'single_file_component_layout:wri_subpage_columns'
@@ -78,9 +79,9 @@ third_party_settings:
         label: hidden
         formatter: default
         settings:
+          link: false
           wrapper: h2
           class: h1
-          link: false
         ft:
           id: reset
           settings:
@@ -92,8 +93,6 @@ mode: hero_on_a_subpage
 content:
   field_narrative_taxonomy:
     type: text_default
-    weight: 9
-    region: sidebar
     label: hidden
     settings: {  }
     third_party_settings:
@@ -102,71 +101,71 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
             ow: true
             ow-el: div
             ow-cl: narrative-taxonomy
             ow-at: ''
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
             ow-def-at: false
             ow-def-cl: false
             fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
             fis-def-at: false
             fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
             fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 9
+    region: sidebar
   field_primary_topic:
     type: entity_reference_label_class
-    weight: 5
-    region: category
     label: inline
     settings:
       link: true
-      tag: span
       class: ''
+      tag: span
     third_party_settings:
       ds:
         ft:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
             ow: true
             ow-el: div
             ow-cl: category-wrapper
             ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
             fis-el: ''
             fis-cl: ''
             fis-at: ''
+            fis-def-at: false
             fi: true
             fi-el: span
             fi-cl: topic-tag
             fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-def-at: false
             fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 5
+    region: category
   field_region:
     type: hierarchical_term_formatter
-    weight: 6
-    region: category
     label: inline
     settings:
       display: root
@@ -181,41 +180,41 @@ content:
           id: expert
           settings:
             lb: Regions
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
             ow: true
             ow-el: span
             ow-cl: 'category-wrapper topic-tag-wrapper'
             ow-at: ''
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
             ow-def-at: false
             ow-def-cl: false
             fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
             fis-def-at: false
             fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
             fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 6
+    region: category
   field_toc:
     type: 'single_file_component_field_formatter:toc_formatter'
-    weight: 4
-    region: hero
     label: hidden
     settings:
       component_context: {  }
     third_party_settings: {  }
+    weight: 4
+    region: hero
   field_twitter_account:
     type: link_separate
-    weight: 7
-    region: share
     label: hidden
     settings:
       trim_length: 80
@@ -229,11 +228,13 @@ content:
           id: reset
           settings:
             lb: ''
-  wri_social_sharing_block:
-    weight: 8
+    weight: 7
     region: share
+  wri_social_sharing_block:
     settings: {  }
     third_party_settings: {  }
+    weight: 8
+    region: share
 hidden:
   body: true
   content_moderation_control: true
@@ -250,6 +251,7 @@ hidden:
   field_platform_link: true
   field_primary_contacts: true
   field_project_partners: true
+  field_show_more_link: true
   field_tags: true
   field_type: true
   langcode: true

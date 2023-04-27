@@ -21,11 +21,11 @@ third_party_settings:
   ds:
     layout:
       id: 'single_file_component_layout:wri_image_cta'
+      settings:
+        label: ''
       library: null
       disable_css: false
       entity_classes: no_classes
-      settings:
-        component_context: {  }
     regions:
       content:
         - block_label
@@ -62,27 +62,27 @@ content:
     region: image
   field_image_cta_background:
     type: entity_class_formatter
-    weight: 4
-    region: content
     label: hidden
     settings:
       prefix: ''
       suffix: ''
       attr: ''
     third_party_settings: {  }
+    weight: 4
+    region: content
   field_intro:
-    weight: 2
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 2
     region: content
   field_link:
-    weight: 3
+    type: link_class
     label: hidden
     settings:
-      trim_length: 80
       class: button
+      trim_length: 80
       url_only: false
       url_plain: false
       rel: '0'
@@ -95,21 +95,23 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
-    type: link_class
+    weight: 3
     region: content
   field_title_logo:
     type: media_thumbnail
-    weight: 1
     label: hidden
     settings:
-      image_style: 250_wide
       image_link: ''
+      image_style: 250_wide
+      image_loading:
+        attribute: lazy
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 1
     region: content
 hidden:
   langcode: true

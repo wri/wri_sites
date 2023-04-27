@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.international_office.field_metatags
     - field.field.node.international_office.field_offices
     - field.field.node.international_office.field_region
+    - field.field.node.international_office.field_show_more_link
     - field.field.node.international_office.layout_builder__layout
     - node.type.international_office
     - responsive_image.styles.tile
@@ -25,9 +26,6 @@ third_party_settings:
   ds:
     layout:
       id: layout_tile
-      library: null
-      disable_css: false
-      entity_classes: all_classes
       settings:
         label: ''
     regions:
@@ -52,8 +50,8 @@ third_party_settings:
           settings:
             lb: ''
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: node.international_office.tile
 targetEntityType: node
 bundle: international_office
@@ -90,6 +88,7 @@ hidden:
   field_metatags: true
   field_offices: true
   field_region: true
+  field_show_more_link: true
   field_transparent_header: true
   langcode: true
   layout_builder__layout: true

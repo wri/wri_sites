@@ -29,16 +29,16 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   ds:
     layout:
       id: layout_tile
+      settings:
+        label: ''
       library: null
       disable_css: false
       entity_classes: all_classes
-      settings:
-        label: ''
     regions:
       image:
         - field_main_image
@@ -81,8 +81,6 @@ content:
     region: image
   field_primary_topic:
     type: entity_reference_label
-    weight: 14
-    region: subtext
     label: hidden
     settings:
       link: false
@@ -92,6 +90,8 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 14
+    region: subtext
 hidden:
   body: true
   content_moderation_control: true
