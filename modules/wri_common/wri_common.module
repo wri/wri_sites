@@ -122,14 +122,6 @@ function wri_common_token_info() {
     'name' => 'Child Topic Links List',
     'description' => 'A comma separated list of Topics that are children of the node\'s primary topic.',
   ];
-  $info['tokens']['node']['link'] = [
-    'name' => 'A node link',
-    'description' => 'The link to the node, if published, or its title if not.',
-  ];
-  $info['tokens']['taxonomy_term']['link'] = [
-    'name' => 'A term link',
-    'description' => 'The link to the term, if published, or its title if not.',
-  ];
 
   return $info;
 }
@@ -192,28 +184,6 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
             $terms = wri_common_get_node_topic_children($node);
             $replacements[$original] = _wri_common_format_list($terms);
             break;
-        }
-      }
-    }
-  }
-  if ($type == 'node') {
-    if (isset($data['node']) && $node = $data['node']) {
-      foreach ($tokens as $name => $original) {
-        // Find the desired token by name.
-        switch ($name) {
-          case 'link':
-            $replacements[$original] = wri_common_link_or_text($data['node']);
-        }
-      }
-    }
-  }
-  if ($type == 'taxonomy_term') {
-    if (isset($data['taxonomy_term']) && $node = $data['taxonomy_term']) {
-      foreach ($tokens as $name => $original) {
-        // Find the desired token by name.
-        switch ($name) {
-          case 'link':
-            $replacements[$original] = wri_common_link_or_text($data['taxonomy_term']);
         }
       }
     }
@@ -320,28 +290,6 @@ function _wri_common_format_list(array $terms) {
   }
 
   return Markup::create($list);
-}
-
-/**
- * Determines whether or not to print an entity's title with link or without.
- *
- * @param \Drupal\Core\Entity\EntityInterface $entity
- *   The entity.
- *
- * @return string
- *   A string representing the entity with or without a link.
- */
-function wri_common_link_or_text(EntityInterface $entity) {
-  $link = '';
-  if (isset($entity)) {
-    if ($entity->isPublished()) {
-      $link = $entity->toLink()->toString();
-    }
-    else {
-      $link = $entity->label();
-    }
-  }
-  return $link;
 }
 
 /**

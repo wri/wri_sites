@@ -9,8 +9,11 @@ dependencies:
     - text
 third_party_settings:
   allowed_formats:
-    allowed_formats:
-      - basic_html
+    basic_html: basic_html
+    full_html: '0'
+    migrated: '0'
+    unrestricted_text: '0'
+    plain_text: '0'
 id: node.program_center.field_narrative_taxonomy
 field_name: field_narrative_taxonomy
 entity_type: node
