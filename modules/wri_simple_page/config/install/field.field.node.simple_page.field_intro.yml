@@ -10,7 +10,6 @@ dependencies:
 third_party_settings:
   allowed_formats:
     allowed_formats:
-      - full_html
       - basic_html
 id: node.simple_page.field_intro
 field_name: field_intro
