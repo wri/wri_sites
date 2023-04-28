@@ -39,11 +39,6 @@ function wri_package2_install() {
     ->set('ft-default', 'reset')
     ->save();
 
-  // Delete the "body" field from all blocks.
-  \Drupal::configFactory()
-    ->getEditable('field.storage.block_content.body')
-    ->delete();
-
   _install_default_hero_block();
   _install_io_and_country_blocks();
   _install_default_program_hero();
