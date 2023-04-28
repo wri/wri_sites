@@ -16,19 +16,27 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   ds:
     layout:
       id: layout_hero-and-content
+      settings:
+        label: ''
       library: null
       disable_css: false
       entity_classes: all_classes
-      settings:
-        label: ''
     regions:
+      featured_image:
+        - childlogo
       content:
         - body
+    fields:
+      childlogo:
+        plugin_id: childlogo
+        weight: 0
+        label: hidden
+        formatter: default
 id: node.subpage.main_content
 targetEntityType: node
 bundle: subpage
@@ -36,8 +44,6 @@ mode: main_content
 content:
   body:
     type: text_default
-    weight: 4
-    region: content
     label: hidden
     settings: {  }
     third_party_settings:
@@ -46,6 +52,8 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 4
+    region: content
 hidden:
   content_moderation_control: true
   field_main_image: true

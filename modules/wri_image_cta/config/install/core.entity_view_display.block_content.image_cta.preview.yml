@@ -36,8 +36,8 @@ third_party_settings:
         - field_link
         - field_image_cta_background
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: block_content.image_cta.preview
 targetEntityType: block_content
 bundle: image_cta
@@ -45,34 +45,34 @@ mode: preview
 content:
   field_image:
     type: media_thumbnail
-    weight: 0
     label: above
     settings:
-      image_style: thumbnail
       image_link: ''
+      image_style: thumbnail
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 0
     region: second
   field_image_cta_background:
     type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
     weight: 4
     region: first
-    label: above
-    settings: {  }
-    third_party_settings: {  }
   field_intro:
-    weight: 2
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 2
     region: first
   field_link:
-    weight: 3
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -88,21 +88,21 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
-    type: link
+    weight: 3
     region: first
   field_title_logo:
     type: media_thumbnail
-    weight: 1
     label: above
     settings:
-      image_style: thumbnail
       image_link: ''
+      image_style: thumbnail
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 1
     region: first
 hidden:
   langcode: true

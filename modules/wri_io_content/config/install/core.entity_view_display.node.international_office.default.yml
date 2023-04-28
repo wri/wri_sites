@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.international_office.field_metatags
     - field.field.node.international_office.field_offices
     - field.field.node.international_office.field_region
+    - field.field.node.international_office.field_show_more_link
     - field.field.node.international_office.layout_builder__layout
     - node.type.international_office
   module:
@@ -20,17 +21,16 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: node.international_office.default
 targetEntityType: node
 bundle: international_office
 mode: default
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 101
+    label: hidden
     settings: {  }
     third_party_settings:
       ds:
@@ -38,13 +38,17 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
             fis: true
             fis-el: ''
             fis-cl: ''
@@ -55,54 +59,52 @@ content:
             fi-cl: ''
             fi-at: ''
             fi-def-at: true
+            prefix: ''
             suffix: ''
-            lbw: false
-            lb-col: false
-            ow: false
-            ow-def-at: false
-            ow-def-cl: false
+    weight: 101
     region: content
   content_moderation_control:
-    weight: -20
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: -20
+    region: content
   field_intro:
-    weight: 0
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 0
     region: content
   field_map_image:
     type: entity_reference_entity_view
-    weight: -1
     label: above
     settings:
       view_mode: default
       link: false
     third_party_settings: {  }
+    weight: -1
     region: content
   field_metatags:
-    weight: 1
+    type: metatag_empty_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: metatag_empty_formatter
+    weight: 1
     region: content
   field_offices:
-    weight: 102
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 102
     region: content
 hidden:
   field_featured_experts: true
   field_io_link: true
   field_main_image: true
   field_region: true
+  field_show_more_link: true
   langcode: true
   layout_builder__layout: true
   links: true

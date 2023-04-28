@@ -7,11 +7,11 @@ tags:
   image_src: '[node:field_profile_image:entity:field_media_image]'
   og_image: '[node:field_profile_image:entity:field_media_image]'
   twitter_cards_image: '[node:field_profile_image:entity:field_media_image]'
-  schema_person_type: Person
-  schema_person_image: 'a:5:{s:5:"@type";s:11:"ImageObject";s:20:"representativeOfPage";s:4:"True";s:3:"url";s:26:"[node:field_profile_image]";s:5:"width";s:5:"100px";s:6:"height";s:5:"100px";}'
-  schema_person_email: '[node:field_email]'
-  schema_person_url: '[node:field_twitter_account]'
-  schema_person_family_name: '[node:field_last_name]'
+  schema_person_image: 'a:5:{s:5:"@type";s:11:"ImageObject";s:20:"representativeOfPage";s:4:"True";s:3:"url";s:51:"[node:field_profile_image:entity:field_media_image]";s:5:"width";s:5:"100px";s:6:"height";s:5:"100px";}'
   schema_person_telephone: '[node:field_phone]'
   schema_person_given_name: '[node:field_first_name]'
+  schema_person_type: Person
+  schema_person_family_name: '[node:field_last_name]'
+  schema_person_url: '[node:field_twitter_account]'
   schema_person_job_title: '[node:field_title]'
+  schema_person_email: '[node:field_email]'

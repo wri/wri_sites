@@ -10,8 +10,8 @@ dependencies:
     - layout_builder
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: paragraph.image_cta.preview
 targetEntityType: paragraph
 bundle: image_cta
@@ -19,8 +19,6 @@ mode: preview
 content:
   field_block:
     type: entity_reference_entity_view
-    weight: 0
-    region: content
     label: hidden
     settings:
       view_mode: preview
@@ -31,5 +29,7 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: content
 hidden:
   search_api_excerpt: true

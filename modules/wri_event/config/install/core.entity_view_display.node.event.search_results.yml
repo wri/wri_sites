@@ -38,8 +38,8 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   ds:
     layout:
       id: layout_search-results
@@ -90,21 +90,21 @@ mode: search_results
 content:
   field_date_time:
     type: smartdate_default
-    weight: 3
-    region: main_section
     label: hidden
     settings:
       timezone_override: ''
+      format_type: medium
       format: short_date
       force_chronological: false
       add_classes: false
-      format_type: medium
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 3
+    region: main_section
   field_main_image:
     type: media_thumbnail
     label: hidden
@@ -122,47 +122,45 @@ content:
     weight: 6
     region: right_section
   field_primary_topic:
-    weight: 0
+    type: entity_reference_label
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 0
     region: left_section
   field_region:
-    weight: 1
+    type: entity_reference_label
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 1
     region: left_section
   field_register:
     type: link_ally_class
-    weight: 6
-    region: main_section
     label: hidden
     settings:
+      class: 'button small'
       link_text: Register
       screenreader_text: ''
       tag: ''
-      class: 'button small'
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 6
+    region: main_section
   field_type:
     type: hierarchical_term_formatter
-    weight: 2
-    region: left_section
     label: hidden
     settings:
       display: root
+      link: false
       wrap: none
       separator: ' » '
-      link: false
       reverse: false
     third_party_settings:
       ds:
@@ -170,6 +168,8 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 2
+    region: left_section
 hidden:
   body: true
   content_moderation_control: true

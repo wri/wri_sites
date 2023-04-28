@@ -48,16 +48,16 @@ third_party_settings:
       settings:
         label: ''
     regions:
+      image:
+        - field_main_image
       date:
         - field_date_time
+      tag:
+        - field_primary_topic
       title:
         - node_title
       content_type:
         - field_type
-      image:
-        - field_main_image
-      tag:
-        - field_primary_topic
     fields:
       node_title:
         plugin_id: node_title

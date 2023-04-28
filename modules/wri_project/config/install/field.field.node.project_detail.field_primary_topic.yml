@@ -11,8 +11,8 @@ entity_type: node
 bundle: project_detail
 label: Topic
 description: ''
-required: true
-translatable: true
+required: false
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:

@@ -18,6 +18,7 @@ dependencies:
     - field.field.node.person.field_profile_image
     - field.field.node.person.field_project_expert
     - field.field.node.person.field_quote
+    - field.field.node.person.field_staff_group
     - field.field.node.person.field_title
     - field.field.node.person.field_topics
     - field.field.node.person.field_twitter_account
@@ -32,8 +33,8 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   ds:
     layout:
       id: layout_impact
@@ -68,14 +69,12 @@ mode: impact
 content:
   field_type:
     type: hierarchical_term_formatter
-    weight: 0
-    region: content_type
     label: hidden
     settings:
       display: root
+      link: false
       wrap: none
       separator: ' » '
-      link: false
       reverse: false
     third_party_settings:
       ds:
@@ -83,6 +82,8 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: content_type
 hidden:
   body: true
   content_moderation_control: true
@@ -107,6 +108,7 @@ hidden:
   field_profile_image: true
   field_project_expert: true
   field_quote: true
+  field_staff_group: true
   field_statistics: true
   field_title: true
   field_topics: true

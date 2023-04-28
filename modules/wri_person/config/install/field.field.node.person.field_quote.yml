@@ -9,9 +9,8 @@ dependencies:
     - text
 third_party_settings:
   allowed_formats:
-    basic_html: basic_html
-    full_html: '0'
-    plain_text: '0'
+    allowed_formats:
+      - basic_html
 id: node.person.field_quote
 field_name: field_quote
 entity_type: node

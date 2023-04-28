@@ -9,11 +9,9 @@ dependencies:
     - text
 third_party_settings:
   allowed_formats:
-    basic_html: basic_html
-    migrated: migrated
-    unrestricted_text: '0'
-    full_html: '0'
-    plain_text: '0'
+    allowed_formats:
+      - basic_html
+      - migrated
 id: node.event.field_location_detail
 field_name: field_location_detail
 entity_type: node

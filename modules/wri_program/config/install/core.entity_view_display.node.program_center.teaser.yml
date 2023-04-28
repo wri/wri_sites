@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.program_center.field_narrative_taxonomy
     - field.field.node.program_center.field_primary_contacts
     - field.field.node.program_center.field_primary_topic
+    - field.field.node.program_center.field_show_more_link
     - field.field.node.program_center.field_twitter_account
     - field.field.node.program_center.field_type
     - field.field.node.program_center.layout_builder__layout
@@ -61,10 +62,10 @@ bundle: program_center
 mode: teaser
 content:
   content_moderation_control:
-    weight: 0
-    region: tag
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: tag
 hidden:
   body: true
   field_featured_experts: true
@@ -78,6 +79,7 @@ hidden:
   field_narrative_taxonomy: true
   field_primary_contacts: true
   field_primary_topic: true
+  field_show_more_link: true
   field_statistics: true
   field_twitter_account: true
   field_type: true

@@ -14,7 +14,9 @@ bundle: partner_logo
 mode: default
 content:
   field_link:
+    type: link_attributes
     weight: 1
+    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -26,15 +28,13 @@ content:
         class: true
         accesskey: false
     third_party_settings: {  }
-    type: link_attributes
-    region: content
   field_partner_logo:
     type: media_library_widget
     weight: 0
+    region: content
     settings:
       media_types: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   created: true
   status: true

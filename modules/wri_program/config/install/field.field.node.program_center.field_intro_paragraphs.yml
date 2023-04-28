@@ -15,16 +15,16 @@ bundle: program_center
 label: 'Intro Paragraphs'
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       program_lead_in: program_lead_in
       statistics: statistics
+    negate: 0
     target_bundles_drag_drop:
       default_hero:
         weight: 11
@@ -48,12 +48,12 @@ settings:
         weight: 17
         enabled: false
       program_lead_in:
-        enabled: true
         weight: 18
+        enabled: true
       statistic:
         weight: 19
         enabled: false
       statistics:
-        enabled: true
         weight: 20
+        enabled: true
 field_type: entity_reference_revisions

@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.international_office.field_metatags
     - field.field.node.international_office.field_offices
     - field.field.node.international_office.field_region
+    - field.field.node.international_office.field_show_more_link
     - field.field.node.international_office.layout_builder__layout
     - node.type.international_office
   module:
@@ -24,13 +25,14 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: true
     enabled: true
+    allow_custom: true
     sections:
       -
         layout_id: layout_onecol
         layout_settings:
           label: ''
+          context_mapping: {  }
         components:
           bd2ccb44-07bb-4543-b037-e549d994bec0:
             uuid: bd2ccb44-07bb-4543-b037-e549d994bec0
@@ -38,61 +40,61 @@ third_party_settings:
             configuration:
               id: 'field_block:node:international_office:field_featured_experts'
               label: 'Featured Experts'
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: above
-                type: entity_reference_entity_view
-                settings:
-                  view_mode: teaser
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: teaser
+                third_party_settings: {  }
             weight: 3
+            additional: {  }
           004311b9-a661-46b8-bea5-a2bc9a24e338:
             uuid: 004311b9-a661-46b8-bea5-a2bc9a24e338
             region: content
             configuration:
               id: 'field_block:node:international_office:field_offices'
               label: Offices
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: above
-                type: entity_reference_entity_view
-                settings:
-                  view_mode: default
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: default
+                third_party_settings: {  }
             weight: 2
+            additional: {  }
           6b6f1dde-5ded-4fc6-8d02-f8922e7077e8:
             uuid: 6b6f1dde-5ded-4fc6-8d02-f8922e7077e8
             region: content
             configuration:
               id: 'entity_view:node'
               label: 'Entity view (Content)'
-              provider: ctools
               label_display: '0'
+              provider: ctools
               view_mode: main_content
               context_mapping:
                 entity: layout_builder.entity
-            additional: {  }
             weight: 1
+            additional: {  }
           bf03f5d7-9d47-48cd-b08c-b69731b685cb:
             uuid: bf03f5d7-9d47-48cd-b08c-b69731b685cb
             region: content
             configuration:
+              id: 'extra_field_block:node:international_office:content_moderation_control'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'extra_field_block:node:international_office:content_moderation_control'
-            additional: {  }
             weight: 4
+            additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories:
@@ -113,7 +115,10 @@ third_party_settings:
       - 'WRI block'
       - core
     entity_view_mode_restriction:
-      whitelisted_blocks:
+      allowed_layouts:
+        - layout_onecol
+      denylisted_blocks: {  }
+      allowlisted_blocks:
         'Chaos Tools':
           - 'entity_view:node'
         Components: {  }
@@ -130,42 +135,39 @@ third_party_settings:
         User: {  }
         'WRI block': {  }
         core: {  }
-      blacklisted_blocks: {  }
-      allowed_layouts:
-        - layout_onecol
 id: node.international_office.full
 targetEntityType: node
 bundle: international_office
 mode: full
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 2
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 2
     region: content
   content_moderation_control:
-    weight: -20
     settings: {  }
     third_party_settings: {  }
+    weight: -20
     region: content
   field_intro:
     type: text_default
-    weight: 1
-    region: content
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 1
+    region: content
   field_main_image:
     type: media_thumbnail
-    weight: 0
-    region: content
     label: hidden
     settings:
-      image_style: ''
       image_link: ''
+      image_style: ''
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   field_featured: true
   field_featured_experts: true
@@ -174,6 +176,7 @@ hidden:
   field_metatags: true
   field_offices: true
   field_region: true
+  field_show_more_link: true
   field_transparent_header: true
   langcode: true
   layout_builder__layout: true

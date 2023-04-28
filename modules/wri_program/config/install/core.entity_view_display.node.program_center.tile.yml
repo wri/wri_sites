@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.program_center.field_narrative_taxonomy
     - field.field.node.program_center.field_primary_contacts
     - field.field.node.program_center.field_primary_topic
+    - field.field.node.program_center.field_show_more_link
     - field.field.node.program_center.field_twitter_account
     - field.field.node.program_center.field_type
     - field.field.node.program_center.layout_builder__layout
@@ -30,9 +31,6 @@ third_party_settings:
   ds:
     layout:
       id: layout_tile
-      library: null
-      disable_css: false
-      entity_classes: all_classes
       settings:
         label: ''
     regions:
@@ -65,16 +63,16 @@ third_party_settings:
         label: hidden
         formatter: default
         settings:
+          link: false
           wrapper: h3
           class: h3
-          link: false
         ft:
           id: reset
           settings:
             lb: ''
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: node.program_center.tile
 targetEntityType: node
 bundle: program_center
@@ -82,8 +80,6 @@ mode: tile
 content:
   field_intro:
     type: text_default
-    weight: 2
-    region: intro
     label: hidden
     settings: {  }
     third_party_settings:
@@ -92,29 +88,31 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
             fis-el: ''
             fis-cl: ''
             fis-at: ''
+            fis-def-at: false
             fi: true
             fi-el: ''
             fi-cl: secondary
             fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow: false
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-def-at: false
             fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 2
+    region: intro
   field_main_image:
     type: media_responsive_thumbnail
     label: hidden
@@ -145,6 +143,7 @@ hidden:
   field_narrative_taxonomy: true
   field_primary_contacts: true
   field_primary_topic: true
+  field_show_more_link: true
   field_statistics: true
   field_transparent_header: true
   field_twitter_account: true

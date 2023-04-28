@@ -17,13 +17,12 @@ bundle: homepage
 mode: default
 content:
   content_moderation_control:
-    weight: -20
     settings: {  }
     third_party_settings: {  }
+    weight: -20
     region: content
   field_homepage_hero:
     type: entity_reference_revisions_entity_view
-    weight: 0
     label: hidden
     settings:
       view_mode: default
@@ -36,13 +35,14 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
+    weight: 0
     region: content
   field_metatags:
-    weight: 1
+    type: metatag_empty_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: metatag_empty_formatter
+    weight: 1
     region: content
 hidden:
   content_moderation_control: true

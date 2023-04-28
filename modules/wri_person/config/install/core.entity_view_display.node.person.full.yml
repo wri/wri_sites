@@ -18,6 +18,7 @@ dependencies:
     - field.field.node.person.field_profile_image
     - field.field.node.person.field_project_expert
     - field.field.node.person.field_quote
+    - field.field.node.person.field_staff_group
     - field.field.node.person.field_title
     - field.field.node.person.field_topics
     - field.field.node.person.field_twitter_account
@@ -39,13 +40,14 @@ dependencies:
     - views
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: true
+    allow_custom: false
     sections:
       -
         layout_id: layout_onecol
         layout_settings:
           label: ''
+          context_mapping: {  }
         components:
           a8cde8f7-da41-4bf2-94f8-182f39e00323:
             uuid: a8cde8f7-da41-4bf2-94f8-182f39e00323
@@ -53,20 +55,17 @@ third_party_settings:
             configuration:
               id: 'entity_view:node'
               label: 'Entity view (Content)'
-              provider: ctools
               label_display: '0'
+              provider: ctools
               view_mode: main_content
               context_mapping:
                 entity: layout_builder.entity
-            additional: {  }
             weight: -9
+            additional: {  }
           33996bab-91a7-4f7b-9306-7e7072739617:
             uuid: 33996bab-91a7-4f7b-9306-7e7072739617
             region: content
             configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
               id: 'extra_field_block:node:person:content_moderation_control'
             additional: {  }
             weight: -10
@@ -95,31 +94,34 @@ third_party_settings:
             configuration:
               id: 'views_block:authored_by-block_2'
               label: ''
-              provider: views
               label_display: visible
+              provider: views
+              context_mapping: {  }
               views_label: ''
               items_per_page: '8'
-              context_mapping: {  }
-            additional: {  }
             weight: -6
+            additional: {  }
           38c00e82-d1b6-4c8f-9e37-321abfd1c683:
             uuid: 38c00e82-d1b6-4c8f-9e37-321abfd1c683
             region: content
             configuration:
               id: 'views_block:authored_by-block_1'
               label: ''
-              provider: views
               label_display: visible
+              provider: views
+              context_mapping: {  }
               views_label: ''
               items_per_page: '8'
-              context_mapping: {  }
-            additional: {  }
             weight: -7
+            additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories: {  }
     entity_view_mode_restriction:
-      whitelisted_blocks:
+      allowed_layouts:
+        - layout_onecol
+      denylisted_blocks: {  }
+      allowlisted_blocks:
         'Chaos Tools':
           - 'entity_view:node'
         Components: {  }
@@ -135,9 +137,6 @@ third_party_settings:
         User: {  }
         'WRI block': {  }
         core: {  }
-      blacklisted_blocks: {  }
-      allowed_layouts:
-        - layout_onecol
 id: node.person.full
 targetEntityType: node
 bundle: person
@@ -145,25 +144,25 @@ mode: full
 content:
   field_profile_image:
     type: media_thumbnail
-    weight: 0
-    region: image
     label: hidden
     settings:
-      image_style: 100x100
       image_link: ''
+      image_style: 100x100
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: image
   field_title:
     type: text_default
-    weight: 0
-    region: additional_info
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: additional_info
 hidden:
   body: true
   content_moderation_control: true
@@ -180,6 +179,7 @@ hidden:
   field_phone: true
   field_project_expert: true
   field_quote: true
+  field_staff_group: true
   field_topics: true
   field_twitter_account: true
   field_type: true

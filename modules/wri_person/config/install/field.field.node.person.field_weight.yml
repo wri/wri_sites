@@ -9,9 +9,9 @@ field_name: field_weight
 entity_type: node
 bundle: person
 label: Weight
-description: 'The order that the Person will appear on the /about/experts page, with 0 being at the top of the list and higher numbers appearing lower. This value makes the most sense when updated using the <a href="/admin/content/leadership-sort" target="_blank">Leadership sort</a> page.'
+description: 'The order that the Person will appear on the /about/experts-staff page, with 0 being at the top of the list and higher numbers appearing lower. This value makes the most sense when updated using the <a href="/admin/content/leadership-sort" target="_blank">Leadership sort</a> page.'
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:

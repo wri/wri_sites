@@ -11,7 +11,7 @@ bundle: person
 label: Leadership
 description: 'Check this box to group this person with other Leadership members, and display the "Leadership" tag on this profile.'
 required: false
-translatable: true
+translatable: false
 default_value:
   -
     value: 0

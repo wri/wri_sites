@@ -73,8 +73,6 @@ mode: teaser
 content:
   field_primary_topic:
     type: hierarchical_term_formatter
-    weight: 0
-    region: tag
     label: hidden
     settings:
       display: root
@@ -88,16 +86,16 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: tag
   field_type:
     type: hierarchical_term_formatter
-    weight: 0
-    region: content_type
     label: hidden
     settings:
       display: root
+      link: false
       wrap: none
       separator: ' » '
-      link: false
       reverse: false
     third_party_settings:
       ds:
@@ -105,6 +103,8 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: content_type
 hidden:
   body: true
   content_moderation_control: true

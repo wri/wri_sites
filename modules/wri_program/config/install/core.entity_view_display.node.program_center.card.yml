@@ -14,10 +14,11 @@ dependencies:
     - field.field.node.program_center.field_narrative_taxonomy
     - field.field.node.program_center.field_primary_contacts
     - field.field.node.program_center.field_primary_topic
+    - field.field.node.program_center.field_show_more_link
     - field.field.node.program_center.field_twitter_account
     - field.field.node.program_center.field_type
     - field.field.node.program_center.layout_builder__layout
-    - image.style.463x330
+    - image.style.350x250
     - node.type.program_center
   module:
     - ds
@@ -119,7 +120,9 @@ content:
     label: hidden
     settings:
       image_link: ''
-      image_style: 463x330
+      image_style: 350x250
+      image_loading:
+        attribute: lazy
     third_party_settings:
       ds:
         ft:
@@ -140,6 +143,7 @@ hidden:
   field_narrative_taxonomy: true
   field_primary_contacts: true
   field_primary_topic: true
+  field_show_more_link: true
   field_statistics: true
   field_twitter_account: true
   field_type: true

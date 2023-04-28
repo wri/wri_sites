@@ -31,13 +31,14 @@ dependencies:
     - wri_block
 third_party_settings:
   layout_builder:
-    allow_custom: true
     enabled: true
+    allow_custom: true
     sections:
       -
         layout_id: layout_onecol
         layout_settings:
           label: ''
+          context_mapping: {  }
         components:
           0c4e830d-4257-4738-9b5e-6f7830023cac:
             uuid: 0c4e830d-4257-4738-9b5e-6f7830023cac
@@ -45,23 +46,23 @@ third_party_settings:
             configuration:
               id: 'entity_view:node'
               label: 'Entity view (Content)'
-              provider: ctools
               label_display: '0'
+              provider: ctools
               view_mode: main_content
               context_mapping:
                 entity: layout_builder.entity
-            additional: {  }
             weight: -9
+            additional: {  }
           515ab62a-1df5-402d-8b0a-af69283947aa:
             uuid: 515ab62a-1df5-402d-8b0a-af69283947aa
             region: content
             configuration:
+              id: 'extra_field_block:node:article:content_moderation_control'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'extra_field_block:node:article:content_moderation_control'
-            additional: {  }
             weight: -6
+            additional: {  }
           1318f40a-3bb2-4fd1-a9a2-bdb7dfc8734f:
             uuid: 1318f40a-3bb2-4fd1-a9a2-bdb7dfc8734f
             region: content
@@ -71,13 +72,16 @@ third_party_settings:
               label_display: visible
               provider: wri_block
               context_mapping: {  }
+            weight: -3
             additional: {  }
-            weight: -5
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories: {  }
     entity_view_mode_restriction:
-      whitelisted_blocks:
+      allowed_layouts:
+        - layout_onecol
+      denylisted_blocks: {  }
+      allowlisted_blocks:
         'Chaos Tools':
           - 'entity_view:node'
         Components: {  }
@@ -97,34 +101,32 @@ third_party_settings:
         'WRI block':
           - related_resources_fallback
         core: {  }
-      blacklisted_blocks: {  }
-      allowed_layouts:
-        - layout_onecol
+      restricted_categories: {  }
 id: node.article.full
 targetEntityType: node
 bundle: article
 mode: full
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 0
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 0
     region: content
   content_moderation_control:
-    weight: -20
     settings: {  }
     third_party_settings: {  }
+    weight: -20
     region: content
   field_main_image:
-    weight: 1
+    type: entity_reference_entity_view
     label: hidden
     settings:
-      link: true
       view_mode: default
+      link: true
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 1
     region: content
 hidden:
   field_authors: true

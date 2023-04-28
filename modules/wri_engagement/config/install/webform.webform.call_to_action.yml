@@ -4,9 +4,9 @@ dependencies:
   module:
     - simple_recaptcha_webform
     - wri_engagement
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 1
 template: false
 archive: false
@@ -14,7 +14,34 @@ id: call_to_action
 title: 'Call to action'
 description: ''
 category: ''
-elements: "flexbox:\n  '#type': webform_flexbox\n  first_name:\n    '#type': textfield\n    '#title': 'First Name'\n    '#required': true\n  last_name:\n    '#type': textfield\n    '#title': 'Last name'\n    '#required': true\nflexbox_01:\n  '#type': webform_flexbox\n  email:\n    '#type': email\n    '#title': Email\n    '#required': true\n  organization:\n    '#type': textfield\n    '#title': Organization\n    '#required': true\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__label': 'Sign up'\nmarkup:\n  '#type': webform_markup\n  '#markup': '<a href=\"#\" class=\"files-overlay-trigger\">No thanks, show me the files</a>'"
+elements: |-
+  flexbox:
+    '#type': webform_flexbox
+    first_name:
+      '#type': textfield
+      '#title': 'First Name'
+      '#required': true
+    last_name:
+      '#type': textfield
+      '#title': 'Last name'
+      '#required': true
+  flexbox_01:
+    '#type': webform_flexbox
+    email:
+      '#type': email
+      '#title': Email
+      '#required': true
+    organization:
+      '#type': textfield
+      '#title': Organization
+      '#required': true
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#submit__label': 'Sign up'
+  markup:
+    '#type': webform_markup
+    '#markup': '<a href="#" class="files-overlay-trigger">No thanks, show me the files</a>'
 css: ''
 javascript: ''
 settings:
@@ -27,42 +54,50 @@ settings:
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
-  form_title: both
+  form_title: source_entity_webform
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: false
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -71,11 +106,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -86,17 +116,17 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
-  wizard_toggle: false
+  wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
   preview: 0
@@ -115,9 +145,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: message
+  confirmation_url: ''
   confirmation_title: ''
   confirmation_message: 'Thank you for signing up.<br /><a class="files-overlay-trigger" href="#">Continue to download</a>'
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -139,14 +169,14 @@ settings:
   entity_limit_user_interval: null
   purge: none
   purge_days: null
-  results_disabled: false
+  results_disabled: true
   results_disabled_ignore: false
   results_customize: false
   token_view: false
   token_update: false
   token_delete: false
   serial_disabled: false
-  form_disable_remote_addr: false
+  form_remote_addr: true
 access:
   create:
     roles:
@@ -197,9 +227,9 @@ access:
 handlers:
   add_cookie:
     id: add_cookie
+    handler_id: add_cookie
     label: 'Add Cookie'
     notes: ''
-    handler_id: add_cookie
     status: true
     conditions: {  }
     weight: 0
@@ -207,10 +237,10 @@ handlers:
       cookie_name: has_signed_up
   recaptcha:
     id: simple_recaptcha
+    handler_id: recaptcha
     label: reCAPTCHA
     notes: ''
-    handler_id: recaptcha
-    status: true
+    status: false
     conditions: {  }
     weight: 0
     settings:
