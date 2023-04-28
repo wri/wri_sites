@@ -94,7 +94,6 @@ third_party_settings:
             configuration:
               id: 'views_block:authored_by-block_2'
               label: ''
-              provider: views
               label_display: visible
               provider: views
               context_mapping: {  }
