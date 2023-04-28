@@ -13,7 +13,7 @@ bundle: event
 label: 'Social media links'
 description: 'Places where visitors can find out more about the event on social media.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
