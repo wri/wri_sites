@@ -181,7 +181,9 @@ content:
     region: content
     settings:
       media_types: {  }
-    third_party_settings: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
   field_featured_text:
     type: text_textarea
     weight: 6
@@ -215,7 +217,9 @@ content:
     region: content
     settings:
       media_types: {  }
-    third_party_settings: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
   field_metatags:
     type: metatag_firehose
     weight: 29
