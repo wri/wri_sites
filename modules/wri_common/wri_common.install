@@ -27,3 +27,33 @@ function wri_common_update_9402() {
     \Drupal::service('module_installer')->install(['wri_latest_tweet'], TRUE);
   }
 }
+
+/**
+ * Add the edit button to all media library elements.
+ */
+function wri_common_update_9501() {
+  $config_factory = \Drupal::service('config.factory');
+  // Find all core.entity_form_display config.
+  $all_config = $config_factory->listAll('core.entity_form_display');
+  $loaded_config = $config_factory->loadMultiple($all_config);
+  foreach ($loaded_config as $name => $config) {
+    // Find any config that uses the media_library module.
+    if ($config->get('dependencies.module') && in_array('media_library', $config->get('dependencies.module'))) {
+      $editable_config = $config_factory->getEditable($name);
+      $fields = $editable_config->get('content');
+      foreach ($fields as $field) {
+        // Find any references to type: media_library_widget.
+        if ($field['type'] == 'media_library_widget' ) {
+          // Add the edit button to the widget.
+          $field['third_party_settings'] = [
+            'media_library_edit' => [
+              'show_edit' => 1,
+            ],
+          ];
+        }
+      }
+      // Save the config.
+      $editable_config->save();
+    }
+  }
+}
