@@ -130,7 +130,7 @@ content:
     settings:
       modal: false
       default_tz: ''
-      custom_tz: America/New_York
+      custom_tz: ''
       allowed_timezones: {  }
       default_duration: 60
       default_duration_increments: |-
