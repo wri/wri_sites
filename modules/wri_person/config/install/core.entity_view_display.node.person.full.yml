@@ -115,37 +115,6 @@ third_party_settings:
               items_per_page: '8'
             weight: -7
             additional: {  }
-          c50a0ee7-957f-448d-903a-2fc0ccbbfcde:
-            uuid: c50a0ee7-957f-448d-903a-2fc0ccbbfcde
-            region: content
-            configuration:
-              id: wri_external_pub_block
-              label: 'External Publications'
-              label_display: visible
-              provider: wri_external_pub
-              context_mapping:
-                node: layout_builder.entity
-            weight: 1
-            additional: {  }
-          874cd517-3926-49a5-afa3-96c3ec904689:
-            uuid: 874cd517-3926-49a5-afa3-96c3ec904689
-            region: content
-            configuration:
-              id: 'field_block:node:person:field_project_expert'
-              label: Projects
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_entity_view
-                label: above
-                settings:
-                  view_mode: card
-                third_party_settings: {  }
-            weight: 2
-            additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories: {  }
