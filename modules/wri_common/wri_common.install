@@ -41,7 +41,7 @@ function wri_common_update_9501() {
     if ($config->get('dependencies.module') && in_array('media_library', $config->get('dependencies.module'))) {
       $editable_config = $config_factory->getEditable($name);
       $fields = $editable_config->get('content');
-      foreach ($fields as $field) {
+      foreach ($fields as $field_name => $field) {
         // Find any references to type: media_library_widget.
         if (isset($field['type']) && $field['type'] == 'media_library_widget' ) {
           // Add the edit button to the widget.
@@ -50,6 +50,8 @@ function wri_common_update_9501() {
               'show_edit' => 1,
             ],
           ];
+
+          $editable_config->set('content.'. $field_name, $field);
         }
       }
       // Save the config.
