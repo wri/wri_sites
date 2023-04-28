@@ -43,7 +43,7 @@ function wri_common_update_9501() {
       $fields = $editable_config->get('content');
       foreach ($fields as $field_name => $field) {
         // Find any references to type: media_library_widget.
-        if (isset($field['type']) && $field['type'] == 'media_library_widget' ) {
+        if (isset($field['type']) && $field['type'] == 'media_library_widget') {
           // Add the edit button to the widget.
           $field['third_party_settings'] = [
             'media_library_edit' => [
@@ -51,7 +51,7 @@ function wri_common_update_9501() {
             ],
           ];
 
-          $editable_config->set('content.'. $field_name, $field);
+          $editable_config->set('content.' . $field_name, $field);
         }
       }
       // Save the config.
