@@ -83,7 +83,7 @@
                 "Changes to a block's text field not saved when ckeditor source mode is active https://www.drupal.org/project/ckeditor/issues/3095304": "https://git.drupalcode.org/project/ckeditor/-/merge_requests/10.diff"
             },
             "drupal/core": {
-                "Dynamic Views Arguments via Tokens https://www.drupal.org/project/drupal/issues/1699378": "https://www.drupal.org/files/issues/2023-01-27/1699378-249.patch",
+                "Dynamic Views Arguments via Tokens https://www.drupal.org/project/drupal/issues/1699378": "https://www.drupal.org/files/issues/2023-05-03/1699378-249.patch",
                 "There is no way to delete or update file entities of other users incl. user/1":"https://www.drupal.org/files/issues/2019-12-12/2949017-59.patch",
                 "Add reusable option to inline block creation https://www.drupal.org/project/drupal/issues/2999491": "https://www.drupal.org/files/issues/2020-05-21/2999491--reusable-title-display--49.patch",
                 "Allow field blocks to display the configuration label when set in Layout Builder https://www.drupal.org/project/drupal/issues/3039185": "https://www.drupal.org/files/issues/2020-07-17/3039185-block_title-33.patch",
