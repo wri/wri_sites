@@ -30,7 +30,6 @@ dependencies:
     - layout_builder_restrictions
     - layout_discovery
     - user
-    - wri_block
 third_party_settings:
   layout_builder:
     enabled: true

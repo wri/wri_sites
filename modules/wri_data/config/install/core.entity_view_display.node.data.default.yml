@@ -32,93 +32,93 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   layout_builder_restrictions:
     allowed_block_categories: {  }
     entity_view_mode_restriction:
-      whitelisted_blocks: {  }
-      blacklisted_blocks: {  }
       allowed_layouts: {  }
+      denylisted_blocks: {  }
+      allowlisted_blocks: {  }
 id: node.data.default
 targetEntityType: node
 bundle: data
 mode: default
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 2
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 2
     region: content
   content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
     weight: 0
     region: content
-    settings: {  }
-    third_party_settings: {  }
   field_authors:
-    weight: 13
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 13
     region: content
   field_featured:
-    weight: 15
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 15
     region: content
   field_featured_headline:
-    weight: 12
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 12
     region: content
   field_featured_text:
-    weight: 11
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 11
     region: content
   field_files:
     type: entity_reference_entity_view
-    weight: 124
     label: above
     settings:
       view_mode: default
       link: false
     third_party_settings: {  }
+    weight: 124
     region: content
   field_intro:
-    weight: 4
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 4
     region: content
   field_metatags:
-    weight: 16
+    type: metatag_empty_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: metatag_empty_formatter
+    weight: 16
     region: content
   field_narrative_taxonomy:
-    weight: 17
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 17
     region: content
   field_platform_link:
-    weight: 14
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -127,53 +127,53 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 14
     region: content
   field_primary_topic:
-    weight: 9
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 9
     region: content
   field_projects:
-    weight: 121
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 121
     region: content
   field_related_resources:
-    weight: 122
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 122
     region: content
   field_tags:
-    weight: 10
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 10
     region: content
   field_type:
-    weight: 8
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 8
     region: content
   links:
-    weight: 1
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 1
+    region: content
 hidden:
   field_license: true
   field_media: true

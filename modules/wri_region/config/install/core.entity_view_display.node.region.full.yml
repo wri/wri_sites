@@ -20,13 +20,14 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: true
     enabled: true
+    allow_custom: true
     sections:
       -
         layout_id: layout_onecol
         layout_settings:
           label: ''
+          context_mapping: {  }
         components:
           3d6c9f85-ce2b-4282-ac0e-9d8d5cd1e093:
             uuid: 3d6c9f85-ce2b-4282-ac0e-9d8d5cd1e093
@@ -34,37 +35,37 @@ third_party_settings:
             configuration:
               id: 'entity_view:node'
               label: 'Entity view (Content)'
-              provider: ctools
               label_display: '0'
+              provider: ctools
               view_mode: main_content
               context_mapping:
                 entity: layout_builder.entity
-            additional: {  }
             weight: -10
+            additional: {  }
           9fe4fd9b-8687-456a-af58-7244e4fb06dd:
             uuid: 9fe4fd9b-8687-456a-af58-7244e4fb06dd
             region: content
             configuration:
               id: 'inline_block:listing_block'
               label: 'International Offices'
-              provider: layout_builder
               label_display: visible
+              provider: layout_builder
               view_mode: full
+              context_mapping: {  }
               block_revision_id: 100187
               block_serialized: null
-              context_mapping: {  }
-            additional: {  }
             weight: -8
+            additional: {  }
           b3620eff-5c8a-4807-87ac-8a88ff2c3198:
             uuid: b3620eff-5c8a-4807-87ac-8a88ff2c3198
             region: content
             configuration:
+              id: 'extra_field_block:node:region:content_moderation_control'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'extra_field_block:node:region:content_moderation_control'
-            additional: {  }
             weight: -7
+            additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories:
@@ -86,7 +87,10 @@ third_party_settings:
       - Webform
       - core
     entity_view_mode_restriction:
-      whitelisted_blocks:
+      allowed_layouts:
+        - layout_onecol
+      denylisted_blocks: {  }
+      allowlisted_blocks:
         'Chaos Tools':
           - 'entity_view:node'
         Components: {  }
@@ -103,35 +107,32 @@ third_party_settings:
         'WRI block': {  }
         Webform: {  }
         core: {  }
-      blacklisted_blocks: {  }
-      allowed_layouts:
-        - layout_onecol
 id: node.region.full
 targetEntityType: node
 bundle: region
 mode: full
 content:
   content_moderation_control:
-    weight: -20
     settings: {  }
     third_party_settings: {  }
+    weight: -20
     region: content
   field_intro:
     type: text_default
-    weight: 1
-    region: content
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 1
+    region: content
   field_main_image:
     type: media_thumbnail
-    weight: 0
-    region: content
     label: hidden
     settings:
-      image_style: ''
       image_link: ''
+      image_style: ''
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   field_featured: true
   field_map_image: true

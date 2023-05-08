@@ -20,6 +20,7 @@ dependencies:
     - field.field.node.project_detail.field_primary_topic
     - field.field.node.project_detail.field_project_partners
     - field.field.node.project_detail.field_region
+    - field.field.node.project_detail.field_show_more_link
     - field.field.node.project_detail.field_tags
     - field.field.node.project_detail.field_toc
     - field.field.node.project_detail.field_twitter_account
@@ -41,11 +42,11 @@ third_party_settings:
   ds:
     layout:
       id: layout_card
+      settings:
+        label: ''
       library: null
       disable_css: false
       entity_classes: all_classes
-      settings:
-        label: ''
     regions:
       title:
         - node_title
@@ -207,6 +208,7 @@ hidden:
   field_primary_contacts: true
   field_project_partners: true
   field_region: true
+  field_show_more_link: true
   field_tags: true
   field_toc: true
   field_twitter_account: true

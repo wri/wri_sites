@@ -17,6 +17,7 @@ dependencies:
     - field.field.node.person.field_profile_image
     - field.field.node.person.field_project_expert
     - field.field.node.person.field_quote
+    - field.field.node.person.field_staff_group
     - field.field.node.person.field_title
     - field.field.node.person.field_topics
     - field.field.node.person.field_twitter_account
@@ -35,11 +36,11 @@ third_party_settings:
   ds:
     layout:
       id: 'single_file_component_layout:wri_person_teaser'
+      settings:
+        component_context: {  }
       library: null
       disable_css: false
       entity_classes: all_classes
-      settings:
-        component_context: {  }
     regions:
       image:
         - field_profile_image
@@ -62,21 +63,13 @@ third_party_settings:
           settings:
             lb: ''
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: node.person.default
 targetEntityType: node
 bundle: person
 mode: default
 content:
-  field_department:
-    weight: 3
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   field_profile_image:
     type: media_thumbnail
     label: hidden
@@ -95,16 +88,17 @@ content:
     region: image
   field_title:
     type: text_default
-    weight: 2
-    region: additional_info
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 2
+    region: additional_info
 hidden:
   body: true
   content_moderation_control: true
   field_alternate_contact: true
   field_areas_of_expertise: true
+  field_department: true
   field_email: true
   field_first_name: true
   field_international_office: true
@@ -115,6 +109,7 @@ hidden:
   field_phone: true
   field_project_expert: true
   field_quote: true
+  field_staff_group: true
   field_topics: true
   field_twitter_account: true
   field_type: true

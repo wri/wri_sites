@@ -17,13 +17,6 @@ function wri_data_update_9301() {
 }
 
 /**
- * Update the narrative taxonomy to use a link token on Data.
- */
-function wri_data_update_9501() {
-  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.data.field_narrative_taxonomy', 'wri_data', 'install', 'TRUE');
-}
-
-/**
  * Implements hook_update_dependencies().
  */
 function wri_data_update_dependencies() {

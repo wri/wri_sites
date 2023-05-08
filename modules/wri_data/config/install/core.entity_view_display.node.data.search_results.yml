@@ -73,8 +73,8 @@ third_party_settings:
           settings:
             lb: ''
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: node.data.search_results
 targetEntityType: node
 bundle: data
@@ -82,12 +82,10 @@ mode: search_results
 content:
   field_media:
     type: media_thumbnail
-    weight: 0
-    region: right_section
     label: hidden
     settings:
-      image_style: 150_tall
       image_link: ''
+      image_style: 150_tall
     third_party_settings:
       wri_media:
         min_width: ''
@@ -96,8 +94,10 @@ content:
           id: reset
           settings:
             lb: ''
-  field_primary_topic:
     weight: 0
+    region: right_section
+  field_primary_topic:
+    type: hierarchical_term_formatter
     label: hidden
     settings:
       display: root
@@ -111,10 +111,10 @@ content:
           id: reset
           settings:
             lb: ''
-    type: hierarchical_term_formatter
+    weight: 0
     region: left_section
   field_region:
-    weight: 1
+    type: hierarchical_term_formatter
     label: hidden
     settings:
       display: root
@@ -129,17 +129,15 @@ content:
           id: reset
           settings:
             lb: ''
-    type: hierarchical_term_formatter
+    weight: 1
     region: left_section
   field_tags:
     type: entity_reference_list_label_class
-    weight: 5
-    region: main_section
     label: hidden
     settings:
-      list_type: ul
-      class: ''
       link: false
+      class: ''
+      list_type: ul
     third_party_settings:
       ds:
         ds_limit: ''
@@ -147,16 +145,16 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 5
+    region: main_section
   field_type:
     type: hierarchical_term_formatter
-    weight: 2
-    region: left_section
     label: hidden
     settings:
       display: root
+      link: false
       wrap: none
       separator: ' » '
-      link: false
       reverse: false
     third_party_settings:
       ds:
@@ -164,6 +162,8 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 2
+    region: left_section
 hidden:
   body: true
   content_moderation_control: true

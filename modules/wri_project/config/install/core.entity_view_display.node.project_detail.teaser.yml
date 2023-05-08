@@ -20,6 +20,7 @@ dependencies:
     - field.field.node.project_detail.field_primary_topic
     - field.field.node.project_detail.field_project_partners
     - field.field.node.project_detail.field_region
+    - field.field.node.project_detail.field_show_more_link
     - field.field.node.project_detail.field_tags
     - field.field.node.project_detail.field_toc
     - field.field.node.project_detail.field_twitter_account
@@ -81,22 +82,20 @@ third_party_settings:
           settings:
             lb: ''
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: node.project_detail.teaser
 targetEntityType: node
 bundle: project_detail
 mode: teaser
 content:
   content_moderation_control:
-    weight: -20
     settings: {  }
     third_party_settings: {  }
+    weight: -20
     region: content
   field_primary_topic:
     type: entity_reference_label
-    weight: 0
-    region: tag
     label: hidden
     settings:
       link: true
@@ -106,6 +105,8 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: tag
 hidden:
   body: true
   field_authors: true
@@ -129,6 +130,7 @@ hidden:
   field_projects: true
   field_region: true
   field_related_resources: true
+  field_show_more_link: true
   field_tags: true
   field_toc: true
   field_twitter_account: true

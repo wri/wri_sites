@@ -4,8 +4,6 @@ dependencies:
   config:
     - field.storage.node.field_toc
     - node.type.publication
-  module:
-    - options
 id: node.publication.field_toc
 field_name: field_toc
 entity_type: node
@@ -13,7 +11,7 @@ bundle: publication
 label: 'Show Table of Contents?'
 description: 'Choose "Generated from H2s" if you want to link to anchors on this page. Choose "Generated from subpages" if you want the menu to link to this page''s child pages.'
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }

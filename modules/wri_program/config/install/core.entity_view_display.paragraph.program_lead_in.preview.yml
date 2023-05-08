@@ -12,8 +12,8 @@ dependencies:
     - text
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: paragraph.program_lead_in.preview
 targetEntityType: paragraph
 bundle: program_lead_in
@@ -21,8 +21,6 @@ mode: preview
 content:
   field_leadin_paragraph:
     type: text_trimmed
-    weight: 1
-    region: content
     label: above
     settings:
       trim_length: 300
@@ -32,13 +30,15 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 1
+    region: content
   field_leadin_title:
     type: string
-    weight: 0
-    region: content
     label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   search_api_excerpt: true

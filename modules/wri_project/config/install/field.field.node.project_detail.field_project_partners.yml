@@ -14,15 +14,15 @@ bundle: project_detail
 label: 'Project Partners'
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       partner_logo: partner_logo
+    negate: 0
     target_bundles_drag_drop:
       default_hero:
         weight: 9
@@ -37,8 +37,8 @@ settings:
         weight: 12
         enabled: false
       partner_logo:
-        enabled: true
         weight: 13
+        enabled: true
       program_lead_in:
         weight: 14
         enabled: false

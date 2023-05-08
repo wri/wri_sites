@@ -30,8 +30,8 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   ds:
     layout:
       id: layout_small_image_teaser
@@ -61,29 +61,29 @@ third_party_settings:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow: false
             ow-def-at: false
             ow-def-cl: false
             fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
             fis-def-at: false
             fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
             fi-def-at: false
+            prefix: ''
+            suffix: ''
       node_title:
         plugin_id: node_title
         weight: 1
@@ -119,23 +119,21 @@ content:
     weight: 2
     region: image
   field_primary_topic:
-    weight: 0
+    type: entity_reference_label
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 0
     region: tag
   field_type:
     type: hierarchical_term_formatter
-    weight: 0
-    region: content_type
     label: hidden
     settings:
       display: root
+      link: false
       wrap: none
       separator: ' » '
-      link: false
       reverse: false
     third_party_settings:
       ds:
@@ -143,6 +141,8 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: content_type
 hidden:
   body: true
   content_moderation_control: true

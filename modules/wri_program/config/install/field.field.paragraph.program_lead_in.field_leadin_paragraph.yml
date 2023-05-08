@@ -9,9 +9,8 @@ dependencies:
     - text
 third_party_settings:
   allowed_formats:
-    basic_html: basic_html
-    full_html: '0'
-    plain_text: '0'
+    allowed_formats:
+      - basic_html
 id: paragraph.program_lead_in.field_leadin_paragraph
 field_name: field_leadin_paragraph
 entity_type: paragraph

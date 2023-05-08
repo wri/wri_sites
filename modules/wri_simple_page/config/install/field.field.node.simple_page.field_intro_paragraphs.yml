@@ -9,6 +9,7 @@ dependencies:
     - paragraphs.paragraphs_type.impact_in_action_blocks
     - paragraphs.paragraphs_type.listing_block
     - paragraphs.paragraphs_type.narrative_taxonomy
+    - paragraphs.paragraphs_type.person_listing
     - paragraphs.paragraphs_type.side_by_side
     - paragraphs.paragraphs_type.small_cta
     - paragraphs.paragraphs_type.statistics
@@ -29,18 +30,19 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       impact_in_action_blocks: impact_in_action_blocks
       side_by_side: side_by_side
       statistics: statistics
-      image: image
       image_cta: image_cta
+      image: image
       listing_block: listing_block
       narrative_taxonomy: narrative_taxonomy
       small_cta: small_cta
+      person_listing: person_listing
       superfeatured_item: superfeatured_item
       unique_feature_cta: unique_feature_cta
+    negate: 0
     target_bundles_drag_drop:
       featured_statement:
         weight: 10
@@ -52,45 +54,48 @@ settings:
         weight: 12
         enabled: false
       image:
-        enabled: true
         weight: 21
-      image_cta:
         enabled: true
+      image_cta:
         weight: 20
+        enabled: true
       impact:
         weight: 13
         enabled: false
       impact_in_action_blocks:
-        enabled: true
         weight: 14
+        enabled: true
       listing_block:
-        enabled: true
         weight: 24
+        enabled: true
       narrative_taxonomy:
-        enabled: true
         weight: 24
+        enabled: true
       partner_logo:
         weight: 15
         enabled: false
+      person_listing:
+        weight: 29
+        enabled: true
       program_lead_in:
         weight: 16
         enabled: false
       side_by_side:
-        enabled: true
         weight: 18
-      small_cta:
         enabled: true
+      small_cta:
         weight: 28
+        enabled: true
       statistic:
         weight: 17
         enabled: false
       statistics:
-        enabled: true
         weight: 18
+        enabled: true
       superfeatured_item:
-        enabled: true
         weight: 31
-      unique_feature_cta:
         enabled: true
+      unique_feature_cta:
         weight: 32
+        enabled: true
 field_type: entity_reference_revisions

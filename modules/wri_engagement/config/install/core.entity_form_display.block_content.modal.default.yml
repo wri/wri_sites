@@ -22,102 +22,102 @@ third_party_settings:
       children:
         - group_cta_options
         - group_image_options
+      label: More
+      region: content
       parent_name: ''
       weight: 20
       format_type: tabs
-      region: content
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         direction: horizontal
-      label: More
     group_cta_options:
       children:
         - field_link
         - field_webform
+      label: 'CTA options'
+      region: content
       parent_name: group_more
       weight: 20
       format_type: tab
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: 'Choose from either the link or the webform'
+        id: ''
         formatter: open
+        description: 'Choose from either the link or the webform'
         required_fields: true
-      label: 'CTA options'
     group_image_options:
       children:
         - field_image_full_width
         - field_image_inset
+      label: 'Image options'
+      region: content
       parent_name: group_more
       weight: 20
       format_type: tab
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: 'Choose either a Full Width image or an Inset image. Images will not show on mobile screens.'
+        id: ''
         formatter: closed
+        description: 'Choose either a Full Width image or an Inset image. Images will not show on mobile screens.'
         required_fields: true
-      label: 'Image options'
 id: block_content.modal.default
 targetEntityType: block_content
 bundle: modal
 mode: default
 content:
   field_cta_background:
+    type: options_select
     weight: 2
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_image_full_width:
     type: media_library_widget
     weight: 34
+    region: content
     settings:
       media_types: {  }
     third_party_settings: {  }
-    region: content
   field_image_inset:
     type: media_library_widget
     weight: 35
+    region: content
     settings:
       media_types: {  }
     third_party_settings: {  }
-    region: content
   field_intro:
+    type: text_textarea
     weight: 1
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_link:
+    type: link_default
     weight: 30
+    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-    type: link_default
-    region: content
   field_title:
+    type: string_textfield
     weight: 0
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_webform:
+    type: webform_entity_reference_select
     weight: 32
+    region: content
     settings:
       default_data: true
       webforms: {  }
     third_party_settings: {  }
-    type: webform_entity_reference_select
-    region: content
   info:
     type: string_textfield
     weight: -5
