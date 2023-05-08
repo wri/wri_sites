@@ -1,0 +1,15 @@
+# Schema for the configuration files of the System module.
+
+wri_common.settings:
+  type: config_object
+  label: 'WRI settings'
+  mapping:
+    unpublished_person_phrase:
+      type: label
+      label: 'Unpublished Person phrase'
+    person_listing_url:
+      type: path
+      label: 'Person listing url'
+    use_fallback_image:
+      type: boolean
+      label: 'Use a fallback image?'
