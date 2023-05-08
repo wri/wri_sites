@@ -1,6 +1,6 @@
 # Schema for the configuration files of the System module.
 
-wri_common.settings:
+wri_node.settings:
   type: config_object
   label: 'WRI settings'
   mapping:
