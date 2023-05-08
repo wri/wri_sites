@@ -9,5 +9,5 @@
  * Add the node settings values.
  */
 function wri_node_update_9501() {
-  \Drupal::service('distro_helper.updates')->installConfig('wri_node.settings.yml', 'wri_node', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('wri_node.settings', 'wri_node', 'install', 'TRUE');
 }
