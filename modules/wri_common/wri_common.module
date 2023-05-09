@@ -340,7 +340,7 @@ function wri_common_link_or_text(EntityInterface $entity) {
     else {
       if ($entity->bundle() == 'person') {
         $url = Url::fromUserInput(\Drupal::config('wri_node.settings')->get('person_listing_url'));
-        $link = Link::fromTextAndUrl(\Drupal::config('wri_node.settings')->get('unpublished_person_phrase'), $url);
+        $link = Link::fromTextAndUrl(\Drupal::config('wri_node.settings')->get('unpublished_person_phrase'), $url)->toString();
       }
       else {
         $link = $entity->label();
