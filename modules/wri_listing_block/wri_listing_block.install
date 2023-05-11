@@ -75,7 +75,8 @@ function wri_listing_block_update_9501() {
 
   // Import the updated views to allow multiples for the "Type" field:
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.content_listing', [
-    'display#default#display_options#arguments#field_projects_target_id',
+    'display#default#display_options#arguments',
+    'display#podcasts#display_options#arguments',
   ], 'wri_listing_block');
 
   // Load all projects with the listing_block having the old value.

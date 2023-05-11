@@ -691,7 +691,7 @@ display:
           field: 'null'
           relationship: none
           group_type: group
-          admin_label: ''
+          admin_label: 'Ignored Content type'
           plugin_id: 'null'
           default_action: ignore
           exception:
@@ -791,16 +791,15 @@ display:
           break_phrase: false
           depth: 1
           use_taxonomy_term_path: false
-        term_node_tid_depth_1:
-          id: term_node_tid_depth_1
-          table: node_field_data
-          field: term_node_tid_depth
+        null_1:
+          id: null_1
+          table: views
+          field: 'null'
           relationship: none
           group_type: group
-          admin_label: 'Resource Type'
-          entity_type: node
-          plugin_id: taxonomy_index_tid_depth
-          default_action: 'not found'
+          admin_label: 'Ignored resource type'
+          plugin_id: 'null'
+          default_action: ignore
           exception:
             value: all
             title_enable: false
@@ -825,9 +824,7 @@ display:
             type: none
             fail: 'not found'
           validate_options: {  }
-          break_phrase: true
-          depth: 3
-          use_taxonomy_term_path: false
+          must_not_be: false
         term_node_tid_depth_2:
           id: term_node_tid_depth_2
           table: node_field_data
@@ -977,7 +974,7 @@ display:
           validate:
             type: none
             fail: ignore
-          validate_options: {  }
+          validate_options: { }
           break_phrase: false
           depth: 0
           use_taxonomy_term_path: false
@@ -1163,7 +1160,6 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
-        - 'cookies:STYXKEY_wri_filter'
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
