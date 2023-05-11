@@ -21,11 +21,12 @@ class ViewfieldFormatterToken extends ViewfieldFormatterDefault {
    */
   protected function processArguments($argument_string, FieldableEntityInterface $entity) {
     // Quick fix for 255 characters for the arguments field.
-    $argument_string = str_replace('[bc:', '[block_content:', $argument_string);
+    $token_service = \Drupal::token();
+    // First grab the content snippet value (which is the token stored in the field).
+    $argument_string = $token_service->replace($argument_string, [], ['clear' => TRUE]);
     $arguments = parent::processArguments($argument_string, $entity);
 
     // If the token failed to find anything, pass "all" to the view.
-    $token_service = \Drupal::token();
     $token_data = [$entity->getEntityTypeId() => $entity];
     foreach ($arguments as $key => $value) {
       $arguments[$key] = trim($token_service->replace($value, $token_data, ['clear' => TRUE]), '+');
