@@ -23,7 +23,6 @@ dependencies:
   - xmlsitemap
 config_devel:
   install:
-    - metatag.settings
     - pathauto.pattern.events
     - pathauto.pattern.pages
     - pathauto.pattern.person
