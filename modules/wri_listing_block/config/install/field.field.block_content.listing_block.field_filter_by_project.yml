@@ -11,7 +11,7 @@ field_name: field_filter_by_project
 entity_type: block_content
 bundle: listing_block
 label: 'Filter by Project'
-description: ''
+description: '<b>Warning</b>: If you choose more than one value here, you should also manually overwrite the "More Link" field by unchecking "Generate url from other fields", as the /resources page does not allow filtering by Project. You can link to the project''s resource by using /project-resources/[the-project-id], or empty out the More link url entirely.'
 required: false
 translatable: false
 default_value: {  }
