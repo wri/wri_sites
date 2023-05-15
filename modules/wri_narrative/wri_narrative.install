@@ -44,7 +44,7 @@ function wri_narrative_update_9501() {
   $old_value = '[bc:field_custom_results:array:target_id:join:+]/[bc:field_filter_by_region:target_id]/[bc:field_tag:target_id]';
 
   // Save all existing blocks with the new value.
-  $definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('block_content', 'listing_block');
+  $definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('block_content', 'narrative_taxonomy');
   if (isset($definitions['field_listing'])) {
     $default_value = $definitions['field_listing']->getDefaultValueLiteral();
     $default_value_string = $default_value[0]['arguments'];
