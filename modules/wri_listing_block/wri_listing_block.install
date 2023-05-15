@@ -62,7 +62,6 @@ function wri_listing_block_update_9401() {
 
 }
 
-
 /**
  * Updates Listing arguments to use our config snippet.
  */
@@ -80,7 +79,7 @@ function wri_listing_block_update_9501() {
   ], 'wri_listing_block');
 
   // Import the updated views to allow multiples for the "Type" field:
-  \Drupal::service('distro_helper.updates')->updateConfig('config/views.view.content_listing_a_to_z', [
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.content_listing_a_to_z', [
     'display#default#display_options#arguments',
   ], 'wri_listing_block');
 
