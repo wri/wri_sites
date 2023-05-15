@@ -66,6 +66,9 @@ function wri_listing_block_update_9401() {
  * Updates Listing arguments to use our config snippet.
  */
 function wri_listing_block_update_9501() {
+  // Import the content_snippets:
+  \Drupal::service('distro_helper.updates')->installConfig('content_snippets.content', 'wri_listing_block', 'install');
+
   // Import the updated value:
   \Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.listing_block.field_listing', [
     'default_value',
