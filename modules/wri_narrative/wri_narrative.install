@@ -37,7 +37,7 @@ function wri_narrative_update_8901() {
 function wri_narrative_update_9501() {
   // Import the updated value:
   \Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.narrative_taxonomy.field_listing', [
-    'default_value#arguments',
+    'default_value#0#arguments',
   ], 'wri_narrative');
 
   // Load all projects with the listing_block having the old value.
