@@ -22,7 +22,7 @@ class ViewfieldFormatterToken extends ViewfieldFormatterDefault {
   protected function processArguments($argument_string, FieldableEntityInterface $entity) {
     // Quick fix for 255 characters for the arguments field.
     $token_service = \Drupal::token();
-    // First grab the content snippet value (which is the token stored in the field).
+    // First grab the content snippet value (the token stored in the field).
     $argument_string = $token_service->replace($argument_string, [], ['clear' => TRUE]);
     $arguments = parent::processArguments($argument_string, $entity);
 

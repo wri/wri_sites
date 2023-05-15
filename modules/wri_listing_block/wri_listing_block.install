@@ -86,7 +86,6 @@ function wri_listing_block_update_9501() {
     'display#default#display_options#arguments',
   ], 'wri_listing_block');
 
-
   // Load all projects with the listing_block having the old value.
   $old_value = '[bc:field_content_types:array:target_id:join:+]/[bc:field_featured:array:target_id:join:+]/[bc:field_filter_by_region:target_id]/[bc:field_filter_by_resource_type:array:target_id:join:+]/[bc:field_tag:target_id]/[bc:field_filter_by_tag:target_id]';
 

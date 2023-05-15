@@ -62,7 +62,6 @@ function wri_31block_update_8902() {
 
 }
 
-
 /**
  * Updates Listing arguments to use our config snippet for 3+1 blocks.
  */
