@@ -67,12 +67,11 @@ function wri_listing_block_update_9401() {
  */
 function wri_listing_block_update_9501() {
   // Import the content_snippets:
-  \Drupal::service('distro_helper.updates')->installConfig('content_snippets.content', 'wri_listing_block', 'install');
+  \Drupal::service('distro_helper.updates')->updateConfig('content_snippets.content', ['snippets'], 'wri_listing_block');
 
   // Import the updated value:
   \Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.listing_block.field_listing', [
-    'default_value',
-    'arguments',
+    'default_value#arguments',
   ], 'wri_listing_block');
 
   // Import the updated views to allow multiples for the "Type" field:
