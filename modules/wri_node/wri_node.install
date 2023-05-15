@@ -12,5 +12,5 @@ function wri_node_update_9501() {
   \Drupal::service('distro_helper.updates')->updateConfig('wri_node.settings', [
     'unpublished_person_phrase',
     'person_listing_url',
-    ], 'wri_node', 'install');
+  ], 'wri_node', 'install');
 }
