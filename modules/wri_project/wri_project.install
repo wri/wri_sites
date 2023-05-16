@@ -45,6 +45,13 @@ function wri_project_update_9302() {
 }
 
 /**
+ * Update the narrative taxonomy to use a link token on Projects.
+ */
+function wri_project_update_9501() {
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.project_detail.field_narrative_taxonomy', 'wri_project', 'install', 'TRUE');
+}
+
+/**
  * Implements hook_update_dependencies().
  */
 function wri_project_update_dependencies() {
