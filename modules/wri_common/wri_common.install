@@ -68,4 +68,8 @@ function wri_common_update_9502() {
   if (!$moduleHandler->moduleExists('ckeditor_accordion')) {
     \Drupal::service('module_installer')->install(['ckeditor_accordion'], TRUE);
   }
+  // Add Accordion to the full_html editor's buttons.
+  \Drupal::service('distro_helper.updates')->updateConfig('editor.editor.full_html', [
+    'settings#toolbar#rows',
+  ], 'wri_media', 'install');
 }
