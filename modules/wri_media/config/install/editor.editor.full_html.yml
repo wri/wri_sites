@@ -43,6 +43,7 @@ settings:
             - Blockquote
             - DrupalMediaLibrary
             - HorizontalRule
+            - Accordion
         -
           name: 'Block Formatting'
           items:
