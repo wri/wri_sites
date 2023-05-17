@@ -13,6 +13,7 @@
     "browser-sync": "^2.26.7",
     "browser-sync-webpack-plugin": "^2.2.2",
     "css-loader": "^2.1.1",
+    "fsevents": "^2.3.2",
     "husky": "^2.2.0",
     "mini-css-extract-plugin": "^1.0.0",
     "node-sass": "^6.0.0",
