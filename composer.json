@@ -260,7 +260,7 @@
         "npm-asset/jquery.toc": "^0.4.0",
         "oomphinc/composer-installers-extender": "^2.0",
         "solarium/solarium": "^6.1.5",
-        "thinkshout/distro_helper": "dev-early-exit"
+        "thinkshout/distro_helper": "dev-install-quitting"
     },
     "require-dev": {
         "drupal/coder": "^8.3",
