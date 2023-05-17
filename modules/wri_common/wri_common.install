@@ -60,7 +60,6 @@ function wri_common_update_9501() {
   }
 }
 
-
 /**
  * Add the ckeditor_accordion module.
  */
