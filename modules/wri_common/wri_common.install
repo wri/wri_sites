@@ -59,3 +59,14 @@ function wri_common_update_9501() {
     }
   }
 }
+
+
+/**
+ * Add the ckeditor_accordion module.
+ */
+function wri_common_update_9502() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('ckeditor_accordion')) {
+    \Drupal::service('module_installer')->install(['ckeditor_accordion'], TRUE);
+  }
+}
