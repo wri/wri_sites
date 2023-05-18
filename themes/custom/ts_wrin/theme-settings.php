@@ -40,7 +40,6 @@ function ts_wrin_form_system_theme_settings_alter(&$form, FormStateInterface $fo
   $form['white_logo']['settings']['white_logo_upload'] = [
     '#type' => 'file',
     '#title' => t('Upload logo image'),
-    '#maxlength' => 40,
     '#description' => t("If you don't have direct file access to the server, use this field to upload your logo."),
     '#upload_validators' => [
       'file_validate_extensions' => ['jpg jpeg gif png svg'],
