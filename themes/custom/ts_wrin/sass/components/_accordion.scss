@@ -1,0 +1,74 @@
+/*
+  Accordion tabs that have not been created using Javascript
+*/
+
+.ckeditor-accordion-container > dl {
+  border: none;
+}
+
+/* label / tab */
+.ckeditor-accordion-container > dl dt {
+  border-top: 1px solid $black;
+  margin-top: $space-sm;
+}
+
+.ckeditor-accordion-container > dl dt > a > .ckeditor-accordion-toggle {
+  display: inline-block;
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  z-index: 1;
+  top: calc(50% - 10px);
+  left: 1px;
+  box-sizing: border-box;
+  background: url("../img/svgs/download.svg") center no-repeat $brand-gold;
+  background-size: 50%;
+  transition: all 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.ckeditor-accordion-container > dl dt.active > a > .ckeditor-accordion-toggle {
+  transform: rotate(180deg);
+}
+
+.ckeditor-accordion-container > dl dt > a > .ckeditor-accordion-toggle:before,
+.ckeditor-accordion-container > dl dt > a > .ckeditor-accordion-toggle:after {
+  display: none;
+}
+
+.ckeditor-accordion-container > dl dt > a,
+.ckeditor-accordion-container > dl dt > a:not(.button) {
+  background: none;
+  color: $black;
+  border: none;
+  @extend .h4;
+  text-decoration: none;
+  padding: 16px $padding-vertical;
+}
+
+.ckeditor-accordion-container > dl dt > a:focus,
+.ckeditor-accordion-container > dl dt > a:not(.button):focus {
+  outline-color: #333;
+}
+
+.ckeditor-accordion-container > dl dt > a:hover,
+.ckeditor-accordion-container > dl dt > a:not(.button):hover {
+  background: none;
+  color: $black;
+  text-decoration: underline;
+}
+.ckeditor-accordion-container > dl dt.active > a {
+  background: none;
+}
+
+.ckeditor-accordion-container > dl dd {
+  padding: 0 $padding-vertical;
+  font-size: $base-font-size;
+
+  p:first-child {
+    margin-top: 0;
+  }
+
+  /* avoids a little margin-collapse bounce during animation */
+  p:last-child {
+    margin-bottom: 0;
+  }
+}

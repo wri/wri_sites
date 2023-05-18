@@ -14,6 +14,7 @@ dependencies:
   - block
   - block_list_override
   - ckeditor
+  - ckeditor_accordion
   - ckeditor_templates
   - ckeditor_templates_ui
   - config

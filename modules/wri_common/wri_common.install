@@ -59,3 +59,19 @@ function wri_common_update_9501() {
     }
   }
 }
+
+/**
+ * Add the ckeditor_accordion module.
+ */
+function wri_common_update_9502() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('ckeditor_accordion')) {
+    \Drupal::service('module_installer')->install(['ckeditor_accordion'], TRUE);
+  }
+  // Add default Accordion settings.
+  \Drupal::service('distro_helper.updates')->installConfig('ckeditor_accordion.settings', 'wri_admin', 'install');
+  // Add Accordion to the full_html editor's buttons.
+  \Drupal::service('distro_helper.updates')->updateConfig('editor.editor.full_html', [
+    'settings#toolbar#rows',
+  ], 'wri_media', 'install');
+}
