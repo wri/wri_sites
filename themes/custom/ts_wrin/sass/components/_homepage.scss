@@ -26,6 +26,7 @@
     }
   }
   .field--name-field-hero-image {
+    width: auto;
     @include column-width(1, 5);
 
     @include mq($ph) {
