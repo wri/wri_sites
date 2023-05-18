@@ -26,7 +26,6 @@
     }
   }
   .field--name-field-hero-image {
-    width: auto;
     @include column-width(1, 5);
 
     @include mq($ph) {
@@ -169,19 +168,13 @@
   img {
     height: 660px;
     min-width: 100%;
+    width: auto;
     @include mq($md) {
       height: 640px;
     }
     @include mq($lg) {
       height: 900px;
     }
-  }
-}
-// Fix for https://bugzilla.mozilla.org/show_bug.cgi?id=1694741
-@-moz-document url-prefix() {
-  .field--name-field-hero-image img {
-    height: auto;
-    width: auto;
   }
 }
 
