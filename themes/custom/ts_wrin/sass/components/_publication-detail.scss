@@ -52,6 +52,10 @@
       @include mq($lg) {
         @include column-width(9, $grid-columns);
       }
+
+      img {
+        width: auto;
+      }
     }
 
     .buttons {

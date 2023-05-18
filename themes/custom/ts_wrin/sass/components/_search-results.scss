@@ -139,6 +139,7 @@
     display: none;
     max-width: 200px;
     margin: 0 auto;
+    width: auto;
     @include mq($md) {
       display: block;
     }
