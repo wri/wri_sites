@@ -85,6 +85,9 @@ p a {
 
 img {
   display: block;
+  height: auto;
+  min-height: 1px;
+  width: 100%;
 }
 
 /**
