@@ -16,13 +16,11 @@ translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:taxonomy_term'
+  handler: views
   handler_settings:
-    target_bundles:
-      resource_type: resource_type
-    sort:
-      field: name
-      direction: asc
-    auto_create: false
-    auto_create_bundle: ''
+    view:
+      view_name: resource_types
+      display_name: entity_reference_1
+      arguments:
+        - Person
 field_type: entity_reference
