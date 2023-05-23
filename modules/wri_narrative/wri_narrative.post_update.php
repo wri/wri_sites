@@ -13,7 +13,7 @@ use Drupal\node\Entity\Node;
 function wri_narrative_post_update_rewrite_narrative_taxonomies(&$sandbox) {
   if (!isset($sandbox['total'])) {
     $sandbox['total'] = Drupal::database()->select('node__field_narrative_taxonomy', 'u')
-      ->condition('u.field_narrative_taxonomy_value', '%<a href="/node/%', 'LIKE')
+      ->condition('u.field_narrative_taxonomy_value', '%<a href="/node/[node:%', 'LIKE')
       ->fields('u')
       ->countQuery()
       ->execute()
@@ -28,7 +28,7 @@ function wri_narrative_post_update_rewrite_narrative_taxonomies(&$sandbox) {
 
   $users_per_batch = 25;
   $nids = Drupal::database()->select('node__field_narrative_taxonomy', 'u')
-    ->condition('u.field_narrative_taxonomy_value', '%<a href="/node/%', 'LIKE')
+    ->condition('u.field_narrative_taxonomy_value', '%<a href="/node/[node:%', 'LIKE')
     ->fields('u')
     ->range(0, $users_per_batch)
     ->execute();
@@ -45,9 +45,11 @@ function wri_narrative_post_update_rewrite_narrative_taxonomies(&$sandbox) {
     $taxonomy_value[0]['value'] = str_replace(
       ['<a href="/node/[node:field_projects:target_id]">[node:field_projects:entity]</a>',
         '<a href="/node/[node:field_primary_contacts:target_id]">[node:field_primary_contacts:entity]</a>',
+        '<a href="/node/[node:field_featured_experts:target_id]">[node:field_featured_experts:entity]</a>',
       ],
       ['[node:field_projects:entity:link]',
         '[node:field_primary_contacts:entity:link]',
+        '[node:field_featured_experts:entity:link]',
       ],
       $taxonomy_value[0]['value']
     );
