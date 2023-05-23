@@ -5,6 +5,7 @@
  * Provides hook implementations for wri_common.
  */
 
+use Drupal\node\NodeInterface;
 use Drupal\node\Entity\Node;
 use Drupal\Core\Link;
 use Drupal\Core\Render\Markup;
@@ -343,13 +344,13 @@ function wri_common_link_or_text(EntityInterface $entity) {
 
         // See if the current page is a node.
         $node = \Drupal::routeMatch()->getParameter('node');
-        if ($node instanceof \Drupal\node\NodeInterface) {
+        if ($node instanceof NodeInterface) {
           // If the current page is a project, link to its experts page.
           if ($node->bundle() == 'project_detail') {
             $url = Url::fromUserInput('/project-experts/' . $node->id());
           }
-          // Otherwise, see if that node has a 'field_projects', and THAT node is
-          // published.
+          // Otherwise, see if that node has a 'field_projects', and THAT node
+          // is published.
           elseif ($node->hasField('field_projects')) {
             $project = $node->field_projects->entity;
             if ($project->isPublished()) {
