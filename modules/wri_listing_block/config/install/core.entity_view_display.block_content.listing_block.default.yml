@@ -5,6 +5,7 @@ dependencies:
     - block_content.type.listing_block
     - field.field.block_content.listing_block.field_content_types
     - field.field.block_content.listing_block.field_featured
+    - field.field.block_content.listing_block.field_filter_by_project
     - field.field.block_content.listing_block.field_filter_by_region
     - field.field.block_content.listing_block.field_filter_by_resource_type
     - field.field.block_content.listing_block.field_filter_by_tag
@@ -21,11 +22,11 @@ third_party_settings:
   ds:
     layout:
       id: 'single_file_component_layout:wri_listing'
+      settings:
+        component_context: {  }
       library: null
       disable_css: false
       entity_classes: all_classes
-      settings:
-        component_context: {  }
     regions:
       header:
         - block_label
@@ -46,7 +47,7 @@ bundle: listing_block
 mode: default
 content:
   field_intro:
-    weight: 3
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings:
@@ -55,43 +56,43 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow: false
             ow-def-at: false
             ow-def-cl: false
             fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
             fis-def-at: false
             fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
             fi-def-at: false
-    type: text_default
+            prefix: ''
+            suffix: ''
+    weight: 3
     region: intro
   field_listing:
-    weight: 0
+    type: viewfield_token
     label: hidden
     settings:
       view_title: hidden
       always_build_output: false
       empty_view_title: hidden
     third_party_settings: {  }
-    type: viewfield_token
+    weight: 0
     region: listing
   field_more_link:
-    weight: 1
+    type: tokenized_link_field_formatter
     label: hidden
     settings:
       trim_length: 80
@@ -105,11 +106,12 @@ content:
           id: reset
           settings:
             lb: ''
-    type: tokenized_link_field_formatter
+    weight: 1
     region: listing
 hidden:
   field_content_types: true
   field_featured: true
+  field_filter_by_project: true
   field_filter_by_region: true
   field_filter_by_resource_type: true
   field_filter_by_tag: true

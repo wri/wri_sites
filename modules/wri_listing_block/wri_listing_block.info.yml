@@ -6,6 +6,7 @@ package: WRI
 dependencies:
   - wri_block
   - wri_node
+  - wri_project
   - wri_taxonomy
 config_devel:
   install:
