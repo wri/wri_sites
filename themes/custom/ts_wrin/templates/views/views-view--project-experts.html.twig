@@ -7,7 +7,9 @@
     'topics-view-block',
   ]
 %}
-{% if header %}{{ header.entity_node }}{% endif %}
+{% if header %}
+  {{ header|without('extra_result') }}
+{% endif %}
 <div{{ attributes.addClass(classes) }}>
   <div class="resources-wrapper">
     <div class="container">
