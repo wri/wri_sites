@@ -157,7 +157,7 @@ display:
         type: none
         options: {  }
       cache:
-        type: none
+        type: search_api_tag
         options: {  }
       empty: {  }
       sorts:
@@ -457,7 +457,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
       tags:
         - 'config:field.storage.node.field_staff_group'
@@ -469,11 +468,8 @@ display:
     display_plugin: page
     position: 2
     display_options:
-      cache:
-        type: search_api_tag
-        options: {  }
       defaults:
-        cache: false
+        cache: true
       display_description: ''
       display_extenders: {  }
       path: about/experts-staff
@@ -493,9 +489,13 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
       tags:
+        - 'config:facets.facet.department'
+        - 'config:facets.facet.experts_all_topics'
+        - 'config:facets.facet.international_office'
+        - 'config:facets.facet.languages_spoken_taxonomy_term_name'
         - 'config:field.storage.node.field_staff_group'
         - 'config:search_api.index.sitewide'
         - 'search_api_list:sitewide'
+        - taxonomy_term_list
