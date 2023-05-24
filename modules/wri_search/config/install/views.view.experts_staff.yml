@@ -449,11 +449,7 @@ display:
             format: unrestricted_text
           tokenize: false
       footer: {  }
-      display_extenders:
-        metatag_display_extender:
-          metatags:
-            robots: noindex
-          tokenize: false
+      display_extenders: {  }
     cache_metadata:
       max-age: -1
       contexts:
@@ -473,14 +469,13 @@ display:
     display_plugin: page
     position: 2
     display_options:
+      cache:
+        type: search_api_tag
+        options: {  }
       defaults:
-        cache: true
+        cache: false
       display_description: ''
-      display_extenders:
-        metatag_display_extender:
-          metatags:
-            robots: noindex
-          tokenize: false
+      display_extenders: {  }
       path: about/experts-staff
       menu:
         type: normal
@@ -492,7 +487,7 @@ display:
         parent: 'menu_link_content:4f92d155-0924-4c24-8dce-7b650d42485f'
         context: '0'
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
