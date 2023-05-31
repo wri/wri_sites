@@ -129,7 +129,7 @@ function ts_wrin_preprocess_page(array &$variables) {
 
   $variables['use_microsite_nav'] = FALSE;
   // See if it has a Theme that overwrites the header.
-  if (($node = $variables['node']) && $node->get('field_theme')->entity && $node->get('field_theme')->entity->field_header_region->value === 'microsite_nav') {
+  if (($node = $variables['node']) && $node->field_theme->entity && $node->get('field_theme')->entity->field_header_region->value === 'microsite_nav') {
     $variables['use_microsite_nav'] = TRUE;
   }
 }
