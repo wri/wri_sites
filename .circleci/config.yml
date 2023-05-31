@@ -39,10 +39,10 @@ workflows:
   build-and-test:
     jobs:
       - build
-  daily-test:
+  weekly-test:
     triggers:
       - schedule:
-          cron: "0 0 * * *"
+          cron: "0 0 * * 4"
           filters:
             branches:
               only:
