@@ -14,4 +14,7 @@
   </div>
 {% endset %}
 {% endif %}
+{% if element['#object'].info.value %}
+{% set label = element['#object'].info.value %}
+{% endif %}
 {% include "@ts_wrin/fields/field--node--field-featured-experts.html.twig" %}
