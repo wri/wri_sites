@@ -6,6 +6,19 @@
 {% endif %}
 <div id="tray-nav-wrapper">
   <div id="tray-nav-canvas">
+    {% if page.microsite_nav %}
+      <header>
+        <div class="container header-wrapper">
+          {% if page.microsite_nav %}
+            {{ page.microsite_nav }}
+          {% endif %}
+
+          <div class="header-right {{ menu_color }}">
+            {% include '@ts_wrin/ts_custom/ts-hamburger-nav.html.twig' %}
+          </div>
+        </div>
+      </header>
+    {% else %}
     <header>
       <div class="container header-wrapper">
         {% if page.primary_nav %}
@@ -33,6 +46,7 @@
         </div>
       </div>
     </header>
+    {% endif %}
 
     <div class="mobile-menu-target">
       <div class="ts-mobile-menu__wrapper">
