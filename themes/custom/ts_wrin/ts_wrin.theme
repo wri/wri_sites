@@ -38,23 +38,11 @@ function ts_wrin_preprocess_html(array &$variables) {
 
       switch ($node->getType()) {
         case 'program_center':
+        case 'microsite':
         case 'project_detail':
           $variables['attributes']['class'][] = 'transparent-header white';
           break;
 
-        case 'microsite':
-          $variables['attributes']['class'][] = 'transparent-header white';
-          $unset_microsite_nav = TRUE;
-          // See if it has a Theme that overwrites the header.
-          if ($node->get('field_theme')->entity && $node->get('field_theme')->entity->field_header_region->value === 'microsite_nav') {
-            $unset_microsite_nav = FALSE;
-          }
-          // If no custom header is specified, we're using the default, so unset
-          // the custom header region.
-          if ($unset_microsite_nav) {
-            unset($variables['page']['microsite_nav']);
-          }
-          break;
         case 'publication':
           if ($node->get('field_toc')->getValue() && $node->get('field_publication_display')->getString() == 'robust') {
             $variables['attributes']['class'][] = 'transparent-header white';
@@ -137,6 +125,12 @@ function ts_wrin_preprocess_page(array &$variables) {
   $status = \Drupal::requestStack()->getCurrentRequest()->attributes->get('exception');
   if ($status && ($status->getStatusCode() == 403 || $status->getStatusCode() == 404)) {
     $variables['is_node'] = TRUE;
+  }
+
+  $variables['use_microsite_nav'] = FALSE;
+  // See if it has a Theme that overwrites the header.
+  if (($node = $variables['node']) && $node->get('field_theme')->entity && $node->get('field_theme')->entity->field_header_region->value === 'microsite_nav') {
+    $variables['use_microsite_nav'] = TRUE;
   }
 }
 
