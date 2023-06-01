@@ -353,7 +353,7 @@ function wri_common_link_or_text(EntityInterface $entity) {
           // is published.
           elseif ($node->hasField('field_projects')) {
             $project = $node->field_projects->entity;
-            if ($project->isPublished()) {
+            if ($project && $project->isPublished()) {
               // If it is, link to the projects/experts page.
               $url = Url::fromUserInput('/project-experts/' . $node->field_projects->target_id);
             }
