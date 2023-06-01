@@ -129,7 +129,12 @@ function ts_wrin_preprocess_page(array &$variables) {
 
   $variables['use_microsite_nav'] = FALSE;
   // See if it has a Theme that overwrites the header.
-  if (($node = $variables['node']) && $node->field_theme->entity && $node->get('field_theme')->entity->field_header_region->value === 'microsite_nav') {
+  // Option 1: Subpage
+  if (($node = $variables['node']) && isset($node->field_parent_page->entity->field_theme->entity->field_header_region->value) && $node->field_parent_page->entity->field_theme->entity->field_header_region->value === 'microsite_nav') {
+    $variables['use_microsite_nav'] = TRUE;
+  }
+  // Option 2: Microsite.
+  if (($node = $variables['node']) && isset($node->field_theme->entity->field_header_region->value) && $node->field_theme->entity->field_header_region->value === 'microsite_nav') {
     $variables['use_microsite_nav'] = TRUE;
   }
 }
@@ -338,4 +343,15 @@ function ts_wrin_theme_suggestions_views_view_list_alter(array &$suggestions, ar
   $suggestions[] = 'views_view_list__' . $current_display_type;
   $suggestions[] = 'views_view_list__' . $current_id;
   $suggestions[] = 'views_view_list__' . $current_id . '__' . $current_view;
+}
+
+/**
+ * Implements hook_preprocess_wri_subpage_columns.
+ */
+function ts_wrin_preprocess_wri_subpage_columns(&$variables) {
+  // If the Microsite's theme indicates a child page should show its own header,
+  // hide the Long Title from the parent page.
+  if (($node = $variables["content"]["#node"]) && isset($node->field_theme->entity->field_child_hero_style->value) && $node->field_theme->entity->field_child_hero_style->value == 'self') {
+    $variables["content"]["hero"]["field_long_title"]['#access'] = FALSE;
+  }
 }
