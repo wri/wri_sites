@@ -6,3 +6,27 @@ gtm_id:
   description: 'Your Google Tag Manager ID'
   group: '3rd Party'
   weight: '10'
+the_content_listing_view_arguments:
+  label: 'The content listing view arguments'
+  id: the_content_listing_view_arguments
+  type: textarea
+  filter: full_html
+  description: 'The string of tokens passed into the Content Listing view by a Listing block viewfield'
+  group: 'View Arguments'
+  weight: '10'
+narrative_taxonomy_view_arguments:
+  label: 'Narrative Taxonomy view arguments'
+  id: narrative_taxonomy_view_arguments
+  type: textarea
+  filter: full_html
+  description: 'The tokenized arguments passed to the Narrative Taxonomy Listing view.'
+  group: 'View Arguments'
+  weight: '10'
+3_1_view_arguments:
+  label: '3+1 view arguments'
+  id: 3_1_view_arguments
+  type: textarea
+  filter: full_html
+  description: 'The arguments passed to the 3+1 block''s listing view.'
+  group: 'View Arguments'
+  weight: '10'

@@ -68,6 +68,11 @@ function wri_listing_block_update_9401() {
 function wri_listing_block_update_9501() {
   // Import the content_snippets:
   \Drupal::service('distro_helper.updates')->updateConfig('content_snippets.content', ['snippets'], 'wri_listing_block');
+  \Drupal::service('distro_helper.updates')->updateConfig('content_snippets.items', [
+    'the_content_listing_view_arguments',
+    'narrative_taxonomy_view_arguments',
+    '3_1_view_arguments'
+  ], 'wri_listing_block');
 
   // Import the updated value:
   \Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.listing_block.field_listing', [
