@@ -1,0 +1,5 @@
+wri_node.settings:
+  title: 'WRI settings'
+  base_route_name: wri_node.settings
+  names:
+    - wri_node.settings
