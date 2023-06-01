@@ -7,14 +7,7 @@
 <div id="tray-nav-wrapper">
   <div id="tray-nav-canvas">
     {% if use_microsite_nav %}
-      <header>
-        <div class="container header-wrapper">
-          {{ page.microsite_nav }}
-          <div class="header-right {{ menu_color }}">
-            {% include '@ts_wrin/ts_custom/ts-hamburger-nav.html.twig' %}
-          </div>
-        </div>
-      </header>
+      {% include '@ts_wrin/_includes/microsite-header.html.twig' %}
     {% else %}
     <header>
       <div class="container header-wrapper">
