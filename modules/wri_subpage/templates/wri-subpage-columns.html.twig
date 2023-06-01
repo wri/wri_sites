@@ -1,6 +1,9 @@
 {% if hero.content.field_toc %}
   {{ attach_library('wri_toc/tocjs') }}
 {% endif %}
+{% if use_microsite_nav %}
+  {% include '@ts_wrin/_includes/_microsite-header.html.twig' %}
+{% endif %}
 {% if content %}
   <div class="publication__detail robust-display subpage">
     {% if content.hero %}

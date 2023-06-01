@@ -51,6 +51,10 @@ function wri_node_preprocess_wri_page_hero(&$context) {
     }
     $context['content']['title']['#markup'] = isset($node->field_long_title->value) ? check_markup($node->field_long_title->value, 'basic_html') : $node->getTitle();
     $context['content']['intro']['#markup'] = isset($node->field_intro->value) ? check_markup($node->field_intro->value, 'basic_html') : '';
+    // The Microsite's theme wants us not to use the default microsite nav.
+    if (isset($node->field_theme->entity->field_header_region->value) && $node->field_theme->entity->field_header_region->value === 'microsite_nav') {
+      $context['use_microsite_nav'] = TRUE;
+    }
   }
 }
 
