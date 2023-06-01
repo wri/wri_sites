@@ -16,7 +16,7 @@ field_name: field_narrative_taxonomy
 entity_type: node
 bundle: publication
 label: 'Narrative Taxonomy'
-description: 'If you want to use the default value, choose "Source" and paste: <code>&lt;p&gt;This &#91;node:field_type:entity&#93; is part of the &#91;node:field_projects:entity:link&#93; within our &#91;wri_tokens:topic_and_sub_topic_links_list&#93;. Reach out to &#91;node:field_primary_contacts:entity&#93; for more information.&lt;/p&gt;</code>'
+description: 'If you want to use the default value, choose "Source" and paste: <code>&lt;p&gt;This &#91;node:field_type:entity&#93; is part of the &#91;node:field_projects:entity:link&#93; within our &#91;wri_tokens:topic_and_sub_topic_links_list&#93;. Reach out to &#91;node:field_primary_contacts:entity:link&#93; for more information.&lt;/p&gt;</code>'
 required: false
 translatable: true
 default_value:
