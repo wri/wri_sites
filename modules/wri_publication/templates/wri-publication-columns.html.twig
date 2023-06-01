@@ -63,8 +63,8 @@
               {{ content.hero.field_twitter_account }}
             </div>
           {% endif %}
-          {% if display_type == 'robust' and (content.hero.field_toc is not empty) %}
-                {{ content.hero.field_toc }}
+          {% if display_type == 'robust' and (content.hero.field_toc is not empty) and (content.hero.field_toc['#value'] != 'microsite') %}
+             {{ content.hero.field_toc }}
           {% endif %}
         </div>
       {% endif %}
