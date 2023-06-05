@@ -126,5 +126,5 @@ function wri_listing_block_update_9502() {
   // Import the new field storage and form display.
   \Drupal::service('distro_helper.updates')->installConfig('field.storage.block_content.field_filter_by_project', 'wri_block');
   \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.listing_block.field_filter_by_project', 'wri_listing_block');
-  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.block_content.listing_block.default',['content#field_filter_by_project'], 'wri_listing_block');
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.block_content.listing_block.default',['content#field_filter_by_project'], 'wri_listing_block');
 }
