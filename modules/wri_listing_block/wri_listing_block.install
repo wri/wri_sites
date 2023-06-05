@@ -125,7 +125,7 @@ function wri_listing_block_update_9501() {
 /**
  * Adds the Filter by Project field to listing blocks.
  */
-function wri_listing_block_update_9510() {
+function wri_listing_block_update_9502() {
   // Import the new field storage and form display so they appear in /config.
   \Drupal::service('distro_helper.updates')->installConfig('field.storage.block_content.field_filter_by_project', 'wri_block', 'install', TRUE);
   \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.listing_block.field_filter_by_project', 'wri_listing_block', 'install', TRUE);
