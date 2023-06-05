@@ -40,6 +40,9 @@ function wri_narrative_post_update_rewrite_narrative_taxonomies(&$sandbox) {
   // Loop through each node.
   foreach ($nids as $result) {
     $node = Node::load($result->entity_id);
+    if ($node->hasTranslation($result->langcode)) {
+      $node = $node->getTranslation($result->langcode);
+    }
     $taxonomy_value = $node->field_narrative_taxonomy->getValue();
     // Replace link strings with new values.
     $taxonomy_value[0]['value'] = str_replace(
