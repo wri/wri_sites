@@ -27,9 +27,12 @@ function wri_narrative_post_update_rewrite_narrative_taxonomies(&$sandbox) {
   }
 
   $users_per_batch = 25;
+  $start_value = $sandbox['current'];
   $nids = Drupal::database()->select('node__field_narrative_taxonomy', 'u')
     ->condition('u.field_narrative_taxonomy_value', '%<a href="/node/[node:%', 'LIKE')
+    ->condition('entity_id', $sandbox['current'], '>=')
     ->fields('u')
+    ->orderBy('entity_id')
     ->range(0, $users_per_batch)
     ->execute();
 
@@ -60,16 +63,11 @@ function wri_narrative_post_update_rewrite_narrative_taxonomies(&$sandbox) {
 
     // Save the node.
     $node->save();
-    $sandbox['current']++;
+    $sandbox['current'] = $result->entity_id;
   }
 
   \Drupal::messenger()
-    ->addMessage($sandbox['current'] . ' persons processed.');
+    ->addMessage($sandbox['current'] . ' node last processed.');
 
-  if ($sandbox['current'] >= $sandbox['total']) {
-    $sandbox['#finished'] = 1;
-  }
-  else {
-    $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
-  }
+  $sandbox['#finished'] = ($sandbox['current'] == $start_value);
 }
