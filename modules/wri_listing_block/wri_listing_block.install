@@ -4,6 +4,9 @@
  * @file
  * The Listing arguments install and update hooks.
  */
+use Drupal\Core\Config\FileStorage;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
 
 /**
  * Updates Listing arguments to allow multiple values in.
@@ -122,9 +125,23 @@ function wri_listing_block_update_9501() {
 /**
  * Adds the Filter by Project field to listing blocks.
  */
-function wri_listing_block_update_9502() {
-  // Import the new field storage and form display.
-  \Drupal::service('distro_helper.updates')->installConfig('field.storage.block_content.field_filter_by_project', 'wri_block');
-  \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.listing_block.field_filter_by_project', 'wri_listing_block');
+function wri_listing_block_update_9510() {
+  // Import the new field storage and form display so they appear in /config.
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.block_content.field_filter_by_project', 'wri_block', 'install', TRUE);
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.listing_block.field_filter_by_project', 'wri_listing_block', 'install', TRUE);
+
+  // Hack -- immediately delete the active config.
+  Drupal::configFactory()->getEditable('field.storage.block_content.field_filter_by_project')->delete();
+  Drupal::configFactory()->getEditable('field.field.block_content.listing_block.field_filter_by_project')->delete();
+
+  // Programmatically save the fields.
+  $config_directory = new FileStorage('../config');
+  $field_storage_name = 'field.storage.block_content.field_filter_by_project';
+  $config_record = $config_directory->read($field_storage_name);
+  FieldStorageConfig::create($config_record)->save();
+  $field_config_name = 'field.field.block_content.listing_block.field_filter_by_project';
+  $config_record = $config_directory->read($field_config_name);
+  FieldConfig::create($config_record)->save();
+
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.block_content.listing_block.default',['content#field_filter_by_project'], 'wri_listing_block');
 }
