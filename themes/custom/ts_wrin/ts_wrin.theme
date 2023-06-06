@@ -137,6 +137,14 @@ function ts_wrin_preprocess_page(array &$variables) {
   if (($node = $variables['node']) && isset($node->field_theme->entity->field_header_region->value) && $node->field_theme->entity->field_header_region->value === 'microsite_nav') {
     $variables['use_microsite_nav'] = TRUE;
   }
+  // Add the library if parent has one.
+  if (($node = $variables['node']) && isset($node->field_theme->entity->field_library->value)) {
+    $variables['#attached']['library'][] = $node->field_theme->entity->field_library->value;
+  }
+  // Add the library if parent has one.
+  if (($node = $variables['node']) && isset($node->field_parent_page->entity->field_theme->entity->field_library->value)) {
+    $variables['#attached']['library'][] = $node->field_parent_page->entity->field_theme->entity->field_library->value;
+  }
 }
 
 /**
