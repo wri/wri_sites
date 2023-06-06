@@ -55,6 +55,10 @@ function wri_node_preprocess_wri_page_hero(&$context) {
     if (isset($node->field_theme->entity->field_header_region->value) && $node->field_theme->entity->field_header_region->value === 'microsite_nav') {
       $context['use_microsite_nav'] = TRUE;
     }
+    // Add the table of contents if that's part of the node.
+    if (isset($node->field_toc->value) && $node->field_toc->value === 'microsite') {
+      $context['content']['hero']['field_toc'] = $node->field_toc->view('hero_on_a_subpage');
+    }
   }
 }
 
