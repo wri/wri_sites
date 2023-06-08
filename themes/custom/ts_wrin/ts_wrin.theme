@@ -129,21 +129,23 @@ function ts_wrin_preprocess_page(array &$variables) {
 
   $variables['use_microsite_nav'] = FALSE;
   // See if it has a Theme that overwrites the header.
-  // Option 1: Subpage
-  if (($node = $variables['node']) && isset($node->field_parent_page->entity->field_theme->entity->field_header_region->value) && $node->field_parent_page->entity->field_theme->entity->field_header_region->value === 'microsite_nav') {
-    $variables['use_microsite_nav'] = TRUE;
-  }
-  // Option 2: Microsite.
-  if (($node = $variables['node']) && isset($node->field_theme->entity->field_header_region->value) && $node->field_theme->entity->field_header_region->value === 'microsite_nav') {
-    $variables['use_microsite_nav'] = TRUE;
-  }
-  // Add the library if parent has one.
-  if (($node = $variables['node']) && isset($node->field_theme->entity->field_library->value)) {
-    $variables['#attached']['library'][] = $node->field_theme->entity->field_library->value;
-  }
-  // Add the library if parent has one.
-  if (($node = $variables['node']) && isset($node->field_parent_page->entity->field_theme->entity->field_library->value)) {
-    $variables['#attached']['library'][] = $node->field_parent_page->entity->field_theme->entity->field_library->value;
+  if (isset($variables['node']) && ($node = $variables['node'])) {
+    // Option 1: Subpage
+    if (isset($node->field_parent_page->entity->field_theme->entity->field_header_region->value) && $node->field_parent_page->entity->field_theme->entity->field_header_region->value === 'microsite_nav') {
+      $variables['use_microsite_nav'] = TRUE;
+    }
+    // Option 2: Microsite.
+    if (isset($node->field_theme->entity->field_header_region->value) && $node->field_theme->entity->field_header_region->value === 'microsite_nav') {
+      $variables['use_microsite_nav'] = TRUE;
+    }
+    // Add the library if parent has one.
+    if (isset($node->field_theme->entity->field_library->value)) {
+      $variables['#attached']['library'][] = $node->field_theme->entity->field_library->value;
+    }
+    // Add the library if parent has one.
+    if (isset($node->field_parent_page->entity->field_theme->entity->field_library->value)) {
+      $variables['#attached']['library'][] = $node->field_parent_page->entity->field_theme->entity->field_library->value;
+    }
   }
 }
 
