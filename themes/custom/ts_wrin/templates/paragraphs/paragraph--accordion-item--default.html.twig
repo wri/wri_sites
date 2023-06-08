@@ -48,11 +48,15 @@
 %}
 {% block paragraph %}
   <dt{{ attributes.addClass(classes) }}>
+    <a href="#{{ hash_id }}">
     {% block content %}
-      {{ content|without('field_body','field_related_resources') }}
+      {{ content|without('field_body','field_related_resources','addtoany') }}
     {% endblock %}
+    </a>
+    {{ content.addtoany }}
   </dt>
   <dd>
+    <a id="{{ hash_id }}"></a>
     {{ content.field_body }}
     {{ content.field_related_resources }}
   </dd>
