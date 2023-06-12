@@ -5,10 +5,10 @@
  * Functions to support theming in the ts_grid theme.
  */
 
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
-use Drupal\Component\Utility\Html;
 use Drupal\wri_node\General;
 
 /**
@@ -130,7 +130,7 @@ function ts_wrin_preprocess_page(array &$variables) {
   $variables['use_microsite_nav'] = $variables['use_microsite_nav'] ?? FALSE;
   // See if it has a Theme that overwrites the header.
   if (isset($variables['node']) && ($node = $variables['node'])) {
-    // Option 1: Subpage
+    // Option 1: Subpage.
     if (isset($node->field_parent_page->entity->field_theme->entity->field_header_region->value) && $node->field_parent_page->entity->field_theme->entity->field_header_region->value === 'microsite_nav') {
       $variables['use_microsite_nav'] = TRUE;
     }
@@ -356,7 +356,7 @@ function ts_wrin_theme_suggestions_views_view_list_alter(array &$suggestions, ar
 }
 
 /**
- * Implements hook_preprocess_wri_subpage_columns.
+ * Implements hook_preprocess_wri_subpage_columns().
  */
 function ts_wrin_preprocess_wri_subpage_columns(&$variables) {
   // If the Microsite's theme indicates a child page should show its own header,
@@ -374,8 +374,7 @@ function ts_wrin_preprocess_wri_subpage_columns(&$variables) {
  * Implements hook_preprocess_menu_local_task().
  */
 function ts_wrin_preprocess_paragraph(array &$variables) {
-  if (isset($variables['elements']['#paragraph']) && $variables['elements']['#paragraph']->getType() == 'accordion_item')
-  {
-    $variables['hash_id'] = Html::getUniqueId('section-' .  $variables['elements']['#paragraph']->field_title->value);
+  if (isset($variables['elements']['#paragraph']) && $variables['elements']['#paragraph']->getType() == 'accordion_item') {
+    $variables['hash_id'] = Html::getUniqueId('section-' . $variables['elements']['#paragraph']->field_title->value);
   }
 }
