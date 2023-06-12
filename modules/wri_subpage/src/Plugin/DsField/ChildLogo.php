@@ -2,8 +2,8 @@
 
 namespace Drupal\wri_subpage\Plugin\DsField;
 
-use Drupal\node\NodeInterface;
 use Drupal\ds\Plugin\DsField\DsFieldBase;
+use Drupal\node\NodeInterface;
 
 /**
  * Plugin that renders the terms from a chosen taxonomy vocabulary.

@@ -5,8 +5,8 @@
  * Narrative Taxonomy install and update hooks..
  */
 
-use Drupal\Core\Utility\UpdateException;
 use Drupal\block_content\Entity\BlockContent;
+use Drupal\Core\Utility\UpdateException;
 
 /**
  * Enables the default value for the link field in all 3+1 blocks.

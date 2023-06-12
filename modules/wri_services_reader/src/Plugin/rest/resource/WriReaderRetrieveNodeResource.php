@@ -3,13 +3,13 @@
 namespace Drupal\wri_services_reader\Plugin\rest\resource;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\file\Entity\File;
+use Drupal\media\Entity\Media;
 use Drupal\rest\Plugin\ResourceBase;
 use Drupal\rest\ResourceResponse;
 use Drupal\taxonomy\Entity\Term;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\media\Entity\Media;
-use Drupal\file\Entity\File;
 
 /**
  * Represents WRI Reader Node Retrieve records as resources.

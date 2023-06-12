@@ -2,10 +2,10 @@
 
 namespace Drupal\wri_subpage\Plugin\DsField;
 
-use Drupal\wri_node\General;
-use Drupal\node\NodeInterface;
 use Drupal\ds\Plugin\DsField\DsFieldBase;
 use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
+use Drupal\wri_node\General;
 
 /**
  * Plugin that renders the terms from a chosen taxonomy vocabulary.

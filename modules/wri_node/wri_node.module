@@ -5,11 +5,11 @@
  * Wri Node module code.
  */
 
-use Drupal\wri_node\General;
-use Drupal\node\NodeInterface;
-use Drupal\node\Entity\Node;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
 use Drupal\responsive_image\Entity\ResponsiveImageStyle;
+use Drupal\wri_node\General;
 
 /**
  * Implements hook_preprocess_hook().
