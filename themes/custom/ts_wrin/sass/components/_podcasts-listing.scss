@@ -1,51 +1,49 @@
 .podcasts-content_listing {
-  .view-content-listing {
-    ul.listing-items {
-      display: flex;
-      flex-wrap: wrap;
+  ul.listing-items {
+    display: flex;
+    flex-wrap: wrap;
 
-      @include mq($ph) {
-        margin-right: calc(#{$grid-gutter-mobile} * -1);
+    @include mq($ph) {
+      margin-right: calc(#{$grid-gutter-mobile} * -1);
+    }
+  }
+
+  .listing-items li {
+    border: 3px solid $black;
+    flex: 1 1 100%;
+    margin-bottom: $grid-gutter-mobile;
+    margin-left: 0;
+
+    @include mq($ph) {
+      // 6px refers to the width that's added from the 3px black border.
+      flex-basis: calc(50% - (#{$grid-gutter-mobile} + 6px));
+      margin-right: $grid-gutter-mobile;
+      &:nth-child(2n),
+      &:nth-child(3n) {
+        margin-right: 0;
       }
     }
 
-    .listing-items li {
-      border: 3px solid $black;
-      flex: 1 1 100%;
-      margin-bottom: $grid-gutter-mobile;
-      margin-left: 0;
-
-      @include mq($ph) {
-        // 6px refers to the width that's added from the 3px black border.
-        flex-basis: calc(50% - (#{$grid-gutter-mobile} + 6px));
+    @include mq($md) {
+      flex-basis: calc(33.3% - (#{$grid-gutter-mobile} + 6px));
+      margin-right: $grid-gutter-mobile;
+      &:nth-child(2n) {
         margin-right: $grid-gutter-mobile;
-        &:nth-child(2n),
-        &:nth-child(3n) {
-          margin-right: 0;
-        }
       }
-
-      @include mq($md) {
-        flex-basis: calc(33.3% - (#{$grid-gutter-mobile} + 6px));
-        margin-right: $grid-gutter-mobile;
-        &:nth-child(2n) {
-          margin-right: $grid-gutter-mobile;
-        }
-        &:nth-child(6n) {
-          margin-right: 0;
-        }
+      &:nth-child(6n) {
+        margin-right: 0;
       }
+    }
 
-      @include hocus() {
-        background-color: $green;
+    @include hocus() {
+      background-color: $green;
+      transition: 0.5s;
+
+      .topic-tag a,
+      .teaser-title a,
+      .date-region.date {
+        color: $white;
         transition: 0.5s;
-
-        .topic-tag a,
-        .teaser-title a,
-        .date-region.date {
-          color: $white;
-          transition: 0.5s;
-        }
       }
     }
   }
