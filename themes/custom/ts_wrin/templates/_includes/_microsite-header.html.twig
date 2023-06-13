@@ -1,17 +1,36 @@
-<header class="header-pfp">
+<header class="pfp-header">
+  <div class="pfp-container">
+    {# Row 1 #}
+    <div class="pfp-header__row-1">
 
-  {# Row 1 #}
-  <div class="container">
-    <img src="profiles/contrib/wri_sites/themes/custom/ts_wrin/img/logo/wri-logo-horizontal.png" alt="World Resources Institute Logo">
-    <div>
-      {% include '@ts_wrin/ts_custom/ts-hamburger-nav.html.twig' %}
+      {# Logo #}
+      <div class="pfp-header__logo-wrap">
+        <a href="/">
+          <img src="profiles/contrib/wri_sites/themes/custom/ts_wrin/img/logo/wri-logo-horizontal.png" alt="World Resources Institute Logo">
+        </a>
+      </div>
+
+      {# Hamburger #}
+      <div>
+        {% include '@ts_wrin/ts_custom/ts-hamburger-nav.html.twig' %}
+      </div>
     </div>
-  </div>
 
-  {# Row 2 #}
-  <div>
-    {% if (content.hero.field_toc is not empty) and (content.hero.field_toc['#value'] == 'microsite') %}
-      {{ content.hero.field_toc }}
-    {% endif %}
+    {# Row 2 #}
+    <div class="pfp-header__row-2">
+
+      {# Logo #}
+      <div class="pfp-header__paris-logo-wrap">
+        <img src="profiles/contrib/wri_sites/themes/custom/ts_wrin/img/logo/pfp-logo.png" alt="Paying for Paris Logo">
+      </div>
+
+      {# Links #}
+      <div class="pfp-header__links">
+        {% if (content.hero.field_toc is not empty) and (content.hero.field_toc['#value'] == 'microsite') %}
+          {{ content.hero.field_toc }}
+        {% endif %}
+
+      </div>
+    </div>
   </div>
 </header>
