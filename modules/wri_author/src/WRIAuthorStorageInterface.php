@@ -3,8 +3,8 @@
 namespace Drupal\wri_author;
 
 use Drupal\Core\Entity\ContentEntityStorageInterface;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\wri_author\Entity\WRIAuthorInterface;
 
 /**

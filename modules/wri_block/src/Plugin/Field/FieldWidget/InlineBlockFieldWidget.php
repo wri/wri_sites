@@ -2,8 +2,8 @@
 
 namespace Drupal\wri_block\Plugin\Field\FieldWidget;
 
-use Drupal\inline_entity_form\Plugin\Field\FieldWidget\InlineEntityFormSimple;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\inline_entity_form\Plugin\Field\FieldWidget\InlineEntityFormSimple;
 
 /**
  * Allows blocks to be saved with duplicate titles.

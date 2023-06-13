@@ -3,9 +3,9 @@
 namespace Drupal\wri_author\Controller;
 
 use Drupal\Core\KeyValueStore\KeyValueStoreInterface;
+use Drupal\system\Controller\EntityAutocompleteController as EntityAutocompleteControllerOrig;
 use Drupal\wri_author\EntityAutocompleteMatcher;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\system\Controller\EntityAutocompleteController as EntityAutocompleteControllerOrig;
 
 /**
  * Adds custom autocomplete functionality.

@@ -2,8 +2,8 @@
 
 namespace Drupal\wri_engagement\Plugin\WebformElement;
 
-use Drupal\webform\WebformSubmissionInterface;
 use Drupal\webform\Plugin\WebformElement\Checkboxes;
+use Drupal\webform\WebformSubmissionInterface;
 
 /**
  * Provides a 'checkboxes' element that saves the value as a string.

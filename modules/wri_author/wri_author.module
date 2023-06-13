@@ -5,9 +5,9 @@
  * Contains wri_author.module.
  */
 
-use Drupal\wri_author\Entity\WRIAuthor;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\wri_author\Entity\WRIAuthor;
 
 /**
  * Implements hook_help().

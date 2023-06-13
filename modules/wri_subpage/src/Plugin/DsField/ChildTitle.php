@@ -2,8 +2,8 @@
 
 namespace Drupal\wri_subpage\Plugin\DsField;
 
-use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Drupal\ds\Plugin\DsField\DsFieldBase;
+use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 
 /**
  * Plugin that renders the terms from a chosen taxonomy vocabulary.
@@ -12,7 +12,7 @@ use Drupal\ds\Plugin\DsField\DsFieldBase;
  *   id = "childtitle",
  *   title = @Translation("Add Title"),
  *   entity_type = "node",
- *   ui_limit = {"project_detail|*","microsite|*"}
+ *   ui_limit = {"project_detail|*","microsite|*","publication|*"}
  * )
  */
 class ChildTitle extends DsFieldBase {

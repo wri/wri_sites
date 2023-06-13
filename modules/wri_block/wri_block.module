@@ -5,8 +5,8 @@
  * Functions for wri custom blocks.
  */
 
-use Drupal\Core\Render\Element;
 use Drupal\Component\Utility\Html;
+use Drupal\Core\Render\Element;
 
 /**
  * Implements hook_preprocess_block().

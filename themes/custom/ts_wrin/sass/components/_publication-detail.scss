@@ -4,6 +4,8 @@
 .publication__detail {
   // Hero
   .hero__text {
+    // Z-index must be higher than the table of contents so modal appears on top of it.
+    z-index: 52;
     .publication__type > .h4 {
       @include center-columns($grid-columns-mobile, $grid-columns-mobile);
       background-color: $black;
