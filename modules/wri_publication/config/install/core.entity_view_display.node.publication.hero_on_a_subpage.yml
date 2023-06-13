@@ -1,5 +1,3 @@
-uuid: 478b67bf-600f-4fd3-8087-43c598727382
-langcode: pt-br
 status: true
 dependencies:
   config:
@@ -88,8 +86,6 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-_core:
-  default_config_hash: i-j1poPE1TFDGwI48E_fZMaAZ1BeW1GsUNl-uJqg9ug
 id: node.publication.hero_on_a_subpage
 targetEntityType: node
 bundle: publication
