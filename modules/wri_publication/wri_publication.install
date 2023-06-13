@@ -50,3 +50,14 @@ function wri_publication_update_dependencies() {
 
   return $dependencies;
 }
+
+/**
+ * Allow subpages on robust publications.
+ */
+function wri_publication_update_9502() {
+  // Add the new view mode.
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.project_detail.hero_on_a_subpage', 'wri_publication', 'install', 'TRUE');
+
+  // Update the subpage parent field to allow publications.
+  \Drupal::services('distro_helper.updates')->updateConfig('field.field.node.subpage.field_parent_page', 'wri_subpage', ['settings#handler_settings#target_bundles#publication']);
+}
