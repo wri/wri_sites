@@ -601,7 +601,7 @@ header nav.menu--donate > ul.menu {
 }
 
 @include mq($md) {
-  header.sticky {
+  header:not(.header-pfp).sticky {
     align-items: center;
     background-color: $white;
     border-bottom: none;
