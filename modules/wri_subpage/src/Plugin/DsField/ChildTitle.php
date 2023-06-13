@@ -12,7 +12,7 @@ use Drupal\ds\Plugin\DsField\DsFieldBase;
  *   id = "childtitle",
  *   title = @Translation("Add Title"),
  *   entity_type = "node",
- *   ui_limit = {"project_detail|*","microsite|*"}
+ *   ui_limit = {"project_detail|*","microsite|*","publication|*"}
  * )
  */
 class ChildTitle extends DsFieldBase {
