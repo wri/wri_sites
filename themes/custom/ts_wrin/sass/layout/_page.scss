@@ -178,3 +178,9 @@ body {
     @include center-columns(6, $grid-columns);
   }
 }
+
+.region-content {
+  // Code do place the hero, etc under the main nav.
+  position: relative;
+  z-index: 1;
+}
