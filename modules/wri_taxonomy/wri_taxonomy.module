@@ -6,11 +6,11 @@
  */
 
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Field\FieldDefinitionInterface;
-use Drupal\taxonomy\TermInterface;
 use Drupal\Core\Url;
+use Drupal\taxonomy\TermInterface;
 
 /**
  * Implements hook_entity_type_alter().

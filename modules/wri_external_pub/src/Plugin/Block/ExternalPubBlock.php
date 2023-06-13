@@ -4,8 +4,8 @@ namespace Drupal\wri_external_pub\Plugin\Block;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 
 /**

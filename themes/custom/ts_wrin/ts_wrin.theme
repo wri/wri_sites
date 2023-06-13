@@ -5,10 +5,10 @@
  * Functions to support theming in the ts_grid theme.
  */
 
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
-use Drupal\Component\Utility\Html;
 use Drupal\wri_node\General;
 
 /**

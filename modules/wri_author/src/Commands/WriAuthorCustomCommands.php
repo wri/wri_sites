@@ -3,9 +3,9 @@
 namespace Drupal\wri_author\Commands;
 
 use Drupal\Core\Database\Connection;
-use Drush\Commands\DrushCommands;
-use Drupal\wri_author\Entity\WRIAuthor;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\wri_author\Entity\WRIAuthor;
+use Drush\Commands\DrushCommands;
 
 /**
  * Drush commands for cleaning up wri_author references.

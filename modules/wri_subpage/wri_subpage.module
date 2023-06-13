@@ -5,9 +5,9 @@
  * Subpage module hook implementations.
  */
 
-use Drupal\menu_link_content\Entity\MenuLinkContent;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\menu_link_content\Entity\MenuLinkContent;
 
 /**
  * Implements hook_ENTITY_TYPE_insert().

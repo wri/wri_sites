@@ -5,12 +5,12 @@
  * Contains hsus_search.module.
  */
 
-use Drupal\Core\Render\BubbleableMetadata;
-use Drupal\search_api\Plugin\views\query\SearchApiQuery;
-use Drupal\views\ViewExecutable;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\search_api\Plugin\views\query\SearchApiQuery;
+use Drupal\views\ViewExecutable;
 
 /**
  * Implements hook_entity_base_field_info().

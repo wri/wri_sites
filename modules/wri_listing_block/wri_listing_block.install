@@ -4,6 +4,7 @@
  * @file
  * The Listing arguments install and update hooks.
  */
+
 use Drupal\Core\Config\FileStorage;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
@@ -143,5 +144,5 @@ function wri_listing_block_update_9502() {
   $config_record = $config_directory->read($field_config_name);
   FieldConfig::create($config_record)->save();
 
-  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.block_content.listing_block.default',['content#field_filter_by_project'], 'wri_listing_block');
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.block_content.listing_block.default', ['content#field_filter_by_project'], 'wri_listing_block');
 }

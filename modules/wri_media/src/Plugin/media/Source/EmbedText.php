@@ -2,8 +2,8 @@
 
 namespace Drupal\wri_media\Plugin\media\Source;
 
-use Drupal\media\Plugin\media\Source\Image;
 use Drupal\media\MediaInterface;
+use Drupal\media\Plugin\media\Source\Image;
 
 /**
  * Media source wrapping around an Embed file.
