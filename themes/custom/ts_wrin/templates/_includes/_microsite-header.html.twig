@@ -1,11 +1,17 @@
-<header>
-  <div class="container header-wrapper">
-    New horizontal logo here in web/profiles/contrib/wri_sites/themes/custom/ts_wrin/templates/_includes/_microsite-header.html.twig
-    <div class="header-right white">
+<header class="header-pfp">
+
+  {# Row 1 #}
+  <div class="container">
+    <img src="profiles/contrib/wri_sites/themes/custom/ts_wrin/img/logo/wri-logo-horizontal.png" alt="World Resources Institute Logo">
+    <div>
       {% include '@ts_wrin/ts_custom/ts-hamburger-nav.html.twig' %}
     </div>
   </div>
-  {% if (content.hero.field_toc is not empty) and (content.hero.field_toc['#value'] == 'microsite') %}
-    {{ content.hero.field_toc }}
-  {% endif %}
+
+  {# Row 2 #}
+  <div>
+    {% if (content.hero.field_toc is not empty) and (content.hero.field_toc['#value'] == 'microsite') %}
+      {{ content.hero.field_toc }}
+    {% endif %}
+  </div>
 </header>
