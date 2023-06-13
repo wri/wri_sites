@@ -21,6 +21,11 @@
               {% if content.hero.childtitle %}
                 {{ content.hero.childtitle }}
               {% endif %}
+              {% if content.buttons|render %}
+                <div class="buttons margin-top-md">
+                  {{ content.buttons }}
+                </div>
+              {% endif %}
             </div>
           </div>
         </div>
