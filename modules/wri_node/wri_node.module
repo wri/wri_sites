@@ -69,7 +69,7 @@ function wri_node_preprocess_wri_page_hero(&$context) {
       $themename = Drupal::service('config.factory')->get('system.theme')->get('default');
       try {
         // Make sure the twig template exists.
-        $template = Drupal::service('twig')->load("@$themename/_includes/wri-page-hero--" . $theme_suggestion . ".html.twig");
+        Drupal::service('twig')->load("@$themename/_includes/wri-page-hero--" . $theme_suggestion . ".html.twig");
         $context['content']['theme_switch'] = $theme_suggestion;
       }
       catch (LoaderError $e) {
