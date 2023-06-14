@@ -1,3 +1,7 @@
+{% if content.theme_switch %}
+{% include '@ts_wrin/_includes/wri-page-hero--' ~ content.theme_switch ~ '.html.twig' %}
+{% else %}
+
 <div {{ attributes.addClass('ds-1col', 'clearfix') }}>
 
   {# Header nav #}
@@ -38,4 +42,5 @@
   <div class="landing-page__hero__field-listing__mobile container content-side-padding padding-vertical white">
     {{ content.content }}
   </div>
+{% endif %}
 {% endif %}
