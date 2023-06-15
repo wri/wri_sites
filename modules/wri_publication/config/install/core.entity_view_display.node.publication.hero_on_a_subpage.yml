@@ -39,6 +39,7 @@ dependencies:
     - layout_builder
     - text
     - user
+    - wri_engagement
     - wri_toc
 third_party_settings:
   ds:
@@ -52,6 +53,8 @@ third_party_settings:
         - node_title
         - childtitle
         - field_toc
+      buttons:
+        - field_files
       category:
         - field_primary_topic
         - field_region
@@ -91,6 +94,21 @@ targetEntityType: node
 bundle: publication
 mode: hero_on_a_subpage
 content:
+  field_files:
+    type: modal_engage_field_formatter
+    label: above
+    settings:
+      view_mode: download_listing
+      link: false
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: reset
+          settings:
+            lb: 'Download Options'
+    weight: 3
+    region: buttons
   field_narrative_taxonomy:
     type: text_default
     label: hidden
@@ -212,7 +230,7 @@ content:
       menu: page-hierarchies
       color_class: black-bar
     third_party_settings: {  }
-    weight: 3
+    weight: 4
     region: hero
   field_twitter_account:
     type: link_separate
@@ -246,7 +264,6 @@ hidden:
   field_featured: true
   field_featured_headline: true
   field_featured_text: true
-  field_files: true
   field_in_this_series: true
   field_intro: true
   field_isbn: true
