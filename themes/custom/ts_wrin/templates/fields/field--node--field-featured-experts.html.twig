@@ -7,7 +7,7 @@
  */
 #}
 
-{% set listing_type = 'persons' %}
+{% set listing_type = listing_type ?? 'persons' %}
 <div{{ attributes.addClass(listing_type, 'grid', 'margin-bottom-lg', 'margin-top-lg') }}>
   {{ title_prefix }}
   {% if label_hidden %}

@@ -152,6 +152,16 @@
   }
 }
 
+.persons-external {
+  .listing-items li {
+    flex-basis: calc(50% - #{$grid-gutter});
+    @include mq($lg) {
+      flex-basis: calc(25% - #{$grid-gutter});
+      margin-right: $space-md;
+    }
+  }
+}
+
 .tiles {
   ul.listing-items {
     @include mq($md) {
