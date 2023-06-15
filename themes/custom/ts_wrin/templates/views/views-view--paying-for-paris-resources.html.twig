@@ -19,9 +19,6 @@
   {{ header|without('extra_result') }}
 {% endif %}
 <div{{ attributes.addClass(classes) }}>
-    <div class="container">
-      <h1 class="h1 padding-vertical">{{ view.title }}</h1>
-    </div>
   <div class="resources-wrapper">
     <div class="container">
       {% if exposed %}
@@ -34,8 +31,8 @@
       <div class="grid results-wrapper">
         <div class="results-sidebar padding-bottom">
           {{ drupal_block('facet_block:pfp_resource_type') }}
-          {{ drupal_block('facet_block:pfp_region') }}
-          {{ drupal_block('facet_block:pfp_tags') }}
+{#          {{ drupal_block('facet_block:pfp_region') }}#}
+{#          {{ drupal_block('facet_block:pfp_tags') }}#}
         </div>
 
         <div class="results-body padding-bottom">
