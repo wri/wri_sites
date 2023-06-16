@@ -50,9 +50,15 @@
 
 {% block paragraph %}
   <div {{ attributes.addClass(classes) }}>
-    <dt class="pfp-accordion__trigger">
-      <a href="#{{ hash_id }}">
+    <dt>
+      <a class="pfp-accordion__trigger" href="#{{ hash_id }}">
       {% block content %}
+
+        {# Indicator #}
+        <div class="pfp-accordion__indicator">
+          <div class="pfp-accordion__indicator__1"></div>
+          <div class="pfp-accordion__indicator__2"></div>
+        </div>
       
         {# Title #}
         <div class="pfp-accordion__title">
