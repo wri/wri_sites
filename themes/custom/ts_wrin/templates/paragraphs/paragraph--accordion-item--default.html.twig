@@ -43,21 +43,25 @@
     'paragraph',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-    not paragraph.isPublished() ? 'paragraph--unpublished'
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+    'pfp-accordion',
+    'pfp-container-lg',
   ]
 %}
 {% block paragraph %}
-  <dt{{ attributes.addClass(classes) }}>
-    <a href="#{{ hash_id }}">
-    {% block content %}
-      {{ content|without('field_body','field_related_resources','addtoany') }}
-    {% endblock %}
-    </a>
-    {{ content.addtoany }}
-  </dt>
-  <dd>
-    <a id="{{ hash_id }}"></a>
-    {{ content.field_body }}
-    {{ content.field_related_resources }}
-  </dd>
+  <div {{ attributes.addClass(classes) }}>
+    <dt class="pfp-accordion__trigger">
+      <a href="#{{ hash_id }}">
+      {% block content %}
+        {{ content|without('field_body','field_related_resources','addtoany') }}
+      {% endblock %}
+      </a>
+      {{ content.addtoany }}
+    </dt>
+    <dd  class="pfp-accordion__content">
+      <a id="{{ hash_id }}"></a>
+      {{ content.field_body }}
+      {{ content.field_related_resources }}
+    </dd>
+  </div>
 {% endblock paragraph %}
