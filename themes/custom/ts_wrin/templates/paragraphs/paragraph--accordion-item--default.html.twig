@@ -47,15 +47,34 @@
     'pfp-accordion',
   ]
 %}
+
 {% block paragraph %}
   <div {{ attributes.addClass(classes) }}>
     <dt class="pfp-accordion__trigger">
       <a href="#{{ hash_id }}">
       {% block content %}
-        {{ content|without('field_body','field_related_resources','addtoany') }}
+      
+        {# Title #}
+        <div class="pfp-accordion__title">
+          {{ content.field_title }}
+        </div>
+
+        {# Intro #}
+        <div class="pfp-accordion__intro">
+          {{ content.field_intro }}
+        </div>
+
+        {# Featured experts #}
+        <div class="pfp-accordion__experts">
+          {{ content.field_featured_experts }}
+        </div>
       {% endblock %}
       </a>
-      {{ content.addtoany }}
+
+      {# Add to any #}
+      <div class="pfp-accordion__add-to-any">
+        {{ content.addtoany }}
+      </div>
     </dt>
     <dd  class="pfp-accordion__content">
       <a id="{{ hash_id }}"></a>
