@@ -11,9 +11,19 @@
         </a>
       </div>
 
-      {# Hamburger #}
+      {# Menu toggle #}
       <div>
-        {% include '@ts_wrin/ts_custom/ts-hamburger-nav.html.twig' %}
+        {# Desktop #}
+        <div class="pfp-header__menu-toggle-wrap-desktop">
+          {% include '@ts_wrin/ts_custom/ts-hamburger-nav.html.twig' %}
+        </div>
+
+        {# Mobile #}
+        <div class="pfp-header__menu-toggle-wrap-mobile">
+          {% include '@ts_wrin/ts_custom/ts-hamburger-nav.html.twig' with {
+            class_name: 'menu-toggle mobile-menu-toggle',
+          } %}
+        </div>
       </div>
     </div>
 

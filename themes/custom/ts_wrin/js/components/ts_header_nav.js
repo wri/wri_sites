@@ -10,7 +10,7 @@ export default function(context) {
   if (context == document) {
     // Hamburger Nav.
     function toggleMenu() {
-      var toggle = $(".menu-toggle");
+      var toggle = $(".menu-toggle:not(.mobile-menu-toggle)");
       var target = $(".mobile-menu-target");
       var headerNav = $(".header-wrapper");
       toggle.toggleClass("active");
@@ -24,7 +24,7 @@ export default function(context) {
       target.toggleClass("expanded");
     }
     // Mobile menu toggle behavior.
-    $(".menu-toggle", context)
+    $(".menu-toggle:not(.mobile-menu-toggle)", context)
       .once("ts-menu-toggle")
       .on("click", function(e) {
         toggleMenu();
