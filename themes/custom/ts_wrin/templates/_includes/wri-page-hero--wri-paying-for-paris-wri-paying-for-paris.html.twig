@@ -9,28 +9,31 @@
   {# New marquee hero #}
   <div class="pfp-hero">
 
-    {# Image background #}
-    <div class="pfp-hero__background-image">
-      {% if content.hero_image %}
-        {{ content.hero_image }}
-      {% endif %}
-    </div>
-
-    {# Content #}
-    <div class="pfp-hero__content">
-
-      {# Headline #}
-      <div class="pfp-hero__headline">
-        <h1>{{ content.title }}</h1>
+    <div class="pfp-hero__wrap">
+      {# Image background #}
+      <div class="pfp-hero__background-image">
+        {% if content.hero_image %}
+          {{ content.hero_image }}
+        {% endif %}
       </div>
 
-      {# Buttons #}
-      {% if content.intro %}
-      <div class="pfp-hero__buttons">
-        <div>{{ content.intro }}</div>
+      {# Content #}
+      <div class="pfp-hero__content">
+
+        {# Headline #}
+        <div class="pfp-hero__headline">
+          <h1>{{ content.title }}</h1>
+        </div>
+
+        {# Buttons #}
+        {% if content.intro %}
+        <div class="pfp-hero__buttons">
+          <div>{{ content.intro }}</div>
+        </div>
+        {% endif %}
       </div>
-      {% endif %}
     </div>
+
   </div>
 </div>
 {% if content.content|render|striptags|trim is not empty %}
