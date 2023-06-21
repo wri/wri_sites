@@ -1,0 +1,37 @@
+<div class="pfp-mobile-nav">
+
+  {# Header #}
+  <div class="pfp-mobile-nav__header">
+
+    {# Logo #}
+    <div class="pfp-mobile-nav__logo">
+      {# TODO: Add in correct href. #}
+      <a href="/">
+        <img src="../profiles/contrib/wri_sites/themes/custom/ts_wrin/img/logo/wri-logo-stacked.png" />
+      </a>
+    </div>
+
+    {# Close #}
+    <div>
+      <button class="pfp-mobile-nav__close" aria-label="{{ 'Close mobile menu'|t }}">
+        <div class="pfp-mobile-nav__close__1"></div>
+        <div class="pfp-mobile-nav__close__2"></div>
+      </button>
+    </div>
+  </div>
+
+  {# PFP Logo #}
+  <button class="pfp-mobile-nav__pfp-logo">
+    <div class="pfp-mobile-nav__pfp-logo__chevron">
+      {{ source('profiles/contrib/wri_sites/themes/custom/ts_wrin/img/svgs/chevron-left.svg') }}
+    </div>
+    <div class="pfp-mobile-nav__pfp-logo__logo">
+      {{ source('profiles/contrib/wri_sites/themes/custom/ts_wrin/img/logo/pfp-logo.svg') }}
+    </div>
+  </button>
+
+  {# Menu #}
+  <div class="pfp-mobile-nav__menu">
+    {{ menu_items}}
+  </div>
+</div>
