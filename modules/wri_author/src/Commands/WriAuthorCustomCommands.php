@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\wri_author\Entity\WRIAuthor;
 use Drush\Commands\DrushCommands;
 
+
 /**
  * Drush commands for cleaning up wri_author references.
  */
@@ -194,11 +195,48 @@ class WriAuthorCustomCommands extends DrushCommands {
           echo "Node Updated: " . $node_id . "\n";
         }
       }
-      // Delete duplicate author.
+      // Delete duplicate authors.
       $excess_author = WRIAuthor::load($author_id);
       if ($author_id !== $primary_author_id) {
         echo "Duplicate Deleted: " . $author_id . "\n\n";
         $excess_author->delete();
+      }
+    }
+  }
+
+  /**
+   * Drush command to make any internal authors with invalid references external.
+   *
+   * @command wri_author:bad-internal-to-external
+   * @usage wri_author:bad-internal-to-external
+   */
+  public function badInternalToExternal() {
+    // Find any field_person values where the node does not exist.
+    $query = $this->database->select('wri_author__field_person', 'author_persons')
+      ->fields('author_persons', ['entity_id']);
+    $query->leftJoin('node', 'persons', 'author_persons.field_person_target_id=persons.nid');
+    $empty_authors = $query->isNull('persons.uuid')
+      ->execute()->fetchCol();
+
+    // Get author IDs without a name.
+    if ($empty_authors) {
+      foreach ($empty_authors as $author_id) {
+        // Load all the nodes referencing the id.
+        $author = WRIAuthor::load($author_id);
+        if ($author->bundle() == 'internal') {
+          $new_external_author = WRIAuthor::create([
+            'type' => 'external',
+            'field_person_link' => [
+              'title' => $author->label(),
+              'uri' => 'route:<nolink>',
+            ],
+            'id' => $author->id(),
+          ]);
+
+          $author->delete();
+          $new_external_author->save();
+          echo "Internal author " . $author->getName() . " doesn't link to a valid person node, and was made an external author.\n";
+        }
       }
     }
   }
