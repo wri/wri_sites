@@ -194,7 +194,7 @@ class WriAuthorCustomCommands extends DrushCommands {
           echo "Node Updated: " . $node_id . "\n";
         }
       }
-      // Delete duplicate authors.
+      // Delete duplicate author.
       $excess_author = WRIAuthor::load($author_id);
       if ($author_id !== $primary_author_id) {
         echo "Duplicate Deleted: " . $author_id . "\n\n";
