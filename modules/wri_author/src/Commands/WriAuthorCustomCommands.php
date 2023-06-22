@@ -7,7 +7,6 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\wri_author\Entity\WRIAuthor;
 use Drush\Commands\DrushCommands;
 
-
 /**
  * Drush commands for cleaning up wri_author references.
  */
@@ -205,7 +204,7 @@ class WriAuthorCustomCommands extends DrushCommands {
   }
 
   /**
-   * Drush command to make any internal authors with invalid references external.
+   * Makes any internal authors with invalid references external via Drush.
    *
    * @command wri_author:bad-internal-to-external
    * @usage wri_author:bad-internal-to-external
