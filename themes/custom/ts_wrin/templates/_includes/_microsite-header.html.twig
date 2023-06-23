@@ -1,18 +1,29 @@
-<header class="pfp-header">
+<header class="pfp-header pfp-content-side-padding">
   <div class="pfp-container">
     {# Row 1 #}
     <div class="pfp-header__row-1">
 
       {# Logo #}
       <div class="pfp-header__logo-wrap">
-        <a href="/">
-          <img src="profiles/contrib/wri_sites/themes/custom/ts_wrin/img/logo/wri-logo-horizontal.png" alt="World Resources Institute Logo">
+        <a class="pfp-header__logo-wrap" href="/">
+          <img class="pfp-header__logo-white" src="../profiles/contrib/wri_sites/themes/custom/ts_wrin/img/logo/wri-logo-horizontal.png" alt="World Resources Institute Logo">
+          <img aria-hidden="true" class="pfp-header__logo-color" src="../profiles/contrib/wri_sites/themes/custom/ts_wrin/img/logo/wri-logo-horizontal-color.png" alt="World Resources Institute Logo">
         </a>
       </div>
 
-      {# Hamburger #}
+      {# Menu toggle #}
       <div>
-        {% include '@ts_wrin/ts_custom/ts-hamburger-nav.html.twig' %}
+        {# Desktop #}
+        <div class="pfp-header__menu-toggle-wrap-desktop">
+          {% include '@ts_wrin/ts_custom/ts-hamburger-nav.html.twig' %}
+        </div>
+
+        {# Mobile #}
+        <div class="pfp-header__menu-toggle-wrap-mobile">
+          {% include '@ts_wrin/ts_custom/ts-hamburger-nav.html.twig' with {
+            class_name: 'menu-toggle mobile-menu-toggle',
+          } %}
+        </div>
       </div>
     </div>
 
@@ -21,7 +32,10 @@
 
       {# Logo #}
       <div class="pfp-header__paris-logo-wrap">
-        <img src="profiles/contrib/wri_sites/themes/custom/ts_wrin/img/logo/pfp-logo.png" alt="Paying for Paris Logo">
+        {# TODO: Add in correct link #}
+        <a class="pfp-header__pfp-logo" href="/">
+          {{ source('profiles/contrib/wri_sites/themes/custom/ts_wrin/img/logo/pfp-logo.svg') }}
+        </a>
       </div>
 
       {# Links #}
@@ -29,8 +43,14 @@
         {% if (content.hero.field_toc is not empty) and (content.hero.field_toc['#value'] == 'microsite') %}
           {{ content.hero.field_toc }}
         {% endif %}
-
       </div>
     </div>
   </div>
+
+  {# Mobile menu #}
+  {% if (content.hero.field_toc is not empty) and (content.hero.field_toc['#value'] == 'microsite') %}
+    {% include '@ts_wrin/_includes/_microsite-mobile-nav.html.twig' with {
+      menu_items: content.hero.field_toc,
+    } only %}
+  {% endif %}
 </header>

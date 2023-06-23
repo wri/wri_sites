@@ -6,32 +6,40 @@
   {% endif %}
   {{ title_suffix.contextual_links }}
 
-  {# Marquee hero #}
-  <div class="landing-page__hero {{ ((content.hero_image|render) ? 'has-image' : '') }}">
-    {% if content.hero_image %}
-      <div class="hero__image">
-        {{ content.hero_image }}
-      </div>
-    {% endif %}
+  {# New marquee hero #}
+  <div class="pfp-hero">
 
-    <div class="hero__text">
-      <div class="grid">
-        <div class="hero__text--inner padding-vertical">
-          <div class="margin-top-xl"></div>
-          <h1 class="h1 {{ ((content.hero_image|render) ? 'xl white' : '') }}">{{ content.title }}</h1>
-          <div class="intro">{{ content.intro }}</div>
-          {% if content.content|render|striptags|trim is not empty %}
-            <div class="landing-page__hero__content">
-              {{ content.content }}
-            </div>
-          {% endif %}
+    <div class="pfp-hero__wrap">
+      {# Image background #}
+      <div class="pfp-hero__background-image">
+        {% if content.hero_image %}
+          {{ content.hero_image }}
+        {% endif %}
+      </div>
+
+      {# Content #}
+      <div class="pfp-hero__content">
+
+        {# Headline #}
+        <div class="pfp-hero__headline">
+          <h1>{{ content.title }}</h1>
         </div>
+
+        {# Buttons #}
+        {% if content.intro %}
+        <div class="pfp-hero__buttons">
+          <div>{{ content.intro }}</div>
+        </div>
+        {% endif %}
+      </div>
+
+      {# Scroll indicator #}
+      <div class="pfp-hero__scroll-indicator" aria-hidden="true">
+        <p>Scroll to Learn More</p>
+        <img class="pfp-hero__scroll-indicator__arrow" src="/profiles/contrib/wri_sites/themes/custom/ts_wrin/img/svgs/arrow-down.svg" alt="Downwards pointing arrow">
       </div>
     </div>
 
-    {% if content.hero_image|render %}
-      <div class="dark-overlay"></div>
-    {% endif %}
   </div>
 </div>
 {% if content.content|render|striptags|trim is not empty %}
