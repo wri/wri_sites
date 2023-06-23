@@ -50,10 +50,10 @@
 
 {% block paragraph %}
   <div {{ attributes.addClass(classes) }}>
-    <div id="pfp-accordion__head-{{ hash_id }}">
+    <div>
 
       {# Button trigger #}
-      <button class="pfp-accordion__trigger" data-hash="#{{ hash_id }}" aria-expanded="false" aria-controls="pfp-accordion__drawer-{{ hash_id }}">
+      <button class="pfp-accordion__trigger" id="pfp-accordion__head-{{ hash_id }}" data-hash="#{{ hash_id }}" aria-expanded="false" aria-controls="pfp-accordion__drawer-{{ hash_id }}">
       {% block content %}
 
         <a id="{{ hash_id }}"></a>
@@ -88,9 +88,11 @@
     </div>
 
     {# Content drawer #}
-    <div id="pfp-accordion__drawer-{{ hash_id }}" class="pfp-accordion__content" aria-labelledby="pfp-accordion__head-{{ hash_id }}">
-      {{ content.field_body }}
-      {{ content.field_related_resources }}
+    <div id="pfp-accordion__content-{{ hash_id }}" class="pfp-accordion__content" aria-labelledby="pfp-accordion__head-{{ hash_id }}">
+      <div class="pfp-accordion__content-wrap">
+        {{ content.field_body }}
+        {{ content.field_related_resources }}
+      </div>
     </div>
   </div>
 {% endblock paragraph %}
