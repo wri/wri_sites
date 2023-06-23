@@ -5,6 +5,8 @@ single_file_component_layout:wri_subpage_columns:
   regions:
     hero:
       label: Hero
+    buttons:
+      label: Buttons
     category:
       label: Category
     share:
@@ -14,7 +16,7 @@ single_file_component_layout:wri_subpage_columns:
     sidebar:
       label: Sidebar
   icon_map:
-    - [ hero ]
+    - [ hero, buttons ]
     - [ category, share ]
     - [ main_content, sidebar ]
 

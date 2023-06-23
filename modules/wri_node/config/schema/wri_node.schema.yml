@@ -3,7 +3,7 @@ wri_node.settings:
   label: 'WRI settings'
   mapping:
     unpublished_person_phrase:
-      type: label
+      type: text
       label: 'Unpublished Person phrase'
     person_listing_url:
       type: path

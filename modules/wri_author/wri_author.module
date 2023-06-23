@@ -77,7 +77,7 @@ function wri_author_node_delete(EntityInterface $node) {
         $new_external_author = WRIAuthor::create([
           'type' => 'external',
           'field_person_link' => [
-            'title' => str_replace(' (WRI)', '', $author->label()),
+            'title' => $author->label(),
             'uri' => 'route:<nolink>',
           ],
           'id' => $author->id(),

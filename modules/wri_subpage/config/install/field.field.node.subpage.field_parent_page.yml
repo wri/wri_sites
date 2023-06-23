@@ -20,6 +20,7 @@ settings:
   handler_settings:
     target_bundles:
       project_detail: project_detail
+      publication: publication
     sort:
       field: _none
       direction: ASC

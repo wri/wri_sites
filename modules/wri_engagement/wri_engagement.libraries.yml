@@ -6,3 +6,9 @@ modal_cookie:
     - core/jquery
     - core/drupal
     - core/js-cookie
+trigger_modal_body:
+  version: VERSION
+  js:
+    js/trigger-modal-body.js: { }
+  dependencies:
+    - core/jquery

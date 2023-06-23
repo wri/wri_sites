@@ -36,7 +36,7 @@ function wri_narrative_preprocess_wri_narrative_tax(&$context) {
   else {
     // If the field intro is not set, get the narrative tax field value
     // from the node.
-    if (isset($context["content"]["main_content"]["field_listing"]['#entity']) && !$context["content"]["main_content"]["field_listing"]['#entity']->get('field_intro')->value) {
+    if (!isset($context["#settings"]["_ds_entity"]->field_intro->value)) {
       $node = \Drupal::routeMatch()->getParameter('node');
       if ($node instanceof NodeInterface) {
         $context["content"]["phrase"] = $node->get('field_narrative_taxonomy')->view(['label' => 'hidden']);
