@@ -50,8 +50,8 @@
 
 {% block paragraph %}
   <div {{ attributes.addClass(classes) }}>
-    <button id="pfp-accordion__head-{{ hash_id }}" aria-controls="pfp-accordion__drawer-{{ hash_id }}" aria-expanded="false">
-      <div class="pfp-accordion__trigger" href="#{{ hash_id }}">
+    <div id="pfp-accordion__head-{{ hash_id }}" aria-controls="pfp-accordion__drawer-{{ hash_id }}">
+      <button class="pfp-accordion__trigger" href="#{{ hash_id }}" aria-expanded="false">
       {% block content %}
 
         {# Indicator #}
@@ -75,13 +75,13 @@
           {{ content.field_featured_experts }}
         </div>
       {% endblock %}
-      </div>
+      </button>
 
       {# Add to any #}
       <div class="pfp-accordion__add-to-any">
         {{ content.addtoany }}
       </div>
-    </button>
+    </div>
     <div id="pfp-accordion__drawer-{{ hash_id }}" class="pfp-accordion__content" aria-labelledby="pfp-accordion__head-{{ hash_id }}">
       <a id="{{ hash_id }}"></a>
       {{ content.field_body }}
