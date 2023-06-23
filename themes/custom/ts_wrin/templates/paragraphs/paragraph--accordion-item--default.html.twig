@@ -43,21 +43,56 @@
     'paragraph',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-    not paragraph.isPublished() ? 'paragraph--unpublished'
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+    'pfp-accordion',
   ]
 %}
+
 {% block paragraph %}
-  <dt{{ attributes.addClass(classes) }}>
-    <a href="#{{ hash_id }}">
-    {% block content %}
-      {{ content|without('field_body','field_related_resources','addtoany') }}
-    {% endblock %}
-    </a>
-    {{ content.addtoany }}
-  </dt>
-  <dd>
-    <a id="{{ hash_id }}"></a>
-    {{ content.field_body }}
-    {{ content.field_related_resources }}
-  </dd>
+  <div {{ attributes.addClass(classes) }}>
+    <div>
+
+      {# Button trigger #}
+      <button class="pfp-accordion__trigger" id="pfp-accordion__head-{{ hash_id }}" data-hash="#{{ hash_id }}" aria-expanded="false" aria-controls="pfp-accordion__drawer-{{ hash_id }}">
+      {% block content %}
+
+        <a id="{{ hash_id }}"></a>
+
+        {# Indicator #}
+        <div class="pfp-accordion__indicator">
+          <div class="pfp-accordion__indicator__1"></div>
+          <div class="pfp-accordion__indicator__2"></div>
+        </div>
+      
+        {# Title #}
+        <div class="pfp-accordion__title">
+          {{ content.field_title }}
+        </div>
+
+        {# Intro #}
+        <div class="pfp-accordion__intro">
+          {{ content.field_intro }}
+        </div>
+
+        {# Featured experts #}
+        <div class="pfp-accordion__experts">
+          {{ content.field_featured_experts }}
+        </div>
+      {% endblock %}
+      </button>
+
+      {# Add to any #}
+      <div class="pfp-accordion__add-to-any">
+        {{ content.addtoany }}
+      </div>
+    </div>
+
+    {# Content drawer #}
+    <div id="pfp-accordion__content-{{ hash_id }}" class="pfp-accordion__content" aria-labelledby="pfp-accordion__head-{{ hash_id }}">
+      <div class="pfp-accordion__content-wrap">
+        {{ content.field_body }}
+        {{ content.field_related_resources }}
+      </div>
+    </div>
+  </div>
 {% endblock paragraph %}
