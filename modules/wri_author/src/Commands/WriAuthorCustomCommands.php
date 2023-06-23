@@ -52,7 +52,8 @@ class WriAuthorCustomCommands extends DrushCommands {
     $query->groupBy('name');
     if ($type == 'internal') {
       $query->groupBy('field_person');
-    } else {
+    }
+    else {
       $query->groupBy('field_person_link');
     }
     $author_list = $query->condition('type', $type)
