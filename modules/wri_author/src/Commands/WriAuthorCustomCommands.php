@@ -49,10 +49,14 @@ class WriAuthorCustomCommands extends DrushCommands {
     // Find any authors that have the same name, within bundle.
     // SELECT name FROM wri_author_field_data GROUP BY name HAVING count(name)>1
     $query = $this->entityTypeManager->getStorage('wri_author')->getAggregateQuery();
-    $author_list = $query->groupBy('name')
-      ->groupBy('field_person')
-      ->groupBy('field_person_link')
-      ->condition('type', $type)
+    $query->groupBy('name');
+    if ($type == 'internal') {
+      $query->groupBy('field_person');
+    }
+    else {
+      $query->groupBy('field_person_link');
+    }
+    $author_list = $query->condition('type', $type)
       ->conditionAggregate('name', 'COUNT', '1', '>')
       ->range(0, $number)
       ->execute();
@@ -199,6 +203,43 @@ class WriAuthorCustomCommands extends DrushCommands {
       if ($author_id !== $primary_author_id) {
         echo "Duplicate Deleted: " . $author_id . "\n\n";
         $excess_author->delete();
+      }
+    }
+  }
+
+  /**
+   * Makes any internal authors with invalid references external via Drush.
+   *
+   * @command wri_author:bad-internal-to-external
+   * @usage wri_author:bad-internal-to-external
+   */
+  public function badInternalToExternal() {
+    // Find any field_person values where the node does not exist.
+    $query = $this->database->select('wri_author__field_person', 'author_persons')
+      ->fields('author_persons', ['entity_id']);
+    $query->leftJoin('node', 'persons', 'author_persons.field_person_target_id=persons.nid');
+    $empty_authors = $query->isNull('persons.uuid')
+      ->execute()->fetchCol();
+
+    // Get author IDs without a name.
+    if ($empty_authors) {
+      foreach ($empty_authors as $author_id) {
+        // Load all the nodes referencing the id.
+        $author = WRIAuthor::load($author_id);
+        if ($author->bundle() == 'internal') {
+          $new_external_author = WRIAuthor::create([
+            'type' => 'external',
+            'field_person_link' => [
+              'title' => $author->label(),
+              'uri' => 'route:<nolink>',
+            ],
+            'id' => $author->id(),
+          ]);
+
+          $author->delete();
+          $new_external_author->save();
+          echo "Internal author " . $author->getName() . " doesn't link to a valid person node, and was made an external author.\n";
+        }
       }
     }
   }
