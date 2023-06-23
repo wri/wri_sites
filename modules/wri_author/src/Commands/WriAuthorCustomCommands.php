@@ -49,10 +49,13 @@ class WriAuthorCustomCommands extends DrushCommands {
     // Find any authors that have the same name, within bundle.
     // SELECT name FROM wri_author_field_data GROUP BY name HAVING count(name)>1
     $query = $this->entityTypeManager->getStorage('wri_author')->getAggregateQuery();
-    $author_list = $query->groupBy('name')
-      ->groupBy('field_person')
-      ->groupBy('field_person_link')
-      ->condition('type', $type)
+    $query->groupBy('name');
+    if ($type == 'internal') {
+      $query->groupBy('field_person');
+    } else {
+      $query->groupBy('field_person_link');
+    }
+    $author_list = $query->condition('type', $type)
       ->conditionAggregate('name', 'COUNT', '1', '>')
       ->range(0, $number)
       ->execute();
