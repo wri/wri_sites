@@ -51,7 +51,7 @@
 {% block paragraph %}
   <div {{ attributes.addClass(classes) }}>
     <button id="pfp-accordion__head-{{ hash_id }}" aria-controls="pfp-accordion__drawer-{{ hash_id }}" aria-expanded="false">
-      <a class="pfp-accordion__trigger" href="#{{ hash_id }}">
+      <div class="pfp-accordion__trigger" href="#{{ hash_id }}">
       {% block content %}
 
         {# Indicator #}
@@ -75,7 +75,7 @@
           {{ content.field_featured_experts }}
         </div>
       {% endblock %}
-      </a>
+      </div>
 
       {# Add to any #}
       <div class="pfp-accordion__add-to-any">
