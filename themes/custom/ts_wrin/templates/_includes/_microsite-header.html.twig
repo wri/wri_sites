@@ -32,8 +32,8 @@
 
       {# Logo #}
       <div class="pfp-header__paris-logo-wrap">
-        {# TODO: Add in correct link #}
-        <a class="pfp-header__pfp-logo" href="/">
+        {% set homeLink = content['#node'] ?  path('entity.node.canonical', {'node': content['#node'].id}) : url('<current>') %}
+        <a class="pfp-header__pfp-logo" href="{{ homeLink }}">
           {{ source('profiles/contrib/wri_sites/themes/custom/ts_wrin/img/logo/pfp-logo.svg') }}
         </a>
       </div>
