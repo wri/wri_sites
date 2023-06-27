@@ -31,14 +31,14 @@
     'block',
     'block-' ~ configuration.provider|clean_class,
     'block-' ~ plugin_id|clean_class,
-    'pfp-instruments',
+    'instruments',
   ]
 %}
 {% set intro = content.field_intro %}
 {% set cards = content.field_cards %}
 
 <div{{ attributes.addClass(classes) }}>
-  <div class="pfp-instruments__container pfp-container">
+  <div class="instruments__container pfp-container">
     {{ title_prefix }}
     {% if label %}
       <h2{{ title_attributes }}>{{ label }}</h2>
@@ -47,34 +47,15 @@
     {% block content %}
 
       {# Intro #}
-      <div class="pfp-instruments__intro">
+      <div class="instruments__intro">
         <div>
           {{ intro }}
         </div>
       </div>
 
       {# Cards #}
-      <div class="pfp-instruments__cards">
-        {# {{ cards }} #}
-        Eu ullamco ad labore ullamco. Ad labore ullamco nulla ullamco. Ullamco nulla ullamco adipiscing adipiscing tempor amet ea. Ullamco adipiscing adipiscing tempor. Adipiscing tempor amet ea labore lorem. Amet ea labore lorem.
-
-Ullamco ad labore ullamco nulla ullamco adipiscing adipiscing. Labore ullamco, nulla ullamco. Ullamco adipiscing adipiscing tempor. Adipiscing tempor amet ea labore lorem. Amet ea labore lorem. Labore lorem in qui anim. In qui, anim et minim esse eiusmod velit. Et minim esse eiusmod. Esse eiusmod velit exercitation nulla laborum. Velit exercitation nulla laborum aliquip culpa qui.
-
-Ad labore ullamco nulla ullamco. Ullamco nulla ullamco adipiscing adipiscing tempor amet ea. Ullamco adipiscing adipiscing tempor. Adipiscing tempor amet ea labore lorem. Amet ea labore lorem. Labore lorem in qui anim. In qui, anim et minim esse eiusmod velit. Et minim esse eiusmod. Esse eiusmod velit exercitation nulla laborum.
-
-Labore ullamco, nulla ullamco. Ullamco adipiscing adipiscing tempor. Adipiscing tempor amet ea labore lorem. Amet ea labore lorem. Labore lorem in qui anim. In qui, anim et minim esse eiusmod velit. Et minim esse eiusmod. Esse eiusmod velit exercitation nulla laborum. Velit exercitation nulla laborum aliquip culpa qui.
-
-Ullamco nulla ullamco adipiscing adipiscing tempor amet ea. Ullamco adipiscing adipiscing tempor. Adipiscing tempor amet ea labore lorem. Amet ea labore lorem. Labore lorem in qui anim.
-
-Nulla ullamco adipiscing adipiscing tempor amet. Adipiscing adipiscing tempor amet ea, labore lorem. Amet ea labore lorem. Labore lorem in qui anim. In qui, anim et minim esse eiusmod velit. Et minim esse eiusmod. Esse eiusmod velit exercitation nulla laborum. Velit exercitation nulla laborum aliquip culpa qui. Nulla laborum aliquip culpa qui. Aliquip culpa qui dolor quis.
-
-Ullamco adipiscing adipiscing tempor. Adipiscing tempor amet ea labore lorem. Amet ea labore lorem. Labore lorem in qui anim. In qui, anim et minim esse eiusmod velit. Et minim esse eiusmod. Esse eiusmod velit exercitation nulla laborum. Velit exercitation nulla laborum aliquip culpa qui. Nulla laborum aliquip culpa qui.
-
-Adipiscing adipiscing tempor amet ea, labore lorem. Amet ea labore lorem. Labore lorem in qui anim. In qui, anim et minim esse eiusmod velit. Et minim esse eiusmod.
-
-Adipiscing tempor amet ea labore lorem. Amet ea labore lorem. Labore lorem in qui anim. In qui, anim et minim esse eiusmod velit. Et minim esse eiusmod. Esse eiusmod velit exercitation nulla laborum. Velit exercitation nulla laborum aliquip culpa qui. Nulla laborum aliquip culpa qui. Aliquip culpa qui dolor quis.
-
-Tempor amet ea labore lorem, in qui. Labore lorem in qui anim. In qui, anim et minim esse eiusmod velit. Et minim esse eiusmod. Esse eiusmod velit exercitation nulla laborum. Velit exercitation nulla laborum aliquip culpa qui.
+      <div class="instruments__cards">
+        {{ cards }}
       </div>
     {% endblock %}
   </div>
