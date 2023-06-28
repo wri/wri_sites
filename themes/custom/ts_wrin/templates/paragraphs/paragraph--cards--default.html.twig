@@ -52,7 +52,7 @@
 {% set image = content.field_image %}
 {% set link = content.field_link[0]['#url'].toString() %}
 {% set title = content.field_link[0]['#title'] %}
-{% set links = content.field_links %}
+{% set links = content.field_links|filter((item, key) => key|first != "#") %}
 
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
@@ -61,9 +61,12 @@
       {# Content #}
       <div class="instrument-card__content">
 
+        {# Shadow #}
+        <div class="instrument-card__shadow"></div>
+
         {# Link. This is absolutely position and covers the entire card. #}
         {% if link %}
-          <a href="{{ link }}" class="instrument-card__link"></a>
+          <a href="{{ link }}" class="instrument-card__link-overlay"></a>
         {% endif %}
 
         {# Eyebrow #}
@@ -78,9 +81,25 @@
 
         {# Links #}
         {% if links %}
-          <div class="instrument-card__links">
-            {{ links }}
-          </div>
+          <ul class="instrument-card__links">
+            {% for link in links %}
+              {% set title = link['#title'] %}
+              {% set href = link['#url'].toString() %}
+
+              <li>
+                <a href="{{ href }}" class="instrument-card__link">
+
+                  {# Title #}
+                  <span>{{ title }}</span>
+
+                  {# Arrow #}
+                  <div class="instrument-card__link__icon">
+                    {{ source('profiles/contrib/wri_sites/themes/custom/ts_wrin/img/svgs/arrow-blue-pfp.svg') }}
+                  </div>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
         {% endif %}
       </div>
 
