@@ -7,8 +7,8 @@
 
 use Drupal\image\Entity\ImageStyle;
 use Drupal\node\Entity\Node;
-use Drupal\taxonomy\Entity\Term;
 use Drupal\node\NodeInterface;
+use Drupal\taxonomy\Entity\Term;
 use Drupal\responsive_image\Entity\ResponsiveImageStyle;
 use Drupal\wri_node\General;
 
@@ -75,8 +75,7 @@ function wri_node_preprocess_layout__card(&$variables) {
           // Get default image from default by name.
           $name = $term->name->value;
           $image_url = \Drupal::service('extension.list.module')
-              ->getPath('wri_node') . '/images/' .
-            strtolower(str_replace(' ', '-', $name)) . '.jpg';
+              ->getPath('wri_node') . '/images/' . strtolower(str_replace(' ', '-', $name)) . '.jpg';
           if (!file_exists($image_url)) {
             $image_url = \Drupal::service('extension.list.module')
                 ->getPath('wri_node') . '/images/default.jpg';
