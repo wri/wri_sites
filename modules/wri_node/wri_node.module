@@ -10,6 +10,8 @@ use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Drupal\responsive_image\Entity\ResponsiveImageStyle;
 use Drupal\wri_node\General;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\file\Entity\File;
 
 /**
  * Implements hook_preprocess_hook().
@@ -60,18 +62,34 @@ function wri_node_preprocess_wri_page_hero(&$context) {
 function wri_node_preprocess_layout__card(&$variables) {
   $variables['default_image'] = [];
   if (Drupal::config('wri_node.settings')->get('use_fallback_image')) {
-    if (isset($variables["content"]['tag']["field_primary_topic"][0]["#title"])) {
-      $image_url = \Drupal::service('extension.list.module')
-        ->getPath('wri_node') . '/images/' . strtolower(str_replace(' ', '-', $variables["content"]['tag']["field_primary_topic"][0]["#title"])) . '.jpg';
-      if (!file_exists($image_url)) {
-        $image_url = \Drupal::service('extension.list.module')
-          ->getPath('wri_node') . '/images/default.jpg';
+    $node = $variables['content']['#node'];
+    $topic = $node->field_primary_topic->target_id;
+    $image_url = '';
+    if ($topic) {
+      // Get default image form term.
+      $term = Term::load($topic);
+      if ($term) {
+        if ($term->field_default_image->target_id) {
+          $image_url = $term->field_default_image->entity->getFileUri();
+        }
+        else {
+          // Get default image from default by name.
+          $name = $term->name->value;
+          $image_url = \Drupal::service('extension.list.module')
+              ->getPath('wri_node') . '/images/' . strtolower(str_replace(' ', '-', $name)) . '.jpg';
+          if (!file_exists($image_url)) {
+            $image_url = \Drupal::service('extension.list.module')
+                ->getPath('wri_node') . '/images/default.jpg';
+          }
+        }
       }
     }
     else {
+      // Get default image.
       $image_url = \Drupal::service('extension.list.module')
-        ->getPath('wri_node') . '/images/default.jpg';
+          ->getPath('wri_node') . '/images/default.jpg';
     }
+
     $variables['default_image'] = [
       '#theme' => 'image',
       '#uri' => $image_url,
