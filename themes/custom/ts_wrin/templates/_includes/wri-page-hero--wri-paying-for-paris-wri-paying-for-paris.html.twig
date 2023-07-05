@@ -13,7 +13,13 @@
       {# Image background #}
       <div class="pfp-hero__background-image">
         {% if content.hero_image %}
-          {{ content.hero_image }}
+          {% set responsiveimagestyle = {
+            '#theme': content.hero_image['#theme'],
+            '#responsive_image_style_id': 'paying_for_paris_splash',
+            '#uri': content.hero_image['#uri'],
+            '#attributes': content.hero_image['#attributes'],
+          } %}
+          {{ responsiveimagestyle }}
         {% endif %}
       </div>
 
