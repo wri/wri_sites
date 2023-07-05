@@ -32,7 +32,7 @@ function field_permissions_help($route_name, RouteMatchInterface $route_match) {
  * Implements hook_entity_field_access().
  */
 function field_permissions_entity_field_access($operation, FieldDefinitionInterface $field_definition, $account, FieldItemListInterface $items = NULL) {
-  $context = ($operation == 'view') ? 'display' : 'edit';
+  $context = ($operation == 'view') ? 'view' : 'edit';
   if (!$field_definition->isDisplayConfigurable($context) || empty($items)) {
     return AccessResult::neutral();
   }
@@ -47,7 +47,7 @@ function field_permissions_entity_field_access($operation, FieldDefinitionInterf
  * Implements hook_jsonapi_entity_field_filter_access().
  */
 function field_permissions_jsonapi_entity_field_filter_access(FieldDefinitionInterface $field_definition, AccountInterface $account) {
-  if (!$field_definition->isDisplayConfigurable('display')) {
+  if (!$field_definition->isDisplayConfigurable('view')) {
     return AccessResult::neutral();
   }
 
