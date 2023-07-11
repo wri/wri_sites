@@ -40,6 +40,7 @@ function ts_wrin_preprocess_html(array &$variables) {
         case 'program_center':
         case 'microsite':
         case 'project_detail':
+        case 'subpage':
           $variables['attributes']['class'][] = 'transparent-header white';
           break;
 

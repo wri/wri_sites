@@ -56,8 +56,6 @@ class ChildImage extends DsFieldBase {
         ],
       ];
     }
-
-    General::$htmlClasses[] = 'transparent-header white';
     return $build;
   }
 
