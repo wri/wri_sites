@@ -289,7 +289,7 @@ function ts_wrin_theme_suggestions_menu_alter(array &$suggestions, array $variab
   // after the original hook_menu suggestion so that block menus can be more
   // specific.
   $menu_extras = $new_suggestions = [];
-  foreach ($suggestions as $index => $suggestion) {
+  foreach ($suggestions as $suggestion) {
     if (strpos($suggestion, 'menu__extras') === 0) {
       $menu_extras[] = $suggestion;
     }
