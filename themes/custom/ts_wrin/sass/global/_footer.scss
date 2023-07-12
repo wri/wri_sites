@@ -18,6 +18,7 @@
     > div {
       border-bottom: 1px solid #898989;
       padding-bottom: $padding-vertical;
+      box-sizing: content-box;
 
       @include mq($md) {
         flex-basis: 50%;
