@@ -128,17 +128,20 @@
 }
 
 .persons {
+  ul.listing-items {
+    display: flex;
+    gap: #{$grid-gutter-mobile};
+    flex-wrap: wrap;
+    @include mq($lg) {
+      gap: #{$grid-gutter};
+    }
+  }
   .listing-items li {
     list-style-type: none;
-    margin-bottom: $padding-vertical;
-
-    &:last-child {
-      margin-bottom: $padding-vertical;
-    }
+    margin-bottom: 0;
 
     @include mq($md) {
-      flex-basis: calc(50% - #{$grid-gutter-mobile});
-      margin-right: $space-xs;
+      flex-basis: calc(50% - 10px);
 
       &:first-of-type {
         margin-left: 0;
@@ -146,18 +149,29 @@
     }
 
     @include mq($lg) {
-      flex-basis: calc(33.3% - #{$grid-gutter});
-      margin-right: $space-md;
+      flex-basis: calc(50% - 24px);
+    }
+
+    @include mq($xl) {
+      flex-basis: calc(33.3% - 32px);
     }
   }
 }
 
 .persons-external {
-  .listing-items li {
-    flex-basis: calc(50% - #{$grid-gutter});
+  ul.listing-items {
+    display: flex;
+    gap: #{$grid-gutter-mobile};
+    flex-wrap: wrap;
     @include mq($lg) {
-      flex-basis: calc(25% - #{$grid-gutter});
-      margin-right: $space-md;
+      gap: #{$grid-gutter};
+    }
+  }
+  .listing-items li {
+    flex-basis: calc(50% - 10px);
+    margin-bottom: 0;
+    @include mq($lg) {
+      flex-basis: calc(25% - 36px);
     }
   }
 }
