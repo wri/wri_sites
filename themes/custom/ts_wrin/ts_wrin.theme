@@ -265,6 +265,7 @@ function ts_wrin_preprocess_wri_subpage_columns(&$variables) {
   // hide the Long Title from the parent page.
   if (($node = $variables["content"]["#node"]) && isset($node->field_theme->entity->field_child_hero_style->value) && $node->field_theme->entity->field_child_hero_style->value == 'self') {
     $variables["content"]["hero"]["field_long_title"]['#access'] = FALSE;
+    $variables["content"]["hero"]["childimg"][0][0]["#responsive_image_style_id"] = 'paying_for_paris_subpage';
   }
   // The Microsite's theme wants us not to use the default microsite nav.
   if (($node = $variables["content"]["#node"]) && isset($node->field_theme->entity->field_header_region->value) && $node->field_theme->entity->field_header_region->value === 'microsite_nav') {
