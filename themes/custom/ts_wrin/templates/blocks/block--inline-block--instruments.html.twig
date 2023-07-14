@@ -39,7 +39,7 @@
 {% set cards = content.field_cards %}
 
 <div{{ attributes.addClass(classes) }}>
-  <div class="instruments__container pfp-container">
+  <div id="instruments__container" class="instruments__container pfp-container">
     {{ title_prefix }}
     {% if label %}
       <h2{{ title_attributes }}>{{ label }}</h2>
