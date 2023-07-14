@@ -274,11 +274,11 @@ function ts_wrin_preprocess_wri_subpage_columns(&$variables) {
 }
 
 /**
- * Implements hook_preprocess_menu_local_task().
+ * Implements hook_preprocess_layout__onecol().
  */
-function ts_wrin_preprocess_paragraph(array &$variables) {
-  if (isset($variables['elements']['#paragraph']) && $variables['elements']['#paragraph']->getType() == 'accordion_item') {
-    $variables['hash_id'] = Html::getUniqueId('section-' . $variables['elements']['#paragraph']->field_title->value);
+function ts_wrin_preprocess_layout__onecol(array &$variables) {
+  if (isset($variables['content']['#paragraph']) && $variables['content']['#paragraph']->getType() == 'accordion_item') {
+    $variables['hash_id'] = Html::getUniqueId('section-' . $variables['content']['#paragraph']->field_title->value);
   }
 }
 
