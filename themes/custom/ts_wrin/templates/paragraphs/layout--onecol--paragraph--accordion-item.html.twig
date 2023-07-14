@@ -14,7 +14,7 @@
  *   See Drupal\paragraphs\Entity\Paragraph for a full list of public properties
  *   and methods for the paragraph object.
  * - content: All paragraph items. Use {{ content }} to print them all,
- *   or print a subset such as {{ content.field_example }}. Use
+ *   or print a subset such as {{ content.content.field_example }}. Use
  *   {{ content|without('field_example') }} to temporarily suppress the printing
  *   of a given child element.
  * - attributes: HTML attributes for the containing element.
@@ -41,9 +41,8 @@
 {%
   set classes = [
     'paragraph',
-    'paragraph--type--' ~ paragraph.bundle|clean_class,
-    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-    not paragraph.isPublished() ? 'paragraph--unpublished',
+    'paragraph--type--accordion-item',
+    view_mode ? 'paragraph--view-mode--default',
     'pfp-accordion',
   ]
 %}
@@ -63,35 +62,35 @@
           <div class="pfp-accordion__indicator__1"></div>
           <div class="pfp-accordion__indicator__2"></div>
         </div>
-      
+
         {# Title #}
         <div class="pfp-accordion__title">
-          {{ content.field_title }}
+          {{ content.content.field_title }}
         </div>
 
         {# Intro #}
         <div class="pfp-accordion__intro">
-          {{ content.field_intro }}
+          {{ content.content.field_intro }}
         </div>
 
         {# Featured experts #}
         <div class="pfp-accordion__experts">
-          {{ content.field_featured_experts }}
+          {{ content.content.field_featured_experts }}
         </div>
       {% endblock %}
       </button>
 
       {# Add to any #}
       <div class="pfp-accordion__add-to-any">
-        {{ content.addtoany }}
+        {{ content.content.addtoany }}
       </div>
     </div>
 
     {# Content drawer #}
     <div id="pfp-accordion__content-{{ hash_id }}" class="pfp-accordion__content" aria-labelledby="pfp-accordion__head-{{ hash_id }}">
       <div class="pfp-accordion__content-wrap">
-        {{ content.field_body }}
-        {{ content.field_related_resources }}
+        {{ content.content.field_body }}
+        {{ content.content.field_related_resources }}
       </div>
     </div>
   </div>
