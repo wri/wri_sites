@@ -45,6 +45,13 @@ function wri_common_entity_extra_field_info() {
     ];
   }
 
+  $extra['paragraph']['accordion_item']['display']['wri_social_sharing_block'] = [
+    'label' => t('Social Sharing Block'),
+    'description' => t('Adds a social sharing block with links to social media and print.'),
+    'weight' => 1,
+    'visible' => FALSE,
+  ];
+
   return $extra;
 }
 
@@ -52,10 +59,27 @@ function wri_common_entity_extra_field_info() {
  * Implements hook_ENTITY_TYPE_view().
  */
 function wri_common_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  $build['wri_social_sharing_block'] = wri_common_get_social_share($display);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function wri_common_paragraph_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  $build['wri_social_sharing_block'] = wri_common_get_social_share($display);
+}
+
+/**
+ * Helper function to build the social sharing block.
+ * @param EntityViewDisplayInterface $display
+ *
+ * @return array
+ */
+function wri_common_get_social_share(EntityViewDisplayInterface $display) {
   if ($display->getComponent('wri_social_sharing_block')) {
     global $base_url;
     $request = \Drupal::request();
-    $title = '';
+
     if ($route = $request->attributes->get(RouteObjectInterface::ROUTE_OBJECT)) {
       $title = \Drupal::service('title_resolver')->getTitle($request, $route);
     }
@@ -67,11 +91,12 @@ function wri_common_node_view(array &$build, EntityInterface $entity, EntityView
       'page_url' => Url::fromRoute('<current>', [], ['absolute' => TRUE]),
       'base_url' => $base_url,
     ];
-    $build['wri_social_sharing_block'] = [
+    return [
       '#theme' => 'wri_common_social_sharing_block',
       '#items' => $items,
     ];
   }
+  return [];
 }
 
 /**
