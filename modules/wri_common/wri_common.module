@@ -71,9 +71,12 @@ function wri_common_paragraph_view(array &$build, EntityInterface $entity, Entit
 
 /**
  * Helper function to build the social sharing block.
- * @param EntityViewDisplayInterface $display
+ *
+ * @param \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display
+ *   The display.
  *
  * @return array
+ *   The render array for the element.
  */
 function wri_common_get_social_share(EntityViewDisplayInterface $display) {
   if ($display->getComponent('wri_social_sharing_block')) {
