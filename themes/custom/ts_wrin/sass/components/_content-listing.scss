@@ -132,6 +132,7 @@
     display: flex;
     gap: #{$grid-gutter-mobile};
     flex-wrap: wrap;
+
     @include mq($lg) {
       gap: #{$grid-gutter};
     }
@@ -163,6 +164,7 @@
     display: flex;
     gap: #{$grid-gutter-mobile};
     flex-wrap: wrap;
+
     @include mq($lg) {
       gap: #{$grid-gutter};
     }
