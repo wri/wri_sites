@@ -1,5 +1,6 @@
 /* Fix for layout. */
-.toolbar-fixed header {
+.toolbar-fixed header,
+.toolbar-fixed header:not(.pfp-header) {
   position: static;
 }
 
