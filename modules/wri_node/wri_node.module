@@ -5,12 +5,14 @@
  * Wri Node module code.
  */
 
+use Drupal\Component\Utility\Html;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Drupal\responsive_image\Entity\ResponsiveImageStyle;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\wri_node\General;
+use Twig\Error\LoaderError;
 
 /**
  * Implements hook_preprocess_hook().
@@ -52,6 +54,30 @@ function wri_node_preprocess_wri_page_hero(&$context) {
     }
     $context['content']['title']['#markup'] = isset($node->field_long_title->value) ? check_markup($node->field_long_title->value, 'basic_html') : $node->getTitle();
     $context['content']['intro']['#markup'] = isset($node->field_intro->value) ? check_markup($node->field_intro->value, 'basic_html') : '';
+    // The Microsite's theme wants us not to use the default microsite nav.
+    if (isset($node->field_theme->entity->field_header_region->value) && $node->field_theme->entity->field_header_region->value === 'microsite_nav') {
+      $context['use_microsite_nav'] = TRUE;
+    }
+    // Add the table of contents if that's part of the node.
+    if (isset($node->field_toc->value) && $node->field_toc->value === 'microsite') {
+      $context['content']['hero']['field_toc'] = $node->field_toc->view('hero_on_a_subpage');
+    }
+    // Tell the template to include another if this is a microsite.
+    // Hack to work around https://www.drupal.org/node/2911996 which prevents
+    // Layouts from having theme suggestions.
+    if (isset($node->field_theme->entity->field_library->value)) {
+      $theme_suggestion = Html::cleanCssIdentifier($node->field_theme->entity->field_library->value);
+      $themename = Drupal::service('config.factory')->get('system.theme')->get('default');
+      try {
+        // Make sure the twig template exists.
+        Drupal::service('twig')->load("@$themename/_includes/wri-page-hero--" . $theme_suggestion . ".html.twig");
+        $context['content']['theme_switch'] = $theme_suggestion;
+      }
+      catch (LoaderError $e) {
+        // Don't load anything custom.
+        $context['content']['theme_switch'] = FALSE;
+      }
+    }
   }
 }
 

@@ -211,6 +211,10 @@
     min-width: 350px;
   }
 
+  .left-section {
+    flex-shrink: 0;
+  }
+
   img {
     border-radius: 50%;
     object-fit: cover;
@@ -219,7 +223,6 @@
 
   .person-teaser__inner-wrapper {
     display: flex;
-    align-items: center;
   }
 
   .right-section {
@@ -234,6 +237,20 @@
   .right-section p {
     margin: 0;
     @include font-line-height(15, 21);
+  }
+}
+
+.persons-external {
+  .person-teaser-item {
+    min-width: 0;
+  }
+
+  .left-section {
+    display: none;
+  }
+
+  .right-section {
+    margin-left: 0;
   }
 }
 

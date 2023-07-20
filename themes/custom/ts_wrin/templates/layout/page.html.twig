@@ -6,6 +6,9 @@
 {% endif %}
 <div id="tray-nav-wrapper">
   <div id="tray-nav-canvas">
+    {% if use_microsite_nav %}
+    {# Do nothing. Pulled in at the wri-subpage-columns level #}
+    {% else %}
     <header>
       <div class="container header-wrapper">
         {% if page.primary_nav %}
@@ -33,6 +36,7 @@
         </div>
       </div>
     </header>
+    {% endif %}
 
     <div class="mobile-menu-target">
       <div class="ts-mobile-menu__wrapper">

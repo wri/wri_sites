@@ -1,3 +1,5 @@
+# Do not delete the uuid for this view.
+uuid: 752f742c-740f-4ae1-9513-1674c84400f2
 langcode: en
 status: true
 dependencies:

@@ -29,7 +29,7 @@
   }
 }
 
-header {
+header:not(.pfp-header) {
   background-color: $white;
   padding-bottom: 50px;
   padding-top: 0;
@@ -601,7 +601,7 @@ header nav.menu--donate > ul.menu {
 }
 
 @include mq($md) {
-  header.sticky {
+  header:not(.pfp-header).sticky {
     align-items: center;
     background-color: $white;
     border-bottom: none;

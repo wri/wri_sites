@@ -243,7 +243,8 @@
   }
 }
 
-.landing-page__content .main-content {
+.landing-page__content .main-content,
+.landing-page__content .main-content .text-formatted {
   @include font($acumin-semi-cond, "light");
   @include font-line-height(18, 30);
 }

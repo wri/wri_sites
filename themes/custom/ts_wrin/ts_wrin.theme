@@ -7,7 +7,6 @@
 
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Datetime\DrupalDateTime;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
 use Drupal\wri_node\General;
 
@@ -40,6 +39,7 @@ function ts_wrin_preprocess_html(array &$variables) {
         case 'program_center':
         case 'microsite':
         case 'project_detail':
+        case 'subpage':
           $variables['attributes']['class'][] = 'transparent-header white';
           break;
 
@@ -75,29 +75,6 @@ function ts_wrin_preprocess_html(array &$variables) {
 }
 
 /**
- * Implements hook_form_FORM_ID_alter().
- */
-function ts_wrin_form_views_exposed_form_alter(&$form, FormStateInterface $form_state) {
-
-}
-
-/**
- * Implements hook_form_alter().
- */
-function ts_wrin_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-
-}
-
-/**
- * Implements hook_theme_suggestions_form_element_alter().
- *
- * Allows us to theme selects.
- */
-function ts_wrin_theme_suggestions_form_element_alter(array &$suggestions, array $variables, $hook) {
-
-}
-
-/**
  * Implements hook_theme_suggestions_container_alter().
  *
  * Make Views containers available for theme sugestions.
@@ -126,6 +103,27 @@ function ts_wrin_preprocess_page(array &$variables) {
   if ($status && ($status->getStatusCode() == 403 || $status->getStatusCode() == 404)) {
     $variables['is_node'] = TRUE;
   }
+
+  $variables['use_microsite_nav'] = $variables['use_microsite_nav'] ?? FALSE;
+  // See if it has a Theme that overwrites the header.
+  if (isset($variables['node']) && ($node = $variables['node'])) {
+    // Option 1: Subpage.
+    if (isset($node->field_parent_page->entity->field_theme->entity->field_header_region->value) && $node->field_parent_page->entity->field_theme->entity->field_header_region->value === 'microsite_nav') {
+      $variables['use_microsite_nav'] = TRUE;
+    }
+    // Option 2: Microsite.
+    if (isset($node->field_theme->entity->field_header_region->value) && $node->field_theme->entity->field_header_region->value === 'microsite_nav') {
+      $variables['use_microsite_nav'] = TRUE;
+    }
+    // Add the library if parent has one.
+    if (isset($node->field_theme->entity->field_library->value)) {
+      $variables['#attached']['library'][] = $node->field_theme->entity->field_library->value;
+    }
+    // Add the library if parent has one.
+    if (isset($node->field_parent_page->entity->field_theme->entity->field_library->value)) {
+      $variables['#attached']['library'][] = $node->field_parent_page->entity->field_theme->entity->field_library->value;
+    }
+  }
 }
 
 /**
@@ -142,17 +140,6 @@ function ts_wrin_theme_suggestions_page_alter(array &$suggestions, array $variab
       $suggestions[] = 'page__microsite';
     }
   }
-}
-
-/**
- * Implements hook_theme_suggestions_node_alter().
- */
-function ts_wrin_theme_suggestions_node_alter(array &$suggestions, array $variables) {
-  /*$node = $variables['elements']['#node'];
-
-  if ($variables['elements']['#view_mode'] == "full") {
-
-  }*/
 }
 
 /**
@@ -224,34 +211,6 @@ function ts_wrin_theme_suggestions_block_alter(array &$suggestions, array $varia
 }
 
 /**
- * Implements hook_theme_suggestions_field_alter().
- */
-function ts_wrin_theme_suggestions_field_alter(array &$suggestions, array $variables) {
-  /*$element = $variables['element'];
-  $suggestions[] = 'field__' . $element['#view_mode'];
-  $suggestions[] = 'field__' . $element['#view_mode'] . '__' . $element['#field_name'];*/
-}
-
-/**
- * Implements hook_theme_suggestions_field_alter().
- */
-function ts_wrin_theme_suggestions_fieldset_alter(array &$suggestions, array $variables) {
-  /*$element = $variables['element'];
-  if (isset($element['#attributes']['class']) &&
-  in_array('form-composite', $element['#attributes']['class'])) {
-  $suggestions[] = 'fieldset__form_composite';
-  }*/
-}
-
-/**
- * Implements hook_preprocess_node().
- */
-function ts_wrin_preprocess_node(array &$variables) {
-  // Default to turning off byline/submitted.
-  // $variables['display_submitted'] = FALSE;.
-}
-
-/**
  * Implements hook_theme_suggestions_views_view_alter().
  */
 function ts_wrin_theme_suggestions_views_view_alter(array &$suggestions, array $variables) {
@@ -276,42 +235,6 @@ function ts_wrin_preprocess_views_view(array &$variables) {
 }
 
 /**
- * Implements hook_preprocess_form().
- */
-function ts_wrin_preprocess_form(array &$variables) {
-  // $variables['attributes']['novalidate'] = 'novalidate';.
-}
-
-/**
- * Implements hook_preprocess_select().
- */
-function ts_wrin_preprocess_select(array &$variables) {
-  // $variables['attributes']['class'][] = 'select-chosen';.
-}
-
-/**
- * Implements hook_preprocess_details().
- */
-function ts_wrin_preprocess_details(array &$variables) {
-  /*$variables['attributes']['class'][] = 'details';
-  $variables['summary_attributes']['class'] = 'summary';*/
-}
-
-/**
- * Implements hook_theme_suggestions_details_alter().
- */
-function ts_wrin_theme_suggestions_details_alter(array &$suggestions, array $variables) {
-
-}
-
-/**
- * Implements hook_preprocess_menu_local_task().
- */
-function ts_wrin_preprocess_menu_local_task(array &$variables) {
-
-}
-
-/**
  * Implements hook_page_attachments_alter().
  */
 function ts_wrin_page_attachments_alter(array &$attachments) {
@@ -332,4 +255,48 @@ function ts_wrin_theme_suggestions_views_view_list_alter(array &$suggestions, ar
   $suggestions[] = 'views_view_list__' . $current_display_type;
   $suggestions[] = 'views_view_list__' . $current_id;
   $suggestions[] = 'views_view_list__' . $current_id . '__' . $current_view;
+}
+
+/**
+ * Implements hook_preprocess_wri_subpage_columns().
+ */
+function ts_wrin_preprocess_wri_subpage_columns(&$variables) {
+  // If the Microsite's theme indicates a child page should show its own header,
+  // hide the Long Title from the parent page.
+  if (($node = $variables["content"]["#node"]) && isset($node->field_theme->entity->field_child_hero_style->value) && $node->field_theme->entity->field_child_hero_style->value == 'self') {
+    $variables["content"]["hero"]["field_long_title"]['#access'] = FALSE;
+    $variables["content"]["hero"]["childimg"][0][0]["#responsive_image_style_id"] = 'paying_for_paris_subpage';
+  }
+  // The Microsite's theme wants us not to use the default microsite nav.
+  if (($node = $variables["content"]["#node"]) && isset($node->field_theme->entity->field_header_region->value) && $node->field_theme->entity->field_header_region->value === 'microsite_nav') {
+    $variables['use_microsite_nav'] = TRUE;
+  }
+}
+
+/**
+ * Implements hook_preprocess_layout__onecol().
+ */
+function ts_wrin_preprocess_layout__onecol(array &$variables) {
+  if (isset($variables['content']['#paragraph']) && $variables['content']['#paragraph']->getType() == 'accordion_item') {
+    $variables['hash_id'] = Html::getUniqueId('section-' . $variables['content']['#paragraph']->field_title->value);
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_menu_alter().
+ */
+function ts_wrin_theme_suggestions_menu_alter(array &$suggestions, array $variables) {
+  // If a menu contains a menu--extras.html.twig reference, move that to right
+  // after the original hook_menu suggestion so that block menus can be more
+  // specific.
+  $menu_extras = $new_suggestions = [];
+  foreach ($suggestions as $suggestion) {
+    if (strpos($suggestion, 'menu__extras') === 0) {
+      $menu_extras[] = $suggestion;
+    }
+    else {
+      $new_suggestions[] = $suggestion;
+    }
+  }
+  $suggestions = array_merge($menu_extras, $new_suggestions);
 }

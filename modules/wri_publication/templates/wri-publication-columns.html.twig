@@ -2,7 +2,7 @@
     {{ attach_library('wri_toc/tocjs') }}
   {% endif %}
   {% if content %}
-    <div class="publication__detail {{ display_type }}-display tall-hero">
+    <div id="publication__detail" class="publication__detail {{ display_type }}-display tall-hero">
       {% if content.hero %}
         <div class="landing-page__hero {{ ((content.hero.field_main_image|render and display_type == 'robust') ? 'has-image' : '') }}">
           {% if content.hero.field_main_image|render and display_type == 'robust' %}
@@ -63,8 +63,8 @@
               {{ content.hero.field_twitter_account }}
             </div>
           {% endif %}
-          {% if display_type == 'robust' and (content.hero.field_toc is not empty) %}
-                {{ content.hero.field_toc }}
+          {% if display_type == 'robust' and (content.hero.field_toc is not empty) and (content.hero.field_toc['#value'] != 'microsite') %}
+             {{ content.hero.field_toc }}
           {% endif %}
         </div>
       {% endif %}

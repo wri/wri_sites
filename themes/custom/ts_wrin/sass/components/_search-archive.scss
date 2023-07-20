@@ -60,6 +60,7 @@
 
 .view-events div.form--inline,
 .view-resources div.form--inline,
+.view-paying-for-paris-resources div.form--inline,
 .experts-container div.form--inline {
   @extend .grid;
   margin: 0;
@@ -68,6 +69,7 @@
 }
 .view-events #edit-actions,
 .view-resources #edit-actions,
+.view-paying-for-paris-resources #edit-actions,
 .experts-container #edit-actions {
   clip: rect(1px, 1px, 1px, 1px);
   height: 1px;
@@ -86,6 +88,7 @@
 .results-sidebar,
 .view-events .form-type-textfield,
 .view-resources .form-type-textfield,
+.view-paying-for-paris-resources .form-type-textfield,
 .experts-container .form-type-textfield,
 .view-events .form-item-date {
   @include column-width(1, 5);
@@ -195,7 +198,8 @@
 }
 
 .results-body,
-.view-resources .form-item-sort-by {
+.view-resources .form-item-sort-by,
+.view-paying-for-paris-resources .form-item-sort-by {
   @include column-width(1, 5);
 
   @include mq($ph) {
@@ -320,6 +324,7 @@
 }
 
 .view-resources .view-header,
+.view-paying-for-paris-resources .view-header,
 .experts-container .view-header {
   @include mq($lg) {
     margin-top: -98px;
@@ -505,7 +510,8 @@
   }
   .view-resources.open,
   .experts-container.open,
-  .view-events.open {
+  .view-events.open,
+  .view-paying-for-paris-resources.open {
     .view-filters .form-type-textfield,
     .form-item-date {
       height: auto;

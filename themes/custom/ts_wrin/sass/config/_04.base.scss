@@ -296,7 +296,8 @@ ul.menu {
   color:$blue
 }
 .has-blue-background-color {
-  background-color:$blue
+  background-color:$blue;
+  color: $white;
 }
 .has-teal-color {
   color:$teal

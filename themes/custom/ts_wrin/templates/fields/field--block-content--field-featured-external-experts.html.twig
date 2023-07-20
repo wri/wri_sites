@@ -1,0 +1,12 @@
+{#
+/**
+ * @file
+ * Pull in the featured expert template with no link.
+ */
+#}
+{% if element['#object'].info.value %}
+  {% set label = element['#object'].info.value %}
+  {% set label_hidden = FALSE %}
+{% endif %}
+{% set listing_type = 'persons persons-external' %}
+{% include "@ts_wrin/fields/field--node--field-featured-experts.html.twig" %}
