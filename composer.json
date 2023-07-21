@@ -225,7 +225,6 @@
         "drupal/redirect": "^1.7",
         "drupal/redis": "^1.5",
         "drupal/responsive_tables_filter": "^1.9",
-        "drupal/s3fs": "^3.0@beta",
         "drupal/scheduled_transitions": "^2.2",
         "drupal/schema_metatag": "^2.2",
         "drupal/search_api": "^1.28",
