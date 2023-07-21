@@ -6,7 +6,6 @@ install:
   - block
   - block_content
   - distro_helper
-  - gdpr_compliance
   - metatag
   - node
   - options
