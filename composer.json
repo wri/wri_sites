@@ -208,7 +208,6 @@
         "drupal/field_group": "^3.2",
         "drupal/file_replace": "^1.2",
         "drupal/focal_point": "^1.5",
-        "drupal/gdpr_compliance": "^1.18",
         "drupal/hierarchical_term_formatter": "^1.2",
         "drupal/inline_entity_form": "^1.0@RC",
         "drupal/layout_builder_modal": "^1.1",
