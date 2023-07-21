@@ -7,7 +7,6 @@ dependencies:
   - wri_node
   - wri_paragraph
   - wri_topics
-  - onlyone
 config_devel:
   install:
     - core.entity_form_display.node.homepage.default
