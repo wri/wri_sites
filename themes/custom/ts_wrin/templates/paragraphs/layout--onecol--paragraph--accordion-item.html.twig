@@ -49,7 +49,7 @@
 
 {% block paragraph %}
   <div {{ attributes.addClass(classes) }}>
-    <div>
+    <div class="pfp-accordion__trigger-wrapper">
 
       {# Button trigger #}
       <button class="pfp-accordion__trigger" id="pfp-accordion__head-{{ hash_id }}" data-hash="#{{ hash_id }}" aria-expanded="false" aria-controls="pfp-accordion__drawer-{{ hash_id }}">
