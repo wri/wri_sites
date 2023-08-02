@@ -5,6 +5,7 @@
  * Theme settings override file.
  */
 
+use Drupal\file\Entity\File;
 use Drupal\Core\File\Exception\FileException;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StreamWrapper\StreamWrapperManager;
@@ -83,8 +84,8 @@ function ts_wrin_settings_form_system_theme_settings_submit(&$form, FormStateInt
   $default_scheme = 'public';
   try {
     if (!empty($values['logo_upload'])) {
-      $file = \Drupal\file\Entity\File::load($values['logo_upload']->id());
-      $file->setFileUri(str_replace('temporary://', $default_scheme. '://', $values['logo_upload']->getFileUri()));
+      $file = File::load($values['logo_upload']->id());
+      $file->setFileUri(str_replace('temporary://', $default_scheme . '://', $values['logo_upload']->getFileUri()));
       $file->setPermanent();
       $file->save();
     }
@@ -97,7 +98,7 @@ function ts_wrin_settings_form_system_theme_settings_submit(&$form, FormStateInt
     if (!empty($values['white_logo_upload'])) {
       $filename = $file_system->copy($values['white_logo_upload']->getFileUri(), $default_scheme . '://');
       $values['white_logo_path'] = $filename;
-      $file = \Drupal\file\Entity\File::load($values['white_logo_upload']->id());
+      $file = File::load($values['white_logo_upload']->id());
       $file->setFileUri($filename);
       $file->setPermanent();
       $file->save();
