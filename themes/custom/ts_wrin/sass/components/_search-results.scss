@@ -37,7 +37,7 @@
     order: 2;
     @include mq($md) {
       border-right: 1px solid $black;
-      flex: 0 0 170px;
+      flex: 0 0 180px;
       margin-right: 25px;
       order: unset;
     }
