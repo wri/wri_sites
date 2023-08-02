@@ -125,3 +125,13 @@ function wri_node_preprocess_layout__card(&$variables) {
     ];
   }
 }
+
+/**
+ * Implements hook_preprocess_hook().
+ */
+function wri_node_preprocess_html(&$variables) {
+  $variables['ads_data_redaction'] = TRUE;
+  if (Drupal::config('wri_node.settings')->get('disable_ads_data_redaction')) {
+    $variables['ads_data_redaction'] = FALSE;
+  }
+}
