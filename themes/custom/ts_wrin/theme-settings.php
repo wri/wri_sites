@@ -5,10 +5,10 @@
  * Theme settings override file.
  */
 
-use Drupal\file\Entity\File;
 use Drupal\Core\File\Exception\FileException;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StreamWrapper\StreamWrapperManager;
+use Drupal\file\Entity\File;
 
 /**
  * Implements hook_form_system_theme_settings_alter().
