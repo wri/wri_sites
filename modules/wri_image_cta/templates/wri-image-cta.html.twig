@@ -15,7 +15,7 @@
   <div class="cta-text-wrapper container padding-vertical">
     <div class="cta-text-wrapper__inner">
       {{ title_prefix }}
-      {% if title.0 %}
+      {% if title|render|striptags|trim is not empty %}
         <div {{ title_attributes.addClass(titleClasses) }}>{{ title }}</div>
       {% endif %}
       {{ title_suffix }}
