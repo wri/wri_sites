@@ -19,12 +19,11 @@
  *   - in_active_trail: TRUE if the link is in the active trail.
  */
 #}
-{{ attach_library('wri_paying_for_paris/pfp_slick') }}
 {% import _self as menu %}
 {{ menu.menu_links(items, attributes, 0) }}
 
 {% macro menu_links(items, attributes, menu_level) %}
-  <ul{{attributes.addClass(['slick-wayfinding','menu', 'menu-level-'~items|first.menu_level])}}>
+  <ul{{attributes.addClass(['scrolling-nav', 'menu', 'menu-level-'~items|first.menu_level])}}>
     {% for key, item in items %}
       {% if key|first != '#' %}
         {% set menu_item_classes = [
