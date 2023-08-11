@@ -108,7 +108,8 @@
                 "Duplicate content when pulling SFC layout into views https://www.drupal.org/project/sfc/issues/3175000": "https://www.drupal.org/files/issues/2020-10-06/duplicate_ds_content-3175000-2.patch"
             },
             "drupal/paragraphs": {
-                "Integrity constraint violation: 1048 Column 'langcode' cannot be null https://www.drupal.org/project/paragraphs/issues/2901390": "https://www.drupal.org/files/issues/2020-06-25/paragraphs-2901390-51.patch"
+                "Integrity constraint violation: 1048 Column 'langcode' cannot be null https://www.drupal.org/project/paragraphs/issues/2901390": "https://www.drupal.org/files/issues/2020-06-25/paragraphs-2901390-51.patch",
+                "Paragraph access check using incorrect revision of its parent https://www.drupal.org/project/paragraphs/issues/3090200": "https://www.drupal.org/files/issues/2022-10-26/3084934-13_combine_3090200-22.patch"
             },
             "drupal/token": {
                 "Add a [current-page:object:?] dynamic token https://www.drupal.org/project/token/issues/919760": "https://www.drupal.org/files/issues/2020-09-08/token--current_page_object_token--919760--83.patch",
