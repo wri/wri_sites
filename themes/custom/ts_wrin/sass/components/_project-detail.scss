@@ -48,6 +48,7 @@
         width: 100%;
         height: auto;
         max-width: 250px;
+
       }
 
       @include center-columns($grid-columns-mobile, $grid-columns-mobile);
@@ -112,4 +113,14 @@
   .landing-page__hero.has-image .hero__text .grid {
     min-height: 550px;
   }
+
+  .layout__region--featured-image {
+    img {
+      display: none;
+      @include mq($md) {
+        display: initial;
+      }
+    }
+  }
+
 }
