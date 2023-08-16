@@ -76,9 +76,6 @@
     ],
     "extra": {
         "patches": {
-            "drupal/block_list_override": {
-                "trim(): Passing null to parameter #1 ($string) of type string is deprecated in block_list_override_block_alter() https://www.drupal.org/project/block_list_override/issues/3276297": "https://www.drupal.org/files/issues/2023-02-08/block_list_override-php-81-3276297-8.patch"
-            },
             "drupal/ckeditor": {
                 "Changes to a block's text field not saved when ckeditor source mode is active https://www.drupal.org/project/ckeditor/issues/3095304": "https://git.drupalcode.org/project/ckeditor/-/merge_requests/10.diff"
             },
@@ -124,9 +121,6 @@
             },
             "drupal/views_bulk_edit": {
                 "Fix Required fields to really not be required https://www.drupal.org/node/3024419": "https://www.drupal.org/files/issues/2020-11-20/3024419-invalid-form-control-24.patch"
-            },
-            "drupal/search_api": {
-                "PHP 8.1 Deprecations": "https://www.drupal.org/files/issues/2021-12-14/3253738-13.patch"
             },
             "drupal/simple_popup_blocks": {
                 "Modal hops user down the page to the first text input https://www.drupal.org/project/simple_popup_blocks/issues/3202060#comment-14021232": "https://git.drupalcode.org/project/simple_popup_blocks/-/merge_requests/2.diff",
