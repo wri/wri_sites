@@ -43,7 +43,7 @@ function wri_subpage_node_update(EntityInterface $entity) {
           $parent_link_menu_id = $parent_link_menu->getPluginId();
         }
 
-        // Save the current page as a child of the parent in the appropriate menu.
+        // Save the current page as a child's parent in the appropriate menu.
         $current_link_menu_menu = $menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $entity->id()], $menu_name);
         if (!$current_link_menu_menu) {
           $current_link_menu = MenuLinkContent::create([
