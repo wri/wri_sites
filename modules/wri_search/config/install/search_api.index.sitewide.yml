@@ -595,6 +595,16 @@ processor_settings:
   search_api_exclude_entity_processor:
     fields:
       node: {  }
+  solr_boost_more_recent:
+    weights:
+      preprocess_query: 0
+    boosts:
+      created:
+        boost: !!float 1
+        resolution: NOW
+        m: '3.16e-11'
+        a: 0.1
+        b: 0.05
   solr_date_range:
     weights:
       preprocess_index: 0
