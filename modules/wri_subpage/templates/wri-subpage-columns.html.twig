@@ -1,0 +1,66 @@
+{% if hero.content.field_toc %}
+  {{ attach_library('wri_toc/tocjs') }}
+{% endif %}
+{% if use_microsite_nav %}
+  {% include '@ts_wrin/_includes/_microsite-header.html.twig' %}
+{% endif %}
+{% if content %}
+  <div class="publication__detail robust-display subpage">
+    {% if content.hero %}
+      <div class="landing-page__hero has-image">
+        <div class="hero__image">
+          {{ content.hero.childimg }}
+        </div>
+        <div class="hero__text">
+          <div class="grid">
+            <div class="hero__text--inner padding-vertical">
+              <div class="margin-top-xl"></div>
+              {{ content.hero.node_title }}
+              {% if content.hero.field_long_title %}
+                <div class="h1 xl white">
+                  {{ content.hero.field_long_title }}
+                </div>
+              {% endif %}
+              {% if content.hero.childtitle %}
+                {{ content.hero.childtitle }}
+              {% endif %}
+              {% if content.buttons|render %}
+                <div class="buttons margin-top-md">
+                  {{ content.buttons }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="dark-overlay"></div>
+        {% if content.hero.field_twitter_account %}
+          <div class="block-field-blocknodeprogram-centerfield-twitter-account">
+            {{ content.hero.field_twitter_account }}
+          </div>
+        {% endif %}
+        {% if (content.hero.field_toc is not empty) and (content.hero.field_toc['#value'] != 'microsite') %}
+          {{ content.hero.field_toc }}
+        {% endif %}
+      </div>
+    {% endif %}
+    {# end if content.hero #}
+
+    {% if content.category or content.share %}
+      <div class="detail__meta meta grid margin-top-md margin-bottom-md">
+        <div class="detail__meta-inner meta-inner {% if content.sidebar.field_narrative_taxonomy|render %}two-column{% endif %}">
+          {% if content.category %}
+            <div {{ region_attributes.category.addClass('layout__region', 'layout__region--category') }}>
+              {{ content.category }}
+            </div>
+          {% endif %}
+
+          {% if content.share %}
+            <div {{ region_attributes.share.addClass('layout__region', 'layout__region--share') }}>
+              {{ content.share }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

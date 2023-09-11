@@ -10,7 +10,7 @@ export default function(context) {
   if (context == document) {
     // Hamburger Nav.
     function toggleMenu() {
-      var toggle = $(".menu-toggle");
+      var toggle = $(".menu-toggle:not(.mobile-menu-toggle)");
       var target = $(".mobile-menu-target");
       var headerNav = $(".header-wrapper");
       toggle.toggleClass("active");
@@ -24,7 +24,7 @@ export default function(context) {
       target.toggleClass("expanded");
     }
     // Mobile menu toggle behavior.
-    $(".menu-toggle", context)
+    $(".menu-toggle:not(.mobile-menu-toggle)", context)
       .once("ts-menu-toggle")
       .on("click", function(e) {
         toggleMenu();
@@ -50,13 +50,23 @@ export default function(context) {
     // Mega-Menu sliders.
     var hamburgerContent = $(".hamburger-content"),
       hamburgerSlider = $(".hamburger-slider"),
-      ourWorkSubmenu = $(".our-work-submenu"),
-      aboutUsSubmenu = $(".about-us-submenu"),
-      ourApproachSubmenu = $(".our-approach-submenu"),
-      joinUsSubmenu = $(".join-us-submenu");
+      flexibleRowsClass = "flexible-row-submenu";
 
-    function slideOut(menuName) {
-      menuName.addClass("active");
+    function slideOut(menuParent) {
+      var clone = $(menuParent.target)
+        .parents("li")
+        .clone();
+      $(".hamburger-slider-contents ul", hamburgerSlider).html(clone);
+      $(".hamburger-slider-contents").addClass("active");
+      // Hack to get the our-work link to have flexed rows.
+      if (
+        $(menuParent.target).hasClass(flexibleRowsClass) ||
+        $(menuParent.target)
+          .children("a")
+          .hasClass(flexibleRowsClass)
+      ) {
+        $(".hamburger-slider-contents").addClass(flexibleRowsClass);
+      }
       hamburgerContent.addClass("left");
       hamburgerSlider.addClass("active");
     }
@@ -64,11 +74,9 @@ export default function(context) {
     function sliderCleanUp() {
       hamburgerContent.removeClass("left");
       hamburgerSlider.removeClass("active");
+      $(".hamburger-slider-contents").removeClass(flexibleRowsClass);
       setTimeout(function() {
-        ourWorkSubmenu.removeClass("active");
-        aboutUsSubmenu.removeClass("active");
-        ourApproachSubmenu.removeClass("active");
-        joinUsSubmenu.removeClass("active");
+        $(".hamburger-slider-contents ul", hamburgerSlider).html("");
       }, 500);
     }
 
@@ -76,29 +84,18 @@ export default function(context) {
       if (windowWidth <= 768) {
         var burger = $(".hamburger-content");
         burger
-          .find(".menu--footer-secondary > ul > li > a")
+          .find(".menu--footer-secondary > ul > li > .menu-item-title")
           .on("click", function(e) {
             e.preventDefault();
-            slideOut(ourWorkSubmenu);
+            slideOut(e);
           });
         burger
-          .find(".menu--mega-menu > ul > li:nth-child(1) > a")
+          .find(".menu--mega-menu > ul > li > .menu-item-title")
           .on("click", function(e) {
             e.preventDefault();
-            slideOut(aboutUsSubmenu);
+            slideOut(e);
           });
-        burger
-          .find(".menu--mega-menu > ul > li:nth-child(2) > a")
-          .on("click", function(e) {
-            e.preventDefault();
-            slideOut(ourApproachSubmenu);
-          });
-        burger
-          .find(".menu--mega-menu > ul > li:nth-child(3) > a")
-          .on("click", function(e) {
-            e.preventDefault();
-            slideOut(joinUsSubmenu);
-          });
+
         // Close the sliders, then reset.
         $(".hamburger-slider .back").on("click", function(e) {
           e.preventDefault();
@@ -242,11 +239,14 @@ export default function(context) {
 
     // TOC Menus.
     let tocMainParent = $("#menu-toc");
-    let tocMenuItem = $("#menu-toc > .menu-wrapper .menu");
-    let tocScrollMenu = $("#menu-toc > .menu-wrapper");
+    let tocMenuItem = $("#menu-toc .menu-item--active-trail .menu");
+    let tocScrollMenu = $("#menu-toc .menu-item--active-trail .menu");
 
     let tocDebouncedSideScroll = debounce(function() {
-      if (tocMainParent.width() > tocMenuItem.width() - 30) {
+      if (
+        tocMenuItem[0] &&
+        tocMainParent.width() > tocMenuItem[0].scrollWidth - 30
+      ) {
         tocMainParent.addClass("no-scroll");
       } else {
         tocMainParent.removeClass("no-scroll");
@@ -263,20 +263,6 @@ export default function(context) {
         { scrollLeft: leftPos + mainParent.width() / 2 },
         500
       );
-      $(this)
-        .once()
-        .clone()
-        .prependTo("nav.toc")
-        .removeClass("nav-arrow")
-        .addClass("back-arrow")
-        .click(function(f) {
-          f.preventDefault();
-          var leftPosBack = tocScrollMenu.scrollLeft();
-          tocScrollMenu.animate(
-            { scrollLeft: leftPosBack - mainParent.width() / 2 },
-            500
-          );
-        });
     });
 
     const tocStickyNav = document.querySelector(".publication__toc");

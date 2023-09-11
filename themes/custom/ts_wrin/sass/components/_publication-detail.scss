@@ -52,6 +52,10 @@
       @include mq($lg) {
         @include column-width(9, $grid-columns);
       }
+
+      img {
+        width: auto;
+      }
     }
 
     .buttons {
@@ -119,11 +123,22 @@
       @include hocus {
         text-decoration: underline;
       }
+
+      &.more-open-close {
+        font-weight: normal;
+      }
     }
 
     .field-label-above,
     .field-label-inline {
       @extend .italic-tiny;
+    }
+
+    .field-label-above a {
+      @include mq($lg) {
+        @include font($caslon, "regular", "italic");
+        @include font-line-height(15, 19);
+      }
     }
 
     .field-label-above.top-border-medium {
@@ -147,6 +162,11 @@
           padding: 6px 0 12px;
         }
       }
+    }
+
+    .pager .pager__item--next,
+    .pager .pager__item--previous {
+      display: inline-block;
     }
   }
 }
@@ -199,4 +219,10 @@
     font-size: inherit;
     line-height: rem(30);
   }
+}
+
+// Make text blocks match the font of their parent node.
+.block-inline-blocktext-block {
+  @include font($acumin-semi-cond, "light");
+  @include font-line-height(18, 30);
 }

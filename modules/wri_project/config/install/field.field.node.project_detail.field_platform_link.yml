@@ -13,10 +13,10 @@ bundle: project_detail
 label: 'Launch Platform'
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
+  title: 1
   link_type: 17
-  title: 0
 field_type: link

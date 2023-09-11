@@ -13,10 +13,10 @@ bundle: program_center
 label: 'Follow on Twitter'
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  link_type: 16
   title: 0
+  link_type: 16
 field_type: link

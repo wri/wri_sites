@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Hooks related to Listing Blocks.
+ */
+
+/**
+ * Implements hook_preprocess_hook().
+ */
+function wri_listing_block_preprocess_wri_listing(&$context) {
+  if (!isset($context['listing_type']) && isset($context["content"]["listing"]["field_listing"][0])) {
+    $context['listing_type'] = $context["content"]["listing"]["field_listing"][0]["#content"]["#display_id"] . '-' . $context["content"]["listing"]["field_listing"][0]["#content"]["#name"] . " " . $context["content"]["listing"]["field_listing"][0]["#content"]["#name"];
+  }
+  else {
+    $context['listing_type'] = '';
+  }
+}

@@ -25,17 +25,21 @@ export default function(context) {
   }
 
   var $inputs = $(
-    "input[type=text], input[type=tel], input[type=email], .form-textarea"
+    "input[type=date], input[type=datetime-local], input[type=text], input[type=email], input[type=month], " +
+      "input[type=number], input[type=search], input[type=tel], input[type=text], input[type=time], " +
+      "input[type=url], input[type=week], input[type=password], .form-textarea"
   );
   $inputs
     .focus(function() {
       $(this)
-        .parent()
+        .parents(".js-form-item")
+        .first()
         .addClass("move-label");
     })
     .on("blur", function() {
       $(this)
-        .parent()
+        .parents(".js-form-item")
+        .first()
         .removeClass("move-label");
     });
 

@@ -26,6 +26,7 @@
     }
 
     .views-row,
+    .teaser-item,
     & > .field__item {
       @include center-columns(4, 4);
 

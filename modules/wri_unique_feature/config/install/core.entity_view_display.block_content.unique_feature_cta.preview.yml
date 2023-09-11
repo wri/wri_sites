@@ -19,8 +19,8 @@ dependencies:
     - text
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   ds:
     layout:
       id: layout_twocol_section
@@ -51,21 +51,21 @@ bundle: unique_feature_cta
 mode: preview
 content:
   field_image:
-    weight: 0
+    type: media_thumbnail
     label: hidden
     settings:
-      image_style: thumbnail
       image_link: ''
+      image_style: thumbnail
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
-    type: media_thumbnail
+    weight: 0
     region: second
   field_intro:
-    weight: 0
+    type: text_trimmed
     label: hidden
     settings:
       trim_length: 300
@@ -75,33 +75,33 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fi-el: ''
-            fi-cl: intro
-            fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow: false
             ow-def-at: false
             ow-def-cl: false
             fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
             fis-def-at: false
             fi: false
+            fi-el: ''
+            fi-cl: intro
+            fi-at: ''
             fi-def-at: false
-    type: text_trimmed
+            prefix: ''
+            suffix: ''
+    weight: 0
     region: first
   field_link:
-    weight: 3
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -115,17 +115,17 @@ content:
           id: reset
           settings:
             lb: ''
-    type: link
+    weight: 3
     region: first
   field_overlay_color:
-    weight: 5
+    type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: list_default
+    weight: 5
     region: first
   field_tag:
-    weight: 1
+    type: entity_reference_label
     label: above
     settings:
       link: false
@@ -135,30 +135,31 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: div
             ow-cl: topic-tag
             ow-at: ''
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow: false
             ow-def-at: false
             ow-def-cl: false
             fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
             fis-def-at: false
             fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
             fi-def-at: false
-    type: entity_reference_label
+            prefix: ''
+            suffix: ''
+    weight: 1
     region: first
 hidden:
+  langcode: true
   search_api_excerpt: true

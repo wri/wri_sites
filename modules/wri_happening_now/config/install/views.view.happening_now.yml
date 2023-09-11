@@ -1,3 +1,5 @@
+# Do not delete the uuid for this view.
+uuid: 1d2fb920-f85d-4de8-945b-3e9736ccf16b
 langcode: en
 status: true
 dependencies:
@@ -17,7 +19,7 @@ display:
   default:
     display_plugin: default
     id: default
-    display_title: Master
+    display_title: Default
     position: 0
     display_options:
       access:
@@ -25,8 +27,12 @@ display:
         options:
           perm: 'access content'
       cache:
-        type: tag
-        options: {  }
+        type: time
+        options:
+          results_lifespan: 21600
+          results_lifespan_custom: 0
+          output_lifespan: 21600
+          output_lifespan_custom: 0
       query:
         type: views_query
         options:
@@ -267,7 +273,7 @@ display:
             fail: 'not found'
           validate_options: {  }
           depth: 3
-          break_phrase: false
+          break_phrase: true
           use_taxonomy_term_path: false
           entity_type: node
           plugin_id: taxonomy_index_tid_depth
@@ -387,7 +393,7 @@ display:
       link_url: '/resources?type={{ raw_arguments.type }}&featured={{ raw_arguments.field_featured_target_id }}'
       link_display: '0'
       use_more: false
-      use_more_always: true
+      use_more_always: false
       use_more_text: 'View all'
     cache_metadata:
       max-age: -1

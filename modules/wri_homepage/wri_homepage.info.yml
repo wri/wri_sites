@@ -7,21 +7,19 @@ dependencies:
   - wri_node
   - wri_paragraph
   - wri_topics
-  - onlyone
 config_devel:
   install:
     - core.entity_form_display.node.homepage.default
     - core.entity_form_display.paragraph.featured_statement.default
     - core.entity_form_display.paragraph.homepage_hero.default
-    - core.entity_view_display.media.image.homepage_hero
     - core.entity_view_display.node.homepage.default
     - core.entity_view_display.node.homepage.full
     - core.entity_view_display.node.homepage.impact
     - core.entity_view_display.node.homepage.teaser
     - core.entity_view_display.paragraph.featured_statement.default
     - core.entity_view_display.paragraph.homepage_hero.default
-    - core.entity_view_mode.media.homepage_hero
     - field.field.node.homepage.field_homepage_hero
+    - field.field.node.homepage.field_metatags
     - field.field.node.homepage.layout_builder__layout
     - field.field.paragraph.featured_statement.field_link
     - field.field.paragraph.featured_statement.field_text

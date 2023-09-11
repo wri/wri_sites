@@ -6,6 +6,7 @@ package: WRI
 dependencies:
   - cer
   - taxonomy
+  - wri_common
 config_devel:
   install:
     - core.entity_form_display.taxonomy_term.tags.default
@@ -21,6 +22,7 @@ config_devel:
     - field.storage.taxonomy_term.field_is_featured
     - field.storage.taxonomy_term.field_landing_page
     - field.storage.taxonomy_term.field_main_image
+    - taxonomy.vocabulary.department
     - taxonomy.vocabulary.embed_types
     - taxonomy.vocabulary.featured
     - taxonomy.vocabulary.languages
@@ -29,6 +31,7 @@ config_devel:
     - taxonomy.vocabulary.publication_series
     - taxonomy.vocabulary.regions
     - taxonomy.vocabulary.resource_type
+    - taxonomy.vocabulary.staff_groups
     - taxonomy.vocabulary.tags
     - taxonomy.vocabulary.topics_and_subtopics
     - views.view.resource_types

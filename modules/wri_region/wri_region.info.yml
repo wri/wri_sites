@@ -31,5 +31,6 @@ config_devel:
     - field.field.taxonomy_term.regions.field_intro
     - field.field.taxonomy_term.regions.field_landing_page
     - field.field.taxonomy_term.regions.field_main_image
+    - metatag.metatag_defaults.node__region
     - node.type.region
     - xmlsitemap.settings.node.region

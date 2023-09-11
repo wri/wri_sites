@@ -4,20 +4,19 @@ dependencies:
   config:
     - field.field.paragraph.partner_logo.field_link
     - field.field.paragraph.partner_logo.field_partner_logo
+    - image.style.455_wide
     - paragraphs.paragraphs_type.partner_logo
-    - responsive_image.styles.full_content
   module:
-    - blazy
     - ds
     - link
-    - wri_media
+    - media
 id: paragraph.partner_logo.default
 targetEntityType: paragraph
 bundle: partner_logo
 mode: default
 content:
   field_link:
-    weight: 1
+    type: link_separate
     label: hidden
     settings:
       trim_length: null
@@ -31,56 +30,23 @@ content:
           id: reset
           settings:
             lb: ''
-    type: link_separate
+    weight: 1
     region: content
   field_partner_logo:
-    type: blazy_media
-    weight: 0
+    type: media_thumbnail
     label: hidden
     settings:
-      image_style: ''
-      responsive_image_style: full_content
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: default
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_link: ''
+      image_style: 455_wide
+      image_loading:
+        attribute: lazy
     third_party_settings:
-      wri_media:
-        min_width: ''
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 0
     region: content
 hidden:
   search_api_excerpt: true

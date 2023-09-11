@@ -47,7 +47,7 @@ class ListOfAuthors extends EntityReferenceEntityFormatter {
     $string = implode(', ', $cleaned_authors);
 
     if (isset($last_author)) {
-      $string .= ' and ' . $last_author;
+      $string .= ' ' . $this->t('and') . ' ' . $last_author;
     }
 
     if (!empty($string)) {

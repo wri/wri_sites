@@ -1,0 +1,18 @@
+single_file_component_layout:wri_listing:
+  label: "Content Listings"
+  template: templates/wri-listing
+  default_region: listing
+  regions:
+    header:
+      label: Header
+    subheader:
+      label: Subheader
+    intro:
+      label: Intro
+    listing:
+      label: Listing
+  icon_map:
+    - [ header, intro ]
+    - [ subheader ]
+    - [ listing ]
+

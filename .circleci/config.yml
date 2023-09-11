@@ -1,0 +1,51 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: thinkshout/nginx-php-fpm:php81
+        environment:
+          WEBROOT: /var/www/html/drupal-project/web
+          GIT_EMAIL: "ci@thinkshout.com"
+          GIT_NAME: "ThinkShout CI Bot"
+          IS_CIRCLE: TRUE
+        command: [ "/start.sh" ]
+      - image: mariadb:10.4
+        environment:
+          MYSQL_RANDOM_ROOT_PASSWORD: 1
+          MYSQL_DATABASE: circletest
+          MYSQL_USER: drupal
+          MYSQL_PASSWORD: drupal
+    working_directory: /var/www/html/drupal-project
+    steps:
+      - checkout
+      - run:
+          name: Test site install works.
+          command: |
+            echo "memory_limit = 256M"  >> ${php_vars}
+            export PATH="./vendor/bin:../vendor/bin:/root/.composer/vendor/bin:$PATH"
+            npm install -g n && n 16
+            COMPOSER_MEMORY_LIMIT=-1 composer create-project --prefer-dist --stability=dev wri/wri-starter-kit circletest
+            cd circletest
+            COMPOSER_MEMORY_LIMIT=-1 composer require wri/wri_sites:dev-${CIRCLE_BRANCH} --update-with-dependencies --no-scripts
+            ./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/modules
+            ./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/themes/custom
+            ./vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/modules
+            ./vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/themes/custom
+            drush si wri_sites -y --verbose --db-url=mysql://drupal:drupal@127.0.0.1:3306/circletest
+            drush en wri_package -y
+            drush en wri_package2 -y
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build
+  weekly-test:
+    triggers:
+      - schedule:
+          cron: "0 0 * * 4"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - build

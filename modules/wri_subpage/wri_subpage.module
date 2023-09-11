@@ -5,9 +5,9 @@
  * Subpage module hook implementations.
  */
 
-use Drupal\menu_link_content\Entity\MenuLinkContent;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\menu_link_content\Entity\MenuLinkContent;
 
 /**
  * Implements hook_ENTITY_TYPE_insert().
@@ -22,31 +22,31 @@ function wri_subpage_node_insert(EntityInterface $entity) {
 function wri_subpage_node_update(EntityInterface $entity) {
   if (isset($entity->field_parent_page)) {
     $parent = $entity->field_parent_page->entity;
-    if ($parent) {
+    if ($parent && $parent->id()) {
+      // Set the correct menu for microsites vs all others.
+      'microsite' == $parent->bundle() ? $menu_name = 'microsites' : $menu_name = 'page-hierarchies';
       $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
 
-      // Save the parent at the root of the Page Heirarchy menu, if not already
-      // there.
-      $parent_link_menu_id = array_key_first($menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $parent->id()], 'page-hierarchies'));
+      // Save the parent at the root of the menu, if not already there.
+      $parent_link_menu_id = array_key_first($menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $parent->id()], $menu_name));
       if (!$parent_link_menu_id) {
         $parent_link_menu = MenuLinkContent::create([
           'title' => $parent->label(),
           'link' => ['uri' => 'entity:node/' . $parent->id()],
-          'menu_name' => 'page-hierarchies',
+          'menu_name' => $menu_name,
           'expanded' => TRUE,
         ]);
         $parent_link_menu->save();
         $parent_link_menu_id = $parent_link_menu->getPluginId();
       }
 
-      // Save the current page as a child of the parent in the Page Hierarchy
-      // menu.
-      $current_link_menu_menu = $menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $entity->id()], 'page-hierarchies');
+      // Save the current page as a child of the parent in the appropriate menu.
+      $current_link_menu_menu = $menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $entity->id()], $menu_name);
       if (!$current_link_menu_menu) {
         $current_link_menu = MenuLinkContent::create([
           'title' => $entity->label(),
           'link' => ['uri' => 'entity:node/' . $entity->id()],
-          'menu_name' => 'page-hierarchies',
+          'menu_name' => $menu_name,
           'parent' => $parent_link_menu_id,
           'expanded' => TRUE,
         ]);
@@ -67,7 +67,7 @@ function wri_subpage_node_update(EntityInterface $entity) {
  */
 function wri_subpage_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $node = $form_state->getFormObject()->getEntity();
-  if (isset($node->field_parent_page)) {
+  if (isset($node->field_parent_page->value)) {
     $value = '';
     if (isset($node->field_parent_page->entity)) {
       $value = $node->field_parent_page->entity->label();
@@ -75,6 +75,5 @@ function wri_subpage_form_node_form_alter(&$form, FormStateInterface $form_state
     $form['menu']['link']['menu_parent']['#type'] = 'item';
     $form['menu']['link']['menu_parent']['#markup'] = $value;
     $form['menu']['link']['menu_parent']['#description'] = t('Parent will be pulled from the "Parent page" field.');
-    $form['menu']['link']['menu_parent']['#default_value'] = ':';
   }
 }

@@ -44,6 +44,7 @@ config_devel:
     - field.field.node.project_detail.field_primary_topic
     - field.field.node.project_detail.field_project_partners
     - field.field.node.project_detail.field_region
+    - field.field.node.project_detail.field_show_more_link
     - field.field.node.project_detail.field_tags
     - field.field.node.project_detail.field_toc
     - field.field.node.project_detail.field_twitter_account
@@ -55,7 +56,6 @@ config_devel:
     - metatag.metatag_defaults.node__project_detail
     - node.type.project_detail
     - paragraphs.paragraphs_type.partner_logo
-    - pathauto.pattern.projects
     - views.view.featured_experts
     - views.view.homepage_projects
     - views.view.related_to_this_project

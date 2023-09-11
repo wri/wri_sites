@@ -17,35 +17,42 @@ required: true
 translatable: true
 default_value:
   -
-    token_help: ''
-    display_id: block_1
-    arguments: '[bc:field_custom_results:array:target_id:join:+]/[bc:field_content_types:array:target_id:join:+]/[bc:field_filter_by_region:target_id]/[bc:field_filter_by_resource_type:target_id]/[bc:field_tag:target_id]/[bc:field_filter_by_tag:target_id]'
-    items_to_display: ''
     target_uuid: ba985f1d-01bd-42cb-ab9c-1f4243795b9c
+    display_id: block_1
+    arguments: '[content_snippets:3_1_view_arguments]'
+    items_to_display: ''
+    token_help: ''
 default_value_callback: ''
 settings:
   force_default: true
   allowed_views:
     '3_1': '3_1'
+    aggregator_rss_feed: '0'
+    aggregator_sources: '0'
     all_topics: '0'
+    api_reader_index: '0'
     authored_by: '0'
+    authors: '0'
     content: '0'
     content_by_type: '0'
     content_cleanup: '0'
     content_css_js: '0'
+    content_inventory: '0'
     content_listing: '0'
     content_listing_a_to_z: '0'
+    staff_list: '0'
     countries: '0'
     block_content: '0'
-    tmp: '0'
+    events: '0'
     experts_staff: '0'
     featured_experts: '0'
     featured_tweet: '0'
     featured_tweets_entity_browser: '0'
     files: '0'
     files_browser: '0'
-    frontpage: '0'
     happening_now: '0'
+    internal_pubs_list: '0'
+    internal_redirect_list: '0'
     media: '0'
     media_library: '0'
     moderated_content: '0'
@@ -54,6 +61,7 @@ settings:
     user_admin_people: '0'
     people_at_this_io: '0'
     programs_centers: '0'
+    project_experts: '0'
     homepage_projects: '0'
     content_recent: '0'
     redirect: '0'
@@ -61,12 +69,13 @@ settings:
     related_to_this_project: '0'
     resources: '0'
     resource_types: '0'
+    aggregator_items: '0'
     rss_feeds: '0'
     scheduled_transitions: '0'
     search: '0'
     superfeatured_content: '0'
     tagged_with: '0'
-    taxonomy_term: '0'
+    test_cache_buster: '0'
     trending_topics: '0'
     watchdog: '0'
     webform_submissions: '0'
@@ -75,12 +84,13 @@ settings:
   allowed_display_types:
     block: block
     attachment: '0'
+    default: '0'
     embed: '0'
     entity_browser: '0'
     entity_reference: '0'
     feed: '0'
-    default: '0'
     page: '0'
+    rest_export: '0'
   handler: 'default:view'
   handler_settings: {  }
 field_type: viewfield

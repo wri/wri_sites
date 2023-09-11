@@ -3,9 +3,9 @@ status: open
 dependencies:
   module:
     - simple_recaptcha_webform
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 385
 template: false
 archive: false
@@ -13,7 +13,115 @@ id: sign_up_for_wri_digest
 title: 'Sign up for the WRI Digest'
 description: 'Main sign-up form for the Digest'
 category: ''
-elements: "processed_text:\n  '#type': processed_text\n  '#text': |\n    <style type=\"text/css\">label.option{\n    position: relative !important;\n    }\n    label.label-above{\n    display: block !important;\n    left: unset !important;\n    position: relative !important;\n    top: unset !important;\n    }\n    input{\n    max-width: 100%;\n    }\n    </style>\n    <h1>Sign up for WRI Digest</h1>\n    \n    <p>The&nbsp;<strong>WRI Digest</strong>, WRI's weekly newsletter, delivers news, commentary and our latest publications, maps and data to your inbox.</p>\n    \n    <p>For other WRI project-specific newsletters,&nbsp;<a href=\"https://connect.wri.org/l/120942/2016-01-11/2sjxx6\">subscribe here</a>.</p>\n    \n  '#format': full_html\nsalutation:\n  '#type': radios\n  '#title': Salutation\n  '#options':\n    Dr.: Dr.\n    Prof.: Prof.\n    Mr.: Mr.\n    Mrs.: Mrs.\n    Ms.: Ms.\n    Miss: Miss\n  '#options_display': side_by_side\nfirst_name:\n  '#type': textfield\n  '#title': 'First Name'\n  '#required': true\n  '#required_error': 'Please provide your first name'\n  '#label_attributes':\n    class:\n      - label-above\nmiddle_name:\n  '#type': textfield\n  '#title': 'Middle Name'\n  '#label_attributes':\n    class:\n      - label-above\nlast_name:\n  '#type': textfield\n  '#title': 'Last Name'\n  '#required': true\n  '#required_error': 'Please provide your last name'\n  '#label_attributes':\n    class:\n      - label-above\nsuffix:\n  '#type': textfield\n  '#title': 'Suffix (PhD, Jr., etc.)'\n  '#label_attributes':\n    class:\n      - label-above\nemail:\n  '#type': email\n  '#title': Email\n  '#required': true\n  '#required_error': 'Please provide your email address'\n  '#label_attributes':\n    class:\n      - label-above\ncompany:\n  '#type': textfield\n  '#title': Company\n  '#required': true\n  '#required_error': 'Please provide your company or organization name'\n  '#label_attributes':\n    class:\n      - label-above\njob_title:\n  '#type': textfield\n  '#title': 'Job Title'\n  '#required': true\n  '#required_error': 'Please provide your job title, or n/a if not applicable'\n  '#label_attributes':\n    class:\n      - label-above\ncity:\n  '#type': textfield\n  '#title': City\n  '#required': true\n  '#required_error': 'Please provide your city of residence or work'\n  '#label_attributes':\n    class:\n      - label-above\ncountry:\n  '#type': select\n  '#title': Country\n  '#options': country_names\n  '#required': true\n  '#required_error': 'Please provide your country of residence or work'\n  '#label_attributes':\n    class:\n      - label-above\ninterests:\n  '#type': checkboxes\n  '#title': Interests\n  '#options':\n    Climate: Climate\n    Energy: Energy\n    Food: Food\n    Water: Water\n    Forests: Forests\n    Cities: Cities\n    Governance: Governance\n    Business: Business\n    Finance: Finance\n    Economics: Economics\n  '#options_display': three_columns\n  '#required': true\n  '#required_error': 'Please select at least one area of interest'\nwater:\n  '#type': webform_select_other\n  '#title': 'Test Interests'\n  '#multiple': true\n  '#options':\n    Climate: Climate\n    Energy: Energy\n    Food: Food\n  '#select2': true\n  '#format_items': custom\n  '#format_items_html': '{{ elements_flattened }}'\n  '#format_items_text': '{{ elements_flattened }}'"
+elements: |-
+  '#attributes':
+    class:
+      - pardot-form-gtm
+  salutation:
+    '#type': radios
+    '#title': Salutation
+    '#options':
+      Dr.: Dr.
+      Prof.: Prof.
+      Mr.: Mr.
+      Mrs.: Mrs.
+      Ms.: Ms.
+      Miss: Miss
+    '#options_display': side_by_side
+  flexbox:
+    '#type': webform_flexbox
+    first_name:
+      '#type': textfield
+      '#title': 'First Name'
+      '#required': true
+      '#required_error': 'Please provide your first name'
+      '#label_attributes':
+        class:
+          - label-above
+    middle_name:
+      '#type': textfield
+      '#title': 'Middle Name'
+      '#label_attributes':
+        class:
+          - label-above
+  flexbox_01:
+    '#type': webform_flexbox
+    last_name:
+      '#type': textfield
+      '#title': 'Last Name'
+      '#required': true
+      '#required_error': 'Please provide your last name'
+      '#label_attributes':
+        class:
+          - label-above
+    suffix:
+      '#type': textfield
+      '#title': 'Suffix (PhD, Jr., etc.)'
+      '#label_attributes':
+        class:
+          - label-above
+  flexbox_02:
+    '#type': webform_flexbox
+    email:
+      '#type': email
+      '#title': Email
+      '#required': true
+      '#required_error': 'Please provide your email address'
+      '#label_attributes':
+        class:
+          - label-above
+    company:
+      '#type': textfield
+      '#title': Company
+      '#required': true
+      '#required_error': 'Please provide your company or organization name'
+      '#label_attributes':
+        class:
+          - label-above
+  job_title:
+    '#type': textfield
+    '#title': 'Job Title'
+    '#required': true
+    '#required_error': 'Please provide your job title, or n/a if not applicable'
+    '#label_attributes':
+      class:
+        - label-above
+  city:
+    '#type': textfield
+    '#title': City
+    '#required': true
+    '#required_error': 'Please provide your city of residence or work'
+    '#label_attributes':
+      class:
+        - label-above
+  country:
+    '#type': select
+    '#title': Country
+    '#options': country_names
+    '#required': true
+    '#required_error': 'Please provide your country of residence or work'
+    '#label_attributes':
+      class:
+        - label-above
+  water:
+    '#type': checkboxes_string
+    '#title': Interests
+    '#options':
+      Climate: Climate
+      Energy: Energy
+      Food: Food
+      Water: Water
+      Forests: Forests
+      Cities: Cities
+      Governance: Equity
+      Finance: Finance
+      Economics: Economics
+    '#options_display': three_columns
+    '#required': true
+    '#required_error': 'Please select at least one area of interest'
+  markup:
+    '#type': webform_markup
+    '#markup': '<h5>By sharing your information you agree to receive updates from WRI. You can change your email preferences at any time.</h5>'
 css: ''
 javascript: "jQuery(document).ready(function($) {\r\n    $('.webform-submission-form').addClass('pardot-form-gtm');\r\n});"
 settings:
@@ -28,9 +136,9 @@ settings:
   page_theme_name: ts_wrin
   form_title: source_entity_webform
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
@@ -40,28 +148,36 @@ settings:
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: true
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -70,11 +186,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -85,13 +196,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -195,9 +306,9 @@ access:
 handlers:
   remote_post:
     id: remote_post
+    handler_id: remote_post
     label: 'Pardot Form Handler'
     notes: 'Submits to Pardot endpoint'
-    handler_id: remote_post
     status: true
     conditions: {  }
     weight: 0
@@ -226,8 +337,9 @@ handlers:
         notes: notes
       custom_data: ''
       custom_options: ''
+      file_data: true
       cast: false
-      debug: true
+      debug: false
       completed_url: 'https://connect.wri.org/l/120942/2019-03-07/46s6pk'
       completed_custom_data: ''
       updated_url: ''
@@ -245,14 +357,15 @@ handlers:
       error_url: ''
   recaptcha:
     id: simple_recaptcha
+    handler_id: recaptcha
     label: reCAPTCHA
     notes: ''
-    handler_id: recaptcha
     status: true
     conditions: {  }
     weight: 0
     settings:
       recaptcha_type: v3
-      v3_score: '90'
+      v3_score: '70'
       v3_error_message: 'There was an error during validation of your form submission, please try to reload the page and submit form again.'
+      hide_badge_v3: false
 variants: {  }

@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.person.body
     - field.field.node.person.field_alternate_contact
     - field.field.node.person.field_areas_of_expertise
+    - field.field.node.person.field_department
     - field.field.node.person.field_email
     - field.field.node.person.field_first_name
     - field.field.node.person.field_international_office
@@ -17,6 +18,7 @@ dependencies:
     - field.field.node.person.field_profile_image
     - field.field.node.person.field_project_expert
     - field.field.node.person.field_quote
+    - field.field.node.person.field_staff_group
     - field.field.node.person.field_title
     - field.field.node.person.field_topics
     - field.field.node.person.field_twitter_account
@@ -42,10 +44,10 @@ third_party_settings:
     regions:
       image:
         - field_profile_image
-      name:
-        - node_title
       additional_info:
         - field_title
+      name:
+        - node_title
     fields:
       node_title:
         plugin_id: node_title
@@ -65,36 +67,35 @@ targetEntityType: node
 bundle: person
 mode: teaser
 content:
-  content_moderation_control:
-    weight: -20
-    settings: {  }
-    third_party_settings: {  }
-    region: content
   field_profile_image:
     type: media_thumbnail
-    weight: 0
-    region: image
     label: hidden
     settings:
-      image_style: 100x100
       image_link: ''
+      image_style: 100x100
+      image_loading:
+        attribute: lazy
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: image
   field_title:
     type: text_default
-    weight: 0
-    region: additional_info
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: additional_info
 hidden:
   body: true
+  content_moderation_control: true
   field_alternate_contact: true
   field_areas_of_expertise: true
+  field_department: true
   field_email: true
   field_first_name: true
   field_international_office: true
@@ -105,10 +106,12 @@ hidden:
   field_phone: true
   field_project_expert: true
   field_quote: true
+  field_staff_group: true
   field_topics: true
   field_twitter_account: true
   field_type: true
   field_weight: true
+  langcode: true
   layout_builder__layout: true
   links: true
   search_api_excerpt: true

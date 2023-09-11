@@ -11,7 +11,7 @@ bundle: internal
 label: Person
 description: 'Choose a person at WRI'
 required: true
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

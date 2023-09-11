@@ -4,7 +4,6 @@ description: 'Modules related to publications on WRI'
 core_version_requirement: '^8.8.0 || ^9'
 package: WRI
 dependencies:
-  - sfc
   - wri_author
   - wri_media
   - wri_node
@@ -15,6 +14,7 @@ config_devel:
     - core.entity_view_display.node.publication.card
     - core.entity_view_display.node.publication.default
     - core.entity_view_display.node.publication.full
+    - core.entity_view_display.node.publication.hero_on_a_subpage
     - core.entity_view_display.node.publication.impact
     - core.entity_view_display.node.publication.large_image_teaser
     - core.entity_view_display.node.publication.main_content

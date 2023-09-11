@@ -31,6 +31,7 @@ config_devel:
     - field.field.node.international_office.field_metatags
     - field.field.node.international_office.field_offices
     - field.field.node.international_office.field_region
+    - field.field.node.international_office.field_show_more_link
     - field.field.node.international_office.layout_builder__layout
     - field.field.wri_office.wri_office.field_address
     - field.field.wri_office.wri_office.field_telephone

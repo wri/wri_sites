@@ -25,55 +25,55 @@ mode: default
 content:
   field_cta_background:
     type: entity_class_formatter
-    weight: 0
-    region: content
     label: hidden
     settings:
       prefix: ''
       suffix: ''
       attr: ''
     third_party_settings: {  }
+    weight: 0
+    region: content
   field_image_full_width:
     type: media_thumbnail
-    weight: 8
     label: hidden
     settings:
-      image_style: 646x251
       image_link: ''
+      image_style: 646x251
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 8
     region: content
   field_image_inset:
     type: media_thumbnail
-    weight: 9
     label: hidden
     settings:
-      image_style: 136x176
       image_link: ''
+      image_style: 136x176
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 9
     region: content
   field_intro:
-    weight: 1
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 1
     region: content
   field_link:
-    weight: 4
+    type: link_class
     label: hidden
     settings:
-      trim_length: 80
       class: button
+      trim_length: 80
       url_only: false
       url_plain: false
       rel: '0'
@@ -86,24 +86,25 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
-    type: link_class
+    weight: 4
     region: content
   field_title:
-    weight: 0
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 0
     region: content
   field_webform:
-    weight: 6
+    type: webform_entity_reference_entity_view
     label: hidden
     settings:
       source_entity: true
     third_party_settings: {  }
-    type: webform_entity_reference_entity_view
+    weight: 6
     region: content
 hidden:
   field_image_cta_background: true
+  langcode: true
   search_api_excerpt: true

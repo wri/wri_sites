@@ -1,0 +1,22 @@
+single_file_component_layout:wri_subpage_columns:
+  label: "Subpage Header"
+  template: templates/wri-subpage-columns
+  default_region: main_content
+  regions:
+    hero:
+      label: Hero
+    buttons:
+      label: Buttons
+    category:
+      label: Category
+    share:
+      label: Share
+    main_content:
+      label: "Main Content"
+    sidebar:
+      label: Sidebar
+  icon_map:
+    - [ hero, buttons ]
+    - [ category, share ]
+    - [ main_content, sidebar ]
+

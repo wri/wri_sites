@@ -3,12 +3,10 @@ type: module
 description: 'Custom search menu.'
 core_version_requirement: '^8.8.0 || ^9'
 dependencies:
-  - sfc
   - search_api
   - facets
   - facets_pretty_paths
   - facets_summary
-  - search_api_autocomplete
   - search_api_exclude_entity
   - search_api_pantheon
   - wri_taxonomy
@@ -22,6 +20,7 @@ config_devel:
     - facets.facet.all_topics
     - facets.facet.content_type
     - facets.facet.country
+    - facets.facet.department
     - facets.facet.event_languages
     - facets.facet.event_type
     - facets.facet.experts_all_topics
@@ -40,12 +39,16 @@ config_devel:
     - facets.facet_source.search_api__views_page__experts_staff__experts_staff1
     - facets.facet_source.search_api__views_page__resources__resources_page
     - facets.facet_source.search_api__views_page__search__results
+    - facets_summary.facets_summary.event_facet_summary
     - facets_summary.facets_summary.experts_summary
+    - facets_summary.facets_summary.summary
     - search_api.index.sitewide
     - search_api.server.localhost
     - search_api.server.pantheon
     - system.menu.search
+    - views.view.events
     - views.view.experts_staff
+    - views.view.project_experts
     - views.view.related_content
     - views.view.resources
     - views.view.search

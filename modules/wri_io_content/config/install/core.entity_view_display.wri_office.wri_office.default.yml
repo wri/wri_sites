@@ -13,21 +13,21 @@ third_party_settings:
   ds:
     layout:
       id: ds_1col
-      library: null
-      disable_css: false
-      entity_classes: all_classes
       settings:
-        label: ''
+        classes:
+          layout_class: {  }
         wrappers:
-          ds_content: div
+          content: div
         outer_wrapper: div
         attributes: ''
         link_attribute: ''
         link_custom: ''
-        classes:
-          layout_class: {  }
+        label: ''
+      library: null
+      disable_css: false
+      entity_classes: all_classes
     regions:
-      ds_content:
+      content:
         - name
         - field_address
         - field_telephone
@@ -37,7 +37,7 @@ bundle: wri_office
 mode: default
 content:
   field_address:
-    weight: -3
+    type: address_default
     label: hidden
     settings: {  }
     third_party_settings:
@@ -46,33 +46,33 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
             fis-el: ''
             fis-cl: ''
             fis-at: ''
+            fis-def-at: false
             fi: true
             fi-el: ''
             fi-cl: ''
             fi-at: ''
             fi-def-at: true
+            prefix: ''
             suffix: ''
-            lbw: false
-            lb-col: false
-            ow: false
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-def-at: false
-    type: address_default
-    region: ds_content
+    weight: -3
+    region: content
   field_telephone:
-    weight: -2
+    type: telephone_link
     label: inline
     settings:
       title: ''
@@ -82,13 +82,11 @@ content:
           id: reset
           settings:
             lb: Tel
-    type: telephone_link
-    region: ds_content
+    weight: -2
+    region: content
   name:
-    label: hidden
     type: string
-    weight: -4
-    region: ds_content
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings:
@@ -97,5 +95,8 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: -4
+    region: content
 hidden:
+  langcode: true
   search_api_excerpt: true

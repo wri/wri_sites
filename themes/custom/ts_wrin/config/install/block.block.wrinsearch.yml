@@ -16,10 +16,10 @@ settings:
   label: 'WRIN Search'
   provider: wri_search
   label_display: '0'
-  component_context:
-    search_nav_title: 'Search WRI.org'
-    search_nav_description: 'Not sure where to find something? Search all of the site''s content.'
-    search_nav_label: 'What can we help you find?'
-    search_nav_id: wrinsearch
-    search_nav_submit: Search
+  search_nav_title: 'Search WRI.org'
+  search_nav_description: 'Not sure where to find something? Search all of the site''s content.'
+  search_nav_destination: /search
+  search_nav_label: 'What can we help you find?'
+  search_nav_id: wrinsearch
+  search_nav_submit: Search
 visibility: {  }

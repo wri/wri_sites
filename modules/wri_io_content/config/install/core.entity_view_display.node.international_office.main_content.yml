@@ -12,26 +12,24 @@ dependencies:
     - field.field.node.international_office.field_metatags
     - field.field.node.international_office.field_offices
     - field.field.node.international_office.field_region
+    - field.field.node.international_office.field_show_more_link
     - field.field.node.international_office.layout_builder__layout
     - node.type.international_office
     - responsive_image.styles.half_content
   module:
-    - blazy
     - ds
     - element_class_formatter
     - layout_builder
+    - media_responsive_thumbnail
     - text
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   ds:
     layout:
       id: layout_hero-5050-and-content
-      library: null
-      disable_css: false
-      entity_classes: all_classes
       settings:
         label: ''
     regions:
@@ -39,11 +37,11 @@ third_party_settings:
         - node_title
         - field_intro
         - field_io_link
+      hero_image:
+        - field_map_image
       content:
         - field_main_image
         - body
-      hero_image:
-        - field_map_image
     fields:
       node_title:
         plugin_id: node_title
@@ -51,9 +49,9 @@ third_party_settings:
         label: hidden
         formatter: default
         settings:
+          link: false
           wrapper: h1
           class: h1
-          link: false
         ft:
           id: reset
           settings:
@@ -64,9 +62,8 @@ bundle: international_office
 mode: main_content
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 10
+    label: hidden
     settings: {  }
     third_party_settings:
       ds:
@@ -74,34 +71,33 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
             ow: true
             ow-el: ''
             ow-cl: io-body
             ow-at: ''
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
             ow-def-at: false
             ow-def-cl: false
             fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
             fis-def-at: false
             fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
             fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 10
     region: content
   field_intro:
     type: text_default
-    weight: 1
-    region: hero_text
     label: hidden
     settings: {  }
     third_party_settings:
@@ -110,37 +106,37 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
             fis-el: ''
             fis-cl: ''
             fis-at: ''
+            fis-def-at: false
             fi: true
             fi-el: ''
             fi-cl: intro
             fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow: false
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-def-at: false
             fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 1
+    region: hero_text
   field_io_link:
     type: link_class
-    weight: 2
-    region: hero_text
     label: hidden
     settings:
-      trim_length: 80
       class: button
+      trim_length: 80
       url_only: false
       url_plain: false
       rel: '0'
@@ -151,10 +147,10 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 2
+    region: hero_text
   field_main_image:
     type: entity_reference_entity_view
-    weight: 0
-    region: content
     label: hidden
     settings:
       view_mode: landing_page_hero
@@ -165,53 +161,22 @@ content:
           id: reset
           settings:
             lb: ''
-  field_map_image:
-    type: blazy_media
     weight: 0
-    region: hero_image
+    region: content
+  field_map_image:
+    type: media_responsive_thumbnail
     label: hidden
     settings:
-      image_style: ''
       responsive_image_style: half_content
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: main_content
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_link: ''
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: hero_image
 hidden:
   content_moderation_control: true
   field_featured: true
@@ -219,7 +184,9 @@ hidden:
   field_metatags: true
   field_offices: true
   field_region: true
+  field_show_more_link: true
   field_transparent_header: true
+  langcode: true
   layout_builder__layout: true
   links: true
   search_api_excerpt: true

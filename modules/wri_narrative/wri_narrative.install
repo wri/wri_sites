@@ -5,8 +5,8 @@
  * Narrative Taxonomy install and update hooks..
  */
 
-use Drupal\Core\Utility\UpdateException;
 use Drupal\block_content\Entity\BlockContent;
+use Drupal\Core\Utility\UpdateException;
 
 /**
  * Enables the default value for the link field in all narrative taxonomies.
@@ -29,4 +29,41 @@ function wri_narrative_update_8901() {
     throw new UpdateException('This should be run after importing the field_more_link to the narrative taxonomy block type.');
   }
 
+}
+
+/**
+ * Updates Listing arguments to use our config snippet for Narrative taxonomies.
+ */
+function wri_narrative_update_9501() {
+  // Import the updated value:
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.narrative_taxonomy.field_listing', [
+    'default_value#0#arguments',
+  ], 'wri_narrative');
+
+  // Load all projects with the listing_block having the old value.
+  $old_value = '[bc:field_custom_results:array:target_id:join:+]/[bc:field_filter_by_region:target_id]/[bc:field_tag:target_id]';
+
+  // Save all existing blocks with the new value.
+  $definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('block_content', 'narrative_taxonomy');
+  if (isset($definitions['field_listing'])) {
+    $default_value = $definitions['field_listing']->getDefaultValueLiteral();
+    $default_value_string = $default_value[0]['arguments'];
+
+    $database = \Drupal::database();
+    $database->update('block_content__field_listing')
+      ->fields([
+        'field_listing_arguments' => $default_value_string,
+      ])
+      ->condition('field_listing_arguments', $old_value)
+      ->execute();
+    $database->update('block_content_revision__field_listing')
+      ->fields([
+        'field_listing_arguments' => $default_value_string,
+      ])
+      ->condition('field_listing_arguments', $old_value)
+      ->execute();
+  }
+  else {
+    throw new UpdateException('This should be run after importing the field_listing to the listing_block block type.');
+  }
 }

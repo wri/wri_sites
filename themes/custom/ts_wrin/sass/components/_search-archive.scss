@@ -60,7 +60,8 @@
 
 .view-events div.form--inline,
 .view-resources div.form--inline,
-.view-experts-staff div.form--inline {
+.view-paying-for-paris-resources div.form--inline,
+.experts-container div.form--inline {
   @extend .grid;
   margin: 0;
   max-width: 100%;
@@ -68,7 +69,8 @@
 }
 .view-events #edit-actions,
 .view-resources #edit-actions,
-.view-experts-staff #edit-actions {
+.view-paying-for-paris-resources #edit-actions,
+.experts-container #edit-actions {
   clip: rect(1px, 1px, 1px, 1px);
   height: 1px;
   overflow: hidden;
@@ -86,7 +88,8 @@
 .results-sidebar,
 .view-events .form-type-textfield,
 .view-resources .form-type-textfield,
-.view-experts-staff .form-type-textfield,
+.view-paying-for-paris-resources .form-type-textfield,
+.experts-container .form-type-textfield,
 .view-events .form-item-date {
   @include column-width(1, 5);
 
@@ -128,7 +131,7 @@
 }
 
 .view .form-type-textfield,
-.view-experts-staff .form-type-textfield {
+.experts-container .form-type-textfield {
   margin-top: 55px;
   position: relative;
   width: 100%;
@@ -195,7 +198,8 @@
 }
 
 .results-body,
-.view-resources .form-item-sort-by {
+.view-resources .form-item-sort-by,
+.view-paying-for-paris-resources .form-item-sort-by {
   @include column-width(1, 5);
 
   @include mq($ph) {
@@ -320,9 +324,11 @@
 }
 
 .view-resources .view-header,
-.view-experts-staff .view-header {
+.view-paying-for-paris-resources .view-header,
+.experts-container .view-header {
   @include mq($lg) {
     margin-top: -98px;
+    margin-right: 230px;
   }
 }
 .view-events .view-header {
@@ -350,6 +356,7 @@
     color: $true-black;
     cursor: pointer;
     padding-top: 10px;
+    padding-bottom: 1rem;
     position: relative;
     span {
       background: transparent url("../img/svgs/icon-arrow-simple.svg") no-repeat
@@ -382,7 +389,8 @@
   .block-facets .open li {
     margin-bottom: 7px;
   }
-  .block-facets input[type="checkbox"] {
+  .block-facets input[type="checkbox"],
+  .block-facets input[type="radio"] {
     height: 17px;
     margin-right: 15px;
     position: relative;
@@ -503,8 +511,9 @@
     transition: all 0.3s;
   }
   .view-resources.open,
-  .view-experts-staff.open,
-  .view-events.open {
+  .experts-container.open,
+  .view-events.open,
+  .view-paying-for-paris-resources.open {
     .view-filters .form-type-textfield,
     .form-item-date {
       height: auto;
@@ -517,7 +526,7 @@
     }
   }
   .view-resources .view-header,
-  .view-experts-staff .view-header {
+  .experts-container .view-header {
     margin-bottom: 30px;
     margin-top: 20px;
   }
@@ -540,7 +549,7 @@
   }
 }
 
-.view-experts-staff {
+.experts-container {
   .view-content {
     display: flex;
     flex-wrap: wrap;

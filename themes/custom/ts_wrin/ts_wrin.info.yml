@@ -18,22 +18,12 @@ regions:
   wrin_custom: 'WRIN Custom'
   disabled: Disabled
   modals: Modals
-component-libraries:
-  ts_custom:
-    paths:
-      - templates/ts_custom
 ckeditor_stylesheets:
   - dist/ckeditor.css
 config_devel:
   install:
     - block.block.addressblock
-    - block.block.claro_breadcrumbs
-    - block.block.claro_content
-    - block.block.claro_local_actions
-    - block.block.claro_messages
-    - block.block.claro_page_title
-    - block.block.claro_primary_local_tasks
-    - block.block.claro_secondary_local_tasks
+    - block.block.beforefilesmodal
     - block.block.copyrightblock
     - block.block.donate
     - block.block.footermenuadditional

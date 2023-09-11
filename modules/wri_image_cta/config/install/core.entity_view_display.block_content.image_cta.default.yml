@@ -11,21 +11,21 @@ dependencies:
     - image.style.250_wide
     - responsive_image.styles.image_cta
   module:
-    - blazy
     - ds
     - element_class_formatter
     - entity_class_formatter
     - media
+    - media_responsive_thumbnail
     - text
 third_party_settings:
   ds:
     layout:
       id: 'single_file_component_layout:wri_image_cta'
+      settings:
+        label: ''
       library: null
       disable_css: false
       entity_classes: no_classes
-      settings:
-        component_context: {  }
     regions:
       content:
         - block_label
@@ -47,75 +47,42 @@ bundle: image_cta
 mode: default
 content:
   field_image:
-    type: blazy_media
-    weight: 5
+    type: media_responsive_thumbnail
     label: hidden
     settings:
-      image_style: ''
       responsive_image_style: image_cta
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: image_cta
-      current_view_mode: default
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_link: ''
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 5
     region: image
   field_image_cta_background:
     type: entity_class_formatter
-    weight: 4
-    region: content
     label: hidden
     settings:
       prefix: ''
       suffix: ''
       attr: ''
     third_party_settings: {  }
+    weight: 4
+    region: content
   field_intro:
-    weight: 2
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 2
     region: content
   field_link:
-    weight: 3
+    type: link_class
     label: hidden
     settings:
-      trim_length: 80
       class: button
+      trim_length: 80
       url_only: false
       url_plain: false
       rel: '0'
@@ -128,21 +95,24 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
-    type: link_class
+    weight: 3
     region: content
   field_title_logo:
     type: media_thumbnail
-    weight: 1
     label: hidden
     settings:
-      image_style: 250_wide
       image_link: ''
+      image_style: 250_wide
+      image_loading:
+        attribute: lazy
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 1
     region: content
 hidden:
+  langcode: true
   search_api_excerpt: true

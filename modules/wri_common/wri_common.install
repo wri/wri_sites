@@ -1,0 +1,77 @@
+<?php
+
+/**
+ * @file
+ * Update hooks for wri_article.
+ */
+
+/**
+ * Enable the wri_text_block module.
+ */
+function wri_common_update_9401() {
+  // Import the config from core.
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.block_content.body', 'block_content', 'install');
+
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('wri_text_block')) {
+    \Drupal::service('module_installer')->install(['wri_text_block'], TRUE);
+  }
+}
+
+/**
+ * Enable the wri_latest_tweet module.
+ */
+function wri_common_update_9402() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('wri_latest_tweet')) {
+    \Drupal::service('module_installer')->install(['wri_latest_tweet'], TRUE);
+  }
+}
+
+/**
+ * Add the edit button to all media library elements.
+ */
+function wri_common_update_9501() {
+  $config_factory = \Drupal::service('config.factory');
+  // Find all core.entity_form_display config.
+  $all_config = $config_factory->listAll('core.entity_form_display');
+  $loaded_config = $config_factory->loadMultiple($all_config);
+  foreach ($loaded_config as $name => $config) {
+    // Find any config that uses the media_library module.
+    if ($config->get('dependencies.module') && in_array('media_library', $config->get('dependencies.module'))) {
+      $editable_config = $config_factory->getEditable($name);
+      $fields = $editable_config->get('content');
+      foreach ($fields as $field_name => $field) {
+        // Find any references to type: media_library_widget.
+        if (isset($field['type']) && $field['type'] == 'media_library_widget') {
+          // Add the edit button to the widget.
+          $field['third_party_settings'] = [
+            'media_library_edit' => [
+              'show_edit' => 1,
+            ],
+          ];
+
+          $editable_config->set('content.' . $field_name, $field);
+        }
+      }
+      // Save the config.
+      $editable_config->save();
+    }
+  }
+}
+
+/**
+ * Add the ckeditor_accordion module.
+ */
+function wri_common_update_9502() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('ckeditor_accordion')) {
+    \Drupal::service('module_installer')->install(['ckeditor_accordion'], TRUE);
+  }
+  // Add default Accordion settings.
+  \Drupal::service('distro_helper.updates')->installConfig('ckeditor_accordion.settings', 'wri_admin', 'install');
+  // Add Accordion to the full_html editor's buttons.
+  \Drupal::service('distro_helper.updates')->updateConfig('editor.editor.full_html', [
+    'settings#toolbar#rows',
+  ], 'wri_media', 'install');
+}

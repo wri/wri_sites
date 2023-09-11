@@ -9,10 +9,8 @@ dependencies:
     - text
 third_party_settings:
   allowed_formats:
-    basic_html: basic_html
-    full_html: '0'
-    unrestricted_text: '0'
-    plain_text: '0'
+    allowed_formats:
+      - basic_html
 id: node.person.field_title
 field_name: field_title
 entity_type: node
@@ -20,7 +18,7 @@ bundle: person
 label: 'Job Title'
 description: 'The title of this person.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

@@ -4,6 +4,7 @@ dependencies:
   config:
     - block_content.type.person_listing
     - field.field.block_content.person_listing.field_featured_experts
+    - field.field.block_content.person_listing.field_more_link
   module:
     - ds
 id: block_content.person_listing.default
@@ -13,8 +14,6 @@ mode: default
 content:
   field_featured_experts:
     type: entity_reference_entity_view
-    weight: 0
-    region: content
     label: above
     settings:
       view_mode: teaser
@@ -26,5 +25,9 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: content
 hidden:
+  field_more_link: true
+  langcode: true
   search_api_excerpt: true

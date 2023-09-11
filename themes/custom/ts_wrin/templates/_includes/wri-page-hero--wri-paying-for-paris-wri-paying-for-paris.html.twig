@@ -1,0 +1,55 @@
+<div {{ attributes.addClass('ds-1col', 'clearfix') }}>
+
+  {{ title_suffix.contextual_links }}
+  {# Header nav #}
+  {% if use_microsite_nav %}
+    {% include '@ts_wrin/_includes/_microsite-header.html.twig' %}
+  {% endif %}
+
+  {# New marquee hero #}
+  <div class="pfp-hero">
+
+    <div class="pfp-hero__wrap">
+      {# Image background #}
+      <div class="pfp-hero__background-image">
+        {% if content.hero_image %}
+          {% set responsiveimagestyle = {
+            '#theme': content.hero_image['#theme'],
+            '#responsive_image_style_id': 'paying_for_paris_splash',
+            '#uri': content.hero_image['#uri'],
+            '#attributes': content.hero_image['#attributes'],
+          } %}
+          {{ responsiveimagestyle }}
+        {% endif %}
+      </div>
+
+      {# Content #}
+      <div class="pfp-hero__content">
+
+        {# Headline #}
+        <div class="pfp-hero__headline">
+          <h1>{{ content.title }}</h1>
+        </div>
+
+        {# Buttons #}
+        {% if content.intro %}
+        <div class="pfp-hero__buttons">
+          <div>{{ content.intro }}</div>
+        </div>
+        {% endif %}
+      </div>
+
+      {# Scroll indicator #}
+      <div class="pfp-hero__scroll-indicator" aria-hidden="true">
+        <p>Scroll to Learn More</p>
+        <img class="pfp-hero__scroll-indicator__arrow" src="/profiles/contrib/wri_sites/themes/custom/ts_wrin/img/svgs/arrow-down.svg" alt="Downwards pointing arrow">
+      </div>
+    </div>
+
+  </div>
+</div>
+{% if content.content|render|striptags|trim is not empty %}
+  <div class="landing-page__hero__field-listing__mobile container content-side-padding padding-vertical white">
+    {{ content.content }}
+  </div>
+{% endif %}

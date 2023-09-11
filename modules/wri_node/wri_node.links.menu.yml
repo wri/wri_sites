@@ -1,0 +1,6 @@
+wri_node.settings:
+  title: WRI settings
+  description: Settings for the WRI Sites profile
+  parent: system.admin_config_content
+  route_name: wri_node.settings
+  weight: 10

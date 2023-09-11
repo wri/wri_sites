@@ -1,7 +1,7 @@
 name: 'WRI Maps'
 type: module
 description: 'Map config and code'
-core: 8.x
+core_version_requirement: '^8.8.0 || ^9'
 package: WRI
 dependencies:
   - simple_popup_blocks

@@ -5,12 +5,20 @@
  * Functions to support theming in the ts_grid theme.
  */
 
-use Drupal\Core\Datetime\DrupalDateTime;
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\node\NodeInterface;
 use Drupal\Component\Utility\Html;
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\node\NodeInterface;
 use Drupal\wri_node\General;
-use Drupal\taxonomy\Entity\Term;
+
+/**
+ * Implements hook_preprocess().
+ */
+function ts_wrin_preprocess(array &$variables) {
+  if (NULL != theme_get_setting('white_logo.path')) {
+    $logo_path = theme_get_setting('white_logo.path');
+    $variables['footer_logo'] = \Drupal::service('file_url_generator')->transformRelative(file_create_url($logo_path));
+  }
+}
 
 /**
  * Implements hook_preprocess_HOOK() for html.html.twig.
@@ -18,7 +26,7 @@ use Drupal\taxonomy\Entity\Term;
 function ts_wrin_preprocess_html(array &$variables) {
   // Adds a URL query (?show-grid=1) that makes the theming grid guide visible.
   $variables['show_grid'] = \Drupal::request()->query->get('show-grid');
-  $current_classes = isset($variables['attributes']['class']) ? $variables['attributes']['class'] : [];
+  $current_classes = $variables['attributes']['class'] ?? [];
   // Is field_transparent_header checked?
   $variables['attributes']['class'] = array_merge($current_classes, General::$htmlClasses);
 
@@ -29,7 +37,9 @@ function ts_wrin_preprocess_html(array &$variables) {
 
       switch ($node->getType()) {
         case 'program_center':
+        case 'microsite':
         case 'project_detail':
+        case 'subpage':
           $variables['attributes']['class'][] = 'transparent-header white';
           break;
 
@@ -65,29 +75,6 @@ function ts_wrin_preprocess_html(array &$variables) {
 }
 
 /**
- * Implements hook_form_FORM_ID_alter().
- */
-function ts_wrin_form_views_exposed_form_alter(&$form, FormStateInterface $form_state) {
-
-}
-
-/**
- * Implements hook_form_alter().
- */
-function ts_wrin_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-
-}
-
-/**
- * Implements hook_theme_suggestions_form_element_alter().
- *
- * Allows us to theme selects.
- */
-function ts_wrin_theme_suggestions_form_element_alter(array &$suggestions, array $variables, $hook) {
-
-}
-
-/**
  * Implements hook_theme_suggestions_container_alter().
  *
  * Make Views containers available for theme sugestions.
@@ -111,24 +98,48 @@ function ts_wrin_preprocess_page(array &$variables) {
   if (str_starts_with($current_route_name, 'view.')) {
     $variables['is_node'] = TRUE;
   }
+
+  $status = \Drupal::requestStack()->getCurrentRequest()->attributes->get('exception');
+  if ($status && ($status->getStatusCode() == 403 || $status->getStatusCode() == 404)) {
+    $variables['is_node'] = TRUE;
+  }
+
+  $variables['use_microsite_nav'] = $variables['use_microsite_nav'] ?? FALSE;
+  // See if it has a Theme that overwrites the header.
+  if (isset($variables['node']) && ($node = $variables['node'])) {
+    // Option 1: Subpage.
+    if (isset($node->field_parent_page->entity->field_theme->entity->field_header_region->value) && $node->field_parent_page->entity->field_theme->entity->field_header_region->value === 'microsite_nav') {
+      $variables['use_microsite_nav'] = TRUE;
+    }
+    // Option 2: Microsite.
+    if (isset($node->field_theme->entity->field_header_region->value) && $node->field_theme->entity->field_header_region->value === 'microsite_nav') {
+      $variables['use_microsite_nav'] = TRUE;
+    }
+    // Add the library if parent has one.
+    if (isset($node->field_theme->entity->field_library->value)) {
+      $variables['#attached']['library'][] = $node->field_theme->entity->field_library->value;
+    }
+    // Add the library if parent has one.
+    if (isset($node->field_parent_page->entity->field_theme->entity->field_library->value)) {
+      $variables['#attached']['library'][] = $node->field_parent_page->entity->field_theme->entity->field_library->value;
+    }
+  }
 }
 
 /**
  * Implements hook_theme_suggestions_page_alter().
  */
 function ts_wrin_theme_suggestions_page_alter(array &$suggestions, array $variables) {
-
-}
-
-/**
- * Implements hook_theme_suggestions_node_alter().
- */
-function ts_wrin_theme_suggestions_node_alter(array &$suggestions, array $variables) {
-  /*$node = $variables['elements']['#node'];
-
-  if ($variables['elements']['#view_mode'] == "full") {
-
-  }*/
+  // Allow page-level template suggestions.
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    $suggestions[] = 'page__' . $node->bundle();
+  }
+  if (isset($node->field_parent_page)) {
+    $parent = $node->field_parent_page->entity;
+    if ($parent && 'microsite' == $parent->bundle()) {
+      $suggestions[] = 'page__microsite';
+    }
+  }
 }
 
 /**
@@ -139,6 +150,13 @@ function ts_wrin_preprocess_field(array &$variables) {
   if ($variables['field_type'] == 'entity_reference' && isset($variables["items"][0]["content"]["#block_content"]) && isset($variables["element"][0]["#attributes"]["class"])) {
     $variables["attributes"]["class"] = $variables["element"][0]["#attributes"]["class"];
     $variables["attributes"]["class"][] = 'block';
+  }
+  // Add 'Show More Link' value to Featured Experts field.
+  if ($variables['element']['#field_name'] == 'field_featured_experts') {
+    $object = $variables['element']['#object'];
+    if (isset($object->field_show_more_link)) {
+      $variables["show_more_link"] = $object->field_show_more_link->value;
+    }
   }
 }
 
@@ -152,14 +170,14 @@ function ts_wrin_preprocess_block(array &$variables) {
   ];
   if ($variables['plugin_id'] == 'menu_block:main' && isset($variables["content"]["#items"])) {
     foreach ($variables["content"]["#items"] as $item) {
-      if ($item['in_active_trail']) {
+      if ($item['in_active_trail'] && $item['is_expanded']) {
         $variables['attributes']['class'][] = 'has-active-trail';
         break;
       }
     }
   }
   // Handle the case of a hero with a transparent background.
-  if (isset($variables["content"]['#entity']->field_hero_background->value)) {
+  if (isset($variables["content"]['#block_content']->field_hero_background->value)) {
     General::$htmlClasses[] = 'transparent-header';
   }
   if (in_array($variables['derivative_plugin_id'], $unfriendly_block_types)) {
@@ -168,6 +186,15 @@ function ts_wrin_preprocess_block(array &$variables) {
   // Adds the field name as a class on a block.
   if ($variables['base_plugin_id'] == 'field_block' && isset($variables["content"][0]["#field_name"])) {
     $variables['attributes']['class'][] = Html::getClass($variables["content"][0]["#field_name"]);
+  }
+
+  if (NULL != theme_get_setting('white_logo.path')) {
+    $logo_path = theme_get_setting('white_logo.path');
+    $variables['white_logo'] = \Drupal::service('file_url_generator')->transformRelative(file_create_url($logo_path));
+  }
+
+  if ($variables['plugin_id'] == 'inline_block:person_listing') {
+    $variables["content"]["field_featured_experts"]["#title"] = $variables["elements"]["#configuration"]["label"];
   }
 }
 
@@ -181,34 +208,6 @@ function ts_wrin_theme_suggestions_block_alter(array &$suggestions, array $varia
   if (isset($variables["elements"]["content"]["#name"]) && $variables["elements"]["content"]["#name"] == 'authored_by') {
     $suggestions[] = 'block__views_block__authored_by_shared';
   }
-}
-
-/**
- * Implements hook_theme_suggestions_field_alter().
- */
-function ts_wrin_theme_suggestions_field_alter(array &$suggestions, array $variables) {
-  /*$element = $variables['element'];
-  $suggestions[] = 'field__' . $element['#view_mode'];
-  $suggestions[] = 'field__' . $element['#view_mode'] . '__' . $element['#field_name'];*/
-}
-
-/**
- * Implements hook_theme_suggestions_field_alter().
- */
-function ts_wrin_theme_suggestions_fieldset_alter(array &$suggestions, array $variables) {
-  /*$element = $variables['element'];
-  if (isset($element['#attributes']['class']) &&
-  in_array('form-composite', $element['#attributes']['class'])) {
-  $suggestions[] = 'fieldset__form_composite';
-  }*/
-}
-
-/**
- * Implements hook_preprocess_node().
- */
-function ts_wrin_preprocess_node(array &$variables) {
-  // Default to turning off byline/submitted.
-  // $variables['display_submitted'] = FALSE;.
 }
 
 /**
@@ -236,42 +235,6 @@ function ts_wrin_preprocess_views_view(array &$variables) {
 }
 
 /**
- * Implements hook_preprocess_form().
- */
-function ts_wrin_preprocess_form(array &$variables) {
-  // $variables['attributes']['novalidate'] = 'novalidate';.
-}
-
-/**
- * Implements hook_preprocess_select().
- */
-function ts_wrin_preprocess_select(array &$variables) {
-  // $variables['attributes']['class'][] = 'select-chosen';.
-}
-
-/**
- * Implements hook_preprocess_details().
- */
-function ts_wrin_preprocess_details(array &$variables) {
-  /*$variables['attributes']['class'][] = 'details';
-  $variables['summary_attributes']['class'] = 'summary';*/
-}
-
-/**
- * Implements hook_theme_suggestions_details_alter().
- */
-function ts_wrin_theme_suggestions_details_alter(array &$suggestions, array $variables) {
-
-}
-
-/**
- * Implements hook_preprocess_menu_local_task().
- */
-function ts_wrin_preprocess_menu_local_task(array &$variables) {
-
-}
-
-/**
  * Implements hook_page_attachments_alter().
  */
 function ts_wrin_page_attachments_alter(array &$attachments) {
@@ -283,14 +246,57 @@ function ts_wrin_page_attachments_alter(array &$attachments) {
 }
 
 /**
- * Implements hook_preprocess_HOOK.
+ * Implements hook_theme_suggestions_views_view_alter().
  */
-function ts_wrin_preprocess_download_modal(&$variables) {
-  // Add hidden field with primary topic, if set.
-  if ($variables['content']['#object']->field_primary_topic->target_id) {
-    $variables['primary_topic'] = Term::load($variables['content']['#object']->field_primary_topic->target_id)->getName();
+function ts_wrin_theme_suggestions_views_view_list_alter(array &$suggestions, array $variables) {
+  $current_view = $variables['view']->current_display;
+  $current_id = $variables['view']->id();
+  $current_display_type = $variables["view"]->display_handler->getPluginId();
+  $suggestions[] = 'views_view_list__' . $current_display_type;
+  $suggestions[] = 'views_view_list__' . $current_id;
+  $suggestions[] = 'views_view_list__' . $current_id . '__' . $current_view;
+}
+
+/**
+ * Implements hook_preprocess_wri_subpage_columns().
+ */
+function ts_wrin_preprocess_wri_subpage_columns(&$variables) {
+  // If the Microsite's theme indicates a child page should show its own header,
+  // hide the Long Title from the parent page.
+  if (($node = $variables["content"]["#node"]) && isset($node->field_theme->entity->field_child_hero_style->value) && $node->field_theme->entity->field_child_hero_style->value == 'self') {
+    $variables["content"]["hero"]["field_long_title"]['#access'] = FALSE;
+    $variables["content"]["hero"]["childimg"][0][0]["#responsive_image_style_id"] = 'paying_for_paris_subpage';
   }
-  else {
-    $variables['primary_topic'] = 'Not set';
+  // The Microsite's theme wants us not to use the default microsite nav.
+  if (($node = $variables["content"]["#node"]) && isset($node->field_theme->entity->field_header_region->value) && $node->field_theme->entity->field_header_region->value === 'microsite_nav') {
+    $variables['use_microsite_nav'] = TRUE;
   }
+}
+
+/**
+ * Implements hook_preprocess_layout__onecol().
+ */
+function ts_wrin_preprocess_layout__onecol(array &$variables) {
+  if (isset($variables['content']['#paragraph']) && $variables['content']['#paragraph']->getType() == 'accordion_item') {
+    $variables['hash_id'] = Html::getUniqueId('section-' . $variables['content']['#paragraph']->field_title->value);
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_menu_alter().
+ */
+function ts_wrin_theme_suggestions_menu_alter(array &$suggestions, array $variables) {
+  // If a menu contains a menu--extras.html.twig reference, move that to right
+  // after the original hook_menu suggestion so that block menus can be more
+  // specific.
+  $menu_extras = $new_suggestions = [];
+  foreach ($suggestions as $suggestion) {
+    if (strpos($suggestion, 'menu__extras') === 0) {
+      $menu_extras[] = $suggestion;
+    }
+    else {
+      $new_suggestions[] = $suggestion;
+    }
+  }
+  $suggestions = array_merge($menu_extras, $new_suggestions);
 }

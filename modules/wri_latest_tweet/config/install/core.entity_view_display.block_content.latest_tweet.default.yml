@@ -1,0 +1,95 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.latest_tweet
+    - field.field.block_content.latest_tweet.field_intro
+    - field.field.block_content.latest_tweet.field_twitter_user
+  module:
+    - ds
+    - text
+    - wri_latest_tweet
+third_party_settings:
+  ds:
+    layout:
+      id: 'single_file_component_layout:wri_listing'
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        component_context: {  }
+    regions:
+      header:
+        - block_label
+      subheader:
+        - field_intro
+        - link_to_twitter
+      intro:
+        - field_twitter_user
+    fields:
+      block_label:
+        plugin_id: block_label
+        weight: 0
+        label: hidden
+        formatter: default
+      link_to_twitter:
+        plugin_id: link_to_twitter
+        weight: 0
+        label: hidden
+        formatter: default
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: false
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: p
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+id: block_content.latest_tweet.default
+targetEntityType: block_content
+bundle: latest_tweet
+mode: default
+content:
+  field_intro:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: subheader
+  field_twitter_user:
+    type: wri_latest_tweet_latesttweet
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: default
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    weight: 0
+    region: intro
+hidden:
+  langcode: true
+  search_api_excerpt: true

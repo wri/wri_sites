@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * @file
+ * Update hooks for search.
+ */
+
+/**
+ * Splits the Experts and Staff views up to avoid facet caching issues.
+ */
+function wri_search_update_8902() {
+  // Step 1: Remove the page_1 display from the experts_staff view.
+  $config_factory = \Drupal::configFactory();
+
+  // Load the view.
+  $view = $config_factory->getEditable('views.view.experts_staff');
+
+  // Go through each display on each view.
+  $displays = $view->get('display');
+  unset($displays['page_1']);
+  $view->set('display', $displays);
+  $view->save(TRUE);
+
+  // Add the Type Name field to search.
+  \Drupal::service('distro_helper.updates')->updateConfig('search_api.index.sitewide', ['field_settings#type_name'], 'wri_search');
+
+  // Add the new view.
+  \Drupal::service('distro_helper.updates')->installConfig('views.view.project_experts', 'wri_search');
+
+  $message = 'Split the Experts view into Staff and Project experts.';
+  return $message;
+}
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_search_update_dependencies() {
+  // We must have the distro_helper module
+  // before we can run the 8902 update hook.
+  $dependencies['wri_search'][8902] = [
+    'wri_sites' => 8908,
+  ];
+
+  return $dependencies;
+}
+
+/**
+ * Adds relevance to the person search, and filters by all phrases.
+ */
+function wri_search_update_9501() {
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.experts_staff', [
+    'display#default#display_options#filters#search_api_fulltext',
+    'display#default#display_options#sorts#search_api_relevance',
+  ], 'wri_search');
+}

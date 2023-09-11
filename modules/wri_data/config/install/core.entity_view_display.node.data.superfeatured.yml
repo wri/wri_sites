@@ -32,24 +32,24 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   ds:
     layout:
       id: 'single_file_component_layout:wri_superfeatured'
+      settings:
+        label: ''
       library: null
       disable_css: false
       entity_classes: all_classes
-      settings:
-        component_context: {  }
     regions:
-      image:
-        - field_media
       left_text:
         - field_primary_topic
         - field_featured_headline
       button:
         - field_platform_link
+      image:
+        - field_media
       right_text:
         - field_featured_text
 id: node.data.superfeatured
@@ -58,7 +58,7 @@ bundle: data
 mode: superfeatured
 content:
   field_featured_headline:
-    weight: 1
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings:
@@ -67,89 +67,40 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
             fis: true
             fis-el: h2
             fis-cl: card-h2
             fis-at: ''
+            fis-def-at: false
             fi: true
             fi-el: a
             fi-cl: ''
             fi-at: 'href="[node:url]"'
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow: false
-            ow-def-at: false
-            ow-def-cl: false
-            fis-def-at: false
             fi-def-at: false
-    type: text_default
+            prefix: ''
+            suffix: ''
+    weight: 1
     region: left_text
   field_featured_text:
-    weight: 3
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 3
     region: right_text
-  field_main_image:
-    weight: 0
-    label: hidden
-    settings:
-      image_style: ''
-      responsive_image_style: superfeatured
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: superfeatured
-      current_view_mode: superfeatured
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
-    third_party_settings:
-      ds:
-        ft:
-          id: reset
-          settings:
-            lb: ''
-    type: blazy_media
-    region: content
   field_media:
     type: entity_reference_entity_view
-    weight: 0
-    region: image
     label: hidden
     settings:
       view_mode: superfeatured
@@ -160,14 +111,14 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 1
+    region: image
   field_platform_link:
     type: link_class
-    weight: 0
-    region: button
     label: hidden
     settings:
-      trim_length: 80
       class: button
+      trim_length: 80
       url_only: false
       url_plain: false
       rel: '0'
@@ -178,31 +129,33 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow: false
             ow-def-at: false
             ow-def-cl: false
             fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
             fis-def-at: false
             fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
             fi-def-at: false
-  field_primary_topic:
+            prefix: ''
+            suffix: ''
     weight: 0
+    region: button
+  field_primary_topic:
+    type: entity_reference_label
     label: hidden
     settings:
       link: true
@@ -212,30 +165,30 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
             fis: true
             fis-el: div
             fis-cl: topic-tag
             fis-at: ''
+            fis-def-at: false
+            fi: false
             fi-el: ''
             fi-cl: ''
             fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow: false
-            ow-def-at: false
-            ow-def-cl: false
-            fis-def-at: false
-            fi: false
             fi-def-at: false
-    type: entity_reference_label
+            prefix: ''
+            suffix: ''
+    weight: 0
     region: left_text
 hidden:
   body: true
@@ -256,6 +209,7 @@ hidden:
   field_related_resources: true
   field_tags: true
   field_type: true
+  langcode: true
   layout_builder__layout: true
   links: true
   search_api_excerpt: true

@@ -1,0 +1,13 @@
+name: 'WRI 3+1 block'
+type: module
+description: 'Provides 3+1 block functionality'
+core_version_requirement: '^8.8.0 || ^9'
+package: WRI
+dependencies:
+  - layout_builder_modal
+config_devel:
+  install:
+    - block_content.type.text_block
+    - core.entity_form_display.block_content.text_block.default
+    - core.entity_view_display.block_content.text_block.default
+    - field.field.block_content.text_block.body

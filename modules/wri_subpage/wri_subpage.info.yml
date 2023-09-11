@@ -10,7 +10,6 @@ config_devel:
     - core.entity_form_display.node.subpage.default
     - core.entity_view_display.node.subpage.default
     - core.entity_view_display.node.subpage.full
-    - core.entity_view_display.node.subpage.hero_on_a_subpage
     - core.entity_view_display.node.subpage.impact
     - core.entity_view_display.node.subpage.main_content
     - core.entity_view_display.node.subpage.search_results

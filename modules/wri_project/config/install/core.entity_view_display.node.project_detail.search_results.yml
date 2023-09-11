@@ -20,6 +20,7 @@ dependencies:
     - field.field.node.project_detail.field_primary_topic
     - field.field.node.project_detail.field_project_partners
     - field.field.node.project_detail.field_region
+    - field.field.node.project_detail.field_show_more_link
     - field.field.node.project_detail.field_tags
     - field.field.node.project_detail.field_toc
     - field.field.node.project_detail.field_twitter_account
@@ -28,20 +29,20 @@ dependencies:
     - image.style.150_tall
     - node.type.project_detail
   module:
-    - blazy
     - ds
     - hierarchical_term_formatter
+    - media
     - taxonomy
     - user
 third_party_settings:
   ds:
     layout:
       id: layout_search-results
+      settings:
+        label: ''
       library: null
       disable_css: false
       entity_classes: all_classes
-      settings:
-        label: ''
     regions:
       left_section:
         - field_primary_topic
@@ -77,56 +78,23 @@ bundle: project_detail
 mode: search_results
 content:
   field_main_image:
-    type: blazy_media
-    weight: 5
-    region: right_section
+    type: media_thumbnail
     label: hidden
     settings:
+      image_link: ''
       image_style: 150_tall
-      responsive_image_style: ''
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: search_results
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_loading:
+        attribute: lazy
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 5
+    region: right_section
   field_primary_topic:
     type: hierarchical_term_formatter
-    weight: 0
-    region: left_section
     label: hidden
     settings:
       display: root
@@ -140,23 +108,23 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: left_section
   field_tags:
     type: entity_reference_rss_category
-    weight: 2
-    region: main_section
     label: above
     settings: {  }
     third_party_settings: {  }
+    weight: 2
+    region: main_section
   field_type:
     type: hierarchical_term_formatter
-    weight: 1
-    region: left_section
     label: hidden
     settings:
       display: root
+      link: false
       wrap: none
       separator: ' » '
-      link: false
       reverse: false
     third_party_settings:
       ds:
@@ -164,6 +132,8 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 1
+    region: left_section
 hidden:
   body: true
   content_moderation_control: true
@@ -181,8 +151,10 @@ hidden:
   field_primary_contacts: true
   field_project_partners: true
   field_region: true
+  field_show_more_link: true
   field_toc: true
   field_twitter_account: true
+  langcode: true
   layout_builder__layout: true
   links: true
   search_api_excerpt: true

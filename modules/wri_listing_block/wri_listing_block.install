@@ -1,0 +1,148 @@
+<?php
+
+/**
+ * @file
+ * The Listing arguments install and update hooks.
+ */
+
+use Drupal\Core\Config\FileStorage;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+
+/**
+ * Updates Listing arguments to allow multiple values in.
+ */
+function wri_listing_block_update_9401() {
+  // Import the updated value:
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.listing_block.field_listing', [
+    'default_value',
+    'arguments',
+  ], 'wri_listing_block');
+
+  // Import the updated views to allow multiples for the "Type" field:
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.content_listing', [
+    'display',
+    'default',
+    'display_options',
+    'arguments',
+    'term_node_tid_depth_1',
+    'break_phrase',
+  ], 'wri_listing_block');
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.content_listing_a_to_z', [
+    'display',
+    'default',
+    'display_options',
+    'arguments',
+    'field_type_target_id',
+    'break_phrase',
+  ], 'wri_listing_block');
+
+  // Load all projects with the listing_block having the old value.
+  $old_value = '[bc:field_content_types:array:target_id:join:+]/[bc:field_featured:array:target_id:join:+]/[bc:field_filter_by_region:target_id]/[bc:field_filter_by_resource_type:target_id]/[bc:field_tag:target_id]/[bc:field_filter_by_tag:target_id]';
+
+  // Save all existing blocks with the new value.
+  $definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('block_content', 'listing_block');
+  if (isset($definitions['field_listing'])) {
+    $default_value = $definitions['field_listing']->getDefaultValueLiteral();
+    $default_value_string = $default_value[0]['arguments'];
+
+    $database = \Drupal::database();
+    $database->update('block_content__field_listing')
+      ->fields([
+        'field_listing_arguments' => $default_value_string,
+      ])
+      ->condition('field_listing_arguments', $old_value)
+      ->execute();
+    $database->update('block_content_revision__field_listing')
+      ->fields([
+        'field_listing_arguments' => $default_value_string,
+      ])
+      ->condition('field_listing_arguments', $old_value)
+      ->execute();
+  }
+  else {
+    throw new UpdateException('This should be run after importing the field_listing to the listing_block block type.');
+  }
+
+}
+
+/**
+ * Updates Listing arguments to use our config snippet.
+ */
+function wri_listing_block_update_9501() {
+  // Import the content_snippets:
+  \Drupal::service('distro_helper.updates')->updateConfig('content_snippets.content', ['snippets'], 'wri_listing_block');
+  \Drupal::service('distro_helper.updates')->updateConfig('content_snippets.items', [
+    'the_content_listing_view_arguments',
+    'narrative_taxonomy_view_arguments',
+    '3_1_view_arguments',
+  ], 'wri_admin');
+
+  // Import the updated value:
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.listing_block.field_listing', [
+    'default_value#0#arguments',
+  ], 'wri_listing_block');
+
+  // Import the updated views to allow multiples for the "Type" field:
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.content_listing', [
+    'display#default#display_options#arguments',
+    'display#podcasts#display_options#arguments',
+  ], 'wri_listing_block');
+
+  // Import the updated views to allow multiples for the "Type" field:
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.content_listing_a_to_z', [
+    'display#default#display_options#arguments',
+  ], 'wri_listing_block');
+
+  // Load all projects with the listing_block having the old value.
+  $old_value = '[bc:field_content_types:array:target_id:join:+]/[bc:field_featured:array:target_id:join:+]/[bc:field_filter_by_region:target_id]/[bc:field_filter_by_resource_type:array:target_id:join:+]/[bc:field_tag:target_id]/[bc:field_filter_by_tag:target_id]';
+
+  // Save all existing blocks with the new value.
+  $definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('block_content', 'listing_block');
+  if (isset($definitions['field_listing'])) {
+    $default_value = $definitions['field_listing']->getDefaultValueLiteral();
+    $default_value_string = $default_value[0]['arguments'];
+
+    $database = \Drupal::database();
+    $database->update('block_content__field_listing')
+      ->fields([
+        'field_listing_arguments' => $default_value_string,
+      ])
+      ->condition('field_listing_arguments', $old_value)
+      ->execute();
+    $database->update('block_content_revision__field_listing')
+      ->fields([
+        'field_listing_arguments' => $default_value_string,
+      ])
+      ->condition('field_listing_arguments', $old_value)
+      ->execute();
+  }
+  else {
+    throw new UpdateException('This should be run after importing the field_listing to the listing_block block type.');
+  }
+
+}
+
+/**
+ * Adds the Filter by Project field to listing blocks.
+ */
+function wri_listing_block_update_9502() {
+  // Import the new field storage and form display so they appear in /config.
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.block_content.field_filter_by_project', 'wri_block', 'install', TRUE);
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.listing_block.field_filter_by_project', 'wri_listing_block', 'install', TRUE);
+
+  // Hack -- immediately delete the active config.
+  Drupal::configFactory()->getEditable('field.storage.block_content.field_filter_by_project')->delete();
+  Drupal::configFactory()->getEditable('field.field.block_content.listing_block.field_filter_by_project')->delete();
+
+  // Programmatically save the fields.
+  $config_directory = new FileStorage('../config');
+  $field_storage_name = 'field.storage.block_content.field_filter_by_project';
+  $config_record = $config_directory->read($field_storage_name);
+  FieldStorageConfig::create($config_record)->save();
+  $field_config_name = 'field.field.block_content.listing_block.field_filter_by_project';
+  $config_record = $config_directory->read($field_config_name);
+  FieldConfig::create($config_record)->save();
+
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.block_content.listing_block.default', ['content#field_filter_by_project'], 'wri_listing_block');
+}

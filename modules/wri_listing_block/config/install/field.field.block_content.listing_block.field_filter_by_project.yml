@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.listing_block
+    - field.storage.block_content.field_filter_by_project
+    - node.type.project_detail
+id: block_content.listing_block.field_filter_by_project
+field_name: field_filter_by_project
+entity_type: block_content
+bundle: listing_block
+label: 'Filter by Project'
+description: '<b>Warning</b>: If you filter by a Project, you should also manually overwrite the "More Link" field by unchecking "Generate url from other fields", as the /resources page does not allow filtering by Project. You can link to the project''s resource by using /project-resources/[the-project-id], or empty out the More link url entirely.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      project_detail: project_detail
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

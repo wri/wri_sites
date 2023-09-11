@@ -3,4 +3,10 @@ status: true
 dependencies: {  }
 id: node__data
 label: 'Content: Data'
-tags: {  }
+tags:
+  image_src: '[node:field_media:entity:field_media_image:1440x550]'
+  og_image_alt: '[node:field_media:entity:field_media_image:1440x550:alt]'
+  og_image_width: '[node:field_media:entity:field_media_image:1440x550:width]'
+  og_image_height: '[node:field_media:entity:field_media_image:1440x550:height]'
+  og_image: '[node:field_media:entity:field_media_image:1440x550]'
+  twitter_cards_image: '[node:field_media:entity:field_media_image:1440x550]'

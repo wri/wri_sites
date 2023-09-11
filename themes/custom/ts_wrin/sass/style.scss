@@ -1,16 +1,76 @@
 /* autoprefixer grid: autoplace */
 
 /* CONFIG */
-@import "config/*.scss";
+@import "config/_01.vars.scss";
+@import "config/_02.mixins.scss";
+@import "config/_03.extends.scss";
+@import "config/_04.base.scss";
+@import "config/_05.buttons.scss";
+@import "config/_06.forms.scss";
 
 /* LAYOUT */
-@import "layout/*.scss";
+@import "layout/page.scss";
+@import "layout/vertical-spacing.scss";
 
 /* GLOBAL */
-@import "global/*.scss";
+@import "global/footer.scss";
+@import "global/header.scss";
+@import "global/tabs.scss";
+@import "global/tray-nav.scss";
+@import "global/ts-hamburger-menu.scss";
+@import "global/wysiwyg.scss";
 
 /* COMPONENTS */
-@import "components/*.scss";
+@import "components/3-and-1-block.scss";
+@import "components/addresses.scss";
+@import "components/accordion.scss";
+@import "components/article-detail.scss";
+@import "components/breadcrumb.scss";
+@import "components/cards.scss";
+@import "components/content-card-listing.scss";
+@import "components/content-listing.scss";
+@import "components/data-detail.scss";
+@import "components/detail-meta.scss";
+@import "components/events.scss";
+@import "components/featured_tweet.scss";
+@import "components/gdpr.scss";
+@import "components/homepage.scss";
+@import "components/image-cta-block.scss";
+@import "components/impact-block.scss";
+@import "components/io-landing.scss";
+@import "components/landing-hero.scss";
+@import "components/language-switcher.scss";
+@import "components/large-cta-block.scss";
+@import "components/latest-tweet.scss";
+@import "components/layout-builder.scss";
+@import "components/media.scss";
+@import "components/more-on.scss";
+@import "components/narrative_taxonomy.scss";
+@import "components/person.scss";
+@import "components/podcasts-listing.scss";
+@import "components/popup_modal.scss";
+@import "components/program-listing.scss";
+@import "components/programs.scss";
+@import "components/project-detail.scss";
+@import "components/project-partners.scss";
+@import "components/publication-detail.scss";
+@import "components/region-detail.scss";
+@import "components/region-map.scss";
+@import "components/region-map-popup.scss";
+@import "components/related-content.scss";
+@import "components/search-archive.scss";
+@import "components/search-results.scss";
+@import "components/simple-page.scss";
+@import "components/simple-popup-blocks.scss";
+@import "components/small-cta-block.scss";
+@import "components/social-sharing_block.scss";
+@import "components/superfeatured.scss";
+@import "components/teaser.scss";
+@import "components/tiles.scss";
+@import "components/toc.scss";
+@import "components/topic-filter.scss";
+@import "components/trending-topics.scss";
+@import "components/unique-feature.scss";
 
 /* PRINT */
 @import "print.scss";

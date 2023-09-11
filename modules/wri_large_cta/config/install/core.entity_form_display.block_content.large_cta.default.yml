@@ -15,20 +15,24 @@ bundle: large_cta
 mode: default
 content:
   field_cta_background:
+    type: options_select
     weight: 0
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_image:
+    type: media_library_widget
     weight: 2
+    region: content
     settings:
       media_types: {  }
-    third_party_settings: {  }
-    type: media_library_widget
-    region: content
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
   field_link:
+    type: link_attributes
     weight: 1
+    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -40,7 +44,12 @@ content:
         class: true
         accesskey: false
     third_party_settings: {  }
-    type: link_attributes
+  langcode:
+    type: language_select
+    weight: 2
     region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
 hidden:
   info: true

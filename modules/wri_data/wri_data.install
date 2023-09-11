@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Update hooks for wri_data.
+ */
+
+/**
+ * Update the data display configs to remove blazy.
+ */
+function wri_data_update_9301() {
+
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.data.card', 'wri_data', 'install', 'TRUE');
+
+  $message = 'Remove blazy, responsive image';
+  return $message;
+}
+
+/**
+ * Update the narrative taxonomy to use a link token on Data.
+ */
+function wri_data_update_9501() {
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.data.field_narrative_taxonomy', 'wri_data', 'install', 'TRUE');
+}
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_data_update_dependencies() {
+  // We must have the distro_helper module before we can run the 9301 update.
+  $dependencies['wri_data'][9301] = [
+    'wri_sites' => 8908,
+  ];
+
+  return $dependencies;
+}

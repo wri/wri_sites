@@ -142,12 +142,15 @@ layout_hero-and-content:
   default_region: hero-and-content
   icon_map:
     - [hero]
-    - [content]
+    - [hero_text]
+    - [featured_image, content]
   regions:
     hero_image:
       label: Hero Image
     hero_text:
       label: Hero Text
+    featured_image:
+      label: Logo
     content:
       label: Content
 
@@ -264,3 +267,23 @@ layout_impact-block:
       label: Title
     content:
       label: Content
+
+single_file_component_layout:wri_page_hero:
+  label: "Page hero"
+  template: templates/wri-page-hero
+  regions:
+    content:
+      label: Content
+  icon_map:
+    - [content]
+  default_region: content
+
+single_file_component_layout:wri_page_main_content:
+  label: "Main page content"
+  template: templates/wri-main-page-content
+  regions:
+    content:
+      label: Content
+  icon_map:
+    - [content]
+  default_region: content

@@ -14,22 +14,22 @@ bundle: homepage_hero
 label: 'Featured statement'
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       featured_statement: featured_statement
+    negate: 0
     target_bundles_drag_drop:
       default_hero:
         weight: 5
         enabled: false
       featured_statement:
-        enabled: true
         weight: 6
+        enabled: true
       happening_now:
         weight: 7
         enabled: false

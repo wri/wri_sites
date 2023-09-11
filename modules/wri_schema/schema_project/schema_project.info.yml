@@ -1,7 +1,7 @@
 name: 'Schema Project'
 type: module
 description: 'Schema Plugins for the Project tags'
-core: 8.x
+core_version_requirement: '^8.8.0 || ^9'
 package: 'WRI'
 dependencies:
   - schema_metatag

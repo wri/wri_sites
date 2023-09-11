@@ -12,13 +12,14 @@ dependencies:
     - field.field.node.international_office.field_metatags
     - field.field.node.international_office.field_offices
     - field.field.node.international_office.field_region
+    - field.field.node.international_office.field_show_more_link
     - field.field.node.international_office.layout_builder__layout
     - image.style.150_tall
     - node.type.international_office
   module:
-    - blazy
     - ds
     - layout_builder
+    - media
     - user
 third_party_settings:
   ds:
@@ -63,68 +64,37 @@ third_party_settings:
           settings:
             lb: ''
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: node.international_office.search_results
 targetEntityType: node
 bundle: international_office
 mode: search_results
 content:
   field_main_image:
-    type: blazy_media
-    weight: 4
-    region: right_section
+    type: media_thumbnail
     label: hidden
     settings:
+      image_link: ''
       image_style: 150_tall
-      responsive_image_style: ''
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: search_results
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_loading:
+        attribute: lazy
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 4
+    region: right_section
   field_region:
     type: entity_reference_label
-    weight: 0
-    region: left_section
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
+    weight: 0
+    region: left_section
 hidden:
   body: true
   content_moderation_control: true
@@ -135,7 +105,9 @@ hidden:
   field_map_image: true
   field_metatags: true
   field_offices: true
+  field_show_more_link: true
   field_transparent_header: true
+  langcode: true
   layout_builder__layout: true
   links: true
   search_api_excerpt: true

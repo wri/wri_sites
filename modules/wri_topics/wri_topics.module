@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Contains wri_topics.module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function wri_topics_theme() {
+  return [
+    'wri_topics_block' => [
+      'variables' => [
+        'topic_intro_text' => '',
+        'hide_centers' => '',
+      ],
+    ],
+  ];
+}

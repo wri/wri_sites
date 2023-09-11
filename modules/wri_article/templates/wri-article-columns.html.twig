@@ -1,0 +1,78 @@
+{% if content %}
+<div class="article">
+  {% if content.hero %}
+  <div {{ region_attributes.hero.addClass('layout__region', 'layout__region--hero') }}>
+    <div class="centering">
+    {{ content.hero }}
+    </div>
+  </div>
+  {% endif %}
+  <div{{ attributes.addClass('grid','article__title', 'margin-bottom-sm') }}>
+    {% if content.title %}
+    <div {{ region_attributes.title.addClass('layout__region', 'layout__region--title', 'full-width') }}>
+    {{ content.title }}
+    </div>
+    {% endif %}
+
+    {% if content.byline %}
+    <div {{ region_attributes.byline.addClass('layout__region', 'layout__region--byline', 'full-width') }}>
+    {{ content.byline }}
+    </div>
+    {% endif %}
+  </div>
+
+  {% if content.bundle or content.category or content.share %}
+  <div class="article__meta grid">
+    {% if content.bundle %}
+    <div {{ region_attributes.bundle.addClass('layout__region', 'layout__region--bundle', 'left-sidebar') }}>
+      {{ content.bundle }}
+    </div>
+    {% endif %}
+
+    {% if content.category %}
+    <div {{ region_attributes.category.addClass('layout__region', 'layout__region--category') }}>
+      {{ content.category }}
+    </div>
+    {% endif %}
+
+    {% if content.share %}
+    <div {{ region_attributes.share.addClass('layout__region', 'layout__region--share', 'right-sidebar') }}>
+      {{ content.share }}
+
+      {# Add mobile more items menu #}
+      {% if content.left_sidebar|render|striptags|trim is not empty %}
+        <div class="mobile more-on">
+          <div class="field-label"><a href="#" class="more-open-close">{{ "More on"|t }}</a></div>
+          <div class="more-on__items">
+            {{ content.left_sidebar }}
+          </div>
+        </div>
+      {% endif %}
+
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  <div class="article__main grid margin-top-md">
+    {% if content.left_sidebar|render|striptags|trim is not empty %}
+      <div class="layout__region layout__region--left_sidebar left-sidebar">
+      <div class="field-label">{{ "More on"|t }}</div>
+        {{ content.left_sidebar }}
+    </div>
+    {% endif %}
+
+    {% if content.main_content %}
+    <div {{ region_attributes.main_content.addClass('layout__region', 'layout__region--main_content', 'main-content', 'margin-bottom-xl') }}>
+    {{ content.main_content }}
+    </div>
+    {% endif %}
+
+    {% if content.right_sidebar %}
+    <div {{ region_attributes.right_sidebar.addClass('layout__region', 'layout__region--right_sidebar', 'right-sidebar') }}>
+    {{ content.right_sidebar }}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endif %}

@@ -5,6 +5,7 @@ dependencies:
     - block_content.type.listing_block
     - field.field.block_content.listing_block.field_content_types
     - field.field.block_content.listing_block.field_featured
+    - field.field.block_content.listing_block.field_filter_by_project
     - field.field.block_content.listing_block.field_filter_by_region
     - field.field.block_content.listing_block.field_filter_by_resource_type
     - field.field.block_content.listing_block.field_filter_by_tag
@@ -23,30 +24,79 @@ bundle: listing_block
 mode: default
 content:
   field_content_types:
-    weight: 1
-    settings: {  }
-    third_party_settings: {  }
     type: options_buttons
+    weight: 1
     region: content
+    settings: {  }
+    third_party_settings: {  }
   field_featured:
-    weight: 3
-    settings: {  }
-    third_party_settings: {  }
     type: options_select
-    region: content
-  field_filter_by_region:
     weight: 4
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
+  field_filter_by_project:
+    type: entity_reference_autocomplete
+    weight: 7
     region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_filter_by_region:
+    type: options_select
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_filter_by_resource_type:
-    weight: 2
+    type: entity_reference_autocomplete_tags
+    weight: 3
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_filter_by_tag:
+    type: entity_reference_autocomplete
+    weight: 8
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_intro:
+    type: text_textarea
+    weight: 11
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings:
+      allowed_formats:
+        hide_help: '1'
+        hide_guidelines: '1'
+  field_listing:
+    type: viewfield_select
+    weight: 9
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
+  field_more_link:
+    type: tokenized_link_field_widget
+    weight: 10
     region: content
-  field_filter_by_tag:
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_tag:
     type: entity_reference_autocomplete
     weight: 6
     region: content
@@ -56,41 +106,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_intro:
-    weight: 9
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings:
-      allowed_formats:
-        hide_help: '1'
-        hide_guidelines: '1'
-    type: text_textarea
-    region: content
-  field_listing:
-    weight: 7
-    settings: {  }
-    third_party_settings: {  }
-    type: viewfield_select
-    region: content
-  field_more_link:
-    weight: 8
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
-    type: tokenized_link_field_widget
-    region: content
-  field_tag:
-    weight: 5
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   info:
     type: string_textfield
     weight: 0
@@ -98,5 +113,12 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
     third_party_settings: {  }
 hidden: {  }

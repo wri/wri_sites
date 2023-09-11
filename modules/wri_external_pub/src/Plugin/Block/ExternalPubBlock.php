@@ -4,12 +4,9 @@ namespace Drupal\wri_external_pub\Plugin\Block;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a block with a simple text.
@@ -67,18 +64,21 @@ class ExternalPubBlock extends BlockBase {
           }
         }
         if ($publicationIsFromAuthor) {
-          $publication_date = $publication_entry['issued']['date-parts'][0][0] . (isset($publication_entry['issued']['date-parts'][0][1]) ? "-" . $publication_entry['issued']['date-parts'][0][1] : "");
-          $publication_date = new DrupalDateTime($publication_date);
+          if (isset($publication_entry['issued']['date-parts'])) {
+            $publication_date = $publication_entry['issued']['date-parts'][0][0] . (isset($publication_entry['issued']['date-parts'][0][1]) ? "-" . $publication_entry['issued']['date-parts'][0][1] : "");
+            $publication_date = new DrupalDateTime($publication_date);
+            $date = $publication_date->getTimestamp();
+          }
           $author_publications_array[] = [
-            'title' => $publication_entry['title'],
+            'title' => $publication_entry['title'] ?? '',
             'authors' => implode(', ', $authors),
             'container_title' => $publication_entry['container-title'] ?? '',
-            'volume' => $publication_entry['volume'],
-            'issued' => $publication_entry['issued']['date-parts'][0][0],
-            'page' => $publication_entry['page'],
+            'volume' => $publication_entry['volume'] ?? '',
+            'issued' => $publication_entry['issued']['date-parts'][0][0] ?? '',
+            'page' => $publication_entry['page'] ?? '',
             'doi' => $publication_entry['DOI'] ?? '',
             'doi_url' => 'https://doi.org/',
-            'date' => $publication_date->getTimestamp(),
+            'date' => $date ?? '',
           ];
         }
       }
@@ -116,19 +116,4 @@ class ExternalPubBlock extends BlockBase {
     return AccessResult::allowedIfHasPermission($account, 'access content');
   }
 
-  // /**
-  //  * {@inheritdoc}
-  //  */
-  // public function blockForm($form, FormStateInterface $form_state) {
-  //   $config = $this->getConfiguration();
-
-  //   return $form;
-  // }
-
-  // /**
-  //  * {@inheritdoc}
-  //  */
-  // public function blockSubmit($form, FormStateInterface $form_state) {
-  //   $this->configuration['my_block_settings'] = $form_state->getValue('my_block_settings');
-  // }
 }

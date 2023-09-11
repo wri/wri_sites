@@ -3,9 +3,10 @@ status: true
 dependencies:
   config:
     - field.storage.node.body
-    - field.storage.node.field_date_time
     - field.storage.node.field_primary_topic
     - field.storage.node.field_type
+    - field.storage.node.field_date_time
+    - field.storage.node.field_department
     - field.storage.node.field_email
     - field.storage.node.field_featured
     - field.storage.node.field_featured_headline
@@ -22,6 +23,7 @@ dependencies:
     - field.storage.node.field_project_expert
     - field.storage.node.field_projects
     - field.storage.node.field_region
+    - field.storage.node.field_staff_group
     - field.storage.node.field_tags
     - field.storage.node.field_weight
     - field.storage.node.field_languages_spoken
@@ -29,7 +31,8 @@ dependencies:
     - field.storage.node.field_title
     - field.storage.node.field_quote
     - field.storage.node.field_topics
-    - search_api.server.localhost
+    - search_api.server.pantheon
+    - core.entity_view_mode.node.main_content
   module:
     - node
     - taxonomy
@@ -37,6 +40,7 @@ dependencies:
     - token
     - search_api
     - search_api_exclude_entity
+    - search_api_solr
 id: sitewide
 name: Sitewide
 description: ''
@@ -96,6 +100,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_date_time
+  field_department:
+    label: Department
+    datasource_id: 'entity:node'
+    property_path: field_department
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_department
   field_email:
     label: Email
     datasource_id: 'entity:node'
@@ -227,6 +239,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_region
+  field_staff_group:
+    label: 'Staff group'
+    datasource_id: 'entity:node'
+    property_path: field_staff_group
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_staff_group
   field_tags:
     label: Tags
     datasource_id: 'entity:node'
@@ -344,6 +364,46 @@ field_settings:
     dependencies:
       module:
         - node
+  rendered_item:
+    label: 'Rendered HTML output'
+    property_path: rendered_item
+    type: text
+    configuration:
+      roles:
+        - anonymous
+      view_mode:
+        'entity:node':
+          article: main_content
+          data: main_content
+          event: main_content
+          homepage: main_content
+          international_office: main_content
+          page: main_content
+          person: main_content
+          program_center: main_content
+          project_detail: main_content
+          publication: main_content
+          region: main_content
+          simple_page: main_content
+          subpage: main_content
+  smart_topic_parent:
+    label: 'Smart Topic'
+    datasource_id: 'entity:node'
+    property_path: smart_topic_parent
+    type: integer
+    dependencies:
+      module:
+        - wri_search
+  staff_group_weight:
+    label: 'Staff group Weight'
+    datasource_id: 'entity:node'
+    property_path: 'field_staff_group:entity:weight'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_staff_group
+      module:
+        - taxonomy
   status:
     label: Published
     datasource_id: 'entity:node'
@@ -434,6 +494,16 @@ field_settings:
     dependencies:
       module:
         - node
+  type_name:
+    label: 'Type » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_type:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_type
+      module:
+        - taxonomy
   uid:
     label: 'Authored by'
     datasource_id: 'entity:node'
@@ -455,31 +525,38 @@ datasource_settings:
 processor_settings:
   add_url: {  }
   aggregated_field: {  }
+  auto_aggregated_fulltext_field: {  }
   content_access:
     weights:
       preprocess_query: -30
   entity_status: {  }
+  entity_type: {  }
   hierarchy:
-    fields:
-      field_type: taxonomy_term-parent
     weights:
       preprocess_index: -45
+    fields:
+      field_type: taxonomy_term-parent
   highlight:
-    highlight: always
-    highlight_partial: true
-    excerpt: true
-    excerpt_length: 256
-    exclude_fields: {  }
-    prefix: '<strong>'
-    suffix: '</strong>'
     weights:
       postprocess_query: 0
+    prefix: '<strong>'
+    suffix: '</strong>'
+    excerpt: true
+    excerpt_always: false
+    excerpt_length: 256
+    exclude_fields: {  }
+    highlight: always
+    highlight_partial: true
   html_filter:
+    weights:
+      preprocess_index: -15
+      preprocess_query: -15
     all_fields: false
     fields:
       - body
       - field_intro
       - langcode
+      - rendered_item
       - title
       - type
     title: true
@@ -490,10 +567,10 @@ processor_settings:
       h2: 3
       h3: 2
       strong: 2
-    weights:
-      preprocess_index: -15
-      preprocess_query: -15
   ignore_character:
+    weights:
+      preprocess_index: -10
+      preprocess_query: -10
     all_fields: false
     fields:
       - body
@@ -513,93 +590,19 @@ processor_settings:
       - Pi
       - Po
       - Ps
-    weights:
-      preprocess_index: -10
-      preprocess_query: -10
-  ignorecase:
-    all_fields: false
-    fields:
-      - body
-      - field_featured_headline
-      - field_featured_text
-      - field_featured_tweet
-      - field_intro
-      - langcode
-      - title
-      - type
-    weights:
-      preprocess_index: -20
-      preprocess_query: -20
   language_with_fallback: {  }
   rendered_item: {  }
   search_api_exclude_entity_processor:
     fields:
       node: {  }
-  stopwords:
-    all_fields: false
-    fields:
-      - body
-      - field_featured_headline
-      - field_featured_text
-      - field_featured_tweet
-      - field_intro
-    stopwords:
-      - a
-      - an
-      - and
-      - are
-      - as
-      - at
-      - be
-      - but
-      - by
-      - for
-      - if
-      - in
-      - into
-      - is
-      - it
-      - 'no'
-      - not
-      - of
-      - 'on'
-      - or
-      - s
-      - such
-      - t
-      - that
-      - the
-      - their
-      - then
-      - there
-      - these
-      - they
-      - this
-      - to
-      - was
-      - will
-      - with
+  solr_date_range:
     weights:
-      preprocess_index: -5
-      preprocess_query: -2
-  transliteration:
-    all_fields: false
-    fields:
-      - body
-      - field_featured_headline
-      - field_featured_text
-      - field_featured_tweet
-      - field_intro
-      - langcode
-      - title
-      - type
-    weights:
-      preprocess_index: -20
-      preprocess_query: -20
+      preprocess_index: 0
 tracker_settings:
   default:
     indexing_order: fifo
 options:
-  index_directly: true
   cron_limit: 50
+  index_directly: true
+  track_changes_in_references: true
 server: pantheon

@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Publication module code.
+ */
+
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_preprocess_hook().
+ */
+function wri_article_preprocess_wri_article_columns(&$context) {
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof NodeInterface) {
+    if (isset($node->field_main_image->entity)) {
+      $media = $node->field_main_image->entity;
+      if ($media->hasField('field_attribution') && ($attribution = $media->get('field_attribution')) && !$attribution->isEmpty()) {
+        $context['content']['byline']['attribution'] = [
+          '#markup' => '<span class="cover-attribution">' . t('Cover Image by: @attribution', ['@attribution' => $attribution->getString()]) . '</span>',
+          '#weight' => 10,
+        ];
+      }
+    }
+  }
+}

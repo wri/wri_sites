@@ -19,5 +19,6 @@ config_devel:
     - field.storage.wri_author.field_person
     - field.storage.wri_author.field_person_link
     - views.view.authored_by
+    - views.view.authors
     - wri_author.wri_author_type.external
     - wri_author.wri_author_type.internal

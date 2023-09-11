@@ -2,9 +2,10 @@ langcode: en
 status: true
 dependencies:
   config:
-    - image.style.1377x900
+    - image.style.1000x900
     - image.style.445x640
     - image.style.500x375
+    - image.style.500x660
     - image.style.630x900
     - image.style.768x640
   module:
@@ -16,7 +17,7 @@ image_style_mappings:
     breakpoint_id: wrin.xlarge
     multiplier: 1x
     image_mapping_type: image_style
-    image_mapping: 1377x900
+    image_mapping: 1000x900
   -
     breakpoint_id: wrin.large
     multiplier: 1x
@@ -36,6 +37,6 @@ image_style_mappings:
     breakpoint_id: wrin.small
     multiplier: 1x
     image_mapping_type: image_style
-    image_mapping: 500x375
+    image_mapping: 500x660
 breakpoint_group: wri_media
 fallback_image_style: 500x375

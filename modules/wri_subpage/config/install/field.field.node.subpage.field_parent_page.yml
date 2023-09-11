@@ -20,8 +20,10 @@ settings:
   handler_settings:
     target_bundles:
       project_detail: project_detail
+      publication: publication
     sort:
       field: _none
+      direction: ASC
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference

@@ -2,12 +2,12 @@
 
 namespace Drupal\wri_author\Entity;
 
-use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EditorialContentEntityBase;
-use Drupal\Core\Entity\RevisionableInterface;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityPublishedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Entity\RevisionableInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
 
 /**
  * Defines the Author entity.
@@ -29,7 +29,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
  *       "default" = "Drupal\wri_author\Form\WRIAuthorForm",
  *       "add" = "Drupal\wri_author\Form\WRIAuthorForm",
  *       "edit" = "Drupal\wri_author\Form\WRIAuthorForm",
- *       "delete" = "Drupal\wri_author\Form\WRIAuthorDeleteForm",
+ *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm",
  *     },
  *     "route_provider" = {
  *       "html" = "Drupal\wri_author\WRIAuthorHtmlRouteProvider",
@@ -50,6 +50,11 @@ use Drupal\Core\Entity\EntityTypeInterface;
  *     "uuid" = "uuid",
  *     "langcode" = "langcode",
  *     "published" = "status",
+ *   },
+ *   revision_metadata_keys = {
+ *     "revision_user" = "revision_user",
+ *     "revision_created" = "revision_created",
+ *     "revision_log_message" = "revision_log_message",
  *   },
  *   links = {
  *     "canonical" = "/admin/content/wri_author/{wri_author}",

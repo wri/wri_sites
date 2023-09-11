@@ -35,6 +35,7 @@ config_devel:
     - field.storage.node.field_areas_of_expertise
     - field.storage.node.field_cover_image
     - field.storage.node.field_date_time
+    - field.storage.node.field_department
     - field.storage.node.field_doi
     - field.storage.node.field_email
     - field.storage.node.field_event_display
@@ -85,7 +86,9 @@ config_devel:
     - field.storage.node.field_register
     - field.storage.node.field_related_events
     - field.storage.node.field_related_resources
+    - field.storage.node.field_show_more_link
     - field.storage.node.field_social_media_links
+    - field.storage.node.field_staff_group
     - field.storage.node.field_tags
     - field.storage.node.field_title
     - field.storage.node.field_toc

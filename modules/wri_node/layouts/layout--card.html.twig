@@ -9,7 +9,7 @@
  * - ds_content: content region
  */
 #}
-<div class="{{ content["#bundle"] }}">
+<div class="{{ content["#node"].type.target_id }}{{ content["#taxonomy_term"].type.target_id }}">
   <div {{ attributes.addClass('ds-1col', 'clearfix', 'card') }}>
     {{ title_suffix.contextual_links }}
     {% if content %}
@@ -17,7 +17,7 @@
         {% if content.image|render|striptags('<img>')|trim or content.image|render|striptags('<iframe>')|trim %}
           {{ content.image }}
         {% else %}
-          <img src="/profiles/contrib/wri_sites/modules/wri_node/images/{{ (content.tag|render|lower|replace({' ': '-'})) ? content.tag.field_primary_topic.0['#title']|lower|replace({' ': '-'}) : 'default' }}.jpg" alt="">
+          {{ default_image }}
         {% endif %}
       </div>
       <div class="card-text">

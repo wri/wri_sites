@@ -1,0 +1,7 @@
+field.value.wri_block_entity_reference_with_view_fallback:
+  type: mapping
+  label: Default value
+  mapping:
+    value:
+      type: label
+      label: Value

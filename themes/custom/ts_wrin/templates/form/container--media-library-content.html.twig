@@ -1,0 +1,15 @@
+{#
+/**
+ * @file
+ * Explicitly pulling in the Admin theme media library.
+ */
+#}
+{%
+  set classes = [
+    has_parent ? 'js-form-wrapper',
+    has_parent ? 'form-wrapper',
+    'media-library-content',
+  ]
+%}
+{{ attach_library('seven/media_library') }}
+<div{{ attributes.addClass(classes) }}>{{ children }}</div>

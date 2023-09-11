@@ -9,9 +9,9 @@
  * Implements hook_page_attachments().
  */
 
-use Drupal\node\Entity\Node;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
 
 /**
  * Implements hook_page_attachments().
@@ -56,7 +56,7 @@ function wri_admin_form_alter(&$form, FormStateInterface $form_state, $form_id) 
   }
   elseif ($form_id == 'content_moderation_entity_moderation_form') {
     $node = $form_state->get('entity');
-    if ($node) {
+    if ($node && $node instanceof Node) {
       $published_node = Node::load($node->id());
       $form['link_to_revision'] = [
         '#title' => t('Compare to published'),

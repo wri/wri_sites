@@ -5,6 +5,11 @@
       margin-bottom: $padding-vertical;
       margin-right: 0;
 
+      @include mq($ph) {
+        flex-basis: calc(50% - #{$grid-gutter-mobile});
+        margin-right: $space-xs;
+      }
+
       @include mq($md) {
         flex-basis: calc(33% - #{$grid-gutter-mobile});
         margin-right: $space-xs;
@@ -15,7 +20,8 @@
       }
 
       img {
-        width: 100%;
+        max-width: 100%;
+        height: auto;
       }
     }
   }

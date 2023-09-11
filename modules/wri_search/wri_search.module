@@ -5,19 +5,19 @@
  * Contains hsus_search.module.
  */
 
-use Drupal\Core\Render\BubbleableMetadata;
-use Drupal\search_api\Plugin\views\query\SearchApiQuery;
-use Drupal\views\ViewExecutable;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\search_api\Plugin\views\query\SearchApiQuery;
+use Drupal\views\ViewExecutable;
 
 /**
  * Implements hook_entity_base_field_info().
  */
 function wri_search_entity_base_field_info(EntityTypeInterface $entity_type) {
+  $fields = [];
   if ($entity_type->id() === 'taxonomy_term') {
-    $fields = [];
 
     // Add a field that shows the parent of the term, or itself if no parent.
     $fields['term_parent_or_self'] = BaseFieldDefinition::create('term_parent_or_self')
@@ -39,8 +39,19 @@ function wri_search_entity_base_field_info(EntityTypeInterface $entity_type) {
       ->setDisplayConfigurable('view', FALSE)
       ->setCardinality(-1);
 
-    return $fields;
   }
+  if ($entity_type->id() === "node") {
+    $fields['smart_topic_parent'] = BaseFieldDefinition::create('smart_topic_parent')
+      ->setName('smart_topic_parent')
+      ->setLabel(t('Smart Topic'))
+      ->setSetting('target_type', 'taxonomy_term')
+      ->setComputed(TRUE)
+      ->setClass('\Drupal\wri_search\WriCalculatedTexts')
+      ->setDisplayConfigurable('view', FALSE)
+      ->setCardinality(-1);
+  }
+
+  return $fields;
 }
 
 /**
@@ -64,7 +75,7 @@ function wri_search_form_views_exposed_form_alter(&$form, FormStateInterface $fo
   // option enabled, and that the Facets module is installed.
   $preserve_facets = !empty($query_plugin->options['preserve_facet_query_args'])
     && $query_plugin instanceof
-  SearchApiQuery    && \Drupal::moduleHandler()->moduleExists('facets');
+    SearchApiQuery    && \Drupal::moduleHandler()->moduleExists('facets');
   if ($preserve_facets) {
     // Retrieve the facet source.
     $query = $query_plugin->getSearchApiQuery();
@@ -112,4 +123,22 @@ function wri_search_tokens($type, $tokens, array $data, array $options, Bubbleab
     }
   }
   return $replacements;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function wri_search_theme() {
+  return [
+    'wri_search_menu' => [
+      'variables' => [
+        'search_nav_title' => '',
+        'search_nav_description' => '',
+        'search_nav_label' => '',
+        'search_nav_id' => '',
+        'search_nav_submit' => '',
+        'search_nav_destination' => '/search',
+      ],
+    ],
+  ];
 }

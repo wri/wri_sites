@@ -13,14 +13,8 @@ bundle: modal
 label: Webform
 description: ''
 required: false
-translatable: false
-default_value:
-  -
-    default_data: ''
-    status: open
-    open: ''
-    close: ''
-    target_uuid: c22e60c0-ae97-4103-9989-ca4083c16c09
+translatable: true
+default_value: {  }
 default_value_callback: ''
 settings:
   handler: 'default:webform'

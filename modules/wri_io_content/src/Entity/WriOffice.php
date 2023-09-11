@@ -2,11 +2,11 @@
 
 namespace Drupal\wri_io_content\Entity;
 
-use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityPublishedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
 
 /**
  * Defines the WRI office entity.
@@ -26,7 +26,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
  *       "default" = "Drupal\wri_io_content\Form\WriOfficeForm",
  *       "add" = "Drupal\wri_io_content\Form\WriOfficeForm",
  *       "edit" = "Drupal\wri_io_content\Form\WriOfficeForm",
- *       "delete" = "Drupal\wri_io_content\Form\WriOfficeDeleteForm",
+ *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm",
  *     },
  *     "route_provider" = {
  *       "html" = "Drupal\wri_io_content\WriOfficeHtmlRouteProvider",

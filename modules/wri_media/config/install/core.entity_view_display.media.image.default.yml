@@ -1,67 +1,38 @@
-langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.image.field_attribution
     - field.field.media.image.field_media_image
     - field.field.media.image.field_tags
     - media.type.image
     - responsive_image.styles.full_content
   module:
-    - blazy
     - ds
+    - responsive_image
 id: media.image.default
 targetEntityType: media
 bundle: image
 mode: default
 content:
   field_media_image:
+    type: responsive_image
     label: hidden
-    weight: 0
     settings:
       responsive_image_style: full_content
-      icon: ''
-      layout: ''
-      view_mode: ''
-      cache: 0
-      current_view_mode: ''
-      skin: ''
-      fx: ''
-      style: ''
-      background: false
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      caption: {  }
-      box_style: ''
-      image_style: ''
-      media_switch: ''
-      ratio: ''
-      thumbnail_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_link: ''
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
-    type: blazy
-    region: content
-  field_tags:
-    weight: 1
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
+    weight: 0
     region: content
 hidden:
   created: true
+  field_attribution: true
+  field_tags: true
+  langcode: true
   name: true
   search_api_excerpt: true
   thumbnail: true

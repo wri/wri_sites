@@ -41,12 +41,14 @@
     'field',
     'field--name-' ~ field_name|clean_class,
     'field--type-' ~ field_type|clean_class,
-    'field--label-' ~ label_display,
+    'field--label',
     'margin-top-lg',
+    'more-on',
   ]
 %}
 {%
   set title_classes = [
+    'field-label',
     'field-label-above',
     'margin-bottom-sm',
     'top-border-medium',
@@ -57,9 +59,10 @@
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if not label_hidden and label %}
-    <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
+    <div{{ title_attributes.addClass(title_classes) }}><a class="more-open-close" href="#">{{ label }}</a></div>
   {% endif %}
   {{ title_suffix }}
+  <div class="more-on__items">
   {% if multiple %}
     <div class="field__items">
   {% endif %}
@@ -69,4 +72,5 @@
   {% if multiple %}
     </div>
   {% endif %}
+  </div>
 </div>

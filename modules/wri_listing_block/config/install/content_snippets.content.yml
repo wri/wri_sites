@@ -1,0 +1,5 @@
+snippets:
+  gtm_id:
+  the_content_listing_view_arguments: '[block_content:field_content_types:array:target_id:join:+]/[block_content:field_featured:array:target_id:join:+]/[block_content:field_filter_by_region:target_id]/[block_content:field_filter_by_resource_type:array:target_id:join:+]/[block_content:field_tag:target_id]/[block_content:field_filter_by_tag:target_id]/[block_content:field_filter_by_project:target_id]'
+  narrative_taxonomy_view_arguments: '[block_content:field_custom_results:array:target_id:join:+]/[block_content:field_filter_by_region:target_id]/[block_content:field_tag:target_id]'
+  3_1_view_arguments: '[block_content:field_custom_results:array:target_id:join:+]/[block_content:field_content_types:array:target_id:join:+]/[block_content:field_filter_by_region:target_id]/[block_content:field_filter_by_resource_type:target_id]/[block_content:field_tag:target_id]/[block_content:field_filter_by_tag:target_id]'

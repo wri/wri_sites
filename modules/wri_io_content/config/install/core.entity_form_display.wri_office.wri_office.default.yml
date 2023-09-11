@@ -14,18 +14,25 @@ bundle: wri_office
 mode: default
 content:
   field_address:
+    type: address_default
     weight: 4
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: address_default
-    region: content
   field_telephone:
+    type: telephone_default
     weight: 3
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-    type: telephone_default
+  langcode:
+    type: language_select
+    weight: 2
     region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
   name:
     type: string_textfield
     weight: -4

@@ -1,0 +1,104 @@
+.more-on {
+  margin: 0;
+  width: 100%;
+  max-width: rem(200);
+
+  @include mq($lg) {
+    max-width: none;
+  }
+
+  .field-label {
+    border-radius: 3px;
+    border: 1px solid $black;
+    cursor: pointer;
+    display: flex;
+    font-style: normal;
+    justify-content: space-between;
+    margin-bottom: 0;
+    padding: rem(10);
+
+    &::after {
+      background: url(../img/svgs/arrow-thin.svg) no-repeat center center /
+        contain;
+      content: "";
+      display: block;
+      height: 16px;
+      transform: rotate(90deg);
+      transition: transform 0.2s ease;
+      width: 16px;
+    }
+
+    a.more-open-close {
+      @include font($acumin-semi-cond, "normal");
+      @include font-line-height(14, 18);
+      font-style: normal;
+      text-decoration: none;
+    }
+
+    @include mq($lg) {
+      border: none;
+      padding: 0;
+
+      &::after {
+        height: 0;
+        width: 0;
+      }
+
+      &.top-border-medium {
+        border-top: 3px solid $black;
+      }
+    }
+  }
+
+  &.active .field-label::after {
+    transform: rotate(-90deg);
+  }
+}
+
+.more-on__items {
+  margin: 0;
+  background-color: $white;
+  border: 1px solid $light-grey;
+  box-sizing: border-box;
+  left: $grid-gutter-mobile;
+  opacity: 0;
+  padding: rem(15) rem(20);
+  position: absolute;
+  transition: all 0.5s ease;
+  visibility: hidden;
+  width: calc(100% - (#{$grid-gutter-mobile}) * 2);
+
+  .active & {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+    transition: all 0.2s ease;
+  }
+
+  @include mq($lg) {
+    position: static;
+    opacity: 1;
+    border: none;
+    padding: 0;
+    visibility: visible;
+    width: auto;
+  }
+
+  ul {
+    list-style: none;
+
+    li {
+      margin: 0 0 rem(3);
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.mobile {
+  @include mq($md) {
+    display: none;
+  }
+}

@@ -19,6 +19,7 @@ dependencies:
     - field.field.node.project_detail.field_primary_topic
     - field.field.node.project_detail.field_project_partners
     - field.field.node.project_detail.field_region
+    - field.field.node.project_detail.field_show_more_link
     - field.field.node.project_detail.field_tags
     - field.field.node.project_detail.field_toc
     - field.field.node.project_detail.field_twitter_account
@@ -34,18 +35,18 @@ bundle: project_detail
 mode: default
 content:
   field_intro:
-    weight: 0
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 0
     region: content
   field_narrative_taxonomy:
-    weight: 1
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 1
     region: content
 hidden:
   body: true
@@ -64,10 +65,12 @@ hidden:
   field_primary_topic: true
   field_project_partners: true
   field_region: true
+  field_show_more_link: true
   field_tags: true
   field_toc: true
   field_twitter_account: true
   field_type: true
+  langcode: true
   layout_builder__layout: true
   links: true
   search_api_excerpt: true

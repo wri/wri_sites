@@ -9,11 +9,12 @@ dependencies:
     - text
 third_party_settings:
   allowed_formats:
-    unrestricted_text: unrestricted_text
-    full_html: full_html
-    basic_html: basic_html
-    migrated: migrated
-    plain_text: plain_text
+    allowed_formats:
+      - unrestricted_text
+      - full_html
+      - basic_html
+      - migrated
+      - plain_text
 id: node.page.body
 field_name: body
 entity_type: node

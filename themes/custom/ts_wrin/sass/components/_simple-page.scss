@@ -160,9 +160,8 @@
   }
 }
 
-.menu--page-hierarchies {
+.page-hierarchies {
   @include font($acumin-pro, "regular");
-  @include font-line-height(14, 18);
 
   @include mq($md) {
     border-left: 1px solid #1a1919;
@@ -218,92 +217,91 @@
 }
 
 // Sub menu styles for simple page and experts page.
-.experts-staff-header,
-.page-node-type-simple-page {
-  .menu-wrapper {
-    display: block;
-    margin: 0;
+.internal-menu-pages {
+  display: block;
+  margin: 0;
+  width: 100%;
+  position: relative;
+
+  .field-label {
+    @include font($acumin-semi-cond, "normal");
+    border-radius: 3px;
+    border: 1px solid $black;
+    display: flex;
+    font-style: normal;
+    justify-content: space-between;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding: rem(10);
+
+    & > a {
+      color: $black;
+      text-decoration: none;
+    }
+
+    &::after {
+      background: url(../img/svgs/arrow-thin.svg) no-repeat center -1px /16px;
+      content: "";
+      display: block;
+      height: 16px;
+      transform: rotate(90deg);
+      width: 16px;
+    }
+
+    @include mq($md) {
+      display: none;
+    }
+  }
+
+  ul.menu {
+    background-color: $white;
+    border: 1px solid $light-grey;
+    box-sizing: border-box;
+    opacity: 0;
+    padding: rem(15) rem(20);
+    position: absolute;
+    transition: all 0.5s ease;
+    visibility: hidden;
     width: 100%;
-    position: relative;
+    z-index: 10;
 
-    .field-label {
-      @include font($acumin-semi-cond, "normal");
-      border-radius: 3px;
-      border: 1px solid $black;
-      display: flex;
-      font-style: normal;
-      justify-content: space-between;
-      margin-bottom: 0;
-      margin-left: 0;
-      padding: rem(10);
-
-      & > a {
-        color: $black;
-      }
-
-      &::after {
-        background: url(../img/svgs/arrow-thin.svg) no-repeat center -1px /16px;
-        content: "";
-        display: block;
-        height: 16px;
-        transform: rotate(90deg);
-        width: 16px;
-      }
-
-      @include mq($md) {
-        display: none;
-      }
-    }
-
-    .menu__items ul {
-      background-color: $white;
-      border: 1px solid $light-grey;
+    @include mq($md) {
+      border: none;
       box-sizing: border-box;
-      opacity: 0;
-      padding: rem(15) rem(20);
-      position: absolute;
-      transition: all 0.5s ease;
-      visibility: hidden;
-      width: 100%;
+      display: block;
+      opacity: 100;
+      padding: 0;
+      position: relative;
+      transition: none;
+      visibility: visible;
+      width: auto;
+      left: 0;
       z-index: 10;
+    }
+
+    li {
+      margin: 0 0 rem(7);
 
       @include mq($md) {
-        border: none;
-        box-sizing: border-box;
-        display: block;
-        opacity: 100;
-        padding: 0;
-        position: relative;
-        transition: none;
-        visibility: visible;
-        width: auto;
-        left: 0;
-        z-index: 10;
+        margin-bottom: rem(12);
       }
 
-      li {
-        margin: 0 0 rem(7);
-
-        @include mq($md) {
-          margin-bottom: rem(12);
-        }
-
-        &:last-of-type {
-          margin-bottom: 0;
-        }
-      }
-
-      a {
-        @include font-line-height(18, 24);
+      &:last-of-type {
+        margin-bottom: 0;
       }
     }
 
-    &:hover,
-    &:focus-within {
-      ul {
-        opacity: 1;
-        visibility: visible;
-      }
+    a {
+      @include font-line-height(18, 24);
+    }
+  }
+
+  &:hover,
+  &:focus,
+  &:focus-within {
+    ul.menu {
+      opacity: 1;
+      visibility: visible;
     }
   }
 }

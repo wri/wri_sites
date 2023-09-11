@@ -9,8 +9,6 @@
 %}
 {% if header %}{{ header.entity_node }}{% endif %}
 <div{{ attributes.addClass(classes) }}>
-  {% if display_id == 'experts_staff1' %}
-
   <div class="grid experts-staff-header">
     <div class="left">
     {{ drupal_breadcrumb() }}
@@ -22,7 +20,6 @@
     </div>
   </div>
   {{ drupal_block('facet_block:experts_all_topics') }}
-  {% endif %}
   <div class="resources-wrapper">
     <div class="container">
       {% if exposed %}
@@ -34,20 +31,16 @@
 
       <div class="grid results-wrapper">
         <div class="results-sidebar padding-bottom">
-          {% if display_id == 'experts_staff1' %}
           {{ drupal_block('facet_block:international_office') }}
           {{ drupal_block('facet_block:languages_spoken_taxonomy_term_name') }}
           {{ drupal_block('facet_block:department') }}
-          {% endif %}
         </div>
 
         <div class="results-body padding-bottom">
           {% if header %}
             <div class="view-header">
               {{ header.extra_result }}
-              {% if display_id == 'experts_staff1' %}
               {{ drupal_block('facets_summary_block:experts_summary') }}
-              {% endif %}
             </div>
           {% endif %}
           {% if rows %}

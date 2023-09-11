@@ -10,9 +10,9 @@ field_name: field_filter_by_resource_type
 entity_type: block_content
 bundle: listing_block
 label: 'Filter by Resource Type'
-description: ''
+description: '<b>Warning</b>: If you choose more than one value here, you should also manually overwrite the "More Link" field by unchecking "Generate url from other fields."'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

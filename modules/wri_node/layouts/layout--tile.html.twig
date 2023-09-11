@@ -9,7 +9,7 @@
  * - ds_content: content region
  */
 #}
-<div {{ attributes.addClass('tile', content['#bundle'] ~ '') }}>
+<div {{ attributes.addClass('tile', content["#node"].type.target_id) }}>
   {% if content %}
     <div class="card-image">
       {% if content.image %}

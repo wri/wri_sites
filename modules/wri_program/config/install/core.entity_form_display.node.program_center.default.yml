@@ -13,11 +13,11 @@ dependencies:
     - field.field.node.program_center.field_narrative_taxonomy
     - field.field.node.program_center.field_primary_contacts
     - field.field.node.program_center.field_primary_topic
+    - field.field.node.program_center.field_show_more_link
     - field.field.node.program_center.field_twitter_account
     - field.field.node.program_center.field_type
     - field.field.node.program_center.layout_builder__layout
     - node.type.program_center
-    - workflows.workflow.content_publishing
   module:
     - content_moderation
     - field_group
@@ -33,62 +33,62 @@ third_party_settings:
       children:
         - field_primary_contacts
         - field_featured_experts
+        - field_show_more_link
+      label: Experts
+      region: content
       parent_name: group_more
       weight: 21
       format_type: tab
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: ''
-        open: false
-        required_fields: true
-        weight: 0
+        id: ''
         formatter: closed
-      label: Experts
+        description: ''
+        required_fields: true
+        open: false
+        weight: 0
     group_features:
       children:
         - field_featured_project
+      label: Related
+      region: content
       parent_name: group_more
       weight: 22
       format_type: tab
-      region: content
       format_settings:
-        description: ''
-        formatter: closed
-        required_fields: true
-        id: ''
         classes: ''
-      label: Related
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
     group_more:
       children:
         - group_featured
         - group_experts
         - group_features
+      label: More
+      region: content
       parent_name: ''
       weight: 20
       format_type: tabs
-      region: content
       format_settings:
-        direction: horizontal
-        id: ''
         classes: ''
-      label: More
+        id: ''
+        direction: horizontal
     group_featured:
       children:
         - field_narrative_taxonomy
+      label: Featured
+      region: content
       parent_name: group_more
       weight: 20
       format_type: tab
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: ''
-        open: false
-        required_fields: true
+        id: ''
         formatter: closed
-      label: Featured
+        description: ''
+        required_fields: true
 id: node.program_center.default
 targetEntityType: node
 bundle: program_center
@@ -97,13 +97,13 @@ content:
   body:
     type: text_textarea_with_summary
     weight: 7
+    region: content
     settings:
       rows: 9
       summary_rows: 3
       placeholder: ''
       show_summary: false
     third_party_settings: {  }
-    region: content
   created:
     type: datetime_timestamp
     weight: 4
@@ -111,27 +111,29 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_featured_experts:
+    type: entity_reference_autocomplete
     weight: 16
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_featured_project:
+    type: entity_reference_autocomplete
     weight: 16
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_intro:
+    type: text_textarea
     weight: 3
+    region: content
     settings:
       rows: 5
       placeholder: ''
@@ -139,11 +141,10 @@ content:
       allowed_formats:
         hide_help: '1'
         hide_guidelines: '1'
-    type: text_textarea
-    region: content
   field_intro_paragraphs:
     type: paragraphs
     weight: 6
+    region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -159,9 +160,10 @@ content:
         collapse_edit_all: collapse_edit_all
         duplicate: duplicate
     third_party_settings: {  }
-    region: content
   field_long_title:
+    type: text_textarea
     weight: 2
+    region: content
     settings:
       rows: 5
       placeholder: ''
@@ -169,69 +171,84 @@ content:
       allowed_formats:
         hide_help: '1'
         hide_guidelines: '1'
-    type: text_textarea
-    region: content
   field_main_image:
+    type: media_library_widget
     weight: 1
+    region: content
     settings:
       media_types: {  }
-    third_party_settings: {  }
-    type: media_library_widget
-    region: content
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
   field_metatag:
+    type: metatag_firehose
     weight: 105
+    region: content
     settings:
       sidebar: true
+      use_details: true
     third_party_settings: {  }
-    type: metatag_firehose
-    region: content
   field_narrative_taxonomy:
+    type: text_textarea
     weight: 105
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_primary_contacts:
+    type: entity_reference_autocomplete
     weight: 15
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_primary_topic:
+    type: entity_reference_autocomplete
     weight: 104
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+  field_show_more_link:
+    type: boolean_checkbox
+    weight: 17
     region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_twitter_account:
+    type: link_default
     weight: 4
+    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-    type: link_default
-    region: content
   field_type:
+    type: options_select
     weight: 103
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
+  langcode:
+    type: language_select
+    weight: 2
     region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
     weight: 100
-    settings: {  }
     region: content
+    settings: {  }
     third_party_settings: {  }
   path:
     type: path
@@ -241,24 +258,24 @@ content:
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 5
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 9
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 6
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   title:
     type: string_textfield
@@ -271,12 +288,12 @@ content:
   uid:
     type: entity_reference_autocomplete
     weight: 3
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
-    region: content
     third_party_settings: {  }
   url_redirects:
     weight: 8

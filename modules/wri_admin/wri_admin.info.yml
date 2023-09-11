@@ -11,14 +11,13 @@ dependencies:
   - admin_toolbar_search
   - admin_toolbar_tools
   - allowed_formats
-  - blazy
   - block
   - block_list_override
   - ckeditor
+  - ckeditor_accordion
   - ckeditor_templates
   - ckeditor_templates_ui
   - config
-  - config_sync
   - content_moderation
   - content_snippets
   - contextual
@@ -35,10 +34,12 @@ dependencies:
   - field_group
   - field_ui
   - file_replace
+  - language
   - layout_builder
   - layout_builder_restrictions
   - layout_discovery
   - link_attributes
+  - media_responsive_thumbnail
   - menu_ui
   - paragraphs
   - responsive_tables_filter

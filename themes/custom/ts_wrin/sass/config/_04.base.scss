@@ -85,6 +85,19 @@ p a {
 
 img {
   display: block;
+  height: auto;
+  min-height: 1px;
+  width: 100%;
+}
+
+/**
+Blazy overrides.
+ */
+.b-lazy, .b-responsive {
+  display: block;
+  height: auto;
+  min-height: 1px;
+  width: 100%;
 }
 
 figcaption {
@@ -92,12 +105,11 @@ figcaption {
   @include font-line-height(13,18);
 
   margin-top: rem(13);
+}
 
-  &::before {
-    content: "Above: ";
-    @include font($caslon, 'italic');
-    @include font-line-height(15,16);
-  }
+.subheader {
+  @include font($acumin-pro, 'regular');
+  @include font-line-height(18, 24);
 }
 
 .intro {
@@ -284,7 +296,8 @@ ul.menu {
   color:$blue
 }
 .has-blue-background-color {
-  background-color:$blue
+  background-color:$blue;
+  color: $white;
 }
 .has-teal-color {
   color:$teal

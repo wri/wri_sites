@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+  theme:
+    - ts_wrin
+id: languageswitcher
+theme: ts_wrin
+region: wrin_custom
+weight: -14
+provider: null
+plugin: 'language_block:language_interface'
+settings:
+  id: 'language_block:language_interface'
+  label: 'Language switcher'
+  provider: language
+  label_display: visible
+visibility:
+  language:
+    id: language
+    langcodes:
+      en: en
+      zh-hans: zh-hans
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

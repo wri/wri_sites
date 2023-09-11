@@ -1,0 +1,38 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display something.
+ *
+ * Available variables:
+ * - 'search_nav_title'
+ * - 'search_nav_description'
+ * - 'search_nav_label'
+ * - 'search_nav_destination'
+ * - 'search_nav_id'
+ * - 'search_nav_submit'
+ *
+ * @ingroup themeable
+ */
+#}
+<div class="search-tray tray-contents">
+  {% if search_nav_title %}
+    <h2 class="h2 white">{{ search_nav_title }}</h2>
+  {% endif %}
+  {% if search_nav_description %}
+    <p class="tray-nav-description">{{ search_nav_description }}</p>
+  {% endif %}
+  <form class="single-border" action="{{ search_nav_destination }}">
+    <div class="input-wrapper">
+      <label for="{{ search_nav_id }}">{{ search_nav_label }}</label>
+      <input class="ghost" type="text" name="keys" id="{{ search_nav_id }}">
+    </div>
+    <input class="button ghost form" type="submit" value="{{ search_nav_submit }}">
+  </form>
+
+  <button class="tray-nav__close" aria-label="{{ 'Toggle Search Menu'|t }}" title="{{ 'Close Search Menu'|t }}">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ffffff">
+      <path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/>
+    </svg>
+  </button>
+  {{ drupal_menu('search') }}
+</div>

@@ -1,0 +1,8 @@
+name: 'WRIN Language'
+type: module
+description: 'Custom language menu.'
+core_version_requirement: '^8.8.0 || ^9'
+dependencies: {  }
+config_devel:
+  install:
+    - block.block.languageswitcher

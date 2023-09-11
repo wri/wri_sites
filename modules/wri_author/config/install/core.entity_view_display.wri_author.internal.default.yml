@@ -6,6 +6,7 @@ dependencies:
     - wri_author.wri_author_type.internal
   module:
     - ds
+    - wri_author
 third_party_settings:
   ds:
     layout:
@@ -14,17 +15,17 @@ third_party_settings:
       disable_css: false
       entity_classes: all_classes
       settings:
-        label: ''
+        classes:
+          layout_class: {  }
         wrappers:
-          ds_content: div
+          content: div
         outer_wrapper: div
         attributes: ''
         link_attribute: ''
         link_custom: ''
-        classes:
-          layout_class: {  }
+        label: ''
     regions:
-      ds_content:
+      content:
         - field_person
 id: wri_author.internal.default
 targetEntityType: wri_author
@@ -32,7 +33,7 @@ bundle: internal
 mode: default
 content:
   field_person:
-    weight: 0
+    type: entity_reference_label_unpublished
     label: hidden
     settings:
       link: true
@@ -42,8 +43,9 @@ content:
           id: reset
           settings:
             lb: ''
-    type: entity_reference_label
-    region: ds_content
+    weight: 0
+    region: content
 hidden:
+  langcode: true
   name: true
   search_api_excerpt: true

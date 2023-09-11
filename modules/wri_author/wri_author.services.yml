@@ -5,11 +5,12 @@ services:
       - { name: event_subscriber }
   wri_author.autocomplete_matcher:
     class: Drupal\wri_author\EntityAutocompleteMatcher
-    arguments: ['@plugin.manager.entity_reference_selection','@entity.manager','@entity_type.manager']
+    arguments: ['@plugin.manager.entity_reference_selection','@entity.repository','@entity_type.manager']
   logger.channel.wri_author:
     parent: logger.channel_base
     arguments: ['wri_author']
   wri_author.commands:
     class: Drupal\wri_author\Commands\WriAuthorCustomCommands
+    arguments: ['@entity_type.manager', '@database']
     tags:
       - { name: drush.command }

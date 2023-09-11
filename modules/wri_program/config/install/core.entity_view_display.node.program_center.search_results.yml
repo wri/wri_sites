@@ -14,20 +14,21 @@ dependencies:
     - field.field.node.program_center.field_narrative_taxonomy
     - field.field.node.program_center.field_primary_contacts
     - field.field.node.program_center.field_primary_topic
+    - field.field.node.program_center.field_show_more_link
     - field.field.node.program_center.field_twitter_account
     - field.field.node.program_center.field_type
     - field.field.node.program_center.layout_builder__layout
     - image.style.150_tall
     - node.type.program_center
   module:
-    - blazy
     - ds
     - layout_builder
+    - media
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   ds:
     layout:
       id: layout_search-results
@@ -60,9 +61,9 @@ third_party_settings:
         label: hidden
         formatter: default
         settings:
+          link: false
           wrapper: h3
           class: h3
-          link: false
         ft:
           id: reset
           settings:
@@ -73,59 +74,28 @@ bundle: program_center
 mode: search_results
 content:
   field_main_image:
-    type: blazy_media
-    weight: 4
-    region: right_section
+    type: media_thumbnail
     label: hidden
     settings:
+      image_link: ''
       image_style: 150_tall
-      responsive_image_style: ''
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: search_results
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_loading:
+        attribute: lazy
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 4
+    region: right_section
   field_resource_type:
     type: entity_reference_rss_category
-    weight: 0
-    region: left_section
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: left_section
 hidden:
   body: true
   content_moderation_control: true
@@ -139,9 +109,11 @@ hidden:
   field_narrative_taxonomy: true
   field_primary_contacts: true
   field_primary_topic: true
+  field_show_more_link: true
   field_statistics: true
   field_twitter_account: true
   field_type: true
+  langcode: true
   layout_builder__layout: true
   links: true
   search_api_excerpt: true

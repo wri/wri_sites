@@ -20,9 +20,9 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       statistic: statistic
+    negate: 0
     target_bundles_drag_drop:
       default_hero:
         weight: 5
@@ -34,6 +34,6 @@ settings:
         weight: 7
         enabled: false
       statistic:
-        enabled: true
         weight: 8
+        enabled: true
 field_type: entity_reference_revisions

@@ -14,15 +14,16 @@ dependencies:
     - field.field.node.program_center.field_narrative_taxonomy
     - field.field.node.program_center.field_primary_contacts
     - field.field.node.program_center.field_primary_topic
+    - field.field.node.program_center.field_show_more_link
     - field.field.node.program_center.field_twitter_account
     - field.field.node.program_center.field_type
     - field.field.node.program_center.layout_builder__layout
     - node.type.program_center
     - responsive_image.styles.tile
   module:
-    - blazy
     - ds
     - layout_builder
+    - media_responsive_thumbnail
     - text
     - user
     - wri_media
@@ -30,9 +31,6 @@ third_party_settings:
   ds:
     layout:
       id: layout_tile
-      library: null
-      disable_css: false
-      entity_classes: all_classes
       settings:
         label: ''
     regions:
@@ -65,16 +63,16 @@ third_party_settings:
         label: hidden
         formatter: default
         settings:
+          link: false
           wrapper: h3
           class: h3
-          link: false
         ft:
           id: reset
           settings:
             lb: ''
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: node.program_center.tile
 targetEntityType: node
 bundle: program_center
@@ -82,8 +80,6 @@ mode: tile
 content:
   field_intro:
     type: text_default
-    weight: 2
-    region: intro
     label: hidden
     settings: {  }
     third_party_settings:
@@ -92,70 +88,37 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
             fis-el: ''
             fis-cl: ''
             fis-at: ''
+            fis-def-at: false
             fi: true
             fi-el: ''
             fi-cl: secondary
             fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow: false
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-def-at: false
             fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 2
+    region: intro
   field_main_image:
-    type: blazy_media
-    weight: 0
-    region: image
+    type: media_responsive_thumbnail
     label: hidden
     settings:
-      image_style: ''
       responsive_image_style: tile
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      view_mode: default
-      current_view_mode: tile
-      background: false
-      caption:
-        field_tags: '0'
-        field_media_embed_code: '0'
-      class: ''
-      id: ''
-      image: ''
-      link: ''
-      overlay: ''
-      title: ''
-      vanilla: false
-      icon: ''
-      layout: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_link: ''
     third_party_settings:
       wri_media:
         min_width: ''
@@ -164,6 +127,8 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: image
 hidden:
   body: true
   content_moderation_control: true
@@ -178,10 +143,12 @@ hidden:
   field_narrative_taxonomy: true
   field_primary_contacts: true
   field_primary_topic: true
+  field_show_more_link: true
   field_statistics: true
   field_transparent_header: true
   field_twitter_account: true
   field_type: true
+  langcode: true
   layout_builder__layout: true
   links: true
   search_api_excerpt: true

@@ -3,5 +3,4 @@ type: module
 description: 'Generates a table of contents'
 package: WRI
 core_version_requirement: '^8.8.0 || ^9'
-dependencies:
-  - sfc
+dependencies: { }

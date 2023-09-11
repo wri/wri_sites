@@ -6,9 +6,9 @@ package: WRI
 dependencies:
   - media
   - media_library
-  - blazy
+  - media_responsive_thumbnail
   - focal_point
-  - s3fs
+  - oembed_lazyload
   - wri_taxonomy
 theme:
   - ts_wrin
@@ -36,12 +36,17 @@ config_devel:
     - core.entity_view_display.media.embed.media_library
     - core.entity_view_display.media.embed.superfeatured
     - core.entity_view_display.media.embed.tile
+    - core.entity_view_display.media.image.card
     - core.entity_view_display.media.image.default
     - core.entity_view_display.media.image.full
     - core.entity_view_display.media.image.full_width
     - core.entity_view_display.media.image.half_content
+    - core.entity_view_display.media.image.homepage_hero
     - core.entity_view_display.media.image.landing_page_hero
+    - core.entity_view_display.media.image.large_image_teaser
     - core.entity_view_display.media.image.media_library
+    - core.entity_view_display.media.image.superfeatured
+    - core.entity_view_display.media.image.tile
     - core.entity_view_display.media.video.default
     - core.entity_view_display.media.video.media_library
     - core.entity_view_display.taxonomy_term.featured.default
@@ -49,6 +54,7 @@ config_devel:
     - core.entity_view_mode.media.download_listing
     - core.entity_view_mode.media.full_width
     - core.entity_view_mode.media.half_content
+    - core.entity_view_mode.media.homepage_hero
     - core.entity_view_mode.media.landing_page_hero
     - core.entity_view_mode.media.large_image_teaser
     - core.entity_view_mode.media.superfeatured
@@ -60,10 +66,12 @@ config_devel:
     - field.field.media.embed.field_media_embed_code
     - field.field.media.embed.field_media_image
     - field.field.media.embed.field_tags
+    - field.field.media.image.field_attribution
     - field.field.media.image.field_media_image
     - field.field.media.image.field_tags
     - field.field.media.video.field_media_oembed_video
     - field.field.media.video.field_tags
+    - field.storage.media.field_attribution
     - field.storage.media.field_media_embed_code
     - field.storage.media.field_media_file
     - field.storage.media.field_media_image
@@ -73,20 +81,15 @@ config_devel:
     - image.style.1000x625
     - image.style.1000x900
     - image.style.100x100
-    - image.style.1024x390
     - image.style.1024x450
     - image.style.1024x500
     - image.style.1024x595
     - image.style.1024x640
-    - image.style.1024x700
     - image.style.1024x800
-    - image.style.1067x600
     - image.style.1222x722
     - image.style.125x95
     - image.style.1260_wide
-    - image.style.1360x900
     - image.style.136x176
-    - image.style.1377x900
     - image.style.1440x500
     - image.style.1440x550
     - image.style.1440x600
@@ -97,11 +100,8 @@ config_devel:
     - image.style.150_wide
     - image.style.1575_wide
     - image.style.2000x1160
-    - image.style.2000x1250
     - image.style.2000x695
-    - image.style.2000x700
     - image.style.2000x765
-    - image.style.2000x972
     - image.style.215x145
     - image.style.215x153
     - image.style.220px
@@ -111,17 +111,13 @@ config_devel:
     - image.style.3000x1000
     - image.style.3000x550
     - image.style.3000x700
-    - image.style.3000x765
     - image.style.3000x900
     - image.style.300x200
     - image.style.300x215
-    - image.style.330x640
     - image.style.350x235
     - image.style.350x250
     - image.style.363x245
     - image.style.445x640
-    - image.style.445x800
-    - image.style.451x322
     - image.style.455_wide
     - image.style.455x265
     - image.style.463x285
@@ -135,7 +131,6 @@ config_devel:
     - image.style.525x325
     - image.style.600_wide
     - image.style.630x900
-    - image.style.630x985
     - image.style.646x251
     - image.style.646x464
     - image.style.700x405
@@ -146,9 +141,7 @@ config_devel:
     - image.style.768x400
     - image.style.768x460
     - image.style.768x640
-    - image.style.768x700
     - image.style.768x720
-    - image.style.800x450
     - image.style.875x540
     - image.style.965_wide
     - image.style.max_height_700

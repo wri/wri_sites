@@ -3,66 +3,45 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.media.landing_page_hero
+    - field.field.media.image.field_attribution
     - field.field.media.image.field_media_image
     - field.field.media.image.field_tags
     - media.type.image
     - responsive_image.styles.landing_page_hero
   module:
-    - blazy
     - ds
     - layout_builder
+    - responsive_image
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: media.image.landing_page_hero
 targetEntityType: media
 bundle: image
 mode: landing_page_hero
 content:
   field_media_image:
+    type: responsive_image
     label: hidden
-    weight: 0
     settings:
-      image_style: ''
       responsive_image_style: landing_page_hero
-      media_switch: ''
-      thumbnail_style: ''
-      ratio: ''
-      current_view_mode: landing_page_hero
-      background: false
-      caption:
-        title: '0'
-        alt: '0'
-      icon: ''
-      layout: ''
-      view_mode: ''
-      cache: 0
-      skin: ''
-      fx: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_media_style: ''
-      box_style: ''
-      _uri: ''
-      breakpoints: {  }
-      sizes: ''
-      grid_header: ''
-      grid: 0
-      grid_medium: 0
-      grid_small: 0
+      image_link: ''
+      image_loading:
+        attribute: eager
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
-    type: blazy
+    weight: 0
     region: content
 hidden:
   created: true
+  field_attribution: true
   field_tags: true
+  langcode: true
   name: true
   search_api_excerpt: true
   thumbnail: true

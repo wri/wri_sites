@@ -1,0 +1,16 @@
+single_file_component_layout:wri_narrative_tax:
+  label: "Narrative Taxonomy"
+  template: templates/wri-narrative-tax
+  default_region: main_content
+  regions:
+    phrase:
+      label: Phrase
+    main_content:
+      label: Content
+    listing:
+      label: Listing
+  icon_map:
+    - [ phrase]
+    - [ main_content ]
+    - [ listing ]
+

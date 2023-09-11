@@ -77,7 +77,8 @@
     margin-right: $space-xxl;
   }
 
-  .field--name-field-twitter-account {
+  .field--name-field-twitter-account,
+  .field-name-field-twitter-account {
     @include font($caslon, "regular", "italic");
     @include font-line-height(15, 16);
     background-color: $white;
@@ -117,6 +118,8 @@
 }
 
 .block-field-blocknodeprogram-centerbody,
+.block-field-blocknodemicrositefield-intro-paragraphs
+  .paragraph--type--program-lead-in,
 .block-field-blocknodeprogram-centerfield-intro-paragraphs
   .paragraph--type--program-lead-in,
 .block-field-blocknodesimple-pagefield-intro-paragraphs

@@ -11,9 +11,9 @@ third_party_settings:
   facets_pretty_paths:
     coder: taxonomy_term_coder
 id: international_office
-name: 'International Office'
+name: Office
 url_alias: international_office
-weight: 0
+weight: -2
 min_count: 1
 show_only_one_result: false
 field_identifier: field_international_office
@@ -42,7 +42,7 @@ processor_configs:
     weights:
       sort: 40
     settings:
-      sort: ASC
+      sort: DESC
   translate_entity:
     processor_id: translate_entity
     weights:

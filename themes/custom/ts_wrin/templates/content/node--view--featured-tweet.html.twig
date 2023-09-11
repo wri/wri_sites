@@ -1,0 +1,12 @@
+{% set tweet = content.field_featured_tweet.0 %}
+
+<div class="featured-tweet container padding-vertical">
+  <div class="tweet-wrapper content-side-padding has-text-align-center">
+    <div class="tweet">
+      <a href="{{ url }}" class="margin-bottom-lg margin-top-sm">{{ tweet }}</a>
+    </div>
+    <div class="updated-wrapper margin-top-sm">
+      <div><span class="italic-tiny">{{ "Updated"|t }}</span> <span class="date">{{ node.changed.value|date('F d, Y') }}</span></div>
+    </div>
+  </div>
+</div>

@@ -10,18 +10,15 @@
   }
 }
 
-.image-cta {
+.image-cta.block-wrapper {
   position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow: hidden;
 
-  .block-wrapper {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-
-    @include mq($md) {
-      justify-content: center;
-      position: relative;
-    }
+  @include mq($md) {
+    justify-content: center;
+    position: relative;
   }
 
   .cta-text-wrapper {

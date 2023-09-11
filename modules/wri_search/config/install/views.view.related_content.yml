@@ -16,66 +16,23 @@ base_table: search_api_index_sitewide
 base_field: search_api_id
 display:
   default:
-    display_plugin: default
     id: default
-    display_title: Master
+    display_title: Default
+    display_plugin: default
     position: 0
     display_options:
-      access:
-        type: none
-        options: {  }
-      cache:
-        type: none
-        options: {  }
-      query:
-        type: views_query
-        options:
-          bypass_access: false
-          skip_access: false
-          preserve_facet_query_args: false
-      exposed_form:
-        type: basic
-        options:
-          submit_button: Apply
-          reset_button: false
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      pager:
-        type: some
-        options:
-          items_per_page: 4
-          offset: 0
-      style:
-        type: default
-      row:
-        type: search_api
-        options:
-          view_modes:
-            'entity:node':
-              article: teaser
-              data: teaser
-              homepage: default
-              international_office: default
-              page: default
-              person: default
-              program_center: default
-              project_detail: teaser
-              publication: default
-              region: default
+      title: 'Relevant Work'
       fields:
         body:
+          id: body
           table: search_api_index_sitewide
           field: body
-          id: body
-          entity_type: null
-          entity_field: null
-          plugin_id: search_api_field
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: null
+          entity_field: null
+          plugin_id: search_api_field
           label: ''
           exclude: false
           alter:
@@ -137,6 +94,60 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 4
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Apply
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      access:
+        type: none
+        options: {  }
+      cache:
+        type: none
+        options: {  }
+      empty: {  }
+      sorts: {  }
+      arguments:
+        search_api_more_like_this:
+          id: search_api_more_like_this
+          table: search_api_index_sitewide
+          field: search_api_more_like_this
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_more_like_this
+          default_action: default
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: node
+          default_argument_options: {  }
+          default_argument_skip_url: false
+          summary_options: {  }
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: false
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          fields:
+            - rendered_item
       filters:
         type:
           id: type
@@ -145,6 +156,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_options
           operator: or
           value:
             article: article
@@ -180,45 +192,34 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-          plugin_id: search_api_options
-      sorts: {  }
-      title: 'Relevant Work'
+      style:
+        type: default
+      row:
+        type: search_api
+        options:
+          view_modes:
+            'entity:node':
+              article: teaser
+              data: teaser
+              homepage: default
+              international_office: default
+              page: default
+              person: default
+              program_center: default
+              project_detail: teaser
+              publication: default
+              region: default
+      query:
+        type: search_api_query
+        options:
+          bypass_access: false
+          skip_access: false
+          preserve_facet_query_args: true
+      relationships: {  }
+      css_class: ''
       header: {  }
       footer: {  }
-      empty: {  }
-      relationships: {  }
-      arguments:
-        search_api_more_like_this:
-          id: search_api_more_like_this
-          table: search_api_index_sitewide
-          field: search_api_more_like_this
-          relationship: none
-          group_type: group
-          admin_label: ''
-          default_action: default
-          exception:
-            value: all
-            title_enable: false
-            title: All
-          title_enable: false
-          title: ''
-          default_argument_type: node
-          default_argument_options: {  }
-          default_argument_skip_url: false
-          summary_options: {  }
-          summary:
-            sort_order: asc
-            number_of_records: 0
-            format: default_summary
-          specify_validation: false
-          validate:
-            type: none
-            fail: 'not found'
-          validate_options: {  }
-          fields: {  }
-          plugin_id: search_api_more_like_this
       display_extenders: {  }
-      css_class: ''
     cache_metadata:
       max-age: -1
       contexts:
@@ -229,17 +230,23 @@ display:
       tags:
         - 'config:field.storage.node.body'
         - 'config:search_api.index.sitewide'
+        - 'search_api_list:sitewide'
   block_1:
-    display_plugin: block
     id: block_1
     display_title: Block
+    display_plugin: block
     position: 1
     display_options:
-      display_extenders: {  }
       cache:
         type: none
+        options:
+          results_lifespan: 3600
+          results_lifespan_custom: 0
+          output_lifespan: 518400
+          output_lifespan_custom: 0
       defaults:
         cache: false
+      display_extenders: {  }
     cache_metadata:
       max-age: -1
       contexts:
@@ -250,3 +257,4 @@ display:
       tags:
         - 'config:field.storage.node.body'
         - 'config:search_api.index.sitewide'
+        - 'search_api_list:sitewide'

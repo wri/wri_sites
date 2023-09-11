@@ -1,0 +1,20 @@
+<div class="superfeatured grid">
+  <div class="image-wrapper">
+    {{ content.image }}
+  </div>
+  <div {{ attributes.addClass('left-text-wrapper') }}>
+    <div class="margin-top-md">
+      {{ title_suffix.contextual_links }}
+      {{ content.left_text }}
+      <div class="button-wrapper">
+      {{ content.button }}
+      </div>
+    </div>
+  </div>
+  <div class="right-text-wrapper card-teaser-text">
+    <p>{{ content.right_text|render|striptags|trim }}</p>
+    <div class="button-wrapper">
+      {{ content.button }}
+    </div>
+  </div>
+</div>

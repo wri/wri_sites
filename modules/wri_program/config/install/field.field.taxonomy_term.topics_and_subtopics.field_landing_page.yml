@@ -24,6 +24,7 @@ settings:
       project_detail: project_detail
     sort:
       field: _none
+      direction: ASC
     auto_create: false
     auto_create_bundle: program_center
 field_type: entity_reference

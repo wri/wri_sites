@@ -17,7 +17,7 @@ display:
   default:
     display_plugin: default
     id: default
-    display_title: Master
+    display_title: Default
     position: 0
     display_options:
       access:
@@ -31,7 +31,7 @@ display:
         options:
           bypass_access: false
           skip_access: false
-          preserve_facet_query_args: false
+          preserve_facet_query_args: true
       exposed_form:
         type: autosubmit
         options:
@@ -225,6 +225,7 @@ display:
             article: article
             data: data
             event: event
+            page: page
             person: person
             project_detail: project_detail
             publication: publication

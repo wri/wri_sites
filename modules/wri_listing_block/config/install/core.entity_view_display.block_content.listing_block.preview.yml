@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.block_content.preview
     - field.field.block_content.listing_block.field_content_types
     - field.field.block_content.listing_block.field_featured
+    - field.field.block_content.listing_block.field_filter_by_project
     - field.field.block_content.listing_block.field_filter_by_region
     - field.field.block_content.listing_block.field_filter_by_resource_type
     - field.field.block_content.listing_block.field_filter_by_tag
@@ -21,16 +22,17 @@ third_party_settings:
   ds:
     layout:
       id: layout_onecol
+      settings:
+        label: ''
       library: layout_discovery/onecol
       disable_css: false
       entity_classes: all_classes
-      settings:
-        label: ''
     regions:
       content:
         - block_label
         - field_content_types
         - field_featured
+        - field_filter_by_project
         - field_filter_by_region
         - field_filter_by_resource_type
         - field_filter_by_tag
@@ -43,8 +45,8 @@ third_party_settings:
         label: hidden
         formatter: default
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: block_content.listing_block.preview
 targetEntityType: block_content
 bundle: listing_block
@@ -52,8 +54,6 @@ mode: preview
 content:
   field_content_types:
     type: entity_reference_label
-    weight: 0
-    region: content
     label: inline
     settings:
       link: false
@@ -64,10 +64,10 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: content
   field_featured:
     type: entity_reference_label
-    weight: 0
-    region: content
     label: inline
     settings:
       link: false
@@ -77,10 +77,18 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: content
+  field_filter_by_project:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
   field_filter_by_region:
     type: entity_reference_label
-    weight: 0
-    region: content
     label: inline
     settings:
       link: false
@@ -90,10 +98,10 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: content
   field_filter_by_resource_type:
     type: entity_reference_label
-    weight: 0
-    region: content
     label: inline
     settings:
       link: false
@@ -103,10 +111,10 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: content
   field_filter_by_tag:
     type: entity_reference_label
-    weight: 0
-    region: content
     label: inline
     settings:
       link: false
@@ -116,8 +124,10 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: content
   field_intro:
-    weight: 3
+    type: text_trimmed
     label: above
     settings:
       trim_length: 300
@@ -127,35 +137,33 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow: false
             ow-def-at: false
             ow-def-cl: false
             fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
             fis-def-at: false
             fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
             fi-def-at: false
-    type: text_trimmed
+            prefix: ''
+            suffix: ''
+    weight: 3
     region: content
   field_tag:
     type: entity_reference_label
-    weight: 0
-    region: content
     label: inline
     settings:
       link: false
@@ -165,7 +173,10 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: content
 hidden:
   field_listing: true
   field_more_link: true
+  langcode: true
   search_api_excerpt: true

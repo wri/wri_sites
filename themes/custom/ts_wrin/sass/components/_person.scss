@@ -211,14 +211,18 @@
     min-width: 350px;
   }
 
+  .left-section {
+    flex-shrink: 0;
+  }
+
   img {
     border-radius: 50%;
     object-fit: cover;
+    width: 100px;
   }
 
   .person-teaser__inner-wrapper {
     display: flex;
-    align-items: center;
   }
 
   .right-section {
@@ -236,6 +240,20 @@
   }
 }
 
+.persons-external {
+  .person-teaser-item {
+    min-width: 0;
+  }
+
+  .left-section {
+    display: none;
+  }
+
+  .right-section {
+    margin-left: 0;
+  }
+}
+
 .search-results.search-results-people {
   .search-results-text {
     border: none;
@@ -249,6 +267,7 @@
     padding: 0 10px 0 20px;
     img {
       border-radius: 50%;
+      width: 100px;
     }
   }
   .leadership {

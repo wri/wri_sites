@@ -86,10 +86,10 @@ class WRIAuthorRevisionRevertTranslationForm extends WRIAuthorRevisionRevertForm
         $latest_revision_translation->set($field_name, $revision_translation->get($field_name)->getValue());
       }
     }
-
+    $request_time = \Drupal::time()->getRequestTime();
     $latest_revision_translation->setNewRevision();
     $latest_revision_translation->isDefaultRevision(TRUE);
-    $revision->setRevisionCreationTime(REQUEST_TIME);
+    $revision->setRevisionCreationTime($request_time);
 
     return $latest_revision_translation;
   }

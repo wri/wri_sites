@@ -13,7 +13,7 @@ bundle: homepage_hero
 label: 'Featured items'
 description: 'Similar to the <em>Happening Now</em> features, there are the two featured items under the hero title.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

@@ -1,0 +1,13 @@
+<div class="large-cta-wrapper {{ ((content.content.field_image|render) ? 'has-image' : '') }}">
+  {% if content.content.field_image|render %}
+    <div class="background-image">
+      {{ content.content.field_image }}
+    </div>
+  {% endif %}
+  <div class="cta-text-wrapper grid padding-top padding-bottom">
+    <div class="cta-text-inner">
+      <h2 class="h2 white margin-bottom-lg">{{ content.content.block_label }}</h2>
+      {{ content.content|without("block_label", "field_image") }}
+    </div>
+  </div>
+</div>

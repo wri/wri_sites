@@ -19,11 +19,11 @@ third_party_settings:
   ds:
     layout:
       id: 'single_file_component_layout:wri_3_1_listing'
+      settings:
+        component_context: {  }
       library: null
       disable_css: false
       entity_classes: all_classes
-      settings:
-        component_context: {  }
     regions:
       header:
         - block_label
@@ -46,7 +46,7 @@ bundle: 3_1_articles
 mode: default
 content:
   field_listing:
-    weight: 0
+    type: viewfield_token
     label: hidden
     settings:
       view_title: hidden
@@ -58,35 +58,33 @@ content:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow: false
             ow-def-at: false
             ow-def-cl: false
             fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
             fis-def-at: false
             fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
             fi-def-at: false
-    type: viewfield_token
+            prefix: ''
+            suffix: ''
+    weight: 0
     region: listing
   field_more_link:
     type: tokenized_link_field_formatter
-    weight: 1
-    region: listing
     label: hidden
     settings:
       trim_length: '80'
@@ -95,6 +93,8 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
+    weight: 1
+    region: listing
 hidden:
   field_content_types: true
   field_custom_results: true
@@ -102,4 +102,5 @@ hidden:
   field_filter_by_resource_type: true
   field_filter_by_tag: true
   field_tag: true
+  langcode: true
   search_api_excerpt: true

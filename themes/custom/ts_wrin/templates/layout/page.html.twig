@@ -2,10 +2,13 @@
   {{ drupal_block('local_tasks_block') }}
 {% endif %}
 {% if page.wrin_custom.wrinfilterstatus %}
-  {% include 'wrin-filter-status' %}
+  {% include '@ts_wrin/ts_custom/wrin-filter-status.html.twig' %}
 {% endif %}
 <div id="tray-nav-wrapper">
   <div id="tray-nav-canvas">
+    {% if use_microsite_nav %}
+    {# Do nothing. Pulled in at the wri-subpage-columns level #}
+    {% else %}
     <header>
       <div class="container header-wrapper">
         {% if page.primary_nav %}
@@ -17,18 +20,23 @@
             {{ page.secondary_nav }}
           {% endif %}
 
+          {% if page.wrin_custom.languageswitcher %}
+            {% include '@ts_wrin/ts_custom/wrin-language-button.html.twig' %}
+          {% endif %}
+
           {% if page.wrin_custom.wrinsearch %}
-            {% include 'wrin-search-button' %}
+            {% include '@ts_wrin/ts_custom/wrin-search-button.html.twig' %}
           {% endif %}
 
           {% if page.wrin_custom.wrinfilter %}
-            {% include 'wrin-filter-button' %}
+            {% include '@ts_wrin/ts_custom/wrin-filter-button.html.twig' %}
           {% endif %}
 
-          {% include '@ts_custom/ts-hamburger-nav.html.twig' %}
+          {% include '@ts_wrin/ts_custom/ts-hamburger-nav.html.twig' %}
         </div>
       </div>
     </header>
+    {% endif %}
 
     <div class="mobile-menu-target">
       <div class="ts-mobile-menu__wrapper">
@@ -73,7 +81,7 @@
           <div class="footer-padding">
             <div class="footer-logo margin-bottom-md">
               <a href="/">
-                {{ 'Home'|t }}
+                <img class="logo-white" src="{{ footer_logo }}" alt="{{ 'Home'|t }}" />
               </a>
             </div>
             {% if page.footer_left %}

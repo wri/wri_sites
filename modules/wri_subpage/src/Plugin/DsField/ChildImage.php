@@ -2,10 +2,9 @@
 
 namespace Drupal\wri_subpage\Plugin\DsField;
 
-use Drupal\wri_node\General;
-use Drupal\node\NodeInterface;
 use Drupal\ds\Plugin\DsField\DsFieldBase;
 use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
 
 /**
  * Plugin that renders the terms from a chosen taxonomy vocabulary.
@@ -18,7 +17,7 @@ use Drupal\node\Entity\Node;
  *   id = "childimg",
  *   title = @Translation("Add Image"),
  *   entity_type = "node",
- *   ui_limit = {"project_detail|*"}
+ *   ui_limit = {"project_detail|*","microsite|*","publication|*"}
  * )
  */
 class ChildImage extends DsFieldBase {
@@ -32,32 +31,30 @@ class ChildImage extends DsFieldBase {
     $node = \Drupal::routeMatch()->getParameter('node');
     if (!$node) {
       $node_route = \Drupal::routeMatch()->getRawParameter('section_storage');
-      $node_id = str_replace('node.', '', $node_route);
-      $node = Node::load($node_id);
+      $node_id = str_replace('node.', '', $node_route ?? '');
+      $node = $node_id ? Node::load($node_id) : '';
     }
     $uri = FALSE;
+    $alt = '';
     if (($node instanceof NodeInterface) && isset($node->field_main_image->entity->field_media_image->entity->uri->value)) {
       $uri = $node->field_main_image->entity->field_media_image->entity->uri->value;
+      $alt = $node->field_main_image->entity->field_media_image->alt;
     }
     elseif (isset($entity->field_main_image->entity->field_media_image->entity->uri->value)) {
       $uri = $entity->field_main_image->entity->field_media_image->entity->uri->value;
+      $alt = $entity->field_main_image->entity->field_media_image->alt;
     }
 
     if ($uri) {
-      $settings = [
-        'uri' => $uri,
-        'lazy' => 'blazy',
-        'responsive_image_style_id' => 'article_hero_large_cta',
-      ];
-
       $build = [
-        '#theme' => 'blazy',
-        '#settings' => $settings,
-        '#attached' => ['library' => ['blazy/load']],
+        '#type' => 'responsive_image',
+        '#responsive_image_style_id' => 'article_hero_large_cta',
+        '#uri' => $uri,
+        '#attributes' => [
+          'alt' => $alt,
+        ],
       ];
     }
-
-    General::$htmlClasses[] = 'transparent-header white';
     return $build;
   }
 

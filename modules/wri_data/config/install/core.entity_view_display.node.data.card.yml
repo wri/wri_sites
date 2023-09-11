@@ -23,22 +23,24 @@ dependencies:
     - field.field.node.data.field_tags
     - field.field.node.data.field_type
     - field.field.node.data.layout_builder__layout
+    - image.style.363x245
     - node.type.data
   module:
     - ds
     - layout_builder
     - layout_builder_restrictions
+    - media
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   layout_builder_restrictions:
     allowed_block_categories: {  }
     entity_view_mode_restriction:
-      whitelisted_blocks: {  }
-      blacklisted_blocks: {  }
       allowed_layouts: {  }
+      denylisted_blocks: {  }
+      allowlisted_blocks: {  }
   ds:
     layout:
       id: layout_card
@@ -77,29 +79,29 @@ third_party_settings:
           id: expert
           settings:
             lb: ''
-            prefix: ''
+            lbw: false
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
+            lb-col: false
+            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            suffix: ''
-            lbw: false
-            lb-col: false
-            ow: false
             ow-def-at: false
             ow-def-cl: false
             fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
             fis-def-at: false
             fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
             fi-def-at: false
+            prefix: ''
+            suffix: ''
       node_title:
         plugin_id: node_title
         weight: 2
@@ -119,27 +121,27 @@ bundle: data
 mode: card
 content:
   field_media:
-    type: entity_reference_entity_view
-    weight: 0
-    region: image
+    type: media_thumbnail
     label: hidden
     settings:
-      view_mode: card
-      link: false
+      image_link: ''
+      image_style: 363x245
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
+    weight: 0
+    region: image
   field_primary_topic:
     type: entity_reference_label
-    weight: 1
-    region: tag
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
+    weight: 1
+    region: tag
 hidden:
   body: true
   content_moderation_control: true
@@ -160,6 +162,7 @@ hidden:
   field_tags: true
   field_transparent_header: true
   field_type: true
+  langcode: true
   layout_builder__layout: true
   links: true
   search_api_excerpt: true

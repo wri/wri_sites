@@ -34,6 +34,18 @@
 <!DOCTYPE html>
 <html{{ html_attributes }}>
   <head>
+    {% if ads_data_redaction %}
+    <script>
+      window.dataLayer = window.dataLayer ||[];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent','default',{
+        'ad_storage':'denied',
+        'analytics_storage':'denied',
+        'wait_for_update': 500
+      });
+      gtag("set", "ads_data_redaction", true);
+    </script>
+    {% endif %}
     <head-placeholder token="{{ placeholder_token|raw }}">
     <title>{{ head_title|safe_join(' | ') }}</title>
     <css-placeholder token="{{ placeholder_token|raw }}">
@@ -49,7 +61,7 @@
     <!-- End Google Tag Manager (noscript) -->
     <!-- Grid Layout Checker -->
     {% if show_grid %}
-      {% include '@ts_custom/ts-grid-checker.html.twig' %}
+      {% include '@ts_wrin/ts_custom/ts-grid-checker.html.twig' %}
     {% endif %}
     <!-- END Grid Layout Checker -->
 

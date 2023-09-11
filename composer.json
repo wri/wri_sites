@@ -7,6 +7,19 @@
     "prefer-stable": true,
     "repositories": [
         {
+            "type": "package",
+            "package": {
+                "name": "drupal/views_arg_order_sort",
+                "type": "drupal-module",
+                "version": "dev-8.x-1.x",
+                "source": {
+                    "type": "git",
+                    "url": "https://git.drupalcode.org/project/views_arg_order_sort.git",
+                    "reference": "5d13cfca5749294d127ebc06348827f775342b37"
+                }
+            }
+        },
+        {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
@@ -63,58 +76,44 @@
     ],
     "extra": {
         "patches": {
+            "drupal/ckeditor": {
+                "Changes to a block's text field not saved when ckeditor source mode is active https://www.drupal.org/project/ckeditor/issues/3095304": "https://git.drupalcode.org/project/ckeditor/-/merge_requests/10.diff"
+            },
             "drupal/core": {
-                "Dynamic Views Arguments via Tokens https://www.drupal.org/project/drupal/issues/1699378":"https://www.drupal.org/files/issues/2020-10-29/1699378-210--on-89x.do-not-test.patch",
+                "Dynamic Views Arguments via Tokens https://www.drupal.org/project/drupal/issues/1699378": "https://www.drupal.org/files/issues/2023-05-03/1699378-249.patch",
                 "There is no way to delete or update file entities of other users incl. user/1":"https://www.drupal.org/files/issues/2019-12-12/2949017-59.patch",
                 "Add reusable option to inline block creation https://www.drupal.org/project/drupal/issues/2999491": "https://www.drupal.org/files/issues/2020-05-21/2999491--reusable-title-display--49.patch",
                 "Allow field blocks to display the configuration label when set in Layout Builder https://www.drupal.org/project/drupal/issues/3039185": "https://www.drupal.org/files/issues/2020-07-17/3039185-block_title-33.patch",
-                "Hyphens and forward slashes (-/) break Views contextual filters https://www.drupal.org/node/672606": "https://www.drupal.org/files/issues/672606-43.patch",
-                "Taxonomy Name infinite loop https://www.drupal.org/project/drupal/issues/2693787": "https://git.drupalcode.org/project/drupal/-/merge_requests/234.diff",
-                "Formatters for empty fields do not render with layout builder enabled": "https://www.drupal.org/files/issues/2020-01-24/3067982-8.patch",
-                "Plugin blocks cannot set their own attributes when put in the layout": "https://www.drupal.org/files/issues/2020-04-11/plugin-block-attributes-fix-3077734-13.patch",
-                "Views RSS feeds have validation issues https://www.drupal.org/project/drupal/issues/1337894": "https://www.drupal.org/files/issues/d8-rss-validation-atom-link-missing-1337894-25.patch",
-                "Add missing enclosure to Views RSS - 2511878-30": "https://www.drupal.org/files/issues/2020-07-24/views-rss-fields-enclosure-2511878-30.patch"
+                "Hyphens and forward slashes (-/) break Views contextual filters https://www.drupal.org/node/672606": "https://www.drupal.org/files/issues/2022-09-27/672606-76.patch",
+                "Views RSS feeds have validation issues https://www.drupal.org/project/drupal/issues/1337894": "https://www.drupal.org/files/issues/2022-11-28/1337894-37.patch",
+                "Add missing enclosure to Views RSS - 2511878-30": "https://www.drupal.org/files/issues/2020-07-24/views-rss-fields-enclosure-2511878-30.patch",
+                "Views Term ID has broken filters (\"All of\", \"Is none of\") and contextual filters \"allow multiple\" https://www.drupal.org/project/drupal/issues/2829178": "https://www.drupal.org/files/issues/2021-12-09/2829178-61.patch"
             },
-            "drupal/config_devel": {
-                "Add a tool for manipulating module info files https://www.drupal.org/project/config_devel/issues/2392929": "https://www.drupal.org/files/issues/2020-05-15/2392929-11.patch"
-            },
-            "drupal/config_suite": {
-                "Syntax error in ConfigSuiteImportSubscriber https://www.drupal.org/project/config_suite/issues/3189614": "https://git.drupalcode.org/project/config_suite/-/merge_requests/1.diff"
+            "drupal/content_snippets": {
+                "Error: Cannot unset string offsets... https://www.drupal.org/project/content_snippets/issues/3268757": "https://git.drupalcode.org/issue/content_snippets-3268757/-/merge_requests/1.diff"
             },
             "drupal/diff": {
                 "No local tasks on compare revisions page https://www.drupal.org/project/diff/issues/3169729": "https://www.drupal.org/files/issues/2020-09-08/diff_add-local-tasks-3169729-2.patch"
             },
-            "drupal/facets": {
-                "Drupal site install from existing config is broken (summary) https://www.drupal.org/project/facets/issues/3199156": "https://www.drupal.org/files/issues/2021-02-23/3199156--facet-summary-coverage.patch",
-                "Drupal site install from existing config is broken (facet) https://www.drupal.org/project/facets/issues/3199156": "https://git.drupalcode.org/project/facets/-/merge_requests/12.diff"
+            "drupal/facets_pretty_paths": {
+                "Cannot filter properly when using facet pretty paths https://www.drupal.org/project/facets_pretty_paths/issues/3254600": "https://www.drupal.org/files/issues/2022-01-11/url-duplication.patch"
             },
             "drupal/menu_block": {
-                "https://www.drupal.org/project/menu_block/issues/3082445 https://www.drupal.org/project/menu_block/issues/3082445": "https://www.drupal.org/files/issues/2019-09-20/menu_block-render-parent-menu-item-3082445-4.patch"
+                "Add option to always render parent menu item https://www.drupal.org/project/menu_block/issues/3082445": "https://www.drupal.org/files/issues/2019-09-20/menu_block-render-parent-menu-item-3082445-4.patch"
             },
             "drupal/sfc": {
                 "Duplicate content when pulling SFC layout into views https://www.drupal.org/project/sfc/issues/3175000": "https://www.drupal.org/files/issues/2020-10-06/duplicate_ds_content-3175000-2.patch"
             },
             "drupal/paragraphs": {
-                "Integrity constraint violation: 1048 Column 'langcode' cannot be null https://www.drupal.org/project/paragraphs/issues/2901390": "https://www.drupal.org/files/issues/2020-06-25/paragraphs-2901390-51.patch"
+                "Integrity constraint violation: 1048 Column 'langcode' cannot be null https://www.drupal.org/project/paragraphs/issues/2901390": "https://www.drupal.org/files/issues/2020-06-25/paragraphs-2901390-51.patch",
+                "Paragraph access check using incorrect revision of its parent https://www.drupal.org/project/paragraphs/issues/3090200": "https://www.drupal.org/files/issues/2022-10-26/3084934-13_combine_3090200-22.patch"
             },
             "drupal/token": {
                 "Add a [current-page:object:?] dynamic token https://www.drupal.org/project/token/issues/919760": "https://www.drupal.org/files/issues/2020-09-08/token--current_page_object_token--919760--83.patch",
                 "Provide array of primitive property values on multivalue field https://www.drupal.org/project/token/issues/3115486": "https://www.drupal.org/files/issues/2020-12-11/token-provide_primitive_type_arrays_for_properties_of_multivalue_fields-3115486-12.patch"
             },
-            "drupal/field_tools": {
-                "TypeError: Argument 2 passed to Drupal\\field_tools\\FieldCloner...": "https://www.drupal.org/files/issues/2020-08-04/3160564-wrong-parameters-for-service-classes.patch"
-            },
             "drupal/hierarchical_term_formatter": {
                 "Use the toUrl to create the link (compatibility with Forum module)": "https://git.drupalcode.org/project/hierarchical_term_formatter/-/merge_requests/1.diff"
-            },
-            "drupal/schema_metatag": {
-                "Illegal offset type in Drupal\\schema_metatag\\SchemaMetatagClient->objectInfo()" : "https://www.drupal.org/files/issues/2020-09-30/schema_metatag-undefined_index_objectinfo-3174103-2.patch"
-            },
-            "drupal/search_api_pantheon": {
-                "Fixing More Like This for D8 on Pantheon https://github.com/pantheon-systems/search_api_pantheon/pull/69": "https://patch-diff.githubusercontent.com/raw/pantheon-systems/search_api_pantheon/pull/69.diff"
-            },
-            "drupal/views_extras": {
-                "Why does Views Extras require Drupal_Visitors to be part of the cookie name?" : "https://www.drupal.org/files/issues/2021-02-03/3054202-08.patch"
             },
             "drupal/textfield_counter": {
                 "'Prevent form submission when character limit exceeded' option does not work https://www.drupal.org/project/textfield_counter/issues/3004457": "https://www.drupal.org/files/issues/2018-10-04/textfield_counter-prevent_form_submission_does_not_work-3004457-2.patch",
@@ -124,8 +123,52 @@
                 "Fix Required fields to really not be required https://www.drupal.org/node/3024419": "https://www.drupal.org/files/issues/2020-11-20/3024419-invalid-form-control-24.patch"
             },
             "drupal/simple_popup_blocks": {
-                "Modal hops user down the page to the first text input https://www.drupal.org/project/simple_popup_blocks/issues/3202060#comment-14021232": "https://git.drupalcode.org/project/simple_popup_blocks/-/merge_requests/2.diff"
+                "Modal hops user down the page to the first text input https://www.drupal.org/project/simple_popup_blocks/issues/3202060#comment-14021232": "https://git.drupalcode.org/project/simple_popup_blocks/-/merge_requests/2.diff",
+                "Warning: htmlspecialchars() expects parameter 1 to be string, array given https://www.drupal.org/files/issues/2022-03-09/simple_popup_blocks-n3267864-5.patch":"https://git.drupalcode.org/project/simple_popup_blocks/-/merge_requests/4.diff"
+            },
+            "drupal/views_arg_order_sort": {
+                "Set as compatible with Drupal 9 https://www.drupal.org/project/views_arg_order_sort/issues/3142079" : "https://git.drupalcode.org/project/views_arg_order_sort/-/commit/be5de28bb9f137b8bdf464091ef2f44fc22d10ab.patch"
+            },
+            "drupal/views_extras": {
+                "Why does Views Extras require Drupal_Visitors to be part of the cookie name?" : "https://www.drupal.org/files/issues/2021-12-27/3054202-09.patch"
+            },
+            "drupal/layout_builder_modal": {
+                "incompatibility with layout_builder_st, contextual links broken https://www.drupal.org/project/layout_builder_modal/issues/3133695": "https://www.drupal.org/files/issues/2022-12-15/3133695-13.patch"
+            },
+            "guzzlehttp/guzzle": {
+                "Pass int to &$still_running of curl_multi_exec. Needed for 6.x branch https://github.com/guzzle/guzzle/issues/2990": "web/profiles/contrib/wri_sites/patches/curl_multi_exec-2990.patch"
             }
+        },
+        "drupal-scaffold": {
+            "locations": {
+                "project-root": "./web",
+                "web-root": "./web"
+            }
+        },
+        "installer-paths": {
+            "web/core": [
+                "type:drupal-core"
+            ],
+            "web/libraries/{$name}": [
+                "type:drupal-library",
+                "type:bower-asset",
+                "type:npm-asset"
+            ],
+            "web/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "web/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "web/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/Commands/contrib/{$name}": [
+                "type:drupal-drush"
+            ],
+            "web/private/scripts/quicksilver/{$name}/": [
+                "type:quicksilver-script"
+            ]
         }
     },
     "require": {
@@ -133,85 +176,99 @@
         "composer/installers": "^1.9",
         "cweagans/composer-patches": "^1.0",
         "dinbror/blazy": "^1.8",
-        "drupal/cer": "^4.0@alpha",
-        "drupal/access_unpublished": "^1.0",
-        "drupal/address": "^1.9",
+        "drupal/access_unpublished": "^1.3",
+        "drupal/address": "^1.10",
         "drupal/addtocal": "^1.1",
-        "drupal/admin_toolbar": "^2.4",
-        "drupal/allowed_formats": "^1.3",
-        "drupal/asset_injector": "^2.7",
+        "drupal/admin_toolbar": "^3.2",
+        "drupal/allowed_formats": "^1.4",
+        "drupal/asset_injector": "^2.9",
         "drupal/auto_entitylabel": "^3.0@beta",
-        "drupal/blazy": "^2.1",
+        "drupal/blazy": "2.6",
         "drupal/block_list_override": "^1.0",
+        "drupal/cer": "^5.0@beta",
+        "drupal/ckeditor_accordion": "^2.0",
         "drupal/ckeditor_templates": "^1.2",
-        "drupal/ckeditor_templates_ui": "^1.3",
-        "drupal/components": "^1.1",
-        "drupal/config_sync": "^2.0@beta",
-        "drupal/content_snippets": "^1.4",
-        "drupal/csv_importer": "^1.10",
+        "drupal/ckeditor_templates_ui": "^1.4",
+        "drupal/config_partial_export": "^1.6",
+        "drupal/content_snippets": "^2.0",
+        "drupal/core-composer-scaffold": "^9.3",
+        "drupal/core-recommended": "^9.3",
+        "drupal/ctools": "^3.7",
+        "drupal/custom_robots": "1.x-dev",
         "drupal/diff": "^1.0",
-        "drupal/draggableviews": "^2.0",
-        "drupal/ds": "^3.9",
-        "drupal/editor_advanced_link": "^1.8",
-        "drupal/element_class_formatter": "^1.2",
-        "drupal/entity_browser": "^2.5",
+        "drupal/ds": "^5.0.0",
+        "drupal/editor_advanced_link": "^1.9",
+        "drupal/element_class_formatter": "^1.4",
+        "drupal/entity_browser": "^2.6",
         "drupal/entity_class_formatter": "^1.3",
-        "drupal/facets": "^1.6",
-        "drupal/facets_pretty_paths": "^1.0",
-        "drupal/field_group": "^3.1",
+        "drupal/facets": "^2.0",
+        "drupal/facets_pretty_paths": "^1.2",
+        "drupal/field_group": "^3.2",
         "drupal/file_replace": "^1.2",
         "drupal/focal_point": "^1.5",
-        "drupal/gdpr_compliance": "^1.18",
         "drupal/hierarchical_term_formatter": "^1.2",
         "drupal/inline_entity_form": "^1.0@RC",
-        "drupal/layout_builder_restrictions": "^2.7",
+        "drupal/layout_builder_modal": "^1.1",
+        "drupal/layout_builder_restrictions": "^2.12",
         "drupal/link_attributes": "^1.11",
-        "drupal/menu_block": "^1.6",
+        "drupal/media_library_edit": "^3.0",
+        "drupal/media_responsive_thumbnail": "^1.2",
+        "drupal/menu_block": "1.8",
         "drupal/menu_position": "^1.0@beta",
-        "drupal/metatag": "^1.14",
+        "drupal/metatag": "^1.19",
         "drupal/metatag_google_scholar": "^1.0",
-        "drupal/onlyone": "^1.10",
+        "drupal/oembed_lazyload": "^1.0@alpha",
         "drupal/paragraphs": "^1.12",
-        "drupal/pathauto": "^1.8",
-        "drupal/redirect": "^1.6",
-        "drupal/redis": "^1.4",
-        "drupal/responsive_tables_filter": "^1.7",
-        "drupal/s3fs": "^3.0@alpha",
-        "drupal/scheduled_transitions": "^2.0",
-        "drupal/schema_metatag": "^2.1",
-        "drupal/search_api_autocomplete": "^1.4",
+        "drupal/pathauto": "^1.9",
+        "drupal/redirect": "^1.7",
+        "drupal/redis": "^1.5",
+        "drupal/responsive_tables_filter": "^1.9",
+        "drupal/scheduled_transitions": "^2.2",
+        "drupal/schema_metatag": "^2.2",
+        "drupal/search_api": "^1.28",
+        "drupal/search_api_autocomplete": "^1.6",
         "drupal/search_api_exclude_entity": "^1.3",
-        "drupal/search_api_pantheon": "1.0",
-        "drupal/search_api_solr": "1.6.0",
-        "drupal/sfc": "^1.3",
-        "drupal/simple_popup_blocks": "^2.6",
+        "drupal/search_api_pantheon": "^8.0",
+        "drupal/search_api_solr": "^4.2.1",
+        "drupal/sendgrid_integration": "^2.1",
+        "drupal/simple_popup_blocks": "^2.8",
         "drupal/simple_recaptcha": "^1.0@beta",
-        "drupal/smart_date": "^3.1",
+        "drupal/smart_date": "^3.4",
         "drupal/sortableviews": "^1.0@beta",
-        "drupal/textfield_counter": "^1.11",
+        "drupal/textfield_counter": "^1.12",
         "drupal/token": "1.8",
-        "drupal/token_filter": "^1.2",
-        "drupal/twig_tweak": "^2.6",
+        "drupal/token_filter": "^1.3",
+        "drupal/twig_tweak": "^2.9",
+        "drupal/twitter_api_block": "^4.0",
         "drupal/viewfield": "^3.0@beta",
-        "drupal/views_arg_order_sort": "1.x-dev",
-        "drupal/views_autosubmit": "^1.3",
-        "drupal/views_bulk_edit": "^2.4",
-        "drupal/views_bulk_operations": "^3.9",
-        "drupal/views_extras": "^1.1",
-        "drupal/webform": "^6.0",
-        "drupal/xmlsitemap": "^1.0",
+        "drupal/views_arg_order_sort": "dev-8.x-1.x",
+        "drupal/views_autosubmit": "^1.4",
+        "drupal/views_bulk_edit": "^2.6",
+        "drupal/views_bulk_operations": "^4.0",
+        "drupal/views_extras": "^2.0@alpha",
+        "drupal/webform": "^6.1",
+        "drupal/xmlsitemap": "^1.2",
         "npm-asset/jquery.toc": "^0.4.0",
         "oomphinc/composer-installers-extender": "^2.0",
-        "solarium/solarium": "3.8.*"
+        "solarium/solarium": "^6.1.5",
+        "thinkshout/distro_helper": "dev-logging-and-errors-15"
     },
     "require-dev": {
-        "drupal/config_devel": "1.7.0",
-        "drupal/config_suite": "^1.4",
-        "drupal/stage_file_proxy": "^1.0",
-        "drupal/devel": "^4.0",
-        "drupal/field_tools": "1.x-dev"
+        "drupal/coder": "^8.3",
+        "drupal/config_devel": "^1.8",
+        "drupal/config_suite": "^2.0",
+        "drupal/devel": "^4.1",
+        "drupal/field_tools": "^1.0@alpha",
+        "drupal/stage_file_proxy": "^1.2"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "cweagans/composer-patches": true,
+            "drupal/core-composer-scaffold": true,
+            "composer/installers": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "oomphinc/composer-installers-extender": true
+        }
     }
 }

@@ -11,7 +11,7 @@ bundle: project_detail
 label: 'Featured from this Project'
 description: 'The items chosen here will be featured as cards on the page. Only items with this project set as a value in their "Projects" field will show up here.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

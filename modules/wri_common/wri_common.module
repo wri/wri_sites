@@ -5,16 +5,17 @@
  * Provides hook implementations for wri_common.
  */
 
-use Drupal\node\Entity\Node;
-use Drupal\Core\Link;
-use Drupal\Core\Render\Markup;
-use Drupal\Core\Language\LanguageInterface;
-use Drupal\Core\Render\BubbleableMetadata;
-use Drupal\Core\Url;
-use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\Link;
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\Render\Markup;
+use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
 use Drupal\node\Entity\NodeType;
+use Drupal\node\NodeInterface;
+use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 
 /**
  * Implements hook_theme().
@@ -44,6 +45,13 @@ function wri_common_entity_extra_field_info() {
     ];
   }
 
+  $extra['paragraph']['accordion_item']['display']['wri_social_sharing_block'] = [
+    'label' => t('Social Sharing Block'),
+    'description' => t('Adds a social sharing block with links to social media and print.'),
+    'weight' => 1,
+    'visible' => FALSE,
+  ];
+
   return $extra;
 }
 
@@ -51,9 +59,30 @@ function wri_common_entity_extra_field_info() {
  * Implements hook_ENTITY_TYPE_view().
  */
 function wri_common_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  $build['wri_social_sharing_block'] = wri_common_get_social_share($display);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function wri_common_paragraph_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  $build['wri_social_sharing_block'] = wri_common_get_social_share($display);
+}
+
+/**
+ * Helper function to build the social sharing block.
+ *
+ * @param \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display
+ *   The display.
+ *
+ * @return array
+ *   The render array for the element.
+ */
+function wri_common_get_social_share(EntityViewDisplayInterface $display) {
   if ($display->getComponent('wri_social_sharing_block')) {
     global $base_url;
     $request = \Drupal::request();
+
     if ($route = $request->attributes->get(RouteObjectInterface::ROUTE_OBJECT)) {
       $title = \Drupal::service('title_resolver')->getTitle($request, $route);
     }
@@ -65,11 +94,12 @@ function wri_common_node_view(array &$build, EntityInterface $entity, EntityView
       'page_url' => Url::fromRoute('<current>', [], ['absolute' => TRUE]),
       'base_url' => $base_url,
     ];
-    $build['wri_social_sharing_block'] = [
+    return [
       '#theme' => 'wri_common_social_sharing_block',
       '#items' => $items,
     ];
   }
+  return [];
 }
 
 /**
@@ -120,6 +150,14 @@ function wri_common_token_info() {
   $info['tokens']['wri_tokens']['child_topic_links_list'] = [
     'name' => 'Child Topic Links List',
     'description' => 'A comma separated list of Topics that are children of the node\'s primary topic.',
+  ];
+  $info['tokens']['node']['link'] = [
+    'name' => 'A node link',
+    'description' => 'The link to the node, if published, or its title if not.',
+  ];
+  $info['tokens']['taxonomy_term']['link'] = [
+    'name' => 'A term link',
+    'description' => 'The link to the term, if published, or its title if not.',
   ];
 
   return $info;
@@ -187,6 +225,28 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
       }
     }
   }
+  if ($type == 'node') {
+    if (isset($data['node']) && $node = $data['node']) {
+      foreach ($tokens as $name => $original) {
+        // Find the desired token by name.
+        switch ($name) {
+          case 'link':
+            $replacements[$original] = wri_common_link_or_text($data['node']);
+        }
+      }
+    }
+  }
+  if ($type == 'taxonomy_term') {
+    if (isset($data['taxonomy_term']) && $node = $data['taxonomy_term']) {
+      foreach ($tokens as $name => $original) {
+        // Find the desired token by name.
+        switch ($name) {
+          case 'link':
+            $replacements[$original] = wri_common_link_or_text($data['taxonomy_term']);
+        }
+      }
+    }
+  }
   return $replacements;
 }
 
@@ -205,13 +265,13 @@ function wri_common_get_node_topics(Node $node, $secondary_only = FALSE) {
   $topics = [];
   if (!$secondary_only && $node->hasField('field_primary_topic') && ($topic_items = $node->get('field_primary_topic')) && !$topic_items->isEmpty()) {
     $topic_item = $topic_items->first()->entity;
-    if ($topic_item) {
+    if ($topic_item && $topic_item->isPublished()) {
       $topics[] = $topic_item;
     }
   }
   if ($node->hasField('field_tags') && ($tag_items = $node->get('field_tags')) && !$tag_items->isEmpty()) {
     foreach ($tag_items as $tag_item) {
-      if (isset($tag_item->entity) && $tag_item->entity->bundle() == 'topics_and_subtopics') {
+      if (isset($tag_item->entity) && $tag_item->entity->bundle() == 'topics_and_subtopics' && $tag_item->entity->isPublished()) {
         $topics[] = $tag_item->entity;
       }
     }
@@ -269,7 +329,7 @@ function _wri_common_format_list(array $terms) {
         }
       }
       else {
-        $term_name = $term->link();
+        $term_name = $term->toLink()->tostring();
       }
 
       // If there is more than 1 term, build a list.
@@ -292,8 +352,75 @@ function _wri_common_format_list(array $terms) {
 }
 
 /**
+ * Determines whether or not to print an entity's title with link or without.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ *   The entity.
+ *
+ * @return string
+ *   A string representing the entity with or without a link.
+ */
+function wri_common_link_or_text(EntityInterface $entity) {
+  $link = '';
+  if (isset($entity)) {
+    if ($entity->isPublished()) {
+      $link = $entity->toLink()->toString();
+    }
+    else {
+      if ($entity->bundle() == 'person') {
+        $url = Url::fromUserInput(\Drupal::config('wri_node.settings')->get('person_listing_url'));
+
+        // See if the current page is a node.
+        $node = \Drupal::routeMatch()->getParameter('node');
+        if ($node instanceof NodeInterface) {
+          // If the current page is a project, link to its experts page.
+          if ($node->bundle() == 'project_detail') {
+            $url = Url::fromUserInput('/project-experts/' . $node->id());
+          }
+          // Otherwise, see if that node has a 'field_projects', and THAT node
+          // is published.
+          elseif ($node->hasField('field_projects')) {
+            $project = $node->field_projects->entity;
+            if ($project && $project->isPublished()) {
+              // If it is, link to the projects/experts page.
+              $url = Url::fromUserInput('/project-experts/' . $node->field_projects->target_id);
+            }
+          }
+        }
+
+        // Fallback to the /about/experts page.
+        $link = Link::fromTextAndUrl(\Drupal::config('wri_node.settings')->get('unpublished_person_phrase'), $url)->toString();
+      }
+      else {
+        $link = $entity->label();
+      }
+    }
+  }
+  return $link;
+}
+
+/**
  * Implements hook_page_attachments_alter().
  */
 function wri_common_page_attachments_alter(array &$attachments) {
   $attachments['#attached']['drupalSettings']['wri_common']['gtm_id'] = content_snippets_retrieve('gtm_id');
+}
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function wri_common_views_data_alter(&$data) {
+  if (isset($data['taxonomy_term_field_data'])) {
+    $term_name = $data['taxonomy_term_field_data']['name'];
+
+    // Create a new views argument for reading taxonomy term names with spaces.
+    $data['taxonomy_term_field_data']['spaced_name'] = [
+      'title' => t('Custom: Taxonomy name with spaces'),
+      'title short' => t('Name (spaces)'),
+      'argument' => $term_name['argument'],
+    ];
+
+    $data['taxonomy_term_field_data']['spaced_name']['argument']['id'] = 'string_with_space';
+    $data['taxonomy_term_field_data']['spaced_name']['argument']['real field'] = 'name';
+  }
 }

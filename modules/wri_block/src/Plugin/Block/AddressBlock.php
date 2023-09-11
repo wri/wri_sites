@@ -23,7 +23,7 @@ class AddressBlock extends BlockBase {
       '#type'   => 'text_format',
       '#title' => $this->t('Address'),
       '#description' => $this->t('This field supports html.'),
-      '#default_value' => isset($this->configuration['address']) ? $this->configuration['address'] :
+      '#default_value' => $this->configuration['address']['value'] ??
       '<p>WRI United States</br>
         10 G Street NE Suite 800</br>
         Washington DC, 20002</br>

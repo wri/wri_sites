@@ -1,4 +1,6 @@
-<button class="menu-toggle" aria-label="Open mobile menu" title="Menu Toggle">
+{% set class_name = class_name ?: 'menu-toggle' %}
+
+<button class="{{ class_name }}" aria-label="{{ 'Open mobile menu'|t }}" title="{{ 'Menu Toggle'|t }}">
   <div class="ts-menu-toggle-wrapper">
     <span></span>
   </div>

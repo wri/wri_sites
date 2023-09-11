@@ -9,9 +9,8 @@ dependencies:
     - text
 third_party_settings:
   allowed_formats:
-    basic_html: basic_html
-    full_html: '0'
-    plain_text: '0'
+    allowed_formats:
+      - basic_html
 id: node.page.field_long_title
 field_name: field_long_title
 entity_type: node
@@ -19,7 +18,7 @@ bundle: page
 label: 'Long Title'
 description: 'This longer title will display in the page''s hero'
 required: true
-translatable: false
+translatable: true
 default_value:
   -
     value: "<p>[current-page:node:title]</p>\r\n"

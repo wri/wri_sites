@@ -1,5 +1,6 @@
 .card-listing .program_center,
-.card-listing .project_detail {
+.card-listing .project_detail,
+.card-listing .microsite {
   h3.teaser-title {
     @include font($acumin-semi-cond);
     @include font-line-height(24, 24);

@@ -9,9 +9,8 @@ dependencies:
     - text
 third_party_settings:
   allowed_formats:
-    basic_html: basic_html
-    full_html: '0'
-    plain_text: '0'
+    allowed_formats:
+      - basic_html
 id: node.publication.field_featured_headline
 field_name: field_featured_headline
 entity_type: node
@@ -19,7 +18,7 @@ bundle: publication
 label: 'Featured Headline'
 description: 'If you would like the headline that shows when featuring this item to differ from the Title, overwrite this here. The default value should be <code>&#91;node:title&#93;</code>'
 required: false
-translatable: false
+translatable: true
 default_value:
   -
     value: "<p>[node:title]</p>\r\n"

@@ -17,8 +17,8 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   ds:
     layout:
       id: layout_hero-and-content
@@ -37,8 +37,6 @@ mode: main_content
 content:
   body:
     type: text_default
-    weight: 3
-    region: content
     label: hidden
     settings: {  }
     third_party_settings:
@@ -47,16 +45,19 @@ content:
           id: reset
           settings:
             lb: ''
+    weight: 3
+    region: content
   content_moderation_control:
-    weight: -20
     settings: {  }
     third_party_settings: {  }
+    weight: -20
     region: content
 hidden:
   field_intro: true
   field_long_title: true
   field_main_image: true
   field_metatags: true
+  langcode: true
   layout_builder__layout: true
   links: true
   search_api_excerpt: true
