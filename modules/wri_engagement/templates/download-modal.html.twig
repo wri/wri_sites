@@ -1,29 +1,4 @@
-{# <a class="files-overlay-trigger button">{{ "Download"|t }}</a>
-<div class="files-modal">
-  <div class="files-modal-unregistered">
-    <h1>{{ "Access the Full Report"|t }} {{ content['#object'].values.nid }}</h1>
-    <p>{{ "Download the free full report! By accessing the full PDF, you agree to receive communications from WRI and P4G. You can unsubscribe at any time."|t  }}</p>
-    <form id="pardot-subscription">
-      <label for="first_name" class="visually-hidden">{{ "First Name"|t }}</label>
-      <input type="text" id="first_name" name="first_name" class="registration" placeholder="{{ "First Name"|t }}">
-      <label for="last_name" class="visually-hidden">{{ "Last Name"|t }}</label>
-      <input type="text" id="last_name" name="last_name" class="registration" placeholder="{{ "Last Name"|t }}">
-      <br>
-      <label for="email" class="visually-hidden">{{ "Email"|t }}</label>
-      <input type="email" id="email" name="email" class="registration" placeholder="{{ "Email"|t }}">
-      <label for="organization" class="visually-hidden">{{  "Organization"|t }}</label>
-      <input type="text" id="organization" name="organization" class="registration" placeholder="{{ "Organization"|t }}">
-      <input type="hidden" id="file_path" name="file_path" value="{{ url("<current>") }}">
-      <br><input class="pardot-submission" type="submit" value="Submit">
-      <br><a id="skip-registration" href="#">{{ "No thanks, show me the files"|t }}</a>
-    </form>
-  </div>
-  <div class="files-modal-registered">
-    {{ content }}
-  </div> #}
-
-{{ attach_library('wri_engagement/trigger_modal_body') }}
 <a class="files-overlay-trigger-webform button">{{ "Download"|t }}</a>
-<div class="files-modal">
- {{ content }}
+<div class="files-modal files-modal-unregistered">
+  {{ content }}
 </div>
