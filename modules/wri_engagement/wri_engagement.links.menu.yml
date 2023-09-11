@@ -1,0 +1,5 @@
+wri_engagement.settings:
+  title: WRI Engagement
+  parent: system.admin_config_system
+  route_name: wri_engagement.settings
+  weight: 10

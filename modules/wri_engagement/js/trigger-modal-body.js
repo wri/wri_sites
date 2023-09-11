@@ -9,6 +9,11 @@
       $('.files-modal-modal-close').on('click', function(){
         $('.publication__toc').css('z-index','51');
       });
+
+      var hasSignedUp = Cookies.get('has_signed_up');
+      if (!hasSignedUp) {
+        $('.ui-dialog-buttonpane').addClass('hide-me');
+      }
     }
   };
 })(jQuery, Drupal);
