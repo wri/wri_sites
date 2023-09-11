@@ -81,6 +81,13 @@
     }
   }
 
+  .h2 .field--name-field-title {
+    font-size: inherit;
+    @include mq($md) {
+      font-size: inherit;
+    }
+  }
+
   input:not([type="submit"]) {
     border: solid 1px #757575;
     border-radius: 5px;
