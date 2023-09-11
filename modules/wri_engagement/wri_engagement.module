@@ -33,15 +33,16 @@ function wri_engagement_preprocess_download_modal(&$variables) {
   }
   $interrupter_webform_id = Drupal::config('wri_engagement.settings')->get('download_interrupter');
   $interrupter_webform = \Drupal\webform\Entity\Webform::load($interrupter_webform_id);
-  $variables['classes'] = 'use-ajax';
   if ($interrupter_webform) {
     $variables['webform_url'] = $interrupter_webform->url();
     if ($nid) {
       $variables['webform_url'] .= '?source_entity_type=node&source_entity_id=' . $nid;
+      $variables['classes'] = 'webform-dialog webform-dialog-normal';
     }
   }
   else {
     $variables['webform_url'] = '/node/' . $nid . '/download';
+    $variables['classes'] = 'use-ajax';
   }
 
 }
