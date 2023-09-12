@@ -38,3 +38,13 @@ function wri_taxonomy_install() {
 function wri_taxonomy_update_9501() {
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.resource_types', ['display#default#display_options#arguments'], 'wri_taxonomy');
 }
+
+/**
+ * Add taxonomy term topics and subtopics.
+ */
+function wri_taxonomy_update_9502() {
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('field.field.taxonomy_term.topics_and_subtopics.field_default_image', 'wri_taxonomy');
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('field.storage.taxonomy_term.field_default_image', 'wri_taxonomy');
+}
