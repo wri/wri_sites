@@ -47,8 +47,6 @@
       img {
         width: 100%;
         height: auto;
-        max-width: 250px;
-
       }
 
       @include center-columns($grid-columns-mobile, $grid-columns-mobile);
@@ -119,6 +117,7 @@
       display: none;
       @include mq($md) {
         display: initial;
+        max-width: 250px;
       }
     }
   }
