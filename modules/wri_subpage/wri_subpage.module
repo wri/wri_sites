@@ -20,44 +20,48 @@ function wri_subpage_node_insert(EntityInterface $entity) {
  * Implements hook_ENTITY_TYPE_update().
  */
 function wri_subpage_node_update(EntityInterface $entity) {
-  if (isset($entity->field_parent_page)) {
-    $parent = $entity->field_parent_page->entity;
-    if ($parent && $parent->id()) {
-      // Set the correct menu for microsites vs all others.
-      'microsite' == $parent->bundle() ? $menu_name = 'microsites' : $menu_name = 'page-hierarchies';
-      $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
+  if ($entity->hasField('field_parent_page') && $entity->field_parent_page->getValue()) {
+    $parentPage = $entity->field_parent_page->getValue();
+    $oriParentPage = $entity->original->field_parent_page->getValue();
+    if ($parentPage[0]['target_id'] !== $oriParentPage[0]['target_id']) {
+      $parent = $entity->field_parent_page->entity;
+      if ($parent && $parent->id()) {
+        // Set the correct menu for microsites vs all others.
+        'microsite' == $parent->bundle() ? $menu_name = 'microsites' : $menu_name = 'page-hierarchies';
+        $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
 
-      // Save the parent at the root of the menu, if not already there.
-      $parent_link_menu_id = array_key_first($menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $parent->id()], $menu_name));
-      if (!$parent_link_menu_id) {
-        $parent_link_menu = MenuLinkContent::create([
-          'title' => $parent->label(),
-          'link' => ['uri' => 'entity:node/' . $parent->id()],
-          'menu_name' => $menu_name,
-          'expanded' => TRUE,
-        ]);
-        $parent_link_menu->save();
-        $parent_link_menu_id = $parent_link_menu->getPluginId();
-      }
+        // Save the parent at the root of the menu, if not already there.
+        $parent_link_menu_id = array_key_first($menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $parent->id()], $menu_name));
+        if (!$parent_link_menu_id) {
+          $parent_link_menu = MenuLinkContent::create([
+            'title' => $parent->label(),
+            'link' => ['uri' => 'entity:node/' . $parent->id()],
+            'menu_name' => $menu_name,
+            'expanded' => TRUE,
+          ]);
+          $parent_link_menu->save();
+          $parent_link_menu_id = $parent_link_menu->getPluginId();
+        }
 
-      // Save the current page as a child of the parent in the appropriate menu.
-      $current_link_menu_menu = $menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $entity->id()], $menu_name);
-      if (!$current_link_menu_menu) {
-        $current_link_menu = MenuLinkContent::create([
-          'title' => $entity->label(),
-          'link' => ['uri' => 'entity:node/' . $entity->id()],
-          'menu_name' => $menu_name,
-          'parent' => $parent_link_menu_id,
-          'expanded' => TRUE,
-        ]);
+        // Save the current page as a child's parent in the appropriate menu.
+        $current_link_menu_menu = $menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $entity->id()], $menu_name);
+        if (!$current_link_menu_menu) {
+          $current_link_menu = MenuLinkContent::create([
+            'title' => $entity->label(),
+            'link' => ['uri' => 'entity:node/' . $entity->id()],
+            'menu_name' => $menu_name,
+            'parent' => $parent_link_menu_id,
+            'expanded' => TRUE,
+          ]);
+        }
+        else {
+          $current_link_menu_id = current($current_link_menu_menu)->getPluginDefinition()["metadata"]["entity_id"];
+          $current_link_menu = MenuLinkContent::load($current_link_menu_id);
+          $current_link_menu->set('enabled', 1);
+          $current_link_menu->set('parent', $parent_link_menu_id);
+        }
+        $current_link_menu->save();
       }
-      else {
-        $current_link_menu_id = current($current_link_menu_menu)->getPluginDefinition()["metadata"]["entity_id"];
-        $current_link_menu = MenuLinkContent::load($current_link_menu_id);
-        $current_link_menu->set('enabled', 1);
-        $current_link_menu->set('parent', $parent_link_menu_id);
-      }
-      $current_link_menu->save();
     }
   }
 }
