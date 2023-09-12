@@ -69,9 +69,11 @@
   }
   .search-results-text {
     align-items: flex-start;
+    border-bottom: 1px solid $black;
     display: flex;
     flex-direction: column;
     flex: 0 0 100%;
+    padding-bottom: 20px;
     justify-content: flex-start;
     margin-bottom: 20px;
     order: 1;
