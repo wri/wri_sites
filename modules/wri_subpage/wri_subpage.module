@@ -20,7 +20,7 @@ function wri_subpage_node_insert(EntityInterface $entity) {
  * Implements hook_ENTITY_TYPE_update().
  */
 function wri_subpage_node_update(EntityInterface $entity) {
-  if (isset($entity->field_parent_page)) {
+  if ($entity->hasField('field_parent_page') && $entity->field_parent_page->getValue()) {
     $parentPage = $entity->field_parent_page->getValue();
     $oriParentPage = $entity->original->field_parent_page->getValue();
     if ($parentPage[0]['target_id'] !== $oriParentPage[0]['target_id']) {
