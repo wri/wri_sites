@@ -59,6 +59,6 @@ function wri_search_update_9501() {
  */
 function wri_search_update_9502() {
   \Drupal::service('distro_helper.updates')->updateConfig('search_api.index.sitewide', [
-    'processor_settings',
+    'processor_settings#solr_boost_more_recent',
   ], 'wri_search');
 }
