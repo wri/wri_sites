@@ -44,7 +44,7 @@ function wri_taxonomy_update_9501() {
  */
 function wri_taxonomy_update_9502() {
   \Drupal::service('distro_helper.updates')
-    ->installConfig('field.field.taxonomy_term.topics_and_subtopics.field_default_image.yml', 'wri_taxonomy');
+    ->installConfig('field.field.taxonomy_term.topics_and_subtopics.field_default_image', 'wri_taxonomy');
   \Drupal::service('distro_helper.updates')
-    ->installConfig('field.storage.taxonomy_term.field_default_image.yml', 'wri_taxonomy');
+    ->installConfig('field.storage.taxonomy_term.field_default_image', 'wri_taxonomy');
 }
