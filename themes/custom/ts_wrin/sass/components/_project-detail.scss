@@ -111,4 +111,15 @@
   .landing-page__hero.has-image .hero__text .grid {
     min-height: 550px;
   }
+
+  .layout__region--featured-image {
+    img {
+      display: none;
+      @include mq($md) {
+        display: initial;
+        max-width: 250px;
+      }
+    }
+  }
+
 }
