@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for wri_external_resources module.
+ */
+
+use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
+
+/**
+ * Implements hook_link_alter().
+ */
+function wri_external_resources_link_alter(&$variables) {
+  // Updates third-party links to point at the field_source field.
+  // Used for External content.
+  if ($variables['url']->isRouted() && $variables['url']->getRouteName() == 'entity.node.canonical') {
+    // Load the node.
+    $node = Node::load($variables['url']->getRouteParameters()['node']);
+    // Find out if it has an external field_link value.
+    if (isset($node->field_source->uri)) {
+      // Update the url.
+      $variables['url'] = Url::fromUri($node->field_source->uri, ['external' => TRUE]);
+      $variables['options']['external'] = TRUE;
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function wri_external_resources_preprocess_node(&$variables) {
+  $node = $variables['node'];
+
+  // Find out if it has an external field_link value.
+  if ($node->hasField('field_source') && $node->field_source->getValue()) {
+    // Update the url.
+    $variables['url'] = $node->field_source->uri;
+  }
+}

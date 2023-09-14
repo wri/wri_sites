@@ -1,0 +1,24 @@
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_type
+    - node.type.external_resource
+id: node.external_resource.field_type
+field_name: field_type
+entity_type: node
+bundle: external_resource
+label: Type
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: resource_types
+      display_name: entity_reference_1
+      arguments:
+        - 'Technical Perspectives+Update+News+Insights+Outcomes'
+field_type: entity_reference

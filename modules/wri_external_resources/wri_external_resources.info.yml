@@ -1,0 +1,5 @@
+name: wri_external_resources
+type: module
+description: External resources custom module
+package: Other
+core_version_requirement: ^9 || ^10

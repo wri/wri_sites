@@ -1,0 +1,16 @@
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - page-hierarchies
+    parent: 'page-hierarchies:'
+name: 'External Resource'
+type: external_resource
+description: 'Resources that link to external places'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

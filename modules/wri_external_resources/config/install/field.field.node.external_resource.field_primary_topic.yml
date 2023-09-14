@@ -1,0 +1,27 @@
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_primary_topic
+    - node.type.external_resource
+    - taxonomy.vocabulary.topics_and_subtopics
+id: node.external_resource.field_primary_topic
+field_name: field_primary_topic
+entity_type: node
+bundle: external_resource
+label: Topic
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      topics_and_subtopics: topics_and_subtopics
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
