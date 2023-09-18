@@ -3,9 +3,8 @@
   {# Header #}
   <div class="pfp-mobile-nav__header">
 
-    {# Logo #}
+    {# WRI Logo #}
     <div class="pfp-mobile-nav__logo">
-      {# TODO: Add in correct href. #}
       <a href="/">
         <img src="../profiles/contrib/wri_sites/themes/custom/ts_wrin/img/logo/wri-logo-stacked.png" />
       </a>
@@ -20,15 +19,23 @@
     </div>
   </div>
 
-  {# PFP Logo #}
-  <button class="pfp-mobile-nav__pfp-logo">
-    <div class="pfp-mobile-nav__pfp-logo__chevron">
+  {# WRI Menu #}
+  <button class="pfp-mobile-nav__wri-logo">
+    <div class="pfp-mobile-nav__wri-logo__chevron">
       {{ source('profiles/contrib/wri_sites/themes/custom/ts_wrin/img/svgs/chevron-left.svg') }}
     </div>
-    <div class="pfp-mobile-nav__pfp-logo__logo">
-      {{ source('profiles/contrib/wri_sites/themes/custom/ts_wrin/img/logo/pfp-logo.svg') }}
+    <div class="pfp-mobile-nav__wri-logo__text">
+      <span class="visually-hidden">Open</span> WRI <span class="visually-hidden">website navigation</span>
     </div>
   </button>
+
+  {# PFP Logo SVG #}
+  <div class="pfp-mobile-nav__pfp-logo">
+    <a href="/paying-for-paris">
+      <span class="visually-hidden">Paying for the Paris Agreement</span>
+      {{ source('profiles/contrib/wri_sites/themes/custom/ts_wrin/img/logo/pfp-logo.svg') }}
+    </a>
+  </div>
 
   {# Menu #}
   <div class="pfp-mobile-nav__menu">
