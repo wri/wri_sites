@@ -5,6 +5,9 @@
  * Install, update and uninstall hooks for the wri_sites install profile.
  */
 
+use Drupal\Core\Config\FileStorage;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\taxonomy\Entity\Term;
 
 /**
@@ -43,8 +46,19 @@ function wri_taxonomy_update_9501() {
  * Add taxonomy term topics and subtopics.
  */
 function wri_taxonomy_update_9502() {
-  \Drupal::service('distro_helper.updates')
-    ->installConfig('field.field.taxonomy_term.topics_and_subtopics.field_default_image', 'wri_taxonomy');
-  \Drupal::service('distro_helper.updates')
-    ->installConfig('field.storage.taxonomy_term.field_default_image', 'wri_taxonomy');
+  // Create a new field: field_default_image.
+  $entitytype = 'taxonomy_term';
+  $field = 'field_default_image';
+  $field_storage_name = 'field.storage.' . $entitytype . '.' . $field;
+  $bundle = 'topics_and_subtopics';
+  $config_directory = new FileStorage(\Drupal::service('extension.list.module')->getPath('wri_taxonomy'), '/config/install');
+  $config_record = $config_directory->read($field_storage_name);
+  if (!FieldStorageConfig::loadByName($config_record['entity_type'], $config_record['field_name'])) {
+    FieldStorageConfig::create($config_record)->save();
+  }
+  $field_config_name = 'field.field.' . $entitytype . '.' . $bundle . '.' . $field;
+  $config_record = $config_directory->read($field_config_name);
+  if (!FieldConfig::loadByName($config_record['entity_type'], $config_record['bundle'], $config_record['field_name'])) {
+    FieldConfig::create($config_record)->save();
+  }
 }
