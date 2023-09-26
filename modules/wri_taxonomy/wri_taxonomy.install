@@ -5,10 +5,10 @@
  * Install, update and uninstall hooks for the wri_sites install profile.
  */
 
-use Drupal\taxonomy\Entity\Term;
 use Drupal\Core\Config\FileStorage;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\taxonomy\Entity\Term;
 
 /**
  * Implements hook_install().
