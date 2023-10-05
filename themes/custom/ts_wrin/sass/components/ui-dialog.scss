@@ -37,6 +37,7 @@
       height: 30px;
       border: 1px solid burlywood;
       text-indent: -9999px;
+      cursor: pointer;
     }
 
     // Close icon.
@@ -44,12 +45,24 @@
       all: unset;
 
       &:after {
+        content: "";
         position: absolute;
         width: 2px;
         height: 100%;
+        top: 50%;
         left: 50%;
-        transform: translateY(-50%);
+        transform: translate(-50%, -50%) rotate(-45deg);
         background-color: burlywood;
+      }
+      &:before {
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+        background-color: khaki;
       }
     }
   }
