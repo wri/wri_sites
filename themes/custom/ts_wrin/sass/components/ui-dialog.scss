@@ -1,0 +1,56 @@
+.ui-dialog {
+  display: flex;
+  flex-direction: column;
+
+  // Title wrapper.
+  .ui-dialog-titlebar {
+    // Reset all styles so we can start from scratch.
+    all: unset;
+    @include font($acumin-semi-cond, "bold");
+    @include font-line-height(24, 30);
+    @include mq($md) {
+      @include font-line-height(32, 40);
+    }
+    padding-top: $space-xs;
+    padding-right: $space-xs;
+    padding-left: $space-xs;
+    @include mq($md) {
+      padding-top: $space-md;
+      padding-right: $space-md;
+      padding-left: $space-md;
+    }
+    background-color: pink;
+    position: relative;
+
+    // Title.
+    .ui-dialog-title {
+      all: unset;
+    }
+
+    // Close button.
+    .ui-dialog-titlebar-close {
+      all: unset;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 30px;
+      height: 30px;
+      border: 1px solid burlywood;
+      text-indent: -9999px;
+    }
+
+    // Close icon.
+    .ui-icon-closethick {
+      all: unset;
+
+      &:after {
+        position: absolute;
+        width: 2px;
+        height: 100%;
+        left: 50%;
+        transform: translateY(-50%);
+        background-color: burlywood;
+      }
+    }
+  }
+}
