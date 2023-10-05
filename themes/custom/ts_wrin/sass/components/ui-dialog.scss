@@ -1,4 +1,4 @@
-.ui-dialog {
+div.ui-dialog {
   display: flex;
   flex-direction: column;
 
@@ -8,19 +8,15 @@
     all: unset;
     @include font($acumin-semi-cond, "bold");
     @include font-line-height(24, 30);
-    @include mq($md) {
-      @include font-line-height(32, 40);
-    }
-    padding-top: $space-xs;
-    padding-right: $space-xs;
+    position: relative;
+    padding-top: $space-sm;
+    padding-right: $space-sm;
     padding-left: $space-xs;
     @include mq($md) {
-      padding-top: $space-md;
       padding-right: $space-md;
       padding-left: $space-md;
+      @include font-line-height(32, 40);
     }
-    background-color: pink;
-    position: relative;
 
     // Title.
     .ui-dialog-title {
@@ -31,39 +27,93 @@
     .ui-dialog-titlebar-close {
       all: unset;
       position: absolute;
-      right: 0;
-      top: 0;
+      right: 10px;
+      top: 10px;
       width: 30px;
       height: 30px;
-      border: 1px solid burlywood;
       text-indent: -9999px;
       cursor: pointer;
+
+      &:hover,
+      &:focus {
+        .ui-icon-closethick:before,
+        .ui-icon-closethick:after {
+          background-color: $gold-hover;
+        }
+      }
     }
 
     // Close icon.
     .ui-icon-closethick {
       all: unset;
 
-      &:after {
-        content: "";
-        position: absolute;
-        width: 2px;
-        height: 100%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) rotate(-45deg);
-        background-color: burlywood;
-      }
+      &:after,
       &:before {
         content: "";
         position: absolute;
-        width: 2px;
+        width: 3px;
         height: 100%;
         top: 50%;
         left: 50%;
+        background-color: $brand-gold;
+        transition: background-color $transition-defaults;
+      }
+      &:after {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+      &:before {
         transform: translate(-50%, -50%) rotate(45deg);
-        background-color: khaki;
       }
     }
   }
+
+  // Content.
+  .ui-dialog-content {
+    padding-right: $space-xs;
+    padding-bottom: $space-md;
+    padding-left: $space-xs;
+
+    @include mq($md) {
+      padding-right: $space-md;
+      padding-bottom: $space-md;
+      padding-left: $space-md;
+    }
+  }
+
+  // Inputs
+  input[type="email"],
+  input[type="text"] {
+    @include font-line-height(14, 18);
+    padding: initial;
+    background-color: darkkhaki;
+    height: 46px;
+    padding: 15px 10px 12px;
+    background-color: $white;
+  }
+
+  // Label
+  label {
+    font-size: initial;
+    line-height: initial;
+    padding-top: 2px;
+    @include font-line-height(14, 18);
+  }
+
+  // Show files.
+  #skip-registration {
+    color: $white;
+    cursor: pointer;
+
+    @include mq($md) {
+      @include text-underline-thin(transparent, $black);
+      background-position: left 100%;
+      color: $black;
+    }
+  }
+}
+
+// Darkened background behind modal.
+.ui-widget-overlay {
+  background-color: $black;
+  opacity: 0.4;
 }
