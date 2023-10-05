@@ -91,6 +91,14 @@ div.ui-dialog {
     background-color: $white;
   }
 
+  // Submit
+  input[type="submit"] {
+    @include font($acumin-semi-cond, "semibold");
+    @include font-line-height(13, 16);
+    // height: 40px;
+    padding: 12px 40px;
+  }
+
   // Label
   label {
     font-size: initial;
@@ -103,6 +111,7 @@ div.ui-dialog {
   #skip-registration {
     color: $white;
     cursor: pointer;
+    font-size: 0.9375rem;
 
     @include mq($md) {
       @include text-underline-thin(transparent, $black);
