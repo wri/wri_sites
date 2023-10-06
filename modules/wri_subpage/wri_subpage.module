@@ -42,7 +42,9 @@ function wri_subpage_node_update(EntityInterface $entity) {
 
       // Save the current page as a child of the parent in the appropriate menu.
       $current_link_menu_menu = $menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $entity->id()], $menu_name);
-      if (!$current_link_menu_menu) {
+      if (!$current_link_menu_menu && !$entity->original) {
+        // Create a new menu link, but only if this is a new node. Otherwise
+        // clicking "Provide a menu link" to "Off" does not stick.
         $current_link_menu = MenuLinkContent::create([
           'title' => $entity->label(),
           'link' => ['uri' => 'entity:node/' . $entity->id()],
@@ -51,13 +53,15 @@ function wri_subpage_node_update(EntityInterface $entity) {
           'expanded' => TRUE,
         ]);
       }
-      else {
+      elseif ($current_link_menu_menu) {
         $current_link_menu_id = current($current_link_menu_menu)->getPluginDefinition()["metadata"]["entity_id"];
         $current_link_menu = MenuLinkContent::load($current_link_menu_id);
         $current_link_menu->set('enabled', 1);
         $current_link_menu->set('parent', $parent_link_menu_id);
       }
-      $current_link_menu->save();
+      if (isset($current_link_menu)) {
+        $current_link_menu->save();
+      }
     }
   }
 }
@@ -67,13 +71,15 @@ function wri_subpage_node_update(EntityInterface $entity) {
  */
 function wri_subpage_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $node = $form_state->getFormObject()->getEntity();
-  if (isset($node->field_parent_page->value)) {
-    $value = '';
-    if (isset($node->field_parent_page->entity)) {
-      $value = $node->field_parent_page->entity->label();
+  if ($form['menu']['enabled']['#default_value'] === 0 && isset($node->field_parent_page->target_id)) {
+    $parent = $node->field_parent_page->entity;
+    if ($parent && $parent->id()) {
+      // Set the correct menu for microsites vs all others.
+      'microsite' == $parent->bundle() ? $menu_name = 'microsites' : $menu_name = 'page-hierarchies';
+      $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
+      $parent_link_menu_id = array_key_first($menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $parent->id()], $menu_name));
+      $form['menu']['link']['menu_parent']['#default_value'] = $menu_name . ':' . $parent_link_menu_id;
+      $form['menu']['link']['menu_parent']['#description'] = t('Parent suggestion set from the "Parent page" field.');
     }
-    $form['menu']['link']['menu_parent']['#type'] = 'item';
-    $form['menu']['link']['menu_parent']['#markup'] = $value;
-    $form['menu']['link']['menu_parent']['#description'] = t('Parent will be pulled from the "Parent page" field.');
   }
 }
