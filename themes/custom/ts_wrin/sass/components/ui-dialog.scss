@@ -1,6 +1,7 @@
 div.ui-dialog {
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 
   // Title wrapper.
   .ui-dialog-titlebar {
