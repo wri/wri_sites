@@ -283,21 +283,11 @@ input[type="submit"].search-icon {
   }
 
   a {
-    padding: 3px 5px;
-    border-radius: 10px;
-    border: 1px solid;
     text-transform: initial;
     font-weight: initial;
-    color: $blue;
-    background-color: white;
     display: flex;
     align-items: center;
     margin: 10px 0px;
-
-    &:hover {
-      background-color: white;
-      color: $blue;
-    }
 
     &::after {
       content: "";
