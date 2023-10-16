@@ -4,8 +4,10 @@
  * @file
  * Contains wri_engagement.module.
  */
-use Drupal\Component\Serialization\Json;
-use Drupal\Core\Url;
+
+use Drupal\node\NodeInterface;
+use Drupal\webform\Entity\Webform;
+
 /**
  * Implements hook_theme().
  */
@@ -15,8 +17,8 @@ function wri_engagement_theme() {
     'variables' => [
       'content' => [],
       'webform_url' => '',
-      'classes' => 'files-overlay-trigger'
-      ],
+      'classes' => 'files-overlay-trigger',
+    ],
     'template' => 'download-modal',
   ];
   return $theme;
@@ -27,12 +29,12 @@ function wri_engagement_theme() {
  */
 function wri_engagement_preprocess_download_modal(&$variables) {
   $node = \Drupal::routeMatch()->getParameter('node');
-  if ($node instanceof \Drupal\node\NodeInterface) {
+  if ($node instanceof NodeInterface) {
     $nid = $node->id();
     // Do whatever you need to do with the node ID here...
   }
   $interrupter_webform_id = Drupal::config('wri_engagement.settings')->get('download_interrupter');
-  $interrupter_webform = \Drupal\webform\Entity\Webform::load($interrupter_webform_id);
+  $interrupter_webform = Webform::load($interrupter_webform_id);
   if ($interrupter_webform) {
     $variables['webform_url'] = $interrupter_webform->url();
     if ($nid) {
