@@ -29,13 +29,17 @@ function wri_engagement_theme() {
  */
 function wri_engagement_preprocess_download_modal(&$variables) {
   $node = \Drupal::routeMatch()->getParameter('node');
+  $interrupter_webform = FALSE;
+
   if ($node instanceof NodeInterface) {
     $nid = $node->id();
     // Do whatever you need to do with the node ID here...
   }
   $interrupter_webform_id = Drupal::config('wri_engagement.settings')->get('download_interrupter');
-  if ($interrupter_webform) {
+  if ($interrupter_webform_id) {
     $interrupter_webform = Webform::load($interrupter_webform_id);
+  }
+  if ($interrupter_webform) {
     $variables['webform_url'] = $interrupter_webform->url();
     if ($nid) {
       $variables['webform_url'] .= '?source_entity_type=node&source_entity_id=' . $nid;

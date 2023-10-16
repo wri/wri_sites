@@ -2,14 +2,29 @@
 
 namespace Drupal\wri_engagement\Form;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\webform\Entity\Webform;
 
 /**
  * Configure WRI Engagement settings for this site.
  */
-class WriEngagementForm extends ConfigFormBase {
+class WriEngagementForm extends ConfigFormBase implements ContainerInjectionInterface  {
+  /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    $instance = parent::create($container);
+    $instance->entityTypeManager = $container->get('entity_type.manager');
+    return $instance;
+  }
 
   /**
    * {@inheritdoc}
@@ -30,8 +45,8 @@ class WriEngagementForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $options = [];
-    $webform_ids = \Drupal::entityQuery('webform')->execute();
-    $webforms = Webform::loadMultiple($webform_ids);
+    $webform_ids = $this->entityTypeManager->getStorage('webform')->getQuery()->execute();
+    $webforms =  $this->entityTypeManager->getStorage('webform')->loadMultiple($webform_ids);
     foreach ($webforms as $id => $value) {
       $options[$id] = $value->label();
     }
