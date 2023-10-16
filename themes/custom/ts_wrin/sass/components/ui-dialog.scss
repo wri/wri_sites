@@ -110,15 +110,21 @@ div.ui-dialog {
 
   // Show files.
   #skip-registration {
-    color: $white;
+    color: $black;
     cursor: pointer;
     font-size: 0.9375rem;
+    text-decoration: underline;
+    transition: color $transition-defaults;
 
-    @include mq($md) {
-      @include text-underline-thin(transparent, $black);
-      background-position: left 100%;
-      color: $black;
+    &:hover,
+    &:focus {
+      color: $green;
     }
+  }
+
+  // Download.
+  .media--type-document {
+    margin-top: 0.75rem;
   }
 }
 
