@@ -25,7 +25,6 @@ class ModalEngageFieldFormatter extends EntityReferenceEntityFormatter {
     $output = parent::view($items, $langcode);
 
     if (isset($output['#items'])) {
-      $build['#attached']['library'][] = 'wri_engagement/modal_cookie';
 
       $build['#theme'] = 'download_modal';
       $build['#content'] = $output;

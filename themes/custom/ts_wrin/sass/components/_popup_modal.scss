@@ -81,6 +81,13 @@
     }
   }
 
+  .h2 .field--name-field-title {
+    font-size: inherit;
+    @include mq($md) {
+      font-size: inherit;
+    }
+  }
+
   input:not([type="submit"]) {
     border: solid 1px #757575;
     border-radius: 5px;
@@ -181,24 +188,24 @@
       }
     }
   }
-  // .files-modal-unregistered {
-  //   p {
-  //     font-size: 1.3em;
-  //   }
-  //   input {
-  //     &.registration {
-  //       width: 48%;
-  //       margin: 0 10px 10px 0;
-  //       border: 2px solid #aaa;
-  //     }
-  //     &.pardot-submission {
-  //       margin: 15px 0;
-  //     }
-  //   }
-  //   #skip-registration {
-  //     font-size: 1.2em;
-  //   }
-  // }
+   .files-modal-unregistered {
+     p {
+       font-size: 1.3em;
+     }
+     input {
+       &.registration {
+         width: 48%;
+         margin: 0 10px 10px 0;
+         border: 2px solid #aaa;
+       }
+       &.pardot-submission {
+         margin: 15px 0;
+       }
+     }
+     #skip-registration {
+       font-size: 1.2em;
+     }
+   }
 }
 
 //Download files modal
@@ -212,6 +219,9 @@
     margin: 36px 50px;
     max-height: calc(100% - (36px * 2));
   }
+  .files-modal-confirmation {
+    display: none;
+  }
 }
 
 .files-modal-modal {
@@ -222,12 +232,14 @@
   .spb_top_center {
     top: 10%;
     @include mq($md) {
-      height: calc(100vh - 180px);
+      max-height: calc(100vh - 180px);
+      height: auto;
       margin-top: 150px;
       top: 0;
     }
     @include mq($lg) {
-      height: calc(100vh - 280px);
+      max-height: calc(100vh - 280px);
+      height: auto;
     }
   }
 
@@ -258,7 +270,7 @@
 .toolbar-tray-open .files-modal-modal {
   .spb_top_center {
     @include mq($md) {
-      margin-top: 210px;
+      margin-top: 25vh;
     }
   }
 }
