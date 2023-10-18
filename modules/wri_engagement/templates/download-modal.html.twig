@@ -1,6 +1,6 @@
 {% if webform_title %}
-  {% set dialog_options = "{&quot;drupalAutoButtons&quot;:false, &quot;width&quot;:&quot;800&quot;, &quot;title&quot;:&quot;webform_title&quot;}" %}
+  {% set dialog_options = '{"drupalAutoButtons":false, "width":"800", "title":"' ~ webform_title ~ '"}' %}
 {% else %}
-  {% set dialog_options = "{&quot;drupalAutoButtons&quot;:false, &quot;width&quot;:&quot;800&quot;}" %}
+  {% set dialog_options = '{"drupalAutoButtons":false, "width":"800"}' %}
 {% endif %}
-<a href="{{ webform_url }}" class="{{ classes }} button" data-dialog-type="modal" data-dialog-options="{{ dialog_options|raw }}">{{ "Download"|t }}</a>
+<a href="{{ webform_url }}" class="{{ classes }} button" data-dialog-type="modal" data-dialog-options="{{ dialog_options }}">{{ "Download"|t }}</a>
