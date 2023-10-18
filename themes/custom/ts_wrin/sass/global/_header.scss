@@ -271,6 +271,14 @@ header nav.menu--main {
   @include mq($lg) {
     margin-left: $space-md;
   }
+  .path-frontpage & {
+    @include mq(900px) {
+      display: none;
+    }
+    @include mq(1135px) {
+      display: block;
+    }
+  }
 }
 
 .nav-arrow,
