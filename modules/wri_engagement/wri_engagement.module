@@ -50,7 +50,7 @@ function wri_engagement_preprocess_download_modal(&$variables) {
   }
   else {
     $variables['webform_url'] = '/node/' . $nid . '/download';
-    $variables['webform_title'] = t('Download Options');
+    $variables['webform_title'] = t('Download Publication');
     $variables['classes'] = 'use-ajax';
   }
 
