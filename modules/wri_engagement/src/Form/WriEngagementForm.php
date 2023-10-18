@@ -48,6 +48,7 @@ class WriEngagementForm extends ConfigFormBase implements ContainerInjectionInte
     $options = [];
     $webform_ids = $this->entityTypeManager->getStorage('webform')->getQuery()->execute();
     $webforms = $this->entityTypeManager->getStorage('webform')->loadMultiple($webform_ids);
+    $options[] = '- None -';
     foreach ($webforms as $id => $value) {
       $options[$id] = $value->label();
     }

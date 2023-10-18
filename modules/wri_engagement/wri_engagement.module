@@ -39,6 +39,7 @@ function wri_engagement_preprocess_download_modal(&$variables) {
   if ($interrupter_webform_id) {
     $interrupter_webform = Webform::load($interrupter_webform_id);
   }
+  $variables['#attached']['library'][] = 'wri_engagement/modal_cookie';
   if ($interrupter_webform) {
     $variables['webform_url'] = $interrupter_webform->url();
     if ($nid) {
