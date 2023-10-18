@@ -17,6 +17,7 @@ function wri_engagement_theme() {
     'variables' => [
       'content' => [],
       'webform_url' => '',
+      'webform_title' => '';
       'classes' => 'files-overlay-trigger',
     ],
     'template' => 'download-modal',
@@ -49,6 +50,7 @@ function wri_engagement_preprocess_download_modal(&$variables) {
   }
   else {
     $variables['webform_url'] = '/node/' . $nid . '/download';
+    $variables['webform_title'] = t('Download Options');
     $variables['classes'] = 'use-ajax';
   }
 
