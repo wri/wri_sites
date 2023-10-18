@@ -17,7 +17,7 @@ function wri_engagement_theme() {
     'variables' => [
       'content' => [],
       'webform_url' => '',
-      'webform_title' => '';
+      'webform_title' => '',
       'classes' => 'files-overlay-trigger',
     ],
     'template' => 'download-modal',
