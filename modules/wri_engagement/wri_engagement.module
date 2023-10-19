@@ -17,6 +17,7 @@ function wri_engagement_theme() {
     'variables' => [
       'content' => [],
       'webform_url' => '',
+      'webform_title' => FALSE,
       'classes' => 'files-overlay-trigger',
     ],
     'template' => 'download-modal',
@@ -39,6 +40,7 @@ function wri_engagement_preprocess_download_modal(&$variables) {
   if ($interrupter_webform_id) {
     $interrupter_webform = Webform::load($interrupter_webform_id);
   }
+  $variables['#attached']['library'][] = 'wri_engagement/modal_cookie';
   if ($interrupter_webform) {
     $variables['webform_url'] = $interrupter_webform->url();
     if ($nid) {
@@ -48,6 +50,7 @@ function wri_engagement_preprocess_download_modal(&$variables) {
   }
   else {
     $variables['webform_url'] = '/node/' . $nid . '/download';
+    $variables['webform_title'] = t('Download Publication');
     $variables['classes'] = 'use-ajax';
   }
 

@@ -5,16 +5,16 @@
 
       // If the person has already signed up for email, go straight to the files overlay.
       if (hasSignedUp) {
-        $('.view-node-downloads').show();
+        $('.downloads-list').show();
         $('.downloads-submission-form').hide();
         $('.ui-dialog-buttonpane').hide();
       } else {
-        $('.view-node-downloads').hide();
+        $('.downloads-list').hide();
         $('.downloads-submission-form').show();
       }
 
       $('#skip-registration').on('click', function () {
-        $('.view-node-downloads').show();
+        $('.downloads-list').show();
         $('.downloads-submission-form').hide();
         $('.ui-dialog-buttonpane').hide();
       });
