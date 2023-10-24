@@ -51,7 +51,7 @@ class ExternalPubBlock extends BlockBase {
 
       foreach ($pubListArray as $publication_entry) {
         $publicationIsFromAuthor = FALSE;
-        if ($publication_entry['author']) {
+        if (isset($publication_entry['author'])) {
           $authors = [];
           foreach ($publication_entry['author'] as $author) {
             $first_name = (isset($author['given'])) ? $author['given'] : '';

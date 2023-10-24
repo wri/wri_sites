@@ -71,7 +71,7 @@ function wri_subpage_node_update(EntityInterface $entity) {
  */
 function wri_subpage_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $node = $form_state->getFormObject()->getEntity();
-  if ($form['menu']['enabled']['#default_value'] === 0 && isset($node->field_parent_page->target_id)) {
+  if (isset($form['menu']['enabled']['#default_value']) && $form['menu']['enabled']['#default_value'] === 0 && isset($node->field_parent_page->target_id)) {
     $parent = $node->field_parent_page->entity;
     if ($parent && $parent->id()) {
       // Set the correct menu for microsites vs all others.
