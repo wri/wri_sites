@@ -1,3 +1,4 @@
 use_fallback_image: true
 unpublished_person_phrase: 'an Initiative Expert'
 person_listing_url: /about/experts-staff
+twitter_share_suffix: 'via @WorldResources'

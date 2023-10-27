@@ -82,6 +82,15 @@ class SettingsForm extends ConfigFormBase {
       '#description' => $this->t('If a narrative taxonomy contains a person link that has been unpublished, link to this url instead.'),
       '#field_prefix' => $this->requestContext->getCompleteBaseUrl(),
     ];
+
+    $form['twitter_share_suffix'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Twitter Share suffix'),
+      '#default_value' => $this->config('wri_node.settings')->get('twitter_share_suffix'),
+      '#size' => 40,
+      '#description' => $this->t('On social share dropdown, the text to come after the title of a page in a tweet. Defaults to "via @WorldResources"'),
+    ];
+
     return parent::buildForm($form, $form_state);
   }
 
@@ -93,6 +102,7 @@ class SettingsForm extends ConfigFormBase {
       ->set('use_fallback_image', $form_state->getValue('use_fallback_image'))
       ->set('unpublished_person_phrase', $form_state->getValue('unpublished_person_phrase'))
       ->set('person_listing_url', $form_state->getValue('person_listing_url'))
+      ->set('twitter_share_suffix', $form_state->getValue('twitter_share_suffix'))
       ->save();
     parent::submitForm($form, $form_state);
   }
