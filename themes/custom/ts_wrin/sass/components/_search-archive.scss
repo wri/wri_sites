@@ -356,6 +356,7 @@
     color: $true-black;
     cursor: pointer;
     padding-top: 10px;
+    padding-bottom: 1rem;
     position: relative;
     span {
       background: transparent url("../img/svgs/icon-arrow-simple.svg") no-repeat
@@ -388,7 +389,8 @@
   .block-facets .open li {
     margin-bottom: 7px;
   }
-  .block-facets input[type="checkbox"] {
+  .block-facets input[type="checkbox"],
+  .block-facets input[type="radio"] {
     height: 17px;
     margin-right: 15px;
     position: relative;

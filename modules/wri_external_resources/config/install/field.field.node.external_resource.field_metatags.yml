@@ -1,0 +1,21 @@
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_metatags
+    - node.type.external_resource
+  module:
+    - metatag
+id: node.external_resource.field_metatags
+field_name: field_metatags
+entity_type: node
+bundle: external_resource
+label: Metatags
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 'a:1:{s:25:"schema_web_site_publisher";s:609:"a:6:{s:5:"@type";s:12:"Organization";s:3:"@id";s:20:"https://www.wri.org/";s:4:"name";s:24:"World Resource Institute";s:3:"url";s:20:"https://www.wri.org/";s:6:"sameAs";s:204:"http://www.facebook.com/pages/World-Resources-Institute/61863318139,http://twitter.comworldresources, http://www.youtube.com/WorldResourcesInst, https://www.linkedin.com/company/world-resources-institute/";s:4:"logo";a:5:{s:5:"@type";s:11:"ImageObject";s:20:"representativeOfPage";s:4:"True";s:3:"url";s:77:"https://www.wri.org/profiles/contrib/wri_sites/themes/custom/ts_wrin/logo.png";s:5:"width";s:3:"150";s:6:"height";s:2:"53";}}";}'
+default_value_callback: ''
+settings: {  }
+field_type: metatag

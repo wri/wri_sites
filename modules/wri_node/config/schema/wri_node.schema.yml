@@ -11,6 +11,10 @@ wri_node.settings:
     use_fallback_image:
       type: boolean
       label: 'Use a fallback image?'
+    disable_ads_data_redaction:
+      type: boolean
+      label: 'Disable google consent mode?'
+
     twitter_share_suffix:
       type: path
       label: 'Twitter Share suffix'

@@ -83,6 +83,14 @@ class SettingsForm extends ConfigFormBase {
       '#field_prefix' => $this->requestContext->getCompleteBaseUrl(),
     ];
 
+    $form['disable_ads_data_redaction'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Disable google consent mode?'),
+      '#description' => $this->t('If checked, the tag for "ads_data_redaction" will be disabled'),
+      '#default_value' => $this->config('wri_node.settings')->get('disable_ads_data_redaction'),
+    ];
+
+
     $form['twitter_share_suffix'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Twitter Share suffix'),
@@ -102,6 +110,7 @@ class SettingsForm extends ConfigFormBase {
       ->set('use_fallback_image', $form_state->getValue('use_fallback_image'))
       ->set('unpublished_person_phrase', $form_state->getValue('unpublished_person_phrase'))
       ->set('person_listing_url', $form_state->getValue('person_listing_url'))
+      ->set('disable_ads_data_redaction', $form_state->getValue('disable_ads_data_redaction'))
       ->set('twitter_share_suffix', $form_state->getValue('twitter_share_suffix'))
       ->save();
     parent::submitForm($form, $form_state);

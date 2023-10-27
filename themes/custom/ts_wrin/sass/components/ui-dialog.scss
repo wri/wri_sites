@@ -1,0 +1,135 @@
+div.ui-dialog {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
+  // Title wrapper.
+  .ui-dialog-titlebar {
+    // Reset all styles so we can start from scratch.
+    all: unset;
+    @include font($acumin-semi-cond, "bold");
+    @include font-line-height(24, 30);
+    position: relative;
+    padding-top: $space-sm;
+    padding-right: $space-sm;
+    padding-left: $space-xs;
+    @include mq($md) {
+      padding-right: $space-md;
+      padding-left: $space-md;
+      @include font-line-height(32, 40);
+    }
+
+    // Title.
+    .ui-dialog-title {
+      all: unset;
+    }
+
+    // Close button.
+    .ui-dialog-titlebar-close {
+      all: unset;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      width: 30px;
+      height: 30px;
+      text-indent: -9999px;
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        .ui-icon-closethick:before,
+        .ui-icon-closethick:after {
+          background-color: $gold-hover;
+        }
+      }
+    }
+
+    // Close icon.
+    .ui-icon-closethick {
+      all: unset;
+
+      &:after,
+      &:before {
+        content: "";
+        position: absolute;
+        width: 3px;
+        height: 100%;
+        top: 50%;
+        left: 50%;
+        background-color: $brand-gold;
+        transition: background-color $transition-defaults;
+      }
+      &:after {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+      &:before {
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+    }
+  }
+
+  // Content.
+  .ui-dialog-content {
+    padding-right: $space-xs;
+    padding-bottom: $space-md;
+    padding-left: $space-xs;
+
+    @include mq($md) {
+      padding-right: $space-md;
+      padding-bottom: $space-md;
+      padding-left: $space-md;
+    }
+  }
+
+  // Inputs
+  input[type="email"],
+  input[type="text"] {
+    @include font-line-height(14, 18);
+    padding: initial;
+    background-color: darkkhaki;
+    height: 46px;
+    padding: 15px 10px 12px;
+    background-color: $white;
+  }
+
+  // Submit
+  input[type="submit"] {
+    @include font($acumin-semi-cond, "semibold");
+    @include font-line-height(13, 16);
+    // height: 40px;
+    padding: 12px 40px;
+  }
+
+  // Label
+  label {
+    font-size: initial;
+    line-height: initial;
+    padding-top: 2px;
+    @include font-line-height(14, 18);
+  }
+
+  // Show files.
+  #skip-registration {
+    color: $black;
+    cursor: pointer;
+    font-size: 0.9375rem;
+    text-decoration: underline;
+    transition: color $transition-defaults;
+
+    &:hover,
+    &:focus {
+      color: $green;
+    }
+  }
+
+  // Download.
+  .media--type-document {
+    margin-top: 0.75rem;
+  }
+}
+
+// Darkened background behind modal.
+.ui-widget-overlay {
+  background-color: $black;
+  opacity: 0.4;
+}

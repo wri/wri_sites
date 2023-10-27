@@ -1,0 +1,123 @@
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.main_content
+    - field.field.node.external_resource.field_intro
+    - field.field.node.external_resource.field_main_image
+    - field.field.node.external_resource.field_metatags
+    - field.field.node.external_resource.field_primary_topic
+    - field.field.node.external_resource.field_source
+    - field.field.node.external_resource.field_type
+    - field.field.node.external_resource.layout_builder__layout
+    - node.type.external_resource
+    - responsive_image.styles.article_hero_large_cta
+  module:
+    - ds
+    - element_class_formatter
+    - layout_builder
+    - media_responsive_thumbnail
+    - metatag
+    - text
+    - user
+    - wri_media
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.external_resource.main_content
+targetEntityType: node
+bundle: external_resource
+mode: main_content
+content:
+  field_intro:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_main_image:
+    type: media_responsive_thumbnail
+    label: hidden
+    settings:
+      responsive_image_style: article_hero_large_cta
+      image_link: ''
+    third_party_settings:
+      wri_media:
+        min_width: '1500'
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 1
+    region: hero
+  field_metatags:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_primary_topic:
+    type: entity_reference_label_class
+    label: inline
+    settings:
+      link: true
+      class: taxonomy
+      tag: span
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 6
+    region: category
+  field_type:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: false
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: ''
+            fi-cl: h4
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 0
+    region: bundle
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_source: true
+  langcode: true
+  layout_builder__layout: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

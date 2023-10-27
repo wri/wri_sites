@@ -76,9 +76,6 @@
     ],
     "extra": {
         "patches": {
-            "drupal/block_list_override": {
-                "trim(): Passing null to parameter #1 ($string) of type string is deprecated in block_list_override_block_alter() https://www.drupal.org/project/block_list_override/issues/3276297": "https://www.drupal.org/files/issues/2023-02-08/block_list_override-php-81-3276297-8.patch"
-            },
             "drupal/ckeditor": {
                 "Changes to a block's text field not saved when ckeditor source mode is active https://www.drupal.org/project/ckeditor/issues/3095304": "https://git.drupalcode.org/project/ckeditor/-/merge_requests/10.diff"
             },
@@ -90,7 +87,8 @@
                 "Hyphens and forward slashes (-/) break Views contextual filters https://www.drupal.org/node/672606": "https://www.drupal.org/files/issues/2022-09-27/672606-76.patch",
                 "Views RSS feeds have validation issues https://www.drupal.org/project/drupal/issues/1337894": "https://www.drupal.org/files/issues/2022-11-28/1337894-37.patch",
                 "Add missing enclosure to Views RSS - 2511878-30": "https://www.drupal.org/files/issues/2020-07-24/views-rss-fields-enclosure-2511878-30.patch",
-                "Views Term ID has broken filters (\"All of\", \"Is none of\") and contextual filters \"allow multiple\" https://www.drupal.org/project/drupal/issues/2829178": "https://www.drupal.org/files/issues/2021-12-09/2829178-61.patch"
+                "Views Term ID has broken filters (\"All of\", \"Is none of\") and contextual filters \"allow multiple\" https://www.drupal.org/project/drupal/issues/2829178": "https://www.drupal.org/files/issues/2021-12-09/2829178-61.patch",
+                "Dialog drupalAutoButtons option should be respected on initial load https://www.drupal.org/node/2793343": "https://www.drupal.org/files/issues/2023-07-11/2793343-82-9-5-x.patch"
             },
             "drupal/content_snippets": {
                 "Error: Cannot unset string offsets... https://www.drupal.org/project/content_snippets/issues/3268757": "https://git.drupalcode.org/issue/content_snippets-3268757/-/merge_requests/1.diff"
@@ -108,7 +106,8 @@
                 "Duplicate content when pulling SFC layout into views https://www.drupal.org/project/sfc/issues/3175000": "https://www.drupal.org/files/issues/2020-10-06/duplicate_ds_content-3175000-2.patch"
             },
             "drupal/paragraphs": {
-                "Integrity constraint violation: 1048 Column 'langcode' cannot be null https://www.drupal.org/project/paragraphs/issues/2901390": "https://www.drupal.org/files/issues/2020-06-25/paragraphs-2901390-51.patch"
+                "Integrity constraint violation: 1048 Column 'langcode' cannot be null https://www.drupal.org/project/paragraphs/issues/2901390": "https://www.drupal.org/files/issues/2020-06-25/paragraphs-2901390-51.patch",
+                "Paragraph access check using incorrect revision of its parent https://www.drupal.org/project/paragraphs/issues/3090200": "https://www.drupal.org/files/issues/2022-10-26/3084934-13_combine_3090200-22.patch"
             },
             "drupal/token": {
                 "Add a [current-page:object:?] dynamic token https://www.drupal.org/project/token/issues/919760": "https://www.drupal.org/files/issues/2020-09-08/token--current_page_object_token--919760--83.patch",
@@ -123,9 +122,6 @@
             },
             "drupal/views_bulk_edit": {
                 "Fix Required fields to really not be required https://www.drupal.org/node/3024419": "https://www.drupal.org/files/issues/2020-11-20/3024419-invalid-form-control-24.patch"
-            },
-            "drupal/search_api": {
-                "PHP 8.1 Deprecations": "https://www.drupal.org/files/issues/2021-12-14/3253738-13.patch"
             },
             "drupal/simple_popup_blocks": {
                 "Modal hops user down the page to the first text input https://www.drupal.org/project/simple_popup_blocks/issues/3202060#comment-14021232": "https://git.drupalcode.org/project/simple_popup_blocks/-/merge_requests/2.diff",

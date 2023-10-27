@@ -1,0 +1,29 @@
+{#
+/**
+ * @file
+ * Template to reset all HTML for the field.
+ *
+ * Available variables:
+ * - element: The field element.
+ * - label: The label of the field.
+ * - show_colon: TRUE if colon should be displayed after label.
+ * - items: List of all the field items. Each item contains:
+ *   - attributes: List of HTML attributes for each item.
+ *   - content: The field item's content.
+ */
+#}
+
+{% for item in items %}
+<div class="field-label-{{ element['#label_display']|clean_class }} external-source-link">
+    <a href="{{ item.content['#url'] }}" >
+      <div>
+    {% if not label_hidden %}
+      <span class="link-label">
+      {{- label }} :
+      </span>
+    {% endif %}
+        {{ item.content['#title'] }}
+      </div>
+    </a>
+</div>
+{% endfor %}

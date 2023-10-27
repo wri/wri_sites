@@ -275,3 +275,27 @@ input[type="submit"].search-icon {
     color: $black;
   }
 }
+
+.external-source-link {
+
+  .link-label {
+    font-weight: bold;
+  }
+
+  a {
+    text-transform: initial;
+    font-weight: initial;
+    display: flex;
+    align-items: center;
+    margin: 10px 0px;
+
+    &::after {
+      content: "";
+      background-image: url("../img/svgs/arrow-gold-sm.svg");
+      background-repeat: no-repeat;
+      background-position: right;
+      height: 20px;
+      width: 46px;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_intro
+    - node.type.external_resource
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    allowed_formats: {  }
+id: node.external_resource.field_intro
+field_name: field_intro
+entity_type: node
+bundle: external_resource
+label: Intro
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

@@ -1,0 +1,8 @@
+wri_engagement.settings:
+  path: '/admin/config/system/wri-engagement'
+  defaults:
+    _title: 'WRI Engagement'
+    _form: 'Drupal\wri_engagement\Form\WriEngagementForm'
+  requirements:
+    _permission: 'administer site configuration'
+

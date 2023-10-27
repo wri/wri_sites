@@ -1,0 +1,117 @@
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.external_resource.field_intro
+    - field.field.node.external_resource.field_main_image
+    - field.field.node.external_resource.field_metatags
+    - field.field.node.external_resource.field_primary_topic
+    - field.field.node.external_resource.field_source
+    - field.field.node.external_resource.field_type
+    - field.field.node.external_resource.layout_builder__layout
+    - node.type.external_resource
+  module:
+    - ds
+    - element_class_formatter
+    - hierarchical_term_formatter
+    - user
+third_party_settings:
+  ds:
+    layout:
+      id: layout_teaser
+      settings:
+        label: ''
+    regions:
+      tag:
+        - field_primary_topic
+      title:
+        - node_title
+      content_type:
+        - 'bundle_field:node'
+      date:
+        - node_post_date
+        - field_source
+    fields:
+      'bundle_field:node':
+        plugin_id: 'bundle_field:node'
+        weight: 2
+        label: hidden
+        formatter: default
+      node_post_date:
+        plugin_id: node_post_date
+        weight: 3
+        label: hidden
+        formatter: ds_post_date_short_day
+      node_title:
+        plugin_id: node_title
+        weight: 1
+        label: hidden
+        formatter: default
+        settings:
+          link: true
+          'link class': ''
+          wrapper: ''
+          class: ''
+        ft:
+          id: reset
+          settings:
+            lb: ''
+id: node.external_resource.teaser
+targetEntityType: node
+bundle: external_resource
+mode: teaser
+content:
+  field_primary_topic:
+    type: hierarchical_term_formatter
+    label: hidden
+    settings:
+      display: root
+      link: true
+      wrap: none
+      separator: ' » '
+      reverse: false
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 0
+    region: tag
+  field_source:
+    type: link_ally_class
+    label: inline
+    settings:
+      class: ''
+      link_text: ''
+      screenreader_text: ''
+      tag: ''
+    third_party_settings: {  }
+    weight: 4
+    region: date
+  field_type:
+    type: hierarchical_term_formatter
+    label: hidden
+    settings:
+      display: root
+      link: false
+      wrap: none
+      separator: ' » '
+      reverse: false
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 0
+    region: content_type
+hidden:
+  field_intro: true
+  field_main_image: true
+  field_metatags: true
+  langcode: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true
