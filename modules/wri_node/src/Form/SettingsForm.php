@@ -90,7 +90,6 @@ class SettingsForm extends ConfigFormBase {
       '#default_value' => $this->config('wri_node.settings')->get('disable_ads_data_redaction'),
     ];
 
-
     $form['twitter_share_suffix'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Twitter Share suffix'),
