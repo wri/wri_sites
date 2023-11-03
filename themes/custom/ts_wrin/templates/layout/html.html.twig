@@ -46,9 +46,9 @@
       gtag("set", "ads_data_redaction", true);
     </script>
     {% endif %}
-    <!-- Add Osano script for Consent Management (set 'osano_id' and 'osano_params' as content Snippets) -->
-    <script src="https://cmp.osano.com/AzyfddTRtqi1560Dk/{{ contentSnippets.osano_id }}/osano.js{{ contentSnippets.osano_params }}"></script>
-    <!-- end Osano script -->
+    {% if osano_script %}
+    <script src="https://cmp.osano.com/AzyfddTRtqi1560Dk/{{ contentSnippets.osano_id }}/osano.js{{ contentSnippets.osano_params }}"></script> 
+    {% endif %}
     <head-placeholder token="{{ placeholder_token|raw }}">
     <title>{{ head_title|safe_join(' | ') }}</title>
     <css-placeholder token="{{ placeholder_token|raw }}">
