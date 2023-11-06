@@ -128,9 +128,15 @@ div.ui-dialog {
 
     .download {
       display: block;
+      text-align: left;
+
+      .field--name-name {
+        display: inline;
+        font-weight: 700;
+      }
 
       span {
-        font-weight: normal;
+        font-weight: 100;
       }
     }
   }
