@@ -72,6 +72,22 @@ elements: |-
       '#text': |
         <p><a id="skip-registration">No thanks. Proceed to download.</a></p>
       '#format': full_html
+  source_origin:
+    '#type': hidden
+    '#title': 'Source origin'
+    '#default_value': Website
+  source_type:
+    '#type': hidden
+    '#title': 'Source type'
+    '#default_value': 'research publication download'
+  source_details:
+    '#type': hidden
+    '#title': 'Source details'
+    '#default_value': '[webform_submission:source-entity:title]'
+  source_interest:
+    '#type': hidden
+    '#title': 'Source interest'
+    '#default_value': '[webform_submission:source-entity:field_primary_topic:entity:name]'
 css: ''
 javascript: ''
 settings:
