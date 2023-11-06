@@ -14,7 +14,9 @@ wri_node.settings:
     disable_ads_data_redaction:
       type: boolean
       label: 'Disable google consent mode?'
-
+    disable_osano_script:
+      type: boolean
+      label: 'Disable Osano script from loading in Head?'
     twitter_share_suffix:
-      type: path
+      type: text
       label: 'Twitter Share suffix'

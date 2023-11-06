@@ -90,6 +90,13 @@ class SettingsForm extends ConfigFormBase {
       '#default_value' => $this->config('wri_node.settings')->get('disable_ads_data_redaction'),
     ];
 
+    $form['disable_osano_script'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Disable Osano script from loading in Head?'),
+      '#description' => $this->t('If checked, the tag for "osano_script" will be disabled'),
+      '#default_value' => $this->config('wri_node.settings')->get('disable_osano_script'),
+    ];
+
     $form['twitter_share_suffix'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Twitter Share suffix'),
@@ -110,6 +117,7 @@ class SettingsForm extends ConfigFormBase {
       ->set('unpublished_person_phrase', $form_state->getValue('unpublished_person_phrase'))
       ->set('person_listing_url', $form_state->getValue('person_listing_url'))
       ->set('disable_ads_data_redaction', $form_state->getValue('disable_ads_data_redaction'))
+      ->set('disable_osano_script', $form_state->getValue('disable_osano_script'))
       ->set('twitter_share_suffix', $form_state->getValue('twitter_share_suffix'))
       ->save();
     parent::submitForm($form, $form_state);
