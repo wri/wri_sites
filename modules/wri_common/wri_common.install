@@ -76,7 +76,6 @@ function wri_common_update_9502() {
   ], 'wri_media', 'install');
 }
 
-
 /**
  * Add the new setting for twitter_share_suffix.
  */
