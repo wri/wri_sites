@@ -3,8 +3,9 @@ langcode: en
 status: open
 dependencies:
   module:
-    - simple_recaptcha_webform
     - wri_engagement
+_core:
+  default_config_hash: MvKfy-qrTey4xEs37HROb2YZKdykDC0KI2xRjyTn43s
 weight: 0
 open: null
 close: null
@@ -272,19 +273,6 @@ access:
     users: {  }
     permissions: {  }
 handlers:
-  recaptcha:
-    id: simple_recaptcha
-    handler_id: recaptcha
-    label: reCAPTCHA
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      recaptcha_type: v3
-      v3_score: '90'
-      v3_error_message: 'There was an error during validation of your form submission, please try to reload the page and submit form again.'
-      hide_badge_v3: false
   remote_post:
     id: remote_post
     handler_id: remote_post
