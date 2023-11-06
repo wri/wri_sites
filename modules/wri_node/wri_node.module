@@ -134,4 +134,8 @@ function wri_node_preprocess_html(&$variables) {
   if (Drupal::config('wri_node.settings')->get('disable_ads_data_redaction')) {
     $variables['ads_data_redaction'] = FALSE;
   }
+  $variables['osano_script'] = TRUE;
+  if (Drupal::config('wri_node.settings')->get('disable_osano_script')) {
+    $variables['osano_script'] = FALSE;
+  }
 }
