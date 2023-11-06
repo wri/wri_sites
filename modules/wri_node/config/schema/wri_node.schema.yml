@@ -17,3 +17,6 @@ wri_node.settings:
     disable_osano_script:
       type: boolean
       label: 'Disable Osano script from loading in Head?'
+    twitter_share_suffix:
+      type: text
+      label: 'Twitter Share suffix'

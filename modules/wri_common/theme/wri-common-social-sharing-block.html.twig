@@ -1,27 +1,27 @@
 <div class="social-sharing-block">
   <nav role="navigation">
     <ul class="">
-      <li><a class="share-icon icon-social" href="#" aria-haspopup="true">Social</a>
+      <li><a class="share-icon icon-social" href="#" aria-haspopup="true">{{ 'Social'|t }}</a>
         <ul class="dropdown" aria-label="submenu">
-          <li><a href="https://twitter.com/intent/tweet?text={{ items.title }}+{{ items.page_url }} via @WorldResources" title="{{ 'Share to'|t }} Twitter" aria-label="{{ 'Share to'|t }} Twitter" class="social-sharing-buttons__button" rel="noopener">
-              Twitter
+          <li><a href="https://twitter.com/intent/tweet?text={{ items.title }}+{{ items.page_url }} {{ twitter_suffix }}" title="{{ 'Share to X'|t }}" aria-label="{{ 'Share to X'|t }}" class="social-sharing-buttons__button" rel="noopener">
+              {{ 'X'|t }}
             </a>
           </li>
           <li>
-            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ items.page_url }}&title={{ items.title }}&source={{ items.base_url }}" title="{{ 'Share to'|t }} Linkedin" aria-label="{{ 'Share to'|t }} Linkedin" class="social-sharing-buttons__button" rel="noopener">
-              LinkedIn
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ items.page_url }}&title={{ items.title }}&source={{ items.base_url }}" title="{{ 'Share to Linkedin'|t }}" aria-label="{{ 'Share to Linkedin'|t }}" class="social-sharing-buttons__button" rel="noopener">
+              {{ 'LinkedIn'|t }}
             </a>
           </li>
           <li>
-            <a href="https://www.facebook.com/sharer/sharer.php?u={{ items.page_url }}&title={{ items.title }}" title="{{ 'Share to'|t }} Facebook" aria-label="{{ 'Share to'|t }} Facebook" class="social-sharing-buttons__button" rel="noopener">
-              Facebook
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ items.page_url }}&title={{ items.title }}" title="{{ 'Share to Facebook'|t }}" aria-label="{{ 'Share to Facebook'|t }}" class="social-sharing-buttons__button" rel="noopener">
+              {{ 'Facebook'|t }}
             </a>
           </li>
         </ul>
       </li>
       <li>
-        <a class="share-icon icon-email social-sharing-buttons__button" href="mailto:?subject={{ items.title }}&body={{ items.page_url }}" title="{{ 'Share to'|t }} E-mail" aria-label="{{ 'Share to'|t }} E-mail"  target="_blank" rel="noopener">
-          Email
+        <a class="share-icon icon-email social-sharing-buttons__button" href="mailto:?subject={{ items.title }}&body={{ items.page_url }}" title="{{ 'Share to E-mail'|t }}" aria-label="{{ 'Share to E-mail'|t }}"  target="_blank" rel="noopener">
+          {{ 'Email'|t }}
         </a>
       </li>
       <li><a class="share-icon icon-print" href="javascript:window.print()" aria-label="{{ 'Print document'|t }}">{{ 'Print'|t }}</a></li>

@@ -3,3 +3,4 @@ unpublished_person_phrase: 'an Initiative Expert'
 person_listing_url: /about/experts-staff
 disable_ads_data_redaction: false
 disable_osano_script: false
+twitter_share_suffix: 'via @WorldResources'

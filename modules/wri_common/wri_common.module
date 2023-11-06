@@ -23,7 +23,7 @@ use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 function wri_common_theme($existing, $type, $theme, $path) {
   return [
     'wri_common_social_sharing_block' => [
-      'variables' => ['items' => ''],
+      'variables' => ['items' => '', 'twitter_suffix' => ''],
       'template' => 'wri-common-social-sharing-block',
       'path' => $path . '/theme',
     ],
@@ -97,6 +97,7 @@ function wri_common_get_social_share(EntityViewDisplayInterface $display) {
     return [
       '#theme' => 'wri_common_social_sharing_block',
       '#items' => $items,
+      '#twitter_suffix' => Drupal::config('wri_node.settings')->get('twitter_share_suffix') ?? '',
     ];
   }
   return [];
