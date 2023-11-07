@@ -1,4 +1,4 @@
-div.ui-dialog {
+div.ui-dialog:not(.ui-dialog-off-canvas) {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
