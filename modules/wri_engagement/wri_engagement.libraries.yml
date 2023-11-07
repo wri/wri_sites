@@ -6,6 +6,7 @@ modal_cookie:
     - core/jquery
     - core/drupal
     - core/js-cookie
+    - core/drupal.ajax
 trigger_modal_body:
   version: VERSION
   js:
