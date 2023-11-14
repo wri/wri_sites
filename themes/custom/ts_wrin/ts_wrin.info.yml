@@ -7,6 +7,7 @@ libraries:
   - ts_wrin/main
 'base theme': classy
 regions:
+  top_modals: 'Top Modals'
   primary_nav: 'Primary Nav'
   secondary_nav: 'Secondary Nav'
   hamburger_nav: 'Hamburger Nav'
