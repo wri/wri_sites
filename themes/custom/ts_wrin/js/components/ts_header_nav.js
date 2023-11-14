@@ -145,7 +145,6 @@ export default function(context) {
       let headerTop = document
         .getElementById("tray-nav-canvas")
         .getBoundingClientRect().top;
-      console.log(headerTop, st);
       if (st >= headerTop + 30) {
         stickyNav.classList.add("sticky");
       } else {
