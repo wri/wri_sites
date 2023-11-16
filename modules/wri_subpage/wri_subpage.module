@@ -5,7 +5,6 @@
  * Subpage module hook implementations.
  */
 
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
 
@@ -61,16 +60,19 @@ function wri_subpage_set_menu(array &$form, FormStateInterface $form_state) {
 
       // Ensure the new menu link always appears at the back of the list.
       $weight = 0;
-      $menu_link_content_children_ids = $menu_link_manager->getChildIds($parent_link_menu_id);
-      $menu_link_content_children = MenuLinkContent::loadMultiple($menu_link_content_children_ids);
-      foreach ($menu_link_content_children as $link) {
+      $menu_link_storage = Drupal::service('entity_type.manager')->getStorage('menu_link_content');
+      $menu_link_content_children_link_ids = $menu_link_manager->getChildIds($parent_link_menu_id);
+      foreach ($menu_link_content_children_link_ids as $id) {
+        $link_id = $menu_link_storage->getQuery()->condition('uuid', str_replace('menu_link_content:', '', $id))->accessCheck('false')->execute();
+        $link = $menu_link_storage->load(current($link_id));
+
         $weight = max($weight, $link->getWeight());
       }
 
       $form_state->setValue('menu', [
         'enabled' => TRUE,
         'title' => $entity->label(),
-        'menu_parent' => $menu_name . ':' .$parent_link_menu_id,
+        'menu_parent' => $menu_name . ':' . $parent_link_menu_id,
         'weight' => $weight + 1,
         'description' => '',
       ]);
