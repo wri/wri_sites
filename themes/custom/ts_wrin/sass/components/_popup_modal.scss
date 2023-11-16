@@ -274,3 +274,19 @@
     }
   }
 }
+
+.region-top-modals .spb_top_bar {
+  position: static;
+  margin-bottom: 16px;
+
+  .block-modal {
+    display: flex;
+
+    .top-image {
+      order: 2;
+    }
+    .modal_inner {
+      width: 50%;
+    }
+  }
+}

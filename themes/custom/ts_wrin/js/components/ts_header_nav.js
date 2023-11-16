@@ -142,7 +142,10 @@ export default function(context) {
 
     function stickyScroll() {
       let st = window.pageYOffset || document.documentElement.scrollTop;
-      if (st >= 30) {
+      let headerTop = document
+        .getElementById("tray-nav-canvas")
+        .getBoundingClientRect().top;
+      if (st >= headerTop + 30) {
         stickyNav.classList.add("sticky");
       } else {
         stickyNav.classList.remove("sticky");
