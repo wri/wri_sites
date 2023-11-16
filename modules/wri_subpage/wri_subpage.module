@@ -25,7 +25,7 @@ function wri_subpage_form_node_form_alter(&$form, FormStateInterface $form_state
     }
   }
   $position = array_search('menu_ui_form_node_form_submit', $form['actions']['submit']['#submit']);
-  array_splice($form['actions']['submit']['#submit'], 4, 0, 'wri_subpage_set_menu');
+  array_splice($form['actions']['submit']['#submit'], $position, 0, 'wri_subpage_set_menu');
 }
 
 /**
