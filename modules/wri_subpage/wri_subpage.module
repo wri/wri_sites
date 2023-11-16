@@ -10,63 +10,6 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
 
 /**
- * Implements hook_ENTITY_TYPE_insert().
- */
-//function wri_subpage_node_insert(EntityInterface $entity) {
-//  wri_subpage_node_update($entity);
-//}
-
-/**
- * Implements hook_ENTITY_TYPE_update().
- */
-//function wri_subpage_node_update(EntityInterface $entity) {
-//  if (isset($entity->field_parent_page)) {
-//    $parent = $entity->field_parent_page->entity;
-//    if ($parent && $parent->id()) {
-//      // Set the correct menu for microsites vs all others.
-//      'microsite' == $parent->bundle() ? $menu_name = 'microsites' : $menu_name = 'page-hierarchies';
-//      $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
-//
-//      // Save the parent at the root of the menu, if not already there.
-//      $parent_link_menu_id = array_key_first($menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $parent->id()], $menu_name));
-//      if (!$parent_link_menu_id) {
-//        $parent_link_menu = MenuLinkContent::create([
-//          'title' => $parent->label(),
-//          'link' => ['uri' => 'entity:node/' . $parent->id()],
-//          'menu_name' => $menu_name,
-//          'expanded' => TRUE,
-//        ]);
-//        $parent_link_menu->save();
-//        $parent_link_menu_id = $parent_link_menu->getPluginId();
-//      }
-//
-//      // Save the current page as a child of the parent in the appropriate menu.
-//      $current_link_menu_menu = $menu_link_manager->loadLinksByRoute('entity.node.canonical', ['node' => $entity->id()], $menu_name);
-//      if (!$current_link_menu_menu && !$entity->original) {
-//        // Create a new menu link, but only if this is a new node. Otherwise
-//        // clicking "Provide a menu link" to "Off" does not stick.
-//        $current_link_menu = MenuLinkContent::create([
-//          'title' => $entity->label(),
-//          'link' => ['uri' => 'entity:node/' . $entity->id()],
-//          'menu_name' => $menu_name,
-//          'parent' => $parent_link_menu_id,
-//          'expanded' => TRUE,
-//        ]);
-//      }
-//      elseif ($current_link_menu_menu) {
-//        $current_link_menu_id = current($current_link_menu_menu)->getPluginDefinition()["metadata"]["entity_id"];
-//        $current_link_menu = MenuLinkContent::load($current_link_menu_id);
-//        $current_link_menu->set('enabled', 1);
-//        $current_link_menu->set('parent', $parent_link_menu_id);
-//      }
-//      if (isset($current_link_menu)) {
-//        $current_link_menu->save();
-//      }
-//    }
-//  }
-//}
-
-/**
  * Implements hook_form_BASE_FORM_ID_alter() for \Drupal\node\NodeForm.
  */
 function wri_subpage_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
@@ -86,9 +29,17 @@ function wri_subpage_form_node_form_alter(&$form, FormStateInterface $form_state
   array_splice($form['actions']['submit']['#submit'], 4, 0, 'wri_subpage_set_menu');
 }
 
+/**
+ * Submit handler to prepare a menu based on the node's parent value.
+ *
+ * @param array $form
+ *   The form array.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The form state object.
+ */
 function wri_subpage_set_menu(array &$form, FormStateInterface $form_state) {
-  $entity = $form_state->getFormObject()->getEntity();
-  if ($entity->isNew()) {
+  if ($form["#form_id"] == 'node_subpage_form') {
+    $entity = $form_state->getFormObject()->getEntity();
     $parent = $entity->field_parent_page->entity;
     if ($parent && $parent->id()) {
       // Set the correct menu for microsites vs all others.
@@ -108,12 +59,20 @@ function wri_subpage_set_menu(array &$form, FormStateInterface $form_state) {
         $parent_link_menu_id = $parent_link_menu->getPluginId();
       }
 
+      // Ensure the new menu link always appears at the back of the list.
+      $weight = 0;
+      $menu_link_content_children_ids = $menu_link_manager->getChildIds($parent_link_menu_id);
+      $menu_link_content_children = MenuLinkContent::loadMultiple($menu_link_content_children_ids);
+      foreach ($menu_link_content_children as $link) {
+        $weight = max($weight, $link->getWeight());
+      }
+
       $form_state->setValue('menu', [
         'enabled' => TRUE,
-        'entity_id' => $entity->id(),
         'title' => $entity->label(),
-        'parent' => $parent_link_menu_id,
-        'menu_name' => $menu_name,
+        'menu_parent' => $menu_name . ':' .$parent_link_menu_id,
+        'weight' => $weight + 1,
+        'description' => '',
       ]);
     }
   }
