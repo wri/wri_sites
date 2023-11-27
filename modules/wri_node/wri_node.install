@@ -14,3 +14,13 @@ function wri_node_update_9501() {
     'person_listing_url',
   ], 'wri_node', 'install');
 }
+
+/**
+ * Updates the node settings values.
+ */
+function wri_node_update_9502() {
+  \Drupal::service('distro_helper.updates')->updateConfig('wri_node.settings', [
+    'twitter_share_suffix',
+    'disable_osano_script',
+  ], 'wri_node', 'install');
+}
