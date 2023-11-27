@@ -24,3 +24,17 @@ function wri_node_update_9502() {
     'disable_osano_script',
   ], 'wri_node', 'install');
 }
+
+/**
+ * Updates the content snippets.
+ */
+function wri_node_update_9503() {
+  \Drupal::service('distro_helper.updates')->updateConfig('content_snippets.content', [
+    'snippets#osano_id',
+    'snippets#osano_params',
+  ], 'wri_listing_block');
+  \Drupal::service('distro_helper.updates')->updateConfig('content_snippets.items', [
+    'osano_id',
+    'osano_params',
+  ], 'wri_admin');
+}
