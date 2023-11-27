@@ -45,7 +45,7 @@ function wri_engagement_preprocess_download_modal(&$variables) {
     $variables['webform_url'] = $interrupter_webform->toUrl()->toString();
     if ($nid) {
       $variables['webform_url'] .= '?source_entity_type=node&source_entity_id=' . $nid;
-      $variables['classes'] = 'webform-dialog webform-dialog-normal';
+      $variables['classes'] = 'webform-dialog';
     }
   }
   else {
