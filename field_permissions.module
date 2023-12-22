@@ -140,7 +140,9 @@ function field_permissions_form_field_config_edit_form_alter(&$form, FormStateIn
 function field_permissions_field_config_edit_form_builder($entity_type, FieldConfigInterface $field, array &$form, FormStateInterface $form_state) {
   $storage = $field->getFieldStorageDefinition();
   $storage->setThirdPartySetting('field_permissions', 'permission_type', $form_state->getValue('type'));
-  $storage->save();
+  if (version_compare(\Drupal::VERSION, '10.2', '<')) {
+    $storage->save();
+  }
 }
 
 /**
