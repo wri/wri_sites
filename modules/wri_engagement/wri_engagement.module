@@ -30,6 +30,9 @@ function wri_engagement_theme() {
  */
 function wri_engagement_preprocess_download_modal(&$variables) {
   $node = \Drupal::routeMatch()->getParameter('node');
+  $language = \Drupal::languageManager()->getCurrentLanguage();
+  $prefixes = \Drupal::config('language.negotiation')->get('url.prefixes');
+  $language_prefix = isset($prefixes[$language->getId()]) ? '/' . $prefixes[$language->getId()] : '';
   $interrupter_webform = FALSE;
 
   if ($node instanceof NodeInterface) {
@@ -49,7 +52,7 @@ function wri_engagement_preprocess_download_modal(&$variables) {
     }
   }
   else {
-    $variables['webform_url'] = '/node/' . $nid . '/download';
+    $variables['webform_url'] = $language_prefix . '/node/' . $nid . '/download';
     $variables['webform_title'] = t('Download Publication');
     $variables['classes'] = 'use-ajax';
   }
