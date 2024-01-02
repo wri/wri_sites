@@ -5,7 +5,6 @@
  * Contains wri_engagement.module.
  */
 
-use Drupal\node\NodeInterface;
 use Drupal\webform\Entity\Webform;
 
 /**
