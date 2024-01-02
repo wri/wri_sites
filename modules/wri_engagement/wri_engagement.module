@@ -32,7 +32,7 @@ function wri_engagement_preprocess_download_modal(&$variables) {
   $node = \Drupal::routeMatch()->getParameter('node');
   $language = \Drupal::languageManager()->getCurrentLanguage();
   $prefixes = \Drupal::config('language.negotiation')->get('url.prefixes');
-  $language_prefix = isset($prefixes[$language->getId()]) ? '/' . $prefixes[$language->getId()] : '';
+  $language_prefix = $prefixes[$language->getId()] ? '/' . $prefixes[$language->getId()] : '';
   $interrupter_webform = FALSE;
 
   if ($node instanceof NodeInterface) {
