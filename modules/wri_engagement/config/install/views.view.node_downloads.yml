@@ -265,15 +265,15 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        content_translation_source:
-          id: content_translation_source
+        langcode:
+          id: langcode
           table: node_field_data
-          field: content_translation_source
+          field: langcode
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: node
-          entity_field: content_translation_source
+          entity_field: langcode
           plugin_id: language
           operator: in
           value:
@@ -362,6 +362,7 @@ display:
     display_plugin: page
     position: 1
     display_options:
+      rendering_language: '***LANGUAGE_language_interface***'
       display_extenders:
         metatag_display_extender:
           metatags: {  }
@@ -370,7 +371,6 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
-        - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - user
