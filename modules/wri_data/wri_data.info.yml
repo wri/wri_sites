@@ -1,7 +1,7 @@
 name: 'WRI Data'
 type: module
 description: 'Data node functionality and fields'
-core_version_requirement: '^8.8.0 || ^9'
+core_version_requirement: '>=9.5'
 package: WRI
 dependencies:
   - pathauto

@@ -2,7 +2,7 @@ name: 'WRI sites administration'
 type: module
 description: 'Helper functions for the WRI site profile admin area'
 package: WRI
-core_version_requirement: '^8.8.0 || ^9'
+core_version_requirement: '>=9.5'
 dependencies:
   - access_unpublished
   - asset_injector

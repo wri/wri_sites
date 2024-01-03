@@ -1,7 +1,7 @@
 name: 'WRI Side by Side paragraph'
 type: module
 description: 'Side by Side paragraph config and functions'
-core_version_requirement: '^8.8.0 || ^9'
+core_version_requirement: '>=9.5'
 package: WRI
 dependencies:
   - wri_paragraph

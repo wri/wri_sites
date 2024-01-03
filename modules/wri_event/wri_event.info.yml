@@ -1,7 +1,7 @@
 name: 'WRI Event'
 type: module
 description: 'Event node functionality and fields'
-core_version_requirement: '^8.8.0 || ^9'
+core_version_requirement: '>=9.5'
 package: WRI
 dependencies:
   - addtocal

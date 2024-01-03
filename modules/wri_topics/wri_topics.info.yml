@@ -1,6 +1,6 @@
 name: 'WRIN Topics'
 type: module
 description: 'Custom topics block.'
-core_version_requirement: '^8.8.0 || ^9'
+core_version_requirement: '>=9.5'
 dependencies:
   - block

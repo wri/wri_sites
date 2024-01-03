@@ -3,6 +3,6 @@ type: module
 description: Endpoints for WRI Reader.
 package: WRI
 core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: '>=9.5'
 dependencies:
   - rest
