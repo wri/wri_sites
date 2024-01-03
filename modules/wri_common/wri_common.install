@@ -85,3 +85,17 @@ function wri_common_update_9503() {
     'twitter_share_suffix',
   ], 'wri_node', 'install');
 }
+
+/**
+ * Replace the ckeditor_template module with ckeditor5_templates.
+ */
+function wri_common_update_9701() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if ($moduleHandler->moduleExists('ckeditor_templates')) {
+    \Drupal::service('module_installer')->uninstall(['ckeditor_templates'], TRUE);
+
+  }
+  if (!$moduleHandler->moduleExists('ckeditor5_templates')) {
+    \Drupal::service('module_installer')->install(['ckeditor5_templates'], TRUE);
+  }
+}
