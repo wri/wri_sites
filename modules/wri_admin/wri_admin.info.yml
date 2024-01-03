@@ -46,7 +46,6 @@ dependencies:
   - sortableviews
   - token_filter
   - telephone
-  - textfield_counter
   - toolbar
   - views_bulk_edit
   - views_bulk_operations
