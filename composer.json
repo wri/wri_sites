@@ -24,21 +24,6 @@
             "url": "https://packages.drupal.org/8"
         },
         {
-            "type": "package",
-            "package": {
-                "name": "ckeditor/templates",
-                "version": "4.15.0",
-                "type": "drupal-library",
-                "extra": {
-                    "installer-name": "ckeditor/plugins/templates"
-                },
-                "dist": {
-                    "url": "https://download.ckeditor.com/templates/releases/templates_4.15.0.zip",
-                    "type": "zip"
-                }
-            }
-        },
-        {
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
@@ -136,7 +121,6 @@
         }
     },
     "require": {
-        "ckeditor/templates": "4.15.0",
         "composer/installers": "^1.9",
         "cweagans/composer-patches": "^1.0",
         "drupal/access_unpublished": "^1.3",
