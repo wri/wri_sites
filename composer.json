@@ -39,21 +39,6 @@
             }
         },
         {
-            "type": "package",
-            "package": {
-                "name": "ckeditor/templates",
-                "version": "4.15.0",
-                "type": "drupal-library",
-                "extra": {
-                    "installer-name": "ckeditor/plugins/templates"
-                },
-                "dist": {
-                    "url": "https://download.ckeditor.com/templates/releases/templates_4.15.0.zip",
-                    "type": "zip"
-                }
-            }
-        },
-        {
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
@@ -168,7 +153,7 @@
         "drupal/ckeditor_templates_ui": "^1.4",
         "drupal/ckeditor5_template": "^1.0",
         "drupal/classy": "^1.0",
-        "drupal/config_partial_export": "^2.0@alpha1",
+        "drupal/config_partial_export": "^2.0@alpha",
         "drupal/content_snippets": "^2.0",
         "drupal/core-composer-scaffold": "^9.3",
         "drupal/core-recommended": "^9.3",
@@ -177,7 +162,7 @@
         "drupal/diff": "^1.0",
         "drupal/ds": "^5.0.0",
         "drupal/editor_advanced_link": "^2.2",
-        "drupal/element_class_formatter": "^2.0@beta1",
+        "drupal/element_class_formatter": "^2.0@beta",
         "drupal/entity_browser": "^2.6",
         "drupal/entity_class_formatter": "^1.3",
         "drupal/facets": "^2.0",
