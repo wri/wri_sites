@@ -15,7 +15,7 @@ dependencies:
   - block_list_override
   - ckeditor5
   - ckeditor_accordion
-  - ckeditor5_templates
+  - ckeditor5_template
   - config
   - content_moderation
   - content_snippets

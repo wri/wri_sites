@@ -166,7 +166,7 @@
         "drupal/ckeditor_accordion": "^2.0",
         "drupal/ckeditor_templates": "^1.2",
         "drupal/ckeditor_templates_ui": "^1.4",
-        "drupal/ckeditor5_templates": "^1.0",
+        "drupal/ckeditor5_template": "^1.0",
         "drupal/classy": "^1.0",
         "drupal/config_partial_export": "^1.6",
         "drupal/content_snippets": "^2.0",
