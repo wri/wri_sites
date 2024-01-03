@@ -13,7 +13,7 @@ dependencies:
   - allowed_formats
   - block
   - block_list_override
-  - ckeditor
+  - ckeditor5
   - ckeditor_accordion
   - ckeditor5_templates
   - config
@@ -56,9 +56,6 @@ libraries:
   - wri_admin/admin
 config_devel:
   install:
-    - ckeditor_templates_ui.ckeditor_template.callout_center
-    - ckeditor_templates_ui.ckeditor_template.callout_left
-    - ckeditor_templates_ui.ckeditor_template.callout_right
     - content_snippets.items
     - editor.editor.basic_html
     - filter.format.basic_html
