@@ -20,7 +20,7 @@ regions:
   disabled: Disabled
   modals: Modals
 ckeditor_stylesheets:
-  - dist/ckeditor.css
+  - dist/ckeditor5.css
 config_devel:
   install:
     - block.block.addressblock
