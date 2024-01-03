@@ -75,3 +75,13 @@ function wri_common_update_9502() {
     'settings#toolbar#rows',
   ], 'wri_media', 'install');
 }
+
+/**
+ * Add the new setting for twitter_share_suffix.
+ */
+function wri_common_update_9503() {
+  // Add twitter_share_suffix value.
+  \Drupal::service('distro_helper.updates')->updateConfig('wri_node.settings', [
+    'twitter_share_suffix',
+  ], 'wri_node', 'install');
+}

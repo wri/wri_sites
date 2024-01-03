@@ -30,3 +30,19 @@ narrative_taxonomy_view_arguments:
   description: 'The arguments passed to the 3+1 block''s listing view.'
   group: 'View Arguments'
   weight: '10'
+osano_id:
+  label: 'Osano ID'
+  id: osano_id
+  type: textfield
+  filter: full_html
+  description: 'The script ID for Osano (not the account ID). It will have this pattern: 68d76b4b-41d5-408a-8727-00456ae2d7c6'
+  group: '3rd Party'
+  weight: '10'
+osano_params:
+  label: 'Osano Params'
+  id: osano_params
+  type: textfield
+  filter: full_html
+  description: 'Optional parameters for the Osano script (e.g. ?variant=five)'
+  group: '3rd Party'
+  weight: '10'

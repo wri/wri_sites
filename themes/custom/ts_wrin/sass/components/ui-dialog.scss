@@ -1,4 +1,4 @@
-div.ui-dialog {
+div.ui-dialog:not(.ui-dialog-off-canvas) {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -125,6 +125,20 @@ div.ui-dialog {
   // Download.
   .media--type-document {
     margin-top: 0.75rem;
+
+    .download {
+      display: block;
+      text-align: left;
+
+      .field--name-name {
+        display: inline;
+        font-weight: 700;
+      }
+
+      span {
+        font-weight: 100;
+      }
+    }
   }
 }
 

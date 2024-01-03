@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Wri Engagement install hooks.
+ */
+
+/**
+ * Update the modal files download.
+ */
+function wri_engagement_update_9501() {
+  \Drupal::service('distro_helper.updates')->updateConfig('simple_popup_blocks.popup_beforefilesmodal', [
+    'width',
+    'cookie_expiry',
+    'enable_escape',
+    'show_minimized_button',
+  ], 'wri_engagement', 'install');
+
+  \Drupal::service('distro_helper.updates')->installConfig('views.view.node_downloads', 'wri_engagement');
+  \Drupal::service('distro_helper.updates')->installConfig('webform.webform.download_publication', 'wri_engagement');
+  \Drupal::service('distro_helper.updates')->installConfig('wri_engagement.settings', 'wri_engagement');
+}

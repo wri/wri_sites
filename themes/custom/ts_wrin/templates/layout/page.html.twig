@@ -1,6 +1,9 @@
 {% if is_node %}
   {{ drupal_block('local_tasks_block') }}
 {% endif %}
+{%  if page.top_modals %}
+  {{ page.top_modals }}
+{% endif %}
 {% if page.wrin_custom.wrinfilterstatus %}
   {% include '@ts_wrin/ts_custom/wrin-filter-status.html.twig' %}
 {% endif %}

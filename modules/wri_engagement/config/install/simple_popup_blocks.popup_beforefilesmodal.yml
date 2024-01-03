@@ -11,11 +11,11 @@ escape: 1
 delay: 0
 minimize: 1
 close: 1
-width: '646'
-cookie_expiry: '100'
-status: 0
-enable_escape: 0
+width: '600'
+cookie_expiry: '0'
+status: 1
+enable_escape: 1
 trigger_width: null
 use_time_frequency: 0
 time_frequency: '3600'
-show_minimized_button: 0
+show_minimized_button: 1
