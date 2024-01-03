@@ -9,7 +9,7 @@ module.exports = (env, argv) => {
     devtool: isDevMode ? "source-map" : false,
     entry: {
       main: ["./js/main.js", "./sass/style.scss"],
-      ckeditor5: ["./sass/ckeditor.scss"]
+      ckeditor: ["./sass/ckeditor.scss"]
     },
     module: {
       rules: [

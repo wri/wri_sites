@@ -19,7 +19,7 @@ regions:
   wrin_custom: 'WRIN Custom'
   disabled: Disabled
   modals: Modals
-ckeditor_stylesheets:
+ckeditor5-stylesheets:
   - dist/ckeditor5.css
 config_devel:
   install:
