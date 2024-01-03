@@ -1,9 +1,11 @@
-@import "config/_01.vars.scss";
-@import "config/_02.mixins.scss";
-@import "config/_03.extends.scss";
-@import "config/_04.base.scss";
-@import "config/_05.buttons.scss";
-@import "config/_06.forms.scss";
+.ck-content {
+  @import "config/_01.vars.scss";
+  @import "config/_02.mixins.scss";
+  @import "config/_03.extends.scss";
+  @import "config/_04.base.scss";
+  @import "config/_05.buttons.scss";
+  @import "config/_06.forms.scss";
 
-/* GLOBAL */
-@import "global/_wysiwyg.scss";
+  /* GLOBAL */
+  @import "global/_wysiwyg.scss";
+}

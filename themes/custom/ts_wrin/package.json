@@ -25,13 +25,12 @@
     "webpack-cli": "^3.3.10"
   },
   "scripts": {
-    "build": "webpack --config webpack.config.js && npm run create.admin",
+    "build": "webpack --config webpack.config.js",
     "build:dev": "webpack --config webpack.config.js --mode development",
     "start": "webpack --watch",
     "start:dev": "webpack --watch --mode development",
     "pretty-quick": "pretty-quick",
-    "prettier": "prettier --write sass/**/*.scss js/**/*.js",
-    "create.admin": "> ./dist/ckeditor5.css && echo \".ck-content {$(cat ./dist/ckeditor.css)}\" >> ./dist/ckeditor5.css"
+    "prettier": "prettier --write sass/**/*.scss js/**/*.js"
   },
   "husky": {
     "hooks": {
