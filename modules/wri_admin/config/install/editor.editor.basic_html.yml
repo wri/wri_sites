@@ -38,6 +38,9 @@ settings:
         - '<span class>'
         - '<div class>'
         - '<a hreflang class>'
+    editor_advanced_link_link:
+      enabled_attributes:
+        - class
 image_upload:
   status: false
   scheme: public

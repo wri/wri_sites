@@ -72,6 +72,14 @@ settings:
       file_path: /profiles/contrib/wri_sites/modules/wri_admin/templates/ckeditor5_template.json
       custom_toolbar_text: Template
       show_toolbar_text: 1
+    editor_advanced_link_link:
+      enabled_attributes:
+        - aria-label
+        - class
+        - id
+        - rel
+        - target
+        - title
 image_upload:
   status: false
   scheme: public
