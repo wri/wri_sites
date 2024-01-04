@@ -68,7 +68,7 @@ class RelatedFieldFormatter extends EntityReferenceEntityFormatter {
         $view = Views::getView('related_content');
         $view->setDisplay('block_1');
         $view->setArguments([$node->id()]);
-        $build = $view->render();
+        $build = $view->\Drupal::service('renderer')->render();
         $build['#field_name'] = $items->getName();
         return $build;
       }

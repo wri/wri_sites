@@ -15,6 +15,7 @@ function wri_person_post_update_person_grouping(&$sandbox) {
   // Work through Persons.
   if (!isset($sandbox['total'])) {
     $nids = \Drupal::entityQuery('node')
+      ->accessCheck(FALSE)
       ->condition('type', 'person')
       ->notExists('field_staff_group')
       ->execute();
@@ -29,6 +30,7 @@ function wri_person_post_update_person_grouping(&$sandbox) {
 
   $users_per_batch = 25;
   $nids = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
     ->condition('type', 'person')
     ->notExists('field_staff_group')
     ->range(0, $users_per_batch)
@@ -40,10 +42,12 @@ function wri_person_post_update_person_grouping(&$sandbox) {
 
   // Load terms.
   $leader_id = \Drupal::entityQuery('taxonomy_term')
+    ->accessCheck(FALSE)
     ->condition('uuid', '51a8936a-2d62-4452-b5c2-1fd0b542e39e')
     ->execute();
 
   $staff_id = \Drupal::entityQuery('taxonomy_term')
+    ->accessCheck(FALSE)
     ->condition('uuid', '7bc441ea-af16-42b2-8111-7f202c979e28')
     ->execute();
 

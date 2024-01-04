@@ -9,29 +9,6 @@ use Drupal\block_content\Entity\BlockContent;
 use Drupal\Core\Utility\UpdateException;
 
 /**
- * Enables the default value for the link field in all narrative taxonomies.
- */
-function wri_narrative_update_8901() {
-  // If field_more_link exists on the narrative taxonomy block type.
-  $definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('block_content', 'narrative_taxonomy');
-  if (isset($definitions['field_more_link'])) {
-    $default_value = $definitions['field_more_link']->getDefaultValueLiteral();
-    // Update all existing narrative taxonomies and set the value of
-    // field_more_link to the default value & save.
-    $bids = \Drupal::entityQuery('block_content')->condition('type', 'narrative_taxonomy')->execute();
-    $blocks = BlockContent::loadMultiple($bids);
-    foreach ($blocks as $block) {
-      $block->set('field_more_link', $default_value);
-      $block->save();
-    }
-  }
-  else {
-    throw new UpdateException('This should be run after importing the field_more_link to the narrative taxonomy block type.');
-  }
-
-}
-
-/**
  * Updates Listing arguments to use our config snippet for Narrative taxonomies.
  */
 function wri_narrative_update_9501() {

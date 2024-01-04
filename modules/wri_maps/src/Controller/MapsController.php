@@ -49,7 +49,7 @@ class MapsController extends ControllerBase {
       switch ($node->bundle()) {
         case 'region':
           $popup = $this->getRegionMapPopup($node);
-          $data[$nid]['popup'] = render($popup);
+          $data[$nid]['popup'] = \Drupal::service('renderer')->render($popup);
           break;
 
         case 'international_office':
@@ -69,7 +69,7 @@ class MapsController extends ControllerBase {
                 /** @var \Drupal\node\NodeInterface $region_node */
                 $region_node = reset($region_nodes);
                 $popup = $this->getRegionMapPopup($region_node);
-                $data[$nid]['popup'] = render($popup);
+                $data[$nid]['popup'] = \Drupal::service('renderer')->render($popup);
               }
             }
           }

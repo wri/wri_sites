@@ -65,6 +65,7 @@ function wri_author_node_delete(EntityInterface $node) {
   if ($node->bundle() == 'person') {
     // Find any authors with this person as their reference.
     $related_author_ids = \Drupal::entityQuery('wri_author')
+      ->accessCheck(FALSE)
       ->condition('type', 'internal')
       ->condition('field_person', $node->id())
       ->execute();
