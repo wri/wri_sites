@@ -26,7 +26,6 @@ dependencies:
     - field_group
     - inline_entity_form
     - media_library
-    - media_library_edit
     - metatag
     - path
     - text
