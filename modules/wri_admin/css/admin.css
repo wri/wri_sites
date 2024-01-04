@@ -178,3 +178,8 @@
 form .fieldset {
   border: 1px solid #ffffff;
 }
+
+/* Set the max width of the main editor to not be 52rem. */
+.layout-node-form .layout-region--node-main .layout-region__content {
+  max-width: none;
+}
