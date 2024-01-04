@@ -161,7 +161,7 @@
         "drupal/link_attributes": "^1.11",
         "drupal/media_library_edit": "^3.0",
         "drupal/media_responsive_thumbnail": "^1.2",
-        "drupal/menu_block": "1.8",
+        "drupal/menu_block": "^1.8",
         "drupal/menu_position": "^1.0@beta",
         "drupal/metatag": "^1.19",
         "drupal/metatag_google_scholar": "^1.0",
