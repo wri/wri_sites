@@ -35,7 +35,7 @@ filters:
     status: true
     weight: -49
     settings:
-      allowed_html: '<a href hreflang class> <em> <strong> <u> <p> <span class=" has-gold-color">'
+      allowed_html: '<br> <p class="pfp-h2-bold pfp-h2-bold-italic pfp-text-blue-200"> <span class> <div class> <a hreflang class href> <strong> <em> <u>'
       filter_html_help: false
       filter_html_nofollow: false
   filter_autop:
@@ -75,8 +75,8 @@ filters:
     weight: -38
     settings:
       default_view_mode: default
-      allowed_media_types: {  }
       allowed_view_modes: {  }
+      allowed_media_types: {  }
   token_filter:
     id: token_filter
     provider: token_filter

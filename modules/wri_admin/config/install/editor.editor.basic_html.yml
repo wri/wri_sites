@@ -4,39 +4,40 @@ dependencies:
   config:
     - filter.format.basic_html
   module:
-    - ckeditor
+    - ckeditor5
 format: basic_html
-editor: ckeditor
+editor: ckeditor5
 settings:
   toolbar:
-    rows:
-      -
-        -
-          name: Formatting
-          items:
-            - Bold
-            - Italic
-            - Underline
-        -
-          name: Links
-          items:
-            - DrupalLink
-            - DrupalUnlink
-        -
-          name: Tools
-          items:
-            - Styles
-            - Source
+    items:
+      - bold
+      - italic
+      - underline
+      - '|'
+      - link
+      - '|'
+      - style
+      - sourceEditing
   plugins:
-    stylescombo:
-      styles: span.has-gold-color|Gold
-    language:
-      language_list: un
-    templates:
-      template_path: ''
-      replace_content: 0
-    tokenbrowser:
-      token_types: {  }
+    ckeditor5_style:
+      styles:
+        -
+          label: Gold
+          element: '<span class="has-gold-color">'
+        -
+          label: 'H2 (pfp)'
+          element: '<p class="pfp-h2-bold">'
+        -
+          label: 'H2 italic (pfp)'
+          element: '<p class="pfp-h2-bold-italic">'
+        -
+          label: 'Blue 200 (pfp)'
+          element: '<p class="pfp-text-blue-200">'
+    ckeditor5_sourceEditing:
+      allowed_tags:
+        - '<span class>'
+        - '<div class>'
+        - '<a hreflang class>'
 image_upload:
   status: false
   scheme: public
