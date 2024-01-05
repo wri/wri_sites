@@ -18,7 +18,7 @@ use Drupal\wri_node\General;
 function ts_wrin_preprocess(array &$variables) {
   if (NULL != theme_get_setting('white_logo.path')) {
     $logo_path = theme_get_setting('white_logo.path');
-    $variables['footer_logo'] = \Drupal::service('file_url_generator')->transformRelative(file_create_url($logo_path));
+    $variables['footer_logo'] = \Drupal::service('file_url_generator')->generateString($logo_path);
   }
 }
 
@@ -192,7 +192,7 @@ function ts_wrin_preprocess_block(array &$variables) {
 
   if (NULL != theme_get_setting('white_logo.path')) {
     $logo_path = theme_get_setting('white_logo.path');
-    $variables['white_logo'] = \Drupal::service('file_url_generator')->transformRelative(file_create_url($logo_path));
+    $variables['white_logo'] = \Drupal::service('file_url_generator')->generateString($logo_path);
   }
 
   if ($variables['plugin_id'] == 'inline_block:person_listing') {

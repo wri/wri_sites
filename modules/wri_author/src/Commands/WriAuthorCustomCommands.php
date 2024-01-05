@@ -57,6 +57,7 @@ class WriAuthorCustomCommands extends DrushCommands {
       $query->groupBy('field_person_link');
     }
     $author_list = $query->condition('type', $type)
+      ->accessCheck(FALSE)
       ->conditionAggregate('name', 'COUNT', '1', '>')
       ->range(0, $number)
       ->execute();
