@@ -11,7 +11,7 @@ use Drupal\text\Plugin\Field\FieldWidget\TextareaWidget;
  *
  * @FieldWidget(
  *   id = "text_textarea_with_counter",
- *   label = @Translation("Textarea (multiple rows) with counter"),
+ *   label = @Translation("Deprecated Textarea (multiple rows) with counter"),
  *   field_types = {
  *     "text_long"
  *   }
