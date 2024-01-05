@@ -66,6 +66,7 @@ class WriAuthorCustomCommands extends DrushCommands {
       if (isset($author['name'])) {
         $query = $this->entityTypeManager->getStorage('wri_author');
         $duplicate_authors = $query->getQuery()
+          ->accessCheck(FALSE)
           ->condition('type', $type)
           ->condition('name', $author['name'])
           ->execute();
@@ -142,6 +143,7 @@ class WriAuthorCustomCommands extends DrushCommands {
         // Load all the nodes referencing the id.
         $query = $this->entityTypeManager->getStorage('node');
         $author_nodes = $query->getQuery()
+          ->accessCheck(FALSE)
           ->condition('field_authors', $author_id, 'IN')
           ->execute();
 
@@ -181,6 +183,7 @@ class WriAuthorCustomCommands extends DrushCommands {
       // Load all the nodes referencing $author_id.
       $query = $this->entityTypeManager->getStorage('node');
       $author_nodes = $query->getQuery()
+        ->accessCheck(FALSE)
         ->condition('field_authors', $author_id, 'IN')
         ->execute();
 

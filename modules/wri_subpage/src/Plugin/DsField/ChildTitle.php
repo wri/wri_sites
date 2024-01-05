@@ -4,7 +4,7 @@ namespace Drupal\wri_subpage\Plugin\DsField;
 
 use Drupal\ds\Plugin\DsField\DsFieldBase;
 use Drupal\node\NodeInterface;
-use Symfony\Cmf\Component\Routing\RouteObjectInterface;
+use Drupal\Core\Routing\RouteObjectInterface;
 
 /**
  * Plugin that renders the terms from a chosen taxonomy vocabulary.
