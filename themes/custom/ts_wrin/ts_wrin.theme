@@ -7,10 +7,10 @@
 
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Datetime\DrupalDateTime;
-use Drupal\node\NodeInterface;
-use Drupal\wri_node\General;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeInterface;
 use Drupal\views\ViewExecutable;
+use Drupal\wri_node\General;
 
 /**
  * Implements hook_preprocess().
@@ -303,13 +303,11 @@ function ts_wrin_theme_suggestions_menu_alter(array &$suggestions, array $variab
   $suggestions = array_merge($menu_extras, $new_suggestions);
 }
 
-
 /**
  * Implements hook_preprocess_views_view_fields().
  */
 function ts_wrin_preprocess_views_view_fields__media_library(array &$variables) {
   // @see claro_preprocess_views_view_fields__media_library();
-
   if (isset($variables['fields']['rendered_entity']->wrapper_attributes)) {
     $variables['fields']['rendered_entity']->wrapper_attributes->addClass('media-library-item__click-to-select-trigger');
   }
@@ -320,7 +318,6 @@ function ts_wrin_preprocess_views_view_fields__media_library(array &$variables) 
  */
 function ts_wrin_form_media_library_add_form_alter(array &$form, FormStateInterface $form_state) {
   // @see claro_form_media_library_add_form_alter.;
-
   $form['#attributes']['class'][] = 'media-library-add-form';
   $form['#attached']['library'][] = 'claro/media_library.theme';
 
@@ -359,7 +356,6 @@ function ts_wrin_form_media_library_add_form_upload_alter(array &$form, FormStat
  */
 function ts_wrin_form_media_library_add_form_oembed_alter(array &$form, FormStateInterface $form_state) {
   // @see claro_form_media_library_add_form_oembed_alter($form,  $form_state);
-
   $form['#attributes']['class'][] = 'media-library-add-form--oembed';
 
   // If no media items have been added yet, add a couple of styling classes
@@ -376,7 +372,6 @@ function ts_wrin_form_media_library_add_form_oembed_alter(array &$form, FormStat
  */
 function ts_wrin_preprocess_item_list__media_library_add_form_media_list(array &$variables) {
   // @see claro_preprocess_item_list__media_library_add_form_media_list($variables);
-
   foreach ($variables['items'] as &$item) {
     $item['value']['preview']['#attributes']['class'][] = 'media-library-add-form__preview';
     $item['value']['fields']['#attributes']['class'][] = 'media-library-add-form__fields';
@@ -423,7 +418,6 @@ function ts_wrin_preprocess_links__media_library_menu(array &$variables) {
     }
   }
 }
-
 
 /**
  * Implements hook_views_pre_render().
