@@ -5,8 +5,6 @@
  * Install and update hooks for wri_project.
  */
 
-use Drupal\block_content\Entity\BlockContent;
-
 /**
  * Add the 'Show More Link' field to the Project Detail content type.
  */

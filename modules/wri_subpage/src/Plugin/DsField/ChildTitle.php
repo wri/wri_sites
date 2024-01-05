@@ -2,9 +2,9 @@
 
 namespace Drupal\wri_subpage\Plugin\DsField;
 
+use Drupal\Core\Routing\RouteObjectInterface;
 use Drupal\ds\Plugin\DsField\DsFieldBase;
 use Drupal\node\NodeInterface;
-use Drupal\Core\Routing\RouteObjectInterface;
 
 /**
  * Plugin that renders the terms from a chosen taxonomy vocabulary.

@@ -5,7 +5,6 @@
  * Narrative Taxonomy install and update hooks..
  */
 
-use Drupal\block_content\Entity\BlockContent;
 use Drupal\Core\Utility\UpdateException;
 
 /**

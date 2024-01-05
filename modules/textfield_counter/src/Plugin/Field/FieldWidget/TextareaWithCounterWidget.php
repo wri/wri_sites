@@ -2,8 +2,6 @@
 
 namespace Drupal\textfield_counter\Plugin\Field\FieldWidget;
 
-use Drupal\Core\Field\FieldItemListInterface;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\text\Plugin\Field\FieldWidget\TextareaWidget;
 
 /**
@@ -17,4 +15,4 @@ use Drupal\text\Plugin\Field\FieldWidget\TextareaWidget;
  *   }
  * )
  */
-class TextareaWithCounterWidget extends TextareaWidget { }
+class TextareaWithCounterWidget extends TextareaWidget {}
