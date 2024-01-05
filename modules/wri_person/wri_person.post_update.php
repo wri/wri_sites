@@ -61,7 +61,7 @@ function wri_person_post_update_person_grouping(&$sandbox) {
     }
     // Figure out what the status is and set the content moderation
     // appropriately.
-    if ($node->status->value == 0) {
+    if ($node->getStatus()->value == 0) {
       $node->moderation_state->set(0, 'archived');
     }
     $node->save();

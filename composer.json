@@ -68,10 +68,6 @@
                 "Use the toUrl to create the link (compatibility with Forum module)": "https://git.drupalcode.org/project/hierarchical_term_formatter/-/merge_requests/1.diff",
                 "Drupal 10 upgrade https://www.drupal.org/project/hierarchical_term_formatter/issues/3287889": "https://www.drupal.org/files/issues/2023-10-06/hierarchical_term_formatter.1.x.rector.patch"
             },
-            "drupal/textfield_counter": {
-                "'Prevent form submission when character limit exceeded' option does not work https://www.drupal.org/project/textfield_counter/issues/3004457": "https://www.drupal.org/files/issues/2018-10-04/textfield_counter-prevent_form_submission_does_not_work-3004457-2.patch",
-                "Issue #3182675: Incompatibilities with Claro theme, which duplicates the field selector class": "https://git.drupalcode.org/project/textfield_counter/-/merge_requests/1.patch"
-            },
             "drupal/views_bulk_edit": {
                 "Fix Required fields to really not be required https://www.drupal.org/node/3024419": "https://www.drupal.org/files/issues/2020-11-20/3024419-invalid-form-control-24.patch"
             },
@@ -185,7 +181,6 @@
         "drupal/simple_recaptcha": "^1.0@beta",
         "drupal/smart_date": "^3.4",
         "drupal/sortableviews": "^1.0@beta",
-        "drupal/textfield_counter": "^1.12",
         "drupal/token": "^1.8",
         "drupal/token_filter": "^2.1",
         "drupal/twig_tweak": "^3.2",
