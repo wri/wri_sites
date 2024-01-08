@@ -42,6 +42,13 @@ class RegionMapBlock extends BlockBase implements ContainerFactoryPluginInterfac
   protected $entityTypeManager;
 
   /**
+   * The file URL generator.
+   *
+   * @var \Drupal\Core\File\FileUrlGeneratorInterface
+   */
+  protected $fileUrlGenerator;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
@@ -49,6 +56,7 @@ class RegionMapBlock extends BlockBase implements ContainerFactoryPluginInterfac
     $instance->redirectDestination = $container->get('redirect.destination');
     $instance->configFactory = $container->get('config.factory');
     $instance->entityTypeManager = $container->get('entity_type.manager');
+    $instance->fileUrlGenerator = $container->get('file_url_generator');
     return $instance;
   }
 
@@ -165,7 +173,7 @@ class RegionMapBlock extends BlockBase implements ContainerFactoryPluginInterfac
     if ($region_map_file) {
       $svg_file = $this->entityTypeManager->getStorage('file')->load($region_map_file);
       if ($svg_file) {
-        $build['wri_region_map']['#svg_url'] = \Drupal::service('file_url_generator')->generateString($svg_file->getFileUri());
+        $build['wri_region_map']['#svg_url'] = $this->fileUrlGenerator()->generateString($svg_file->getFileUri());
       }
       else {
         $build['wri_region_map']['#svg_url'] = '';
