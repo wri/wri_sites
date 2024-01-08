@@ -43,6 +43,7 @@ function wri_package2_install() {
   _install_io_and_country_blocks();
   _install_default_program_hero();
   _install_narrative_taxonomy();
+  _set_anonymous_authenticated_permissions();
 }
 
 /**
@@ -159,4 +160,40 @@ function _install_narrative_taxonomy() {
     'reusable' => FALSE,
   ]);
   $block->save();
+}
+
+function _set_anonymous_authenticated_permissions() {
+  $anonymous = \Drupal\user\Entity\Role::load('anonymous');
+  $anonymous_permissions = [
+    'access content',
+    'access_unpublished node article',
+    'access_unpublished node data',
+    'access_unpublished node event',
+    'access_unpublished node international_office',
+    'access_unpublished node page',
+    'access_unpublished node program_center',
+    'access_unpublished node project_detail',
+    'access_unpublished node publication',
+    'access_unpublished node simple_page',
+    'access_unpublished node subpage',
+    'view media',
+    'view published author entities',
+    'view published wri office entities',
+  ];
+
+  foreach ($anonymous_permissions as $permission) {
+    $anonymous->grantPermission($permission);
+  }
+
+  $authenticated = \Drupal\user\Entity\Role::load('authenticated');
+  $authenticated_permissions = [
+    'access content',
+    'view media',
+    'view published author entities',
+    'view published wri office entities',
+  ];
+
+  foreach ($authenticated_permissions as $permission) {
+    $authenticated->grantPermission($permission);
+  }
 }
