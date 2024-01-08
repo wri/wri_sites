@@ -37,15 +37,13 @@
                 "Changes to a block's text field not saved when ckeditor source mode is active https://www.drupal.org/project/ckeditor/issues/3095304": "https://git.drupalcode.org/project/ckeditor/-/merge_requests/10.diff"
             },
             "drupal/core": {
-                "Dynamic Views Arguments via Tokens https://www.drupal.org/project/drupal/issues/1699378": "https://www.drupal.org/files/issues/2023-05-03/1699378-249.patch",
-                "There is no way to delete or update file entities of other users incl. user/1":"https://www.drupal.org/files/issues/2019-12-12/2949017-59.patch",
+                "Dynamic Views Arguments via Tokens https://www.drupal.org/project/drupal/issues/1699378": "https://www.drupal.org/files/issues/2023-11-05/1699378-255.patch",
                 "Add reusable option to inline block creation https://www.drupal.org/project/drupal/issues/2999491": "https://www.drupal.org/files/issues/2020-05-21/2999491--reusable-title-display--49.patch",
-                "Allow field blocks to display the configuration label when set in Layout Builder https://www.drupal.org/project/drupal/issues/3039185": "https://www.drupal.org/files/issues/2020-07-17/3039185-block_title-33.patch",
                 "Hyphens and forward slashes (-/) break Views contextual filters https://www.drupal.org/node/672606": "https://www.drupal.org/files/issues/2022-09-27/672606-76.patch",
                 "Views RSS feeds have validation issues https://www.drupal.org/project/drupal/issues/1337894": "https://www.drupal.org/files/issues/2022-11-28/1337894-37.patch",
                 "Add missing enclosure to Views RSS - 2511878-30": "https://www.drupal.org/files/issues/2020-07-24/views-rss-fields-enclosure-2511878-30.patch",
-                "Views Term ID has broken filters (\"All of\", \"Is none of\") and contextual filters \"allow multiple\" https://www.drupal.org/project/drupal/issues/2829178": "https://www.drupal.org/files/issues/2021-12-09/2829178-61.patch",
-                "Dialog drupalAutoButtons option should be respected on initial load https://www.drupal.org/node/2793343": "https://www.drupal.org/files/issues/2023-07-11/2793343-82-9-5-x.patch"
+                "Views Term ID has broken filters (\"All of\", \"Is none of\") and contextual filters \"allow multiple\" https://www.drupal.org/project/drupal/issues/2829178": "https://git.drupalcode.org/project/drupal/-/merge_requests/5321.patch",
+                "Dialog drupalAutoButtons option should be respected on initial load https://www.drupal.org/node/2793343": "https://www.drupal.org/files/issues/2023-07-11/2793343-83.patch"
             },
             "drupal/content_snippets": {
                 "Error: Cannot unset string offsets... https://www.drupal.org/project/content_snippets/issues/3268757": "https://git.drupalcode.org/issue/content_snippets-3268757/-/merge_requests/1.diff"
@@ -69,7 +67,6 @@
             },
             "drupal/hierarchical_term_formatter": {
                 "Use the toUrl to create the link (compatibility with Forum module)": "https://git.drupalcode.org/project/hierarchical_term_formatter/-/merge_requests/1.diff",
-                "Drupal 10 upgrade https://www.drupal.org/project/hierarchical_term_formatter/issues/3287889": "https://www.drupal.org/files/issues/2023-10-06/hierarchical_term_formatter.1.x.rector.patch"
             },
             "drupal/views_bulk_edit": {
                 "Fix Required fields to really not be required https://www.drupal.org/node/3024419": "https://www.drupal.org/files/issues/2020-11-20/3024419-invalid-form-control-24.patch"
