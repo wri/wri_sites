@@ -66,7 +66,7 @@
                 "Provide array of primitive property values on multivalue field https://www.drupal.org/project/token/issues/3115486": "https://www.drupal.org/files/issues/2020-12-11/token-provide_primitive_type_arrays_for_properties_of_multivalue_fields-3115486-12.patch"
             },
             "drupal/hierarchical_term_formatter": {
-                "Use the toUrl to create the link (compatibility with Forum module)": "https://git.drupalcode.org/project/hierarchical_term_formatter/-/merge_requests/1.diff",
+                "Use the toUrl to create the link (compatibility with Forum module)": "https://git.drupalcode.org/project/hierarchical_term_formatter/-/merge_requests/1.diff"
             },
             "drupal/views_bulk_edit": {
                 "Fix Required fields to really not be required https://www.drupal.org/node/3024419": "https://www.drupal.org/files/issues/2020-11-20/3024419-invalid-form-control-24.patch"
