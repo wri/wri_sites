@@ -29,6 +29,9 @@
         }
     ],
     "extra": {
+        "drupal-lenient": {
+            "allowed-list": ["drupal/custom_robots"]
+        },
         "patches": {
             "drupal/ckeditor": {
                 "Changes to a block's text field not saved when ckeditor source mode is active https://www.drupal.org/project/ckeditor/issues/3095304": "https://git.drupalcode.org/project/ckeditor/-/merge_requests/10.diff"
@@ -82,9 +85,6 @@
             },
             "drupal/layout_builder_modal": {
                 "incompatibility with layout_builder_st, contextual links broken https://www.drupal.org/project/layout_builder_modal/issues/3133695": "https://www.drupal.org/files/issues/2022-12-15/3133695-13.patch"
-            },
-            "guzzlehttp/guzzle": {
-                "Pass int to &$still_running of curl_multi_exec. Needed for 6.x branch https://github.com/guzzle/guzzle/issues/2990": "web/profiles/contrib/wri_sites/patches/curl_multi_exec-2990.patch"
             }
         },
         "drupal-scaffold": {
@@ -131,17 +131,17 @@
         "drupal/auto_entitylabel": "^3.0@beta",
         "drupal/block_list_override": "^1.0",
         "drupal/cer": "^5.0@beta",
+        "drupal/ckeditor5_template": "^1.0",
         "drupal/ckeditor_accordion": "^2.0",
         "drupal/ckeditor_templates": "^1.2",
         "drupal/ckeditor_templates_ui": "^1.4",
-        "drupal/ckeditor5_template": "^1.0",
         "drupal/classy": "^1.0",
         "drupal/config_partial_export": "^2.0@alpha",
         "drupal/content_snippets": "^2.0",
         "drupal/core-composer-scaffold": "^10.0",
         "drupal/core-recommended": "^10.0",
         "drupal/ctools": "^4.0",
-        "drupal/custom_robots": "1.x-dev",
+        "drupal/custom_robots": "*",
         "drupal/diff": "^1.0",
         "drupal/ds": "^5.0.0",
         "drupal/editor_advanced_link": "^2.2",
@@ -193,18 +193,11 @@
         "drupal/views_extras": "^3.0",
         "drupal/webform": "^6.1",
         "drupal/xmlsitemap": "^1.2",
+        "mglaman/composer-drupal-lenient": "*",
         "npm-asset/jquery.toc": "^0.4.0",
         "oomphinc/composer-installers-extender": "^2.0",
         "solarium/solarium": "^6.1.5",
         "thinkshout/distro_helper": "dev-logging-and-errors-15"
-    },
-    "require-dev": {
-        "drupal/coder": "^8.3",
-        "drupal/config_devel": "^1.8",
-        "drupal/config_suite": "^2.0",
-        "drupal/devel": "^4.1",
-        "drupal/field_tools": "^1.0@alpha",
-        "drupal/stage_file_proxy": "^1.2"
     },
     "config": {
         "sort-packages": true,
@@ -213,7 +206,16 @@
             "drupal/core-composer-scaffold": true,
             "composer/installers": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
-            "oomphinc/composer-installers-extender": true
+            "oomphinc/composer-installers-extender": true,
+            "mglaman/composer-drupal-lenient": true
         }
+    },
+    "require-dev": {
+        "drupal/coder": "*",
+        "drupal/config_devel": "*",
+        "drupal/config_suite": "*",
+        "drupal/devel": "*",
+        "drupal/field_tools": "*",
+        "drupal/stage_file_proxy": "*"
     }
 }
