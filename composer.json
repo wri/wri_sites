@@ -123,7 +123,7 @@
         "drupal/address": "^2.0",
         "drupal/addtocal": "^3.0.0-beta1",
         "drupal/admin_toolbar": "^3.2",
-        "drupal/allowed_formats": "^2.0",
+        "drupal/allowed_formats": "^3.0",
         "drupal/asset_injector": "^2.9",
         "drupal/auto_entitylabel": "^3.0@beta",
         "drupal/block_list_override": "^1.0",
