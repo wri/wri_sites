@@ -171,7 +171,6 @@ function _set_scheduled_transitions() {
   // Load the workflows.workflow.content_publishing config.
   $workflow = \Drupal::configFactory()->getEditable('workflows.workflow.content_publishing');
   // Add all the nodes to it under entity_types.
-  $data = $workflow->get('type_settings.entity_types.node');
   $data = [
     'article',
     'data',
@@ -179,6 +178,7 @@ function _set_scheduled_transitions() {
     'homepage',
     'international_office',
     'page',
+    'person',
     'program_center',
     'project_detail',
     'publication',
@@ -189,9 +189,9 @@ function _set_scheduled_transitions() {
   $workflow->set('type_settings.entity_types.node', $data);
   // Set the transitions.
   $workflow->save();
-  
+
   // Load the sheduled transition settings.
-  $scheduled_transition = \Drupal::configFactory()->getEditable('scheduled_transition.settings');
+  $scheduled_transition = \Drupal::configFactory()->getEditable('scheduled_transitions.settings');
   $data = [
     [
       'entity_type' => 'node',
@@ -216,6 +216,10 @@ function _set_scheduled_transitions() {
     [
       'entity_type' => 'node',
       'bundle' => 'page',
+    ],
+    [
+      'entity_type' => 'node',
+      'bundle' => 'person',
     ],
     [
       'entity_type' => 'node',
