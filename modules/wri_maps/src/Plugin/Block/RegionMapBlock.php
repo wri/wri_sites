@@ -173,7 +173,7 @@ class RegionMapBlock extends BlockBase implements ContainerFactoryPluginInterfac
     if ($region_map_file) {
       $svg_file = $this->entityTypeManager->getStorage('file')->load($region_map_file);
       if ($svg_file) {
-        $build['wri_region_map']['#svg_url'] = $this->fileUrlGenerator()->generateString($svg_file->getFileUri());
+        $build['wri_region_map']['#svg_url'] = $this->fileUrlGenerator->generateString($svg_file->getFileUri());
       }
       else {
         $build['wri_region_map']['#svg_url'] = '';
