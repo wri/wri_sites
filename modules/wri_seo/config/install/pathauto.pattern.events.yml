@@ -9,10 +9,10 @@ type: 'canonical_entities:node'
 pattern: '/events/[node:field_date_time:value-format:year]/[node:field_date_time:value-format:month]/[node:title]'
 selection_criteria:
   0526da16-2884-4fdb-a2ad-ee82cbb0df56:
-    id: node_type
+    id: 'entity_bundle:node'
+    negate: false
     bundles:
       event: event
-    negate: false
     context_mapping:
       node: node
     uuid: 0526da16-2884-4fdb-a2ad-ee82cbb0df56
