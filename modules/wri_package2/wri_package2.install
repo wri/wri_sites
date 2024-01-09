@@ -44,6 +44,7 @@ function wri_package2_install() {
   _install_io_and_country_blocks();
   _install_default_program_hero();
   _install_narrative_taxonomy();
+  _set_scheduled_transitions();
   _set_anonymous_authenticated_permissions();
 }
 
@@ -161,6 +162,33 @@ function _install_narrative_taxonomy() {
     'reusable' => FALSE,
   ]);
   $block->save();
+}
+
+/**
+ * Sets the scheduled transitions for the content publishing workflow.
+ */
+function _set_scheduled_transitions() {
+  // Load the workflows.workflow.content_publishing config.
+  $workflow = \Drupal::configFactory()->getEditable('workflows.workflow.content_publishing');
+  // Add all the nodes to it under entity_types.
+  $data = $workflow->get('type_settings.entity_types.node');
+  $data = [
+    'article',
+    'data',
+    'event',
+    'homepage',
+    'international_office',
+    'page',
+    'program_center',
+    'project_detail',
+    'publication',
+    'region',
+    'simple_page',
+    'subpage',
+  ];
+  $workflow->set('type_settings.entity_types.node', $data);
+  // Set the transitions.
+  $workflow->save();
 }
 
 /**
