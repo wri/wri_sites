@@ -1,6 +1,67 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - core.entity_view_display.node.article.full
+    - core.entity_view_display.node.data.full
+    - core.entity_view_display.node.event.full
+    - core.entity_view_display.node.homepage.full
+    - core.entity_view_display.node.international_office.full
+    - core.entity_view_display.node.microsite.full
+    - core.entity_view_display.node.page.full
+    - core.entity_view_display.node.program_center.full
+    - core.entity_view_display.node.project_detail.full
+    - core.entity_view_display.node.publication.full
+    - core.entity_view_display.node.region.full
+    - core.entity_view_display.node.simple_page.full
+    - core.entity_view_display.node.subpage.full
+    - filter.format.basic_html
+    - filter.format.full_html
+    - filter.format.migrated
+    - filter.format.unrestricted_text
+    - media.type.document
+    - media.type.embed
+    - media.type.image
+    - media.type.video
+    - node.type.article
+    - node.type.data
+    - node.type.event
+    - node.type.homepage
+    - node.type.international_office
+    - node.type.microsite
+    - node.type.page
+    - node.type.person
+    - node.type.program_center
+    - node.type.project_detail
+    - node.type.publication
+    - node.type.region
+    - node.type.simple_page
+    - node.type.subpage
+    - taxonomy.vocabulary.embed_types
+    - taxonomy.vocabulary.media_tags
+    - workflows.workflow.content_publishing
+  module:
+    - access_unpublished
+    - admin_toolbar_search
+    - block
+    - block_content
+    - content_moderation
+    - contextual
+    - entity_browser
+    - file
+    - file_replace
+    - filter
+    - layout_builder
+    - media
+    - node
+    - path
+    - scheduled_transitions
+    - system
+    - taxonomy
+    - toolbar
+    - webform
+    - wri_author
+    - wri_io_content
 id: content_editor
 label: 'Content Editor'
 weight: 4
