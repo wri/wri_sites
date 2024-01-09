@@ -128,7 +128,7 @@ permissions:
   - 'create webform'
   - 'delete any document media'
   - 'delete any embed media'
-  - 'delete any files'
+  - 'delete any file'
   - 'delete any image media'
   - 'delete any media'
   - 'delete article revisions'
