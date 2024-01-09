@@ -88,7 +88,7 @@ function wri_node_preprocess_layout__card(&$variables) {
   $variables['default_image'] = [];
   if (Drupal::config('wri_node.settings')->get('use_fallback_image')) {
     $node = $variables['content']['#node'];
-    $topic = $node->field_primary_topic->target_id;
+    $topic = $node->field_primary_topic->target_id ?? FALSE;
     $image_url = '';
     $theme = 'image';
     if ($topic) {
