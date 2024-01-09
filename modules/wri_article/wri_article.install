@@ -28,3 +28,13 @@ function wri_article_update_dependencies() {
 
   return $dependencies;
 }
+
+/**
+ * Update the Featured tweet field to remove text count.
+ */
+function wri_article_update_10101() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.article.default', [
+    'dependencies#module',
+    'content#field_featured_tweet',
+  ], 'wri_article');
+}
