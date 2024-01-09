@@ -43,7 +43,7 @@ class MapsController extends ControllerBase {
     $data = [];
 
     $node_storage = $this->entityTypeManager()->getStorage('node');
-    $nids = $request->query->get('nids');
+    $nids = \Drupal::request()->query->all()['nids'] ?? [];
     $nodes = $node_storage->loadMultiple($nids);
 
     /** @var \Drupal\node\NodeInterface $node */
