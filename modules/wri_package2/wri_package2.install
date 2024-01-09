@@ -7,7 +7,6 @@
 
 use Drupal\block_content\Entity\BlockContent;
 use Drupal\paragraphs\Entity\Paragraph;
-use Drupal\user\Entity\Role;
 
 /**
  * Implements hook_install().
@@ -254,9 +253,9 @@ function _set_scheduled_transitions() {
  * Sets the anonymous and authenticated permissions.
  */
 function _set_anonymous_authenticated_permissions() {
-  \Drupal::service('distro_helper.updates')->installConfig('user.role.anonymous','wri_package2', 'post-install', TRUE);
-  \Drupal::service('distro_helper.updates')->installConfig('user.role.authenticated','wri_package2', 'post-install', TRUE);
-  \Drupal::service('distro_helper.updates')->installConfig('user.role.content_editor','wri_package2', 'post-install', TRUE);
-  \Drupal::service('distro_helper.updates')->installConfig('user.role.editorial','wri_package2', 'post-install', TRUE);
-  \Drupal::service('distro_helper.updates')->installConfig('user.role.hr','wri_package2', 'post-install', TRUE);
+  \Drupal::service('distro_helper.updates')->installConfig('user.role.anonymous', 'wri_package2', 'post-install', TRUE);
+  \Drupal::service('distro_helper.updates')->installConfig('user.role.authenticated', 'wri_package2', 'post-install', TRUE);
+  \Drupal::service('distro_helper.updates')->installConfig('user.role.content_editor', 'wri_package2', 'post-install', TRUE);
+  \Drupal::service('distro_helper.updates')->installConfig('user.role.editorial', 'wri_package2', 'post-install', TRUE);
+  \Drupal::service('distro_helper.updates')->installConfig('user.role.hr', 'wri_package2', 'post-install', TRUE);
 }
