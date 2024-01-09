@@ -105,7 +105,7 @@ function wri_common_update_9701() {
  */
 function wri_common_update_9702() {
   $moduleHandler = \Drupal::service('module_handler');
-  if ($moduleHandler->moduleExists('jquery_once')) {
+  if (!$moduleHandler->moduleExists('jquery_once')) {
     \Drupal::service('module_installer')->install(['jquery_once'], TRUE);
   }
 }
