@@ -50,7 +50,7 @@ class AddCookieWebformHandler extends WebformHandlerBase {
   public function submitForm(array &$form, FormStateInterface $form_state, WebformSubmissionInterface $webform_submission) {
     if ($this->configuration['cookie_name']) {
       $params = session_get_cookie_params();
-      setcookie($this->configuration['cookie_name'], TRUE, time() + 31556952, '/', $params['domain'], $params['secure'], $params['httponly']);
+      setcookie($this->configuration['cookie_name'], TRUE, time() + 31556952, '/', $params['domain'], FALSE, FALSE);
     }
   }
 
