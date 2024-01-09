@@ -48,7 +48,6 @@ permissions:
   - 'access toolbar'
   - 'access tweets entity browser pages'
   - 'administer blocks'
-  - 'configure editable person node layout overrides'
   - 'create and edit custom blocks'
   - 'create document media'
   - 'create image media'
