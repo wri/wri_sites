@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies: {  }
+id: anonymous
+label: 'Anonymous user'
+weight: 0
+is_admin: false
+permissions:
+  - 'access content'
+  - 'access_unpublished node article'
+  - 'access_unpublished node data'
+  - 'access_unpublished node event'
+  - 'access_unpublished node international_office'
+  - 'access_unpublished node page'
+  - 'access_unpublished node program_center'
+  - 'access_unpublished node project_detail'
+  - 'access_unpublished node publication'
+  - 'access_unpublished node simple_page'
+  - 'access_unpublished node subpage'
+  - 'view media'
+  - 'view published author entities'
+  - 'view published wri office entities'
