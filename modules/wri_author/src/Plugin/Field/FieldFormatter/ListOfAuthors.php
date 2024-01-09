@@ -36,8 +36,9 @@ class ListOfAuthors extends EntityReferenceEntityFormatter {
     $cleaned_authors = [];
 
     foreach ($elements as $item) {
-      if (trim(strip_tags(\Drupal::service('renderer')->render($item)))) {
-        $cleaned_authors[] = trim(\Drupal::service('renderer')->render($item));
+      $author = \Drupal::service('renderer')->render($item);
+      if (trim(strip_tags(($author))) !== '') {
+        $cleaned_authors[] = trim(strip_tags(($author), '<a><span>'));
       }
     }
     if (count($cleaned_authors) > 1) {
