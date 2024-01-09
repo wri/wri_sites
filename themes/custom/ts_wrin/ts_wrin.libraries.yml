@@ -10,7 +10,7 @@ main:
     - core/jquery
     - core/drupal
     - core/drupalSettings
-    - core/jquery.once
+    - jquery_once/jquery.once
     - core/drupal.tabbingmanager
     - core/drupal.announce
 
@@ -25,4 +25,4 @@ dev:
     - core/jquery
     - core/drupal
     - core/drupalSettings
-    - core/jquery.once
+    - jquery_once/jquery.once
