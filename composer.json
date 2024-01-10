@@ -40,7 +40,8 @@
                 "Views RSS feeds have validation issues https://www.drupal.org/project/drupal/issues/1337894": "https://www.drupal.org/files/issues/2022-11-28/1337894-37.patch",
                 "Add missing enclosure to Views RSS - 2511878-30": "https://www.drupal.org/files/issues/2020-07-24/views-rss-fields-enclosure-2511878-30.patch",
                 "Views Term ID has broken filters (\"All of\", \"Is none of\") and contextual filters \"allow multiple\" https://www.drupal.org/project/drupal/issues/2829178": "https://git.drupalcode.org/project/drupal/-/merge_requests/5321.patch",
-                "Dialog drupalAutoButtons option should be respected on initial load https://www.drupal.org/node/2793343": "https://www.drupal.org/files/issues/2023-07-11/2793343-83.patch"
+                "Dialog drupalAutoButtons option should be respected on initial load https://www.drupal.org/node/2793343": "https://www.drupal.org/files/issues/2023-07-11/2793343-83.patch",
+                "Media Type links in Media Library modal missing vertical tabs styling in Claro https://www.drupal.org/project/drupal/issues/3404866": "https://www.drupal.org/files/issues/2024-01-04/missing_variables_in_claro-3404866-41.patch"
             },
             "drupal/content_snippets": {
                 "Error: Cannot unset string offsets... https://www.drupal.org/project/content_snippets/issues/3268757": "https://git.drupalcode.org/issue/content_snippets-3268757/-/merge_requests/1.diff"
