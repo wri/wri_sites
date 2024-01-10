@@ -89,6 +89,7 @@ function wri_common_get_social_share(EntityViewDisplayInterface $display) {
     else {
       $title = \Drupal::config('system.site')->get('name');
     }
+    $title = $title ?? '';
     $items = [
       'title' => strip_tags($title),
       'page_url' => Url::fromRoute('<current>', [], ['absolute' => TRUE]),
