@@ -36,6 +36,12 @@ settings:
       - template
       - insertTable
   plugins:
+    ckeditor5_alignment:
+      enabled_alignments:
+        - center
+        - justify
+        - left
+        - right
     ckeditor5_heading:
       enabled_headings:
         - heading2
@@ -43,6 +49,14 @@ settings:
         - heading4
         - heading5
         - heading6
+    ckeditor5_list:
+      properties:
+        reversed: true
+        startIndex: true
+      multiBlock: true
+    ckeditor5_sourceEditing:
+      allowed_tags:
+        - '<div class="/">'
     ckeditor5_style:
       styles:
         -
@@ -54,20 +68,6 @@ settings:
         -
           label: Secondary
           element: '<p class="secondary">'
-    ckeditor5_sourceEditing:
-      allowed_tags:
-        - '<div class="/">'
-    ckeditor5_list:
-      reversed: true
-      startIndex: true
-    ckeditor5_alignment:
-      enabled_alignments:
-        - left
-        - center
-        - right
-        - justify
-    media_media:
-      allow_view_mode_override: false
     ckeditor5_template_template:
       file_path: /profiles/contrib/wri_sites/modules/wri_admin/templates/ckeditor5_template.json
       custom_toolbar_text: Template
@@ -80,6 +80,8 @@ settings:
         - rel
         - target
         - title
+    media_media:
+      allow_view_mode_override: true
 image_upload:
   status: false
   scheme: public
