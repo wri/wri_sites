@@ -33,9 +33,6 @@
             "allowed-list": ["drupal/custom_robots"]
         },
         "patches": {
-            "drupal/ckeditor": {
-                "Changes to a block's text field not saved when ckeditor source mode is active https://www.drupal.org/project/ckeditor/issues/3095304": "https://git.drupalcode.org/project/ckeditor/-/merge_requests/10.diff"
-            },
             "drupal/core": {
                 "Dynamic Views Arguments via Tokens https://www.drupal.org/project/drupal/issues/1699378": "https://www.drupal.org/files/issues/2023-11-05/1699378-255.patch",
                 "Add reusable option to inline block creation https://www.drupal.org/project/drupal/issues/2999491": "https://www.drupal.org/files/issues/2020-05-21/2999491--reusable-title-display--49.patch",
