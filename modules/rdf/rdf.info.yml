@@ -1,0 +1,7 @@
+name: Ghost of RDF
+type: module
+description: 'Ghost of the RDF module so we can uninstall it.'
+package: Core
+lifecycle: deprecated
+lifecycle_link: https://www.drupal.org/docs/core-modules-and-themes/deprecated-and-obsolete-modules-and-themes#s-rdf
+version: VERSION
