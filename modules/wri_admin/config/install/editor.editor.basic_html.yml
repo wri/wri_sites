@@ -19,6 +19,10 @@ settings:
       - style
       - sourceEditing
   plugins:
+    ckeditor5_sourceEditing:
+      allowed_tags:
+        - '<span class>'
+        - '<div class>'
     ckeditor5_style:
       styles:
         -
@@ -33,11 +37,6 @@ settings:
         -
           label: 'Blue 200 (pfp)'
           element: '<p class="pfp-text-blue-200">'
-    ckeditor5_sourceEditing:
-      allowed_tags:
-        - '<span class>'
-        - '<div class>'
-        - '<a hreflang class>'
     editor_advanced_link_link:
       enabled_attributes:
         - class
