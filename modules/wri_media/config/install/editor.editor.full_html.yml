@@ -57,6 +57,7 @@ settings:
     ckeditor5_sourceEditing:
       allowed_tags:
         - '<div class="/">'
+        - '<span>'
     ckeditor5_style:
       styles:
         -
