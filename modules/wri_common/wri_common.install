@@ -91,9 +91,14 @@ function wri_common_update_9503() {
  */
 function wri_common_update_9701() {
   $moduleHandler = \Drupal::service('module_handler');
+  if ($moduleHandler->moduleExists('ckeditor')) {
+    \Drupal::service('module_installer')->uninstall(['ckeditor'], TRUE);
+  }
   if ($moduleHandler->moduleExists('ckeditor_templates')) {
     \Drupal::service('module_installer')->uninstall(['ckeditor_templates'], TRUE);
-
+  }
+  if (!$moduleHandler->moduleExists('ckeditor5')) {
+    \Drupal::service('module_installer')->install(['ckeditor5'], TRUE);
   }
   if (!$moduleHandler->moduleExists('ckeditor5_template')) {
     \Drupal::service('module_installer')->install(['ckeditor5_template'], TRUE);
@@ -107,5 +112,15 @@ function wri_common_update_9702() {
   $moduleHandler = \Drupal::service('module_handler');
   if (!$moduleHandler->moduleExists('jquery_once')) {
     \Drupal::service('module_installer')->install(['jquery_once'], TRUE);
+  }
+}
+
+/**
+ * Uninstall textfield_counter
+ */
+function wri_common_update_9703() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if ($moduleHandler->moduleExists('textfield_counter')) {
+    \Drupal::service('module_installer')->uninstall(['textfield_counter'], TRUE);
   }
 }
