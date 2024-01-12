@@ -8,10 +8,6 @@ services:
     class: Drupal\hal\Normalizer\FieldItemNormalizer
     tags:
       - { name: normalizer, priority: 10 }
-  serializer.normalizer.field.hal:
-    class: Drupal\hal\Normalizer\FieldNormalizer
-    tags:
-      - { name: normalizer, priority: 10 }
   serializer.normalizer.file_entity.hal:
     class: Drupal\hal\Normalizer\FileEntityNormalizer
     arguments: ['@entity_type.manager', '@hal.link_manager', '@module_handler', '@config.factory', '@entity_type.repository', '@entity_field.manager']
