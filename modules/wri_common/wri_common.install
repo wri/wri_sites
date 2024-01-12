@@ -89,7 +89,7 @@ function wri_common_update_9503() {
 /**
  * Replace the ckeditor_template module with ckeditor5_templates.
  */
-function wri_common_update_9701() {
+function wri_common_update_10101() {
   $moduleHandler = \Drupal::service('module_handler');
   if ($moduleHandler->moduleExists('ckeditor')) {
     \Drupal::service('module_installer')->uninstall(['ckeditor'], TRUE);
@@ -108,7 +108,7 @@ function wri_common_update_9701() {
 /**
  * Install jquery.once.
  */
-function wri_common_update_9702() {
+function wri_common_update_10102() {
   $moduleHandler = \Drupal::service('module_handler');
   if (!$moduleHandler->moduleExists('jquery_once')) {
     \Drupal::service('module_installer')->install(['jquery_once'], TRUE);
@@ -118,7 +118,7 @@ function wri_common_update_9702() {
 /**
  * Uninstall textfield_counter
  */
-function wri_common_update_9703() {
+function wri_common_update_10103() {
   $moduleHandler = \Drupal::service('module_handler');
   if ($moduleHandler->moduleExists('textfield_counter')) {
     \Drupal::service('module_installer')->uninstall(['textfield_counter'], TRUE);
