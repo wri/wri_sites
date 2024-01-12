@@ -40,7 +40,7 @@ filters:
     status: true
     weight: -49
     settings:
-      allowed_html: '<br> <p class="pfp-h2-bold pfp-h2-bold-italic pfp-text-blue-200"> <span class> <div class> <strong> <em> <u> <a href class>'
+      allowed_html: '<br> <p> <span class> <div class> <strong> <em> <u> <a href class>'
       filter_html_help: false
       filter_html_nofollow: false
   filter_html_escape:
