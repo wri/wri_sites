@@ -116,7 +116,7 @@ function wri_common_update_10102() {
 }
 
 /**
- * Uninstall textfield_counter
+ * Uninstall textfield_counter.
  */
 function wri_common_update_10103() {
   $moduleHandler = \Drupal::service('module_handler');
