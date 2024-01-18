@@ -137,7 +137,6 @@
         "drupal/core-composer-scaffold": "^10.0",
         "drupal/core-recommended": "^10.0",
         "drupal/ctools": "^4.0",
-        "drupal/custom_robots": "*",
         "drupal/diff": "^1.0",
         "drupal/ds": "^5.0.0",
         "drupal/editor_advanced_link": "^2.2",
