@@ -28,7 +28,7 @@ settings:
       - drupalMedia
       - horizontalLine
       - Accordion
-      - '|'
+      - '-'
       - heading
       - style
       - '|'
