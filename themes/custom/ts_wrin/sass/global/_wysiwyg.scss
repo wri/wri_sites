@@ -1,365 +1,354 @@
-.main-content,
-.main-content .text-formatted,
-.paragraph--type--side-by-side .text-formatted {
-  line-height: 1.5;
+h2 {
+  @extend .h2;
+  @include font-line-height(32, 40);
 
-  ::selection {
-    background-color: $black;
-    color: $white;
+  @include mq($md) {
+    @include font-line-height(36, 44);
+  }
+}
+
+h3 {
+  @extend .h3;
+
+  @include mq($md) {
+    @include font-line-height(24, 30);
+  }
+}
+
+h4,
+h5,
+h6 {
+  @extend .h4;
+
+  @include mq($md) {
+    @include font-line-height(20, 24);
+  }
+}
+
+a {
+  text-decoration: underline;
+}
+
+a.button {
+  text-decoration: none;
+}
+
+hr {
+  background-color: #b1b1b1;
+}
+
+.drop-cap {
+  @include font($acumin-semi-cond, "bold");
+  @include font-line-height(24, 24);
+}
+
+ul,
+ol {
+  list-style: none;
+  padding-left: 10px;
+
+  li::before {
+    content: "";
   }
 
-  h2 {
-    @extend .h2;
-    @include font-line-height(32, 40);
-
-    @include mq($md) {
-      @include font-line-height(36, 44);
-    }
+  li p {
+    margin: 0;
   }
 
-  h3 {
-    @extend .h3;
+  li {
+    @include font($acumin-semi-cond, "medium");
+    @include font-line-height(16, 26);
+  }
+}
 
-    @include mq($md) {
-      @include font-line-height(24, 30);
-    }
+& > ul li {
+  margin-left: rem(32);
+}
+
+& > ul li::before {
+  background-color: $brand-gold;
+  border-radius: 50%;
+  display: block;
+  height: rem(5);
+  width: rem(5);
+  position: relative;
+  top: rem(15);
+  left: rem(-20);
+}
+
+ol {
+  counter-reset: list;
+
+  li {
+    margin-left: 0;
   }
 
-  h4,
-  h5,
-  h6 {
-    @extend .h4;
-
-    @include mq($md) {
-      @include font-line-height(20, 24);
-    }
-  }
-
-  a {
-    text-decoration: underline;
-  }
-
-  a.button {
-    text-decoration: none;
-  }
-
-  hr {
-    background-color: #b1b1b1;
-  }
-
-  .drop-cap {
-    @include font($acumin-semi-cond, "bold");
-    @include font-line-height(24, 24);
-  }
-
-  ul,
-  ol {
-    list-style: none;
-    padding-left: 10px;
-
-    li::before {
-      content: "";
-    }
-
-    li p {
-      margin: 0;
-    }
-
-    li {
-      @include font($acumin-semi-cond, "medium");
-      @include font-line-height(16, 26);
-    }
-  }
-
-  & > ul li {
-    margin-left: rem(32);
-  }
-
-  & > ul li::before {
-    background-color: $brand-gold;
-    border-radius: 50%;
-    display: block;
-    height: rem(5);
-    width: rem(5);
+  & > li::before {
+    content: counter(list) ")";
+    @include font-line-height(16, 24);
+    counter-increment: list;
+    font-weight: 700;
+    padding-right: 1rem;
     position: relative;
-    top: rem(15);
-    left: rem(-20);
+    left: rem(5);
   }
+}
 
-  ol {
-    counter-reset: list;
+/* Start Block Quote */
+.callout {
+  @extend .secondary;
+  border-bottom: 3px solid $black;
+  border-left: none;
+  border-top: 3px solid $black;
+  padding: 20px 0 12px;
+  margin-top: $space-xs;
 
-    li {
-      margin-left: 0;
-    }
-
-    & > li::before {
-      content: counter(list) ")";
-      @include font-line-height(16, 24);
-      counter-increment: list;
-      font-weight: 700;
-      padding-right: 1rem;
-      position: relative;
-      left: rem(5);
-    }
-  }
-
-  /* Start Block Quote */
-  .callout {
-    @extend .secondary;
-    border-bottom: 3px solid $black;
-    border-left: none;
-    border-top: 3px solid $black;
-    padding: 20px 0 12px;
-    margin-top: $space-xs;
-
-    &.alignleft p.secondary.body-link,
-    &.alignright p.secondary.body-link {
-      @include mq($md) {
-        &:first-of-type {
-          margin-top: 0;
-        }
-      }
-    }
-  }
-
-  .callout.alignright {
+  &.alignleft p.secondary.body-link,
+  &.alignright p.secondary.body-link {
     @include mq($md) {
-      border-bottom: none;
-      border-left: 3px solid $black;
-      border-top: none;
-      display: inline;
-      float: right;
-      margin: 0 -25.7% 0 $space-sm;
-      padding: 0 0 0 16px;
-      width: 36%;
-    }
-
-    @include mq($lg) {
-      margin: 0 -18% 0 $space-sm;
-    }
-  }
-
-  .callout.alignleft {
-    @include mq($md) {
-      border-bottom: none;
-      border-right: 3px solid $black;
-      border-top: none;
-      display: inline;
-      float: left;
-      margin: 0 $space-sm 0 -25.7%;
-      padding: 0 8px 0 0;
-      width: 37%;
-    }
-
-    @include mq($lg) {
-      margin: 0 $space-sm 0 -18%;
-    }
-  }
-  /* End Block Quote */
-
-  /* Start Pull Quote */
-  blockquote {
-    border: none;
-    margin: 0 0 $space-sm 0;
-    padding: 0;
-
-    p {
-      @include font($acumin-semi-cond, "bold");
-      @include font-line-height(30, 38);
-      border-left: 1px solid #b1b1b1;
-      margin: 16px 0;
-      text-align: left;
-      padding-left: $space-sm;
-
-      @include mq($md) {
-        @include font-line-height(34, 42);
-        display: inline;
-        float: right;
-        margin: 0 -26% $space-sm $space-sm;
-        width: 60%;
-      }
-
-      @include mq($lg) {
-        margin: 0 -47.7% $space-sm $space-sm;
-        width: 68%;
-      }
-
       &:first-of-type {
         margin-top: 0;
       }
     }
-
-    p.text-align-center {
-      @include mq($md) {
-        border: none;
-        float: none;
-        margin: 0;
-        width: 100%;
-      }
-    }
-
-    p.text-align-left {
-      @include mq($md) {
-        border-right: 1px solid $black;
-        border-left: none;
-        float: left;
-        margin: 0 $space-sm $space-sm -26%;
-        padding-right: $space-sm;
-      }
-
-      @include mq($lg) {
-        margin: 0 $space-sm $space-sm -52.7%;
-      }
-    }
   }
-  /* End Pull Quote */
+}
 
-  /* Start Media */
-  // Reset caption styles.
-  .caption {
-    display: inherit;
-    margin: 0 0 $space-sm;
-    float: none;
-  }
-  .caption > * {
-    display: inherit;
-    max-width: inherit;
-  }
-  .caption > figcaption {
-    display: inherit;
-    max-width: inherit;
-    caption-side: inherit;
-  }
-
-  .caption.half_content.align-right,
-  .media--view-mode-half-content.align-right {
+.callout.alignright {
+  @include mq($md) {
+    border-bottom: none;
+    border-left: 3px solid $black;
+    border-top: none;
+    display: inline;
     float: right;
-    margin-left: $space-md;
-    margin-right: 0;
-    margin-bottom: $space-sm;
+    margin: 0 -25.7% 0 $space-sm;
+    padding: 0 0 0 16px;
+    width: 36%;
   }
 
-  .caption.half_content.align-left,
-  .media--view-mode-half-content.align-left {
+  @include mq($lg) {
+    margin: 0 -18% 0 $space-sm;
+  }
+}
+
+.callout.alignleft {
+  @include mq($md) {
+    border-bottom: none;
+    border-right: 3px solid $black;
+    border-top: none;
+    display: inline;
     float: left;
-    margin-left: 0;
-    margin-right: $space-md;
-    margin-bottom: $space-sm;
+    margin: 0 $space-sm 0 -25.7%;
+    padding: 0 8px 0 0;
+    width: 37%;
   }
 
-  .caption.half_content,
-  .media--view-mode-half-content {
+  @include mq($lg) {
+    margin: 0 $space-sm 0 -18%;
+  }
+}
+/* End Block Quote */
+
+/* Start Pull Quote */
+blockquote {
+  border: none;
+  margin: 0 0 $space-sm 0;
+  padding: 0;
+
+  p {
+    @include font($acumin-semi-cond, "bold");
+    @include font-line-height(30, 38);
+    border-left: 1px solid #b1b1b1;
+    margin: 16px 0;
+    text-align: left;
+    padding-left: $space-sm;
+
     @include mq($md) {
-      width: 50%;
+      @include font-line-height(34, 42);
+      display: inline;
+      float: right;
+      margin: 0 -26% $space-sm $space-sm;
+      width: 60%;
+    }
 
-      .media--view-mode-half-content {
-        width: 100%;
-      }
+    @include mq($lg) {
+      margin: 0 -47.7% $space-sm $space-sm;
+      width: 68%;
+    }
+
+    &:first-of-type {
+      margin-top: 0;
     }
   }
 
-  // Handle migrated images
-  img {
+  p.text-align-center {
+    @include mq($md) {
+      border: none;
+      float: none;
+      margin: 0;
+      width: 100%;
+    }
+  }
+
+  p.text-align-left {
+    @include mq($md) {
+      border-right: 1px solid $black;
+      border-left: none;
+      float: left;
+      margin: 0 $space-sm $space-sm -26%;
+      padding-right: $space-sm;
+    }
+
+    @include mq($lg) {
+      margin: 0 $space-sm $space-sm -52.7%;
+    }
+  }
+}
+/* End Pull Quote */
+
+/* Start Media */
+// Reset caption styles.
+.caption {
+  display: inherit;
+  margin: 0 0 $space-sm;
+  float: none;
+}
+.caption > * {
+  display: inherit;
+  max-width: inherit;
+}
+.caption > figcaption {
+  display: inherit;
+  max-width: inherit;
+  caption-side: inherit;
+}
+
+.caption.half_content.align-right,
+.media--view-mode-half-content.align-right {
+  float: right;
+  margin-left: $space-md;
+  margin-right: 0;
+  margin-bottom: $space-sm;
+}
+
+.caption.half_content.align-left,
+.media--view-mode-half-content.align-left {
+  float: left;
+  margin-left: 0;
+  margin-right: $space-md;
+  margin-bottom: $space-sm;
+}
+
+.caption.half_content,
+.media--view-mode-half-content {
+  @include mq($md) {
+    width: 50%;
+
+    .media--view-mode-half-content {
+      width: 100%;
+    }
+  }
+}
+
+// Handle migrated images
+img {
+  max-width: 100%;
+  height: auto;
+  width: 100%;
+}
+
+// Full-width elements from limited width parents - https://bit.ly/3lHPjRd.
+.media--view-mode-full-width,
+.media--view-mode-landing-page-hero {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+
+  @include mq($site-max-width) {
+    width: $site-max-width;
+    margin-left: -$site-max-width/2;
+    margin-right: -$site-max-width/2;
+  }
+
+  iframe,
+  object,
+  embed {
     max-width: 100%;
-    height: auto;
-    width: 100%;
   }
-
-  // Full-width elements from limited width parents - https://bit.ly/3lHPjRd.
-  .media--view-mode-full-width,
-  .media--view-mode-landing-page-hero {
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-
-    @include mq($site-max-width) {
-      width: $site-max-width;
-      margin-left: -$site-max-width/2;
-      margin-right: -$site-max-width/2;
-    }
-
+  .field--name-field-media-oembed-video {
     iframe,
     object,
     embed {
-      max-width: 100%;
-    }
-    .field--name-field-media-oembed-video {
-      iframe,
-      object,
-      embed {
-        height: auto;
-      }
-    }
-
-    // Right Align Full Width Media Caption
-    @include mq($lg) {
-      & + figcaption {
-        position: absolute;
-        left: calc(100% + 32px);
-        width: 180px;
-      }
+      height: auto;
     }
   }
 
-  // Document media styles.
-  .media--type-document {
-    @include mq($md) {
-      width: 50%;
-    }
-    .document-inline {
-      display: block;
-      text-align: left;
+  // Right Align Full Width Media Caption
+  @include mq($lg) {
+    & + figcaption {
+      position: absolute;
+      left: calc(100% + 32px);
+      width: 180px;
     }
   }
-  /* End Media */
+}
 
-  /* Tables */
-  table {
+// Document media styles.
+.media--type-document {
+  @include mq($md) {
+    width: 50%;
+  }
+  .document-inline {
     display: block;
-    max-width: fit-content;
-    overflow: auto;
+    text-align: left;
+  }
+}
+/* End Media */
 
-    td {
-      @include font($acumin-semi-cond, "light");
-      @include font-line-height(16, 22);
+/* Tables */
+table {
+  display: block;
+  max-width: fit-content;
+  overflow: auto;
+
+  td {
+    @include font($acumin-semi-cond, "light");
+    @include font-line-height(16, 22);
+  }
+
+  td {
+    p {
+      margin-top: 0;
+      margin-bottom: 0;
     }
+  }
 
-    td {
-      p {
-        margin-top: 0;
-        margin-bottom: 0;
-      }
+  thead {
+    background-color: $black;
+    color: $white;
+
+    p {
+      @include font($acumin-semi-cond, "bold");
+      @include font-line-height(16, 19);
     }
+  }
 
-    thead {
-      background-color: $black;
-      color: $white;
+  td,
+  th {
+    padding: 5px $space-xs;
+  }
 
-      p {
-        @include font($acumin-semi-cond, "bold");
-        @include font-line-height(16, 19);
-      }
+  tbody {
+    tr:nth-of-type(even) {
+      background-color: $light-grey;
     }
+  }
 
-    td,
-    th {
-      padding: 5px $space-xs;
-    }
-
-    tbody {
-      tr:nth-of-type(even) {
-        background-color: $light-grey;
-      }
-    }
-
-    @include mq($lg) {
-      display: table;
-      max-width: 100%;
-    }
+  @include mq($lg) {
+    display: table;
+    max-width: 100%;
   }
 }
 
@@ -377,28 +366,5 @@
     left: 0;
     width: 100%;
     height: 100%;
-  }
-}
-
-.cke_editable_themed.cke_editable {
-  .media--view-mode-full-width {
-    margin-left: 0;
-    margin-right: 0;
-    left: 0;
-    right: 0;
-  }
-
-  .field--name-thumbnail {
-    display: block;
-  }
-
-  .callout.alignright,
-  blockquote p.text-align-right {
-    margin-right: 0;
-  }
-
-  .callout.alignleft,
-  blockquote p.text-align-left {
-    margin-left: 0;
   }
 }
