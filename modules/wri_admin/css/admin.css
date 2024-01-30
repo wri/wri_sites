@@ -178,9 +178,4 @@
 form .fieldset {
   border: 1px solid #ffffff;
 }
-
-@media (min-width: 100rem) {
-  .layout-node-form .layout-region--node-main, .layout-node-form .layout-region--node-footer {
-    width: auto;
-  }
 }
