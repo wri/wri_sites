@@ -1,7 +1,7 @@
 name: wri_sites
 type: profile
 description: 'WRI site profile'
-core_version_requirement: '^8.9.3 || ^9'
+core_version_requirement: '>=9.5'
 install:
   - block
   - block_content

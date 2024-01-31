@@ -15,10 +15,18 @@ use Symfony\Component\HttpFoundation\Request;
 class MapsController extends ControllerBase {
 
   /**
+   * The renderer.
+   *
+   * @var \Drupal\Core\Render\RendererInterface
+   */
+  protected $renderer;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
     $instance = parent::create($container);
+    $instance->renderer = $container->get('renderer');
     return $instance;
   }
 
@@ -35,7 +43,7 @@ class MapsController extends ControllerBase {
     $data = [];
 
     $node_storage = $this->entityTypeManager()->getStorage('node');
-    $nids = $request->query->get('nids');
+    $nids = $request->query->all()['nids'] ?? [];
     $nodes = $node_storage->loadMultiple($nids);
 
     /** @var \Drupal\node\NodeInterface $node */
@@ -49,7 +57,7 @@ class MapsController extends ControllerBase {
       switch ($node->bundle()) {
         case 'region':
           $popup = $this->getRegionMapPopup($node);
-          $data[$nid]['popup'] = render($popup);
+          $data[$nid]['popup'] = $this->renderer->render($popup);
           break;
 
         case 'international_office':
@@ -69,7 +77,7 @@ class MapsController extends ControllerBase {
                 /** @var \Drupal\node\NodeInterface $region_node */
                 $region_node = reset($region_nodes);
                 $popup = $this->getRegionMapPopup($region_node);
-                $data[$nid]['popup'] = render($popup);
+                $data[$nid]['popup'] = $this->renderer->render($popup);
               }
             }
           }

@@ -1,6 +1,6 @@
 {% if value == 'microsite' %}
   {# Todo: Add whatever divs here for theming this option. #}
-  {{ contextual_links('menu:menu=' ~ menu_title ~ ':langcode=en') }}
+  {{ drupal_contextual_links('menu:menu=' ~ menu_title ~ ':langcode=en') }}
   {{ drupal_block('menu_block:' ~ menu_title, {level: 1, expand_all_items: 1, depth: 0, parent: menu_title ~ ':' ~ menu_link, render_parent: 0, follow_parent: 'child', follow: 0, label: 'Table of Contents', label_display: 0, id:'toc', suggestion: 'toc'}) }}
 {% else %}
 <div class="publication__toc {{ color_bar }}">
@@ -21,7 +21,7 @@
       {% include "@ts_wrin/_includes/scroll-right.html.twig" %}
     </nav>
   {% elseif value == 'menu' and menu_link %}
-    {{ contextual_links('menu:menu=' ~ menu_title ~ ':langcode=en') }}
+    {{ drupal_contextual_links('menu:menu=' ~ menu_title ~ ':langcode=en') }}
     {{ drupal_block('menu_block:' ~ menu_title, {level: 1, depth: 0, parent: menu_title ~ ':' ~ menu_link, render_parent: 1, follow_parent: 'child', follow: 0, label: 'Table of Contents', label_display: 0, id:'toc', suggestion: 'toc'}) }}
   {% endif %}
   </div>

@@ -5,30 +5,7 @@
  * Narrative Taxonomy install and update hooks..
  */
 
-use Drupal\block_content\Entity\BlockContent;
 use Drupal\Core\Utility\UpdateException;
-
-/**
- * Enables the default value for the link field in all 3+1 blocks.
- */
-function wri_31block_update_8901() {
-  // If field_more_link exists on the narrative taxonomy block type.
-  $definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('block_content', '3_1_articles');
-  if (isset($definitions['field_more_link'])) {
-    $default_value = $definitions['field_more_link']->getDefaultValueLiteral();
-    // Update all existing narrative taxonomies and set the value of
-    // field_more_link to the default value & save.
-    $bids = \Drupal::entityQuery('block_content')->condition('type', '3_1_articles')->execute();
-    $blocks = BlockContent::loadMultiple($bids);
-    foreach ($blocks as $block) {
-      $block->set('field_more_link', $default_value);
-      $block->save();
-    }
-  }
-  else {
-    throw new UpdateException('This should be run after importing the field_more_link to the 3+1 content block type.');
-  }
-}
 
 /**
  * Updates 3+1 arguments.

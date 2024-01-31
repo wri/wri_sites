@@ -1,9 +1,30 @@
-@import "config/_01.vars.scss";
-@import "config/_02.mixins.scss";
-@import "config/_03.extends.scss";
-@import "config/_04.base.scss";
-@import "config/_05.buttons.scss";
-@import "config/_06.forms.scss";
+.ck-content {
+  @import "config/_01.vars.scss";
+  @import "config/_02.mixins.scss";
+  @import "config/_03.extends.scss";
+  @import "config/_04.base.scss";
+  @import "config/_05.buttons.scss";
+  @import "config/_06.forms.scss";
+  /* GLOBAL */
+  @import "global/_wysiwyg.scss";
+  .media--view-mode-full-width {
+    margin-left: 0;
+    margin-right: 0;
+    left: 0;
+    right: 0;
+  }
 
-/* GLOBAL */
-@import "global/_wysiwyg.scss";
+  .field--name-thumbnail {
+    display: block;
+  }
+
+  .callout.alignright,
+  blockquote p.text-align-right {
+    margin-right: 0;
+  }
+
+  .callout.alignleft,
+  blockquote p.text-align-left {
+    margin-left: 0;
+  }
+}

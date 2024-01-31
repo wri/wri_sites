@@ -10,7 +10,7 @@
  * @see template_preprocess_select()
  */
 #}
-{% spaceless %}
+{% apply spaceless %}
   <span class="select-wrapper">
   <select{{ attributes }}>
     {% for option in options %}
@@ -26,4 +26,4 @@
     {% endfor %}
   </select>
   </span>
-{% endspaceless %}
+{% endapply %}

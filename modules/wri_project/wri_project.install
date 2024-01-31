@@ -5,21 +5,6 @@
  * Install and update hooks for wri_project.
  */
 
-use Drupal\block_content\Entity\BlockContent;
-
-/**
- * Delete homepage_projects block items.
- */
-function wri_project_update_8901() {
-  // Load all homepage_project blocks.
-  $bids = \Drupal::entityQuery('block_content')->condition('type', 'homepage_projects')->execute();
-  $blocks = BlockContent::loadMultiple($bids);
-  // Delete.
-  foreach ($blocks as $block) {
-    $block->delete();
-  }
-}
-
 /**
  * Add the 'Show More Link' field to the Project Detail content type.
  */

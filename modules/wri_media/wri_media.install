@@ -60,3 +60,13 @@ function wri_media_update_dependencies() {
 
   return $dependencies;
 }
+
+/**
+ * Update our editors to use ckeditor 5.
+ */
+function wri_media_update_10101() {
+  \Drupal::service('distro_helper.updates')->installConfig('editor.editor.full_html', 'wri_media', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('filter.format.full_html', 'wri_media', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('editor.editor.basic_html', 'wri_admin', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('filter.format.basic_html', 'wri_admin', 'install', 'TRUE');
+}

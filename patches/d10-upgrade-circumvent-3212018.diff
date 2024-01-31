@@ -1,0 +1,29 @@
+diff --git a/src/Plugin/views/sort/ArgOrderSort.php b/src/Plugin/views/sort/ArgOrderSort.php
+index 7ad3baf..dee7c76 100644
+--- a/src/Plugin/views/sort/ArgOrderSort.php
++++ b/src/Plugin/views/sort/ArgOrderSort.php
+@@ -41,10 +41,10 @@ class ArgOrderSort extends SortPluginBase {
+ 
+     foreach ($base_tables as $table => $values) {
+       $data = $table_data[$table];
+-      $group = (string) render($data['table']['group']);
++      $group = (string) \Drupal::service('renderer')->render($data['table']['group']);
+       foreach ($data as $field => $f) {
+         if (isset($f['entity field'])) {
+-          $options[$group][$table . '::' . $field] = render($f['title']);
++          $options[$group][$table . '::' . $field] = \Drupal::service('renderer')->render($f['title']);
+         }
+       }
+     }
+diff --git a/views_arg_order_sort.info.yml b/views_arg_order_sort.info.yml
+index affc921..8297a6d 100644
+--- a/views_arg_order_sort.info.yml
++++ b/views_arg_order_sort.info.yml
+@@ -1,6 +1,6 @@
+ name: 'Views Arg Order Sort'
+ description: 'Sort a view by the order of its arguments.'
+-core: 8.x
++core_version_requirement: ">9.5"
+ dependencies:
+   - views
+ package: Views

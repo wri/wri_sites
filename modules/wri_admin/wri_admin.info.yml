@@ -2,7 +2,7 @@ name: 'WRI sites administration'
 type: module
 description: 'Helper functions for the WRI site profile admin area'
 package: WRI
-core_version_requirement: '^8.8.0 || ^9'
+core_version_requirement: '>=9.5'
 dependencies:
   - access_unpublished
   - asset_injector
@@ -13,10 +13,9 @@ dependencies:
   - allowed_formats
   - block
   - block_list_override
-  - ckeditor
+  - ckeditor5
   - ckeditor_accordion
-  - ckeditor_templates
-  - ckeditor_templates_ui
+  - ckeditor5_template
   - config
   - content_moderation
   - content_snippets
@@ -47,7 +46,6 @@ dependencies:
   - sortableviews
   - token_filter
   - telephone
-  - textfield_counter
   - toolbar
   - views_bulk_edit
   - views_bulk_operations
@@ -57,9 +55,6 @@ libraries:
   - wri_admin/admin
 config_devel:
   install:
-    - ckeditor_templates_ui.ckeditor_template.callout_center
-    - ckeditor_templates_ui.ckeditor_template.callout_left
-    - ckeditor_templates_ui.ckeditor_template.callout_right
     - content_snippets.items
     - editor.editor.basic_html
     - filter.format.basic_html

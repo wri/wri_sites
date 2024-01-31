@@ -7,7 +7,9 @@
 
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
+use Drupal\views\ViewExecutable;
 use Drupal\wri_node\General;
 
 /**
@@ -16,7 +18,7 @@ use Drupal\wri_node\General;
 function ts_wrin_preprocess(array &$variables) {
   if (NULL != theme_get_setting('white_logo.path')) {
     $logo_path = theme_get_setting('white_logo.path');
-    $variables['footer_logo'] = \Drupal::service('file_url_generator')->transformRelative(file_create_url($logo_path));
+    $variables['footer_logo'] = \Drupal::service('file_url_generator')->generateString($logo_path);
   }
 }
 
@@ -190,7 +192,7 @@ function ts_wrin_preprocess_block(array &$variables) {
 
   if (NULL != theme_get_setting('white_logo.path')) {
     $logo_path = theme_get_setting('white_logo.path');
-    $variables['white_logo'] = \Drupal::service('file_url_generator')->transformRelative(file_create_url($logo_path));
+    $variables['white_logo'] = \Drupal::service('file_url_generator')->generateString($logo_path);
   }
 
   if ($variables['plugin_id'] == 'inline_block:person_listing') {
@@ -299,4 +301,174 @@ function ts_wrin_theme_suggestions_menu_alter(array &$suggestions, array $variab
     }
   }
   $suggestions = array_merge($menu_extras, $new_suggestions);
+}
+
+/**
+ * Implements hook_preprocess_views_view_fields().
+ */
+function ts_wrin_preprocess_views_view_fields__media_library(array &$variables) {
+  // @see claro_preprocess_views_view_fields__media_library();
+  if (isset($variables['fields']['rendered_entity']->wrapper_attributes)) {
+    $variables['fields']['rendered_entity']->wrapper_attributes->addClass('media-library-item__click-to-select-trigger');
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function ts_wrin_form_media_library_add_form_alter(array &$form, FormStateInterface $form_state) {
+  // @see claro_form_media_library_add_form_alter.;
+  $form['#attributes']['class'][] = 'media-library-add-form';
+  $form['#attached']['library'][] = 'claro/media_library.theme';
+
+  // If there are unsaved media items, apply styling classes to various parts
+  // of the form.
+  if (isset($form['media'])) {
+    $form['#attributes']['class'][] = 'media-library-add-form--with-input';
+
+    // Put a wrapper around the informational message above the unsaved media
+    // items.
+    $form['description']['#template'] = '<p class="media-library-add-form__description">{{ text }}</p>';
+  }
+  else {
+    $form['#attributes']['class'][] = 'media-library-add-form--without-input';
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function ts_wrin_form_media_library_add_form_upload_alter(array &$form, FormStateInterface $form_state) {
+  // @see claro_form_media_library_add_form_upload_alter($form, $form_state);
+  $form['#attributes']['class'][] = 'media-library-add-form--upload';
+  if (isset($form['container']['upload'])) {
+    // Set this flag so we can prevent the details element from being added
+    // in \Drupal\claro\ClaroPreRender::managedFile.
+    $form['container']['upload']['#do_not_wrap_in_details'] = TRUE;
+  }
+  if (isset($form['container'])) {
+    $form['container']['#attributes']['class'][] = 'media-library-add-form__input-wrapper';
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function ts_wrin_form_media_library_add_form_oembed_alter(array &$form, FormStateInterface $form_state) {
+  // @see claro_form_media_library_add_form_oembed_alter($form,  $form_state);
+  $form['#attributes']['class'][] = 'media-library-add-form--oembed';
+
+  // If no media items have been added yet, add a couple of styling classes
+  // to the initial URL form.
+  if (isset($form['container'])) {
+    $form['container']['#attributes']['class'][] = 'media-library-add-form__input-wrapper';
+    $form['container']['url']['#attributes']['class'][] = 'media-library-add-form-oembed-url';
+    $form['container']['submit']['#attributes']['class'][] = 'media-library-add-form-oembed-submit';
+  }
+}
+
+/**
+ * Implements hook_preprocess_item_list__media_library_add_form_media_list().
+ */
+function ts_wrin_preprocess_item_list__media_library_add_form_media_list(array &$variables) {
+  // @see claro_preprocess_item_list__media_library_add_form_media_list($variables);
+  foreach ($variables['items'] as &$item) {
+    $item['value']['preview']['#attributes']['class'][] = 'media-library-add-form__preview';
+    $item['value']['fields']['#attributes']['class'][] = 'media-library-add-form__fields';
+    $item['value']['remove_button']['#attributes']['class'][] = 'media-library-add-form__remove-button';
+
+    $item['value']['remove_button']['#attributes']['class'][] = 'button--extrasmall';
+    // #source_field_name is set by AddFormBase::buildEntityFormElement()
+    // to help themes and form_alter hooks identify the source field.
+    $fields = &$item['value']['fields'];
+    $source_field_name = $fields['#source_field_name'];
+
+    // Set this flag so we can remove the details element.
+    $fields[$source_field_name]['widget'][0]['#do_not_wrap_in_details'] = TRUE;
+
+    if (isset($fields[$source_field_name])) {
+      $fields[$source_field_name]['#attributes']['class'][] = 'media-library-add-form__source-field';
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_media_library_item__small().
+ */
+function ts_wrin_preprocess_media_library_item__small(array &$variables) {
+  $variables['content']['select']['#attributes']['class'][] = 'media-library-item__click-to-select-checkbox';
+}
+
+/**
+ * Implements hook_preprocess_links__media_library_menu().
+ */
+function ts_wrin_preprocess_links__media_library_menu(array &$variables) {
+  foreach ($variables['links'] as &$link) {
+    // Add a class to the Media Library menu items.
+    $link['attributes']->addClass('media-library-menu__item');
+
+    // This conditional exists because the media-library-menu__link class is
+    // currently added by Classy, but Claro will eventually not use Classy as a
+    // base theme.
+    // @todo remove conditional, keep class addition in
+    //   https://drupal.org/node/3110137
+    // @see classy_preprocess_links__media_library_menu()
+    if (!isset($link['link']['#options']['attributes']['class']) || !in_array('media-library-menu__link', $link['link']['#options']['attributes']['class'])) {
+      $link['link']['#options']['attributes']['class'][] = 'media-library-menu__link';
+    }
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function ts_wrin_views_pre_render(ViewExecutable $view) {
+  // @see claro_views_pre_render().
+  $add_classes = function (&$option, array $classes_to_add) {
+    $classes = preg_split('/\s+/', $option);
+    $classes = array_filter($classes);
+    $classes = array_merge($classes, $classes_to_add);
+    $option = implode(' ', array_unique($classes));
+  };
+
+  if ($view->id() === 'media_library') {
+    if ($view->display_handler->options['defaults']['css_class']) {
+      $add_classes($view->displayHandlers->get('default')->options['css_class'], ['media-library-view']);
+    }
+    else {
+      $add_classes($view->display_handler->options['css_class'], ['media-library-view']);
+    }
+
+    if ($view->current_display === 'page') {
+      if (array_key_exists('media_bulk_form', $view->field)) {
+        $add_classes($view->field['media_bulk_form']->options['element_class'], ['media-library-item__click-to-select-checkbox']);
+      }
+      if (array_key_exists('rendered_entity', $view->field)) {
+        $add_classes($view->field['rendered_entity']->options['element_class'], ['media-library-item__content']);
+      }
+      if (array_key_exists('edit_media', $view->field)) {
+        $add_classes($view->field['edit_media']->options['alter']['link_class'], ['media-library-item__edit']);
+        $add_classes($view->field['edit_media']->options['alter']['link_class'], ['icon-link']);
+      }
+      if (array_key_exists('delete_media', $view->field)) {
+        $add_classes($view->field['delete_media']->options['alter']['link_class'], ['media-library-item__remove']);
+        $add_classes($view->field['delete_media']->options['alter']['link_class'], ['icon-link']);
+      }
+    }
+    elseif (strpos($view->current_display, 'widget') === 0) {
+      if (array_key_exists('rendered_entity', $view->field)) {
+        $add_classes($view->field['rendered_entity']->options['element_class'], ['media-library-item__content']);
+      }
+      if (array_key_exists('media_library_select_form', $view->field)) {
+        $add_classes($view->field['media_library_select_form']->options['element_wrapper_class'], ['media-library-item__click-to-select-checkbox']);
+      }
+
+      if ($view->display_handler->options['defaults']['css_class']) {
+        $add_classes($view->displayHandlers->get('default')->options['css_class'], ['media-library-view--widget']);
+      }
+      else {
+        $add_classes($view->display_handler->options['css_class'], ['media-library-view--widget']);
+      }
+    }
+  }
 }

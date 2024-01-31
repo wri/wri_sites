@@ -1,12 +1,83 @@
 langcode: en
 status: true
-dependencies: {  }
-id: content_editor
-label: 'Content Editor'
-weight: 4
+dependencies:
+  config:
+    - core.entity_view_display.node.article.full
+    - core.entity_view_display.node.data.full
+    - core.entity_view_display.node.event.full
+    - core.entity_view_display.node.homepage.full
+    - core.entity_view_display.node.international_office.full
+    - core.entity_view_display.node.page.full
+    - core.entity_view_display.node.program_center.full
+    - core.entity_view_display.node.project_detail.full
+    - core.entity_view_display.node.publication.full
+    - core.entity_view_display.node.region.full
+    - core.entity_view_display.node.simple_page.full
+    - core.entity_view_display.node.subpage.full
+    - filter.format.basic_html
+    - filter.format.full_html
+    - filter.format.migrated
+    - filter.format.unrestricted_text
+    - media.type.document
+    - media.type.embed
+    - media.type.image
+    - media.type.video
+    - node.type.article
+    - node.type.data
+    - node.type.event
+    - node.type.homepage
+    - node.type.international_office
+    - node.type.page
+    - node.type.person
+    - node.type.program_center
+    - node.type.project_detail
+    - node.type.publication
+    - node.type.region
+    - node.type.simple_page
+    - node.type.subpage
+    - taxonomy.vocabulary.embed_types
+    - taxonomy.vocabulary.featured
+    - taxonomy.vocabulary.languages
+    - taxonomy.vocabulary.media_tags
+    - taxonomy.vocabulary.publication_series
+    - taxonomy.vocabulary.regions
+    - taxonomy.vocabulary.resource_type
+    - taxonomy.vocabulary.tags
+    - taxonomy.vocabulary.topics_and_subtopics
+    - workflows.workflow.content_publishing
+  module:
+    - access_unpublished
+    - admin_toolbar_search
+    - block
+    - block_content
+    - content_moderation
+    - content_snippets
+    - contextual
+    - entity_browser
+    - field_ui
+    - file
+    - file_replace
+    - filter
+    - layout_builder
+    - media
+    - metatag
+    - node
+    - path
+    - scheduled_transitions
+    - system
+    - taxonomy
+    - toolbar
+    - views_bulk_edit
+    - webform
+    - wri_author
+    - wri_io_content
+id: editorial
+label: Editorial
+weight: 6
 is_admin: null
 permissions:
   - 'access administration pages'
+  - 'access any webform configuration'
   - 'access content overview'
   - 'access contextual links'
   - 'access files entity browser pages'
@@ -17,9 +88,11 @@ permissions:
   - 'access tokens overview'
   - 'access toolbar'
   - 'access tweets entity browser pages'
+  - 'access user profiles'
   - 'access webform help'
   - 'access webform overview'
   - 'access webform submission user'
+  - 'access_unpublished node project_detail'
   - 'add author entities'
   - 'add scheduled transitions node article'
   - 'add scheduled transitions node data'
@@ -33,6 +106,11 @@ permissions:
   - 'add scheduled transitions node region'
   - 'add wri office entities'
   - 'administer blocks'
+  - 'administer content types'
+  - 'administer meta tags'
+  - 'administer node display'
+  - 'administer nodes'
+  - 'bypass node access'
   - 'configure editable article node layout overrides'
   - 'configure editable data node layout overrides'
   - 'configure editable event node layout overrides'
@@ -48,6 +126,8 @@ permissions:
   - 'create and edit custom blocks'
   - 'create article content'
   - 'create data content'
+  - 'create document media'
+  - 'create embed media'
   - 'create event content'
   - 'create homepage content'
   - 'create image media'
@@ -63,15 +143,39 @@ permissions:
   - 'create simple_page content'
   - 'create subpage content'
   - 'create terms in embed_types'
+  - 'create terms in featured'
+  - 'create terms in languages'
   - 'create terms in media_tags'
+  - 'create terms in person_title_deprecated_'
+  - 'create terms in publication_series'
+  - 'create terms in regions'
+  - 'create terms in resource_type'
+  - 'create terms in tags'
+  - 'create terms in topics_and_subtopics'
   - 'create url aliases'
   - 'create video media'
   - 'create webform'
+  - 'delete all author revisions'
+  - 'delete any article content'
+  - 'delete any data content'
   - 'delete any document media'
   - 'delete any embed media'
-  - 'delete any files'
+  - 'delete any event content'
+  - 'delete any file'
+  - 'delete any homepage content'
   - 'delete any image media'
+  - 'delete any international_office content'
   - 'delete any media'
+  - 'delete any page content'
+  - 'delete any person content'
+  - 'delete any program_center content'
+  - 'delete any project_detail content'
+  - 'delete any publication content'
+  - 'delete any region content'
+  - 'delete any simple_page content'
+  - 'delete any subpage content'
+  - 'delete any video media'
+  - 'delete any webform'
   - 'delete article revisions'
   - 'delete author entities'
   - 'delete data revisions'
@@ -81,6 +185,8 @@ permissions:
   - 'delete media'
   - 'delete own article content'
   - 'delete own data content'
+  - 'delete own document media'
+  - 'delete own embed media'
   - 'delete own event content'
   - 'delete own homepage content'
   - 'delete own image media'
@@ -94,6 +200,7 @@ permissions:
   - 'delete own simple_page content'
   - 'delete own subpage content'
   - 'delete own video media'
+  - 'delete own webform'
   - 'delete page revisions'
   - 'delete person revisions'
   - 'delete program_center revisions'
@@ -102,9 +209,22 @@ permissions:
   - 'delete region revisions'
   - 'delete simple_page revisions'
   - 'delete subpage revisions'
+  - 'delete terms in embed_types'
+  - 'delete terms in featured'
+  - 'delete terms in languages'
+  - 'delete terms in media_tags'
+  - 'delete terms in person_title_deprecated_'
+  - 'delete terms in publication_series'
+  - 'delete terms in regions'
+  - 'delete terms in resource_type'
+  - 'delete terms in tags'
+  - 'delete terms in topics_and_subtopics'
+  - 'delete token'
   - 'delete wri office entities'
   - 'edit any article content'
   - 'edit any data content'
+  - 'edit any document media'
+  - 'edit any embed media'
   - 'edit any event content'
   - 'edit any homepage content'
   - 'edit any image media'
@@ -119,6 +239,7 @@ permissions:
   - 'edit any subpage content'
   - 'edit any video media'
   - 'edit author entities'
+  - 'edit content snippets'
   - 'edit own article content'
   - 'edit own data content'
   - 'edit own document media'
@@ -136,7 +257,19 @@ permissions:
   - 'edit own simple_page content'
   - 'edit own subpage content'
   - 'edit own video media'
+  - 'edit terms in embed_types'
+  - 'edit terms in featured'
+  - 'edit terms in languages'
+  - 'edit terms in media_tags'
+  - 'edit terms in person_title_deprecated_'
+  - 'edit terms in publication_series'
+  - 'edit terms in regions'
+  - 'edit terms in resource_type'
+  - 'edit terms in tags'
+  - 'edit terms in topics_and_subtopics'
   - 'edit wri office entities'
+  - 'merge taxonomy terms'
+  - 'renew token'
   - 'replace files'
   - 'reschedule scheduled transitions node article'
   - 'reschedule scheduled transitions node data'
@@ -148,6 +281,7 @@ permissions:
   - 'reschedule scheduled transitions node project_detail'
   - 'reschedule scheduled transitions node publication'
   - 'reschedule scheduled transitions node region'
+  - 'revert all author revisions'
   - 'revert article revisions'
   - 'revert data revisions'
   - 'revert event revisions'
@@ -166,15 +300,20 @@ permissions:
   - 'use admin toolbar search'
   - 'use content_publishing transition archive'
   - 'use content_publishing transition create_new_draft'
+  - 'use content_publishing transition publish'
+  - 'use content_publishing transition publish_without_review'
   - 'use content_publishing transition submit_for_review'
   - 'use text format basic_html'
   - 'use text format full_html'
   - 'use text format migrated'
   - 'use text format unrestricted_text'
+  - 'use views bulk edit'
   - 'view all author revisions'
   - 'view all media revisions'
   - 'view all revisions'
+  - 'view all scheduled transitions'
   - 'view any unpublished content'
+  - 'view any webform submission'
   - 'view article revisions'
   - 'view data revisions'
   - 'view event revisions'

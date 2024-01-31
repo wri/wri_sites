@@ -5,8 +5,8 @@
 }
 
 /* Hide some confusing arguments for layout builder block builder. */
-#drupal-off-canvas .layout-builder-configure-block .field--type-viewfield div[class*="-arguments"],
-#drupal-off-canvas .block-content-form .field--type-viewfield div[class*="-arguments"] {
+#drupal-off-canvas-wrapper .layout-builder-configure-block .field--type-viewfield div[class*="-arguments"],
+#drupal-off-canvas-wrapper .block-content-form .field--type-viewfield div[class*="-arguments"] {
   display: none !important;
   visibility: hidden;
   height: 1px;
@@ -24,40 +24,40 @@
   display: none;
 }
 
-#drupal-off-canvas .ui-autocomplete li,
-#drupal-off-canvas .ui-autocomplete li a {
+#drupal-off-canvas-wrapper .ui-autocomplete li,
+#drupal-off-canvas-wrapper .ui-autocomplete li a {
   background: #ffffff;
   line-height: 200%;
   display: block;
 }
 
-#drupal-off-canvas .ui-autocomplete li a:hover,
-#drupal-off-canvas .ui-autocomplete li a:focus {
+#drupal-off-canvas-wrapper .ui-autocomplete li a:hover,
+#drupal-off-canvas-wrapper .ui-autocomplete li a:focus {
   background: #ddd;
 }
 
-#drupal-off-canvas .tabledrag-toggle-weight-wrapper {
+#drupal-off-canvas-wrapper .tabledrag-toggle-weight-wrapper {
   text-align: left;
 }
 
-#drupal-off-canvas table {
+#drupal-off-canvas-wrapper table {
   text-align: left;
   margin: 0 -20px 10px -20px;
 }
-#drupal-off-canvas th:first-child,
-#drupal-off-canvas td:first-child {
+#drupal-off-canvas-wrapper th:first-child,
+#drupal-off-canvas-wrapper td:first-child {
   width: 20px;
   padding-top: 6px;
   padding-bottom: 6px;
 }
-#drupal-off-canvas td {
+#drupal-off-canvas-wrapper td {
   padding: 2px 8px 8px 4px;
 }
 
-#drupal-off-canvas input[type="text"] {
+#drupal-off-canvas-wrapper input[type="text"] {
   width: calc(100% - 10px);
 }
-#drupal-off-canvas .field--name-field-custom-happening-nows .description {
+#drupal-off-canvas-wrapper .field--name-field-custom-happening-nows .description {
   margin-bottom: 10px;
 }
 
@@ -141,11 +141,11 @@
 }
 
 /* Hide the 'Edit' button on the Hero paragraph selector -- it makes no sense. */
-#drupal-off-canvas input[data-drupal-selector='edit-settings-block-form-field-hero-type-entities-0-actions-ief-entity-edit'].button {
+#drupal-off-canvas-wrapper input[data-drupal-selector='edit-settings-block-form-field-hero-type-entities-0-actions-ief-entity-edit'].button {
   display: none;
 }
 
-#drupal-off-canvas .dropbutton-multiple .dropbutton-widget {
+#drupal-off-canvas-wrapper .dropbutton-multiple .dropbutton-widget {
   display: block;
   overflow: visible;
   width: auto;
@@ -154,16 +154,16 @@
   height: auto;
   padding: 0;
 }
-#drupal-off-canvas span.dropbutton-arrow {
+#drupal-off-canvas-wrapper span.dropbutton-arrow {
   top: 4px;
   right: 2px;
   background: transparent;
 }
-#drupal-off-canvas .dropbutton-multiple.open .dropbutton-widget {
+#drupal-off-canvas-wrapper .dropbutton-multiple.open .dropbutton-widget {
   box-shadow: none;
 }
-#drupal-off-canvas td .dropbutton-multiple .dropbutton,
-#drupal-off-canvas .dropbutton-multiple .dropbutton .secondary-action {
+#drupal-off-canvas-wrapper td .dropbutton-multiple .dropbutton,
+#drupal-off-canvas-wrapper .dropbutton-multiple .dropbutton .secondary-action {
   display: block;
   width: auto;
   height: auto;
@@ -177,4 +177,5 @@
 
 form .fieldset {
   border: 1px solid #ffffff;
+}
 }

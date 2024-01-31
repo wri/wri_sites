@@ -2,7 +2,7 @@ name: 'Ts Wrin'
 type: theme
 description: 'A base theme for ThinkShout D8 sites'
 package: Other
-core_version_requirement: '^8.8.0 || ^9'
+core_version_requirement: '>=9.5'
 libraries:
   - ts_wrin/main
 'base theme': classy
@@ -19,8 +19,8 @@ regions:
   wrin_custom: 'WRIN Custom'
   disabled: Disabled
   modals: Modals
-ckeditor_stylesheets:
-  - dist/ckeditor.css
+ckeditor5-stylesheets:
+  - dist/ckeditor5.css
 config_devel:
   install:
     - block.block.addressblock

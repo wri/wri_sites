@@ -1,7 +1,7 @@
 name: 'WRI package'
 type: module
 description: 'A module that requires a bunch of other modules, for install purposes.'
-core_version_requirement: '^8.8.0 || ^9'
+core_version_requirement: '>=9.5'
 package: WRI
 dependencies:
   - wri_admin

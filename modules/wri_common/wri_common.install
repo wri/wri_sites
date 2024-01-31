@@ -85,3 +85,42 @@ function wri_common_update_9503() {
     'twitter_share_suffix',
   ], 'wri_node', 'install');
 }
+
+/**
+ * Replace the ckeditor_template module with ckeditor5_templates.
+ */
+function wri_common_update_10101() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if ($moduleHandler->moduleExists('ckeditor')) {
+    \Drupal::service('module_installer')->uninstall(['ckeditor'], TRUE);
+  }
+  if ($moduleHandler->moduleExists('ckeditor_templates')) {
+    \Drupal::service('module_installer')->uninstall(['ckeditor_templates'], TRUE);
+  }
+  if (!$moduleHandler->moduleExists('ckeditor5')) {
+    \Drupal::service('module_installer')->install(['ckeditor5'], TRUE);
+  }
+  if (!$moduleHandler->moduleExists('ckeditor5_template')) {
+    \Drupal::service('module_installer')->install(['ckeditor5_template'], TRUE);
+  }
+}
+
+/**
+ * Install jquery.once.
+ */
+function wri_common_update_10102() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('jquery_once')) {
+    \Drupal::service('module_installer')->install(['jquery_once'], TRUE);
+  }
+}
+
+/**
+ * Uninstall textfield_counter.
+ */
+function wri_common_update_10103() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if ($moduleHandler->moduleExists('textfield_counter')) {
+    \Drupal::service('module_installer')->uninstall(['textfield_counter'], TRUE);
+  }
+}

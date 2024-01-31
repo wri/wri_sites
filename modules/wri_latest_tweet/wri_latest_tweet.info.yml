@@ -1,7 +1,7 @@
 name: 'WRI Latest Tweet'
 type: module
 description: 'Provides the latest tweet block'
-core_version_requirement: '^8.8.0 || ^9'
+core_version_requirement: '>=9.5'
 package: WRI
 dependencies:
   - twitter_api_block

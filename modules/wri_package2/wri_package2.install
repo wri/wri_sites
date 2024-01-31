@@ -43,6 +43,8 @@ function wri_package2_install() {
   _install_io_and_country_blocks();
   _install_default_program_hero();
   _install_narrative_taxonomy();
+  _set_scheduled_transitions();
+  _set_anonymous_authenticated_permissions();
 }
 
 /**
@@ -159,4 +161,101 @@ function _install_narrative_taxonomy() {
     'reusable' => FALSE,
   ]);
   $block->save();
+}
+
+/**
+ * Sets the scheduled transitions for the content publishing workflow.
+ */
+function _set_scheduled_transitions() {
+  // Load the workflows.workflow.content_publishing config.
+  $workflow = \Drupal::configFactory()->getEditable('workflows.workflow.content_publishing');
+  // Add all the nodes to it under entity_types.
+  $data = [
+    'article',
+    'data',
+    'event',
+    'homepage',
+    'international_office',
+    'page',
+    'person',
+    'program_center',
+    'project_detail',
+    'publication',
+    'region',
+    'simple_page',
+    'subpage',
+  ];
+  $workflow->set('type_settings.entity_types.node', $data);
+  // Set the transitions.
+  $workflow->save();
+
+  // Load the sheduled transition settings.
+  $scheduled_transition = \Drupal::configFactory()->getEditable('scheduled_transitions.settings');
+  $data = [
+    [
+      'entity_type' => 'node',
+      'bundle' => 'article',
+    ],
+    [
+      'entity_type' => 'node',
+      'bundle' => 'data',
+    ],
+    [
+      'entity_type' => 'node',
+      'bundle' => 'event',
+    ],
+    [
+      'entity_type' => 'node',
+      'bundle' => 'homepage',
+    ],
+    [
+      'entity_type' => 'node',
+      'bundle' => 'international_office',
+    ],
+    [
+      'entity_type' => 'node',
+      'bundle' => 'page',
+    ],
+    [
+      'entity_type' => 'node',
+      'bundle' => 'person',
+    ],
+    [
+      'entity_type' => 'node',
+      'bundle' => 'program_center',
+    ],
+    [
+      'entity_type' => 'node',
+      'bundle' => 'project_detail',
+    ],
+    [
+      'entity_type' => 'node',
+      'bundle' => 'publication',
+    ],
+    [
+      'entity_type' => 'node',
+      'bundle' => 'region',
+    ],
+    [
+      'entity_type' => 'node',
+      'bundle' => 'simple_page',
+    ],
+    [
+      'entity_type' => 'node',
+      'bundle' => 'subpage',
+    ],
+  ];
+  $scheduled_transition->set('bundles', $data);
+  $scheduled_transition->save();
+}
+
+/**
+ * Sets the anonymous and authenticated permissions.
+ */
+function _set_anonymous_authenticated_permissions() {
+  \Drupal::service('distro_helper.updates')->installConfig('user.role.anonymous', 'wri_package2', 'post-install', TRUE);
+  \Drupal::service('distro_helper.updates')->installConfig('user.role.authenticated', 'wri_package2', 'post-install', TRUE);
+  \Drupal::service('distro_helper.updates')->installConfig('user.role.content_editor', 'wri_package2', 'post-install', TRUE);
+  \Drupal::service('distro_helper.updates')->installConfig('user.role.editorial', 'wri_package2', 'post-install', TRUE);
+  \Drupal::service('distro_helper.updates')->installConfig('user.role.hr', 'wri_package2', 'post-install', TRUE);
 }

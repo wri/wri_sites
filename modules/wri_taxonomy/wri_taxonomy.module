@@ -16,6 +16,9 @@ use Drupal\taxonomy\TermInterface;
  * Implements hook_entity_type_alter().
  */
 function wri_taxonomy_entity_type_alter(array &$entity_types) {
+  // Ovewrite the Taxonomy entity class to use my own,
+  // which only overwrites the toUrl method.
+  $entity_types['taxonomy_term']->setClass('Drupal\wri_taxonomy\Entity\WriTerm');
   $moduleHandler = \Drupal::service('module_handler');
   // Create a custom callback for the term uri.
   $entity_types['taxonomy_term']->setUriCallback('wri_taxonomy_term_uri');

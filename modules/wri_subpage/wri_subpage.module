@@ -63,7 +63,7 @@ function wri_subpage_set_menu(array &$form, FormStateInterface $form_state) {
       $menu_link_storage = Drupal::service('entity_type.manager')->getStorage('menu_link_content');
       $menu_link_content_children_link_ids = $menu_link_manager->getChildIds($parent_link_menu_id);
       foreach ($menu_link_content_children_link_ids as $id) {
-        $link_id = $menu_link_storage->getQuery()->condition('uuid', str_replace('menu_link_content:', '', $id))->accessCheck('false')->execute();
+        $link_id = $menu_link_storage->getQuery()->accessCheck(FALSE)->condition('uuid', str_replace('menu_link_content:', '', $id))->accessCheck('false')->execute();
         $link = $menu_link_storage->load(current($link_id));
 
         $weight = max($weight, $link->getWeight());

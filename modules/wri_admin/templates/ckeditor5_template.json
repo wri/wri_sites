@@ -1,0 +1,20 @@
+[
+    {
+        "title": "Callout Center",
+        "icon": "",
+        "description": "",
+        "html": "<div class=\"callout\"><p class=\"secondary body-link\"><strong>Callout Top Text</strong></p><p class=\"secondary\">Callout Bottom Text</p></div>"
+    },
+    {
+      "title": "Callout Left",
+      "icon": "",
+      "description": "",
+      "html": "<div class=\"callout alignleft\"><p class=\"secondary body-link\"><strong>Callout Top Text1</strong></p><p class=\"secondary\">Callout Bottom Text</p></div>"
+    },
+    {
+      "title": "Callout Right",
+      "icon": "",
+      "description": "",
+      "html": "<div class=\"callout alignright\"><p class=\"secondary body-link\"><strong>Callout Top Text1</strong></p><p class=\"secondary\">Callout Bottom Text</p></div>"
+    }
+]

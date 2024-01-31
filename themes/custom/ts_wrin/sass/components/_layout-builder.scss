@@ -9,14 +9,14 @@
   }
 }
 
-#drupal-off-canvas input[type="submit"].button.js-hide {
+#drupal-off-canvas-wrapper input[type="submit"].button.js-hide {
   display: none;
 }
 
-#drupal-off-canvas *:not(div),
-#drupal-off-canvas *:not(svg *),
-#drupal-off-canvas *:after,
-#drupal-off-canvas *:before {
+#drupal-off-canvas-wrapper *:not(div),
+#drupal-off-canvas-wrapper *:not(svg *),
+#drupal-off-canvas-wrapper *:after,
+#drupal-off-canvas-wrapper *:before {
   display: revert;
   font-family: revert;
   color: #ddd;

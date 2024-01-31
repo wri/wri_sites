@@ -9,7 +9,7 @@ type: 'canonical_entities:node'
 pattern: '[node:title]'
 selection_criteria:
   36c52d2f-45d1-47ae-987f-6fb096c7ca73:
-    id: node_type
+    id: 'entity_bundle:node'
     bundles:
       program_center: program_center
       region: region

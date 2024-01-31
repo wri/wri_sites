@@ -1,7 +1,7 @@
 name: 'WRI Engagement'
 type: module
 description: 'Engagement functionality and fields'
-core_version_requirement: '^8.8.0 || ^9'
+core_version_requirement: '>=9.5'
 package: WRI
 dependencies:
   - simple_recaptcha_webform
