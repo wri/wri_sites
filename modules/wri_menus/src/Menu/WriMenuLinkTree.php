@@ -2,21 +2,14 @@
 
 namespace Drupal\wri_menus\Menu;
 
-use Drupal\Component\Utility\NestedArray;
-use Drupal\Core\Access\AccessResultInterface;
-use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Controller\ControllerResolverInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Menu\MenuActiveTrailInterface;
 use Drupal\Core\Menu\MenuLinkManagerInterface;
 use Drupal\Core\Menu\MenuLinkTree;
-use Drupal\Core\Menu\MenuTreeParameters;
 use Drupal\Core\Menu\MenuTreeStorageInterface;
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\Core\Routing\PreloadableRouteProviderInterface;
 use Drupal\Core\Routing\RouteProviderInterface;
-use Drupal\Core\Template\Attribute;
 use Drupal\Core\Utility\CallableResolver;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Implements the loading, transforming and rendering of menu link trees.
@@ -44,15 +37,21 @@ class WriMenuLinkTree extends MenuLinkTree {
    * @param \Drupal\Core\Utility\CallableResolver|\Drupal\Core\Controller\ControllerResolverInterface $callable_resolver
    *   The callable resolver.
    */
-  public function __construct(MenuTreeStorageInterface $tree_storage, MenuLinkManagerInterface $menu_link_manager, RouteProviderInterface $route_provider, MenuActiveTrailInterface $menu_active_trail, ControllerResolverInterface|CallableResolver $callable_resolver, \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(MenuTreeStorageInterface $tree_storage, MenuLinkManagerInterface $menu_link_manager, RouteProviderInterface $route_provider, MenuActiveTrailInterface $menu_active_trail, ControllerResolverInterface|CallableResolver $callable_resolver, EntityTypeManagerInterface $entity_type_manager) {
     parent::__construct($tree_storage, $menu_link_manager, $route_provider, $menu_active_trail, $callable_resolver);
     $this->entityTypeManager = $entity_type_manager;
   }
+
   /**
    * {@inheritdoc}
    */
   public function getCurrentRouteMenuTreeParameters($menu_name) {
     $parameters = parent::getCurrentRouteMenuTreeParameters($menu_name);
+
+    // Don't bother doing anything for top-level or second-level items.
+    if (count($parameters->activeTrail) < 3) {
+      return $parameters;
+    }
 
     // If the current route's url route name matches the menu link's route name
     // and route parameters, unset it. We are assuming no menu item has itself
