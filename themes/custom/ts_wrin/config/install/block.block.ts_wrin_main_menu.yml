@@ -4,7 +4,7 @@ dependencies:
   config:
     - system.menu.main
   module:
-    - menu_block
+    - wri_menus
   theme:
     - ts_wrin
 id: ts_wrin_main_menu
@@ -12,21 +12,20 @@ theme: ts_wrin
 region: primary_nav
 weight: -12
 provider: null
-plugin: 'menu_block:main'
+plugin: 'parent_menu_block:main'
 settings:
   id: 'menu_block:main'
   label: 'Main navigation'
-  provider: menu_block
   label_display: '0'
-  follow: true
+  provider: wri_menus
+  follow: 1
   follow_parent: active
-  level: 1
-  depth: 2
+  level: '1'
+  depth: '2'
   expand_all_items: false
   parent: 'main:'
-  render_parent: true
+  render_parent: 1
   suggestion: main
   label_type: block
-  label_link: false
-  expand: false
+  label_link: 0
 visibility: {  }
