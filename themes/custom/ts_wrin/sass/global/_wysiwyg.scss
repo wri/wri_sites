@@ -334,7 +334,7 @@ table {
     background-color: $black;
     color: $white;
 
-    p {
+    th {
       @include font($acumin-semi-cond, "bold");
       @include font-line-height(16, 19);
     }
