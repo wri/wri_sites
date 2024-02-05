@@ -45,6 +45,7 @@ hr {
 ul,
 ol {
   list-style: none;
+  list-style-type: none !important; // this is added with javascript on editor load, so we need to override it here.
   padding-left: 10px;
 
   li::before {
@@ -94,6 +95,9 @@ ol {
   }
 }
 
+li .ck-list-bogus-paragraph {
+  display: inline;
+}
 /* Start Block Quote */
 .callout {
   @extend .secondary;
