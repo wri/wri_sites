@@ -155,6 +155,7 @@ li .ck-list-bogus-paragraph {
 /* Start Pull Quote */
 blockquote {
   border: none;
+  font-style: inherit;
   margin: 0 0 $space-sm 0;
   padding: 0;
 
@@ -337,6 +338,11 @@ table {
       @include font($acumin-semi-cond, "bold");
       @include font-line-height(16, 19);
     }
+  }
+
+  th,
+  tr {
+    color: inherit;
   }
 
   td,
