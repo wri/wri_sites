@@ -8,7 +8,7 @@ use Drupal\Core\Menu\MenuActiveTrailInterface;
 use Drupal\Core\Menu\MenuLinkManagerInterface;
 use Drupal\Core\Menu\MenuLinkTree;
 use Drupal\Core\Menu\MenuTreeStorageInterface;
-use Drupal\Core\Routing\RouteMatch;
+use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Routing\RouteProviderInterface;
 use Drupal\Core\Utility\CallableResolver;
 
@@ -49,7 +49,7 @@ class WriMenuLinkTree extends MenuLinkTree {
    * @param \Drupal\Core\Routing\RouteMatchInterface $current_route_match
    *   A route match object for finding the active link.
    */
-  public function __construct(MenuTreeStorageInterface $tree_storage, MenuLinkManagerInterface $menu_link_manager, RouteProviderInterface $route_provider, MenuActiveTrailInterface $menu_active_trail, ControllerResolverInterface|CallableResolver $callable_resolver, EntityTypeManagerInterface $entity_type_manager, RouteMatch $current_route_match) {
+  public function __construct(MenuTreeStorageInterface $tree_storage, MenuLinkManagerInterface $menu_link_manager, RouteProviderInterface $route_provider, MenuActiveTrailInterface $menu_active_trail, ControllerResolverInterface|CallableResolver $callable_resolver, EntityTypeManagerInterface $entity_type_manager, RouteMatchInterface $current_route_match) {
     parent::__construct($tree_storage, $menu_link_manager, $route_provider, $menu_active_trail, $callable_resolver);
     $this->entityTypeManager = $entity_type_manager;
     $this->routeMatch = $current_route_match;
