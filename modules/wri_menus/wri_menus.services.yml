@@ -1,5 +1,5 @@
 services:
   wri_menus.link_tree:
     class: Drupal\wri_menus\Menu\WriMenuLinkTree
-    arguments: ['@menu.tree_storage', '@plugin.manager.menu.link', '@router.route_provider', '@menu.active_trail', '@callable_resolver', '@entity_type.manager']
+    arguments: ['@menu.tree_storage', '@plugin.manager.menu.link', '@router.route_provider', '@menu.active_trail', '@callable_resolver', '@entity_type.manager', '@current_route_match']
 

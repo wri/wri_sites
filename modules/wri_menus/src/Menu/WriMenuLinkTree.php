@@ -8,6 +8,7 @@ use Drupal\Core\Menu\MenuActiveTrailInterface;
 use Drupal\Core\Menu\MenuLinkManagerInterface;
 use Drupal\Core\Menu\MenuLinkTree;
 use Drupal\Core\Menu\MenuTreeStorageInterface;
+use Drupal\Core\Routing\RouteMatch;
 use Drupal\Core\Routing\RouteProviderInterface;
 use Drupal\Core\Utility\CallableResolver;
 
@@ -24,6 +25,13 @@ class WriMenuLinkTree extends MenuLinkTree {
   protected $entityTypeManager;
 
   /**
+   * The route match object for the current page.
+   *
+   * @var \Drupal\Core\Routing\RouteMatchInterface
+   */
+  protected $routeMatch;
+
+  /**
    * Constructs a \Drupal\Core\Menu\MenuLinkTree object.
    *
    * @param \Drupal\Core\Menu\MenuTreeStorageInterface $tree_storage
@@ -36,10 +44,15 @@ class WriMenuLinkTree extends MenuLinkTree {
    *   The active menu trail service.
    * @param \Drupal\Core\Utility\CallableResolver|\Drupal\Core\Controller\ControllerResolverInterface $callable_resolver
    *   The callable resolver.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
+   * @param \Drupal\Core\Routing\RouteMatchInterface $current_route_match
+   *   A route match object for finding the active link.
    */
-  public function __construct(MenuTreeStorageInterface $tree_storage, MenuLinkManagerInterface $menu_link_manager, RouteProviderInterface $route_provider, MenuActiveTrailInterface $menu_active_trail, ControllerResolverInterface|CallableResolver $callable_resolver, EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(MenuTreeStorageInterface $tree_storage, MenuLinkManagerInterface $menu_link_manager, RouteProviderInterface $route_provider, MenuActiveTrailInterface $menu_active_trail, ControllerResolverInterface|CallableResolver $callable_resolver, EntityTypeManagerInterface $entity_type_manager, RouteMatch $current_route_match) {
     parent::__construct($tree_storage, $menu_link_manager, $route_provider, $menu_active_trail, $callable_resolver);
     $this->entityTypeManager = $entity_type_manager;
+    $this->routeMatch = $current_route_match;
   }
 
   /**
@@ -56,8 +69,8 @@ class WriMenuLinkTree extends MenuLinkTree {
     // If the current route's url route name matches the menu link's route name
     // and route parameters, unset it. We are assuming no menu item has itself
     // as a parent.
-    $route_name = \Drupal::routeMatch()->getRouteName();
-    $route_parameters = \Drupal::routeMatch()->getRawParameters()->all();
+    $route_name = $this->routeMatch->getRouteName();
+    $route_parameters = $this->routeMatch->getRawParameters()->all();
 
     foreach ($parameters->activeTrail as $key => $active_trail) {
       // Load the menu link from the active trail.
