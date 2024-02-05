@@ -155,7 +155,7 @@ li .ck-list-bogus-paragraph {
 /* Start Pull Quote */
 blockquote {
   border: none;
-  font-style: inherit;
+  font-style: inherit !important; // this is added with javascript on editor load, so we need to override it here.
   margin: 0 0 $space-sm 0;
   padding: 0;
 
