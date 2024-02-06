@@ -107,6 +107,10 @@ li .ck-list-bogus-paragraph {
   padding: 20px 0 12px;
   margin-top: $space-xs;
 
+  & p:first-child {
+    margin-top: 0;
+  }
+
   &.alignleft p.secondary.body-link,
   &.alignright p.secondary.body-link {
     @include mq($md) {
