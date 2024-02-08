@@ -460,7 +460,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: title
     type: text
-    boost: !!float 5
+    boost: 5.0
     dependencies:
       module:
         - node
@@ -529,6 +529,7 @@ processor_settings:
   content_access:
     weights:
       preprocess_query: -30
+  custom_value: {  }
   entity_status: {  }
   entity_type: {  }
   hierarchy:
@@ -551,14 +552,27 @@ processor_settings:
     weights:
       preprocess_index: -15
       preprocess_query: -15
-    all_fields: false
+    all_fields: true
     fields:
       - body
+      - field_email
+      - field_featured_headline
+      - field_featured_text
+      - field_featured_tweet
+      - field_first_name
       - field_intro
+      - field_last_name
       - langcode
-      - rendered_item
+      - langcode_1
+      - name
+      - name_1
+      - name_2
+      - processed
+      - processed_1
       - title
+      - title_fulltext
       - type
+      - type_name
     title: true
     alt: true
     tags:
@@ -581,7 +595,7 @@ processor_settings:
       - langcode
       - name
       - title
-    ignorable: '[''¿¡!?,.:;]'
+    ignorable: "['¿¡!?,.:;]"
     ignorable_classes:
       - Pc
       - Pd
@@ -590,6 +604,17 @@ processor_settings:
       - Pi
       - Po
       - Ps
+  ignorecase:
+    all_fields: false
+    fields:
+      - body
+      - field_featured_headline
+      - field_featured_text
+      - field_featured_tweet
+      - field_intro
+      - langcode
+      - title
+      - type
   language_with_fallback: {  }
   rendered_item: {  }
   search_api_exclude_entity_processor:
@@ -598,6 +623,61 @@ processor_settings:
   solr_date_range:
     weights:
       preprocess_index: 0
+  stopwords:
+    all_fields: false
+    fields:
+      - body
+      - field_featured_headline
+      - field_featured_text
+      - field_featured_tweet
+      - field_intro
+    stopwords:
+      - a
+      - an
+      - and
+      - are
+      - as
+      - at
+      - be
+      - but
+      - by
+      - for
+      - if
+      - in
+      - into
+      - is
+      - it
+      - 'no'
+      - not
+      - of
+      - 'on'
+      - or
+      - s
+      - such
+      - t
+      - that
+      - the
+      - their
+      - then
+      - there
+      - these
+      - they
+      - this
+      - to
+      - was
+      - will
+      - with
+  transliteration:
+    all_fields: false
+    fields:
+      - body
+      - field_featured_headline
+      - field_featured_text
+      - field_featured_tweet
+      - field_intro
+      - langcode
+      - title
+      - type
 tracker_settings:
   default:
     indexing_order: fifo
