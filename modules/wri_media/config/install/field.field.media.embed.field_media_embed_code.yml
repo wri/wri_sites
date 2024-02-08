@@ -7,12 +7,6 @@ dependencies:
   module:
     - allowed_formats
     - text
-third_party_settings:
-  allowed_formats:
-    unrestricted_text: unrestricted_text
-    full_html: '0'
-    basic_html: '0'
-    plain_text: '0'
 id: media.embed.field_media_embed_code
 field_name: field_media_embed_code
 entity_type: media
@@ -23,5 +17,7 @@ required: true
 translatable: true
 default_value: {  }
 default_value_callback: ''
-settings: {  }
+settings:
+  allowed_formats:
+    - unrestricted_text
 field_type: text_long

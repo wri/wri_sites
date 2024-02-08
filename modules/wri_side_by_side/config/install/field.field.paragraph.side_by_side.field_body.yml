@@ -7,13 +7,6 @@ dependencies:
   module:
     - allowed_formats
     - text
-third_party_settings:
-  allowed_formats:
-    full_html: full_html
-    unrestricted_text: '0'
-    basic_html: '0'
-    migrated: '0'
-    plain_text: '0'
 id: paragraph.side_by_side.field_body
 field_name: field_body
 entity_type: paragraph
@@ -24,5 +17,7 @@ required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
-settings: {  }
+settings:
+  allowed_formats:
+    - full_html
 field_type: text_long
