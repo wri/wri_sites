@@ -56,7 +56,7 @@ settings:
       multiBlock: true
     ckeditor5_sourceEditing:
       allowed_tags:
-        - '<div class="/">'
+        - '<div class>'
         - '<span>'
     ckeditor5_style:
       styles:
