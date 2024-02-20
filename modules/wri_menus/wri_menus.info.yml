@@ -6,6 +6,7 @@ package: WRI
 dependencies:
   - menu_block
   - menu_position
+  - jquery_once
 config_devel:
   install:
     - system.menu.donate
