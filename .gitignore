@@ -4,4 +4,3 @@ vendor
 composer.lock
 web
 .gitconfig
-themes/custom/ts_wrin/dist
