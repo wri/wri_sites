@@ -4,4 +4,3 @@ node_modules/
 .idea
 *.map
 dist_dev/
-dist/
