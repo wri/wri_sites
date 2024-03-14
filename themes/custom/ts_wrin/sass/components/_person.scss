@@ -283,6 +283,7 @@
       text-decoration: none;
     }
   }
+  .job_title,
   .job_title p {
     margin: 0;
     @include font($acumin-semi-cond, "light", "normal");
