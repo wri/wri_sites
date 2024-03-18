@@ -143,6 +143,7 @@
         "drupal/element_class_formatter": "^2.0@beta",
         "drupal/entity_browser": "^2.6",
         "drupal/entity_class_formatter": "^2.0",
+        "drupal/entity_usage": "^2.0@beta",
         "drupal/facets": "^2.0",
         "drupal/facets_pretty_paths": "^1.2",
         "drupal/field_group": "^3.2",
