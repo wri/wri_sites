@@ -10,10 +10,11 @@ https://github.com/thinkshout/ts_wrin/wiki
 
 ## Setup and use
 
-You can run the commands below from the theme directory, but the final css files are
-copied to the web/libraries folder in the project root. If you're doing a lot of
-changes and want to use the "start" command, you can change the "main" library
-in the ts_wrin.libraries.yml file to point to the dist folder, but don't commit that.
+You can run the commands below from the theme directory, but the final css files
+are copied to the web/libraries folder in the project root. If you're doing a
+lot of changes and want to use the "start" command, you can change the "main"
+library in the ts_wrin.libraries.yml file to point to the dist folder, but don't
+commit that.
 
 - Run `npm install` to install dependencies.
 - Run `npm run build` to run the production build. See note above. You can
