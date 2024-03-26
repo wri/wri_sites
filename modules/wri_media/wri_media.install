@@ -70,3 +70,12 @@ function wri_media_update_10101() {
   \Drupal::service('distro_helper.updates')->installConfig('editor.editor.basic_html', 'wri_admin', 'install', 'TRUE');
   \Drupal::service('distro_helper.updates')->installConfig('filter.format.basic_html', 'wri_admin', 'install', 'TRUE');
 }
+
+/**
+ * Update our editors to allow empty a tags.
+ */
+function wri_media_update_10102() {
+  \Drupal::service('distro_helper.updates')->updateConfig('editor.editor.full_html', [
+    'settings#plugins#ckeditor5_sourceEditing#allowed_tags',
+  ], 'wri_media', 'install');
+}
