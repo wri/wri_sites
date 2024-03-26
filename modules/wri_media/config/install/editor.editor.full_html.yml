@@ -58,6 +58,7 @@ settings:
       allowed_tags:
         - '<div class>'
         - '<span>'
+        - '<a name>'
     ckeditor5_style:
       styles:
         -
