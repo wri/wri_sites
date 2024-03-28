@@ -11,6 +11,7 @@ use Drupal\Core\Field\FormatterInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
+use Drupal\ckeditor5\Plugin\CKEditor5PluginDefinition;
 use Drupal\file\Entity\File;
 
 /**
@@ -73,24 +74,19 @@ function wri_media_preprocess_media(&$variables) {
 }
 
 /**
- * Implements hook_form_BASE_FORM_ID_alter().
+ * Implements hook_ckeditor5_plugin_info_alter().
  */
-function wri_media_form_editor_media_dialog_alter(&$form, FormStateInterface $form_state, $form_id) {
-  // Hide view align options unless using half_content view mode.
-  $form['align']['#states'] = [
-    'visible' => [
-      'select[name="attributes[data-view-mode]"]' => ['value' => 'half_content'],
-    ],
-  ];
-  // Reorder fields.
-  $form['align']['#weight'] = 10;
-  $form['caption']['#weight'] = 11;
+function wri_media_ckeditor5_plugin_info_alter(array &$plugin_definitions) : void {
+  $specialchar_plugin_definition = $plugin_definitions['media_mediaAlign']->toArray();
 
-  // Set appropriate default and remove unnecessary align options.
-  $form["align"]["#default_value"] = $form["align"]["#default_value"] == 'center' ? 'none' : $form["align"]["#default_value"];
-  unset($form['align']['#options']['center']);
+  foreach ($specialchar_plugin_definition['ckeditor5']['config']['drupalElementStyles']['align'] as &$alignment_option) {
+    if (in_array($alignment_option['name'], ['right', 'left'])) {
+      $alignment_option['title'] = '(Half content) ' . $alignment_option['title'];
+    }
+  }
+
+  $plugin_definitions['media_mediaAlign']= new CKEditor5PluginDefinition($specialchar_plugin_definition);
 }
-
 /**
  * Implements hook_field_formatter_third_party_settings_form().
  */
