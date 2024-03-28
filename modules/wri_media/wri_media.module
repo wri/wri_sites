@@ -5,13 +5,13 @@
  * WRI media functions.
  */
 
+use Drupal\ckeditor5\Plugin\CKEditor5PluginDefinition;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Field\FormatterInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
-use Drupal\ckeditor5\Plugin\CKEditor5PluginDefinition;
 use Drupal\file\Entity\File;
 
 /**
@@ -85,8 +85,9 @@ function wri_media_ckeditor5_plugin_info_alter(array &$plugin_definitions) : voi
     }
   }
 
-  $plugin_definitions['media_mediaAlign']= new CKEditor5PluginDefinition($specialchar_plugin_definition);
+  $plugin_definitions['media_mediaAlign'] = new CKEditor5PluginDefinition($specialchar_plugin_definition);
 }
+
 /**
  * Implements hook_field_formatter_third_party_settings_form().
  */
