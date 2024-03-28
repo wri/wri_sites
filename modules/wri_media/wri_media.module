@@ -5,6 +5,7 @@
  * WRI media functions.
  */
 
+use Drupal\ckeditor5\Plugin\CKEditor5PluginDefinition;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Field\FormatterInterface;
@@ -73,22 +74,18 @@ function wri_media_preprocess_media(&$variables) {
 }
 
 /**
- * Implements hook_form_BASE_FORM_ID_alter().
+ * Implements hook_ckeditor5_plugin_info_alter().
  */
-function wri_media_form_editor_media_dialog_alter(&$form, FormStateInterface $form_state, $form_id) {
-  // Hide view align options unless using half_content view mode.
-  $form['align']['#states'] = [
-    'visible' => [
-      'select[name="attributes[data-view-mode]"]' => ['value' => 'half_content'],
-    ],
-  ];
-  // Reorder fields.
-  $form['align']['#weight'] = 10;
-  $form['caption']['#weight'] = 11;
+function wri_media_ckeditor5_plugin_info_alter(array &$plugin_definitions) : void {
+  $specialchar_plugin_definition = $plugin_definitions['media_mediaAlign']->toArray();
 
-  // Set appropriate default and remove unnecessary align options.
-  $form["align"]["#default_value"] = $form["align"]["#default_value"] == 'center' ? 'none' : $form["align"]["#default_value"];
-  unset($form['align']['#options']['center']);
+  foreach ($specialchar_plugin_definition['ckeditor5']['config']['drupalElementStyles']['align'] as &$alignment_option) {
+    if (in_array($alignment_option['name'], ['right', 'left'])) {
+      $alignment_option['title'] = '(Half content) ' . $alignment_option['title'];
+    }
+  }
+
+  $plugin_definitions['media_mediaAlign'] = new CKEditor5PluginDefinition($specialchar_plugin_definition);
 }
 
 /**
@@ -179,6 +176,9 @@ function wri_media_preprocess_filter_caption(&$variables) {
   // Tell the figure wrapping around a media entity what view mode it is.
   $xmlEl = simplexml_load_string($variables['node']);
   $view_mode = $xmlEl->attributes()->{'data-view-mode'};
+  if (!$view_mode && ($embedded_media = $xmlEl->xpath('/a/drupal-media'))) {
+    $view_mode = $embedded_media[0]->attributes()->{'data-view-mode'};
+  }
   $variables['classes'] .= ' ' . $view_mode;
 }
 
