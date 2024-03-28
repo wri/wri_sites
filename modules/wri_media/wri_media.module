@@ -176,8 +176,7 @@ function wri_media_preprocess_filter_caption(&$variables) {
   // Tell the figure wrapping around a media entity what view mode it is.
   $xmlEl = simplexml_load_string($variables['node']);
   $view_mode = $xmlEl->attributes()->{'data-view-mode'};
-  if (!$view_mode && ($embedded_media = $xmlEl->xpath('/a/drupal-media')))
-  {
+  if (!$view_mode && ($embedded_media = $xmlEl->xpath('/a/drupal-media'))) {
     $view_mode = $embedded_media[0]->attributes()->{'data-view-mode'};
   }
   $variables['classes'] .= ' ' . $view_mode;
