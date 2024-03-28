@@ -258,6 +258,10 @@ blockquote {
   }
 }
 
+[data-view-mode="half_content"] .media--view-mode-half-content {
+  width: 100%;
+}
+
 // Handle migrated images
 img {
   max-width: 100%;
@@ -302,6 +306,23 @@ img {
       width: 180px;
     }
   }
+}
+
+// Don't align anything but half-content.
+.ck-widget.drupal-media-style-align-left,
+.ck-widget.drupal-media-style-align-right {
+  float: none;
+  max-width: 100%;
+}
+
+.drupal-media-style-align-left[data-view-mode="half_content"] {
+  float: left;
+  max-width: 100%;
+}
+
+.drupal-media-style-align-right[data-view-mode="half_content"] {
+  float: right;
+  width: 50%;
 }
 
 // Document media styles.
