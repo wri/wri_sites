@@ -157,6 +157,14 @@ function wri_common_token_info() {
     'name' => 'A node link',
     'description' => 'The link to the node, if published, or its title if not.',
   ];
+  $info['tokens']['node']['projects_links'] = [
+    'name' => 'A listing of project links',
+    'description' => 'The link to the related projects if published, and the site title if no projects are related.',
+  ];
+  $info['tokens']['node']['primary_contact_links'] = [
+    'name' => 'The primary contact link or a fallback phrase.',
+    'description' => 'The link to the related primary contact if published, and a fallback phrase if no published contact found.',
+  ];
   $info['tokens']['taxonomy_term']['link'] = [
     'name' => 'A term link',
     'description' => 'The link to the term, if published, or its title if not.',
@@ -234,6 +242,25 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
         switch ($name) {
           case 'link':
             $replacements[$original] = wri_common_link_or_text($data['node']);
+            break;
+          case 'projects_links':
+            if ($node->hasField('field_projects') && ($contact_items = $node->get('field_projects')) && !$contact_items->isEmpty()) {
+              $contact_item = $contact_items->first()->entity;
+              $replacements[$original] = wri_common_link_or_text($contact_item);
+            }
+            else {
+              $replacements[$original] = \Drupal::config('system.site')->get('name');
+            }
+            break;
+          case 'primary_contact_links':
+            if ($node->hasField('field_primary_contacts') && ($contact_items = $node->get('field_primary_contacts')) && !$contact_items->isEmpty()) {
+              $contact_item = $contact_items->first()->entity;
+              $replacements[$original] = wri_common_link_or_text($contact_item);
+            }
+            else {
+              $replacements[$original] = \Drupal::config('wri_node.settings')->get('unpublished_person_phrase');
+            }
+            break;
         }
       }
     }
@@ -370,34 +397,40 @@ function wri_common_link_or_text(EntityInterface $entity) {
     }
     else {
       if ($entity->bundle() == 'person') {
-        $url = Url::fromUserInput(\Drupal::config('wri_node.settings')->get('person_listing_url'));
-
         // See if the current page is a node.
         $node = \Drupal::routeMatch()->getParameter('node');
-        if ($node instanceof NodeInterface) {
-          // If the current page is a project, link to its experts page.
-          if ($node->bundle() == 'project_detail') {
-            $url = Url::fromUserInput('/project-experts/' . $node->id());
-          }
-          // Otherwise, see if that node has a 'field_projects', and THAT node
-          // is published.
-          elseif ($node->hasField('field_projects')) {
-            $project = $node->field_projects->entity;
-            if ($project && $project->isPublished()) {
-              // If it is, link to the projects/experts page.
-              $url = Url::fromUserInput('/project-experts/' . $node->field_projects->target_id);
-            }
-          }
-        }
-
-        // Fallback to the /about/experts page.
-        $link = Link::fromTextAndUrl(\Drupal::config('wri_node.settings')->get('unpublished_person_phrase'), $url)->toString();
+        $link = wri_common_person_link_fallback($node);
       }
       else {
         $link = $entity->label();
       }
     }
   }
+  return $link;
+}
+
+function wri_common_person_link_fallback(EntityInterface $node) {
+  $url = Url::fromUserInput(\Drupal::config('wri_node.settings')->get('person_listing_url'));
+
+  if ($node instanceof NodeInterface) {
+    // If the current page is a project, link to its experts page.
+    if ($node->bundle() == 'project_detail') {
+      $url = Url::fromUserInput('/project-experts/' . $node->id());
+    }
+    // Otherwise, see if that node has a 'field_projects', and THAT node
+    // is published.
+    elseif ($node->hasField('field_projects')) {
+      $project = $node->field_projects->entity;
+      if ($project && $project->isPublished()) {
+        // If it is, link to the projects/experts page.
+        $url = Url::fromUserInput('/project-experts/' . $node->field_projects->target_id);
+      }
+    }
+  }
+
+  // Fallback to the /about/experts page.
+  $link = Link::fromTextAndUrl(\Drupal::config('wri_node.settings')->get('unpublished_person_phrase'), $url)->toString();
+
   return $link;
 }
 
