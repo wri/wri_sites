@@ -20,3 +20,6 @@ wri_node.settings:
     twitter_share_suffix:
       type: text
       label: 'Twitter Share suffix'
+    and_phrase:
+        type: text
+        label: 'And word for listings, ie: 1, 2 "and" 3'

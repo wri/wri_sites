@@ -74,6 +74,13 @@ class SettingsForm extends ConfigFormBase {
       '#required' => TRUE,
     ];
 
+    $form['and_phrase'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('And word for listings, ie: 1, 2 "and" 3'),
+      '#default_value' => $this->config('wri_node.settings')->get('and_phrase'),
+      '#required' => TRUE,
+      ];
+
     $form['person_listing_url'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Person listing url'),

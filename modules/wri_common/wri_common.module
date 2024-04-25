@@ -337,7 +337,7 @@ function _wri_common_format_list(array $terms) {
       // If there is more than 1 term, build a list.
       if (count($terms) > 1) {
         if (!next($terms)) {
-          $list .= "and $term_name";
+          $list .= \Drupal::config('wri_node.settings')->get('and_phrase') . " $term_name";
         }
         else {
           $list .= "$term_name, ";
