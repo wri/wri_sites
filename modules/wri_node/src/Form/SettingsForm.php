@@ -123,6 +123,7 @@ class SettingsForm extends ConfigFormBase {
       ->set('use_fallback_image', $form_state->getValue('use_fallback_image'))
       ->set('unpublished_person_phrase', $form_state->getValue('unpublished_person_phrase'))
       ->set('person_listing_url', $form_state->getValue('person_listing_url'))
+      ->set('and_phrase', $form_state->getValue('and_phrase'))
       ->set('disable_ads_data_redaction', $form_state->getValue('disable_ads_data_redaction'))
       ->set('disable_osano_script', $form_state->getValue('disable_osano_script'))
       ->set('twitter_share_suffix', $form_state->getValue('twitter_share_suffix'))
