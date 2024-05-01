@@ -43,38 +43,44 @@ function wri_node_update_9503() {
  * Updates the node and_phrase values.
  */
 function wri_node_update_10001() {
-  \Drupal::service('distro_helper.updates')->updateConfig('wri_node.settings', [
-    'and_phrase',
-  ], 'wri_node', 'install');
-
   $collections = \Drupal::service('config.manager')->getConfigCollectionInfo();
+
   foreach ($collections->getCollectionNames() as $collection_name) {
     if ($collection_name) {
-      $collection = $collections->getOverrideService($collection_name);
-      $language = $collection->getLanguage()->getId();
-      $config_translation = \Drupal::languageManager()->getLanguageConfigOverride($language, 'wri_node.settings');
-      switch ($language) {
-        case 'en':
-          $config_translation->set('and_phrase', 'and');
-          break;
-        case 'fr':
-          $config_translation->set('and_phrase', 'et');
-          break;
-        case 'es':
-          $config_translation->set('and_phrase', 'y');
-          break;
-        case 'zh-hans':
-          $config_translation->set('and_phrase', '和');
-          break;
-        case 'id':
-          $config_translation->set('and_phrase', 'dan');
-          break;
-        case 'pt-br':
-          $config_translation->set('and_phrase', 'e');
-          break;
-      }
-      // Write the keys you want to translate on the config object.
-      $config_translation->save();
+      list(, $language) = explode('.', $collection_name);
+    }
+    else {
+      $config_translation = \Drupal::configFactory()->getEditable('wri_node.settings');
+      $language = $default_language = $config_translation->get('langcode');
+    }
+    $phrase = 'and';
+
+    switch ($language) {
+      case 'en':
+        $phrase = 'and';
+        break;
+      case 'fr':
+        $phrase = 'et';
+        break;
+      case 'es':
+        $phrase = 'y';
+        break;
+      case 'zh-hans':
+        $phrase = '和';
+        break;
+      case 'id':
+        $phrase = 'dan';
+        break;
+      case 'pt-br':
+        $phrase = 'e';
+        break;
+    }
+
+    if ($collection_name && $default_language != $language) {
+      \Drupal::languageManager()->getLanguageConfigOverride($language, 'wri_node.settings')->set('and_phrase', $phrase)->save();
+    }
+    else {
+      \Drupal::configFactory()->getEditable('wri_node.settings')->set('and_phrase', $phrase)->save();
     }
   }
 }
