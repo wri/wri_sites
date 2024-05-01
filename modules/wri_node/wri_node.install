@@ -38,3 +38,12 @@ function wri_node_update_9503() {
     'osano_params',
   ], 'wri_admin');
 }
+
+/**
+ * Updates the node and_phrase values.
+ */
+function wri_node_update_10001() {
+  \Drupal::service('distro_helper.updates')->updateConfig('wri_node.settings', [
+    'and_phrase',
+  ], 'wri_node', 'install');
+}
