@@ -50,9 +50,6 @@
             "drupal/diff": {
                 "No local tasks on compare revisions page https://www.drupal.org/project/diff/issues/3169729": "https://www.drupal.org/files/issues/2020-09-08/diff_add-local-tasks-3169729-2.patch"
             },
-            "drupal/menu_block": {
-                "Add option to always render parent menu item https://www.drupal.org/project/menu_block/issues/3082445": "https://www.drupal.org/files/issues/2022-11-08/menu_block-render-parent-3082445-53.patch"
-            },
             "drupal/paragraphs": {
                 "Integrity constraint violation: 1048 Column 'langcode' cannot be null https://www.drupal.org/project/paragraphs/issues/2901390": "https://www.drupal.org/files/issues/2020-06-25/paragraphs-2901390-51.patch",
                 "Paragraph access check using incorrect revision of its parent https://www.drupal.org/project/paragraphs/issues/3090200": "https://www.drupal.org/files/issues/2022-10-26/3084934-13_combine_3090200-22.patch"
@@ -64,9 +61,6 @@
             },
             "drupal/views_bulk_edit": {
                 "Fix Required fields to really not be required https://www.drupal.org/node/3024419": "https://www.drupal.org/files/issues/2020-11-20/3024419-invalid-form-control-24.patch"
-            },
-            "drupal/smart_date": {
-                "Deprecation in Drupal 10.2: Smart Date List Item allowed values must be passed as array https://www.drupal.org/project/smart_date/issues/3409287": "https://www.drupal.org/files/issues/2023-12-18/3409287.patch"
             },
             "drupal/simple_popup_blocks": {
                 "Warning: htmlspecialchars() expects parameter 1 to be string, array given https://www.drupal.org/files/issues/2022-03-09/simple_popup_blocks-n3267864-5.patch":"https://git.drupalcode.org/project/simple_popup_blocks/-/merge_requests/4.diff",
