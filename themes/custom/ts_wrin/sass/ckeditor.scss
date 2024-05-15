@@ -28,3 +28,14 @@
     margin-left: 0;
   }
 }
+
+.node-publication-form,
+.node-article-form {
+  .field--name-body .ck-content {
+    @include font($caslon, "regular");
+    @include font-line-height(20, 24);
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    color: $black;
+  }
+}
