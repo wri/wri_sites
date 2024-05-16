@@ -91,7 +91,7 @@ function wri_node_update_10001() {
 }
 
 /**
- * Add translations for each narrative taxonomy language.
+ * Updates tokens in default value of narrative taxonomies.
  */
 function wri_node_update_10002() {
   // Load all narrative taxonomy fields on nodes.
