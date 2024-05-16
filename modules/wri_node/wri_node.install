@@ -97,12 +97,12 @@ function wri_node_update_10002() {
   // Load all narrative taxonomy fields on nodes.
   $narrative_fields = \Drupal::entityTypeManager()->getStorage('field_config')->loadByProperties(['field_name' => 'field_narrative_taxonomy']);
   $old_values = [
-    '[node:field_primary_contacts:entity:link]',
-    '[node:field_projects:entity:link]',
+    'node:field_primary_contacts:entity:link',
+    'node:field_projects:entity:link',
   ];
   $new_values = [
-    '[node:primary_contact_links]',
-    '[node:projects_links]',
+    'node:primary_contact_links',
+    'node:projects_links',
   ];
 
   // Loop through the fields.
