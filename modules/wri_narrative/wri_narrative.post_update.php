@@ -54,7 +54,7 @@ function wri_narrative_post_update_rewrite_narrative_taxonomies(&$sandbox) {
         '<a href="/node/[node:field_featured_experts:target_id]">[node:field_featured_experts:entity]</a>',
       ],
       ['[node:field_projects:entity:link]',
-        '[node:field_primary_contacts:entity:link]',
+        '[node:primary_contact_links]',
         '[node:field_featured_experts:entity:link]',
       ],
       $taxonomy_value[0]['value']

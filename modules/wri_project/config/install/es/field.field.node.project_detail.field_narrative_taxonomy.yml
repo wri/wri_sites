@@ -12,12 +12,12 @@ field_name: field_narrative_taxonomy
 entity_type: node
 bundle: project_detail
 label: 'Narrative Taxonomy'
-description: 'Si desea utilizar el valor predeterminado, elija "Origen" y pegue: <code>&lt;p&gt;&lt;span&gt;El proyecto &#91;node:title&#93; es parte del programa de &#91;wri_tokens:topic_and_sub_topic_links_list&#93;. Para más información, favor de contactar a &#91;node:field_primary_contacts:entity:link&#93;.&lt;/span&gt;&lt;/p&gt;</code>'
+description: 'Si desea utilizar el valor predeterminado, elija "Origen" y pegue: <code>&lt;p&gt;&lt;span&gt;El proyecto &#91;node:title&#93; es parte del programa de &#91;wri_tokens:topic_and_sub_topic_links_list&#93;. Para más información, favor de contactar a &#91;node:primary_contact_links&#93;.&lt;/span&gt;&lt;/p&gt;</code>'
 required: false
 translatable: true
 default_value:
   -
-    value: '<p><span>El proyecto [node:title] es parte del programa de [wri_tokens:topic_and_sub_topic_links_list]. Para más información, favor de contactar a [node:field_primary_contacts:entity:link].</span></p>'
+    value: '<p><span>El proyecto [node:title] es parte del programa de [wri_tokens:topic_and_sub_topic_links_list]. Para más información, favor de contactar a [node:primary_contact_links].</span></p>'
     format: basic_html
 default_value_callback: ''
 settings:
