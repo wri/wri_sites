@@ -243,6 +243,7 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
           case 'link':
             $replacements[$original] = wri_common_link_or_text($data['node']);
             break;
+
           case 'projects_links':
             if ($node->hasField('field_projects') && ($projects = $node->get('field_projects')->referencedEntities())) {
               $replacements[$original] = _wri_common_format_list($projects);
@@ -251,6 +252,7 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
               $replacements[$original] = \Drupal::config('system.site')->get('name');
             }
             break;
+
           case 'primary_contact_links':
             if ($node->hasField('field_primary_contacts') && ($contact_items = $node->get('field_primary_contacts')) && !$contact_items->isEmpty()) {
               $contact_item = $contact_items->first()->entity;
@@ -363,7 +365,6 @@ function _wri_common_format_list(array $terms) {
         $term_name = $term->label();
       }
 
-
       // If there is more than 1 term, build a list.
       if (count($terms) > 1) {
         if (!next($terms)) {
@@ -412,6 +413,15 @@ function wri_common_link_or_text(EntityInterface $entity) {
   return $link;
 }
 
+/**
+ * Fallback for when a person is unpublished.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $node
+ *   The person node.
+ *
+ * @return \Drupal\Core\GeneratedLink
+ *   The link.
+ */
 function wri_common_person_link_fallback(EntityInterface $node) {
   $url = Url::fromUserInput(\Drupal::config('wri_node.settings')->get('person_listing_url'));
 

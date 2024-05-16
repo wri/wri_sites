@@ -117,8 +117,8 @@ function wri_narrative_post_update_rewrite_narrative_taxonomies2(&$sandbox) {
       ['[node:field_primary_contacts:entity:link]',
         '[node:field_projects:entity:link]',
       ],
-      [ '[node:primary_contact_links]',
-      '[node:projects_links]'
+      ['[node:primary_contact_links]',
+        '[node:projects_links]',
       ],
       $taxonomy_value[0]['value']
     );

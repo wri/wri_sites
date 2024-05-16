@@ -59,18 +59,23 @@ function wri_node_update_10001() {
       case 'en':
         $phrase = 'and';
         break;
+
       case 'fr':
         $phrase = 'et';
         break;
+
       case 'es':
         $phrase = 'y';
         break;
+
       case 'zh-hans':
         $phrase = '和';
         break;
+
       case 'id':
         $phrase = 'dan';
         break;
+
       case 'pt-br':
         $phrase = 'e';
         break;
@@ -85,7 +90,6 @@ function wri_node_update_10001() {
   }
 }
 
-
 /**
  * Add translations for each narrative taxonomy language.
  */
@@ -98,7 +102,7 @@ function wri_node_update_10002() {
   ];
   $new_values = [
     '[node:primary_contact_links]',
-    '[node:projects_links]'
+    '[node:projects_links]',
   ];
 
   // Loop through the fields.
@@ -106,7 +110,7 @@ function wri_node_update_10002() {
     $field = \Drupal::configFactory()->getEditable('field.field.' . $narrative_field->id());
     // Find and replace the tokens.
     $field->set('description', str_replace($old_values, $new_values, $field->get('description')));
-    $default_value  = $field->get('default_value');
+    $default_value = $field->get('default_value');
     if (isset($default_value[0]['value'])) {
       $default_value[0]['value'] = str_replace($old_values, $new_values, $default_value[0]['value']);
       $field->set('default_value', $default_value);
