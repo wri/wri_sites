@@ -219,7 +219,7 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
 
           case 'topic_and_sub_topic_links_list':
             $terms = wri_common_get_node_topics($node, FALSE);
-            if(empty($tersm)) {
+            if(empty($terms)) {
               $replacements[$original] = \Drupal::config('system.site')->get('name');
             } else {
               $replacements[$original] = _wri_common_format_list($terms);
