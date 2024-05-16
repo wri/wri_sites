@@ -94,7 +94,7 @@ function wri_narrative_post_update_rewrite_narrative_taxonomies2(&$sandbox) {
   $users_per_batch = 25;
   $start_value = $sandbox['current'];
   $nids = Drupal::database()->select('node__field_narrative_taxonomy', 'u')
-    ->condition('u.field_narrative_taxonomy_value', '[node:field_(projects|primary_contacts):entity:link]', 'REGEXP')
+    ->condition('u.field_narrative_taxonomy_value', '\[node:field_(projects|primary_contacts):entity:link\]', 'REGEXP')
     ->condition('entity_id', $sandbox['current'], '>=')
     ->fields('u')
     ->orderBy('entity_id')
