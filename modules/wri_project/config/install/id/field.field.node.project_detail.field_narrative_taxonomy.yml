@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_narrative_taxonomy
+    - node.type.project_detail
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    allowed_formats:
+      - basic_html
+id: node.project_detail.field_narrative_taxonomy
+field_name: field_narrative_taxonomy
+entity_type: node
+bundle: project_detail
+label: 'Narrative Taxonomy'
+description: 'Jika Anda ingin menggunakan nilai default, pilih "Sumber" dan tempel: <code>&lt;p&gt;WRI&#39;s &#91;node:title&#93; adalah bagian dari &#91;wri_tokens:topic_and_sub_topic_links_list&#93;. Hubungi &#91;node:primary_contact_links&#93; untuk detail lebih lanjut atau pertanyaan media.&lt;/p&gt;</code>'
+required: false
+translatable: true
+default_value:
+  -
+    value: "<p>WRI's [node:title] adalah bagian dari [wri_tokens:topic_and_sub_topic_links_list]. Hubungi [node:primary_contact_links] untuk detail lebih lanjut atau pertanyaan media.</p>\r\n"
+    format: basic_html
+default_value_callback: ''
+settings: {  }
+field_type: text_long
