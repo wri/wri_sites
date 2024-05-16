@@ -1,4 +1,4 @@
-langcode: id
+langcode: zh-hans
 status: true
 dependencies:
   config:
@@ -16,12 +16,12 @@ field_name: field_narrative_taxonomy
 entity_type: node
 bundle: project_detail
 label: 'Narrative Taxonomy'
-description: 'Jika Anda ingin menggunakan nilai default, pilih "Sumber" dan tempel: <code>&lt;p&gt;WRI&#39;s &#91;node:title&#93; adalah bagian dari &#91;wri_tokens:topic_and_sub_topic_links_list&#93;. Hubungi &#91;node:primary_contact_links&#93; untuk detail lebih lanjut atau pertanyaan media.&lt;/p&gt;</code>'
+description: 'If you want to use the default value, choose "Source" and paste: <code>&lt;p&gt;WRI&#39;s &#91;node:title&#93; 是 &#91;wri_tokens:topic_and_sub_topic_links_list&#93;. 的一部分。联系 &#91;node:primary_contact_links&#93; 了解更多详细信息或媒体查询。&lt;/p&gt;</code>'
 required: false
 translatable: true
 default_value:
   -
-    value: "<p>WRI's [node:title] adalah bagian dari [wri_tokens:topic_and_sub_topic_links_list]. Hubungi [node:primary_contact_links] untuk detail lebih lanjut atau pertanyaan media.</p>\r\n"
+    value: "<p>WRI's [node:title] 是 [wri_tokens:topic_and_sub_topic_links_list] 的一部分。联系 [node:primary_contact_links] 了解更多详细信息或媒体查询。</p>\r\n"
     format: basic_html
 default_value_callback: ''
 settings: {  }
