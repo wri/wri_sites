@@ -85,12 +85,13 @@ function wri_node_update_10001() {
   }
 }
 
+
 /**
  * Add translations for each narrative taxonomy language.
  */
 function wri_node_update_10002() {
   // Load all narrative taxonomy fields on nodes.
-  $narrative_fields = \Drupal::entityTypeManager()->getStorage('field_config')->loadByProperties(['field_name' => 'field_narrative']);
+  $narrative_fields = \Drupal::entityTypeManager()->getStorage('field_config')->loadByProperties(['field_name' => 'field_narrative_taxonomy']);
   $old_values = [
     '[node:field_primary_contacts:entity:link]',
     '[node:field_projects:entity:link]',
@@ -102,10 +103,15 @@ function wri_node_update_10002() {
 
   // Loop through the fields.
   foreach ($narrative_fields as $narrative_field) {
+    $field = \Drupal::configFactory()->getEditable('field.field.' . $narrative_field->id());
     // Find and replace the tokens.
-    $narrative_field->description = str_replace('narrative', 'narrative', $narrative_field->description);
-    $narrative_field->default_value[0]['value'] = str_replace($old_values, $new_values, $narrative_field->default_value[0]['value']);
+    $field->set('description', str_replace($old_values, $new_values, $field->get('description')));
+    $default_value  = $field->get('default_value');
+    if (isset($default_value[0]['value'])) {
+      $default_value[0]['value'] = str_replace($old_values, $new_values, $default_value[0]['value']);
+      $field->set('default_value', $default_value);
+    }
 
-    $narrative_field->save();
+    $field->save();
   }
 }
