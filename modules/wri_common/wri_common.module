@@ -260,7 +260,12 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
           case 'primary_contact_links':
             if ($node->hasField('field_primary_contacts') && ($contact_items = $node->get('field_primary_contacts')) && !$contact_items->isEmpty()) {
               $contact_item = $contact_items->first()->entity;
-              $replacements[$original] = wri_common_link_or_text($contact_item);
+              if ($contact_item) {
+                $replacements[$original] = wri_common_link_or_text($contact_item);
+              }
+              else {
+                $replacements[$original] = \Drupal::config('wri_node.settings')->get('unpublished_person_phrase');
+              }
             }
             else {
               $replacements[$original] = \Drupal::config('wri_node.settings')->get('unpublished_person_phrase');
