@@ -265,11 +265,11 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
                 $replacements[$original] = wri_common_link_or_text($contact_item);
               }
               else {
-                $replacements[$original] = \Drupal::config('wri_node.settings')->get('unpublished_person_phrase');
+                $replacements[$original] = wri_common_person_link_fallback($node);
               }
             }
             else {
-              $replacements[$original] = \Drupal::config('wri_node.settings')->get('unpublished_person_phrase');
+              $replacements[$original] = wri_common_person_link_fallback($node);
             }
             break;
         }
