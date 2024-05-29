@@ -93,15 +93,19 @@ input[type="text"].ghost {
 }
 
 form.webform-submission-form {
-  .fieldset-legend {
-    @include font($acumin-semi-cond, "semibold", "normal");
-    @include font-line-height(20, 20);
-  }
-
+  .fieldset-legend,
   label {
     @include font($acumin-semi-cond, "regular", "normal");
     @include font-line-height(16, 22);
   }
+
+  .checkboxes--wrapper {
+    .fieldset-legend {
+      @include font($acumin-semi-cond, "semibold", "normal");
+      @include font-line-height(20, 20);
+    }
+  }
+
   input[type="text"],
   input[type="email"],
   input[type="phone"],
@@ -227,5 +231,16 @@ form.webform-submission-form {
 
   @include mq($ph) {
     @include center-columns($grid-columns, $grid-columns);
+  }
+}
+
+.webform-flex--container select {
+  width: 400px;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .webform-flex--container select {
+    width: 100%;
   }
 }
