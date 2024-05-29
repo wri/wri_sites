@@ -48,7 +48,7 @@ class RegisterButton extends DsFieldBase {
 
         $info['link'] = $link->toRenderable();
         $info['link']['#attributes'] = [
-          'class' => $button_classes
+          'class' => $button_classes,
         ];
       }
       elseif ($registration_link) {
@@ -58,7 +58,7 @@ class RegisterButton extends DsFieldBase {
 
         $info['link'] = $link->toRenderable();
         $info['link']['#attributes'] = [
-          'class' => $button_classes
+          'class' => $button_classes,
         ];
       }
     }
