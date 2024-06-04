@@ -7,12 +7,15 @@
 <nav role="navigation" id="{{ heading_id }}" aria-labelledby="{{ heading_id }}"{{ attributes.addClass(classes)|without('role', 'aria-labelledby','id') }}>
   <div class="menu-wrapper">
     <div class="menu">
-  <ul class="toc-list-wrapper">
-    <li class="menu-item menu-item--expanded menu-item--active-trail">{{ configuration.label }}
-  {% block content %}
-    {{ content }}
-  {% endblock %}</li>
-  </ul>
+      <ul class="toc-list-wrapper">
+        <li class="menu-item menu-item--expanded menu-item--active-trail">
+        {{ configuration.label }}
+        {% block content %}
+          {{ content }}
+        {% endblock %}
+        {% include "@ts_wrin/_includes/scroll-right.html.twig" %}
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
