@@ -220,7 +220,6 @@ blockquote {
   display: inherit;
   margin: 0 0 $space-sm;
   float: none;
-  position: relative;
 }
 .caption > * {
   display: inherit;
@@ -296,15 +295,6 @@ img {
     object,
     embed {
       height: auto;
-    }
-  }
-
-  // Right Align Full Width Media Caption
-  @include mq($lg) {
-    & + figcaption {
-      position: absolute;
-      left: calc(100% + 32px);
-      width: 180px;
     }
   }
 }
