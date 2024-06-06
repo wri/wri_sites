@@ -220,6 +220,7 @@ blockquote {
   display: inherit;
   margin: 0 0 $space-sm;
   float: none;
+  position: relative;
 }
 .caption > * {
   display: inherit;
