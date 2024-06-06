@@ -38,6 +38,7 @@ dependencies:
   - layout_builder_restrictions
   - layout_discovery
   - link_attributes
+  - link_attributes_menu_link_content
   - media_responsive_thumbnail
   - menu_ui
   - paragraphs
