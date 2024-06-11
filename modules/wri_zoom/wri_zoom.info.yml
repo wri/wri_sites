@@ -1,0 +1,8 @@
+name: 'WRI Zoom'
+type: module
+description: 'Integrate WRI events with zoom'
+package: WRI
+core_version_requirement: '>=9.5'
+dependencies:
+  - webform:webform
+  - wri_event:wri_event
