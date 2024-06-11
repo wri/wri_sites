@@ -2,31 +2,8 @@
 
 namespace Drupal\wri_zoom\Plugin\WebformHandler;
 
-use Drupal\Component\Render\MarkupInterface;
-use Drupal\Component\Utility\Html;
-use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax\RedirectCommand;
-use Drupal\Core\EventSubscriber\MainContentViewSubscriber;
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Messenger\MessengerInterface;
-use Drupal\Core\Routing\TrustedRedirectResponse;
-use Drupal\Core\Serialization\Yaml;
-use Drupal\Core\Url;
-use Drupal\file\Entity\File;
-use Drupal\webform\Element\WebformMessage;
-use Drupal\webform\Plugin\WebformElement\BooleanBase;
-use Drupal\webform\Plugin\WebformElement\NumericBase;
-use Drupal\webform\Plugin\WebformElement\WebformCompositeBase;
-use Drupal\webform\Plugin\WebformElement\WebformManagedFileBase;
-use Drupal\webform\Plugin\WebformElementInterface;
 use Drupal\webform\Plugin\WebformHandler\RemotePostWebformHandler;
-use Drupal\webform\Plugin\WebformHandlerBase;
-use Drupal\webform\WebformInterface;
-use Drupal\webform\WebformMessageManagerInterface;
 use Drupal\webform\WebformSubmissionInterface;
-use GuzzleHttp\Exception\RequestException;
-use Psr\Http\Message\ResponseInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Webform submission remote Zoom post handler.
@@ -59,7 +36,6 @@ class ZoomRemotePostWebformHandler extends RemotePostWebformHandler {
     return $response_has_error || $body_has_error;
   }
 
-
   /**
    * {@inheritdoc}
    */
@@ -74,7 +50,6 @@ class ZoomRemotePostWebformHandler extends RemotePostWebformHandler {
 
     return $data;
   }
-
 
   /**
    * {@inheritdoc}
