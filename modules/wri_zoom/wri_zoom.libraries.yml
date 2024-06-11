@@ -1,0 +1,5 @@
+get_browser_lang:
+  js:
+    js/get-browser-lang.js: {}
+  dependencies:
+    - core/drupal
