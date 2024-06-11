@@ -48,12 +48,43 @@ class ZoomRemotePostWebformHandler extends RemotePostWebformHandler {
    * {@inheritdoc}
    */
   protected function responseHasError($response) {
-    $status_code_response = parent::responseHasError($response);
+    $response_has_error = parent::responseHasError($response);
     // The http response is always 200, so we need to check the body of the
     // response conains "Success".
     $body = $response->getBody()->getContents();
+    // Ensure we can get the body again.
+    $response->getBody()->rewind();
+    $body_has_error = $body !== 'Success';
 
-    return $status_code_response && $body !== 'Success';
+    return $response_has_error || $body_has_error;
+  }
+
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getRequestData($state, WebformSubmissionInterface $webform_submission) {
+    $data = parent::getRequestData($state, $webform_submission);
+
+    // Clear out any tokens that have no value so we can get an error if the
+    // webform id is not set.
+    foreach ($data as $key => $value) {
+      $data[$key] = $this->replaceTokens($value, $webform_submission, [], ['clear' => TRUE]);
+    }
+
+    return $data;
+  }
+
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function handleError($state, $message, $request_url, $request_method, $request_type, $request_options, $response) {
+    // Give our logs more information about why the response failed.
+    $message .= ' Response body: ' . $response->getBody()->getContents();
+    // Ensure we can get the body again.
+    $response->getBody()->rewind();
+    return parent::handleError($state, $message, $request_url, $request_method, $request_type, $request_options, $response);
   }
 
 }
