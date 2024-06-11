@@ -93,10 +93,17 @@ input[type="text"].ghost {
 }
 
 form.webform-submission-form {
-  .fieldset-legend,
+
   label {
     @include font($acumin-semi-cond, "regular", "normal");
     @include font-line-height(16, 22);
+  }
+
+  .fieldset-legend {
+    @include font($acumin-semi-cond, "bold", "normal");
+    @include font-line-height(16, 22);
+    position: relative;
+    top: -4px;
   }
 
   .checkboxes--wrapper {
@@ -121,11 +128,11 @@ form.webform-submission-form {
   input[type="month"],
   select {
     @include font($acumin-semi-cond, "regular", "normal");
-    @include font-line-height(16, 22);
+    @include font-line-height(20, 24);
     background-color: transparent;
     border: 1px solid $med-grey;
     color: $black;
-    height: 40px;
+    height: 48px;
     padding: 12px 15px 4px 8px;
     display: flex;
     justify-content: center;
@@ -134,11 +141,11 @@ form.webform-submission-form {
     max-width: 100%;
     border-radius: 3px;
     @include mq($md) {
-      height: 50px;
+      height: 58px;
       padding: 16px 20px 8px 10px;
     }
     @include mq($lg) {
-      height: 60px;
+      height: 68px;
       padding: 24px 25px 12px 10px;
     }
     @include hocus() {
@@ -156,20 +163,22 @@ form.webform-submission-form {
       top: -4px;
       left: auto;
       position: relative;
+      font-weight: bold;
     }
     select {
       padding: 8px 15px 8px 8px;
       @include mq($md) {
         padding: 12px 20px 12px 10px;
       }
-      @include mq($lg) {
-        padding: 18px 25px 18px 10px;
-      }
       @include hocus() {
         border-color: $true-black;
         outline: none;
       }
     }
+  }
+
+  .fieldset-wrapper .form-type-select {
+    margin: 0;
   }
 
   .form-type-checkbox,
@@ -235,7 +244,7 @@ form.webform-submission-form {
 }
 
 .webform-flex--container select {
-  width: 400px;
+  width: 100%;
   max-width: 100%;
 }
 
