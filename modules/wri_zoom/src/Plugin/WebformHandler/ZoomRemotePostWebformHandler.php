@@ -45,19 +45,15 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ZoomRemotePostWebformHandler extends RemotePostWebformHandler {
 
   /**
-   * Determine if response has an error status code.
-   *
-   * @param \Psr\Http\Message\ResponseInterface|null $response
-   *   The response returned by the remote server.
-   *
-   * @return bool
-   *   TRUE if response status code reflects an unsuccessful value.
+   * {@inheritdoc}
    */
   protected function responseHasError($response) {
-    $status_code = $response->getStatusCode();
+    $status_code_response = parent::responseHasError($response);
+    // The http response is always 200, so we need to check the body of the
+    // response conains "Success".
     $body = $response->getBody()->getContents();
 
-    return ($status_code < 200 || $status_code >= 300) && $body !== 'Success';
+    return $status_code_response && $body !== 'Success';
   }
 
 }
