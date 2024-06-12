@@ -1,0 +1,12 @@
+.bullets {
+  padding: $space-xs;
+  margin: 1rem 0;
+
+  ul,
+  li {
+    margin: 0;
+    padding: 0;
+    list-style: none outside none;
+    font-family: inherit;
+  }
+}
