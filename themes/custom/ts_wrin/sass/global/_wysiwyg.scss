@@ -161,8 +161,10 @@ li .ck-list-bogus-paragraph {
   padding: $space-xs;
   margin: 1rem 0;
 
-  .h4 {
-    margin-bottom: rem(11);
+  .bottom-border-tiny-black {
+    border-bottom: 0.5px solid $black;
+    padding-bottom: rem(11);
+    margin-bottom: rem(8);
   }
 
   ul,
@@ -172,9 +174,6 @@ li .ck-list-bogus-paragraph {
     list-style: none outside none;
     font-family: inherit;
     font-size: rem(18);
-  }
-  ul {
-    padding-top: rem(8);
   }
   li {
     margin-left: rem(16);
