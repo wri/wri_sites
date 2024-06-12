@@ -6,7 +6,7 @@
  */
 
 /**
- * Enable the modules better_passwords and rename_admin_paths.
+ * Enable the modules better_passwords and rename_admin_paths and pulls config.
  */
 function wri_admin_update_10001() {
   $moduleHandler = \Drupal::service('module_handler');
@@ -16,4 +16,7 @@ function wri_admin_update_10001() {
   if (!$moduleHandler->moduleExists('rename_admin_paths')) {
     \Drupal::service('module_installer')->install(['rename_admin_paths'], TRUE);
   }
+
+  \Drupal::service('distro_helper.updates')->installConfig('better_passwords.settings', 'wri_admin', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('rename_admin_paths.settings', 'wri_admin', 'install');
 }
