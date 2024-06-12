@@ -10,10 +10,10 @@ id: node.program_center.field_twitter_account
 field_name: field_twitter_account
 entity_type: node
 bundle: program_center
-label: 'Follow on Twitter'
+label: 'Follow on X'
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
