@@ -3,3 +3,9 @@ get_browser_lang:
     js/get-browser-lang.js: {}
   dependencies:
     - core/drupal
+
+zoom_utm:
+  js:
+    js/zoom-utm.js: {}
+  dependencies:
+    - core/drupal

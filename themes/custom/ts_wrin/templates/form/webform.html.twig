@@ -8,5 +8,6 @@
 #}
 {% if element["elements"]["webinar_id"] %}
 <a id="register"></a>
+{{ attach_library('wri_zoom/zoom_utm') }}
 {% endif %}
 {% include "@webform/webform.html.twig" %}

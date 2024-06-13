@@ -33,17 +33,18 @@ class RegisterButton extends DsFieldBase {
     if ($end > time()) {
       if ($this->viewMode() == 'main_content') {
         $button_classes = ['button', 'button--primary'];
+        $node_url = Url::fromUserInput('#register');
       }
       else {
         $button_classes = ['button', 'small'];
+        $node_url = $entity->toUrl();
+        $node_url->setOption('fragment', 'register');
       }
       $zoom_id = $entity->field_zoom_webinar_id->value;
       $webform_id = $entity->field_zoom_registration_form->target_id;
       $registration_link = $entity->field_register->uri;
 
       if ($zoom_id && $webform_id) {
-        $node_url = $entity->toUrl();
-        $node_url->setOption('fragment', 'register');
         $link = new Link('Register', $node_url);
 
         $info['link'] = $link->toRenderable();
