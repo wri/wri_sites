@@ -101,6 +101,10 @@ function wri_search_token_info_alter(&$info) {
     'name' => 'TID if Child',
     'description' => t('The term id if this term is a child.'),
   ];
+  $info['types']['term']['term_parent_or_self'] = [
+    'name' => 'Term parent or self',
+    'description' => t('The term parent or the term id if this has no parent.'),
+  ];
 }
 
 /**
@@ -117,6 +121,12 @@ function wri_search_tokens($type, $tokens, array $data, array $options, Bubbleab
         case 'non_orphan':
           if ($term->parent->target_id) {
             $replacements[$original] = $term->id();
+          }
+          break;
+
+        case 'term_parent_or_self':
+          if ($term->term_parent_or_self && $parent_or_self = $term->term_parent_or_self->getValue()) {
+            $replacements[$original] = $parent_or_self[0]['target_id'] ?? '';
           }
           break;
       }
