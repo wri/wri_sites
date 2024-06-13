@@ -20,20 +20,25 @@ use Drupal\webform\WebformSubmissionInterface;
  * )
  */
 class ZoomRemotePostWebformHandler extends RemotePostWebformHandler {
+  private $response_has_error;
 
   /**
    * {@inheritdoc}
    */
   protected function responseHasError($response) {
-    $response_has_error = parent::responseHasError($response);
-    // The http response is always 200, so we need to check the body of the
-    // response conains "Success".
-    $body = $response->getBody()->getContents();
-    // Ensure we can get the body again.
-    $response->getBody()->rewind();
-    $body_has_error = $body !== 'Success';
+    if (!isset($this->response_has_error)) {
+      $response_has_error = parent::responseHasError($response);
+      // The http response is always 200, so we need to check the body of the
+      // response conains "Success".
+      $body = $response->getBody()->getContents();
+      // Ensure we can get the body again.
+      $response->getBody()->rewind();
+      $body_has_error = $body !== 'Success';
 
-    return $response_has_error || $body_has_error;
+      $this->response_has_error = $response_has_error || $body_has_error;
+    }
+
+    return $this->response_has_error;
   }
 
   /**
