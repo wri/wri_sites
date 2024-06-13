@@ -5,5 +5,7 @@
  */
 function wri_zoom_webform_submission_insert(\Drupal\Core\Entity\EntityInterface $entity) {
   $params = session_get_cookie_params();
-  setcookie('ap3c_track_email', $entity->getData()['email'], time() + 31556952, '/', $params['domain'], FALSE, FALSE);
+  if (isset($entity->getData()['email'])) {
+    setcookie('ap3c_track_email', $entity->getData()['email'], time() + 31556952, '/', $params['domain'], FALSE, FALSE);
+  }
 }
