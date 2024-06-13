@@ -11,7 +11,7 @@ use Drupal\ds\Plugin\DsField\DsFieldBase;
  *
  * @DsField(
  *   id = "register_button",
- *   title = @Translation("Smart Register Button."),
+ *   title = @Translation("Smart Register Button"),
  *   entity_type = "node",
  *   ui_limit = {"event|*"}
  * )
@@ -43,7 +43,7 @@ class RegisterButton extends DsFieldBase {
 
       if ($zoom_id && $webform_id) {
         $node_url = $entity->toUrl();
-        $node_url->setOption('fragment', 'webform-' . $webform_id);
+        $node_url->setOption('fragment', 'register');
         $link = new Link('Register', $node_url);
 
         $info['link'] = $link->toRenderable();
