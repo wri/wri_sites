@@ -478,8 +478,8 @@ function ts_wrin_views_pre_render(ViewExecutable $view) {
  */
 function ts_wrin_preprocess_webform_confirmation(&$variables) {
   // If the submitted form has an "email" field, track that in ap3c.
-  if ($variables["webform_submission"]->data["email"]) {
-    $variables["#attached"]["library"][] = "wri_zoom/ap3c_track";
-    $variables['#attached']['library']['wriZoomAp3cTrack']['email'] = $variables["webform_submission"]->data["email"];
+  if ($variables["webform_submission"] && ($email = $variables["webform_submission"]->getData()['email'] ?? FALSE)) {
+    $variables['message']["#attached"]["library"][] = "wri_zoom/ap3c_track";
+    $variables['message']['#attached']['drupalSettings']['wriZoomAp3cTrack']['email'] = $email;
   }
 }
