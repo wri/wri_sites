@@ -10,6 +10,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\search_api\Plugin\views\query\SearchApiQuery;
+use Drupal\taxonomy\Entity\Term;
 use Drupal\views\ViewExecutable;
 
 /**
@@ -125,8 +126,12 @@ function wri_search_tokens($type, $tokens, array $data, array $options, Bubbleab
           break;
 
         case 'term_parent_or_self':
-          if ($term->term_parent_or_self && $parent_or_self = $term->term_parent_or_self->getValue()) {
-            $replacements[$original] = $parent_or_self[0]['target_id'] ?? '';
+          if ($term->parent->target_id == '0') {
+            $replacements[$original] = $term->getName() ?? '';
+          }
+          elseif ($parent_id = $term->parent->target_id) {
+            $parent_term = Term::load($parent_id);
+            $replacements[$original] = $parent_term->getName() ?? '';
           }
           break;
       }
