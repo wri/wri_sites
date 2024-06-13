@@ -9,3 +9,9 @@ zoom_utm:
     js/zoom-utm.js: {}
   dependencies:
     - core/drupal
+
+ap3c_track:
+  js:
+    js/ap3c-track.js: {}
+  dependencies:
+    - core/drupal

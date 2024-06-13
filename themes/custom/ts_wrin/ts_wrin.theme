@@ -472,3 +472,14 @@ function ts_wrin_views_pre_render(ViewExecutable $view) {
     }
   }
 }
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function ts_wrin_preprocess_webform_confirmation(&$variables) {
+  // If the submitted form has an "email" field, track that in ap3c.
+  if ($variables["webform_submission"]->data["email"]) {
+    $variables["#attached"]["library"][] = "wri_zoom/ap3c_track";
+    $variables['#attached']['library']['wriZoomAp3cTrack']['email'] = $variables["webform_submission"]->data["email"];
+  }
+}
