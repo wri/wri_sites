@@ -231,6 +231,10 @@ figcaption {
   }
 }
 
+.border-small {
+  border: 1px solid $black;
+}
+
 .top-border-thick {
   border-top: 6px solid $black;
   margin-top: 0;
