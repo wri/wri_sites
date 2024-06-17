@@ -157,6 +157,10 @@ function wri_common_token_info() {
     'name' => 'A node link',
     'description' => 'The link to the node, if published, or its title if not.',
   ];
+  $info['tokens']['node']['projects_links'] = [
+    'name' => 'A listing of project links',
+    'description' => 'The link to the related projects if published, and nothing if not.',
+  ];
   $info['tokens']['node']['projects_links_within'] = [
     'name' => 'A listing of project links, followed by "within"',
     'description' => 'The link to the related projects if published, and the site title if no projects are related.',
@@ -249,12 +253,18 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
             $replacements[$original] = wri_common_link_or_text($data['node']);
             break;
 
-          case 'projects_links_within':
+          case 'projects_links':
             if ($node->hasField('field_projects') && ($projects = $node->get('field_projects')->referencedEntities())) {
               $replacements[$original] = _wri_common_format_list($projects);
             }
-            else {
-              $replacements[$original] = \Drupal::config('system.site')->get('name');
+            break;
+
+          case 'projects_links_within':
+            // Get the projects_links value using tokens.
+            $phrase = \Drupal::config('wri_node.settings')->get('within_phrase');
+            $replaced = \Drupal::token()->replace('[node:projects_links_within]', ['node' => $node], ['clear' => TRUE]);
+            if ($replaced) {
+              $replacements[$original] = \Drupal::token()->replace($phrase, ['node' => $node], ['clear' => TRUE]);
             }
             break;
 

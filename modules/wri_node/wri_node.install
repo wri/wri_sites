@@ -54,38 +54,47 @@ function wri_node_update_10001() {
       $language = $default_language = $config_translation->get('langcode');
     }
     $phrase = 'and';
+    $within = 'within';
 
     switch ($language) {
       case 'en':
         $phrase = 'and';
+        $within = '[node:projects_links_within] within';
         break;
 
       case 'fr':
         $phrase = 'et';
+        $within = '[node:projects_links_within] dans';
         break;
 
       case 'es':
         $phrase = 'y';
+        $within = '[node:projects_links_within] del';
         break;
 
       case 'zh-hans':
-        $phrase = '和';
+        $within = '[node:projects_links_within] within';
+        $phrase = 'and';
         break;
 
       case 'id':
         $phrase = 'dan';
+        $within = '[node:projects_links_within] dalam';
         break;
 
       case 'pt-br':
         $phrase = 'e';
+        $within = 'do projeto [node:field_projects:entity:link]';
         break;
     }
 
     if ($collection_name && $default_language != $language) {
       \Drupal::languageManager()->getLanguageConfigOverride($language, 'wri_node.settings')->set('and_phrase', $phrase)->save();
+      \Drupal::languageManager()->getLanguageConfigOverride($language, 'wri_node.settings')->set('within_phrase', $within)->save();
     }
     else {
       \Drupal::configFactory()->getEditable('wri_node.settings')->set('and_phrase', $phrase)->save();
+      \Drupal::configFactory()->getEditable('wri_node.settings')->set('within_phrase', $within)->save();
     }
   }
 }
@@ -98,10 +107,16 @@ function wri_node_update_10002() {
   $narrative_fields = \Drupal::entityTypeManager()->getStorage('field_config')->loadByProperties(['field_name' => 'field_narrative_taxonomy']);
   $old_values = [
     'node:field_primary_contacts:entity:link',
-    '[node:field_projects:entity:link] within',
+    '[node:field_projects:entity:link] within', // en
+    '[node:field_projects:entity:link] dalam', // id
+    '[node:field_projects:entity:link] del', // es
+    'do projeto [node:field_projects:entity:link]', // pt-br
   ];
   $new_values = [
     'node:primary_contact_links',
+    '[node:projects_links_within]',
+    '[node:projects_links_within]',
+    '[node:projects_links_within]',
     '[node:projects_links_within]',
   ];
 
@@ -117,53 +132,5 @@ function wri_node_update_10002() {
     }
 
     $field->save();
-  }
-}
-
-function wri_node_update_10003() {
-  $collections = \Drupal::service('config.manager')->getConfigCollectionInfo();
-
-  foreach ($collections->getCollectionNames() as $collection_name) {
-    if ($collection_name) {
-      [, $language] = explode('.', $collection_name);
-    }
-    else {
-      $config_translation = \Drupal::configFactory()->getEditable('wri_node.settings');
-      $language = $default_language = $config_translation->get('langcode');
-    }
-    $phrase = 'and';
-
-    switch ($language) {
-      case 'en':
-        $phrase = 'and';
-        break;
-
-      case 'fr':
-        $phrase = 'et';
-        break;
-
-      case 'es':
-        $phrase = 'y';
-        break;
-
-      case 'zh-hans':
-        $phrase = '和';
-        break;
-
-      case 'id':
-        $phrase = 'dan';
-        break;
-
-      case 'pt-br':
-        $phrase = 'e';
-        break;
-    }
-
-    if ($collection_name && $default_language != $language) {
-      \Drupal::languageManager()->getLanguageConfigOverride($language, 'wri_node.settings')->set('within_phrase', $phrase)->save();
-    }
-    else {
-      \Drupal::configFactory()->getEditable('wri_node.settings')->set('within_phrase', $phrase)->save();
-    }
   }
 }
