@@ -115,10 +115,10 @@ function wri_narrative_post_update_rewrite_narrative_taxonomies2(&$sandbox) {
     // Replace link strings with new values.
     $taxonomy_value[0]['value'] = str_replace(
       ['[node:field_primary_contacts:entity:link]',
-        '[node:field_projects:entity:link]',
+        '[node:field_projects:entity:link] within',
       ],
       ['[node:primary_contact_links]',
-        '[node:projects_links]',
+        '[node:projects_links_within]',
       ],
       $taxonomy_value[0]['value']
     );

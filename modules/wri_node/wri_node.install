@@ -98,11 +98,11 @@ function wri_node_update_10002() {
   $narrative_fields = \Drupal::entityTypeManager()->getStorage('field_config')->loadByProperties(['field_name' => 'field_narrative_taxonomy']);
   $old_values = [
     'node:field_primary_contacts:entity:link',
-    'node:field_projects:entity:link',
+    '[node:field_projects:entity:link] within',
   ];
   $new_values = [
     'node:primary_contact_links',
-    'node:projects_links',
+    '[node:projects_links_within]',
   ];
 
   // Loop through the fields.
