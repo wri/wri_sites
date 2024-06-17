@@ -119,3 +119,51 @@ function wri_node_update_10002() {
     $field->save();
   }
 }
+
+function wri_node_update_10003() {
+  $collections = \Drupal::service('config.manager')->getConfigCollectionInfo();
+
+  foreach ($collections->getCollectionNames() as $collection_name) {
+    if ($collection_name) {
+      [, $language] = explode('.', $collection_name);
+    }
+    else {
+      $config_translation = \Drupal::configFactory()->getEditable('wri_node.settings');
+      $language = $default_language = $config_translation->get('langcode');
+    }
+    $phrase = 'and';
+
+    switch ($language) {
+      case 'en':
+        $phrase = 'and';
+        break;
+
+      case 'fr':
+        $phrase = 'et';
+        break;
+
+      case 'es':
+        $phrase = 'y';
+        break;
+
+      case 'zh-hans':
+        $phrase = '和';
+        break;
+
+      case 'id':
+        $phrase = 'dan';
+        break;
+
+      case 'pt-br':
+        $phrase = 'e';
+        break;
+    }
+
+    if ($collection_name && $default_language != $language) {
+      \Drupal::languageManager()->getLanguageConfigOverride($language, 'wri_node.settings')->set('within_phrase', $phrase)->save();
+    }
+    else {
+      \Drupal::configFactory()->getEditable('wri_node.settings')->set('within_phrase', $phrase)->save();
+    }
+  }
+}
