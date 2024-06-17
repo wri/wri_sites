@@ -23,3 +23,7 @@ wri_node.settings:
     and_phrase:
         type: text
         label: 'And word for listings, ie: 1, 2 "and" 3'
+    within_phrase:
+      type: text
+      label: 'And word for "within" in the phrase "is part of X-project within Y-topic"'
+

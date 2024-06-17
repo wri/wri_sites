@@ -63,28 +63,35 @@ class SettingsForm extends ConfigFormBase {
     $form['use_fallback_image'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Use a fallback image?'),
+      '#config_target' => 'wri_node.settings:use_fallback_image',
       '#description' => $this->t('If checked, a Card for a Node with no existing Main Image will display a default image (based on the title of the Primary topic). If one is not found the default image at <a href="@href" target="_blank">default.jpg</a> will be used.', ['@href' => $url]),
-      '#default_value' => $this->config('wri_node.settings')->get('use_fallback_image'),
     ];
 
     $form['unpublished_person_phrase'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Unpublished Person phrase'),
-      '#default_value' => $this->config('wri_node.settings')->get('unpublished_person_phrase'),
+      '#config_target' => 'wri_node.settings:unpublished_person_phrase',
       '#required' => TRUE,
     ];
 
     $form['and_phrase'] = [
       '#type' => 'textfield',
       '#title' => $this->t('And word for listings, ie: 1, 2 "and" 3'),
-      '#default_value' => $this->config('wri_node.settings')->get('and_phrase'),
+      '#config_target' => 'wri_node.settings:and_phrase',
+      '#required' => TRUE,
+    ];
+
+    $form['within_phrase'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('And word for "within" in the phrase "is part of X-project within Y-topic"'),
+      '#config_target' => 'wri_node.settings:within_phrase',
       '#required' => TRUE,
     ];
 
     $form['person_listing_url'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Person listing url'),
-      '#default_value' => $this->config('wri_node.settings')->get('person_listing_url'),
+      '#config_target' => 'wri_node.settings:person_listing_url',
       '#size' => 40,
       '#description' => $this->t('If a narrative taxonomy contains a person link that has been unpublished, link to this url instead.'),
       '#field_prefix' => $this->requestContext->getCompleteBaseUrl(),
@@ -93,42 +100,25 @@ class SettingsForm extends ConfigFormBase {
     $form['disable_ads_data_redaction'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Disable google consent mode?'),
+      '#config_target' => 'wri_node.settings:disable_ads_data_redaction',
       '#description' => $this->t('If checked, the tag for "ads_data_redaction" will be disabled'),
-      '#default_value' => $this->config('wri_node.settings')->get('disable_ads_data_redaction'),
     ];
 
     $form['disable_osano_script'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Disable Osano script from loading in Head?'),
+      '#config_target' => 'wri_node.settings:disable_osano_script',
       '#description' => $this->t('If checked, the tag for "osano_script" will be disabled'),
-      '#default_value' => $this->config('wri_node.settings')->get('disable_osano_script'),
     ];
 
     $form['twitter_share_suffix'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Twitter Share suffix'),
-      '#default_value' => $this->config('wri_node.settings')->get('twitter_share_suffix'),
+      '#config_target' => 'wri_node.settings:twitter_share_suffix',
       '#size' => 40,
       '#description' => $this->t('On social share dropdown, the text to come after the title of a page in a tweet. Defaults to "via @WorldResources"'),
     ];
 
     return parent::buildForm($form, $form_state);
   }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-    $this->config('wri_node.settings')
-      ->set('use_fallback_image', $form_state->getValue('use_fallback_image'))
-      ->set('unpublished_person_phrase', $form_state->getValue('unpublished_person_phrase'))
-      ->set('person_listing_url', $form_state->getValue('person_listing_url'))
-      ->set('and_phrase', $form_state->getValue('and_phrase'))
-      ->set('disable_ads_data_redaction', $form_state->getValue('disable_ads_data_redaction'))
-      ->set('disable_osano_script', $form_state->getValue('disable_osano_script'))
-      ->set('twitter_share_suffix', $form_state->getValue('twitter_share_suffix'))
-      ->save();
-    parent::submitForm($form, $form_state);
-  }
-
 }
