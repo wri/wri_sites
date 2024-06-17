@@ -40,7 +40,7 @@ function wri_node_update_9503() {
 }
 
 /**
- * Updates the node and_phrase values.
+ * Updates the node and_phrase and within_phase values.
  */
 function wri_node_update_10001() {
   $collections = \Drupal::service('config.manager')->getConfigCollectionInfo();
@@ -107,16 +107,24 @@ function wri_node_update_10002() {
   $narrative_fields = \Drupal::entityTypeManager()->getStorage('field_config')->loadByProperties(['field_name' => 'field_narrative_taxonomy']);
   $old_values = [
     'node:field_primary_contacts:entity:link',
-    '[node:field_projects:entity:link] within', // en
-    '[node:field_projects:entity:link] dalam', // id
-    '[node:field_projects:entity:link] del', // es
-    'do projeto [node:field_projects:entity:link]', // pt-br
+    '&#91;node:field_projects:entity:link&#93;&#91; within ',
+    '[node:field_projects:entity:link] within ', // en
+    '&#91;node:field_projects:entity:link&#93;&#91; dalam ',
+    '[node:field_projects:entity:link] dalam ', // id
+    '&#91;node:field_projects:entity:link&#93;&#91; del ',
+    '[node:field_projects:entity:link] del ', // es
+    'do projeto &#91;node:field_projects:entity:link&#93;&#91; ',
+    'do projeto [node:field_projects:entity:link] ', // pt-br
   ];
   $new_values = [
     'node:primary_contact_links',
+    '&#91;node:projects_links_within&#93;&#91;',
     '[node:projects_links_within]',
+    '&#91;node:projects_links_within&#93;&#91;',
     '[node:projects_links_within]',
+    '&#91;node:projects_links_within&#93;&#91;',
     '[node:projects_links_within]',
+    '&#91;node:projects_links_within&#93;&#91;',
     '[node:projects_links_within]',
   ];
 
