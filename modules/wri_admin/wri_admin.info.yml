@@ -11,6 +11,7 @@ dependencies:
   - admin_toolbar_search
   - admin_toolbar_tools
   - allowed_formats
+  - better_passwords
   - block
   - block_list_override
   - ckeditor5
@@ -41,6 +42,7 @@ dependencies:
   - media_responsive_thumbnail
   - menu_ui
   - paragraphs
+  - rename_admin_paths
   - responsive_tables_filter
   - scheduled_transitions
   - sortableviews
