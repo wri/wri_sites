@@ -262,9 +262,9 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
           case 'projects_links_within':
             // Get the projects_links value using tokens.
             $phrase = \Drupal::config('wri_node.settings')->get('within_phrase');
-            $replaced = \Drupal::token()->replace('[node:projects_links_within]', ['node' => $node], ['clear' => TRUE]);
+            $replaced = \Drupal::token()->replace('[node:projects_links]', ['node' => $node], ['clear' => TRUE]);
             if ($replaced) {
-              $replacements[$original] = \Drupal::token()->replace($phrase, ['node' => $node], ['clear' => TRUE]) . ' ';
+              $replacements[$original] = t(str_replace('[node:projects_links]', $replaced, $phrase) . ' ');
             }
             break;
 
