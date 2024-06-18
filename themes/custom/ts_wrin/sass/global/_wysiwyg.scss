@@ -156,41 +156,6 @@ li .ck-list-bogus-paragraph {
 }
 /* End Block Quote */
 
-/* Start bullets */
-.bullets {
-  padding: $space-xs;
-  margin: 1rem 0;
-
-  .bottom-border-tiny-black {
-    border-bottom: 0.5px solid $black;
-    padding-bottom: rem(11);
-    margin-bottom: rem(8);
-  }
-
-  ul,
-  li {
-    margin: 0;
-    padding: 0;
-    list-style: none outside none;
-    font-family: inherit;
-    font-size: rem(18);
-  }
-  li {
-    margin-left: rem(16);
-    &::before {
-      background-color: $green;
-      border-radius: 50%;
-      display: block;
-      height: rem(8);
-      width: rem(8);
-      position: relative;
-      top: rem(15);
-      left: rem(-16);
-    }
-  }
-}
-/* End Bullets */
-
 /* Start Pull Quote */
 blockquote {
   border: none;
