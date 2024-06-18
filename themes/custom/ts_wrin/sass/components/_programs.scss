@@ -302,6 +302,7 @@
 
     p {
       @include font($acumin-semi-cond, "light");
+      @include font-line-height(18, 30);
     }
 
     .field--name-field-media-image img {
