@@ -76,7 +76,10 @@
                 "incompatibility with layout_builder_st, contextual links broken https://www.drupal.org/project/layout_builder_modal/issues/3133695": "https://www.drupal.org/files/issues/2022-12-15/3133695-13.patch"
             },
             "drupal/search_api": {
-                "[1.35] https://www.drupal.org/project/search_api/issues/3454939": "https://git.drupalcode.org/project/search_api/-/merge_requests/148.diff"
+                "[search_api 1.35 and core 10.x] https://www.drupal.org/project/search_api/issues/3454939": "https://git.drupalcode.org/project/search_api/-/merge_requests/148.diff"
+            },
+            "drupal/search_api_solr": {
+                "[search_api_solr 4.3.3 and core 10.x] https://www.drupal.org/project/search_api_solr/issues/3449292": "https://www.drupal.org/files/issues/2024-06-17/search-api-solr-fatal-error-declaration-of-sleep-3449292-12.patch"
             }
         },
         "drupal-scaffold": {
