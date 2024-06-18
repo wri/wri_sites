@@ -107,7 +107,7 @@ function wri_node_update_10002() {
   $narrative_fields = \Drupal::entityTypeManager()->getStorage('field_config')->loadByProperties(['field_name' => 'field_narrative_taxonomy']);
   $old_values = [
     'node:field_primary_contacts:entity:link',
-    '&#91;node:field_projects:entity:link&#93;; within ',
+    '&#91;node:field_projects:entity:link&#93; within ',
     '[node:field_projects:entity:link] within ', // en
     '&#91;node:field_projects:entity:link&#93; dalam ',
     '[node:field_projects:entity:link] dalam ', // id
@@ -118,13 +118,13 @@ function wri_node_update_10002() {
   ];
   $new_values = [
     'node:primary_contact_links',
-    '&#91;node:projects_links_within&#93;&#91;',
+    '&#91;node:projects_links_within&#93;',
     '[node:projects_links_within]',
-    '&#91;node:projects_links_within&#93;&#91;',
+    '&#91;node:projects_links_within&#93;',
     '[node:projects_links_within]',
-    '&#91;node:projects_links_within&#93;&#91;',
+    '&#91;node:projects_links_within&#93;',
     '[node:projects_links_within]',
-    '&#91;node:projects_links_within&#93;&#91;',
+    '&#91;node:projects_links_within&#93;',
     '[node:projects_links_within]',
   ];
 
