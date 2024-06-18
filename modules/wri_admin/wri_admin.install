@@ -8,6 +8,22 @@
 /**
  * Enable the modules better_passwords and rename_admin_paths and pulls config.
  */
+function wri_admin_install() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('better_passwords')) {
+    \Drupal::service('module_installer')->install(['better_passwords'], TRUE);
+  }
+  if (!$moduleHandler->moduleExists('rename_admin_paths')) {
+    \Drupal::service('module_installer')->install(['rename_admin_paths'], TRUE);
+  }
+  // Delete two config files that we will populate with ours.
+  \Drupal::configFactory()->getEditable('better_passwords.settings')->delete();
+  \Drupal::configFactory()->getEditable('rename_admin_paths.settings')->delete();
+}
+
+/**
+ * Enable the modules better_passwords and rename_admin_paths and pulls config.
+ */
 function wri_admin_update_10001() {
   $moduleHandler = \Drupal::service('module_handler');
   if (!$moduleHandler->moduleExists('better_passwords')) {
