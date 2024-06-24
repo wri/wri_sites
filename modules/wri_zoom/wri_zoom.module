@@ -16,3 +16,38 @@ function wri_zoom_webform_submission_insert(EntityInterface $entity) {
     setcookie('ap3c_track_email', $entity->getData()['email'], time() + 31556952, '/', $params['domain'], FALSE, FALSE);
   }
 }
+
+/**
+ * Implements hook_cron().
+ */
+function wri_zoom_cron() {
+  // Verify there's a value in the content_snippet field orto_registration_url.
+  $orto_link = content_snippets_retrieve('orto_registration_url');
+
+  if (!empty($orto_link)) {
+    // Load up any event nodes without a value in field_sent_to_orto.
+    $nids = \Drupal::entityQuery('node')
+      ->condition('type', 'event')
+      ->condition('field_sent_to_orto', 1, '<>')
+      ->condition('field_date_time', time(), '<')
+      ->execute();
+
+    // Load the nodes and send them to Orto.
+    $nodes = \Drupal\node\Entity\Node::loadMultiple($nids);
+    foreach ($nodes as $node) {
+      // Did the event end over an hour ago?
+      if ($node->field_date_time->end_value < time() + 3600) {
+        // Replace the orto_link tokens with node values;
+        $orto_link = \Drupal::token()->replace($orto_link, ['node' => $node]);
+        continue;
+        // Send the node to Orto using Guzzle.
+        try {
+          $response = \Drupal::httpClient()->request('GET', $orto_link);
+        }
+        catch (\Exception $e) {
+          \Drupal::logger('wri_zoom')->error('Error sending node to Orto: @error', ['@error' => $e->getMessage()]);
+        }
+      }
+    }
+  }
+}
