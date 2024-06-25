@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\Entity\Node;
 
 /**
  * Implements hook_ENTITY_TYPE_insert().
@@ -35,7 +36,6 @@ function wri_zoom_cron() {
     $nids->innerJoin('node__field_date_time', 'node__field_date_time', 'node__field_date_time.entity_id = base_table.nid');
     $nids->innerJoin('node__field_zoom_webinar_id', 'node__field_zoom_webinar_id', 'node__field_zoom_webinar_id.entity_id = base_table.nid');
 
-
     $field_empty_or_zero = $nids->orConditionGroup()
       ->condition('node__field_sent_to_orto.field_sent_to_orto_value', NULL, 'IS NULL')
       ->condition('node__field_sent_to_orto.field_sent_to_orto_value', 1, '<>');
@@ -46,12 +46,12 @@ function wri_zoom_cron() {
 
     $nids = $nids->execute()->fetchCol();
     // Load the nodes and send them to Orto.
-    $nodes = \Drupal\node\Entity\Node::loadMultiple($nids);
+    $nodes = Node::loadMultiple($nids);
     foreach ($nodes as $node) {
       // Url encode the title:
       $original_title = $node->getTitle();
       $node->setTitle(urlencode($node->getTitle()));
-      // Replace the orto_link tokens with node values;
+      // Replace the orto_link tokens with node values;.
       $orto_link = \Drupal::token()->replace($orto_link, ['node' => $node]);
       // Send the node to Orto using Guzzle.
       try {
@@ -59,7 +59,8 @@ function wri_zoom_cron() {
         $node->setTitle($original_title);
         $node->set('field_sent_to_orto', 1);
         $node->save();
-      } catch (\Exception $e) {
+      }
+      catch (\Exception $e) {
         \Drupal::logger('wri_zoom')
           ->error('Error sending event to Orto: @error', ['@error' => $e->getMessage()]);
       }
