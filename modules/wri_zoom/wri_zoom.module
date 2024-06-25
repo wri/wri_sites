@@ -55,7 +55,7 @@ function wri_zoom_cron() {
       $orto_link = \Drupal::token()->replace($orto_link, ['node' => $node]);
       // Send the node to Orto using Guzzle.
       try {
-        $response = \Drupal::httpClient()->request('GET', $orto_link);
+        \Drupal::httpClient()->request('GET', $orto_link);
         $node->setTitle($original_title);
         $node->set('field_sent_to_orto', 1);
         $node->save();
