@@ -130,6 +130,10 @@ figcaption {
   padding: $space-xs;
   margin: 1rem 0;
 
+  .h4 {
+    @include font($caslon, 'bold', 'italic');
+  }
+
   .bottom-border-tiny-black {
     border-bottom: 0.5px solid $black;
     padding-bottom: rem(11);
@@ -141,8 +145,8 @@ figcaption {
     margin: 0;
     padding: 0;
     list-style: none outside none;
-    font-family: inherit;
     font-size: rem(16);
+    @include font($caslon, 'regular');
   }
   li {
     margin-left: rem(16);

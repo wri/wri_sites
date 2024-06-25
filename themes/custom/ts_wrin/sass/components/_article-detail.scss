@@ -131,18 +131,4 @@
     background-position: left 100%;
     text-decoration: none;
   }
-
-  .bullets {
-    @extend .bullets;
-
-    li {
-      font-size: rem(18);
-      &::before {
-        height: rem(8);
-        width: rem(8);
-        top: rem(15);
-        left: rem(-16);
-      }
-    }
-  }
 }
