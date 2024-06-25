@@ -26,13 +26,13 @@ class ZoomRemotePostWebformHandler extends RemotePostWebformHandler {
    *
    * @var bool
    */
-  private $responseHasErro;
+  private $responseHasError;
 
   /**
    * {@inheritdoc}
    */
   protected function responseHasError($response) {
-    if (!isset($this->responseHasErro)) {
+    if (!isset($this->responseHasError)) {
       $response_has_error = parent::responseHasError($response);
       // The http response is always 200, so we need to check the body of the
       // response conains "Success".
@@ -41,10 +41,10 @@ class ZoomRemotePostWebformHandler extends RemotePostWebformHandler {
       $response->getBody()->rewind();
       $body_has_error = $body !== 'Success';
 
-      $this->responseHasErro = $response_has_error || $body_has_error;
+      $this->responseHasError = $response_has_error || $body_has_error;
     }
 
-    return $this->responseHasErro;
+    return $this->responseHasError;
   }
 
   /**
