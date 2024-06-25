@@ -473,4 +473,3 @@ function ts_wrin_views_pre_render(ViewExecutable $view) {
     }
   }
 }
-
