@@ -16,5 +16,11 @@
       "icon": "",
       "description": "",
       "html": "<div class=\"callout alignright\"><p class=\"secondary body-link\"><strong>Callout Top Text1</strong></p><p class=\"secondary\">Callout Bottom Text</p></div>"
+    },
+    {
+      "title": "Bulleted List",
+      "icon": "",
+      "description": "",
+      "html": "<div class=\"bullets border-small\"><div class=\"h4 bottom-border-tiny-black\">Stuff you need to know</div><ul><li><strong>Bullet Title:</strong> List item 1 content</li><li><strong>Bullet Title 2:</strong> List item 2 content</li></ul></div>"
     }
 ]

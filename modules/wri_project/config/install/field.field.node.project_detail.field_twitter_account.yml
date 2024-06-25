@@ -6,14 +6,16 @@ dependencies:
     - node.type.project_detail
   module:
     - link
+_core:
+  default_config_hash: LqPOPLrnuR3-DoKxK8HDIO_CSIhRlbs5ukBsrLANyTE
 id: node.project_detail.field_twitter_account
 field_name: field_twitter_account
 entity_type: node
 bundle: project_detail
-label: 'Follow on Twitter'
-description: ''
+label: 'Follow on'
+description: 'The X (aka Twitter) account of this project.'
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:

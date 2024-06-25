@@ -297,15 +297,6 @@ img {
       height: auto;
     }
   }
-
-  // Right Align Full Width Media Caption
-  @include mq($lg) {
-    & + figcaption {
-      position: absolute;
-      left: calc(100% + 32px);
-      width: 180px;
-    }
-  }
 }
 
 // Don't align anything but half-content.
