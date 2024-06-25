@@ -33,6 +33,8 @@ function wri_zoom_cron() {
     $nids->innerJoin('node_field_data', 'node_field_data', 'base_table.nid = node_field_data.nid');
     $nids->leftJoin('node__field_sent_to_orto', 'node__field_sent_to_orto', 'node__field_sent_to_orto.entity_id = base_table.nid');
     $nids->innerJoin('node__field_date_time', 'node__field_date_time', 'node__field_date_time.entity_id = base_table.nid');
+    $nids->innerJoin('node__field_zoom_webinar_id', 'node__field_zoom_webinar_id', 'node__field_zoom_webinar_id.entity_id = base_table.nid');
+
 
     $field_empty_or_zero = $nids->orConditionGroup()
       ->condition('node__field_sent_to_orto.field_sent_to_orto_value', NULL, 'IS NULL')
@@ -46,16 +48,21 @@ function wri_zoom_cron() {
     // Load the nodes and send them to Orto.
     $nodes = \Drupal\node\Entity\Node::loadMultiple($nids);
     foreach ($nodes as $node) {
-        // Replace the orto_link tokens with node values;
-        $orto_link = \Drupal::token()->replace($orto_link, ['node' => $node]);
-        continue;
-        // Send the node to Orto using Guzzle.
-        try {
-          $response = \Drupal::httpClient()->request('GET', $orto_link);
-        }
-        catch (\Exception $e) {
-          \Drupal::logger('wri_zoom')->error('Error sending node to Orto: @error', ['@error' => $e->getMessage()]);
-        }
+      // Url encode the title:
+      $original_title = $node->getTitle();
+      $node->setTitle(urlencode($node->getTitle()));
+      // Replace the orto_link tokens with node values;
+      $orto_link = \Drupal::token()->replace($orto_link, ['node' => $node]);
+      // Send the node to Orto using Guzzle.
+      try {
+        $response = \Drupal::httpClient()->request('GET', $orto_link);
+        $node->setTitle($original_title);
+        $node->set('field_sent_to_orto', 1);
+        $node->save();
+      } catch (\Exception $e) {
+        \Drupal::logger('wri_zoom')
+          ->error('Error sending event to Orto: @error', ['@error' => $e->getMessage()]);
+      }
     }
   }
 }
