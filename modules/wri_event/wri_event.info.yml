@@ -6,7 +6,6 @@ package: WRI
 dependencies:
   - addtocal
   - smart_date
-  - webform
 config_devel:
   install:
     - core.base_field_override.node.event.promote
