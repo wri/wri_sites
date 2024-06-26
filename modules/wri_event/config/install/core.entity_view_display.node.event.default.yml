@@ -21,9 +21,12 @@ dependencies:
     - field.field.node.event.field_register
     - field.field.node.event.field_related_events
     - field.field.node.event.field_related_resources
+    - field.field.node.event.field_sent_to_orto
     - field.field.node.event.field_social_media_links
     - field.field.node.event.field_tags
     - field.field.node.event.field_type
+    - field.field.node.event.field_zoom_registration_form
+    - field.field.node.event.field_zoom_webinar_id
     - field.field.node.event.layout_builder__layout
     - node.type.event
     - responsive_image.styles.large_image_teaser
@@ -44,6 +47,8 @@ content:
     settings:
       responsive_image_style: large_image_teaser
       image_link: ''
+      image_loading:
+        attribute: lazy
     third_party_settings:
       wri_media:
         min_width: ''
@@ -98,8 +103,11 @@ hidden:
   field_register: true
   field_related_events: true
   field_related_resources: true
+  field_sent_to_orto: true
   field_social_media_links: true
   field_tags: true
+  field_zoom_registration_form: true
+  field_zoom_webinar_id: true
   langcode: true
   layout_builder__layout: true
   links: true

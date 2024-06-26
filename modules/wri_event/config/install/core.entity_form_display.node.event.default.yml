@@ -21,20 +21,26 @@ dependencies:
     - field.field.node.event.field_register
     - field.field.node.event.field_related_events
     - field.field.node.event.field_related_resources
+    - field.field.node.event.field_sent_to_orto
     - field.field.node.event.field_social_media_links
     - field.field.node.event.field_tags
     - field.field.node.event.field_type
+    - field.field.node.event.field_zoom_registration_form
+    - field.field.node.event.field_zoom_webinar_id
     - field.field.node.event.layout_builder__layout
     - node.type.event
+    - workflows.workflow.content_publishing
   module:
     - content_moderation
     - field_group
     - link
     - media_library
+    - media_library_edit
     - metatag
     - path
     - smart_date
     - text
+    - webform
 third_party_settings:
   field_group:
     group_category:
@@ -102,6 +108,70 @@ third_party_settings:
         open: false
         description: ''
         required_fields: true
+    group_zoom:
+      children:
+        - field_zoom_webinar_id
+        - field_zoom_registration_form
+        - field_sent_to_orto
+      label: Zoom
+      region: content
+      parent_name: group_registration_options
+      weight: 2
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_registration_options:
+      children:
+        - group_link
+        - group_zoom
+      label: 'Registration tabs'
+      region: content
+      parent_name: group_registration_types
+      weight: 1
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        direction: horizontal
+        width_breakpoint: 640
+    group_link:
+      children:
+        - field_register
+      label: Link
+      region: content
+      parent_name: group_registration_options
+      weight: 1
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: open
+        description: ''
+        required_fields: true
+    group_registration_types:
+      children:
+        - group_registration_options
+      label: 'Registration Button Options'
+      region: content
+      parent_name: ''
+      weight: 6
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: 'Fill in all fields under the tab you choose. For Zoom, select both a Webform and a Registration Form, or the registration button will not render.'
+        required_fields: true
+_core:
+  default_config_hash: z74aUAaSQBpsQ9K8zGUX5ZiaK3V_I1GNQGOK-VcZQDs
 id: node.event.default
 targetEntityType: node
 bundle: event
@@ -109,7 +179,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 7
+    weight: 4
     region: content
     settings:
       rows: 9
@@ -125,7 +195,7 @@ content:
     third_party_settings: {  }
   field_date_time:
     type: smartdate_timezone
-    weight: 7
+    weight: 5
     region: content
     settings:
       modal: false
@@ -141,6 +211,9 @@ content:
         custom
       show_extra: true
       hide_date: false
+      allday: true
+      remove_seconds: false
+      separator: to
       add_abbreviations: ''
     third_party_settings: {  }
   field_event_display:
@@ -219,6 +292,7 @@ content:
     region: content
     settings:
       sidebar: true
+      use_details: true
     third_party_settings: {  }
   field_primary_contacts:
     type: entity_reference_autocomplete
@@ -280,6 +354,13 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_sent_to_orto:
+    type: boolean_checkbox
+    weight: 135
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_social_media_links:
     type: link_default
     weight: 7
@@ -303,6 +384,22 @@ content:
     weight: 26
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_zoom_registration_form:
+    type: webform_entity_reference_select
+    weight: 134
+    region: content
+    settings:
+      default_data: true
+      webforms: {  }
+    third_party_settings: {  }
+  field_zoom_webinar_id:
+    type: string_textfield
+    weight: 7
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   langcode:
     type: language_select
