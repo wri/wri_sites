@@ -1,0 +1,13 @@
+{#
+/**
+ * @file
+ * Theme implementation for a 'webform' element.
+ *
+ * Adds an anchor link to the top of zoom forms so they can be linked to directly.
+ */
+#}
+{% if element["elements"]["webinar_id"] %}
+<a id="register"></a>
+{{ attach_library('wri_zoom/zoom_utm') }}
+{% endif %}
+{% include "@webform/webform.html.twig" %}

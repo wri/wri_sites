@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Update hooks for wri_zoom module.
+ */
+
+/**
+ * Enable the modules better_passwords and rename_admin_paths and pulls config.
+ */
+function wri_zoom_install() {
+  \Drupal::service('distro_helper.updates')->installConfig('better_passwords.settings', 'wri_admin', 'post-install', TRUE);
+  \Drupal::service('distro_helper.updates')->installConfig('rename_admin_paths.settings', 'wri_admin', 'post-install', TRUE);
+}

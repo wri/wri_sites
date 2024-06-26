@@ -1,0 +1,69 @@
+<?php
+
+/**
+ * @file
+ * The wri_zoom.module alters.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\Entity\Node;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function wri_zoom_webform_submission_insert(EntityInterface $entity) {
+  $params = session_get_cookie_params();
+  if (isset($entity->getData()['email'])) {
+    setcookie('ap3c_track_email', $entity->getData()['email'], time() + 31556952, '/', $params['domain'], FALSE, FALSE);
+  }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function wri_zoom_cron() {
+  // Verify there's a value in the content_snippet field orto_registration_url.
+  $orto_link = content_snippets_retrieve('orto_registration_url');
+
+  if (!empty($orto_link)) {
+
+    // Load up any event nodes without a value in field_sent_to_orto.
+    $nids = \Drupal::database()->select('node', 'base_table')
+      ->fields('base_table', ['nid']);
+
+    $nids->innerJoin('node_field_data', 'node_field_data', 'base_table.nid = node_field_data.nid');
+    $nids->leftJoin('node__field_sent_to_orto', 'node__field_sent_to_orto', 'node__field_sent_to_orto.entity_id = base_table.nid');
+    $nids->innerJoin('node__field_date_time', 'node__field_date_time', 'node__field_date_time.entity_id = base_table.nid');
+    $nids->innerJoin('node__field_zoom_webinar_id', 'node__field_zoom_webinar_id', 'node__field_zoom_webinar_id.entity_id = base_table.nid');
+
+    $field_empty_or_zero = $nids->orConditionGroup()
+      ->condition('node__field_sent_to_orto.field_sent_to_orto_value', NULL, 'IS NULL')
+      ->condition('node__field_sent_to_orto.field_sent_to_orto_value', 1, '<>');
+
+    $nids->condition('node_field_data.type', 'event')
+      ->condition('node__field_date_time.field_date_time_end_value', time() - 3600, '<')
+      ->condition($field_empty_or_zero);
+
+    $nids = $nids->execute()->fetchCol();
+    // Load the nodes and send them to Orto.
+    $nodes = Node::loadMultiple($nids);
+    foreach ($nodes as $node) {
+      // Url encode the title:
+      $original_title = $node->getTitle();
+      $node->setTitle(urlencode($node->getTitle()));
+      // Replace the orto_link tokens with node values;.
+      $orto_link = \Drupal::token()->replace($orto_link, ['node' => $node]);
+      // Send the node to Orto using Guzzle.
+      try {
+        \Drupal::httpClient()->request('GET', $orto_link);
+        $node->setTitle($original_title);
+        $node->set('field_sent_to_orto', 1);
+        $node->save();
+      }
+      catch (\Exception $e) {
+        \Drupal::logger('wri_zoom')
+          ->error('Error sending event to Orto: @error', ['@error' => $e->getMessage()]);
+      }
+    }
+  }
+}

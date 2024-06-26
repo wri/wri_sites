@@ -1,0 +1,18 @@
+get_browser_lang:
+  js:
+    js/get-browser-lang.js: {}
+  dependencies:
+    - core/drupal
+
+zoom_utm:
+  js:
+    js/zoom-utm.js: {}
+  dependencies:
+    - core/drupal
+
+ap3c_track:
+  js:
+    js/ap3c-track.js: {}
+  dependencies:
+    - core/drupal
+    - core/js-cookie

@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sent_to_orto
+    - node.type.event
+id: node.event.field_sent_to_orto
+field_name: field_sent_to_orto
+entity_type: node
+bundle: event
+label: 'Sent to Orto?'
+description: 'Auto-populated field that indicates that this event has been sent to Orto. This will be set to "checked" an hour after the Event''s end time. If you wish to not send this event to Orto, check this box now.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
