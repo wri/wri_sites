@@ -74,7 +74,8 @@ a {
   font-family: inherit;
 }
 
-p a {
+p a,
+.bullets a {
   color: $green;
   transition: color $transition-defaults;
 
