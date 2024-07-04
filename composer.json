@@ -127,7 +127,7 @@
         "drupal/config_partial_export": "^2.0@alpha",
         "drupal/content_snippets": "^2.0",
         "drupal/core-composer-scaffold": "^10.0",
-        "drupal/core-recommended": "~10.2.0",
+        "drupal/core-recommended": "^10.0",
         "drupal/ctools": "^4.0",
         "drupal/diff": "^1.0",
         "drupal/ds": "^5.0.0",
