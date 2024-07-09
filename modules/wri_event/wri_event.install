@@ -48,7 +48,7 @@ function wri_event_update_10001() {
   \Drupal::service('distro_helper.updates')->installConfig('field.field.node.event.field_sent_to_orto', 'wri_event', 'install', 'TRUE');
   \Drupal::service('distro_helper.updates')->installConfig('field.field.node.event.field_zoom_registration_form', 'wri_event', 'install', 'TRUE');
   \Drupal::service('distro_helper.updates')->installConfig('field.field.node.event.field_zoom_webinar_id', 'wri_event', 'install', 'TRUE');
-  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.event.field_zoom_list_id', 'wri_node', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.event.field_zoom_list_id', 'wri_event', 'install', 'TRUE');
 
   // Updating the Event form display.
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.event.default', [
