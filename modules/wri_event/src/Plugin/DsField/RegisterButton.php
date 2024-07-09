@@ -45,7 +45,7 @@ class RegisterButton extends DsFieldBase {
       $registration_link = $entity->field_register->uri;
 
       if ($zoom_id && $webform_id) {
-        $link = new Link('Register', $node_url);
+        $link = new Link(t('Register'), $node_url);
 
         $info['link'] = $link->toRenderable();
         $info['link']['#attributes'] = [
@@ -55,7 +55,7 @@ class RegisterButton extends DsFieldBase {
       elseif ($registration_link) {
         // Display the rendered register link.
         $url = Url::fromUri($registration_link);
-        $link = new Link('Register', $url);
+        $link = new Link(t('Register'), $url);
 
         $info['link'] = $link->toRenderable();
         $info['link']['#attributes'] = [
