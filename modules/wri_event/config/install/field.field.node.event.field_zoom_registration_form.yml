@@ -14,13 +14,7 @@ label: 'Zoom Registration Form'
 description: "You can create a new webform by <a href=\"/admin/structure/webform/manage/zoom_default/duplicate\" target=\"_blank\">duplicating the \"Zoom (default)\" form here</a>.\r\nYou can set the time the webform will become disabled using the \"Zoom Registration Form settings\" and setting \"Scheduled\" to end at the time you wish to close registrations."
 required: false
 translatable: false
-default_value:
-  -
-    target_uuid: f8f5cada-d1e6-442f-8f57-f0606a87d161
-    default_data: ''
-    status: open
-    open: ''
-    close: ''
+default_value: {  }
 default_value_callback: ''
 settings:
   handler: 'default:webform'

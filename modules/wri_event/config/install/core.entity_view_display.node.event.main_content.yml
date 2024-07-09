@@ -26,6 +26,7 @@ dependencies:
     - field.field.node.event.field_social_media_links
     - field.field.node.event.field_tags
     - field.field.node.event.field_type
+    - field.field.node.event.field_zoom_list_id
     - field.field.node.event.field_zoom_registration_form
     - field.field.node.event.field_zoom_webinar_id
     - field.field.node.event.layout_builder__layout
@@ -511,6 +512,7 @@ hidden:
   field_related_resources: true
   field_sent_to_orto: true
   field_tags: true
+  field_zoom_list_id: true
   field_zoom_webinar_id: true
   langcode: true
   layout_builder__layout: true

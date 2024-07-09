@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies: {  }
+id: sector
+label: Sector
+category: General
+likert: false
+options: |-
+  'Academic / Research Organization': 'Academic / Research Organization'
+  'Business / Private Sector': 'Business / Private Sector'
+  'Community-Based or Indigenous Organization': 'Community-Based or Indigenous Organization'
+  'Government / Public Sector': 'Government / Public Sector'
+  'Intergovernmental / Multilateral Organization': 'Intergovernmental / Multilateral Organization'
+  'Journalist / Media Organization': 'Journalist / Media Organization'
+  'NGO - International': 'NGO - International'
+  'NGO - National or Local': 'NGO - National or Local'
+  'Philanthropic Organization': 'Philanthropic Organization'
+  'Student / Youth': 'Student / Youth'
+  'No Affiliation / Other': 'No Affiliation / Other'
