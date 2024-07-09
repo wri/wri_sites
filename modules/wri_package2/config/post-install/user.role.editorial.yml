@@ -257,7 +257,6 @@ permissions:
   - 'edit terms in tags'
   - 'edit terms in topics_and_subtopics'
   - 'edit wri office entities'
-  - 'merge taxonomy terms'
   - 'renew token'
   - 'replace files'
   - 'revert all author revisions'
