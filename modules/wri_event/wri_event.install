@@ -33,14 +33,14 @@ function wri_event_update_dependencies() {
  */
 function wri_event_update_10001() {
   // Add the fields.
-  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.event.field_sent_to_orto', 'wri_event', 'install', 'TRUE');
-  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.event.field_zoom_registration_form', 'wri_event', 'install', 'TRUE');
-  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.event.field_zoom_webinar_id', 'wri_event', 'install', 'TRUE');
-
-  // Attach the fields to the Event node.
   \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_sent_to_orto', 'wri_node', 'install', 'TRUE');
   \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_zoom_registration_form', 'wri_node', 'install', 'TRUE');
   \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_zoom_webinar_id', 'wri_node', 'install', 'TRUE');
+
+  // Attach the fields to the Event node.
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.event.field_sent_to_orto', 'wri_event', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.event.field_zoom_registration_form', 'wri_event', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.event.field_zoom_webinar_id', 'wri_event', 'install', 'TRUE');
 
   // Updating the Event form display.
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.event.default', [
