@@ -187,7 +187,7 @@
         "npm-asset/jquery.toc": "^0.4.0",
         "oomphinc/composer-installers-extender": "^2.0",
         "solarium/solarium": "^6.1.5",
-        "thinkshout/distro_helper": "dev-logging-and-errors-15"
+        "thinkshout/distro_helper": "dev-install-quitting"
     },
     "config": {
         "sort-packages": true,
