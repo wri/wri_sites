@@ -56,7 +56,7 @@ function wri_event_update_10001() {
     'third_party_settings#ds#regions#main_content',
     'third_party_settings#ds#fields#register_button',
     'content#field_register',
-    'content#field_zoom_registration_form'
+    'content#field_zoom_registration_form',
   ], 'wri_event');
 
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.event.search_results', [
