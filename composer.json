@@ -121,7 +121,7 @@
         "drupal/better_passwords": "^2.2",
         "drupal/block_list_override": "^1.0",
         "drupal/cer": "^5.0@beta",
-        "drupal/ckeditor5_template": "^1.0",
+        "drupal/ckeditor5_template": "1.0.5",
         "drupal/ckeditor_accordion": "^2.0",
         "drupal/classy": "^1.0",
         "drupal/config_partial_export": "^2.0@alpha",
