@@ -131,7 +131,7 @@
         "drupal/core-recommended": "^10.3",
         "drupal/ctools": "^4.0",
         "drupal/diff": "^1.0",
-        "drupal/ds": "^5.0.0",
+        "drupal/ds": "^3.0",
         "drupal/editor_advanced_link": "^2.2",
         "drupal/element_class_formatter": "^2.0@beta",
         "drupal/entity_browser": "^2.6",
