@@ -107,7 +107,6 @@ permissions:
   - 'create project_detail content'
   - 'create publication content'
   - 'create region content'
-  - 'create reusable blocks'
   - 'create simple_page content'
   - 'create subpage content'
   - 'create terms in embed_types'
