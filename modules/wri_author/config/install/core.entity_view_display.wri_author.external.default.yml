@@ -15,17 +15,17 @@ third_party_settings:
       disable_css: false
       entity_classes: all_classes
       settings:
-        classes:
-          layout_class: {  }
+        label: ''
         wrappers:
-          content: div
+          ds_content: div
         outer_wrapper: div
         attributes: ''
         link_attribute: ''
         link_custom: ''
-        label: ''
+        classes:
+          layout_class: {  }
     regions:
-      content:
+      ds_content:
         - field_person_link
 id: wri_author.external.default
 targetEntityType: wri_author
@@ -33,7 +33,7 @@ bundle: external
 mode: default
 content:
   field_person_link:
-    type: link
+    weight: 0
     label: hidden
     settings:
       trim_length: 80
@@ -47,31 +47,31 @@ content:
           id: expert
           settings:
             lb: ''
-            lbw: false
+            prefix: ''
             lbw-el: ''
             lbw-cl: ''
             lbw-at: ''
-            lb-col: false
-            ow: false
             ow-el: ''
             ow-cl: ''
             ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
             fis-el: ''
             fis-cl: ''
             fis-at: ''
-            fis-def-at: false
-            fi: false
             fi-el: ''
             fi-cl: ''
             fi-at: ''
-            fi-def-at: false
-            prefix: ''
             suffix: ''
-    weight: 0
-    region: content
+            lbw: false
+            lb-col: false
+            ow: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi: false
+            fi-def-at: false
+    type: link
+    region: ds_content
 hidden:
   langcode: true
   name: true
