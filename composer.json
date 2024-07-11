@@ -35,11 +35,11 @@
         "patches": {
             "drupal/core": {
                 "Dynamic Views Arguments via Tokens https://www.drupal.org/project/drupal/issues/1699378": "https://www.drupal.org/files/issues/2024-07-07/1699378-drupal-10.3.x.patch",
-                "Add reusable option to inline block creation https://www.drupal.org/project/drupal/issues/2999491": "https://www.drupal.org/files/issues/2020-05-21/2999491--reusable-title-display--49.patch",
+                "Add reusable option to inline block creation https://www.drupal.org/project/drupal/issues/2999491": "https://www.drupal.org/files/issues/2024-01-23/add_reusable_option_to_inline_block_creation-2999491-141.patch",
                 "Hyphens and forward slashes (-/) break Views contextual filters https://www.drupal.org/node/672606": "https://www.drupal.org/files/issues/2022-09-27/672606-76.patch",
                 "Views RSS feeds have validation issues https://www.drupal.org/project/drupal/issues/1337894": "https://www.drupal.org/files/issues/2022-11-28/1337894-37.patch",
                 "Add missing enclosure to Views RSS https://www.drupal.org/node/2511878": "https://www.drupal.org/files/issues/2024-01-23/core-support-enclosure-field-rss-2511878-70_withfallback.patch",
-                "Views Term ID has broken filters (\"All of\", \"Is none of\") and contextual filters \"allow multiple\" https://www.drupal.org/project/drupal/issues/2829178": "https://git.drupalcode.org/project/drupal/-/merge_requests/5321.patch",
+                "Views Term ID has broken filters (\"All of\", \"Is none of\") and contextual filters \"allow multiple\" https://www.drupal.org/project/drupal/issues/2829178": "https://www.drupal.org/files/issues/2024-06-23/2511878-add-support-for-enclosure-field-10.3.x.patch",
                 "More link is missing in pager when using the \"Some\" pager and there are more records than shown https://www.drupal.org/project/drupal/issues/3381979": "https://www.drupal.org/files/issues/2023-10-09/3381979-13.patch"
             },
             "drupal/content_snippets": {
