@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_zoom_list_id
+    - node.type.event
+id: node.event.field_zoom_list_id
+field_name: field_zoom_list_id
+entity_type: node
+bundle: event
+label: 'Zoom List Id'
+description: 'The list id to be posted to Zoom.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
