@@ -65,34 +65,34 @@
 
         {# Title #}
         <div class="pfp-accordion__title">
-          {{ content.content.field_icon }}
-          <span class="title-text">{{ content.content.field_title }}</span>
+          {{ content.ds_content.field_icon }}
+          <span class="title-text">{{ content.ds_content.field_title }}</span>
         </div>
 
         {# Intro #}
         <div class="pfp-accordion__intro">
-          {{ content.content.field_intro }}
+          {{ content.ds_content.field_intro }}
         </div>
 
         {# Featured experts #}
         <div class="pfp-accordion__experts">
-          {{ content.content.field_featured_experts }}
+          {{ content.ds_content.field_featured_experts }}
         </div>
       {% endblock %}
       </button>
 
       {# Add to any #}
       <div class="pfp-accordion__add-to-any">
-        {{ content.content.wri_social_sharing_block }}
+        {{ content.ds_content.wri_social_sharing_block }}
       </div>
     </div>
 
     {# Content drawer #}
     <div id="pfp-accordion__content-{{ hash_id }}" class="pfp-accordion__content" aria-labelledby="pfp-accordion__head-{{ hash_id }}">
       <div class="pfp-accordion__content-wrap">
-        {{ content.content.field_body }}
-        {{ content.content.field_additional_resources_text }}
-        {{ content.content.field_related_resources }}
+        {{ content.ds_content.field_body }}
+        {{ content.ds_content.field_additional_resources_text }}
+        {{ content.ds_content.field_related_resources }}
       </div>
     </div>
   </div>
