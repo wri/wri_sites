@@ -32,6 +32,13 @@ function ts_wrin_preprocess_html(array &$variables) {
   $current_classes = $variables['attributes']['class'] ?? [];
   // Is field_transparent_header checked?
   $variables['attributes']['class'] = array_merge($current_classes, General::$htmlClasses);
+  // Adds a class to the page if we're running a vr test with loading=eager.
+  $variables['#cache']['contexts'][] = 'url.query_args:loading';
+  $loading = \Drupal::request()->query->get('loading');
+  // If found, set the "loading" attribute to "eager".
+  if ($loading == 'eager') {
+    $variables["attributes"]["class"][] = 'no-animation';
+  }
 
   if ($node = \Drupal::request()->attributes->get('node')) {
     if ($node instanceof NodeInterface) {
