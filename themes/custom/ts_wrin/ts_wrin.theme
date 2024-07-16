@@ -473,3 +473,15 @@ function ts_wrin_views_pre_render(ViewExecutable $view) {
     }
   }
 }
+
+/**
+ * Implements hook_preprocess_image().
+ */
+function ts_wrin_preprocess_image(&$variables) {
+  // Look for a url parameter: ?loading=eager.
+  $loading = \Drupal::request()->query->get('loading');
+  // If found, set the "loading" attribute to "eager".
+  if ($loading == 'eager') {
+    $variables["attributes"]["loading"] = 'eager';
+  }
+}
