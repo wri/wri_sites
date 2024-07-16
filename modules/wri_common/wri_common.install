@@ -146,6 +146,13 @@ function wri_common_update_10104() {
       if ($has_content_region) {
         $editable_config->set('third_party_settings.ds.regions', ['ds_content' => $has_content_region]);
         $editable_config->set('third_party_settings.ds.layout.settings.wrappers', ['ds_content' => 'div']);
+        $fields = $editable_config->get('content');
+        foreach ($fields as $field_name => $value) {
+          if ($value['region'] == 'content') {
+            $fields[$field_name]['region'] = 'ds_content';
+          }
+        }
+        $editable_config->set('content', $fields);
         $editable_config->save();
       }
     }
