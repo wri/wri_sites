@@ -139,7 +139,7 @@ function wri_common_update_10104() {
   foreach ($loaded_config as $name => $config) {
     $editable_config = $config_factory->getEditable('core.entity_view_display.' . $name);
     $layout_id = $editable_config->get('third_party_settings.ds.layout.id');
-    // if $layout_id starts with "ds_"
+    // If $layout_id starts with "ds_".
     if (strpos($layout_id, 'ds_') === 0) {
       // Convert any 'content' regions to 'ds_content'.
       $has_content_region = $editable_config->get('third_party_settings.ds.regions.content');
