@@ -124,3 +124,26 @@ function wri_common_update_10103() {
     \Drupal::service('module_installer')->uninstall(['textfield_counter'], TRUE);
   }
 }
+
+/**
+ * Support downgrading display suite to the 3.x branch.
+ */
+function wri_common_update_10104() {
+  // Load all entity_view_display config.
+  $config_factory = \Drupal::service('config.factory');
+  $all_config = $config_factory->listAll('core.entity_view_display');
+  $loaded_config = $config_factory->loadMultiple($all_config);
+  // Look at all config and find any using a ds third-party setting.
+  foreach ($loaded_config as $name => $config) {
+    if ($config->get('third_party_settings.ds')) {
+      // Convert any 'content' regions to 'ds_content'.
+      $editable_config = $config_factory->getEditable($name);
+      $has_content_region = $editable_config->get('third_party_settings.ds.regions.content');
+      if ($has_content_region) {
+        $editable_config->set('third_party_settings.ds.regions.ds_content', $has_content_region);
+        $editable_config->unset('third_party_settings.ds.regions.content');
+      }
+      $editable_config->save();
+    }
+  }
+}
