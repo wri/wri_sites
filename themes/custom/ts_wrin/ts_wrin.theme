@@ -189,6 +189,9 @@ function ts_wrin_preprocess_block(array &$variables) {
   // Handle the case of a hero with a transparent background.
   if (isset($variables["content"]['#block_content']->field_hero_background->value)) {
     General::$htmlClasses[] = 'transparent-header';
+    // Sometimes the block is cached so we have a little javascript to apply
+    // transparent-header to the page in that case.
+    $variables['attributes']['class'][] = 'add-transparent-header';
   }
   if (in_array($variables['derivative_plugin_id'], $unfriendly_block_types)) {
     $variables['attributes']['class'][] = 'unfriendly-block';
