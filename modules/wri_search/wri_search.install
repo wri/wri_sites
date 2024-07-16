@@ -53,3 +53,13 @@ function wri_search_update_9501() {
     'display#default#display_options#sorts#search_api_relevance',
   ], 'wri_search');
 }
+
+/**
+ * Disables highlighting, which has a bug and we are not using anyway.
+ */
+function wri_search_update_10001() {
+  // Bug is https://www.drupal.org/project/search_api/issues/3461936.
+  \Drupal::service('distro_helper.updates')->updateConfig('search_api.index.sitewide', [
+    'processor_settings#highlight',
+  ], 'wri_search');
+}
