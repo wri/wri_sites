@@ -32,6 +32,13 @@ function ts_wrin_preprocess_html(array &$variables) {
   $current_classes = $variables['attributes']['class'] ?? [];
   // Is field_transparent_header checked?
   $variables['attributes']['class'] = array_merge($current_classes, General::$htmlClasses);
+  // Adds a class to the page if we're running a vr test with loading=eager.
+  $variables['#cache']['contexts'][] = 'url.query_args:loading';
+  $loading = \Drupal::request()->query->get('loading');
+  // If found, set the "loading" attribute to "eager".
+  if ($loading == 'eager') {
+    $variables["attributes"]["class"][] = 'no-animation';
+  }
 
   if ($node = \Drupal::request()->attributes->get('node')) {
     if ($node instanceof NodeInterface) {
@@ -182,6 +189,9 @@ function ts_wrin_preprocess_block(array &$variables) {
   // Handle the case of a hero with a transparent background.
   if (isset($variables["content"]['#block_content']->field_hero_background->value)) {
     General::$htmlClasses[] = 'transparent-header';
+    // Sometimes the block is cached so we have a little javascript to apply
+    // transparent-header to the page in that case.
+    $variables['attributes']['class'][] = 'add-transparent-header';
   }
   if (in_array($variables['derivative_plugin_id'], $unfriendly_block_types)) {
     $variables['attributes']['class'][] = 'unfriendly-block';
@@ -471,5 +481,17 @@ function ts_wrin_views_pre_render(ViewExecutable $view) {
         $add_classes($view->display_handler->options['css_class'], ['media-library-view--widget']);
       }
     }
+  }
+}
+
+/**
+ * Implements hook_preprocess_image().
+ */
+function ts_wrin_preprocess_image(&$variables) {
+  // Look for a url parameter: ?loading=eager.
+  $loading = \Drupal::request()->query->get('loading');
+  // If found, set the "loading" attribute to "eager".
+  if ($loading == 'eager') {
+    $variables["attributes"]["loading"] = 'eager';
   }
 }

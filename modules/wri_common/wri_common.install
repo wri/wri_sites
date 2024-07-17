@@ -124,3 +124,37 @@ function wri_common_update_10103() {
     \Drupal::service('module_installer')->uninstall(['textfield_counter'], TRUE);
   }
 }
+
+/**
+ * Support downgrading display suite to the 3.x branch.
+ */
+function wri_common_update_10104() {
+  // Load all entity_view_display config.
+  $config_factory = \Drupal::service('config.factory');
+  $loaded_config = \Drupal::entityQuery('entity_view_display')
+    ->condition('third_party_settings.ds.regions.content', NULL, 'IS NOT NULL')
+    ->execute();
+
+  // Look at all config and find any using a ds third-party setting.
+  foreach ($loaded_config as $name => $config) {
+    $editable_config = $config_factory->getEditable('core.entity_view_display.' . $name);
+    $layout_id = $editable_config->get('third_party_settings.ds.layout.id');
+    // If $layout_id starts with "ds_".
+    if (strpos($layout_id, 'ds_') === 0) {
+      // Convert any 'content' regions to 'ds_content'.
+      $has_content_region = $editable_config->get('third_party_settings.ds.regions.content');
+      if ($has_content_region) {
+        $editable_config->set('third_party_settings.ds.regions', ['ds_content' => $has_content_region]);
+        $editable_config->set('third_party_settings.ds.layout.settings.wrappers', ['ds_content' => 'div']);
+        $fields = $editable_config->get('content');
+        foreach ($fields as $field_name => $value) {
+          if ($value['region'] == 'content') {
+            $fields[$field_name]['region'] = 'ds_content';
+          }
+        }
+        $editable_config->set('content', $fields);
+        $editable_config->save();
+      }
+    }
+  }
+}

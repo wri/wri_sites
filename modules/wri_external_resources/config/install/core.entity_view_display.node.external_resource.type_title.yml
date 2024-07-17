@@ -26,14 +26,14 @@ third_party_settings:
         classes:
           layout_class: {  }
         wrappers:
-          content: div
+          ds_content: div
         outer_wrapper: div
         attributes: ''
         link_attribute: ''
         link_custom: ''
         label: ''
     regions:
-      content:
+      ds_content:
         - field_type
         - node_title
     fields:
