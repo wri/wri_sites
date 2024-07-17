@@ -41,13 +41,18 @@
       gtag('consent','default',{
         'ad_storage':'denied',
         'analytics_storage':'denied',
+        'ad_user_data':'denied',
+        'ad_personalization':'denied',
+        'personalization_storage':'denied',
+        'functionality_storage':'granted',
+        'security_storage':'granted',
         'wait_for_update': 500
       });
       gtag("set", "ads_data_redaction", true);
     </script>
     {% endif %}
     {% if osano_script %}
-    <script src="https://cmp.osano.com/AzyfddTRtqi1560Dk/{{ contentSnippets.osano_id }}/osano.js{{ contentSnippets.osano_params }}"></script> 
+    <script src="https://cmp.osano.com/AzyfddTRtqi1560Dk/{{ contentSnippets.osano_id }}/osano.js{{ contentSnippets.osano_params }}"></script>
     {% endif %}
     <head-placeholder token="{{ placeholder_token|raw }}">
     <title>{{ head_title|safe_join(' | ') }}</title>

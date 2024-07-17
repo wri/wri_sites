@@ -10,6 +10,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\search_api\Plugin\views\query\SearchApiQuery;
+use Drupal\taxonomy\Entity\Term;
 use Drupal\views\ViewExecutable;
 
 /**
@@ -101,6 +102,10 @@ function wri_search_token_info_alter(&$info) {
     'name' => 'TID if Child',
     'description' => t('The term id if this term is a child.'),
   ];
+  $info['types']['term']['term_parent_or_self'] = [
+    'name' => 'Term parent or self',
+    'description' => t('The term parent or the term id if this has no parent.'),
+  ];
 }
 
 /**
@@ -117,6 +122,16 @@ function wri_search_tokens($type, $tokens, array $data, array $options, Bubbleab
         case 'non_orphan':
           if ($term->parent->target_id) {
             $replacements[$original] = $term->id();
+          }
+          break;
+
+        case 'term_parent_or_self':
+          if ($term->parent->target_id == '0') {
+            $replacements[$original] = $term->getName() ?? '';
+          }
+          elseif ($parent_id = $term->parent->target_id) {
+            $parent_term = Term::load($parent_id);
+            $replacements[$original] = $parent_term->getName() ?? '';
           }
           break;
       }

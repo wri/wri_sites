@@ -22,9 +22,13 @@ dependencies:
     - field.field.node.event.field_register
     - field.field.node.event.field_related_events
     - field.field.node.event.field_related_resources
+    - field.field.node.event.field_sent_to_orto
     - field.field.node.event.field_social_media_links
     - field.field.node.event.field_tags
     - field.field.node.event.field_type
+    - field.field.node.event.field_zoom_list_id
+    - field.field.node.event.field_zoom_registration_form
+    - field.field.node.event.field_zoom_webinar_id
     - field.field.node.event.layout_builder__layout
     - node.type.event
   module:
@@ -36,7 +40,6 @@ dependencies:
     - smart_date
     - text
     - user
-    - wri_block
 third_party_settings:
   layout_builder:
     enabled: true
@@ -126,8 +129,8 @@ third_party_settings:
                 entity: layout_builder.entity
             weight: -4
             additional: {  }
-          fa953d7a-54c8-4b9e-9d26-2fc96dc923be:
-            uuid: fa953d7a-54c8-4b9e-9d26-2fc96dc923be
+          aa13f897-b817-4b88-8339-e15f26805a2e:
+            uuid: aa13f897-b817-4b88-8339-e15f26805a2e
             region: content
             configuration:
               id: 'field_block:node:event:field_related_resources'
@@ -160,7 +163,6 @@ third_party_settings:
           - 'field_block:node:event:field_primary_contacts'
           - 'field_block:node:event:field_related_events'
           - 'field_block:node:event:field_related_resources'
-        Devel: {  }
         Facets: {  }
         'Facets summary (Experimental)': {  }
         Forms: {  }
@@ -340,6 +342,10 @@ hidden:
   field_location: true
   field_location_detail: true
   field_metatag: true
+  field_sent_to_orto: true
+  field_zoom_list_id: true
+  field_zoom_registration_form: true
+  field_zoom_webinar_id: true
   langcode: true
   layout_builder__layout: true
   search_api_excerpt: true

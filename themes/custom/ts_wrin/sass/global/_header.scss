@@ -601,6 +601,9 @@ header nav.menu--donate > ul.menu {
 }
 
 @include mq($md) {
+  html {
+    scroll-padding-top: 60px;
+  }
   header:not(.pfp-header).sticky {
     align-items: center;
     background-color: $white;

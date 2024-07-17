@@ -19,6 +19,7 @@ dependencies:
   - taxonomy
   - telephone
   - workflows
+  - webform
 config_devel:
   install:
     - core.entity_view_mode.node.card

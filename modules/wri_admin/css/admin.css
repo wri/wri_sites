@@ -178,4 +178,12 @@
 form .fieldset {
   border: 1px solid #ffffff;
 }
+
+/* For password auto-generate */
+.js .is-initial.is-password-empty.is-confirm-empty:not(.form-item--error) .password-confirm__confirm.form-item--pass-pass2 {
+  max-block-size: max-content;
+}
+
+#auto-generate-password {
+  width: 1.25rem;
 }

@@ -17,7 +17,7 @@ third_party_settings:
         classes:
           layout_class: {  }
         wrappers:
-          content: div
+          ds_content: div
         outer_wrapper: div
         attributes: ''
         link_attribute: ''
@@ -27,7 +27,7 @@ third_party_settings:
       disable_css: false
       entity_classes: all_classes
     regions:
-      content:
+      ds_content:
         - name
         - field_address
         - field_telephone
@@ -70,7 +70,7 @@ content:
             prefix: ''
             suffix: ''
     weight: -3
-    region: content
+    region: ds_content
   field_telephone:
     type: telephone_link
     label: inline
@@ -83,7 +83,7 @@ content:
           settings:
             lb: Tel
     weight: -2
-    region: content
+    region: ds_content
   name:
     type: string
     label: hidden
@@ -96,7 +96,7 @@ content:
           settings:
             lb: ''
     weight: -4
-    region: content
+    region: ds_content
 hidden:
   langcode: true
   search_api_excerpt: true

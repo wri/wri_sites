@@ -49,7 +49,7 @@ third_party_settings:
         classes:
           layout_class: {  }
         wrappers:
-          content: div
+          ds_content: div
         outer_wrapper: div
         attributes: ''
         link_attribute: ''
@@ -59,7 +59,7 @@ third_party_settings:
       disable_css: false
       entity_classes: all_classes
     regions:
-      content:
+      ds_content:
         - field_type
         - node_title
     fields:
@@ -101,7 +101,7 @@ content:
             lb-col: false
             classes: {  }
     weight: 0
-    region: content
+    region: ds_content
 hidden:
   body: true
   content_moderation_control: true

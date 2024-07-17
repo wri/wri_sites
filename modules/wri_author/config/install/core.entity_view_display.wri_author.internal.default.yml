@@ -15,17 +15,17 @@ third_party_settings:
       disable_css: false
       entity_classes: all_classes
       settings:
-        classes:
-          layout_class: {  }
+        label: ''
         wrappers:
-          content: div
+          ds_content: div
         outer_wrapper: div
         attributes: ''
         link_attribute: ''
         link_custom: ''
-        label: ''
+        classes:
+          layout_class: {  }
     regions:
-      content:
+      ds_content:
         - field_person
 id: wri_author.internal.default
 targetEntityType: wri_author
@@ -33,7 +33,7 @@ bundle: internal
 mode: default
 content:
   field_person:
-    type: entity_reference_label_unpublished
+    weight: 0
     label: hidden
     settings:
       link: true
@@ -43,8 +43,8 @@ content:
           id: reset
           settings:
             lb: ''
-    weight: 0
-    region: content
+    type: entity_reference_label_unpublished
+    region: ds_content
 hidden:
   langcode: true
   name: true

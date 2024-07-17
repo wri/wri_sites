@@ -22,9 +22,13 @@ dependencies:
     - field.field.node.event.field_register
     - field.field.node.event.field_related_events
     - field.field.node.event.field_related_resources
+    - field.field.node.event.field_sent_to_orto
     - field.field.node.event.field_social_media_links
     - field.field.node.event.field_tags
     - field.field.node.event.field_type
+    - field.field.node.event.field_zoom_list_id
+    - field.field.node.event.field_zoom_registration_form
+    - field.field.node.event.field_zoom_webinar_id
     - field.field.node.event.layout_builder__layout
     - node.type.event
     - responsive_image.styles.program_landing_page_hero
@@ -39,6 +43,7 @@ dependencies:
     - taxonomy
     - text
     - user
+    - webform
     - wri_media
 third_party_settings:
   layout_builder:
@@ -49,25 +54,21 @@ third_party_settings:
       id: layout_event
       settings:
         label: ''
-      library: null
-      disable_css: false
-      entity_classes: all_classes
     regions:
       hero:
-        - content_moderation_control
         - field_main_image
         - field_type
         - node_title
         - field_intro
         - field_featured
         - links
+      buttons:
+        - register_button
+        - addtocal
       info:
         - is_past
         - field_date_time
         - field_location
-      buttons:
-        - field_register
-        - addtocal
       category:
         - field_primary_topic
         - field_region
@@ -76,10 +77,16 @@ third_party_settings:
         - wri_social_sharing_block
       main_content:
         - body
+        - field_zoom_registration_form
       sidebar_left:
         - field_social_media_links
         - field_files
     fields:
+      register_button:
+        plugin_id: register_button
+        weight: 0
+        label: hidden
+        formatter: default
       is_past:
         plugin_id: is_past
         weight: 0
@@ -115,11 +122,6 @@ content:
     third_party_settings: {  }
     weight: 12
     region: main_content
-  content_moderation_control:
-    settings: {  }
-    third_party_settings: {  }
-    weight: -20
-    region: hero
   field_date_time:
     type: smartdate_default
     label: hidden
@@ -131,6 +133,14 @@ content:
       add_classes: false
       time_wrapper: true
       localize: false
+      parts:
+        - start
+        - end
+      duration:
+        separator: ' | '
+        unit: ''
+        decimals: 2
+        suffix: h
     third_party_settings:
       ds:
         ft:
@@ -325,6 +335,8 @@ content:
     settings:
       responsive_image_style: program_landing_page_hero
       image_link: ''
+      image_loading:
+        attribute: lazy
     third_party_settings:
       wri_media:
         min_width: ''
@@ -414,22 +426,6 @@ content:
             suffix: ''
     weight: 9
     region: category
-  field_register:
-    type: link_ally_class
-    label: hidden
-    settings:
-      class: button
-      link_text: Register
-      screenreader_text: Register
-      tag: ''
-    third_party_settings:
-      ds:
-        ft:
-          id: reset
-          settings:
-            lb: ''
-    weight: 4
-    region: buttons
   field_social_media_links:
     type: link
     label: above
@@ -484,6 +480,15 @@ content:
             lb: ''
     weight: 1
     region: hero
+  field_zoom_registration_form:
+    type: webform_entity_reference_entity_view
+    label: hidden
+    settings:
+      source_entity: true
+      lazy: false
+    third_party_settings: {  }
+    weight: 13
+    region: main_content
   links:
     settings: {  }
     third_party_settings: {  }
@@ -495,15 +500,20 @@ content:
     weight: 11
     region: share
 hidden:
+  content_moderation_control: true
   field_event_display: true
   field_international_office: true
   field_location_detail: true
   field_metatag: true
   field_primary_contacts: true
   field_projects: true
+  field_register: true
   field_related_events: true
   field_related_resources: true
+  field_sent_to_orto: true
   field_tags: true
+  field_zoom_list_id: true
+  field_zoom_webinar_id: true
   langcode: true
   layout_builder__layout: true
   search_api_excerpt: true

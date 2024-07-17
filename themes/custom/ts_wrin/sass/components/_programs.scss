@@ -301,12 +301,8 @@
     }
 
     p {
-      @extend .intro;
+      @include font($acumin-semi-cond, "light");
       @include font-line-height(18, 30);
-      strong {
-        @include font($acumin-semi-cond, bold);
-        @include font-line-height(24, 30);
-      }
     }
 
     .field--name-field-media-image img {
