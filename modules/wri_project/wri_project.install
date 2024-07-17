@@ -48,3 +48,12 @@ function wri_project_update_dependencies() {
 
   return $dependencies;
 }
+
+/**
+ * Fix project resource links, which started pointing at the label.
+ */
+function wri_project_update_10001() {
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.related_to_this_project', [
+    'display#block_1#display_options#link_url',
+  ], 'wri_project');
+}
