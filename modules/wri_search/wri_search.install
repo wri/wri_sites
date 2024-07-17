@@ -63,3 +63,12 @@ function wri_search_update_10001() {
     'processor_settings#highlight',
   ], 'wri_search');
 }
+
+/**
+ * Sorts search results by date published, when all other sorts are equal.
+ */
+function wri_search_update_10002() {
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.search', [
+    'display#default#display_options#sorts#created_1',
+  ], 'wri_search');
+}
