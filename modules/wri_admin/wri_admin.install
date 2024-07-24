@@ -11,7 +11,6 @@
 function wri_admin_install() {
   \Drupal::service('distro_helper.updates')->installConfig('better_passwords.settings', 'wri_admin', 'post-install', TRUE);
   \Drupal::service('distro_helper.updates')->installConfig('rename_admin_paths.settings', 'wri_admin', 'post-install', TRUE);
-  \Drupal::service('distro_helper.updates')->installConfig('menu_admin_per_menu.settings', 'wri_admin', 'post-install', TRUE);
 }
 
 /**
@@ -38,6 +37,4 @@ function wri_admin_update_10002() {
   if (!$moduleHandler->moduleExists('menu_admin_per_menu')) {
     \Drupal::service('module_installer')->install(['menu_admin_per_menu'], TRUE);
   }
-
-  \Drupal::service('distro_helper.updates')->installConfig('menu_admin_per_menu.settings', 'wri_admin', 'post-install');
 }
