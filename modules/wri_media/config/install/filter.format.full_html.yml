@@ -5,6 +5,7 @@ dependencies:
     - core.entity_view_mode.media.full
     - core.entity_view_mode.media.full_width
     - core.entity_view_mode.media.half_content
+    - core.entity_view_mode.media.thumbnail
   module:
     - editor
     - media
@@ -41,10 +42,10 @@ filters:
   filter_html:
     id: filter_html
     provider: filter
-    status: true
+    status: false
     weight: -50
     settings:
-      allowed_html: '<br> <p class="secondary text-align-left text-align-center text-align-right text-align-justify"> <h2 class="text-align-left text-align-center text-align-right text-align-justify"> <h3 class="text-align-left text-align-center text-align-right text-align-justify"> <h4 class="text-align-left text-align-center text-align-right text-align-justify"> <h5 class="text-align-left text-align-center text-align-right text-align-justify"> <h6 class="text-align-left text-align-center text-align-right text-align-justify"> <a class href aria-label title id target="_blank" rel> <span class="drop-cap"> <div class> <strong> <em> <s> <sub> <sup> <blockquote> <ul> <ol reversed start> <li> <hr> <table> <tr> <td rowspan colspan> <th rowspan colspan> <thead> <tbody> <tfoot> <caption> <drupal-media data-entity-type data-entity-uuid alt data-view-mode data-caption data-align> <dl class> <dt> <dd>'
+      allowed_html: '<div class> <a name class="button"> <span class="drop-cap"> <p class="secondary">'
       filter_html_help: false
       filter_html_nofollow: false
   filter_html_escape:
@@ -78,7 +79,7 @@ filters:
     weight: -48
     settings:
       tablesaw_type: stack
-      tablesaw_persist: '0'
+      tablesaw_persist: false
   filter_url:
     id: filter_url
     provider: filter
@@ -97,6 +98,7 @@ filters:
         full: full
         full_width: full_width
         half_content: half_content
+        thumbnail: thumbnail
       allowed_media_types: {  }
   token_filter:
     id: token_filter
@@ -104,4 +106,4 @@ filters:
     status: false
     weight: -40
     settings:
-      replace_empty: '0'
+      replace_empty: false

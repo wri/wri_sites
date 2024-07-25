@@ -79,3 +79,12 @@ function wri_media_update_10102() {
     'settings#plugins#ckeditor5_sourceEditing#allowed_tags',
   ], 'wri_media', 'install');
 }
+
+/**
+ * Update filter thumbnail media settings.
+ */
+function wri_media_update_10103() {
+  \Drupal::service('distro_helper.updates')->installConfig('filter.format.full_html', 'wri_media', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.image.thumbnail.yml', 'wri_media', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('filter.format.full_html', 'wri_media', 'install', 'TRUE');
+}
