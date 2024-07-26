@@ -1,9 +1,9 @@
 [
     {
-        "title": "Callout Center",
-        "icon": "",
-        "description": "",
-        "html": "<div class=\"callout\"><p class=\"secondary body-link\"><strong>Callout Top Text</strong></p><p class=\"secondary\">Callout Bottom Text</p></div>"
+      "title": "Callout Center",
+      "icon": "",
+      "description": "",
+      "html": "<div class=\"callout\"><p class=\"secondary body-link\"><strong>Callout Top Text</strong></p><p class=\"secondary\">Callout Bottom Text</p></div>"
     },
     {
       "title": "Callout Left",
@@ -22,5 +22,11 @@
       "icon": "",
       "description": "",
       "html": "<div class=\"bullets border-small\"><div class=\"h4 bottom-border-tiny-black\">Stuff you need to know</div><ul><li><strong>Bullet Title:</strong> List item 1 content</li><li><strong>Bullet Title 2:</strong> List item 2 content</li></ul></div>"
+    },
+    {
+      "title": "Report Teaser",
+      "icon": "",
+      "description": "",
+      "html": "<div class=\"report-teaser gold-borders-medium\"><div class=\"image-wrapper\">Optional Image - set to 'Thumbnail'</div><div class=\"text-wrapper\"><div class=\"h4 topic-tag\">Report/Publication</div><p>Teaser text for the report or publication.</p><p><a href=\"/resources\" download class=\"button small\">Download</a></p></div></div>"
     }
 ]
