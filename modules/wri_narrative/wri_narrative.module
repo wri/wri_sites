@@ -38,7 +38,7 @@ function wri_narrative_preprocess_wri_narrative_tax(&$context) {
     // from the node.
     if (!isset($context["#settings"]["_ds_entity"]->field_intro->value)) {
       $node = \Drupal::routeMatch()->getParameter('node');
-      if ($node instanceof NodeInterface) {
+      if ($node instanceof NodeInterface && $node->field_narrative_taxonomy) {
         $context["content"]["phrase"] = $node->get('field_narrative_taxonomy')->view(['label' => 'hidden']);
       }
     }
