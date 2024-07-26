@@ -327,7 +327,7 @@
 
   p {
     @include font($acumin-semi-cond, "semi-bold");
-    @include font-line-height(16);
+    @include font-line-height(18,26);
   }
 
   @media (min-width:768px) and (max-width:991px) {
