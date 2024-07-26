@@ -101,6 +101,17 @@ function ts_wrin_theme_suggestions_container_alter(array &$suggestions, array $v
 }
 
 /**
+ * Implements hook_preprocess_HOOK() for paragraph templates.
+ */
+function ts_wrin_preprocess_paragraph(array &$variables) {
+  // On person listing paragraphs, get the field title from the block title.
+  // Person listing blocks do this automatically.
+  if ($variables['paragraph']->getType() == 'person_listing') {
+    $variables["elements"]["field_block"][0]["field_featured_experts"]['#object']->overridden_label = $variables["elements"]["field_block"][0]["#block_content"]->info->value ?? NULL;
+  }
+}
+
+/**
  * Implements hook_preprocess_page() for page.html.twig.
  */
 function ts_wrin_preprocess_page(array &$variables) {
@@ -161,9 +172,11 @@ function ts_wrin_preprocess_field(array &$variables) {
     $variables["attributes"]["class"] = $variables["element"][0]["#attributes"]["class"];
     $variables["attributes"]["class"][] = 'block';
   }
-  // Add 'Show More Link' value to Featured Experts field.
+  // Add 'Show More Link' value to Featured Experts field and set the label to
+  // the block description for blocks embedded as paragraphs.
   if ($variables['element']['#field_name'] == 'field_featured_experts') {
     $object = $variables['element']['#object'];
+    $variables['label'] = $variables["element"]["#object"]->overridden_label ?? $variables['label'];
     if (isset($object->field_show_more_link)) {
       $variables["show_more_link"] = $object->field_show_more_link->value;
     }
