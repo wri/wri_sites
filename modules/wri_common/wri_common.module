@@ -272,7 +272,7 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
             if ($node->hasField('field_primary_contacts') && ($contact_items = $node->get('field_primary_contacts')) && !$contact_items->isEmpty()) {
               $contact_item = $contact_items->first()->entity;
               if ($contact_item) {
-                $replacements[$original] = wri_common_link_or_text($contact_item);
+                $replacements[$original] = wri_common_link_or_text($contact_item, $node);
               }
               else {
                 $replacements[$original] = wri_common_person_link_fallback($node);
@@ -416,20 +416,20 @@ function _wri_common_format_list(array $terms) {
  *
  * @param \Drupal\Core\Entity\EntityInterface $entity
  *   The entity.
+ * @param \Drupal\node\Entity\NodeInterface $node
+ *   The node that this entity is appearing on, if not the same as the entity.
  *
  * @return string
  *   A string representing the entity with or without a link.
  */
-function wri_common_link_or_text(EntityInterface $entity) {
+function wri_common_link_or_text(EntityInterface $entity, NodeInterface $node = NULL) {
   $link = '';
   if (isset($entity)) {
     if ($entity->isPublished()) {
       $link = $entity->toLink()->toString();
     }
     else {
-      if ($entity->bundle() == 'person') {
-        // See if the current page is a node.
-        $node = \Drupal::routeMatch()->getParameter('node');
+      if ($entity->bundle() == 'person' && $node) {
         $link = wri_common_person_link_fallback($node);
       }
       else {
