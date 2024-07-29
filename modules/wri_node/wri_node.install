@@ -108,13 +108,17 @@ function wri_node_update_10002() {
   $old_values = [
     'node:field_primary_contacts:entity:link',
     '&#91;node:field_projects:entity:link&#93; within ',
-    '[node:field_projects:entity:link] within ', // en
+  // En.
+    '[node:field_projects:entity:link] within ',
     '&#91;node:field_projects:entity:link&#93; dalam ',
-    '[node:field_projects:entity:link] dalam ', // id
+  // Id.
+    '[node:field_projects:entity:link] dalam ',
     '&#91;node:field_projects:entity:link&#93; del ',
-    '[node:field_projects:entity:link] del ', // es
+  // Es.
+    '[node:field_projects:entity:link] del ',
     'do projeto &#91;node:field_projects:entity:link&#93; ',
-    'do projeto [node:field_projects:entity:link] ', // pt-br
+  // pt-br.
+    'do projeto [node:field_projects:entity:link] ',
   ];
   $new_values = [
     'node:primary_contact_links',
