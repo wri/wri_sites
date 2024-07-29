@@ -320,7 +320,7 @@ function wri_common_get_node_topics(Node $node, $secondary_only = FALSE) {
   }
   if ($node->hasField('field_tags') && ($tag_items = $node->get('field_tags')) && !$tag_items->isEmpty()) {
     foreach ($tag_items as $tag_item) {
-      if (!isset($existing_topics[$tag_item->entity->id()]) && isset($tag_item->entity) && $tag_item->entity->bundle() == 'topics_and_subtopics' && $tag_item->entity->isPublished()) {
+      if (isset($tag_item->entity) && $tag_item->entity->bundle() == 'topics_and_subtopics' && $tag_item->entity->isPublished() && !isset($existing_topics[$tag_item->entity->id()]) ) {
         $topics[] = $tag_item->entity;
         $existing_topics[$tag_item->entity->id()] = TRUE;
       }
