@@ -49,7 +49,6 @@ permissions:
   - 'access tokens overview'
   - 'access toolbar'
   - 'access tweets entity browser pages'
-  - 'add scheduled transitions node person'
   - 'administer block content'
   - 'administer block types'
   - 'administer blocks'
