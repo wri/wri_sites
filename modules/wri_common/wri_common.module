@@ -264,7 +264,7 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
             $phrase = \Drupal::config('wri_node.settings')->get('within_phrase');
             $replaced = \Drupal::token()->replace('[node:projects_links]', ['node' => $node], ['clear' => TRUE]);
             if ($replaced) {
-              $replacements[$original] = str_replace('[node:projects_links]', $replaced, $phrase) . ' ';
+              $replacements[$original] = Markup::create((str_replace('[node:projects_links_within]', $replaced, $phrase) . ' '));
             }
             break;
 
