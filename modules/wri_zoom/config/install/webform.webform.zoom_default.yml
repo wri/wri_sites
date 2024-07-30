@@ -1,5 +1,3 @@
-# Preserve this uuid for the field reference.
-uuid: f8f5cada-d1e6-442f-8f57-f0606a87d161
 langcode: en
 status: open
 dependencies:
@@ -12,13 +10,18 @@ uid: 1
 template: false
 archive: false
 id: zoom_default
-title: 'Zoom (default)'
+title: 'Zoom Webinar Registration (default)'
 description: ''
 categories: {  }
 elements: |-
   header:
     '#type': webform_markup
-    '#markup': '<h2>Sign up</h2>'
+    '#markup': '<h2>Register for this webinar</h2>'
+  email:
+    '#type': email
+    '#title': Email
+    '#required': true
+    '#required_error': 'Please enter an email'
   flexbox:
     '#type': webform_flexbox
     first_name:
@@ -33,67 +36,20 @@ elements: |-
       '#required_error': 'Please enter a last name'
   flexbox_01:
     '#type': webform_flexbox
-    email:
-      '#type': email
-      '#title': Email
-      '#required': true
-      '#required_error': 'Please enter an email'
-  gender:
-    '#type': webform_select_other
-    '#title': 'With which gender do you most identify?'
-    '#options':
-      Woman: Woman
-      Man: Man
-      Non-binary: Non-binary
-      'Prefer not to say': 'Prefer not to say'
-    '#other__option_label': 'Prefer to self-describe'
-    '#other__title': 'Describe your gender'
-    '#other__placeholder': ''
-    '#required': true
-    '#required_error': 'Please select a Gender'
-  flexbox_03:
-    '#type': webform_flexbox
-    '#align_items': center
-    country:
-      '#type': select
-      '#title': Country
-      '#options': country_codes
-    language:
-      '#type': select
-      '#title': 'Preferred language'
-      '#options': translations
-  flexbox_02:
-    '#type': webform_flexbox
     org:
       '#type': textfield
       '#title': Organization
     job_title:
       '#type': textfield
       '#title': 'Job Title'
-  flexbox_04:
-    '#type': webform_flexbox
-    best_describes_org:
-      '#type': webform_select_other
-      '#title': 'Which best describes your organization?'
-      '#options':
-        Government: Government
-        'Donor Institution/Agency': 'Donor Institution/Agency'
-        'Local NGO (National or Subnational)': 'Local NGO (National or Subnational)'
-        'International NGO': 'International NGO'
-        'UN or International Organization': 'UN or International Organization'
-        'Academic/Research Organization': 'Academic/Research Organization'
-        'Journalist/Media Organization': 'Journalist/Media Organization'
-        'Indigenous or Community-Based Organization': 'Indigenous or Community-Based Organization'
-        'Private Sector': 'Private Sector'
-        'No Affiliation': 'No Affiliation'
-      '#other__title': 'Describe your organization'
-      '#other__placeholder': ''
-      '#required': true
-      '#required_error': 'Please select an option'
-    sector:
-      '#type': select
-      '#title': Sector
-      '#options': sector
+  country:
+    '#type': webform_autocomplete
+    '#title': Country
+    '#autocomplete_items': country_names
+  sector:
+    '#type': select
+    '#title': Sector
+    '#options': sector
   webinar_name:
     '#type': hidden
     '#title': 'Webinar Name'
@@ -138,6 +94,7 @@ elements: |-
   list:
     '#type': hidden
     '#title': list
+    '#default_value': '[webform_submission:source-entity:field_zoom_list_id]'
     '#prepopulate': true
   webinar_region:
     '#type': hidden

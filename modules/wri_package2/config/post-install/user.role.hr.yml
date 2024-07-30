@@ -82,7 +82,6 @@ permissions:
   - 'edit own image media'
   - 'edit own person content'
   - 'edit own video media'
-  - 'reschedule scheduled transitions node person'
   - 'revert person revisions'
   - 'update any media'
   - 'update media'
@@ -100,5 +99,4 @@ permissions:
   - 'view own unpublished content'
   - 'view own unpublished media'
   - 'view own webform submission'
-  - 'view scheduled transitions node person'
   - 'view the administration theme'

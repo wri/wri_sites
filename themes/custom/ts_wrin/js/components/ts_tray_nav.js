@@ -7,6 +7,9 @@ export default function(context) {
   if (context == document) {
     let trayNavWrapper = document.querySelector("#tray-nav-wrapper");
     let pageBody = document.querySelector("body");
+    let setTransparentHeader = document.querySelector(
+      ".add-transparent-header"
+    );
 
     document.querySelectorAll(".tray-toggle").forEach(toggle => {
       toggle.addEventListener("click", event => {
@@ -72,5 +75,9 @@ export default function(context) {
         }
       }
     });
+
+    if (setTransparentHeader) {
+      pageBody.classList.add("transparent-header");
+    }
   }
 }

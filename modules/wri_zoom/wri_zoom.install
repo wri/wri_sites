@@ -11,4 +11,5 @@
 function wri_zoom_install() {
   \Drupal::service('distro_helper.updates')->installConfig('better_passwords.settings', 'wri_admin', 'post-install', TRUE);
   \Drupal::service('distro_helper.updates')->installConfig('rename_admin_paths.settings', 'wri_admin', 'post-install', TRUE);
+  \Drupal::service('distro_helper.updates')->installConfig('webform.webform_options.translations', 'wri_zoom', 'post-install', TRUE);
 }

@@ -28,25 +28,26 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    enabled: false
     allow_custom: false
+    enabled: false
   ds:
     layout:
       id: ds_1col
+      library: null
+      disable_css: false
+      entity_classes: all_classes
       settings:
-        disable_css: false
-        entity_classes: all_classes
-        classes:
-          layout_class: {  }
+        label: ''
         wrappers:
-          content: div
+          ds_content: div
         outer_wrapper: div
         attributes: ''
         link_attribute: ''
         link_custom: ''
-        label: ''
+        classes:
+          layout_class: {  }
     regions:
-      content:
+      ds_content:
         - field_type
         - node_title
     fields:
@@ -71,13 +72,13 @@ bundle: article
 mode: type_title
 content:
   field_type:
-    type: hierarchical_term_formatter
+    weight: 0
     label: hidden
     settings:
       display: root
-      link: false
       wrap: none
       separator: ' » '
+      link: false
       reverse: false
     third_party_settings:
       ds:
@@ -87,8 +88,8 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
-    weight: 0
-    region: content
+    type: hierarchical_term_formatter
+    region: ds_content
 hidden:
   body: true
   content_moderation_control: true

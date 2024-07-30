@@ -26,6 +26,7 @@ dependencies:
     - field.field.node.event.field_social_media_links
     - field.field.node.event.field_tags
     - field.field.node.event.field_type
+    - field.field.node.event.field_zoom_list_id
     - field.field.node.event.field_zoom_registration_form
     - field.field.node.event.field_zoom_webinar_id
     - field.field.node.event.layout_builder__layout
@@ -46,7 +47,7 @@ third_party_settings:
         classes:
           layout_class: {  }
         wrappers:
-          content: div
+          ds_content: div
         outer_wrapper: div
         attributes: ''
         link_attribute: ''
@@ -56,7 +57,7 @@ third_party_settings:
       disable_css: false
       entity_classes: all_classes
     regions:
-      content:
+      ds_content:
         - field_type
         - node_title
     fields:
@@ -98,7 +99,7 @@ content:
             lb-col: false
             classes: {  }
     weight: 0
-    region: content
+    region: ds_content
 hidden:
   body: true
   content_moderation_control: true
@@ -129,6 +130,7 @@ hidden:
   field_sent_to_orto: true
   field_social_media_links: true
   field_tags: true
+  field_zoom_list_id: true
   field_zoom_registration_form: true
   field_zoom_webinar_id: true
   langcode: true
