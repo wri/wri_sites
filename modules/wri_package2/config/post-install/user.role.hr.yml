@@ -27,6 +27,7 @@ dependencies:
     - filter
     - layout_builder
     - media
+    - menu_admin_per_menu
     - node
     - path
     - scheduled_transitions
@@ -40,6 +41,7 @@ weight: 3
 is_admin: null
 permissions:
   - 'access administration pages'
+  - 'access block library'
   - 'access contextual links'
   - 'access files entity browser pages'
   - 'access files overview'
@@ -48,14 +50,16 @@ permissions:
   - 'access toolbar'
   - 'access tweets entity browser pages'
   - 'add scheduled transitions node person'
+  - 'administer block content'
+  - 'administer block types'
   - 'administer blocks'
-  - 'configure editable person node layout overrides'
+  - 'administer page-hierarchies menu items'
+  - 'configure editable article node layout overrides'
   - 'create and edit custom blocks'
   - 'create document media'
   - 'create image media'
   - 'create media'
   - 'create person content'
-  - 'create reusable blocks'
   - 'create terms in embed_types'
   - 'create terms in media_tags'
   - 'create url aliases'
@@ -65,6 +69,7 @@ permissions:
   - 'delete any page content'
   - 'delete media'
   - 'delete own document media'
+  - 'delete own files'
   - 'delete own image media'
   - 'delete own person content'
   - 'delete own video media'
