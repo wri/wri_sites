@@ -189,6 +189,7 @@
         "drupal/views_bulk_operations": "^4.0",
         "drupal/views_extras": "^3.0",
         "drupal/webform": "^6.1",
+        "drupal/webform_views": "^5.2",
         "drupal/xmlsitemap": "^1.2",
         "mglaman/composer-drupal-lenient": "*",
         "npm-asset/jquery.toc": "^0.4.0",
