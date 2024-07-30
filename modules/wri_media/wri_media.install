@@ -84,8 +84,9 @@ function wri_media_update_10102() {
  * Update filter thumbnail media settings.
  */
 function wri_media_update_10103() {
-  \Drupal::service('distro_helper.updates')->installConfig('filter.format.full_html', 'wri_media', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->updateConfig('filter.format.full_html', [
+    'filters#media_embed#settings#allowed_view_modes#half_content',
+  ] 'wri_media');
   \Drupal::service('distro_helper.updates')->installConfig('image.style.180x240_scale', 'wri_media', 'install', 'TRUE');
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.image.thumbnail', 'wri_media', 'install', 'TRUE');
-  \Drupal::service('distro_helper.updates')->installConfig('filter.format.full_html', 'wri_media', 'install', 'TRUE');
 }
