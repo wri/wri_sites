@@ -97,7 +97,7 @@ function wri_person_create_person_group() {
 /**
  * Update the person content type to add fields and field group.
  */
-function wri_event_update_10001() {
+function wri_person_update_10001() {
   // Add the fields.
   \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_alt_first_names', 'wri_person', 'install', 'TRUE');
   \Drupal::service('distro_helper.updates')->installConfig('field.field.node.person.field_alt_first_names', 'wri_person', 'install', 'TRUE');
