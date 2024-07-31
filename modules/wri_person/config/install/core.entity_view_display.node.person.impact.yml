@@ -4,6 +4,8 @@ dependencies:
   config:
     - core.entity_view_mode.node.impact
     - field.field.node.person.body
+    - field.field.node.person.field_alt_first_names
+    - field.field.node.person.field_alt_last_names
     - field.field.node.person.field_alternate_contact
     - field.field.node.person.field_areas_of_expertise
     - field.field.node.person.field_department
@@ -18,6 +20,7 @@ dependencies:
     - field.field.node.person.field_profile_image
     - field.field.node.person.field_project_expert
     - field.field.node.person.field_quote
+    - field.field.node.person.field_share_with_io
     - field.field.node.person.field_staff_group
     - field.field.node.person.field_title
     - field.field.node.person.field_topics
@@ -62,6 +65,8 @@ third_party_settings:
           id: reset
           settings:
             lb: ''
+_core:
+  default_config_hash: HGssAd_DT-kZ-cSKCnUedafcDAqHWVVApPHmwmYO2fs
 id: node.person.impact
 targetEntityType: node
 bundle: person
@@ -87,6 +92,8 @@ content:
 hidden:
   body: true
   content_moderation_control: true
+  field_alt_first_names: true
+  field_alt_last_names: true
   field_alternate_contact: true
   field_areas_of_expertise: true
   field_department: true
@@ -108,6 +115,7 @@ hidden:
   field_profile_image: true
   field_project_expert: true
   field_quote: true
+  field_share_with_io: true
   field_staff_group: true
   field_statistics: true
   field_title: true

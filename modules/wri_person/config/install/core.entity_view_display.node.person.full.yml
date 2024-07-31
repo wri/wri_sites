@@ -4,6 +4,8 @@ dependencies:
   config:
     - core.entity_view_mode.node.full
     - field.field.node.person.body
+    - field.field.node.person.field_alt_first_names
+    - field.field.node.person.field_alt_last_names
     - field.field.node.person.field_alternate_contact
     - field.field.node.person.field_areas_of_expertise
     - field.field.node.person.field_department
@@ -18,6 +20,7 @@ dependencies:
     - field.field.node.person.field_profile_image
     - field.field.node.person.field_project_expert
     - field.field.node.person.field_quote
+    - field.field.node.person.field_share_with_io
     - field.field.node.person.field_staff_group
     - field.field.node.person.field_title
     - field.field.node.person.field_topics
@@ -38,6 +41,7 @@ dependencies:
     - text
     - user
     - views
+    - wri_external_pub
 third_party_settings:
   layout_builder:
     enabled: true
@@ -67,27 +71,11 @@ third_party_settings:
             region: content
             configuration:
               id: 'extra_field_block:node:person:content_moderation_control'
-            additional: {  }
-            weight: -10
-          874cd517-3926-49a5-afa3-96c3ec904689:
-            uuid: 874cd517-3926-49a5-afa3-96c3ec904689
-            region: content
-            configuration:
-              id: 'field_block:node:person:field_project_expert'
-              label: Projects
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: above
-                type: entity_reference_entity_view
-                settings:
-                  view_mode: card
-                third_party_settings: {  }
               context_mapping:
                 entity: layout_builder.entity
-                view_mode: view_mode
+            weight: -10
             additional: {  }
-            weight: 0
           289716b1-599c-4414-854b-f44fa4531bb7:
             uuid: 289716b1-599c-4414-854b-f44fa4531bb7
             region: content
@@ -114,6 +102,37 @@ third_party_settings:
               items_per_page: '8'
             weight: -7
             additional: {  }
+          c50a0ee7-957f-448d-903a-2fc0ccbbfcde:
+            uuid: c50a0ee7-957f-448d-903a-2fc0ccbbfcde
+            region: content
+            configuration:
+              id: wri_external_pub_block
+              label: 'External Publications'
+              label_display: visible
+              provider: wri_external_pub
+              context_mapping:
+                node: layout_builder.entity
+            weight: 1
+            additional: {  }
+          874cd517-3926-49a5-afa3-96c3ec904689:
+            uuid: 874cd517-3926-49a5-afa3-96c3ec904689
+            region: content
+            configuration:
+              id: 'field_block:node:person:field_project_expert'
+              label: Projects
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: card
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories: {  }
@@ -137,6 +156,8 @@ third_party_settings:
         User: {  }
         'WRI block': {  }
         core: {  }
+_core:
+  default_config_hash: 23OctIldHyWmhULHlurk9QoSxa3VX7umAW_uZPNKc6E
 id: node.person.full
 targetEntityType: node
 bundle: person
@@ -166,6 +187,8 @@ content:
 hidden:
   body: true
   content_moderation_control: true
+  field_alt_first_names: true
+  field_alt_last_names: true
   field_alternate_contact: true
   field_areas_of_expertise: true
   field_department: true
@@ -179,6 +202,7 @@ hidden:
   field_phone: true
   field_project_expert: true
   field_quote: true
+  field_share_with_io: true
   field_staff_group: true
   field_topics: true
   field_twitter_account: true
