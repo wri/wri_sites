@@ -75,7 +75,12 @@ function wri_narrative_post_update_rewrite_narrative_taxonomies(&$sandbox) {
 /**
  * Updates the tokens in narrative taxonomies, round 2.
  */
-function wri_narrative_post_update_rewrite_narrative_taxonomies2(&$sandbox) {
+function wri_narrative_post_update_rewrite_narrative_taxonomies3(&$sandbox) {
+  // We don't display the narrative taxonomy on nodes older than 2020, so clear
+  // that boilerplate out of the database.
+  Drupal::database()->query("DELETE FROM node__field_narrative_taxonomy WHERE entity_id IN (SELECT nid FROM node_field_data WHERE created<1577836800 AND type IN ('data', 'publication'))")->execute();
+  Drupal::database()->query("DELETE FROM node_revision__field_narrative_taxonomy WHERE entity_id IN (SELECT nid FROM node_field_data WHERE created<1577836800 AND type IN ('data', 'publication'))")->execute();
+
   if (!isset($sandbox['total'])) {
     $sandbox['total'] = Drupal::database()->select('node__field_narrative_taxonomy', 'u')
       ->condition('u.field_narrative_taxonomy_value', '[node:field_(projects|primary_contacts):entity:link]', 'REGEXP')
