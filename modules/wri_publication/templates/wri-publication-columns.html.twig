@@ -75,9 +75,19 @@
         {% if display_type == 'robust' and (content.hero.field_toc is not empty) and (content.hero.field_toc['#value'] != 'microsite') %}
           <div class="mobile__toc grid">
             <div class="internal-menu-pages">
+              {% set node_title = content.hero.field_toc['#node_title'] %}
               {% set menu_title = content.hero.field_toc['#menu_title'] %}
               {% set menu_link = content.hero.field_toc['#menu_link'] %}
-              {{ drupal_block('menu_block:' ~ menu_title, {level: 1, expand_all_items: 1, depth: 0, parent: menu_title ~ ':' ~ menu_link, render_parent: 0, follow_parent: 'child', follow: 0, label: 'Table of Contents', label_display: 0, id:'page-hierarchies', suggestion: 'page-hierarchies'}) }}
+              {% set value = content.hero.field_toc['#value'] %}
+              {% if  value == 1 %}
+              {{ attach_library('wri_toc/tocjs') }}
+                <div class="field-label" tabindex="0"><a tabindex="-1" href="#">{{ node_title }}</a></div>
+                <nav role="navigation" id="menu-toc" aria-label="Page sub navigation" class="page-hierarchies">
+                  <ul class="toc-list menu" data-toc="div.layout__region--content" data-toc-headings=".publication__main h2"></ul>
+                </nav>
+              {% else %}
+                {{ drupal_block('menu_block:' ~ menu_title, {level: 1, expand_all_items: 1, depth: 0, parent: menu_title ~ ':' ~ menu_link, render_parent: 0, follow_parent: 'child', follow: 0, label: 'Table of Contents', label_display: 0, id:'page-hierarchies', suggestion: 'page-hierarchies'}) }}
+              {% endif %}
             </div>
            </div>
         {% endif %}
