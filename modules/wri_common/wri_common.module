@@ -255,7 +255,14 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
 
           case 'projects_links':
             if ($node->hasField('field_projects') && ($projects = $node->get('field_projects')->referencedEntities())) {
-              $replacements[$original] = _wri_common_format_list($projects);
+              $published_projects = [];
+              foreach ($projects as $project) {
+                if ($project->isPublished()) {
+                  $published_projects[] = $project;
+                }
+              }
+
+              $replacements[$original] = _wri_common_format_list($published_projects);
             }
             break;
 
