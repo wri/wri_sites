@@ -5,6 +5,8 @@
  * Update hooks for wri_admin module.
  */
 
+use Drupal\user\Entity\Role;
+
 /**
  * Enable the modules better_passwords and rename_admin_paths and pulls config.
  */
@@ -32,9 +34,12 @@ function wri_admin_update_10001() {
 /**
  * Enable the module menu_admin_per_menu and pulls config.
  */
-function wri_admin_update_10002() {
+function wri_admin_update_10301() {
   $moduleHandler = \Drupal::service('module_handler');
   if (!$moduleHandler->moduleExists('menu_admin_per_menu')) {
     \Drupal::service('module_installer')->install(['menu_admin_per_menu'], TRUE);
   }
+  $role = Role::load('hr');
+  $role->grantPermission('administer page-hierarchies menu items');
+  $role->save();
 }

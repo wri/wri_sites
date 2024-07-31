@@ -259,10 +259,3 @@ function _set_anonymous_authenticated_permissions() {
   \Drupal::service('distro_helper.updates')->installConfig('user.role.editorial', 'wri_package2', 'post-install', TRUE);
   \Drupal::service('distro_helper.updates')->installConfig('user.role.hr', 'wri_package2', 'post-install', TRUE);
 }
-
-/**
- * Set updated HR permissions using menu_admin_per_menu.
- */
-function wri_package2_update_10001() {
-  \Drupal::service('distro_helper.updates')->installConfig('user.role.hr', 'wri_package2', 'post-install', TRUE);
-}
