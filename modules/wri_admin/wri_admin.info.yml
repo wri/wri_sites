@@ -42,6 +42,7 @@ dependencies:
   - link_attributes_menu_link_content
   - media_responsive_thumbnail
   - menu_ui
+  - menu_admin_per_menu
   - paragraphs
   - rename_admin_paths
   - responsive_tables_filter

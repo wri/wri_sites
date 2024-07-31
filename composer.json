@@ -156,6 +156,7 @@
         "drupal/link_attributes": "^2.1",
         "drupal/media_library_edit": "^3.0",
         "drupal/media_responsive_thumbnail": "^1.2",
+        "drupal/menu_admin_per_menu": "*",
         "drupal/menu_block": "^1.8",
         "drupal/menu_position": "^1.0@beta",
         "drupal/metatag": "^2.0",
