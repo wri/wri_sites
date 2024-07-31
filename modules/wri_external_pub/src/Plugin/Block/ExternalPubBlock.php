@@ -32,12 +32,14 @@ class ExternalPubBlock extends BlockBase {
     if ($node instanceof NodeInterface
       && $node->bundle() === 'person') {
 
-      $pubListSrc = "https://s3.amazonaws.com/wriorg/external-publications/externalpubs.json";
+      $pubListSrc = "https://files.wri.org/external-publications/externalpubs.json";
       $pubList = file_get_contents($pubListSrc);
       $pubListArray = json_decode($pubList, TRUE);
 
       $authLast = $node->field_last_name->value;
       $authFirst = $node->field_first_name->value;
+      $authAltLast = $node->field_alt_last_names->value;
+      $authAltFirst = $node->field_alt_first_names->value;
 
       $name_fixes = [
         "á" => "a",
@@ -47,7 +49,19 @@ class ExternalPubBlock extends BlockBase {
         "ú" => "u",
       ];
 
-      $drupalName = strtr($authFirst . ' ' . $authLast, $name_fixes);
+      // Create an array of all possible name combinations.
+      // Note: not checking $authFirst/$authLast in case of single-name people.
+      $name_variants = [];
+      $name_variants[] = strtr($authFirst . ' ' . $authLast, $name_fixes);
+      if (!empty($authAltLast)) {
+        $name_variants[] = strtr($authFirst . ' ' . $authAltLast, $name_fixes);
+      }
+      if (!empty($authAltFirst)) {
+        $name_variants[] = strtr($authAltFirst . ' ' . $authLast, $name_fixes);
+      }
+      if (!empty($authAltFirst) && !empty($authAltLast)) {
+        $name_variants[] = strtr($authAltFirst . ' ' . $authAltLast, $name_fixes);
+      }
 
       foreach ($pubListArray as $publication_entry) {
         $publicationIsFromAuthor = FALSE;
@@ -58,7 +72,9 @@ class ExternalPubBlock extends BlockBase {
             $last_name = (isset($author['family'])) ? $author['family'] : '';
             $authors[] = $last_name . ' ' . $first_name;
             $feedName = strtr($first_name . ' ' . $last_name, $name_fixes);
-            if ($feedName === $drupalName) {
+
+            // Check against all name variants.
+            if (in_array($feedName, $name_variants)) {
               $publicationIsFromAuthor = TRUE;
             }
           }
