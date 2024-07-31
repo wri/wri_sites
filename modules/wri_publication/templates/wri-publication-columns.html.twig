@@ -72,6 +72,15 @@
 
 
       {% if content.category or content.share %}
+        {% if display_type == 'robust' and (content.hero.field_toc is not empty) and (content.hero.field_toc['#value'] != 'microsite') %}
+          <div class="mobile__toc grid">
+            <div class="internal-menu-pages">
+              {% set menu_title = content.hero.field_toc['#menu_title'] %}
+              {% set menu_link = content.hero.field_toc['#menu_link'] %}
+              {{ drupal_block('menu_block:' ~ menu_title, {level: 1, expand_all_items: 1, depth: 0, parent: menu_title ~ ':' ~ menu_link, render_parent: 0, follow_parent: 'child', follow: 0, label: 'Table of Contents', label_display: 0, id:'page-hierarchies', suggestion: 'page-hierarchies'}) }}
+            </div>
+           </div>
+        {% endif %}
         <div class="detail__meta meta grid margin-top-md margin-bottom-md">
           <div class="detail__meta-inner meta-inner {% if content.sidebar.field_narrative_taxonomy|render %}two-column{% endif %}">
             {% if content.category %}
