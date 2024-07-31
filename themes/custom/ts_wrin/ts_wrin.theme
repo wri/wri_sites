@@ -219,7 +219,15 @@ function ts_wrin_preprocess_block(array &$variables) {
     $variables['white_logo'] = \Drupal::service('file_url_generator')->generateString($logo_path);
   }
 
-  if ($variables['plugin_id'] == 'inline_block:person_listing') {
+  if (
+    $variables['plugin_id'] == 'inline_block:person_listing'
+    ||
+    (
+      isset($variables["content"]["#block_content"]->type->target_id)
+      &&
+      $variables["content"]["#block_content"]->type->target_id == 'person_listing'
+    )
+  ) {
     $variables["content"]["field_featured_experts"]["#title"] = $variables["elements"]["#configuration"]["label"];
   }
 }
