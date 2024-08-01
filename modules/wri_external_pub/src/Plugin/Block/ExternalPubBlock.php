@@ -32,12 +32,14 @@ class ExternalPubBlock extends BlockBase {
     if ($node instanceof NodeInterface
       && $node->bundle() === 'person') {
 
-      $pubListSrc = "https://s3.amazonaws.com/wriorg/external-publications/externalpubs.json";
+      $pubListSrc = "https://files.wri.org/external-publications/externalpubs.json";
       $pubList = file_get_contents($pubListSrc);
       $pubListArray = json_decode($pubList, TRUE);
 
       $authLast = $node->field_last_name->value;
       $authFirst = $node->field_first_name->value;
+      $authAltLastArray = $node->field_alt_last_names->getValue();
+      $authAltFirstArray = $node->field_alt_first_names->getValue();
 
       $name_fixes = [
         "á" => "a",
@@ -47,7 +49,33 @@ class ExternalPubBlock extends BlockBase {
         "ú" => "u",
       ];
 
-      $drupalName = strtr($authFirst . ' ' . $authLast, $name_fixes);
+      // Create an array of all possible name combinations.
+      // Note: not checking $authFirst/$authLast in case of single-name people.
+      $name_variants = [];
+      $name_variants[] = strtr($authFirst . ' ' . $authLast, $name_fixes);
+
+      // Handle alternate last names.
+      if (!empty($authAltLastArray)) {
+        foreach ($authAltLastArray as $altLastName) {
+          $name_variants[] = strtr($authFirst . ' ' . $altLastName['value'], $name_fixes);
+        }
+      }
+
+      // Handle alternate first names.
+      if (!empty($authAltFirstArray)) {
+        foreach ($authAltFirstArray as $altFirstName) {
+          $name_variants[] = strtr($altFirstName['value'] . ' ' . $authLast, $name_fixes);
+        }
+      }
+
+      // Handle combinations of alternate first and last names.
+      if (!empty($authAltFirstArray) && !empty($authAltLastArray)) {
+        foreach ($authAltFirstArray as $altFirstName) {
+          foreach ($authAltLastArray as $altLastName) {
+            $name_variants[] = strtr($altFirstName['value'] . ' ' . $altLastName['value'], $name_fixes);
+          }
+        }
+      }
 
       foreach ($pubListArray as $publication_entry) {
         $publicationIsFromAuthor = FALSE;
@@ -58,7 +86,9 @@ class ExternalPubBlock extends BlockBase {
             $last_name = (isset($author['family'])) ? $author['family'] : '';
             $authors[] = $last_name . ' ' . $first_name;
             $feedName = strtr($first_name . ' ' . $last_name, $name_fixes);
-            if ($feedName === $drupalName) {
+
+            // Check against all name variants.
+            if (in_array($feedName, $name_variants)) {
               $publicationIsFromAuthor = TRUE;
             }
           }

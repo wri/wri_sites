@@ -3,6 +3,8 @@ status: true
 dependencies:
   config:
     - field.field.node.person.body
+    - field.field.node.person.field_alt_first_names
+    - field.field.node.person.field_alt_last_names
     - field.field.node.person.field_alternate_contact
     - field.field.node.person.field_areas_of_expertise
     - field.field.node.person.field_department
@@ -57,6 +59,7 @@ third_party_settings:
         - group_contact
         - group_category
         - group_leadership
+        - group_aliases
       label: More
       region: content
       parent_name: ''
@@ -99,6 +102,24 @@ third_party_settings:
         formatter: open
         description: ''
         required_fields: true
+    group_aliases:
+      children:
+        - field_alt_first_names
+        - field_alt_last_names
+      label: Aliases
+      region: content
+      parent_name: group_more
+      weight: 4
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+        direction: vertical
+        width_breakpoint: 640
 id: node.person.default
 targetEntityType: node
 bundle: person
@@ -113,6 +134,22 @@ content:
       summary_rows: 3
       placeholder: ''
       show_summary: false
+    third_party_settings: {  }
+  field_alt_first_names:
+    type: string_textfield
+    weight: 138
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_alt_last_names:
+    type: string_textfield
+    weight: 139
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_alternate_contact:
     type: entity_reference_autocomplete

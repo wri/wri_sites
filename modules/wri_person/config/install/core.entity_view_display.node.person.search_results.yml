@@ -4,6 +4,8 @@ dependencies:
   config:
     - core.entity_view_mode.node.search_results
     - field.field.node.person.body
+    - field.field.node.person.field_alt_first_names
+    - field.field.node.person.field_alt_last_names
     - field.field.node.person.field_alternate_contact
     - field.field.node.person.field_areas_of_expertise
     - field.field.node.person.field_department
@@ -67,6 +69,8 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
+_core:
+  default_config_hash: 4lTnt6E8DjipTS3AYnKOPQhf0qsVgBW0tKobNKhgTNI
 id: node.person.search_results
 targetEntityType: node
 bundle: person
@@ -93,6 +97,8 @@ content:
 hidden:
   body: true
   content_moderation_control: true
+  field_alt_first_names: true
+  field_alt_last_names: true
   field_alternate_contact: true
   field_areas_of_expertise: true
   field_department: true

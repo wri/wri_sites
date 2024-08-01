@@ -1,3 +1,11 @@
 .card-listing .listing-items li.external__publications {
-  flex: 0 1 calc(48% - (48px - (48px / 2)))
+  flex: 0 1 calc(50% - (20px / 2));
+}
+@media (min-width: 64rem) {
+  .card-listing .listing-items li.external__publications {
+    flex: 0 1 calc(50% - (48px / 2));
+  }
+}
+.card-listing .listing-items li.external__publications:nth-child(even) {
+  margin-right: 0;
 }

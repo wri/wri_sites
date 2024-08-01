@@ -4,6 +4,8 @@ dependencies:
   config:
     - core.entity_view_mode.node.small_image_teaser
     - field.field.node.person.body
+    - field.field.node.person.field_alt_first_names
+    - field.field.node.person.field_alt_last_names
     - field.field.node.person.field_alternate_contact
     - field.field.node.person.field_areas_of_expertise
     - field.field.node.person.field_department
@@ -38,6 +40,8 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
+_core:
+  default_config_hash: OwC9p_a03rJcp8eZLMFHATCRLAGw4KR4uUKK0xNnYMs
 id: node.person.small_image_teaser
 targetEntityType: node
 bundle: person
@@ -48,8 +52,8 @@ content:
     label: hidden
     settings:
       format: custom
-      format_custom_true: Leadership
       format_custom_false: ''
+      format_custom_true: 'Leadership'
     third_party_settings:
       ds:
         ft:
@@ -102,6 +106,8 @@ content:
 hidden:
   body: true
   content_moderation_control: true
+  field_alt_first_names: true
+  field_alt_last_names: true
   field_alternate_contact: true
   field_areas_of_expertise: true
   field_department: true
@@ -114,6 +120,7 @@ hidden:
   field_phone: true
   field_project_expert: true
   field_quote: true
+  field_share_with_io: true
   field_staff_group: true
   field_twitter_account: true
   field_type: true
