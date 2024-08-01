@@ -187,3 +187,7 @@ form .fieldset {
 #auto-generate-password {
   width: 1.25rem;
 }
+
+.report-teaser figure {
+  margin: 0 0 20px 0;
+}
