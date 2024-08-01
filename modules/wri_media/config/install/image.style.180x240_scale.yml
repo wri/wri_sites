@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 180x240_scale
+label: '180x240 scale'
+effects:
+  0886dc7e-d080-4e13-ac4f-ef467352d1fd:
+    uuid: 0886dc7e-d080-4e13-ac4f-ef467352d1fd
+    id: image_scale
+    weight: 1
+    data:
+      width: 180
+      height: 240
+      upscale: true

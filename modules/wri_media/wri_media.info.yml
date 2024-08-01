@@ -46,6 +46,7 @@ config_devel:
     - core.entity_view_display.media.image.large_image_teaser
     - core.entity_view_display.media.image.media_library
     - core.entity_view_display.media.image.superfeatured
+    - core.entity_view_display.media.image.thumbnail
     - core.entity_view_display.media.image.tile
     - core.entity_view_display.media.video.default
     - core.entity_view_display.media.video.media_library
@@ -99,6 +100,7 @@ config_devel:
     - image.style.150_tall
     - image.style.150_wide
     - image.style.1575_wide
+    - image.style.180x240_scale
     - image.style.2000x1160
     - image.style.2000x695
     - image.style.2000x765
