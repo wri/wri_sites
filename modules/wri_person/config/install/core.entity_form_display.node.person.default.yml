@@ -31,7 +31,6 @@ dependencies:
     - field_group
     - link
     - media_library
-    - media_library_edit
     - metatag
     - path
     - telephone

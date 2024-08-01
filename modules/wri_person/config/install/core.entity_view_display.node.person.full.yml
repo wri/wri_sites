@@ -40,7 +40,6 @@ dependencies:
     - text
     - user
     - views
-    - wri_external_pub
 third_party_settings:
   layout_builder:
     enabled: true
