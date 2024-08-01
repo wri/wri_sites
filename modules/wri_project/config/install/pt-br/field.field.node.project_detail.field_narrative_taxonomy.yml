@@ -1,0 +1,26 @@
+langcode: pt-br
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_narrative_taxonomy
+    - filter.format.basic_html
+    - node.type.project_detail
+  module:
+    - text
+id: node.project_detail.field_narrative_taxonomy
+field_name: field_narrative_taxonomy
+entity_type: node
+bundle: project_detail
+label: 'Narrative Taxonomy'
+description: 'Predefinição: escolha "Código-Fonte" e cole: <code>O projeto [node:title] faz parte do programa de [wri_tokens:topic_and_sub_topic_links_list]. Para informações sobre o projeto, contate [node:field_primary_contacts:entity:link]. Para solicitar uma entrevista, visite a página de &lt;a href=&quot;/imprensa&quot;&gt;imprensa&lt;/a&gt;.</code>'
+required: false
+translatable: true
+default_value:
+  -
+    value: 'O projeto [node:title] faz parte do programa de [wri_tokens:topic_and_sub_topic_links_list]. Para informações sobre o projeto, contate [node:field_primary_contacts:entity:link]. Para solicitar uma entrevista, visite a página de <a href="/imprensa">imprensa</a>.'
+    format: basic_html
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+field_type: text_long
