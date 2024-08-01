@@ -38,8 +38,8 @@ class ExternalPubBlock extends BlockBase {
 
       $authLast = $node->field_last_name->value;
       $authFirst = $node->field_first_name->value;
-      $authAltLast = $node->field_alt_last_names->value;
-      $authAltFirst = $node->field_alt_first_names->value;
+      $authAltLastArray = $node->field_alt_last_names->getValue();
+      $authAltFirstArray = $node->field_alt_first_names->getValue();
 
       $name_fixes = [
         "á" => "a",
@@ -53,14 +53,28 @@ class ExternalPubBlock extends BlockBase {
       // Note: not checking $authFirst/$authLast in case of single-name people.
       $name_variants = [];
       $name_variants[] = strtr($authFirst . ' ' . $authLast, $name_fixes);
-      if (!empty($authAltLast)) {
-        $name_variants[] = strtr($authFirst . ' ' . $authAltLast, $name_fixes);
+
+      // Handle alternate last names.
+      if (!empty($authAltLastArray)) {
+        foreach ($authAltLastArray as $altLastName) {
+          $name_variants[] = strtr($authFirst . ' ' . $altLastName['value'], $name_fixes);
+        }
       }
-      if (!empty($authAltFirst)) {
-        $name_variants[] = strtr($authAltFirst . ' ' . $authLast, $name_fixes);
+
+      // Handle alternate first names.
+      if (!empty($authAltFirstArray)) {
+        foreach ($authAltFirstArray as $altFirstName) {
+          $name_variants[] = strtr($altFirstName['value'] . ' ' . $authLast, $name_fixes);
+        }
       }
-      if (!empty($authAltFirst) && !empty($authAltLast)) {
-        $name_variants[] = strtr($authAltFirst . ' ' . $authAltLast, $name_fixes);
+
+      // Handle combinations of alternate first and last names.
+      if (!empty($authAltFirstArray) && !empty($authAltLastArray)) {
+        foreach ($authAltFirstArray as $altFirstName) {
+          foreach ($authAltLastArray as $altLastName) {
+            $name_variants[] = strtr($altFirstName['value'] . ' ' . $altLastName['value'], $name_fixes);
+          }
+        }
       }
 
       foreach ($pubListArray as $publication_entry) {

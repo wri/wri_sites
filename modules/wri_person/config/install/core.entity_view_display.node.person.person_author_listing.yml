@@ -20,7 +20,6 @@ dependencies:
     - field.field.node.person.field_profile_image
     - field.field.node.person.field_project_expert
     - field.field.node.person.field_quote
-    - field.field.node.person.field_share_with_io
     - field.field.node.person.field_staff_group
     - field.field.node.person.field_title
     - field.field.node.person.field_topics
@@ -123,7 +122,6 @@ hidden:
   field_profile_image: true
   field_project_expert: true
   field_quote: true
-  field_share_with_io: true
   field_staff_group: true
   field_topics: true
   field_twitter_account: true

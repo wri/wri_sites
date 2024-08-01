@@ -106,13 +106,9 @@ function wri_person_update_10001() {
 
   // Updating the Person form/view displays.
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.person.default', [
-    'third_party_settings#field_group#group_more#group_aliases',
+    'third_party_settings#field_group#group_aliases',
     'content#field_alt_first_names',
     'content#field_alt_last_names',
-  ], 'wri_person');
-  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.person.default', [
-    'hidden#field_alt_first_names',
-    'hidden#field_alt_last_names',
   ], 'wri_person');
 
   $message = 'Add the Alt First/Last name fields and Aliases tab group.';
