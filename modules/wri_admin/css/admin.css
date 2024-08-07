@@ -4,6 +4,10 @@
   position: static;
 }
 
+.layout-region--main {
+  overflow: hidden;
+}
+
 /* Hide some confusing arguments for layout builder block builder. */
 #drupal-off-canvas-wrapper .layout-builder-configure-block .field--type-viewfield div[class*="-arguments"],
 #drupal-off-canvas-wrapper .block-content-form .field--type-viewfield div[class*="-arguments"] {
