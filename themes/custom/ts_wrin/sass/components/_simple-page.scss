@@ -302,6 +302,12 @@
     a {
       @include font-line-height(18, 24);
     }
+    ul.menu {
+      border-top: 0;
+      left: -1px;
+      width: calc(100% + 2px);
+      padding-left: 2.5rem;
+    }
   }
 
   &:hover,
