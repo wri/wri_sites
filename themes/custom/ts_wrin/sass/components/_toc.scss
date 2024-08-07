@@ -54,6 +54,11 @@
 }
 
 .publication__toc {
+  display: none;
+  @include mq($md) {
+    display: block;
+  }
+
   @include font($acumin-semi-cond, "bold");
   @include font-line-height(18, 21);
   position: relative;
@@ -174,6 +179,14 @@
     .nav-arrow svg {
       width: 8px;
     }
+  }
+}
+
+.mobile__toc {
+  display: block;
+  margin-top: 16px;
+  @include mq($md) {
+    display: none;
   }
 }
 
