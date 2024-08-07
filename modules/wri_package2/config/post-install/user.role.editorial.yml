@@ -99,6 +99,7 @@ permissions:
   - 'administer meta tags'
   - 'administer node display'
   - 'administer nodes'
+  - 'administer page-hierarchies menu items'
   - 'bypass node access'
   - 'configure editable article node layout overrides'
   - 'configure editable data node layout overrides'
