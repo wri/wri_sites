@@ -443,10 +443,8 @@ table {
     @include mq($lg) {
       display: inline;
       float: right;
-      margin: 0 -25.7% 0 $space-sm;
-      width: 36%;
-      max-width: 180px;
+      margin: 0 230px 0 $space-sm;
+      width: 180px;
     }
   }
 }
-
