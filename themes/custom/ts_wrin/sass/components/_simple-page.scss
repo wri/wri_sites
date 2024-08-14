@@ -9,18 +9,24 @@
     }
   }
   .has-menu {
+    order: 1;
     @include mq($md) {
       @include column-width(2, -4);
+      order: 1;
     }
   }
 
   .layout__region--menu {
     @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+    order: -1;
+    margin-top: 16px;
     @include mq($ph) {
       @include center-columns($grid-columns, $grid-columns);
     }
     @include mq($md) {
       @include column-width(10, 12);
+      margin-top: 0;
+      order: 1;
     }
   }
 
@@ -158,6 +164,13 @@
       height: auto;
     }
   }
+
+  .simple-page .breadcrumb {
+    display: none;
+    @include mq($md) {
+      display: block;
+    }
+  }
 }
 
 .page-hierarchies {
@@ -246,6 +259,8 @@
       height: 16px;
       transform: rotate(90deg);
       width: 16px;
+      position: relative;
+      top: 2px;
     }
 
     @include mq($md) {
@@ -294,14 +309,47 @@
     a {
       @include font-line-height(18, 24);
     }
+    ul.menu {
+      border-top: 0;
+      left: -1px;
+      width: calc(100% + 2px);
+    }
   }
 
   &:hover,
   &:focus,
-  &:focus-within {
+  &:focus-within,
+  .menu-open {
     ul.menu {
       opacity: 1;
       visibility: visible;
+    }
+  }
+  &.menu-closed:hover,
+  &.menu-closed:focus,
+  &.menu-closed:focus-within,
+  .menu-closed {
+    ul.menu {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  @include mq($md) {
+    &.menu-closed:hover,
+    &.menu-closed:focus,
+    &.menu-closed:focus-within,
+    .menu-closed {
+      ul.menu {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  #menu-toc > ul.menu > li > .menu-item-title {
+    @include mq($md) {
+      display: none;
     }
   }
 }
