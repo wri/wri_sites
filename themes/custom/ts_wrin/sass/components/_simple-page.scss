@@ -164,6 +164,13 @@
       height: auto;
     }
   }
+
+  .simple-page .breadcrumb {
+    display: none;
+    @include mq($md) {
+      display: block;
+    }
+  }
 }
 
 .page-hierarchies {
@@ -306,16 +313,43 @@
       border-top: 0;
       left: -1px;
       width: calc(100% + 2px);
-      padding-left: 2.5rem;
     }
   }
 
   &:hover,
   &:focus,
-  &:focus-within {
+  &:focus-within,
+  .menu-open {
     ul.menu {
       opacity: 1;
       visibility: visible;
+    }
+  }
+  &.menu-closed:hover,
+  &.menu-closed:focus,
+  &.menu-closed:focus-within,
+  .menu-closed {
+    ul.menu {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  @include mq($md) {
+    &.menu-closed:hover,
+    &.menu-closed:focus,
+    &.menu-closed:focus-within,
+    .menu-closed {
+      ul.menu {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  #menu-toc > ul.menu > li > .menu-item-title {
+    @include mq($md) {
+      display: none;
     }
   }
 }
