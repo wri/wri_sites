@@ -309,36 +309,38 @@ export default function(context) {
       }
     });
 
-    const menuContainer = document.querySelector('.internal-menu-pages');
-    const menuToggle = document.querySelector('.internal-menu-pages .field-label');
+    const menuContainer = document.querySelector(".internal-menu-pages");
+    const menuToggle = document.querySelector(
+      ".internal-menu-pages .field-label"
+    );
 
     if (menuContainer && menuToggle) {
       // Toggle menu open/closed when clicking the label
-      menuToggle.addEventListener('click', function (e) {
+      menuToggle.addEventListener("click", function(e) {
         e.preventDefault();
         e.stopPropagation(); // Stop event propagation to avoid interfering with links
 
         // Toggle the 'menu-open' and 'menu-closed' classes
-        if (menuContainer.classList.contains('menu-open')) {
-          menuContainer.classList.remove('menu-open');
-          menuContainer.classList.add('menu-closed');
+        if (menuContainer.classList.contains("menu-open")) {
+          menuContainer.classList.remove("menu-open");
+          menuContainer.classList.add("menu-closed");
         } else {
-          menuContainer.classList.remove('menu-closed');
-          menuContainer.classList.add('menu-open');
+          menuContainer.classList.remove("menu-closed");
+          menuContainer.classList.add("menu-open");
         }
       });
 
       // Prevent clicks within the menu from toggling the menu
-      menuContainer.querySelector('nav').addEventListener('click', function (e) {
+      menuContainer.querySelector("nav").addEventListener("click", function(e) {
         e.stopPropagation();
       });
     }
 
     // Close the menu if clicking outside of it
-    document.addEventListener('click', function () {
-      if (menuContainer.classList.contains('menu-open')) {
-        menuContainer.classList.remove('menu-open');
-        menuContainer.classList.add('menu-closed');
+    document.addEventListener("click", function() {
+      if (menuContainer.classList.contains("menu-open")) {
+        menuContainer.classList.remove("menu-open");
+        menuContainer.classList.add("menu-closed");
       }
     });
   }
