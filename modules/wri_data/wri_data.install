@@ -34,3 +34,27 @@ function wri_data_update_dependencies() {
 
   return $dependencies;
 }
+
+/**
+ * Update the Data content type to add fields and field group.
+ */
+function wri_data_update_10001() {
+  // Add the fields.
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_apple_podcasts', 'wri_data', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.data.field_apple_podcasts', 'wri_data', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_spotify', 'wri_data', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.data.field_spotify', 'wri_data', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_youtube', 'wri_data', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.data.field_youtube', 'wri_data', 'install', 'TRUE');
+
+  // Updating the Data form/view displays.
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.data.default', [
+    'third_party_settings#field_group#group_podcasts',
+    'content#field_apple_podcasts',
+    'content#field_spotify',
+    'content#field_youtube',
+  ], 'wri_data');
+
+  $message = 'Add the podcast link fields and Podcasts tab group.';
+  return $message;
+}
