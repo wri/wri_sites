@@ -4,6 +4,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.type_title
     - field.field.node.data.body
+    - field.field.node.data.field_apple_podcasts
     - field.field.node.data.field_authors
     - field.field.node.data.field_featured
     - field.field.node.data.field_featured_headline
@@ -20,8 +21,10 @@ dependencies:
     - field.field.node.data.field_projects
     - field.field.node.data.field_region
     - field.field.node.data.field_related_resources
+    - field.field.node.data.field_spotify
     - field.field.node.data.field_tags
     - field.field.node.data.field_type
+    - field.field.node.data.field_youtube
     - field.field.node.data.layout_builder__layout
     - node.type.data
   module:
@@ -36,6 +39,9 @@ third_party_settings:
   ds:
     layout:
       id: ds_1col
+      library: null
+      disable_css: false
+      entity_classes: all_classes
       settings:
         classes:
           layout_class: {  }
@@ -46,9 +52,6 @@ third_party_settings:
         link_attribute: ''
         link_custom: ''
         label: ''
-      library: null
-      disable_css: false
-      entity_classes: all_classes
     regions:
       ds_content:
         - field_type
@@ -96,6 +99,7 @@ content:
 hidden:
   body: true
   content_moderation_control: true
+  field_apple_podcasts: true
   field_authors: true
   field_exclude_from_blog_feed: true
   field_featured: true
@@ -115,7 +119,9 @@ hidden:
   field_projects: true
   field_region: true
   field_related_resources: true
+  field_spotify: true
   field_tags: true
+  field_youtube: true
   langcode: true
   layout_builder__layout: true
   links: true

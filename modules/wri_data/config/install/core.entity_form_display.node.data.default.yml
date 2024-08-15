@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - field.field.node.data.body
+    - field.field.node.data.field_apple_podcasts
     - field.field.node.data.field_authors
     - field.field.node.data.field_featured
     - field.field.node.data.field_featured_headline
@@ -19,14 +20,17 @@ dependencies:
     - field.field.node.data.field_projects
     - field.field.node.data.field_region
     - field.field.node.data.field_related_resources
+    - field.field.node.data.field_spotify
     - field.field.node.data.field_tags
     - field.field.node.data.field_type
+    - field.field.node.data.field_youtube
     - field.field.node.data.layout_builder__layout
     - node.type.data
   module:
     - content_moderation
     - field_group
     - inline_entity_form
+    - link
     - link_attributes
     - media_library
     - metatag
@@ -60,7 +64,7 @@ third_party_settings:
       label: 'Experts & Staff'
       region: content
       parent_name: group_more
-      weight: 17
+      weight: 10
       format_type: tab
       format_settings:
         classes: ''
@@ -76,7 +80,7 @@ third_party_settings:
       label: Features
       region: content
       parent_name: group_more
-      weight: 18
+      weight: 11
       format_type: tab
       format_settings:
         classes: ''
@@ -92,6 +96,7 @@ third_party_settings:
         - group_experts
         - group_features
         - group_related
+        - group_podcasts
       label: More
       region: content
       parent_name: ''
@@ -108,12 +113,29 @@ third_party_settings:
       label: Related
       region: content
       parent_name: group_more
-      weight: 20
+      weight: 12
       format_type: details
       format_settings:
         classes: ''
         id: ''
         open: false
+        description: ''
+        required_fields: true
+    group_podcasts:
+      children:
+        - field_apple_podcasts
+        - field_spotify
+        - field_youtube
+      label: Podcasts
+      region: content
+      parent_name: group_more
+      weight: 13
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
         description: ''
         required_fields: true
 id: node.data.default
@@ -136,6 +158,14 @@ content:
     weight: 14
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_apple_podcasts:
+    type: link_default
+    weight: 107
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
   field_authors:
     type: inline_entity_form_complex
@@ -282,6 +312,14 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_spotify:
+    type: link_default
+    weight: 108
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete_tags
     weight: 19
@@ -297,6 +335,14 @@ content:
     weight: 26
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_youtube:
+    type: link_default
+    weight: 109
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
   langcode:
     type: language_select

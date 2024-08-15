@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - field.field.node.data.body
+    - field.field.node.data.field_apple_podcasts
     - field.field.node.data.field_authors
     - field.field.node.data.field_featured
     - field.field.node.data.field_featured_headline
@@ -19,8 +20,10 @@ dependencies:
     - field.field.node.data.field_projects
     - field.field.node.data.field_region
     - field.field.node.data.field_related_resources
+    - field.field.node.data.field_spotify
     - field.field.node.data.field_tags
     - field.field.node.data.field_type
+    - field.field.node.data.field_youtube
     - field.field.node.data.layout_builder__layout
     - node.type.data
   module:
@@ -63,7 +66,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 13
+    weight: 9
     region: content
   field_featured:
     type: entity_reference_label
@@ -71,21 +74,21 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 15
+    weight: 11
     region: content
   field_featured_headline:
     type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 12
+    weight: 8
     region: content
   field_featured_text:
     type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 11
+    weight: 7
     region: content
   field_files:
     type: entity_reference_entity_view
@@ -94,28 +97,28 @@ content:
       view_mode: default
       link: false
     third_party_settings: {  }
-    weight: 124
+    weight: 16
     region: content
   field_intro:
     type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 4
+    weight: 3
     region: content
   field_metatags:
     type: metatag_empty_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 16
+    weight: 12
     region: content
   field_narrative_taxonomy:
     type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 17
+    weight: 13
     region: content
   field_platform_link:
     type: link
@@ -127,7 +130,7 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 14
+    weight: 10
     region: content
   field_primary_topic:
     type: entity_reference_label
@@ -135,7 +138,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 9
+    weight: 5
     region: content
   field_projects:
     type: entity_reference_label
@@ -143,7 +146,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 121
+    weight: 14
     region: content
   field_related_resources:
     type: entity_reference_label
@@ -151,7 +154,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 122
+    weight: 15
     region: content
   field_tags:
     type: entity_reference_label
@@ -159,7 +162,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 10
+    weight: 6
     region: content
   field_type:
     type: entity_reference_label
@@ -167,7 +170,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 8
+    weight: 4
     region: content
   links:
     settings: {  }
@@ -175,10 +178,13 @@ content:
     weight: 1
     region: content
 hidden:
+  field_apple_podcasts: true
   field_license: true
   field_media: true
   field_primary_contacts: true
   field_region: true
+  field_spotify: true
+  field_youtube: true
   langcode: true
   layout_builder__layout: true
   search_api_excerpt: true
