@@ -1,0 +1,53 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.page.body
+    - field.field.node.page.field_intro
+    - field.field.node.page.field_long_title
+    - field.field.node.page.field_main_image
+    - field.field.node.page.field_metatags
+    - field.field.node.page.layout_builder__layout
+    - node.type.page
+  module:
+    - layout_builder
+    - metatag
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.page.default
+targetEntityType: node
+bundle: page
+mode: default
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  field_intro:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_metatags:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  body: true
+  field_long_title: true
+  field_main_image: true
+  langcode: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

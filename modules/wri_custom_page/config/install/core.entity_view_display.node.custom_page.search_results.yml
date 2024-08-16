@@ -1,0 +1,80 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_results
+    - field.field.node.page.body
+    - field.field.node.page.field_intro
+    - field.field.node.page.field_long_title
+    - field.field.node.page.field_main_image
+    - field.field.node.page.field_metatags
+    - field.field.node.page.layout_builder__layout
+    - image.style.150_tall
+    - node.type.page
+  module:
+    - ds
+    - media
+    - user
+third_party_settings:
+  ds:
+    layout:
+      id: layout_search-results
+      settings:
+        label: ''
+    regions:
+      main_section:
+        - node_post_date
+        - node_title
+      right_section:
+        - field_main_image
+    fields:
+      node_post_date:
+        plugin_id: node_post_date
+        weight: 1
+        label: hidden
+        formatter: ds_post_date_short_day
+      node_title:
+        plugin_id: node_title
+        weight: 2
+        label: hidden
+        formatter: default
+        settings:
+          link: true
+          wrapper: h3
+          class: h3
+        ft:
+          id: reset
+          settings:
+            lb: ''
+id: node.page.search_results
+targetEntityType: node
+bundle: page
+mode: search_results
+content:
+  field_main_image:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: 150_tall
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 3
+    region: right_section
+hidden:
+  body: true
+  content_moderation_control: true
+  field_intro: true
+  field_long_title: true
+  field_metatags: true
+  langcode: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true
