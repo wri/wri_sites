@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: plain_image
+label: 'Plain Image'
+revision: 0
+description: ''

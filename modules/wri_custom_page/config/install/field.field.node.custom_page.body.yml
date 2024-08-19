@@ -5,16 +5,7 @@ dependencies:
     - field.storage.node.body
     - node.type.custom_page
   module:
-    - allowed_formats
     - text
-third_party_settings:
-  allowed_formats:
-    allowed_formats:
-      - unrestricted_text
-      - full_html
-      - basic_html
-      - migrated
-      - plain_text
 id: node.custom_page.body
 field_name: body
 entity_type: node

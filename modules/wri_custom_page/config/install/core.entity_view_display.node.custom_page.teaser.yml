@@ -9,83 +9,29 @@ dependencies:
     - field.field.node.custom_page.layout_builder__layout
     - node.type.custom_page
   module:
-    - ds
+    - text
     - user
-third_party_settings:
-  ds:
-    layout:
-      id: layout_teaser
-      library: null
-      disable_css: false
-      entity_classes: all_classes
-      settings:
-        label: ''
-    regions:
-      title:
-        - node_title
-      content_type:
-        - 'bundle_field:node'
-      date:
-        - node_post_date
-    fields:
-      'bundle_field:node':
-        plugin_id: 'bundle_field:node'
-        weight: 2
-        label: hidden
-        formatter: default
-        ft:
-          id: reset
-          settings:
-            lb: ''
-      node_post_date:
-        plugin_id: node_post_date
-        weight: 3
-        label: hidden
-        formatter: ds_post_date_short_day
-        ft:
-          id: reset
-          settings:
-            lb: ''
-      node_title:
-        plugin_id: node_title
-        weight: 0
-        label: hidden
-        formatter: default
-        settings:
-          link: true
-          wrapper: ''
-          class: ''
-        ft:
-          id: reset
-          settings:
-            lb: ''
 id: node.custom_page.teaser
 targetEntityType: node
 bundle: custom_page
 mode: teaser
 content:
-  field_main_image:
-    type: media_responsive_thumbnail
+  body:
+    type: text_summary_or_trimmed
     label: hidden
     settings:
-      responsive_image_style: tile
-      image_link: ''
-    third_party_settings:
-      wri_media:
-        min_width: ''
-      ds:
-        ft:
-          id: reset
-          settings:
-            lb: ''
-    weight: 0
-    region: image
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
 hidden:
-  body: true
   field_main_image: true
-  field_metatags: true
   langcode: true
   layout_builder__layout: true
-  links: true
   search_api_excerpt: true
   wri_social_sharing_block: true
