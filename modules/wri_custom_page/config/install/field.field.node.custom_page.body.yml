@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - field.storage.node.body
-    - node.type.page
+    - node.type.custom_page
   module:
     - allowed_formats
     - text
@@ -15,10 +15,10 @@ third_party_settings:
       - basic_html
       - migrated
       - plain_text
-id: node.page.body
+id: node.custom_page.body
 field_name: body
 entity_type: node
-bundle: page
+bundle: custom_page
 label: Body
 description: ''
 required: false

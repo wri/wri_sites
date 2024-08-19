@@ -1,6 +1,6 @@
-name: 'WRI custom custom_page'
+name: 'WRI Custom Page'
 type: module
-description: 'Custom custom_Page node functionality and fields'
+description: 'Custom Page node functionality and fields'
 core_version_requirement: '>=9.5'
 package: WRI
 dependencies:
@@ -17,8 +17,6 @@ config_devel:
     - core.entity_view_display.node.custom_page.teaser
     - core.entity_view_display.node.custom_page.tile
     - field.field.node.custom_page.body
-    - field.field.node.custom_page.field_intro
-    - field.field.node.custom_page.field_long_title
     - field.field.node.custom_page.field_main_image
     - field.field.node.custom_page.field_metatags
     - field.field.node.custom_page.layout_builder__layout

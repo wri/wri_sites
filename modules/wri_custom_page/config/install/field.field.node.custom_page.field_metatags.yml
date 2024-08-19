@@ -3,13 +3,13 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_metatags
-    - node.type.page
+    - node.type.custom_page
   module:
     - metatag
-id: node.page.field_metatags
+id: node.custom_page.field_metatags
 field_name: field_metatags
 entity_type: node
-bundle: page
+bundle: custom_page
 label: Metatags
 description: ''
 required: false

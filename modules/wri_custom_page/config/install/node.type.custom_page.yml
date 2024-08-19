@@ -8,9 +8,9 @@ third_party_settings:
     available_menus:
       - main
     parent: 'main:'
-name: Page
-type: page
-description: 'Basic and landing pages.'
+name: Custom Page
+type: custom_
+description: 'Custom pages.'
 help: ''
 new_revision: true
 preview_mode: 1

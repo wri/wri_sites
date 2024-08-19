@@ -3,13 +3,11 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.tile
-    - field.field.node.page.body
-    - field.field.node.page.field_intro
-    - field.field.node.page.field_long_title
-    - field.field.node.page.field_main_image
-    - field.field.node.page.field_metatags
-    - field.field.node.page.layout_builder__layout
-    - node.type.page
+    - field.field.node.custom_page.body
+    - field.field.node.custom_page.field_main_image
+    - field.field.node.custom_page.field_metatags
+    - field.field.node.custom_page.layout_builder__layout
+    - node.type.custom_page
     - responsive_image.styles.tile
   module:
     - ds
@@ -51,18 +49,11 @@ third_party_settings:
           id: reset
           settings:
             lb: ''
-id: node.page.tile
+id: node.custom_page.tile
 targetEntityType: node
-bundle: page
+bundle: custom_page
 mode: tile
 content:
-  field_intro:
-    type: text_default
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 2
-    region: intro
   field_main_image:
     type: media_responsive_thumbnail
     label: hidden
@@ -81,8 +72,6 @@ content:
     region: image
 hidden:
   body: true
-  content_moderation_control: true
-  field_long_title: true
   field_metatags: true
   langcode: true
   layout_builder__layout: true

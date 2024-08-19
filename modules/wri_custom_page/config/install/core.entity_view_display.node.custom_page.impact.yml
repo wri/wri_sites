@@ -3,13 +3,11 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.impact
-    - field.field.node.page.body
-    - field.field.node.page.field_intro
-    - field.field.node.page.field_long_title
-    - field.field.node.page.field_main_image
-    - field.field.node.page.field_metatags
-    - field.field.node.page.layout_builder__layout
-    - node.type.page
+    - field.field.node.custom_page.body
+    - field.field.node.custom_page.field_main_image
+    - field.field.node.custom_page.field_metatags
+    - field.field.node.custom_page.layout_builder__layout
+    - node.type.custom_page
   module:
     - ds
     - layout_builder
@@ -50,24 +48,15 @@ third_party_settings:
           id: reset
           settings:
             lb: ''
-id: node.page.impact
+id: node.custom_page.impact
 targetEntityType: node
-bundle: page
+bundle: custom_page
 mode: impact
 content: {  }
 hidden:
   body: true
-  content_moderation_control: true
-  field_featured_experts: true
-  field_featured_project: true
-  field_intro: true
-  field_lead_in: true
-  field_long_title: true
   field_main_image: true
   field_metatags: true
-  field_primary_contacts: true
-  field_statistics: true
-  field_twitter_account: true
   langcode: true
   layout_builder__layout: true
   links: true
