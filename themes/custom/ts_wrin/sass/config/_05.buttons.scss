@@ -28,7 +28,7 @@
 .button,
 input[type="submit"] {
   @include font($acumin-semi-cond, "bold");
-  @include font-line-height(16, 18);
+  @include font-line-height(16, 14);
   background-color: $brand-gold;
   border-radius: 3px;
   color: $black;
