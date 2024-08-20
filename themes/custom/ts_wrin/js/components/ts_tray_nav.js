@@ -10,6 +10,7 @@ export default function(context) {
     let setTransparentHeader = document.querySelector(
       ".add-transparent-header"
     );
+    let setWhiteHeader = document.querySelector(".add-white-header");
 
     document.querySelectorAll(".tray-toggle").forEach(toggle => {
       toggle.addEventListener("click", event => {
@@ -78,6 +79,9 @@ export default function(context) {
 
     if (setTransparentHeader) {
       pageBody.classList.add("transparent-header");
+    }
+    if (setWhiteHeader) {
+      pageBody.classList.add("white");
     }
   }
 }
