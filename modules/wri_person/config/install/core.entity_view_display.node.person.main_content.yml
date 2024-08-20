@@ -4,6 +4,8 @@ dependencies:
   config:
     - core.entity_view_mode.node.main_content
     - field.field.node.person.body
+    - field.field.node.person.field_alt_first_names
+    - field.field.node.person.field_alt_last_names
     - field.field.node.person.field_alternate_contact
     - field.field.node.person.field_areas_of_expertise
     - field.field.node.person.field_department
@@ -35,6 +37,7 @@ dependencies:
     - telephone
     - text
     - user
+    - wri_author
     - wri_media
 third_party_settings:
   layout_builder:
@@ -211,7 +214,7 @@ content:
     weight: 3
     region: hero
   field_international_office:
-    type: entity_reference_label
+    type: entity_reference_label_unpublished
     label: hidden
     settings:
       link: true
@@ -496,6 +499,8 @@ content:
     region: buttons
 hidden:
   content_moderation_control: true
+  field_alt_first_names: true
+  field_alt_last_names: true
   field_department: true
   field_last_name: true
   field_metatags: true
