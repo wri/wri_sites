@@ -31,7 +31,11 @@ export default function(context) {
   );
   $inputs
     .focus(function() {
-      if (!$(this).closest("form").hasClass("webform-submission-form")) {
+      if (
+        !$(this)
+          .closest("form")
+          .hasClass("webform-submission-form")
+      ) {
         $(this)
           .parents(".js-form-item")
           .first()
@@ -39,12 +43,16 @@ export default function(context) {
       }
     })
     .on("blur", function() {
-      if (!$(this).closest("form").hasClass("webform-submission-form")) {
+      if (
+        !$(this)
+          .closest("form")
+          .hasClass("webform-submission-form")
+      ) {
         $(this)
           .parents(".js-form-item")
           .first()
           .removeClass("move-label");
-        }
+      }
     });
 
   $.each($inputs, function() {
