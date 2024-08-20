@@ -31,16 +31,28 @@ export default function(context) {
   );
   $inputs
     .focus(function() {
-      $(this)
-        .parents(".js-form-item")
-        .first()
-        .addClass("move-label");
+      if (
+        !$(this)
+          .closest("form")
+          .hasClass("webform-submission-form")
+      ) {
+        $(this)
+          .parents(".js-form-item")
+          .first()
+          .addClass("move-label");
+      }
     })
     .on("blur", function() {
-      $(this)
-        .parents(".js-form-item")
-        .first()
-        .removeClass("move-label");
+      if (
+        !$(this)
+          .closest("form")
+          .hasClass("webform-submission-form")
+      ) {
+        $(this)
+          .parents(".js-form-item")
+          .first()
+          .removeClass("move-label");
+      }
     });
 
   $.each($inputs, function() {
