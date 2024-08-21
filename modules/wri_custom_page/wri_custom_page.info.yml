@@ -7,6 +7,7 @@ dependencies:
   - wri_node
 config_devel:
   install:
+    - asset_injector.css.show_sections.yml
     - block_content.type.plain_image.yml
     - core.base_field_override.node.custom_page.promote.yml
     - core.entity_form_display.block_content.plain_image.default.yml

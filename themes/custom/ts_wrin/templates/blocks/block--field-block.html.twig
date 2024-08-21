@@ -6,6 +6,6 @@
  * @see template_preprocess_block()
  */
 #}
-{% if content|render|striptags|trim %}
+{% if content|render|striptags|trim or content[0][0] %}
 {% include "@classy/block/block.html.twig" %}
 {% endif %}
