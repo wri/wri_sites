@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.webform
+    - field.field.block_content.webform.field_webform
+  module:
+    - webform
+id: block_content.webform.default
+targetEntityType: block_content
+bundle: webform
+mode: default
+content:
+  field_webform:
+    type: webform_entity_reference_entity_view
+    label: hidden
+    settings:
+      source_entity: true
+      lazy: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

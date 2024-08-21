@@ -9,10 +9,13 @@ config_devel:
   install:
     - asset_injector.css.show_sections.yml
     - block_content.type.plain_image.yml
+    - block_content.type.webform.yml
     - core.base_field_override.node.custom_page.promote.yml
     - core.entity_form_display.block_content.plain_image.default.yml
+    - core.entity_form_display.block_content.webform.default.yml
     - core.entity_form_display.node.custom_page.default.yml
     - core.entity_view_display.block_content.plain_image.default.yml
+    - core.entity_view_display.block_content.webform.default.yml
     - core.entity_view_display.node.custom_page.card.yml
     - core.entity_view_display.node.custom_page.default.yml
     - core.entity_view_display.node.custom_page.full.yml
@@ -22,12 +25,14 @@ config_devel:
     - core.entity_view_display.node.custom_page.teaser.yml
     - core.entity_view_display.node.custom_page.tile.yml
     - field.field.block_content.plain_image.field_plain_image.yml
+    - field.field.block_content.webform.field_webform.yml
     - field.field.node.custom_page.body.yml
     - field.field.node.custom_page.field_main_image.yml
     - field.field.node.custom_page.field_metatags.yml
     - field.field.node.custom_page.layout_builder__layout.yml
     - field.storage.block_content.field_plain_image.yml
     - language.content_settings.block_content.plain_image.yml
+    - language.content_settings.block_content.webform.yml
     - language.content_settings.node.custom_page.yml
     - node.type.custom_page.yml
     - xmlsitemap.settings.node.custom_page.yml
