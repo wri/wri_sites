@@ -48,20 +48,25 @@ third_party_settings:
       - Webform
       - core
     entity_view_mode_restriction:
-      allowed_layouts:
-        - layout_onecol
+      allowed_layouts: {  }
       denylisted_blocks: {  }
       allowlisted_blocks:
         'Chaos Tools':
           - 'entity_view:node'
         Components: {  }
-        'Content fields': {  }
+        'Content fields':
+          - 'field_block:node:custom_page:body'
+          - 'field_block:node:custom_page:field_main_image'
+          - 'field_block:node:custom_page:title'
         Devel: {  }
         Facets: {  }
         'Facets summary (Experimental)': {  }
         Forms: {  }
         'Lists (Views)': {  }
-        Menus: {  }
+        Menus:
+          - 'menu_block:page-hierarchies'
+          - 'system_menu_block:page-hierarchies'
+          - 'parent_menu_block:page-hierarchies'
         System: {  }
         User: {  }
         'WRI block':
