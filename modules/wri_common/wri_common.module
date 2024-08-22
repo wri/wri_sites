@@ -474,11 +474,14 @@ function wri_common_link_or_text(EntityInterface $entity, NodeInterface $node = 
  */
 function wri_common_person_link_fallback(EntityInterface $node) {
   $url = Url::fromUserInput(\Drupal::config('wri_node.settings')->get('person_listing_url'));
+  $prefix = $suffix = '';
 
   if ($node instanceof NodeInterface) {
     // If the current page is a project, link to its experts page.
     if ($node->bundle() == 'project_detail') {
       $url = Url::fromUserInput('/project-experts/' . $node->id());
+      $prefix = '<!--project-experts-->';
+      $suffix = '<!--/project-experts-->';
     }
     // Otherwise, see if that node has a 'field_projects', and THAT node
     // is published.
@@ -487,12 +490,15 @@ function wri_common_person_link_fallback(EntityInterface $node) {
       if ($project && $project->isPublished()) {
         // If it is, link to the projects/experts page.
         $url = Url::fromUserInput('/project-experts/' . $node->field_projects->target_id);
+        $prefix = '<!--project-experts-->';
+        $suffix = '<!--/project-experts-->';
       }
     }
   }
 
   // Fallback to the /about/experts page.
   $link = Link::fromTextAndUrl(\Drupal::config('wri_node.settings')->get('unpublished_person_phrase'), $url)->toString();
+  $link->setGeneratedLink($prefix . $link . $suffix);
 
   return $link;
 }
