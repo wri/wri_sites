@@ -480,8 +480,8 @@ function wri_common_person_link_fallback(EntityInterface $node) {
     // If the current page is a project, link to its experts page.
     if ($node->bundle() == 'project_detail') {
       $url = Url::fromUserInput('/project-experts/' . $node->id());
-      $prefix = '<!--project-experts-->';
-      $suffix = '<!--/project-experts-->';
+      $prefix = '<span class="data-project-expert">';
+      $suffix = '</span>';
     }
     // Otherwise, see if that node has a 'field_projects', and THAT node
     // is published.
@@ -490,8 +490,8 @@ function wri_common_person_link_fallback(EntityInterface $node) {
       if ($project && $project->isPublished()) {
         // If it is, link to the projects/experts page.
         $url = Url::fromUserInput('/project-experts/' . $node->field_projects->target_id);
-        $prefix = '<!--project-experts-->';
-        $suffix = '<!--/project-experts-->';
+        $prefix = '<span class="data-project-expert">';
+        $suffix = '</span>';
       }
     }
   }
