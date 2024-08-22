@@ -223,8 +223,8 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
 
           case 'topic_and_sub_topic_links_list':
             $terms = wri_common_get_node_topics($node, FALSE);
-            // If the node has a topic whose Landing page points to a value in Project,
-            // filter that out.
+            // If the node has a topic whose Landing page points to a value in
+            // Project, filter that out.
             if ($terms && $node->hasField('field_projects') && ($projects = $node->get('field_projects')) && !$projects->isEmpty()) {
               $project_items = [];
               $allowed_terms = [];
@@ -482,12 +482,21 @@ function wri_common_person_link_fallback(EntityInterface $node) {
 
   // Fallback to the /about/experts page.
   $link = Link::fromTextAndUrl(\Drupal::config('wri_node.settings')->get('unpublished_person_phrase'), $url)->toString();
-  $link->setGeneratedLink($link);
 
   return $link;
 }
 
+/**
+ * Get the URL for a project from a node.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $node
+ *   The node.
+ *
+ * @return \Drupal\Core\Url|false\
+ *   The url, or false if no url could be produced.
+ */
 function wri_common_url_from_node_project($node) {
+  $url = FALSE;
   if ($node instanceof NodeInterface) {
     // If the current page is a project, link to its experts page.
     if ($node->bundle() == 'project_detail') {
@@ -503,7 +512,7 @@ function wri_common_url_from_node_project($node) {
       }
     }
   }
-  return FALSE;
+  return $url;
 }
 
 /**
