@@ -39,7 +39,13 @@ function wri_admin_update_10301() {
   if (!$moduleHandler->moduleExists('menu_admin_per_menu')) {
     \Drupal::service('module_installer')->install(['menu_admin_per_menu'], TRUE);
   }
-  $role = Role::load('hr');
+  $role = Role::load('editorial');
+  $role->revokePermission('create reusable blocks');
   $role->grantPermission('administer page-hierarchies menu items');
   $role->save();
+
+  $role1 = Role::load('hr');
+  $role1->revokePermission('create reusable blocks');
+  $role1->revokePermission('administer blocks');
+  $role1->save();
 }

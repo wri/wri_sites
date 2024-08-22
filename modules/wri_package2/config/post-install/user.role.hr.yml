@@ -51,8 +51,6 @@ permissions:
   - 'access tweets entity browser pages'
   - 'administer block content'
   - 'administer block types'
-  - 'administer blocks'
-  - 'administer page-hierarchies menu items'
   - 'configure editable article node layout overrides'
   - 'create and edit custom blocks'
   - 'create document media'
