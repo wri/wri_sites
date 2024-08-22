@@ -223,6 +223,22 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
 
           case 'topic_and_sub_topic_links_list':
             $terms = wri_common_get_node_topics($node, FALSE);
+            // If the node has a topic whose Landing page points to a value in Project,
+            // filter that out.
+            if ($terms && $node->hasField('field_projects') && ($projects = $node->get('field_projects')) && !$projects->isEmpty()) {
+              $project_items = [];
+              $allowed_terms = [];
+              foreach ($projects->getValue() as $value) {
+                $project_items[] = $value['target_id'];
+              }
+              foreach ($terms as $term) {
+                if (!in_array($term->field_landing_page->target_id, $project_items)) {
+                  $allowed_terms[] = $term;
+                }
+              }
+              $terms = $allowed_terms;
+            }
+
             if (empty($terms)) {
               $replacements[$original] = \Drupal::config('system.site')->get('name');
             }
