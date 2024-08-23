@@ -69,10 +69,8 @@
         </div>
       {% endif %}
       {# end if content.hero #}
-
-
-      {% if content.category or content.share %}
-        {% if display_type == 'robust' and (content.hero.field_toc is not empty) and (content.hero.field_toc['#value'] != 'microsite') %}
+      {% if content.field_toc['#value'] %}
+        {% if display_type == 'robust' and (content.hero.field_toc is not empty) %}
           <div class="mobile__toc grid">
             <div class="internal-menu-pages">
               {% set node_title = content.hero.field_toc['#node_title'] %}
@@ -86,33 +84,35 @@
                   <ul class="toc-list menu" data-toc="div.layout__region--content" data-toc-headings=".publication__main h2"></ul>
                 </nav>
               {% else %}
-                {{ drupal_block('menu_block:' ~ menu_title, {level: 1, expand_all_items: 1, depth: 0, parent: menu_title ~ ':' ~ menu_link, render_parent: 0, follow_parent: 'child', follow: 0, label: 'Table of Contents', label_display: 0, id:'page-hierarchies', suggestion: 'page-hierarchies'}) }}
+                {{ drupal_block('menu_block:' ~ menu_title, {level: 1, expand_all_items: 1, depth: 0, parent: menu_title ~ ':' ~ menu_link, render_parent: 1, follow_parent: 'child', follow: 0, label: 'Table of Contents', label_display: 0, id:'page-hierarchies', suggestion: 'page-hierarchies'}) }}
               {% endif %}
             </div>
            </div>
         {% endif %}
-        <div class="detail__meta meta grid margin-top-md margin-bottom-md">
-          <div class="detail__meta-inner meta-inner {% if content.sidebar.field_narrative_taxonomy|render %}two-column{% endif %}">
-            {% if content.category %}
-            <div {{ region_attributes.category.addClass('layout__region', 'layout__region--category') }}>
-              {{ content.category }}
-            </div>
-            {% endif %}
+        {% if content.category or content.share %}
+          <div class="detail__meta meta grid margin-top-md margin-bottom-md">
+            <div class="detail__meta-inner meta-inner {% if content.sidebar.field_narrative_taxonomy|render %}two-column{% endif %}">
+              {% if content.category %}
+              <div {{ region_attributes.category.addClass('layout__region', 'layout__region--category') }}>
+                {{ content.category }}
+              </div>
+              {% endif %}
 
-            {% if content.share %}
-            <div {{ region_attributes.share.addClass('layout__region', 'layout__region--share') }}>
-              {{ content.share }}
+              {% if content.share %}
+              <div {{ region_attributes.share.addClass('layout__region', 'layout__region--share') }}>
+                {{ content.share }}
+              </div>
+              {% endif %}
             </div>
+            {% if show_narrative_taxonomy == true %}
+              {% if content.sidebar.field_narrative_taxonomy|render %}
+                <div class="detail__meta-secondary">
+                  {{ content.sidebar.field_narrative_taxonomy }}
+                </div>
+              {% endif %}
             {% endif %}
           </div>
-          {% if show_narrative_taxonomy == true %}
-            {% if content.sidebar.field_narrative_taxonomy|render %}
-              <div class="detail__meta-secondary">
-                {{ content.sidebar.field_narrative_taxonomy }}
-              </div>
-            {% endif %}
-          {% endif %}
-        </div>
+        {% endif %}
       {% endif %}
 
       <div class="publication__main grid margin-top-lg">
