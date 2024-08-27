@@ -50,8 +50,7 @@ input[type="text"].ghost {
   }
 }
 
-#wri-stay-informed-footer .form-item,
-.webform-submission-form .form-item {
+#wri-stay-informed-footer .form-item {
   position: relative;
   label {
     left: 10px;
@@ -70,11 +69,6 @@ input[type="text"].ghost {
     font-size: 10px;
     top: 2px;
     transition: top 0.3s ease-out, left 0.3s ease-out, font-size 0.3s ease-out;
-  }
-}
-.webform-submission-form .form-item {
-  label {
-    position: static;
   }
 }
 
@@ -144,7 +138,7 @@ form.webform-submission-form {
     height: 48px;
     justify-content: center;
     max-width: 100%;
-    padding: 16px 12px;
+    padding: 0 12px;
     transition: all 0.3s ease-in;
     @include hocus() {
       border-color: $true-black;
@@ -160,15 +154,7 @@ form.webform-submission-form {
   }
 
   .form-type-select {
-    label {
-      top: -4px;
-      left: auto;
-      position: relative;
-      font-weight: bold;
-    }
     select {
-      padding: 12px 16px 12px 6px;
-      height: 48px;
       @include hocus() {
         border-color: $true-black;
         outline: none;
@@ -223,9 +209,6 @@ form.webform-submission-form {
       @include font($acumin-semi-cond, "regular", "normal");
       @include font-line-height(15, 15);
       color: $black;
-      top: -4px;
-      left: auto;
-      position: relative;
     }
   }
 
