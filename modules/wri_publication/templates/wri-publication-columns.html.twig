@@ -69,8 +69,7 @@
         </div>
       {% endif %}
       {# end if content.hero #}
-      {% if content.field_toc['#value'] %}
-        {% if display_type == 'robust' and (content.hero.field_toc is not empty) %}
+      {% if display_type == 'robust' and (content.hero.field_toc is not empty) and (content.hero.field_toc['#value'] != 'microsite') %}
           <div class="mobile__toc grid">
             <div class="internal-menu-pages">
               {% set node_title = content.hero.field_toc['#node_title'] %}
@@ -88,7 +87,6 @@
               {% endif %}
             </div>
            </div>
-        {% endif %}
       {% endif %}
       {% if content.category or content.share %}
         <div class="detail__meta meta grid margin-top-md margin-bottom-md">
