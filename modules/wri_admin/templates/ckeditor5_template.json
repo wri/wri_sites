@@ -27,6 +27,6 @@
       "title": "Report Teaser",
       "icon": "",
       "description": "",
-      "html": "<div class=\"report-teaser gold-borders-medium alignright\"><div class=\"image-wrapper\">Optional Image - set to 'Thumbnail'</div><div class=\"text-wrapper\"><div class=\"h4 topic-tag\">Report/Pub Title</div><p>Teaser text for the report or publication.</p><p><a href=\"/resources\" download class=\"button small\">Download</a></p></div></div>"
+      "html": "<div class=\"report-teaser gold-borders-medium alignright\"><div class=\"image-wrapper\">Optional Image - set to 'Thumbnail'</div><div class=\"text-wrapper\"><div class=\"h4 topic-tag\">Report/Pub Title</div><p>Teaser text for the report or publication.</p><p><a href=\"/resources\" class=\"button small\">Download</a></p></div></div>"
     }
 ]
