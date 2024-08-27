@@ -39,7 +39,7 @@ class ExternalPubBlock extends BlockBase {
       $authLast = $node->field_last_name->value;
       $authFirst = $node->field_first_name->value;
       $authAltLastArray = $node->field_alt_last_names ? $node->field_alt_last_names->getValue() : [];
-      $authAltFirstArray = $node->field_alt_first_names ? $node->field_alt_last_names->getValue() : [];
+      $authAltFirstArray = $node->field_alt_first_names ? $node->field_alt_first_names->getValue() : [];
 
       $name_fixes = [
         "á" => "a",
