@@ -20,6 +20,15 @@
   display: none;
 }
 
+.page-node-type-custom-page .layout-builder .layout-builder__add-section {
+  display: block;
+}
+
+.page-node-type-custom-page .layout-builder img {
+  height: auto;
+  width: 100%;
+}
+
 .ui-front {
   z-index: 1000;
 }

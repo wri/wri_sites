@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.plain_image
+    - field.field.block_content.plain_image.field_plain_image
+  module:
+    - ds
+    - image
+id: block_content.plain_image.default
+targetEntityType: block_content
+bundle: plain_image
+mode: default
+content:
+  field_plain_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 0
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

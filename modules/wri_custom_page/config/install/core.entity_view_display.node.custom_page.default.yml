@@ -1,0 +1,117 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.custom_page.body
+    - field.field.node.custom_page.field_main_image
+    - field.field.node.custom_page.field_metatags
+    - field.field.node.custom_page.layout_builder__layout
+    - node.type.custom_page
+  module:
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_discovery
+    - metatag
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+        components: {  }
+        third_party_settings: {  }
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      allowed_layouts:
+        - layout_onecol
+        - layout_twocol_section
+        - layout_threecol_section
+        - layout_fourcol_section
+        - 'single_file_component_layout:wri_3_1_listing'
+        - 'single_file_component_layout:wri_article_columns'
+        - 'single_file_component_layout:wri_image_cta'
+        - layout_impact_in_action
+        - 'single_file_component_layout:wri_large_cta'
+        - 'single_file_component_layout:wri_listing'
+        - 'single_file_component_layout:wri_narrative_tax'
+        - layout_teaser
+        - layout_small_image_teaser
+        - layout_tile
+        - layout_card
+        - layout_large_image_teaser
+        - layout_search-results
+        - layout_hero-and-content
+        - layout_simple-page
+        - layout_hero-5050-and-content
+        - layout_person
+        - layout_unique_feature
+        - layout_impact
+        - layout_impact-block
+        - 'single_file_component_layout:wri_page_hero'
+        - 'single_file_component_layout:wri_page_main_content'
+        - 'single_file_component_layout:wri_person_teaser'
+        - 'single_file_component_layout:wri_publication_columns'
+        - 'single_file_component_layout:wri_small_cta'
+        - 'single_file_component_layout:wri_subpage_columns'
+        - 'single_file_component_layout:wri_superfeatured'
+        - 'single_file_component_layout:wri_superfeatured_block'
+        - ds_1col
+        - ds_1col_wrapper
+        - ds_2col
+        - ds_2col_fluid
+        - ds_2col_stacked
+        - ds_2col_stacked_fluid
+        - ds_3col
+        - ds_3col_equal_width
+        - ds_3col_stacked
+        - ds_3col_stacked_fluid
+        - ds_3col_stacked_equal_width
+        - ds_4col
+      denylisted_blocks: {  }
+      allowlisted_blocks: {  }
+      restricted_categories: {  }
+id: node.custom_page.default
+targetEntityType: node
+bundle: custom_page
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_main_image:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+  field_metatags:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 103
+    region: content
+hidden:
+  field_main_image: true
+  langcode: true
+  layout_builder__layout: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

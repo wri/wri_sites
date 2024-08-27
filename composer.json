@@ -54,6 +54,9 @@
             "drupal/diff": {
                 "No local tasks on compare revisions page https://www.drupal.org/project/diff/issues/3169729": "https://www.drupal.org/files/issues/2020-09-08/diff_add-local-tasks-3169729-2.patch"
             },
+            "drupal/entity_embed": {
+                "Logs flooded with warning messages 'Invalid display settings encountered' https://www.drupal.org/project/entity_embed/issues/3077225": "https://www.drupal.org/files/issues/2019-12-11/3077225-10.reduce-invalid-config-logs.patch"
+            },
             "drupal/paragraphs": {
                 "Paragraph access check using incorrect revision of its parent https://www.drupal.org/project/paragraphs/issues/3090200": "https://www.drupal.org/files/issues/2022-10-26/3084934-13_combine_3090200-22.patch"
             },
@@ -141,6 +144,7 @@
         "drupal/element_class_formatter": "^2.0@beta",
         "drupal/entity_browser": "^2.6",
         "drupal/entity_class_formatter": "^2.0",
+        "drupal/entity_embed": "^1.6",
         "drupal/entity_usage": "^2.0@beta",
         "drupal/facets": "^2.0",
         "drupal/facets_pretty_paths": "^1.2",
@@ -152,6 +156,7 @@
         "drupal/jquery_once": "^1.0",
         "drupal/layout_builder_modal": "^1.1",
         "drupal/layout_builder_restrictions": "^2.12",
+        "drupal/layout_custom_section_classes": "^2.0",
         "drupal/link_attributes": "^2.1",
         "drupal/media_library_edit": "^3.0",
         "drupal/media_responsive_thumbnail": "^1.2",
