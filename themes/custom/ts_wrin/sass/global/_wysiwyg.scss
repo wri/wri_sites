@@ -417,6 +417,9 @@ table {
       }
     }
   }
+  a {
+    text-decoration: none;
+  }
   img {
     max-height: 240px;
     padding-bottom: $space-xs;
@@ -444,7 +447,9 @@ table {
       display: inline;
       float: right;
       margin: 0 -230px 0 $space-sm;
+      position: relative;
       width: 180px;
+      z-index: 10;
     }
   }
 }
