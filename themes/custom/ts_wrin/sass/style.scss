@@ -18,8 +18,18 @@
 @import "global/tabs.scss";
 @import "global/tray-nav.scss";
 @import "global/ts-hamburger-menu.scss";
-@import "global/wysiwyg.scss";
+.main-content,
+.main-content .text-formatted,
+.paragraph--type--side-by-side .text-formatted {
+  line-height: 1.5;
 
+  ::selection {
+    background-color: $black;
+    color: $white;
+  }
+
+  @import "global/wysiwyg.scss";
+}
 /* COMPONENTS */
 @import "components/3-and-1-block.scss";
 @import "components/addresses.scss";
@@ -58,6 +68,7 @@
 @import "components/region-map.scss";
 @import "components/region-map-popup.scss";
 @import "components/related-content.scss";
+@import "components/report-teaser-overrides.scss";
 @import "components/search-archive.scss";
 @import "components/search-results.scss";
 @import "components/simple-page.scss";

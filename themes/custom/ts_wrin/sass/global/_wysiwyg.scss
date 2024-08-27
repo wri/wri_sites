@@ -464,17 +464,3 @@
     }
   }
 }
-
-.publication__detail.simple-display .main-content,
-.person__detail.publication__detail .main-content {
-  .report-teaser.alignright {
-    @include mq($lg) {
-      display: inline;
-      float: right;
-      margin: 0 calc((-100% + 250px)/6 - 278px) 0 30px;
-      position: relative;
-      width: 180px;
-      z-index: 10;
-    }
-  }
-}
