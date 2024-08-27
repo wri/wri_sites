@@ -46,7 +46,7 @@
     {# end if content.hero #}
 
     {% if content.field_toc['#value'] %}
-      {% if (content.hero.field_toc is not empty) %}
+      {% if (content.hero.field_toc is not empty and (content.hero.field_toc['#value'] != 'microsite')) %}
         <div class="mobile__toc grid">
           <div class="internal-menu-pages">
             {% set node_title = content.hero.field_toc['#node_title'] %}
@@ -65,23 +65,23 @@
           </div>
          </div>
       {% endif %}
-      {% if content.category or content.share %}
-        <div class="detail__meta meta grid margin-top-md margin-bottom-md">
-          <div class="detail__meta-inner meta-inner {% if content.sidebar.field_narrative_taxonomy|render %}two-column{% endif %}">
-            {% if content.category %}
-              <div {{ region_attributes.category.addClass('layout__region', 'layout__region--category') }}>
-                {{ content.category }}
-              </div>
-            {% endif %}
+    {% endif %}
+    {% if content.category or content.share %}
+      <div class="detail__meta meta grid margin-top-md margin-bottom-md">
+        <div class="detail__meta-inner meta-inner {% if content.sidebar.field_narrative_taxonomy|render %}two-column{% endif %}">
+          {% if content.category %}
+            <div {{ region_attributes.category.addClass('layout__region', 'layout__region--category') }}>
+              {{ content.category }}
+            </div>
+          {% endif %}
 
-            {% if content.share %}
-              <div {{ region_attributes.share.addClass('layout__region', 'layout__region--share') }}>
-                {{ content.share }}
-              </div>
-            {% endif %}
-          </div>
+          {% if content.share %}
+            <div {{ region_attributes.share.addClass('layout__region', 'layout__region--share') }}>
+              {{ content.share }}
+            </div>
+          {% endif %}
         </div>
-      {% endif %}
+      </div>
     {% endif %}
   </div>
 {% endif %}
