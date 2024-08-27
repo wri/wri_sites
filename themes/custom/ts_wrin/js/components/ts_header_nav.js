@@ -271,14 +271,14 @@ export default function(context) {
     if (tocStickyNav) {
       let tocTop =
         window.pageYOffset + tocStickyNav.getBoundingClientRect().top;
+      if (tocTop == 0) {
+        const mobileStickyNav = document.querySelector(".mobile__toc");
+        tocTop =
+          window.pageYOffset + mobileStickyNav.getBoundingClientRect().top;
+      }
 
       function tocStickyScroll() {
         let st = window.pageYOffset || document.documentElement.scrollTop;
-        // if tocTop was invisible but is now visible, recalculate tocTop.
-        if (tocTop == 0) {
-          tocTop =
-            window.pageYOffset + tocStickyNav.getBoundingClientRect().top;
-        }
         if (st >= tocTop) {
           tocStickyNav.classList.add("sticky");
         } else {
