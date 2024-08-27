@@ -82,7 +82,7 @@
                 <nav role="navigation" id="menu-toc" aria-label="Page sub navigation" class="page-hierarchies">
                   <ul class="toc-list menu" data-toc="div.layout__region--content" data-toc-headings=".publication__main h2"></ul>
                 </nav>
-              {% else %}
+              {% elseif value=='menu' %}
                 {{ drupal_block('menu_block:' ~ menu_title, {level: 1, expand_all_items: 1, depth: 0, parent: menu_title ~ ':' ~ menu_link, render_parent: 1, follow_parent: 'child', follow: 0, label: 'Table of Contents', label_display: 0, id:'page-hierarchies', suggestion: 'page-hierarchies'}) }}
               {% endif %}
             </div>
