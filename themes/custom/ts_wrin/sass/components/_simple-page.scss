@@ -257,10 +257,12 @@
       content: "";
       display: block;
       height: 16px;
-      transform: rotate(90deg);
-      width: 16px;
+      min-height: 16px;
+      min-width: 16px;
       position: relative;
       top: 2px;
+      transform: rotate(90deg);
+      width: 16px;
     }
 
     @include mq($md) {
@@ -351,5 +353,15 @@
     @include mq($md) {
       display: none;
     }
+  }
+
+  #menu-toc .menu-link-contentmicrosites {
+    position: static;
+  }
+}
+
+.view .internal-menu-pages  #menu-toc > ul.menu > li > .menu-item-title {
+  @include mq($md) {
+    display: block;
   }
 }
