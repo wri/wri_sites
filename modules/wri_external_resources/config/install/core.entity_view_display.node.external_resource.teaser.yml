@@ -19,24 +19,22 @@ third_party_settings:
   ds:
     layout:
       id: layout_teaser
+      library: null
+      disable_css: false
+      entity_classes: all_classes
       settings:
         label: ''
     regions:
       tag:
         - field_primary_topic
+      content_type:
+        - field_type
       title:
         - node_title
-      content_type:
-        - 'bundle_field:node'
       date:
         - node_post_date
         - field_source
     fields:
-      'bundle_field:node':
-        plugin_id: 'bundle_field:node'
-        weight: 2
-        label: hidden
-        formatter: default
       node_post_date:
         plugin_id: node_post_date
         weight: 3
@@ -90,14 +88,10 @@ content:
     weight: 4
     region: date
   field_type:
-    type: hierarchical_term_formatter
+    type: entity_reference_label
     label: hidden
     settings:
-      display: root
       link: false
-      wrap: none
-      separator: ' » '
-      reverse: false
     third_party_settings:
       ds:
         ft:
