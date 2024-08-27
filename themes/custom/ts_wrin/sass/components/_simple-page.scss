@@ -173,7 +173,8 @@
   }
 }
 
-.page-hierarchies {
+.page-hierarchies,
+.menu-blockpage-hierarchies {
   @include font($acumin-pro, "regular");
 
   @include mq($md) {
@@ -360,7 +361,7 @@
   }
 }
 
-.view .internal-menu-pages  #menu-toc > ul.menu > li > .menu-item-title {
+.view .internal-menu-pages #menu-toc > ul.menu > li > .menu-item-title {
   @include mq($md) {
     display: block;
   }
