@@ -120,9 +120,8 @@
       text-decoration: none;
       font-weight: bold;
 
-      @include hocus {
-        text-decoration: underline;
-      }
+      @include text-underline(transparent, $green);
+      background-position: left 100%;
 
       &.more-open-close {
         font-weight: normal;

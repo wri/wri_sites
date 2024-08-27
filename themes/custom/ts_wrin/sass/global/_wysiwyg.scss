@@ -1,450 +1,480 @@
-h2 {
-  @extend .h2;
-  @include font-line-height(32, 40);
+.main-content,
+.main-content .text-formatted,
+.paragraph--type--side-by-side .text-formatted {
+  line-height: 1.5;
 
-  @include mq($md) {
-    @include font-line-height(36, 44);
-  }
-}
-
-h3 {
-  @extend .h3;
-
-  @include mq($md) {
-    @include font-line-height(24, 30);
-  }
-}
-
-h4,
-h5,
-h6 {
-  @extend .h4;
-
-  @include mq($md) {
-    @include font-line-height(20, 24);
-  }
-}
-
-a {
-  text-decoration: underline;
-}
-
-a.button {
-  text-decoration: none;
-}
-
-hr {
-  background-color: #b1b1b1;
-}
-
-.drop-cap {
-  @include font($acumin-semi-cond, "bold");
-  @include font-line-height(24, 24);
-}
-
-ul,
-ol {
-  list-style: none;
-  list-style-type: none !important; // this is added with javascript on editor load, so we need to override it here.
-  padding-left: 10px;
-
-  li::before {
-    content: "";
+  ::selection {
+    background-color: $black;
+    color: $white;
   }
 
-  li p {
-    margin: 0;
-  }
+  h2 {
+    @extend .h2;
+    @include font-line-height(32, 40);
 
-  li {
-    @include font($acumin-semi-cond, "medium");
-    @include font-line-height(16, 26);
-  }
-}
-
-& > ul li {
-  margin-left: rem(32);
-}
-
-& > ul li::before {
-  background-color: $brand-gold;
-  border-radius: 50%;
-  display: block;
-  height: rem(5);
-  width: rem(5);
-  position: relative;
-  top: rem(15);
-  left: rem(-20);
-}
-
-ol {
-  counter-reset: list;
-
-  li {
-    margin-left: 0;
-  }
-
-  & > li::before {
-    content: counter(list) ")";
-    @include font-line-height(16, 24);
-    counter-increment: list;
-    font-weight: 700;
-    padding-right: 1rem;
-    position: relative;
-    left: rem(5);
-  }
-}
-
-li .ck-list-bogus-paragraph {
-  display: inline;
-}
-/* Start Block Quote */
-.callout {
-  @extend .secondary;
-  border-bottom: 3px solid $black;
-  border-left: none;
-  border-top: 3px solid $black;
-  padding: 20px 0 12px;
-  margin-top: $space-xs;
-
-  & p:first-child {
-    margin-top: 0;
-  }
-
-  &.alignleft p.secondary.body-link,
-  &.alignright p.secondary.body-link {
     @include mq($md) {
+      @include font-line-height(36, 44);
+    }
+  }
+
+  h3 {
+    @extend .h3;
+
+    @include mq($md) {
+      @include font-line-height(24, 30);
+    }
+  }
+
+  h4,
+  h5,
+  h6 {
+    @extend .h4;
+
+    @include mq($md) {
+      @include font-line-height(20, 24);
+    }
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  a.button {
+    text-decoration: none;
+  }
+
+  hr {
+    background-color: #b1b1b1;
+  }
+
+  .drop-cap {
+    @include font($acumin-semi-cond, "bold");
+    @include font-line-height(24, 24);
+  }
+
+  ul,
+  ol {
+    list-style: none;
+    list-style-type: none !important; // this is added with javascript on editor load, so we need to override it here.
+    padding-left: 10px;
+
+    li::before {
+      content: "";
+    }
+
+    li p {
+      margin: 0;
+    }
+
+    li {
+      @include font($acumin-semi-cond, "medium");
+      @include font-line-height(16, 26);
+    }
+  }
+
+  & > ul li {
+    margin-left: rem(32);
+  }
+
+  & > ul li::before {
+    background-color: $brand-gold;
+    border-radius: 50%;
+    display: block;
+    height: rem(5);
+    width: rem(5);
+    position: relative;
+    top: rem(15);
+    left: rem(-20);
+  }
+
+  ol {
+    counter-reset: list;
+
+    li {
+      margin-left: 0;
+    }
+
+    & > li::before {
+      content: counter(list) ")";
+      @include font-line-height(16, 24);
+      counter-increment: list;
+      font-weight: 700;
+      padding-right: 1rem;
+      position: relative;
+      left: rem(5);
+    }
+  }
+
+  li .ck-list-bogus-paragraph {
+    display: inline;
+  }
+  /* Start Block Quote */
+  .callout {
+    @extend .secondary;
+    border-bottom: 3px solid $black;
+    border-left: none;
+    border-top: 3px solid $black;
+    padding: 20px 0 12px;
+    margin-top: $space-xs;
+
+    & p:first-child {
+      margin-top: 0;
+    }
+
+    &.alignleft p.secondary.body-link,
+    &.alignright p.secondary.body-link {
+      @include mq($md) {
+        &:first-of-type {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+  .bullets {
+    @extend .bullets;
+  }
+
+  .callout.alignright {
+    @include mq($md) {
+      border-bottom: none;
+      border-left: 3px solid $black;
+      border-top: none;
+      display: inline;
+      float: right;
+      margin: 0 -25.7% 0 $space-sm;
+      padding: 0 0 0 16px;
+      width: 36%;
+    }
+
+    @include mq($lg) {
+      margin: 0 -18% 0 $space-sm;
+    }
+  }
+
+  .callout.alignleft {
+    @include mq($md) {
+      border-bottom: none;
+      border-right: 3px solid $black;
+      border-top: none;
+      display: inline;
+      float: left;
+      margin: 0 $space-sm 0 -25.7%;
+      padding: 0 8px 0 0;
+      width: 37%;
+    }
+
+    @include mq($lg) {
+      margin: 0 $space-sm 0 -18%;
+    }
+  }
+  /* End Block Quote */
+
+  /* Start Pull Quote */
+  blockquote {
+    border: none;
+    font-style: inherit !important; // this is added with javascript on editor load, so we need to override it here.
+    margin: 0 0 $space-sm 0;
+    padding: 0;
+
+    p {
+      @include font($acumin-semi-cond, "bold");
+      @include font-line-height(30, 38);
+      border-left: 1px solid #b1b1b1;
+      margin: 16px 0;
+      text-align: left;
+      padding-left: $space-sm;
+
+      @include mq($md) {
+        @include font-line-height(34, 42);
+        display: inline;
+        float: right;
+        margin: 0 -26% $space-sm $space-sm;
+        width: 60%;
+      }
+
+      @include mq($lg) {
+        margin: 0 -47.7% $space-sm $space-sm;
+        width: 68%;
+      }
+
       &:first-of-type {
         margin-top: 0;
       }
     }
+
+    p.text-align-center {
+      @include mq($md) {
+        border: none;
+        float: none;
+        margin: 0;
+        width: 100%;
+      }
+    }
+
+    p.text-align-left {
+      @include mq($md) {
+        border-right: 1px solid $black;
+        border-left: none;
+        float: left;
+        margin: 0 $space-sm $space-sm -26%;
+        padding-right: $space-sm;
+      }
+
+      @include mq($lg) {
+        margin: 0 $space-sm $space-sm -52.7%;
+      }
+    }
   }
-}
+  /* End Pull Quote */
 
-.bullets {
-  @extend .bullets;
-}
+  /* Start Media */
+  // Reset caption styles.
+  .caption {
+    display: inherit;
+    margin: 0 0 $space-sm;
+    float: none;
+  }
+  .caption > * {
+    display: inherit;
+    max-width: inherit;
+  }
+  .caption > figcaption {
+    display: inherit;
+    max-width: inherit;
+    caption-side: inherit;
+  }
 
-.callout.alignright {
-  @include mq($md) {
-    border-bottom: none;
-    border-left: 3px solid $black;
-    border-top: none;
-    display: inline;
+  .caption.half_content.align-right,
+  .media--view-mode-half-content.align-right {
     float: right;
-    margin: 0 -25.7% 0 $space-sm;
-    padding: 0 0 0 16px;
-    width: 36%;
+    margin-left: $space-md;
+    margin-right: 0;
+    margin-bottom: $space-sm;
   }
 
-  @include mq($lg) {
-    margin: 0 -18% 0 $space-sm;
-  }
-}
-
-.callout.alignleft {
-  @include mq($md) {
-    border-bottom: none;
-    border-right: 3px solid $black;
-    border-top: none;
-    display: inline;
+  .caption.half_content.align-left,
+  .media--view-mode-half-content.align-left {
     float: left;
-    margin: 0 $space-sm 0 -25.7%;
-    padding: 0 8px 0 0;
-    width: 37%;
+    margin-left: 0;
+    margin-right: $space-md;
+    margin-bottom: $space-sm;
   }
 
-  @include mq($lg) {
-    margin: 0 $space-sm 0 -18%;
-  }
-}
-/* End Block Quote */
-
-/* Start Pull Quote */
-blockquote {
-  border: none;
-  font-style: inherit !important; // this is added with javascript on editor load, so we need to override it here.
-  margin: 0 0 $space-sm 0;
-  padding: 0;
-
-  p {
-    @include font($acumin-semi-cond, "bold");
-    @include font-line-height(30, 38);
-    border-left: 1px solid #b1b1b1;
-    margin: 16px 0;
-    text-align: left;
-    padding-left: $space-sm;
-
+  .caption.half_content,
+  .media--view-mode-half-content {
     @include mq($md) {
-      @include font-line-height(34, 42);
-      display: inline;
-      float: right;
-      margin: 0 -26% $space-sm $space-sm;
-      width: 60%;
-    }
+      width: 50%;
 
-    @include mq($lg) {
-      margin: 0 -47.7% $space-sm $space-sm;
-      width: 68%;
-    }
-
-    &:first-of-type {
-      margin-top: 0;
+      .media--view-mode-half-content {
+        width: 100%;
+      }
     }
   }
 
-  p.text-align-center {
-    @include mq($md) {
-      border: none;
-      float: none;
-      margin: 0;
-      width: 100%;
-    }
+  [data-view-mode="half_content"] .media--view-mode-half-content {
+    width: 100%;
   }
 
-  p.text-align-left {
-    @include mq($md) {
-      border-right: 1px solid $black;
-      border-left: none;
-      float: left;
-      margin: 0 $space-sm $space-sm -26%;
-      padding-right: $space-sm;
-    }
-
-    @include mq($lg) {
-      margin: 0 $space-sm $space-sm -52.7%;
-    }
-  }
-}
-/* End Pull Quote */
-
-/* Start Media */
-// Reset caption styles.
-.caption {
-  display: inherit;
-  margin: 0 0 $space-sm;
-  float: none;
-}
-.caption > * {
-  display: inherit;
-  max-width: inherit;
-}
-.caption > figcaption {
-  display: inherit;
-  max-width: inherit;
-  caption-side: inherit;
-}
-
-.caption.half_content.align-right,
-.media--view-mode-half-content.align-right {
-  float: right;
-  margin-left: $space-md;
-  margin-right: 0;
-  margin-bottom: $space-sm;
-}
-
-.caption.half_content.align-left,
-.media--view-mode-half-content.align-left {
-  float: left;
-  margin-left: 0;
-  margin-right: $space-md;
-  margin-bottom: $space-sm;
-}
-
-.caption.half_content,
-.media--view-mode-half-content {
-  @include mq($md) {
-    width: 50%;
-
-    .media--view-mode-half-content {
-      width: 100%;
-    }
-  }
-}
-
-[data-view-mode="half_content"] .media--view-mode-half-content {
-  width: 100%;
-}
-
-// Handle migrated images
-img {
-  max-width: 100%;
-  height: auto;
-  width: 100%;
-}
-
-// Full-width elements from limited width parents - https://bit.ly/3lHPjRd.
-.media--view-mode-full-width,
-.media--view-mode-landing-page-hero {
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-
-  @include mq($site-max-width) {
-    width: $site-max-width;
-    margin-left: -$site-max-width/2;
-    margin-right: -$site-max-width/2;
-  }
-
-  iframe,
-  object,
-  embed {
+  // Handle migrated images
+  img {
     max-width: 100%;
+    height: auto;
+    width: 100%;
   }
-  .field--name-field-media-oembed-video {
+
+  // Full-width elements from limited width parents - https://bit.ly/3lHPjRd.
+  .media--view-mode-full-width,
+  .media--view-mode-landing-page-hero {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+
+    @include mq($site-max-width) {
+      width: $site-max-width;
+      margin-left: -$site-max-width/2;
+      margin-right: -$site-max-width/2;
+    }
+
     iframe,
     object,
     embed {
-      height: auto;
+      max-width: 100%;
     }
-  }
-}
-
-// Don't align anything but half-content.
-.ck-widget.drupal-media-style-align-left,
-.ck-widget.drupal-media-style-align-right {
-  float: none;
-  max-width: 100%;
-}
-
-.drupal-media-style-align-left[data-view-mode="half_content"] {
-  float: left;
-  max-width: 100%;
-}
-
-.drupal-media-style-align-right[data-view-mode="half_content"] {
-  float: right;
-  width: 50%;
-}
-
-// Document media styles.
-.media--type-document {
-  @include mq($md) {
-    width: 50%;
-  }
-  .document-inline {
-    display: block;
-    text-align: left;
-  }
-}
-/* End Media */
-
-/* Tables */
-table {
-  display: block;
-  max-width: fit-content;
-  overflow: auto;
-
-  td {
-    @include font($acumin-semi-cond, "light");
-    @include font-line-height(16, 22);
-  }
-
-  td {
-    p {
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-  }
-
-  thead {
-    background-color: $black;
-    color: $white;
-
-    th {
-      @include font($acumin-semi-cond, "bold");
-      @include font-line-height(16, 19);
-    }
-  }
-
-  th,
-  tr {
-    color: inherit;
-  }
-
-  td,
-  th {
-    padding: 5px $space-xs;
-  }
-
-  tbody {
-    tr:nth-of-type(even) {
-      background-color: $light-grey;
-    }
-  }
-
-  @include mq($lg) {
-    display: table;
-    max-width: 100%;
-  }
-}
-
-// Variable width video.
-.media.media--type-video .field__item {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 */
-  height: 0;
-
-  iframe,
-  object,
-  embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-}
-
-.report-teaser {
-  @extend .secondary;
-  border-left: none;
-  padding: 20px 0 12px;
-  margin-top: $space-xs;
-
-  & p:first-child {
-    margin-top: 0;
-  }
-
-  &.alignleft p.secondary.body-link,
-  &.alignright p.secondary.body-link {
-    @include mq($md) {
-      &:first-of-type {
-        margin-top: 0;
+    .field--name-field-media-oembed-video {
+      iframe,
+      object,
+      embed {
+        height: auto;
       }
     }
   }
-  img {
-    max-height: 240px;
-    padding-bottom: $space-xs;
-    width: 180px;
+
+  // Don't align anything but half-content.
+  .ck-widget.drupal-media-style-align-left,
+  .ck-widget.drupal-media-style-align-right {
+    float: none;
+    max-width: 100%;
   }
 
-  p {
-    @include font($acumin-semi-cond, "semi-bold");
-    @include font-line-height(18, 26);
-  }
-  figure {
-    margin: 0 0 20px 0;
+  .drupal-media-style-align-left[data-view-mode="half_content"] {
+    float: left;
+    max-width: 100%;
   }
 
-  @media (min-width: 768px) and (max-width: 1023px) {
-    align-items: center;
-    display: flex;
+  .drupal-media-style-align-right[data-view-mode="half_content"] {
+    float: right;
+    width: 50%;
+  }
 
-    .media--type-image {
-      padding-right: $space-xs;
+  // Document media styles.
+  .media--type-document {
+    @include mq($md) {
+      width: 50%;
+    }
+    .document-inline {
+      display: block;
+      text-align: left;
     }
   }
-  &.alignright {
+  /* End Media */
+
+  /* Tables */
+  table {
+    display: block;
+    max-width: fit-content;
+    overflow: auto;
+
+    td {
+      @include font($acumin-semi-cond, "light");
+      @include font-line-height(16, 22);
+    }
+
+    td {
+      p {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    thead {
+      background-color: $black;
+      color: $white;
+
+      th {
+        @include font($acumin-semi-cond, "bold");
+        @include font-line-height(16, 19);
+      }
+    }
+
+    th,
+    tr {
+      color: inherit;
+    }
+
+    td,
+    th {
+      padding: 5px $space-xs;
+    }
+
+    tbody {
+      tr:nth-of-type(even) {
+        background-color: $light-grey;
+      }
+    }
+
+    @include mq($lg) {
+      display: table;
+      max-width: 100%;
+    }
+  }
+
+  // Variable width video.
+  .media.media--type-video .field__item {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+
+    iframe,
+    object,
+    embed {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .report-teaser {
+    @extend .secondary;
+    border-left: none;
+    padding: 20px 0 12px;
+    margin-top: $space-xs;
+
+    & p:first-child {
+      margin-top: 0;
+    }
+
+    &.alignleft p.secondary.body-link,
+    &.alignright p.secondary.body-link {
+      @include mq($md) {
+        &:first-of-type {
+          margin-top: 0;
+        }
+      }
+    }
+    a {
+      text-decoration: none;
+    }
+    img {
+      max-height: 240px;
+      padding-bottom: $space-xs;
+      width: 180px;
+    }
+
+    p {
+      @include font($acumin-semi-cond, "semi-bold");
+      @include font-line-height(18, 26);
+    }
+    figure {
+      margin: 0 0 20px 0;
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      align-items: center;
+      display: flex;
+
+      .media--type-image {
+        padding-right: $space-xs;
+      }
+    }
+    &.alignright {
+      @include mq($lg) {
+        display: inline;
+        float: right;
+        margin: 0 -230px 0 $space-sm;
+        position: relative;
+        width: 180px;
+        z-index: 10;
+      }
+    }
+  }
+}
+
+.publication__detail.simple-display .main-content,
+.person__detail.publication__detail .main-content {
+  .report-teaser.alignright {
     @include mq($lg) {
       display: inline;
       float: right;
-      margin: 0 -230px 0 $space-sm;
+      margin: 0 calc((-100% + 250px)/6 - 278px) 0 30px;
+      position: relative;
       width: 180px;
+      z-index: 10;
     }
   }
 }
