@@ -158,7 +158,6 @@ export default function(context) {
         return window.innerWidth;
       };
       if (windowSize() > 768) {
-        let scrollDirection = 0;
         window.addEventListener("scroll", stickyScroll);
       }
     }, 250);
@@ -270,11 +269,16 @@ export default function(context) {
 
     const tocStickyNav = document.querySelector(".publication__toc");
     if (tocStickyNav) {
-      const tocTop =
+      let tocTop =
         window.pageYOffset + tocStickyNav.getBoundingClientRect().top;
 
       function tocStickyScroll() {
         let st = window.pageYOffset || document.documentElement.scrollTop;
+        // if tocTop was invisible but is now visible, recalculate tocTop.
+        if (tocTop == 0) {
+          tocTop =
+            window.pageYOffset + tocStickyNav.getBoundingClientRect().top;
+        }
         if (st >= tocTop) {
           tocStickyNav.classList.add("sticky");
         } else {
