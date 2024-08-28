@@ -75,3 +75,17 @@ function wri_31block_update_9501() {
     throw new UpdateException('This should be run after importing the field_listing to the listing_block block type.');
   }
 }
+
+
+/**
+ * Updates Listing arguments to allow multiple resource types.
+ */
+function wri_31block_update_9502() {
+  // Import the updated value:
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.3_1', [
+    'display#default#display_options#arguments#term_node_tid_depth#break_phrase',
+  ], 'wri_31block');
+  \Drupal::service('distro_helper.updates')->updateConfig('content_snippets.content', [
+    'snippets#3_1_view_arguments',
+  ], 'wri_listing_block');
+}
