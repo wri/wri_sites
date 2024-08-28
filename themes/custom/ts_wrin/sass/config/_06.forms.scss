@@ -137,6 +137,7 @@ form.webform-submission-form {
     display: flex;
     height: 48px;
     justify-content: center;
+    width: 100%;
     max-width: 100%;
     padding: 0 12px;
     transition: all 0.3s ease-in;
@@ -146,6 +147,10 @@ form.webform-submission-form {
     }
     &.error {
       border-color: #F00;
+    }
+
+    @include mq ($lg) {
+      width: auto;
     }
   }
 
