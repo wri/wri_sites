@@ -76,7 +76,6 @@ function wri_31block_update_9501() {
   }
 }
 
-
 /**
  * Updates Listing arguments to allow multiple resource types.
  */
