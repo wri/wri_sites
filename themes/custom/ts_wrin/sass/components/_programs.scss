@@ -69,7 +69,6 @@
 .block-field-blocknodeprogram-centerfield-twitter-account {
   display: flex;
   justify-content: flex-end;
-  margin-top: -50px;
   z-index: 2;
   position: relative;
 
@@ -86,6 +85,7 @@
     width: 55px;
     display: flex;
     justify-content: center;
+    margin-top: -50px;
     align-items: center;
     text-indent: -9999px;
 
@@ -317,4 +317,3 @@
   @extend .top-border-thick;
   @extend .margin-top-sm;
 }
-
