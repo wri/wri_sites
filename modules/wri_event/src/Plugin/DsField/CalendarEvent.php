@@ -53,7 +53,7 @@ class CalendarEvent extends DsFieldBase {
       $info['#markup'] .= '<span class="_summary">' . $entity->getTitle() . '</span>';
       $info['#markup'] .= '<span class="_description">' . $this->t('%title - from WRI: %url', [
         '%title' => $entity->getTitle(),
-        '%url' => 'http://www.wri.org/node/' . $entity->id(),
+        '%url' => '/node/' . $entity->id(),
       ]) . '</span>';
       $info['#markup'] .= '</a></div>';
       $info['#attached']['library'][] = 'wri_event/event';
