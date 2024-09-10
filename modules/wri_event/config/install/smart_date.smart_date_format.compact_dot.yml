@@ -5,7 +5,7 @@ id: compact_dot
 label: 'Compact dot'
 date_format: 'F d, Y'
 time_format: 'g:ia T'
-time_hour_format: 'ga T'
+time_hour_format: 'g:ia T'
 allday_label: 'All day'
 separator: ' - '
 join: '<span>•</span>'
