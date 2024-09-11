@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Update hooks for wri_region.
+ */
+
+/**
+ * Update the metatags to display field_intro for description.
+ */
+function wri_region_update_10001() {
+  \Drupal::service('distro_helper.updates')->updateConfig('metatag.metatag_defaults.node__region', [
+    'tags#description',
+  ], 'wri_region');
+
+  $message = 'Add field_intro to metatags description';
+  return $message;
+}
