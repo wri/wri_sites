@@ -29,6 +29,14 @@
     margin-left: 0;
   }
 
+  blockquote:before {
+    content: none;
+  }
+
+  blockquote p {
+    float: none !important;
+  }
+
   // Setting up the editor for Articles and Publications, which use a serif font.
   .node-publication-edit-form .field--name-body &,
   .node-article-edit-form .field--name-body &,
