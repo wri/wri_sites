@@ -104,4 +104,4 @@ function wri_media_update_10104() {
     filter.format.full_html', [
     'filters#filter_html#settings#allowed_html',
   ], 'wri_media');
-
+}
