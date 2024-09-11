@@ -27,3 +27,13 @@ function wri_simple_page_update_dependencies() {
 
   return $dependencies;
 }
+
+/**
+ * Update the metatags to display field_intro for description.
+ */
+function wri_simple_page_update_10001() {
+  \Drupal::service('distro_helper.updates')->installConfig('metatag.metatag_defaults.node__simple_page', 'wri_simple_page', 'install', 'TRUE');
+
+  $message = 'Add field_intro to metatags description';
+  return $message;
+}
