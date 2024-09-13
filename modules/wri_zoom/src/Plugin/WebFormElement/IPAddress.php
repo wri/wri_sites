@@ -2,9 +2,9 @@
 
 namespace Drupal\wri_zoom\Plugin\WebformElement;
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\Plugin\WebformElementBase;
 use Drupal\webform\WebformSubmissionInterface;
-use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Provides an 'ip_address' webform element.
@@ -36,7 +36,8 @@ class IPAddress extends WebformElementBase {
 
     // Check if the webform has a remote address.
     if ($this->getWebform()->hasRemoteAddr()) {
-      // Prefer 'X-Forwarded-For' header, but fall back to 'remote_addr' if it's not present.
+      // Prefer 'X-Forwarded-For' header, but fall
+      // back to 'remote_addr' if it's not present.
       $ip_address = $request->headers->has('X-Forwarded-For')
         ? trim(explode(',', $request->headers->get('X-Forwarded-For'))[0])
         : $request->getClientIp();
@@ -76,4 +77,5 @@ class IPAddress extends WebformElementBase {
     $form = parent::buildConfigurationForm($form, $form_state);
     return $form;
   }
+
 }
