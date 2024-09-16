@@ -59,9 +59,8 @@ elements: |-
     '#title': 'Webinar Date'
     '#default_value': '[webform_submission:source-entity:field_date_time:format:default]'
   ip_addr:
-    '#type': hidden
+    '#type': ip_address
     '#title': 'Ip Addr'
-    '#default_value': '[webform_submission:ip-address]'
   preferred_language:
     '#type': hidden
     '#title': 'Browser Language'
