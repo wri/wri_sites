@@ -5,6 +5,8 @@
  * Update hooks for wri_zoom module.
  */
 
+use Drupal\webform\Entity\Webform;
+
 /**
  * Enable the modules better_passwords and rename_admin_paths and pulls config.
  */
@@ -12,4 +14,78 @@ function wri_zoom_install() {
   \Drupal::service('distro_helper.updates')->installConfig('better_passwords.settings', 'wri_admin', 'post-install', TRUE);
   \Drupal::service('distro_helper.updates')->installConfig('rename_admin_paths.settings', 'wri_admin', 'post-install', TRUE);
   \Drupal::service('distro_helper.updates')->installConfig('webform.webform_options.translations', 'wri_zoom', 'post-install', TRUE);
+}
+
+/**
+ * Update webform fields to the new ip_address plugin.
+ */
+function wri_zoom_update_10301() {
+  // Load all webforms.
+  $webforms = Webform::loadMultiple();
+
+  // If no webforms exist, log a message and return.
+  if (empty($webforms)) {
+    $message = 'No webforms found.';
+    \Drupal::logger('wri_zoom')->notice($message);
+    print($message . PHP_EOL);
+    return;
+  }
+
+  // Keep track of webforms that were updated.
+  $updated_webforms = [];
+
+  // Loop through each webform and check if it needs updating.
+  foreach ($webforms as $webform_id => $webform) {
+    $elements = $webform->getElementsDecoded();
+
+    // Track if the webform was updated.
+    $updated = FALSE;
+
+    // Loop through all elements of the webform.
+    foreach ($elements as &$element) {
+      if (
+        isset($element['#default_value']) &&
+        $element['#default_value'] === '[webform_submission:ip-address]'
+      ) {
+        // Update this element to use the custom ip_address plugin.
+        $element['#type'] = 'ip_address';
+        // Remove the default value.
+        unset($element['#default_value']);
+
+        $updated = TRUE;
+      }
+    }
+
+    // If the webform was updated, save it and log the changes.
+    if ($updated) {
+      // Encode the updated elements back to the webform.
+      $webform->setElements($elements);
+      $webform->save();
+
+      // Store the updated webform information.
+      $updated_webforms[] = [
+        'id' => $webform_id,
+        'name' => $webform->label(),
+      ];
+
+      // Log the webform ID and name.
+      \Drupal::logger('wri_zoom')->notice(
+        'Updated webform: @id - @name', [
+          '@id' => $webform_id,
+          '@name' => $webform->label(),
+        ]
+      );
+    }
+  }
+
+  // Output results to the console.
+  if (!empty($updated_webforms)) {
+    print('The following webforms were updated:' . PHP_EOL);
+    foreach ($updated_webforms as $webform_info) {
+      print('Webform ID: ' . $webform_info['id'] . ' - Name: ' . $webform_info['name'] . PHP_EOL);
+    }
+  }
+  else {
+    print('No webforms needed updating.' . PHP_EOL);
+  }
 }
