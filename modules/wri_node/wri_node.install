@@ -38,3 +38,111 @@ function wri_node_update_9503() {
     'osano_params',
   ], 'wri_admin');
 }
+
+/**
+ * Updates the node and_phrase and within_phase values.
+ */
+function wri_node_update_10001() {
+  $collections = \Drupal::service('config.manager')->getConfigCollectionInfo();
+
+  foreach ($collections->getCollectionNames() as $collection_name) {
+    if ($collection_name) {
+      [, $language] = explode('.', $collection_name);
+    }
+    else {
+      $config_translation = \Drupal::configFactory()->getEditable('wri_node.settings');
+      $language = $default_language = $config_translation->get('langcode');
+    }
+    $phrase = 'and';
+    $within = 'within';
+
+    switch ($language) {
+      case 'en':
+        $phrase = 'and';
+        $within = '[node:projects_links_within] within';
+        break;
+
+      case 'fr':
+        $phrase = 'et';
+        $within = '[node:projects_links_within] dans';
+        break;
+
+      case 'es':
+        $phrase = 'y';
+        $within = '[node:projects_links_within] del';
+        break;
+
+      case 'zh-hans':
+        $within = '[node:projects_links_within] within';
+        $phrase = 'and';
+        break;
+
+      case 'id':
+        $phrase = 'dan';
+        $within = '[node:projects_links_within] dalam';
+        break;
+
+      case 'pt-br':
+        $phrase = 'e';
+        $within = 'do projeto [node:field_projects:entity:link]';
+        break;
+    }
+
+    if ($collection_name && $default_language != $language) {
+      \Drupal::languageManager()->getLanguageConfigOverride($language, 'wri_node.settings')->set('and_phrase', $phrase)->save();
+      \Drupal::languageManager()->getLanguageConfigOverride($language, 'wri_node.settings')->set('within_phrase', $within)->save();
+    }
+    else {
+      \Drupal::configFactory()->getEditable('wri_node.settings')->set('and_phrase', $phrase)->save();
+      \Drupal::configFactory()->getEditable('wri_node.settings')->set('within_phrase', $within)->save();
+    }
+  }
+}
+
+/**
+ * Updates tokens in default value of narrative taxonomies.
+ */
+function wri_node_update_10002() {
+  // Load all narrative taxonomy fields on nodes.
+  $narrative_fields = \Drupal::entityTypeManager()->getStorage('field_config')->loadByProperties(['field_name' => 'field_narrative_taxonomy']);
+  $old_values = [
+    'node:field_primary_contacts:entity:link',
+    '&#91;node:field_projects:entity:link&#93; within ',
+  // En.
+    '[node:field_projects:entity:link] within ',
+    '&#91;node:field_projects:entity:link&#93; dalam ',
+  // Id.
+    '[node:field_projects:entity:link] dalam ',
+    '&#91;node:field_projects:entity:link&#93; del ',
+  // Es.
+    '[node:field_projects:entity:link] del ',
+    'do projeto &#91;node:field_projects:entity:link&#93; ',
+  // pt-br.
+    'do projeto [node:field_projects:entity:link] ',
+  ];
+  $new_values = [
+    'node:primary_contact_links',
+    '&#91;node:projects_links_within&#93;',
+    '[node:projects_links_within]',
+    '&#91;node:projects_links_within&#93;',
+    '[node:projects_links_within]',
+    '&#91;node:projects_links_within&#93;',
+    '[node:projects_links_within]',
+    '&#91;node:projects_links_within&#93;',
+    '[node:projects_links_within]',
+  ];
+
+  // Loop through the fields.
+  foreach ($narrative_fields as $narrative_field) {
+    $field = \Drupal::configFactory()->getEditable('field.field.' . $narrative_field->id());
+    // Find and replace the tokens.
+    $field->set('description', str_replace($old_values, $new_values, $field->get('description')));
+    $default_value = $field->get('default_value');
+    if (isset($default_value[0]['value'])) {
+      $default_value[0]['value'] = str_replace($old_values, $new_values, $default_value[0]['value']);
+      $field->set('default_value', $default_value);
+    }
+
+    $field->save();
+  }
+}
