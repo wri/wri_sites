@@ -169,14 +169,15 @@ blockquote {
 
   p {
     @include font($acumin-semi-cond, "bold");
-    @include font-line-height(30, 38);
+    @include font-line-height(20, 28);
     border-left: 1px solid #b1b1b1;
     margin: 16px 0;
     text-align: left;
     padding-left: $space-sm;
+    position: relative;
 
     @include mq($md) {
-      @include font-line-height(34, 42);
+      @include font-line-height(24, 32);
       display: inline;
       float: right;
       margin: 0 -26% $space-sm $space-sm;
@@ -190,6 +191,14 @@ blockquote {
 
     &:first-of-type {
       margin-top: 0;
+    }
+    &.with-quote:before {
+      content: "‘";
+      font-size: 60px;
+      font-weight: 700;
+      position: absolute;
+      top: -16px;
+      left: 8px;
     }
   }
 
