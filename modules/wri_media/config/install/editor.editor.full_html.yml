@@ -59,6 +59,7 @@ settings:
         - '<div class>'
         - '<span>'
         - '<a name>'
+        - '<script src>'
     ckeditor5_style:
       styles:
         -
