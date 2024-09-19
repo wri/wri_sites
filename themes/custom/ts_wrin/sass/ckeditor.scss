@@ -29,6 +29,14 @@
     margin-left: 0;
   }
 
+  blockquote:before {
+    content: none;
+  }
+
+  blockquote p {
+    float: none !important;
+  }
+
   // Setting up the editor for Articles and Publications, which use a serif font.
   .node-publication-edit-form .field--name-body &,
   .node-article-edit-form .field--name-body &,
@@ -39,5 +47,55 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     color: $black;
+  }
+
+  // Podcast icons.
+  .icons-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .icons-container > .icons-div {
+    margin: 10px;
+    padding: 12px;
+    border: 1px solid #000;
+    width: 155px;
+    height: 25px;
+  }
+  .icons-container > .icons-div:hover {
+    background-color: #fafafa !important;
+  }
+  .icons-container > .icons-div img {
+    vertical-align: middle;
+  }
+  .icons-container a  {
+    text-decoration: none;
+    align-items: center;
+    color: #000;
+  }
+  .apple-podcasts-button {
+    background-image: url('https://files.wri.org/d8/s3fs-public/2024-07/apple-podcasts-icon.png');
+  }
+  .youtube-podcasts-button {
+    background-image: url('https://files.wri.org/d8/s3fs-public/2024-07/youtube-icon.png');
+  }
+  .spotify-podcasts-button {
+    background-image: url('https://files.wri.org/d8/s3fs-public/2024-07/spotify-icon.png');
+  }
+  .icons-div {
+    background-position: 10px 50%;
+    background-repeat: no-repeat;
+    background-size: 30px auto;
+  }
+  .podcast-social-icon {
+    margin-left: 40px;
+    font-size: 1rem;
+  }
+
+  .icons-container div a {
+    text-decoration: none !important;
+  }
+
+  .icons-div a {
+    display: block;
   }
 }

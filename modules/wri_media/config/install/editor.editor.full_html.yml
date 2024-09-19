@@ -71,6 +71,9 @@ settings:
         -
           label: Secondary
           element: '<p class="secondary">'
+        -
+          label: 'Quote Mark'
+          element: '<p class="with-quote">'
     ckeditor5_template_template:
       file_path: /profiles/contrib/wri_sites/modules/wri_admin/templates/ckeditor5_template.json
       custom_toolbar_text: Template

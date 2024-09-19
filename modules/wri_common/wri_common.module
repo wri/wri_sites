@@ -157,6 +157,18 @@ function wri_common_token_info() {
     'name' => 'A node link',
     'description' => 'The link to the node, if published, or its title if not.',
   ];
+  $info['tokens']['node']['projects_links'] = [
+    'name' => 'A listing of project links',
+    'description' => 'The link to the related projects if published, and nothing if not.',
+  ];
+  $info['tokens']['node']['projects_links_within'] = [
+    'name' => 'A listing of project links, followed by "within"',
+    'description' => 'The link to the related projects if published, and the site title if no projects are related.',
+  ];
+  $info['tokens']['node']['primary_contact_links'] = [
+    'name' => 'The primary contact link or a fallback phrase.',
+    'description' => 'The link to the related primary contact if published, and a fallback phrase if no published contact found.',
+  ];
   $info['tokens']['taxonomy_term']['link'] = [
     'name' => 'A term link',
     'description' => 'The link to the term, if published, or its title if not.',
@@ -211,7 +223,28 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
 
           case 'topic_and_sub_topic_links_list':
             $terms = wri_common_get_node_topics($node, FALSE);
-            $replacements[$original] = _wri_common_format_list($terms);
+            // If the node has a topic whose Landing page points to a value in
+            // Project, filter that out.
+            if ($terms && $node->hasField('field_projects') && ($projects = $node->get('field_projects')) && !$projects->isEmpty()) {
+              $project_items = [];
+              $allowed_terms = [];
+              foreach ($projects->getValue() as $value) {
+                $project_items[] = $value['target_id'];
+              }
+              foreach ($terms as $term) {
+                if (!in_array($term->field_landing_page->target_id, $project_items)) {
+                  $allowed_terms[] = $term;
+                }
+              }
+              $terms = $allowed_terms;
+            }
+
+            if (empty($terms)) {
+              $replacements[$original] = \Drupal::config('system.site')->get('name');
+            }
+            else {
+              $replacements[$original] = _wri_common_format_list($terms);
+            }
             break;
 
           case 'sub_topic_links_list':
@@ -234,6 +267,44 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
         switch ($name) {
           case 'link':
             $replacements[$original] = wri_common_link_or_text($data['node']);
+            break;
+
+          case 'projects_links':
+            if ($node->hasField('field_projects') && ($projects = $node->get('field_projects')->referencedEntities())) {
+              $published_projects = [];
+              foreach ($projects as $project) {
+                if ($project->isPublished()) {
+                  $published_projects[] = $project;
+                }
+              }
+
+              $replacements[$original] = _wri_common_format_list($published_projects);
+            }
+            break;
+
+          case 'projects_links_within':
+            // Get the projects_links value using tokens.
+            $phrase = \Drupal::config('wri_node.settings')->get('within_phrase');
+            $replaced = \Drupal::token()->replace('[node:projects_links]', ['node' => $node], ['clear' => TRUE]);
+            if ($replaced) {
+              $replacements[$original] = Markup::create((str_replace('[node:projects_links_within]', $replaced, $phrase) . ' '));
+            }
+            break;
+
+          case 'primary_contact_links':
+            if ($node->hasField('field_primary_contacts') && ($contact_items = $node->get('field_primary_contacts')) && !$contact_items->isEmpty()) {
+              $contact_item = $contact_items->first()->entity;
+              if ($contact_item) {
+                $replacements[$original] = wri_common_link_or_text($contact_item, $node);
+              }
+              else {
+                $replacements[$original] = wri_common_person_link_fallback($node);
+              }
+            }
+            else {
+              $replacements[$original] = wri_common_person_link_fallback($node);
+            }
+            break;
         }
       }
     }
@@ -265,19 +336,20 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
  */
 function wri_common_get_node_topics(Node $node, $secondary_only = FALSE) {
   $topics = [];
-  if (!$secondary_only && $node->hasField('field_primary_topic') && ($topic_items = $node->get('field_primary_topic')) && !$topic_items->isEmpty()) {
-    $topic_item = $topic_items->first()->entity;
-    if ($topic_item && $topic_item->isPublished()) {
-      $topics[] = $topic_item;
-    }
+  $existing_topics = [];
+  if (!$secondary_only && $node->hasField('field_primary_topic') && ($topic_items = $node->get('field_primary_topic')) && !$topic_items->isEmpty() && $topic_items->first()->entity) {
+    $topics[] = $topic_items->first()->entity;
+    $existing_topics[$topic_items->first()->entity->id()] = TRUE;
   }
   if ($node->hasField('field_tags') && ($tag_items = $node->get('field_tags')) && !$tag_items->isEmpty()) {
     foreach ($tag_items as $tag_item) {
-      if (isset($tag_item->entity) && $tag_item->entity->bundle() == 'topics_and_subtopics' && $tag_item->entity->isPublished()) {
+      if (isset($tag_item->entity) && $tag_item->entity->bundle() == 'topics_and_subtopics' && $tag_item->entity->isPublished() && !isset($existing_topics[$tag_item->entity->id()])) {
         $topics[] = $tag_item->entity;
+        $existing_topics[$tag_item->entity->id()] = TRUE;
       }
     }
   }
+
   return $topics;
 }
 
@@ -321,23 +393,32 @@ function _wri_common_format_list(array $terms) {
   $list = '';
   if ($terms) {
     foreach ($terms as $term) {
-      $term_url = $term->toUrl();
-      if ($term->hasField('field_full_name') && $term_label = $term->get('field_full_name')->getString()) {
-        if ($term_url->toString()) {
-          $term_name = Link::fromTextAndUrl($term_label, $term_url)
-            ->toRenderable();
-          $renderer = \Drupal::service('renderer');
-          $term_name = $renderer->render($term_name);
+      $published = $term->isPublished();
+      if ($published) {
+        $term_url = $term->toUrl();
+        if ($term->hasField('field_full_name') && $term_label = $term->get('field_full_name')->getString()) {
+          if ($term_url->toString()) {
+            $term_name = Link::fromTextAndUrl($term_label, $term_url)
+              ->toRenderable();
+            $renderer = \Drupal::service('renderer');
+            $term_name = $renderer->render($term_name);
+          }
+        }
+        else {
+          $term_name = $term->toLink()->tostring();
         }
       }
       else {
-        $term_name = $term->toLink()->tostring();
+        $term_name = $term->label();
       }
 
       // If there is more than 1 term, build a list.
       if (count($terms) > 1) {
         if (!next($terms)) {
-          $list .= "and $term_name";
+          // Put no comma between A and B, remove Oxford comma.
+          $list = trim($list, ', ') . ' ';
+          // Leave the Oxford comma, A, B, and C.
+          $list .= \Drupal::config('wri_node.settings')->get('and_phrase') . " $term_name";
         }
         else {
           $list .= "$term_name, ";
@@ -358,40 +439,21 @@ function _wri_common_format_list(array $terms) {
  *
  * @param \Drupal\Core\Entity\EntityInterface $entity
  *   The entity.
+ * @param \Drupal\node\Entity\NodeInterface $node
+ *   The node that this entity is appearing on, if not the same as the entity.
  *
  * @return string
  *   A string representing the entity with or without a link.
  */
-function wri_common_link_or_text(EntityInterface $entity) {
+function wri_common_link_or_text(EntityInterface $entity, NodeInterface $node = NULL) {
   $link = '';
   if (isset($entity)) {
     if ($entity->isPublished()) {
       $link = $entity->toLink()->toString();
     }
     else {
-      if ($entity->bundle() == 'person') {
-        $url = Url::fromUserInput(\Drupal::config('wri_node.settings')->get('person_listing_url'));
-
-        // See if the current page is a node.
-        $node = \Drupal::routeMatch()->getParameter('node');
-        if ($node instanceof NodeInterface) {
-          // If the current page is a project, link to its experts page.
-          if ($node->bundle() == 'project_detail') {
-            $url = Url::fromUserInput('/project-experts/' . $node->id());
-          }
-          // Otherwise, see if that node has a 'field_projects', and THAT node
-          // is published.
-          elseif ($node->hasField('field_projects')) {
-            $project = $node->field_projects->entity;
-            if ($project && $project->isPublished()) {
-              // If it is, link to the projects/experts page.
-              $url = Url::fromUserInput('/project-experts/' . $node->field_projects->target_id);
-            }
-          }
-        }
-
-        // Fallback to the /about/experts page.
-        $link = Link::fromTextAndUrl(\Drupal::config('wri_node.settings')->get('unpublished_person_phrase'), $url)->toString();
+      if ($entity->bundle() == 'person' && $node) {
+        $link = wri_common_person_link_fallback($node);
       }
       else {
         $link = $entity->label();
@@ -399,6 +461,58 @@ function wri_common_link_or_text(EntityInterface $entity) {
     }
   }
   return $link;
+}
+
+/**
+ * Fallback for when a person is unpublished.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $node
+ *   The person node.
+ *
+ * @return \Drupal\Core\GeneratedLink
+ *   The link.
+ */
+function wri_common_person_link_fallback(EntityInterface $node) {
+  $url = wri_common_url_from_node_project($node);
+
+  if (!$url) {
+    $url = Url::fromUserInput(\Drupal::config('wri_node.settings')
+      ->get('person_listing_url'));
+  }
+
+  // Fallback to the /about/experts page.
+  $link = Link::fromTextAndUrl(\Drupal::config('wri_node.settings')->get('unpublished_person_phrase'), $url)->toString();
+
+  return $link;
+}
+
+/**
+ * Get the URL for a project from a node.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $node
+ *   The node.
+ *
+ * @return \Drupal\Core\Url|false\
+ *   The url, or false if no url could be produced.
+ */
+function wri_common_url_from_node_project($node) {
+  $url = FALSE;
+  if ($node instanceof NodeInterface) {
+    // If the current page is a project, link to its experts page.
+    if ($node->bundle() == 'project_detail') {
+      $url = Url::fromUserInput('/project-experts/' . $node->id());
+    }
+    // Otherwise, see if that node has a 'field_projects', and THAT node
+    // is published.
+    elseif ($node->hasField('field_projects')) {
+      $project = $node->field_projects->entity;
+      if ($project && $project->isPublished()) {
+        // If it is, link to the projects/experts page.
+        $url = Url::fromUserInput('/project-experts/' . $node->field_projects->target_id);
+      }
+    }
+  }
+  return $url;
 }
 
 /**

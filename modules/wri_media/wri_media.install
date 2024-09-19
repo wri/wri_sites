@@ -88,13 +88,26 @@ function wri_media_update_10103() {
     'filters#media_embed#settings#allowed_view_modes#thumbnail',
   ], 'wri_media');
   \Drupal::service('distro_helper.updates')->installConfig('image.style.180x240_scale', 'wri_media', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_mode.media.thumbnail', 'wri_media', 'post-install', 'TRUE');
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.media.image.thumbnail', 'wri_media', 'install', 'TRUE');
+}
+
+/**
+ * Update filter blockquote settings.
+ */
+function wri_media_update_10104() {
+  \Drupal::service('distro_helper.updates')->updateConfig('filter.format.full_html', [
+    'filters#filter_html#settings#allowed_html',
+  ], 'wri_media');
+  \Drupal::service('distro_helper.updates')->updateConfig('editor.editor.full_html', [
+    'settings#plugins#ckeditor5_style#styles',
+  ], 'wri_media');
 }
 
 /**
  * Update our editors to allow script tags.
  */
-function wri_media_update_10104() {
+function wri_media_update_10105() {
   \Drupal::service('distro_helper.updates')->updateConfig('editor.editor.full_html', [
     'settings#plugins#ckeditor5_sourceEditing#allowed_tags',
   ], 'wri_media', 'install');

@@ -86,3 +86,12 @@ function wri_event_update_10001() {
   $message = 'Added Zoom tie-in fields, webform, and settings.';
   return $message;
 }
+
+/**
+ * Update the Smart Date compact_dot date format.
+ */
+function wri_event_update_10002() {
+  \Drupal::service('distro_helper.updates')->updateConfig('smart_date.smart_date_format.compact_dot', [
+    'time_hour_format',
+  ], 'wri_event');
+}
