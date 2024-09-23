@@ -26,6 +26,15 @@ function ts_wrin_preprocess(array &$variables) {
  * Implements hook_preprocess_HOOK() for html.html.twig.
  */
 function ts_wrin_preprocess_html(array &$variables) {
+  $menu_tree = Drupal::menuTree();
+  $parameters = $menu_tree->getCurrentRouteMenuTreeParameters('main');
+  $main_menu_top_level = $menu_tree->load('main', $parameters);
+  foreach ($main_menu_top_level as $menu_item) {
+    if ($menu_item->inActiveTrail) {
+      $variables['attributes']['class'][] = 'showing-main-menu';
+      break;
+    }
+  }
   $variables['page']["#attached"]["library"][] = "wri_zoom/ap3c_track";
   // Adds a URL query (?show-grid=1) that makes the theming grid guide visible.
   $variables['show_grid'] = \Drupal::request()->query->get('show-grid');

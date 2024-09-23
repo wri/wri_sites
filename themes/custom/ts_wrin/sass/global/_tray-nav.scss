@@ -14,15 +14,21 @@ body.noscroll {
   position: relative;
   transition: left 0.5s ease-in-out;
   width: 100%;
-  padding-top: 85px;
+  padding-top: 72px;
 
   @include mq($md) {
-    padding-top: 126px;
+    padding-top: 113px;
   }
 
   .path-frontpage &,
   .transparent-header & {
     padding-top: 0;
+  }
+
+  .showing-main-menu & {
+    @include mq($md) {
+      padding-top: 126px;
+    }
   }
 }
 

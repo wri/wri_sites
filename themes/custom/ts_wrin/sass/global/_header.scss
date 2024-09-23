@@ -52,6 +52,13 @@ header:not(.pfp-header) {
     }
   }
 
+  .showing-main-menu & {
+    padding-bottom: 50px;
+    @include mq($md) {
+      padding-bottom: $space-sm;
+    }
+  }
+
   .transparent-header &,
   .path-frontpage & .header-right {
     background-color: transparent;
