@@ -20,15 +20,13 @@ body.noscroll {
     padding-top: 113px;
   }
 
+  .showing-main-menu & {
+    padding-top: 122px;
+  }
+
   .path-frontpage &,
   .transparent-header & {
     padding-top: 0;
-  }
-
-  .showing-main-menu & {
-    @include mq($md) {
-      padding-top: 126px;
-    }
   }
 }
 
