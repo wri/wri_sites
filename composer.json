@@ -178,7 +178,7 @@
         "drupal/search_api_pantheon": "^8.0",
         "drupal/search_api_solr": "^4.2.1",
         "drupal/sendgrid_integration": "^2.1",
-        "drupal/simple_popup_blocks": "^3.1",
+        "drupal/simple_popup_blocks": "^3.3",
         "drupal/simple_recaptcha": "^1.0@beta",
         "drupal/smart_date": "^4.0",
         "drupal/sortableviews": "^1.0@beta",
