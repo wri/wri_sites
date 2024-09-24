@@ -114,7 +114,7 @@ function wri_taxonomy_term_uri(TermInterface $term) {
 /**
  * Implements hook_entity_field_access().
  */
-function wri_taxonomy_entity_field_access($operation, FieldDefinitionInterface $field_definition, AccountInterface $account, FieldItemListInterface $items = NULL) {
+function wri_taxonomy_entity_field_access($operation, FieldDefinitionInterface $field_definition, AccountInterface $account, ?FieldItemListInterface $items = NULL) {
   // Disable the Url Alias field.
   if ($field_definition->getTargetEntityTypeId() == 'taxonomy_term' && $field_definition->getName() == 'path' && $operation == 'edit') {
     return AccessResult::forbidden();

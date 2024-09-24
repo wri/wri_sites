@@ -30,36 +30,17 @@ class IPAddress extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function getValue(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
-    // Fetch the current request.
-    $request = \Drupal::requestStack()->getCurrentRequest();
-
-    // Check if the webform has a remote address.
-    if ($this->getWebform()->hasRemoteAddr()) {
-      // Prefer 'X-Forwarded-For' header, but fall
-      // back to 'remote_addr' if it's not present.
-      $ip_address = $request->headers->has('X-Forwarded-For')
-        ? trim(explode(',', $request->headers->get('X-Forwarded-For'))[0])
-        : $request->getClientIp();
-
-      // Save the IP address value to the webform submission.
-      $submission_data = $webform_submission->getData();
-      $submission_data[$element['#webform_key']] = $ip_address;
-      $webform_submission->setData($submission_data);
-
-      return $ip_address;
-    }
-
-    // Return empty string if no IP address is available.
-    return '';
+  public function postSave(array &$element, WebformSubmissionInterface $webform_submission, $update = TRUE) {
+    $data = $webform_submission->getData();
+    $data[$element['#webform_key']] = $webform_submission->getRemoteAddr();
+    $webform_submission->setData($data);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function isInput(array $element) {
-    // This is an input element since it captures data.
-    return TRUE;
+  public function getValue(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
+    return $webform_submission->getRemoteAddr();
   }
 
   /**

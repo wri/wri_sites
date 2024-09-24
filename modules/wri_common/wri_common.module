@@ -445,7 +445,7 @@ function _wri_common_format_list(array $terms) {
  * @return string
  *   A string representing the entity with or without a link.
  */
-function wri_common_link_or_text(EntityInterface $entity, NodeInterface $node = NULL) {
+function wri_common_link_or_text(EntityInterface $entity, ?NodeInterface $node = NULL) {
   $link = '';
   if (isset($entity)) {
     if ($entity->isPublished()) {
