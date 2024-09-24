@@ -103,7 +103,8 @@ function wri_event_update_10003() {
   // Load the configuration.
   $config_name = 'asset_injector.css.event_pages';
 
-  // Define the file path to the configuration file in the project root /config/ directory.
+  // Define the file path to the configuration file in the project root /config/
+  // directory.
   $config_file_path = dirname(DRUPAL_ROOT) . '/config/asset_injector.css.event_pages.yml';
 
   // Check if the configuration exists in the active store.
