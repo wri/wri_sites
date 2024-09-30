@@ -28,10 +28,7 @@ module.exports = (env, argv) => {
             {
               loader: "css-loader",
               options: {
-                sourceMap: true,
-                modules: {
-                  localIdentName: "[local]___[hash:base64:5]"
-                }
+                sourceMap: true
               }
             },
             {
