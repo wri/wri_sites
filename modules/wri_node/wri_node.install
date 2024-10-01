@@ -84,7 +84,7 @@ function wri_node_update_10001() {
 
       case 'pt-br':
         $phrase = 'e';
-        $within = 'do projeto [node:field_projects:entity:link]';
+        $within = 'do projeto [node:projects_links_within]';
         break;
     }
 
