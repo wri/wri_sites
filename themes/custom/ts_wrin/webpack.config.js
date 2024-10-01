@@ -17,12 +17,6 @@ module.exports = (env, argv) => {
           test: /\.scss$/,
           use: [
             {
-              loader: "file-loader",
-              options: {
-                name: "dist/[name].css"
-              }
-            },
-            {
               loader: MiniCssExtractPlugin.loader
             },
             {
