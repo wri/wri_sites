@@ -73,9 +73,6 @@
             "drupal/views_bulk_edit": {
                 "Fix Required fields to really not be required https://www.drupal.org/node/3024419": "https://www.drupal.org/files/issues/2024-01-10/views_bulk_edit-3024419-fix_required_fields-57.patch"
             },
-            "drupal/simple_popup_blocks": {
-                "Warning: htmlspecialchars() expects parameter 1 to be string, array given https://www.drupal.org/files/issues/2022-03-09/simple_popup_blocks-n3267864-5.patch":"https://git.drupalcode.org/project/simple_popup_blocks/-/merge_requests/4.diff"
-            },
             "drupal/views_arg_order_sort": {
                 "Set as compatible with Drupal 10 but lock down version https://www.drupal.org/project/views_arg_order_sort/issues/3212018" : "web/profiles/contrib/wri_sites/patches/d10-upgrade-circumvent-3212018.diff"
             },
@@ -184,7 +181,7 @@
         "drupal/search_api_pantheon": "^8.0",
         "drupal/search_api_solr": "^4.2.1",
         "drupal/sendgrid_integration": "^2.1",
-        "drupal/simple_popup_blocks": "^3.3",
+        "drupal/simple_popup_blocks": "^3.4",
         "drupal/simple_recaptcha": "^1.0@beta",
         "drupal/smart_date": "^4.0",
         "drupal/sortableviews": "^1.0@beta",
