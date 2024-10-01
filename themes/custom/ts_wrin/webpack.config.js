@@ -57,15 +57,12 @@ module.exports = (env, argv) => {
           }
         },
         {
+          test: /\.svg/,
+          type: "asset/inline"
+        },
+        {
           test: /\.(jpg|png|gif)$/,
-          use: {
-            loader: "file-loader",
-            options: {
-              name: "[name].[ext]",
-              outputPath: "img",
-              esModule: false
-            }
-          }
+          type: "asset/resource"
         }
       ]
     },
