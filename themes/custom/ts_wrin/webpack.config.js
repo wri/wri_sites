@@ -17,20 +17,12 @@ module.exports = (env, argv) => {
           test: /\.scss$/,
           use: [
             {
-              loader: "file-loader",
-              options: {
-                name: "dist/[name].css"
-              }
-            },
-            {
               loader: MiniCssExtractPlugin.loader
             },
             {
               loader: "css-loader",
               options: {
-                sourceMap: true,
-                modules: false,
-                localIdentName: "[local]___[hash:base64:5]"
+                sourceMap: true
               }
             },
             {
@@ -42,7 +34,7 @@ module.exports = (env, argv) => {
             {
               loader: "sass-loader",
               options: {
-                implementation: require("node-sass"),
+                implementation: require("sass"),
                 sourceMap: true
               }
             }
@@ -60,21 +52,11 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.svg/,
-          use: {
-            loader: "svg-url-loader",
-            options: {}
-          }
+          type: "asset/inline"
         },
         {
           test: /\.(jpg|png|gif)$/,
-          use: {
-            loader: "file-loader",
-            options: {
-              name: "[name].[ext]",
-              outputPath: "img",
-              esModule: false
-            }
-          }
+          type: "asset/resource"
         }
       ]
     },
@@ -83,7 +65,7 @@ module.exports = (env, argv) => {
         ? path.resolve(__dirname, "dist_dev")
         : path.resolve(__dirname, "dist"),
       filename: "[name].min.js",
-      publicPath: "/assets/"
+      publicPath: "/libraries/ts_wrin/"
     },
     plugins: [
       new MiniCssExtractPlugin(),

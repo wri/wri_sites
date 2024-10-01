@@ -57,6 +57,11 @@
             "drupal/entity_embed": {
                 "Logs flooded with warning messages 'Invalid display settings encountered' https://www.drupal.org/project/entity_embed/issues/3077225": "https://www.drupal.org/files/issues/2019-12-11/3077225-10.reduce-invalid-config-logs.patch"
             },
+            "drupal/layout_builder_st": {
+                "Error: Call to a member function getConfig() OverridesSectionStorage.php https://www.drupal.org/project/layout_builder_st/issues/3420063": "https://www.drupal.org/files/issues/2024-03-29/layout_builder_st-call_to_a_member_function_getconfig-3420063-26.patch",
+                "Contextual links for translation are removed by core https://www.drupal.org/project/layout_builder_st/issues/3411037": "https://git.drupalcode.org/project/layout_builder_st/-/merge_requests/5.diff",
+                "Drupal\\Component\\Plugin\\Exception\\PluginNotFoundException: The \"block.settings.<block_name>\" plugin does not exist https://www.drupal.org/project/layout_builder_st/issues/3463435": "https://www.drupal.org/files/issues/2024-07-23/layout_builder_st-plugin-not-found-3463435-3.patch"
+            },
             "drupal/paragraphs": {
                 "Paragraph access check using incorrect revision of its parent https://www.drupal.org/project/paragraphs/issues/3090200": "https://www.drupal.org/files/issues/2022-10-26/3084934-13_combine_3090200-22.patch"
             },
@@ -67,9 +72,6 @@
             },
             "drupal/views_bulk_edit": {
                 "Fix Required fields to really not be required https://www.drupal.org/node/3024419": "https://www.drupal.org/files/issues/2024-01-10/views_bulk_edit-3024419-fix_required_fields-57.patch"
-            },
-            "drupal/simple_popup_blocks": {
-                "Warning: htmlspecialchars() expects parameter 1 to be string, array given https://www.drupal.org/files/issues/2022-03-09/simple_popup_blocks-n3267864-5.patch":"https://git.drupalcode.org/project/simple_popup_blocks/-/merge_requests/4.diff"
             },
             "drupal/views_arg_order_sort": {
                 "Set as compatible with Drupal 10 but lock down version https://www.drupal.org/project/views_arg_order_sort/issues/3212018" : "web/profiles/contrib/wri_sites/patches/d10-upgrade-circumvent-3212018.diff"
@@ -155,6 +157,7 @@
         "drupal/jquery_once": "^1.0",
         "drupal/layout_builder_modal": "^1.1",
         "drupal/layout_builder_restrictions": "^2.12",
+        "drupal/layout_builder_st": "^1.0@alpha",
         "drupal/layout_custom_section_classes": "^2.0",
         "drupal/link_attributes": "^2.1",
         "drupal/media_library_edit": "^3.0",
@@ -178,7 +181,7 @@
         "drupal/search_api_pantheon": "^8.0",
         "drupal/search_api_solr": "^4.2.1",
         "drupal/sendgrid_integration": "^2.1",
-        "drupal/simple_popup_blocks": "^3.3",
+        "drupal/simple_popup_blocks": "^3.4",
         "drupal/simple_recaptcha": "^1.0@beta",
         "drupal/smart_date": "^4.0",
         "drupal/sortableviews": "^1.0@beta",
