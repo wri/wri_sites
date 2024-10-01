@@ -57,13 +57,6 @@ module.exports = (env, argv) => {
           }
         },
         {
-          test: /\.svg/,
-          use: {
-            loader: "svg-url-loader",
-            options: {}
-          }
-        },
-        {
           test: /\.(jpg|png|gif)$/,
           use: {
             loader: "file-loader",
@@ -81,7 +74,7 @@ module.exports = (env, argv) => {
         ? path.resolve(__dirname, "dist_dev")
         : path.resolve(__dirname, "dist"),
       filename: "[name].min.js",
-      publicPath: "/assets/"
+      publicPath: "/libraries/ts_wrin/"
     },
     plugins: [
       new MiniCssExtractPlugin(),
