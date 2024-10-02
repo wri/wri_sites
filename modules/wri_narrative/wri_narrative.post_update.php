@@ -75,7 +75,7 @@ function wri_narrative_post_update_rewrite_narrative_taxonomies(&$sandbox) {
 /**
  * Updates the tokens in narrative taxonomies, round 2.
  */
-function wri_narrative_post_update_rewrite_narrative_taxonomies2(&$sandbox) {
+function wri_narrative_post_update_rewrite_narrative_taxonomies1(&$sandbox) {
   // We don't display the narrative taxonomy on nodes older than 2020, so clear
   // that boilerplate out of the database.
   Drupal::database()->query("DELETE FROM node__field_narrative_taxonomy WHERE entity_id IN (SELECT nid FROM node_field_data WHERE created<1577836800 AND type IN ('data', 'publication'))")->execute();
@@ -117,10 +117,12 @@ function wri_narrative_post_update_rewrite_narrative_taxonomies2(&$sandbox) {
       $node = $node->getTranslation($result->langcode);
     }
     $taxonomy_value = $node->field_narrative_taxonomy->getValue();
+    $within_phrase = \Drupal::config('wri_node.settings')->get('within_phrase');
+    $within_phrase = str_replace('[node:projects_links_within]', '[node:field_projects:entity:link]', $within_phrase);
     // Replace link strings with new values.
     $taxonomy_value[0]['value'] = str_replace(
       ['[node:field_primary_contacts:entity:link]',
-        \Drupal::config('wri_node.settings')->get('within_phrase') . ' ',
+        $within_phrase . ' ',
       ],
       ['[node:primary_contact_links]',
         '[node:projects_links_within]',
