@@ -392,7 +392,11 @@ function wri_common_get_node_topic_children(Node $node) {
 function _wri_common_format_list(array $terms) {
   $list = '';
   if ($terms) {
+    $lang_code = \Drupal::service('language_manager')->getCurrentLanguage()->getId();
     foreach ($terms as $term) {
+      if ($term->hasTranslation($lang_code)) {
+        $term = $term->getTranslation($lang_code);
+      }
       $published = $term->isPublished();
       if ($published) {
         $term_url = $term->toUrl();
@@ -446,6 +450,10 @@ function _wri_common_format_list(array $terms) {
  *   A string representing the entity with or without a link.
  */
 function wri_common_link_or_text(EntityInterface $entity, ?NodeInterface $node = NULL) {
+  $lang_code = \Drupal::service('language_manager')->getCurrentLanguage()->getId();
+  if ($entity->hasTranslation($lang_code)) {
+    $entity = $entity->getTranslation($lang_code);
+  }
   $link = '';
   if (isset($entity)) {
     if ($entity->isPublished()) {
