@@ -148,7 +148,7 @@
         "drupal/entity_embed": "^1.6",
         "drupal/entity_usage": "^2.0@beta",
         "drupal/facets": "^2.0",
-        "drupal/facets_pretty_paths": "^1.2",
+        "drupal/facets_pretty_paths": "^2.0",
         "drupal/field_group": "^3.2",
         "drupal/file_replace": "^1.2",
         "drupal/focal_point": "^2.0",
