@@ -528,6 +528,7 @@ function wri_common_url_from_node_project($node) {
  */
 function wri_common_page_attachments_alter(array &$attachments) {
   $attachments['#attached']['drupalSettings']['wri_common']['gtm_id'] = content_snippets_retrieve('gtm_id');
+  $attachments['#attached']['drupalSettings']['wri_common']['analytics_url'] = content_snippets_retrieve('analytics_url');
 }
 
 /**
