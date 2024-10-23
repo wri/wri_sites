@@ -49,3 +49,14 @@ function wri_admin_update_10301() {
   $role1->revokePermission('administer blocks');
   $role1->save();
 }
+
+/**
+ * Enable the module dblog_persistent and pulls config.
+ */
+function wri_admin_update_10302() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('dblog_persistent')) {
+    \Drupal::service('module_installer')->install(['dblog_persistent'], TRUE);
+  }
+  \Drupal::service('distro_helper.updates')->installConfig('dblog_persistent.channel.solr_schema_problems', 'wri_admin', 'install');
+}
