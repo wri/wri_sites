@@ -27,7 +27,7 @@ narrative_taxonomy_view_arguments:
   id: 3_1_view_arguments
   type: textarea
   filter: full_html
-  description: 'The arguments passed to the 3+1 block''s listing view.'
+  description: "The arguments passed to the 3+1 block's listing view."
   group: 'View Arguments'
   weight: '10'
 osano_id:
@@ -54,3 +54,11 @@ orto_registration_url:
   description: '1 hour after the scheduled end time of an event with a zoom webinar ID, send the event to this url. Example: https://ortto.wri.org/zoom/import-participants/?webinarId=[WEBINARID]&webinarName=[WEBINAR_NAME]&webinarDate=[WEBINAR_DATE]. This field accepts tokens.'
   group: '3rd Party'
   weight: '10'
+analytics_url:
+  label: 'Analytics URL'
+  id: analytics_url
+  type: textfield
+  filter: full_html
+  description: 'example: https://www.googletagmanager.com (with no final slash)'
+  group: '3rd Party'
+  weight: '-10'

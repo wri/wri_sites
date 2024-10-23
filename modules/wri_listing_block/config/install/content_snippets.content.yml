@@ -6,3 +6,4 @@ snippets:
   osano_id: ''
   osano_params: ''
   orto_registration_url: 'https://ortto.wri.org/zoom/import-participants/?webinarId=[node:field_zoom_webinar_id]&webinarName=[node:title]&webinarDate=[node:field_date_time:format:default]'
+  analytics_url: 'https://www.googletagmanager.com'
