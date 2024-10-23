@@ -1,0 +1,8 @@
+status: true
+dependencies: {  }
+id: solr_schema_problems
+label: 'Solr schema problems'
+types:
+  search_api: search_api
+levels: {  }
+message: DOCS_AND_FREQS_AND_POSITIONS

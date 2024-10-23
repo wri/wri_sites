@@ -23,6 +23,7 @@ dependencies:
   - ctools_views
   - diff
   - dblog
+  - dblog_persistent
   - ds
   - ds_extras
   - editor
