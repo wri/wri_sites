@@ -3,6 +3,7 @@
 }
 
 .region-top-modals .block-modal {
+  display: none;
   position: absolute;
   z-index: 100;
   button.ui-button {
@@ -13,7 +14,7 @@
     position: absolute;
     right: 10px;
     text-indent: -9999px;
-    top:10px;
+    top: 10px;
     width: 30px;
 
     .ui-icon-closethick {
