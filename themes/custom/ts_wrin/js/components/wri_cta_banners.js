@@ -19,6 +19,7 @@ export default function(context) {
 
   function announce(message) {
     announceRegion.textContent = '';
+    // Timeout ensures the message is re-announced when modal changes.
     setTimeout(() => {
       announceRegion.textContent = message;
     }, 100);
@@ -99,8 +100,8 @@ export default function(context) {
     showModal(selectedModal);
   }
 
-  const stripeCookie = getCookie('__stripe_orig_props');
-  const hasDonated = stripeCookie && decodeURIComponent(stripeCookie).includes('"referrer":"https://invoice.stripe.com/"');
+  const classyCookie = getCookie('classy_donation');
+  const hasDonated = classyCookie && classyCookie === 'true';
 
   if (!getCookie(thankYouCookie) && hasDonated) {
     displayThankYouModal();
