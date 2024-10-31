@@ -2,6 +2,51 @@
   display: none;
 }
 
+.region-top-modals .block-modal {
+  position: absolute;
+  z-index: 100;
+  button.ui-button {
+    all: unset;
+    display: block;
+    height: 30px;
+    overflow: hidden;
+    position: absolute;
+    right: 10px;
+    text-indent: -9999px;
+    top:10px;
+    width: 30px;
+
+    .ui-icon-closethick {
+      all: unset;
+
+      &:after,
+      &:before {
+        background-color: $white;
+        content: "";
+        height: 100%;
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transition: background-color $transition-defaults;
+        width: 3px;
+      }
+      &:after {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+      &:before {
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+    }
+    &:hover,
+    &:focus {
+      .ui-icon-closethick:before,
+      .ui-icon-closethick:after {
+        background-color: $gold-hover;
+      }
+    }
+  }
+}
+
 .block-modal,
 .simple-popup-blocks-global {
   @include font($acumin-semi-cond, "light");
@@ -9,6 +54,7 @@
 
   &.has-blue-background-color,
   &.has-green-background-color,
+  &.has-teal-background-color,
   &.has-black-background-color {
     color: $white;
 
