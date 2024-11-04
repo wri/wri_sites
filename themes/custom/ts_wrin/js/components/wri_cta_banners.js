@@ -114,8 +114,13 @@ export default function(context) {
     selectedModal.setAttribute("role", "dialog");
     selectedModal.setAttribute("aria-labelledby", "modalTitle");
     selectedModal.setAttribute("aria-describedby", "modalMessage");
-    selectedModal.querySelector(".field--name-field-title").id = "modalTitle";
-    selectedModal.querySelector(".field--name-field-intro").id = "modalMessage";
+    if (selectedModal.querySelector(".field--name-field-title")) {
+      selectedModal.querySelector(".field--name-field-title").id = "modalTitle";
+    }
+    if (selectedModal.querySelector(".field--name-field-intro")) {
+      selectedModal.querySelector(".field--name-field-intro").id =
+        "modalMessage";
+    }
     showModal(selectedModal);
   }
 
