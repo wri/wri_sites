@@ -12,6 +12,7 @@ import wriMaps from "./components/wri_maps.js";
 import wriModals from "./components/wri_modals.js";
 import wriMoreOn from "./components/wri_more_on.js";
 import wriMedia from "./components/wri_media.js";
+import wriCtaBanners from "./components/wri_cta_banners.js";
 import tsExternalLinks from "./components/ts_external_links.js";
 
 (($, Drupal) => {
@@ -52,6 +53,10 @@ import tsExternalLinks from "./components/ts_external_links.js";
 
   Drupal.behaviors.wriMoreOn = {
     attach: wriMoreOn
+  };
+
+  Drupal.behaviors.wriCtaBanners = {
+    attach: wriCtaBanners
   };
 
   Drupal.behaviors.wriMedia = {
