@@ -340,12 +340,14 @@ export default function(context) {
       });
     }
 
-    // Close the menu if clicking outside of it
-    document.addEventListener("click", function() {
-      if (menuContainer.classList.contains("menu-open")) {
-        menuContainer.classList.remove("menu-open");
-        menuContainer.classList.add("menu-closed");
-      }
-    });
+    if (menuContainer) {
+      // Close the menu if clicking outside of it
+      document.addEventListener("click", function() {
+        if (menuContainer.classList.contains("menu-open")) {
+          menuContainer.classList.remove("menu-open");
+          menuContainer.classList.add("menu-closed");
+        }
+      });
+    }
   }
 }
