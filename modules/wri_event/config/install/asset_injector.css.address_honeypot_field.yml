@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: address_honeypot_field
+label: 'Address Honeypot Field'
+code: |-
+  .form-item-address {
+  	display: none;
+  }
+media: all
+preprocess: true
+conditions:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      event: event
+contexts: {  }
+conditions_require_all: true
