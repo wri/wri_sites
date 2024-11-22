@@ -153,8 +153,12 @@ export default function(context) {
     }
 
     function stickyScrollMobile() {
-      const mobileStickyNav = document.querySelector(".page-node-type-simple-page .layout__region--menu");
-      const mobileStickyParent = document.querySelector(".page-node-type-simple-page .simple-page__title");
+      const mobileStickyNav = document.querySelector(
+        ".page-node-type-simple-page .layout__region--menu"
+      );
+      const mobileStickyParent = document.querySelector(
+        ".page-node-type-simple-page .simple-page__title"
+      );
 
       if (mobileStickyNav) {
         let tocTop =
