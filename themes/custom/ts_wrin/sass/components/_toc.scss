@@ -183,10 +183,32 @@
 }
 
 .mobile__toc {
+  background-color: $white;
   display: block;
   margin-top: 16px;
+  border-radius: 3px;
   @include mq($md) {
     display: none;
+  }
+  &.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    left: 20px;
+    max-width: calc(100% - 20px * 2);
+    z-index: 500;
+
+    .user-logged-in & {
+      top: rem(39);
+    }
+    .user-logged-in.toolbar-tray-open & {
+      top: rem(79);
+    }
+    + .detail__meta,
+    + .publication__main {
+      margin-top: 107px;
+    }
   }
 }
 

@@ -1,4 +1,21 @@
 .page-node-type-simple-page {
+  .simple-page__title {
+    &.sticky {
+      padding-top: rem(56px);
+      .layout__region--menu {
+        background-color: $white;
+        border-radius: 3px;
+        left: 20px;
+        margin: 0;
+        max-width: calc(100% - 20px * 2);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 500;
+      }
+    }
+  }
+
   .layout__region--title {
     @include center-columns($grid-columns-mobile, $grid-columns-mobile);
     @include mq($ph) {
@@ -170,6 +187,17 @@
     @include mq($md) {
       display: block;
     }
+  }
+}
+
+.user-logged-in.page-node-type-simple-page {
+  .simple-page__title.sticky .layout__region--menu {
+    top: rem(39);
+  }
+}
+.user-logged-in.toolbar-tray-open.page-node-type-simple-page {
+  .simple-page__title.sticky .layout__region--menu {
+    top: rem(79);
   }
 }
 
