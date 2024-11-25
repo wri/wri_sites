@@ -50,7 +50,7 @@ export default function(context) {
       1
     );
     document.removeEventListener("keydown", closeOnEscape);
-    document.removeEventListener("click", clickOutsideModal);
+    //document.removeEventListener("click", clickOutsideModal);
     announce("Modal closed.");
   }
 
@@ -63,17 +63,17 @@ export default function(context) {
     }
   }
 
-  function clickOutsideModal(event) {
-    const visibleModal = context.querySelector(
-      '.block-modal[style*="display: block"]'
-    );
-    if (
-      visibleModal &&
-      !visibleModal.querySelector(".modal_inner").contains(event.target)
-    ) {
-      closeModal(visibleModal);
-    }
-  }
+  // function clickOutsideModal(event) {
+  //   const visibleModal = context.querySelector(
+  //     '.block-modal[style*="display: block"]'
+  //   );
+  //   if (
+  //     visibleModal &&
+  //     !visibleModal.querySelector(".modal_inner").contains(event.target)
+  //   ) {
+  //     closeModal(visibleModal);
+  //   }
+  // }
 
   function showModal(modal) {
     modal.style.display = "block";
@@ -81,7 +81,7 @@ export default function(context) {
       closeModal(modal);
     });
     document.addEventListener("keydown", closeOnEscape);
-    document.addEventListener("click", clickOutsideModal);
+    //document.addEventListener("click", clickOutsideModal);
     announce(
       "A message for you: " +
         modal.querySelector(".field--name-field-title").textContent
@@ -124,8 +124,7 @@ export default function(context) {
     showModal(selectedModal);
   }
 
-  const classyCookie = getCookie("classy_donation");
-  const hasDonated = classyCookie && classyCookie === "true";
+  const hasDonated = getCookie("donation_success");
 
   if (!getCookie(thankYouCookie) && hasDonated) {
     displayThankYouModal();
