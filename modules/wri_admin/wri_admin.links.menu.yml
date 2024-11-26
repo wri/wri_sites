@@ -1,0 +1,6 @@
+wri_admin.paragraph_checker_menu_link:
+  title: 'Check Paragraphs'
+  description: 'Check for missing or orphaned paragraph translations.'
+  parent: entity.paragraphs_type.collection
+  route_name: wri_admin.paragraph_checker
+  weight: 0
