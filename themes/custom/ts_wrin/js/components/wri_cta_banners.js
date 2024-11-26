@@ -8,6 +8,16 @@ export default function(context) {
   const modals = context.querySelectorAll(".region-top-modals .block-modal");
   const ctaCookie = "wri_cta_displayed";
   const thankYouCookie = "wri_cta_thank_you";
+  const modalButtons = context.querySelectorAll(
+    ".region-top-modals .block-modal .button"
+  );
+
+  modalButtons.forEach(function(button) {
+    button.addEventListener("click", function() {
+      const modal = button.closest(".block-modal");
+      modal.style.display = "none";
+    });
+  });
 
   // Accessibility: aria-live region for announcements
   const announceRegion = document.createElement("div");
