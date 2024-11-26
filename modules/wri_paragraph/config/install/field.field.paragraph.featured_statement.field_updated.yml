@@ -1,0 +1,20 @@
+langcode: id
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_updated
+    - paragraphs.paragraphs_type.featured_statement
+id: paragraph.featured_statement.field_updated
+field_name: field_updated
+entity_type: paragraph
+bundle: featured_statement
+label: 'Updated date'
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: 1605811540
+default_value_callback: ''
+settings: {  }
+field_type: timestamp

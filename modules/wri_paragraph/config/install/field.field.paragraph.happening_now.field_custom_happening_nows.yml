@@ -1,0 +1,25 @@
+langcode: id
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_custom_happening_nows
+    - paragraphs.paragraphs_type.happening_now
+id: paragraph.happening_now.field_custom_happening_nows
+field_name: field_custom_happening_nows
+entity_type: paragraph
+bundle: happening_now
+label: 'Custom Happening Nows'
+description: "If you don't like the generated Happening Now results, you can add your own values. These will appear in order at the front of the list."
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: content_by_type
+      display_name: entity_reference_1
+      arguments:
+        - article+data+project_detail+publication
+field_type: entity_reference

@@ -1,0 +1,27 @@
+langcode: id
+status: true
+dependencies:
+  config:
+    - block_content.type.superfeatured
+    - field.storage.paragraph.field_block
+    - paragraphs.paragraphs_type.superfeatured_item
+id: paragraph.superfeatured_item.field_block
+field_name: field_block
+entity_type: paragraph
+bundle: superfeatured_item
+label: Blok
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:block_content'
+  handler_settings:
+    target_bundles:
+      superfeatured: superfeatured
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

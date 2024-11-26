@@ -1,0 +1,27 @@
+langcode: id
+status: true
+dependencies:
+  config:
+    - block_content.type.unique_feature_cta
+    - field.storage.paragraph.field_block
+    - paragraphs.paragraphs_type.unique_feature_cta
+id: paragraph.unique_feature_cta.field_block
+field_name: field_block
+entity_type: paragraph
+bundle: unique_feature_cta
+label: Blok
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:block_content'
+  handler_settings:
+    target_bundles:
+      unique_feature_cta: unique_feature_cta
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

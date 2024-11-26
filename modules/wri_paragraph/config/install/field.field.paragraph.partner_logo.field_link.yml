@@ -1,0 +1,25 @@
+uuid: 0b43ea3b-f1d3-4ad5-b811-eadaa59b9fde
+langcode: id
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_link
+    - paragraphs.paragraphs_type.partner_logo
+  module:
+    - link
+_core:
+  default_config_hash: l0Qw7xtZPg4opTj8LWls7F8XpQRbQe5eCxi62WemkHY
+id: paragraph.partner_logo.field_link
+field_name: field_link
+entity_type: paragraph
+bundle: partner_logo
+label: 'Partner Link'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 17
+field_type: link

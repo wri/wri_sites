@@ -1,0 +1,28 @@
+langcode: id
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_filter_by_resource_type
+    - paragraphs.paragraphs_type.happening_now
+    - taxonomy.vocabulary.resource_type
+id: paragraph.happening_now.field_filter_by_resource_type
+field_name: field_filter_by_resource_type
+entity_type: paragraph
+bundle: happening_now
+label: 'Filter by Resource Type'
+description: 'Note: Only Articles, Data, Publications, and Projects will show in happening now. You can further refine the Type of resource to show using this field.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      resource_type: resource_type
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
