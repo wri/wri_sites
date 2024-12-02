@@ -192,13 +192,17 @@ blockquote {
     &:first-of-type {
       margin-top: 0;
     }
+
+    &.with-quote {
+      text-indent: rem(16);
+    }
+
     &.with-quote:before {
       @include font($caslon, "bold");
       content: "“";
       font-size: 58px;
       position: absolute;
-      top: -21px;
-      left: 0px;
+      left: 0;
     }
     span.attribution {
       @include font($acumin-semi-cond, "semibold");
