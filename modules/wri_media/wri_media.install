@@ -103,6 +103,7 @@ function wri_media_update_10104() {
     'settings#plugins#ckeditor5_style#styles',
   ], 'wri_media');
 }
+
 /**
  * Update filter blockquote settings.
  */
