@@ -14,6 +14,7 @@ import wriMoreOn from "./components/wri_more_on.js";
 import wriMedia from "./components/wri_media.js";
 import wriCtaBanners from "./components/wri_cta_banners.js";
 import tsExternalLinks from "./components/ts_external_links.js";
+import wriDatetime from "./components/wri_datetime.js";
 
 (($, Drupal) => {
   /**
@@ -65,5 +66,9 @@ import tsExternalLinks from "./components/ts_external_links.js";
 
   Drupal.behaviors.tsExternalLinks = {
     attach: tsExternalLinks
+  };
+
+  Drupal.behaviors.wriDatetime = {
+    attach: wriDatetime
   };
 })(jQuery, Drupal);
