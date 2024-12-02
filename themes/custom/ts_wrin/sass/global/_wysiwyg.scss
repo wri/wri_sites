@@ -168,7 +168,7 @@ blockquote {
   padding: 0;
 
   p {
-    @include font($acumin-semi-cond, "bold");
+    @include font($acumin-semi-cond, "medium");
     @include font-line-height(20, 28);
     border-left: 1px solid #b1b1b1;
     margin: 16px 0;
@@ -192,13 +192,24 @@ blockquote {
     &:first-of-type {
       margin-top: 0;
     }
+
+    &.with-quote {
+      text-indent: rem(16);
+    }
+
     &.with-quote:before {
-      content: "‘";
-      font-size: 60px;
-      font-weight: 700;
+      @include font($caslon, "bold");
+      content: "“";
+      font-size: 58px;
       position: absolute;
-      top: -16px;
-      left: 8px;
+      left: 0;
+    }
+    span.attribution {
+      @include font($acumin-semi-cond, "semibold");
+      @include font-line-height(18, 28);
+      @include mq($md) {
+        @include font-line-height(22, 32);
+      }
     }
   }
 
