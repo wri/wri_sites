@@ -56,10 +56,6 @@ import wriDatetime from "./components/wri_datetime.js";
     attach: wriMoreOn
   };
 
-  Drupal.behaviors.wriCtaBanners = {
-    attach: wriCtaBanners
-  };
-
   Drupal.behaviors.wriMedia = {
     attach: wriMedia
   };
