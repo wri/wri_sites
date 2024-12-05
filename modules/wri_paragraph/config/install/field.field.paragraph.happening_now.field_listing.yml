@@ -1,0 +1,77 @@
+langcode: id
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_listing
+    - paragraphs.paragraphs_type.happening_now
+    - views.view.happening_now
+  module:
+    - viewfield
+id: paragraph.happening_now.field_listing
+field_name: field_listing
+entity_type: paragraph
+bundle: happening_now
+label: 'Sedang Berlangsung'
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    target_uuid: 1d2fb920-f85d-4de8-945b-3e9736ccf16b
+    display_id: teasers
+    arguments: '[paragraph:field_filter_by_resource_type:array:target_id:join:+]/[paragraph:field_tag:target_id]/[paragraph:field_custom_happening_nows:array:target_id:join:+]'
+    items_to_display: '3'
+    token_help: ''
+default_value_callback: ''
+settings:
+  force_default: true
+  allowed_views:
+    happening_now: happening_now
+    '3_1': '0'
+    all_topics: '0'
+    authored_by: '0'
+    content: '0'
+    content_by_type: '0'
+    content_cleanup: '0'
+    content_css_js: '0'
+    content_listing: '0'
+    content_listing_a_to_z: '0'
+    countries: '0'
+    block_content: '0'
+    featured_experts: '0'
+    featured_tweet: '0'
+    featured_tweets_entity_browser: '0'
+    files: '0'
+    files_browser: '0'
+    frontpage: '0'
+    homepage_projects: '0'
+    media: '0'
+    media_library: '0'
+    moderated_content: '0'
+    user_admin_people: '0'
+    people_at_this_io: '0'
+    programs_centers: '0'
+    content_recent: '0'
+    redirect: '0'
+    related_content: '0'
+    resources: '0'
+    resource_types: '0'
+    scheduled_transitions: '0'
+    superfeatured_content: '0'
+    tagged_with: '0'
+    taxonomy_term: '0'
+    trending_topics: '0'
+    watchdog: '0'
+    who_s_new: '0'
+    who_s_online: '0'
+  allowed_display_types:
+    block: block
+    attachment: '0'
+    entity_browser: '0'
+    entity_reference: '0'
+    feed: '0'
+    default: '0'
+    page: '0'
+  handler: 'default:view'
+  handler_settings: {  }
+field_type: viewfield

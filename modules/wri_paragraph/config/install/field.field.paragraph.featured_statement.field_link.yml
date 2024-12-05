@@ -1,0 +1,22 @@
+langcode: id
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_link
+    - paragraphs.paragraphs_type.featured_statement
+  module:
+    - link
+id: paragraph.featured_statement.field_link
+field_name: field_link
+entity_type: paragraph
+bundle: featured_statement
+label: Link
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 17
+field_type: link

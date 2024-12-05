@@ -1,0 +1,39 @@
+langcode: id
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_featured_statement
+    - paragraphs.paragraphs_type.featured_statement
+    - paragraphs.paragraphs_type.homepage_hero
+  module:
+    - entity_reference_revisions
+id: paragraph.homepage_hero.field_featured_statement
+field_name: field_featured_statement
+entity_type: paragraph
+bundle: homepage_hero
+label: 'Featured statement'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      featured_statement: featured_statement
+    negate: 0
+    target_bundles_drag_drop:
+      default_hero:
+        weight: 5
+        enabled: false
+      featured_statement:
+        weight: 6
+        enabled: true
+      happening_now:
+        weight: 7
+        enabled: false
+      homepage_hero:
+        weight: 8
+        enabled: false
+field_type: entity_reference_revisions

@@ -1,0 +1,28 @@
+langcode: id
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_tag
+    - paragraphs.paragraphs_type.happening_now
+    - taxonomy.vocabulary.topics_and_subtopics
+id: paragraph.happening_now.field_tag
+field_name: field_tag
+entity_type: paragraph
+bundle: happening_now
+label: 'Filter by Topic'
+description: 'Leave this empty if you want the topic to be set by the sitewide filter.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      topics_and_subtopics: topics_and_subtopics
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: tags
+field_type: entity_reference
