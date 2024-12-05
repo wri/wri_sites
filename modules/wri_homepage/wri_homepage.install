@@ -28,7 +28,6 @@ function wri_homepage_update_dependencies() {
   return $dependencies;
 }
 
-
 /**
  * Update the Featured Statement paragraph to have a preview mode.
  */
