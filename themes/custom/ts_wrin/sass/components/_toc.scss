@@ -199,15 +199,15 @@
     max-width: calc(100% - 20px * 2);
     z-index: 500;
 
-    .user-logged-in & {
-      top: rem(39);
-    }
-    .user-logged-in.toolbar-tray-open & {
-      top: rem(79);
-    }
     + .detail__meta,
     + .publication__main {
       margin-top: 107px;
+    }
+    @include mq($md) {
+      + .detail__meta,
+      + .publication__main {
+        margin-top: 149px;
+      }
     }
   }
 }
