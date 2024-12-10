@@ -154,10 +154,10 @@ export default function(context) {
 
     function stickyScrollMobile() {
       const mobileStickyNav = document.querySelector(
-        ".page-node-type-simple-page .layout__region--menu"
+        ".page-node-type-simple-page .layout__region--menu, .experts-staff-header .internal-menu-pages"
       );
       const mobileStickyParent = document.querySelector(
-        ".page-node-type-simple-page .simple-page__title"
+        ".page-node-type-simple-page .simple-page__title, .experts-staff-header .right"
       );
 
       if (mobileStickyNav) {
@@ -181,6 +181,10 @@ export default function(context) {
       };
       if (windowSize() > 768) {
         window.addEventListener("scroll", stickyScroll);
+        const mobileStickyParent = document.querySelector(
+          ".page-node-type-simple-page .simple-page__title, .experts-staff-header .right"
+        );
+        mobileStickyParent.classList.remove("sticky");
       } else {
         window.addEventListener("scroll", stickyScrollMobile);
       }
@@ -293,12 +297,16 @@ export default function(context) {
 
     const tocStickyNav = document.querySelector(".publication__toc");
     const mobileStickyNav = document.querySelector(".mobile__toc");
+    console.log( "tocStickyNav: " + tocStickyNav )
+    console.log( "mobileStickyNav: " + mobileStickyNav )
     if (tocStickyNav) {
       let tocTop =
         window.pageYOffset + tocStickyNav.getBoundingClientRect().top;
+        console.log( "tocTop (desktop): " + tocTop )
       if (tocTop == 0) {
         tocTop =
           window.pageYOffset + mobileStickyNav.getBoundingClientRect().top;
+        console.log( "tocTop (mobile): " + tocTop )
       }
 
       function tocStickyScroll() {
