@@ -151,10 +151,6 @@ function wri_event_update_10004() {
     'time_format', 'time_hour_format',
   ], 'wri_event');
 
-  \Drupal::service('distro_helper.updates')->updateConfig('asset_injector.css.address_honeypot_field', [
-    'code',
-  ], 'wri_event');
-
   // Load the configuration.
   $config_name = 'asset_injector.js.add_gmt_to_events';
 
