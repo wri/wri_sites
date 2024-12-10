@@ -152,13 +152,41 @@ export default function(context) {
       }
     }
 
+    function stickyScrollMobile() {
+      const mobileStickyNav = document.querySelector(
+        ".page-node-type-simple-page .layout__region--menu, .experts-staff-header .internal-menu-pages"
+      );
+      const mobileStickyParent = document.querySelector(
+        ".page-node-type-simple-page .simple-page__title, .experts-staff-header .right"
+      );
+
+      if (mobileStickyNav) {
+        let tocTop =
+          window.pageYOffset + mobileStickyParent.getBoundingClientRect().top;
+
+        let st = window.pageYOffset || document.documentElement.scrollTop;
+        if (st >= tocTop) {
+          mobileStickyParent.classList.add("sticky");
+        } else {
+          mobileStickyParent.classList.remove("sticky");
+        }
+      }
+    }
+
     var debouncedStickyNav = debounce(function() {
       window.removeEventListener("scroll", stickyScroll);
+      window.removeEventListener("scroll", stickyScrollMobile);
       let windowSize = function() {
         return window.innerWidth;
       };
       if (windowSize() > 768) {
         window.addEventListener("scroll", stickyScroll);
+        const mobileStickyParent = document.querySelector(
+          ".page-node-type-simple-page .simple-page__title, .experts-staff-header .right"
+        );
+        mobileStickyParent.classList.remove("sticky");
+      } else {
+        window.addEventListener("scroll", stickyScrollMobile);
       }
     }, 250);
 
@@ -268,11 +296,11 @@ export default function(context) {
     });
 
     const tocStickyNav = document.querySelector(".publication__toc");
+    const mobileStickyNav = document.querySelector(".mobile__toc");
     if (tocStickyNav) {
       let tocTop =
         window.pageYOffset + tocStickyNav.getBoundingClientRect().top;
       if (tocTop == 0) {
-        const mobileStickyNav = document.querySelector(".mobile__toc");
         tocTop =
           window.pageYOffset + mobileStickyNav.getBoundingClientRect().top;
       }
@@ -281,8 +309,10 @@ export default function(context) {
         let st = window.pageYOffset || document.documentElement.scrollTop;
         if (st >= tocTop) {
           tocStickyNav.classList.add("sticky");
+          mobileStickyNav.classList.add("sticky");
         } else {
           tocStickyNav.classList.remove("sticky");
+          mobileStickyNav.classList.remove("sticky");
         }
       }
 
