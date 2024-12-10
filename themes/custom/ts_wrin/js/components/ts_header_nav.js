@@ -297,16 +297,12 @@ export default function(context) {
 
     const tocStickyNav = document.querySelector(".publication__toc");
     const mobileStickyNav = document.querySelector(".mobile__toc");
-    console.log( "tocStickyNav: " + tocStickyNav )
-    console.log( "mobileStickyNav: " + mobileStickyNav )
     if (tocStickyNav) {
       let tocTop =
         window.pageYOffset + tocStickyNav.getBoundingClientRect().top;
-        console.log( "tocTop (desktop): " + tocTop )
       if (tocTop == 0) {
         tocTop =
           window.pageYOffset + mobileStickyNav.getBoundingClientRect().top;
-        console.log( "tocTop (mobile): " + tocTop )
       }
 
       function tocStickyScroll() {
