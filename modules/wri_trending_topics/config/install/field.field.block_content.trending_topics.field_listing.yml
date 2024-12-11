@@ -13,7 +13,7 @@ bundle: trending_topics
 label: Listing
 description: ''
 required: true
-translatable: true
+translatable: false
 default_value:
   -
     token_help: ''

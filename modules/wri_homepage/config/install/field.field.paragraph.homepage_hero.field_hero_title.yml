@@ -1,16 +1,11 @@
-langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_hero_title
+    - filter.format.basic_html
     - paragraphs.paragraphs_type.homepage_hero
   module:
-    - allowed_formats
     - text
-third_party_settings:
-  allowed_formats:
-    allowed_formats:
-      - basic_html
 id: paragraph.homepage_hero.field_hero_title
 field_name: field_hero_title
 entity_type: paragraph
@@ -21,5 +16,7 @@ required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
-settings: {  }
+settings:
+  allowed_formats:
+    - basic_html
 field_type: text_long

@@ -14,7 +14,7 @@ bundle: hero
 label: 'Hero type'
 description: 'Choose a type of hero to display, or leave empty to display the default hero.'
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
