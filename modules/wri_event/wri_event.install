@@ -142,3 +142,54 @@ function wri_event_update_10003() {
     ]);
   }
 }
+
+/**
+ * Update Smart Date compact_dot time_format and update the asset injectors.
+ */
+function wri_event_update_10004() {
+  \Drupal::service('distro_helper.updates')->updateConfig('smart_date.smart_date_format.compact_dot', [
+    'time_format', 'time_hour_format',
+  ], 'wri_event');
+
+  // Load the configuration.
+  $config_name = 'asset_injector.js.add_gmt_to_events';
+
+  // Define the file path to the configuration file in the project root /config/
+  // directory.
+  $config_file_path = dirname(DRUPAL_ROOT) . '/config/asset_injector.js.add_gmt_to_events.yml';
+
+  // Check if the configuration exists in the active store.
+  if (\Drupal::configFactory()->getEditable($config_name)->isNew() === FALSE) {
+    // Delete the configuration from active storage.
+    \Drupal::configFactory()->getEditable($config_name)->delete();
+
+    \Drupal::logger('wri_event')->notice('Configuration %config_name was successfully deleted from active storage.', [
+      '%config_name' => $config_name,
+    ]);
+
+    // Check if the config file exists in the /config/ directory.
+    if (file_exists($config_file_path)) {
+      // Attempt to delete the file.
+      if (unlink($config_file_path)) {
+        \Drupal::logger('wri_event')->notice('Configuration file %file_path was successfully deleted from the config directory.', [
+          '%file_path' => $config_file_path,
+        ]);
+      }
+      else {
+        \Drupal::logger('wri_event')->error('Failed to delete configuration file %file_path.', [
+          '%file_path' => $config_file_path,
+        ]);
+      }
+    }
+    else {
+      \Drupal::logger('wri_event')->warning('Configuration file %file_path not found in the config directory.', [
+        '%file_path' => $config_file_path,
+      ]);
+    }
+  }
+  else {
+    \Drupal::logger('wri_event')->warning('Configuration %config_name not found in active storage.', [
+      '%config_name' => $config_name,
+    ]);
+  }
+}

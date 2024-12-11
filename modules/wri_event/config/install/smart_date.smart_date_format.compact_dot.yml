@@ -4,8 +4,8 @@ dependencies: {  }
 id: compact_dot
 label: 'Compact dot'
 date_format: 'F d, Y'
-time_format: 'g:ia T'
-time_hour_format: 'g:ia T'
+time_format: 'g:ia <\s\p\a\n \c\l\a\s\s=''\g\m\t''>T</\s\p\a\n>'
+time_hour_format: 'g:ia <\s\p\a\n \c\l\a\s\s=''\g\m\t''>T</\s\p\a\n>'
 allday_label: 'All day'
 separator: ' - '
 join: '<span>•</span>'

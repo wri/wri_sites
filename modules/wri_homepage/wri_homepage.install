@@ -29,6 +29,17 @@ function wri_homepage_update_dependencies() {
 }
 
 /**
+ * Update the Featured Statement paragraph to have a preview mode.
+ */
+function wri_homepage_update_10001() {
+
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.paragraph.featured_statement.preview', 'wri_homepage', 'install', 'TRUE');
+
+  $message = 'Add Preview mode for Featured Statement paragraph';
+  return $message;
+}
+
+/**
  * Translatable field update.
  */
 function wri_homepage_update_10301() {

@@ -29,8 +29,12 @@
     margin-left: 0;
   }
 
-  blockquote:before {
-    content: none;
+  blockquote p.with-quote {
+    text-indent: 0;
+  }
+
+  blockquote p.with-quote:before {
+    top: -20px;
   }
 
   blockquote p {

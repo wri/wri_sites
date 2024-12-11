@@ -131,6 +131,10 @@
       &.event-info-date span {
         padding: 0 15px;
       }
+      &.event-info-date span.gmt {
+        margin: 0;
+        padding: 0;
+      }
 
       @include mq($lg) {
         display: inline-block;
