@@ -14,7 +14,7 @@ bundle: narrative_taxonomy
 label: Listing
 description: ''
 required: true
-translatable: true
+translatable: false
 default_value:
   -
     target_uuid: d269a51d-af3c-4126-91c1-fab3e1090abf

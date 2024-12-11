@@ -2,9 +2,9 @@ wri_admin.paragraph_checker:
   path: '/admin/wri-admin/paragraph-checker'
   defaults:
     _controller: '\Drupal\wri_admin\Controller\ParagraphCheckerController::checkParagraphs'
-    _title: 'Paragraph Translation Checker'
+    _title: 'Check Paragraphs'
   requirements:
-    _permission: 'administer site configuration'
+    _permission: 'administer nodes'
 
 wri_admin.add_missing:
   path: '/admin/paragraph-checker/add-missing/{node_id}'

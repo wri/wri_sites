@@ -1,4 +1,3 @@
-langcode: id
 status: true
 dependencies:
   config:

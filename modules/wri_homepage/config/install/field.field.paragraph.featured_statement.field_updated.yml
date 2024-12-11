@@ -11,7 +11,7 @@ bundle: featured_statement
 label: 'Updated date'
 description: ''
 required: true
-translatable: false
+translatable: true
 default_value:
   -
     value: 1605811540

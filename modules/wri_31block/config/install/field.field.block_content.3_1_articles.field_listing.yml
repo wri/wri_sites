@@ -14,7 +14,7 @@ bundle: 3_1_articles
 label: Listing
 description: ''
 required: true
-translatable: true
+translatable: false
 default_value:
   -
     target_uuid: ba985f1d-01bd-42cb-ab9c-1f4243795b9c

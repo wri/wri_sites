@@ -14,7 +14,7 @@ bundle: happening_now
 label: 'Happening Now'
 description: ''
 required: true
-translatable: true
+translatable: false
 default_value:
   -
     token_help: ''

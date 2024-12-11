@@ -88,3 +88,12 @@ function wri_31block_update_9502() {
     'snippets#3_1_view_arguments',
   ], 'wri_listing_block');
 }
+
+/**
+ * Translatable field update.
+ */
+function wri_31block_update_10301() {
+\Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.3_1_articles.field_listing', [
+    'translatable',
+  ], 'wri_31block');
+}
