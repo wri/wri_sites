@@ -4,9 +4,10 @@ namespace Drupal\wri_admin\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Database\Connection;
+use Drupal\Core\Entity\EntityFieldManager;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Url;
-use Drupal\node\Entity\Node;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -22,13 +23,33 @@ class ParagraphCheckerController extends ControllerBase {
   protected $database;
 
   /**
+   * Entity type manager service.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * Entity field manager service.
+   *
+   * @var \Drupal\Core\Entity\EntityFieldManager
+   */
+  protected $entityFieldManager;
+
+  /**
    * Constructs the controller.
    *
    * @param \Drupal\Core\Database\Connection $database
    *   The database connection.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity type manager.
+   * @param \Drupal\Core\Entity\EntityFieldManager $entityFieldManager
+   *   The entity field manager.
    */
-  public function __construct(Connection $database) {
+  public function __construct(Connection $database, EntityTypeManagerInterface $entityTypeManager, EntityFieldManager $entityFieldManager) {
     $this->database = $database;
+    $this->entityTypeManager = $entityTypeManager;
+    $this->entityFieldManager = $entityFieldManager;
   }
 
   /**
@@ -36,9 +57,12 @@ class ParagraphCheckerController extends ControllerBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('database')
+      $container->get('database'),
+      $container->get('entity_type.manager'),
+      $container->get('entity_field.manager')
     );
   }
+
 
   /**
    * Check paragraphs for translation inconsistencies.
@@ -55,13 +79,11 @@ class ParagraphCheckerController extends ControllerBase {
     $rows = [];
 
     // Get all content types.
-    $node_bundles = \Drupal::service('entity_type.manager')
-      ->getStorage('node_type')
-      ->loadMultiple();
+    $node_bundles = $this->entityTypeManager->getStorage('node_type')->loadMultiple();
 
     foreach ($node_bundles as $bundle_id => $bundle) {
       // Get the fields for this content type.
-      $fields = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $bundle_id);
+      $fields = $this->entityFieldManager->getFieldDefinitions('node', $bundle_id);
 
       foreach ($fields as $field_name => $field) {
 
@@ -72,8 +94,7 @@ class ParagraphCheckerController extends ControllerBase {
         }
 
         // Load nodes of this content type with translations.
-        $nodes = \Drupal::entityTypeManager()->getStorage('node')
-          ->loadByProperties(['type' => $bundle_id]);
+        $nodes = $this->entityTypeManager->getStorage('node')->loadByProperties(['type' => $bundle_id]);
 
         foreach ($nodes as $node) {
           if (!$node->isTranslatable()) {
@@ -145,7 +166,7 @@ class ParagraphCheckerController extends ControllerBase {
    */
   public function addMissingParagraphs($node_id) {
     // Load the original node.
-    $node = Node::load($node_id);
+    $node = $this->entityTypeManager->getStorage('node')->load($node_id);
     if (!$node) {
       $this->messenger()->addError($this->t('Node @id not found.', ['@id' => $node_id]));
       return $this->redirect('wri_admin.paragraph_checker');
@@ -216,7 +237,7 @@ class ParagraphCheckerController extends ControllerBase {
    */
   public function removeOrphanedParagraphs($node_id) {
     // Load the original node.
-    $node = Node::load($node_id);
+    $node = $this->entityTypeManager->getStorage('node')->load($node_id);
     if (!$node) {
       $this->messenger()->addError($this->t('Node @id not found.', ['@id' => $node_id]));
       return $this->redirect('wri_admin.paragraph_checker');
@@ -285,7 +306,7 @@ class ParagraphCheckerController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  private function getParagraphFields(Node $node) {
+  private function getParagraphFields($node) {
     $fields = [];
     foreach ($node->getFieldDefinitions() as $field_name => $field) {
       if ($field->getType() === 'entity_reference_revisions' && $field->getSetting('target_type') === 'paragraph') {
