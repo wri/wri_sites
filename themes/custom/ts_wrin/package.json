@@ -30,11 +30,6 @@
     "pretty-quick": "pretty-quick",
     "prettier": "prettier --write sass/**/*.scss js/**/*.js"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --pattern '**/ts_wrin/**' --staged"
-    }
-  },
   "author": "ThinkShout, Inc",
   "license": "GPL-3.0"
 }
