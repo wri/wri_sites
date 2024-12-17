@@ -8,15 +8,15 @@
 /**
  * Language handling updates for paragraphs.
  */
-function wri_paragraph_update_10301() {
-  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.featured_statement', 'wri_paragraph');
-  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.happening_now', 'wri_paragraph');
-  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.homepage_hero', 'wri_paragraph');
-  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.image', 'wri_paragraph');
-  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.impact', 'wri_paragraph');
-  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.partner_logo', 'wri_paragraph');
-  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.program_lead_in', 'wri_paragraph');
-  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.side_by_side', 'wri_paragraph');
-  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.statistic', 'wri_paragraph');
-  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.statistics', 'wri_paragraph');
+function wri_paragraph_update_10302() {
+  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.featured_statement', 'wri_homepage');
+  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.happening_now', 'wri_happening_now');
+  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.homepage_hero', 'wri_homepage');
+  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.image', 'wri_simple_page');
+  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.impact', 'wri_impact');
+  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.partner_logo', 'wri_project');
+  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.program_lead_in', 'wri_program');
+  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.side_by_side', 'wri_side_by_side');
+  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.statistic', 'wri_program');
+  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.statistics', 'wri_program');
 }
