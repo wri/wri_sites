@@ -5,13 +5,13 @@
  * WRI media functions.
  */
 
+use Drupal\ckeditor5\Plugin\CKEditor5PluginDefinition;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Field\FormatterInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
-use Drupal\ckeditor5\Plugin\CKEditor5PluginDefinition;
 use Drupal\file\Entity\File;
 
 /**

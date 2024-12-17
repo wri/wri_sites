@@ -43,3 +43,15 @@ function wri_narrative_update_9501() {
     throw new UpdateException('This should be run after importing the field_listing to the listing_block block type.');
   }
 }
+
+/**
+ * Translatable field update.
+ */
+function wri_narrative_update_10301() {
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.narrative_taxonomy.field_listing', [
+    'translatable',
+  ], 'wri_narrative');
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.narrative_taxonomy.field_block', [
+    'translatable',
+  ], 'wri_narrative');
+}

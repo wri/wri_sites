@@ -146,3 +146,15 @@ function wri_listing_block_update_9502() {
 
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.block_content.listing_block.default', ['content#field_filter_by_project'], 'wri_listing_block');
 }
+
+/**
+ * Translatable field update.
+ */
+function wri_listing_block_update_10301() {
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.listing_block.field_listing', [
+    'translatable',
+  ], 'wri_listing_block');
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.listing_block.field_block', [
+    'translatable',
+  ], 'wri_listing_block');
+}

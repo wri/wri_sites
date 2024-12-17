@@ -38,3 +38,27 @@ function wri_homepage_update_10001() {
   $message = 'Add Preview mode for Featured Statement paragraph';
   return $message;
 }
+
+/**
+ * Translatable field update.
+ */
+function wri_homepage_update_10301() {
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.featured_statement.field_updated', [
+    'translatable',
+  ], 'wri_homepage');
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.homepage_hero.field_featured_items', [
+    'translatable',
+  ], 'wri_homepage');
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.homepage_hero.field_featured_statement', [
+    'translatable',
+  ], 'wri_homepage');
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.homepage_hero.field_hero_image', [
+    'translatable',
+  ], 'wri_homepage');
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.homepage_hero.field_hero_intro', [
+    'translatable',
+  ], 'wri_homepage');
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.homepage_hero.field_hero_title', [
+    'translatable',
+  ], 'wri_homepage');
+}

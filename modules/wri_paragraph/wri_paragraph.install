@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Update hooks for wri_paragraph module.
+ */
+
+/**
+ * Language handling updates for paragraphs.
+ */
+function wri_paragraph_update_10301() {
+  if (!\Drupal::moduleHandler()->moduleExists('content_translation')) {
+    \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.featured_statement', 'wri_paragraph', 'optional');
+    \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.happening_now', 'wri_paragraph', 'optional');
+    \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.homepage_hero', 'wri_paragraph', 'optional');
+    \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.image', 'wri_paragraph', 'optional');
+    \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.impact', 'wri_paragraph', 'optional');
+    \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.partner_logo', 'wri_paragraph', 'optional');
+    \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.program_lead_in', 'wri_paragraph', 'optional');
+    \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.side_by_side', 'wri_paragraph', 'optional');
+    \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.statistic', 'wri_paragraph', 'optional');
+    \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.statistics', 'wri_paragraph', 'optional');
+  }
+}

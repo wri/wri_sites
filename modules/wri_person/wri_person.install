@@ -114,3 +114,12 @@ function wri_person_update_10001() {
   $message = 'Add the Alt First/Last name fields and Aliases tab group.';
   return $message;
 }
+
+/**
+ * Translatable field update.
+ */
+function wri_person_update_10301() {
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.person_listing.field_block', [
+    'translatable',
+  ], 'wri_person');
+}

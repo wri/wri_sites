@@ -37,3 +37,12 @@ function wri_simple_page_update_10001() {
   $message = 'Add field_intro to metatags description';
   return $message;
 }
+
+/**
+ * Translatable field update.
+ */
+function wri_simple_page_update_10301() {
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.node.simple_page.field_intro_paragraphs', [
+    'translatable',
+  ], 'wri_simple_page');
+}
