@@ -11,8 +11,8 @@
 function wri_happening_now_update_10301() {
   \Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.hero.field_hero_type', [
     'translatable',
-  ], 'wri_31block');
+  ], 'wri_happening_now');
   \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.happening_now.field_listing', [
     'translatable',
-  ], 'wri_31block');
+  ], 'wri_happening_now');
 }
