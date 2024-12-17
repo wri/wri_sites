@@ -59,6 +59,9 @@
   text-align: center;
   aspect-ratio: 923.2/448;
 }
+.has-light-gray-background-color .interactive-map {
+  background-color: $light-grey;
+}
 
 .wri-region-map {
   @include center-columns($grid-columns-mobile, $grid-columns-mobile);
