@@ -9,7 +9,7 @@
  * Translatable field update.
  */
 function wri_small_cta_update_10301() {
-\Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.small_cta.field_block', [
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.small_cta.field_block', [
     'translatable',
   ], 'wri_small_cta');
 }

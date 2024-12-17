@@ -63,7 +63,6 @@ class ParagraphCheckerController extends ControllerBase {
     );
   }
 
-
   /**
    * Check paragraphs for translation inconsistencies.
    */

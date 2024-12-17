@@ -9,10 +9,10 @@
  * Translatable field update.
  */
 function wri_impact_update_10301() {
-\Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.impact_in_action.field_impacts', [
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.impact_in_action.field_impacts', [
     'translatable',
   ], 'wri_impact');
-\Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.impact_in_action_blocks.field_block', [
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.impact_in_action_blocks.field_block', [
     'translatable',
   ], 'wri_impact');
 }

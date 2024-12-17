@@ -9,10 +9,10 @@
  * Translatable field update.
  */
 function wri_superfeatured_update_10301() {
-\Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.superfeatured.field_listing', [
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.superfeatured.field_listing', [
     'translatable',
   ], 'wri_superfeatured');
-\Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.superfeatured_item.field_block', [
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.superfeatured_item.field_block', [
     'translatable',
   ], 'wri_superfeatured');
 }

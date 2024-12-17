@@ -9,7 +9,7 @@
  * Translatable field update.
  */
 function wri_trending_topics_update_10301() {
-\Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.trending_topics.field_listing', [
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.trending_topics.field_listing', [
     'translatable',
   ], 'wri_trending_topics');
 }

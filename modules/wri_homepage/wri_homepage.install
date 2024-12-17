@@ -43,22 +43,22 @@ function wri_homepage_update_10001() {
  * Translatable field update.
  */
 function wri_homepage_update_10301() {
-\Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.featured_statement.field_updated', [
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.featured_statement.field_updated', [
     'translatable',
   ], 'wri_homepage');
-\Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.homepage_hero.field_featured_items', [
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.homepage_hero.field_featured_items', [
     'translatable',
   ], 'wri_homepage');
-\Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.homepage_hero.field_featured_statement', [
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.homepage_hero.field_featured_statement', [
     'translatable',
   ], 'wri_homepage');
-\Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.homepage_hero.field_hero_image', [
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.homepage_hero.field_hero_image', [
     'translatable',
   ], 'wri_homepage');
-\Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.homepage_hero.field_hero_intro', [
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.homepage_hero.field_hero_intro', [
     'translatable',
   ], 'wri_homepage');
-\Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.homepage_hero.field_hero_title', [
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.homepage_hero.field_hero_title', [
     'translatable',
   ], 'wri_homepage');
 }
