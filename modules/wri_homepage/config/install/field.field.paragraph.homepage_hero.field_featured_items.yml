@@ -3,7 +3,6 @@ dependencies:
   config:
     - field.storage.paragraph.field_featured_items
     - node.type.article
-    - node.type.page
     - node.type.publication
     - paragraphs.paragraphs_type.homepage_hero
 id: paragraph.homepage_hero.field_featured_items
@@ -21,7 +20,6 @@ settings:
   handler_settings:
     target_bundles:
       article: article
-      page: page
       publication: publication
     sort:
       field: _none
