@@ -147,6 +147,7 @@ class RegionMapBlock extends BlockBase implements ContainerFactoryPluginInterfac
 
     $attributes = new Attribute();
     $attributes->addClass('wri-region-map');
+    $attributes->addClass('hidden');
     $attributes->addClass($map_style);
 
     $build['#attributes']['class'][] = $map_style;

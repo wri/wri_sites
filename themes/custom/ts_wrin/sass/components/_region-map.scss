@@ -16,6 +16,12 @@
     /* line text up with border. */
     margin-top: -0.5rem;
 
+    &.margin-bottom-md {
+      @media (max-width: rem(767)) {
+        margin-bottom: 0;
+      }
+    }
+
     @include mq($ph) {
       @include center-columns($grid-columns, $grid-columns);
     }
@@ -46,11 +52,28 @@
   }
 }
 
+.interactive-map {
+  width: 100%;
+  height: auto;
+  background-color: $white;
+  text-align: center;
+  aspect-ratio: 923.2/448;
+}
+.has-light-gray-background-color .interactive-map {
+  background-color: $light-grey;
+}
+
 .wri-region-map {
   @include center-columns($grid-columns-mobile, $grid-columns-mobile);
 
   @include mq($ph) {
     @include center-columns($grid-columns, $grid-columns);
+  }
+
+  @include mq($md) {
+    &.hidden {
+      display: block;
+    }
   }
 
   svg > g.region,
