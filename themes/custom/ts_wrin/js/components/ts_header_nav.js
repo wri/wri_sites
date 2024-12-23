@@ -184,7 +184,9 @@ export default function(context) {
         const mobileStickyParent = document.querySelector(
           ".page-node-type-simple-page .simple-page__title, .experts-staff-header .right"
         );
-        mobileStickyParent.classList.remove("sticky");
+        if (mobileStickyParent) {
+          mobileStickyParent.classList.remove("sticky");
+        }
       } else {
         window.addEventListener("scroll", stickyScrollMobile);
       }
