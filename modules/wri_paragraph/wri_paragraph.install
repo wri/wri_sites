@@ -8,7 +8,7 @@
 /**
  * Language handling updates for paragraphs.
  */
-function wri_paragraph_update_10304() {
+function wri_paragraph_update_10301() {
   if (\Drupal::moduleHandler()->moduleExists('content_translation')) {
     \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.featured_statement', 'wri_paragraph', 'optional');
     \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.happening_now', 'wri_paragraph', 'optional');
