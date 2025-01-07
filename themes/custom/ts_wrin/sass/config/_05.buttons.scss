@@ -299,3 +299,8 @@ input[type="submit"].search-icon {
     }
   }
 }
+
+/* We leave it to individual sections of the site to show or hide this svg. */
+svg.offsite-link {
+  display: none;
+}
