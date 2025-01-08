@@ -190,7 +190,8 @@ function ts_wrin_preprocess_field(array &$variables) {
       $variables["show_more_link"] = $object->field_show_more_link->value;
     }
   }
-  // For Brasil, append a suffix to the date time field, but only if there's a date showing.
+  // For Brasil, append a suffix to the date time field, but only if there's a
+  // date showing.
   if ($variables['field_name'] == 'field_date_time' && isset($variables["ds-config"]["settings"]["suffix"])) {
     if ( isset($variables["items"][0]["content"]["end"]["#text"]["time"]["value"]["#markup"])) {
       $variables["items"][0]["content"]["end"]["#text"]["time"]["value"]["#markup"] = $variables["items"][0]["content"]["end"]["#text"]["time"]["value"]["#markup"] . ' ' . $variables["ds-config"]["settings"]["suffix"];
