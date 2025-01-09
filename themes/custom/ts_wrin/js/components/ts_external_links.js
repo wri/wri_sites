@@ -22,8 +22,6 @@ export default function(context) {
       // If this is a button add class to indicate that it is offsite.
       if ($this.hasClass("button")) {
         $this.addClass("offsite");
-      } else {
-        $this.append(svgIcon);
       }
     }
   });
