@@ -28,7 +28,16 @@ function wri_narrative_preprocess_wri_narrative_tax(&$context) {
     // from landing page node.
     if ($current_filter) {
       $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($current_filter);
-      $landing_narrative_tax = $term->get('field_landing_page')->entity->get('field_narrative_taxonomy')->view(['label' => 'hidden']);
+      $landing_narrative_tax = NULL;
+
+      if ($term->hasField('field_landing_page') && !$term->get('field_landing_page')->isEmpty()) {
+        $landing_page_entity = $term->get('field_landing_page')->entity;
+
+        if ($landing_page_entity && $landing_page_entity->hasField('field_narrative_taxonomy') && !$landing_page_entity->get('field_narrative_taxonomy')->isEmpty()) {
+          $landing_narrative_tax = $landing_page_entity->get('field_narrative_taxonomy')->view(['label' => 'hidden']);
+        }
+      }
+
       $context["content"]["phrase"] = $landing_narrative_tax;
     }
   }
