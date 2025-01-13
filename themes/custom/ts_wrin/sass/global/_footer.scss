@@ -314,7 +314,7 @@
     }
   }
 
-  $social-icons: facebook twitter linkedin youtube instagram wechat weibo;
+  $social-icons: facebook twitter linkedin youtube instagram wechat weibo bluesky threads;
   @each $icon in $social-icons {
     a.#{$icon} {
       background: transparent
