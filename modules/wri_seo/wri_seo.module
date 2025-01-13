@@ -4,7 +4,6 @@
  * @file
  * WRI SEO related hooks.
  */
-use Drupal\Core\Asset\AttachedAssetsInterface;
 
 /**
  * Implements hook_page_attachments().
@@ -61,23 +60,23 @@ function wri_seo_page_attachments(array &$attachments) {
             $source = $media->get('field_media_embed_code')->value;
 
             if (strpos($source, 'flourish-embed') !== FALSE) {
-              // $attachments['#attached']['library'][] = 'wri_seo/flourish_analytics';
               $module_path = \Drupal::service('extension.path.resolver')->getPath('module', 'wri_seo');
 
-                // Add custom Flourish analytics script inline.
-                $script_path = $module_path . '/js/flourish_analytics.js';
-                if (file_exists($script_path)) {
-                  $attachments['#attached']['html_head'][] = [
-                    [
-                      '#tag' => 'script',
-                      '#attributes' => ['type' => 'text/javascript'],
-                      '#value' => file_get_contents($script_path),
-                    ],
-                    'flourish_analytics',
-                  ];
-                } else {
-                  \Drupal::logger('wri_seo')->warning('Flourish analytics script not found at @path', ['@path' => $script_path]);
-                }
+              // Add custom Flourish analytics script inline.
+              $script_path = $module_path . '/js/flourish_analytics.js';
+              if (file_exists($script_path)) {
+                $attachments['#attached']['html_head'][] = [
+                  [
+                    '#tag' => 'script',
+                    '#attributes' => ['type' => 'text/javascript'],
+                    '#value' => file_get_contents($script_path),
+                  ],
+                  'flourish_analytics',
+                ];
+              }
+              else {
+                \Drupal::logger('wri_seo')->warning('Flourish analytics script not found at @path', ['@path' => $script_path]);
+              }
               break;
             }
           }
