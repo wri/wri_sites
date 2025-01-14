@@ -5,7 +5,3 @@ wri-seo:
   dependencies:
     - jquery_once/jquery
     - core/drupalSettings
-flourish_analytics:
-  version: 1.x
-  js:
-    flourish_analytics.js: { type: file, scope: header, weight: 0 }

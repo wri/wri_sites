@@ -8,3 +8,7 @@ browser.styling:
   dependencies:
     - core/backbone
     - core/jquery
+flourish_analytics:
+  version: 1.x
+  js:
+    flourish_analytics.js: { type: file, scope: header, weight: 0 }
