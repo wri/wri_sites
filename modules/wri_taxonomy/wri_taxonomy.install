@@ -9,6 +9,7 @@ use Drupal\Core\Config\FileStorage;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\taxonomy\Entity\Vocabulary;
 
 /**
  * Implements hook_install().
@@ -61,4 +62,64 @@ function wri_taxonomy_update_9502() {
   if (!FieldConfig::loadByName($config_record['entity_type'], $config_record['bundle'], $config_record['field_name'])) {
     FieldConfig::create($config_record)->save();
   }
+}
+
+/**
+ * Add "Social Media sites" vocabulary, icon field, and display configs.
+ */
+function wri_taxonomy_update_10401() {
+  $vid = 'social_media_sites';
+  $module_path = \Drupal::service('extension.list.module')->getPath('wri_taxonomy');
+  $storage = new FileStorage($module_path . '/config/install');
+
+  if (!Vocabulary::load($vid)) {
+    $vocab_config_name = 'taxonomy.vocabulary.' . $vid;
+    $vocab_data = $storage->read($vocab_config_name);
+    if ($vocab_data) {
+      $vocabulary = Vocabulary::create($vocab_data);
+      $vocabulary->save();
+    }
+  }
+
+  // Field storage.
+  if (!FieldStorageConfig::load('taxonomy_term.field_icon')) {
+    $field_storage_config = $storage->read('field.storage.taxonomy_term.field_icon');
+    if ($field_storage_config) {
+      FieldStorageConfig::create($field_storage_config)->save();
+      \Drupal::messenger()->addStatus(t('Created field storage for field_icon.'));
+    }
+  }
+
+  // Field instance (field config) on the "social_media_sites" bundle.
+  if (!FieldConfig::load('taxonomy_term.' . $vid . '.field_icon')) {
+    $field_config = $storage->read('field.field.taxonomy_term.' . $vid . '.field_icon');
+    if ($field_config) {
+      FieldConfig::create($field_config)->save();
+      \Drupal::messenger()->addStatus(t('Created field instance for field_icon on the Social Media sites vocabulary.'));
+    }
+  }
+
+  // Import the entity form display configuration.
+  $form_display_name = 'core.entity_form_display.taxonomy_term.' . $vid . '.default';
+  $form_display_data = $storage->read($form_display_name);
+  if ($form_display_data) {
+    \Drupal::configFactory()->getEditable($form_display_name)
+      ->setData($form_display_data)
+      ->save();
+    \Drupal::messenger()->addStatus(t('Imported the form display configuration.'));
+  }
+
+  // Import the entity view display configuration.
+  $view_display_name = 'core.entity_view_display.taxonomy_term.' . $vid . '.default';
+  $view_display_data = $storage->read($view_display_name);
+  if ($view_display_data) {
+    \Drupal::configFactory()->getEditable($view_display_name)
+      ->setData($view_display_data)
+      ->save();
+    \Drupal::messenger()->addStatus(t('Imported the view display configuration.'));
+  }
+
+  // Cleanup.
+  \Drupal::service('cache.bootstrap')->invalidateAll();
+  \Drupal::service('cache.config')->invalidateAll();
 }
