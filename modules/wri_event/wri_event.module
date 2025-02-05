@@ -7,6 +7,8 @@
 
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\views\ViewExecutable;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
 
 /**
  * Implements hook_views_query_alter().
@@ -19,3 +21,24 @@ function wri_event_views_query_alter(ViewExecutable $view, QueryPluginBase $quer
     $sort['field_date_time'] = 'DESC';
   }
 }
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function wri_event_entity_base_field_info(EntityTypeInterface $entity_type) {
+  $fields = [];
+  if ($entity_type->id() === 'node') {
+    // Add a field that shows the parent of the term, or itself if no parent.
+    $fields['addtocal'] = BaseFieldDefinition::create('addtocal')
+      ->setName('addtocal')
+      ->setLabel(t('Calendar item'))
+      ->setSetting('target_type', 'node')
+      ->setComputed(TRUE)
+      ->setClass('\Drupal\wri_search\WriCalculatedTexts')
+      ->setDisplayConfigurable('view', TRUE)
+      ->setCardinality(1);
+
+    return $fields;
+  }
+}
+
