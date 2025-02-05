@@ -30,7 +30,7 @@ final class WriEventAddToCalFormatter extends AddtocalView {
     ];
     $timezone_override = $this->getSetting('timezone_override') ?: NULL;
     $element = [];
-    foreach ($items as $delta => $item) {
+    foreach ($items as $item) {
       $info = [];
 
       $start = '';
