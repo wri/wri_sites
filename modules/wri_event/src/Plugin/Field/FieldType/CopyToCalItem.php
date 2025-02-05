@@ -14,6 +14,7 @@ use Drupal\smart_date\Plugin\Field\FieldType\SmartDateItem;
  *   label = @Translation("Add To Calendar button"),
  *   description = @Translation("Copies the value in the Date field."),
  *   default_formatter = "wri_event_wri_event_add_to_cal",
+ *   no_ui = TRUE,
  * )
  */
 final class CopyToCalItem extends SmartDateItem {
