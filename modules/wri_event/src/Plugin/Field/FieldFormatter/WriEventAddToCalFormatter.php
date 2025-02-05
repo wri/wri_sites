@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\wri_event\Plugin\Field\FieldFormatter;
 
+use Drupal\addtocal\Plugin\Field\FieldFormatter\AddtocalView;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Field\FieldItemListInterface;
 
@@ -16,7 +17,11 @@ use Drupal\Core\Field\FieldItemListInterface;
  *   field_types = {"addtocal"},
  * )
  */
-final class WriEventAddToCalFormatter extends \Drupal\addtocal\Plugin\Field\FieldFormatter\AddtocalView {
+final class WriEventAddToCalFormatter extends AddtocalView {
+
+  /**
+   * {@inheritdoc}
+   */
   public function viewElements(FieldItemListInterface $items, $langcode) {
     $entity = $items->getEntity();
     $field = $this->fieldDefinition;
@@ -68,4 +73,5 @@ final class WriEventAddToCalFormatter extends \Drupal\addtocal\Plugin\Field\Fiel
 
     return $element;
   }
+
 }

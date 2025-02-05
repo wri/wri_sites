@@ -1,7 +1,0 @@
-field.value.wri_event_copy_to_cal:
-  type: mapping
-  label: Default value
-  mapping:
-    value:
-      type: label
-      label: Value

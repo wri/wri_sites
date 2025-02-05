@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\wri_event\Plugin\Field\FieldType;
 
+use Drupal\smart_date\Plugin\Field\FieldType\SmartDateItem;
 
 /**
  * Defines the 'wri_event_copy_to_cal' field type.
@@ -15,7 +16,7 @@ namespace Drupal\wri_event\Plugin\Field\FieldType;
  *   default_formatter = "wri_event_wri_event_add_to_cal",
  * )
  */
-final class CopyToCalItem extends \Drupal\smart_date\Plugin\Field\FieldType\SmartDateItem {
+final class CopyToCalItem extends SmartDateItem {
 
   /**
    * Whether the value has been calculated.
@@ -47,7 +48,6 @@ final class CopyToCalItem extends \Drupal\smart_date\Plugin\Field\FieldType\Smar
     $this->ensureCalculated();
     return parent::getValue();
   }
-
 
   /**
    * Calculates the value of the field and sets it.

@@ -41,4 +41,3 @@ function wri_event_entity_base_field_info(EntityTypeInterface $entity_type) {
     return $fields;
   }
 }
-
