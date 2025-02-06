@@ -533,3 +533,36 @@ function ts_wrin_preprocess_image(&$variables) {
     $variables["attributes"]["loading"] = 'eager';
   }
 }
+
+function ts_wrin_preprocess_responsive_image(&$variables) {
+  $webp_sources = [];
+ foreach($variables["sources"] as $source) {
+   $storage = $source->storage();
+   if (isset($storage['srcset']) && strpos($storage['srcset']->value(), ".webp") !== false) {
+     $image_source = $storage['srcset']->value();
+     // Strip any parameters off the image source.
+     $image_source = explode("?", $image_source)[0];
+
+     // See if the image exists.
+     $client = \Drupal::httpClient();
+     try {
+       $request = $client->get($image_source, []);
+     }
+     catch (\Exception $e) {
+       // Get the image uri from its source.
+       $files = \Drupal::entityTypeManager()->getStorage('file')->loadByProperties(['uri' => $variables['uri']]);
+       $webp = FALSE;
+       // Possibly what I want to do here is \Drupal\webp\Controller\ImageStyleDownloadController::deliver.
+//       if ($files) {
+//         $file = current($files);
+//         $image_uri = $file ? $file->getFileUri() : NULL;
+//         $webp = \Drupal::service('webp.webp')->createWebpCopy($image_uri);
+//       }
+        if (!$webp) {
+          // If the image doesn't exist, remove the source.
+          unset($source);
+        }
+     }
+   }
+ }
+}
