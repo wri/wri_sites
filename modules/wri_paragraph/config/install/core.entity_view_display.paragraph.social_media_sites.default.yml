@@ -1,0 +1,53 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.social_media_sites.field_links
+    - field.field.paragraph.social_media_sites.field_site
+    - field.field.paragraph.social_media_sites.field_text
+    - paragraphs.paragraphs_type.social_media_sites
+  module:
+    - ds
+    - link
+id: paragraph.social_media_sites.default
+targetEntityType: paragraph
+bundle: social_media_sites
+mode: default
+content:
+  field_links:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_site:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_text:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    weight: 2
+    region: content
+hidden:
+  search_api_excerpt: true

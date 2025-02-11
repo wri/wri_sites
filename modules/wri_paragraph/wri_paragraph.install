@@ -22,3 +22,22 @@ function wri_paragraph_update_10301() {
     \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.paragraph.statistics', 'wri_paragraph', 'optional');
   }
 }
+
+/**
+ * Add the Social Media Sites paragraph.
+ */
+function wri_paragraph_update_10402() {
+
+  // Add the new paragraph configs.
+  \Drupal::service('distro_helper.updates')->installConfig('paragraphs.paragraphs_type.social_media_sites', 'wri_paragraph');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.paragraph.social_media_sites.field_links', 'wri_paragraph');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.paragraph.field_site', 'wri_paragraph');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.paragraph.social_media_sites.field_site', 'wri_paragraph');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.paragraph.social_media_sites.field_text', 'wri_paragraph');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.paragraph.social_media_sites.default', 'wri_paragraph');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.paragraph.social_media_sites.default', 'wri_paragraph');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.paragraph.social_media_sites.preview', 'wri_paragraph');
+
+  $message = 'Social Media Sites paragraph.';
+  return $message;
+}
