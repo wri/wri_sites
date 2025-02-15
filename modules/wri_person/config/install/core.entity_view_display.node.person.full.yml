@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.person.field_last_name
     - field.field.node.person.field_leadership
     - field.field.node.person.field_metatags
+    - field.field.node.person.field_paragraphs
     - field.field.node.person.field_phone
     - field.field.node.person.field_profile_image
     - field.field.node.person.field_project_expert
@@ -51,7 +52,7 @@ third_party_settings:
           label: ''
           context_mapping: {  }
         components:
-          a8cde8f7-da41-4bf2-94f8-182f39e00323:
+          -
             uuid: a8cde8f7-da41-4bf2-94f8-182f39e00323
             region: content
             configuration:
@@ -64,7 +65,7 @@ third_party_settings:
                 entity: layout_builder.entity
             weight: -9
             additional: {  }
-          33996bab-91a7-4f7b-9306-7e7072739617:
+          -
             uuid: 33996bab-91a7-4f7b-9306-7e7072739617
             region: content
             configuration:
@@ -74,7 +75,7 @@ third_party_settings:
                 entity: layout_builder.entity
             weight: -10
             additional: {  }
-          289716b1-599c-4414-854b-f44fa4531bb7:
+          -
             uuid: 289716b1-599c-4414-854b-f44fa4531bb7
             region: content
             configuration:
@@ -87,7 +88,7 @@ third_party_settings:
               items_per_page: '8'
             weight: -6
             additional: {  }
-          38c00e82-d1b6-4c8f-9e37-321abfd1c683:
+          -
             uuid: 38c00e82-d1b6-4c8f-9e37-321abfd1c683
             region: content
             configuration:
@@ -100,7 +101,7 @@ third_party_settings:
               items_per_page: '8'
             weight: -7
             additional: {  }
-          c50a0ee7-957f-448d-903a-2fc0ccbbfcde:
+          -
             uuid: c50a0ee7-957f-448d-903a-2fc0ccbbfcde
             region: content
             configuration:
@@ -112,7 +113,7 @@ third_party_settings:
                 node: layout_builder.entity
             weight: 1
             additional: {  }
-          874cd517-3926-49a5-afa3-96c3ec904689:
+          -
             uuid: 874cd517-3926-49a5-afa3-96c3ec904689
             region: content
             configuration:
@@ -154,8 +155,6 @@ third_party_settings:
         User: {  }
         'WRI block': {  }
         core: {  }
-_core:
-  default_config_hash: 23OctIldHyWmhULHlurk9QoSxa3VX7umAW_uZPNKc6E
 id: node.person.full
 targetEntityType: node
 bundle: person
@@ -197,6 +196,7 @@ hidden:
   field_last_name: true
   field_leadership: true
   field_metatags: true
+  field_paragraphs: true
   field_phone: true
   field_project_expert: true
   field_quote: true

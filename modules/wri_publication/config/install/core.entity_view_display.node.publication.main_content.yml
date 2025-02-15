@@ -19,6 +19,7 @@ dependencies:
     - field.field.node.publication.field_main_image
     - field.field.node.publication.field_metatag
     - field.field.node.publication.field_narrative_taxonomy
+    - field.field.node.publication.field_paragraphs
     - field.field.node.publication.field_platform_link
     - field.field.node.publication.field_primary_contacts
     - field.field.node.publication.field_primary_topic
@@ -538,6 +539,7 @@ hidden:
   field_featured_headline: true
   field_featured_text: true
   field_metatag: true
+  field_paragraphs: true
   field_projects: true
   field_publication_display: true
   field_publication_series: true

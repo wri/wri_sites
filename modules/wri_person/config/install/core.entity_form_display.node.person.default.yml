@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.person.field_last_name
     - field.field.node.person.field_leadership
     - field.field.node.person.field_metatags
+    - field.field.node.person.field_paragraphs
     - field.field.node.person.field_phone
     - field.field.node.person.field_profile_image
     - field.field.node.person.field_project_expert
@@ -235,6 +236,16 @@ content:
     settings:
       sidebar: true
       use_details: true
+    third_party_settings: {  }
+  field_paragraphs:
+    type: entity_reference_revisions_autocomplete
+    weight: 129
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_phone:
     type: telephone_default

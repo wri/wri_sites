@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.program_center.field_main_image
     - field.field.node.program_center.field_metatag
     - field.field.node.program_center.field_narrative_taxonomy
+    - field.field.node.program_center.field_paragraphs
     - field.field.node.program_center.field_primary_contacts
     - field.field.node.program_center.field_primary_topic
     - field.field.node.program_center.field_show_more_link
@@ -69,7 +70,7 @@ third_party_settings:
       label: More
       region: content
       parent_name: ''
-      weight: 20
+      weight: 16
       format_type: tabs
       format_settings:
         classes: ''
@@ -96,7 +97,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 7
+    weight: 13
     region: content
     settings:
       rows: 9
@@ -106,7 +107,7 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 4
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -132,7 +133,7 @@ content:
     third_party_settings: {  }
   field_intro:
     type: text_textarea
-    weight: 3
+    weight: 5
     region: content
     settings:
       rows: 5
@@ -143,7 +144,7 @@ content:
         hide_guidelines: '1'
   field_intro_paragraphs:
     type: paragraphs
-    weight: 6
+    weight: 11
     region: content
     settings:
       title: Paragraph
@@ -162,7 +163,7 @@ content:
     third_party_settings: {  }
   field_long_title:
     type: text_textarea
-    weight: 2
+    weight: 3
     region: content
     settings:
       rows: 5
@@ -182,7 +183,7 @@ content:
         show_edit: '1'
   field_metatag:
     type: metatag_firehose
-    weight: 105
+    weight: 20
     region: content
     settings:
       sidebar: true
@@ -196,6 +197,26 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
+  field_paragraphs:
+    type: paragraphs
+    weight: 8
+    region: content
+    settings:
+      title: 'Social Link'
+      title_plural: 'Social Links'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: social_media_sites
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        convert: '0'
+        duplicate: duplicate
+    third_party_settings: {  }
   field_primary_contacts:
     type: entity_reference_autocomplete
     weight: 15
@@ -208,7 +229,7 @@ content:
     third_party_settings: {  }
   field_primary_topic:
     type: entity_reference_autocomplete
-    weight: 104
+    weight: 19
     region: content
     settings:
       match_operator: CONTAINS
@@ -225,7 +246,7 @@ content:
     third_party_settings: {  }
   field_twitter_account:
     type: link_default
-    weight: 4
+    weight: 7
     region: content
     settings:
       placeholder_url: ''
@@ -233,7 +254,7 @@ content:
     third_party_settings: {  }
   field_type:
     type: options_select
-    weight: 103
+    weight: 18
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -246,33 +267,33 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 100
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 7
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
-    type: boolean_checkbox
-    weight: 5
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  status:
     type: boolean_checkbox
     weight: 9
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 15
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 6
+    weight: 10
     region: content
     settings:
       display_label: true
@@ -287,7 +308,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 3
+    weight: 4
     region: content
     settings:
       match_operator: CONTAINS
@@ -296,7 +317,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 8
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
