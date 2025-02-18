@@ -32,8 +32,8 @@ dependencies:
     - node.type.person
   module:
     - ds
+    - entity_reference_revisions
     - layout_builder
-    - link
     - media
     - telephone
     - text
@@ -59,8 +59,8 @@ third_party_settings:
         - field_title
         - field_first_name
       buttons:
+        - field_paragraphs
         - field_international_office
-        - field_twitter_account
       featured_image:
         - field_profile_image
       quote:
@@ -328,6 +328,15 @@ content:
             suffix: ''
     weight: 0
     region: hero
+  field_paragraphs:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: buttons
   field_phone:
     type: telephone_link
     label: inline
@@ -461,46 +470,6 @@ content:
             suffix: ''
     weight: 13
     region: sidebar
-  field_twitter_account:
-    type: link
-    label: hidden
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: '0'
-      target: '0'
-    third_party_settings:
-      ds:
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: false
-            lbw-el: ''
-            lbw-cl: ''
-            lbw-at: ''
-            lb-col: false
-            ow: false
-            ow-el: ''
-            ow-cl: ''
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fis-def-at: false
-            fi: true
-            fi-el: span
-            fi-cl: twitter
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
-    weight: 5
-    region: buttons
 hidden:
   content_moderation_control: true
   field_alt_first_names: true
@@ -508,9 +477,9 @@ hidden:
   field_department: true
   field_last_name: true
   field_metatags: true
-  field_paragraphs: true
   field_project_expert: true
   field_staff_group: true
+  field_twitter_account: true
   field_type: true
   field_weight: true
   langcode: true

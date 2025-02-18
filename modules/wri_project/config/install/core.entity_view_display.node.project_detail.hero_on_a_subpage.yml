@@ -31,9 +31,9 @@ dependencies:
   module:
     - ds
     - element_class_formatter
+    - entity_reference_revisions
     - hierarchical_term_formatter
     - layout_builder
-    - link
     - text
     - user
     - wri_toc
@@ -48,7 +48,7 @@ third_party_settings:
       disable_css: false
       entity_classes: all_classes
       settings:
-        component_context: {  }
+        label: ''
     regions:
       hero:
         - childimg
@@ -59,8 +59,8 @@ third_party_settings:
         - field_primary_topic
         - field_region
       share:
-        - field_twitter_account
         - wri_social_sharing_block
+        - field_paragraphs
       sidebar:
         - field_narrative_taxonomy
     fields:
@@ -125,8 +125,17 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 9
+    weight: 8
     region: sidebar
+  field_paragraphs:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 7
+    region: share
   field_primary_topic:
     type: entity_reference_label_class
     label: inline
@@ -163,7 +172,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 5
+    weight: 4
     region: category
   field_region:
     type: hierarchical_term_formatter
@@ -204,38 +213,22 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 6
+    weight: 5
     region: category
   field_toc:
     type: 'single_file_component_field_formatter:toc_formatter'
     label: hidden
     settings:
-      component_context: {  }
+      menu: page-hierarchies
+      color_class: black-bar
     third_party_settings: {  }
-    weight: 4
+    weight: 3
     region: hero
-  field_twitter_account:
-    type: link_separate
-    label: hidden
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: '0'
-      target: '0'
-    third_party_settings:
-      ds:
-        ft:
-          id: reset
-          settings:
-            lb: ''
-    weight: 7
-    region: share
   wri_social_sharing_block:
     settings: {  }
     third_party_settings: {  }
-    weight: 8
-    region: share
+    weight: 6
+    region: hero
 hidden:
   body: true
   content_moderation_control: true
@@ -249,12 +242,12 @@ hidden:
   field_main_image: true
   field_metatags: true
   field_other_link: true
-  field_paragraphs: true
   field_platform_link: true
   field_primary_contacts: true
   field_project_partners: true
   field_show_more_link: true
   field_tags: true
+  field_twitter_account: true
   field_type: true
   langcode: true
   layout_builder__layout: true
