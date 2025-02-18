@@ -50,6 +50,9 @@ function wri_publication_update_dependencies() {
   $dependencies['wri_publication'][10401] = [
     'wri_node' => 10401,
   ];
+  $dependencies['wri_publication'][10402] = [
+    'wri_publication' => 10401,
+  ];
 
   return $dependencies;
 }
@@ -89,3 +92,15 @@ function wri_publication_update_10401() {
   $message = 'Add field Paragraphs and update view modes.';
   return $message;
 }
+
+/**
+ * Update publication form display.
+ */
+function wri_publication_update_10402() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.publication.default', [
+    'content'], 'wri_publication');
+
+  $message = 'Update publication form display configs';
+  return $message;
+}
+
