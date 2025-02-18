@@ -26,7 +26,7 @@ function wri_paragraph_update_10301() {
 /**
  * Add the Social Media Sites paragraph.
  */
-function wri_paragraph_update_10402() {
+function wri_paragraph_update_10401() {
 
   // Add the new paragraph configs.
   \Drupal::service('distro_helper.updates')->installConfig('paragraphs.paragraphs_type.social_media_sites', 'wri_paragraph');
@@ -40,4 +40,14 @@ function wri_paragraph_update_10402() {
 
   $message = 'Social Media Sites paragraph.';
   return $message;
+}
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_paragraph_update_dependencies() {
+  $dependencies['wri_paragraph'][10401] = [
+    'wri_taxonomy' => 10401,
+  ];
+  return $dependencies;
 }

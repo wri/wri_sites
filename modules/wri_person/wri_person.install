@@ -68,6 +68,9 @@ function wri_person_update_dependencies() {
   $dependencies['wri_person'][9301] = [
     'wri_sites' => 8908,
   ];
+  $dependencies['wri_person'][10401] = [
+    'wri_node' => 10401,
+  ];
 
   return $dependencies;
 }
@@ -122,4 +125,23 @@ function wri_person_update_10301() {
   \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.person_listing.field_block', [
     'translatable',
   ], 'wri_person');
+}
+
+/**
+ * Add field_paragraphs and update all view modes.
+ */
+function wri_person_update_10401() {
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.person.field_paragraphs', 'wri_person');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.node.person.default', 'wri_person');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.person.default', 'wri_person');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.person.full', 'wri_person');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.person.impact', 'wri_person');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.person.main_content', 'wri_person');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.person.person_author_listing', 'wri_person');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.person.search_results', 'wri_person');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.person.small_image_teaser', 'wri_person');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.person.teaser', 'wri_person');
+
+  $message = 'Add field Paragraph and update view modes.';
+  return $message;
 }

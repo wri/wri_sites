@@ -146,3 +146,24 @@ function wri_node_update_10002() {
     $field->save();
   }
 }
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_node_update_dependencies() {
+  $dependencies['wri_node'][10401] = [
+    'wri_paragraph' => 10401,
+  ];
+  return $dependencies;
+}
+
+/**
+ * Add field_paragraphs.
+ */
+function wri_node_update_10401() {
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_paragraphs', 'wri_node');
+
+  $message = 'Add field Paragraphs.';
+  return $message;
+}
+

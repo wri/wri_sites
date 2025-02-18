@@ -38,6 +38,29 @@ function wri_program_update_dependencies() {
     'wri_sites' => 8908,
     'wri_io_content' => 9301,
   ];
+  $dependencies['wri_program'][10401] = [
+    'wri_node' => 10401,
+  ];
+
 
   return $dependencies;
+}
+
+/**
+ * Add field_paragraphs and update all view modes.
+ */
+function wri_program_update_10401() {
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.program_center.field_paragraphs', 'wri_program');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.node.program_center.default', 'wri_program');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.card', 'wri_program');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.default', 'wri_program');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.full', 'wri_program');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.impact', 'wri_program');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.main_content', 'wri_program');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.search_results', 'wri_program');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.teaser', 'wri_program');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.tile', 'wri_program');
+
+  $message = 'Add field Paragraph and update view modes.';
+  return $message;
 }
