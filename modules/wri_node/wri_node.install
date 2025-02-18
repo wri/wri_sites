@@ -5,6 +5,9 @@
  * Wri Node module code.
  */
 
+use Drupal\node\Entity\Node;
+use Drupal\paragraphs\Entity\Paragraph;
+
 /**
  * Add the node settings values.
  */
@@ -154,6 +157,11 @@ function wri_node_update_dependencies() {
   $dependencies['wri_node'][10401] = [
     'wri_paragraph' => 10401,
   ];
+  $dependencies['wri_node'][10402] = [
+    'wri_person' => 10402,
+    'wri_program' => 10402,
+    'wri_project' => 10402,
+  ];
   return $dependencies;
 }
 
@@ -167,3 +175,98 @@ function wri_node_update_10401() {
   return $message;
 }
 
+/**
+ * Migrate field_twitter_account values into a social_media_sites paragraph.
+ */
+function wri_node_update_10402() {
+  // Define the content types to process.
+  $content_types = ['program_center', 'microsite', 'person', 'project_detail'];
+
+  // Query for nodes with a non-empty field_twitter_account.
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type', $content_types, 'IN')
+    ->exists('field_twitter_account');
+  $nids = $query->execute();
+
+  // Load the taxonomy term for Twitter from the Social Media sites vocabulary.
+  $twitter_terms = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term')
+    ->loadByProperties([
+      'vid' => 'social_media_sites',
+      'name' => 'Twitter',
+    ]);
+  $twitter_term = $twitter_terms ? reset($twitter_terms) : NULL;
+
+  $nodes = Node::loadMultiple($nids);
+  $migrated_nids = [];
+
+  foreach ($nodes as $node) {
+    if ($node->hasField('field_twitter_account') && !$node->get('field_twitter_account')->isEmpty()) {
+      // Check if the node already has a Twitter paragraph.
+      $hasTwitterParagraph = FALSE;
+      if ($node->hasField('field_paragraphs') && !$node->get('field_paragraphs')->isEmpty()) {
+        foreach ($node->get('field_paragraphs') as $item) {
+          $paragraph = $item->entity;
+          if ($paragraph && $paragraph->bundle() == 'social_media_sites') {
+            $siteField = $paragraph->get('field_site')->getValue();
+            if (!empty($siteField) && $siteField[0]['target_id'] == $twitter_term->id()) {
+              $hasTwitterParagraph = TRUE;
+              break;
+            }
+          }
+        }
+      }
+      if ($hasTwitterParagraph) {
+        \Drupal::messenger()->addStatus(t('Node @nid already has a Twitter paragraph; skipping migration.', ['@nid' => $node->id()]));
+        // Clear the old field anyway.
+        $node->set('field_twitter_account', NULL);
+        $node->save();
+        continue;
+      }
+
+      // Process the migration if no Twitter paragraph exists.
+      $link_item = $node->get('field_twitter_account')->first();
+      if ($link_item) {
+        $uri = $link_item->uri;
+        $handle = $link_item->title;
+
+        // Create a new paragraph of type social_media_sites.
+        $paragraph = Paragraph::create([
+          'type' => 'social_media_sites',
+          // Set all field values before saving.
+          'field_text' => $handle,
+          'field_links' => [
+            'uri' => $uri,
+            'title' => $handle,
+          ],
+          'field_site' => [
+            ['target_id' => $twitter_term->id()],
+          ],
+        ]);
+        $paragraph->save();
+
+        // Attach the paragraph to the node's field_paragraphs field.
+        if ($node->hasField('field_paragraphs')) {
+          $node->get('field_paragraphs')->appendItem([
+            'target_id' => $paragraph->id(),
+            'target_revision_id' => $paragraph->getRevisionId(),
+          ]);
+          // Optionally, clear the old field_twitter_account.
+          $node->set('field_twitter_account', NULL);
+          $node->save();
+          $migrated_nids[] = $node->id();
+        }
+      }
+    }
+  }
+
+  if (!empty($migrated_nids)) {
+    $message = t('Migrated Twitter account values for node IDs: @nids', ['@nids' => implode(', ', $migrated_nids)]);
+    \Drupal::messenger()->addStatus($message);
+  }
+  else {
+    \Drupal::messenger()->addStatus(t('No nodes were migrated.'));
+  }
+  return t('Migrated field_twitter_account values to social_media_sites paragraphs for applicable nodes.');
+}
