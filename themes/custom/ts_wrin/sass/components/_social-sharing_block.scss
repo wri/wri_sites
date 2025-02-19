@@ -106,3 +106,36 @@
     flex-direction: column;
   }
 }
+
+.paragraph--type--social-media-sites {
+  display: inline-block;
+
+  .social-icon-wrapper {
+    display: inline-block;
+    overflow: hidden;
+    max-width: 15px;
+    max-height: 16px;
+    color: black;
+    font-size: 0;
+  }
+  a {
+    @include font($acumin-semi-cond, "bold");
+    @include text-underline(transparent, $black);
+    background-position: left 100%;
+    padding-bottom: 5px;
+  }
+  .twitter:before {
+    content: none;
+  }
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+  svg path {
+    fill: black;
+  }
+}
+
+
+
+
