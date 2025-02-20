@@ -77,7 +77,7 @@ class ParagraphCheckerController extends ControllerBase {
     ];
 
     $rows = [];
-    foreach (['paragraph','block_content'] as $entity_type) {
+    foreach (['node','paragraph','block_content'] as $entity_type) {
 
       // Get all content types.
       $type = $entity_type . '_type';
