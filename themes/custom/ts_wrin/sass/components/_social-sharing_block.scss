@@ -112,17 +112,20 @@
 
   .social-icon-wrapper {
     display: inline-block;
-    overflow: hidden;
     max-width: 15px;
     max-height: 16px;
     color: black;
     font-size: 0;
+    &.instagram {
+      max-width: 18px;
+      max-height: 18px;
+    }
   }
   a {
     @include font($acumin-semi-cond, "bold");
     @include text-underline(transparent, $black);
     background-position: left 100%;
-    padding-bottom: 5px;
+    margin-right: rem(10);
   }
   .twitter:before {
     content: none;
@@ -133,6 +136,24 @@
   }
   svg path {
     fill: black;
+  }
+  .follow-on {
+    @include font($caslon, "italic");
+    @include font-line-height(15, 16);
+    display: inline;
+    margin-bottom: 0;
+    padding-bottom: 1px;
+    position: relative;
+    text-decoration: none;
+    white-space: nowrap;
+
+    @include hocus() {
+      text-decoration: none;
+    }
+    svg {
+      position: relative;
+      bottom: -1px;
+    }
   }
 }
 

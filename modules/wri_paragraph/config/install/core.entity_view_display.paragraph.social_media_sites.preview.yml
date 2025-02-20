@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.paragraph.preview
-    - field.field.paragraph.social_media_sites.field_links
+    - field.field.paragraph.social_media_sites.field_link
     - field.field.paragraph.social_media_sites.field_site
     - field.field.paragraph.social_media_sites.field_text
     - paragraphs.paragraphs_type.social_media_sites
@@ -30,6 +30,6 @@ content:
     weight: 2
     region: content
 hidden:
-  field_links: true
+  field_link: true
   field_site: true
   search_api_excerpt: true

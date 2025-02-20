@@ -67,8 +67,8 @@ third_party_settings:
         - field_primary_topic
         - field_region
       share:
-        - wri_social_sharing_block
         - field_paragraphs
+        - wri_social_sharing_block
       featured_image:
         - field_logo
       main_content:
@@ -211,7 +211,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 10
+    weight: 9
     region: share
   field_platform_link:
     type: link_ally_class
@@ -335,7 +335,7 @@ content:
   wri_social_sharing_block:
     settings: {  }
     third_party_settings: {  }
-    weight: 9
+    weight: 10
     region: share
 hidden:
   content_moderation_control: true

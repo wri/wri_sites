@@ -2,12 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_links
+    - field.storage.paragraph.field_link
     - paragraphs.paragraphs_type.social_media_sites
   module:
     - link
-id: paragraph.social_media_sites.field_links
-field_name: field_links
+id: paragraph.social_media_sites.field_link
+field_name: field_link
 entity_type: paragraph
 bundle: social_media_sites
 label: URL

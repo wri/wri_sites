@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.social_media_sites.field_links
+    - field.field.paragraph.social_media_sites.field_link
     - field.field.paragraph.social_media_sites.field_site
     - field.field.paragraph.social_media_sites.field_text
     - paragraphs.paragraphs_type.social_media_sites
@@ -14,7 +14,7 @@ targetEntityType: paragraph
 bundle: social_media_sites
 mode: default
 content:
-  field_links:
+  field_link:
     type: link
     label: hidden
     settings:

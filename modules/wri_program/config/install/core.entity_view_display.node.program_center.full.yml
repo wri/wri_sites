@@ -40,28 +40,6 @@ third_party_settings:
           context_mapping: {  }
         components:
           -
-            uuid: 7ed8cbf8-c802-44e4-9e4b-3a7d8ad314e7
-            region: content
-            configuration:
-              id: 'field_block:node:program_center:field_twitter_account'
-              label: 'Follow on X'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: link_ally_class
-                label: hidden
-                settings:
-                  class: ''
-                  link_text: 'Follow on '
-                  screenreader_text: 'Follow on X'
-                  tag: ''
-                third_party_settings: {  }
-            weight: 1
-            additional: {  }
-          -
             uuid: 28457f99-400e-4a9a-aa78-31177fe5c60e
             region: content
             configuration:
@@ -75,6 +53,25 @@ third_party_settings:
               block_revision_id: 100070
               block_serialized: null
             weight: 0
+            additional: {  }
+          -
+            uuid: b9b69304-d49e-4486-b722-f072c44b2844
+            region: content
+            configuration:
+              id: 'field_block:node:program_center:field_paragraphs'
+              label: 'Social links'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_revisions_entity_view
+                label: hidden
+                settings:
+                  view_mode: default
+                third_party_settings: {  }
+            weight: 1
             additional: {  }
         third_party_settings: {  }
       -
@@ -186,11 +183,9 @@ third_party_settings:
   layout_builder_restrictions:
     allowed_block_categories:
       - 'Chaos Tools'
-      - Components
       - 'Content fields'
       - 'Custom block types'
       - 'Custom blocks'
-      - Devel
       - Facets
       - 'Facets summary (Experimental)'
       - Forms
@@ -198,8 +193,12 @@ third_party_settings:
       - 'Lists (Views)'
       - Menus
       - System
+      - Twitter
       - User
+      - 'WRI Data Viz'
+      - 'WRI External Publications'
       - 'WRI block'
+      - Webform
       - core
     entity_view_mode_restriction:
       allowed_layouts:
@@ -209,15 +208,13 @@ third_party_settings:
       allowlisted_blocks:
         'Chaos Tools':
           - 'entity_view:node'
-        Components: {  }
         'Content fields':
           - 'field_block:node:program_center:body'
           - 'field_block:node:program_center:field_featured_experts'
           - 'field_block:node:program_center:field_featured_project'
           - 'field_block:node:program_center:field_intro_paragraphs'
           - 'field_block:node:program_center:field_primary_contacts'
-          - 'field_block:node:program_center:field_twitter_account'
-        Devel: {  }
+          - 'field_block:node:program_center:field_paragraphs'
         Facets: {  }
         'Facets summary (Experimental)': {  }
         Forms: {  }
@@ -227,6 +224,11 @@ third_party_settings:
         User: {  }
         'WRI block': {  }
         core: {  }
+      restricted_categories:
+        - Twitter
+        - 'WRI Data Viz'
+        - 'WRI External Publications'
+        - Webform
 id: node.program_center.full
 targetEntityType: node
 bundle: program_center

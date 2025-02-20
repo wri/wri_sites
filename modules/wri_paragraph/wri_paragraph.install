@@ -30,7 +30,7 @@ function wri_paragraph_update_10401() {
 
   // Add the new paragraph configs.
   \Drupal::service('distro_helper.updates')->installConfig('paragraphs.paragraphs_type.social_media_sites', 'wri_paragraph');
-  \Drupal::service('distro_helper.updates')->installConfig('field.field.paragraph.social_media_sites.field_links', 'wri_paragraph');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.paragraph.social_media_sites.field_link', 'wri_paragraph');
   \Drupal::service('distro_helper.updates')->installConfig('field.storage.paragraph.field_site', 'wri_paragraph');
   \Drupal::service('distro_helper.updates')->installConfig('field.field.paragraph.social_media_sites.field_site', 'wri_paragraph');
   \Drupal::service('distro_helper.updates')->installConfig('field.field.paragraph.social_media_sites.field_text', 'wri_paragraph');

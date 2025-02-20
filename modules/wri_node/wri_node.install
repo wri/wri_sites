@@ -236,7 +236,7 @@ function wri_node_update_10402() {
           'type' => 'social_media_sites',
           // Set all field values before saving.
           'field_text' => $handle,
-          'field_links' => [
+          'field_link' => [
             'uri' => $uri,
             'title' => $handle,
           ],
