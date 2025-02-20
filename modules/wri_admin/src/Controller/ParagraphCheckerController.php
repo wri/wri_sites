@@ -68,7 +68,8 @@ class ParagraphCheckerController extends ControllerBase {
    */
   public function checkParagraphs() {
     $header = [
-      $this->t('Node ID'),
+      $this->t('Entity ID'),
+      $this->t('Entity Type'),
       $this->t('Content Type'),
       $this->t('Paragraph Field'),
       $this->t('Issues'),
@@ -76,76 +77,83 @@ class ParagraphCheckerController extends ControllerBase {
     ];
 
     $rows = [];
+    foreach (['paragraph','block_content'] as $entity_type) {
 
-    // Get all content types.
-    $node_bundles = $this->entityTypeManager->getStorage('node_type')->loadMultiple();
+      // Get all content types.
+      $type = $entity_type . '_type';
+      if ($entity_type == 'paragraph') {
+        $type = 'paragraphs_type';
+      }
+      $entity_bundles = $this->entityTypeManager->getStorage($type)->loadMultiple();
 
-    foreach ($node_bundles as $bundle_id => $bundle) {
-      // Get the fields for this content type.
-      $fields = $this->entityFieldManager->getFieldDefinitions('node', $bundle_id);
+      foreach ($entity_bundles as $bundle_id => $bundle) {
+        // Get the fields for this content type.
+        $fields = $this->entityFieldManager->getFieldDefinitions($entity_type, $bundle_id);
 
-      foreach ($fields as $field_name => $field) {
+        foreach ($fields as $field_name => $field) {
 
-        // Check for paragraph references.
-        if (!in_array($field->getType(), ['entity_reference', 'entity_reference_revisions']) ||
+          // Check for paragraph references.
+          if (!in_array($field->getType(), ['entity_reference', 'entity_reference_revisions']) ||
             $field->getSetting('target_type') !== 'paragraph') {
-          continue;
-        }
-
-        // Load nodes of this content type with translations.
-        $nodes = $this->entityTypeManager->getStorage('node')->loadByProperties(['type' => $bundle_id]);
-
-        foreach ($nodes as $node) {
-          if (!$node->isTranslatable()) {
             continue;
           }
 
-          // Check for translations.
-          $translations = $node->getTranslationLanguages();
-          foreach ($translations as $langcode => $language) {
-            $translated_node = $node->getTranslation($langcode);
+          // Load entitys of this content type with translations.
+          $entitys = $this->entityTypeManager->getStorage($entity_type)->loadByProperties(['type' => $bundle_id]);
 
-            // Get paragraph IDs for original and translation.
-            $original_paragraph_ids = [];
-            $translated_paragraph_ids = [];
-            if ($node->hasField($field_name)) {
-              $original_paragraph_ids = array_column($node->get($field_name)->getValue(), 'target_id');
-            }
-            if ($translated_node->hasField($field_name)) {
-              $translated_paragraph_ids = array_column($translated_node->get($field_name)->getValue(), 'target_id');
+          foreach ($entitys as $entity) {
+            if (!$entity->isTranslatable()) {
+              continue;
             }
 
-            // Compare the IDs.
-            $missing_in_translation = array_diff($original_paragraph_ids, $translated_paragraph_ids);
-            $orphaned_in_translation = array_diff($translated_paragraph_ids, $original_paragraph_ids);
+            // Check for translations.
+            $translations = $entity->getTranslationLanguages();
+            foreach ($translations as $langcode => $language) {
+              $translated_entity = $entity->getTranslation($langcode);
 
-            // Add rows for discrepancies.
-            if (!empty($missing_in_translation) || !empty($orphaned_in_translation)) {
-              $rows[] = [
-                'node_id' => $node->id(),
-                'content_type' => $node->bundle(),
-                'paragraph_field' => $field_name,
-                'issues' => Markup::create(
-                  '<strong>Missing in Translation:</strong> ' . (!empty($missing_in_translation) ? implode(', ', $missing_in_translation) : 'None') . '<br>' .
-                  '<strong>Orphaned in Translation:</strong> ' . (!empty($orphaned_in_translation) ? implode(', ', $orphaned_in_translation) : 'None')
-                ),
-                'operations' => [
-                  'data' => [
-                    '#type' => 'operations',
-                    '#links' => [
-                      'add_missing' => [
-                        'title' => $this->t('Add Missing'),
-                        'url' => Url::fromRoute('wri_admin.add_missing', ['node_id' => $node->id()]),
-                      ],
-                      'remove_orphans' => [
-                        'title' => $this->t('Remove Orphans'),
-                        'url' => Url::fromRoute('wri_admin.remove_orphans', ['node_id' => $node->id()]),
+              // Get paragraph IDs for original and translation.
+              $original_paragraph_ids = [];
+              $translated_paragraph_ids = [];
+              if ($entity->hasField($field_name)) {
+                $original_paragraph_ids = array_column($entity->get($field_name)->getValue(), 'target_id');
+              }
+              if ($translated_entity->hasField($field_name)) {
+                $translated_paragraph_ids = array_column($translated_entity->get($field_name)->getValue(), 'target_id');
+              }
+
+              // Compare the IDs.
+              $missing_in_translation = array_diff($original_paragraph_ids, $translated_paragraph_ids);
+              $orphaned_in_translation = array_diff($translated_paragraph_ids, $original_paragraph_ids);
+
+              // Add rows for discrepancies.
+              if (!empty($missing_in_translation) || !empty($orphaned_in_translation)) {
+                $rows[] = [
+                  'entity_id' => $entity->id(),
+                  'entity_type' => $entity_type,
+                  'content_type' => $entity->bundle(),
+                  'paragraph_field' => $field_name,
+                  'issues' => Markup::create(
+                    '<strong>Missing in Translation:</strong> ' . (!empty($missing_in_translation) ? implode(', ', $missing_in_translation) : 'None') . '<br>' .
+                    '<strong>Orphaned in Translation:</strong> ' . (!empty($orphaned_in_translation) ? implode(', ', $orphaned_in_translation) : 'None')
+                  ),
+                  'operations' => [
+                    'data' => [
+                      '#type' => 'operations',
+                      '#links' => [
+                        'add_missing' => [
+                          'title' => $this->t('Add Missing'),
+                          'url' => Url::fromRoute('wri_admin.add_missing', ['entity_id' => $entity->id()]),
+                        ],
+                        'remove_orphans' => [
+                          'title' => $this->t('Remove Orphans'),
+                          'url' => Url::fromRoute('wri_admin.remove_orphans', ['entity_id' => $entity->id()]),
+                        ],
                       ],
                     ],
                   ],
-                ],
-              ];
+                ];
 
+              }
             }
           }
         }
@@ -163,37 +171,37 @@ class ParagraphCheckerController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function addMissingParagraphs($node_id) {
-    // Load the original node.
-    $node = $this->entityTypeManager->getStorage('node')->load($node_id);
-    if (!$node) {
-      $this->messenger()->addError($this->t('Node @id not found.', ['@id' => $node_id]));
+  public function addMissingParagraphs($entity_id, $entity_type) {
+    // Load the original entity.
+    $entity = $this->entityTypeManager->getStorage($entity_type)->load($entity_id);
+    if (!$entity) {
+      $this->messenger()->addError($this->t('entity @id not found.', ['@id' => $entity_id]));
       return $this->redirect('wri_admin.paragraph_checker');
     }
 
-    if (!$node->isTranslatable()) {
-      $this->messenger()->addError($this->t('Node @id is not translatable.', ['@id' => $node_id]));
+    if (!$entity->isTranslatable()) {
+      $this->messenger()->addError($this->t('entity @id is not translatable.', ['@id' => $entity_id]));
       return $this->redirect('wri_admin.paragraph_checker');
     }
 
-    // Get the list of translations for the node.
-    $translations = $node->getTranslationLanguages();
+    // Get the list of translations for the entity.
+    $translations = $entity->getTranslationLanguages();
 
     foreach ($translations as $langcode => $language) {
       // Skip the original language.
-      if ($langcode === $node->language()->getId()) {
+      if ($langcode === $entity->language()->getId()) {
         continue;
       }
 
-      // Load the translated node.
-      $translated_node = $node->getTranslation($langcode);
+      // Load the translated entity.
+      $translated_entity = $entity->getTranslation($langcode);
 
       // Process each paragraph field.
-      $paragraph_fields = $this->getParagraphFields($node);
+      $paragraph_fields = $this->getParagraphFields($entity);
       foreach ($paragraph_fields as $field_name) {
         // Get the original and translated paragraphs.
-        $original_paragraphs = $node->get($field_name)->referencedEntities();
-        $translated_paragraphs = $translated_node->get($field_name)->referencedEntities();
+        $original_paragraphs = $entity->get($field_name)->referencedEntities();
+        $translated_paragraphs = $translated_entity->get($field_name)->referencedEntities();
 
         // Extract IDs for comparison.
         $original_ids = array_map(fn($paragraph) => $paragraph->id(), $original_paragraphs);
@@ -206,7 +214,7 @@ class ParagraphCheckerController extends ControllerBase {
         }
 
         // Reuse the original paragraph IDs in the translation.
-        $updated_paragraphs = $translated_node->get($field_name)->getValue();
+        $updated_paragraphs = $translated_entity->get($field_name)->getValue();
 
         foreach ($original_paragraphs as $original_paragraph) {
           if (in_array($original_paragraph->id(), $missing_ids)) {
@@ -217,54 +225,54 @@ class ParagraphCheckerController extends ControllerBase {
           }
         }
 
-        // Update the translated node's field with the updated paragraphs.
-        $translated_node->set($field_name, $updated_paragraphs);
+        // Update the translated entity's field with the updated paragraphs.
+        $translated_entity->set($field_name, $updated_paragraphs);
       }
 
       // Mark as a new revision to force save.
-      $translated_node->setNewRevision(TRUE);
-      $translated_node->save();
+      $translated_entity->setNewRevision(TRUE);
+      $translated_entity->save();
     }
 
     // Display a success message.
-    $this->messenger()->addMessage($this->t('Missing paragraphs have been added for Node @id.', ['@id' => $node_id]));
+    $this->messenger()->addMessage($this->t('Missing paragraphs have been added for entity @id.', ['@id' => $entity_id]));
     return $this->redirect('wri_admin.paragraph_checker');
   }
 
   /**
    * {@inheritdoc}
    */
-  public function removeOrphanedParagraphs($node_id) {
-    // Load the original node.
-    $node = $this->entityTypeManager->getStorage('node')->load($node_id);
-    if (!$node) {
-      $this->messenger()->addError($this->t('Node @id not found.', ['@id' => $node_id]));
+  public function removeOrphanedParagraphs($entity_id, $entity_type) {
+    // Load the original entity.
+    $entity = $this->entityTypeManager->getStorage($entity_type)->load($entity_id);
+    if (!$entity) {
+      $this->messenger()->addError($this->t('entity @id not found.', ['@id' => $entity_id]));
       return $this->redirect('wri_admin.paragraph_checker');
     }
 
-    if (!$node->isTranslatable()) {
-      $this->messenger()->addError($this->t('Node @id is not translatable.', ['@id' => $node_id]));
+    if (!$entity->isTranslatable()) {
+      $this->messenger()->addError($this->t('entity @id is not translatable.', ['@id' => $entity_id]));
       return $this->redirect('wri_admin.paragraph_checker');
     }
 
-    // Get the list of translations for the node.
-    $translations = $node->getTranslationLanguages();
+    // Get the list of translations for the entity.
+    $translations = $entity->getTranslationLanguages();
 
     foreach ($translations as $langcode => $language) {
       // Skip the original language.
-      if ($langcode === $node->language()->getId()) {
+      if ($langcode === $entity->language()->getId()) {
         continue;
       }
 
-      // Load the translated node.
-      $translated_node = $node->getTranslation($langcode);
+      // Load the translated entity.
+      $translated_entity = $entity->getTranslation($langcode);
 
       // Process each paragraph field.
-      $paragraph_fields = $this->getParagraphFields($node);
+      $paragraph_fields = $this->getParagraphFields($entity);
       foreach ($paragraph_fields as $field_name) {
         // Get the original and translated paragraphs.
-        $original_paragraphs = $node->get($field_name)->referencedEntities();
-        $translated_paragraphs = $translated_node->get($field_name)->referencedEntities();
+        $original_paragraphs = $entity->get($field_name)->referencedEntities();
+        $translated_paragraphs = $translated_entity->get($field_name)->referencedEntities();
 
         // Extract IDs for comparison.
         $original_ids = array_map(fn($paragraph) => $paragraph->id(), $original_paragraphs);
@@ -276,13 +284,13 @@ class ParagraphCheckerController extends ControllerBase {
           continue;
         }
 
-        // Remove orphaned paragraphs from the translated node's field.
+        // Remove orphaned paragraphs from the translated entity's field.
         $updated_paragraphs = array_filter(
-          $translated_node->get($field_name)->getValue(),
+          $translated_entity->get($field_name)->getValue(),
           fn($item) => !in_array($item['target_id'], $orphaned_ids)
         );
 
-        $translated_node->set($field_name, $updated_paragraphs);
+        $translated_entity->set($field_name, $updated_paragraphs);
 
         // Delete the orphaned paragraph entities to clean up the database.
         foreach ($translated_paragraphs as $translated_paragraph) {
@@ -293,21 +301,21 @@ class ParagraphCheckerController extends ControllerBase {
       }
 
       // Mark as a new revision to force save.
-      $translated_node->setNewRevision(TRUE);
-      $translated_node->save();
+      $translated_entity->setNewRevision(TRUE);
+      $translated_entity->save();
     }
 
     // Display a success message.
-    $this->messenger()->addMessage($this->t('Orphaned paragraphs have been removed for Node @id.', ['@id' => $node_id]));
+    $this->messenger()->addMessage($this->t('Orphaned paragraphs have been removed for entity @id.', ['@id' => $entity_id]));
     return $this->redirect('wri_admin.paragraph_checker');
   }
 
   /**
    * {@inheritdoc}
    */
-  private function getParagraphFields($node) {
+  private function getParagraphFields($entity, $entity_type) {
     $fields = [];
-    foreach ($node->getFieldDefinitions() as $field_name => $field) {
+    foreach ($entity->getFieldDefinitions() as $field_name => $field) {
       if ($field->getType() === 'entity_reference_revisions' && $field->getSetting('target_type') === 'paragraph') {
         $fields[] = $field_name;
       }
