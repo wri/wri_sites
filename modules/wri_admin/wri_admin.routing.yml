@@ -7,7 +7,7 @@ wri_admin.paragraph_checker:
     _permission: 'administer nodes'
 
 wri_admin.add_missing:
-  path: '/admin/paragraph-checker/add-missing/{node_id}'
+  path: '/admin/paragraph-checker/add-missing/{entity_id}/{enitity_type}'
   defaults:
     _controller: '\Drupal\wri_admin\Controller\ParagraphCheckerController::addMissingParagraphs'
     _title: 'Add Missing Paragraphs'
@@ -15,7 +15,7 @@ wri_admin.add_missing:
     _permission: 'administer nodes'
 
 wri_admin.remove_orphans:
-  path: '/admin/paragraph-checker/remove-orphans/{node_id}'
+  path: '/admin/paragraph-checker/remove-orphans/{entity_id}/{enitity_type}'
   defaults:
     _controller: '\Drupal\wri_admin\Controller\ParagraphCheckerController::removeOrphanedParagraphs'
     _title: 'Remove Orphaned Paragraphs'
