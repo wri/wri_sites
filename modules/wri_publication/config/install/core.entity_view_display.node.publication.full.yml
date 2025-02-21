@@ -146,12 +146,11 @@ third_party_settings:
       allowlisted_blocks:
         'Chaos Tools':
           - 'entity_view:node'
-        Components: {  }
         'Content fields':
           - 'field_block:node:publication:field_primary_contacts'
           - 'field_block:node:publication:field_projects'
           - 'field_block:node:publication:field_related_resources'
-        Devel: {  }
+          - 'field_block:node:publication:field_paragraphs'
         Facets: {  }
         'Facets summary (Experimental)': {  }
         Forms: {  }

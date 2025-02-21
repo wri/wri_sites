@@ -69,7 +69,7 @@ third_party_settings:
                 settings:
                   view_mode: teaser
                 third_party_settings: {  }
-            weight: 7
+            weight: 2
             additional: {  }
           -
             uuid: 60b9c12e-4773-40dd-9339-eaf9036816aa
@@ -82,7 +82,7 @@ third_party_settings:
               view_mode: main_content
               context_mapping:
                 entity: layout_builder.entity
-            weight: -10
+            weight: -4
             additional: {  }
           -
             uuid: a321f598-b4e3-4c3f-a580-532d2aab6287
@@ -101,7 +101,7 @@ third_party_settings:
                 settings:
                   view_mode: default
                 third_party_settings: {  }
-            weight: -5
+            weight: -1
             additional: {  }
           -
             uuid: a1c32609-f9f9-469f-8afc-86e509c3b92a
@@ -114,7 +114,7 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: '8'
-            weight: -3
+            weight: 1
             additional: {  }
           -
             uuid: 1185969a-7903-4804-883d-f5c194e519fa
@@ -133,7 +133,7 @@ third_party_settings:
                 settings:
                   view_mode: card
                 third_party_settings: {  }
-            weight: -4
+            weight: 0
             additional: {  }
           -
             uuid: 92d9873f-5e02-42fa-bd07-7fe52b58c08c
@@ -143,7 +143,7 @@ third_party_settings:
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-            weight: -9
+            weight: -2
             additional: {  }
           -
             uuid: 11aff077-a1e9-4b73-8903-3bad7fb7baba
@@ -160,7 +160,26 @@ third_party_settings:
                   view_mode: teaser
                   link: false
                 third_party_settings: {  }
-            weight: 8
+            weight: 3
+            additional: {  }
+          -
+            uuid: c096c0b5-cccf-4994-94aa-99a39d69aec7
+            region: content
+            configuration:
+              id: 'field_block:node:project_detail:field_paragraphs'
+              label: 'Follow on social'
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_revisions_entity_view
+                label: hidden
+                settings:
+                  view_mode: default
+                third_party_settings: {  }
+            weight: -3
             additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:
@@ -172,15 +191,15 @@ third_party_settings:
       allowlisted_blocks:
         'Chaos Tools':
           - 'entity_view:node'
-        Components: {  }
         'Content fields':
           - 'field_block:node:project_detail:field_region'
           - 'field_block:node:project_detail:field_featured_experts'
           - 'field_block:node:project_detail:field_featured_related_resources'
           - 'field_block:node:project_detail:field_logo'
-          - 'extra_field_block:node:project_detail:content_moderation_control'
           - 'field_block:node:project_detail:field_primary_contacts'
+          - 'extra_field_block:node:project_detail:content_moderation_control'
           - 'field_block:node:project_detail:field_project_partners'
+          - 'field_block:node:project_detail:field_paragraphs'
         Facets: {  }
         'Facets summary (Experimental)': {  }
         Forms: {  }
