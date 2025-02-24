@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.person_author_listing
     - field.field.node.person.body
     - field.field.node.person.field_alt_first_names
     - field.field.node.person.field_alt_last_names
