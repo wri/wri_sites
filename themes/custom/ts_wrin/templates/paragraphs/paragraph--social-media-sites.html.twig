@@ -20,10 +20,10 @@
       {% if content.field_site.0 and content.field_text.0 %}
         <div class="social-icon-wrapper {{ social_site|lower }}">{{ content.field_site.0 }}</div>
         {% if paragraph.field_link.0.url %}
-          <a href="{{ paragraph.field_link.0.url }}" class="" >{{ content.field_text.0 }}</a>
+          <a href="{{ paragraph.field_link.0.url }}" class="handle" >{{ content.field_text.0 }}</a>
         {% endif %}
       {% elseif paragraph.field_link.0.url %}
-        <a href="{{ paragraph.field_link.0.url }}" class="follow-on" ><span class="follow-text">{{ 'Follow on'|t }}&nbsp;&nbsp;</span><div class="social-icon-wrapper {{ social_site|lower }}">{{ content.field_site.0 }}</div></a>
+        <a href="{{ paragraph.field_link.0.url }}"><div class="social-icon-wrapper {{ social_site|lower }}">{{ content.field_site.0 }}</div></a>
       {% endif %}
     {% endblock %}
   </div>

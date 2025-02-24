@@ -66,7 +66,6 @@
     z-index: 1;
   }
 }
-.block-field-blocknodeprogram-centerfield-paragraphs,
 .block-field-blocknodeprogram-centerfield-twitter-account {
   display: flex;
   justify-content: flex-end;
@@ -77,8 +76,6 @@
     margin-right: $space-xxl;
   }
 
-  .field--name-field-paragraphs,
-  .field-name-field-paragraphs,
   .field--name-field-twitter-account,
   .field-name-field-twitter-account {
     @include font($caslon, "regular", "italic");
@@ -116,70 +113,6 @@
       @include mq($lg) {
         background-position: right center;
       }
-    }
-  }
-  .field--name-field-paragraphs,
-  .field-name-field-paragraphs {
-    position: relative;
-    text-indent: 0;
-    width: auto;
-    min-width: 35px;
-    padding-left: 10px;
-    padding-right: 10px;
-    @include mq($lg) {
-      width: auto;
-      min-width: 165px;
-    }
-
-    .social-icon-wrapper {
-      max-width: 19px;
-      max-height: 20px;
-      @include mq($lg) {
-        max-width: 15px;
-        max-height: 16px;
-      }
-      &.instagram {
-        max-width: 24px;
-        max-height: 24px;
-        @include mq($lg) {
-          max-width: 18px;
-          max-height: 18px;
-        }
-      }
-    }
-
-
-    a.follow-on {
-      @include text-underline(transparent, $black);
-      background-position: left 100%;
-      display: inline-block;
-      height: 20px;
-      line-height: 1.5rem;
-      padding-right: 0;
-      margin-left: 5px;
-      margin-right: 5px;
-      position: relative;
-      transition: background $transition-defaults;
-      text-decoration: none;
-      .follow-text {
-        display: none;
-      }
-      @include mq($lg) {
-        .follow-text {
-          display: inline;
-        }
-      }
-
-      @include hocus {
-        text-decoration: none;
-        background-size: 100% 2px, 0 2px;
-        @include mq($lg) {
-          background-size: 100% 0, 100% 2px;
-        }
-      }
-    }
-    .field__item:nth-child(n+2) a.follow-on .follow-text {
-      display: none;
     }
   }
 }
