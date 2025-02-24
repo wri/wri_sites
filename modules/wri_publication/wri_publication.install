@@ -100,6 +100,10 @@ function wri_publication_update_10402() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.publication.default', [
     'content',
   ], 'wri_publication');
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.publication.main_content', [
+    'content#field_paragraphs',
+    'third_party_settings#ds#regions#share',
+  ], 'wri_publication');
 
   $message = 'Update publication form display configs';
   return $message;

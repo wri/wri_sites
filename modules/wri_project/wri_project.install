@@ -95,6 +95,10 @@ function wri_project_update_10402() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.project_detail.default', [
     'content',
   ], 'wri_project');
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.project_detail.main_content', [
+    'content#field_paragraphs',
+    'third_party_settings#ds#regions#share',
+  ], 'wri_project');
 
   $message = 'Update project form display configs';
   return $message;
