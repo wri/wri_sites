@@ -98,9 +98,9 @@ function wri_publication_update_10401() {
  */
 function wri_publication_update_10402() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.publication.default', [
-    'content'], 'wri_publication');
+    'content',
+  ], 'wri_publication');
 
   $message = 'Update publication form display configs';
   return $message;
 }
-

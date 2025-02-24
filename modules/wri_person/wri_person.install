@@ -154,7 +154,8 @@ function wri_person_update_10401() {
  */
 function wri_person_update_10402() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.person.default', [
-    'content'], 'wri_person');
+    'content',
+  ], 'wri_person');
 
   $message = 'Update person form display configs';
   return $message;

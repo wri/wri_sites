@@ -93,9 +93,9 @@ function wri_project_update_10401() {
  */
 function wri_project_update_10402() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.project_detail.default', [
-    'content'], 'wri_project');
+    'content',
+  ], 'wri_project');
 
   $message = 'Update project form display configs';
   return $message;
 }
-

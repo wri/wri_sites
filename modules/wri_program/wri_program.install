@@ -45,7 +45,6 @@ function wri_program_update_dependencies() {
     'wri_program' => 10401,
   ];
 
-
   return $dependencies;
 }
 
@@ -73,7 +72,8 @@ function wri_program_update_10401() {
  */
 function wri_program_update_10402() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.program_center.default', [
-    'content'], 'wri_program');
+    'content',
+  ], 'wri_program');
 
   $message = 'Update program form display configs';
   return $message;
