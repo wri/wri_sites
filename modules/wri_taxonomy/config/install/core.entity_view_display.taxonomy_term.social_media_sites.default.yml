@@ -5,8 +5,6 @@ dependencies:
     - field.field.taxonomy_term.social_media_sites.field_icon
     - image.style.thumbnail
     - taxonomy.vocabulary.social_media_sites
-  module:
-    - svg_image
 id: taxonomy_term.social_media_sites.default
 targetEntityType: taxonomy_term
 bundle: social_media_sites

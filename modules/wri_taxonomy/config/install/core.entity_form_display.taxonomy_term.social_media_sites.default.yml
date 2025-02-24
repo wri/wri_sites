@@ -7,7 +7,6 @@ dependencies:
     - taxonomy.vocabulary.social_media_sites
   module:
     - path
-    - svg_image
     - text
 id: taxonomy_term.social_media_sites.default
 targetEntityType: taxonomy_term
