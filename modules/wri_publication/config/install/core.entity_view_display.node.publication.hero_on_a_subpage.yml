@@ -29,7 +29,6 @@ dependencies:
     - field.field.node.publication.field_publication_series
     - field.field.node.publication.field_region
     - field.field.node.publication.field_related_resources
-    - field.field.node.publication.field_share_with_io
     - field.field.node.publication.field_tags
     - field.field.node.publication.field_toc
     - field.field.node.publication.field_total_pages
