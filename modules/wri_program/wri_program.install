@@ -41,9 +41,6 @@ function wri_program_update_dependencies() {
   $dependencies['wri_program'][10401] = [
     'wri_node' => 10401,
   ];
-  $dependencies['wri_program'][10402] = [
-    'wri_program' => 10401,
-  ];
 
   return $dependencies;
 }
@@ -53,16 +50,6 @@ function wri_program_update_dependencies() {
  */
 function wri_program_update_10401() {
   \Drupal::service('distro_helper.updates')->installConfig('field.field.node.program_center.field_paragraphs', 'wri_program');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.node.program_center.default', 'wri_program');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.card', 'wri_program');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.default', 'wri_program');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.full', 'wri_program');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.impact', 'wri_program');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.main_content', 'wri_program');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.search_results', 'wri_program');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.teaser', 'wri_program');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.tile', 'wri_program');
-
   $message = 'Add field Paragraph and update view modes.';
   return $message;
 }
@@ -73,6 +60,10 @@ function wri_program_update_10401() {
 function wri_program_update_10402() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.program_center.default', [
     'content',
+  ], 'wri_program');
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.program_center.full', [
+    'third_party_settings#layout_builder#sections',
+    'third_party_settings#layout_builder_restrictions',
   ], 'wri_program');
 
   $message = 'Update program form display configs';

@@ -162,25 +162,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 3
             additional: {  }
-          -
-            uuid: c096c0b5-cccf-4994-94aa-99a39d69aec7
-            region: content
-            configuration:
-              id: 'field_block:node:project_detail:field_paragraphs'
-              label: 'Follow on social'
-              label_display: visible
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_revisions_entity_view
-                label: hidden
-                settings:
-                  view_mode: default
-                third_party_settings: {  }
-            weight: -3
-            additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories: {  }

@@ -67,12 +67,12 @@ third_party_settings:
         - field_primary_topic
         - field_region
       share:
-        - field_paragraphs
         - wri_social_sharing_block
       featured_image:
         - field_logo
       main_content:
         - body
+        - field_paragraphs
       sidebar:
         - field_narrative_taxonomy
     fields:
@@ -99,7 +99,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 12
+    weight: 11
     region: main_content
   field_intro:
     type: wrapper_class
@@ -133,7 +133,7 @@ content:
           id: reset
           settings:
             lb: ''
-    weight: 11
+    weight: 10
     region: featured_image
   field_main_image:
     type: media_responsive_thumbnail
@@ -206,13 +206,13 @@ content:
     region: buttons
   field_paragraphs:
     type: entity_reference_revisions_entity_view
-    label: hidden
+    label: above
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 9
-    region: share
+    weight: 12
+    region: main_content
   field_platform_link:
     type: link_ally_class
     label: hidden
@@ -335,7 +335,7 @@ content:
   wri_social_sharing_block:
     settings: {  }
     third_party_settings: {  }
-    weight: 10
+    weight: 9
     region: share
 hidden:
   content_moderation_control: true

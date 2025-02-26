@@ -69,20 +69,7 @@ function wri_project_update_10001() {
  */
 function wri_project_update_10401() {
   \Drupal::service('distro_helper.updates')->installConfig('field.field.node.project_detail.field_paragraphs', 'wri_project');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.node.project_detail.default', 'wri_project');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.project_detail.card', 'wri_project');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.project_detail.default', 'wri_project');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.project_detail.full', 'wri_project');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.project_detail.hero_on_a_subpage', 'wri_project');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.project_detail.impact', 'wri_project');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.project_detail.large_image_teaser', 'wri_project');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.project_detail.main_content', 'wri_project');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.project_detail.search_results', 'wri_project');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.project_detail.small_image_teaser', 'wri_project');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.project_detail.teaser', 'wri_project');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.project_detail.tile', 'wri_project');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.project_detail.type_title', 'wri_project');
-
+  \Drupal::service('distro_helper.install')->syncUUIDs(\Drupal::service('config.storage.export')->listAll());
   $message = 'Add field Paragraphs and update view modes.';
   return $message;
 }

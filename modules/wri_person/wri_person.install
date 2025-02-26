@@ -135,15 +135,6 @@ function wri_person_update_10301() {
  */
 function wri_person_update_10401() {
   \Drupal::service('distro_helper.updates')->installConfig('field.field.node.person.field_paragraphs', 'wri_person');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.node.person.default', 'wri_person');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.person.default', 'wri_person');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.person.full', 'wri_person');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.person.impact', 'wri_person');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.person.main_content', 'wri_person');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.person.search_results', 'wri_person');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.person.small_image_teaser', 'wri_person');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.person.teaser', 'wri_person');
-
   $message = 'Add field Paragraph and update view modes.';
   return $message;
 }

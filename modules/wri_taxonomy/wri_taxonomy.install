@@ -202,5 +202,7 @@ function wri_taxonomy_update_10401() {
       $term->save();
       \Drupal::messenger()->addStatus(t('Created/updated term @name with icon.', ['@name' => $term_name]));
     }
+    // Sync UUIDs to prevent CircleCi errors.
+    \Drupal::service('distro_helper.install')->syncUUIDs(\Drupal::service('config.storage.export')->listAll());
   }
 }

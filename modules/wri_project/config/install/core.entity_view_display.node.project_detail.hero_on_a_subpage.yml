@@ -60,7 +60,6 @@ third_party_settings:
         - field_region
       share:
         - wri_social_sharing_block
-        - field_paragraphs
       sidebar:
         - field_narrative_taxonomy
     fields:
