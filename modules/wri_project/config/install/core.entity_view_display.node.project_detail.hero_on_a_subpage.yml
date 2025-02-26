@@ -126,15 +126,6 @@ content:
             suffix: ''
     weight: 8
     region: sidebar
-  field_paragraphs:
-    type: entity_reference_revisions_entity_view
-    label: hidden
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
-    weight: 7
-    region: share
   field_primary_topic:
     type: entity_reference_label_class
     label: inline
@@ -241,6 +232,7 @@ hidden:
   field_main_image: true
   field_metatags: true
   field_other_link: true
+  field_paragraphs: true
   field_platform_link: true
   field_primary_contacts: true
   field_project_partners: true
