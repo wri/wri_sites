@@ -180,7 +180,7 @@
         "drupal/twig_tweak": "^3.2",
         "drupal/twitter_api_block": "^4.0",
         "drupal/viewfield": "^3.0@beta",
-        "drupal/views_arg_order_sort": "dev-8.x-1.x",
+        "drupal/views_arg_order_sort": "^2.0@alpha",
         "drupal/views_autosubmit": "^1.4",
         "drupal/views_bulk_edit": "^3.0",
         "drupal/views_bulk_operations": "^4.0",
