@@ -19,7 +19,6 @@ dependencies:
     - field.field.node.publication.field_main_image
     - field.field.node.publication.field_metatag
     - field.field.node.publication.field_narrative_taxonomy
-    - field.field.node.publication.field_paragraphs
     - field.field.node.publication.field_platform_link
     - field.field.node.publication.field_primary_contacts
     - field.field.node.publication.field_primary_topic
@@ -39,7 +38,6 @@ dependencies:
   module:
     - ds
     - element_class_formatter
-    - entity_reference_revisions
     - hierarchical_term_formatter
     - layout_builder
     - media
@@ -59,9 +57,6 @@ third_party_settings:
   ds:
     layout:
       id: 'single_file_component_layout:wri_publication_columns'
-      library: null
-      disable_css: false
-      entity_classes: all_classes
       settings:
         label: ''
     regions:
@@ -84,7 +79,6 @@ third_party_settings:
         - field_total_pages
       share:
         - wri_social_sharing_block
-        - field_paragraphs
       main_content:
         - body
       sidebar:
@@ -149,7 +143,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 16
+    weight: 15
     region: main_content
   field_authors:
     type: list_of_authors
@@ -166,7 +160,7 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
-    weight: 18
+    weight: 17
     region: sidebar
   field_cover_image:
     type: media_thumbnail
@@ -227,7 +221,7 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
-    weight: 21
+    weight: 20
     region: sidebar
   field_intro:
     type: text_trimmed
@@ -285,7 +279,7 @@ content:
             lb: ''
             lb-col: false
             classes: {  }
-    weight: 20
+    weight: 19
     region: sidebar
   field_main_image:
     type: media_responsive_thumbnail
@@ -293,8 +287,6 @@ content:
     settings:
       responsive_image_style: program_landing_page_hero
       image_link: ''
-      image_loading:
-        attribute: lazy
     third_party_settings:
       wri_media:
         min_width: ''
@@ -338,17 +330,8 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 17
+    weight: 16
     region: sidebar
-  field_paragraphs:
-    type: entity_reference_revisions_entity_view
-    label: hidden
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
-    weight: 15
-    region: share
   field_platform_link:
     type: link_class
     label: hidden
@@ -402,7 +385,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 19
+    weight: 18
     region: sidebar
   field_primary_topic:
     type: entity_reference_label_class

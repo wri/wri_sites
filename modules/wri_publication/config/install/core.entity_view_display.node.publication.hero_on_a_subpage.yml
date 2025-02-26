@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -19,7 +18,6 @@ dependencies:
     - field.field.node.publication.field_main_image
     - field.field.node.publication.field_metatag
     - field.field.node.publication.field_narrative_taxonomy
-    - field.field.node.publication.field_paragraphs
     - field.field.node.publication.field_platform_link
     - field.field.node.publication.field_primary_contacts
     - field.field.node.publication.field_primary_topic
@@ -37,7 +35,6 @@ dependencies:
   module:
     - ds
     - element_class_formatter
-    - entity_reference_revisions
     - hierarchical_term_formatter
     - layout_builder
     - text
@@ -48,9 +45,6 @@ third_party_settings:
   ds:
     layout:
       id: 'single_file_component_layout:wri_subpage_columns'
-      library: null
-      disable_css: false
-      entity_classes: all_classes
       settings:
         label: ''
     regions:
@@ -66,7 +60,6 @@ third_party_settings:
         - field_region
       share:
         - wri_social_sharing_block
-        - field_paragraphs
       sidebar:
         - field_narrative_taxonomy
     fields:
@@ -151,15 +144,6 @@ content:
             suffix: ''
     weight: 9
     region: sidebar
-  field_paragraphs:
-    type: entity_reference_revisions_entity_view
-    label: hidden
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
-    weight: 8
-    region: share
   field_primary_topic:
     type: entity_reference_label_class
     label: inline
@@ -246,7 +230,7 @@ content:
       menu: page-hierarchies
       color_class: black-bar
     third_party_settings: {  }
-    weight: 3
+    weight: 4
     region: hero
   field_twitter_account:
     type: link_separate
@@ -268,7 +252,7 @@ content:
   wri_social_sharing_block:
     settings: {  }
     third_party_settings: {  }
-    weight: 7
+    weight: 8
     region: share
 hidden:
   body: true

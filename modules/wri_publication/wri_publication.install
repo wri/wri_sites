@@ -47,12 +47,6 @@ function wri_publication_update_dependencies() {
   $dependencies['wri_publication'][9301] = [
     'wri_sites' => 8908,
   ];
-  $dependencies['wri_publication'][10401] = [
-    'wri_node' => 10401,
-  ];
-  $dependencies['wri_publication'][10402] = [
-    'wri_publication' => 10401,
-  ];
 
   return $dependencies;
 }
@@ -68,43 +62,4 @@ function wri_publication_update_9502() {
   \Drupal::service('distro_helper.updates')->updateConfig('field.field.node.subpage.field_parent_page',
     ['settings#handler_settings#target_bundles#publication'],
     'wri_subpage');
-}
-
-/**
- * Add field_paragraphs and update all view modes.
- */
-function wri_publication_update_10401() {
-  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.publication.field_paragraphs', 'wri_publication');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.node.publication.default', 'wri_publication');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.publication.card', 'wri_publication');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.publication.default', 'wri_publication');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.publication.full', 'wri_publication');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.publication.hero_on_a_subpage', 'wri_publication');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.publication.impact', 'wri_publication');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.publication.large_image_teaser', 'wri_publication');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.publication.main_content', 'wri_publication');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.publication.search_results', 'wri_publication');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.publication.small_image_teaser', 'wri_publication');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.publication.superfeatured', 'wri_publication');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.publication.teaser', 'wri_publication');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.publication.type_title', 'wri_publication');
-
-  $message = 'Add field Paragraphs and update view modes.';
-  return $message;
-}
-
-/**
- * Update publication form display.
- */
-function wri_publication_update_10402() {
-  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.publication.default', [
-    'content',
-  ], 'wri_publication');
-  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.publication.main_content', [
-    'content#field_paragraphs',
-    'third_party_settings#ds#regions#share',
-  ], 'wri_publication');
-
-  $message = 'Update publication form display configs';
-  return $message;
 }

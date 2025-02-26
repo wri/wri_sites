@@ -19,7 +19,6 @@ dependencies:
     - field.field.node.publication.field_main_image
     - field.field.node.publication.field_metatag
     - field.field.node.publication.field_narrative_taxonomy
-    - field.field.node.publication.field_paragraphs
     - field.field.node.publication.field_platform_link
     - field.field.node.publication.field_primary_contacts
     - field.field.node.publication.field_primary_topic
@@ -56,7 +55,7 @@ third_party_settings:
           label: ''
           context_mapping: {  }
         components:
-          -
+          60b9c12e-4773-40dd-9339-eaf9036816aa:
             uuid: 60b9c12e-4773-40dd-9339-eaf9036816aa
             region: content
             configuration:
@@ -69,7 +68,7 @@ third_party_settings:
                 entity: layout_builder.entity
             weight: -10
             additional: {  }
-          -
+          92d9873f-5e02-42fa-bd07-7fe52b58c08c:
             uuid: 92d9873f-5e02-42fa-bd07-7fe52b58c08c
             region: content
             configuration:
@@ -79,7 +78,7 @@ third_party_settings:
                 entity: layout_builder.entity
             weight: -9
             additional: {  }
-          -
+          e4314601-6301-482b-9289-b066a382766d:
             uuid: e4314601-6301-482b-9289-b066a382766d
             region: content
             configuration:
@@ -98,7 +97,7 @@ third_party_settings:
                 third_party_settings: {  }
             weight: -7
             additional: {  }
-          -
+          de1e5b47-2b96-44ae-b809-cb8c5064adc6:
             uuid: de1e5b47-2b96-44ae-b809-cb8c5064adc6
             region: content
             configuration:
@@ -117,7 +116,7 @@ third_party_settings:
                 third_party_settings: {  }
             weight: -6
             additional: {  }
-          -
+          9a3dd6c3-5fb7-4f9b-ae27-12cb57be1b11:
             uuid: 9a3dd6c3-5fb7-4f9b-ae27-12cb57be1b11
             region: content
             configuration:
@@ -146,11 +145,12 @@ third_party_settings:
       allowlisted_blocks:
         'Chaos Tools':
           - 'entity_view:node'
+        Components: {  }
         'Content fields':
           - 'field_block:node:publication:field_primary_contacts'
           - 'field_block:node:publication:field_projects'
           - 'field_block:node:publication:field_related_resources'
-          - 'field_block:node:publication:field_paragraphs'
+        Devel: {  }
         Facets: {  }
         'Facets summary (Experimental)': {  }
         Forms: {  }
@@ -185,7 +185,6 @@ hidden:
   field_main_image: true
   field_metatag: true
   field_narrative_taxonomy: true
-  field_paragraphs: true
   field_platform_link: true
   field_primary_contacts: true
   field_primary_topic: true

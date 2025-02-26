@@ -18,7 +18,6 @@ dependencies:
     - field.field.node.publication.field_main_image
     - field.field.node.publication.field_metatag
     - field.field.node.publication.field_narrative_taxonomy
-    - field.field.node.publication.field_paragraphs
     - field.field.node.publication.field_platform_link
     - field.field.node.publication.field_primary_contacts
     - field.field.node.publication.field_primary_topic
@@ -40,7 +39,6 @@ dependencies:
     - link_attributes
     - media_library
     - metatag
-    - paragraphs
     - path
     - text
     - viewfield
@@ -103,7 +101,6 @@ third_party_settings:
     group_experts:
       children:
         - field_primary_contacts
-        - field_paragraphs
       label: 'Experts & Staff'
       region: content
       parent_name: group_more
@@ -200,7 +197,6 @@ content:
       collapsible: false
       collapsed: false
       revision: false
-      removed_reference: optional
     third_party_settings: {  }
   field_cover_image:
     type: media_library_widget
@@ -227,11 +223,10 @@ content:
         class: false
         accesskey: false
         title: false
-      widget_default_open: expandIfValuesSet
     third_party_settings: {  }
   field_exclude_from_blog_feed:
     type: boolean_checkbox
-    weight: 16
+    weight: 104
     region: content
     settings:
       display_label: true
@@ -316,7 +311,6 @@ content:
     region: content
     settings:
       sidebar: true
-      use_details: true
     third_party_settings: {  }
   field_narrative_taxonomy:
     type: text_textarea
@@ -325,26 +319,6 @@ content:
     settings:
       rows: 5
       placeholder: ''
-    third_party_settings: {  }
-  field_paragraphs:
-    type: paragraphs
-    weight: 28
-    region: content
-    settings:
-      title: 'Social Link'
-      title_plural: 'Social Links'
-      edit_mode: closed
-      closed_mode: summary
-      autocollapse: none
-      closed_mode_threshold: 0
-      add_mode: button
-      form_display_mode: default
-      default_paragraph_type: _none
-      features:
-        add_above: '0'
-        collapse_edit_all: collapse_edit_all
-        convert: '0'
-        duplicate: duplicate
     third_party_settings: {  }
   field_platform_link:
     type: link_attributes
@@ -360,7 +334,6 @@ content:
         rel: true
         class: true
         accesskey: false
-      widget_default_open: expandIfValuesSet
     third_party_settings: {  }
   field_primary_contacts:
     type: entity_reference_autocomplete
