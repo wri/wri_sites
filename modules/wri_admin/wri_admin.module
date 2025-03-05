@@ -9,8 +9,12 @@
  * Implements hook_page_attachments().
  */
 
+use Drupal\media\Entity\Media;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\file\Entity\File;
 use Drupal\node\Entity\Node;
 
 /**
@@ -75,7 +79,9 @@ function wri_admin_form_alter(&$form, FormStateInterface $form_state, $form_id) 
       ];
     }
   }
-
+  if (strpos($form_id, 'media_') === 0) {
+    $form['#validate'][] = 'wri_admin_validate_media_name';
+  }
 }
 
 /**
@@ -98,4 +104,115 @@ function wri_admin_theme_suggestions_entity_moderation_form(array $variables) {
   $suggestions[] = 'entity_moderation_form__diff';
 
   return $suggestions;
+}
+
+/**
+ * Validation function to ensure the media name is not just numbers.
+ */
+
+/**
+ * Validation function to ensure the media name is not just numbers.
+ */
+function wri_admin_validate_media_name(array &$form, FormStateInterface $form_state) {
+  \Drupal::logger('wri_admin')->notice('Validation triggered for media name.');
+
+  // Log available form state keys (safe debugging).
+  $form_state_keys = array_keys($form_state->getValues());
+  \Drupal::logger('wri_admin')->notice('Form state keys: @keys', ['@keys' => implode(', ', $form_state_keys)]);
+
+  // Check if the 'name' field exists in the form state.
+  $name_values = $form_state->getValue('name');
+  if (!isset($name_values[0]['value']) || empty($name_values[0]['value'])) {
+    \Drupal::logger('wri_admin')->warning('Media name field is missing or empty.');
+    return;
+  }
+
+  // Extract and clean up the media name.
+  $name = trim($name_values[0]['value']);
+  $name_without_extension = pathinfo($name, PATHINFO_FILENAME);
+  \Drupal::logger('wri_admin')->notice('Extracted name: @name', ['@name' => $name_without_extension]);
+
+  // Ensure the name contains at least one letter or dash.
+  if (!preg_match('/[a-zA-Z-]/', $name_without_extension)) {
+    \Drupal::logger('wri_admin')->warning('Invalid media name detected: @name', ['@name' => $name_without_extension]);
+
+    // Ensure the form contains the 'name' field before setting an error.
+    if (isset($form['name'])) {
+      $form_state->setErrorByName('name', t('The media name must contain at least one letter or dash (-). Only numbers and underscores (_) are not allowed.'));
+    }
+    else {
+      \Drupal::logger('wri_admin')->error('Failed to set error: "name" field missing from form structure.');
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function wri_admin_entity_presave(EntityInterface $entity) {
+  if ($entity instanceof Media && $entity->hasField('field_media_image')) {
+    $file_id = $entity->get('field_media_image')->target_id;
+    $file = File::load($file_id);
+
+    if ($file) {
+      $original_uri = $file->getFileUri();
+      $pathinfo = pathinfo($original_uri);
+
+      // Transliterate the new filename based on the media Name field.
+      $transliteration = \Drupal::service('transliteration');
+      $media_name = $entity->getName();
+
+      // Transliterate and replace special characters.
+      $transliterated_name = $transliteration->transliterate($media_name, 'en');
+
+      // Convert to lowercase and replace spaces/special characters with dashes.
+      $sanitized_name = strtolower(preg_replace('/[^a-zA-Z0-9]+/', '-', trim($transliterated_name)));
+
+      // Ensure the filename doesn't end with a dash.
+      $sanitized_name = rtrim($sanitized_name, '-');
+
+      $new_filename = $sanitized_name . '.' . $pathinfo['extension'];
+
+      // Ensure the new filename does not exist yet.
+      $file_system = \Drupal::service('file_system');
+      $new_uri = $pathinfo['dirname'] . '/' . $new_filename;
+      $new_uri = $file_system->getDestinationFilename($new_uri, FileSystemInterface::EXISTS_RENAME);
+
+      \Drupal::logger('wri_admin')->notice('Presave Hook Triggered:
+        Media ID: @id,
+        Original URI: @orig_uri,
+        Proposed New Filename: @new_filename',
+        [
+          '@id' => $entity->id(),
+          '@orig_uri' => $original_uri,
+          '@new_filename' => $new_filename,
+        ]
+      );
+
+      try {
+        // Copy the file to the new location.
+        $copy_result = $file_system->copy($original_uri, $new_uri, FileSystemInterface::EXISTS_RENAME);
+        if (!$copy_result) {
+          throw new \Exception("File copy failed for: $original_uri to $new_uri");
+        }
+
+        // Update the file entity with the new URI.
+        $file->setFileUri($new_uri);
+        $file->setFilename($new_filename);
+        $file->save();
+
+        // Delete the old file from S3.
+        $file_system->delete($original_uri);
+
+        \Drupal::logger('wri_admin')->notice('File successfully renamed to: @new_filename', ['@new_filename' => $new_filename]);
+
+      }
+      catch (\Exception $e) {
+        \Drupal::logger('wri_admin')->error('File rename error: @error', ['@error' => $e->getMessage()]);
+      }
+    }
+    else {
+      \Drupal::logger('wri_admin')->warning('Presave Hook: File not found for Media ID: @id', ['@id' => $entity->id()]);
+    }
+  }
 }
