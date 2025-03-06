@@ -65,5 +65,5 @@ function wri_admin_update_10302() {
  * Update the file sytem settings.
  */
 function wri_admin_update_10400() {
-  \Drupal::service('distro_helper.updates')->updateConfig('file.settings', ['filename_sanitization'], 'wri_admin');
+  \Drupal::service('distro_helper.updates')->updateConfig('file.settings', ['filename_sanitization'], 'wri_admin', 'install');
 }
