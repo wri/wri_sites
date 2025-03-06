@@ -60,10 +60,3 @@ function wri_admin_update_10302() {
   }
   \Drupal::service('distro_helper.updates')->installConfig('dblog_persistent.channel.solr_schema_problems', 'wri_admin', 'install');
 }
-
-/**
- * Update the file sytem settings.
- */
-function wri_admin_update_10400() {
-  \Drupal::service('distro_helper.updates')->installConfig('file.settings', 'wri_admin', 'install');
-}
