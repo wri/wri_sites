@@ -110,8 +110,6 @@ function wri_admin_theme_suggestions_entity_moderation_form(array $variables) {
  * Validation function to ensure the media name is not just numbers.
  */
 function wri_admin_validate_media_name(array &$form, FormStateInterface $form_state) {
-  $form_state_keys = array_keys($form_state->getValues());
-
   // Check if the 'name' field exists in the form state.
   $name_values = $form_state->getValue('name');
   if (!isset($name_values[0]['value']) || empty($name_values[0]['value'])) {
@@ -167,6 +165,9 @@ function wri_admin_entity_presave(EntityInterface $entity) {
       try {
         // Copy the file to the new location.
         $copy_result = $file_system->copy($original_uri, $new_uri, FileSystemInterface::EXISTS_RENAME);
+        if (!$copy_result) {
+          throw new \Exception("File copy failed for: $original_uri to $new_uri");
+        }
 
         // Update the file entity with the new URI.
         $file->setFileUri($new_uri);
