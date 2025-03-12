@@ -265,6 +265,10 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
       foreach ($tokens as $name => $original) {
         // Find the desired token by name.
         switch ($name) {
+          case 'us':
+            $replacements[$original] = wri_common_who_is_us($data['node']);
+            break;
+
           case 'link':
             $replacements[$original] = wri_common_link_or_text($data['node']);
             break;
