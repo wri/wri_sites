@@ -91,41 +91,6 @@ targetEntityType: node
 bundle: project_detail
 mode: hero_on_a_subpage
 content:
-  field_narrative_taxonomy:
-    type: text_default
-    label: hidden
-    settings: {  }
-    third_party_settings:
-      ds:
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: false
-            lbw-el: ''
-            lbw-cl: ''
-            lbw-at: ''
-            lb-col: false
-            ow: true
-            ow-el: div
-            ow-cl: narrative-taxonomy
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fis-def-at: false
-            fi: false
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
-    weight: 8
-    region: sidebar
   field_primary_topic:
     type: entity_reference_label_class
     label: inline
@@ -231,6 +196,7 @@ hidden:
   field_logo: true
   field_main_image: true
   field_metatags: true
+  field_narrative_taxonomy: true
   field_other_link: true
   field_paragraphs: true
   field_platform_link: true
