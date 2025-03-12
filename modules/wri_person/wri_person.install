@@ -71,9 +71,6 @@ function wri_person_update_dependencies() {
   $dependencies['wri_person'][10401] = [
     'wri_node' => 10401,
   ];
-  $dependencies['wri_person'][10402] = [
-    'wri_person' => 10401,
-  ];
 
   return $dependencies;
 }
