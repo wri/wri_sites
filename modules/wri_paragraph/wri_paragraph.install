@@ -33,7 +33,6 @@ function wri_paragraph_update_10401() {
   \Drupal::service('distro_helper.updates')->installConfig('field.field.paragraph.social_media_sites.field_link', 'wri_paragraph');
   \Drupal::service('distro_helper.updates')->installConfig('field.storage.paragraph.field_site', 'wri_paragraph');
   \Drupal::service('distro_helper.updates')->installConfig('field.field.paragraph.social_media_sites.field_site', 'wri_paragraph');
-  \Drupal::service('distro_helper.updates')->installConfig('field.field.paragraph.social_media_sites.field_text', 'wri_paragraph');
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.paragraph.social_media_sites.default', 'wri_paragraph');
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.paragraph.social_media_sites.default', 'wri_paragraph');
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.paragraph.social_media_sites.preview', 'wri_paragraph');
