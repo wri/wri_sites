@@ -113,6 +113,10 @@ function wri_admin_validate_media_name(array &$form, FormStateInterface $form_st
   // Check if the 'name' field exists in the form state.
   $name_values = $form_state->getValue('name');
   if (!isset($name_values[0]['value']) || empty($name_values[0]['value'])) {
+    $name_values = $form_state->getValue("media")[0]["fields"]["name"] ?? NULL;
+  }
+
+  if (!isset($name_values[0]['value']) || empty($name_values[0]['value'])) {
     return;
   }
 
@@ -126,6 +130,9 @@ function wri_admin_validate_media_name(array &$form, FormStateInterface $form_st
     // Ensure the form contains the 'name' field before setting an error.
     if (isset($form['name'])) {
       $form_state->setErrorByName('name', t('The media name must contain at least one letter or dash (-). Only numbers and underscores (_) are not allowed.'));
+    }
+    elseif (isset($form["media"][0]["fields"]["name"])) {
+      $form_state->setErrorByName("media][0][fields][name", t('The media name must contain at least one letter or dash (-). Only numbers and underscores (_) are not allowed.'));
     }
   }
 }
