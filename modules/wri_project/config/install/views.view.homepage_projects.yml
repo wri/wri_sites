@@ -6,6 +6,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.card
     - core.entity_view_mode.node.tile
+    - node.type.microsite
     - node.type.project_detail
   module:
     - node
@@ -99,23 +100,6 @@ display:
         options: {  }
       empty: {  }
       sorts:
-        weight:
-          id: weight
-          table: views_arg_order_sort
-          field: weight
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: views_arg_order_sort_default
-          order: ASC
-          expose:
-            label: ''
-            field_identifier: weight
-          exposed: false
-          inherit_type: 0
-          null_below: 1
-          argument_number: '0'
-          field_type: 'node_field_data::nid'
         promote:
           id: promote
           table: node_field_data
@@ -242,6 +226,7 @@ display:
           plugin_id: bundle
           operator: in
           value:
+            microsite: microsite
             project_detail: project_detail
           group: 1
           exposed: false
@@ -360,9 +345,9 @@ display:
             label: ''
             field_identifier: weight
           exposed: false
-          inherit_type: 0
-          null_below: 1
-          argument_number: '0'
+          inherit_type: false
+          null_below: true
+          argument_number: 0
           field_type: 'node_field_data::nid'
         created:
           id: created
@@ -381,14 +366,16 @@ display:
           exposed: false
           granularity: second
       arguments:
-        'null':
-          id: 'null'
-          table: views
-          field: 'null'
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: 'null'
+          entity_type: node
+          entity_field: nid
+          plugin_id: node_nid
           default_action: ignore
           exception:
             value: all
@@ -399,7 +386,6 @@ display:
           default_argument_type: fixed
           default_argument_options:
             argument: ''
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -414,7 +400,8 @@ display:
             type: none
             fail: 'not found'
           validate_options: {  }
-          must_not_be: false
+          break_phrase: true
+          not: false
         term_node_tid_depth:
           id: term_node_tid_depth
           table: node_field_data
@@ -434,7 +421,6 @@ display:
           default_argument_type: fixed
           default_argument_options:
             argument: ''
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -471,7 +457,6 @@ display:
           default_argument_type: fixed
           default_argument_options:
             argument: ''
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
