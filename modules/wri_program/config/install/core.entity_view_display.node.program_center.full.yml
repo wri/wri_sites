@@ -99,6 +99,25 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 5
             additional: {  }
+          -
+            uuid: 0820b83a-5fd4-4884-9ffa-5185449302cb
+            region: content
+            configuration:
+              id: 'field_block:node:program_center:field_paragraphs'
+              label: 'Connect with us'
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_revisions_entity_view
+                label: hidden
+                settings:
+                  view_mode: default
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
         third_party_settings: {  }
       -
         layout_id: layout_onecol

@@ -7,12 +7,16 @@
 ]
 %}
 <div{{ attributes.addClass(classes) }}>
-  {{ title_prefix }}
-  {% if label %}
-    <h2{{ title_attributes }}>{{ label }}</h2>
-  {% endif %}
-  {{ title_suffix }}
-  {% block content %}
-    {{ content }}
-  {% endblock %}
+  <div class="xl:col-start-10 md:col-start-11 col-start-1 col-end-4 md:col-end-12">
+    <div class="md:absolute">
+    {{ title_prefix }}
+    {% if label %}
+      <div class="italic mb-xxs">{{ label }}</div>
+    {% endif %}
+    {{ title_suffix }}
+    {% block content %}
+      {{ content }}
+    {% endblock %}
+    </div>
+  </div>
 </div>
