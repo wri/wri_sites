@@ -5,31 +5,26 @@ dependencies:
     - core.entity_view_mode.paragraph.preview
     - field.field.paragraph.social_media_sites.field_link
     - field.field.paragraph.social_media_sites.field_site
-    - field.field.paragraph.social_media_sites.field_text
     - paragraphs.paragraphs_type.social_media_sites
   module:
-    - ds
+    - link
 id: paragraph.social_media_sites.preview
 targetEntityType: paragraph
 bundle: social_media_sites
 mode: preview
 content:
-  field_text:
-    type: string
+  field_link:
+    type: link_separate
     label: hidden
     settings:
-      link_to_entity: false
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
-    weight: 2
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
-  field_link: true
   field_site: true
   search_api_excerpt: true

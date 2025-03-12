@@ -1,13 +1,11 @@
-langcode: en
+
 status: true
 dependencies:
   config:
     - field.field.paragraph.social_media_sites.field_link
     - field.field.paragraph.social_media_sites.field_site
-    - field.field.paragraph.social_media_sites.field_text
     - paragraphs.paragraphs_type.social_media_sites
   module:
-    - ds
     - link
 id: paragraph.social_media_sites.default
 targetEntityType: paragraph
@@ -34,21 +32,6 @@ content:
       link: false
     third_party_settings: {  }
     weight: 0
-    region: content
-  field_text:
-    type: string
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings:
-      ds:
-        ft:
-          id: minimal
-          settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
-    weight: 2
     region: content
 hidden:
   search_api_excerpt: true
