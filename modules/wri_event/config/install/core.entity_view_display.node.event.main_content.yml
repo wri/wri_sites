@@ -44,6 +44,7 @@ dependencies:
     - text
     - user
     - webform
+    - wri_event
     - wri_media
 third_party_settings:
   layout_builder:
@@ -52,6 +53,9 @@ third_party_settings:
   ds:
     layout:
       id: layout_event
+      library: null
+      disable_css: false
+      entity_classes: all_classes
       settings:
         label: ''
     regions:
@@ -92,11 +96,6 @@ third_party_settings:
         weight: 0
         label: hidden
         formatter: default
-      addtocal:
-        plugin_id: addtocal
-        weight: 5
-        label: hidden
-        formatter: default
       node_title:
         plugin_id: node_title
         weight: 2
@@ -115,6 +114,48 @@ targetEntityType: node
 bundle: event
 mode: main_content
 content:
+  addtocal:
+    type: wri_event_wri_event_add_to_cal
+    label: hidden
+    settings:
+      timezone_override: ''
+      date_format: 'Y-m-d\TH:i:s'
+      event_title: ''
+      location: ''
+      description: '[node:field_calendar_description:value]'
+      past_events: 0
+      separator: '-'
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: false
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 5
+    region: buttons
   body:
     type: text_default
     label: hidden
@@ -501,6 +542,7 @@ content:
     region: share
 hidden:
   content_moderation_control: true
+  field_calendar_description: true
   field_event_display: true
   field_international_office: true
   field_location_detail: true
