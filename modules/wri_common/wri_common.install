@@ -176,6 +176,8 @@ function wri_common_update_10301() {
 function wri_common_update_10302() {
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.3_1',
     ['display#default#display_options#arguments#nid'], 'wri_31block');
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.featured_tweet',
+    ['display#default#display_options#arguments#nid'], 'wri_featured_tweet');
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.happening_now',
     ['display#default#display_options#arguments#nid'], 'wri_happening_now');
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.homepage_projects',
