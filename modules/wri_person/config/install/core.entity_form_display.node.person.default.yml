@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -15,11 +14,11 @@ dependencies:
     - field.field.node.person.field_last_name
     - field.field.node.person.field_leadership
     - field.field.node.person.field_metatags
-    - field.field.node.person.field_paragraphs
     - field.field.node.person.field_phone
     - field.field.node.person.field_profile_image
     - field.field.node.person.field_project_expert
     - field.field.node.person.field_quote
+    - field.field.node.person.field_social_links
     - field.field.node.person.field_staff_group
     - field.field.node.person.field_title
     - field.field.node.person.field_topics
@@ -32,7 +31,9 @@ dependencies:
     - field_group
     - link
     - media_library
+    - media_library_edit
     - metatag
+    - paragraphs
     - path
     - telephone
     - text
@@ -91,7 +92,6 @@ third_party_settings:
         - field_email
         - field_phone
         - field_twitter_account
-        - field_paragraphs
         - field_alternate_contact
       label: Contact
       region: content
@@ -155,7 +155,7 @@ content:
     third_party_settings: {  }
   field_alternate_contact:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 4
     region: content
     settings:
       match_operator: CONTAINS
@@ -238,26 +238,6 @@ content:
       sidebar: true
       use_details: true
     third_party_settings: {  }
-  field_paragraphs:
-    type: paragraphs
-    weight: 4
-    region: content
-    settings:
-      title: 'Social Link'
-      title_plural: 'Social Links'
-      edit_mode: closed
-      closed_mode: summary
-      autocollapse: none
-      closed_mode_threshold: 0
-      add_mode: button
-      form_display_mode: default
-      default_paragraph_type: _none
-      features:
-        add_above: '0'
-        collapse_edit_all: collapse_edit_all
-        convert: '0'
-        duplicate: duplicate
-    third_party_settings: {  }
   field_phone:
     type: telephone_default
     weight: 2
@@ -291,6 +271,26 @@ content:
     settings:
       rows: 5
       placeholder: ''
+    third_party_settings: {  }
+  field_social_links:
+    type: paragraphs
+    weight: 4
+    region: content
+    settings:
+      title: 'Social Link'
+      title_plural: 'Social Links'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        convert: '0'
+        duplicate: duplicate
     third_party_settings: {  }
   field_staff_group:
     type: options_select
