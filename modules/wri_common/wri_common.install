@@ -187,4 +187,6 @@ function wri_common_update_10302() {
     ], 'wri_project');
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.superfeatured_content',
     ['display#default#display_options#arguments#nid'], 'wri_superfeatured');
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.trending_topics',
+    ['display#default#display_options#arguments#tid'], 'wri_trending_topics');
 }
