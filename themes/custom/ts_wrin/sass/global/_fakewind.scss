@@ -45,3 +45,7 @@ Classes that emulate tailwind, in case some day we start using tailwind.
 .mb-xxs {
   margin-bottom: $space-xs;
 }
+
+.z-1 {
+    z-index: 1;
+}
