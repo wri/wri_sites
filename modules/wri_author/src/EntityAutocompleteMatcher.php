@@ -15,11 +15,25 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 class EntityAutocompleteMatcher extends EntityAutocompleteMatcherOrig {
 
   /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * The entity repository.
+   *
+   * @var \Drupal\Core\Entity\EntityRepositoryInterface
+   */
+  protected $entityRepository;
+
+  /**
    * Constructs a EntityAutocompleteMatcher object.
    *
    * @param \Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface $selection_manager
    *   The entity reference selection handler plugin manager.
-   * @param \Drupal\Core\Entity\EntityRepository $entity_repository
+   * @param \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository
    *   The Drupal entity.manager service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The Drupal entity_type.manager service.
