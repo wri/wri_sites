@@ -179,7 +179,10 @@ function wri_common_update_10302() {
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.happening_now',
     ['display#default#display_options#arguments#nid'], 'wri_happening_now');
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.homepage_projects',
-    ['display#tiles#display_options#arguments#nid'], 'wri_project');
+    [
+      'display#default#display_options#arguments#nid',
+      'display#tiles#display_options#arguments#nid',
+    ], 'wri_project');
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.superfeatured_content',
     ['display#default#display_options#arguments#nid'], 'wri_superfeatured');
 }
