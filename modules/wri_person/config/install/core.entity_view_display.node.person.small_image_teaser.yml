@@ -16,7 +16,6 @@ dependencies:
     - field.field.node.person.field_last_name
     - field.field.node.person.field_leadership
     - field.field.node.person.field_metatags
-    - field.field.node.person.field_paragraphs
     - field.field.node.person.field_phone
     - field.field.node.person.field_profile_image
     - field.field.node.person.field_project_expert
@@ -41,6 +40,8 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
+_core:
+  default_config_hash: OwC9p_a03rJcp8eZLMFHATCRLAGw4KR4uUKK0xNnYMs
 id: node.person.small_image_teaser
 targetEntityType: node
 bundle: person
@@ -116,7 +117,6 @@ hidden:
   field_languages_spoken: true
   field_last_name: true
   field_metatags: true
-  field_paragraphs: true
   field_phone: true
   field_project_expert: true
   field_quote: true

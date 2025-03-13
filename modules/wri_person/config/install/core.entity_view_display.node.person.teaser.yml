@@ -16,7 +16,6 @@ dependencies:
     - field.field.node.person.field_last_name
     - field.field.node.person.field_leadership
     - field.field.node.person.field_metatags
-    - field.field.node.person.field_paragraphs
     - field.field.node.person.field_phone
     - field.field.node.person.field_profile_image
     - field.field.node.person.field_project_expert
@@ -108,7 +107,6 @@ hidden:
   field_last_name: true
   field_leadership: true
   field_metatags: true
-  field_paragraphs: true
   field_phone: true
   field_project_expert: true
   field_quote: true
