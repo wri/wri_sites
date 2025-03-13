@@ -65,10 +65,10 @@ function wri_project_update_10001() {
 }
 
 /**
- * Add field_paragraphs and update all view modes.
+ * Add field_social_sharing_links and update all view modes.
  */
 function wri_project_update_10401() {
-  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.project_detail.field_paragraphs', 'wri_project');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.project_detail.field_social_sharing_links', 'wri_project');
   \Drupal::service('distro_helper.install')->syncUUIDs(\Drupal::service('config.storage.export')->listAll());
   $message = 'Add field Paragraphs and update view modes.';
   return $message;
@@ -82,7 +82,7 @@ function wri_project_update_10402() {
     'content',
   ], 'wri_project');
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.project_detail.main_content', [
-    'content#field_paragraphs',
+    'content#field_social_sharing_links',
     'third_party_settings#ds#regions#share',
     'third_party_settings#ds#regions#main_content'
   ], 'wri_project');

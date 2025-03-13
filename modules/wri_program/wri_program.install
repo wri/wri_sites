@@ -46,10 +46,10 @@ function wri_program_update_dependencies() {
 }
 
 /**
- * Add field_paragraphs and update all view modes.
+ * Add field_social_links and update all view modes.
  */
 function wri_program_update_10401() {
-  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.program_center.field_paragraphs', 'wri_program');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.program_center.field_social_sharing_links', 'wri_program');
   $message = 'Add field Paragraph and update view modes.';
   return $message;
 }

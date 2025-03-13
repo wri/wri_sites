@@ -166,10 +166,11 @@ function wri_node_update_dependencies() {
 }
 
 /**
- * Add field_paragraphs.
+ * Add field_social_links.
  */
 function wri_node_update_10401() {
-  \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_paragraphs', 'wri_node');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_social_links', 'wri_node');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_social_sharing_links', 'wri_node');
 
   $message = 'Add field Paragraphs.';
   return $message;
@@ -246,9 +247,9 @@ function wri_node_update_10402() {
         ]);
         $paragraph->save();
 
-        // Attach the paragraph to the node's field_paragraphs field.
-        if ($node->hasField('field_paragraphs')) {
-          $node->get('field_paragraphs')->appendItem([
+        // Attach the paragraph to the node's field_social_links field.
+        if ($node->hasField('field_social_links')) {
+          $node->get('field_social_links')->appendItem([
             'target_id' => $paragraph->id(),
             'target_revision_id' => $paragraph->getRevisionId(),
           ]);

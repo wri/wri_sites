@@ -128,10 +128,10 @@ function wri_person_update_10301() {
 }
 
 /**
- * Add field_paragraphs and update all view modes.
+ * Add field_social_links and update all view modes.
  */
 function wri_person_update_10401() {
-  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.person.field_paragraphs', 'wri_person');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.person.field_social_links', 'wri_person');
   $message = 'Add field Paragraph and update view modes.';
   return $message;
 }
@@ -144,7 +144,7 @@ function wri_person_update_10402() {
     'content',
   ], 'wri_person');
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.person.main_content', [
-    'content#field_paragraphs',
+    'content#field_social_links',
     'third_party_settings#ds#regions#buttons',
   ], 'wri_person');
 
