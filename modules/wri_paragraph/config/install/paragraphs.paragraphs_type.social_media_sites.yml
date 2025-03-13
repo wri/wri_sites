@@ -2,7 +2,7 @@
 status: true
 dependencies: {  }
 id: social_media_sites
-label: 'Social Media Sites'
+label: 'Social links'
 icon_uuid: null
 icon_default: null
 description: ''

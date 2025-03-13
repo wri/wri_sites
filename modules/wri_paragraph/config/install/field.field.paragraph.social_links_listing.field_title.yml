@@ -1,0 +1,19 @@
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.social_links_listing
+id: paragraph.social_links_listing.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: social_links_listing
+label: Title
+description: 'Accepts tokens. Default value is "Connect with %5Bparagraph:parent_entity:title%5D"'
+required: false
+translatable: false
+default_value:
+  -
+    value: 'Connect with [paragraph:parent_entity:title]'
+default_value_callback: ''
+settings: {  }
+field_type: string
