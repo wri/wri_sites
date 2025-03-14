@@ -44,6 +44,11 @@ final class WriEventAddToCalFormatter extends AddtocalView {
         $end = $item->end_value;
         $end_date = DrupalDateTime::createFromTimestamp($end);
       }
+      else {
+        // Our formatter is being used on a date without an end, which we don't
+        // have a clear way to handle.
+        continue;
+      }
 
       $today = DrupalDateTime::createFromTimestamp(time());
 
@@ -52,7 +57,7 @@ final class WriEventAddToCalFormatter extends AddtocalView {
         $title = $this->token->replace($this->getSetting('event_title'), $token_data, ['clear' => TRUE]) ?: $entity->label();
         $description = $this->token->replace($this->getSetting('description'), $token_data, ['clear' => TRUE]);
         $description = $this->token->replace($description, $token_data, ['clear' => TRUE]);
-        $timezone = $item->timezone ? $item->timezone : $timezone_override;
+        $timezone = $item->timezone ?: $timezone_override;
         $location = '';
         if (isset($entity->field_location->value)) {
           $location = $entity->field_location->value;
@@ -71,7 +76,6 @@ final class WriEventAddToCalFormatter extends AddtocalView {
         $element[] = $info;
       }
     }
-
     return $element;
   }
 
