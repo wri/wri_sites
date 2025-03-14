@@ -174,19 +174,30 @@ function wri_common_update_10301() {
  * Update Views configurations using views arg sort order.
  */
 function wri_common_update_10302() {
-  \Drupal::service('distro_helper.updates')->updateConfig('views.view.3_1',
-    ['display#default#display_options#arguments#nid'], 'wri_31block');
-  \Drupal::service('distro_helper.updates')->updateConfig('views.view.featured_tweet',
-    ['display#default#display_options#arguments#nid'], 'wri_featured_tweet');
-  \Drupal::service('distro_helper.updates')->updateConfig('views.view.happening_now',
-    ['display#default#display_options#arguments#nid'], 'wri_happening_now');
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.3_1', [
+      'display#default#display_options#arguments#nid',
+      'display#default#display_options#arguments#null',
+    ], 'wri_31block');
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.featured_tweet', [
+      'display#default#display_options#arguments#nid',
+      'display#default#display_options#arguments#null',
+    ], 'wri_featured_tweet');
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.happening_now', [
+      'display#default#display_options#arguments#nid',
+      'display#default#display_options#arguments#null',
+    ], 'wri_happening_now');
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.homepage_projects',
     [
       'display#default#display_options#arguments#nid',
+      'display#default#display_options#arguments#null',
       'display#tiles#display_options#arguments#nid',
     ], 'wri_project');
-  \Drupal::service('distro_helper.updates')->updateConfig('views.view.superfeatured_content',
-    ['display#default#display_options#arguments#nid'], 'wri_superfeatured');
-  \Drupal::service('distro_helper.updates')->updateConfig('views.view.trending_topics',
-    ['display#default#display_options#arguments#tid'], 'wri_trending_topics');
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.superfeatured_content', [
+      'display#default#display_options#arguments#nid',
+      'display#default#display_options#arguments#null',
+    ], 'wri_superfeatured');
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.trending_topics', [
+      'display#default#display_options#arguments#tid',
+      'display#default#display_options#arguments#null',
+    ], 'wri_trending_topics');
 }
