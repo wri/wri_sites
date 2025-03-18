@@ -7,15 +7,9 @@
 
 script_path=$( cd "$(dirname "$0")" || exit 2; pwd -P )
 AFF_BASE="$(dirname "$script_path")"
-AFF_VENDOR="${AFF_BASE}/vendor"
-if [ ! -d "${AFF_VENDOR}" ]; then
-    echo "No vendor directory. Run composer install."
-    exit 1
-fi
-TERMINUS="${AFF_VENDOR}/bin/terminus"
 
 function check_auth() {
-    ${TERMINUS} auth:login > /dev/null 2>&1
+    terminus auth:login > /dev/null 2>&1
     ret="$?"
     if [ "$ret" -ne "0" ]; then
         echo "terminus auth failed"
