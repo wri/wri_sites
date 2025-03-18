@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a Social Media Site paragraph.
+ *
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+]
+%}
+{% set social_site = content.field_site.0['#taxonomy_term'].getName() %}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      <a href="{{ paragraph.field_link.0.url }}"><div class="social-icon-wrapper {{ social_site|lower }}">{{ content.field_site.0 }}</div></a>
+    {% endblock %}
+  </div>
+{% endblock paragraph %}
