@@ -25,6 +25,8 @@ function wri_performance_update_10001() {
  * Install some default config for autobanning.
  */
 function wri_performance_update_10002() {
+  \Drupal::service('distro_helper.updates')->installConfig('advban.settings', 'wri_performance', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('autoban.settings', 'wri_performance', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('autoban.autoban.a_67daf715f3ee8', 'wri_performance', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('autoban.autoban.a_67daf7154753b', 'wri_performance', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('autoban.autoban.a_67daf71601348', 'wri_performance', 'install');
