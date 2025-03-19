@@ -6,3 +6,5 @@ package: 'WRI'
 dependencies:
   - dynamic_page_cache
   - redis
+  - autoban
+  - advban
