@@ -193,3 +193,29 @@ function wri_event_update_10004() {
     ]);
   }
 }
+
+/**
+ * Add a new calendar event description field to events.
+ */
+function wri_event_update_10005() {
+  // Add the fields.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('field.storage.node.field_calendar_description', 'wri_event', 'install', 'TRUE');
+
+  // Attach the fields to the Event node.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('field.field.node.event.field_calendar_description', 'wri_event', 'install', 'TRUE');
+
+  // Updating the Event form display.
+  \Drupal::service('distro_helper.updates')
+    ->updateConfig('core.entity_form_display.node.event.default', [
+      'third_party_settings#field_group#group_registration_types',
+      'content#field_calendar_description',
+    ], 'wri_event');
+
+  // Updating the Event main content display.
+  \Drupal::service('distro_helper.updates')
+    ->updateConfig('core.entity_view_display.node.event.main_content', [
+      'content#addtocal',
+    ], 'wri_event');
+}
