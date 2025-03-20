@@ -25,6 +25,6 @@ terminus multidev:create "$TERMINUS_SITE".live live-backup
 terminus backup:create "$TERMINUS_SITE".test && terminus env:clone-content "$TERMINUS_SITE".live test -y && terminus drush "$TERMINUS_SITE".test -- sapi-sc pantheon
 
 # If this is Flagship, pull files on AWS from the live to the dev bucket
-if [[ "$TERMINUS_SITE" == "wriflagship" ]]
+if [[ "$TERMINUS_SITE" == "wriflagship" ]]; then
   aws s3 sync s3://wriorg/d8/s3fs-public s3://wriorg-dev/d8/s3fs-public --acl public-read
 fi
