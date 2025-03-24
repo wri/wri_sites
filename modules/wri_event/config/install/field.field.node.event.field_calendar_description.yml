@@ -12,7 +12,7 @@ field_name: field_calendar_description
 entity_type: node
 bundle: event
 label: 'Calendar Description'
-description: ''
+description: 'The event description in the "Add to Calendar" link. Default value is "&#91;node:title&#93; - from WRI: &#91;node:url:absolute&#93;"'
 required: false
 translatable: false
 default_value:
