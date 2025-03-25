@@ -58,6 +58,9 @@ final class WriEventAddToCalFormatter extends AddtocalView {
         $description = $this->token->replace($this->getSetting('description'), $token_data, ['clear' => TRUE]);
         $description = $this->token->replace($description, $token_data, ['clear' => TRUE]);
         $timezone = $item->timezone ?: $timezone_override;
+        $timezone_object = new \DateTimeZone($timezone);
+        $start_date->setTimezone($timezone_object);
+        $end_date->setTimezone($timezone_object);
         $location = '';
         if (isset($entity->field_location->value)) {
           $location = $entity->field_location->value;
@@ -66,7 +69,7 @@ final class WriEventAddToCalFormatter extends AddtocalView {
         $info['#markup'] = '<div class="event-subscribe-wrapper"><a href="#" title="' . $button_title . '" class="addeventatc">' . $button_title;
         $info['#markup'] .= '<span class="_start">' . $start_date->format('m/d/Y g:i a') . '</span>';
         $info['#markup'] .= '<span class="_end">' . $end_date->format('m/d/Y g:i a') . '</span>';
-        $info['#markup'] .= '<span class="_zonecode">' . $timezone . '</span>';
+        $info['#markup'] .= '<span class="_timezone">' . $timezone . '</span>';
         $info['#markup'] .= '<span class="_location">' . $location . '</span>';
         $info['#markup'] .= '<span class="_summary">' . $title . '</span>';
         $info['#markup'] .= '<span class="_description">' . $description . '</span>';
