@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - field.field.node.event.body
+    - field.field.node.event.field_calendar_description
     - field.field.node.event.field_date_time
     - field.field.node.event.field_event_display
     - field.field.node.event.field_featured
@@ -158,6 +159,7 @@ third_party_settings:
         required_fields: true
     group_registration_types:
       children:
+        - field_calendar_description
         - group_registration_options
       label: 'Registration Button Options'
       region: content
@@ -193,6 +195,14 @@ content:
     weight: 100
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_calendar_description:
+    type: text_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
     third_party_settings: {  }
   field_date_time:
     type: smartdate_timezone
