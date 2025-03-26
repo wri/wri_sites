@@ -57,10 +57,12 @@ final class WriEventAddToCalFormatter extends AddtocalView {
         $title = $this->token->replace($this->getSetting('event_title'), $token_data, ['clear' => TRUE]) ?: $entity->label();
         $description = $this->token->replace($this->getSetting('description'), $token_data, ['clear' => TRUE]);
         $description = $this->token->replace($description, $token_data, ['clear' => TRUE]);
-        $timezone = $item->timezone ?: $timezone_override;
-        $timezone_object = new \DateTimeZone($timezone);
-        $start_date->setTimezone($timezone_object);
-        $end_date->setTimezone($timezone_object);
+        $timezone = $item->timezone ?: $timezone_override ?: date_default_timezone_get();
+        if ($timezone) {
+          $timezone_object = new \DateTimeZone($timezone);
+          $start_date->setTimezone($timezone_object);
+          $end_date->setTimezone($timezone_object);
+        }
         $location = '';
         if (isset($entity->field_location->value)) {
           $location = $entity->field_location->value;
