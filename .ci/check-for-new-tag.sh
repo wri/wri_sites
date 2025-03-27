@@ -15,7 +15,7 @@ ltag_commit=$(git rev-list -n 1 "$latest_tag")
 # if latest tag is a descendant of the latest tag commit, return pass
 if [ $(git merge-base --is-ancestor "$ltag_commit" "$latest_commit") 0 ]; then
   echo "New tags found. Running pre-deploy.sh"
-  ./pre-deploy.sh
+  ./.ci/pre-deploy.sh
 else
   echo "No new tags found."
 fi
