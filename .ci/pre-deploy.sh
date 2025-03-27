@@ -2,15 +2,10 @@
 
 set -eo pipefail
 
-# load common functions
-script_path=$( cd "$(dirname "$0")" || exit 2; pwd -P )
-# shellcheck source=scripts/util.sh
-source "$script_path/util.sh"
-
 # Authenticate with Terminus
 terminus -n auth:login --machine-token="$TERMINUS_TOKEN"
 
-# Authenticate with AWS
+# Authenticate with AWS (todo)
 
 
 # Wipe all content from the 'live-backup' environment
