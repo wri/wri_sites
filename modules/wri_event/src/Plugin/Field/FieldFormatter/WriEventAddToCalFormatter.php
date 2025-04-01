@@ -69,8 +69,8 @@ final class WriEventAddToCalFormatter extends AddtocalView {
         }
         $button_title = $this->t('Add to Calendar');
         $info['#markup'] = '<div class="event-subscribe-wrapper"><a href="#" title="' . $button_title . '" class="addeventatc">' . $button_title;
-        $info['#markup'] .= '<span class="_start">' . $start_date->format('m/d/Y g:i a') . '</span>';
-        $info['#markup'] .= '<span class="_end">' . $end_date->format('m/d/Y g:i a') . '</span>';
+        $info['#markup'] .= '<span class="_start">' . $this->formatDate($start_date) . '</span>';
+        $info['#markup'] .= '<span class="_end">' . $this->formatDate($end_date) . '</span>';
         $info['#markup'] .= '<span class="_timezone">' . $timezone . '</span>';
         $info['#markup'] .= '<span class="_location">' . $location . '</span>';
         $info['#markup'] .= '<span class="_summary">' . $title . '</span>';
