@@ -153,6 +153,9 @@ function wri_admin_entity_presave(EntityInterface $entity) {
       $transliteration = \Drupal::service('transliteration');
       $media_name = $entity->getName();
 
+      // Remove the extension from the media name.
+      $media_name = isset($pathinfo['extension']) ? trim($media_name, '.' . $pathinfo['extension']) : $media_name;
+
       // Transliterate and replace special characters.
       $transliterated_name = $transliteration->transliterate($media_name, 'en');
 
