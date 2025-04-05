@@ -1,0 +1,31 @@
+
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.social_media_sites.field_link
+    - field.field.paragraph.social_media_sites.field_site
+    - paragraphs.paragraphs_type.social_media_sites
+  module:
+    - link
+id: paragraph.social_media_sites.default
+targetEntityType: paragraph
+bundle: social_media_sites
+mode: default
+content:
+  field_link:
+    type: link_default
+    weight: 3
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_site:
+    type: options_select
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

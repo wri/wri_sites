@@ -1,0 +1,8 @@
+status: true
+dependencies: {  }
+id: social_media_sites
+label: 'Social links'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }
