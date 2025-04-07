@@ -1,0 +1,19 @@
+status: true
+dependencies:
+  module:
+    - wri_filter
+  theme:
+    - ts_wrin
+id: wrinfilter
+theme: ts_wrin
+region: wrin_custom
+weight: -14
+provider: null
+plugin: 'single_file_component_block:wri_filter'
+settings:
+  id: 'single_file_component_block:wri_filter'
+  label: 'WRIN Filter'
+  label_display: '0'
+  provider: wri_filter
+  component_context: {  }
+visibility: {  }
