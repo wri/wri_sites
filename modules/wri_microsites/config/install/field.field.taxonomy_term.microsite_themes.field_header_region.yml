@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_header_region
+    - taxonomy.vocabulary.microsite_themes
+  module:
+    - options
+id: taxonomy_term.microsite_themes.field_header_region
+field_name: field_header_region
+entity_type: taxonomy_term
+bundle: microsite_themes
+label: 'Header region'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: wri_default
+default_value_callback: ''
+settings: {  }
+field_type: list_string

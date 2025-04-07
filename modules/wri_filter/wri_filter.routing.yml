@@ -1,0 +1,14 @@
+wri_filter.filter_controller_apply_filter:
+  path: '/content-filter/{filter}'
+  defaults:
+    _controller: '\Drupal\wri_filter\Controller\FilterController::applyFilter'
+    _title: 'Filter your experience'
+  requirements:
+    _permission: 'access content'
+wri_filter.filter_controller_remove_filter:
+  path: '/content-filter/remove'
+  defaults:
+    _controller: '\Drupal\wri_filter\Controller\FilterController::removeFilter'
+    _title: 'Remove filter'
+  requirements:
+    _permission: 'access content'

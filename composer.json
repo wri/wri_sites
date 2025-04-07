@@ -171,6 +171,7 @@
         "drupal/media_responsive_thumbnail": "^1.2",
         "drupal/menu_admin_per_menu": "*",
         "drupal/menu_block": "^1.8",
+        "drupal/menu_item_extras": "^3.1",
         "drupal/menu_position": "^1.0@beta",
         "drupal/metatag": "^2.0",
         "drupal/metatag_google_scholar": "^1.0",

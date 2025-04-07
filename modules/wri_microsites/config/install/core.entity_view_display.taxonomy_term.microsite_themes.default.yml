@@ -1,0 +1,47 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.microsite_themes.field_child_hero_style
+    - field.field.taxonomy_term.microsite_themes.field_header_region
+    - field.field.taxonomy_term.microsite_themes.field_library
+    - taxonomy.vocabulary.microsite_themes
+  module:
+    - options
+    - text
+id: taxonomy_term.microsite_themes.default
+targetEntityType: taxonomy_term
+bundle: microsite_themes
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_child_hero_style:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_header_region:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_library:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

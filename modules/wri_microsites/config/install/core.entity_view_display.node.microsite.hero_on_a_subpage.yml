@@ -1,0 +1,124 @@
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.hero_on_a_subpage
+    - field.field.node.microsite.body
+    - field.field.node.microsite.field_featured_experts
+    - field.field.node.microsite.field_featured_related_resources
+    - field.field.node.microsite.field_intro
+    - field.field.node.microsite.field_intro_paragraphs
+    - field.field.node.microsite.field_logo
+    - field.field.node.microsite.field_long_title
+    - field.field.node.microsite.field_main_image
+    - field.field.node.microsite.field_metatags
+    - field.field.node.microsite.field_primary_contacts
+    - field.field.node.microsite.field_project_partners
+    - field.field.node.microsite.field_theme
+    - field.field.node.microsite.field_toc
+    - field.field.node.microsite.field_twitter_account
+    - field.field.node.microsite.field_type
+    - field.field.node.microsite.layout_builder__layout
+    - node.type.microsite
+  module:
+    - ds
+    - element_class_formatter
+    - layout_builder
+    - text
+    - user
+    - wri_toc
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  ds:
+    layout:
+      id: 'single_file_component_layout:wri_subpage_columns'
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        component_context: {  }
+    regions:
+      hero:
+        - childimg
+        - field_long_title
+        - childtitle
+        - field_toc
+        - field_twitter_account
+    fields:
+      childimg:
+        plugin_id: childimg
+        weight: 0
+        label: hidden
+        formatter: default
+      childtitle:
+        plugin_id: childtitle
+        weight: 2
+        label: hidden
+        formatter: default
+_core:
+  default_config_hash: 2LwQE22ua4lgDr3Xcnz1mp5hkrpgayorYk8UEEubHDc
+id: node.microsite.hero_on_a_subpage
+targetEntityType: node
+bundle: microsite
+mode: hero_on_a_subpage
+content:
+  field_long_title:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: hero
+  field_toc:
+    type: 'single_file_component_field_formatter:toc_formatter'
+    label: hidden
+    settings:
+      menu: microsites
+      color_class: gold-bar
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 4
+    region: hero
+  field_twitter_account:
+    type: link_ally_class
+    label: hidden
+    settings:
+      class: ''
+      link_text: 'Follow on '
+      screenreader_text: 'Follow on X'
+      tag: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    weight: 7
+    region: hero
+hidden:
+  body: true
+  content_moderation_control: true
+  field_featured_experts: true
+  field_featured_related_resources: true
+  field_intro: true
+  field_intro_paragraphs: true
+  field_logo: true
+  field_main_image: true
+  field_metatags: true
+  field_primary_contacts: true
+  field_project_partners: true
+  field_theme: true
+  field_type: true
+  langcode: true
+  layout_builder__layout: true
+  layout_builder__translation: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true
