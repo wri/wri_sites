@@ -1,0 +1,6 @@
+name: WRIN Filter
+type: module
+description: Custom off-canvas filter menu.
+core_version_requirement: '>=9.5'
+dependencies:
+  - views_extras

@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.menu_link_content.microsites.field_section
+    - system.menu.microsites
+id: menu_link_content.microsites.default
+targetEntityType: menu_link_content
+bundle: microsites
+mode: default
+content:
+  children:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_section: true
+  langcode: true
+  search_api_excerpt: true

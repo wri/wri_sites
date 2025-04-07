@@ -1,0 +1,178 @@
+<?php
+
+/**
+ * @file
+ * Install functions for WRI.
+ */
+
+use Drupal\Core\Utility\UpdateException;
+use Drupal\node\Entity\Node;
+
+/**
+ * Update the language.entity.en file.
+ */
+function wri_filter_update_9001() {
+  // If the language.entity.en config exists,
+  // update its uuid in the system to match what's in our config
+  // 220b5ec8-62e2-419e-873d-a893297125dd.
+  $saved_config = \Drupal::configFactory()->getEditable('language.entity.en');
+  if ($saved_config) {
+    \Drupal::configFactory()
+      ->getEditable('language.entity.en')
+      ->set('uuid', '220b5ec8-62e2-419e-873d-a893297125dd')
+      ->save();
+  }
+  else {
+    throw new UpdateException('This update should run after the update that creates the language.entity.en file');
+  }
+}
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_filter_update_dependencies() {
+  // Indicate that the wri_filter_update_8901() function provided by this module
+  // must run after the search_api_solr_update_8409() function provided by the
+  // 'another_module' module.
+  $dependencies['wri_filter'][9001] = [
+    'search_api_solr' => 8409,
+  ];
+
+  return $dependencies;
+}
+
+/**
+ * Updates the tokens in narrative taxonomies.
+ */
+function wri_filter_update_9503(&$sandbox) {
+  if (!isset($sandbox['total'])) {
+    $sandbox['total'] = Drupal::database()->select('node__field_narrative_taxonomy', 'u')
+      ->condition('u.field_narrative_taxonomy_value', '%our %', 'LIKE')
+      ->fields('u')
+      ->countQuery()
+      ->execute()
+      ->fetchField();
+    $sandbox['current'] = 0;
+
+    if (empty($sandbox['total'])) {
+      $sandbox['#finished'] = 1;
+      return;
+    }
+  }
+
+  $users_per_batch = 25;
+  $start_value = $sandbox['current'];
+  $nids = Drupal::database()->select('node__field_narrative_taxonomy', 'u')
+    ->condition('u.field_narrative_taxonomy_value', '%our %', 'LIKE')
+    ->condition('entity_id', $sandbox['current'], '>=')
+    ->fields('u')
+    ->orderBy('entity_id')
+    ->range(0, $users_per_batch)
+    ->execute();
+
+  if (empty($nids)) {
+    $sandbox['#finished'] = 1;
+    return;
+  }
+  // Loop through each node.
+  foreach ($nids as $result) {
+    $node = Node::load($result->entity_id);
+    if ($node->hasTranslation($result->langcode)) {
+      $node = $node->getTranslation($result->langcode);
+    }
+    $taxonomy_value = $node->field_narrative_taxonomy->getValue();
+    // Replace link strings with new values.
+    $taxonomy_value[0]['value'] = str_replace(
+      [
+        'our [wri_tokens:topic_and_sub_topic_links_list]',
+        'our <a',
+      ],
+      [
+        '[wri_tokens:topic_and_sub_topic_links_list]',
+        '<a',
+      ],
+      $taxonomy_value[0]['value']
+    );
+    $node->field_narrative_taxonomy->setValue($taxonomy_value);
+
+    // Save the node.
+    $node->save();
+    $sandbox['current'] = $result->entity_id;
+  }
+
+  \Drupal::messenger()
+    ->addMessage($sandbox['current'] . ' node last processed.');
+
+  $sandbox['#finished'] = ($sandbox['current'] == $start_value);
+}
+
+/**
+ * Updates "part of the" in narrative taxonomies.
+ */
+function wri_filter_update_9506(&$sandbox) {
+  if (!isset($sandbox['total'])) {
+    $sandbox['total'] = Drupal::database()->select('node__field_narrative_taxonomy', 'u')
+      ->condition('u.field_narrative_taxonomy_value', '%part of the%', 'LIKE')
+      ->fields('u')
+      ->countQuery()
+      ->execute()
+      ->fetchField();
+    $sandbox['current'] = 0;
+
+    if (empty($sandbox['total'])) {
+      $sandbox['#finished'] = 1;
+      return;
+    }
+  }
+
+  $users_per_batch = 25;
+  $start_value = $sandbox['current'];
+  $nids = Drupal::database()->select('node__field_narrative_taxonomy', 'u')
+    ->condition('u.field_narrative_taxonomy_value', '%part of the%', 'LIKE')
+    ->condition('entity_id', $sandbox['current'], '>=')
+    ->fields('u')
+    ->orderBy('entity_id')
+    ->range(0, $users_per_batch)
+    ->execute();
+
+  if (empty($nids)) {
+    $sandbox['#finished'] = 1;
+    return;
+  }
+  // Loop through each node.
+  foreach ($nids as $result) {
+    $node = Node::load($result->entity_id);
+    if ($node->hasTranslation($result->langcode)) {
+      $node = $node->getTranslation($result->langcode);
+    }
+    $taxonomy_value = $node->field_narrative_taxonomy->getValue();
+    // Replace link strings with new values.
+    $taxonomy_value[0]['value'] = str_replace(
+      [
+        'part of the [node:field_projects:entity:link]',
+        'part of the <a',
+        'part of the&nbsp;[node:field_projects:entity:link]',
+        'part of the&nbsp;<a',
+        'part of the [wri_tokens:topic_and_sub_topic_links_list]',
+      ],
+      [
+        'part of [node:field_projects:entity:link]',
+        'part of <a',
+        'part of [node:field_projects:entity:link]',
+        'part of <a',
+        'part of [wri_tokens:topic_and_sub_topic_links_list]',
+      ],
+      $taxonomy_value[0]['value']
+    );
+    $node->field_narrative_taxonomy->setValue($taxonomy_value);
+
+    // Save the node.
+    $node->save();
+    $sandbox['current'] = $result->entity_id;
+  }
+
+  \Drupal::messenger()
+    ->addMessage($sandbox['current'] . ' node last processed.');
+
+  $sandbox['#finished'] = ($sandbox['current'] == $start_value);
+}

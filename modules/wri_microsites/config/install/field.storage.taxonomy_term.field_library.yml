@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - taxonomy
+id: taxonomy_term.field_library
+field_name: field_library
+entity_type: taxonomy_term
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: wri_paying_for_paris/wri_paying_for_paris
+      label: 'Paying for Paris'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

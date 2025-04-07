@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.menu_link_content.field_section
+    - system.menu.microsites
+id: menu_link_content.microsites.field_section
+field_name: field_section
+entity_type: menu_link_content
+bundle: microsites
+label: Section
+description: "Optional section for this menu item. Displays above the menu item's title on some views."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Microsite Themes'
+vid: microsite_themes
+description: 'Themes that can be applied to microsite pages and subpages'
+weight: 0
+new_revision: false

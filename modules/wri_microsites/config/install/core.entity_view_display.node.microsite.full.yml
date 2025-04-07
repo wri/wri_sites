@@ -1,0 +1,252 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.hero
+    - core.entity_view_mode.node.full
+    - field.field.node.microsite.body
+    - field.field.node.microsite.field_featured_experts
+    - field.field.node.microsite.field_featured_related_resources
+    - field.field.node.microsite.field_intro
+    - field.field.node.microsite.field_intro_paragraphs
+    - field.field.node.microsite.field_logo
+    - field.field.node.microsite.field_long_title
+    - field.field.node.microsite.field_main_image
+    - field.field.node.microsite.field_metatags
+    - field.field.node.microsite.field_primary_contacts
+    - field.field.node.microsite.field_project_partners
+    - field.field.node.microsite.field_theme
+    - field.field.node.microsite.field_toc
+    - field.field.node.microsite.field_twitter_account
+    - field.field.node.microsite.field_type
+    - field.field.node.microsite.layout_builder__layout
+    - field.field.node.microsite.layout_builder__translation
+    - node.type.microsite
+    - views.view.related_to_this_project
+  module:
+    - ctools
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_discovery
+    - user
+    - views
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+        components:
+          1ae74557-4e51-4fd9-bfe8-83d700829d0a:
+            uuid: 1ae74557-4e51-4fd9-bfe8-83d700829d0a
+            region: content
+            configuration:
+              id: 'field_block:node:microsite:field_primary_contacts'
+              label: 'Primary contacts'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: teaser
+                third_party_settings: {  }
+            weight: -3
+            additional: {  }
+          60b9c12e-4773-40dd-9339-eaf9036816aa:
+            uuid: 60b9c12e-4773-40dd-9339-eaf9036816aa
+            region: content
+            configuration:
+              id: 'entity_view:node'
+              label: 'Entity view (Content)'
+              label_display: '0'
+              provider: ctools
+              view_mode: main_content
+              context_mapping:
+                entity: layout_builder.entity
+            weight: -8
+            additional: {  }
+          a321f598-b4e3-4c3f-a580-532d2aab6287:
+            uuid: a321f598-b4e3-4c3f-a580-532d2aab6287
+            region: content
+            configuration:
+              id: 'field_block:node:microsite:field_project_partners'
+              label: 'Project Partners'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_revisions_entity_view
+                label: above
+                settings:
+                  view_mode: default
+                third_party_settings: {  }
+            weight: -6
+            additional: {  }
+          a1c32609-f9f9-469f-8afc-86e509c3b92a:
+            uuid: a1c32609-f9f9-469f-8afc-86e509c3b92a
+            region: content
+            configuration:
+              id: 'views_block:related_to_this_project-block_1'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: '8'
+            weight: -4
+            additional: {  }
+          1185969a-7903-4804-883d-f5c194e519fa:
+            uuid: 1185969a-7903-4804-883d-f5c194e519fa
+            region: content
+            configuration:
+              id: 'field_block:node:microsite:field_featured_related_resources'
+              label: 'Featured Related Resources'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: card
+                third_party_settings: {  }
+            weight: -5
+            additional: {  }
+          11aff077-a1e9-4b73-8903-3bad7fb7baba:
+            uuid: 11aff077-a1e9-4b73-8903-3bad7fb7baba
+            region: content
+            configuration:
+              id: 'field_block:node:microsite:field_featured_experts'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: teaser
+                  link: false
+                third_party_settings: {  }
+            weight: -2
+            additional: {  }
+          a582f0f0-cdb2-4f9c-b100-0d32ba64fbe7:
+            uuid: a582f0f0-cdb2-4f9c-b100-0d32ba64fbe7
+            region: content
+            configuration:
+              id: 'field_block:node:microsite:field_intro_paragraphs'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_revisions_entity_view
+                label: hidden
+                settings:
+                  view_mode: default
+                  link: ''
+                third_party_settings: {  }
+            weight: -7
+            additional: {  }
+          673ccc58-9c48-4003-a0f5-d0672affb1b5:
+            uuid: 673ccc58-9c48-4003-a0f5-d0672affb1b5
+            region: content
+            configuration:
+              id: 'extra_field_block:node:microsite:content_moderation_control'
+              label: 'Moderation control'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: -10
+            additional: {  }
+          a786cd48-e408-473f-94fa-92552b6f2cbc:
+            uuid: a786cd48-e408-473f-94fa-92552b6f2cbc
+            region: content
+            configuration:
+              id: 'inline_block:hero'
+              label: 'Node hero'
+              label_display: '0'
+              provider: layout_builder
+              view_mode: full
+              context_mapping: {  }
+              block_revision_id: 8
+              block_serialized: null
+            weight: -9
+            additional: {  }
+        third_party_settings: {  }
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      allowed_layouts:
+        - layout_onecol
+      denylisted_blocks: {  }
+      allowlisted_blocks:
+        'Chaos Tools':
+          - 'entity_view:node'
+        Components: {  }
+        'Content fields':
+          - 'field_block:node:microsite:field_featured_experts'
+          - 'field_block:node:microsite:field_featured_related_resources'
+          - 'field_block:node:microsite:field_intro_paragraphs'
+          - 'field_block:node:microsite:field_primary_contacts'
+          - 'extra_field_block:node:microsite:content_moderation_control'
+          - 'field_block:node:microsite:field_project_partners'
+        Facets: {  }
+        'Facets summary (Experimental)': {  }
+        Forms: {  }
+        'Lists (Views)':
+          - 'views_block:featured_experts-block_1'
+          - 'views_block:related_to_this_project-block_1'
+        Menus: {  }
+        System: {  }
+        User: {  }
+        'WRI block': {  }
+        core: {  }
+      restricted_categories: {  }
+id: node.microsite.full
+targetEntityType: node
+bundle: microsite
+mode: full
+content: {  }
+hidden:
+  body: true
+  content_moderation_control: true
+  field_authors: true
+  field_cover_image: true
+  field_doi: true
+  field_featured_experts: true
+  field_featured_related_resources: true
+  field_intro: true
+  field_intro_paragraphs: true
+  field_isbn: true
+  field_logo: true
+  field_long_title: true
+  field_main_image: true
+  field_metatags: true
+  field_primary_contacts: true
+  field_project_partners: true
+  field_theme: true
+  field_toc: true
+  field_total_pages: true
+  field_twitter_account: true
+  field_type: true
+  langcode: true
+  layout_builder__layout: true
+  layout_builder__translation: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

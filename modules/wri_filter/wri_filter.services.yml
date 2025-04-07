@@ -1,0 +1,12 @@
+services:
+  wri_filter.filter:
+    class: Drupal\wri_filter\FilterService
+    arguments: ['@request_stack', '@path.matcher', '@entity_type.manager','@current_route_match', '@router.admin_context']
+  wri_filter.twig_filter:
+    class: Drupal\wri_filter\TwigFilterService
+    arguments: ['@request_stack', '@wri_filter.filter']
+    tags:
+      - { name: twig.extension }
+  logger.channel.wri_filter:
+    parent: logger.channel_base
+    arguments: ['wri_filter']

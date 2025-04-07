@@ -1,0 +1,59 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_intro_paragraphs
+    - node.type.microsite
+    - paragraphs.paragraphs_type.program_lead_in
+    - paragraphs.paragraphs_type.statistics
+  module:
+    - entity_reference_revisions
+id: node.microsite.field_intro_paragraphs
+field_name: field_intro_paragraphs
+entity_type: node
+bundle: microsite
+label: 'Intro Paragraphs'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      program_lead_in: program_lead_in
+      statistics: statistics
+    negate: 0
+    target_bundles_drag_drop:
+      default_hero:
+        weight: 11
+        enabled: false
+      featured_statement:
+        weight: 12
+        enabled: false
+      happening_now:
+        weight: 13
+        enabled: false
+      homepage_hero:
+        weight: 14
+        enabled: false
+      impact:
+        weight: 15
+        enabled: false
+      impact_in_action_blocks:
+        weight: 16
+        enabled: false
+      partner_logo:
+        weight: 17
+        enabled: false
+      program_lead_in:
+        weight: 18
+        enabled: true
+      statistic:
+        weight: 19
+        enabled: false
+      statistics:
+        weight: 20
+        enabled: true
+field_type: entity_reference_revisions

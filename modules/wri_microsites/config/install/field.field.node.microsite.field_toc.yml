@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_toc
+    - node.type.microsite
+  module:
+    - options
+id: node.microsite.field_toc
+field_name: field_toc
+entity_type: node
+bundle: microsite
+label: 'Show Table of Contents?'
+description: 'Choose "Generated from H2s" if you want to link to anchors on this page. Choose "Generated from subpages" if you want the menu to link to this page''s child pages.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string
