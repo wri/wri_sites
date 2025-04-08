@@ -85,7 +85,17 @@ class MapsController extends ControllerBase {
       }
     }
 
-    return new JsonResponse($data);
+    $data['#cache'] = [
+      'max-age' => $this->config('system.performance')->get('cache')['page']['max_age'],
+      'contexts' => [
+        'url.query_args',
+      ],
+    ];
+
+    $response = new CacheableJsonResponse($region_nodes);
+    $response->addCacheableDependency(CacheableMetadata::createFromRenderArray($data));
+
+    return $response;
   }
 
   /**
