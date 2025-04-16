@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.project_detail.field_metatags
     - field.field.node.project_detail.field_narrative_taxonomy
     - field.field.node.project_detail.field_other_link
+    - field.field.node.project_detail.field_paragraphs
     - field.field.node.project_detail.field_platform_link
     - field.field.node.project_detail.field_primary_contacts
     - field.field.node.project_detail.field_primary_topic
@@ -60,6 +61,7 @@ hidden:
   field_main_image: true
   field_metatags: true
   field_other_link: true
+  field_paragraphs: true
   field_platform_link: true
   field_primary_contacts: true
   field_primary_topic: true

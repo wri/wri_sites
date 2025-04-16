@@ -1,0 +1,22 @@
+{%
+  set classes = [
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  'grid'
+]
+%}
+<div{{ attributes.addClass(classes) }}>
+  <div class="xl:col-start-10 md:col-start-11 col-start-1 col-end-4 md:col-end-12">
+    <div class="md:absolute z-1">
+    {{ title_prefix }}
+    {% if label %}
+      <h2{{ title_attributes }}>{{ label }}</h2>
+    {% endif %}
+    {{ title_suffix }}
+    {% block content %}
+      {{ content }}
+    {% endblock %}
+    </div>
+  </div>
+</div>
