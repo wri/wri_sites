@@ -93,7 +93,7 @@ class MapsController extends ControllerBase {
       ],
     ];
 
-    $response = new CacheableJsonResponse($region_nodes);
+    $response = new CacheableJsonResponse($data);
     $response->addCacheableDependency(CacheableMetadata::createFromRenderArray($data));
 
     return $response;
