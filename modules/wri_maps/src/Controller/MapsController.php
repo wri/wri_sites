@@ -2,11 +2,12 @@
 
 namespace Drupal\wri_maps\Controller;
 
+use Drupal\Core\Cache\CacheableJsonResponse;
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Template\Attribute;
 use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -85,7 +86,17 @@ class MapsController extends ControllerBase {
       }
     }
 
-    return new JsonResponse($data);
+    $data['#cache'] = [
+      'max-age' => $this->config('system.performance')->get('cache')['page']['max_age'],
+      'contexts' => [
+        'url.query_args',
+      ],
+    ];
+
+    $response = new CacheableJsonResponse($data);
+    $response->addCacheableDependency(CacheableMetadata::createFromRenderArray($data));
+
+    return $response;
   }
 
   /**
