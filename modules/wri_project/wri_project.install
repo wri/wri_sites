@@ -69,7 +69,6 @@ function wri_project_update_10001() {
  */
 function wri_project_update_10401() {
   \Drupal::service('distro_helper.updates')->installConfig('field.field.node.project_detail.field_social_sharing_links', 'wri_project');
-  \Drupal::service('distro_helper.install')->syncUUIDs(\Drupal::service('config.storage.export')->listAll());
   $message = 'Add field Paragraphs and update view modes.';
   return $message;
 }
