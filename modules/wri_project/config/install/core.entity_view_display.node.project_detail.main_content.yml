@@ -15,13 +15,13 @@ dependencies:
     - field.field.node.project_detail.field_metatags
     - field.field.node.project_detail.field_narrative_taxonomy
     - field.field.node.project_detail.field_other_link
-    - field.field.node.project_detail.field_paragraphs
     - field.field.node.project_detail.field_platform_link
     - field.field.node.project_detail.field_primary_contacts
     - field.field.node.project_detail.field_primary_topic
     - field.field.node.project_detail.field_project_partners
     - field.field.node.project_detail.field_region
     - field.field.node.project_detail.field_show_more_link
+    - field.field.node.project_detail.field_social_sharing_links
     - field.field.node.project_detail.field_tags
     - field.field.node.project_detail.field_toc
     - field.field.node.project_detail.field_twitter_account
@@ -72,9 +72,9 @@ third_party_settings:
         - field_logo
       main_content:
         - body
-        - field_paragraphs
       sidebar:
         - field_narrative_taxonomy
+        - field_social_sharing_links
     fields:
       node_title:
         plugin_id: node_title
@@ -204,15 +204,6 @@ content:
             lb: ''
     weight: 6
     region: buttons
-  field_paragraphs:
-    type: entity_reference_revisions_entity_view
-    label: above
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
-    weight: 12
-    region: main_content
   field_platform_link:
     type: link_ally_class
     label: hidden
@@ -308,6 +299,15 @@ content:
             suffix: ''
     weight: 8
     region: category
+  field_social_sharing_links:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 14
+    region: sidebar
   field_toc:
     type: 'single_file_component_field_formatter:toc_formatter'
     label: hidden
@@ -338,6 +338,7 @@ content:
     weight: 9
     region: share
 hidden:
+  addtocal: true
   content_moderation_control: true
   field_featured: true
   field_featured_experts: true

@@ -14,13 +14,13 @@ dependencies:
     - field.field.node.project_detail.field_metatags
     - field.field.node.project_detail.field_narrative_taxonomy
     - field.field.node.project_detail.field_other_link
-    - field.field.node.project_detail.field_paragraphs
     - field.field.node.project_detail.field_platform_link
     - field.field.node.project_detail.field_primary_contacts
     - field.field.node.project_detail.field_primary_topic
     - field.field.node.project_detail.field_project_partners
     - field.field.node.project_detail.field_region
     - field.field.node.project_detail.field_show_more_link
+    - field.field.node.project_detail.field_social_sharing_links
     - field.field.node.project_detail.field_tags
     - field.field.node.project_detail.field_toc
     - field.field.node.project_detail.field_twitter_account
@@ -30,8 +30,10 @@ dependencies:
   module:
     - content_moderation
     - field_group
+    - inline_entity_form
     - link
     - media_library
+    - media_library_edit
     - metatag
     - paragraphs
     - path
@@ -312,6 +314,24 @@ content:
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  field_social_sharing_links:
+    type: inline_entity_form_complex
+    weight: 8
+    region: content
+    settings:
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: false
+      match_operator: CONTAINS
+      allow_duplicate: false
+      collapsible: false
+      collapsed: false
+      revision: false
+      removed_reference: optional
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete_tags
