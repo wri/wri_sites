@@ -17,7 +17,9 @@
     </div>
     <div class="right">
       {% set parent_menu_id = view.display_handler.display.display_options.menu.parent %}
-    {{ drupal_block('menu_block:page-hierarchies', {level: 1, depth: 0, parent: parent_menu_id, render_parent: false, follow_parent: 'child', follow: 0, label: 'Child pages', label_display: 0, id:'page-hierarchies'}) }}
+      {% if parent_menu_id %}
+      {{ drupal_block('menu_block:page-hierarchies', {level: 1, depth: 0, parent: parent_menu_id, render_parent: false, follow_parent: 'child', follow: 0, label: 'Child pages', label_display: 0, id:'page-hierarchies'}) }}
+      {% endif %}
     </div>
   </div>
   {{ drupal_block('facet_block:experts_all_topics') }}
