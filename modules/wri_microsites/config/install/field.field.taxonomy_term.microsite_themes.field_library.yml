@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_library
+    - taxonomy.vocabulary.microsite_themes
+  module:
+    - options
+id: taxonomy_term.microsite_themes.field_library
+field_name: field_library
+entity_type: taxonomy_term
+bundle: microsite_themes
+label: Library
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

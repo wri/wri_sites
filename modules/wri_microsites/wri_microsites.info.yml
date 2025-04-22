@@ -1,0 +1,6 @@
+name: WRIN microsites
+type: module
+description: Contains config and functions to add the microsites content type.
+core_version_requirement: '>=9.5'
+dependencies:
+  - menu_item_extras:menu_item_extras

@@ -1,0 +1,51 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_partners
+    - node.type.microsite
+    - paragraphs.paragraphs_type.partner_logo
+  module:
+    - entity_reference_revisions
+id: node.microsite.field_project_partners
+field_name: field_project_partners
+entity_type: node
+bundle: microsite
+label: 'Project Partners'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      partner_logo: partner_logo
+    negate: 0
+    target_bundles_drag_drop:
+      default_hero:
+        weight: 9
+        enabled: false
+      featured_statement:
+        weight: 10
+        enabled: false
+      happening_now:
+        weight: 11
+        enabled: false
+      homepage_hero:
+        weight: 12
+        enabled: false
+      partner_logo:
+        weight: 13
+        enabled: true
+      program_lead_in:
+        weight: 14
+        enabled: false
+      statistic:
+        weight: 15
+        enabled: false
+      statistics:
+        weight: 16
+        enabled: false
+field_type: entity_reference_revisions

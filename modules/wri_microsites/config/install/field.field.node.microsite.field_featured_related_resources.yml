@@ -1,0 +1,34 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_featured_related_resources
+    - node.type.article
+    - node.type.data
+    - node.type.event
+    - node.type.microsite
+    - node.type.publication
+id: node.microsite.field_featured_related_resources
+field_name: field_featured_related_resources
+entity_type: node
+bundle: microsite
+label: 'Featured from this Microsite'
+description: 'Choose items to feature on this microsite'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      article: article
+      data: data
+      event: event
+      publication: publication
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: article
+field_type: entity_reference

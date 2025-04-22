@@ -19,7 +19,8 @@
     position: relative;
   }
 
-  #tray-nav-canvas {
+  #tray-nav-canvas,
+  .showing-main-menu #tray-nav-canvas {
     padding-top: 0;
   }
 }

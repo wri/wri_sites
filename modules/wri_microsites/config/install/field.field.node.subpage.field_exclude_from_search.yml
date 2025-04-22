@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_exclude_from_search
+    - node.type.subpage
+id: node.subpage.field_exclude_from_search
+field_name: field_exclude_from_search
+entity_type: node
+bundle: subpage
+label: 'Exclude From Search'
+description: "Set to 'on' for microsite subpages."
+required: false
+translatable: false
+default_value:
+  -
+    value: false
+default_value_callback: ''
+settings: {  }
+field_type: search_api_exclude_entity

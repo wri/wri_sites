@@ -1,0 +1,4 @@
+wri_filter.filter:
+  version: 1.x
+  js:
+    js/wri_filter.js: {}

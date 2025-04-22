@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_long_title
+    - filter.format.basic_html
+    - node.type.microsite
+  module:
+    - text
+id: node.microsite.field_long_title
+field_name: field_long_title
+entity_type: node
+bundle: microsite
+label: 'Long Title'
+description: "This longer title will display in the page's hero"
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+    - basic_html
+field_type: text_long

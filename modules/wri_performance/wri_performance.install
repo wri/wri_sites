@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Wri Performance module code.
+ */
+
+/**
+ * Install the modules advban, autoban, and autoban_advban.
+ */
+function wri_performance_update_10001() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('advban')) {
+    \Drupal::service('module_installer')->install(['advban'], TRUE);
+  }
+  if (!$moduleHandler->moduleExists('autoban')) {
+    \Drupal::service('module_installer')->install(['autoban'], TRUE);
+  }
+  if (!$moduleHandler->moduleExists('autoban_advban')) {
+    \Drupal::service('module_installer')->install(['autoban_advban'], TRUE);
+  }
+}
+
+/**
+ * Install some default config for autobanning.
+ */
+function wri_performance_update_10002() {
+  \Drupal::service('distro_helper.updates')->installConfig('advban.settings', 'wri_performance', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('autoban.settings', 'wri_performance', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('autoban.autoban.a_67daf715f3ee8', 'wri_performance', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('autoban.autoban.a_67daf7154753b', 'wri_performance', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('autoban.autoban.a_67daf71601348', 'wri_performance', 'install');
+}

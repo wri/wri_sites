@@ -1,0 +1,64 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.microsite.body
+    - field.field.node.microsite.field_featured_experts
+    - field.field.node.microsite.field_featured_related_resources
+    - field.field.node.microsite.field_intro
+    - field.field.node.microsite.field_intro_paragraphs
+    - field.field.node.microsite.field_logo
+    - field.field.node.microsite.field_long_title
+    - field.field.node.microsite.field_main_image
+    - field.field.node.microsite.field_metatags
+    - field.field.node.microsite.field_primary_contacts
+    - field.field.node.microsite.field_project_partners
+    - field.field.node.microsite.field_theme
+    - field.field.node.microsite.field_toc
+    - field.field.node.microsite.field_twitter_account
+    - field.field.node.microsite.field_type
+    - field.field.node.microsite.layout_builder__layout
+    - node.type.microsite
+  module:
+    - text
+    - user
+id: node.microsite.teaser
+targetEntityType: node
+bundle: microsite
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  content_moderation_control: true
+  field_featured_experts: true
+  field_featured_related_resources: true
+  field_intro: true
+  field_intro_paragraphs: true
+  field_logo: true
+  field_long_title: true
+  field_main_image: true
+  field_metatags: true
+  field_primary_contacts: true
+  field_project_partners: true
+  field_theme: true
+  field_toc: true
+  field_twitter_account: true
+  field_type: true
+  langcode: true
+  layout_builder__layout: true
+  layout_builder__translation: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

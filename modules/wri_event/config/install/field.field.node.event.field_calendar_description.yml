@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_calendar_description
+    - filter.format.basic_html
+    - node.type.event
+  module:
+    - text
+id: node.event.field_calendar_description
+field_name: field_calendar_description
+entity_type: node
+bundle: event
+label: 'Calendar Description'
+description: 'The event description in the "Add to Calendar" link. Default value is "&#91;node:title&#93; - from WRI: &#91;node:url:absolute&#93;"'
+required: false
+translatable: false
+default_value:
+  -
+    value: '<p>[node:title] - from WRI: [node:url:absolute]</p>'
+    format: basic_html
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+field_type: text_long
