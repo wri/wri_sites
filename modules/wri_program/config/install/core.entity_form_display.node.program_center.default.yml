@@ -11,19 +11,22 @@ dependencies:
     - field.field.node.program_center.field_main_image
     - field.field.node.program_center.field_metatag
     - field.field.node.program_center.field_narrative_taxonomy
-    - field.field.node.program_center.field_paragraphs
     - field.field.node.program_center.field_primary_contacts
     - field.field.node.program_center.field_primary_topic
     - field.field.node.program_center.field_show_more_link
+    - field.field.node.program_center.field_social_sharing_links
     - field.field.node.program_center.field_twitter_account
     - field.field.node.program_center.field_type
     - field.field.node.program_center.layout_builder__layout
     - node.type.program_center
+    - workflows.workflow.content_publishing
   module:
     - content_moderation
     - field_group
+    - inline_entity_form
     - link
     - media_library
+    - media_library_edit
     - metatag
     - paragraphs
     - path
@@ -70,7 +73,7 @@ third_party_settings:
       label: More
       region: content
       parent_name: ''
-      weight: 16
+      weight: 20
       format_type: tabs
       format_settings:
         classes: ''
@@ -243,6 +246,24 @@ content:
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  field_social_sharing_links:
+    type: inline_entity_form_complex
+    weight: 7
+    region: content
+    settings:
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: false
+      match_operator: CONTAINS
+      allow_duplicate: false
+      collapsible: false
+      collapsed: false
+      revision: false
+      removed_reference: optional
     third_party_settings: {  }
   field_twitter_account:
     type: link_default
