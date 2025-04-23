@@ -181,8 +181,17 @@ function wri_node_update_10401() {
  */
 function wri_node_update_10402() {
   // Define the content types to process.
-  $content_types = ['program_center', 'microsite', 'person', 'project_detail'];
+  $content_types = ['person'];
 
+  wri_update_twitter_replacement($content_types);
+}
+
+/**
+ * Migrate field_twitter_account values into a social_media_sites paragraph.
+ *
+ * @param array $content_types
+ */
+function wri_update_twitter_replacement($content_types) {
   // Query for nodes with a non-empty field_twitter_account.
   $query = \Drupal::entityQuery('node')
     ->accessCheck(FALSE)
