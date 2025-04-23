@@ -159,8 +159,6 @@ function wri_node_update_dependencies() {
   ];
   $dependencies['wri_node'][10402] = [
     'wri_person' => 10402,
-    'wri_program' => 10402,
-    'wri_project' => 10402,
   ];
   return $dependencies;
 }
