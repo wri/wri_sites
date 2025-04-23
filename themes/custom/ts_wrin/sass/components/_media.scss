@@ -4,6 +4,7 @@
 .field--name-field-media-oembed-video.playing {
   margin-bottom: rem(30);
 }
-.oembed-lazyload__iframe {
+.oembed-lazyload__iframe,
+.media--type-video iframe {
   border: none;
 }

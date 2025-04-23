@@ -23,4 +23,12 @@
   .showing-main-menu #tray-nav-canvas {
     padding-top: 0;
   }
+
+  ul li {
+    list-style: disc !important;
+
+    &::before {
+      display: none !important;
+    }
+  }
 }
