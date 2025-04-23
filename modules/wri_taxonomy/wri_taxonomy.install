@@ -70,6 +70,7 @@ function wri_taxonomy_update_9502() {
  * Add "Social Media sites" vocabulary, and populate with predefined terms.
  */
 function wri_taxonomy_update_10401() {
+  $vid = 'social_media_sites';
   \Drupal::service('distro_helper.updates')->installConfig('taxonomy.vocabulary.social_media_sites', 'wri_taxonomy');
   \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_icon', 'wri_taxonomy');
   \Drupal::service('distro_helper.updates')->installConfig('field.field.taxonomy_term.social_media_sites.field_icon', 'wri_taxonomy');
