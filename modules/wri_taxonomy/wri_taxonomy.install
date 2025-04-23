@@ -74,8 +74,8 @@ function wri_taxonomy_update_10401() {
   \Drupal::service('distro_helper.updates')->installConfig('taxonomy.vocabulary.social_media_sites', 'wri_taxonomy');
   \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_icon', 'wri_taxonomy');
   \Drupal::service('distro_helper.updates')->installConfig('field.field.taxonomy_term.social_media_sites.field_icon', 'wri_taxonomy');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.taxonomy_term.social_media_sites.default', 'wri_taxonomy');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.taxonomy_term.social_media_sites.default', 'wri_taxonomy');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.taxonomy_term.social_media_sites.default', 'wri_taxonomy', 'install', 1);
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.taxonomy_term.social_media_sites.default', 'wri_taxonomy', 'install', 1);
 
   $term_machine_names = [
     'facebook',
