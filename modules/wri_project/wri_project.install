@@ -45,12 +45,6 @@ function wri_project_update_dependencies() {
     'wri_sites' => 8908,
     'wri_io_content' => 9301,
   ];
-  $dependencies['wri_project'][10401] = [
-    'wri_node' => 10401,
-  ];
-  $dependencies['wri_project'][10402] = [
-    'wri_project' => 10401,
-  ];
 
   return $dependencies;
 }
@@ -62,30 +56,4 @@ function wri_project_update_10001() {
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.related_to_this_project', [
     'display#block_1#display_options#link_url',
   ], 'wri_project');
-}
-
-/**
- * Add field_social_sharing_links and update all view modes.
- */
-function wri_project_update_10401() {
-  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.project_detail.field_social_sharing_links', 'wri_project');
-  $message = 'Add field Paragraphs and update view modes.';
-  return $message;
-}
-
-/**
- * Update project form display.
- */
-function wri_project_update_10402() {
-  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.project_detail.default', [
-    'content',
-  ], 'wri_project');
-  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.project_detail.main_content', [
-    'content#field_social_sharing_links',
-    'third_party_settings#ds#regions#share',
-    'third_party_settings#ds#regions#main_content'
-  ], 'wri_project');
-
-  $message = 'Update project form display configs';
-  return $message;
 }

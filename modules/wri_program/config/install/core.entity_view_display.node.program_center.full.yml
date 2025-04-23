@@ -17,7 +17,6 @@ dependencies:
     - field.field.node.program_center.field_primary_contacts
     - field.field.node.program_center.field_primary_topic
     - field.field.node.program_center.field_show_more_link
-    - field.field.node.program_center.field_social_sharing_links
     - field.field.node.program_center.field_twitter_account
     - field.field.node.program_center.field_type
     - field.field.node.program_center.layout_builder__layout
@@ -39,7 +38,29 @@ third_party_settings:
           label: Hero
           context_mapping: {  }
         components:
-          -
+          7ed8cbf8-c802-44e4-9e4b-3a7d8ad314e7:
+            uuid: 7ed8cbf8-c802-44e4-9e4b-3a7d8ad314e7
+            region: content
+            configuration:
+              id: 'field_block:node:program_center:field_twitter_account'
+              label: 'Follow on X'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: link_ally_class
+                label: hidden
+                settings:
+                  class: ''
+                  link_text: 'Follow on '
+                  screenreader_text: 'Follow on X'
+                  tag: ''
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          28457f99-400e-4a9a-aa78-31177fe5c60e:
             uuid: 28457f99-400e-4a9a-aa78-31177fe5c60e
             region: content
             configuration:
@@ -48,10 +69,9 @@ third_party_settings:
               label_display: '0'
               provider: layout_builder
               view_mode: full
-              context_mapping: {  }
-              block_id: null
               block_revision_id: 100070
               block_serialized: null
+              context_mapping: {  }
             weight: 0
             additional: {  }
         third_party_settings: {  }
@@ -62,7 +82,7 @@ third_party_settings:
           context_mapping: {  }
           component_context: {  }
         components:
-          -
+          5f4ab45b-2d34-4893-9a61-c3d29573d93e:
             uuid: 5f4ab45b-2d34-4893-9a61-c3d29573d93e
             region: content
             configuration:
@@ -80,7 +100,7 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 6
             additional: {  }
-          -
+          325aa2f4-b6fb-4448-98df-8b2b0f505402:
             uuid: 325aa2f4-b6fb-4448-98df-8b2b0f505402
             region: content
             configuration:
@@ -99,25 +119,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 5
             additional: {  }
-          -
-            uuid: d593ec71-4209-4daf-b431-e27d358c18f3
-            region: content
-            configuration:
-              id: 'field_block:node:program_center:field_social_sharing_links'
-              label: 'Social Sharing Links'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_revisions_entity_view
-                label: hidden
-                settings:
-                  view_mode: default
-                third_party_settings: {  }
-            weight: -2
-            additional: {  }
         third_party_settings: {  }
       -
         layout_id: layout_onecol
@@ -126,7 +127,7 @@ third_party_settings:
           context_mapping: {  }
           component_context: {  }
         components:
-          -
+          f2bb374a-3ea9-4168-b5b9-e596636700fd:
             uuid: f2bb374a-3ea9-4168-b5b9-e596636700fd
             region: content
             configuration:
@@ -143,9 +144,9 @@ third_party_settings:
                 settings:
                   view_mode: teaser
                 third_party_settings: {  }
-            weight: -1
+            weight: -9
             additional: {  }
-          -
+          f1699151-e710-4123-b8c5-6d27274ffc97:
             uuid: f1699151-e710-4123-b8c5-6d27274ffc97
             region: content
             configuration:
@@ -162,9 +163,9 @@ third_party_settings:
                 settings:
                   view_mode: teaser
                 third_party_settings: {  }
-            weight: 0
+            weight: -8
             additional: {  }
-          -
+          8a4e6af5-aef1-4629-a702-a390e87327b9:
             uuid: 8a4e6af5-aef1-4629-a702-a390e87327b9
             region: content
             configuration:
@@ -173,19 +174,20 @@ third_party_settings:
               label_display: ''
               provider: layout_builder
               view_mode: default
-              context_mapping: {  }
-              block_id: null
               block_revision_id: 100482
               block_serialized: null
+              context_mapping: {  }
             weight: -10
             additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories:
       - 'Chaos Tools'
+      - Components
       - 'Content fields'
       - 'Custom block types'
       - 'Custom blocks'
+      - Devel
       - Facets
       - 'Facets summary (Experimental)'
       - Forms
@@ -193,12 +195,8 @@ third_party_settings:
       - 'Lists (Views)'
       - Menus
       - System
-      - Twitter
       - User
-      - 'WRI Data Viz'
-      - 'WRI External Publications'
       - 'WRI block'
-      - Webform
       - core
     entity_view_mode_restriction:
       allowed_layouts:
@@ -208,14 +206,15 @@ third_party_settings:
       allowlisted_blocks:
         'Chaos Tools':
           - 'entity_view:node'
+        Components: {  }
         'Content fields':
           - 'field_block:node:program_center:body'
           - 'field_block:node:program_center:field_featured_experts'
           - 'field_block:node:program_center:field_featured_project'
-          - 'field_block:node:program_center:field_twitter_account'
           - 'field_block:node:program_center:field_intro_paragraphs'
           - 'field_block:node:program_center:field_primary_contacts'
-          - 'field_block:node:program_center:field_social_sharing_links'
+          - 'field_block:node:program_center:field_twitter_account'
+        Devel: {  }
         Facets: {  }
         'Facets summary (Experimental)': {  }
         Forms: {  }
@@ -225,11 +224,6 @@ third_party_settings:
         User: {  }
         'WRI block': {  }
         core: {  }
-      restricted_categories:
-        - Twitter
-        - 'WRI Data Viz'
-        - 'WRI External Publications'
-        - Webform
 id: node.program_center.full
 targetEntityType: node
 bundle: program_center
@@ -246,7 +240,6 @@ content:
     weight: 100
     region: content
 hidden:
-  addtocal: true
   body: true
   field_featured_experts: true
   field_featured_project: true
@@ -260,7 +253,6 @@ hidden:
   field_primary_contacts: true
   field_primary_topic: true
   field_show_more_link: true
-  field_social_sharing_links: true
   field_statistics: true
   field_twitter_account: true
   field_type: true

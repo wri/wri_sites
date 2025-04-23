@@ -15,7 +15,6 @@ dependencies:
     - field.field.node.project_detail.field_metatags
     - field.field.node.project_detail.field_narrative_taxonomy
     - field.field.node.project_detail.field_other_link
-    - field.field.node.project_detail.field_paragraphs
     - field.field.node.project_detail.field_platform_link
     - field.field.node.project_detail.field_primary_contacts
     - field.field.node.project_detail.field_primary_topic
@@ -52,7 +51,7 @@ third_party_settings:
           label: ''
           context_mapping: {  }
         components:
-          -
+          1ae74557-4e51-4fd9-bfe8-83d700829d0a:
             uuid: 1ae74557-4e51-4fd9-bfe8-83d700829d0a
             region: content
             configuration:
@@ -69,9 +68,9 @@ third_party_settings:
                 settings:
                   view_mode: teaser
                 third_party_settings: {  }
-            weight: 2
+            weight: 7
             additional: {  }
-          -
+          60b9c12e-4773-40dd-9339-eaf9036816aa:
             uuid: 60b9c12e-4773-40dd-9339-eaf9036816aa
             region: content
             configuration:
@@ -82,9 +81,9 @@ third_party_settings:
               view_mode: main_content
               context_mapping:
                 entity: layout_builder.entity
-            weight: -4
+            weight: -10
             additional: {  }
-          -
+          a321f598-b4e3-4c3f-a580-532d2aab6287:
             uuid: a321f598-b4e3-4c3f-a580-532d2aab6287
             region: content
             configuration:
@@ -101,9 +100,9 @@ third_party_settings:
                 settings:
                   view_mode: default
                 third_party_settings: {  }
-            weight: -1
+            weight: -5
             additional: {  }
-          -
+          a1c32609-f9f9-469f-8afc-86e509c3b92a:
             uuid: a1c32609-f9f9-469f-8afc-86e509c3b92a
             region: content
             configuration:
@@ -114,9 +113,9 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: '8'
-            weight: 1
+            weight: -3
             additional: {  }
-          -
+          1185969a-7903-4804-883d-f5c194e519fa:
             uuid: 1185969a-7903-4804-883d-f5c194e519fa
             region: content
             configuration:
@@ -133,9 +132,9 @@ third_party_settings:
                 settings:
                   view_mode: card
                 third_party_settings: {  }
-            weight: 0
+            weight: -4
             additional: {  }
-          -
+          92d9873f-5e02-42fa-bd07-7fe52b58c08c:
             uuid: 92d9873f-5e02-42fa-bd07-7fe52b58c08c
             region: content
             configuration:
@@ -143,9 +142,9 @@ third_party_settings:
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-            weight: -2
+            weight: -9
             additional: {  }
-          -
+          11aff077-a1e9-4b73-8903-3bad7fb7baba:
             uuid: 11aff077-a1e9-4b73-8903-3bad7fb7baba
             region: content
             configuration:
@@ -160,7 +159,7 @@ third_party_settings:
                   view_mode: teaser
                   link: false
                 third_party_settings: {  }
-            weight: 3
+            weight: 8
             additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:
@@ -172,15 +171,15 @@ third_party_settings:
       allowlisted_blocks:
         'Chaos Tools':
           - 'entity_view:node'
+        Components: {  }
         'Content fields':
           - 'field_block:node:project_detail:field_region'
           - 'field_block:node:project_detail:field_featured_experts'
           - 'field_block:node:project_detail:field_featured_related_resources'
           - 'field_block:node:project_detail:field_logo'
-          - 'field_block:node:project_detail:field_primary_contacts'
           - 'extra_field_block:node:project_detail:content_moderation_control'
+          - 'field_block:node:project_detail:field_primary_contacts'
           - 'field_block:node:project_detail:field_project_partners'
-          - 'field_block:node:project_detail:field_paragraphs'
         Facets: {  }
         'Facets summary (Experimental)': {  }
         Forms: {  }
@@ -215,7 +214,6 @@ hidden:
   field_metatags: true
   field_narrative_taxonomy: true
   field_other_link: true
-  field_paragraphs: true
   field_platform_link: true
   field_primary_contacts: true
   field_primary_topic: true

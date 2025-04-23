@@ -29,9 +29,6 @@
         }
     ],
     "extra": {
-        "drupal-lenient": {
-            "allowed-list": ["drupal/custom_robots"]
-        },
         "patches": {
             "drupal/core": {
                 "Dynamic Views Arguments via Tokens https://www.drupal.org/project/drupal/issues/1699378": "https://www.drupal.org/files/issues/2024-07-07/1699378-drupal-10.3.x.patch",
@@ -48,9 +45,6 @@
             "drupal/content_snippets": {
                 "Error: Cannot unset string offsets... https://www.drupal.org/project/content_snippets/issues/3268757": "https://git.drupalcode.org/issue/content_snippets-3268757/-/merge_requests/1.diff"
             },
-            "drupal/custom_robots": {
-                "Automated Drupal 10 compatibility fixes https://www.drupal.org/project/custom_robots/issues/3286869": "https://www.drupal.org/files/issues/2022-06-15/custom_robots.1.x-dev.rector.patch"
-            },
             "drupal/diff": {
                 "No local tasks on compare revisions page https://www.drupal.org/project/diff/issues/3169729": "https://www.drupal.org/files/issues/2020-09-08/diff_add-local-tasks-3169729-2.patch"
             },
@@ -65,9 +59,11 @@
             "drupal/metatag": {
                 "Provide field formatter to output meta tags on-page, e.g. for use with Views (D9), https://www.drupal.org/project/metatag/issues/3027873": "https://www.drupal.org/files/issues/2023-07-23/metatag-field_formatter_for_views-3027873-27.patch"
             },
+            "drupal/oembed_lazyload": {
+                "Use strict should be inside function https://www.drupal.org/project/oembed_lazyload/issues/3475956#comment-16067120": "https://www.drupal.org/files/issues/2024-09-21/oembed_lazyload_use_strict-3475956.patch"
+            },
             "drupal/paragraphs": {
-                "Paragraph access check using incorrect revision of its parent https://www.drupal.org/project/paragraphs/issues/3090200": "https://www.drupal.org/files/issues/2022-10-26/3084934-13_combine_3090200-22.patch",
-                "Add a parent entity token for paragraphs https://www.drupal.org/project/paragraphs/issues/3067265": "https://git.drupalcode.org/project/paragraphs/-/merge_requests/92.diff"
+                "Paragraph access check using incorrect revision of its parent https://www.drupal.org/project/paragraphs/issues/3090200": "https://www.drupal.org/files/issues/2022-10-26/3084934-13_combine_3090200-22.patch"
             },
             "drupal/token": {
                 "Add a [current-page:object:?] dynamic token https://www.drupal.org/project/token/issues/919760": "https://www.drupal.org/files/issues/2020-09-08/token--current_page_object_token--919760--83.patch",
