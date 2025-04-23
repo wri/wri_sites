@@ -88,10 +88,9 @@ third_party_settings:
         required_fields: true
     group_contact:
       children:
+        - field_social_links
         - field_email
         - field_phone
-        - field_social_links
-        - field_twitter_account
         - field_alternate_contact
       label: Contact
       region: content
@@ -278,9 +277,9 @@ content:
     region: content
     settings:
       form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
+      override_labels: true
+      label_singular: 'Social Link'
+      label_plural: 'Social Links'
       allow_new: true
       allow_existing: false
       match_operator: CONTAINS
@@ -288,7 +287,7 @@ content:
       collapsible: false
       collapsed: false
       revision: false
-      removed_reference: optional
+      removed_reference: keep
     third_party_settings: {  }
   field_staff_group:
     type: options_select

@@ -143,7 +143,7 @@ function wri_person_update_10402() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.person.default', [
     'content#field_social_links',
     'content#field_twitter_account',
-    'third_party_settings#children#field_social_links',
+    'third_party_settings.field_group.group_contact.children',
   ], 'wri_person');
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.person.main_content', [
     'content#field_social_links',
