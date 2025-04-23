@@ -29,9 +29,6 @@
         }
     ],
     "extra": {
-        "drupal-lenient": {
-            "allowed-list": ["drupal/custom_robots"]
-        },
         "patches": {
             "drupal/core": {
                 "Dynamic Views Arguments via Tokens https://www.drupal.org/project/drupal/issues/1699378": "https://www.drupal.org/files/issues/2024-07-07/1699378-drupal-10.3.x.patch",
@@ -47,9 +44,6 @@
             },
             "drupal/content_snippets": {
                 "Error: Cannot unset string offsets... https://www.drupal.org/project/content_snippets/issues/3268757": "https://git.drupalcode.org/issue/content_snippets-3268757/-/merge_requests/1.diff"
-            },
-            "drupal/custom_robots": {
-                "Automated Drupal 10 compatibility fixes https://www.drupal.org/project/custom_robots/issues/3286869": "https://www.drupal.org/files/issues/2022-06-15/custom_robots.1.x-dev.rector.patch"
             },
             "drupal/diff": {
                 "No local tasks on compare revisions page https://www.drupal.org/project/diff/issues/3169729": "https://www.drupal.org/files/issues/2020-09-08/diff_add-local-tasks-3169729-2.patch"
