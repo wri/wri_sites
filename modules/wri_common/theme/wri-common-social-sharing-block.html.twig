@@ -3,13 +3,19 @@
     <ul class="">
       <li><a class="share-icon icon-social" href="#" aria-haspopup="true">{{ 'Social'|t }}</a>
         <ul class="dropdown" aria-label="submenu">
-          <li><a href="https://twitter.com/intent/tweet?text={{ items.title }}+{{ items.page_url }} {{ twitter_suffix }}" title="{{ 'Share to X'|t }}" aria-label="{{ 'Share to X'|t }}" class="social-sharing-buttons__button" rel="noopener">
-              {{ 'X'|t }}
-            </a>
-          </li>
           <li>
             <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ items.page_url }}&title={{ items.title }}&source={{ items.base_url }}" title="{{ 'Share to Linkedin'|t }}" aria-label="{{ 'Share to Linkedin'|t }}" class="social-sharing-buttons__button" rel="noopener">
               {{ 'LinkedIn'|t }}
+            </a>
+          </li>
+          <li>
+            <a href="https://bsky.app/intent/compose?text={{ items.title }} {{ items.page_url }}" title="{{ 'Share to Bluesky'|t }}" aria-label="{{ 'Share to Bluesky'|t }}" class="social-sharing-buttons__button" rel="noopener">
+              {{ 'Bluesky'|t }}
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/intent/tweet?text={{ items.title }}+{{ items.page_url }} {{ twitter_suffix }}" title="{{ 'Share to X'|t }}" aria-label="{{ 'Share to X'|t }}" class="social-sharing-buttons__button" rel="noopener">
+              {{ 'X'|t }}
             </a>
           </li>
           <li>
