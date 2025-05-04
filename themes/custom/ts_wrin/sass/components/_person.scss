@@ -52,20 +52,20 @@
           }
         }
       }
-    }
-  }
 
-  .buttons {
-    text-align: center;
+      .buttons {
+        text-align: center;
 
-    @include mq($md) {
-      text-align: left;
-      margin-top: $space-lg;
-      margin-bottom: $space-lg;
-    }
+        @include mq($md) {
+          text-align: left;
+          margin-top: $space-lg;
+          margin-bottom: $space-lg;
+        }
 
-    a {
-      margin-bottom: 0;
+        a {
+          margin-right: 0;
+        }
+      }
     }
   }
 
@@ -77,7 +77,6 @@
     }
   }
 
-  .twitter,
   .int-office {
     display: inline-block;
     position: relative;
@@ -102,11 +101,16 @@
     }
   }
 
-  .twitter {
-    &:before {
-      background: transparent url("../img/svgs/twitter-black.svg") no-repeat
-        center center / contain;
-    }
+  .paragraph--type--social-media-sites {
+    display: inline-block;
+    position: relative;
+    margin-left: $space-xs;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+
+  .paragraph--type--social-media-sites + .paragraph--type--social-media-sites {
+    margin-left: 0;
   }
 
   .int-office {
