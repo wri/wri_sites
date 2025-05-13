@@ -8,6 +8,7 @@ dependencies:
   - wri_io_content
   - wri_media
   - wri_node
+  - wri_paragraph
   - wri_taxonomy
 config_devel:
   install:
