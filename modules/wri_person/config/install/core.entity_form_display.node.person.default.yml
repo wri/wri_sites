@@ -88,9 +88,9 @@ third_party_settings:
         required_fields: true
     group_contact:
       children:
-        - field_social_links
         - field_email
         - field_phone
+        - field_social_links
         - field_alternate_contact
       label: Contact
       region: content
