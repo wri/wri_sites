@@ -6,6 +6,7 @@ package: WRI
 dependencies:
   - media
   - media_library
+  - media_library_edit
   - media_responsive_thumbnail
   - focal_point
   - oembed_lazyload
