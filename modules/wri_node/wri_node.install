@@ -188,6 +188,7 @@ function wri_node_update_10402() {
  * Migrate field_twitter_account values into a social_media_sites paragraph.
  *
  * @param array $content_types
+ *   The content types to process.
  */
 function wri_update_twitter_replacement($content_types) {
   // Query for nodes with a non-empty field_twitter_account.
