@@ -68,6 +68,9 @@ function wri_person_update_dependencies() {
   $dependencies['wri_person'][9301] = [
     'wri_sites' => 8908,
   ];
+  $dependencies['wri_person'][10401] = [
+    'wri_node' => 10401,
+  ];
 
   return $dependencies;
 }
@@ -122,4 +125,33 @@ function wri_person_update_10301() {
   \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.person_listing.field_block', [
     'translatable',
   ], 'wri_person');
+}
+
+/**
+ * Add field_social_links and update all view modes.
+ */
+function wri_person_update_10401() {
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.person.field_social_links', 'wri_person');
+  $message = 'Add field Paragraph and update view modes.';
+  return $message;
+}
+
+/**
+ * Update person form display.
+ */
+function wri_person_update_10402() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.person.default', [
+    'content#field_social_links',
+    'content#field_twitter_account',
+    'third_party_settings#field_group#group_more#children',
+    'third_party_settings#field_group#group_contact',
+  ], 'wri_person');
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.person.main_content', [
+    'content#field_social_links',
+    'content#field_twitter_account',
+    'third_party_settings#ds#regions#buttons',
+  ], 'wri_person');
+
+  $message = 'Update person form display configs';
+  return $message;
 }

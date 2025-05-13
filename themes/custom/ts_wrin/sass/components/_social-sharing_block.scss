@@ -106,3 +106,61 @@
     flex-direction: column;
   }
 }
+
+.paragraph--type--social-media-sites {
+  display: inline-block;
+  margin-bottom: rem(5);
+
+  .social-icon-wrapper {
+    display: inline-block;
+    max-width: 24px;
+    max-height: 24px;
+    color: black;
+    font-size: 0;
+    &.twitter {
+      max-width: 22px;
+      max-height: 22px;
+    }
+    &.wechat {
+      max-width: 28px;
+      max-height: 28px;
+    }
+    &.weibo,
+    &.bluesky  {
+      max-width: 25px;
+      max-height: 25px;
+    }
+    .social-icon-wrapper.facebook,
+    .social-icon-wrapper.linkedin,
+    .social-icon-wrapper.twitter {
+      position: relative;
+      bottom: 1px;
+    }
+  }
+  a {
+    @include font($acumin-semi-cond, "bold");
+    @include text-underline(transparent, $black);
+    background-position: left 100%;
+    margin-right: rem(16);
+  }
+  a.handle {
+    position: relative;
+    bottom: 1px;
+  }
+  .twitter:before {
+    content: none;
+  }
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+  svg path {
+    fill: black;
+  }
+}
+
+.field-name-field-paragraphs .field-label-above {
+  font-style: italic;
+  margin-bottom: rem(16);
+  margin-top: rem(16);
+}

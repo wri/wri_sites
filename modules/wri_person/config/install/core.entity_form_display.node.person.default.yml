@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -19,6 +18,7 @@ dependencies:
     - field.field.node.person.field_profile_image
     - field.field.node.person.field_project_expert
     - field.field.node.person.field_quote
+    - field.field.node.person.field_social_links
     - field.field.node.person.field_staff_group
     - field.field.node.person.field_title
     - field.field.node.person.field_topics
@@ -29,8 +29,9 @@ dependencies:
     - node.type.person
   module:
     - field_group
-    - link
+    - inline_entity_form
     - media_library
+    - media_library_edit
     - metatag
     - path
     - telephone
@@ -89,7 +90,7 @@ third_party_settings:
       children:
         - field_email
         - field_phone
-        - field_twitter_account
+        - field_social_links
         - field_alternate_contact
       label: Contact
       region: content
@@ -270,6 +271,24 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
+  field_social_links:
+    type: inline_entity_form_complex
+    weight: 3
+    region: content
+    settings:
+      form_mode: default
+      override_labels: true
+      label_singular: 'Social Link'
+      label_plural: 'Social Links'
+      allow_new: true
+      allow_existing: false
+      match_operator: CONTAINS
+      allow_duplicate: false
+      collapsible: false
+      collapsed: false
+      revision: false
+      removed_reference: keep
+    third_party_settings: {  }
   field_staff_group:
     type: options_select
     weight: 130
@@ -293,14 +312,6 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  field_twitter_account:
-    type: link_default
-    weight: 3
-    region: content
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
     third_party_settings: {  }
   field_type:
     type: entity_reference_autocomplete
@@ -360,6 +371,7 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_twitter_account: true
   layout_builder__layout: true
   promote: true
   sticky: true

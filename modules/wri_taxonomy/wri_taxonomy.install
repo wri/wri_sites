@@ -6,8 +6,10 @@
  */
 
 use Drupal\Core\Config\FileStorage;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\file\Entity\File;
 use Drupal\taxonomy\Entity\Term;
 
 /**
@@ -60,5 +62,97 @@ function wri_taxonomy_update_9502() {
   $config_record = $config_directory->read($field_config_name);
   if (!FieldConfig::loadByName($config_record['entity_type'], $config_record['bundle'], $config_record['field_name'])) {
     FieldConfig::create($config_record)->save();
+  }
+}
+
+/**
+ * Add "Social Media sites" vocabulary, and populate with predefined terms.
+ */
+function wri_taxonomy_update_10401() {
+  $vid = 'social_media_sites';
+  \Drupal::service('distro_helper.updates')->installConfig('taxonomy.vocabulary.social_media_sites', 'wri_taxonomy');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_icon', 'wri_taxonomy');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.taxonomy_term.social_media_sites.field_icon', 'wri_taxonomy');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.taxonomy_term.social_media_sites.default', 'wri_taxonomy', 'install', 1);
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.taxonomy_term.social_media_sites.default', 'wri_taxonomy', 'install', 1);
+
+  $term_machine_names = [
+    'facebook',
+    'twitter',
+    'linkedin',
+    'youtube',
+    'instagram',
+    'wechat',
+    'weibo',
+    'bluesky',
+    'threads',
+  ];
+
+  // Get the theme path for your custom theme.
+  $theme_handler = \Drupal::service('extension.list.theme');
+  $theme_path = $theme_handler->getPath('ts_wrin');
+
+  // Prepare a destination directory in the public file system.
+  $destination_directory = 'public://social_media_icons';
+  \Drupal::service('file_system')->prepareDirectory($destination_directory, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
+
+  foreach ($term_machine_names as $machine_name) {
+    $term_name = ucfirst($machine_name);
+    // Load term(s) by vocabulary and name.
+    $terms = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->loadByProperties([
+        'vid' => $vid,
+        'name' => $term_name,
+      ]);
+    if ($terms) {
+      // If the term exists, update it if needed.
+      $term = reset($terms);
+      $icon_values = $term->get('field_icon')->getValue();
+      // Skip if the term already has a field_icon value.
+      if (!empty($icon_values)) {
+        continue;
+      }
+    }
+    else {
+      // If no term exists, create a new one.
+      $term = Term::create([
+        'vid' => $vid,
+        'name' => $term_name,
+      ]);
+    }
+
+    // Build the source path to the SVG file.
+    $source_path = $theme_path . '/img/svgs/' . $machine_name . '.svg';
+    if (!file_exists($source_path)) {
+      \Drupal::messenger()->addWarning(t('SVG file for @machine not found at @source.', [
+        '@machine' => $machine_name,
+        '@source' => $source_path,
+      ]));
+      continue;
+    }
+
+    // Read the SVG file data.
+    $data = file_get_contents($source_path);
+
+    // Define the destination URI.
+    $destination_uri = $destination_directory . '/' . $machine_name . '.svg';
+    $file_uri = \Drupal::service('file_system')->saveData($data, $destination_uri, FileSystemInterface::EXISTS_REPLACE);
+    if ($file_uri) {
+      $file = File::create([
+        'uri' => $file_uri,
+      ]);
+      $file->setPermanent();
+      $file->save();
+
+      // Set or update the field_icon value.
+      $term->set('field_icon', [
+        'target_id' => $file->id(),
+        'alt' => $term_name . ' icon',
+        'title' => $term_name . ' icon',
+      ]);
+      $term->save();
+      \Drupal::messenger()->addStatus(t('Created/updated term @name with icon.', ['@name' => $term_name]));
+    }
   }
 }

@@ -1,0 +1,38 @@
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.social_links_listing.field_social_links
+    - field.field.paragraph.social_links_listing.field_title
+    - paragraphs.paragraphs_type.social_links_listing
+  module:
+    - element_class_formatter
+    - entity_reference_revisions
+id: paragraph.social_links_listing.default
+targetEntityType: paragraph
+bundle: social_links_listing
+mode: default
+content:
+  field_social_links:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: wrapper_class
+    label: hidden
+    settings:
+      class: 'italic mb-xxs field-label-above'
+      tag: div
+      link: false
+      link_class: ''
+      summary: false
+      trim: 200
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true
