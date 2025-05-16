@@ -31,8 +31,15 @@ if [ -n "$(drush config:status --format=list)" ]; then
   # Creating new live config branch from the most recent tag
   git checkout "tags/$latest_pantheon_tag" -b "$BRANCH_NAME"
 
-  # Composer install and robo pull:config against live config branch
-  composer install && robo pull:config
+  # Pull config changes from live-backup environment
+  terminus drush "$TERMINUS_SITE".live-backup -- config:export --partial --destination=/tmp/config/partial
+
+  # Pull config into build container
+  terminus rsync "$TERMINUS_SITE.$MULTIDEV_ENV:/tmp/config/partial" "./config/partial"
+
+  # Copy into sync directory (unsure if this should be done...does a human need to review this first during deployment?)
+  cp -R ./config/partial/* ./config/sync/
+
 
   # Add changes, push them up, open PR
   git add .
