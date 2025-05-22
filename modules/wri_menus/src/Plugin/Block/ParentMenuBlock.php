@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   id = "parent_menu_block",
  *   admin_label = @Translation("Menu block (show parent)"),
  *   category = @Translation("Menus"),
- *   deriver = "Drupal\menu_block\Plugin\Derivative\MenuBlock",
+ *   deriver = "Drupal\wri_menus\Plugin\Derivative\MenuBlock",
  *   forms = {
  *     "settings_tray" = "\Drupal\system\Form\SystemMenuOffCanvasForm",
  *   },

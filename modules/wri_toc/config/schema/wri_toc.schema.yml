@@ -1,0 +1,7 @@
+block.settings.wri_toc_horizontal_bar_menu:
+  type: block_settings
+  label: 'Horizontal bar menu block'
+  mapping:
+    example:
+      type: string
+      label: Example
