@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Update hooks for wri_custom_page.
+ */
+
+/**
+ * Enables the Page Heirarchy menu on custom pages.
+ */
+function wri_custom_page_update_10400() {
+  \Drupal::service('distro_helper.updates')->updateConfig('node.type.custom_page', [
+    'third_party_settings',
+  ], 'wri_custom_page', 'install');
+}
