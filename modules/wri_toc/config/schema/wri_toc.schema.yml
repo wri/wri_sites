@@ -5,7 +5,7 @@ block.settings.wri_toc_horizontal_bar_menu:
     color_class:
       type: string
       label: Color Class
-      description: 'Background color class to apply (can take any css class). Example: black-bar, teal-bar'
+      description: 'Background color class to apply (can take any css class). Example: black-bar, gold-bar'
     menu:
       type: string
       label: Menu

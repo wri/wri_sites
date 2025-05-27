@@ -34,7 +34,7 @@ trait TocConfigTrait {
     $form['color_class'] = [
       '#type' => 'textfield',
       '#title' => t('Color class'),
-      '#description' => t('Background color class to apply. Example: black-bar, teal-bar'),
+      '#description' => t('Background color class to apply. Example: black-bar, gold-bar'),
       '#default_value' => $config['color_class'] ?? 'black-bar',
     ];
     return $form;
