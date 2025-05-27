@@ -204,3 +204,7 @@ form .fieldset {
 .report-teaser figure {
   margin: 0 0 20px 0;
 }
+
+#layout-builder .mobile__toc, #layout-builder .publication__toc {
+  display: block;
+}
