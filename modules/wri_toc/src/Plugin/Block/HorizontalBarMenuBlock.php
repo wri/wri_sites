@@ -95,7 +95,14 @@ final class HorizontalBarMenuBlock extends BlockBase implements ContainerFactory
       $node_id = $node->id();
       $links = $this->linkManager->loadLinksByRoute('entity.node.canonical', ['node' => $node_id], $menu);
       if (!empty($links)) {
-        $menu_link = array_key_first($links);
+        $menu_link = current($links);
+        $parent = $menu_link->getParent();
+        if ($parent)  {
+          $menu_link_id = $parent;
+        }
+        else {
+          $menu_link_id = $menu_link->getPluginId();
+        }
       }
     }
 
@@ -103,7 +110,7 @@ final class HorizontalBarMenuBlock extends BlockBase implements ContainerFactory
       '#theme' => 'table_of_contents',
       '#menu_title' => $menu,
       '#value' => 'menu',
-      '#menu_link' => $menu_link,
+      '#menu_link' => $menu_link_id,
       '#node_title' => $node_title,
       '#color_bar' => $color_class,
     ];
