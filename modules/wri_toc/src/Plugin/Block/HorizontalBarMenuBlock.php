@@ -97,7 +97,7 @@ final class HorizontalBarMenuBlock extends BlockBase implements ContainerFactory
       if (!empty($links)) {
         $menu_link = current($links);
         $parent = $menu_link->getParent();
-        if ($parent)  {
+        if ($parent) {
           $menu_link_id = $parent;
         }
         else {
