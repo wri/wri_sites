@@ -192,7 +192,8 @@
 }
 
 .page-hierarchies,
-.menu-blockpage-hierarchies {
+.menu-blockpage-hierarchies,
+.parent-menu-blockpage-hierarchies {
   @include font($acumin-pro, "regular");
 
   @include mq($md) {

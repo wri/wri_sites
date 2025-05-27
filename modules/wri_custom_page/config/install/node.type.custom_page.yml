@@ -5,8 +5,9 @@ dependencies:
     - menu_ui
 third_party_settings:
   menu_ui:
-    available_menus: {  }
-    parent: ''
+    available_menus:
+      - page-hierarchies
+    parent: 'page-hierarchies:'
 name: 'Custom Page'
 type: custom_page
 description: null

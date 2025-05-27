@@ -1,0 +1,12 @@
+block.settings.wri_toc_horizontal_bar_menu:
+  type: block_settings
+  label: 'Horizontal bar menu block'
+  mapping:
+    color_class:
+      type: string
+      label: Color Class
+      description: 'Background color class to apply (can take any css class). Example: black-bar, teal-bar'
+    menu:
+      type: string
+      label: Menu
+      description: 'The dash-case name of the menu: i.e., page-hierarchies'

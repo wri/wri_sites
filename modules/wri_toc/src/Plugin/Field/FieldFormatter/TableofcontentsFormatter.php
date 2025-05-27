@@ -11,6 +11,7 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\wri_toc\Traits\TocConfigTrait;
 
 /**
  * Plugin implementation of the 'TableOfContents' formatter.
@@ -37,6 +38,8 @@ class TableofcontentsFormatter extends FormatterBase implements ContainerFactory
    * @var \Drupal\Core\Menu\MenuLinkManagerInterface
    */
   protected $linkManager;
+
+  use TocConfigTrait;
 
   /**
    * {@inheritdoc}
@@ -67,32 +70,15 @@ class TableofcontentsFormatter extends FormatterBase implements ContainerFactory
   /**
    * {@inheritdoc}
    */
-  public static function defaultSettings() {
-    return [
-      'menu' => 'page-hierarchies',
-      'color_class' => 'black-bar',
-    ] + parent::defaultSettings();
+  public function defaultConfiguration(): array {
+    return $this->getDefaultTocConfig();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function settingsForm(array $form, FormStateInterface $form_state) {
-
-    $elements['menu'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Menu name'),
-      '#description' => $this->t('The dash-case name of the menu: ie page-hierarchies'),
-      '#default_value' => $this->getSetting('menu') ?? 'page-hierarchies',
-    ];
-    $elements['color_class'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Color class'),
-      '#description' => $this->t('The background color class to apply. Example: black-bar, teal-bar'),
-      '#default_value' => $this->getSetting('color_class') ?? 'black-bar',
-    ];
-
-    return $elements;
+  public function blockForm($form, FormStateInterface $form_state): array {
+    return $this->buildTocForm($form, $form_state, $this->configuration);
   }
 
   /**
