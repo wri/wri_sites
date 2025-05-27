@@ -140,9 +140,10 @@ function wri_node_preprocess_html(&$variables) {
   ];
   $variables['osano_script'] = TRUE;
   $status = \Drupal::requestStack()->getCurrentRequest()->attributes->get('exception');
-  if ($status && in_array($status->getStatusCode(), $responses_to_hide_osana)){
+  if ($status && in_array($status->getStatusCode(), $responses_to_hide_osana)) {
     $variables['osano_script'] = FALSE;
-  } elseif (Drupal::config('wri_node.settings')->get('disable_osano_script')) {
+  }
+  elseif (Drupal::config('wri_node.settings')->get('disable_osano_script')) {
     $variables['osano_script'] = FALSE;
   }
 }
