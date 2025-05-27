@@ -150,6 +150,7 @@
         "drupal/entity_class_formatter": "^2.0",
         "drupal/entity_embed": "^1.6",
         "drupal/entity_usage": "^2.0@beta",
+        "drupal/facet_bot_blocker": "^1.0",
         "drupal/facets": "^2.0",
         "drupal/facets_pretty_paths": "^2.0",
         "drupal/field_group": "^3.2",
