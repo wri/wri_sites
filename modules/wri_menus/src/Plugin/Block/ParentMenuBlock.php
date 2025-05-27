@@ -74,8 +74,7 @@ class ParentMenuBlock extends OriginalMenuBlock {
 
     // Wrap the menu in a div with a class if specified.
     if (isset($this->configuration['add_class'])) {
-      $build['#prefix'] = '<div class="' . $this->configuration['add_class'] . '">';
-      $build['#suffix'] = '</div>';
+      $build['#add_class'] = $this->configuration['add_class'];
     }
     return $build;
   }

@@ -4,4 +4,11 @@
  * Theme override for the parent heirarchy menu.
  */
 #}
+{% if elements.content['#add_class'] %}
+<div class="{{ elements.content['#add_class'] }}">
+{% endif %}
+
 {% include '@ts_wrin/blocks/block--menu-block--page-hierarchies.html.twig' %}
+{% if add_class %}
+</div>
+{% endif %}
