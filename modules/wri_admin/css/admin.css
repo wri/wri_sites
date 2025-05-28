@@ -207,4 +207,5 @@ form .fieldset {
 
 #layout-builder .mobile__toc, #layout-builder .publication__toc {
   display: block;
+  position: static;
 }
