@@ -58,8 +58,14 @@ function ts_wrin_preprocess_html(array &$variables) {
         case 'program_center':
         case 'microsite':
         case 'project_detail':
-        case 'subpage':
           $variables['attributes']['class'][] = 'transparent-header white';
+          break;
+
+        case 'subpage':
+          $parent_page = $node->get('field_parent_page')->entity;
+          if ($parent_page instanceof NodeInterface && $parent_page->getType() != 'custom_page') {
+            $variables['attributes']['class'][] = 'transparent-header white';
+          }
           break;
 
         case 'publication':
