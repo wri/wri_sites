@@ -53,7 +53,7 @@
             },
             "drupal/layout_builder_st": {
                 "Error: Call to a member function getConfig() OverridesSectionStorage.php https://www.drupal.org/project/layout_builder_st/issues/3420063": "https://www.drupal.org/files/issues/2024-03-29/layout_builder_st-call_to_a_member_function_getconfig-3420063-26.patch",
-                "Contextual links for translation are removed by core https://www.drupal.org/project/layout_builder_st/issues/3411037": "https://git.drupalcode.org/project/layout_builder_st/-/merge_requests/5.diff",
+                "Contextual links for translation are removed by core https://www.drupal.org/project/layout_builder_st/issues/3411037": "https://www.drupal.org/files/issues/2024-05-23/3411037-contextual-links-removed-from-core.patch",
                 "Drupal\\Component\\Plugin\\Exception\\PluginNotFoundException: The \"block.settings.<block_name>\" plugin does not exist https://www.drupal.org/project/layout_builder_st/issues/3463435": "https://www.drupal.org/files/issues/2024-07-23/layout_builder_st-plugin-not-found-3463435-3.patch"
             },
             "drupal/metatag": {
