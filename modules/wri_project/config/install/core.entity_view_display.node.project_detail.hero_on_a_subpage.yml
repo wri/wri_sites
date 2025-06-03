@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.project_detail.field_metatags
     - field.field.node.project_detail.field_narrative_taxonomy
     - field.field.node.project_detail.field_other_link
+    - field.field.node.project_detail.field_paragraphs
     - field.field.node.project_detail.field_platform_link
     - field.field.node.project_detail.field_primary_contacts
     - field.field.node.project_detail.field_primary_topic
@@ -58,19 +59,18 @@ third_party_settings:
         - field_primary_topic
         - field_region
       share:
-        - field_twitter_account
         - wri_social_sharing_block
       sidebar:
         - field_narrative_taxonomy
     fields:
-      childtitle:
-        plugin_id: childtitle
-        weight: 2
-        label: hidden
-        formatter: default
       childimg:
         plugin_id: childimg
         weight: 0
+        label: hidden
+        formatter: default
+      childtitle:
+        plugin_id: childtitle
+        weight: 2
         label: hidden
         formatter: default
       node_title:
@@ -247,12 +247,15 @@ hidden:
   field_logo: true
   field_main_image: true
   field_metatags: true
+  field_narrative_taxonomy: true
   field_other_link: true
+  field_paragraphs: true
   field_platform_link: true
   field_primary_contacts: true
   field_project_partners: true
   field_show_more_link: true
   field_tags: true
+  field_twitter_account: true
   field_type: true
   langcode: true
   layout_builder__layout: true
