@@ -186,6 +186,16 @@ function wri_node_update_10402() {
 
 /**
  * Migrate field_twitter_account values into a social_media_sites paragraph.
+ */
+function wri_node_update_10403() {
+  // Define the content types to process.
+  $content_types = ['project_detail'];
+
+  wri_update_twitter_replacement($content_types);
+}
+
+/**
+ * Migrate field_twitter_account values into a social_media_sites paragraph.
  *
  * @param array $content_types
  *   The content types to process.
