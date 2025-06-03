@@ -64,6 +64,7 @@ third_party_settings:
         - field_featured_text
         - field_project_partners
         - field_narrative_taxonomy
+        - field_social_sharing_links
         - field_featured_related_resources
       label: Featured
       region: content
