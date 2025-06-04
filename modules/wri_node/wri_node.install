@@ -281,8 +281,9 @@ function wri_update_twitter_replacement($content_types, $field_name = 'field_par
               'target_revision_id' => $paragraph->getRevisionId(),
             ]);
           }
-        } elseif ($node->bundle() == 'project_detail') {
-          // TODO: create a social_links_listing paragraph instead.
+        }
+        elseif ($node->bundle() == 'project_detail') {
+          // @todo create a social_links_listing paragraph instead.
         }
         // Optionally, clear the old field_twitter_account.
         $node->set('field_twitter_account', NULL);
