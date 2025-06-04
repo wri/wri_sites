@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.microsite.field_long_title
     - field.field.node.microsite.field_main_image
     - field.field.node.microsite.field_metatags
+    - field.field.node.microsite.field_paragraphs
     - field.field.node.microsite.field_primary_contacts
     - field.field.node.microsite.field_project_partners
     - field.field.node.microsite.field_theme
@@ -192,11 +193,31 @@ content:
         show_edit: '1'
   field_metatags:
     type: metatag_firehose
-    weight: 30
+    weight: 17
     region: content
     settings:
       sidebar: true
       use_details: true
+    third_party_settings: {  }
+  field_paragraphs:
+    type: paragraphs
+    weight: 6
+    region: content
+    settings:
+      title: 'Social Link'
+      title_plural: 'Social Links'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: social_media_sites
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        convert: '0'
+        duplicate: duplicate
     third_party_settings: {  }
   field_primary_contacts:
     type: entity_reference_autocomplete

@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.microsite.field_long_title
     - field.field.node.microsite.field_main_image
     - field.field.node.microsite.field_metatags
+    - field.field.node.microsite.field_paragraphs
     - field.field.node.microsite.field_primary_contacts
     - field.field.node.microsite.field_project_partners
     - field.field.node.microsite.field_theme
@@ -31,11 +32,11 @@ third_party_settings:
   ds:
     layout:
       id: layout_impact
-      settings:
-        label: ''
       library: null
       disable_css: false
       entity_classes: all_classes
+      settings:
+        label: ''
     regions:
       content_type:
         - field_type
@@ -55,8 +56,6 @@ third_party_settings:
           id: reset
           settings:
             lb: ''
-_core:
-  default_config_hash: bqOGOH_iygwUNqHdPbq41iLK1e_H0d_GfMSVpxxNSr8
 id: node.microsite.impact
 targetEntityType: node
 bundle: microsite
@@ -95,6 +94,7 @@ hidden:
   field_metatag: true
   field_metatags: true
   field_narrative_taxonomy: true
+  field_paragraphs: true
   field_primary_contacts: true
   field_primary_topic: true
   field_project_partners: true

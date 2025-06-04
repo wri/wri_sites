@@ -193,6 +193,15 @@ function wri_node_update_10403() {
 
   wri_update_twitter_replacement($content_types);
 }
+/**
+ * Migrate field_twitter_account values into a social_media_sites paragraph.
+ */
+function wri_node_update_10404() {
+  // Define the content types to process.
+  $content_types = ['program_center', 'microsite'];
+
+  wri_update_twitter_replacement($content_types);
+}
 
 /**
  * Migrate field_twitter_account values into a social_media_sites paragraph.

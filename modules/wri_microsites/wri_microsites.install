@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the wri_microsites module.
+ */
+
+/**
+ * Add field_paragraphs and update all view modes.
+ */
+function wri_microsites_update_10401() {
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.microsite.field_paragraphs', 'wri_microsites');
+
+  $message = 'Add field Paragraph and update view modes.';
+  return $message;
+}
+
+/**
+ * Update microsites form display.
+ */
+function wri_microsites_update_10403() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.microsite.default', [
+    'content#field_paragraphs',
+  ], 'wri_microsites');
+
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.microsite.full', [
+    'third_party_settings#layout_builder#sections#0#components',
+    'third_party_settings#layout_builder_restrictions#entity_view_mode_restriction#allowlisted_blocks',
+  ], 'wri_microsites');
+
+  $message = 'Update microsite form display configs';
+  return $message;
+}
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_microsites_update_dependencies() {
+  $dependencies['wri_microsites'][10401] = [
+    'wri_node' => 10401,
+  ];
+  return $dependencies;
+}

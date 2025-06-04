@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.microsite.field_long_title
     - field.field.node.microsite.field_main_image
     - field.field.node.microsite.field_metatags
+    - field.field.node.microsite.field_paragraphs
     - field.field.node.microsite.field_primary_contacts
     - field.field.node.microsite.field_project_partners
     - field.field.node.microsite.field_theme
@@ -73,8 +74,6 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-_core:
-  default_config_hash: DJJ9gil3aCHQg9mLHpbgGCCpiGK270uIh_yKXgs8XtY
 id: node.microsite.tile
 targetEntityType: node
 bundle: microsite
@@ -145,6 +144,7 @@ hidden:
   field_metatag: true
   field_metatags: true
   field_narrative_taxonomy: true
+  field_paragraphs: true
   field_primary_contacts: true
   field_primary_topic: true
   field_project_partners: true
