@@ -78,7 +78,7 @@ third_party_settings:
                 label: hidden
                 settings: {  }
                 third_party_settings: {  }
-            weight: 6
+            weight: 0
             additional: {  }
           325aa2f4-b6fb-4448-98df-8b2b0f505402:
             uuid: 325aa2f4-b6fb-4448-98df-8b2b0f505402
@@ -97,7 +97,7 @@ third_party_settings:
                 settings:
                   view_mode: default
                 third_party_settings: {  }
-            weight: 5
+            weight: -1
             additional: {  }
           -
             uuid: d593ec71-4209-4daf-b431-e27d358c18f3

@@ -6,12 +6,12 @@
  */
 
 /**
- * Add field_paragraphs and update all view modes.
+ * Add field_social_sharing_links and update all view modes.
  */
 function wri_microsites_update_10401() {
-  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.microsite.field_paragraphs', 'wri_microsites');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.microsite.field_social_sharing_links', 'wri_microsites');
 
-  $message = 'Add field Paragraph and update view modes.';
+  $message = 'Add field Social Sharing Links and update view modes.';
   return $message;
 }
 
@@ -20,12 +20,11 @@ function wri_microsites_update_10401() {
  */
 function wri_microsites_update_10403() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.microsite.default', [
-    'content#field_paragraphs',
+    'content#field_social_sharing_links',
   ], 'wri_microsites');
 
-  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.microsite.full', [
-    'third_party_settings#layout_builder#sections#0#components',
-    'third_party_settings#layout_builder_restrictions#entity_view_mode_restriction#allowlisted_blocks',
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.microsite.main_content', [
+    'content#field_social_sharing_links',
   ], 'wri_microsites');
 
   $message = 'Update microsite form display configs';

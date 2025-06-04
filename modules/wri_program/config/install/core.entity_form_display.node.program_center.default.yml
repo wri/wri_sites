@@ -343,5 +343,6 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_social_sharing_links: true
   field_statistics: true
   layout_builder__layout: true

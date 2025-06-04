@@ -12,9 +12,9 @@ dependencies:
     - field.field.node.microsite.field_long_title
     - field.field.node.microsite.field_main_image
     - field.field.node.microsite.field_metatags
-    - field.field.node.microsite.field_paragraphs
     - field.field.node.microsite.field_primary_contacts
     - field.field.node.microsite.field_project_partners
+    - field.field.node.microsite.field_social_sharing_links
     - field.field.node.microsite.field_theme
     - field.field.node.microsite.field_toc
     - field.field.node.microsite.field_twitter_account
@@ -146,11 +146,11 @@ hidden:
   field_metatag: true
   field_metatags: true
   field_narrative_taxonomy: true
-  field_paragraphs: true
   field_primary_contacts: true
   field_primary_topic: true
   field_project_partners: true
   field_show_more_link: true
+  field_social_sharing_links: true
   field_statistics: true
   field_theme: true
   field_toc: true
