@@ -95,7 +95,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 11
+    weight: 12
     region: main_content
   field_intro:
     type: wrapper_class
@@ -129,7 +129,7 @@ content:
           id: reset
           settings:
             lb: ''
-    weight: 10
+    weight: 11
     region: featured_image
   field_main_image:
     type: media_responsive_thumbnail
@@ -180,7 +180,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 12
+    weight: 13
     region: sidebar
   field_other_link:
     type: link_class
@@ -336,7 +336,7 @@ content:
   wri_social_sharing_block:
     settings: {  }
     third_party_settings: {  }
-    weight: 9
+    weight: 10
     region: share
 hidden:
   addtocal: true
