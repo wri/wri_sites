@@ -58,7 +58,6 @@ third_party_settings:
         - field_primary_topic
         - field_region
       share:
-        - field_twitter_account
         - wri_social_sharing_block
       sidebar:
         - field_narrative_taxonomy
