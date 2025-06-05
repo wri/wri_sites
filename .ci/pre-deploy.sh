@@ -6,7 +6,7 @@ set -eo pipefail
 terminus -n auth:login --machine-token="$TERMINUS_TOKEN"
 
 # Wipe all content from the 'live-backup' environment
-if ! terminus multidev:delete --delete-branch "$TERMINUS_SITE".live-backup; then
+if ! terminus multidev:delete --delete-branch "$TERMINUS_SITE".live-backup -y; then
   echo "live-backup not found. Skipping this step."
 fi
 
@@ -35,6 +35,7 @@ if [ -n "$(drush config:status --format=list)" ]; then
   terminus drush "$TERMINUS_SITE".live-backup -- config:export --partial --destination=/tmp/config/partial
 
   # Pull config into build container
+  terminus self:plugin:install terminus-rsync-plugin
   terminus rsync "$TERMINUS_SITE.$MULTIDEV_ENV:/tmp/config/partial" "./config/partial"
 
   # Copy into sync directory (unsure if this should be done...does a human need to review this first during deployment?)
