@@ -27,7 +27,7 @@
       {% if content.field_profile_image|render %}
         {{ content.field_profile_image }}
       {% else %}
-        <img src="/profiles/contrib/wri_sites/themes/custom/ts_wrin/img/svgs/circle_grey_solid.svg" alt="{{ 'Person default'|t }}" width="100" height="100" typeof="foaf:Image" class="image-style-_00x100">
+        <img src="/{{ ts_wrin_path }}/img/svgs/circle_grey_solid.svg" alt="{{ 'Person default'|t }}" width="100" height="100" typeof="foaf:Image" class="image-style-_00x100">
       {% endif %}
     </div>
   {% endif %}

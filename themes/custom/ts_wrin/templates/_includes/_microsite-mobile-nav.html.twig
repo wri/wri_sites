@@ -6,7 +6,7 @@
     {# WRI Logo #}
     <div class="pfp-mobile-nav__logo">
       <a href="/">
-        <img src="../profiles/contrib/wri_sites/themes/custom/ts_wrin/img/logo/wri-logo-stacked.png" />
+        <img src="/{{ ts_wrin_path }}/img/logo/wri-logo-stacked.png" />
       </a>
     </div>
 
@@ -22,7 +22,7 @@
   {# WRI Menu #}
   <button class="pfp-mobile-nav__wri-logo">
     <div class="pfp-mobile-nav__wri-logo__chevron">
-      {{ source('profiles/contrib/wri_sites/themes/custom/ts_wrin/img/svgs/chevron-left.svg') }}
+      {{ source(ts_wrin_path ~ '/img/svgs/chevron-left.svg') }}
     </div>
     <div class="pfp-mobile-nav__wri-logo__text">
       <span class="visually-hidden">Open</span> WRI <span class="visually-hidden">website navigation</span>
@@ -33,7 +33,7 @@
   <div class="pfp-mobile-nav__pfp-logo">
     <a href="/paying-for-paris">
       <span class="visually-hidden">Paying for the Paris Agreement</span>
-      {{ source('profiles/contrib/wri_sites/themes/custom/ts_wrin/img/logo/pfp-logo.svg') }}
+      {{ source(ts_wrin_path ~ '/img/logo/pfp-logo.svg') }}
     </a>
   </div>
 
