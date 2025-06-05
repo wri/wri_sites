@@ -18,6 +18,7 @@ dependencies:
   - smart_date
   - taxonomy
   - telephone
+  - viewfield
   - workflows
   - webform
 config_devel:
