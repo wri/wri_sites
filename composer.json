@@ -73,9 +73,6 @@
             "drupal/views_bulk_edit": {
                 "Fix Required fields to really not be required https://www.drupal.org/node/3024419": "https://www.drupal.org/files/issues/2024-01-10/views_bulk_edit-3024419-fix_required_fields-57.patch"
             },
-            "drupal/views_arg_order_sort": {
-                "Set as compatible with Drupal 10 but lock down version https://www.drupal.org/project/views_arg_order_sort/issues/3212018" : "web/profiles/contrib/wri_sites/patches/d10-upgrade-circumvent-3212018.diff"
-            },
             "drupal/views_extras": {
                 "Why does Views Extras require Drupal_Visitors to be part of the cookie name? https://www.drupal.org/project/views_extras/issues/3054202" : "https://www.drupal.org/files/issues/2024-01-03/3054202-11.patch"
             },
