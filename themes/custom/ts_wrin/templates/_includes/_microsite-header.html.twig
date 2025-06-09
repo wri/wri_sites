@@ -55,6 +55,9 @@
   {% if (content.hero.field_toc is not empty) and (content.hero.field_toc['#value'] == 'microsite') %}
     {% include '@ts_wrin/_includes/_microsite-mobile-nav.html.twig' with {
       menu_items: content.hero.field_toc,
+      stacked_logo: ts_wrin_path ~ "/img/logo/wri-logo-stacked.png",
+      chevron_left: ts_wrin_path ~ '/img/svgs/chevron-left.svg',
+      pfp_logo: ts_wrin_path ~ '/img/logo/pfp-logo.svg',
     } only %}
   {% endif %}
 </header>

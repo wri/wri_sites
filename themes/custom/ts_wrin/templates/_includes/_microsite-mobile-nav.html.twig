@@ -1,3 +1,15 @@
+{#
+/**
+ * @file
+ * Microsite mobile navigation.
+ *
+ * Variables:
+ * - menu_items: A list of menu items.
+ * - stacked_logo: Path to the site logo used at the top of the menu.
+ * - chevron_left: Path to the default chevron_left logo.
+ * - pfp_logo: Path to the "Paying for the Paris Agreement" logo.
+ */
+#}
 <div class="pfp-mobile-nav">
 
   {# Header #}
@@ -6,7 +18,7 @@
     {# WRI Logo #}
     <div class="pfp-mobile-nav__logo">
       <a href="/">
-        <img src="/{{ ts_wrin_path }}/img/logo/wri-logo-stacked.png" />
+        <img src={{ stacked_logo }} />
       </a>
     </div>
 
@@ -22,7 +34,7 @@
   {# WRI Menu #}
   <button class="pfp-mobile-nav__wri-logo">
     <div class="pfp-mobile-nav__wri-logo__chevron">
-      {{ source(ts_wrin_path ~ '/img/svgs/chevron-left.svg') }}
+      {{ source(chevron_left) }}
     </div>
     <div class="pfp-mobile-nav__wri-logo__text">
       <span class="visually-hidden">Open</span> WRI <span class="visually-hidden">website navigation</span>
@@ -33,12 +45,12 @@
   <div class="pfp-mobile-nav__pfp-logo">
     <a href="/paying-for-paris">
       <span class="visually-hidden">Paying for the Paris Agreement</span>
-      {{ source(ts_wrin_path ~ '/img/logo/pfp-logo.svg') }}
+      {{ source(pfp_logo) }}
     </a>
   </div>
 
   {# Menu #}
   <div class="pfp-mobile-nav__menu">
-    {{ menu_items}}
+    {{ menu_items }}
   </div>
 </div>
