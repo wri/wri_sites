@@ -31,21 +31,23 @@ if [ -n "$(drush config:status --format=list)" ]; then
   # Creating new live config branch from the most recent tag
   git checkout "tags/$latest_pantheon_tag" -b "$BRANCH_NAME"
 
-  # Pull config changes from live-backup environment
-  terminus drush "$TERMINUS_SITE".live-backup -- config:export --partial --destination=/tmp/config/partial
+  # Run full export
+  terminus drush "$TERMINUS_SITE.live-backup" -- config:export --destination=/tmp/config/sync
 
   # Pull config into build container
   terminus self:plugin:install terminus-rsync-plugin
-  terminus rsync "$TERMINUS_SITE.$MULTIDEV_ENV:/tmp/config/partial" "./config/partial"
+  terminus rsync "$TERMINUS_SITE.live-backup:/tmp/config/sync" ./config/sync
 
-  # Copy into sync directory (unsure if this should be done...does a human need to review this first during deployment?)
-  cp -R ./config/partial/* ./config/sync/
+  # Commit if there are changes (unsure if this should be done...does a human need to review this first during deployment?)
+  git add config/sync/
 
+  if ! git diff --cached --quiet; then
+    echo "Committing config changes"
+    git commit -m "Export changed config from live-backup on $(date + '%Y-%m-%d')"
 
-  # Add changes, push them up, open PR
-  git add .
-  git push origin "$BRANCH_NAME"
-  gh pr create --base main --head "$BRANCH_NAME" --title "Live config from $(date +'%Y-%m-%d')."
-else
-  echo "No config changes detected. Skipping live config sync steps."
-fi
+    echo "Pushing changes to branch $BRANCH_NAME"
+    git push origin "$BRANCH_NAME"
+    gh pr create --base main --head "$BRANCH_NAME" --title "Live config from $(date +'%Y-%m-%d')."
+  else
+    echo "No config changes detected. Skipping live config sync steps."
+  fi
