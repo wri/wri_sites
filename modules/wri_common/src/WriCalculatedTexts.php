@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\wri_search;
+namespace Drupal\wri_common;
 
 use Drupal\Core\Field\FieldItemList;
 

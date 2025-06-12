@@ -3,9 +3,9 @@ main:
   css:
     theme:
       https://use.typekit.net/xrt8xkt.css: { type: external }
-      ../../../../../../libraries/ts_wrin/main.css: {}
+      dist/main.css: {}
   js:
-    ../../../../../../libraries/ts_wrin/main.min.js: {}
+    dist/main.min.js: {}
   dependencies:
     - core/jquery
     - core/drupal
