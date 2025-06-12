@@ -163,7 +163,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 5
+    weight: 4
     region: category
   field_region:
     type: hierarchical_term_formatter
@@ -204,7 +204,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 6
+    weight: 5
     region: category
   field_social_sharing_links:
     type: entity_reference_revisions_entity_view
