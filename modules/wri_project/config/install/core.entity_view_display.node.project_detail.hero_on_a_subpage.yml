@@ -43,11 +43,8 @@ third_party_settings:
   ds:
     layout:
       id: 'single_file_component_layout:wri_subpage_columns'
-      library: null
-      disable_css: false
-      entity_classes: all_classes
       settings:
-        component_context: {  }
+        label: ''
     regions:
       hero:
         - childimg
@@ -63,14 +60,14 @@ third_party_settings:
       sidebar:
         - field_narrative_taxonomy
     fields:
-      childtitle:
-        plugin_id: childtitle
-        weight: 2
-        label: hidden
-        formatter: default
       childimg:
         plugin_id: childimg
         weight: 0
+        label: hidden
+        formatter: default
+      childtitle:
+        plugin_id: childtitle
+        weight: 2
         label: hidden
         formatter: default
       node_title:
@@ -209,7 +206,8 @@ content:
     type: 'single_file_component_field_formatter:toc_formatter'
     label: hidden
     settings:
-      component_context: {  }
+      menu: page-hierarchies
+      color_class: black-bar
     third_party_settings: {  }
     weight: 4
     region: hero
@@ -227,7 +225,7 @@ content:
         ft:
           id: reset
           settings:
-            lb: ''
+            lb: 'Follow on'
     weight: 7
     region: share
   wri_social_sharing_block:
