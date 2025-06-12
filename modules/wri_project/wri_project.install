@@ -45,9 +45,6 @@ function wri_project_update_dependencies() {
     'wri_sites' => 8908,
     'wri_io_content' => 9301,
   ];
-  $dependencies['wri_project'][10401] = [
-    'wri_node' => 10403,
-  ];
   $dependencies['wri_project'][10402] = [
     'wri_project' => 10401,
   ];
