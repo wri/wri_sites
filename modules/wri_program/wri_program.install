@@ -50,7 +50,7 @@ function wri_program_update_dependencies() {
  */
 function wri_program_update_10401() {
   \Drupal::service('distro_helper.updates')->installConfig('field.field.node.program_center.field_social_sharing_links', 'wri_program');
-  $message = 'Add field Paragraph and update view modes.';
+  $message = 'Add field Social Sharing Links and update view modes.';
   return $message;
 }
 
@@ -59,7 +59,8 @@ function wri_program_update_10401() {
  */
 function wri_program_update_10402() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.program_center.default', [
-    'content',
+    'content#field_social_sharing_links',
+    'content#field_twitter_account',
   ], 'wri_program');
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.program_center.full', [
     'third_party_settings#layout_builder#sections',

@@ -89,7 +89,7 @@ content:
         ft:
           id: reset
           settings:
-            lb: ''
+            lb: 'Connect with [node:title]'
     weight: 3
     region: sidebar
   field_toc:

@@ -83,24 +83,20 @@ content:
             lb: ''
     weight: 4
     region: hero
-  field_twitter_account:
-    type: link_ally_class
+  field_social_sharing_links:
+    type: entity_reference_revisions_entity_view
     label: hidden
     settings:
-      class: ''
-      link_text: 'Follow on '
-      screenreader_text: 'Follow on X'
-      tag: ''
+      view_mode: default
+      link: ''
     third_party_settings:
       ds:
         ft:
-          id: minimal
+          id: reset
           settings:
-            lb: ''
-            lb-col: false
-            classes: {  }
-    weight: 7
-    region: hero
+            lb: 'Connect with [node:title]'
+    weight: 8
+    region: sidebar
 hidden:
   body: true
   content_moderation_control: true
@@ -115,6 +111,7 @@ hidden:
   field_project_partners: true
   field_social_sharing_links: true
   field_theme: true
+  field_twitter_account: true
   field_type: true
   langcode: true
   layout_builder__layout: true

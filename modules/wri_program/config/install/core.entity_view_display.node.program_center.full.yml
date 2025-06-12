@@ -99,7 +99,7 @@ third_party_settings:
                 third_party_settings: {  }
             weight: -1
             additional: {  }
-          -
+          d593ec71-4209-4daf-b431-e27d358c18f3:
             uuid: d593ec71-4209-4daf-b431-e27d358c18f3
             region: content
             configuration:
