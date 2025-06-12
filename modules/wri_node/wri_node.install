@@ -283,7 +283,40 @@ function wri_update_twitter_replacement($content_types, $field_name = 'field_par
           }
         }
         elseif ($node->bundle() == 'project_detail') {
-          // @todo create a social_links_listing paragraph instead.
+          // Create the inner social_media_sites paragraph.
+          $inner_paragraph = Paragraph::create([
+            'type' => 'social_media_sites',
+            'field_text' => $handle,
+            'field_link' => [
+              'uri' => $uri,
+              'title' => $handle,
+            ],
+            'field_site' => [
+              ['target_id' => $twitter_term->id()],
+            ],
+          ]);
+          $inner_paragraph->save();
+
+          // Create the outer social_links_listing paragraph.
+          $outer_paragraph = Paragraph::create([
+            'type' => 'social_links_listing',
+            'field_title' => 'Follow us',
+            'field_social_links' => [
+              [
+                'target_id' => $inner_paragraph->id(),
+                'target_revision_id' => $inner_paragraph->getRevisionId(),
+              ],
+            ],
+          ]);
+          $outer_paragraph->save();
+
+          // Attach the outer paragraph to the node's field.
+          if ($node->hasField($field_name)) {
+            $node->get($field_name)->appendItem([
+              'target_id' => $outer_paragraph->id(),
+              'target_revision_id' => $outer_paragraph->getRevisionId(),
+            ]);
+          }
         }
         // Optionally, clear the old field_twitter_account.
         $node->set('field_twitter_account', NULL);

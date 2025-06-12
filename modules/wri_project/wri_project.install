@@ -78,12 +78,18 @@ function wri_project_update_10401() {
  */
 function wri_project_update_10402() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.project_detail.default', [
-    'content',
+    'content#field_social_sharing_links',
+    'content#field_twitter_account',
   ], 'wri_project');
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.project_detail.main_content', [
     'content#field_social_sharing_links',
     'third_party_settings#ds#regions#share',
-    'third_party_settings#ds#regions#main_content',
+    'third_party_settings#ds#regions#sidebar',
+  ], 'wri_project');
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.project_detail.hero_on_a_subpage', [
+    'content#field_social_sharing_links',
+    'third_party_settings#ds#regions#share',
+    'third_party_settings#ds#regions#sidebar',
   ], 'wri_project');
 
   $message = 'Update project form display configs';

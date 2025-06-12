@@ -330,14 +330,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_twitter_account:
-    type: link_default
-    weight: 6
-    region: content
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
   field_type:
     type: options_select
     weight: 26
@@ -406,5 +398,6 @@ hidden:
   revision_timestamp: true
   revision_translation_affected: true
   revision_uid: true
+  field_twitter_account: true
   uid: true
   vid: true
