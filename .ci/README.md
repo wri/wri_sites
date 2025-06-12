@@ -1,9 +1,16 @@
 ## How to use these scripts
 
-Set a couple of environment variables to be able to run the script, namely
-`$TERMINUS_TOKEN` (or we could check to see if the user is logged in before running `terminus -n auth:login`) and `$TERMINUS_SITE`.  I think it's fine to either tell people to run `export TERMINUS_SITE=yoursitename` in console or read in the contents of the `.env` file using `export $(cat .env | xargs)` before running this script.
+1. In your site's root `.env` file, you should have the following variables set:
+  * `$TERMINUS_TOKEN` -- the Terminus authentication token, which can be generated from your Pantheon dashboard.
+You can get this by looking it your `~/.terminus/cache/tokens/` folder, or print it out using
+`cat ~/.terminus/cache/tokens/$(terminus whoami) | jq -r .token`
 
-Then, within the site root, run:
+  * `$TERMINUS_SITE` -- the name of your Pantheon site, which is usually in the format `wriflagship` or `wri-brasil` for example.
+
+
+2. Then read in the contents of the `.env` file using `export $(cat .env | xargs)` before running this script.
+
+3. Within the site root, run:
 ```
 ./web/profiles/contrib/wri_sites/.ci/check-for-new-tag.sh
 ```
