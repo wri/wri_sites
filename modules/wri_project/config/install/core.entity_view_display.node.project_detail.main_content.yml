@@ -21,7 +21,6 @@ dependencies:
     - field.field.node.project_detail.field_project_partners
     - field.field.node.project_detail.field_region
     - field.field.node.project_detail.field_show_more_link
-    - field.field.node.project_detail.field_social_sharing_links
     - field.field.node.project_detail.field_tags
     - field.field.node.project_detail.field_toc
     - field.field.node.project_detail.field_twitter_account
@@ -33,9 +32,9 @@ dependencies:
   module:
     - ds
     - element_class_formatter
-    - entity_reference_revisions
     - hierarchical_term_formatter
     - layout_builder
+    - link
     - media
     - media_responsive_thumbnail
     - text
@@ -48,9 +47,6 @@ third_party_settings:
   ds:
     layout:
       id: 'single_file_component_layout:wri_publication_columns'
-      library: null
-      disable_css: false
-      entity_classes: all_classes
       settings:
         label: ''
     regions:
@@ -99,7 +95,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 11
+    weight: 12
     region: main_content
   field_intro:
     type: wrapper_class
@@ -133,7 +129,7 @@ content:
           id: reset
           settings:
             lb: ''
-    weight: 10
+    weight: 11
     region: featured_image
   field_main_image:
     type: media_responsive_thumbnail
@@ -184,7 +180,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 12
+    weight: 13
     region: sidebar
   field_other_link:
     type: link_class
@@ -340,7 +336,7 @@ content:
   wri_social_sharing_block:
     settings: {  }
     third_party_settings: {  }
-    weight: 9
+    weight: 10
     region: share
 hidden:
   addtocal: true

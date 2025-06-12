@@ -15,13 +15,13 @@ dependencies:
     - field.field.node.project_detail.field_metatags
     - field.field.node.project_detail.field_narrative_taxonomy
     - field.field.node.project_detail.field_other_link
-    - field.field.node.project_detail.field_paragraphs
     - field.field.node.project_detail.field_platform_link
     - field.field.node.project_detail.field_primary_contacts
     - field.field.node.project_detail.field_primary_topic
     - field.field.node.project_detail.field_project_partners
     - field.field.node.project_detail.field_region
     - field.field.node.project_detail.field_show_more_link
+    - field.field.node.project_detail.field_social_sharing_links
     - field.field.node.project_detail.field_tags
     - field.field.node.project_detail.field_toc
     - field.field.node.project_detail.field_twitter_account
@@ -31,9 +31,9 @@ dependencies:
   module:
     - ds
     - element_class_formatter
+    - entity_reference_revisions
     - hierarchical_term_formatter
     - layout_builder
-    - link
     - text
     - user
     - wri_toc
@@ -48,7 +48,7 @@ third_party_settings:
       disable_css: false
       entity_classes: all_classes
       settings:
-        component_context: {  }
+        label: ''
     regions:
       hero:
         - childimg
@@ -62,6 +62,7 @@ third_party_settings:
         - wri_social_sharing_block
       sidebar:
         - field_narrative_taxonomy
+        - field_social_sharing_links
     fields:
       childimg:
         plugin_id: childimg
@@ -124,7 +125,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 9
+    weight: 7
     region: sidebar
   field_primary_topic:
     type: entity_reference_label_class
@@ -162,7 +163,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 5
+    weight: 4
     region: category
   field_region:
     type: hierarchical_term_formatter
@@ -203,39 +204,36 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 6
+    weight: 5
     region: category
-  field_toc:
-    type: 'single_file_component_field_formatter:toc_formatter'
+  field_social_sharing_links:
+    type: entity_reference_revisions_entity_view
     label: hidden
     settings:
-      component_context: {  }
-    third_party_settings: {  }
-    weight: 4
-    region: hero
-  field_twitter_account:
-    type: link_separate
-    label: hidden
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: '0'
-      target: '0'
+      view_mode: default
+      link: ''
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
-            lb: ''
-    weight: 7
-    region: share
+            lb: 'Connect with [node:title]'
+    weight: 8
+    region: sidebar
+  field_toc:
+    type: 'single_file_component_field_formatter:toc_formatter'
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: hero
   wri_social_sharing_block:
     settings: {  }
     third_party_settings: {  }
-    weight: 8
+    weight: 6
     region: share
 hidden:
+  addtocal: true
   body: true
   content_moderation_control: true
   field_featured: true
@@ -247,9 +245,7 @@ hidden:
   field_logo: true
   field_main_image: true
   field_metatags: true
-  field_narrative_taxonomy: true
   field_other_link: true
-  field_paragraphs: true
   field_platform_link: true
   field_primary_contacts: true
   field_project_partners: true
