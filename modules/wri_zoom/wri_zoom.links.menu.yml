@@ -1,0 +1,6 @@
+wri_zoom.settings:
+  route_name: wri_zoom.settings
+  parent: system.admin_config_services
+  title: 'Zoom & ORTO'
+  description: 'Integration settings for Zoom & ORTO.'
+  weight: 10
