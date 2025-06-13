@@ -52,7 +52,7 @@ class AdminSettingsForm extends ConfigFormBase {
     }
     $form['orto_registration_url'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Orto Registration URL	'),
+      '#title' => $this->t('Orto Registration URL'),
       '#description' => "1 hour after the scheduled end time of an event with a zoom webinar ID, send the event to this url. Example: https://ortto.wri.org/zoom/import-participants/?webinarId=[WEBINARID]&webinarName=[WEBINAR_NAME]&webinarDate=[WEBINAR_DATE]. This field accepts tokens.",
       '#default_value' => $settings['orto_registration_url'] ?? '',
     ];
