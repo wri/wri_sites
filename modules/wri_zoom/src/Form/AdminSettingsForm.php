@@ -38,21 +38,18 @@ class AdminSettingsForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form = parent::buildForm($form, $form_state);
-
     $settings = $this->config(self::SETTINGS)->get();
-    // It's not clear to me how else to get the "in use" version of the
-    // configuration that accepts settings.php based changes, so we have to:
-    // @codingStandardsIgnoreStart
-    $overridden_settings = \Drupal::config(self::SETTINGS)->get();
-    // @codingStandardsIgnoreEnd
     $form['orto_enabled'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Enable ORTO reporting'),
       '#description' => $this->t("If disabled, no reporting will be sent to ORTO at all. Enable only during testing or on live sites of record."),
       '#default_value' => $settings['orto_enabled'] ?? FALSE,
     ];
-    if ($settings['orto_enabled'] != $overridden_settings['orto_enabled']) {
-      $form['orto_enabled']['#title'] .= ' <i>[' . $this->t('NOTE: Overridden in settings.php') . ']</i>';
+    global $config;
+    if (isset($config['wri_zoom.settings']['orto_enabled'])) {
+      $form['orto_enabled']['#title'] .= ' <i>' . $this->t('[NOTE: Override in settings.php: %value]', [
+        '%value' => $config['wri_zoom.settings']['orto_enabled'] ? 'TRUE' : 'FALSE'
+        ]) . '</i>';
     }
     $form['orto_registration_url'] = [
       '#type' => 'textfield',
