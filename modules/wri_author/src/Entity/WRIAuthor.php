@@ -57,7 +57,6 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *     "revision_log_message" = "revision_log_message",
  *   },
  *   links = {
- *     "canonical" = "/admin/content/wri_author/{wri_author}",
  *     "add-page" = "/admin/content/wri_author/add",
  *     "add-form" = "/admin/content/wri_author/add/{wri_author_type}",
  *     "edit-form" = "/admin/content/wri_author/{wri_author}/edit",
