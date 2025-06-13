@@ -40,7 +40,11 @@ class AdminSettingsForm extends ConfigFormBase {
     $form = parent::buildForm($form, $form_state);
 
     $settings = $this->config(self::SETTINGS)->get();
+    // It's not clear to me how else to get the "in use" version of the
+    // configuration that accepts settings.php based changes, so we have to:
+    // @codingStandardsIgnoreStart
     $overridden_settings = \Drupal::config(self::SETTINGS)->get();
+    // @codingStandardsIgnoreEnd
     $form['orto_enabled'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Enable ORTO reporting'),
@@ -48,12 +52,12 @@ class AdminSettingsForm extends ConfigFormBase {
       '#default_value' => $settings['orto_enabled'] ?? FALSE,
     ];
     if ($settings['orto_enabled'] != $overridden_settings['orto_enabled']) {
-      $form['orto_enabled']['#title'] .= ' <i>[' . t('NOTE: Overridden in settings.php') . ']</i>';
+      $form['orto_enabled']['#title'] .= ' <i>[' . $this->t('NOTE: Overridden in settings.php') . ']</i>';
     }
     $form['orto_registration_url'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Orto Registration URL'),
-      '#description' => "1 hour after the scheduled end time of an event with a zoom webinar ID, send the event to this url. Example: https://ortto.wri.org/zoom/import-participants/?webinarId=[WEBINARID]&webinarName=[WEBINAR_NAME]&webinarDate=[WEBINAR_DATE]. This field accepts tokens.",
+      '#description' => $this->t("1 hour after the scheduled end time of an event with a zoom webinar ID, send the event to this url. Example: https://ortto.wri.org/zoom/import-participants/?webinarId=[WEBINARID]&webinarName=[WEBINAR_NAME]&webinarDate=[WEBINAR_DATE]. This field accepts tokens."),
       '#default_value' => $settings['orto_registration_url'] ?? '',
     ];
 
