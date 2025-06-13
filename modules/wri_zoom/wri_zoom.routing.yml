@@ -1,0 +1,9 @@
+wri_zoom.settings:
+  path: '/admin/config/services/zoom'
+  defaults:
+    _form: '\Drupal\wri_zoom\Form\AdminSettingsForm'
+    _title: 'Zoom & ORTO'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _permission: 'administer site configuration'

@@ -22,11 +22,10 @@ function wri_zoom_webform_submission_insert(EntityInterface $entity) {
  * Implements hook_cron().
  */
 function wri_zoom_cron() {
-  // Verify there's a value in the content_snippet field orto_registration_url.
-  $orto_link = content_snippets_retrieve('orto_registration_url');
-
-  if (!empty($orto_link)) {
-
+  // Verify there's a configured orto_registration_url and orto is enabled.
+  $settings = \Drupal::config('wri_zoom.settings');
+  $orto_link = $settings->get('orto_registration_url');
+  if ($settings->get('orto_enabled') && !empty($orto_link)) {
     // Load up any event nodes without a value in field_sent_to_orto.
     $nids = \Drupal::database()->select('node', 'base_table')
       ->fields('base_table', ['nid']);
