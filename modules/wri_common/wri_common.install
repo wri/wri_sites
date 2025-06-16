@@ -169,3 +169,90 @@ function wri_common_update_10301() {
     'analytics_url',
   ], 'wri_admin');
 }
+
+/**
+ * Replace "WRI's" with the org_name token in narrative taxonomy field help texts.
+ */
+function wri_common_update_10302() {
+  $config_factory = \Drupal::configFactory();
+  $config_storage = \Drupal::service('config.storage');
+  $prefix = 'field.field.node.';
+  $suffix = '.field_narrative_taxonomy';
+
+  // Get all config names that match our target pattern.
+  $all_configs = $config_storage->listAll($prefix);
+  $target_configs = array_filter($all_configs, function ($name) use ($suffix) {
+    return str_ends_with($name, $suffix);
+  });
+
+  foreach ($target_configs as $config_name) {
+    $config = $config_factory->getEditable($config_name);
+    $help = $config->get('settings.help') ?? '';
+
+    // Replace both straight and HTML-encoded apostrophe versions.
+    $replacements = [
+      "WRI's" => "[wri_tokens:org_name]'s",
+      "WRI&#39;s" => "[wri_tokens:org_name]&#39;s",
+    ];
+    $new_help = strtr($help, $replacements);
+
+    if ($new_help !== $help) {
+      $config->set('settings.help', $new_help)->save();
+      \Drupal::logger('wri_common')->notice("Updated help text in config: @name", ['@name' => $config_name]);
+    }
+  }
+}
+
+
+/**
+ * Update field config for narrative taxonomy to use org_name token.
+ */
+function wri_common_update_10303() {
+  $config_factory = \Drupal::configFactory();
+  $config_storage = \Drupal::service('config.storage');
+  $prefix = 'field.field.node.';
+  $suffix = '.field_narrative_taxonomy';
+
+  $target_configs = array_filter(
+    $config_storage->listAll($prefix),
+    fn($name) => str_ends_with($name, $suffix)
+  );
+
+  foreach ($target_configs as $config_name) {
+    $config = $config_factory->getEditable($config_name);
+
+    $description = $config->get('description') ?? '';
+    $default_value = $config->get('default_value');
+    $changed = FALSE;
+
+    // Replace WRI's → [wri_tokens:org_name]'s
+    $description_replacements = [
+      "WRI's" => "[wri_tokens:org_name]'s",
+      "WRI&#39;s" => "[wri_tokens:org_name]&#39;s",
+    ];
+    $new_description = strtr($description, $description_replacements);
+
+    if ($new_description !== $description) {
+      $config->set('description', $new_description);
+      $changed = TRUE;
+    }
+
+    // Update the default value if it's a text value.
+    if (is_array($default_value) && isset($default_value[0]['value'])) {
+      $text = $default_value[0]['value'];
+      $new_text = strtr($text, $description_replacements);
+
+      if ($new_text !== $text) {
+        $default_value[0]['value'] = $new_text;
+        $config->set('default_value', $default_value);
+        $changed = TRUE;
+      }
+    }
+
+    if ($changed) {
+      $config->save();
+      \Drupal::logger('wri_common')->notice('Updated field config: @name', ['@name' => $config_name]);
+    }
+  }
+}
+
