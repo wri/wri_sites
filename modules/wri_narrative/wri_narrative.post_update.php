@@ -146,48 +146,70 @@ function wri_narrative_post_update_rewrite_narrative_taxonomies1(&$sandbox) {
  * Updates field config to use org_name token in narrative taxonomies, round 3.
  */
 function wri_narrative_post_update_rewrite_narrative_taxonomies2(&$sandbox) {
-  $config_factory = \Drupal::configFactory();
-  $config_storage = \Drupal::service('config.storage');
-  $prefix = 'field.field.node.';
-  $suffix = '.field_narrative_taxonomy';
+  $database = \Drupal::database();
 
-  $field_configs = array_filter(
-    $config_storage->listAll($prefix),
-    fn($name) => str_ends_with($name, $suffix)
-  );
+  if (!isset($sandbox['total'])) {
+    $sandbox['total'] = $database->select('node__field_narrative_taxonomy', 'f')
+      ->fields('f', ['entity_id'])
+      ->countQuery()
+      ->execute()
+      ->fetchField();
+    $sandbox['current'] = 0;
+
+    if (empty($sandbox['total'])) {
+      $sandbox['#finished'] = 1;
+      return;
+    }
+  }
+
+  $batch_size = 25;
+  $query = $database->select('node__field_narrative_taxonomy', 'f')
+    ->fields('f', ['entity_id', 'langcode'])
+    ->condition('f.entity_id', $sandbox['current'], '>=')
+    ->orderBy('f.entity_id')
+    ->range(0, $batch_size)
+    ->distinct();
+
+  $results = $query->execute()->fetchAll();
+
+  if (empty($results)) {
+    $sandbox['#finished'] = 1;
+    return;
+  }
 
   $replacements = [
     "WRI's" => "[wri_tokens:org_name]'s",
     "WRI&#39;s" => "[wri_tokens:org_name]&#39;s",
   ];
 
-  foreach ($field_configs as $config_name) {
-    $config = $config_factory->getEditable($config_name);
-    $changed = FALSE;
-
-    // Replace in description.
-    $description = $config->get('description') ?? '';
-    $new_description = strtr($description, $replacements);
-    if ($new_description !== $description) {
-      $config->set('description', $new_description);
-      $changed = TRUE;
+  foreach ($results as $record) {
+    $node = \Drupal\node\Entity\Node::load($record->entity_id);
+    if (!$node) {
+      continue;
     }
 
-    // Replace in default_value.
-    $default_value = $config->get('default_value');
-    if (is_array($default_value) && isset($default_value[0]['value'])) {
-      $text = $default_value[0]['value'];
-      $new_text = strtr($text, $replacements);
-      if ($new_text !== $text) {
-        $default_value[0]['value'] = $new_text;
-        $config->set('default_value', $default_value);
-        $changed = TRUE;
-      }
+    // Load the correct translation.
+    if ($node->hasTranslation($record->langcode)) {
+      $node = $node->getTranslation($record->langcode);
     }
 
-    if ($changed) {
-      $config->save();
-      \Drupal::logger('wri_narrative')->notice('Updated field config: @name', ['@name' => $config_name]);
+    if (!$node->hasField('field_narrative_taxonomy') || $node->get('field_narrative_taxonomy')->isEmpty()) {
+      continue;
     }
+
+    $value = $node->get('field_narrative_taxonomy')->value;
+    $new_value = strtr($value, $replacements);
+
+    if ($new_value !== $value) {
+      $node->get('field_narrative_taxonomy')->value = $new_value;
+      $node->save();
+    }
+
+    $sandbox['current'] = $record->entity_id;
+  }
+
+  $sandbox['#finished'] = FALSE;
+  if ($sandbox['current'] >= $sandbox['total']) {
+    $sandbox['#finished'] = 1;
   }
 }
