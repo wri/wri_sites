@@ -141,3 +141,53 @@ function wri_narrative_post_update_rewrite_narrative_taxonomies1(&$sandbox) {
 
   $sandbox['#finished'] = ($sandbox['current'] == $start_value);
 }
+
+/**
+ * Updates field config to use org_name token in narrative taxonomies, round 3.
+ */
+function wri_narrative_post_update_rewrite_narrative_taxonomies2(&$sandbox) {
+  $config_factory = \Drupal::configFactory();
+  $config_storage = \Drupal::service('config.storage');
+  $prefix = 'field.field.node.';
+  $suffix = '.field_narrative_taxonomy';
+
+  $field_configs = array_filter(
+    $config_storage->listAll($prefix),
+    fn($name) => str_ends_with($name, $suffix)
+  );
+
+  $replacements = [
+    "WRI's" => "[wri_tokens:org_name]'s",
+    "WRI&#39;s" => "[wri_tokens:org_name]&#39;s",
+  ];
+
+  foreach ($field_configs as $config_name) {
+    $config = $config_factory->getEditable($config_name);
+    $changed = FALSE;
+
+    // Replace in description.
+    $description = $config->get('description') ?? '';
+    $new_description = strtr($description, $replacements);
+    if ($new_description !== $description) {
+      $config->set('description', $new_description);
+      $changed = TRUE;
+    }
+
+    // Replace in default_value.
+    $default_value = $config->get('default_value');
+    if (is_array($default_value) && isset($default_value[0]['value'])) {
+      $text = $default_value[0]['value'];
+      $new_text = strtr($text, $replacements);
+      if ($new_text !== $text) {
+        $default_value[0]['value'] = $new_text;
+        $config->set('default_value', $default_value);
+        $changed = TRUE;
+      }
+    }
+
+    if ($changed) {
+      $config->save();
+      \Drupal::logger('wri_narrative')->notice('Updated field config: @name', ['@name' => $config_name]);
+    }
+  }
+}

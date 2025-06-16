@@ -153,6 +153,10 @@ function wri_common_token_info() {
     'name' => 'Child Topic Links List',
     'description' => 'A comma separated list of Topics that are children of the node\'s primary topic.',
   ];
+  $info['tokens']['wri_tokens']['org_name'] = [
+    'name' => 'WRI Organization name',
+    'description' => 'WRI is default, change to "WRI India, WRI China, etc."',
+  ];
   $info['tokens']['node']['link'] = [
     'name' => 'A node link',
     'description' => 'The link to the node, if published, or its title if not.',
@@ -255,6 +259,21 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
           case 'child_topic_links_list':
             $terms = wri_common_get_node_topic_children($node);
             $replacements[$original] = _wri_common_format_list($terms);
+            break;
+
+          case 'org_name':
+            $langcode = isset($options['langcode']) ? $options['langcode'] : \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+            // Load the translated config for the appropriate langcode.
+            $config = \Drupal::languageManager()->getLanguageConfigOverride($langcode, 'wri_node.settings');
+            $org_name = $config->get('narrative_taxonomy_org_name');
+
+            // Fallback if the field is empty.
+            if (empty($org_name)) {
+              $org_name = 'WRI';
+            }
+
+            $replacements[$original] = Markup::create($org_name);
             break;
         }
       }
