@@ -124,7 +124,6 @@ class SettingsForm extends ConfigFormBase {
       '#title' => $this->t('Narrative taxonomy organization name'),
       '#config_target' => 'wri_node.settings:narrative_taxonomy_org_name',
       '#size' => 40,
-      '#default_value' => $narrative_taxonomy_org_name ? $narrative_taxonomy_org_name : 'WRI',
       '#required' => TRUE,
     ];
 
