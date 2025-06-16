@@ -256,3 +256,13 @@ function wri_common_update_10303() {
   }
 }
 
+/**
+ * Add the new setting for narrative_taxonomy_org_name.
+ */
+function wri_common_update_10304() {
+  // Add twitter_share_suffix value.
+  \Drupal::service('distro_helper.updates')->updateConfig('wri_node.settings', [
+    'narrative_taxonomy_org_name',
+  ], 'wri_node', 'install');
+}
+
