@@ -145,11 +145,6 @@ function wri_narrative_post_update_rewrite_narrative_taxonomies1(&$sandbox) {
 /**
  * Updates field config to use org_name token in narrative taxonomies, round 3.
  */
-use Drupal\node\Entity\Node;
-
-/**
- * Replaces "WRI's" with "[wri_tokens:org_name]'s" in field_narrative_taxonomy values.
- */
 function wri_narrative_post_update_rewrite_narrative_taxonomies2(&$sandbox) {
   // Ensure config was imported — check that default_value uses the new token.
   $field_config = \Drupal::config('field.field.node.project_detail.field_narrative_taxonomy');
