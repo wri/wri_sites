@@ -405,7 +405,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_zoom_registration_form:
-    type: webform_entity_reference_select
+    type: registration_webform_entity_select
     weight: 134
     region: content
     settings:
