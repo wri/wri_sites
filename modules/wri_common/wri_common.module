@@ -262,7 +262,7 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
             break;
 
           case 'org_name':
-            $langcode = isset($options['langcode']) ? $options['langcode'] : \Drupal::languageManager()->getCurrentLanguage()->getId();
+            $langcode = $options['langcode'] ?? \Drupal::languageManager()->getCurrentLanguage()->getId();
 
             // Load the config override only if it exists.
             $override = \Drupal::languageManager()->getLanguageConfigOverride($langcode, 'wri_node.settings');

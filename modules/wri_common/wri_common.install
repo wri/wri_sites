@@ -171,7 +171,7 @@ function wri_common_update_10301() {
 }
 
 /**
- * Replace "WRI's" with the org_name token in narrative taxonomy field help texts.
+ * Replace "WRI's" with the org_name token in narrative taxonomy help texts.
  */
 function wri_common_update_10302() {
   $config_factory = \Drupal::configFactory();
@@ -203,7 +203,6 @@ function wri_common_update_10302() {
   }
 }
 
-
 /**
  * Update field config for narrative taxonomy to use org_name token.
  */
@@ -225,7 +224,7 @@ function wri_common_update_10303() {
     $default_value = $config->get('default_value');
     $changed = FALSE;
 
-    // Replace WRI's → [wri_tokens:org_name]'s
+    // Replace WRI's → [wri_tokens:org_name]'s.
     $description_replacements = [
       "WRI's" => "[wri_tokens:org_name]'s",
       "WRI&#39;s" => "[wri_tokens:org_name]&#39;s",
@@ -265,4 +264,3 @@ function wri_common_update_10304() {
     'narrative_taxonomy_org_name',
   ], 'wri_node', 'install');
 }
-
