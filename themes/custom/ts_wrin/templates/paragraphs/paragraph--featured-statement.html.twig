@@ -20,7 +20,7 @@
     {% block content %}
       <a href="{{ content.field_link.0 }}">
         <div class="intro-wrapper">
-          <div class="italic-tiny">{{ "Featured Statement"|t }}</div>
+          <div class="italic-tiny">{{ paragraph.getParagraphType().label|title }}</div>
           <div class="date">{{ content.field_updated.0 }}</div>
         </div>
         <div class="body-wrapper">
