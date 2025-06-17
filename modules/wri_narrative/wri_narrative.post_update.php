@@ -146,13 +146,6 @@ function wri_narrative_post_update_rewrite_narrative_taxonomies1(&$sandbox) {
  * Updates field config to use org_name token in narrative taxonomies, round 3.
  */
 function wri_narrative_post_update_rewrite_narrative_taxonomies2(&$sandbox) {
-  // Ensure config was imported — check that default_value uses the new token.
-  $field_config = \Drupal::config('field.field.node.project_detail.field_narrative_taxonomy');
-  $default_value = $field_config->get('default_value');
-  if (empty($default_value) || strpos($default_value[0]['value'], '[wri_tokens:org_name]') === FALSE) {
-    throw new \Exception('Config import must run before this post-update hook. Missing expected token in field config.');
-  }
-
   if (!isset($sandbox['total'])) {
     $sandbox['total'] = \Drupal::database()->select('node__field_narrative_taxonomy', 'u')
       ->condition('u.field_narrative_taxonomy_value', "%WRI's%", 'LIKE')

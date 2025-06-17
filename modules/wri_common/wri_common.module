@@ -264,11 +264,16 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
           case 'org_name':
             $langcode = isset($options['langcode']) ? $options['langcode'] : \Drupal::languageManager()->getCurrentLanguage()->getId();
 
-            // Load the translated config for the appropriate langcode.
-            $config = \Drupal::languageManager()->getLanguageConfigOverride($langcode, 'wri_node.settings');
-            $org_name = $config->get('narrative_taxonomy_org_name');
+            // Load the config override only if it exists.
+            $override = \Drupal::languageManager()->getLanguageConfigOverride($langcode, 'wri_node.settings');
+            $org_name = $override->get('narrative_taxonomy_org_name');
 
-            // Fallback if the field is empty.
+            // Fall back to default config if override is not set.
+            if (empty($org_name)) {
+              $org_name = \Drupal::config('wri_node.settings')->get('narrative_taxonomy_org_name');
+            }
+
+            // Final fallback to hardcoded default.
             if (empty($org_name)) {
               $org_name = 'WRI';
             }
