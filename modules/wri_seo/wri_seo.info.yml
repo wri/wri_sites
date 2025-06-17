@@ -4,6 +4,7 @@ description: 'Modules to improve SEO'
 core_version_requirement: '>=9.5'
 package: WRI
 dependencies:
+  - jquery_once
   - metatag
   - metatag_google_scholar
   - metatag_facebook

@@ -8,11 +8,11 @@
       {# Logo #}
       <div class="pfp-header__logo-wrap">
         <a class="pfp-header__logo-wrap-link--wri" href="/">
-          <img class="pfp-header__logo-white" width="373" height="36" src="../profiles/contrib/wri_sites/themes/custom/ts_wrin/img/logo/wri-logo-horizontal.svg" alt="World Resources Institute Logo">
-          <img aria-hidden="true" width="373" height="36" class="pfp-header__logo-color" src="../profiles/contrib/wri_sites/themes/custom/ts_wrin/img/logo/wri-logo-horizontal-color.svg" alt="World Resources Institute Logo">
+          <img class="pfp-header__logo-white" width="373" height="36" src="/{{ ts_wrin_path }}/img/logo/wri-logo-horizontal.svg" alt="World Resources Institute Logo">
+          <img aria-hidden="true" width="373" height="36" class="pfp-header__logo-color" src="/{{ ts_wrin_path }}/img/logo/wri-logo-horizontal-color.svg" alt="World Resources Institute Logo">
         </a>
         <a class="pfp-header__logo-wrap-link--pfp" href="{{ homeLink }}" aria-label="Paying For the Paris Agreement" >
-          {{ source('profiles/contrib/wri_sites/themes/custom/ts_wrin/img/logo/pfp-logo-stacked.svg') }}
+          {{ source(ts_wrin_path ~ '/img/logo/pfp-logo-stacked.svg') }}
         </a>
       </div>
 
@@ -38,7 +38,7 @@
       {# Logo #}
       <div class="pfp-header__paris-logo-wrap">
         <a class="pfp-header__pfp-logo" href="{{ homeLink }}">
-          {{ source('profiles/contrib/wri_sites/themes/custom/ts_wrin/img/logo/pfp-logo.svg') }}
+          {{ source(ts_wrin_path ~ '/img/logo/pfp-logo.svg') }}
         </a>
       </div>
 
@@ -55,6 +55,9 @@
   {% if (content.hero.field_toc is not empty) and (content.hero.field_toc['#value'] == 'microsite') %}
     {% include '@ts_wrin/_includes/_microsite-mobile-nav.html.twig' with {
       menu_items: content.hero.field_toc,
+      stacked_logo: ts_wrin_path ~ "/img/logo/wri-logo-stacked.png",
+      chevron_left: ts_wrin_path ~ '/img/svgs/chevron-left.svg',
+      pfp_logo: ts_wrin_path ~ '/img/logo/pfp-logo.svg',
     } only %}
   {% endif %}
 </header>

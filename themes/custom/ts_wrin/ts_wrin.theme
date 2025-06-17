@@ -20,6 +20,7 @@ function ts_wrin_preprocess(array &$variables) {
     $logo_path = theme_get_setting('white_logo.path');
     $variables['footer_logo'] = \Drupal::service('file_url_generator')->generateString($logo_path);
   }
+  $variables['ts_wrin_path'] = \Drupal::service('extension.list.theme')->getPath('ts_wrin');
 }
 
 /**

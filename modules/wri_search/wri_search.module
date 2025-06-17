@@ -26,7 +26,7 @@ function wri_search_entity_base_field_info(EntityTypeInterface $entity_type) {
       ->setLabel(t('Parent or Self'))
       ->setSetting('target_type', 'taxonomy_term')
       ->setComputed(TRUE)
-      ->setClass('\Drupal\wri_search\WriCalculatedTexts')
+      ->setClass('\Drupal\wri_common\WriCalculatedTexts')
       ->setDisplayConfigurable('view', FALSE)
       ->setCardinality(-1);
 
@@ -36,7 +36,7 @@ function wri_search_entity_base_field_info(EntityTypeInterface $entity_type) {
       ->setLabel(t('Is Child'))
       ->setSetting('target_type', 'taxonomy_term')
       ->setComputed(TRUE)
-      ->setClass('\Drupal\wri_search\WriCalculatedTexts')
+      ->setClass('\Drupal\wri_common\WriCalculatedTexts')
       ->setDisplayConfigurable('view', FALSE)
       ->setCardinality(-1);
 
@@ -47,7 +47,7 @@ function wri_search_entity_base_field_info(EntityTypeInterface $entity_type) {
       ->setLabel(t('Smart Topic'))
       ->setSetting('target_type', 'taxonomy_term')
       ->setComputed(TRUE)
-      ->setClass('\Drupal\wri_search\WriCalculatedTexts')
+      ->setClass('\Drupal\wri_common\WriCalculatedTexts')
       ->setDisplayConfigurable('view', FALSE)
       ->setCardinality(-1);
   }

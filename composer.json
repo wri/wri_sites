@@ -53,7 +53,7 @@
             },
             "drupal/layout_builder_st": {
                 "Error: Call to a member function getConfig() OverridesSectionStorage.php https://www.drupal.org/project/layout_builder_st/issues/3420063": "https://www.drupal.org/files/issues/2024-03-29/layout_builder_st-call_to_a_member_function_getconfig-3420063-26.patch",
-                "Contextual links for translation are removed by core https://www.drupal.org/project/layout_builder_st/issues/3411037": "https://git.drupalcode.org/project/layout_builder_st/-/merge_requests/5.diff",
+                "Contextual links for translation are removed by core https://www.drupal.org/project/layout_builder_st/issues/3411037": "https://www.drupal.org/files/issues/2024-05-23/3411037-contextual-links-removed-from-core.patch",
                 "Drupal\\Component\\Plugin\\Exception\\PluginNotFoundException: The \"block.settings.<block_name>\" plugin does not exist https://www.drupal.org/project/layout_builder_st/issues/3463435": "https://www.drupal.org/files/issues/2024-07-23/layout_builder_st-plugin-not-found-3463435-3.patch"
             },
             "drupal/metatag": {
@@ -70,11 +70,11 @@
                 "Provide array of primitive property values on multivalue field https://www.drupal.org/project/token/issues/3115486": "https://www.drupal.org/files/issues/2020-12-11/token-provide_primitive_type_arrays_for_properties_of_multivalue_fields-3115486-12.patch",
                 "Updating to Token 1.13 breaks smart_date range tokens https://www.drupal.org/project/token/issues/3396209": "https://www.drupal.org/files/issues/2023-11-27/token-3396209-bypassing-null-insertion.patch"
             },
+            "drupal/views_arg_order_sort": {
+                "Set as compatible with Drupal 10 but lock down version https://www.drupal.org/project/views_arg_order_sort/issues/3212018" : "https://raw.githubusercontent.com/wri/wri_sites/refs/heads/main/patches/d10-upgrade-circumvent-3212018.diff"
+            },
             "drupal/views_bulk_edit": {
                 "Fix Required fields to really not be required https://www.drupal.org/node/3024419": "https://www.drupal.org/files/issues/2024-01-10/views_bulk_edit-3024419-fix_required_fields-57.patch"
-            },
-            "drupal/views_arg_order_sort": {
-                "Set as compatible with Drupal 10 but lock down version https://www.drupal.org/project/views_arg_order_sort/issues/3212018" : "web/profiles/contrib/wri_sites/patches/d10-upgrade-circumvent-3212018.diff"
             },
             "drupal/views_extras": {
                 "Why does Views Extras require Drupal_Visitors to be part of the cookie name? https://www.drupal.org/project/views_extras/issues/3054202" : "https://www.drupal.org/files/issues/2024-01-03/3054202-11.patch"

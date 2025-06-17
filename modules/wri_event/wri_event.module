@@ -34,10 +34,9 @@ function wri_event_entity_base_field_info(EntityTypeInterface $entity_type) {
       ->setLabel(t('Calendar item'))
       ->setSetting('target_type', 'node')
       ->setComputed(TRUE)
-      ->setClass('\Drupal\wri_search\WriCalculatedTexts')
+      ->setClass('\Drupal\wri_common\WriCalculatedTexts')
       ->setDisplayConfigurable('view', TRUE)
       ->setCardinality(1);
-
-    return $fields;
   }
+  return $fields;
 }

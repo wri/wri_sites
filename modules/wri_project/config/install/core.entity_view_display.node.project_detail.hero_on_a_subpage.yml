@@ -223,7 +223,9 @@ content:
   field_toc:
     type: 'single_file_component_field_formatter:toc_formatter'
     label: hidden
-    settings: {  }
+    settings:
+      menu: page-hierarchies
+      color_class: black-bar
     third_party_settings: {  }
     weight: 4
     region: hero
