@@ -17,4 +17,12 @@ function wri_zoom_post_update_default_admin_settings() {
     $config->set('orto_registration_url', $orto_url);
     $config->save(TRUE);
   }
+  \Drupal::service('distro_helper.updates')->updateConfig(
+    'content_snippets.content',
+    ['snippets#orto_registration_url'],
+    'wri_listing_block');
+  \Drupal::service('distro_helper.updates')->updateConfig(
+    'content_snippets.items',
+    ['orto_registration_url'],
+    'wri_admin');
 }
