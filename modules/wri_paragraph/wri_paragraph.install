@@ -64,7 +64,7 @@ function wri_paragraph_update_dependencies() {
  */
 function wri_paragraph_update_10402() {
   $moduleHandler = \Drupal::service('module_handler');
-    if ($moduleHandler->moduleExists('svg_image')) {
-      \Drupal::service('module_installer')->install(['svg_image'], TRUE);
-    }
+  if ($moduleHandler->moduleExists('svg_image')) {
+    \Drupal::service('module_installer')->install(['svg_image'], TRUE);
+  }
 }
