@@ -190,6 +190,7 @@
         "drupal/simple_popup_blocks": "^3.4",
         "drupal/simple_recaptcha": "^1.0@beta",
         "drupal/smart_date": "^4.0",
+        "drupal/svg_image": "^3.2",
         "drupal/sortableviews": "^1.0@beta",
         "drupal/token": "^1.8",
         "drupal/token_filter": "^2.1",
