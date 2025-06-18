@@ -46,14 +46,6 @@ osano_params:
   description: 'Optional parameters for the Osano script (e.g. ?variant=five)'
   group: '3rd Party'
   weight: '10'
-orto_registration_url:
-  label: 'Orto Registration URL'
-  id: orto_registration_url
-  type: textarea
-  filter: full_html
-  description: '1 hour after the scheduled end time of an event with a zoom webinar ID, send the event to this url. Example: https://ortto.wri.org/zoom/import-participants/?webinarId=[WEBINARID]&webinarName=[WEBINAR_NAME]&webinarDate=[WEBINAR_DATE]. This field accepts tokens.'
-  group: '3rd Party'
-  weight: '10'
 analytics_url:
   label: 'Analytics URL'
   id: analytics_url
