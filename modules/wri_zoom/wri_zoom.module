@@ -5,6 +5,7 @@
  * The wri_zoom.module alters.
  */
 
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\Entity\Node;
 
@@ -65,5 +66,11 @@ function wri_zoom_cron() {
           ->error('Error sending event to Orto: @error', ['@error' => $e->getMessage()]);
       }
     }
+  }
+}
+
+function wri_zoom_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if ($entity->bundle() == 'event') {
+    $build["#attached"]["library"][] = "wri_zoom/events";
   }
 }
