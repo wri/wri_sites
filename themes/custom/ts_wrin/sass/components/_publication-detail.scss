@@ -168,6 +168,14 @@
         }
       }
     }
+    .paragraph--type--social-links-listing {
+      .field--name-field-title {
+        margin-bottom: 16px;
+      }
+      .field--name-field-social-links {
+        display: flex;
+      }
+    }
 
     .pager .pager__item--next,
     .pager .pager__item--previous {
