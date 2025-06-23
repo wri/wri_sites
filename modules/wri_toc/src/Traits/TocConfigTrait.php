@@ -14,7 +14,7 @@ trait TocConfigTrait {
   /**
    * Returns default configuration values.
    */
-  protected function getDefaultTocConfig(): array {
+  protected static function getDefaultTocConfig(): array {
     return [
       'menu' => 'page-hierarchies',
       'color_class' => 'black-bar',

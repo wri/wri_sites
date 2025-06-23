@@ -70,15 +70,15 @@ class TableofcontentsFormatter extends FormatterBase implements ContainerFactory
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration(): array {
-    return $this->getDefaultTocConfig() + parent::defaultSettings();
+  public static function defaultSettings() {
+    return static::getDefaultTocConfig() + parent::defaultSettings();
   }
 
   /**
    * {@inheritdoc}
    */
   public function settingsForm($form, FormStateInterface $form_state): array {
-    return $this->buildTocForm([], $form_state, $this->configuration);
+    return $this->buildTocForm([], $form_state, $this->getSettings());
   }
 
   /**
