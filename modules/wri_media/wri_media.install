@@ -123,5 +123,5 @@ function wri_media_update_10106() {
   \Drupal::service('distro_helper.updates')->installConfig('responsive_image.styles.vertical_hero', 'wri_media', 'install', 'TRUE');
   \Drupal::service('distro_helper.updates')->updateConfig('system.image.gd', [
     'jpeg_quality',
-  ], 'wri_admin', '../../config/install');
+  ], 'wri_admin', '../../../config/install');
 }
