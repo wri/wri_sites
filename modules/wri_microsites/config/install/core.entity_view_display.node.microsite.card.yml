@@ -1,4 +1,3 @@
-uuid: a64f05c5-779f-4637-a9b7-b3a2da180ad0
 langcode: en
 status: true
 dependencies:
@@ -15,6 +14,7 @@ dependencies:
     - field.field.node.microsite.field_metatags
     - field.field.node.microsite.field_primary_contacts
     - field.field.node.microsite.field_project_partners
+    - field.field.node.microsite.field_social_sharing_links
     - field.field.node.microsite.field_theme
     - field.field.node.microsite.field_toc
     - field.field.node.microsite.field_twitter_account
@@ -35,6 +35,9 @@ third_party_settings:
   ds:
     layout:
       id: layout_card
+      library: null
+      disable_css: false
+      entity_classes: all_classes
       settings:
         label: ''
     regions:
@@ -73,8 +76,6 @@ third_party_settings:
           id: reset
           settings:
             lb: ''
-_core:
-  default_config_hash: Kr6dJcGC3tMlyz4ncEDtzOFvMwMxcn4RGYs-dtc0pWM
 id: node.microsite.card
 targetEntityType: node
 bundle: microsite
@@ -149,6 +150,7 @@ hidden:
   field_primary_topic: true
   field_project_partners: true
   field_show_more_link: true
+  field_social_sharing_links: true
   field_statistics: true
   field_theme: true
   field_toc: true
