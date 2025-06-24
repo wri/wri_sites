@@ -279,3 +279,12 @@ function wri_update_twitter_replacement($content_types) {
   }
   return t('Migrated field_twitter_account values to social_media_sites paragraphs for applicable nodes.');
 }
+
+/**
+ * Updates the node settings values.
+ */
+function wri_node_update_10403() {
+  \Drupal::service('distro_helper.updates')->updateConfig('wri_node.settings', [
+    'narrative_taxonomy_org_name',
+  ], 'wri_node', 'install');
+}
