@@ -35,7 +35,7 @@
             {% include '@ts_wrin/ts_custom/wrin-filter-button.html.twig' %}
           {% endif %}
 
-          {% if page.hamburger_nav and page.hamburger_nav.content %}
+          {% if page.hamburger_nav and page.hamburger_nav|children %}
             {% include '@ts_wrin/ts_custom/ts-hamburger-nav.html.twig' %}
           {% endif %}
         </div>
@@ -45,7 +45,7 @@
 
     <div class="mobile-menu-target">
       <div class="ts-mobile-menu__wrapper">
-        {% if page.hamburger_nav and page.hamburger_nav.content %}
+        {% if page.hamburger_nav and page.hamburger_nav|children %}
           {{ page.hamburger_nav }}
         {% endif %}
       </div>
