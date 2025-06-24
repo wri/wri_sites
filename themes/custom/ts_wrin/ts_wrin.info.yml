@@ -1,6 +1,6 @@
 name: 'Ts Wrin'
 type: theme
-description: 'A base theme for ThinkShout D8 sites'
+description: 'WRI theme: using base theme for ThinkShout Drupal sites'
 package: Other
 core_version_requirement: '>=9.5'
 requirements:
