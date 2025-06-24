@@ -99,6 +99,7 @@
 
             {% if content.share %}
             <div {{ region_attributes.share.addClass('layout__region', 'layout__region--share') }}>
+                <div class="mobile-social visit-on-social margin-right-md">{{ content.sidebar|without('field_narrative_taxonomy') }}</div>
               {{ content.share }}
             </div>
             {% endif %}
@@ -120,7 +121,7 @@
             {% if show_narrative_taxonomy == true %}
               {{ content.sidebar.field_narrative_taxonomy }}
             {% endif %}
-            {{ content.sidebar|without('field_narrative_taxonomy') }}
+            <div class="desktop-social">{{ content.sidebar|without('field_narrative_taxonomy') }}</div>
 
             {# If robust display show isbn and doi in sidebar #}
             {% if display_type == 'robust' %}
@@ -133,7 +134,7 @@
         {% endif %}
 
         {% if content.featured_image|render %}
-          <div class="publication__image margin-bottom-lg">
+          <div class="publication__image margin-bottom-sm">
             <div class="publication__image-inner">
               <div {{ region_attributes.share.addClass('layout__region', 'layout__region--featured-image') }}>
                 {{ content.featured_image }}
