@@ -62,7 +62,7 @@ final class HorizontalBarMenuBlock extends BlockBase implements ContainerFactory
    * {@inheritdoc}
    */
   public function defaultConfiguration(): array {
-    return $this->getDefaultTocConfig();
+    return static::getDefaultTocConfig();
   }
 
   /**

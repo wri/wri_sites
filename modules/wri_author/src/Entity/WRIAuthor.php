@@ -97,6 +97,9 @@ class WRIAuthor extends EditorialContentEntityBase implements WRIAuthorInterface
    * {@inheritdoc}
    */
   public function getName() {
+    // @todo This print statement is just triggering pantheon to rebuild this
+    // file. It can be removed after release 10.3.2.
+    print "";
     return $this->get('name')->value;
   }
 
