@@ -103,13 +103,7 @@
       display: block;
     }
   }
-  .publication__detail .publication__main.margin-top-lg {
-    @include mq($ph) {
-      margin-top: 0;
-    }
-    @include mq($lg) {
-      margin-top: 60px;
-    }
+  .publication__detail .publication__main {
     .sidebar {
       @include mq($ph) {
         @include column-width(1, 5);
