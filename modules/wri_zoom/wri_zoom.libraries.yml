@@ -4,12 +4,6 @@ get_browser_lang:
   dependencies:
     - core/drupal
 
-events:
-  js:
-    js/events.js: {}
-  dependencies:
-    - core/drupal
-
 zoom_utm:
   js:
     js/zoom-utm.js: {}

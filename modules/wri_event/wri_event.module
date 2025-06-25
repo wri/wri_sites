@@ -40,3 +40,13 @@ function wri_event_entity_base_field_info(EntityTypeInterface $entity_type) {
   }
   return $fields;
 }
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function wri_event_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if ($entity->bundle() == 'event') {
+    if ($entity->type->entity->getThirdPartySetting('wri_event', 'enable_backlink')) {
+      $build["#attached"]["library"][] = "wri_event/backlink";
+    }
+  }
+}
