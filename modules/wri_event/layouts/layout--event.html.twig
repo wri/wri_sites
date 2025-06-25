@@ -11,7 +11,9 @@
 #}
 {% set display_type = content["#node"].field_event_display[0].value %}
 <div class="event__detail tall-hero">
-  <a class="event_backlink" href="#" hidden>< Back</a>
+  {% if content['#backlink_enabled'] %}
+    <a class="event_backlink" href="#" hidden>< Back</a>
+  {% endif %}
   {% if content.hero %}
     <div class="landing-page__hero {{ ((content.hero.field_main_image|render and display_type == 'robust') ? 'has-image' : '') }}">
       {% if content.hero.field_main_image|render and display_type == 'robust' %}

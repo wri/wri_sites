@@ -5,6 +5,9 @@
  * Wri_event.
  */
 
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\views\ViewExecutable;
 use Drupal\Core\Entity\EntityTypeInterface;
@@ -40,6 +43,44 @@ function wri_event_entity_base_field_info(EntityTypeInterface $entity_type) {
   }
   return $fields;
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function wri_event_form_node_type_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $entity = $form_state->getFormObject()->getEntity();
+  if ($entity && $entity->id() === 'event') {
+    $setting = $entity->getThirdPartySetting('wri_event', 'enable_backlink');
+
+    $form['wri_events'] = [
+      '#type' => 'details',
+      '#group' => 'additional_settings',
+      '#title' => t('WRI Events Settings'),
+    ];
+
+    $form['wri_events']['enable_backlink'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Include a backlink based on the "?returnTo=" URL argument on Full event displays'),
+      '#default_value' => $setting,
+    ];
+
+    $form['#entity_builders'][] = 'wri_event_node_form_builder';
+  }
+}
+
+/**
+ * Entity builder for the node:event entity.
+ */
+function wri_event_node_form_builder($entity_type, $entity, &$form, FormStateInterface $form_state) {
+  if ($form_state->getValue('enable_backlink')) {
+    $value = $form_state->getValue('enable_backlink');
+    $entity->setThirdPartySetting('wri_event', 'enable_backlink', $value);
+  }
+  else {
+    $entity->setThirdPartySetting('wri_event', 'enable_backlink', FALSE);
+  }
+}
+
 /**
  * Implements hook_ENTITY_TYPE_view().
  */
@@ -47,6 +88,10 @@ function wri_event_node_view(array &$build, EntityInterface $entity, EntityViewD
   if ($entity->bundle() == 'event') {
     if ($entity->type->entity->getThirdPartySetting('wri_event', 'enable_backlink')) {
       $build["#attached"]["library"][] = "wri_event/backlink";
+      $build['#backlink_enabled'] = TRUE;
+    }
+    else {
+      $build['#backlink_enabled'] = FALSE;
     }
   }
 }
