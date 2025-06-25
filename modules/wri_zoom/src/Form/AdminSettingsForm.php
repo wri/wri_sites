@@ -48,8 +48,8 @@ class AdminSettingsForm extends ConfigFormBase {
     global $config;
     if (isset($config['wri_zoom.settings']['orto_enabled'])) {
       $form['orto_enabled']['#title'] .= ' <i>' . $this->t('[NOTE: Overridden in settings.php to "%value"]', [
-        '%value' => $config['wri_zoom.settings']['orto_enabled'] ? 'TRUE' : 'FALSE'
-        ]) . '</i>';
+        '%value' => $config['wri_zoom.settings']['orto_enabled'] ? 'TRUE' : 'FALSE',
+      ]) . '</i>';
     }
     $form['orto_registration_url'] = [
       '#type' => 'textfield',
