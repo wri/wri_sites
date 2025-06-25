@@ -105,7 +105,7 @@
   }
   .publication__detail .publication__main.margin-top-lg {
     @include mq($ph) {
-      margin-top: -45px;
+      margin-top: 0;
     }
     @include mq($lg) {
       margin-top: 60px;
