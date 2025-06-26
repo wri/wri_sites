@@ -5,6 +5,8 @@
  */
 export default function(context) {
   const $ = jQuery;
+  const maxTotalSelections = 4;
+
   $(".block-facets h3")
     .off("click")
     .on("click", function() {
@@ -48,4 +50,36 @@ export default function(context) {
       .once()
       .append($(".resources-container [name=query]").val());
   }
+
+  // Global facet limit across all blocks.
+  $(".facets-widget-checkbox input[type='checkbox']", context).each(function () {
+    const $checkbox = $(this);
+
+    $checkbox.off("click.limit").on("click.limit", function (e) {
+      // Total selected *before* this one toggles.
+      const checkedCount = $(".block-facets input[type='checkbox']:checked").length;
+      const willBeChecked = $checkbox.prop("checked");
+
+      if (willBeChecked && checkedCount > maxTotalSelections) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        $(".facet-limit-warning").remove();
+
+        const translatedMsg = Drupal.t('You can select up to @max filters total.', {
+          '@max': maxTotalSelections,
+        });
+        const $msg = $(
+          `<div class="facet-limit-warning" style="color: red; font-weight: bold; margin-bottom: 1em;">
+            ${translatedMsg}
+          </div>`
+        );
+
+        $(".view-filters").append($msg);
+        $("html, body").animate({
+            scrollTop: $(".view-filters").offset().top - 20,
+          }, 300);
+      }
+    });
+  });
 }
