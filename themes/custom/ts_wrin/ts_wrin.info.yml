@@ -22,7 +22,7 @@ regions:
   disabled: Disabled
   modals: Modals
 ckeditor5-stylesheets:
-  - ../../../../../../libraries/ts_wrin/ckeditor5.css
+  - dist/ckeditor5.css
 config_devel:
   install:
     - block.block.addressblock
