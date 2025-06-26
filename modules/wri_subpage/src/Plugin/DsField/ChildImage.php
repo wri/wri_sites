@@ -48,7 +48,7 @@ class ChildImage extends DsFieldBase {
     if ($uri) {
       $build = [
         '#type' => 'responsive_image',
-        '#responsive_image_style_id' => 'article_hero_large_cta',
+        '#responsive_image_style_id' => 'vertical_hero',
         '#uri' => $uri,
         '#attributes' => [
           'alt' => $alt,

@@ -119,6 +119,15 @@ class SettingsForm extends ConfigFormBase {
       '#description' => $this->t('On social share dropdown, the text to come after the title of a page in a tweet. Defaults to "via @WorldResources"'),
     ];
 
+    $form['narrative_taxonomy_org_name'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Narrative taxonomy organization name'),
+      '#config_target' => 'wri_node.settings:narrative_taxonomy_org_name',
+      '#size' => 40,
+      '#required' => TRUE,
+      '#description' => $this->t('The organization name to use in narrative taxonomy terms. Replaces "[wri_tokens:org_name]" in phrases like this: "[wri_tokens:org_name]\'s [node:title] is part of..."'),
+    ];
+
     return parent::buildForm($form, $form_state);
   }
 
