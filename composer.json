@@ -7,19 +7,6 @@
     "prefer-stable": true,
     "repositories": [
         {
-            "type": "package",
-            "package": {
-                "name": "drupal/views_arg_order_sort",
-                "type": "drupal-module",
-                "version": "dev-8.x-1.x",
-                "source": {
-                    "type": "git",
-                    "url": "https://git.drupalcode.org/project/views_arg_order_sort.git",
-                    "reference": "5d13cfca5749294d127ebc06348827f775342b37"
-                }
-            }
-        },
-        {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
@@ -69,9 +56,6 @@
                 "Add a [current-page:object:?] dynamic token https://www.drupal.org/project/token/issues/919760": "https://www.drupal.org/files/issues/2020-09-08/token--current_page_object_token--919760--83.patch",
                 "Provide array of primitive property values on multivalue field https://www.drupal.org/project/token/issues/3115486": "https://www.drupal.org/files/issues/2020-12-11/token-provide_primitive_type_arrays_for_properties_of_multivalue_fields-3115486-12.patch",
                 "Updating to Token 1.13 breaks smart_date range tokens https://www.drupal.org/project/token/issues/3396209": "https://www.drupal.org/files/issues/2023-11-27/token-3396209-bypassing-null-insertion.patch"
-            },
-            "drupal/views_arg_order_sort": {
-                "Set as compatible with Drupal 10 but lock down version https://www.drupal.org/project/views_arg_order_sort/issues/3212018" : "https://raw.githubusercontent.com/wri/wri_sites/refs/heads/main/patches/d10-upgrade-circumvent-3212018.diff"
             },
             "drupal/views_bulk_edit": {
                 "Fix Required fields to really not be required https://www.drupal.org/node/3024419": "https://www.drupal.org/files/issues/2024-01-10/views_bulk_edit-3024419-fix_required_fields-57.patch"
@@ -197,7 +181,6 @@
         "drupal/twig_tweak": "^3.2",
         "drupal/twitter_api_block": "^4.0",
         "drupal/viewfield": "^3.0@beta",
-        "drupal/views_arg_order_sort": "dev-8.x-1.x",
         "drupal/views_autosubmit": "^1.4",
         "drupal/views_bulk_edit": "^3.0",
         "drupal/views_bulk_operations": "^4.0",
