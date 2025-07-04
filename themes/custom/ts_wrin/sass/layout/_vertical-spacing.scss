@@ -148,8 +148,9 @@ p.margin-bottom-zero,
 }
 
 // Bottom margin
-.margin-bottom-xs {
-  margin-bottom: $space-xs;
+.margin-bottom-xs,
+.mb-5 {
+  margin-bottom: var(--spacer-5);
 }
 
 .margin-bottom-sm {
