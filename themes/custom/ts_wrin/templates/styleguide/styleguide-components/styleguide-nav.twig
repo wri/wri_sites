@@ -1,0 +1,47 @@
+<div class="styleguide-nav colorway-white">
+  <div class="pt-4 text-primary">
+    <nav class="">
+      <h2 class="h4 pl-3 pt-xs pb-xs">Style guide</h2>
+      <ul class="p-0 m-0">
+        {% set nav_classes = "body-base-bold bg-gray-100 block pl-3 py-2 rounded-md hocus-underline" %}
+        {% set subnav_classes = "body-xs block pl-7 py-2 hocus-underline" %}
+        <li><a href="/style-guide#elements" class="{{ nav_classes }}">Global Elements</a></li>
+        <li>
+          {% for element in elements %}
+        <li><a href="/style-guide#{{ element['key'] }}" class="{{ subnav_classes }}">
+            {{ element['label'] }}
+          </a></li>
+        {% endfor %}
+
+        </li>
+        <li>
+        <li>
+          <a href="/style-guide#components" class="{{ nav_classes }}">Atoms & Molecules</a>
+        </li>
+          {% for atom in atoms %}
+            <li><a href="/style-guide#{{ atom['key'] }}" class="{{ subnav_classes }}">
+                {{ atom['label'] }}
+              </a></li>
+          {% endfor %}
+        {% for molecule in molecules %}
+          <li>
+            <a href="/style-guide#{{ molecule.machine_name }}" class="{{ subnav_classes }}">
+              {{ molecule.label }}
+            </a>
+          </li>
+        {% endfor %}
+        {# GLOBAL BLOCKS #}
+        <li><a href="/style-guide#blocks--global" class="{{ nav_classes }}">Blocks (custom)</a></li>
+        <li>
+          {# Blocks auto generate nav items and same page links to the block on the page #}
+          {% for organism in organisms %}
+          <li>
+            <a href="/style-guide#{{ organism.machine_name }}" class="{{ subnav_classes }}">
+              {{ organism.label }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
+</div>

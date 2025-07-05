@@ -1,0 +1,188 @@
+{# Global Style Guide available at /style-guide #}
+
+{% block header %}
+{% endblock %}
+{% block footer %}
+{% endblock %}
+
+{% block content %}
+  {% set section_title_classes = "h2 mb-xs color-primary" %}
+  {% set section_description_classes = "color-primary utility-lg mb-3" %}
+  {% set block_title_classes = "h3 mb-3" %}
+  {% set block_description_classes = "body-md max-w-[900px] mb-4" %}
+  {% set limited_message = "*Available on limited pages." %}
+
+  {% set atoms = [
+    {
+      'key': 'buttons-&-links',
+      'label': 'Buttons & Links',
+      'description': 'Button styles are dynamic. They can be modified by adjusting the size, icon, and icon placement
+      properties. Icons shown are examples. Any icon can be used. Button colors will adjust automatically based on the
+      background
+      color.',
+      'dev_notes': "Development notes: Defined in tokens/src/buttons.tokens.json. Button colorways are defined in
+      css/_elements/colorways.css. To add an svg icon, place the svg code in assets/images/svgs, and pass the svg file
+      name as the 'svg_name' property when you include the button component in your template. You can also use
+      Tailwind @apply syntax to apply button classes directly (In CSS: @apply btn-solid;). Note that with @apply
+      syntax, you can't add an icon.",
+    },
+    {
+      'key': 'inputs',
+      'label': 'Inputs',
+      'description': 'Inputs are used to collect information from users. They can be used to collect text, numbers, dates, or files. Inputs can be used in forms, search bars, or to filter content.',
+      'dev_notes': 'Development notes: Defined in tokens/src/inputs.tokens.json.',
+    }
+  ]
+  %}
+  {% set elements = [
+    {
+      'key': 'color-all',
+      'label': 'All Colors',
+      'description': 'Every colors available on the site.',
+      'dev_notes': 'Defined in tokens/src/color.tokens.json.',
+    },
+    {
+      'key': 'colorways',
+      'label': 'Colorways',
+      'description': 'Colorways are color relationships between background colors, text, buttons and other elements.
+  Using a block with a different colorway can help break up a longer page or change the tone. The styles within a
+  colorway adapt automatically to the background color by redefining the color values based on the colorway class.',
+      'dev_notes': 'Development notes: Defined in css/_elements/colorways.css',
+    },
+    {
+      'key': 'typography',
+      'label': 'Typography',
+      'description': "Use headings to improve scannability and provide context for users to better understand the page. Headings also help structure page content for screen readers and search engines. Headings should be logically structured on a page using proper hierarchy, headings are ranked 'h1' through 'h6.' A page starts with the H1 heading, which describes a page's main topic— the title of the page. Subsections can be organized with 'h2' level headings. Those subsections can themselves be divided with 'h3' level headings, and so on.",
+      'dev_notes': 'Development notes: Defined in tokens/src/typography.tokens.json.',
+    },
+    {
+      'key': 'spacing',
+      'label': 'Spacing',
+      'description': 'Spacing values define the space between elements on the page. This can include space between buttons, between columns of text, or around an image. Setting a scale of sizes helps the page to feel cohesive and considered.',
+      'dev_notes': 'Development notes: Defined in tokens/src/spacer.tokens.json, and tokens/tailwind-site-spacing
+      .json. .ts-py-block, .ts-my-block, .ts-py-block-sm and .ts-my-block-sm classes are available for consistent
+      block-level spacing. All margin, padding and height classes use generated from these base values using Tailwind
+       syntax. They are also available as CSS variables in this format "var(--spacer-[value]".',
+    },
+    {
+      'key': 'grids',
+      'label': 'Grids',
+      'description': 'Grids used throughout the design system.',
+      'dev_notes': 'Developer notes: Defined in tokens/tailwind-grids.json. Use "xl:container p-site" for site
+    container and padding classes. Grids can be applied as classes directly or with the apply syntax "@apply
+    ts-grid-col-2"',
+    },
+  ]
+  %}
+  {% set molecules = [
+    {
+      'label': 'Breadcrumbs',
+      'machine_name': 'breadcrumbs',
+    }
+  ]
+  %}
+  {% set organisms = [
+
+  ]
+%}
+
+  <span class="hidden justify-end justify-start md:ts-grid-col-3 md:ts-grid-col-4"></span>
+  <div class="relative" id="page-style-guide">
+    {# Menu#}
+
+    <div class="styleguide-menu-padding">
+      {% include '@ts_wrin/styleguide/styleguide-components/styleguide-nav.twig' %}
+
+      {# WELCOME #}
+      {% include '@ts_wrin/styleguide/styleguide-components/banner.twig' with {
+        heading: 'Welcome to your Design System',
+      } %}
+
+      {# Style Guide Intro #}
+      {% include '@ts_wrin/styleguide/styleguide-components/intro-section-title.twig' with {
+        id: 'h2--intro',
+        heading: 'How to use this resource',
+        description: 'This design system style guide is a shared resource for all who work on the website. It is a
+        reference point for designers and developers on approved brand colors and type styles. It can also be useful
+        to content editors to see what larger blocks are available for page building.'
+      } %}
+
+      {# Global Elements #}
+      {% include '@ts_wrin/styleguide/styleguide-components/h2-section-title.twig' with {
+        id: 'elements',
+        heading: 'Global Elements',
+        description: 'The "Foundations" section outlines the color tokens, typography
+          styles, grids, and spacing rules used throughout the design system.'
+      } %}
+
+      {% for element in elements %}
+        <div class="my-block xl:container p-site" id="{{ element['key'] }}">
+          {% include '@ts_wrin/styleguide/styleguide-components/h3-section-title.twig' with {
+            heading: element['label'],
+            description: element['description'],
+            dev_notes: element['dev_notes']
+          } %}
+          {% include '@ts_wrin/styleguide/_elements/' ~ element['key'] ~ '.twig' %}
+        </div>
+      {% endfor %}
+
+      {# ATOMS & MOLECULES #}
+      {% include '@ts_wrin/styleguide/styleguide-components/h2-section-title.twig' with {
+        id: 'components',
+        heading: 'Atoms & molecules',
+        description: 'The “Atoms & Molecules” section outlines larger UI elements
+          throughout the design system including buttons, inputs, dropdowns, and cards that display a variety of
+          content. These elements are present within the larger blocks or sections of your page builder.'
+      } %}
+
+      {% for atom in atoms %}
+        <div class="my-block xl:container p-site" id="{{ atom['key'] }}">
+          {% include '@ts_wrin/styleguide/styleguide-components/h3-section-title.twig' with {
+            heading: atom['label'],
+            description: atom['description'],
+            dev_notes: atom['dev_notes']
+          } %}
+          {% include '@ts_wrin/styleguide/atoms/' ~ atom['key'] ~ '.twig' %}
+        </div>
+      {% endfor %}
+
+      {# MOLECULES #}
+      {% for molecule in molecules %}
+        <div class="p-site xl:container">
+          {% include '@ts_wrin/styleguide/styleguide-components/h4-section-title.twig' with {
+            'heading': molecule.label,
+            'dev_notes': '@ts_wrin/design-system/molecules/' ~ molecule.machine_name,
+            'id': molecule.machine_name,
+          } %}
+          {% include '@ts_wrin/design-system/molecules/' ~ molecule.machine_name ~ '/styleguide/' ~ molecule
+            .machine_name ~
+            '--styleguide-layout.twig' %}
+        </div>
+      {% endfor %}
+
+      {# Global blocks #}
+      <div class="py-block-sm" id="blocks--global">
+        <div class="p-site xl:container">
+          <h2 class="{{ section_title_classes }}">Blocks (global)</h2>
+          <p>Blocks available on all pages. They can be used to build entire page layouts in dynamic ways.</p>
+        </div>
+      </div>
+
+      {% for block in organisms %}
+        <div class="xl:container p-site my-block">
+          {% if block.label %}
+            {% include '@ts_wrin/styleguide/styleguide-components/h4-section-title.twig' with {
+              heading: block.label,
+              dev_notes: 'organisms/blocks/' ~ block.machine_name,
+              id: block.machine_name,
+            } %}
+            <div class="">
+              {% include '@ts_wrin/design-system/organisms/blocks/' ~ block.machine_name ~ '/styleguide/' ~ block
+                .machine_name ~ '--styleguide-layout.twig' %}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
