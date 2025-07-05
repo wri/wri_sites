@@ -101,7 +101,7 @@ Blazy overrides.
   width: 100%;
 }
 
-figcaption {
+figcaption, .figcaption {
   @include font($acumin-semi-cond, 'regular');
   @include font-line-height(13,18);
 
