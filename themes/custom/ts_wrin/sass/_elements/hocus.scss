@@ -1,0 +1,37 @@
+.hocus-underline {
+  text-decoration: none;
+  &:hover,
+  &:focus-visible {
+     text-decoration: underline;
+     text-underline-offset: 2px;
+  }
+}
+
+.hocus-text-underline a,
+p.hocus-text-underline a {
+  background-image: linear-gradient(to right, transparent, transparent),
+    linear-gradient(to right, var(--color-green-500), var(--color-green-500));
+  background-repeat: no-repeat;
+  background-size: 100% 2px, 0 2px;
+  text-decoration: none;
+  transition: 0.5s;
+
+    &:hover,
+    &:focus-visible {
+      background-size: 100% 0, 100% 2px;
+      color: var(--color-green-500);
+    }
+    background-position: left 100%;
+}
+
+// Reverts green to context color on hover/focus
+.hocus-primary a {
+  color: var(--color-green-500);
+  background: none;
+  text-decoration: none;
+  transition: color .2s linear;
+  &:hover,
+  &:focus-visible {
+    color: inherit;
+  }
+}
