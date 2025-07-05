@@ -1,0 +1,44 @@
+:root {
+  --primary: var(--color-neutral-900);
+  --secondary: var(--color-neutral-600);
+  --action: var(--color-green-500);
+}
+
+.colorway-white {
+  background-color: var(--color-white);
+}
+
+.colorway-green-500 {
+  --primary: var(--color-white);
+  --secondary: var(--color-neutral-200);
+  --action: var(--color-white);
+  background-color: var(--color-green-500);
+}
+
+.colorway-neutral-200 {
+  --primary: var(--color-neutral-900);
+  --action: var(--color-green-500);
+  background-color: var(--color-neutral-200);
+}
+.colorway-neutral-900 {
+  --primary: var(--color-white);
+  --secondary: var(--color-neutral-500);
+  --action: var(--color-gold-500);
+  background-color: var(--color-neutral-900);
+}
+.colorway-blue-500 {
+  --primary: var(--color-white);
+  --secondary: var(--color-neutral-200);
+  --action: var(--color-gold-500);
+  background-color: var(--color-blue-500);
+}
+
+.color-primary {
+  color: var(--primary);
+}
+.color-secondary {
+  color: var(--secondary);
+}
+.color-action {
+  color: var(--action);
+}
