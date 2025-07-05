@@ -1,0 +1,113 @@
+{%
+  set headerStyles = [
+  'h1',
+  'h2',
+  'card-h2',
+  'h3',
+  'h4',
+]
+%}
+
+{%
+  set designSystemTextStyles = [
+  'utility-2xl',
+  'utility-xl',
+  'utility-lg',
+  'utility-md font-bold ',
+  'utility-md',
+  'utility-base font-bold',
+  'utility-base',
+  'utility-sm font-bold',
+  'utility-sm',
+  'utility-xs uppercase font-light',
+  'utility-xs btn-pill',
+  'body-italic-sm',
+  'body-italic-xs',
+  'body-xs',
+  'body-base',
+  'body-md',
+  'tag color-action',
+]
+%}
+{%
+  set textStyles = [
+  'teaser-title large',
+  'intro',
+  'teaser-title',
+  'label',
+  'card-teaser-text',
+  'secondary body-link',
+  'secondary',
+  'label small',
+  'figcaption',
+  'date',
+  'bundle',
+  'italic-tiny',
+  'italic-xtra-tiny',
+  'secondary link',
+  'subheader',
+  'topic-tag',
+  'taxonomy',
+  'taxonomy small-text',
+]
+%}
+
+<div class="colorway-white">
+  <div>
+    {% include '@ts_wrin/styleguide/styleguide-components/h4-section-title.twig' with {
+      heading: 'Header styles',
+    } %}
+    {% for style in headerStyles %}
+      <div class="mb-4 flex items-center gap-4">
+        <p class="body-xs color-primary my-0 font-bold shrink-0 w-30">.{{ style }}</p>
+        <p class="{{ style }} mt-0 mb-4">
+          The quick brown fox jumped over the lazy dog.
+        </p>
+      </div>
+    {% endfor %}
+  </div>
+  <hr class="border-1 border-neutral-300 my-12">
+  <div class="flex gap-4">
+    <div class="">
+      {% include '@ts_wrin/styleguide/styleguide-components/h4-section-title.twig' with {
+        heading: 'Archived Text styles',
+        show_btn: false,
+      } %}
+      {% for style in textStyles %}
+        <div class="mb-4 flex items-center gap-4">
+          <p class="utility-base color-primary my-0 shrink-0 w-30">.{{ style }}</p>
+          <p class="{{ style }} my-0">
+            The quick brown fox jumped over the lazy dog.
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+    <hr class="border-1 border-neutral-300 my-12">
+    <div class="">
+      {% include '@ts_wrin/styleguide/styleguide-components/h4-section-title.twig' with {
+        heading: 'Design System Text styles',
+        show_btn: false,
+      } %}
+      {% for style in designSystemTextStyles %}
+        <div class="mb-4 flex items-center gap-4">
+          <p class="utility-base my-0 shrink-0 w-40">.{{ style }}</p>
+          <p class="{{ style }} my-0">
+            The quick brown fox jumped over the lazy dog.
+          </p>
+        </div>
+      {% endfor %}
+      <div class="mb-4 flex items-center gap-4">
+        <p class="utility-base my-0 shrink-0 w-40">.body-md.hocus-text-underline a</p>
+        <p class="body-md font-medium my-0 hocus-text-underline">
+          <a href="">The quick brown fox jumped over the lazy dog.</a>
+        </p>
+      </div>
+      <div class="mb-4 flex items-center gap-4">
+        <p class="utility-base my-0 shrink-0 w-40">.body-sm.hocus-text-underline a</p>
+        <p class="body-sm font-medium my-0 hocus-text-underline">
+          <a href="">The quick brown fox jumped over the lazy dog.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
