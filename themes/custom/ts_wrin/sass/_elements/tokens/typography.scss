@@ -39,6 +39,14 @@
   }
 }
 
+/* FORMERLY: .paragraph--type--side-by-side .field--name-field-title h2 */
+.h2-alt {
+  font-family: var(--font-family-heading-condensed);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
 /* FORMERLY: .h3 */
 .heading-3 {
   font-family: var(--font-family-heading-condensed);
@@ -54,6 +62,7 @@
   font-weight: 700;
   line-height: 1;
 }
+
 
 .utility-xl,
 .utility-lg {
@@ -168,7 +177,7 @@
 /* FORMERLY: .topic-tag, without the color/uppercase and letterspacing */
 .body-base {
   font-family: var(--font-family-heading);
-  font-weight: 700;
+  font-weight: 400;
   font-size: 15px;
   line-height: 1.2;
 }
@@ -189,8 +198,16 @@
   line-height: 1.45;
 }
 
+/* FORMERLY: default typography site-wide. */
+.body-serif-md {
+  font-family: var(--font-family-serif);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
 /* FORMERLY: .italic-tiny */
-.body-italic-sm {
+.body-serif-italic-sm {
   font-family: var(--font-family-serif);
   font-weight: 400;
   font-style: italic;
@@ -199,7 +216,7 @@
 }
 
 /* FORMERLY: .italic-xtra-tiny */
-.body-italic-xs {
+.body-serif-italic-xs {
   font-family: var(--font-family-serif);
   font-weight: 400;
   font-style: italic;
