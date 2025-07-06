@@ -13,7 +13,7 @@
 {% set heading_color = color ? 'color-' ~ color : 'color-primary' %}
 
 <div class="styleguide-component--h3-section-title my-6" id="{{ id }}">
-  <div class="flex justify-between">
+  <div class="flex items-center justify-between">
     <h3 class="h3 {{ heading_color }} md:max-w-[75%]">{{ heading }}</h3>
     {% include '@ts_wrin/design-system/atoms/btns/btn-solid.html.twig' with {
       link: {
