@@ -322,51 +322,7 @@ ul.menu {
     @include font-line-height(13);
   }
 }
-.has-white-background-color {
-  background: $white;
-}
 
-.has-black-background-color {
-  background-color:$black
-}
-
-.has-light-gray-color {
-  color:$light-grey
-}
-.has-light-gray-background-color {
-  background-color:$light-grey
-}
-.has-white-color {
-  color:$white
-}
-.has-white-background-color {
-  background-color:$white
-}
-.has-blue-color {
-  color:$blue
-}
-.has-blue-background-color {
-  background-color:$blue;
-  color: $white;
-}
-.has-teal-color {
-  color:$teal
-}
-.has-teal-background-color {
-  background-color:$teal
-}
-.has-green-color {
-  color:$green
-}
-.has-green-background-color {
-  background-color:$green
-}
-.has-gold-color {
-  color:$brand-gold
-}
-.has-gold-background-color {
-  background-color:$brand-gold
-}
 .has-text-align-center {
   text-align: center;
 }
