@@ -1,0 +1,84 @@
+/* Button and link styles. */
+/* @TODO: turn these styles into Tailwind components. */
+
+.text-link a,
+ a.text-link {
+  color: var(--primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  &:hover,
+  &:focus-visible {
+    color: var(--action);
+  }
+}
+
+button.btn-underline {
+  background-color: unset;
+}
+
+.btn-solid {
+  font-family: var(--font-family-heading-condensed);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: .875;
+  background-color: var(--btn-solid-bg);
+  border-radius: 3px;
+  color: var(--btn-solid-text);
+  display: flex;
+  margin: 0;
+  padding: var(--spacer-5) var(--spacer-10);
+  text-align: center;
+  text-decoration: none;
+  transition: color .2s linear, border-color .2s linear, background-color .2s linear;
+  &:hover,
+  &:focus-visible {
+    background-color: var(--btn-solid-bg-hover);
+    color: var(--btn-solid-text-hover);
+  }
+  & .btn-svg {
+    align-items: center;
+    display: inline-flex;
+  }
+  & .btn-svg svg path {
+    fill: var(--btn-solid-svg);
+  }
+}
+
+.btn-outline {
+  font-family: var(--font-family-heading-condensed);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: .875;
+  background-color: var(--btn-outline-bg);
+  border: 2px solid var(--btn-outline-border);
+  border-radius: 3px;
+  color: var(--btn-outline-text);
+  display: flex;
+  margin: 0;
+  padding: var(--spacer-5) var(--spacer-10);
+  text-align: center;
+  text-decoration: none;
+  transition: color .2s linear, border-color .2s linear, background-color .2s linear;
+  &:hover,
+  &:focus-visible {
+    background-color: var(--btn-outline-bg-hover);
+    color: var(--btn-outline-text-hover);
+  }
+}
+
+.btn--sm {
+  font-size: 13px;
+  padding: 10px var(--spacer-5);
+  & .btn-svg svg {
+    width: var(--spacer-1);
+  }
+}
+
+.btn--lg {
+  font-size: 16px;
+  padding: var(--spacer-5) var(--spacer-10);
+  & .btn-svg svg {
+    width: var(--spacer-2);
+  }
+}
