@@ -1,8 +1,10 @@
 {%
   set headerStyles = [
   'h1',
-  'h2',
+  'card-h2 font-bold',
   'card-h2',
+  'h2',
+  'h2-alt',
   'h3',
   'h4',
 ]
@@ -21,11 +23,13 @@
   'utility-sm',
   'utility-xs uppercase font-light',
   'utility-xs btn-pill',
-  'body-italic-sm',
-  'body-italic-xs',
-  'body-xs',
-  'body-base',
+  'body-serif-md',
+  'body-serif-italic-sm',
+  'body-serif-italic-xs',
   'body-md',
+  'body-base font-bold',
+  'body-base',
+  'body-xs',
   'tag color-action',
 ]
 %}
@@ -42,10 +46,13 @@
   'figcaption',
   'date',
   'bundle',
+  'default text',
   'italic-tiny',
   'italic-xtra-tiny',
-  'secondary link',
   'subheader',
+  'body-base font-bold',
+  'body-base',
+  'secondary link',
   'topic-tag',
   'taxonomy',
   'taxonomy small-text',
@@ -75,7 +82,7 @@
       } %}
       {% for style in textStyles %}
         <div class="mb-4 flex items-center gap-4">
-          <p class="utility-base color-primary my-0 shrink-0 w-30">.{{ style }}</p>
+          <p class="utility-base color-primary my-0 shrink-0 w-40">.{{ style }}</p>
           <p class="{{ style }} my-0">
             The quick brown fox jumped over the lazy dog.
           </p>
