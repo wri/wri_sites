@@ -1,0 +1,103 @@
+{# Button and Link Styles#}
+
+{% set btnLinkStyles = [
+  'btn-solid',
+  'btn-outline',
+] %}
+{#  'btn-underline',#}
+{#  'btn-icon',#}
+
+{% set sizes = [
+  'lg',
+  'sm'
+] %}
+
+{% set bgColors = {
+  "White Colorway": 'colorway-white',
+  "Blue 500 Colorway": 'colorway-blue-500',
+  "Neutral 900 Colorway": 'colorway-neutral-900',
+  "Green 500 Colorway": 'colorway-green-500'
+}
+%}
+
+{% set svgs = {
+  "none": "",
+  "before": "download",
+  "after": "chevron-right",
+}
+%}
+
+{% set iconBtnLinkStyles = [
+
+] %}
+<span class="hidden btn--lg btn--md btn--sm"></span>
+
+{# Loops through buttons, prints them on all backgrounds at all sizes#}
+{% include '@ts_wrin/styleguide/styleguide-components/h4-section-title.twig' with {
+  heading: "Button Sizes",
+  description: "Buttons come in two sizes: large and small. Both can be used as an offsite link."
+} %}
+{% for size in sizes %}
+  <div class="px-4 py-2 colorway-white ">
+  {% for btn in btnLinkStyles %}
+    <div class="inline-block">
+      {% include '@ts_wrin/design-system/atoms/btns/' ~ btn ~ '.html.twig' with {
+        link: {title: btn ~ " " ~ size, url: link_url},
+        size: size,
+        svg_position: key,
+        link_svg_name: svg,
+        icon_only: false,
+      } %}
+    </div>
+  {% endfor %}
+  </div>
+{% endfor %}
+{% include '@ts_wrin/styleguide/styleguide-components/h4-section-title.twig' with {
+  heading: "Icon Options",
+  description: "Shown are a button style with no icon, icon only, an icon before the text, an icon after the text,
+  and in a disabled state."
+}
+%}
+  {% for btn in btnLinkStyles %}
+    <div class="px-4 py-2 colorway-white">
+        <div class="py-3 flex items-center flex-start gap-4">
+          {% for key, svg in svgs %}
+            <div class="inline-block">
+              {% include '@ts_wrin/design-system/atoms/btns/' ~ btn ~ '.html.twig' with {
+                link: {title: btn ~ " " ~ size, url: link_url},
+                size: size,
+                svg_position: key,
+                link_svg_name: svg,
+                icon_only: false
+              } %}
+            </div>
+          {% endfor %}
+        </div>
+    </div>
+  {% endfor %}
+{% include '@ts_wrin/styleguide/styleguide-components/h4-section-title.twig' with {
+  heading: "How buttons display on different colorways"
+}
+%}
+<div class="ts-grid-col-2">
+{% for key, bgColor in bgColors %}
+  <div class="{{ bgColor }} p-7">
+    {% for btn in btnLinkStyles %}
+      <div class="inline-block">
+        {% include '@ts_wrin/design-system/atoms/btns/' ~ btn ~ '.html.twig' with {
+          link: {title: btn ~ " " ~ size, url: link_url},
+          size: 'sm',
+          svg_position: 'after',
+          link_svg_name: 'chevron-right',
+          add_classes: 'mb-4'
+        } %}
+      </div>
+    {% endfor %}
+    {% include '@ts_wrin/design-system/atoms/btns/btn-text-link.html.twig' with {
+      link: { title: "Inline text link treatment", url: "#" },
+      add_classes: "block mt-4"
+    }
+    %}
+  </div>
+{% endfor %}
+</div>
