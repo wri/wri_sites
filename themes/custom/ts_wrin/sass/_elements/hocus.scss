@@ -8,7 +8,8 @@
 }
 
 .hocus-text-underline a,
-p.hocus-text-underline a {
+p.hocus-text-underline a,
+button.hocus-text-underline {
   background-image: linear-gradient(to right, transparent, transparent),
     linear-gradient(to right, var(--color-green-500), var(--color-green-500));
   background-repeat: no-repeat;
