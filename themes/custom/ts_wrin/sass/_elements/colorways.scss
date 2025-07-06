@@ -3,18 +3,21 @@
   --secondary: var(--color-neutral-600);
   --action: var(--color-green-500);
 }
-
 .colorway-white {
   background-color: var(--color-white);
 }
-
 .colorway-green-500 {
+  background-color: var(--color-green-500);
   --primary: var(--color-white);
   --secondary: var(--color-neutral-200);
   --action: var(--color-white);
-  background-color: var(--color-green-500);
 }
-
+.colorway-gold-500 {
+  background-color: var(--color-gold-500);
+  --primary: var(--color-neutral-900);
+  --secondary: var(--color-neutral-600);
+  --action: var(--color-white);
+}
 .colorway-neutral-200 {
   --primary: var(--color-neutral-900);
   --action: var(--color-green-500);
