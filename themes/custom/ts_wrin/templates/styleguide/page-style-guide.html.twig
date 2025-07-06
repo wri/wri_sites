@@ -15,16 +15,17 @@
   {% set atoms = [
     {
       'key': 'buttons-&-links',
-      'label': 'Buttons & Links',
-      'description': 'Button styles are dynamic. They can be modified by adjusting the size, icon, and icon placement
-      properties. Icons shown are examples. Any icon can be used. Button colors will adjust automatically based on the
-      background
-      color.',
-      'dev_notes': "Development notes: Defined in tokens/src/buttons.tokens.json. Button colorways are defined in
-      css/_elements/colorways.css. To add an svg icon, place the svg code in assets/images/svgs, and pass the svg file
-      name as the 'svg_name' property when you include the button component in your template. You can also use
-      Tailwind @apply syntax to apply button classes directly (In CSS: @apply btn-solid;). Note that with @apply
-      syntax, you can't add an icon.",
+      'label': 'Existing Buttons & Links',
+      'description': 'All globally set button styles.',
+      'dev_notes': "Development notes: Defined in _05.buttons.scss.",
+    },
+    {
+      'key': 'buttons-links-bb',
+      'label': 'Design System Buttons & Links',
+      'description': 'A system for using and maintaining and using buttons as components. Each style can be modified
+      with a size, update automatically across colorways, and display an svg before or after the text.',
+      'dev_notes': "Development notes: Defined in design-system/atoms/btns/ for twig templates, and in
+      _elements/tokens/buttons.scss for styles.",
     },
     {
       'key': 'inputs',
