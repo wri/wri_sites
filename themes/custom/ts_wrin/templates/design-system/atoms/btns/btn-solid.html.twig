@@ -27,10 +27,10 @@
 
 {# btn classes, colorway, svg name #}
 {% set add_classes = add_classes ?? '' %}
-{#{% set btn_classes = 'button small offsite' %}#}
+{% set btn_classes = "btn-solid btn--" ~ size ~ ' ' ~ add_classes %}
 
-{% set properties = properties ?? [] %}
+{#{% set properties = properties ?? [] %}#}
 {# Final set of classes #}
-{% set properties = properties|merge({ 'class': (btn_classes) }) %}
+{#{% set properties = properties|merge({ 'class': (btn_classes) }) %}#}
 
 {% extends '@ts_wrin/design-system/atoms/btns/btn-base.html.twig' %}

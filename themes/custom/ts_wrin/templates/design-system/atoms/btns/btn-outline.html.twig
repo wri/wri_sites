@@ -22,11 +22,11 @@
 
 {# btn classes, colorway, svg name #}
 {% set add_classes = add_classes ?? '' %}
-{% set btn_classes = 'btn-outline focus-outline btn--' ~ size ~ ' ' ~ add_classes %}
+{% set btn_classes = 'btn-outline btn--' ~ size ~ ' ' ~ add_classes %}
 
-{% set properties = properties ?? [] %}
+{#{% set properties = properties ?? [] %}#}
 {# Final set of classes #}
-{% set properties = properties|merge({ 'class': (btn_classes) }) %}
+{#{% set properties = properties|merge({ 'class': (btn_classes) }) %}#}
 
 {# btn classes, colorway, svg name #}
 {% set link_svg_name = link_svg_name %}

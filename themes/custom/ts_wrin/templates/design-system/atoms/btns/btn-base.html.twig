@@ -82,13 +82,13 @@
 	{% set props = props|merge( [ 'href="' ~ link.url ~ '"' ] )|merge( [ 'target="' ~ link.target ~ '"' ] ) %}
 {% endif %}
 
-<{{ tag_name }} {{ props|join(" ") }} {{ link_disabled ? 'disabled' : '' }}>
+<{{ tag_name }} {{ props|join(" ") }} {{ link_disabled ? 'disabled' : '' }} class="{{ btn_classes }}">
 
 {# SVG #}
     {% block svg %}
 			{% if link_svg_name is not empty and svg_position == 'before' %}
 				<span class="btn-svg btn-svg--before {{ link_svg_classes }}">
-            {% include '@ts_wrin/design-system/atoms/svg-icon-embed.twig' with {
+            {% include '@ts_wrin/design-system/atoms/svg-icon-embed.html.twig' with {
 							'svg_name': link_svg_name,
 						} only %}
           </span>
@@ -109,7 +109,7 @@
     {% block svg_after %}
 			{% if link_svg_name is not empty and svg_position == 'after' and icon_only == false %}
 				<span class="btn-svg btn-svg--after {{ link_svg_classes }}">
-            {% include '@ts_wrin/design-system/atoms/svg-icon-embed.twig' with {
+            {% include '@ts_wrin/design-system/atoms/svg-icon-embed.html.twig' with {
 							'svg_name': link_svg_name,
 						} only %}
           </span>

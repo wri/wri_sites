@@ -1,0 +1,37 @@
+{# Text link
+ * Found in body copy.
+ * Variations styled below.
+  DEFAULT STYLES SET IN: tailwind-btns.json.
+ *
+ * SIZE OPTIONS:
+ *    - lg (default)
+ *    - md
+ *    - sm
+ *    - xs
+ *
+ * Icon only -- adds screen reader text
+ * - icon_only (boolean)
+
+  HOW TO USE:
+  Add .btn-text-link in the twig template, or include this template:
+  btn-text-link:
+  {% include 'atoms/btns/btn-text-link.twig' with {
+      link: {title: 'learn more', url: '/'}
+    }
+  %}
+#}
+
+{# Primary values #}
+{% set link = link %}
+{% set size = size ?: '' %}
+
+{# btn classes, icon only, svg name #}
+{% set link_svg_name = link_svg_name %}
+{% set icon_only = icon_only ?? false %}
+
+{# Combines classes, adds them to the btn template #}
+{% set btn_class = "text-link " %}
+{# Final set of classes, including any passed in #}
+{% set link_classes = add_classes ? btn_class ~ ' ' ~ add_classes : btn_class %}
+
+{% extends '@ts_wrin/design-system/atoms/btns/btn-base.html.twig' %}
