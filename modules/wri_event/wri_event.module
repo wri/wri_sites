@@ -7,11 +7,12 @@
 
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\views\ViewExecutable;
-use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\webform\WebformSubmissionInterface;
 
 /**
  * Implements hook_views_query_alter().
@@ -93,5 +94,35 @@ function wri_event_node_view(array &$build, EntityInterface $entity, EntityViewD
     else {
       $build['#backlink_enabled'] = FALSE;
     }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function wri_event_form_node_event_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (isset($form["field_zoom_registration_form"]) && isset($form["field_zoom_form_fields"])) {
+    $form["field_zoom_form_fields"]["widget"]['#states']['invisible'] = [
+        'input[name="field_zoom_registration_form[0][target_id]"]' => ['value' => NULL],
+    ];
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_prepare_form().
+ */
+function wri_event_webform_submission_prepare_form(WebformSubmissionInterface $webform_submission, $operation, FormStateInterface $form_state) {
+  $event = $webform_submission->getSourceEntity();
+  $webform = $webform_submission->getWebform();
+  $webform_tweaks = $event->field_zoom_form_fields->getValue();
+  foreach ($webform_tweaks as $tweak) {
+    $defaults = $webform->getElement($tweak['field']);
+    if ($tweak['disabled']) {
+      $defaults['#type'] = 'hidden';
+    }
+    if ($tweak['required']) {
+      $defaults['#required'] = TRUE;
+    }
+    $webform->setElementProperties($tweak['field'], $defaults);
   }
 }
