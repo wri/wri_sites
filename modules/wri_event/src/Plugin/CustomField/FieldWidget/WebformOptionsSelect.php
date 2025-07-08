@@ -16,14 +16,14 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Plugin implementation of the 'select' widget.
  */
 #[CustomFieldWidget(
-  id: 'select_webform_field',
-  label: new TranslatableMarkup('Select webform field'),
+  id: 'select_webform_options',
+  label: new TranslatableMarkup('Select webform options set'),
   category: new TranslatableMarkup('Lists'),
   field_types: [
     'string',
   ],
 )]
-class WebformFieldSelect extends SelectWidget {
+class WebformOptionsSelect extends SelectWidget {
 
   /**
    * {@inheritdoc}
@@ -33,7 +33,6 @@ class WebformFieldSelect extends SelectWidget {
     // For compatibility with inherited functions, a valid value is needed for
     // allowed_values:
     $defaults['settings']['allowed_values'] = [];
-    $defaults['settings']['default_webform'] = NULL;
     return $defaults;
   }
 
@@ -67,14 +66,6 @@ class WebformFieldSelect extends SelectWidget {
       $options[$id] = $webform->label();
     }
 
-    $form['settings']['default_webform'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Default Webform'),
-      '#options' => $options,
-      '#default_value' => $this->getSetting('default_webform') ?? NULL,
-      '#required' => TRUE,
-    ];
-
     return $form;
   }
 
@@ -84,21 +75,10 @@ class WebformFieldSelect extends SelectWidget {
   public function widget(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state, CustomFieldTypeInterface $field): array {
     $element = parent::widget($items, $delta, $element, $form, $form_state, $field);
     $settings = $field->getWidgetSetting('settings') + static::defaultSettings()['settings'];
+    $webform_option_sets = $this->entityTypeManager->getStorage('webform_options')->loadByProperties(['category' => 'Sector Options']);
     $options = [];
-    if (isset($settings["default_webform"])) {
-      $webform_elements = $this->entityTypeManager->getStorage('webform')
-        ->load($settings["default_webform"])
-        ->getElementsDecodedAndFlattened();
-      foreach ($webform_elements as $id => $webform_element) {
-        if ($webform_element['#type'] != 'hidden' && isset($webform_element['#title']) && empty($webform_element['#required'])) {
-          $title = $webform_element['#title'];
-          $maxsize = 20;
-          if (strlen($title) > $maxsize) {
-            $title = substr($title, 0, $maxsize) . '...';
-          }
-          $options[$id] = $title;
-        }
-      }
+    foreach ($webform_option_sets as $id => $option_set) {
+      $options[$id] = $option_set->label();
     }
     // Add our widget type and additional properties and return.
     $element['#type'] = 'select';

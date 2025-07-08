@@ -101,10 +101,23 @@ function wri_event_node_view(array &$build, EntityInterface $entity, EntityViewD
  * Implements hook_form_FORM_ID_alter().
  */
 function wri_event_form_node_event_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if (isset($form["field_zoom_registration_form"]) && isset($form["field_zoom_form_fields"])) {
-    $form["field_zoom_form_fields"]["widget"]['#states']['invisible'] = [
-        'input[name="field_zoom_registration_form[0][target_id]"]' => ['value' => NULL],
-    ];
+  if (isset($form['field_zoom_registration_form']) && isset($form['field_zoom_form_fields'])) {
+    $option_fields = [];
+    $webform = Drupal::entityTypeManager()->getStorage('webform')->load($form['field_zoom_registration_form']['widget'][0]['target_id']['#default_value']);
+    if ($webform) {
+      foreach ($webform->getElementsDecodedAndFlattened() as $id => $element) {
+        if ($element['#type'] == 'select') {
+          $option_fields[] = ['value' => $id];
+        }
+      }
+    }
+    $index = 0;
+    while ($index <= $form['field_zoom_form_fields']['widget']['#max_delta']) {
+      $form['field_zoom_form_fields']['widget'][$index]['options']['#states']['visible'] = [
+        'select[name="field_zoom_form_fields[' . $index . '][field]"]' => $option_fields,
+      ];
+      $index++;
+    }
   }
 }
 
