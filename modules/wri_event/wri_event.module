@@ -136,6 +136,12 @@ function wri_event_webform_submission_prepare_form(WebformSubmissionInterface $w
     if ($tweak['required']) {
       $defaults['#required'] = TRUE;
     }
+    if (!empty($tweak['options'])) {
+      $option_set = Drupal::entityTypeManager()->getStorage('webform_options')->load($tweak['options']);
+      if ($option_set) {
+        $defaults['#options'] = $option_set->getOptions();
+      }
+    }
     $webform->setElementProperties($tweak['field'], $defaults);
   }
 }
