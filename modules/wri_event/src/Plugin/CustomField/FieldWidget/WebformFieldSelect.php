@@ -81,7 +81,7 @@ class WebformFieldSelect extends SelectWidget {
     /**
    * {@inheritdoc}
    */
-  public function  widget(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state, CustomFieldTypeInterface $field): array {
+  public function widget(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state, CustomFieldTypeInterface $field): array {
     $element = parent::widget($items, $delta, $element, $form, $form_state, $field);
     $settings = $field->getWidgetSetting('settings') + static::defaultSettings()['settings'];
     $options = [];
