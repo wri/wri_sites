@@ -69,7 +69,7 @@ class WebformOptionsSelect extends SelectWidget {
     return $form;
   }
 
-    /**
+  /**
    * {@inheritdoc}
    */
   public function widget(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state, CustomFieldTypeInterface $field): array {
