@@ -141,6 +141,7 @@
         "drupal/core-composer-scaffold": "^10.3",
         "drupal/core-recommended": "^10.3",
         "drupal/ctools": "^4.0",
+        "drupal/custom_field": "^3.1",
         "drupal/dblog_persistent": "^2.1",
         "drupal/diff": "^1.0",
         "drupal/ds": "^3.0",
