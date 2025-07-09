@@ -117,6 +117,12 @@ header:not(.pfp-header) {
     max-width: $grid-max-width-xxl + ($grid-gutter * 2);
   }
 
+  .header-left {
+    align-items: center;
+    display: flex;
+    gap: 3rem;
+  }
+
   .header-right {
     align-items: center;
     display: flex;
