@@ -1,0 +1,7 @@
+node.type.event.third_party.wri_event:
+  type: config_entity
+  label: "WRI Event Settings"
+  mapping:
+    enable_backlink:
+      type: boolean
+      label: "Enable back-link"

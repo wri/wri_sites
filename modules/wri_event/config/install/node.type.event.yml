@@ -3,14 +3,17 @@ status: true
 dependencies:
   module:
     - menu_ui
+    - wri_event
 third_party_settings:
   menu_ui:
     available_menus: {  }
     parent: ''
+  wri_event:
+    enable_backlink: false
 name: Event
 type: event
-description: ''
-help: ''
+description: null
+help: null
 new_revision: true
 preview_mode: 1
 display_submitted: false

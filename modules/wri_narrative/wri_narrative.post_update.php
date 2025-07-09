@@ -141,3 +141,64 @@ function wri_narrative_post_update_rewrite_narrative_taxonomies1(&$sandbox) {
 
   $sandbox['#finished'] = ($sandbox['current'] == $start_value);
 }
+
+/**
+ * Updates field config to use org_name token in narrative taxonomies, round 3.
+ */
+function wri_narrative_post_update_rewrite_narrative_taxonomies2(&$sandbox) {
+  if (!isset($sandbox['total'])) {
+    $sandbox['total'] = \Drupal::database()->select('node__field_narrative_taxonomy', 'u')
+      ->condition('u.field_narrative_taxonomy_value', "%WRI's%", 'LIKE')
+      ->fields('u')
+      ->countQuery()
+      ->execute()
+      ->fetchField();
+    $sandbox['current'] = 0;
+
+    if (empty($sandbox['total'])) {
+      $sandbox['#finished'] = 1;
+      return;
+    }
+  }
+
+  $batch_size = 25;
+  $start_value = $sandbox['current'];
+
+  $results = \Drupal::database()->select('node__field_narrative_taxonomy', 'u')
+    ->condition('u.field_narrative_taxonomy_value', "%WRI's%", 'LIKE')
+    ->condition('entity_id', $sandbox['current'], '>=')
+    ->fields('u', ['entity_id', 'langcode'])
+    ->orderBy('entity_id')
+    ->range(0, $batch_size)
+    ->execute();
+
+  foreach ($results as $row) {
+    $node = Node::load($row->entity_id);
+    if (!$node) {
+      continue;
+    }
+
+    // Use the correct translation if available.
+    if ($node->hasTranslation($row->langcode)) {
+      $node = $node->getTranslation($row->langcode);
+    }
+
+    if (!$node->hasField('field_narrative_taxonomy') || $node->get('field_narrative_taxonomy')->isEmpty()) {
+      continue;
+    }
+
+    $value = $node->get('field_narrative_taxonomy')->value;
+    $updated = str_replace("WRI's", "[wri_tokens:org_name]'s", $value);
+
+    if ($updated !== $value) {
+      $node->get('field_narrative_taxonomy')->value = $updated;
+      $node->save();
+    }
+
+    $sandbox['current'] = $row->entity_id;
+  }
+
+  \Drupal::messenger()->addMessage($sandbox['current'] . ' node last processed.');
+
+  $sandbox['#finished'] = ($sandbox['current'] == $start_value);
+}
