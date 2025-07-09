@@ -15,8 +15,8 @@
         var backlinks = document.getElementsByClassName('event_backlink');
         // set the value of the form element to the browser language
         for (let i = 0; i < backlinks.length; i++) {
-          backlinks[i].href = urlParams.get('returnTo');
           backlinks[i].removeAttribute('hidden');
+          backlinks[i].getElementsByTagName('a')[0].href = urlParams.get('returnTo');
         }
       }
     }

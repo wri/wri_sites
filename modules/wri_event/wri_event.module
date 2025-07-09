@@ -88,10 +88,17 @@ function wri_event_node_view(array &$build, EntityInterface $entity, EntityViewD
   if ($entity->bundle() == 'event') {
     if ($entity->type->entity->getThirdPartySetting('wri_event', 'enable_backlink')) {
       $build["#attached"]["library"][] = "wri_event/backlink";
-      $build['#backlink_enabled'] = TRUE;
+    }
+  }
+}
+
+function wri_event_preprocess_page(&$variables) {
+  if (isset($variables['node']) && $variables['node']->bundle() == 'event') {
+    if ($variables['node']->type->entity->getThirdPartySetting('wri_event', 'enable_backlink')) {
+      $variables['backlink_enabled'] = TRUE;
     }
     else {
-      $build['#backlink_enabled'] = FALSE;
+      $variables['backlink_enabled'] = FALSE;
     }
   }
 }
