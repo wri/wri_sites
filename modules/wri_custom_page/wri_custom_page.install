@@ -13,3 +13,12 @@ function wri_custom_page_update_10400() {
     'third_party_settings',
   ], 'wri_custom_page', 'install');
 }
+
+/**
+ * Update layout builder options.
+ */
+function wri_custom_page_update_10401() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.custom_page.full', [
+    'third_party_settings#layout_builder_restrictions#entity_view_mode_restriction#allowed_layouts',
+  ], 'wri_custom_page', 'install');
+}

@@ -48,7 +48,18 @@ third_party_settings:
       - Webform
       - core
     entity_view_mode_restriction:
-      allowed_layouts: {  }
+      allowed_layouts:
+        - layout_onecol
+        - layout_twocol_section
+        - layout_threecol_section
+        - layout_fourcol_section
+        - layout_hero-and-content
+        - layout_simple-page
+        - layout_hero-5050-and-content
+        - layout_unique_feature
+        - 'single_file_component_layout:wri_page_hero'
+        - 'single_file_component_layout:wri_page_main_content'
+        - 'single_file_component_layout:wri_superfeatured'
       denylisted_blocks: {  }
       allowlisted_blocks:
         'Chaos Tools':
