@@ -337,3 +337,23 @@
     margin: 0;
   }
 }
+
+
+// Adding menu css
+
+@media (min-width: 48rem) {
+  .region-primary-nav,
+  header:not(.pfp-header).sticky .region-primary-nav {
+    flex-direction: column;
+    align-items: start;
+    row-gap: .5rem;
+  }
+
+  .region-secondary-nav {
+    order: 4;
+  }
+
+  .region-secondary-nav nav#block-secondarynavigation {
+    display: block;
+  }
+}
