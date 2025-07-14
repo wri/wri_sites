@@ -189,16 +189,6 @@ function wri_node_update_10402() {
 
 /**
  * Migrate field_twitter_account values into a social_media_sites paragraph.
- */
-function wri_node_update_10403() {
-  // Define the content types to process.
-  $content_types = ['project_detail'];
-
-  wri_update_twitter_replacement($content_types, 'field_social_sharing_links');
-}
-
-/**
- * Migrate field_twitter_account values into a social_media_sites paragraph.
  *
  * @param array $content_types
  *   The content types to process.
@@ -346,4 +336,14 @@ function wri_node_update_10403() {
   \Drupal::service('distro_helper.updates')->updateConfig('wri_node.settings', [
     'narrative_taxonomy_org_name',
   ], 'wri_node', 'install');
+}
+
+/**
+ * Migrate field_twitter_account values into a social_media_sites paragraph.
+ */
+function wri_node_update_10404() {
+  // Define the content types to process.
+  $content_types = ['project_detail'];
+
+  wri_update_twitter_replacement($content_types, 'field_social_sharing_links');
 }
