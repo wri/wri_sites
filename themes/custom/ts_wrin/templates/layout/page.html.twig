@@ -14,16 +14,9 @@
     {% else %}
     <header>
       <div class="container header-wrapper">
-        <div class="header-left">
         {% if page.primary_nav %}
           {{ page.primary_nav }}
         {% endif %}
-        {% if backlink_enabled %}
-          <div class="event_backlink" hidden>
-            <a class="button small" href="#">{{ 'Back to Events'|t }}</a>
-          </div>
-        {% endif %}
-        </div>
         <div class="header-right {{ menu_color }}">
           {% if page.secondary_nav %}
             {{ page.secondary_nav }}
@@ -46,6 +39,12 @@
           {% endif %}
         </div>
       </div>
+      {% if backlink_enabled %}
+        <div class="container event_backlink" hidden>
+          <a class="backlink backlink-color" href="#">< {{ 'Back to Events'|t }}</a>
+          <a class="backlink backlink-white" href="#" hidden>< {{ 'Back to Events'|t }}</a>
+        </div>
+      {% endif %}
     </header>
     {% endif %}
 
