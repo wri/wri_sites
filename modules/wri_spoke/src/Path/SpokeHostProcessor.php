@@ -16,7 +16,7 @@ class SpokeHostProcessor implements OutboundPathProcessorInterface {
   /**
    * {@inheritdoc}
    */
-  public function processOutbound($path, &$options = [], Request $request = NULL, ?BubbleableMetadata $bubbleable_metadata = NULL) {
+  public function processOutbound($path, &$options = [], ?Request $request = NULL, ?BubbleableMetadata $bubbleable_metadata = NULL) {
     try {
       $url = Url::fromUri('internal:' . $path);
     }
