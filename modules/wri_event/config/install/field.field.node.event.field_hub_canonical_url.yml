@@ -11,7 +11,7 @@ bundle: event
 label: 'Hub URL'
 description: 'The home URL of this Event, if it was imported from the Hub.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }
