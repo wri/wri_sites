@@ -88,18 +88,20 @@
     @include hocus() {
       text-decoration: underline;
     }
-    @include mq($ph) {
-      display: none;
-    }
     @include mq($lg) {
       margin-bottom: 0;
+    }
+  }
+  .mobile-social {
+    @include mq($lg) {
+      display: none;
     }
   }
   .desktop-social,
   .layout__region--sidebar {
     display: none;
 
-    @include mq($ph) {
+    @include mq($lg) {
       display: block;
     }
   }
@@ -131,7 +133,6 @@
       @include mq($ph) {
         @include column-width(1, 5);
         align-self: start;
-        grid-row: 2;
         order: 2;
       }
       @include mq($lg) {
