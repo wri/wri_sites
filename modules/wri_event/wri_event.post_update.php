@@ -60,3 +60,11 @@ function wri_event_post_update_calendar_description(&$sandbox) {
     $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
   }
 }
+
+/**
+ * Add fields to facilitate event sharing from the hub.
+ */
+function wri_event_post_update_event_sharing_fields() {
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_hub_canonical_url', 'wri_event', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.event.field_hub_canonical_url', 'wri_event', 'install', 'TRUE');
+}
