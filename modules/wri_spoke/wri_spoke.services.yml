@@ -1,0 +1,6 @@
+services:
+  wri_spoke.path_outbound_host_processor:
+    class: Drupal\wri_spoke\Path\SpokeHostProcessor
+    arguments: ['@config.factory']
+    tags:
+      - { name: path_processor_outbound, priority: 3000 }
