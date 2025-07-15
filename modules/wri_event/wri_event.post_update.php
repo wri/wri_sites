@@ -67,5 +67,11 @@ function wri_event_post_update_calendar_description(&$sandbox) {
 function wri_event_post_update_event_sharing_fields() {
   \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_hub_canonical_url', 'wri_event', 'install', 'TRUE');
   \Drupal::service('distro_helper.updates')->installConfig('field.field.node.event.field_hub_canonical_url', 'wri_event', 'install', 'TRUE');
-  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.event.default',['content#field_hub_canonical_url', 'third_party_settings#field_group#group_publishing'], 'wri_event', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->updateConfig(
+    'core.entity_form_display.node.event.default',
+    [
+      'content#field_hub_canonical_url',
+      'third_party_settings#field_group#group_publishing',
+    ],
+    'wri_event', 'install', 'TRUE');
 }

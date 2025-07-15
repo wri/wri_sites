@@ -2,33 +2,23 @@
 
 namespace Drupal\wri_spoke\Path;
 
-use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\PathProcessor\OutboundPathProcessorInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Overrides canonical URLs for events to point to the hub.
+ */
 class SpokeHostProcessor implements OutboundPathProcessorInterface {
-
-  /**
-   * @var $configFactory ConfigFactoryInterface
-   */
-  protected $configFactory;
-
-  /**
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   */
-  public function __construct(ConfigFactoryInterface $config_factory) {
-    $this->configFactory = $config_factory;
-  }
 
   /**
    * {@inheritdoc}
    */
-  public function processOutbound($path, &$options = array(), Request $request = NULL, BubbleableMetadata $bubbleable_metadata = NULL) {
+  public function processOutbound($path, &$options = [], Request $request = NULL, ?BubbleableMetadata $bubbleable_metadata = NULL) {
     try {
-      $url = Url::fromUri('internal:' .  $path);
+      $url = Url::fromUri('internal:' . $path);
     }
     catch (\Throwable $throwable) {
       return $path;
@@ -62,4 +52,5 @@ class SpokeHostProcessor implements OutboundPathProcessorInterface {
     }
     return $path;
   }
+
 }
