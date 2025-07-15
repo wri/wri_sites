@@ -1,8 +1,0 @@
-name: 'WRI Event Client'
-type: module
-description: 'Import Events from the Hub server'
-core_version_requirement: '>=9.5'
-package: WRI
-dependencies:
-  - entity_share_client
-  - wri_event

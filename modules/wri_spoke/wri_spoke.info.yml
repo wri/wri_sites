@@ -1,0 +1,8 @@
+name: 'WRI Spoke'
+type: module
+description: 'Custom code for making use of the Hub as a client.'
+package: WRI
+core_version_requirement: ^10 || ^11
+dependencies:
+  - entity_share_client:entity_share_client
+  - wri_event:wri_event
