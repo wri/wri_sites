@@ -2,6 +2,7 @@
 
 namespace Drupal\wri_spoke\Path;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\PathProcessor\OutboundPathProcessorInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Url;
@@ -12,6 +13,20 @@ use Symfony\Component\HttpFoundation\Request;
  * Overrides canonical URLs for events to point to the hub.
  */
 class SpokeHostProcessor implements OutboundPathProcessorInterface {
+
+  /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   */
+  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
+    $this->entityTypeManager = $entity_type_manager;
+  }
 
   /**
    * {@inheritdoc}
@@ -39,7 +54,7 @@ class SpokeHostProcessor implements OutboundPathProcessorInterface {
 
     $node = $params['node'];
     if (!($node instanceof Node) && is_numeric($node)) {
-      $node = Node::load($node);
+      $node = $this->entityTypeManager->getStorage('node')->load($node);
     }
     if (!($node instanceof Node)) {
       return $path;
