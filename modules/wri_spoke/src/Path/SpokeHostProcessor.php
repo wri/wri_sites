@@ -16,6 +16,9 @@ class SpokeHostProcessor implements OutboundPathProcessorInterface {
    */
   protected $configFactory;
 
+  /**
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   */
   public function __construct(ConfigFactoryInterface $config_factory) {
     $this->configFactory = $config_factory;
   }
@@ -51,9 +54,11 @@ class SpokeHostProcessor implements OutboundPathProcessorInterface {
     if (!($node instanceof Node)) {
       return $path;
     }
-    if ($node->bundle() == 'event') {
+    if ($node->bundle() == 'event' && $node->field_hub_canonical_url->value) {
       $options['absolute'] = TRUE;
-      $options['base_url'] = $request->getScheme() . '://web.wri-hub.localhost';
+      $hub_url = parse_url($node->field_hub_canonical_url->value);
+      $options['base_url'] = $hub_url['scheme'] . "://" . $hub_url['host'];
+      $path = $hub_url['path'];
     }
     return $path;
   }
