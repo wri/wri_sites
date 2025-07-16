@@ -348,19 +348,19 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
         switch ($name) {
           case 'link':
             $replacements[$original] = wri_common_link_or_text($data['taxonomy_term']);
-        case 'non_orphan':
+          case 'non_orphan':
             if ($term->parent->target_id) {
-                $replacements[$original] = $term->id();
+              $replacements[$original] = $term->id();
             }
             break;
 
-        case 'term_parent_or_self':
+          case 'term_parent_or_self':
             if ($term->parent->target_id == '0') {
-                $replacements[$original] = $term->getName() ?? '';
+              $replacements[$original] = $term->getName() ?? '';
             }
             elseif ($parent_id = $term->parent->target_id) {
-                $parent_term = Term::load($parent_id);
-                $replacements[$original] = $parent_term->getName() ?? '';
+              $parent_term = Term::load($parent_id);
+              $replacements[$original] = $parent_term->getName() ?? '';
             }
             break;
         }
