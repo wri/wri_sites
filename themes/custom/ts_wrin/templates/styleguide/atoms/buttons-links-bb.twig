@@ -16,7 +16,8 @@
   "White Colorway": 'colorway-white',
   "Blue 500 Colorway": 'colorway-blue-500',
   "Neutral 900 Colorway": 'colorway-neutral-900',
-  "Green 500 Colorway": 'colorway-green-500'
+  "Green 500 Colorway": 'colorway-green-500',
+  "Gold 500 Colorway": 'colorway-gold-500'
 }
 %}
 
@@ -94,10 +95,17 @@
       </div>
     {% endfor %}
     {% include '@ts_wrin/design-system/atoms/btns/btn-text-link.html.twig' with {
-      link: { title: "Inline text link treatment", url: "#" },
-      add_classes: "block mt-4"
+      link: { title: "inline text-link", url: "#" },
+      add_classes: "mx-2"
     }
     %}
+    {% include '@ts_wrin/design-system/atoms/btns/btn-arrow.html.twig' with {
+      link: { title: "btn-arrow", url: "#" },
+      add_classes: "block ml-4"
+    } %}
+    <div class="inline-block hocus-text-underline ml-4">
+      <a href=" " class="color-primary">hocus-text-underline</a>
+    </div>
   </div>
 {% endfor %}
 </div>

@@ -30,8 +30,6 @@
 {% set icon_only = icon_only ?? false %}
 
 {# Combines classes, adds them to the btn template #}
-{% set btn_class = "text-link " %}
-{# Final set of classes, including any passed in #}
-{% set link_classes = add_classes ? btn_class ~ ' ' ~ add_classes : btn_class %}
+{% set btn_classes = "text-link btn--" ~ size ~ ' ' ~ add_classes %}
 
 {% extends '@ts_wrin/design-system/atoms/btns/btn-base.html.twig' %}

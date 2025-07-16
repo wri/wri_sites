@@ -29,6 +29,16 @@
   --primary: var(--color-neutral-900);
   --secondary: var(--color-neutral-600);
   --action: var(--color-white);
+
+   /* BTN SOLID */
+    --btn-solid-bg: var(--color-neutral-900);
+    --btn-solid-text: var(--color-white);
+    --btn-solid-bg-hover: var(--color-gold-300);
+    --btn-solid-text-hover: var(--color-neutral-900);
+    --btn-solid-svg: var(--color-white);
+    --btn-solid-svg-hover: var(--color-neutral-900);
+    /* BTN OUTLINE */
+    --btn-outline-border: var(--color-gold-100);
 }
 .colorway-neutral-200 {
   --primary: var(--color-neutral-900);
