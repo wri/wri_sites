@@ -72,3 +72,21 @@ function wri_search_update_10002() {
     'display#default#display_options#sorts#created_1',
   ], 'wri_search');
 }
+
+/**
+ * Update views cache settings.
+ */
+function wri_search_update_10003() {
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.project_experts', [
+    'display#default#display_options#cache#type',
+  ], 'wri_search');
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.feeds_feed', [
+    'display#default#display_options#cache#type',
+  ], 'wri_search');
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.metatags', [
+    'display#default#display_options#cache#type',
+  ], 'wri_search');
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.tmp_view', [
+    'display#default#display_options#cache#type',
+  ], 'wri_search');
+}
