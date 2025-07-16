@@ -5,17 +5,74 @@
  * The wri_spoke module.
  */
 
-use Drupal\entity_share_client\ImportContext;
+use Drupal\Component\Serialization\Json;
+use Drupal\Component\Utility\UrlHelper;
+use Drupal\entity_share_client\Service\StateInformationInterface;
 
 /**
  * Implements hook_cron().
  */
 function wri_spoke_cron() {
-  $settings = \Drupal::config('wri_spoke.cron.settings');
-  $remote_id = $settings->get('remote');
-  $channel_id = $settings->get('channel');
+  $remote_manager = \Drupal::service('entity_share_client.remote_manager');
+  $settings = \Drupal::service('config.factory')->getEditable('wri_spoke.cron.settings');
+
   $import_config_id = 'hub_events';
-  $import_context = new ImportContext($remote_id, $channel_id, $import_config_id);
-  $import_context->setRemoteChannelCount(1);
-  \Drupal::service('entity_share_client.import_service')->importService->importChannel($import_context);
+  $channel_id = $settings->get('channel');
+  $remote_id = $settings->get('remote');
+
+  $remote = \Drupal::entityTypeManager()->getStorage('remote')->load($remote_id);
+  $channels_info = $remote_manager->getChannelsInfos($remote, [
+    'rethrow' => TRUE,
+  ]);
+  if (isset($channels_info[$channel_id])) {
+    $sync_from_time = $settings->get('changed_since') ?? 0;
+    $time = new DateTime($sync_from_time);
+    $parsed_url = UrlHelper::parse($channels_info[$channel_id]['url']);
+    $parsed_url['query']['filter'] = [
+      'changed' => [
+        'path' => 'changed',
+        'operator' => '>',
+        'value' => $time->getTimestamp(),
+      ],
+    ];
+    $parsed_url['query']['sort'] = [
+      'changed' => [
+        'path' => 'changed',
+        'direction' => 'ASC',
+      ],
+    ];
+    $prepared_url = $parsed_url['path'] . '?' . UrlHelper::buildQuery($parsed_url['query']);
+
+    try {
+      $response = $remote_manager->jsonApiRequest($remote, 'GET', $prepared_url, [
+        'rethrow' => TRUE,
+      ]);
+    }
+    catch (\Throwable $exception) {
+      \Drupal::logger('wri_spoke')->error('Unable to retrieve Events from the Hub.');
+      return;
+    }
+    $json = Json::decode((string) $response->getBody());
+    $data = array_slice($json['data'], 0, $settings->get('limit') ?? 20);
+
+    $state_information = \Drupal::service('entity_share_client.state_information');
+    $entities_to_sync = [];
+    $states_to_sync = [
+      StateInformationInterface::INFO_ID_NEW,
+      StateInformationInterface::INFO_ID_CHANGED,
+    ];
+    foreach ($data as $item) {
+      $sync_state = $state_information->getStatusInfo($item);
+      $sync_from_time = $item['attributes']['changed'];
+      if (in_array($sync_state['info_id'], $states_to_sync)) {
+        $entities_to_sync[] = $item['id'];
+      }
+    }
+    /** @var \Drupal\entity_share_async\Service\QueueHelperInterface $queue_helper */
+    $queue_helper = \Drupal::service('entity_share_async.queue_helper');
+    $queue_helper->enqueue($remote_id, $channel_id, $import_config_id, $entities_to_sync);
+    $settings->set('changed_since', $sync_from_time);
+    $settings->save();
+  }
+
 }
