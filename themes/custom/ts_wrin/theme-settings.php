@@ -18,6 +18,13 @@ function ts_wrin_form_system_theme_settings_alter(&$form, FormStateInterface $fo
   $form["logo"]["settings"]["logo_upload"]["#upload_validators"] = [
     'file_validate_extensions' => ['jpg jpeg gif png svg'],
   ];
+
+  $form["logo"]["settings"]['logo_link'] = [
+    '#type' => 'url',
+    '#title' => t('Link logo to an external URL'),
+    '#default_value' => theme_get_setting('logo_link', 'ts_wrin'),
+    '#description' => t('If you want the logo to link to an external site, like wri.org, enter it here. If left empty, the logo will link to the homepage of this site.'),
+  ];
   // Set up the white logo form.
   $form['white_logo'] = [
     '#type' => 'details',
