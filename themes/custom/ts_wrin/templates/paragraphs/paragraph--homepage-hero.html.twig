@@ -17,12 +17,14 @@
   {% block content %}
     <div{{ attributes.addClass(classes) }}>
       <div class="hero-text-area content-side-padding">
+        {% set headingText %}
+          {{ content.field_hero_title }}
+        {% endset %}
         {{ content.field_hero_intro }}
-        {{ content.field_hero_title }}
+        <h1 class="homepage-hero-heading heading-1 hocus-primary mt-0 mb-xs">{{ headingText|striptags('<a>')|raw }}</h1>
         {{ content.field_hero_image }}
         {{ content.field_featured_items }}
       </div>
-
       {{ content.field_hero_image }}
     </div>
     {{ content.field_featured_statement }}
