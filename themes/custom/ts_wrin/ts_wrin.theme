@@ -21,6 +21,13 @@ function ts_wrin_preprocess(array &$variables) {
     $variables['footer_logo'] = \Drupal::service('file_url_generator')->generateString($logo_path);
   }
   $variables['ts_wrin_path'] = \Drupal::service('extension.list.theme')->getPath('ts_wrin');
+  $logo_link = theme_get_setting('logo_link');
+  if ($logo_link) {
+    $variables['logo_link'] = $logo_link;
+  }
+  else {
+    $variables['logo_link'] = '/';
+  }
 }
 
 /**
@@ -256,21 +263,6 @@ function ts_wrin_preprocess_block(array &$variables) {
   }
 }
 
-/**
- * Implements hook_preprocess_block__ts_wrin_branding().
- *
- * Sets the logo link for the branding block.
- */
-function ts_wrin_preprocess_block__ts_wrin_branding(array &$variables) {
-  // If the block is a branding block, set the path.
-    $logo_link = theme_get_setting('logo_link');
-    if ($logo_link) {
-      $variables['logo_link'] = $logo_link;
-    }
-    else {
-      $variables['logo_link'] = '/';
-    }
-}
 /**
  * Implements hook_theme_suggestions_block_alter().
  */
