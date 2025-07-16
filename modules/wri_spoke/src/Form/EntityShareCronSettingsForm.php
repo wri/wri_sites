@@ -19,6 +19,22 @@ class EntityShareCronSettingsForm extends ConfigFormBase {
   const SETTINGS = 'wri_spoke.cron.settings';
 
   /**
+   * The Entity type manager service.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    $instance = new static($container->get('config.factory'));
+    $instance->entityTypeManager = $container->get('entity_type.manager');
+    return $instance;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function getFormId() {
@@ -40,6 +56,11 @@ class EntityShareCronSettingsForm extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form = parent::buildForm($form, $form_state);
     $settings = $this->config(self::SETTINGS)->get();
+    $remotes = $this->entityTypeManager->getStorage('remote')->loadMultiple();
+    $options = [];
+    foreach ($remotes as $remote) {
+      $remote_options[$remote->id()] = $remote->label();
+    }
     $form['remote'] = [
       '#type' => 'select',
       '#options' => [
@@ -62,6 +83,17 @@ class EntityShareCronSettingsForm extends ConfigFormBase {
       ],
       '#title' => $this->t('Channel'),
       '#default_value' => $settings['channel'] ?? '',
+    ];
+    $form['limit'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Records per Cron run'),
+      '#default_value' => $settings['limit'] ?? 20,
+    ];
+    $form['changed_since'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Last synced change time.'),
+      '#description' => $this->t('Do not edit this unless you know what you are doing. Setting it to 0 will cause event synchronization to go back to the oldest events on the Hub and work forward slowly.'),
+      '#default_value' => $settings['changed_since'] ?? 0,
     ];
 
     return $form;
