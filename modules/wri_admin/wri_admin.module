@@ -160,7 +160,7 @@ function wri_admin_entity_presave(EntityInterface $entity) {
         // Transliterate and replace special characters.
         $transliterated_name = $transliteration->transliterate($media_name, 'en');
 
-        // Convert to lowercase and replace spaces/special characters with dashes.
+        // Convert to lowercase and replace spaces/special chars with dashes.
         $sanitized_name = strtolower(preg_replace('/[^a-zA-Z0-9]+/', '-', trim($transliterated_name)));
 
         // Ensure the filename doesn't end with a dash.
