@@ -11,3 +11,4 @@ favicon:
 white_logo:
   use_default: 0
   path: profiles/contrib/wri_sites/themes/custom/ts_wrin/img/svgs/nav_logo_white.svg
+logo_link: ''
