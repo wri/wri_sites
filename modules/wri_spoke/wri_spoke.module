@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * The wri_spoke module.
+ */
+
+use Drupal\entity_share_client\ImportContext;
+
+/**
+ * Implements hook_cron().
+ */
+function wri_spoke_cron() {
+  $settings = \Drupal::config('wri_spoke.cron.settings');
+  $remote_id = $settings->get('remote');
+  $channel_id = $settings->get('channel');
+  $import_config_id = 'hub_events';
+  $import_context = new ImportContext($remote_id, $channel_id, $import_config_id);
+  $import_context->setRemoteChannelCount(1);
+  \Drupal::service('entity_share_client.import_service')->importService->importChannel($import_context);
+}
