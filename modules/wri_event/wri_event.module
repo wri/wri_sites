@@ -95,13 +95,13 @@ function wri_event_node_view(array &$build, EntityInterface $entity, EntityViewD
 /**
  * Implements hook_preprocess_HOOK().
  */
-function wri_event_preprocess_page(&$variables) {
-  if (isset($variables['node']) && $variables['node']->bundle() == 'event') {
-    if ($variables['node']->type->entity->getThirdPartySetting('wri_event', 'enable_backlink')) {
-      $variables['backlink_enabled'] = TRUE;
+function wri_event_preprocess_layout__event(&$variables) {
+  if (isset($variables['content']['#node']) && $variables['content']['#node']->bundle() == 'event') {
+    if ($variables['content']['#node']->type->entity->getThirdPartySetting('wri_event', 'enable_backlink')) {
+      $variables['content']['#backlink_enabled'] = TRUE;
     }
     else {
-      $variables['backlink_enabled'] = FALSE;
+      $variables['content']['#backlink_enabled'] = FALSE;
     }
   }
 }

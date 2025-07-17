@@ -20,6 +20,18 @@
         <div class="hero__text display-type-robust">
           <div class="grid">
             <div class="hero__text--inner padding-vertical">
+              {% if content['#backlink_enabled'] %}
+                <div class="event_backlink" hidden>
+                  <nav class="breadcrumb" role="navigation" aria-labelledby="system-breadcrumb">
+                    <ol>
+                      <li>
+                        <a class="backlink backlink-color" href="#">{{ 'Back to Events'|t }}</a>
+                        <a class="backlink backlink-white" href="#" hidden>{{ 'Back to Events'|t }}</a>
+                      </li>
+                    </ol>
+                  </nav>
+                </div>
+              {% endif %}
               <div class="margin-top-xl"></div>
               <div class="event__type">
                 {{ content.hero.field_type }}
@@ -39,6 +51,18 @@
         <div class="hero__text display-type-simple">
           <div class="grid">
             <div class="hero__text--inner padding-vertical">
+              {% if content['#backlink_enabled'] %}
+                <div class="event_backlink" hidden>
+                  <nav class="breadcrumb" role="navigation" aria-labelledby="system-breadcrumb">
+                    <ol>
+                      <li>
+                        <a class="backlink backlink-color" href="#">{{ 'Back to Events'|t }}</a>
+                        <a class="backlink backlink-white" href="#" hidden>{{ 'Back to Events'|t }}</a>
+                      </li>
+                    </ol>
+                  </nav>
+                </div>
+              {% endif %}
               <div class="event__type has-black-background-color has-white-color">
                 {{ content.hero.field_type }}
               </div>
