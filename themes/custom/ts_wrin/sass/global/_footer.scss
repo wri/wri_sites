@@ -185,10 +185,11 @@
     flex-direction: column;
 
     .menu--footer-additional {
-      order: 1;
+      order: 2;
+      margin-top: var(--spacer-4);
     }
     .menu--footer-offices {
-      order: 2;
+      order: 1;
     }
     .block-address-block {
       order: 3;
@@ -211,24 +212,8 @@
       nav {
         flex-basis: 50%;
       }
-
-      .menu--footer-offices {
-        order: 1;
-      }
-      .block-address-block {
-        order: 3;
-      }
       .menu--footer-additional {
-        order: 2;
-      }
-      .menu--social-menu {
-        order: 4;
-      }
-      .block-copyright-block {
-        order: 5;
-      }
-      .menu--account {
-        order: 6;
+        margin-top: 0;
       }
     }
 
@@ -240,7 +225,6 @@
         flex-basis: 100%;
         text-align: right;
       }
-
       .menu--account ul.menu {
         text-align: right;
       }

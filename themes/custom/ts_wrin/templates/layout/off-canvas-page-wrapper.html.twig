@@ -1,0 +1,11 @@
+{#
+/**
+ * @file
+ * Theme override for a page wrapper, changing the element from a div to a main.
+ */
+#}
+{% if children %}
+  <main class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
+    {{ children }}
+  </main>
+{% endif %}
