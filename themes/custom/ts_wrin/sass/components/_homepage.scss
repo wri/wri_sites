@@ -63,32 +63,16 @@
   margin-top: 0;
 }
 
-.text-formatted.field--name-field-hero-title p {
-  @include font($acumin-semi-cond, "bold", "normal");
-  @include font-line-height(48, 52);
+.homepage-hero-heading {
   box-sizing: border-box;
   letter-spacing: -1.23px;
-  margin: 0;
-  margin-bottom: $space-sm;
   max-width: 100%;
-
   @include mq($lg) {
-    @include font-line-height(74, 80);
     margin-bottom: $space-md;
     max-width: 90%;
   }
-
   @include mq($xl) {
     max-width: 100%;
-  }
-
-  a {
-    background: none;
-    text-decoration: none;
-    transition: color $transition-defaults;
-    @include hocus {
-      background: none;
-    }
   }
 }
 
