@@ -66,11 +66,9 @@ class SpokeHostProcessor implements OutboundPathProcessorInterface {
       $options['absolute'] = TRUE;
       $hub_url = parse_url($node->field_hub_canonical_url->value);
       $options['base_url'] = $hub_url['scheme'] . "://" . $hub_url['host'];
-      $options['query']['returnTo'] = Url::fromRoute(
-        '<current>',
-        [],
-        ['absolute' => TRUE]
-      )->toString();
+      if ($request) {
+        $options['query']['returnTo'] = $request->getScheme() . "://" . $request->getHttpHost() . $request->getRequestUri();
+      }
       $path = $hub_url['path'];
     }
     return $path;
