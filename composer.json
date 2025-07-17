@@ -57,7 +57,9 @@
                 "Drupal\\Component\\Plugin\\Exception\\PluginNotFoundException: The \"block.settings.<block_name>\" plugin does not exist https://www.drupal.org/project/layout_builder_st/issues/3463435": "https://www.drupal.org/files/issues/2024-07-23/layout_builder_st-plugin-not-found-3463435-3.patch"
             },
             "drupal/metatag": {
-                "Provide field formatter to output meta tags on-page, e.g. for use with Views (D9), https://www.drupal.org/project/metatag/issues/3027873": "https://www.drupal.org/files/issues/2023-07-23/metatag-field_formatter_for_views-3027873-27.patch"
+                "Provide field formatter to output meta tags on-page, e.g. for use with Views (D9), https://www.drupal.org/project/metatag/issues/3027873": "https://www.drupal.org/files/issues/2023-07-23/metatag-field_formatter_for_views-3027873-27.patch",
+                "Description sub_property for Organization / Person: https://www.drupal.org/project/schema_metatag/issues/3187882": "https://www.drupal.org/files/issues/2021-01-04/description-sub-property-for-organization-or-person-3187882-4.patch"
+
             },
             "drupal/oembed_lazyload": {
                 "Use strict should be inside function https://www.drupal.org/project/oembed_lazyload/issues/3475956#comment-16067120": "https://www.drupal.org/files/issues/2024-09-21/oembed_lazyload_use_strict-3475956.patch"
