@@ -142,6 +142,15 @@
       }
     }
   }
+
+  .media--view-mode-full-width {
+    @include mq($ph) {
+      margin-left: -65vw;
+    }
+    @include mq($lg) {
+      margin-left: -50vw;
+    }
+  }
 }
 
 .subpage {
