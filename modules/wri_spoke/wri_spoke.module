@@ -26,7 +26,7 @@ function wri_spoke_cron() {
   ]);
   if (isset($channels_info[$channel_id])) {
     $sync_from_time = $settings->get('changed_since') ?? 0;
-    $time = new DateTime($sync_from_time);
+    $time = $sync_from_time ? new DateTime($sync_from_time) : 0;
     $parsed_url = UrlHelper::parse($channels_info[$channel_id]['url']);
     $parsed_url['query']['filter'] = [
       'changed' => [
