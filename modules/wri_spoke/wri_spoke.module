@@ -26,13 +26,19 @@ function wri_spoke_cron() {
   ]);
   if (isset($channels_info[$channel_id])) {
     $sync_from_time = $settings->get('changed_since') ?? 0;
-    $time = $sync_from_time ? new DateTime($sync_from_time) : 0;
+    if ($sync_from_time) {
+      $time = new DateTime($sync_from_time);
+      $filter_time = $time->getTimestamp();
+    }
+    else {
+      $filter_time = 0;
+    }
     $parsed_url = UrlHelper::parse($channels_info[$channel_id]['url']);
     $parsed_url['query']['filter'] = [
       'changed' => [
         'path' => 'changed',
         'operator' => '>',
-        'value' => $time->getTimestamp(),
+        'value' => $filter_time,
       ],
     ];
     $parsed_url['query']['sort'] = [

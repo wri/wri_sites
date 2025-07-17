@@ -88,7 +88,7 @@ class EntityShareCronSettingsForm extends ConfigFormBase {
     ];
     $form['changed_since'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Last synced change time.'),
+      '#title' => $this->t('Last synced change time'),
       '#description' => $this->t('Do not edit this unless you know what you are doing. Setting it to 0 will cause event synchronization to go back to the oldest events on the Hub and work forward slowly.'),
       '#default_value' => $settings['changed_since'] ?? 0,
     ];
