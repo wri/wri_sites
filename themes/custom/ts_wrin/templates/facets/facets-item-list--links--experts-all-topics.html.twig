@@ -22,7 +22,7 @@
           <a class="title" href="/about/experts-staff">{{ title }}</a>
         {%- endif -%}
         {%- for item in items -%}
-          {{ item.value }}
+          <div class="facet-item">{{ item.value }}</div>
         {%- endfor -%}
       </div>
     {%- else -%}
