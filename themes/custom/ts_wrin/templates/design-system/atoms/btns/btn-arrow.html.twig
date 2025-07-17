@@ -1,0 +1,40 @@
+{# Arrow button
+ * A text button with an animated arrow right.
+
+  * Button OPTIONS (text and outline)
+  *   - size: 'sm', 'md' or 'lg
+
+  * ICON OPTION
+  *   - link_svg_name: 'download' (pass in svg name)
+  *   - svg_position: 'before' (default) or 'after'
+
+  HOW TO USE:
+  {% include 'btns/btn-arrow.twig' with {
+      link: {title: 'learn more', url: '/'},
+      size: 'sm'
+    }
+  %}
+#}
+
+{# Primary values #}
+{% set link = link %}
+{% set size = size ?: '' %}
+
+{# btn classes, colorway, svg name #}
+{% set add_classes = add_classes ?? '' %}
+{% set btn_classes = 'btn-arrow btn--' ~ size ~ ' ' ~ add_classes %}
+
+{#{% set properties = properties ?? [] %}#}
+{# Final set of classes #}
+{#{% set properties = properties|merge({ 'class': (btn_classes) }) %}#}
+
+{# btn classes, colorway, svg name #}
+{% set link_svg_name = link_svg_name ?? 'arrow-gold-sm' %}
+{% set svg_position = 'after' %}
+
+{# Adds icon classes if needed#}
+{% if link_svg_name %}
+  {% set link_svg_classes = ' inline-block ' %}
+{% endif %}
+
+{% extends '@ts_wrin/design-system/atoms/btns/btn-base.html.twig' %}

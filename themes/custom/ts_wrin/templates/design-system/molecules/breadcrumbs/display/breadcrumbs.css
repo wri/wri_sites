@@ -1,0 +1,11 @@
+/* Breadcrumbs CSS */
+
+.molecule--breadcrumbs a {
+	@apply underline underline-offset-[3px] decoration-[2px];
+	color: var(--primary);
+	transition: color 300ms ease-in-out;
+	&:hover,
+	&:focus {
+		color: var(--action);
+	}
+}

@@ -1,0 +1,31 @@
+{#{% set example_options = [#}
+{#  { value: 'test', label: 'Test' },#}
+{#  { value: 'test', label: 'Test 2' },#}
+{#  { value: 'test', label: 'Test 3' },#}
+{#] %}#}
+
+{#<div class="my-3 flex flex-row gap-sm">#}
+{#  <div>#}
+{#    <h3 class="h5">Searchable Select</h3>#}
+{#    <p class="body-sm mb-xs">views/atoms/input--select.twig</p>#}
+{#    {% embed 'atoms/input--select.twig' with { select_label: 'Searchable Select', select_searchable:#}
+{#      true } %}#}
+{#      {% block options %}#}
+{#        {% for example_option in example_options %}#}
+{#          <option value="{{ example_option.value }}">{{ example_option.label }}</option>#}
+{#        {% endfor %}#}
+{#      {% endblock %}#}
+{#    {% endembed %}#}
+{#  </div>#}
+{#  <div>#}
+{#    <h3 class="h5">Select</h3>#}
+{#    <p class="body-sm mb-xs">views/atoms/input--select.twig</p>#}
+{#    {% embed 'atoms/input--select.twig' with { select_label: 'Standard Select' } %}#}
+{#      {% block options %}#}
+{#        {% for example_option in example_options %}#}
+{#          <option value="{{ example_option.value }}">{{ example_option.label }}</option>#}
+{#        {% endfor %}#}
+{#      {% endblock %}#}
+{#    {% endembed %}#}
+{#  </div>#}
+{#</div>#}

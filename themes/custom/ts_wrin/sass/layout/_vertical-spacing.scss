@@ -58,6 +58,103 @@
   @extend .margin-zero;
 }
 
+.margin-top-xl {
+  margin-top: 80px;
+
+  @include mq($md) {
+    margin-top: 84px;
+  }
+
+  @include mq($lg) {
+    margin-top: 102px;
+  }
+
+  @include mq($xl) {
+    margin-top: $space-xl;
+  }
+}
+
+.margin-top-xxl {
+  margin-top: 100px;
+
+  @include mq($md) {
+    margin-top: 108px;
+  }
+
+  @include mq($lg) {
+    margin-top: 130px;
+  }
+
+  @include mq($xl) {
+    margin-top: $space-xxl;
+  }
+}
+.margin-bottom-xl {
+  margin-bottom: 80px;
+
+  @include mq($md) {
+    margin-bottom: 84px;
+  }
+
+  @include mq($lg) {
+    margin-bottom: 102px;
+  }
+
+  @include mq($xl) {
+    margin-bottom: $space-xl;
+  }
+}
+
+.margin-bottom-xxl {
+  margin-bottom: 100px;
+
+  @include mq($md) {
+    margin-bottom: 108px;
+  }
+
+  @include mq($lg) {
+    margin-bottom: 130px;
+  }
+
+  @include mq($xl) {
+    margin-bottom: $space-xxl;
+  }
+}
+
+.margin-right-xl {
+  margin-right: 80px;
+
+  @include mq($md) {
+    margin-right: 84px;
+  }
+
+  @include mq($lg) {
+    margin-right: 102px;
+  }
+
+  @include mq($xl) {
+    margin-right: $space-xl;
+  }
+}
+
+.margin-right-xxl {
+  margin-right: 100px;
+
+  @include mq($md) {
+    margin-right: 108px;
+  }
+
+  @include mq($lg) {
+    margin-right: 130px;
+  }
+
+  @include mq($xl) {
+    margin-right: $space-xxl;
+  }
+}
+
+/* @TODO: below this point, find and replace instances of utilties with their tailwind equivalent (mostly listed inline)
+, then delete the utility class. */
 //Applies consistent padding
 //Use classes whenever possible
 .padding-top,
@@ -93,58 +190,25 @@ p.margin-bottom-zero,
   margin-bottom: 0;
 }
 
-.my-0 {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
 // Top margin
-.margin-top-xs {
-  margin-top: $space-xs;
+.margin-top-xs,
+.mt-5 {
+  margin-top: var(--spacer-5);
 }
 
-.margin-top-sm {
-  margin-top: $space-sm;
+.margin-top-sm,
+.mt-7 {
+  margin-top: var(--spacer-7);
 }
 
-.margin-top-md {
-  margin-top: $space-md;
+.margin-top-md,
+.mt-11 {
+  margin-top: var(--spacer-11);
 }
 
-.margin-top-lg {
-  margin-top: $space-lg;
-}
-
-.margin-top-xl {
-  margin-top: 80px;
-
-  @include mq($md) {
-    margin-top: 84px;
-  }
-
-  @include mq($lg) {
-    margin-top: 102px;
-  }
-
-  @include mq($xl) {
-    margin-top: $space-xl;
-  }
-}
-
-.margin-top-xxl {
-  margin-top: 100px;
-
-  @include mq($md) {
-    margin-top: 108px;
-  }
-
-  @include mq($lg) {
-    margin-top: 130px;
-  }
-
-  @include mq($xl) {
-    margin-top: $space-xxl;
-  }
+.margin-top-lg,
+.mt-15 {
+  margin-top: var(--spacer-15);
 }
 
 // Bottom margin
@@ -153,95 +217,37 @@ p.margin-bottom-zero,
   margin-bottom: var(--spacer-5);
 }
 
-.margin-bottom-sm {
-  margin-bottom: $space-sm;
+.margin-bottom-sm,
+.mb-7 {
+  margin-bottom: var(--spacer-7);
 }
 
-.margin-bottom-md {
-  margin-bottom: $space-md;
+.margin-bottom-md,
+.mb-11 {
+  margin-bottom: var(--spacer-11);
 }
-
-.margin-bottom-lg {
-  margin-bottom: $space-lg;
-}
-
-.margin-bottom-xl {
-  margin-bottom: 80px;
-
-  @include mq($md) {
-    margin-bottom: 84px;
-  }
-
-  @include mq($lg) {
-    margin-bottom: 102px;
-  }
-
-  @include mq($xl) {
-    margin-bottom: $space-xl;
-  }
-}
-
-.margin-bottom-xxl {
-  margin-bottom: 100px;
-
-  @include mq($md) {
-    margin-bottom: 108px;
-  }
-
-  @include mq($lg) {
-    margin-bottom: 130px;
-  }
-
-  @include mq($xl) {
-    margin-bottom: $space-xxl;
-  }
+.margin-bottom-lg,
+.mb-15 {
+  margin-bottom: var(--spacer-15);
 }
 
 // Right margin
-.margin-right-xs {
-  margin-right: $space-xs;
+.margin-right-xs,
+.mr-5 {
+  margin-right: var(--spacer-5);
 }
 
-.margin-right-sm {
-  margin-right: $space-sm;
+.margin-right-sm,
+.mr-7 {
+  margin-right: var(--spacer-7);
 }
 
-.margin-right-md {
-  margin-right: $space-md;
+.margin-right-md,
+ .mr-11 {
+  margin-right: var(--spacer-11);
 }
 
-.margin-right-lg {
-  margin-right: $space-lg;
-}
-
-.margin-right-xl {
-  margin-right: 80px;
-
-  @include mq($md) {
-    margin-right: 84px;
-  }
-
-  @include mq($lg) {
-    margin-right: 102px;
-  }
-
-  @include mq($xl) {
-    margin-right: $space-xl;
-  }
-}
-
-.margin-right-xxl {
-  margin-right: 100px;
-
-  @include mq($md) {
-    margin-right: 108px;
-  }
-
-  @include mq($lg) {
-    margin-right: 130px;
-  }
-
-  @include mq($xl) {
-    margin-right: $space-xxl;
-  }
+.margin-right-lg,
+.mr-15 {
+  margin-right: var(--spacer-15);
 }

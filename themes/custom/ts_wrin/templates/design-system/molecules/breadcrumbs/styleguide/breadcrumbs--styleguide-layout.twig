@@ -1,0 +1,8 @@
+{# Breadcrumbs: style guide
+ *
+#}
+{% set link1 = "<a href='/'>Linked top</a>" %}
+{% set link2 = "<a href='/'>Linked parent</a>" %}
+{% set breadcrumbs = [ link1, link2 ] %}
+
+{% include '@ts_wrin/design-system/molecules/breadcrumbs/display/breadcrumbs--display.twig' %}

@@ -1,0 +1,16 @@
+{#
+/**
+ * @file
+ * SVG Icon Embed
+ *
+ * Available variables:
+ * - svg_name: Any valid SVG name located in icon_path
+ *
+ * Sample Include:
+ *  {% include '@ts_wrin/design-system/atoms/svg-icon-embed.twig' with {
+ *    svg_name: 'download',
+ *  } only %}
+ */
+#}
+
+{{ source('@ts_wrin/img/svgs/' ~ svg_name ~ '.svg', ignore_missing = true) }}

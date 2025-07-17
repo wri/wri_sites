@@ -1,0 +1,36 @@
+{# Solid button
+ * A color pill button.
+ * Variations styled below.
+  DEFAULT STYLES SET IN: tailwind-btns.json.
+ *
+ * SIZE OPTIONS:
+ *    - lg (default)
+ *    - md
+ *    - sm
+ *    - xs
+ *
+ * Icon only -- adds screen reader text
+ * - icon_only (boolean)
+
+  HOW TO USE:
+  btn-solid md:
+  {% include 'btns/btn-solid.twig' with {
+      link: {title: 'learn more', url: '/'}
+      size: 'md',
+    }
+  %}
+#}
+
+{# Primary values #}
+{% set link = link %}
+{% set size = size ?: 'lg' %}
+
+{# btn classes, colorway, svg name #}
+{% set add_classes = add_classes ?? '' %}
+{% set btn_classes = "btn-solid btn--" ~ size ~ ' ' ~ add_classes %}
+
+{#{% set properties = properties ?? [] %}#}
+{# Final set of classes #}
+{#{% set properties = properties|merge({ 'class': (btn_classes) }) %}#}
+
+{% extends '@ts_wrin/design-system/atoms/btns/btn-base.html.twig' %}

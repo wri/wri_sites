@@ -1,0 +1,78 @@
+{# Spacer Visual#}
+{# * Bars indicate spacer sizes.#}
+
+
+{% set spacing_values = [
+  {
+    "name":"40",
+    "rem":"10"
+  },
+  {
+    "name":"30",
+    "rem":"7.5"
+  },
+  {
+    "name":"25",
+    "rem":"6.25"
+  },
+  {
+    "name":"20",
+    "rem":"5"
+  },
+  {
+    "name":"15",
+    "rem":"3.75"
+  },
+  {
+    "name":"12",
+    "rem":"3"
+  },
+  {
+    "name":"11",
+    "rem":"2.8125"
+  },
+  {
+    "name":"10",
+    "rem":"2.5"
+  },
+  {
+    "name":"7",
+    "rem":"1.75"
+  },
+  {
+    "name":"6",
+    "rem":"1.5"
+  },
+  {
+    "name":"5",
+    "rem":"1.25"
+  },
+  {
+    "name":"4",
+    "rem":"1"
+  },
+  {
+    "name":"3",
+    "rem":".75"
+  },
+  {
+    "name":"2",
+    "rem":".5"
+  },
+  {
+    "name":"1",
+    "rem":".25"
+  }
+] %}
+
+{% for value in spacing_values %}
+  <div>
+    <div class="bg-neutral-900 inline-block h-{{ value.name }} w-1/4"></div>
+    <p class="utility-sm inline-block my-0 ml-4 w-8"><strong>{{ value.name }}</strong></p>
+    <p class="body-sm inline-block ml-4 my-0 w-16">{{ value.rem }} rem</p>
+    <p class="body-sm inline-block my-0 ml-4">({{ value.rem * 16 }} px)</p>
+  </div>
+{% endfor %}
+
+{# DEPRECATED SPACING VARIABLES #}
+{#{% include '@ts_wrin/styleguide/_elements/block-level-spacing.html.twig' %}#}

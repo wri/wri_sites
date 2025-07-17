@@ -1,0 +1,17 @@
+{#
+/**
+* H2 section title on /style-guide.
+*
+* Available variables:
+* - id: unique id for the section
+* - heading: the title of the section
+* - description: the description of the section
+*/
+#}
+
+<div class="styleguide-component--h2-section-title mt-30 p-site xl:container" id="{{ id }}">
+  <div class="mb-3 inline-block md:max-w-[75%]">
+    <h2 class="h2 color-primary">{{ heading }}</h2>
+    <p class="{{ section_description_classes }}">{{ description }}</p>
+  </div>
+</div>

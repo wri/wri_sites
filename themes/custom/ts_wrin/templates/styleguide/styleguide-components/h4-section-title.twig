@@ -1,0 +1,35 @@
+{#
+/**
+* H4 section title on /style-guide.
+*
+* Available variables:
+* - id: unique id for the section
+* - heading: the title of the section
+* - description: the description of the section
+* - dev_notes: variable and path details.
+*/
+#}
+
+<div class="styleguide-component--h4-section-title xl:container mt-10 mb-6" id="{{ id }}">
+  <div class="flex justify-between">
+    <h3 class="h4 font-bold color-primary md:max-w-[75%]">{{ heading }}</h3>
+    {% if show_btn %}
+    {% include '@ts_wrin/design-system/atoms/btns/btn-solid.html.twig' with {
+      link: {
+        title: 'Report issue',
+        url: 'https://github.com/wri/WRIN/issues/new?template=bug-qa-issue.md&title=' ~ heading ~ ':',
+      },
+      properties: { target: '_blank' },
+      size: 'sm',
+    } %}
+    {% endif %}
+  </div>
+  <div class="mb-6 md:max-w-[75%]">
+    {% if description %}
+     <p class="{{ section_description_classes }}">{{ description }}</p>
+    {% endif %}
+    {% if dev_notes %}
+      <p class="utility-xs italic color-primary"><em>{{ dev_notes }}</em></p>
+    {% endif %}
+  </div>
+</div>
