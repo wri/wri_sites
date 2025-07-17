@@ -57,16 +57,13 @@ class EntityShareCronSettingsForm extends ConfigFormBase {
     $form = parent::buildForm($form, $form_state);
     $settings = $this->config(self::SETTINGS)->get();
     $remotes = $this->entityTypeManager->getStorage('remote')->loadMultiple();
-    $options = [];
+    $remote_options = [];
     foreach ($remotes as $remote) {
       $remote_options[$remote->id()] = $remote->label();
     }
     $form['remote'] = [
       '#type' => 'select',
-      '#options' => [
-        'hub' => 'WRI Hub',
-        'local_hub' => 'Local hub (dev only)',
-      ],
+      '#options' => $remote_options,
       '#title' => $this->t('Remote'),
       '#default_value' => $settings['remote'] ?? '',
     ];
