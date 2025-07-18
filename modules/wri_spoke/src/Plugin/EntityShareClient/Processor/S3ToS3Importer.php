@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\wri_africa_entity_share\Plugin\EntityShareClient\Processor;
+namespace Drupal\wri_spoke\Plugin\EntityShareClient\Processor;
 
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -58,7 +58,9 @@ class S3ToS3Importer extends ImportProcessorPluginBase implements PluginFormInte
   public function processEntity(RuntimeImportContext $runtime_import_context, ContentEntityInterface $processed_entity, array $entity_json_data) {
     if ($processed_entity instanceof FileInterface) {
       $uri = $processed_entity->getFileUri();
-      $this->s3fsStream->writeUriToCache($uri);
+      if (strpos($uri, 's3://') === 0) {
+        $this->s3fsStream->writeUriToCache($uri);
+      }
     }
   }
 
