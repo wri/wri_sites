@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.event.field_event_display
     - field.field.node.event.field_featured
     - field.field.node.event.field_files
+    - field.field.node.event.field_hub_canonical_url
     - field.field.node.event.field_international_office
     - field.field.node.event.field_intro
     - field.field.node.event.field_languages_spoken
@@ -544,6 +545,7 @@ hidden:
   content_moderation_control: true
   field_calendar_description: true
   field_event_display: true
+  field_hub_canonical_url: true
   field_international_office: true
   field_location_detail: true
   field_metatag: true
