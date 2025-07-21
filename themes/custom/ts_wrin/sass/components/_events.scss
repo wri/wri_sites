@@ -257,7 +257,11 @@ a.backlink {
   }
 }
 
-.white {
+.white .breadcrumb {
+  ol::before {
+    border-left: 1px solid $white;
+    border-top: 1px solid $white;
+  }
   .backlink-white {
     display: block;
   }
