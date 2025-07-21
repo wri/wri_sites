@@ -16,6 +16,7 @@ use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 use Drupal\node\Entity\NodeType;
 use Drupal\node\NodeInterface;
+use Drupal\taxonomy\Entity\Term;
 
 /**
  * Implements hook_theme().
@@ -173,9 +174,17 @@ function wri_common_token_info() {
     'name' => 'The primary contact link or a fallback phrase.',
     'description' => 'The link to the related primary contact if published, and a fallback phrase if no published contact found.',
   ];
-  $info['tokens']['taxonomy_term']['link'] = [
+  $info['tokens']['term']['link'] = [
     'name' => 'A term link',
     'description' => 'The link to the term, if published, or its title if not.',
+  ];
+  $info['tokens']['term']['non_orphan'] = [
+    'name' => 'TID if Child',
+    'description' => t('The term id if this term is a child.'),
+  ];
+  $info['tokens']['term']['term_parent_or_self'] = [
+    'name' => 'Term parent or self',
+    'description' => t('The term parent or the term id if this has no parent.'),
   ];
 
   return $info;
@@ -333,13 +342,30 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
       }
     }
   }
-  if ($type == 'taxonomy_term') {
-    if (isset($data['taxonomy_term']) && $node = $data['taxonomy_term']) {
+  if ($type == 'term') {
+    if (isset($data['term']) && $term = $data['term']) {
       foreach ($tokens as $name => $original) {
         // Find the desired token by name.
         switch ($name) {
           case 'link':
-            $replacements[$original] = wri_common_link_or_text($data['taxonomy_term']);
+            $replacements[$original] = wri_common_link_or_text($data['term']);
+            break;
+
+          case 'non_orphan':
+            if ($term->parent->target_id) {
+              $replacements[$original] = $term->id();
+            }
+            break;
+
+          case 'term_parent_or_self':
+            if ($term->parent->target_id == '0') {
+              $replacements[$original] = $term->getName() ?? '';
+            }
+            elseif ($parent_id = $term->parent->target_id) {
+              $parent_term = Term::load($parent_id);
+              $replacements[$original] = $parent_term->getName() ?? '';
+            }
+            break;
         }
       }
     }
