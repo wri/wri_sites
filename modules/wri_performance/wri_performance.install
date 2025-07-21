@@ -4,10 +4,13 @@
  * @file
  * Wri Performance module code.
  */
+
 /**
- * Enable the pantheon_advanced_page_cache and http_cache_control modules and pulls config.
+ * Implements hook_install().
  */
 function wri_admin_install() {
+  // Updates the configuration for the pantheon_advanced_page_cache and
+  // http_cache_control modules.
   \Drupal::service('distro_helper.updates')->installConfig('pantheon_advanced_page_cache.settings', 'wri_performance', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('http_cache_control.settings', 'wri_performance', 'install');
 }
