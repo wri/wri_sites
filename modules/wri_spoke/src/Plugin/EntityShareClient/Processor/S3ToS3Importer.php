@@ -28,7 +28,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class S3ToS3Importer extends ImportProcessorPluginBase implements PluginFormInterface {
 
   /**
-   * The entity type manager.
+   * The s3fs stream wrapper.
    *
    * @var \Drupal\s3fs\StreamWrapper\S3fsStream
    */
