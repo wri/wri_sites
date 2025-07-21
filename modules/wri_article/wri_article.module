@@ -5,7 +5,6 @@
  * Publication module code.
  */
 
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
 
 /**
@@ -22,48 +21,6 @@ function wri_article_preprocess_wri_article_columns(&$context) {
           '#weight' => 10,
         ];
       }
-    }
-  }
-}
-
-/**
- * Implements hook_form_FORM_ID_alter() for Article node edit form.
- */
-function wri_article_form_node_article_edit_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
-  _wri_article_increase_sameas_maxlength($form);
-}
-
-/**
- * Helper to increase maxlength for sameAs fields inside schema_metatag.
- */
-function _wri_article_increase_sameas_maxlength(array &$form) {
-  if (!isset($form['field_metatags']['widget'][0]['schema_article'])) {
-    return;
-  }
-
-  $schema = &$form['field_metatags']['widget'][0]['schema_article'];
-
-  // List all sameAs fields to adjust.
-  $sameas_paths = [
-    ['schema_article_author', 'sameAs'],
-    ['schema_article_publisher', 'sameAs'],
-    ['schema_article_has_part', 'sameAs'],
-    ['schema_article_review', 'schema_article_review_author', 'sameAs'],
-  ];
-
-  foreach ($sameas_paths as $path) {
-    $element = &$schema;
-    foreach ($path as $key) {
-      if (isset($element[$key])) {
-        $element = &$element[$key];
-      }
-      else {
-        continue 2;
-      }
-    }
-
-    if (isset($element['#maxlength'])) {
-      $element['#maxlength'] = 2048;
     }
   }
 }

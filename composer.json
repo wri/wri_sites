@@ -60,7 +60,8 @@
                 "Provide field formatter to output meta tags on-page, e.g. for use with Views (D9), https://www.drupal.org/project/metatag/issues/3027873": "https://www.drupal.org/files/issues/2023-07-23/metatag-field_formatter_for_views-3027873-27.patch"
             },
             "drupal/schema_metatag": {
-                "Description sub_property for Organization / Person: https://www.drupal.org/project/schema_metatag/issues/3187882": "https://www.drupal.org/files/issues/2021-01-04/description-sub-property-for-organization-or-person-3187882-4.patch"
+                "Description sub_property for Organization / Person: https://www.drupal.org/project/schema_metatag/issues/3187882": "https://www.drupal.org/files/issues/2021-01-04/description-sub-property-for-organization-or-person-3187882-4.patch",
+                "allow more characters in \"sameAs\" field? or convert to multivalue single fields? https://www.drupal.org/project/schema_metatag/issues/3498969": "https://git.drupalcode.org/project/schema_metatag/-/merge_requests/90.diff"
             },
             "drupal/oembed_lazyload": {
                 "Use strict should be inside function https://www.drupal.org/project/oembed_lazyload/issues/3475956#comment-16067120": "https://www.drupal.org/files/issues/2024-09-21/oembed_lazyload_use_strict-3475956.patch"
