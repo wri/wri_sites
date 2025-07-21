@@ -31,3 +31,18 @@ function wri_performance_update_10002() {
   \Drupal::service('distro_helper.updates')->installConfig('autoban.autoban.a_67daf7154753b', 'wri_performance', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('autoban.autoban.a_67daf71601348', 'wri_performance', 'install');
 }
+
+/**
+ * Enable the pantheon_advanced_page_cache and http_cache_control modules.
+ */
+function wri_performance_update_10003() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('pantheon_advanced_page_cache')) {
+    \Drupal::service('module_installer')->install(['pantheon_advanced_page_cache'], TRUE);
+  }
+  \Drupal::service('distro_helper.updates')->installConfig('pantheon_advanced_page_cache.settings', 'wri_performance', 'install');
+  if (!$moduleHandler->moduleExists('http_cache_control')) {
+    \Drupal::service('module_installer')->install(['http_cache_control'], TRUE);
+  }
+  \Drupal::service('distro_helper.updates')->installConfig('http_cache_control.settings', 'wri_performance', 'install');
+}
