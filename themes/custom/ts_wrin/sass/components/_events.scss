@@ -242,3 +242,31 @@
 
 .landing-page__hero .display-type-simple .hero__text--inner {
 }
+
+a.backlink {
+  @include font("acumin-pro", "normal");
+  @include font-line-height(12, 26);
+
+  text-decoration: none;
+
+  @include hocus {
+    text-decoration: underline;
+  }
+  &.backlink-white {
+    color: $white;
+  }
+}
+
+.white .breadcrumb {
+  ol::before {
+    border-left: 1px solid $white;
+    border-top: 1px solid $white;
+  }
+  .backlink-white {
+    display: block;
+  }
+
+  .backlink-color {
+    display: none;
+  }
+}
