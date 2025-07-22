@@ -21,7 +21,9 @@
           {{ content.field_hero_title }}
         {% endset %}
         {{ content.field_hero_intro }}
-        <h1 class="homepage-hero-heading heading-1 hocus-primary mt-0 mb-xs">{{ headingText|striptags('<a>')|raw }}</h1>
+        <h1 class="homepage-hero-heading heading-1-xl hocus-primary mt-0 mb-xs">
+          {{ headingText|striptags('<a>')|raw}}
+        </h1>
         {{ content.field_hero_image }}
         {{ content.field_featured_items }}
       </div>
