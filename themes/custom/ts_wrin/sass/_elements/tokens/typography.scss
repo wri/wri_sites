@@ -24,9 +24,6 @@ move these to tailwind components. */
   @include mq($ph) {
     font-size: 48px;
   }
-  @include mq($md) {
-    font-size: 64px;
-  }
 }
 .heading-1--xl {
   @include mq($lg) {
