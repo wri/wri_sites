@@ -279,9 +279,6 @@ header nav.menu--main {
     margin-left: $space-sm;
     width: auto;
   }
-  @include mq($lg) {
-    margin-left: $space-md;
-  }
 }
 
 .nav-arrow,
