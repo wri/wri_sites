@@ -341,24 +341,26 @@
 
 // Adding menu css
 
-@media (min-width: 48rem) {
-  .region-primary-nav,
-  header:not(.pfp-header).sticky .region-primary-nav {
-    flex-direction: column;
-    align-items: start;
-    row-gap: .5rem;
+.page-node-type-homepage {
+  @media (min-width: 48rem) {
+    .region-primary-nav,
+    header:not(.pfp-header).sticky .region-primary-nav {
+      flex-direction: column;
+      align-items: start;
+      row-gap: .5rem;
+    }
+
+    .region-secondary-nav {
+      order: 4;
+    }
+
+    .region-secondary-nav nav#block-secondarynavigation {
+      display: block;
+    }
   }
 
-  .region-secondary-nav {
-    order: 4;
-  }
-
-  .region-secondary-nav nav#block-secondarynavigation {
+  .path-frontpage header nav.menu--main {
     display: block;
+    margin-left: 0;
   }
-}
-
-.path-frontpage header nav.menu--main {
-  display: block;
-  margin-left: 0;
 }
