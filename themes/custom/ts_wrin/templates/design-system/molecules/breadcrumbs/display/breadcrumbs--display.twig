@@ -1,0 +1,22 @@
+{# Breadcrumbs: display
+ *
+#}
+
+{% set breadcrumbs = breadcrumbs ?? [] %}
+
+{# If the template receives fixed breadcrumbs (ie for the styleguide).#}
+{% if ( breadcrumbs|length )  %}
+	<ul class="molecule--breadcrumbs utility-lg color-primary list-none flex px-0">
+    {% for key, breadcrumb in breadcrumbs %}
+			<li class="flex items-center">{{ breadcrumb }}
+        {% if ( key < breadcrumbs|length - 1 )  %}
+          <span class="color-link px-2">></span>
+        {% endif %}
+			</li>
+    {% endfor %}
+	</ul>
+{% else %}
+	<div class="molecule--breadcrumbs utility-lg color-primary list-none flex px-0">
+  		{{ breadcrumb }}
+	</div>
+{% endif %}

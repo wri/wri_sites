@@ -1,0 +1,65 @@
+{# Color: All colors in the palette
+ *
+#}
+
+{%
+  set row1 = [
+  'black',
+  'white'
+]
+%}
+
+{%
+  set row2 = [
+  'neutral-900',
+  'neutral-800',
+  'neutral-600',
+  'neutral-500',
+  'neutral-400',
+  'neutral-200'
+
+]
+%}
+{%
+  set row3 = [
+  'gold-500',
+  'gold-300',
+  'gold-100'
+]
+%}
+{%
+  set row4 = [
+  'teal-500',
+  'blue-500',
+  'green-500'
+]
+%}
+{%
+  set row5 = [
+  'error-100',
+  'warning-100',
+  'success-100'
+]
+%}
+
+{% set color_rows = [
+  row1,
+  row2,
+  row3,
+  row4,
+  row5,
+] %}
+
+{# Add components/blocks here... #}
+
+{% for color_row in color_rows %}
+  <div class="ts-grid-cols-5 gap-4 mb-12">
+    {% for color1 in color_row %}
+      <div class="col-span-1">
+        <div class="bg-{{ color1 }} color-primary body-bold body-sm p-sm shadow rounded-7 w-full h-11
+        mb-4"></div>
+        <label class="body-sm">{{ color1 }}</label>
+      </div>
+    {% endfor %}
+  </div>
+{% endfor %}

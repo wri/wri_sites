@@ -8,16 +8,28 @@
 @import "config/_05.buttons.scss";
 @import "config/_06.forms.scss";
 
+/* DESIGN SYSTEM GLOBAL */
+@import "_elements/colorways.scss";
+@import "_elements/hocus.scss";
+/* TAILWIND HARDCODED TOKENS AND UTILITY CLASSES */
+@import "_elements/tokens/_fakewind.scss";
+@import "_elements/tokens/_fakewind-margin-padding-height.scss";
+@import "_elements/tokens/_fakewind_colors.scss";
+@import "_elements/tokens/buttons.scss";
+@import "_elements/tokens/colors-text-bg.scss";
+@import "_elements/tokens/typography.scss";
+@import "_elements/tokens/grids.scss";
+
+
 /* LAYOUT */
 @import "layout/page.scss";
+@import "layout/styleguide.scss";
 @import "layout/vertical-spacing.scss";
 
 /* GLOBAL */
 @import "global/footer.scss";
-@import "global/fakewind.scss";
 @import "global/header.scss";
 @import "global/tabs.scss";
-@import "global/typography.scss";
 @import "global/tray-nav.scss";
 @import "global/ts-hamburger-menu.scss";
 .main-content,
