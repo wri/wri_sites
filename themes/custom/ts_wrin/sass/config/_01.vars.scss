@@ -23,6 +23,10 @@ $green: #32864b;
 $teal: #1b808d;
 $blue: #3654a5;
 
+:root {
+  --color-green: #32864b;
+}
+
 /* FONTS */
 // Base Font Family
 $acumin-semi-cond: "acumin-pro-semi-condensed";
@@ -58,6 +62,17 @@ $space-md: 45px;
 $space-lg: 60px;
 $space-xl: 120px;
 $space-xxl: 160px;
+
+:root {
+  --spacer-40: 160px;
+  --spacer-30: 120px;
+  --spacer-15: 60px;
+  --spacer-11: 45px;
+  --spacer-7: 30px;
+  --spacer-5: 20px;
+  --spacer-4: 16px;
+  --spacer-3: 12px;
+}
 
 /* GRID */
 $grid-max-width: 1390px; // Where the content begins and ends for desktops.

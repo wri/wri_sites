@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.event.field_event_display
     - field.field.node.event.field_featured
     - field.field.node.event.field_files
+    - field.field.node.event.field_hub_canonical_url
     - field.field.node.event.field_international_office
     - field.field.node.event.field_intro
     - field.field.node.event.field_languages_spoken
@@ -154,6 +155,7 @@ hidden:
   field_featured_text: true
   field_featured_tweet: true
   field_files: true
+  field_hub_canonical_url: true
   field_international_office: true
   field_intro: true
   field_languages_spoken: true

@@ -82,12 +82,19 @@
 }
 
 .margin-top-zero,
-p.margin-top-zero {
+p.margin-top-zero,
+.mt-0 {
   margin-top: 0;
 }
 
 .margin-bottom-zero,
-p.margin-bottom-zero {
+p.margin-bottom-zero,
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.my-0 {
+  margin-top: 0;
   margin-bottom: 0;
 }
 
@@ -141,8 +148,9 @@ p.margin-bottom-zero {
 }
 
 // Bottom margin
-.margin-bottom-xs {
-  margin-bottom: $space-xs;
+.margin-bottom-xs,
+.mb-5 {
+  margin-bottom: var(--spacer-5);
 }
 
 .margin-bottom-sm {
