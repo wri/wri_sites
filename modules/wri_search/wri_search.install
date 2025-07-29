@@ -72,3 +72,12 @@ function wri_search_update_10002() {
     'display#default#display_options#sorts#created_1',
   ], 'wri_search');
 }
+
+/**
+ * Add a default for 'No Results'.
+ */
+function wri_search_update_10003() {
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.search', [
+    'display#default#display_options#empty',
+  ], 'wri_search');
+}
