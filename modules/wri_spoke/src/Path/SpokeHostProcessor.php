@@ -45,6 +45,9 @@ class SpokeHostProcessor implements OutboundPathProcessorInterface {
       return $path;
     }
 
+    if (!$url->isRouted()) {
+      return $path;
+    }
     $routeName = $url->getRouteName();
     if ($routeName != 'entity.node.canonical') {
       return $path;
