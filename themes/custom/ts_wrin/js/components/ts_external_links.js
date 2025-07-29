@@ -18,6 +18,9 @@ export default function (context) {
     const href = $this.attr("href") || "";
     const isInternal = href.indexOf(location.hostname) >= 0 && href.indexOf(location.hostname) <= 8;
 
+    // Skip .site-logo links
+    if ($this.hasClass("site-logo")) return;
+
     if (!isInternal) {
       if (!$this.attr("target")) {
         $this.attr("target", "_blank");
