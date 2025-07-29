@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: {  }
+id: hub
+label: 'WRI Hub'
+url: 'https://hub.wri.org'
+auth:
+  pid: basic_auth
+  uuid: d0dc2b1b-8774-4a1b-be30-b22a0777470d
+  data:
+    credential_provider: entity_share
+    storage_key: d0dc2b1b-8774-4a1b-be30-b22a0777470d

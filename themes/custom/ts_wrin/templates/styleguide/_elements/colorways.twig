@@ -1,0 +1,72 @@
+{# Text colors and Weights
+ *
+ * Dynamic text colors that change depending on bg color
+#}
+{%
+  set textColors = [
+  'color-primary',
+  'color-secondary',
+  'color-action',
+]
+%}
+
+{% set bgColors = {
+  "Blue 500 Colorway": 'colorway-blue-500',
+  "Neutral 200 Colorway": 'colorway-neutral-200',
+  "White Colorway": 'colorway-white',
+  "Green 500 Colorway": 'colorway-green-500',
+  "Neutral 900 Colorway": 'colorway-neutral-900',
+  "Gold 500 Colorway": 'colorway-gold-500',
+}
+%}
+{% set forms = [
+  {
+    label: 'Label',
+  },
+  {
+    label: 'Required',
+    required: 1,
+  },
+  {
+    label: 'Required',
+    input_error: 1,
+    error_message: 'Error Message on ' ~ key,
+  }
+] %}
+
+<div class="styleguide--elements--colorways ts-grid-cols-2">
+  {% for key, bgColor in bgColors %}
+    <div class="{{ bgColor }} p-10">
+      <h3 class="h3 color-primary mt-0 mb-8">{{ key }}</h3>
+      <div class="mb-5">
+        <p class="body-base font-bold color-primary">Text colors: </p>
+        <p class="body-base color-secondary mb-2">Use as classes or CSS variables.</p>
+        <ul class="list-none pl-0">
+          {% for color in textColors %}
+            <li class="">
+              <p class="{{ color }} utility-base">-- {{ color }}</p>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="mb-5">
+        <div>
+          <p class="body-sm font-bold color-primary">Inline text link style: </p>
+          <a href="/" class="text-link">text-link</a>
+        </div>
+        {% include '@ts_wrin/design-system/atoms/btns/btn-arrow.html.twig' with {
+          link: { title:'Arrow button' },
+        } %}
+      </div>
+      <div class="gap-default my-6">
+        <p class="body-base font-bold color-primary mb-2">Buttons: </p>
+        {% include '@ts_wrin/design-system/atoms/btns/btn-solid.html.twig' with {
+          link: { title:'Solid btn' },
+        } %}
+        {% include '@ts_wrin/design-system/atoms/btns/btn-outline.html.twig' with {
+          link: { title:'Outline btn' },
+        } %}
+      </div>
+    </div>
+  {% endfor %}
+</div>

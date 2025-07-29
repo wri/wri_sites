@@ -59,11 +59,18 @@
             "drupal/metatag": {
                 "Provide field formatter to output meta tags on-page, e.g. for use with Views (D9), https://www.drupal.org/project/metatag/issues/3027873": "https://www.drupal.org/files/issues/2023-07-23/metatag-field_formatter_for_views-3027873-27.patch"
             },
+            "drupal/schema_metatag": {
+                "Description sub_property for Organization / Person: https://www.drupal.org/project/schema_metatag/issues/3187882": "https://www.drupal.org/files/issues/2021-01-04/description-sub-property-for-organization-or-person-3187882-4.patch",
+                "allow more characters in \"sameAs\" field? or convert to multivalue single fields? https://www.drupal.org/project/schema_metatag/issues/3498969": "https://git.drupalcode.org/project/schema_metatag/-/merge_requests/90.diff"
+            },
             "drupal/oembed_lazyload": {
                 "Use strict should be inside function https://www.drupal.org/project/oembed_lazyload/issues/3475956#comment-16067120": "https://www.drupal.org/files/issues/2024-09-21/oembed_lazyload_use_strict-3475956.patch"
             },
             "drupal/paragraphs": {
                 "Paragraph access check using incorrect revision of its parent https://www.drupal.org/project/paragraphs/issues/3090200": "https://www.drupal.org/files/issues/2022-10-26/3084934-13_combine_3090200-22.patch"
+            },
+            "drupal/search_api": {
+                "View recalculated with wrong data from cache https://www.drupal.org/project/search_api/issues/3327645": "https://git.drupalcode.org/project/search_api/-/merge_requests/63.diff"
             },
             "drupal/token": {
                 "Add a [current-page:object:?] dynamic token https://www.drupal.org/project/token/issues/919760": "https://www.drupal.org/files/issues/2020-09-08/token--current_page_object_token--919760--83.patch",
@@ -156,6 +163,7 @@
         "drupal/file_replace": "^1.2",
         "drupal/focal_point": "^2.0",
         "drupal/hierarchical_term_formatter": "^1.2",
+        "drupal/http_cache_control": "^2.6",
         "drupal/inline_entity_form": "^1.0@RC",
         "drupal/jquery_once": "^1.0",
         "drupal/layout_builder_modal": "^1.1",
@@ -173,6 +181,7 @@
         "drupal/metatag": "^2.0",
         "drupal/metatag_google_scholar": "^1.0",
         "drupal/oembed_lazyload": "^2.0",
+        "drupal/pantheon_advanced_page_cache": "^2.3",
         "drupal/paragraphs": "^1.12",
         "drupal/pathauto": "^1.9",
         "drupal/redirect": "^1.7",

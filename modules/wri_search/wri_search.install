@@ -74,9 +74,18 @@ function wri_search_update_10002() {
 }
 
 /**
- * Add a default for 'No Results'.
+ * Update views cache settings.
  */
 function wri_search_update_10003() {
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.project_experts', [
+    'display#default#display_options#cache#type',
+  ], 'wri_search');
+}
+
+/**
+ * Add a default for 'No Results'.
+ */
+function wri_search_update_10004() {
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.search', [
     'display#default#display_options#empty',
   ], 'wri_search');

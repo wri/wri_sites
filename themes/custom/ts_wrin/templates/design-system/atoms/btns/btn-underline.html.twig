@@ -1,0 +1,39 @@
+{# Button Underline
+ * An underlined text button.
+
+  * Button OPTIONS (text and outline)
+  *   - size: 'sm', 'md' or 'lg
+
+  * ICON OPTION
+  *   - link_svg_name: 'download' (just an example, pass in svg name, confirm icon is in assets/images/svgs)
+  *   - svg_position: 'before' (default) or 'after'
+
+  HOW TO USE:
+  {% include '@egpaf/atoms/btns/btn-underline.twig' with {
+    link: {title: 'learn more', url: '/'},
+    size: 'sm'
+  } %}
+#}
+
+{# Primary values #}
+{% set link = link %}
+
+{# btn classes, svg name #}
+{% set link_svg_name = link_svg_name %}
+
+{# Adds icon classes if needed#}
+{% if link_svg_name %}
+  {% set link_svg_classes = ' inline-block ' %}
+{% endif %}
+
+{# Combines classes, adds them to the btn template #}
+{% set add_classes = add_classes ?? '' %}
+{% set btn_classes = "btn-underline hocus-text-underline " ~ size ~ ' ' ~ add_classes %}
+
+{# Properties #}
+{#{% set properties = properties ?? [] %}#}
+{# Final set of classes #}
+{#{% set properties = properties|merge({ 'class': (btn_classes) }) %}#}
+
+{% extends '@ts_wrin/design-system/atoms/btns/btn-base.html.twig' %}
+
