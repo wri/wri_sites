@@ -1,0 +1,9 @@
+wri_spoke.cron.settings:
+  path: '/admin/config/services/entity_share/cron'
+  defaults:
+    _form: '\Drupal\wri_spoke\Form\EntityShareCronSettingsForm'
+    _title: 'Entity Share Client Cron Settings'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _permission: 'administer site configuration'

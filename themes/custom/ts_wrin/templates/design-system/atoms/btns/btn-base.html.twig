@@ -1,0 +1,119 @@
+{# Base btn/link file
+ *
+ * Uses a btn if no href (link.url).
+#}
+
+{# WARNING: DO NOT UPDATE THIS FILE.
+ *
+ * It will update all buttons and links site-wide. To update a style of button, update
+ * the button-style template in views/_includes/btns. To update a single instance,
+ * pass different classes or variables from the instance where the button is included.
+ * See README for more info.
+#}
+
+{# VARIABLES #}
+{% set link = link|default({ title: '', url: '', target: '' }) %}
+{% set link_disabled = link_disabled %}
+
+{# Classes + svg name #}
+{% set link_svg_classes = link_svg_classes %}
+{% set link_svg_name = link_svg_name %}
+{% set svg_position = svg_position ?? 'before' %}
+{% set type = link_type ? 'type="' ~ link_type ~ '"' %}
+{% set text_margin = link_svg_name and svg_position|trim == 'before' ? 'ml-2' : link_svg_name ? "mr-2" %}
+
+{# Properties. #}
+{% set properties = properties ?? [] %}
+{% set props = [] %}
+{% set accessible = accessible ?? true %}
+{# The "props" array will have all its elements concatenated with spaces into
+ * the <a> or <button> tag. The labeled array indexes enforce uniqueness.
+ * Properties like "required" are just printed alone. Properties that require
+ * labels like "class=" need to be assembled with their label. We list those
+ * properties here and then assemble them in a little loop.
+#}
+{% set labeled_properties = [
+	{
+		'label': 'class',
+		'property_name': 'class',
+	},
+	{
+		'label': 'id',
+		'property_name': 'id',
+	},
+	{
+		'label': 'type',
+		'property_name': 'type',
+	},
+	{
+		'label': 'aria_label',
+		'property_name': 'aria-label',
+	},
+	{
+		'label': 'aria_described_by',
+		'property_name': 'aria-describedby',
+	},
+	{
+		'label': 'on_click',
+		'property_name': 'onClick',
+	},
+	{
+		'label': 'rel',
+		'property_name': 'rel',
+	},
+]
+%}
+{% for property in labeled_properties %}
+	{% if properties[property['label']] %}
+		{% set props = props|merge([ property.property_name ~ "= '" ~ properties[property['label']] ~ "'" ]) %}
+	{% endif %}
+{% endfor %}
+
+{# Hides the button from screen readers. Only use on duplicate links.#}
+{% if ( not accessible )  %}
+	{% set props = props|merge( [ 'aria-hidden="true"' ] ) %}
+	{% set props = props|merge( [ 'tabindex="-1"' ] ) %}
+{% endif %}
+
+{# anchor or button -- checks to see if link.url is set #}
+{% set tag_name = 'button' %}
+{% if link.url is not empty %}
+	{% set tag_name = 'a' %}
+	{% set props = props|merge( [ 'href="' ~ link.url ~ '"' ] )|merge( [ 'target="' ~ link.target ~ '"' ] ) %}
+{% endif %}
+
+<{{ tag_name }} {{ props|join(" ") }} {{ link_disabled ? 'disabled' : '' }} class="{{ btn_classes }}">
+
+{# SVG #}
+    {% block svg %}
+			{% if link_svg_name is not empty and svg_position == 'before' %}
+				<span class="btn-svg btn-svg--before {{ link_svg_classes }}">
+            {% include '@ts_wrin/design-system/atoms/svg-icon-embed.html.twig' with {
+							'svg_name': link_svg_name,
+						} only %}
+          </span>
+			{% endif %}
+		{% endblock %}
+
+    {# Content #}
+    {% block content %}
+			{% if link.title and icon_only == false %}
+				<span class="btn--text {{ text_class }} {{ text_margin }}">
+          {{ link.title }}</span>
+			{% elseif icon_only == true %}
+				<span class="sr-only">{{ link.title }}</span>
+			{% endif %}
+		{% endblock %}
+
+    {# SVG #}
+    {% block svg_after %}
+			{% if link_svg_name is not empty and svg_position == 'after' and icon_only == false %}
+				<span class="btn-svg btn-svg--after {{ link_svg_classes }}">
+            {% include '@ts_wrin/design-system/atoms/svg-icon-embed.html.twig' with {
+							'svg_name': link_svg_name,
+						} only %}
+          </span>
+			{% endif %}
+		{% endblock %}
+
+</{{ tag_name }}>

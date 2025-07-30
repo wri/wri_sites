@@ -58,56 +58,6 @@
   @extend .margin-zero;
 }
 
-//Applies consistent padding
-//Use classes whenever possible
-.padding-top,
-%padding-top {
-  padding-top: $padding-vertical;
-}
-
-.padding-bottom,
-%padding-bottom {
-  padding-bottom: $padding-vertical;
-}
-
-.padding-vertical,
-%padding-vertical {
-  @extend %padding-top;
-  @extend %padding-bottom;
-}
-
-// Nice for resetting header elements
-.margin-zero {
-  margin: 0;
-}
-
-.margin-top-zero,
-p.margin-top-zero {
-  margin-top: 0;
-}
-
-.margin-bottom-zero,
-p.margin-bottom-zero {
-  margin-bottom: 0;
-}
-
-// Top margin
-.margin-top-xs {
-  margin-top: $space-xs;
-}
-
-.margin-top-sm {
-  margin-top: $space-sm;
-}
-
-.margin-top-md {
-  margin-top: $space-md;
-}
-
-.margin-top-lg {
-  margin-top: $space-lg;
-}
-
 .margin-top-xl {
   margin-top: 80px;
 
@@ -139,24 +89,6 @@ p.margin-bottom-zero {
     margin-top: $space-xxl;
   }
 }
-
-// Bottom margin
-.margin-bottom-xs {
-  margin-bottom: $space-xs;
-}
-
-.margin-bottom-sm {
-  margin-bottom: $space-sm;
-}
-
-.margin-bottom-md {
-  margin-bottom: $space-md;
-}
-
-.margin-bottom-lg {
-  margin-bottom: $space-lg;
-}
-
 .margin-bottom-xl {
   margin-bottom: 80px;
 
@@ -189,23 +121,6 @@ p.margin-bottom-zero {
   }
 }
 
-// Right margin
-.margin-right-xs {
-  margin-right: $space-xs;
-}
-
-.margin-right-sm {
-  margin-right: $space-sm;
-}
-
-.margin-right-md {
-  margin-right: $space-md;
-}
-
-.margin-right-lg {
-  margin-right: $space-lg;
-}
-
 .margin-right-xl {
   margin-right: 80px;
 
@@ -236,4 +151,103 @@ p.margin-bottom-zero {
   @include mq($xl) {
     margin-right: $space-xxl;
   }
+}
+
+/* @TODO: below this point, find and replace instances of utilties with their tailwind equivalent (mostly listed inline)
+, then delete the utility class. */
+//Applies consistent padding
+//Use classes whenever possible
+.padding-top,
+%padding-top {
+  padding-top: $padding-vertical;
+}
+
+.padding-bottom,
+%padding-bottom {
+  padding-bottom: $padding-vertical;
+}
+
+.padding-vertical,
+%padding-vertical {
+  @extend %padding-top;
+  @extend %padding-bottom;
+}
+
+// Nice for resetting header elements
+.margin-zero {
+  margin: 0;
+}
+
+.margin-top-zero,
+p.margin-top-zero,
+.mt-0 {
+  margin-top: 0;
+}
+
+.margin-bottom-zero,
+p.margin-bottom-zero,
+.mb-0 {
+  margin-bottom: 0;
+}
+
+// Top margin
+.margin-top-xs,
+.mt-5 {
+  margin-top: var(--spacer-5);
+}
+
+.margin-top-sm,
+.mt-7 {
+  margin-top: var(--spacer-7);
+}
+
+.margin-top-md,
+.mt-11 {
+  margin-top: var(--spacer-11);
+}
+
+.margin-top-lg,
+.mt-15 {
+  margin-top: var(--spacer-15);
+}
+
+// Bottom margin
+.margin-bottom-xs,
+.mb-5 {
+  margin-bottom: var(--spacer-5);
+}
+
+.margin-bottom-sm,
+.mb-7 {
+  margin-bottom: var(--spacer-7);
+}
+
+.margin-bottom-md,
+.mb-11 {
+  margin-bottom: var(--spacer-11);
+}
+.margin-bottom-lg,
+.mb-15 {
+  margin-bottom: var(--spacer-15);
+}
+
+// Right margin
+.margin-right-xs,
+.mr-5 {
+  margin-right: var(--spacer-5);
+}
+
+.margin-right-sm,
+.mr-7 {
+  margin-right: var(--spacer-7);
+}
+
+.margin-right-md,
+ .mr-11 {
+  margin-right: var(--spacer-11);
+}
+
+.margin-right-lg,
+.mr-15 {
+  margin-right: var(--spacer-15);
 }

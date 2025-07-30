@@ -8,3 +8,5 @@ dependencies:
   - redis
   - autoban
   - advban
+  - http_cache_control
+  - pantheon_advanced_page_cache
