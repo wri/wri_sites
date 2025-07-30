@@ -92,6 +92,10 @@
       margin-bottom: 0;
     }
   }
+  .visit-on-social .field--name-field-social-links {
+    display: flex;
+    flex-wrap: wrap;
+  }
   .mobile-social {
     @include mq($lg) {
       display: none;
@@ -116,12 +120,13 @@
       @include mq($lg) {
         @include column-width(10, 13);
         order: 2;
+        grid-row: 2 / 3;
       }
     }
     .main-content {
       @include mq($ph) {
         @include column-width(5, 13);
-        grid-row: 1 / 4;
+        grid-row: 2 / 4;
         order: 3;
       }
       @include mq($lg) {
@@ -134,11 +139,14 @@
         @include column-width(1, 5);
         align-self: start;
         order: 2;
+        grid-row: 2 / 3;
+        margin-top: 50px;
       }
       @include mq($lg) {
         @include column-width(2, 4);
         order: 0;
-        grid-row: 1;
+        grid-row: 2;
+        margin-top: 0;
       }
     }
   }
