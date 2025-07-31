@@ -160,6 +160,9 @@ function wri_node_update_dependencies() {
   $dependencies['wri_node'][10402] = [
     'wri_person' => 10402,
   ];
+  $dependencies['wri_node'][10402] = [
+    'wri_project' => 10402,
+  ];
   return $dependencies;
 }
 
@@ -190,7 +193,7 @@ function wri_node_update_10402() {
  * @param array $content_types
  *   The content types to process.
  */
-function wri_update_twitter_replacement($content_types) {
+function wri_update_twitter_replacement($content_types, $field_name = 'field_paragraphs') {
   // Query for nodes with a non-empty field_twitter_account.
   $query = \Drupal::entityQuery('node')
     ->accessCheck(FALSE)
@@ -214,11 +217,18 @@ function wri_update_twitter_replacement($content_types) {
     if ($node->hasField('field_twitter_account') && !$node->get('field_twitter_account')->isEmpty()) {
       // Check if the node already has a Twitter paragraph.
       $hasTwitterParagraph = FALSE;
-      if ($node->hasField('field_paragraphs') && !$node->get('field_paragraphs')->isEmpty()) {
-        foreach ($node->get('field_paragraphs') as $item) {
+      if ($node->hasField($field_name) && !$node->get($field_name)->isEmpty()) {
+        foreach ($node->get($field_name) as $item) {
           $paragraph = $item->entity;
           if ($paragraph && $paragraph->bundle() == 'social_media_sites') {
             $siteField = $paragraph->get('field_site')->getValue();
+            if (!empty($siteField) && $siteField[0]['target_id'] == $twitter_term->id()) {
+              $hasTwitterParagraph = TRUE;
+              break;
+            }
+          }
+          elseif ($paragraph && $paragraph->bundle() == 'social_links_listing') {
+            $siteField = $paragraph->get('field_social_links')->entity->field_site->getValue();
             if (!empty($siteField) && $siteField[0]['target_id'] == $twitter_term->id()) {
               $hasTwitterParagraph = TRUE;
               break;
@@ -240,32 +250,71 @@ function wri_update_twitter_replacement($content_types) {
         $uri = $link_item->uri;
         $handle = $link_item->title;
 
-        // Create a new paragraph of type social_media_sites.
-        $paragraph = Paragraph::create([
-          'type' => 'social_media_sites',
-          // Set all field values before saving.
-          'field_text' => $handle,
-          'field_link' => [
-            'uri' => $uri,
-            'title' => $handle,
-          ],
-          'field_site' => [
-            ['target_id' => $twitter_term->id()],
-          ],
-        ]);
-        $paragraph->save();
-
-        // Attach the paragraph to the node's field_social_links field.
-        if ($node->hasField('field_social_links')) {
-          $node->get('field_social_links')->appendItem([
-            'target_id' => $paragraph->id(),
-            'target_revision_id' => $paragraph->getRevisionId(),
+        if ($node->bundle() == 'person') {
+          // Create a new paragraph of type social_media_sites.
+          $paragraph = Paragraph::create([
+            'type' => 'social_media_sites',
+            // Set all field values before saving.
+            'field_text' => $handle,
+            'field_link' => [
+              'uri' => $uri,
+              'title' => $handle,
+            ],
+            'field_site' => [
+              ['target_id' => $twitter_term->id()],
+            ],
           ]);
-          // Optionally, clear the old field_twitter_account.
-          $node->set('field_twitter_account', NULL);
-          $node->save();
-          $migrated_nids[] = $node->id();
+
+          $paragraph->save();
+
+          // Attach the paragraph to the node's field_social_links field.
+          if ($node->hasField('field_social_links')) {
+            $node->get('field_social_links')->appendItem([
+              'target_id' => $paragraph->id(),
+              'target_revision_id' => $paragraph->getRevisionId(),
+            ]);
+          }
         }
+        elseif ($node->bundle() == 'project_detail') {
+          // Create the inner social_media_sites paragraph.
+          $inner_paragraph = Paragraph::create([
+            'type' => 'social_media_sites',
+            'field_text' => $handle,
+            'field_link' => [
+              'uri' => $uri,
+              'title' => $handle,
+            ],
+            'field_site' => [
+              ['target_id' => $twitter_term->id()],
+            ],
+          ]);
+          $inner_paragraph->save();
+
+          // Create the outer social_links_listing paragraph.
+          $outer_paragraph = Paragraph::create([
+            'type' => 'social_links_listing',
+            'field_title' => 'Follow us',
+            'field_social_links' => [
+              [
+                'target_id' => $inner_paragraph->id(),
+                'target_revision_id' => $inner_paragraph->getRevisionId(),
+              ],
+            ],
+          ]);
+          $outer_paragraph->save();
+
+          // Attach the outer paragraph to the node's field.
+          if ($node->hasField($field_name)) {
+            $node->get($field_name)->appendItem([
+              'target_id' => $outer_paragraph->id(),
+              'target_revision_id' => $outer_paragraph->getRevisionId(),
+            ]);
+          }
+        }
+        // Optionally, clear the old field_twitter_account.
+        $node->set('field_twitter_account', NULL);
+        $node->save();
+        $migrated_nids[] = $node->id();
       }
     }
   }
@@ -287,4 +336,14 @@ function wri_node_update_10403() {
   \Drupal::service('distro_helper.updates')->updateConfig('wri_node.settings', [
     'narrative_taxonomy_org_name',
   ], 'wri_node', 'install');
+}
+
+/**
+ * Migrate field_twitter_account values into a social_media_sites paragraph.
+ */
+function wri_node_update_10404() {
+  // Define the content types to process.
+  $content_types = ['project_detail'];
+
+  wri_update_twitter_replacement($content_types, 'field_social_sharing_links');
 }

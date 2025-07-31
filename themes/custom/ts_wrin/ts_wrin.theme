@@ -212,6 +212,23 @@ function ts_wrin_preprocess_field(array &$variables) {
     }
     $variables["ds-config"]["settings"]["suffix"] = '';
   }
+
+  // Replace tokens, providing both “node” and “paragraph” contexts.
+  if ($variables['field_name'] == 'field_title' && $variables["element"]["#bundle"] == 'social_links_listing') {
+    $paragraph = $variables['element']['#object'];
+    $parent_node = $paragraph->getParentEntity();
+    $raw_value = (string) $variables['items'][0]['content']['#value'];
+    $variables['items'][0]['content']['#value'] = \Drupal::token()->replace(
+      $raw_value,
+      [
+        'node'      => $parent_node,
+        'paragraph' => $paragraph,
+      ],
+      [
+        'clear' => TRUE,
+      ]
+    );
+  }
 }
 
 /**

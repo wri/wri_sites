@@ -170,7 +170,7 @@
   }
 
   @include mq($md) {
-    @include column-width(1, 4);
+    @include column-width(1, 5);
   }
 
   @include mq($lg) {
@@ -185,11 +185,14 @@
   margin-bottom: $space-md;
 
   @include mq($md) {
-    @include column-width(4, 11);
+    @include column-width(5, 13);
 
     p {
       margin-top: 0;
     }
+  }
+  @include mq($lg) {
+    @include column-width(4, 10);
   }
   @include mq($xl) {
     @include column-width(4, 10);
@@ -217,6 +220,7 @@
     margin-bottom: 45px;
     border-bottom: 2px solid $black;
     position: relative;
+    overflow: hidden;
 
     @include mq($md) {
       &:after {
@@ -232,7 +236,11 @@
     }
 
     @include mq($md) {
-      @include column-width(4, 11);
+      @include column-width(5, 13);
+    }
+
+    @include mq($lg) {
+      @include column-width(4, 13);
     }
     @include mq($xl) {
       @include column-width(4, 10);
@@ -246,6 +254,13 @@
       }
 
       @include mq($md) {
+        flex: 0 0 50%;
+
+        .field--name-field-statistic-text {
+          width: 80%;
+        }
+      }
+      @include mq($lg) {
         flex: 0 0 25%;
 
         .field--name-field-statistic-text {
