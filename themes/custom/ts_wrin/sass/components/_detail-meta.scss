@@ -87,6 +87,15 @@
       margin-bottom: 60px;
     }
   }
+  .publication__image-inner {
+    display: none;
+    @include mq($ph) {
+      display: block;
+    }
+    @include mq($lg) {
+      display: none;
+    }
+  }
 }
 
 .detail__meta-secondary {
@@ -105,27 +114,34 @@
   }
 }
 
+.detail__meta .detail__meta-inner.two-column {
+  @include mq($lg) {
+    margin-bottom: 0;
+  }
+}
+
 // Set the top border for mobile and dt.
-.simple-display .detail__meta {
+.simple-display .detail__meta-inner {
   // At mobile set to parent
   border-top: 3px solid $black;
   padding-top: $space-sm;
 
-  @include mq($lg) {
-    // Desktop, hide this border and show child.
-    border-top: none;
-    padding-top: 0;
-  }
 
-  .detail__meta-inner {
-    padding-top: 0;
-    border-top: 0 solid $black;
+  // @include mq($lg) {
+  //   // Desktop, hide this border and show child.
+  //   border-top: none;
+  //   padding-top: 0;
+  // }
 
-    @include mq($lg) {
-      border-width: 3px;
-      padding-top: $space-sm;
-    }
-  }
+  // .detail__meta-inner {
+  //   padding-top: 0;
+  //   border-top: 0 solid $black;
+
+  //   @include mq($lg) {
+  //     border-width: 3px;
+  //     padding-top: $space-sm;
+  //   }
+  // }
 }
 
 // Show/hide narrative taxonomy in sidebar.

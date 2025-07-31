@@ -141,12 +141,14 @@
         order: 2;
         grid-row: 2 / 3;
         margin-top: 50px;
+        display: none;
       }
       @include mq($lg) {
         @include column-width(2, 4);
         order: 0;
         grid-row: 2;
         margin-top: 0;
+        display: block;
       }
     }
   }
