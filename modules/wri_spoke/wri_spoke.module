@@ -7,6 +7,7 @@
 
 use Drupal\Component\Serialization\Json;
 use Drupal\Component\Utility\UrlHelper;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\entity_share_client\Service\StateInformationInterface;
 
 /**
@@ -80,5 +81,18 @@ function wri_spoke_cron() {
     $settings->set('changed_since', $sync_from_time);
     $settings->save();
   }
+}
 
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function wri_spoke_node_presave(EntityInterface $entity) {
+  // Populate a default value for the "register" field on hub-supplied events
+  // so they get a nice register button.
+  if ($entity->bundle() == 'event'
+    && $entity->hasField('field_hub_canonical_url')
+    && !empty($entity->field_hub_canonical_url[0])
+    && empty($entity->field_register->getValue())) {
+    $entity->field_register->setValue(['uri' => $entity->field_hub_canonical_url->getValue()[0]['value'] . '#register']);
+  }
 }
