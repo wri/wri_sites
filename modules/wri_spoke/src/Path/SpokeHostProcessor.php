@@ -32,6 +32,9 @@ class SpokeHostProcessor implements OutboundPathProcessorInterface {
   /**
    * Constructs a path processor.
    *
+   * @param \Drupal\Core\Routing\AdminContext $admin_context
+   *   The admin context service.
+   *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The Entity Type Manager.
    */
