@@ -34,7 +34,6 @@ class SpokeHostProcessor implements OutboundPathProcessorInterface {
    *
    * @param \Drupal\Core\Routing\AdminContext $admin_context
    *   The admin context service.
-   *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The Entity Type Manager.
    */
@@ -81,14 +80,8 @@ class SpokeHostProcessor implements OutboundPathProcessorInterface {
       $options['absolute'] = TRUE;
       $hub_url = parse_url($node->field_hub_canonical_url->value);
       $options['base_url'] = $hub_url['scheme'] . "://" . $hub_url['host'];
-      if ($request) {
-        if ($this->adminContext->isAdminRoute()) {
-          $uri_path = '/events';
-        }
-        else {
-          $uri_path = $request->getRequestUri();
-        }
-        $options['query']['returnTo'] = $request->getScheme() . "://" . $request->getHttpHost() . $uri_path;
+      if ($request && !$this->adminContext->isAdminRoute()) {
+        $options['query']['returnTo'] = $request->getScheme() . "://" . $request->getHttpHost() . $request->getRequestUri();
       }
       $path = $hub_url['path'];
     }
