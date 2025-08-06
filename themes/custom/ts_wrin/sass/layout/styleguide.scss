@@ -1,0 +1,41 @@
+#page-style-guide {
+  @media (min-width: 768px) {
+    .styleguide-nav {
+      position: fixed;
+      border-right: 1px solid var(--color-neutral-500);
+      height: 100%;
+      width: 280px;
+      left: 0;
+      top: 0;
+      overflow: scroll;
+    }
+    .styleguide-menu-padding {
+      padding-left: 280px;
+    }
+  }
+  .bg-demo-m {
+    background-color: peachpuff;
+  }
+
+  .bg-demo-p {
+    background-color: darkseagreen;
+  }
+
+  .bg-demo-element {
+    background-color: lightblue;
+  }
+  nav ul {
+    list-style: none;
+  }
+}
+
+/* Hides nav on /style-guide */
+.style-guide header,
+.style-guide footer,
+header.sticky {
+  display: none;
+}
+
+#page-style-guide .p-site {
+  padding: var(--spacer-4);
+}

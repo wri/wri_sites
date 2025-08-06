@@ -160,10 +160,10 @@ function wri_node_update_dependencies() {
   $dependencies['wri_node'][10402] = [
     'wri_person' => 10402,
   ];
-  $dependencies['wri_node'][10403] = [
+  $dependencies['wri_node'][10405] = [
     'wri_project' => 10402,
   ];
-  $dependencies['wri_node'][10404] = [
+  $dependencies['wri_node'][10406] = [
     'wri_program' => 10402,
     'wri_microsites' => 10403,
   ];
@@ -194,7 +194,7 @@ function wri_node_update_10402() {
 /**
  * Migrate field_twitter_account values into a social_media_sites paragraph.
  */
-function wri_node_update_10403() {
+function wri_node_update_10405() {
   // Define the content types to process.
   $content_types = ['project_detail'];
 
@@ -203,7 +203,7 @@ function wri_node_update_10403() {
 /**
  * Migrate field_twitter_account values into a social_media_sites paragraph.
  */
-function wri_node_update_10404() {
+function wri_node_update_10406() {
   // Define the content types to process.
   $content_types = ['program_center', 'microsite'];
 
@@ -350,4 +350,23 @@ function wri_update_twitter_replacement($content_types, $field_name = 'field_par
     \Drupal::messenger()->addStatus(t('No nodes were migrated.'));
   }
   return t('Migrated field_twitter_account values to social_media_sites paragraphs for applicable nodes.');
+}
+
+/**
+ * Updates the node settings values.
+ */
+function wri_node_update_10403() {
+  \Drupal::service('distro_helper.updates')->updateConfig('wri_node.settings', [
+    'narrative_taxonomy_org_name',
+  ], 'wri_node', 'install');
+}
+
+/**
+ * Migrate field_twitter_account values into a social_media_sites paragraph.
+ */
+function wri_node_update_10404() {
+  // Define the content types to process.
+  $content_types = ['project_detail'];
+
+  wri_update_twitter_replacement($content_types, 'field_social_sharing_links');
 }

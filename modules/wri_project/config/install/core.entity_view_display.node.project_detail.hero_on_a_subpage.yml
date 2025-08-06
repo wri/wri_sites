@@ -125,7 +125,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 7
+    weight: 9
     region: sidebar
   field_primary_topic:
     type: entity_reference_label_class
@@ -163,7 +163,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 4
+    weight: 5
     region: category
   field_region:
     type: hierarchical_term_formatter
@@ -204,7 +204,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 5
+    weight: 6
     region: category
   field_social_sharing_links:
     type: entity_reference_revisions_entity_view
@@ -223,14 +223,16 @@ content:
   field_toc:
     type: 'single_file_component_field_formatter:toc_formatter'
     label: hidden
-    settings: {  }
+    settings:
+      menu: page-hierarchies
+      color_class: black-bar
     third_party_settings: {  }
-    weight: 3
+    weight: 4
     region: hero
   wri_social_sharing_block:
     settings: {  }
     third_party_settings: {  }
-    weight: 6
+    weight: 8
     region: share
 hidden:
   addtocal: true

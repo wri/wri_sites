@@ -21,6 +21,13 @@ function ts_wrin_preprocess(array &$variables) {
     $variables['footer_logo'] = \Drupal::service('file_url_generator')->generateString($logo_path);
   }
   $variables['ts_wrin_path'] = \Drupal::service('extension.list.theme')->getPath('ts_wrin');
+  $logo_link = theme_get_setting('logo_link');
+  if ($logo_link) {
+    $variables['logo_link'] = $logo_link;
+  }
+  else {
+    $variables['logo_link'] = '/';
+  }
 }
 
 /**
