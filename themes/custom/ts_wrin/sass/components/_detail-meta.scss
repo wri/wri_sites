@@ -125,23 +125,6 @@
   // At mobile set to parent
   border-top: 3px solid $black;
   padding-top: $space-sm;
-
-
-  // @include mq($lg) {
-  //   // Desktop, hide this border and show child.
-  //   border-top: none;
-  //   padding-top: 0;
-  // }
-
-  // .detail__meta-inner {
-  //   padding-top: 0;
-  //   border-top: 0 solid $black;
-
-  //   @include mq($lg) {
-  //     border-width: 3px;
-  //     padding-top: $space-sm;
-  //   }
-  // }
 }
 
 // Show/hide narrative taxonomy in sidebar.
