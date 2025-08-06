@@ -106,14 +106,16 @@
                 {{ content.share }}
               </div>
               {% endif %}
-              {% if content.featured_image|render %}
-              <div class="publication__image-inner margin-top-md">
+              <div class="publication__image-inner">
                 <div {{ region_attributes.share.addClass('layout__region', 'layout__region--featured-image') }}>
+                {% if content.featured_image|render %}
+                  <div class="margin-top-md">
                   {{ content.featured_image }}
+                  </div>
+                {% endif %}
                 </div>
               </div>
             </div>
-            {% endif %}
             {% if show_narrative_taxonomy == true %}
               {% if content.sidebar.field_narrative_taxonomy|render %}
                 <div class="detail__meta-secondary">
