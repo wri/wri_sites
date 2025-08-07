@@ -17,7 +17,6 @@
         {% if page.primary_nav %}
           {{ page.primary_nav }}
         {% endif %}
-
         <div class="header-right {{ menu_color }}">
           {% if page.secondary_nav %}
             {{ page.secondary_nav }}
@@ -35,7 +34,9 @@
             {% include '@ts_wrin/ts_custom/wrin-filter-button.html.twig' %}
           {% endif %}
 
-          {% include '@ts_wrin/ts_custom/ts-hamburger-nav.html.twig' %}
+          {% if page.hamburger_nav and page.hamburger_nav|children %}
+            {% include '@ts_wrin/ts_custom/ts-hamburger-nav.html.twig' %}
+          {% endif %}
         </div>
       </div>
     </header>
@@ -43,7 +44,7 @@
 
     <div class="mobile-menu-target">
       <div class="ts-mobile-menu__wrapper">
-        {% if page.hamburger_nav %}
+        {% if page.hamburger_nav and page.hamburger_nav|children %}
           {{ page.hamburger_nav }}
         {% endif %}
       </div>
@@ -74,30 +75,31 @@
       {% endif %}
     {% endif %}
 
-    {% if page.footer_top %}
-      {{page.footer_top}}
-    {% endif %}
+    <footer>
+      {% if page.footer_top %}
+        {{page.footer_top}}
+      {% endif %}
+      {% if page.footer_left or page.footer_right %}
+        <div class="region-footer">
+          <div class="container">
+            <div class="footer-padding">
+              <div class="footer-logo margin-bottom-md">
+                <a href="{{ logo_link }}">
+                  <img class="logo-white" src="{{ footer_logo }}" alt="{{ 'Home'|t }}" />
+                </a>
+              </div>
+              {% if page.footer_left %}
+                {{page.footer_left}}
+              {% endif %}
 
-    {% if page.footer_left or page.footer_right %}
-      <div class="region-footer">
-        <div class="container">
-          <div class="footer-padding">
-            <div class="footer-logo margin-bottom-md">
-              <a href="/">
-                <img class="logo-white" src="{{ footer_logo }}" alt="{{ 'Home'|t }}" />
-              </a>
+              {% if page.footer_right %}
+                {{page.footer_right}}
+              {% endif %}
             </div>
-            {% if page.footer_left %}
-              {{page.footer_left}}
-            {% endif %}
-
-            {% if page.footer_right %}
-              {{page.footer_right}}
-            {% endif %}
           </div>
         </div>
-      </div>
-    {% endif %}
+      {% endif %}
+    </footer>
 
     {% if page.modals %}
       {{ page.modals }}

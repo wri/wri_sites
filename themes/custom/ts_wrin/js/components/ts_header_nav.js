@@ -270,9 +270,9 @@ export default function(context) {
     });
 
     // TOC Menus.
-    let tocMainParent = $("#menu-toc");
-    let tocMenuItem = $("#menu-toc .menu-item--active-trail .menu");
-    let tocScrollMenu = $("#menu-toc .menu-item--active-trail .menu");
+    let tocMainParent = $(".toc");
+    let tocMenuItem = $(".toc .menu-item--active-trail .menu");
+    let tocScrollMenu = $(".toc .menu-item--active-trail .menu");
 
     let tocDebouncedSideScroll = debounce(function() {
       if (

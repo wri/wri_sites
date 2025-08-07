@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   id = "parent_menu_block",
  *   admin_label = @Translation("Menu block (show parent)"),
  *   category = @Translation("Menus"),
- *   deriver = "Drupal\menu_block\Plugin\Derivative\MenuBlock",
+ *   deriver = "Drupal\wri_menus\Plugin\Derivative\MenuBlock",
  *   forms = {
  *     "settings_tray" = "\Drupal\system\Form\SystemMenuOffCanvasForm",
  *   },
@@ -48,7 +48,35 @@ class ParentMenuBlock extends OriginalMenuBlock {
       '#description' => $this->t('If the <strong>Initial visibility level</strong> is greater than 1, or a <strong>Fixed parent item</strong> is chosen, only the children of that item will be displayed by default. Enable this option to <strong>always</strong> render the parent item in the menu.'),
     ];
 
+    $form['advanced']['add_class'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('<strong>Add class to parent item</strong>'),
+      '#default_value' => $config['add_class'],
+      '#description' => $this->t('Add a class to the parent item. This is useful for styling purposes. The class mobile__toc will make this menu only show on mobile screen sizes.'),
+    ];
+
     return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function blockSubmit($form, FormStateInterface $form_state) {
+    parent::blockSubmit($form, $form_state);
+    $this->configuration['add_class'] = $form_state->getValue('add_class');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function build() {
+    $build = parent::build();
+
+    // Wrap the menu in a div with a class if specified.
+    if (isset($this->configuration['add_class'])) {
+      $build['#add_class'] = $this->configuration['add_class'];
+    }
+    return $build;
   }
 
 }

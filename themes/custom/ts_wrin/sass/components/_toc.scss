@@ -54,6 +54,7 @@
 }
 
 .publication__toc {
+  clear: both;
   display: none;
   @include mq($md) {
     display: block;
@@ -188,9 +189,10 @@
 }
 
 .mobile__toc {
+  clear: both;
   background-color: $white;
   display: block;
-  margin-top: 16px;
+  margin: 16px 20px 0;
   border-radius: 3px;
   @include mq($md) {
     display: none;

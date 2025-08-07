@@ -77,12 +77,6 @@ function wri_event_update_10001() {
     'content#field_register',
   ], 'wri_event');
 
-  // Import the content_snippets:
-  \Drupal::service('distro_helper.updates')->updateConfig('content_snippets.content', ['snippets#orto_registration_url'], 'wri_listing_block');
-  \Drupal::service('distro_helper.updates')->updateConfig('content_snippets.items', [
-    'orto_registration_url',
-  ], 'wri_admin');
-
   $message = 'Added Zoom tie-in fields, webform, and settings.';
   return $message;
 }

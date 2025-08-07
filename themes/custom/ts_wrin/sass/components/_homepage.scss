@@ -63,32 +63,16 @@
   margin-top: 0;
 }
 
-.text-formatted.field--name-field-hero-title p {
-  @include font($acumin-semi-cond, "bold", "normal");
-  @include font-line-height(48, 52);
+.homepage-hero-heading {
   box-sizing: border-box;
   letter-spacing: -1.23px;
-  margin: 0;
-  margin-bottom: $space-sm;
   max-width: 100%;
-
   @include mq($lg) {
-    @include font-line-height(74, 80);
     margin-bottom: $space-md;
     max-width: 90%;
   }
-
   @include mq($xl) {
     max-width: 100%;
-  }
-
-  a {
-    background: none;
-    text-decoration: none;
-    transition: color $transition-defaults;
-    @include hocus {
-      background: none;
-    }
   }
 }
 
@@ -335,5 +319,98 @@
   }
   h3 {
     margin: 0;
+  }
+}
+
+
+// Adding menu css
+
+.page-node-type-homepage {
+  @media (min-width: 48rem) {
+    header:not(.pfp-header).sticky,
+    header:not(.pfp-header).sticky .header-wrapper {
+      height: 90px;
+    }
+    .region-primary-nav,
+    header:not(.pfp-header).sticky .region-primary-nav {
+      flex-direction: column;
+      align-items: start;
+      row-gap: .5rem;
+    }
+
+    header nav.menu--main {
+      display: block;
+      margin-left: 0;
+    }
+    .header-right {
+      flex-wrap: wrap;
+      align-items: start;
+      width: 300px;
+      justify-content: right;
+      row-gap: .5rem;
+      position: relative;
+    }
+    .header-right .menu--donate {
+      position: absolute;
+      right: 130px;
+      top: 10px;
+    }
+    .region-secondary-nav {
+      order: 4;
+    }
+    .region-secondary-nav nav#block-secondarynavigation {
+      display: block;
+    }
+    header nav.menu--donate>ul.menu,
+    header nav.menu--secondary>ul.menu {
+      margin-right: 0;
+    }
+    header nav.menu--secondary>ul.menu {
+      width: 205px;
+    }
+    header nav.menu--main .menu-wrapper>ul.menu li a {
+      font-size: .9rem;
+    }
+    header .site-logo img {
+      height: 36px;
+    }
+  }
+
+  @media (min-width: 79.6875rem) {
+    header:not(.pfp-header).sticky,
+    header:not(.pfp-header).sticky .header-wrapper {
+      height: 60px;
+    }
+    .region-primary-nav,
+    header:not(.pfp-header).sticky .region-primary-nav {
+      flex-direction: row;
+      align-items: center;
+      column-gap: 2rem;
+    }
+    header nav.menu--main .menu-wrapper>ul.menu li a {
+      font-size: .9375rem;
+    }
+    header .site-logo img {
+      height: auto;
+    }
+    .header-right {
+      flex-wrap: wrap;
+      align-items: center;
+      width: auto;
+      justify-content: right;
+    }
+    .header-right .menu--donate {
+      position: static;
+    }
+    .region-secondary-nav {
+      order: 0;
+    }
+    header nav.menu--donate>ul.menu,
+    header nav.menu--secondary>ul.menu {
+      margin-right: 20px;
+    }
+    header nav.menu--secondary>ul.menu {
+      width: 190px;
+    }
   }
 }

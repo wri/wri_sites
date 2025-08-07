@@ -1,0 +1,69 @@
+:root {
+  --primary: var(--color-neutral-900);
+  --secondary: var(--color-neutral-600);
+  --action: var(--color-green-500);
+  /* BTN SOLID */
+  --btn-solid-bg: var(--color-gold-500);
+  --btn-solid-text: var(--color-neutral-900);
+  --btn-solid-bg-hover: var(--color-gold-300);
+  --btn-solid-text-hover: var(--color-neutral-900);
+  --btn-solid-svg: var(--color-neutral-900);
+
+  /* BTN OUTLINE */
+  --btn-outline-bg: var(--color-white);
+  --btn-outline-text: var(--color-neutral-900);
+  --btn-outline-border: var(--color-gold-500);
+  --btn-outline-bg-hover: var(--color-neutral-200);
+}
+.colorway-white {
+  background-color: var(--color-white);
+}
+.colorway-green-500 {
+  background-color: var(--color-green-500);
+  --primary: var(--color-white);
+  --secondary: var(--color-neutral-200);
+  --action: var(--color-white);
+}
+.colorway-gold-500 {
+  background-color: var(--color-gold-500);
+  --primary: var(--color-neutral-900);
+  --secondary: var(--color-neutral-600);
+  --action: var(--color-white);
+
+   /* BTN SOLID */
+    --btn-solid-bg: var(--color-neutral-900);
+    --btn-solid-text: var(--color-white);
+    --btn-solid-bg-hover: var(--color-gold-300);
+    --btn-solid-text-hover: var(--color-neutral-900);
+    --btn-solid-svg: var(--color-white);
+    --btn-solid-svg-hover: var(--color-neutral-900);
+    /* BTN OUTLINE */
+    --btn-outline-border: var(--color-gold-100);
+}
+.colorway-neutral-200 {
+  --primary: var(--color-neutral-900);
+  --action: var(--color-green-500);
+  background-color: var(--color-neutral-200);
+}
+.colorway-neutral-900 {
+  --primary: var(--color-white);
+  --secondary: var(--color-neutral-500);
+  --action: var(--color-gold-500);
+  background-color: var(--color-neutral-900);
+}
+.colorway-blue-500 {
+  --primary: var(--color-white);
+  --secondary: var(--color-neutral-200);
+  --action: var(--color-gold-500);
+  background-color: var(--color-blue-500);
+}
+
+.color-primary {
+  color: var(--primary);
+}
+.color-secondary {
+  color: var(--secondary);
+}
+.color-action {
+  color: var(--action);
+}

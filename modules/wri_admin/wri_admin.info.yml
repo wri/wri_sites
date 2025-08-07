@@ -21,9 +21,10 @@ dependencies:
   - content_snippets
   - contextual
   - ctools_views
-  - diff
   - dblog
   - dblog_persistent
+  - diff
+  - distro_helper
   - ds
   - ds_extras
   - editor

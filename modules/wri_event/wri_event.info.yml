@@ -5,7 +5,26 @@ core_version_requirement: '>=9.5'
 package: WRI
 dependencies:
   - addtocal
+  - allowed_formats
+  - asset_injector
+  - content_moderation
+  - ds
+  - element_class_formatter
+  - field_group
+  - hierarchical_term_formatter
+  - layout_builder
+  - layout_builder_restrictions
+  - layout_discovery
+  - link
+  - media_library
+  - media_responsive_thumbnail
+  - menu_ui
+  - metatag
+  - path
   - smart_date
+  - taxonomy
+  - webform
+  - wri_media
 config_devel:
   install:
     - core.base_field_override.node.event.promote

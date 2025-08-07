@@ -143,52 +143,55 @@ function wri_admin_validate_media_name(array &$form, FormStateInterface $form_st
 function wri_admin_entity_presave(EntityInterface $entity) {
   if ($entity instanceof Media && $entity->hasField('field_media_image')) {
     $file_id = $entity->get('field_media_image')->target_id;
-    $file = File::load($file_id);
+    if ($file_id) {
+      $file = File::load($file_id);
 
-    if ($file) {
-      $original_uri = $file->getFileUri();
-      $pathinfo = pathinfo($original_uri);
+      if ($file) {
+        $original_uri = $file->getFileUri();
+        $pathinfo = pathinfo($original_uri);
 
-      // Transliterate the new filename based on the media Name field.
-      $transliteration = \Drupal::service('transliteration');
-      $media_name = $entity->getName();
+        // Transliterate the new filename based on the media Name field.
+        $transliteration = \Drupal::service('transliteration');
+        $media_name = $entity->getName();
 
-      // Remove the extension from the media name.
-      $media_name = isset($pathinfo['extension']) ? trim($media_name, '.' . $pathinfo['extension']) : $media_name;
+        // Remove the extension from the media name.
+        $media_name = isset($pathinfo['extension']) ? pathinfo($media_name, PATHINFO_FILENAME) : $media_name;
 
-      // Transliterate and replace special characters.
-      $transliterated_name = $transliteration->transliterate($media_name, 'en');
+        // Transliterate and replace special characters.
+        $transliterated_name = $transliteration->transliterate($media_name, 'en');
 
-      // Convert to lowercase and replace spaces/special characters with dashes.
-      $sanitized_name = strtolower(preg_replace('/[^a-zA-Z0-9]+/', '-', trim($transliterated_name)));
+        // Convert to lowercase and replace spaces/special chars with dashes.
+        $sanitized_name = strtolower(preg_replace('/[^a-zA-Z0-9]+/', '-', trim($transliterated_name)));
 
-      // Ensure the filename doesn't end with a dash.
-      $sanitized_name = rtrim($sanitized_name, '-');
+        // Ensure the filename doesn't end with a dash.
+        $sanitized_name = rtrim($sanitized_name, '-');
 
-      $new_filename = $sanitized_name . '.' . $pathinfo['extension'];
+        $new_filename = $sanitized_name . '.' . $pathinfo['extension'];
 
-      // Ensure the new filename does not exist yet.
-      $file_system = \Drupal::service('file_system');
-      $new_uri = $pathinfo['dirname'] . '/' . $new_filename;
-      $new_uri = $file_system->getDestinationFilename($new_uri, FileSystemInterface::EXISTS_RENAME);
+        // Ensure the new filename does not exist yet.
+        $file_system = \Drupal::service('file_system');
+        $new_uri = $pathinfo['dirname'] . '/' . $new_filename;
+        $new_uri = $file_system->getDestinationFilename($new_uri, FileSystemInterface::EXISTS_RENAME);
 
-      try {
-        // Copy the file to the new location.
-        $copy_result = $file_system->copy($original_uri, $new_uri, FileSystemInterface::EXISTS_RENAME);
-        if (!$copy_result) {
-          throw new \Exception("File copy failed for: $original_uri to $new_uri");
+        try {
+          // Copy the file to the new location.
+          $copy_result = $file_system->copy($original_uri, $new_uri, FileSystemInterface::EXISTS_RENAME);
+          if (!$copy_result) {
+            throw new \Exception("File copy failed for: $original_uri to $new_uri");
+          }
+
+          // Update the file entity with the new URI.
+          $file->setFileUri($new_uri);
+          $file->setFilename($new_filename);
+          $file->save();
+
+          // Delete the old file from S3.
+          $file_system->delete($original_uri);
         }
-
-        // Update the file entity with the new URI.
-        $file->setFileUri($new_uri);
-        $file->setFilename($new_filename);
-        $file->save();
-
-        // Delete the old file from S3.
-        $file_system->delete($original_uri);
-      }
-      catch (\Exception $e) {
-        \Drupal::logger('wri_admin')->error('File rename error: @error', ['@error' => $e->getMessage()]);
+        catch (\Exception $e) {
+          \Drupal::logger('wri_admin')
+            ->error('File rename error: @error', ['@error' => $e->getMessage()]);
+        }
       }
     }
   }

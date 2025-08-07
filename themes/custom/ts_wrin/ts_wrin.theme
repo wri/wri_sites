@@ -20,6 +20,14 @@ function ts_wrin_preprocess(array &$variables) {
     $logo_path = theme_get_setting('white_logo.path');
     $variables['footer_logo'] = \Drupal::service('file_url_generator')->generateString($logo_path);
   }
+  $variables['ts_wrin_path'] = \Drupal::service('extension.list.theme')->getPath('ts_wrin');
+  $logo_link = theme_get_setting('logo_link');
+  if ($logo_link) {
+    $variables['logo_link'] = $logo_link;
+  }
+  else {
+    $variables['logo_link'] = '/';
+  }
 }
 
 /**
@@ -58,8 +66,14 @@ function ts_wrin_preprocess_html(array &$variables) {
         case 'program_center':
         case 'microsite':
         case 'project_detail':
-        case 'subpage':
           $variables['attributes']['class'][] = 'transparent-header white';
+          break;
+
+        case 'subpage':
+          $parent_page = $node->get('field_parent_page')->entity;
+          if ($parent_page instanceof NodeInterface && $parent_page->getType() != 'custom_page') {
+            $variables['attributes']['class'][] = 'transparent-header white';
+          }
           break;
 
         case 'publication':
@@ -197,6 +211,23 @@ function ts_wrin_preprocess_field(array &$variables) {
       $variables["items"][0]["content"]["end"]["#text"]["time"]["value"]["#markup"] = $variables["items"][0]["content"]["end"]["#text"]["time"]["value"]["#markup"] . ' ' . $variables["ds-config"]["settings"]["suffix"];
     }
     $variables["ds-config"]["settings"]["suffix"] = '';
+  }
+
+  // Replace tokens, providing both “node” and “paragraph” contexts.
+  if ($variables['field_name'] == 'field_title' && $variables["element"]["#bundle"] == 'social_links_listing') {
+    $paragraph = $variables['element']['#object'];
+    $parent_node = $paragraph->getParentEntity();
+    $raw_value = (string) $variables['items'][0]['content']['#value'];
+    $variables['items'][0]['content']['#value'] = \Drupal::token()->replace(
+      $raw_value,
+      [
+        'node'      => $parent_node,
+        'paragraph' => $paragraph,
+      ],
+      [
+        'clear' => TRUE,
+      ]
+    );
   }
 }
 
