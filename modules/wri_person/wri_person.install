@@ -155,3 +155,10 @@ function wri_person_update_10402() {
   $message = 'Update person form display configs';
   return $message;
 }
+
+/**
+ * Enable the new wri_person_base module.
+ */
+function wri_person_update_10500() {
+  \Drupal::service('module_installer')->install(['wri_person_base']);
+}

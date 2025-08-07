@@ -1,0 +1,9 @@
+name: 'WRI Person Base'
+type: module
+description: 'Core elements of WRI Person nodes used on both spokes and the hub'
+core_version_requirement: '>=9.5'
+package: WRI
+dependencies:
+  - wri_media
+  - wri_node
+  - wri_taxonomy
