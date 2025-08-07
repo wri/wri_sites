@@ -1,14 +1,16 @@
-name: 'WRI Person (full)'
+name: 'WRI Person'
 type: module
-description: 'Person node full functionality, including full display.'
+description: 'Person node functionality.'
 core_version_requirement: '>=9.5'
 package: WRI
 dependencies:
   - wri_author
   - wri_block
   - wri_io_content
+  - wri_media
   - wri_paragraph
-  - wri_person
+  - wri_person_templates
+  - wri_taxonomy
 config_devel:
   install:
     - block_content.type.person_listing

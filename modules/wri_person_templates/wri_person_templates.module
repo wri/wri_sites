@@ -2,12 +2,12 @@
 
 /**
  * @file
- * Person Base module hook implementations.
+ * Person Templates module file.
  */
 
 /**
  * Implement hook_preprocess_HOOK().
  */
-function wri_person_base_preprocess_wri_person_teaser(&$variables) {
+function wri_person_templates_preprocess_wri_person_teaser(&$variables) {
   $variables['ts_wrin_path'] = \Drupal::service('extension.list.theme')->getPath('ts_wrin');
 }

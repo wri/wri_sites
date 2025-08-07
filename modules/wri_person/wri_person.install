@@ -160,5 +160,5 @@ function wri_person_update_10402() {
  * Enable the new wri_person_base module.
  */
 function wri_person_update_10500() {
-  \Drupal::service('module_installer')->install(['wri_person_base']);
+  \Drupal::service('module_installer')->install(['wri_person_templates']);
 }
