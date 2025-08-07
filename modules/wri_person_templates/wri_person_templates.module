@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Person Templates module file.
+ */
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function wri_person_templates_preprocess_wri_person_teaser(&$variables) {
+  $variables['ts_wrin_path'] = \Drupal::service('extension.list.theme')->getPath('ts_wrin');
+}

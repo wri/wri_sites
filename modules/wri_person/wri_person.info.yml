@@ -1,6 +1,6 @@
-name: 'WRI person'
+name: 'WRI Person'
 type: module
-description: 'Modules related to people on WRI'
+description: 'Person node functionality.'
 core_version_requirement: '>=9.5'
 package: WRI
 dependencies:
@@ -8,8 +8,8 @@ dependencies:
   - wri_block
   - wri_io_content
   - wri_media
-  - wri_node
   - wri_paragraph
+  - wri_person_templates
   - wri_taxonomy
 config_devel:
   install:
@@ -46,6 +46,7 @@ config_devel:
     - field.field.node.person.field_profile_image
     - field.field.node.person.field_project_expert
     - field.field.node.person.field_quote
+    - field.field.node.person.field_social_links
     - field.field.node.person.field_staff_group
     - field.field.node.person.field_title
     - field.field.node.person.field_topics
