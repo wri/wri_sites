@@ -57,10 +57,9 @@ function wri_article_update_10102() {
     'dependencies#config',
     'third_party_settings#ds#regions#main_content',
     'content#field_contributing_authors',
-    'hidden'
+    'hidden',
   ], 'wri_article');
 
   $message = 'Add field field_contributing_authors and update view modes.';
   return $message;
 }
-
