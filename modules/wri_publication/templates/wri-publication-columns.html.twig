@@ -88,39 +88,49 @@
             </div>
            </div>
       {% endif %}
-      {% if content.category or content.share %}
-        <div class="detail__meta meta grid margin-top-md margin-bottom-md">
-          <div class="detail__meta-inner meta-inner {% if content.sidebar.field_narrative_taxonomy|render %}two-column{% endif %}">
-            {% if content.category %}
-            <div {{ region_attributes.category.addClass('layout__region', 'layout__region--category') }}>
-              {{ content.category }}
-            </div>
-            {% endif %}
 
-            {% if content.share %}
-            <div {{ region_attributes.share.addClass('layout__region', 'layout__region--share') }}>
-              {{ content.share }}
-            </div>
-            {% endif %}
-          </div>
-          {% if show_narrative_taxonomy == true %}
-            {% if content.sidebar.field_narrative_taxonomy|render %}
-              <div class="detail__meta-secondary">
-                {{ content.sidebar.field_narrative_taxonomy }}
+
+      <div class="publication__main grid margin-top-md">
+
+        {% if content.category or content.share %}
+            <div class="detail__meta-inner meta-inner margin-bottom-md {% if content.sidebar.field_narrative_taxonomy|render %}two-column{% endif %}">
+              {% if content.category %}
+              <div {{ region_attributes.category.addClass('layout__region', 'layout__region--category') }}>
+                {{ content.category }}
               </div>
-            {% endif %}
-          {% endif %}
-        </div>
-      {% endif %}
+              {% endif %}
 
-      <div class="publication__main grid margin-top-lg">
+              {% if content.share %}
+              <div {{ region_attributes.share.addClass('layout__region', 'layout__region--share') }}>
+                  <div class="mobile-social visit-on-social margin-right-md">{{ content.sidebar.field_social_sharing_links }}</div>
+                {{ content.share }}
+              </div>
+              {% endif %}
+              <div class="publication__image-inner">
+                <div {{ region_attributes.share.addClass('layout__region', 'layout__region--featured-image') }}>
+                {% if content.featured_image|render %}
+                  <div class="margin-top-md">
+                  {{ content.featured_image }}
+                  </div>
+                {% endif %}
+                </div>
+              </div>
+            </div>
+            {% if show_narrative_taxonomy == true %}
+              {% if content.sidebar.field_narrative_taxonomy|render %}
+                <div class="detail__meta-secondary">
+                  {{ content.sidebar.field_narrative_taxonomy }}
+                </div>
+              {% endif %}
+            {% endif %}
+        {% endif %}
 
         {% if content.sidebar %}
           <div {{ region_attributes.sidebar.addClass('layout__region', 'layout__region--sidebar', 'sidebar') }}>
             {% if show_narrative_taxonomy == true %}
               {{ content.sidebar.field_narrative_taxonomy }}
             {% endif %}
-            {{ content.sidebar|without('field_narrative_taxonomy') }}
+            <div class="desktop-social">{{ content.sidebar|without('field_narrative_taxonomy') }}</div>
 
             {# If robust display show isbn and doi in sidebar #}
             {% if display_type == 'robust' %}
@@ -133,7 +143,7 @@
         {% endif %}
 
         {% if content.featured_image|render %}
-          <div class="publication__image margin-bottom-lg">
+          <div class="publication__image margin-bottom-sm">
             <div class="publication__image-inner">
               <div {{ region_attributes.share.addClass('layout__region', 'layout__region--featured-image') }}>
                 {{ content.featured_image }}

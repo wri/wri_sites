@@ -1,6 +1,6 @@
 services:
   wri_spoke.path_outbound_host_processor:
     class: Drupal\wri_spoke\Path\SpokeHostProcessor
-    arguments: ['@entity_type.manager']
+    arguments: ['@router.admin_context', '@entity_type.manager']
     tags:
       - { name: path_processor_outbound, priority: -10 }

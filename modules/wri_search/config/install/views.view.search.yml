@@ -361,7 +361,20 @@ display:
           content: '<span class=''totals''>Displaying @start - @end of @total</span>'
           plugin_id: result
       footer: {  }
-      empty: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: 'Sorry, no results for those terms.'
+            format: basic_html
+          tokenize: true
       relationships: {  }
       arguments: {  }
       display_extenders: {  }

@@ -5,6 +5,7 @@ namespace Drupal\wri_spoke\Path;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\PathProcessor\OutboundPathProcessorInterface;
 use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\Routing\AdminContext;
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +14,13 @@ use Symfony\Component\HttpFoundation\Request;
  * Overrides canonical URLs for events to point to the hub.
  */
 class SpokeHostProcessor implements OutboundPathProcessorInterface {
+
+  /**
+   * The admin context service.
+   *
+   * @var \Drupal\Core\Routing\AdminContext
+   */
+  protected $adminContext;
 
   /**
    * The entity type manager.
@@ -24,10 +32,13 @@ class SpokeHostProcessor implements OutboundPathProcessorInterface {
   /**
    * Constructs a path processor.
    *
+   * @param \Drupal\Core\Routing\AdminContext $admin_context
+   *   The admin context service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The Entity Type Manager.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(AdminContext $admin_context, EntityTypeManagerInterface $entity_type_manager) {
+    $this->adminContext = $admin_context;
     $this->entityTypeManager = $entity_type_manager;
   }
 
@@ -73,9 +84,9 @@ class SpokeHostProcessor implements OutboundPathProcessorInterface {
       $hub_url = parse_url($node->field_hub_canonical_url->value);
       $options['base_url'] = $hub_url['scheme'] . "://" . $hub_url['host'];
       // The prefix is used to add a translation code, but in this case we don't
-      // need it added: it's already there if it's translated content.
+      // need it added: we have our full URL coming from the hub url field.
       unset($options["prefix"]);
-      if ($request) {
+      if ($request && !$this->adminContext->isAdminRoute()) {
         $options['query']['returnTo'] = $request->getScheme() . "://" . $request->getHttpHost() . $request->getRequestUri();
       }
       $path = $hub_url['path'];
