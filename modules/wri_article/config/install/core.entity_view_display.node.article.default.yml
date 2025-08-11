@@ -4,6 +4,7 @@ dependencies:
   config:
     - field.field.node.article.body
     - field.field.node.article.field_authors
+    - field.field.node.article.field_contributing_authors
     - field.field.node.article.field_exclude_from_blog_feed
     - field.field.node.article.field_featured
     - field.field.node.article.field_featured_headline
@@ -48,6 +49,14 @@ content:
       link: true
     third_party_settings: {  }
     weight: 117
+    region: content
+  field_contributing_authors:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 118
     region: content
   field_exclude_from_blog_feed:
     type: boolean

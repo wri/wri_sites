@@ -4,6 +4,7 @@ dependencies:
   config:
     - field.field.node.article.body
     - field.field.node.article.field_authors
+    - field.field.node.article.field_contributing_authors
     - field.field.node.article.field_exclude_from_blog_feed
     - field.field.node.article.field_featured
     - field.field.node.article.field_featured_headline
@@ -134,6 +135,23 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_authors:
+    type: inline_entity_form_complex
+    weight: -1
+    region: content
+    settings:
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      allow_duplicate: false
+      collapsible: false
+      collapsed: false
+      revision: false
+    third_party_settings: {  }
+  field_contributing_authors:
     type: inline_entity_form_complex
     weight: 0
     region: content

@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - wri_author
+id: node.field_contributing_authors
+field_name: field_contributing_authors
+entity_type: node
+type: entity_reference
+settings:
+  target_type: wri_author
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

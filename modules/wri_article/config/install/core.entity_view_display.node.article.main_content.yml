@@ -5,6 +5,7 @@ dependencies:
     - core.entity_view_mode.node.main_content
     - field.field.node.article.body
     - field.field.node.article.field_authors
+    - field.field.node.article.field_contributing_authors
     - field.field.node.article.field_exclude_from_blog_feed
     - field.field.node.article.field_featured
     - field.field.node.article.field_featured_headline
@@ -61,6 +62,7 @@ third_party_settings:
         - field_tags
       main_content:
         - body
+        - field_contributing_authors
     fields:
       node_post_date:
         plugin_id: node_post_date
@@ -162,6 +164,44 @@ content:
             suffix: ''
     weight: 4
     region: byline
+  field_contributing_authors:
+    type: list_of_authors
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: small
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: '<strong><small>Contributing Authors: </small></strong>'
+            suffix: ''
+    weight: 11
+    region: main_content
   field_main_image:
     type: media_responsive_thumbnail
     label: hidden
