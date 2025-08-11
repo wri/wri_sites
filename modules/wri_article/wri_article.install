@@ -38,10 +38,12 @@ function wri_article_update_10101() {
     'content#field_featured_tweet',
   ], 'wri_article');
 }
+
 /**
- * Update the Featured tweet field to remove text count.
+ * Add & configure the 'Contributing authors' field.
  */
 function wri_article_update_10102() {
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.article.field_contributing_authors', 'wri_article');
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.article.default', [
     'dependencies#config',
     'content#field_authors',
@@ -52,4 +54,7 @@ function wri_article_update_10102() {
     'third_party_settings#ds#regions#main_content',
     'content#field_contributing_authors',
   ], 'wri_article');
+
+  $message = 'Add field field_contributing_authors and update view modes.';
+  return $message;
 }
