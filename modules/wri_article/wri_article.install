@@ -40,12 +40,16 @@ function wri_article_update_10101() {
 }
 
 /**
- * Add & configure the 'Contributing authors' field.
+ * Add the 'Contributing authors' field.
  */
 function wri_article_update_10102() {
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_contributing_authors', 'wri_article');
   \Drupal::service('distro_helper.updates')->installConfig('field.field.node.article.field_contributing_authors', 'wri_article');
+
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.article.default', [
     'dependencies#config',
+    'content#title',
+    'content#field_main_image',
     'content#field_authors',
     'content#field_contributing_authors',
   ], 'wri_article');
@@ -53,8 +57,10 @@ function wri_article_update_10102() {
     'dependencies#config',
     'third_party_settings#ds#regions#main_content',
     'content#field_contributing_authors',
+    'hidden'
   ], 'wri_article');
 
   $message = 'Add field field_contributing_authors and update view modes.';
   return $message;
 }
+

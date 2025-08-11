@@ -225,7 +225,7 @@ content:
         hide_guidelines: '1'
   field_main_image:
     type: media_library_widget
-    weight: -1
+    weight: -2
     region: content
     settings:
       media_types: {  }
@@ -329,7 +329,7 @@ content:
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: -2
+    weight: -3
     region: content
     settings:
       size: 60
