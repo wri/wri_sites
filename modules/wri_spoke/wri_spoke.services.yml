@@ -3,4 +3,4 @@ services:
     class: Drupal\wri_spoke\Path\SpokeHostProcessor
     arguments: ['@router.admin_context', '@entity_type.manager']
     tags:
-      - { name: path_processor_outbound, priority: 3000 }
+      - { name: path_processor_outbound, priority: -10 }

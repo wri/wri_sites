@@ -76,10 +76,16 @@ class SpokeHostProcessor implements OutboundPathProcessorInterface {
     if (!($node instanceof Node)) {
       return $path;
     }
+    if (isset($options['language'])) {
+      $node = $node->getTranslation($options['language']->getId());
+    }
     if ($node->bundle() == 'event' && $node->field_hub_canonical_url->value) {
       $options['absolute'] = TRUE;
       $hub_url = parse_url($node->field_hub_canonical_url->value);
       $options['base_url'] = $hub_url['scheme'] . "://" . $hub_url['host'];
+      // The prefix is used to add a translation code, but in this case we don't
+      // need it added: we have our full URL coming from the hub url field.
+      unset($options["prefix"]);
       if ($request && !$this->adminContext->isAdminRoute()) {
         $options['query']['returnTo'] = $request->getScheme() . "://" . $request->getHttpHost() . $request->getRequestUri();
       }
