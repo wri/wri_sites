@@ -76,7 +76,7 @@ class EntityShareCronSettingsForm extends ConfigFormBase {
         'events_brasil' => $this->t('Events for WRI Brasil'),
         'events_brasil_pt_br' => $this->t('Events for WRI Brasil (Portuguese, Brazil)'),
         'events_china' => $this->t('Events for WRI China'),
-        'events_china_zh_hans' => $this->t('Events for WRI China (Chinese, Simplified'),
+        'events_china_zh_hans' => $this->t('Events for WRI China (Chinese, Simplified)'),
         'events_espanol' => $this->t('Events for WRI Espanol'),
         'events_espanol_es' => $this->t('Events for WRI Espanol (Spanish)'),
         'events_flagship' => $this->t('Events for WRI Flagship'),
