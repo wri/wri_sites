@@ -213,3 +213,15 @@ function wri_event_update_10005() {
       'content#addtocal',
     ], 'wri_event');
 }
+
+/**
+ * Update the registration field to be translatable.
+ */
+function wri_event_update_10006() {
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.node.event.field_register', [
+    'translatable',
+  ], 'wri_event');
+
+  $message = 'Event registration field is now translatable.';
+  return $message;
+}
