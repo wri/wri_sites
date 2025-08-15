@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contributing_authors
+    - filter.format.basic_html
+    - node.type.article
+  module:
+    - text
+id: node.article.field_contributing_authors
+field_name: field_contributing_authors
+entity_type: node
+bundle: article
+label: 'Contributing authors'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+field_type: text_long

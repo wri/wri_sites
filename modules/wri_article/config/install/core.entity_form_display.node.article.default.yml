@@ -4,6 +4,7 @@ dependencies:
   config:
     - field.field.node.article.body
     - field.field.node.article.field_authors
+    - field.field.node.article.field_contributing_authors
     - field.field.node.article.field_exclude_from_blog_feed
     - field.field.node.article.field_featured
     - field.field.node.article.field_featured_headline
@@ -87,6 +88,7 @@ third_party_settings:
       children:
         - field_related_resources
         - field_projects
+        - field_contributing_authors
       label: Related
       region: content
       parent_name: group_more
@@ -150,6 +152,17 @@ content:
       collapsed: false
       revision: false
     third_party_settings: {  }
+  field_contributing_authors:
+    type: text_textarea
+    weight: 104
+    region: content
+    settings:
+      rows: 4
+      placeholder: ''
+    third_party_settings:
+      allowed_formats:
+        hide_help: '1'
+        hide_guidelines: '0'
   field_exclude_from_blog_feed:
     type: boolean_checkbox
     weight: 101
