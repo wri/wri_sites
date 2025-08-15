@@ -36,7 +36,7 @@ if [ -n "$(drush config:status --format=list)" ]; then
 
   # Pull config into build container
   terminus self:plugin:install terminus-rsync-plugin
-  terminus rsync "$TERMINUS_SITE.live-backup:/tmp/config/sync" ./config/sync
+  terminus rsync "$TERMINUS_SITE.live-backup:/tmp/config/sync" ./config
 
   # Commit if there are changes (unsure if this should be done...does a human need to review this first during deployment?)
   git add config/sync/
