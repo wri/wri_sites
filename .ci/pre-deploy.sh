@@ -17,7 +17,7 @@ terminus multidev:create "$TERMINUS_SITE".live live-backup
 terminus backup:create "$TERMINUS_SITE".test && terminus env:clone-content "$TERMINUS_SITE".live test -y && terminus drush "$TERMINUS_SITE".test -- sapi-sc pantheon
 
 # Check to see if there is live config to export
-if [ -n "$(drush config:status --format=list)" ]; then
+if [ -n "$(terminus drush "$TERMINUS_SITE".live-backup -- config:status --format=list)" ]; then
   echo "Config changes detected. Creating live config branch..."
 
   # Getting latest Pantheon tag
