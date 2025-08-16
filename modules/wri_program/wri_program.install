@@ -38,6 +38,35 @@ function wri_program_update_dependencies() {
     'wri_sites' => 8908,
     'wri_io_content' => 9301,
   ];
+  $dependencies['wri_program'][10401] = [
+    'wri_node' => 10401,
+  ];
 
   return $dependencies;
+}
+
+/**
+ * Add field_social_links and update all view modes.
+ */
+function wri_program_update_10401() {
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.program_center.field_social_sharing_links', 'wri_program');
+  $message = 'Add field Social Sharing Links and update view modes.';
+  return $message;
+}
+
+/**
+ * Update program form display.
+ */
+function wri_program_update_10402() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.program_center.default', [
+    'content#field_social_sharing_links',
+    'content#field_twitter_account',
+  ], 'wri_program');
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.program_center.full', [
+    'third_party_settings#layout_builder#sections',
+    'third_party_settings#layout_builder_restrictions',
+  ], 'wri_program');
+
+  $message = 'Update program form display configs';
+  return $message;
 }
