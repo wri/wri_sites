@@ -162,3 +162,13 @@ function wri_person_update_10402() {
 function wri_person_update_10500() {
   \Drupal::service('module_installer')->install(['wri_person_templates']);
 }
+
+/**
+ * Add a class to person teaser titles.
+ */
+function wri_person_update_10501() {
+  if (!\Drupal::service('module_handler')->moduleExists('wri_hub') && !\Drupal::service('module_handler')->moduleExists('wri_hub_event')) {
+    \Drupal::service('distro_helper.updates')
+      ->updateConfig('core.entity_view_display.node.person.teaser', ['third_party_settings#ds#fields#node_title#settings'], 'wri_person');
+  }
+}

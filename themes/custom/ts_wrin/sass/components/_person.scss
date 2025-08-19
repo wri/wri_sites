@@ -233,8 +233,7 @@
     margin-left: $space-sm;
   }
 
-  .right-section a {
-    @include font($acumin-semi-cond, light);
+  .right-section .person-title {
     @include font-line-height(32, 38);
   }
 
