@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Update hooks for the spoke.
+ */
+
+/**
+ * Add the registration link processor.
+ */
+function wri_spoke_update_10500() {
+  \Drupal::service('distro_helper.updates')->updateConfig(
+    'entity_share_client.import_config.hub_events',
+    ['import_processor_settings#default_registration_link'], 'wri_spoke');
+}
