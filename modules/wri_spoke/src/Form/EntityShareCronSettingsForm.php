@@ -67,19 +67,25 @@ class EntityShareCronSettingsForm extends ConfigFormBase {
       '#title' => $this->t('Remote'),
       '#default_value' => $settings['remote'] ?? '',
     ];
+    $channel_settings = is_array($settings['channel']) ? $settings['channel'] : [$settings['channel']];
     $form['channel'] = [
-      '#type' => 'select',
+      '#type' => 'checkboxes',
       '#options' => [
         'events_africa' => $this->t('Events for WRI Africa'),
+        'events_africa_fr' => $this->t('Events for WRI Africa (French)'),
         'events_brasil' => $this->t('Events for WRI Brasil'),
+        'events_brasil_pt_br' => $this->t('Events for WRI Brasil (Portuguese, Brazil)'),
         'events_china' => $this->t('Events for WRI China'),
+        'events_china_zh_hans' => $this->t('Events for WRI China (Chinese, Simplified)'),
         'events_espanol' => $this->t('Events for WRI Espanol'),
+        'events_espanol_es' => $this->t('Events for WRI Espanol (Spanish)'),
         'events_flagship' => $this->t('Events for WRI Flagship'),
         'events_india' => $this->t('Events for WRI India'),
         'events_indonesia' => $this->t('Events for WRI Indonesia'),
+        'events_indonesia_id' => $this->t('Events for WRI Indonesia (Indonesian)'),
       ],
       '#title' => $this->t('Channel'),
-      '#default_value' => $settings['channel'] ?? '',
+      '#default_value' => $channel_settings,
     ];
     $form['limit'] = [
       '#type' => 'number',
@@ -87,11 +93,19 @@ class EntityShareCronSettingsForm extends ConfigFormBase {
       '#default_value' => $settings['limit'] ?? 20,
     ];
     $form['changed_since'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Last synced change time'),
-      '#description' => $this->t('Do not edit this unless you know what you are doing. Setting it to 0 will cause event synchronization to go back to the oldest events on the Hub and work forward slowly.'),
-      '#default_value' => $settings['changed_since'] ?? 0,
+      '#type' => 'fieldset',
+      '#title' => $this->t('Last synced change times by channel'),
+      '#tree' => TRUE,
     ];
+    foreach ($settings['changed_since'] as $id => $value) {
+      $form['changed_since'][$id] = [
+        '#type' => 'textfield',
+        '#title' => $form['channel']['#options'][$id],
+        '#description' => $this->t('Do not edit this unless you know what you are doing. Setting it to 0 will cause event synchronization to go back to the oldest events on the Hub and work forward slowly.'),
+        '#default_value' => $value ?? 0,
+      ];
+
+    }
 
     return $form;
   }
@@ -106,6 +120,25 @@ class EntityShareCronSettingsForm extends ConfigFormBase {
     $config = $this->config(self::SETTINGS);
     foreach ($values as $key => $val) {
       $config->set($key, $val);
+    }
+    $changed_since = $config->get('changed_since');
+    if (!is_array($changed_since)) {
+      $changed_since = [
+        current($form["channel"]["#value"]) => $changed_since,
+      ];
+    }
+    $new_channels = FALSE;
+    foreach ($values["channel"] as $id => $selected) {
+      if ($selected && !isset($changed_since[$id])) {
+        $changed_since[$id] = 0;
+        $new_channels = TRUE;
+      }
+    }
+    if ($new_channels) {
+      unset($changed_since[0]);
+      unset($changed_since[1]);
+      unset($changed_since[2]);
+      $config->set('changed_since', $changed_since);
     }
     $config->save();
   }
