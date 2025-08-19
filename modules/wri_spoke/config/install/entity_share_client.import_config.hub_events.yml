@@ -35,9 +35,6 @@ import_processor_settings:
     weights:
       prepare_importable_entity_data: 20
     max_recursion_depth: -1
-  s3_to_s3_importer:
-    weights:
-      process_entity: 0
   skip_imported:
     weights:
       is_entity_importable: -5
