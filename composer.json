@@ -151,6 +151,7 @@
         "drupal/ctools": "^4.0",
         "drupal/dblog_persistent": "^2.1",
         "drupal/diff": "^1.0",
+        "drupal/distro_helper": "^1.0",
         "drupal/ds": "^3.0",
         "drupal/editor_advanced_link": "^2.2",
         "drupal/element_class_formatter": "^2.0@beta",
@@ -220,8 +221,7 @@
         "mglaman/composer-drupal-lenient": "*",
         "npm-asset/jquery.toc": "^0.4.0",
         "oomphinc/composer-installers-extender": "^2.0",
-        "solarium/solarium": "^6.1.5",
-        "thinkshout/distro_helper": "^1.0"
+        "solarium/solarium": "^6.1.5"
     },
     "config": {
         "sort-packages": true,
