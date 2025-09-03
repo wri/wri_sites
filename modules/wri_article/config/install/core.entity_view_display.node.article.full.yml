@@ -5,6 +5,7 @@ dependencies:
     - core.entity_view_mode.node.full
     - field.field.node.article.body
     - field.field.node.article.field_authors
+    - field.field.node.article.field_contributing_authors
     - field.field.node.article.field_exclude_from_blog_feed
     - field.field.node.article.field_featured
     - field.field.node.article.field_featured_headline
@@ -130,6 +131,7 @@ content:
     region: content
 hidden:
   field_authors: true
+  field_contributing_authors: true
   field_exclude_from_blog_feed: true
   field_featured: true
   field_featured_headline: true

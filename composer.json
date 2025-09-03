@@ -151,6 +151,7 @@
         "drupal/ctools": "^4.0",
         "drupal/dblog_persistent": "^2.1",
         "drupal/diff": "^1.0",
+        "drupal/distro_helper": "^1.0",
         "drupal/ds": "^3.0",
         "drupal/editor_advanced_link": "^2.2",
         "drupal/element_class_formatter": "^2.0@beta",
@@ -206,6 +207,7 @@
         "drupal/token_filter": "^2.1",
         "drupal/twig_tweak": "^3.2",
         "drupal/twitter_api_block": "^4.0",
+        "drupal/ultimate_cron": "^2.0@alpha",
         "drupal/viewfield": "^3.0@beta",
         "drupal/views_arg_order_sort": "dev-8.x-1.x",
         "drupal/views_autosubmit": "^1.4",
@@ -219,8 +221,7 @@
         "mglaman/composer-drupal-lenient": "*",
         "npm-asset/jquery.toc": "^0.4.0",
         "oomphinc/composer-installers-extender": "^2.0",
-        "solarium/solarium": "^6.1.5",
-        "thinkshout/distro_helper": "^1.0"
+        "solarium/solarium": "^6.1.5"
     },
     "config": {
         "sort-packages": true,

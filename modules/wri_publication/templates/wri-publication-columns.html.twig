@@ -106,9 +106,13 @@
                 {{ content.share }}
               </div>
               {% endif %}
-              <div class="publication__image-inner margin-top-md">
+              <div class="publication__image-inner">
                 <div {{ region_attributes.share.addClass('layout__region', 'layout__region--featured-image') }}>
+                {% if content.featured_image|render %}
+                  <div class="margin-top-md">
                   {{ content.featured_image }}
+                  </div>
+                {% endif %}
                 </div>
               </div>
             </div>
