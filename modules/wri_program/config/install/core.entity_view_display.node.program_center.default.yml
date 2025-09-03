@@ -11,7 +11,6 @@ dependencies:
     - field.field.node.program_center.field_main_image
     - field.field.node.program_center.field_metatag
     - field.field.node.program_center.field_narrative_taxonomy
-    - field.field.node.program_center.field_paragraphs
     - field.field.node.program_center.field_primary_contacts
     - field.field.node.program_center.field_primary_topic
     - field.field.node.program_center.field_show_more_link
@@ -91,7 +90,6 @@ hidden:
   field_featured_project: true
   field_intro: true
   field_main_image: true
-  field_paragraphs: true
   field_primary_contacts: true
   field_primary_topic: true
   field_show_more_link: true

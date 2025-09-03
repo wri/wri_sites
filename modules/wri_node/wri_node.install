@@ -217,7 +217,7 @@ function wri_node_update_10406() {
  * @param array $content_types
  *   The content types to process.
  */
-function wri_update_twitter_replacement($content_types, $field_name = 'field_paragraphs') {
+function wri_update_twitter_replacement($content_types, $field_name = 'field_social_links') {
   // Query for nodes with a non-empty field_twitter_account.
   $query = \Drupal::entityQuery('node')
     ->accessCheck(FALSE)
