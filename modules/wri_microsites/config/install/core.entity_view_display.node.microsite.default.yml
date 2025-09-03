@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.microsite.field_metatags
     - field.field.node.microsite.field_primary_contacts
     - field.field.node.microsite.field_project_partners
+    - field.field.node.microsite.field_social_sharing_links
     - field.field.node.microsite.field_theme
     - field.field.node.microsite.field_toc
     - field.field.node.microsite.field_twitter_account
@@ -42,7 +43,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 5
+    weight: 2
     region: content
   field_long_title:
     type: text_default
@@ -61,6 +62,7 @@ hidden:
   field_metatags: true
   field_primary_contacts: true
   field_project_partners: true
+  field_social_sharing_links: true
   field_theme: true
   field_toc: true
   field_twitter_account: true

@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the wri_microsites module.
+ */
+
+/**
+ * Add field_social_sharing_links and update all view modes.
+ */
+function wri_microsites_update_10401() {
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.microsite.field_social_sharing_links', 'wri_microsites');
+
+  $message = 'Add field Social Sharing Links and update view modes.';
+  return $message;
+}
+
+/**
+ * Update microsites form display.
+ */
+function wri_microsites_update_10403() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.microsite.default', [
+    'content#field_social_sharing_links',
+    'content#field_twitter_account',
+  ], 'wri_microsites');
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.microsite.main_content', [
+    'content#field_social_sharing_links',
+    'third_party_settings#ds#regions#share',
+    'third_party_settings#ds#regions#sidebar',
+  ], 'wri_microsites');
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.microsite.hero_on_a_subpage', [
+    'content#field_social_sharing_links',
+    'third_party_settings#ds#regions#share',
+    'third_party_settings#ds#regions#sidebar',
+  ], 'wri_microsites');
+
+  $message = 'Update microsite form display configs';
+  return $message;
+}
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_microsites_update_dependencies() {
+  $dependencies['wri_microsites'][10401] = [
+    'wri_node' => 10401,
+  ];
+  return $dependencies;
+}

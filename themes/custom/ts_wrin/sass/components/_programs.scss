@@ -65,6 +65,13 @@
   .block-inline-blockhero {
     z-index: 1;
   }
+
+  .paragraph--type--social-links-listing {
+    margin-bottom: 32px;
+    .field--name-field-social-links {
+      display: flex;
+    }
+  }
 }
 .block-field-blocknodeprogram-centerfield-twitter-account {
   display: flex;
