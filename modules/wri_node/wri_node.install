@@ -200,6 +200,7 @@ function wri_node_update_10405() {
 
   wri_update_twitter_replacement($content_types, 'field_social_sharing_links');
 }
+
 /**
  * Migrate field_twitter_account values into a social_media_sites paragraph.
  */
