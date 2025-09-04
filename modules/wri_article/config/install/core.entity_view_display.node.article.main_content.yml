@@ -179,12 +179,12 @@ content:
             lb: ''
             lbw: true
             lbw-el: div
-            lbw-cl: 'margin-top-md h4'
+            lbw-cl: 'margin-top-md utility-base font-bold'
             lbw-at: ''
             lb-col: true
             ow: true
             ow-el: span
-            ow-cl: utility-lg
+            ow-cl: utility-base
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
