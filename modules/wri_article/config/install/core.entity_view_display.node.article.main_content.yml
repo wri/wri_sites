@@ -40,6 +40,9 @@ third_party_settings:
   ds:
     layout:
       id: 'single_file_component_layout:wri_article_columns'
+      library: null
+      disable_css: false
+      entity_classes: all_classes
       settings:
         label: ''
     regions:
@@ -166,7 +169,7 @@ content:
     region: byline
   field_contributing_authors:
     type: text_default
-    label: hidden
+    label: above
     settings: {  }
     third_party_settings:
       ds:
@@ -174,14 +177,14 @@ content:
           id: expert
           settings:
             lb: ''
-            lbw: false
-            lbw-el: ''
-            lbw-cl: ''
+            lbw: true
+            lbw-el: div
+            lbw-cl: 'margin-top-md h4'
             lbw-at: ''
-            lb-col: false
+            lb-col: true
             ow: true
             ow-el: span
-            ow-cl: contributing-authors
+            ow-cl: utility-lg
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
@@ -195,8 +198,8 @@ content:
             fi-cl: ''
             fi-at: ''
             fi-def-at: false
-            prefix: '<div class="margin-top-md"><strong>Contributing Authors: </strong>'
-            suffix: '</div>'
+            prefix: ''
+            suffix: ''
     weight: 11
     region: main_content
   field_main_image:
@@ -205,6 +208,8 @@ content:
     settings:
       responsive_image_style: article_hero_large_cta
       image_link: ''
+      image_loading:
+        attribute: lazy
     third_party_settings:
       wri_media:
         min_width: '1500'
@@ -344,7 +349,7 @@ content:
             fi-def-at: false
             prefix: ''
             suffix: ''
-    weight: 0
+    weight: 5
     region: bundle
   wri_social_sharing_block:
     settings: {  }
@@ -352,6 +357,7 @@ content:
     weight: 8
     region: share
 hidden:
+  addtocal: true
   field_exclude_from_blog_feed: true
   field_featured: true
   field_featured_headline: true
