@@ -52,7 +52,9 @@ class DefaultRegistrationLink extends ImportProcessorPluginBase implements Plugi
    * {@inheritdoc}
    */
   public function prepareImportableEntityData(RuntimeImportContext $runtime_import_context, array &$entity_json_data): void {
-    if (empty($entity_json_data['attributes']['field_register'])) {
+      $zoom_id = $entity_json_data['attributes']['field_zoom_webinar_id'] ?? false;
+
+    if (empty($entity_json_data['attributes']['field_register']) && $zoom_id) {
       $entity_json_data['attributes']['field_register'] = $entity_json_data['attributes']['field_hub_canonical_url'] . '#register';
     }
   }
