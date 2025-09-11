@@ -77,10 +77,11 @@ class SpokeHostProcessor implements OutboundPathProcessorInterface {
       return $path;
     }
     if (isset($options['language'])) {
-        try {
-            $node = $node->getTranslation($options['language']->getId());
-        }
-        catch (\Exception $e) {}
+      try {
+        $node = $node->getTranslation($options['language']->getId());
+      }
+      catch (\Exception $e) {
+      }
     }
     if ($node->bundle() == 'event' && $node->field_hub_canonical_url->value) {
       $options['absolute'] = TRUE;
