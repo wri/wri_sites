@@ -92,3 +92,16 @@ function wri_project_update_10402() {
   $message = 'Update project form display configs';
   return $message;
 }
+
+/**
+ * Updating a few settings for the Social Media Sites paragraph.
+ */
+function wri_project_update_10403() {
+
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.project_detail.default', [
+    'content#field_social_sharing_links',
+  ], 'wri_project');
+
+  $message = 'Updated Social Media Sites widgets to be translatable.';
+  return $message;
+}
