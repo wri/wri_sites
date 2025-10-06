@@ -32,7 +32,7 @@ class BlockCreate extends WidgetBase {
    * {@inheritdoc}
    */
   public function getForm(array &$original_form, FormStateInterface $form_state, array $aditional_widget_parameters) {
-    // Get current page post values;
+    // Get current page post values;.
     $request = \Drupal::request();
     $current_path = $request->getRequestUri();
     $block_types = $this->configuration['block_type'];
@@ -44,8 +44,8 @@ class BlockCreate extends WidgetBase {
       foreach ($block_types as $block_type) {
         if (!empty($block_type)) {
           $url = Url::fromRoute('block_content.add_form', ['block_content_type' => $block_type], ['query' => ['destination' => $current_path], 'attributes' => ['class' => ['use-ajax'], 'data-dialog-type' => 'modal']]);
-          $links[]  = Link::fromTextAndUrl($this->t('Create a @type block', ['@type' => $block_type]), $url );
-          //$links[] = '<a href="/block/add/' . $block_type . '?destination=' . $current_path . '" class="use-ajax" data-dialog-type="modal">' . $this->t('Create a @type block', ['@type' => $block_type]) . '</a>';
+          $links[] = Link::fromTextAndUrl($this->t('Create a @type block', ['@type' => $block_type]), $url);
+          // $links[] = '<a href="/block/add/' . $block_type . '?destination=' . $current_path . '" class="use-ajax" data-dialog-type="modal">' . $this->t('Create a @type block', ['@type' => $block_type]) . '</a>';
         }
       }
       return [
