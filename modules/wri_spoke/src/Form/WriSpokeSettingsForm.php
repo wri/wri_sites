@@ -38,4 +38,5 @@ final class WriSpokeSettingsForm extends ConfigFormBase {
     ];
     return parent::buildForm($form, $form_state);
   }
+
 }
