@@ -7,3 +7,11 @@ wri_spoke.cron.settings:
     _admin_route: TRUE
   requirements:
     _permission: 'administer site configuration'
+
+wri_spoke.wri_spoke_settings:
+  path: 'admin/config/services/entity_share/wri-spoke-settings'
+  defaults:
+    _title: 'Wri spoke settings'
+    _form: 'Drupal\wri_spoke\Form\WriSpokeSettingsForm'
+  requirements:
+    _permission: 'entity_share_access_config_pages'
