@@ -4,3 +4,9 @@ wri_spoke.cron.settings:
   title: 'Cron Settings'
   description: 'Cron settings for Entity Share spokes.'
   weight: 10
+
+wri_spoke.wri_spoke_settings:
+  title: WRI Spoke settings
+  description: Settings for WRI spoke sites
+  route_name: wri_spoke.wri_spoke_settings
+  weight: 10
