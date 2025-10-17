@@ -156,6 +156,10 @@
   }
   svg path {
     fill: black;
+
+    &.fill-none {
+      fill: none;
+    }
   }
 }
 

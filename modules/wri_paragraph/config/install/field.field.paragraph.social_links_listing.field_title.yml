@@ -8,9 +8,9 @@ field_name: field_title
 entity_type: paragraph
 bundle: social_links_listing
 label: Title
-description: 'Accepts tokens. Default value is "Connect with %5Bparagraph:parent_entity:title%5D"'
+description: 'Accepts tokens. Default value is <code>"Connect with &#91;paragraph:parent_entity:title&#93;"</code>'
 required: false
-translatable: false
+translatable: true
 default_value:
   -
     value: 'Connect with [paragraph:parent_entity:title]'

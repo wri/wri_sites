@@ -68,3 +68,16 @@ function wri_paragraph_update_10402() {
     \Drupal::service('module_installer')->install(['svg_image'], TRUE);
   }
 }
+
+/**
+ * Updating a few settings for the Social Media Sites paragraph.
+ */
+function wri_paragraph_update_10403() {
+
+  // Add the embedded paragraph configs.
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.paragraph.social_links_listing.default', 'wri_paragraph', 'install', TRUE);
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.paragraph.social_links_listing.field_title', 'wri_paragraph', 'install', TRUE);
+
+  $message = 'Updated Social Media Sites widgets to be translatable.';
+  return $message;
+}

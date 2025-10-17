@@ -98,6 +98,12 @@
   }
 }
 
+.page-node-type-data .detail__meta-inner .publication__image-inner {
+  @include mq($ph) {
+    display: none;
+  }
+}
+
 .detail__meta-secondary {
   @include column-width(1, 5);
   margin-top: $space-xs;
@@ -121,10 +127,23 @@
 }
 
 // Set the top border for mobile and dt.
-.simple-display .detail__meta-inner {
-  // At mobile set to parent
+.simple-display .publication__main {
   border-top: 3px solid $black;
   padding-top: $space-sm;
+
+  // At desktop, this becomes too wide. Set it on the inner element instead.
+  @include mq($lg) {
+    border-top: none;
+    padding-top: 0;
+  }
+}
+
+@include mq($lg) {
+  // Set the top border desktop.
+  .simple-display .detail__meta-inner {
+    border-top: 3px solid $black;
+    padding-top: $space-sm;
+  }
 }
 
 // Show/hide narrative taxonomy in sidebar.
