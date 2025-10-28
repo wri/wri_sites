@@ -8,11 +8,11 @@
 /**
  * Update the media display configs to add all the display modes.
  */
-function wri_block_update_10301() {
+function wri_block_update_10401() {
 
-  \Drupal::service('distro_helper.updates')->installConfig('embed.button.blocks', 'wri_block', 'install', 'TRUE');
-  \Drupal::service('distro_helper.updates')->installConfig('entity_browser.browser.block', 'wri_block', 'install', 'TRUE');
   \Drupal::service('distro_helper.updates')->installConfig('views.view.content_blocks_browser', 'wri_block', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('entity_browser.browser.block', 'wri_block', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('embed.button.blocks', 'wri_block', 'install', 'TRUE');
 
   $message = 'Add embeddable blocks';
   return $message;
