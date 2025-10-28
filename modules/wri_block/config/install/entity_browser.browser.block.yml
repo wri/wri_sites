@@ -1,0 +1,62 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.content_blocks_browser
+  module:
+    - views
+    - wri_block
+name: block
+label: Block
+display: iframe
+display_configuration:
+  width: '650'
+  height: '500'
+  link_text: 'Select blocks'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  05c59a70-9bd8-4e62-ba6a-3a1d43a5c897:
+    id: view
+    uuid: 05c59a70-9bd8-4e62-ba6a-3a1d43a5c897
+    label: Choose
+    weight: 2
+    settings:
+      submit_text: 'Select entities'
+      auto_select: false
+      view: content_blocks_browser
+      view_display: entity_browser_1
+  4adec20a-737f-4287-9370-dc49be5d7ff0:
+    id: block_create
+    uuid: 4adec20a-737f-4287-9370-dc49be5d7ff0
+    label: 'Add new'
+    weight: 4
+    settings:
+      submit_text: 'Select entities'
+      block_type:
+        webform: webform
+        3_1_articles: 0
+        featured_tweet: 0
+        feed_block: 0
+        hero: 0
+        image_cta: 0
+        impact_in_action: 0
+        instruments: 0
+        large_cta: 0
+        latest_tweet: 0
+        listing_block: 0
+        modal: 0
+        narrative_taxonomy: 0
+        non_wri_person_listing: 0
+        person_listing: 0
+        plain_image: 0
+        rich_accordion: 0
+        small_cta: 0
+        statistics: 0
+        superfeatured: 0
+        text_block: 0
+        trending_topics: 0
+        unique_feature_cta: 0
