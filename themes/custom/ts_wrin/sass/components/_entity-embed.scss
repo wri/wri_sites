@@ -1,0 +1,40 @@
+.embedded-entity {
+  border-radius: 6px;
+  padding: var(--spacer-1) var(--spacer-6) var(--spacer-4);
+  @include mq($md) {
+    padding: var(--spacer-2) var(--spacer-15) var(--spacer-5);
+  }
+
+  @include font($acumin-semi-cond, "light");
+  @include font-line-height(15, 21);
+
+  &.has-blue-background-color,
+  &.has-green-background-color,
+  &.has-teal-background-color,
+  &.has-black-background-color {
+    color: $white;
+  }
+  form.webform-submission-form {
+    input[type="text"],
+    input[type="email"] {
+      @include font($acumin-semi-cond, "regular");
+      @include font-line-height(14, 18);
+      height: 46px;
+      padding: 15px 10px 12px;
+      background-color: $white;
+      width: 100%;
+    }
+  }
+
+  .webform-submission-form {
+    @include font($caslon, "light");
+    @include font-line-height(15, 21);
+  }
+  h5 {
+    font-family: inherit;
+  }
+  .field--name-field-other-orto-list-tags {
+    visibility: hidden;
+    font-size: 0;
+  }
+}
