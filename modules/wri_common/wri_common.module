@@ -345,16 +345,8 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
 
           case 'event_register_link':
             if ($node->hasField('field_register')) {
-              $contact_item = $contact_items->first()->entity;
-              if ($contact_item) {
-                $replacements[$original] = wri_common_link_or_text($contact_item, $node);
-              }
-              else {
-                $replacements[$original] = wri_common_person_link_fallback($node);
-              }
-            }
-            else {
-              $replacements[$original] = wri_common_person_link_fallback($node);
+              $url = wri_common_register_link($node);
+              $replacements[$original] = $url ? $url->toString() : '';
             }
             break;
         }
@@ -638,6 +630,7 @@ function wri_common_register_link($node, $show_full_url=TRUE) {
   else {
     $node_url = $node->toUrl();
     $node_url->setOption('fragment', 'register');
+    $node_url->setOption('absolute', TRUE);
   }
   $zoom_id = $node->field_zoom_webinar_id->value;
   $webform_id = $node->field_zoom_registration_form->target_id;
