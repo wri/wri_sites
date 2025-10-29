@@ -188,7 +188,11 @@ function wri_common_token_info() {
   ];
   $info['tokens']['term']['term_parent_or_self'] = [
     'name' => 'Term parent or self',
-    'description' => t('The term parent or the term id if this has no parent.'),
+    'description' => t('The term parent name or the term name if this has no parent.'),
+  ];
+  $info['tokens']['term']['term_parent_or_self_url'] = [
+    'name' => 'Term parent or self url',
+    'description' => t('The link to the term parent or the term if this has no parent.'),
   ];
 
   return $info;
@@ -375,6 +379,16 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
             elseif ($parent_id = $term->parent->target_id) {
               $parent_term = Term::load($parent_id);
               $replacements[$original] = $parent_term->getName() ?? '';
+            }
+            break;
+
+          case 'term_parent_or_self_url':
+            if ($term->parent->target_id == '0') {
+              $replacements[$original] = $term->toUrl(NULL, ['absolute' => TRUE])->toString() ?? '';
+            }
+            elseif ($parent_id = $term->parent->target_id) {
+              $parent_term = Term::load($parent_id);
+              $replacements[$original] = $parent_term->toUrl(NULL, ['absolute' => TRUE])->toString() ?? '';
             }
             break;
         }
