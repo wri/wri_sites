@@ -14,11 +14,42 @@ function wri_custom_page_update_10400() {
   ], 'wri_custom_page', 'install');
 }
 
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_custom_page_update_dependencies() {
+  // We must have the new webform block fields before we update the block.
+  $dependencies['wri_custom_page'][10402] = [
+    'wri_block' => 10402,
+  ];
+
+  return $dependencies;
+}
+
 /**
  * Update layout builder options.
  */
 function wri_custom_page_update_10401() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.custom_page.full', [
     'third_party_settings#layout_builder_restrictions#entity_view_mode_restriction#allowed_layouts',
+  ], 'wri_custom_page', 'install');
+}
+
+/**
+ * Update webform block.
+ */
+function wri_custom_page_update_10402() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.block_content.webform.default', [
+    'dependencies',
+    'content#field_cta_background',
+    'content#field_other_orto_list_tags',
+    'content#field_title',
+  ], 'wri_custom_page', 'install');
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.block_content.webform.default', [
+    'dependencies#config',
+    'content#field_cta_background',
+    'content#field_other_orto_list_tags',
+    'content#field_title',
   ], 'wri_custom_page', 'install');
 }

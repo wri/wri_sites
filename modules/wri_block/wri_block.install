@@ -17,3 +17,16 @@ function wri_block_update_10401() {
   $message = 'Add embeddable blocks';
   return $message;
 }
+
+/**
+ * Update webform block with useful fields.
+ */
+function wri_block_update_10402() {
+
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.webform.field_cta_background', 'wri_block', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.webform.field_other_orto_list_tags', 'wri_block', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.webform.field_title', 'wri_block', 'install', 'TRUE');
+
+  $message = 'Add Webform block fields';
+  return $message;
+}
