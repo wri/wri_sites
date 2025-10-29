@@ -6,7 +6,7 @@
   }
 
   @include font($acumin-semi-cond, "light");
-  @include font-line-height(15, 21);
+  @include font-line-height(16, 21);
 
   &.has-blue-background-color,
   &.has-green-background-color,
@@ -18,23 +18,35 @@
     input[type="text"],
     input[type="email"] {
       @include font($acumin-semi-cond, "regular");
-      @include font-line-height(14, 18);
+      @include font-line-height(16, 18);
       height: 46px;
       padding: 15px 10px 12px;
       background-color: $white;
       width: 100%;
     }
   }
-
-  .webform-submission-form {
-    @include font($caslon, "light");
-    @include font-line-height(15, 21);
+  .form-type-processed-text {
+    @include font($acumin-semi-cond, "regular");
+    @include font-line-height(16, 18);
+    @include mq($md) {
+      @include font-line-height(22, 28);
+    }
   }
-  h5 {
+  h4, h5, p {
     font-family: inherit;
+    font-size: inherit;
+    margin: 16px 0;
   }
   .field--name-field-other-orto-list-tags {
-    visibility: hidden;
     font-size: 0;
+    visibility: hidden;
+  }
+}
+
+.article .embedded-entity .form-type-processed-text {
+  @include font($caslon, "light");
+  @include font-line-height(16, 18);
+  @include mq($md) {
+    @include font-line-height(22, 28);
   }
 }
