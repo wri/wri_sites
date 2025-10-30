@@ -5,6 +5,19 @@
  * Update hooks for wri_block.
  */
 
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_block_update_dependencies() {
+  // We must have the new webform block fields before we update the block.
+  $dependencies['wri_block'][10401] = [
+    'wri_custom_page' => 10402,
+  ];
+
+  return $dependencies;
+}
+
 /**
  * Update the media display configs to add all the display modes.
  */

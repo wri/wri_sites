@@ -8,7 +8,6 @@ dependencies:
   module:
     - block_content
     - entity_embed
-    - wri_custom_page
 label: Blocks
 id: blocks
 type_id: entity
