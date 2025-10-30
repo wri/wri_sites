@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.webform
+    - field.storage.block_content.field_title
+_core:
+  default_config_hash: baRwalqACK6aR-6e0xdhAn9hcoqq-FOgOaietv1kd4U
+id: block_content.webform.field_title
+field_name: field_title
+entity_type: block_content
+bundle: webform
+label: Title
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

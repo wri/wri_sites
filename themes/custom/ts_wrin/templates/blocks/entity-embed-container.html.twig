@@ -1,0 +1,20 @@
+{#
+/**
+ * @file
+ * Default theme implementation of a container used to wrap embedded entities.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the containing element.
+ * - children: The rendered child elements of the container.
+ *
+ * @see template_preprocess_entity_embed_container()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    element.entity['#attributes'].class[0]
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>{{ children }}</div>
