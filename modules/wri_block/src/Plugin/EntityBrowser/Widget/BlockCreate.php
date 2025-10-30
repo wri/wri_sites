@@ -33,8 +33,8 @@ class BlockCreate extends WidgetBase {
    */
   public function getForm(array &$original_form, FormStateInterface $form_state, array $aditional_widget_parameters) {
     // Get current page post values;.
-    $request = \Drupal::request();
-    $current_path = $request->getRequestUri();
+    $request = $form_state->getRequest();
+    $current_path = $request ? $request->getRequestUri() : '/';
     $block_types = $this->configuration['block_type'];
     if (empty($block_types)) {
       return ['#markup' => $this->t('No block types selected. Please configure the widget.')];
