@@ -5,7 +5,6 @@
  * Update hooks for wri_block.
  */
 
-
 /**
  * Implements hook_update_dependencies().
  */
