@@ -131,8 +131,7 @@ function wri_media_update_10106() {
  */
 function wri_media_update_10107() {
   \Drupal::service('distro_helper.updates')->updateConfig('filter.format.full_html', [
-    'dependencies#config',
-    'dependencies#module',
+    'dependencies',
     'filters',
   ], 'wri_media');
   \Drupal::service('distro_helper.updates')->updateConfig('editor.editor.full_html', [
