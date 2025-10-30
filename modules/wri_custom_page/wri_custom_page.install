@@ -27,7 +27,6 @@ function wri_custom_page_update_10401() {
  * Update webform block.
  */
 function wri_custom_page_update_10402() {
-  \Drupal::service('distro_helper.updates')->installConfig('block_content.type.webform', 'wri_custom_page', 'install', 'TRUE');
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.block_content.webform.default', [
     'dependencies',
     'content#field_cta_background',
