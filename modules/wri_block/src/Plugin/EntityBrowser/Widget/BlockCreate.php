@@ -43,9 +43,19 @@ class BlockCreate extends WidgetBase {
       $links = [];
       foreach ($block_types as $block_type) {
         if (!empty($block_type)) {
-          $url = Url::fromRoute('block_content.add_form', ['block_content_type' => $block_type], ['query' => ['destination' => $current_path], 'attributes' => ['class' => ['use-ajax'], 'data-dialog-type' => 'modal']]);
+          $url = Url::fromRoute('block_content.add_form', [
+            'block_content_type' => $block_type,
+          ],
+            [
+              'query' => [
+                'destination' => $current_path,
+              ],
+              'attributes' => [
+                'class' => ['use-ajax'],
+                'data-dialog-type' => 'modal',
+              ],
+            ]);
           $links[] = Link::fromTextAndUrl($this->t('Create a @type block', ['@type' => $block_type]), $url);
-          // $links[] = '<a href="/block/add/' . $block_type . '?destination=' . $current_path . '" class="use-ajax" data-dialog-type="modal">' . $this->t('Create a @type block', ['@type' => $block_type]) . '</a>';
         }
       }
       return [

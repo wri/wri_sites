@@ -14,7 +14,6 @@ function wri_custom_page_update_10400() {
   ], 'wri_custom_page', 'install');
 }
 
-
 /**
  * Implements hook_update_dependencies().
  */
