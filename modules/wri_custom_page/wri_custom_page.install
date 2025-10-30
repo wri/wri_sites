@@ -15,6 +15,18 @@ function wri_custom_page_update_10400() {
 }
 
 /**
+ * Implements hook_update_dependencies().
+ */
+function wri_custom_page_update_dependencies() {
+  // We must have the new webform block fields before we update the block.
+  $dependencies['wri_custom_page'][10402] = [
+    'wri_block' => 10402,
+  ];
+
+  return $dependencies;
+}
+
+/**
  * Update layout builder options.
  */
 function wri_custom_page_update_10401() {
