@@ -4,7 +4,6 @@ description: 'Modules related to media on WRI'
 core_version_requirement: '>=9.5'
 package: WRI
 dependencies:
-  - entity_embed
   - media
   - media_library
   - media_library_edit
