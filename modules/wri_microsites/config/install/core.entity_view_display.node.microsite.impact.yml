@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.microsite.field_metatags
     - field.field.node.microsite.field_primary_contacts
     - field.field.node.microsite.field_project_partners
+    - field.field.node.microsite.field_social_sharing_links
     - field.field.node.microsite.field_theme
     - field.field.node.microsite.field_toc
     - field.field.node.microsite.field_twitter_account
@@ -31,11 +32,11 @@ third_party_settings:
   ds:
     layout:
       id: layout_impact
-      settings:
-        label: ''
       library: null
       disable_css: false
       entity_classes: all_classes
+      settings:
+        label: ''
     regions:
       content_type:
         - field_type
@@ -55,8 +56,6 @@ third_party_settings:
           id: reset
           settings:
             lb: ''
-_core:
-  default_config_hash: bqOGOH_iygwUNqHdPbq41iLK1e_H0d_GfMSVpxxNSr8
 id: node.microsite.impact
 targetEntityType: node
 bundle: microsite
@@ -99,6 +98,7 @@ hidden:
   field_primary_topic: true
   field_project_partners: true
   field_show_more_link: true
+  field_social_sharing_links: true
   field_statistics: true
   field_theme: true
   field_toc: true

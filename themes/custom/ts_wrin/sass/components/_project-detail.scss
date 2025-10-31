@@ -229,4 +229,19 @@
       }
     }
   }
+  .desktop-social {
+    display: block;
+  }
+  .layout__region--sidebar {
+    display: grid;
+  }
+  .publication__detail .publication__main .sidebar {
+    grid-row: 2;
+    @include mq($md) {
+      grid-row: 3;
+    }
+    @include mq($lg) {
+      grid-row: 2/3;
+    }
+  }
 }

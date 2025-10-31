@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -14,6 +13,7 @@ dependencies:
     - field.field.node.microsite.field_metatags
     - field.field.node.microsite.field_primary_contacts
     - field.field.node.microsite.field_project_partners
+    - field.field.node.microsite.field_social_sharing_links
     - field.field.node.microsite.field_theme
     - field.field.node.microsite.field_toc
     - field.field.node.microsite.field_twitter_account
@@ -34,12 +34,12 @@ content:
     settings:
       trim_length: 600
     third_party_settings: {  }
-    weight: 1
+    weight: 101
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 100
     region: content
 hidden:
   content_moderation_control: true
@@ -53,6 +53,7 @@ hidden:
   field_metatags: true
   field_primary_contacts: true
   field_project_partners: true
+  field_social_sharing_links: true
   field_theme: true
   field_toc: true
   field_twitter_account: true

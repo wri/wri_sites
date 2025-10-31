@@ -160,8 +160,12 @@ function wri_node_update_dependencies() {
   $dependencies['wri_node'][10402] = [
     'wri_person' => 10402,
   ];
-  $dependencies['wri_node'][10402] = [
+  $dependencies['wri_node'][10405] = [
     'wri_project' => 10402,
+  ];
+  $dependencies['wri_node'][10406] = [
+    'wri_program' => 10402,
+    'wri_microsites' => 10403,
   ];
   return $dependencies;
 }
@@ -185,6 +189,26 @@ function wri_node_update_10402() {
   $content_types = ['person'];
 
   wri_update_twitter_replacement($content_types);
+}
+
+/**
+ * Migrate field_twitter_account values into a social_media_sites paragraph.
+ */
+function wri_node_update_10405() {
+  // Define the content types to process.
+  $content_types = ['project_detail'];
+
+  wri_update_twitter_replacement($content_types, 'field_social_sharing_links');
+}
+
+/**
+ * Migrate field_twitter_account values into a social_media_sites paragraph.
+ */
+function wri_node_update_10406() {
+  // Define the content types to process.
+  $content_types = ['program_center', 'microsite'];
+
+  wri_update_twitter_replacement($content_types, 'field_social_sharing_links');
 }
 
 /**
@@ -279,7 +303,7 @@ function wri_update_twitter_replacement($content_types, $field_name = 'field_par
             ]);
           }
         }
-        elseif ($node->bundle() == 'project_detail') {
+        elseif ($node->bundle() == 'project_detail' || $node->bundle() == 'microsite' || $node->bundle() == 'program_center') {
           // Create the inner social_media_sites paragraph.
           $inner_paragraph = Paragraph::create([
             'type' => 'social_media_sites',
