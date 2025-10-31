@@ -187,6 +187,7 @@
         "drupal/pantheon_advanced_page_cache": "^2.3",
         "drupal/paragraphs": "^1.12",
         "drupal/pathauto": "^1.9",
+        "drupal/purge": "^3.6",
         "drupal/redirect": "^1.7",
         "drupal/redis": "^1.5",
         "drupal/rename_admin_paths": "^2.2",
