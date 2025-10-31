@@ -95,14 +95,16 @@ content:
   field_toc:
     type: 'single_file_component_field_formatter:toc_formatter'
     label: hidden
-    settings: {  }
+    settings:
+      menu: microsites
+      color_class: gold-bar
     third_party_settings:
       ds:
         ft:
           id: reset
           settings:
             lb: ''
-    weight: 0
+    weight: 5
     region: hero
 hidden:
   content_moderation_control: true
