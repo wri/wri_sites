@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Update hooks for wri_in_this_series.
+ */
+
+/**
+ * Install the block and fields.
+ */
+function wri_in_this_series_update_10401() {
+
+  \Drupal::service('distro_helper.updates')->installConfig('block_content.type.in_this_series', 'wri_in_this_series', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.block_content.field_featured_items', 'wri_in_this_series', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.in_this_series.field_featured_items', 'wri_in_this_series', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.block_content.in_this_series.default', 'wri_in_this_series', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.block_content.in_this_series.default', 'wri_in_this_series', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.block_content.in_this_series', 'wri_in_this_series', 'install', 'TRUE');
+
+  $message = 'Add wri_in_this_series block type';
+  return $message;
+}

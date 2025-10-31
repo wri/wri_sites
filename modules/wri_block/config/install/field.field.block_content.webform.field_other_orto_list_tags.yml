@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.webform
+    - field.storage.block_content.field_other_orto_list_tags
+id: block_content.webform.field_other_orto_list_tags
+field_name: field_other_orto_list_tags
+entity_type: block_content
+bundle: webform
+label: 'Other orto list tags'
+description: 'A comma separated set of orto tags to append to the webform submission.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

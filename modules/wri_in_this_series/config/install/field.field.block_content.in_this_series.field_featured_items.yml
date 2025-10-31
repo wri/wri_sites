@@ -1,0 +1,48 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.in_this_series
+    - field.storage.block_content.field_featured_items
+    - node.type.article
+    - node.type.custom_page
+    - node.type.data
+    - node.type.event
+    - node.type.microsite
+    - node.type.page
+    - node.type.program_center
+    - node.type.project_detail
+    - node.type.publication
+    - node.type.simple_page
+    - node.type.subpage
+id: block_content.in_this_series.field_featured_items
+field_name: field_featured_items
+entity_type: block_content
+bundle: in_this_series
+label: 'Featured items'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      article: article
+      custom_page: custom_page
+      data: data
+      event: event
+      microsite: microsite
+      page: page
+      program_center: program_center
+      project_detail: project_detail
+      publication: publication
+      simple_page: simple_page
+      subpage: subpage
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: article
+field_type: entity_reference
