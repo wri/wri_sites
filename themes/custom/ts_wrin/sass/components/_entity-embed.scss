@@ -50,3 +50,10 @@
     @include font-line-height(22, 28);
   }
 }
+
+.embed--block-type--in-this-series {
+  padding: 0;
+  .field__item:first-child .teaser-item {
+    border-top: none;
+  }
+}

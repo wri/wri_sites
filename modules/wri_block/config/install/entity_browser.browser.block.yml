@@ -37,6 +37,7 @@ widgets:
     settings:
       submit_text: 'Select entities'
       block_type:
+        in_this_series: in_this_series
         webform: webform
         3_1_articles: 0
         featured_tweet: 0
