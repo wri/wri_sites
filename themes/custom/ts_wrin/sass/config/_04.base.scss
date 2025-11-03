@@ -75,7 +75,7 @@ a {
 }
 
 p a,
-.bullets a {
+.bullets li a {
   color: $green;
   transition: color $transition-defaults;
 
@@ -211,6 +211,11 @@ figcaption, .figcaption {
 .topic-tag a {
   @include text-underline(transparent, $green);
   background-position: left 100%;
+}
+
+.main-content .teaser-title a,
+.main-content .topic-tag a {
+  text-decoration: none;
 }
 
 .taxonomy,
