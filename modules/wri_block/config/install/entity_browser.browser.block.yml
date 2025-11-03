@@ -10,8 +10,8 @@ name: block
 label: Block
 display: iframe
 display_configuration:
-  width: '650'
-  height: '500'
+  width: 100%
+  height: '600'
   link_text: 'Select blocks'
   auto_open: false
 selection_display: no_display
