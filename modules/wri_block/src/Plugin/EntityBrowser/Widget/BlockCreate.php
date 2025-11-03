@@ -70,7 +70,7 @@ class BlockCreate extends WidgetBase implements ContainerFactoryPluginInterface 
             'attributes' => [
               'class' => ['use-ajax'],
               'data-dialog-type' => 'modal',
-              'data-dialog-options' => '{"width": "90%"}'
+              'data-dialog-options' => '{"width": "90%"}',
             ],
           ]
         );
