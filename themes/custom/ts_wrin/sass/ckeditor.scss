@@ -1,13 +1,16 @@
+@import "config/_01.vars.scss";
+
 .ck-content {
-  @import "config/_01.vars.scss";
   @import "config/_02.mixins.scss";
   @import "config/_03.extends.scss";
   @import "config/_04.base.scss";
   @import "config/_05.buttons.scss";
   @import "config/_06.forms.scss";
+  @import "_elements/tokens/colors-text-bg.scss";
   /* GLOBAL */
   @import "global/_wysiwyg.scss";
   @import "components/_teaser.scss";
+  @import "components/_entity-embed.scss";
   .media--view-mode-full-width {
     margin-left: 0;
     margin-right: 0;
