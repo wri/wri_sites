@@ -49,6 +49,16 @@ function wri_block_update_10402() {
  */
 function wri_block_update_10403() {
 
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('entity_embed')) {
+    \Drupal::service('module_installer')->install(['entity_embed'], TRUE);
+  }
+
+  // Set the embed.settings.yml file to use file_scheme: public.
+  $config = \Drupal::service('config.factory')->getEditable('embed.settings');
+
+  $config->set('file_scheme', 'public')->save();
+
   \Drupal::service('distro_helper.updates')->updateConfig('entity_browser.browser.block', [
     'widgets',
   ], 'wri_block', 'install');
