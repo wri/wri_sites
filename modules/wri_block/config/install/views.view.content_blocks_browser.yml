@@ -2,8 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - block_content.type.in_this_series
-    - block_content.type.webform
     - core.entity_view_mode.block_content.preview
   module:
     - block_content
@@ -288,8 +286,7 @@ display:
           entity_field: type
           plugin_id: bundle
           operator: in
-          value:
-            in_this_series: in_this_series
+          value: {  }
           group: 1
           exposed: true
           expose:
