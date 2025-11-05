@@ -1,0 +1,8 @@
+# Schema for the configuration files of the WRI Spoke module.
+wri_spoke.settings:
+  type: config_object
+  label: 'WRI Spoke settings'
+  mapping:
+    ignore_hub_url:
+      type: boolean
+      label: 'Do not link nodes to the Hub'

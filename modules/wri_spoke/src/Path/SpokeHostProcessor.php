@@ -2,6 +2,7 @@
 
 namespace Drupal\wri_spoke\Path;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\PathProcessor\OutboundPathProcessorInterface;
 use Drupal\Core\Render\BubbleableMetadata;
@@ -14,6 +15,13 @@ use Symfony\Component\HttpFoundation\Request;
  * Overrides canonical URLs for events to point to the hub.
  */
 class SpokeHostProcessor implements OutboundPathProcessorInterface {
+
+  /**
+   * The configuration factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
 
   /**
    * The admin context service.
@@ -36,16 +44,23 @@ class SpokeHostProcessor implements OutboundPathProcessorInterface {
    *   The admin context service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The Entity Type Manager.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   The configuration factory.
    */
-  public function __construct(AdminContext $admin_context, EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(AdminContext $admin_context, EntityTypeManagerInterface $entity_type_manager, ConfigFactoryInterface $config_factory) {
     $this->adminContext = $admin_context;
     $this->entityTypeManager = $entity_type_manager;
+    $this->configFactory = $config_factory;
   }
 
   /**
    * {@inheritdoc}
    */
   public function processOutbound($path, &$options = [], ?Request $request = NULL, ?BubbleableMetadata $bubbleable_metadata = NULL) {
+    $spoke_config = $this->configFactory->get('wri_spoke.settings');
+    if ($spoke_config->get('ignore_hub_url')) {
+      return $path;
+    }
     try {
       $url = Url::fromUri('internal:' . $path);
     }
