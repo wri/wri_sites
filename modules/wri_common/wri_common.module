@@ -636,7 +636,7 @@ function wri_common_views_data_alter(&$data) {
  * @return \Drupal\Core\Url|null
  *   The URL object or null if no link is available.
  */
-function wri_common_register_link($node, $show_full_url=TRUE) {
+function wri_common_register_link($node, $show_full_url = TRUE) {
   $url = NULL;
   if (!$show_full_url) {
     $node_url = Url::fromUserInput('#register');

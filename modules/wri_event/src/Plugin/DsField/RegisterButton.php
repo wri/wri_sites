@@ -3,7 +3,6 @@
 namespace Drupal\wri_event\Plugin\DsField;
 
 use Drupal\Core\Link;
-use Drupal\Core\Url;
 use Drupal\ds\Plugin\DsField\DsFieldBase;
 
 /**
@@ -40,7 +39,7 @@ class RegisterButton extends DsFieldBase {
         $url = wri_common_register_link($entity);
       }
 
-      if ($url){
+      if ($url) {
         $link = new Link($this->t('Register'), $url);
         $info['link'] = $link->toRenderable();
         $info['link']['#attributes'] = [
