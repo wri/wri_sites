@@ -290,7 +290,6 @@ display:
           operator: in
           value:
             in_this_series: in_this_series
-            webform: webform
           group: 1
           exposed: true
           expose:
@@ -387,7 +386,6 @@ display:
           operator: in
           value:
             in_this_series: in_this_series
-            webform: webform
           group: 1
           exposed: false
           expose:

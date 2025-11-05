@@ -3,49 +3,21 @@ status: true
 dependencies:
   config:
     - block_content.type.webform
-    - field.field.block_content.webform.field_cta_background
     - field.field.block_content.webform.field_other_orto_list_tags
-    - field.field.block_content.webform.field_title
     - field.field.block_content.webform.field_webform
   module:
-    - element_class_formatter
-    - entity_class_formatter
     - webform
 id: block_content.webform.default
 targetEntityType: block_content
 bundle: webform
 mode: default
 content:
-  field_cta_background:
-    type: entity_class_formatter
-    label: hidden
-    settings:
-      prefix: ''
-      suffix: ''
-      attr: ''
-      field: ''
-    third_party_settings: {  }
-    weight: 0
-    region: content
   field_other_orto_list_tags:
     type: basic_string
     label: hidden
     settings: {  }
     third_party_settings: {  }
     weight: 7
-    region: content
-  field_title:
-    type: wrapper_class
-    label: hidden
-    settings:
-      class: ''
-      tag: h3
-      link: false
-      link_class: ''
-      summary: false
-      trim: 200
-    third_party_settings: {  }
-    weight: 0
     region: content
   field_webform:
     type: webform_entity_reference_entity_view

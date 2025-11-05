@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - block_content.type.webform
     - core.entity_view_mode.block_content.full
     - entity_browser.browser.block
   module:
@@ -13,8 +12,7 @@ id: blocks
 type_id: entity
 type_settings:
   entity_type: block_content
-  bundles:
-    - webform
+  bundles: {  }
   display_plugins:
     - 'view_mode:block_content.full'
   entity_browser: block
