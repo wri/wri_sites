@@ -1,0 +1,11 @@
+<?php
+
+/**
+ * Implements hook_plugin_alter().
+ */
+function wri_performance_purge_purgers_alter(array &$definitions) {
+  if (isset($definitions['cloudflare'])) {
+    // Replace the class with your custom class.
+    $definitions['cloudflare']['class'] = 'Drupal\wri_performance\Plugin\Purge\Purger\EnvCloudFlarePurger';
+  }
+}
