@@ -36,7 +36,7 @@ function wri_block_update_10401() {
 function wri_block_update_10402() {
 
   \Drupal::service('distro_helper.updates')->installConfig('field.storage.block_content.field_other_orto_list_tags', 'wri_block', 'install', 'TRUE');
-  \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.webform.field_other_orto_list_tags', 'wri_block', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.webform.field_other_orto_list_tags', 'wri_custom_page', 'install', 'TRUE');
 
   $message = 'Add Webform block fields';
   return $message;
