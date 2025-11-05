@@ -81,3 +81,16 @@ function wri_paragraph_update_10403() {
   $message = 'Updated Social Media Sites widgets to be translatable.';
   return $message;
 }
+
+/**
+ * Fix label on the social listings on Programs.
+ */
+function wri_paragraph_update_10404() {
+
+  // Add the embedded paragraph configs.
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.paragraph.social_links_listing.default', [
+    'content#field_title#settings#class',
+  ], 'wri_paragraph', 'install');
+  $message = 'Set label for Social links listing to italic-tiny so it looks right on Programs.';
+  return $message;
+}
