@@ -9,7 +9,7 @@ use Drupal\cloudflarepurger\Plugin\Purge\Purger\CloudFlarePurger;
  * CloudFlare purger.
  *
  * @PurgePurger(
- *   id = "cloudflare",
+ *   id = "cloudflare_live_only",
  *   label = @Translation("CloudFlare (live only)"),
  *   description = @Translation("Live environment Purger for CloudFlare."),
  *   types = {"tag", "url", "everything"},
@@ -22,7 +22,7 @@ class EnvCloudFlarePurger extends CloudFlarePurger {
    * {@inheritdoc}
    */
   public function invalidate(array $invalidations) {
-    if (TRUE || (defined('PANTHEON_ENVIRONMENT') && $_ENV['PANTHEON_ENVIRONMENT'] == 'live')) {
+    if (defined('PANTHEON_ENVIRONMENT') && $_ENV['PANTHEON_ENVIRONMENT'] == 'live') {
       return parent::invalidate($invalidations);
     }
     else {
