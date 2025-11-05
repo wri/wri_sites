@@ -564,3 +564,10 @@ function ts_wrin_preprocess_image(&$variables) {
     $variables["attributes"]["loading"] = 'eager';
   }
 }
+
+function ts_wrin_preprocess_filter_caption(&$variables) {
+  if ($variables['tag' == 'drupal-entity']) {
+    // Get the uuid from the "node" value.
+
+  }
+}
