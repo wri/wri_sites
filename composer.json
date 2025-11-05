@@ -70,7 +70,7 @@
                 "Paragraph access check using incorrect revision of its parent https://www.drupal.org/project/paragraphs/issues/3090200": "https://www.drupal.org/files/issues/2022-10-26/3084934-13_combine_3090200-22.patch",
                 "Add a parent entity token for paragraphs https://www.drupal.org/project/paragraphs/issues/3067265": "https://git.drupalcode.org/project/paragraphs/-/merge_requests/92.diff"
             },
-            "drupal/purge": {
+            "drupal/cloudflare": {
                 "Add optional Environment setting https://www.drupal.org/project/cloudflare/issues/3394651": "https://www.drupal.org/files/issues/2025-10-17/3394651-cloudflare-environment-prefix-5.patch"
             },
             "drupal/search_api": {
