@@ -4,7 +4,6 @@ namespace Drupal\wri_performance\Plugin\Purge\Purger;
 
 use Drupal\cloudflarepurger\Plugin\Purge\Purger\CloudFlarePurger;
 
-// cspell:ignore Depencies
 /**
  * CloudFlare purger.
  *
