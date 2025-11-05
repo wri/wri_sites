@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - block_content.type.webform
+    - field.field.block_content.webform.field_other_orto_list_tags
     - field.field.block_content.webform.field_webform
   module:
     - webform
@@ -11,6 +12,13 @@ targetEntityType: block_content
 bundle: webform
 mode: default
 content:
+  field_other_orto_list_tags:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: content
   field_webform:
     type: webform_entity_reference_entity_view
     label: hidden

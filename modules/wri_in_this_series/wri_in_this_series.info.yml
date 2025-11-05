@@ -1,0 +1,7 @@
+name: 'WRI in this Series'
+type: module
+description: 'Custom module for the In This Series block'
+core_version_requirement: '>=9.5'
+package: WRI
+dependencies:
+  - wri_block

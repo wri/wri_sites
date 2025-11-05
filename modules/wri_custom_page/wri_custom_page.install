@@ -22,3 +22,17 @@ function wri_custom_page_update_10401() {
     'third_party_settings#layout_builder_restrictions#entity_view_mode_restriction#allowed_layouts',
   ], 'wri_custom_page', 'install');
 }
+
+/**
+ * Update webform block.
+ */
+function wri_custom_page_update_10402() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.block_content.webform.default', [
+    'dependencies',
+    'content#field_other_orto_list_tags',
+  ], 'wri_custom_page', 'install');
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.block_content.webform.default', [
+    'dependencies#config',
+    'content#field_other_orto_list_tags',
+  ], 'wri_custom_page', 'install');
+}

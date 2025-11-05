@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Update hooks for wri_in_this_series.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function wri_in_this_series_install() {
+  // Set the views.view.content_blocks_browser.yml config to include this
+  // module's block type.
+  $config = \Drupal::configFactory()->getEditable('views.view.content_blocks_browser');
+  $data = $config->getRawData();
+  $data['display']['default']['display_options']['filters']['type_1']['value']['in_this_series'] = 'in_this_series';
+  $data['dependencies']['config'][] = 'block_content.type.in_this_series';
+  $config->setData($data);
+  $config->save();
+}

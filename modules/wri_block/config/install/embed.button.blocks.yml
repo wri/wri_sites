@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.block_content.full
+    - entity_browser.browser.block
+  module:
+    - block_content
+    - entity_embed
+label: Blocks
+id: blocks
+type_id: entity
+type_settings:
+  entity_type: block_content
+  bundles: {  }
+  display_plugins:
+    - 'view_mode:block_content.full'
+  entity_browser: block
+  entity_browser_settings:
+    display_review: true
+icon:
+  uri: 'public://block-svgrepo-com_1.svg'
+  data: PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IS0tIFVwbG9hZGVkIHRvOiBTVkcgUmVwbywgd3d3LnN2Z3JlcG8uY29tLCBHZW5lcmF0b3I6IFNWRyBSZXBvIE1peGVyIFRvb2xzIC0tPgo8c3ZnIGZpbGw9IiMwMDAwMDAiIHdpZHRoPSI4MDBweCIgaGVpZ2h0PSI4MDBweCIgdmlld0JveD0iMCAwIDM2IDM2IiB2ZXJzaW9uPSIxLjEiICBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KICAgIDx0aXRsZT5ibG9jay1zb2xpZDwvdGl0bGU+CiAgICA8cGF0aCBkPSJNMzEuNDIsOS4wOWwtMTMtNmExLDEsMCwwLDAtLjg0LDBsLTEzLDZBMSwxLDAsMCwwLDQsMTBWMjdhMSwxLDAsMCwwLC41OC45MWwxMyw2YTEsMSwwLDAsMCwuODQsMGwxMy02QTEsMSwwLDAsMCwzMiwyN1YxMEExLDEsMCwwLDAsMzEuNDIsOS4wOVpNMTgsMTQuOSw3LjM5LDEwLDE4LDUuMSwyOC42MSwxMFpNMzAsMjYuMzYsMTksMzEuNDRWMTYuNjRsMTEtNS4wOFoiIGNsYXNzPSJjbHItaS1zb2xpZCBjbHItaS1zb2xpZC1wYXRoLTEiPjwvcGF0aD4KPC9zdmc+
+icon_uuid: null

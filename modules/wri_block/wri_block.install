@@ -1,0 +1,71 @@
+<?php
+
+/**
+ * @file
+ * Update hooks for wri_block.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function wri_block_install() {
+  \Drupal::service('distro_helper.updates')->installConfig('views.view.block_content', 'wri_block', 'post-install', 'TRUE');
+}
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_block_update_dependencies() {
+  // We must have the new webform block fields before we update the block.
+  $dependencies['wri_block'][10401] = [
+    'wri_custom_page' => 10402,
+  ];
+
+  return $dependencies;
+}
+
+/**
+ * Update the media display configs to add all the display modes.
+ */
+function wri_block_update_10401() {
+
+  \Drupal::service('distro_helper.updates')->installConfig('views.view.content_blocks_browser', 'wri_block', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('entity_browser.browser.block', 'wri_block', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('embed.button.blocks', 'wri_block', 'install', 'TRUE');
+
+  $message = 'Add embeddable blocks';
+  return $message;
+}
+
+/**
+ * Update webform block with useful fields.
+ */
+function wri_block_update_10402() {
+
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.block_content.field_other_orto_list_tags', 'wri_block', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.webform.field_other_orto_list_tags', 'wri_custom_page', 'install', 'TRUE');
+
+  $message = 'Add Webform block fields';
+  return $message;
+}
+
+/**
+ * Update entity browser and block view to include 'In this series' block/usage.
+ */
+function wri_block_update_10403() {
+
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('entity_embed')) {
+    \Drupal::service('module_installer')->install(['entity_embed'], TRUE);
+  }
+
+  // Set the embed.settings.yml file to use file_scheme: public.
+  $config = \Drupal::service('config.factory')->getEditable('embed.settings');
+
+  $config->set('file_scheme', 'public')->save();
+
+  \Drupal::service('distro_helper.updates')->updateConfig('entity_browser.browser.block', [
+    'widgets',
+  ], 'wri_block', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('views.view.block_content', 'wri_block', 'post-install', 'TRUE');
+}
