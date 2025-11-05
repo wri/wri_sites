@@ -3,9 +3,7 @@ status: true
 dependencies:
   config:
     - block_content.type.webform
-    - field.field.block_content.webform.field_cta_background
     - field.field.block_content.webform.field_other_orto_list_tags
-    - field.field.block_content.webform.field_title
     - field.field.block_content.webform.field_webform
   module:
     - webform
