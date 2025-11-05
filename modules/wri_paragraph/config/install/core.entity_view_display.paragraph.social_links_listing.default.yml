@@ -25,7 +25,7 @@ content:
     type: wrapper_class
     label: hidden
     settings:
-      class: 'italic mb-xxs field-label-above'
+      class: 'italic-tiny mb-xxs field-label-above'
       tag: div
       link: false
       link_class: ''
