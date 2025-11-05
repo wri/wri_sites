@@ -71,7 +71,7 @@
                 "Add a parent entity token for paragraphs https://www.drupal.org/project/paragraphs/issues/3067265": "https://git.drupalcode.org/project/paragraphs/-/merge_requests/92.diff"
             },
             "drupal/cloudflare": {
-                "Add optional Environment setting https://www.drupal.org/project/cloudflare/issues/3394651": "https://www.drupal.org/files/issues/2025-10-17/3394651-cloudflare-environment-prefix-5.patch"
+                "Add optional Environment setting https://www.drupal.org/project/cloudflare/issues/3394651": "https://git.drupalcode.org/project/cloudflare/-/merge_requests/24.diff"
             },
             "drupal/search_api": {
                 "View recalculated with wrong data from cache https://www.drupal.org/project/search_api/issues/3327645": "https://git.drupalcode.org/project/search_api/-/merge_requests/63.diff"
