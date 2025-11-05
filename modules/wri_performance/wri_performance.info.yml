@@ -6,7 +6,4 @@ package: 'WRI'
 dependencies:
   - dynamic_page_cache
   - redis
-  - autoban
-  - advban
-  - http_cache_control
   - pantheon_advanced_page_cache
