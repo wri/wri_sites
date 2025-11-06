@@ -58,4 +58,7 @@
   h3.teaser-title {
     @include font-line-height(16, 18);
   }
+  .topic-tag a {
+    @include font-line-height(13, 15);
+  }
 }
