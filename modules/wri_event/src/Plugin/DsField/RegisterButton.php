@@ -3,7 +3,6 @@
 namespace Drupal\wri_event\Plugin\DsField;
 
 use Drupal\Core\Link;
-use Drupal\Core\Url;
 use Drupal\ds\Plugin\DsField\DsFieldBase;
 
 /**
@@ -33,30 +32,15 @@ class RegisterButton extends DsFieldBase {
     if ($end > time()) {
       if ($this->viewMode() == 'main_content') {
         $button_classes = ['button', 'button--primary'];
-        $node_url = Url::fromUserInput('#register');
+        $url = wri_common_register_link($entity, FALSE);
       }
       else {
         $button_classes = ['button', 'small'];
-        $node_url = $entity->toUrl();
-        $node_url->setOption('fragment', 'register');
+        $url = wri_common_register_link($entity);
       }
-      $zoom_id = $entity->field_zoom_webinar_id->value;
-      $webform_id = $entity->field_zoom_registration_form->target_id;
-      $registration_link = $entity->field_register->uri;
 
-      if ($zoom_id && $webform_id) {
-        $link = new Link($this->t('Register'), $node_url);
-
-        $info['link'] = $link->toRenderable();
-        $info['link']['#attributes'] = [
-          'class' => $button_classes,
-        ];
-      }
-      elseif ($registration_link) {
-        // Display the rendered register link.
-        $url = Url::fromUri($registration_link);
+      if ($url) {
         $link = new Link($this->t('Register'), $url);
-
         $info['link'] = $link->toRenderable();
         $info['link']['#attributes'] = [
           'class' => $button_classes,
