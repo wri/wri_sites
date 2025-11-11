@@ -13,18 +13,6 @@ function wri_block_install() {
 }
 
 /**
- * Implements hook_update_dependencies().
- */
-function wri_block_update_dependencies() {
-  // We must have the new webform block fields before we update the block.
-  $dependencies['wri_block'][10401] = [
-    'wri_custom_page' => 10402,
-  ];
-
-  return $dependencies;
-}
-
-/**
  * Update the media display configs to add all the display modes.
  */
 function wri_block_update_10401() {
@@ -41,10 +29,10 @@ function wri_block_update_10401() {
  * Update webform block with useful fields.
  */
 function wri_block_update_10402() {
-
-  \Drupal::service('distro_helper.updates')->installConfig('field.storage.block_content.field_other_orto_list_tags', 'wri_block', 'install', 'TRUE');
-  \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.webform.field_other_orto_list_tags', 'wri_custom_page', 'install', 'TRUE');
-
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('wri_block_webform')) {
+    \Drupal::service('module_installer')->install(['wri_block_webform'], TRUE);
+  }
   $message = 'Add Webform block fields';
   return $message;
 }

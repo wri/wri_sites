@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Update hooks for wri_webform_block.
+ */
+
+function wri_webform_block_install() {
+  // In some sites, the block_content.type.webform.yml config was added by
+  // another module, so we can't rely on the default functionality that pulls
+  // in this content type.
+  \Drupal::service('distro_helper.updates')->installConfig('block_content.type.webform', 'wri_webform_block', 'post-install');
+}

@@ -24,15 +24,9 @@ function wri_custom_page_update_10401() {
 }
 
 /**
- * Update webform block.
+ * Deprecated update hook that ran on Flagship.
  */
 function wri_custom_page_update_10402() {
-  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.block_content.webform.default', [
-    'dependencies',
-    'content#field_other_orto_list_tags',
-  ], 'wri_custom_page', 'install');
-  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.block_content.webform.default', [
-    'dependencies#config',
-    'content#field_other_orto_list_tags',
-  ], 'wri_custom_page', 'install');
+  // Deprecated: replaced with wri_webform_block_install, but we need this
+  // placeholder because Flagship has already run this.
 }
