@@ -32,10 +32,8 @@ function wri_block_update_10402() {
   if (!$moduleHandler->moduleExists('wri_in_this_series')) {
     \Drupal::service('module_installer')->install(['wri_in_this_series'], TRUE);
   }
-
-  $moduleHandler = \Drupal::service('module_handler');
-  if (!$moduleHandler->moduleExists('wri_block_webform')) {
-    \Drupal::service('module_installer')->install(['wri_block_webform'], TRUE);
+  if (!$moduleHandler->moduleExists('wri_webform_block')) {
+    \Drupal::service('module_installer')->install(['wri_webform_block'], TRUE);
   }
   $message = 'Add Webform block fields';
   return $message;

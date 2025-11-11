@@ -10,4 +10,7 @@ function wri_webform_block_install() {
   // another module, so we can't rely on the default functionality that pulls
   // in this content type.
   \Drupal::service('distro_helper.updates')->installConfig('block_content.type.webform', 'wri_webform_block', 'post-install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.block_content.field_other_orto_list_tags', 'wri_webform_block', 'post-install', TRUE);
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.webform.field_other_orto_list_tags', 'wri_webform_block', 'post-install', TRUE);
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.webform.field_webform', 'wri_webform_block', 'post-install', TRUE);
 }
