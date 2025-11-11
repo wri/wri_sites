@@ -1,0 +1,11 @@
+status: true
+dependencies: {  }
+id: wri_register
+label: 'WRI register'
+description: 'A link to register for events'
+htmlElement: meta
+htmlValueAttribute: content
+attributes:
+  -
+    name: name
+    value: wri_register

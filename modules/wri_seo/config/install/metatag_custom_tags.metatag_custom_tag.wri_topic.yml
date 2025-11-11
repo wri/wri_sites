@@ -1,0 +1,11 @@
+status: true
+dependencies: {  }
+id: wri_topic
+label: 'WRI topic'
+description: 'The topic term associated with this tag'
+htmlElement: meta
+htmlValueAttribute: content
+attributes:
+  -
+    name: name
+    value: wri_topic

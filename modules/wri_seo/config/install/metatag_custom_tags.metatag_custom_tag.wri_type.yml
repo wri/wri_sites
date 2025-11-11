@@ -1,0 +1,11 @@
+status: true
+dependencies: {  }
+id: wri_type
+label: 'WRI Type'
+description: 'The resource type associated with the page'
+htmlElement: meta
+htmlValueAttribute: content
+attributes:
+  -
+    name: name
+    value: wri_type

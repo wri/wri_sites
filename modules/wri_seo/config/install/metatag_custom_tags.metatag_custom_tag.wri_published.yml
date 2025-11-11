@@ -1,0 +1,11 @@
+status: true
+dependencies: {  }
+id: wri_published
+label: 'WRI Published'
+description: 'The day the page was published'
+htmlElement: meta
+htmlValueAttribute: content
+attributes:
+  -
+    name: name
+    value: wri_published
