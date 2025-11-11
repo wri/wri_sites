@@ -266,11 +266,9 @@ function wri_common_update_10304() {
 }
 
 /**
- * Enable the wri_in_this_series module.
+ * Deprecated update hook that ran on Flagship.
  */
 function wri_common_update_10400() {
-  $moduleHandler = \Drupal::service('module_handler');
-  if (!$moduleHandler->moduleExists('wri_in_this_series')) {
-    \Drupal::service('module_installer')->install(['wri_in_this_series'], TRUE);
-  }
+  // Deprecated: replaced with wri_block_update_10402, but we need this
+  // placeholder because Flagship has already run this.
 }
