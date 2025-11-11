@@ -34,3 +34,10 @@ function wri_data_update_dependencies() {
 
   return $dependencies;
 }
+
+/**
+ * Add custom metatag configuration for data.
+ */
+function wri_person_update_10502() {
+  \Drupal::service('distro_helper.updates')->updateConfig('metatag.metatag_defaults.node__person', ['tags#metatag_custom_tag:wri_thumbnail'], 'wri_data');
+}

@@ -1,5 +1,3 @@
-uuid: 7538cc4d-c632-482b-b2c6-36a0bfe8c4d3
-langcode: en
 status: true
 dependencies: {  }
 id: node__event
