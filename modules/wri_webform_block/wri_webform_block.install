@@ -5,6 +5,9 @@
  * Update hooks for wri_webform_block.
  */
 
+/**
+ * Implements hook_install().
+ */
 function wri_webform_block_install() {
   // In some sites, the block_content.type.webform.yml config was added by
   // another module, so we can't rely on the default functionality that pulls
