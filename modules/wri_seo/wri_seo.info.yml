@@ -6,6 +6,7 @@ package: WRI
 dependencies:
   - jquery_once
   - metatag
+  - metatag_custom_tags
   - metatag_google_scholar
   - metatag_facebook
   - metatag_open_graph

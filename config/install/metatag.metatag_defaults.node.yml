@@ -4,14 +4,21 @@ dependencies: {  }
 id: node
 label: Content
 tags:
+  article_tag: '[node:field_tags]'
   canonical_url: '[node:url]'
   description: '[node:summary]'
   image_src: '[node:field_main_image:entity:field_media_image:1200max]'
+  'metatag_custom_tag:wri_published': '[node:created:custom:F j Y]'
+  'metatag_custom_tag:wri_register': '[node:event_register_link]'
+  'metatag_custom_tag:wri_thumbnail': '[node:field_main_image:entity:field_media_image:150_tall]'
+  'metatag_custom_tag:wri_topic': '[node:field_primary_topic:entity:term_parent_or_self]'
+  'metatag_custom_tag:wri_topic_link': '[node:field_primary_topic:entity:term_parent_or_self_url]'
+  'metatag_custom_tag:wri_type': '[node:field_type:entity:term_parent_or_self]'
   og_description: '[node:summary]'
+  og_image: '[node:field_main_image:entity:field_media_image:1222x722]'
   og_image_alt: '[node:field_main_image:entity:field_media_image:alt]'
   og_image_height: '[node:field_main_image:entity:field_media_image:1222x722:height]'
   og_image_width: '[node:field_main_image:entity:field_media_image:1222x722:width]'
-  og_image: '[node:field_main_image:entity:field_media_image:1222x722]'
   og_site_name: '[site:name]'
   og_title: '[node:title]'
   og_url: '[node:url]'

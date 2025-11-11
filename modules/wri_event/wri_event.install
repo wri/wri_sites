@@ -225,3 +225,10 @@ function wri_event_update_10006() {
   $message = 'Event registration field is now translatable.';
   return $message;
 }
+
+/**
+ * Add custom metatag configuration for events.
+ */
+function wri_event_update_10007() {
+  \Drupal::service('distro_helper.updates')->installConfig('metatag.metatag_defaults.node__event', 'wri_event', 'install', TRUE);
+}

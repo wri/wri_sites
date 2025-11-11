@@ -1,0 +1,6 @@
+status: true
+dependencies: {  }
+id: node__event
+label: 'Content: Event'
+tags:
+  'metatag_custom_tag:wri_published': '[node:field_date_time:value-custom:F j Y]'

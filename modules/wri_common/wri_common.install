@@ -272,3 +272,15 @@ function wri_common_update_10400() {
   // Deprecated: replaced with wri_block_update_10402, but we need this
   // placeholder because Flagship has already run this.
 }
+
+/**
+ * Update some metatags to include custom items.
+ */
+function wri_common_update_10500() {
+  \Drupal::service('distro_helper.updates')->updateConfig('metatag.settings', [
+    'entity_type_groups#node',
+  ], 'wri_sites', 'install');
+  \Drupal::service('distro_helper.updates')->updateConfig('metatag.metatag_defaults.node', [
+    'tags',
+  ], 'wri_sites', 'install');
+}

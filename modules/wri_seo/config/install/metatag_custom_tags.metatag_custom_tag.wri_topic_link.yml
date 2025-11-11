@@ -1,0 +1,11 @@
+status: true
+dependencies: {  }
+id: wri_topic_link
+label: 'WRI Topic link'
+description: 'The link to the topic'
+htmlElement: meta
+htmlValueAttribute: href
+attributes:
+  -
+    name: name
+    value: wri_topic_link

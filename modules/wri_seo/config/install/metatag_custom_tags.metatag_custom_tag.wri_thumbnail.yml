@@ -1,0 +1,11 @@
+status: true
+dependencies: {  }
+id: wri_thumbnail
+label: 'WRI thumbnail'
+description: 'The thumbnail for search results'
+htmlElement: meta
+htmlValueAttribute: content
+attributes:
+  -
+    name: name
+    value: wri_thumbnail
