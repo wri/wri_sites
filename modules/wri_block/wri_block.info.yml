@@ -6,6 +6,7 @@ package: WRI
 dependencies:
   - block_content
   - entity_embed
+  - entity_usage
   - link
   - paragraphs
   - viewfield
