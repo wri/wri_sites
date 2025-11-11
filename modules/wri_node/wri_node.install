@@ -163,9 +163,9 @@ function wri_node_update_dependencies() {
   $dependencies['wri_node'][10405] = [
     'wri_project' => 10402,
   ];
+
   $dependencies['wri_node'][10406] = [
     'wri_program' => 10402,
-    'wri_microsites' => 10403,
   ];
   return $dependencies;
 }
@@ -206,7 +206,7 @@ function wri_node_update_10405() {
  */
 function wri_node_update_10406() {
   // Define the content types to process.
-  $content_types = ['program_center', 'microsite'];
+  $content_types = ['program_center'];
 
   wri_update_twitter_replacement($content_types, 'field_social_sharing_links');
 }

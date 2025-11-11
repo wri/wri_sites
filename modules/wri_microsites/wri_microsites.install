@@ -10,6 +10,10 @@
  */
 function wri_microsites_update_10401() {
   \Drupal::service('distro_helper.updates')->installConfig('field.field.node.microsite.field_social_sharing_links', 'wri_microsites');
+  // Define the content types to process.
+  $content_types = ['microsite'];
+
+  wri_update_twitter_replacement($content_types, 'field_social_sharing_links');
 
   $message = 'Add field Social Sharing Links and update view modes.';
   return $message;
