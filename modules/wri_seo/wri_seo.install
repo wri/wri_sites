@@ -7,9 +7,9 @@
 
 
 /**
- * Add custom metatags
+ * Add custom metatags.
  */
-function wri_block_update_10401() {
+function wri_seo_update_10401() {
   \Drupal::service('distro_helper.updates')->installConfig('metatag_custom_tags.metatag_custom_tag.wri_published', 'wri_seo', 'install', TRUE);
   \Drupal::service('distro_helper.updates')->installConfig('metatag_custom_tags.metatag_custom_tag.wri_register', 'wri_seo', 'install', TRUE);
   \Drupal::service('distro_helper.updates')->installConfig('metatag_custom_tags.metatag_custom_tag.wri_thumbnail', 'wri_seo', 'install', TRUE);
@@ -17,6 +17,6 @@ function wri_block_update_10401() {
   \Drupal::service('distro_helper.updates')->installConfig('metatag_custom_tags.metatag_custom_tag.wri_topic_link', 'wri_seo', 'install', TRUE);
   \Drupal::service('distro_helper.updates')->installConfig('metatag_custom_tags.metatag_custom_tag.wri_type', 'wri_seo', 'install', TRUE);
 
-  $message = 'Add embeddable blocks';
+  $message = 'Added custom metatags';
   return $message;
 }

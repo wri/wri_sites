@@ -38,6 +38,6 @@ function wri_data_update_dependencies() {
 /**
  * Add custom metatag configuration for data.
  */
-function wri_person_update_10502() {
-  \Drupal::service('distro_helper.updates')->updateConfig('metatag.metatag_defaults.node__person', ['tags#metatag_custom_tag:wri_thumbnail'], 'wri_data');
+function wri_data_update_10500() {
+  \Drupal::service('distro_helper.updates')->updateConfig('metatag.metatag_defaults.node__data', ['tags#metatag_custom_tag:wri_thumbnail'], 'wri_data');
 }
