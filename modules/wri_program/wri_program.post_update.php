@@ -64,7 +64,7 @@ function wri_program_post_update_sharelist_top(&$sandbox) {
       $changed = FALSE;
 
       // Track the region, whether Share exists, and Twitter uuids.
-      $paragraphs_region = 'content';
+      $paragraphs_region = NULL;
       $share_uuid = NULL;
       $twitter_uuids = [];
 
