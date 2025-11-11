@@ -9,26 +9,30 @@
  * Implements hook_install().
  */
 function wri_block_install() {
-  \Drupal::service('distro_helper.updates')->installConfig('views.view.block_content', 'wri_block', 'post-install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('views.view.block_content', 'wri_block', 'post-install', TRUE);
 }
 
 /**
  * Update the media display configs to add all the display modes.
  */
 function wri_block_update_10401() {
-
-  \Drupal::service('distro_helper.updates')->installConfig('views.view.content_blocks_browser', 'wri_block', 'install', 'TRUE');
-  \Drupal::service('distro_helper.updates')->installConfig('entity_browser.browser.block', 'wri_block', 'install', 'TRUE');
-  \Drupal::service('distro_helper.updates')->installConfig('embed.button.blocks', 'wri_block', 'install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('views.view.content_blocks_browser', 'wri_block', 'install', TRUE);
+  \Drupal::service('distro_helper.updates')->installConfig('entity_browser.browser.block', 'wri_block', 'install', TRUE);
+  \Drupal::service('distro_helper.updates')->installConfig('embed.button.blocks', 'wri_block', 'install', TRUE);
 
   $message = 'Add embeddable blocks';
   return $message;
 }
 
 /**
- * Update webform block with useful fields.
+ * Update webform and "In this series" blocks with useful fields.
  */
 function wri_block_update_10402() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('wri_in_this_series')) {
+    \Drupal::service('module_installer')->install(['wri_in_this_series'], TRUE);
+  }
+
   $moduleHandler = \Drupal::service('module_handler');
   if (!$moduleHandler->moduleExists('wri_block_webform')) {
     \Drupal::service('module_installer')->install(['wri_block_webform'], TRUE);
@@ -55,5 +59,5 @@ function wri_block_update_10403() {
   \Drupal::service('distro_helper.updates')->updateConfig('entity_browser.browser.block', [
     'widgets',
   ], 'wri_block', 'install');
-  \Drupal::service('distro_helper.updates')->installConfig('views.view.block_content', 'wri_block', 'post-install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('views.view.block_content', 'wri_block', 'post-install', TRUE);
 }
