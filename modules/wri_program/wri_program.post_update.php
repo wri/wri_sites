@@ -54,6 +54,7 @@ function wri_program_post_update_sharelist_top(&$sandbox) {
       continue;
     }
 
+    $share_component_added = FALSE;
     foreach ($sections as $section) {
 
       $components = $section->getComponents();
@@ -94,7 +95,7 @@ function wri_program_post_update_sharelist_top(&$sandbox) {
       }
 
       // If Paragraphs exists, ensure Share is at the top of that region.
-      if ($paragraphs_region) {
+      if ($paragraphs_region && !$share_component_added) {
         $very_low_weight = -1000000;
 
         if ($share_uuid) {
@@ -125,6 +126,7 @@ function wri_program_post_update_sharelist_top(&$sandbox) {
           $new_component->setWeight($very_low_weight);
           $section->appendComponent($new_component);
           $changed = TRUE;
+          $share_component_added = TRUE;
         }
 
         // Normalize weights in this region so Share renders first.
