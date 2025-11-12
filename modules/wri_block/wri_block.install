@@ -5,6 +5,8 @@
  * Update hooks for wri_block.
  */
 
+use Drupal\user\Entity\Role;
+
 /**
  * Implements hook_install().
  */
@@ -64,8 +66,15 @@ function wri_block_update_10403() {
   \Drupal::service('distro_helper.updates')->installConfig('views.view.block_content', 'wri_block', 'post-install', TRUE);
 }
 
+/**
+ * Grant editorial role the ability to use the block browser.
+ */
 function wri_block_update_10404() {
   // Add permissions for block browser to Editorial user.
   // 'access block entity browser pages'
-  // 'access block library'
+  // 'access block library'.
+  $role = Role::load('editorial');
+  $role->grantPermission('access block entity browser pages');
+  $role->grantPermission('access block library');
+  $role->save();
 }
