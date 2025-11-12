@@ -23,8 +23,6 @@ dependencies:
   module:
     - content_moderation
     - field_group
-    - inline_entity_form
-    - link
     - media_library
     - media_library_edit
     - metatag
@@ -228,30 +226,24 @@ content:
       display_label: true
     third_party_settings: {  }
   field_social_sharing_links:
-    type: inline_entity_form_complex
+    type: paragraphs
     weight: 7
     region: content
     settings:
-      form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: false
-      match_operator: CONTAINS
-      allow_duplicate: false
-      collapsible: false
-      collapsed: false
-      revision: false
-      removed_reference: optional
-    third_party_settings: {  }
-  field_twitter_account:
-    type: link_default
-    weight: 7
-    region: content
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: add_above
+        collapse_edit_all: collapse_edit_all
+        convert: '0'
+        duplicate: duplicate
     third_party_settings: {  }
   field_type:
     type: options_select
@@ -323,6 +315,6 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
-  field_social_sharing_links: true
   field_statistics: true
+  field_twitter_account: true
   layout_builder__layout: true
