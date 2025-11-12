@@ -59,6 +59,7 @@ function wri_block_update_10403() {
   ], 'wri_block', 'install');
   if (!$moduleHandler->moduleExists('entity_usage')) {
     \Drupal::service('module_installer')->install(['entity_usage'], TRUE);
+    \Drupal::service('distro_helper.updates')->installConfig('entity_usage.settings', 'wri_block', 'post-install', TRUE);
   }
   \Drupal::service('distro_helper.updates')->installConfig('views.view.block_content', 'wri_block', 'post-install', TRUE);
 }
