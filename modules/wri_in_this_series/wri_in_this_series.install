@@ -17,4 +17,17 @@ function wri_in_this_series_install() {
   $data['dependencies']['config'][] = 'block_content.type.in_this_series';
   $config->setData($data);
   $config->save();
+  // Add permissions
+  wri_in_this_series_add_permissions();
+}
+
+function wri_in_this_series_add_permissions() {
+  // Add permissions for Editorial:
+  // 'revert any in_this_series block content revisions'
+  // 'edit any in_this_series block content'
+  // 'create in_this_series block content'
+}
+
+function wri_in_this_series_update_10500() {
+  wri_in_this_series_add_permissions();
 }
