@@ -377,8 +377,11 @@ function wri_common_tokens($type, $tokens, array $data, array $options, Bubbleab
               $replacements[$original] = $term->getName() ?? '';
             }
             elseif ($parent_id = $term->parent->target_id) {
+              $language_code = $term->language()->getId();
               $parent_term = Term::load($parent_id);
-              $replacements[$original] = $parent_term->getName() ?? '';
+
+              $translated_term = \Drupal::service('entity.repository')->getTranslationFromContext($parent_term, $language_code);
+              $replacements[$original] = $translated_term->getName() ?? '';
             }
             break;
 
