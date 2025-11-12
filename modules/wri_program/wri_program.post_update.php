@@ -144,7 +144,7 @@ function wri_program_post_update_sharelist_top(&$sandbox) {
               'w' => (int) $c->getWeight(),
             ];
           }
-          usort($rows, static function($a, $b) {
+          usort($rows, static function ($a, $b) {
             if ($a['is_share'] && !$b['is_share']) {
               return -1;
             }
