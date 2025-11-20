@@ -252,6 +252,10 @@ function wri_event_update_10501() {
       'content#field_webinar',
     ], 'wri_event');
 
+  // Add the callout display mode.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('core.entity_view_mode.node.callout', 'wri_event', 'install', 'TRUE');
+
   // Add the callout view display.
   \Drupal::service('distro_helper.updates')
     ->installConfig('core.entity_view_display.node.event.callout', 'wri_event', 'install', 'TRUE');
