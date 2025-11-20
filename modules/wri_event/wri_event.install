@@ -232,3 +232,27 @@ function wri_event_update_10006() {
 function wri_event_update_10007() {
   \Drupal::service('distro_helper.updates')->installConfig('metatag.metatag_defaults.node__event', 'wri_event', 'install', TRUE);
 }
+
+
+/**
+ * Add a new webinar field to events.
+ */
+function wri_event_update_10501() {
+  // Add the fields.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('field.storage.node.field_webinar', 'wri_event', 'install', 'TRUE');
+
+  // Attach the fields to the Event node.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('field.field.node.event.field_webinar', 'wri_event', 'install', 'TRUE');
+
+  // Updating the Event form display.
+  \Drupal::service('distro_helper.updates')
+    ->updateConfig('core.entity_form_display.node.event.default', [
+      'content#field_webinar',
+    ], 'wri_event');
+
+  // Add the callout view display.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('core.entity_view_display.node.event.callout', 'wri_event', 'install', 'TRUE');
+}

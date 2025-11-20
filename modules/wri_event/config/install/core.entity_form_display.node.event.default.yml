@@ -27,6 +27,7 @@ dependencies:
     - field.field.node.event.field_social_media_links
     - field.field.node.event.field_tags
     - field.field.node.event.field_type
+    - field.field.node.event.field_webinar
     - field.field.node.event.field_zoom_list_id
     - field.field.node.event.field_zoom_registration_form
     - field.field.node.event.field_zoom_webinar_id
@@ -313,6 +314,18 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
+  field_webinar:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 10
+    region: content
   field_main_image:
     type: media_library_widget
     weight: -1

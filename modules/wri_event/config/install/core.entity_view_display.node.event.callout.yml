@@ -1,0 +1,142 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.callout
+    - field.field.node.event.body
+    - field.field.node.event.field_date_time
+    - field.field.node.event.field_event_display
+    - field.field.node.event.field_featured
+    - field.field.node.event.field_files
+    - field.field.node.event.field_hub_canonical_url
+    - field.field.node.event.field_international_office
+    - field.field.node.event.field_intro
+    - field.field.node.event.field_languages_spoken
+    - field.field.node.event.field_location
+    - field.field.node.event.field_location_detail
+    - field.field.node.event.field_main_image
+    - field.field.node.event.field_metatag
+    - field.field.node.event.field_primary_contacts
+    - field.field.node.event.field_primary_topic
+    - field.field.node.event.field_projects
+    - field.field.node.event.field_region
+    - field.field.node.event.field_register
+    - field.field.node.event.field_related_events
+    - field.field.node.event.field_related_resources
+    - field.field.node.event.field_sent_to_orto
+    - field.field.node.event.field_social_media_links
+    - field.field.node.event.field_tags
+    - field.field.node.event.field_type
+    - field.field.node.event.field_webinar
+    - field.field.node.event.field_zoom_list_id
+    - field.field.node.event.field_zoom_registration_form
+    - field.field.node.event.field_zoom_webinar_id
+    - field.field.node.event.layout_builder__layout
+    - image.style.medium
+    - node.type.event
+  module:
+    - layout_builder
+    - link
+    - media
+    - smart_date
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.event.callout
+targetEntityType: node
+bundle: event
+mode: callout
+content:
+  field_date_time:
+    type: smartdate_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: medium
+      format: default
+      force_chronological: false
+      add_classes: false
+      time_wrapper: true
+      localize: false
+      parts:
+        - start
+        - end
+      duration:
+        separator: ' | '
+        unit: ''
+        decimals: 2
+        suffix: h
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_intro:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_main_image:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: medium
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_primary_topic:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_webinar:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+hidden:
+  body: true
+  content_moderation_control: true
+  field_event_display: true
+  field_featured: true
+  field_files: true
+  field_hub_canonical_url: true
+  field_international_office: true
+  field_languages_spoken: true
+  field_location: true
+  field_location_detail: true
+  field_metatag: true
+  field_primary_contacts: true
+  field_projects: true
+  field_region: true
+  field_register: true
+  field_related_events: true
+  field_related_resources: true
+  field_sent_to_orto: true
+  field_social_media_links: true
+  field_tags: true
+  field_type: true
+  field_zoom_list_id: true
+  field_zoom_registration_form: true
+  field_zoom_webinar_id: true
+  langcode: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

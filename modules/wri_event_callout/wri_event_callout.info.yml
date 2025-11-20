@@ -1,0 +1,10 @@
+name: 'WRI Event Callout'
+type: module
+description: 'Provides an upcoming event callout block and related configuration.'
+package: WRI
+dependencies:
+  - drupal:block
+  - drupal:node
+  - drupal:views
+  - drupal:taxonomy
+core_version_requirement: ^10 || ^11
