@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.upcoming_event
+    - field.field.block_content.upcoming_event.field_after_the_event_ends
+    - field.field.block_content.upcoming_event.field_event_to_feature
+    - field.field.block_content.upcoming_event.field_topic
+  module:
+    - options
+id: block_content.upcoming_event.default
+targetEntityType: block_content
+bundle: upcoming_event
+mode: default
+content:
+  field_after_the_event_ends:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_event_to_feature: true
+  field_topic: true
+  langcode: true
+  search_api_excerpt: true

@@ -233,7 +233,6 @@ function wri_event_update_10007() {
   \Drupal::service('distro_helper.updates')->installConfig('metatag.metatag_defaults.node__event', 'wri_event', 'install', TRUE);
 }
 
-
 /**
  * Add a new webinar field to events.
  */
