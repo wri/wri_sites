@@ -234,6 +234,17 @@ function wri_event_update_10007() {
 }
 
 /**
+ * Implements hook_update_dependencies().
+ */
+function wri_program_update_dependencies() {
+  // Add the new image type first.
+  $dependencies['wri_event'][10501] = [
+    'wri_media' => 10501,
+  ];
+  return $dependencies;
+}
+
+/**
  * Add a new webinar field to events.
  */
 function wri_event_update_10501() {

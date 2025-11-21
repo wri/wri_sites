@@ -11,35 +11,39 @@
 #}
 
 <div class="event-callout">
-  {% if content.hero %}
-    {% if content.is_past %}
-      <h2>{{ "Past Webinar"|t }}</h2>
-    {% else %}
-      <h2>{{ "Upcoming Webinar"|t }}</h2>
-    {% endif %}
-    {{ content.hero.field_date_time }}
-    <h3>{{ content.title }}</h3>
-    {{ content.hero.body }}
-  {% endif %}
-
-  {% if content.main_content %}
-    {{ content.main_content|without('is_past') }}
-  {% endif %}
-
-  {% set node = content['#node'] ?? null %}
-  {% if node %}
-    {% set url = path('entity.node.canonical', {'node': node.id}) %}
-  {% endif %}
-  <div class="buttons margin-top-md">
-    {% if content.is_past %}
-      {% if content.webinar|render %}
-        {{ content.webinar }}
+  <div class="event-wrapper">
+    {% if content.hero %}
+      {% if content.is_past %}
+        <h2 class="h2-alt">{{ "Past Webinar"|t }}</h2>
       {% else %}
-        <a href="{{ url }}" class="button button--primary">{{ "Watch the Video"|t }}</a>
+        <h2 class="h2-alt">{{ "Upcoming Webinar"|t }}</h2>
       {% endif %}
-    {% else %}
-      {{ content.buttons }}
+      <div class="time-wrapper utility-lg">{{ content.hero.field_date_time }}</div>
+      <div class="primary-topic topic-tag">{{ content.hero.field_primary_topic }}</div>
+      <h3>{{ content.title }}</h3>
+      <div class="utility-base info-text">{{ content.hero.body }}</div>
     {% endif %}
   </div>
 
+  <div class="image-wrapper">
+    {% if content.main_content %}
+      {{ content.main_content|without('is_past') }}
+    {% endif %}
+
+    {% set node = content['#node'] ?? null %}
+    {% if node %}
+      {% set url = path('entity.node.canonical', {'node': node.id}) %}
+    {% endif %}
+    <div class="buttons margin-top-xs">
+      {% if content.is_past %}
+        {% if content.webinar|render %}
+          {{ content.webinar }}
+        {% else %}
+          <a href="{{ url }}" class="button button--primary">{{ "Watch the Video"|t }}</a>
+        {% endif %}
+      {% else %}
+        {{ content.buttons }}
+      {% endif %}
+    </div>
+  </div>
 </div>

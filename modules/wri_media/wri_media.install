@@ -138,3 +138,10 @@ function wri_media_update_10107() {
     'settings#toolbar#items',
   ], 'wri_media');
 }
+
+/**
+ * Add square event image w. focal point scale & crop.
+ */
+function wri_media_update_10501() {
+  \Drupal::service('distro_helper.updates')->installConfig('image.style.200_square', 'wri_media', 'install', 'TRUE');
+}

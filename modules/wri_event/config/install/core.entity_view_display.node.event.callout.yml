@@ -32,7 +32,7 @@ dependencies:
     - field.field.node.event.field_zoom_registration_form
     - field.field.node.event.field_zoom_webinar_id
     - field.field.node.event.layout_builder__layout
-    - image.style.medium
+    - image.style.200_square
     - node.type.event
   module:
     - ds
@@ -91,8 +91,13 @@ content:
     type: text_summary_or_trimmed
     label: hidden
     settings:
-      trim_length: 300
-    third_party_settings: {  }
+      trim_length: 200
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
     weight: 2
     region: hero
   field_date_time:
@@ -101,20 +106,26 @@ content:
     settings:
       timezone_override: ''
       format_type: medium
-      format: default
+      format: compact
       force_chronological: false
       add_classes: false
       time_wrapper: true
       localize: false
       parts:
-        - start
-        - end
+        start: start
+        end: end
+        duration: '0'
       duration:
         separator: ' | '
         unit: ''
         decimals: 2
         suffix: h
-    third_party_settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
     weight: 0
     region: hero
   field_main_image:
@@ -122,10 +133,15 @@ content:
     label: hidden
     settings:
       image_link: ''
-      image_style: medium
+      image_style: 200_square
       image_loading:
         attribute: lazy
-    third_party_settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
     weight: 3
     region: main_content
   field_primary_topic:
