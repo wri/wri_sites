@@ -9,7 +9,7 @@ dependencies:
     - field.field.block_content.upcoming_event.field_topic
   module:
     - layout_builder
-    - options
+    - wri_event_callout
 third_party_settings:
   layout_builder:
     enabled: false
@@ -20,9 +20,12 @@ bundle: upcoming_event
 mode: preview
 content:
   field_after_the_event_ends:
-    type: list_default
+    type: wri_event_callout_event_callout_behavior
     label: hidden
-    settings: {  }
+    settings:
+      view_id: event_callout
+      display_id: block_1
+      event_date_field: field_date_time
     third_party_settings: {  }
     weight: 0
     region: content

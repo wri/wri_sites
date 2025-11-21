@@ -7,16 +7,19 @@ dependencies:
     - field.field.block_content.upcoming_event.field_event_to_feature
     - field.field.block_content.upcoming_event.field_topic
   module:
-    - options
+    - wri_event_callout
 id: block_content.upcoming_event.default
 targetEntityType: block_content
 bundle: upcoming_event
 mode: default
 content:
   field_after_the_event_ends:
-    type: list_default
+    type: wri_event_callout_event_callout_behavior
     label: hidden
-    settings: {  }
+    settings:
+      view_id: event_callout
+      display_id: block_1
+      event_date_field: field_date_time
     third_party_settings: {  }
     weight: 0
     region: content
