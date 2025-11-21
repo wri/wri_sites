@@ -1,0 +1,45 @@
+{#
+/**
+ * @file
+ * Display Suite Card template.
+ *
+ * Available variables:
+ * - ds_content_wrapper: wrapper around content
+ * - attributes: content region attributes
+ * - ds_content: content region
+ */
+#}
+
+<div class="event-callout">
+  {% if content.hero %}
+    {% if content.is_past %}
+      <h2>{{ "Past Webinar"|t }}</h2>
+    {% else %}
+      <h2>{{ "Upcoming Webinar"|t }}</h2>
+    {% endif %}
+    {{ content.hero.field_date_time }}
+    <h3>{{ content.title }}</h3>
+    {{ content.hero.body }}
+  {% endif %}
+
+  {% if content.main_content %}
+    {{ content.main_content|without('is_past') }}
+  {% endif %}
+
+  {% set node = content['#node'] ?? null %}
+  {% if node %}
+    {% set url = path('entity.node.canonical', {'node': node.id}) %}
+  {% endif %}
+  <div class="buttons margin-top-md">
+    {% if content.is_past %}
+      {% if content.webinar|render %}
+        {{ content.webinar }}
+      {% else %}
+        <a href="{{ url }}" class="button button--primary">{{ "Watch the Video"|t }}</a>
+      {% endif %}
+    {% else %}
+      {{ content.buttons }}
+    {% endif %}
+  </div>
+
+</div>

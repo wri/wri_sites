@@ -62,3 +62,16 @@
     @include font-line-height(13, 15);
   }
 }
+
+.embedded-entity.embed--block-type--upcoming-event {
+  padding: 0;
+
+  &> .field {
+    padding: var(--spacer-2) var(--spacer-5);
+  }
+  .field--name-field-after-the-event-ends {
+
+  }
+
+
+}
