@@ -154,19 +154,25 @@ function wri_node_update_10002() {
  * Implements hook_update_dependencies().
  */
 function wri_node_update_dependencies() {
+    $moduleHandler = \Drupal::service('module_handler');
   $dependencies['wri_node'][10401] = [
     'wri_paragraph' => 10401,
   ];
   $dependencies['wri_node'][10402] = [
     'wri_person' => 10402,
   ];
-  $dependencies['wri_node'][10405] = [
-    'wri_project' => 10402,
-  ];
 
-  $dependencies['wri_node'][10406] = [
-    'wri_program' => 10402,
-  ];
+    if ($moduleHandler->moduleExists('wri_project')) {
+        $dependencies['wri_node'][10405] = [
+            'wri_project' => 10402,
+        ];
+    }
+
+    if ($moduleHandler->moduleExists('wri_program')) {
+        $dependencies['wri_node'][10406] = [
+            'wri_program' => 10402,
+        ];
+    }
   return $dependencies;
 }
 
@@ -195,6 +201,10 @@ function wri_node_update_10402() {
  * Migrate field_twitter_account values into a social_media_sites paragraph.
  */
 function wri_node_update_10405() {
+    $moduleHandler = \Drupal::service('module_handler');
+    if (!$moduleHandler->moduleExists('wri_project')) {
+        return t('WRI Project module not found, skipping update.');
+    }
   // Define the content types to process.
   $content_types = ['project_detail'];
 
@@ -205,6 +215,10 @@ function wri_node_update_10405() {
  * Migrate field_twitter_account values into a social_media_sites paragraph.
  */
 function wri_node_update_10406() {
+    $moduleHandler = \Drupal::service('module_handler');
+    if (!$moduleHandler->moduleExists('wri_program')) {
+        return t('WRI Project module not found, skipping update.');
+    }
   // Define the content types to process.
   $content_types = ['program_center'];
 
