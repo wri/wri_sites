@@ -2,8 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - block_content.type.in_this_series
-    - block_content.type.upcoming_event
     - core.entity_view_mode.block_content.preview
   module:
     - block_content

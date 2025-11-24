@@ -63,6 +63,7 @@ third_party_settings:
       main_content:
         - field_main_image
         - is_past
+        - field_type
       buttons:
         - field_social_media_links
         - register_button
@@ -163,6 +164,19 @@ content:
     third_party_settings: {  }
     weight: 5
     region: buttons
+  field_type:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 6
+    region: main_content
   field_webinar:
     type: link
     label: hidden

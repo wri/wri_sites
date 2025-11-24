@@ -13,10 +13,11 @@
 <div class="event-callout">
   <div class="event-wrapper">
     {% if content.hero %}
+      {% set event_type = content.field_type.0['#plain_text'] %}
       {% if content.is_past %}
-        <h2 class="h2-alt">{{ "Past Webinar"|t }}</h2>
+        <h2 class="h2-alt">{{ "Past "|t ~ event_type }}</h2>
       {% else %}
-        <h2 class="h2-alt">{{ "Upcoming Webinar"|t }}</h2>
+        <h2 class="h2-alt">{{ "Upcoming "|t ~ event_type }}</h2>
       {% endif %}
       <div class="time-wrapper utility-lg">{{ content.hero.field_date_time }}</div>
       <div class="primary-topic topic-tag">{{ content.hero.field_primary_topic }}</div>
@@ -27,7 +28,7 @@
 
   <div class="image-wrapper">
     {% if content.main_content %}
-      {{ content.main_content|without('is_past') }}
+      {{ content.main_content|without('is_past', 'field_type') }}
     {% endif %}
 
     {% set node = content['#node'] ?? null %}

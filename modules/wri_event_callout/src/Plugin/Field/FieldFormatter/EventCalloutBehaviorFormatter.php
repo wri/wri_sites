@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Drupal\wri_event_callout\Plugin\Field\FieldFormatter;
 
 use Drupal\block_content\BlockContentInterface;
+use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
@@ -36,6 +37,11 @@ final class EventCalloutBehaviorFormatter extends FormatterBase implements Conta
   protected EntityTypeManagerInterface $entityTypeManager;
 
   /**
+   * The time service.
+   */
+  protected TimeInterface $time;
+
+  /**
    * Constructs a new EventCalloutBehaviorFormatter.
    */
   public function __construct(
@@ -47,9 +53,11 @@ final class EventCalloutBehaviorFormatter extends FormatterBase implements Conta
     $view_mode,
     array $third_party_settings,
     EntityTypeManagerInterface $entity_type_manager,
+    TimeInterface $time,
   ) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings);
     $this->entityTypeManager = $entity_type_manager;
+    $this->time = $time;
   }
 
   /**
@@ -64,7 +72,8 @@ final class EventCalloutBehaviorFormatter extends FormatterBase implements Conta
       $configuration['label'],
       $configuration['view_mode'],
       $configuration['third_party_settings'],
-      $container->get('entity_type.manager')
+      $container->get('entity_type.manager'),
+      $container->get('datetime.time'),
     );
   }
 
@@ -213,7 +222,7 @@ final class EventCalloutBehaviorFormatter extends FormatterBase implements Conta
       return FALSE;
     }
 
-    $now = \Drupal::time()->getRequestTime();
+    $now = $this->time->getRequestTime();
     return $timestamp >= $now;
   }
 
