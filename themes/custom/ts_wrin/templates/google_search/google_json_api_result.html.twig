@@ -23,7 +23,7 @@
       {% if result.link %}
         <h3 class="h3"><a href="{{ result.link }}">{{ result.htmlTitle | raw }}</a></h3>
       {% endif %}
-      {{ highlight_search(result.snippet, term) }}
+      <div class="body-base"{{ highlight_search(result.snippet, term) }}</div>
       {% if result.pagemap.metatags[0]['article:tag'] %}
         <div class="tags">
           {{ result.pagemap.metatags[0]['article:tag'] }}

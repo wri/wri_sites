@@ -593,7 +593,8 @@
 
 .search-page-main-input {
   margin-top: -$space-lg;
-  .search-input {
+  .search-input,
+  .gjas-element-keys {
     @include font($acumin-semi-cond, "light", "normal");
     @include font-line-height(16, 22);
     box-sizing: border-box;
