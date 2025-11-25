@@ -40,7 +40,9 @@ final class WriSearchControllerAlterSubscriber implements EventSubscriberInterfa
       $build['#pager'] = $build['pager'] ?? [];
       $build['#search_form'] = $build['search_form'] ?? [];
       $build['#search_results'] = $build['search_results'] ?? [];
-      $build['#search_results_title'] = $build['search_results_title'] ? strip_tags($build[ 'search_results_title']['#markup']) : '';
+      if (isset($build['search_results_title'])) {
+        $build['#search_results_title'] = $build['search_results_title']['#markup'] ? strip_tags($build[ 'search_results_title']['#markup']) : '';
+      }
       $event->setControllerResult($build);
     }
   }
