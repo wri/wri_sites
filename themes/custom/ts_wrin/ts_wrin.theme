@@ -139,7 +139,7 @@ function ts_wrin_preprocess_paragraph(array &$variables) {
  */
 function ts_wrin_preprocess_page(array &$variables) {
   $current_route_name = \Drupal::service('current_route_match')->getRouteName();
-  if (str_starts_with($current_route_name, 'view.') || $current_route_name == 'search.view_google_json_api_search') {
+  if (str_starts_with($current_route_name, 'view.') || ($current_route_name == 'search.view') || $current_route_name == 'search.view_google_json_api_search') {
     $variables['is_node'] = TRUE;
   }
 
