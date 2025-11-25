@@ -233,9 +233,16 @@ function wri_event_update_dependencies() {
 }
 
 /**
- * Add a new webinar field to events.
+ * Enable the new wri_event_callout module.
  */
 function wri_event_update_10501() {
+  \Drupal::service('module_installer')->install(['wri_event_callout']);
+}
+
+/**
+ * Add a new webinar field to events.
+ */
+function wri_event_update_10502() {
   // Add the fields.
   \Drupal::service('distro_helper.updates')
     ->installConfig('field.storage.node.field_body_contains_recording', 'wri_node', 'install', 'TRUE');
@@ -257,11 +264,4 @@ function wri_event_update_10501() {
   // Add the callout view display.
   \Drupal::service('distro_helper.updates')
     ->installConfig('core.entity_view_display.node.event.callout', 'wri_event', 'install', 'TRUE');
-}
-
-/**
- * Enable the new wri_event_callout module.
- */
-function wri_event_update_10502() {
-  \Drupal::service('module_installer')->install(['wri_event_callout']);
 }
