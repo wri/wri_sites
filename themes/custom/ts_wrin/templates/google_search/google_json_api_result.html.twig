@@ -25,8 +25,7 @@
       {% endif %}
       <div class="body-base mb-5"{{ highlight_search(result.snippet, term) }}</div>
       {% if result.pagemap.metatags[0]['article:tag'] %}
-        <div class="tags">
-          {{ result.pagemap.metatags[0]['article:tag'] }}
+        <div class="tags"><ul><li>{{ result.pagemap.metatags[0]['article:tag'] }}</li></ul>
         </div>
       {% endif %}
       {% if result.pagemap.metatags[0].wri_register %}
@@ -35,9 +34,7 @@
     </div>
     <div class="search-results-image">
       <img src="{{ result.pagemap.metatags[0].wri_thumbnail }}" alt="" />
-      <div class="tags">
-        {{ result.pagemap.metatags[0]['article:tag'] }}
-      </div>
+      <div class="tags"><ul><li>{{ result.pagemap.metatags[0]['article:tag'] }}</li></ul></div>
     </div>
   {% endif %}
 </div>
