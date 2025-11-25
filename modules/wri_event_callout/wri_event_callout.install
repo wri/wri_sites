@@ -71,6 +71,32 @@ function wri_event_callout_install() {
   $data['dependencies']['config'][] = 'block_content.type.upcoming_event';
   $config->setData($data);
   $config->save();
+
+  // Allow Upcoming Event blocks in the block Entity Browser.
+  $config = \Drupal::configFactory()->getEditable('entity_browser.browser.block');
+  if (!$config->isNew()) {
+    $data = $config->getRawData();
+
+    if (!empty($data['widgets']) && is_array($data['widgets'])) {
+      foreach ($data['widgets'] as &$widget) {
+        // Only touch widgets that already have block_type settings.
+        if (!empty($widget['settings']['block_type']) && is_array($widget['settings']['block_type'])) {
+          $widget['settings']['block_type']['upcoming_event'] = 'upcoming_event';
+        }
+      }
+      unset($widget);
+
+      // Ensure this browser config depends on the upcoming_event block type.
+      if (empty($data['dependencies']['config']) || !is_array($data['dependencies']['config'])) {
+        $data['dependencies']['config'] = [];
+      }
+      if (!in_array('block_content.type.upcoming_event', $data['dependencies']['config'], TRUE)) {
+        $data['dependencies']['config'][] = 'block_content.type.upcoming_event';
+      }
+
+      $config->setData($data)->save();
+    }
+  }
   // Add permissions.
   wri_event_callout_add_permissions();
 }
@@ -95,4 +121,11 @@ function wri_event_callout_add_permissions() {
  */
 function wri_event_callout_update_10503() {
   wri_event_callout_add_permissions();
+}
+
+/**
+ * Allow Upcoming Event blocks in the block Entity Browser widget.
+ */
+function wri_event_callout_update_10504() {
+  wri_event_callout_install();
 }

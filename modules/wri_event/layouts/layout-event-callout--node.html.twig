@@ -22,7 +22,7 @@
       <div class="time-wrapper utility-lg">{{ content.hero.field_date_time }}</div>
       <div class="primary-topic topic-tag">{{ content.hero.field_primary_topic }}</div>
       <h3>{{ content.title }}</h3>
-      <div class="utility-base info-text">{{ content.hero.body }}</div>
+      <div class="utility-base info-text">{{ content.hero.body|render|striptags|trim }}</div>
     {% endif %}
   </div>
 
@@ -37,11 +37,7 @@
     {% endif %}
     <div class="buttons margin-top-xs">
       {% if content.is_past %}
-        {% if content.webinar|render %}
-          {{ content.webinar }}
-        {% else %}
-          <a href="{{ url }}" class="button button--primary">{{ "Watch the Video"|t }}</a>
-        {% endif %}
+        <a href="{{ url }}" class="button button--primary">{{ "Watch the Video"|t }}</a>
       {% else %}
         {{ content.buttons }}
       {% endif %}

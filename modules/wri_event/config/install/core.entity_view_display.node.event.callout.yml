@@ -4,6 +4,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.callout
     - field.field.node.event.body
+    - field.field.node.event.field_body_contains_recording
     - field.field.node.event.field_date_time
     - field.field.node.event.field_event_display
     - field.field.node.event.field_featured
@@ -27,7 +28,6 @@ dependencies:
     - field.field.node.event.field_social_media_links
     - field.field.node.event.field_tags
     - field.field.node.event.field_type
-    - field.field.node.event.field_webinar
     - field.field.node.event.field_zoom_list_id
     - field.field.node.event.field_zoom_registration_form
     - field.field.node.event.field_zoom_webinar_id
@@ -38,7 +38,6 @@ dependencies:
     - ds
     - element_class_formatter
     - layout_builder
-    - link
     - media
     - smart_date
     - text
@@ -177,20 +176,9 @@ content:
             lb: ''
     weight: 6
     region: main_content
-  field_webinar:
-    type: link
-    label: hidden
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-    weight: 7
-    region: buttons
 hidden:
   content_moderation_control: true
+  field_body_contains_recording: true
   field_event_display: true
   field_featured: true
   field_files: true

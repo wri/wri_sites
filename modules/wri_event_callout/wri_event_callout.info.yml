@@ -5,6 +5,8 @@ package: WRI
 dependencies:
   - drupal:block
   - drupal:node
-  - drupal:views
   - drupal:taxonomy
+  - drupal:views
+  - drupal:wri_block
+  - drupal:wri_event
 core_version_requirement: ^10 || ^11
