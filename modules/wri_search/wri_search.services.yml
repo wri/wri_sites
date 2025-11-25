@@ -2,3 +2,8 @@ services:
   wri_search.pretty_facets_helper:
     class: Drupal\wri_search\PrettyFacetsHelper
     arguments: ['@plugin.manager.facets_pretty_paths.coder']
+
+  wri_search.event_subscriber:
+    class: Drupal\wri_search\EventSubscriber\WriSearchControllerAlterSubscriber
+    tags:
+      - { name: event_subscriber }

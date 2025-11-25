@@ -1,10 +1,10 @@
 <div class="ds-1col clearfix search-results-container margin-bottom-sm">
   {% if result %}
-    {% if result.articletags or result.pagemap.metatags[0].wri_type %}
+    {% if result.pagemap.metatags[0]['article:tag'] or result.pagemap.metatags[0].wri_type %}
       <div class="search-results-tags">
         <div class="tags">
-          {% if result.articletags %}
-            <div class="topic-tag">{{ result.articletags }}</div>
+          {% if result.pagemap.metatags[0]['article:tag'] %}
+            <div class="topic-tag">{{ result.pagemap.metatags[0]['article:tag'] }}</div>
           {% endif %}
         </div>
         {% if result.pagemap.metatags[0].wri_type %}
@@ -24,9 +24,9 @@
         <h3 class="h3"><a href="{{ result.link }}">{{ result.htmlTitle | raw }}</a></h3>
       {% endif %}
       {{ highlight_search(result.snippet, term) }}
-      {% if result.articletags %}
+      {% if result.pagemap.metatags[0]['article:tag'] %}
         <div class="tags">
-          {{ result.articletags }}
+          {{ result.pagemap.metatags[0]['article:tag'] }}
         </div>
       {% endif %}
       {% if result.pagemap.metatags[0].wri_register %}
@@ -34,9 +34,9 @@
       {% endif %}
     </div>
     <div class="search-results-image">
-      {{ result.pagemap.metatags[0].wri_thumbnail }}
+      <img src="{{ result.pagemap.metatags[0].wri_thumbnail }}" alt="" />
       <div class="tags">
-        {{ result.articletags }}
+        {{ result.pagemap.metatags[0]['article:tag'] }}
       </div>
     </div>
   {% endif %}

@@ -1,0 +1,107 @@
+{% if is_node %}
+  {{ drupal_block('local_tasks_block') }}
+{% endif %}
+{%  if page.top_modals %}
+  {{ page.top_modals }}
+{% endif %}
+{% if page.wrin_custom.wrinfilterstatus %}
+  {% include '@ts_wrin/ts_custom/wrin-filter-status.html.twig' %}
+{% endif %}
+<div id="tray-nav-wrapper">
+  <div id="tray-nav-canvas">
+    {% if use_microsite_nav %}
+    {# Do nothing. Pulled in at the wri-subpage-columns level #}
+    {% else %}
+    <header>
+      <div class="container header-wrapper">
+        {% if page.primary_nav %}
+          {{ page.primary_nav }}
+        {% endif %}
+        <div class="header-right {{ menu_color }}">
+          {% if page.secondary_nav %}
+            {{ page.secondary_nav }}
+          {% endif %}
+
+          {% if page.wrin_custom.languageswitcher %}
+            {% include '@ts_wrin/ts_custom/wrin-language-button.html.twig' %}
+          {% endif %}
+
+          {% if page.wrin_custom.wrinsearch %}
+            {% include '@ts_wrin/ts_custom/wrin-search-button.html.twig' %}
+          {% endif %}
+
+          {% if page.wrin_custom.wrinfilter %}
+            {% include '@ts_wrin/ts_custom/wrin-filter-button.html.twig' %}
+          {% endif %}
+
+          {% if page.hamburger_nav and page.hamburger_nav|children %}
+            {% include '@ts_wrin/ts_custom/ts-hamburger-nav.html.twig' %}
+          {% endif %}
+        </div>
+      </div>
+    </header>
+    {% endif %}
+
+    <div class="mobile-menu-target">
+      <div class="ts-mobile-menu__wrapper">
+        {% if page.hamburger_nav and page.hamburger_nav|children %}
+          {{ page.hamburger_nav }}
+        {% endif %}
+      </div>
+    </div>
+
+    {# Start - Off-canvas elements: Filter, Search, Mega-menu #}
+    <div id="tray-nav">
+      {% if page.wrin_custom %}
+        {{ page.wrin_custom }}
+      {% endif %}
+    </div>
+    {# End - Off-canvas elements #}
+
+    {% if page.admin %}
+      {{ page.admin }}
+    {% endif %}
+
+    {% if page.content %}
+      <div class="resources-wrapper">
+      <div class="landing-page__content container margin-top-md margin-bottom-md">
+        <div class="content__inner">
+          {{ drupal_block('local_tasks_block') }}
+          {{page.content}}
+        </div>
+      </div>
+      </div>
+    {% endif %}
+
+    <footer>
+      {% if page.footer_top %}
+        {{page.footer_top}}
+      {% endif %}
+      {% if page.footer_left or page.footer_right %}
+        <div class="region-footer">
+          <div class="container">
+            <div class="footer-padding">
+              <div class="footer-logo margin-bottom-md">
+                <a href="{{ logo_link }}">
+                  <img class="logo-white" src="{{ footer_logo }}" alt="{{ 'Home'|t }}" />
+                </a>
+              </div>
+              {% if page.footer_left %}
+                {{page.footer_left}}
+              {% endif %}
+
+              {% if page.footer_right %}
+                {{page.footer_right}}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </footer>
+
+    {% if page.modals %}
+      {{ page.modals }}
+    {% endif %}
+
+  </div>
+</div>
