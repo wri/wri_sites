@@ -315,17 +315,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_webinar:
-    type: link
-    label: hidden
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
+    type: link_default
     weight: 10
     region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    label: hidden
   field_main_image:
     type: media_library_widget
     weight: -1
