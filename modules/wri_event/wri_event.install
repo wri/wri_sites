@@ -264,4 +264,7 @@ function wri_event_update_10501() {
  */
 function wri_event_update_10502() {
   \Drupal::service('module_installer')->install(['wri_event_callout']);
+
+  $message = 'wri_event_callout module enabled';
+  return $message;
 }
