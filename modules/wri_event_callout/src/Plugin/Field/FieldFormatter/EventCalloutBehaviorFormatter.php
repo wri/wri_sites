@@ -212,12 +212,8 @@ final class EventCalloutBehaviorFormatter extends FormatterBase implements Conta
 
     // For datetime or daterange, the first item's "value" is usually the start.
     $item = $event->get($date_field)->first();
-    $value = $item->value ?? NULL;
-    if (!$value) {
-      return FALSE;
-    }
+    $timestamp = $item->value ?? NULL;
 
-    $timestamp = strtotime($value);
     if (!$timestamp) {
       return FALSE;
     }

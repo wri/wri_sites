@@ -12,11 +12,11 @@ entity_type: block_content
 bundle: upcoming_event
 label: 'After the event ends'
 description: ''
-required: false
+required: true
 translatable: false
 default_value:
   -
-    value: show_next_event
+    value: hide_block
 default_value_callback: ''
 settings: {  }
 field_type: list_string
