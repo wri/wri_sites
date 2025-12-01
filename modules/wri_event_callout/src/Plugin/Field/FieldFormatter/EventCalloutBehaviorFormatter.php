@@ -182,7 +182,9 @@ final class EventCalloutBehaviorFormatter extends FormatterBase implements Conta
     switch ($behavior) {
       case 'link_to_recording':
         // Show the chosen (past) event in Callout view mode.
-        $elements[0] = $this->buildEventCallout($event);
+        if ($event->field_body_contains_recording->value == TRUE) {
+          $elements[0] = $this->buildEventCallout($event);
+        }
         return $elements;
 
       case 'show_next_event':
@@ -226,13 +228,8 @@ final class EventCalloutBehaviorFormatter extends FormatterBase implements Conta
    * Render the event in the Callout view mode.
    */
   protected function buildEventCallout(NodeInterface $event): array {
-    if ($event->field_body_contains_recording->value == TRUE) {
-      $view_builder = $this->entityTypeManager->getViewBuilder('node');
-      return $view_builder->view($event, 'callout');
-    }
-    else {
-      return [];
-    }
+    $view_builder = $this->entityTypeManager->getViewBuilder('node');
+    return $view_builder->view($event, 'callout');
   }
 
   /**
