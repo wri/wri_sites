@@ -226,8 +226,13 @@ final class EventCalloutBehaviorFormatter extends FormatterBase implements Conta
    * Render the event in the Callout view mode.
    */
   protected function buildEventCallout(NodeInterface $event): array {
-    $view_builder = $this->entityTypeManager->getViewBuilder('node');
-    return $view_builder->view($event, 'callout');
+    if ($event->field_body_contains_recording->value == TRUE) {
+      $view_builder = $this->entityTypeManager->getViewBuilder('node');
+      return $view_builder->view($event, 'callout');
+    }
+    else {
+      return [];
+    }
   }
 
   /**
