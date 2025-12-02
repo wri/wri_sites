@@ -88,11 +88,6 @@
   }
   .event-callout .event-wrapper {
     flex: 0 1 70%;
-    .h2-alt {
-      color: var(--color-blue-500);
-      margin-bottom: 4px;
-      margin-top: 0;
-    }
     .time-wrapper {
       display: block;
       margin-bottom: 24px;
@@ -104,10 +99,18 @@
         margin-top: 12px;
       }
     }
-    h3 {
+    .h3 {
       margin-bottom: 0;
       margin-top: 4px;
       line-height: 1.3;
+
+      a {
+        color: inherit;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
   }
   .event-callout .image-wrapper {

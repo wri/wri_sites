@@ -14,14 +14,16 @@
   <div class="event-wrapper">
     {% if content.hero %}
       {% set event_type = content.field_type.0['#plain_text'] %}
+      <span class="utility-lg font-bold uppercase has-blue-color">
       {% if content.is_past %}
-        <h2 class="h2-alt">{{ "Past "|t ~ event_type }}</h2>
+        {{ "Past "|t ~ event_type }}
       {% else %}
-        <h2 class="h2-alt">{{ "Upcoming "|t ~ event_type }}</h2>
+        {{ "Upcoming "|t ~ event_type }}
       {% endif %}
+      </span>
       <div class="time-wrapper utility-lg">{{ content.hero.field_date_time }}</div>
       <div class="primary-topic topic-tag">{{ content.hero.field_primary_topic }}</div>
-      <h3>{{ content.title }}</h3>
+      {{ content.hero.node_title }}
       <div class="utility-base info-text">{{ content.hero.body|render|striptags|trim }}</div>
     {% endif %}
   </div>
