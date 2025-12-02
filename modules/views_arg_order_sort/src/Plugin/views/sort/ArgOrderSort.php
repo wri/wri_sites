@@ -14,22 +14,15 @@ use Drupal\views\Views;
 class ArgOrderSort extends SortPluginBase {
 
   /**
-   * The sort values.
-   *
-   * @var array
-   */
-  public $sort_values = [];
-
-  /**
    * {@inheritdoc}
    */
   protected function defineOptions() {
     $options = parent::defineOptions();
 
-    $options['inherit_type'] = array('default' => 1);
-    $options['null_below'] = array('default' => 1);
-    $options['argument_number'] = array('default' => 0);
-    $options['field_type'] = array('default' => 'node::nid');
+    $options['inherit_type'] = ['default' => 1];
+    $options['null_below'] = ['default' => 1];
+    $options['argument_number'] = ['default' => 0];
+    $options['field_type'] = ['default' => 'node::nid'];
 
     return $options;
   }
@@ -40,8 +33,8 @@ class ArgOrderSort extends SortPluginBase {
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
     parent::buildOptionsForm($form, $form_state);
 
-    $options = array();
-    $group_options = array();
+    $options = [];
+    $group_options = [];
 
     $base_tables = Views::viewsData()->fetchBaseTables();
     $table_data = Views::viewsData()->get();
@@ -56,39 +49,39 @@ class ArgOrderSort extends SortPluginBase {
       }
     }
 
-    $form['argument_number'] = array(
+    $form['argument_number'] = [
       '#title' => t('Argument'),
       '#type' => 'select',
-      '#options' => array(1, 2, 3, 4, 5, 6, 7, 8, 9),
+      '#options' => [1, 2, 3, 4, 5, 6, 7, 8, 9],
       '#default_value' => $this->options['argument_number'],
-    );
-    $form['null_below'] = array(
+    ];
+    $form['null_below'] = [
       '#type' => 'checkbox',
       '#title' => 'Non arguments at End',
       '#description' => t('Place items not in the argument at the end.'),
       '#default_value' => $this->options['null_below'],
-      '#options' => array( 0, 'Null values below'),
-    );
-    $form['inherit_type'] = array(
+      '#options' => [0, 'Null values below'],
+    ];
+    $form['inherit_type'] = [
       '#type' => 'checkbox',
       '#title' => 'Inherit type of Field from Argument',
       '#description' => t('If the argument is the NULL argument or you want to choose a different type for linking the uncheck, otherwise it is safe to leave it checked.'),
       '#default_value' => $this->options['inherit_type'],
-      '#options' => array( 0, 'Inherit type of Field from Argument'),
-      '#ajax' => array(
+      '#options' => [0, 'Inherit type of Field from Argument'],
+      '#ajax' => [
         'callback' => 'views_boxes_arg_order_type_callback',
         'wrapper' => 'arg-order-type',
         'method' => 'replace',
         'effect' => 'fade',
-      ),
-    );
-    $form['field_type'] = array(
+      ],
+    ];
+    $form['field_type'] = [
       '#title' => t('Type of Argument Field'),
       '#type' => 'select',
       '#options' => $options,
       '#default_value' => $this->options['field_type'],
 
-    );
+    ];
 
   }
 
@@ -103,7 +96,7 @@ class ArgOrderSort extends SortPluginBase {
     $order = $this->options['order'];
     $null_below = $this->options['null_below'];
 
-    // if inherited look at the argument to get table and field.
+    // If inherited look at the argument to get table and field.
     if ($inherit_type) {
       $arg_handlers = array_values($this->view->argument);
       $arg_handler = $arg_handlers[$arg_to_use];
@@ -111,7 +104,7 @@ class ArgOrderSort extends SortPluginBase {
       $left_field = $arg_handler->field;
     }
     else {
-      list($left_table, $left_field) = explode('::', $this->options['field_type']);
+      [$left_table, $left_field] = explode('::', $this->options['field_type']);
     }
 
     // The type to replace. Always uses string--seems ok.
@@ -119,19 +112,18 @@ class ArgOrderSort extends SortPluginBase {
 
     // The arguments passed into the view.
     $args = $this->view->args;
-    $items = isset($args[$arg_to_use]) ? explode('+', $args[$arg_to_use]) : array();
+    $items = isset($args[$arg_to_use]) ? explode('+', $args[$arg_to_use]) : [];
 
-    // Get our sort order
+    // Get our sort order.
     $invert_order = ($order == 'DESC') ? TRUE : FALSE;
     $items = $invert_order ? array_reverse($items) : $items;
 
     // Defaults.
     $max_o = 0;
-    $case_items = array();
+    $case_items = [];
 
     // Generate the case statement from the args.
     foreach ($items as $o => $value) {
-      $this->sort_values[$value] = $o;
       if ($value) {
         $case_items[] = "WHEN $value_query_type THEN $o ";
         $max_o = $max_o > $o ? $max_o : $o;
@@ -141,10 +133,10 @@ class ArgOrderSort extends SortPluginBase {
     // If the case statement items are populated.
     if (!empty($case_items)) {
       $is_desc = ($order == 'DESC');
-      $null_o = $is_desc == $null_below ? -1 : $max_o+1;
+      $null_o = $is_desc == $null_below ? -1 : $max_o + 1;
 
-      $order_by = "CASE $left_table.$left_field " . implode("", $case_items) . " ELSE $null_o END" ;
-      $order_by =  vsprintf($order_by, $items);
+      $order_by = "CASE $left_table.$left_field " . implode("", $case_items) . " ELSE $null_o END";
+      $order_by = vsprintf($order_by, $items);
 
       $alias = "arg_order" . rand(0, 10000);
       $this->query->addOrderBy(NULL, $order_by, $order, $alias);
