@@ -60,6 +60,7 @@ third_party_settings:
         - field_date_time
         - field_primary_topic
         - node_title
+        - field_intro
         - body
       main_content:
         - field_main_image
@@ -114,7 +115,7 @@ content:
           id: reset
           settings:
             lb: ''
-    weight: 2
+    weight: 3
     region: hero
   field_date_time:
     type: smartdate_default
@@ -143,6 +144,19 @@ content:
           settings:
             lb: ''
     weight: 0
+    region: hero
+  field_intro:
+    type: text_trimmed
+    label: hidden
+    settings:
+      trim_length: 200
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 2
     region: hero
   field_main_image:
     type: media_thumbnail
@@ -202,7 +216,6 @@ hidden:
   field_files: true
   field_hub_canonical_url: true
   field_international_office: true
-  field_intro: true
   field_languages_spoken: true
   field_location: true
   field_location_detail: true

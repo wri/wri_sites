@@ -24,7 +24,11 @@
       <div class="time-wrapper utility-lg">{{ content.hero.field_date_time }}</div>
       <div class="primary-topic topic-tag">{{ content.hero.field_primary_topic }}</div>
       {{ content.hero.node_title }}
+      {% if content.field_intro[0]["#text"] %}
+      <div class="utility-base info-text">{{ content.hero.field_intro|render|striptags|trim }}</div>
+        {% else %}
       <div class="utility-base info-text">{{ content.hero.body|render|striptags|trim }}</div>
+      {% endif %}
     {% endif %}
   </div>
 
