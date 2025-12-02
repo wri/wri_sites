@@ -34,7 +34,6 @@ class ArgOrderSort extends SortPluginBase {
     parent::buildOptionsForm($form, $form_state);
 
     $options = [];
-    $group_options = [];
 
     $base_tables = Views::viewsData()->fetchBaseTables();
     $table_data = Views::viewsData()->get();
@@ -50,7 +49,7 @@ class ArgOrderSort extends SortPluginBase {
     }
 
     $form['argument_number'] = [
-      '#title' => t('Argument'),
+      '#title' => $this->t('Argument'),
       '#type' => 'select',
       '#options' => [1, 2, 3, 4, 5, 6, 7, 8, 9],
       '#default_value' => $this->options['argument_number'],
@@ -58,14 +57,14 @@ class ArgOrderSort extends SortPluginBase {
     $form['null_below'] = [
       '#type' => 'checkbox',
       '#title' => 'Non arguments at End',
-      '#description' => t('Place items not in the argument at the end.'),
+      '#description' => $this->t('Place items not in the argument at the end.'),
       '#default_value' => $this->options['null_below'],
       '#options' => [0, 'Null values below'],
     ];
     $form['inherit_type'] = [
       '#type' => 'checkbox',
       '#title' => 'Inherit type of Field from Argument',
-      '#description' => t('If the argument is the NULL argument or you want to choose a different type for linking the uncheck, otherwise it is safe to leave it checked.'),
+      '#description' => $this->t('If the argument is the NULL argument or you want to choose a different type for linking the uncheck, otherwise it is safe to leave it checked.'),
       '#default_value' => $this->options['inherit_type'],
       '#options' => [0, 'Inherit type of Field from Argument'],
       '#ajax' => [
@@ -76,7 +75,7 @@ class ArgOrderSort extends SortPluginBase {
       ],
     ];
     $form['field_type'] = [
-      '#title' => t('Type of Argument Field'),
+      '#title' => $this->t('Type of Argument Field'),
       '#type' => 'select',
       '#options' => $options,
       '#default_value' => $this->options['field_type'],
