@@ -2,19 +2,16 @@ version: 2
 jobs:
   build:
     docker:
-      - image: thinkshout/nginx-php-fpm:php81
+      - image: wodby/php:8.3
         environment:
-          WEBROOT: /var/www/html/drupal-project/web
-          GIT_EMAIL: "ci@thinkshout.com"
-          GIT_NAME: "ThinkShout CI Bot"
           IS_CIRCLE: TRUE
-        command: [ "/start.sh" ]
-      - image: mariadb:10.4
+          PHP_MEMORY_LIMIT: 512M
+          PHP_CLI_MEMORY_LIMIT: 512M
+      - image: wodby/mariadb
         environment:
-          MYSQL_RANDOM_ROOT_PASSWORD: 1
-          MYSQL_DATABASE: circletest
           MYSQL_USER: drupal
           MYSQL_PASSWORD: drupal
+          MYSQL_DATABASE: circletest
     working_directory: /var/www/html/drupal-project
     steps:
       - checkout
