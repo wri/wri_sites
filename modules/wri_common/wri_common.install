@@ -279,8 +279,8 @@ function wri_common_update_10400() {
 function wri_common_update_10500() {
   \Drupal::service('distro_helper.updates')->updateConfig('metatag.settings', [
     'entity_type_groups#node',
-  ], 'wri_sites', 'install');
+  ], 'wri_common', '../../../config/install');
   \Drupal::service('distro_helper.updates')->updateConfig('metatag.metatag_defaults.node', [
     'tags',
-  ], 'wri_sites', 'install');
+  ], 'wri_common', '../../../config/install');
 }

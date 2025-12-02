@@ -2,29 +2,27 @@ version: 2
 jobs:
   build:
     docker:
-      - image: thinkshout/nginx-php-fpm:php81
+      - image: wodby/php:8.3
         environment:
-          WEBROOT: /var/www/html/drupal-project/web
-          GIT_EMAIL: "ci@thinkshout.com"
-          GIT_NAME: "ThinkShout CI Bot"
           IS_CIRCLE: TRUE
-        command: [ "/start.sh" ]
-      - image: mariadb:10.4
+          PHP_MEMORY_LIMIT: 256M
+          PHP_CLI_MEMORY_LIMIT: 256M
+      - image: wodby/mariadb
         environment:
           MYSQL_RANDOM_ROOT_PASSWORD: 1
-          MYSQL_DATABASE: circletest
           MYSQL_USER: drupal
           MYSQL_PASSWORD: drupal
+          MYSQL_DATABASE: circletest
     working_directory: /var/www/html/drupal-project
     steps:
       - checkout
       - run:
           name: Test site install works.
           command: |
-            echo "memory_limit = 256M"  >> ${php_vars}
+            /docker-entrypoint.sh
             export PATH="./vendor/bin:../vendor/bin:/root/.composer/vendor/bin:$PATH"
             npm install -g n && n 16
-            COMPOSER_MEMORY_LIMIT=-1 composer create-project --prefer-dist --stability=dev wri/wri-starter-kit:^10.0 circletest
+            COMPOSER_MEMORY_LIMIT=-1 composer create-project --prefer-dist --stability=dev wri/wri-starter-kit:dev-views_arg circletest
             cd circletest
             COMPOSER_MEMORY_LIMIT=-1 composer require wri/wri_sites:dev-${CIRCLE_BRANCH} --update-with-dependencies --no-scripts
             ./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/modules
