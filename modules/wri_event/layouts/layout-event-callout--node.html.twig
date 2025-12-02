@@ -41,7 +41,7 @@
     {% if node %}
       {% set url = path('entity.node.canonical', {'node': node.id}) %}
     {% endif %}
-    <div class="buttons margin-top-xs">
+    <div class="buttons">
       {% if content.is_past %}
         <a href="{{ url }}" class="button button--primary">{{ "Watch the Video"|t }}</a>
       {% else %}

@@ -67,7 +67,6 @@
   padding: 0;
 
   &> .field {
-    border-radius: 3px;
     border: 2px solid var(--color-neutral-200);
     padding: var(--spacer-5);
 
@@ -83,25 +82,23 @@
 
     @include mq($md) {
       flex-direction: row;
-      gap: 24px;
+      gap: var(--spacer-6);
     }
   }
   .event-callout .event-wrapper {
     flex: 0 1 70%;
     .time-wrapper {
       display: block;
-      margin-bottom: 24px;
+      margin-bottom: var(--spacer-6);
       font-weight: 500;
     }
     .info-text {
       line-height: 1.8;
-      p {
-        margin-top: 12px;
-      }
+      margin: var(--spacer-3) 0;
     }
     .h3 {
-      margin-bottom: 0;
-      margin-top: 4px;
+      margin-bottom: var(--spacer-1);
+      margin-top: var(--spacer-1);
       line-height: 1.3;
 
       a {
@@ -125,7 +122,7 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      padding-top: 8px;
+      padding-top: var(--spacer-2);
     }
   }
   img {
@@ -134,18 +131,12 @@
       display: block;
     }
   }
-  .buttons.margin-top-xs {
-    margin-top: 0;
-    @include mq($md) {
-      margin-top: 20px;
-    }
-  }
   .button {
     font-size: 16px;
     margin-top: 0;
-    padding: 20px 40px;
+    padding: var(--spacer-5) var(--spacer-10);
     @include mq($md) {
-      margin-top: 20px;
+      margin-top: var(--spacer-5);
     }
   }
 }
