@@ -50,9 +50,9 @@
                 "No local tasks on compare revisions page https://www.drupal.org/project/diff/issues/3169729": "https://www.drupal.org/files/issues/2020-09-08/diff_add-local-tasks-3169729-2.patch"
             },
             "drupal/entity_embed": {
-                "Drupal 10.5/11.2 compatability (tooltip broken, cannot edit embedded entities) https://www.drupal.org/project/entity_embed/issues/3531672": "web/profiles/contrib/wri_sites/patches/entity_embed--fix-ckeditor-icon-reference--3531672.patch",
                 "Logs flooded with warning messages 'Invalid display settings encountered' https://www.drupal.org/project/entity_embed/issues/3077225": "https://www.drupal.org/files/issues/2019-12-11/3077225-10.reduce-invalid-config-logs.patch",
-                "Entity embed dialog can no longer use custom data- attributes in CKEditor 5 https://www.drupal.org/project/entity_embed/issues/3410132": "https://www.drupal.org/files/issues/2025-08-07/3410132-MR-31_support-custom-data-attribs.diff-14.patch"
+                "Entity embed dialog can no longer use custom data- attributes in CKEditor 5 https://www.drupal.org/project/entity_embed/issues/3410132": "https://www.drupal.org/files/issues/2025-08-07/3410132-MR-31_support-custom-data-attribs.diff-14.patch",
+                "Drupal 10.5/11.2 compatability (tooltip broken, cannot edit embedded entities) https://www.drupal.org/project/entity_embed/issues/3531672": "web/profiles/contrib/wri_sites/patches/entity_embed--fix-ckeditor-icon-reference--3531672.patch"
             },
             "drupal/layout_builder_st": {
                 "Error: Call to a member function getConfig() OverridesSectionStorage.php https://www.drupal.org/project/layout_builder_st/issues/3420063": "https://www.drupal.org/files/issues/2024-03-29/layout_builder_st-call_to_a_member_function_getconfig-3420063-26.patch",
