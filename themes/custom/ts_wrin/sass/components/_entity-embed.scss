@@ -66,7 +66,7 @@
 .embedded-entity.embed--block-type--upcoming-event {
   padding: 0;
 
-  &> .field {
+  .callout {
     border: 2px solid var(--color-neutral-200);
     padding: var(--spacer-5);
 
@@ -88,7 +88,6 @@
   .event-callout .event-wrapper {
     flex: 0 1 70%;
     .time-wrapper {
-      display: block;
       margin-bottom: var(--spacer-6);
       font-weight: 500;
     }
