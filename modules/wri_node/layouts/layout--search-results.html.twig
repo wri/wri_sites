@@ -52,11 +52,6 @@
       {% if content.main_section.node_title %}
         {{ content.main_section.node_title }}
       {% endif %}
-      {% if content.field_intro[0]["#text"] %}
-        <div class="utility-base info-text mb-4">{{ content.field_intro|render|striptags|trim }}</div>
-      {% elseif content.body[0]["#text"] %}
-        <div class="utility-base info-text mb-4">{{ content.body|render|striptags|trim }}</div>
-      {% endif %}
       {% if content.main_section.field_tags  %}
         <div class="tags">
           {{ content.main_section.field_tags }}

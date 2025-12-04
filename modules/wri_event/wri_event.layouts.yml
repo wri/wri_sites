@@ -19,3 +19,16 @@ layout_event:
       label: Main Content
     sidebar_left:
       label: Left Sidebar
+layout_event_callout:
+  label: 'Event Callout'
+  path: layouts
+  template: layout-event-callout--node
+  category: 'WRI Custom'
+  default_region: main_content
+  regions:
+    hero:
+      label: Hero
+    main_content:
+      label: Main Content
+    buttons:
+      label: Buttons
