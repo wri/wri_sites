@@ -15,10 +15,10 @@
     {% if content.hero %}
       {% set event_type = content.field_type.0['#plain_text'] %}
       {% if content.is_past %}
-        <span class="utility-lg font-bold uppercase has-blue-color">{{ "Event Recording"|t }}</span>
+        <span class="utility-sm font-bold uppercase has-blue-color">{{ "Event Recording"|t }}</span>
       {% else %}
-        <span class="utility-lg font-bold uppercase has-blue-color">{{ "Upcoming Event"|t }}</span> -
-        <span class="time-wrapper utility-lg">{{ content.hero.field_date_time }}</span>
+        <span class="utility-sm font-bold uppercase has-blue-color">{{ "Upcoming Event"|t }}</span> -
+        <span class="time-wrapper utility-sm uppercase">{{ content.hero.field_date_time }}</span>
       {% endif %}
       <div class="primary-topic topic-tag">{{ content.hero.field_primary_topic }}</div>
       {{ content.hero.node_title }}
