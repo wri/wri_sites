@@ -1,0 +1,95 @@
+diff --git a/entity_embed.info.yml b/entity_embed.info.yml
+index a1ad7cb..98663c2 100644
+--- a/entity_embed.info.yml
++++ b/entity_embed.info.yml
+@@ -1,7 +1,7 @@
+ name: Entity Embed
+ type: module
+ description: 'Allows entities to be embedded using a text editor.'
+-core_version_requirement: ^10.3 || ^11
++core_version_requirement: ^10.5 || ^11.2
+ package: Filters
+ dependencies:
+   - drupal:editor
+diff --git a/js/ckeditor5_plugins/drupalentity/src/linkui.js b/js/ckeditor5_plugins/drupalentity/src/linkui.js
+index 7c14c0c..4671a9f 100644
+--- a/js/ckeditor5_plugins/drupalentity/src/linkui.js
++++ b/js/ckeditor5_plugins/drupalentity/src/linkui.js
+@@ -1,9 +1,9 @@
+ /* eslint-disable import/no-extraneous-dependencies */
+ // cSpell:words linkui
+-import { Plugin, icons } from 'ckeditor5/src/core';
++import { Plugin } from 'ckeditor5/src/core';
++import { IconLink } from 'ckeditor5/src/icons'
+ import { LINK_KEYSTROKE } from '@ckeditor/ckeditor5-link/src/utils';
+ import { ButtonView } from 'ckeditor5/src/ui';
+-import linkIcon from '@ckeditor/ckeditor5-link/theme/icons/link.svg';
+
+ /**
+  * The link entity embed UI plugin.
+@@ -72,7 +72,7 @@ export default class EntityEmbedLinkUI extends Plugin {
+       button.set({
+         isEnabled: true,
+         label: Drupal.t('Link entity embed'),
+-        icon: linkIcon,
++        icon: IconLink,
+         keystroke: LINK_KEYSTROKE,
+         tooltip: true,
+         isToggleable: true,
+@@ -88,7 +88,7 @@ export default class EntityEmbedLinkUI extends Plugin {
+         if (
+           this._isSelectedLinkedEntityEmbed(editor.model.document.selection)
+         ) {
+-          plugin._addActionsView();
++          plugin._addToolbarView();
+         } else {
+           plugin._showUI(true);
+         }
+diff --git a/js/ckeditor5_plugins/drupalentity/src/toolbar.js b/js/ckeditor5_plugins/drupalentity/src/toolbar.js
+index 1b03c4c..bd5a61c 100644
+--- a/js/ckeditor5_plugins/drupalentity/src/toolbar.js
++++ b/js/ckeditor5_plugins/drupalentity/src/toolbar.js
+@@ -1,4 +1,5 @@
+-import { Plugin, icons } from 'ckeditor5/src/core';
++import { Plugin } from 'ckeditor5/src/core';
++import { IconCog, IconPencil } from 'ckeditor5/src/icons'
+ import { isWidget, WidgetToolbarRepository } from 'ckeditor5/src/widget';
+ import { ButtonView } from 'ckeditor5/src/ui';
+
+@@ -25,7 +26,7 @@ export default class EntityEmbedToolbar extends Plugin {
+
+       buttonView.set({
+         label: editor.t('Edit'),
+-        icon: icons.pencil,
++        icon: IconPencil,
+         tooltip: true,
+       })
+
+@@ -63,7 +64,7 @@ export default class EntityEmbedToolbar extends Plugin {
+       buttonView.set({
+         isEnabled: true,
+         label: Drupal.t('Edit the embedded entity (opens in new tab)'),
+-        icon: icons.cog,
++        icon: IconCog,
+         tooltip: true,
+       });
+
+diff --git a/package.json b/package.json
+index d774587..a935f7e 100644
+--- a/package.json
++++ b/package.json
+@@ -9,10 +9,10 @@
+     "build": "webpack"
+   },
+   "devDependencies": {
+-    "@ckeditor/ckeditor5-dev-utils": "^30.0.0",
+-    "@ckeditor/ckeditor5-html-support": "^40.0.0",
+-    "@ckeditor/ckeditor5-link": "^40.0.0",
+-    "ckeditor5": "~34.1.0",
++    "@ckeditor/ckeditor5-dev-utils": "^40.0.0",
++    "@ckeditor/ckeditor5-html-support": "^45.2.0",
++    "@ckeditor/ckeditor5-link": "^45.2.0",
++    "ckeditor5": "~45.2.0",
+     "raw-loader": "^4.0.2",
+     "terser-webpack-plugin": "^5.2.0",
+     "webpack": "^5.51.1",
