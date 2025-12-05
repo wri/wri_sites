@@ -58,8 +58,8 @@ settings:
     ckeditor5_sourceEditing:
       allowed_tags:
         - '<div class>'
-        - '<span>'
         - '<a name>'
+        - '<drupal-entity data-block-title data-style-attribute>'
     ckeditor5_style:
       styles:
         -
