@@ -14,6 +14,9 @@ dependencies:
     - core.entity_view_display.node.region.full
     - core.entity_view_display.node.simple_page.full
     - core.entity_view_display.node.subpage.full
+    - entity_browser.browser.block
+    - entity_browser.browser.files
+    - entity_browser.browser.tweets
     - filter.format.basic_html
     - filter.format.full_html
     - filter.format.migrated
@@ -60,16 +63,20 @@ dependencies:
     - filter
     - layout_builder
     - media
+    - menu_admin_per_menu
     - metatag
     - node
     - path
+    - scheduled_transitions
     - system
     - taxonomy
+    - term_merge
     - toolbar
     - views_bulk_edit
     - webform
     - wri_author
     - wri_io_content
+    - wri_policy
 id: editorial
 label: Editorial
 weight: 6
@@ -77,6 +84,8 @@ is_admin: null
 permissions:
   - 'access administration pages'
   - 'access any webform configuration'
+  - 'access block entity browser pages'
+  - 'access block library'
   - 'access content overview'
   - 'access contextual links'
   - 'access files entity browser pages'
@@ -135,7 +144,6 @@ permissions:
   - 'create terms in featured'
   - 'create terms in languages'
   - 'create terms in media_tags'
-  - 'create terms in person_title_deprecated_'
   - 'create terms in publication_series'
   - 'create terms in regions'
   - 'create terms in resource_type'
@@ -177,6 +185,7 @@ permissions:
   - 'delete own document media'
   - 'delete own embed media'
   - 'delete own event content'
+  - 'delete own files'
   - 'delete own homepage content'
   - 'delete own image media'
   - 'delete own international_office content'
@@ -202,7 +211,6 @@ permissions:
   - 'delete terms in featured'
   - 'delete terms in languages'
   - 'delete terms in media_tags'
-  - 'delete terms in person_title_deprecated_'
   - 'delete terms in publication_series'
   - 'delete terms in regions'
   - 'delete terms in resource_type'
@@ -250,7 +258,6 @@ permissions:
   - 'edit terms in featured'
   - 'edit terms in languages'
   - 'edit terms in media_tags'
-  - 'edit terms in person_title_deprecated_'
   - 'edit terms in publication_series'
   - 'edit terms in regions'
   - 'edit terms in resource_type'

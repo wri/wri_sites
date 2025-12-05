@@ -1,0 +1,8 @@
+name: 'Views Arg Order Sort'
+description: 'Sort a view by the order of its arguments.'
+core_version_requirement: ">9.5"
+dependencies:
+  - views
+package: Views
+project: views_arg_order_sort
+type: module

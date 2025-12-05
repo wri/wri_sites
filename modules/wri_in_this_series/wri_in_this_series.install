@@ -5,6 +5,8 @@
  * Update hooks for wri_in_this_series.
  */
 
+use Drupal\user\Entity\Role;
+
 /**
  * Implements hook_install().
  */
@@ -17,4 +19,28 @@ function wri_in_this_series_install() {
   $data['dependencies']['config'][] = 'block_content.type.in_this_series';
   $config->setData($data);
   $config->save();
+  // Add permissions.
+  wri_in_this_series_add_permissions();
+}
+
+/**
+ * Helper function to set permissions for this block on install.
+ */
+function wri_in_this_series_add_permissions() {
+  // Add permissions for Editorial:
+  // 'revert any in_this_series block content revisions'
+  // 'edit any in_this_series block content'
+  // 'create in_this_series block content'.
+  $role = Role::load('editorial');
+  $role->grantPermission('revert any in_this_series block content revisions');
+  $role->grantPermission('edit any in_this_series block content');
+  $role->grantPermission('create in_this_series block content');
+  $role->save();
+}
+
+/**
+ * Give Editor the ability to make In This Series blocks.
+ */
+function wri_in_this_series_update_10500() {
+  wri_in_this_series_add_permissions();
 }
