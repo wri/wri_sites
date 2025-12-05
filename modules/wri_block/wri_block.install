@@ -72,7 +72,7 @@ function wri_block_update_10501() {
   \Drupal::service('distro_helper.updates')->updateConfig('entity_browser.browser.block', [
     'widgets',
   ], 'wri_block', 'install');
-  \Drupal::service('distro_helper.updates')->updateConfig('views.view.block_content', [
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.content_blocks_browser', [
     'dependencies#config',
     'display#default#display_options#filters#type_1#value',
     'display#default#display_options#filters#type#value'
