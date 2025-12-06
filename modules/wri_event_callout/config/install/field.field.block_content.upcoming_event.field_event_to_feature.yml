@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.upcoming_event
+    - field.storage.block_content.field_event_to_feature
+    - node.type.event
+id: block_content.upcoming_event.field_event_to_feature
+field_name: field_event_to_feature
+entity_type: block_content
+bundle: upcoming_event
+label: 'Event to feature'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      event: event
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

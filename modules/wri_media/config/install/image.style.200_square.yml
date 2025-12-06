@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 200_square
+label: '200 Square'
+effects:
+  44592e9e-671d-45da-823d-e5083996e91d:
+    uuid: 44592e9e-671d-45da-823d-e5083996e91d
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 200
+      height: 200
+      crop_type: focal_point

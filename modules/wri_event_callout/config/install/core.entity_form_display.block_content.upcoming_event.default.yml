@@ -1,0 +1,51 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.upcoming_event
+    - field.field.block_content.upcoming_event.field_after_the_event_ends
+    - field.field.block_content.upcoming_event.field_event_to_feature
+    - field.field.block_content.upcoming_event.field_topic
+id: block_content.upcoming_event.default
+targetEntityType: block_content
+bundle: upcoming_event
+mode: default
+content:
+  field_after_the_event_ends:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_event_to_feature:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_topic:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 4
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+hidden: {  }

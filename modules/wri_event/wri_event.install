@@ -17,18 +17,6 @@ function wri_event_update_9301() {
 }
 
 /**
- * Implements hook_update_dependencies().
- */
-function wri_event_update_dependencies() {
-  // We must have the distro_helper module before we can run the 9301 update.
-  $dependencies['wri_event'][9301] = [
-    'wri_sites' => 8908,
-  ];
-
-  return $dependencies;
-}
-
-/**
  * Update the event display configs to add Zoom fields and settings.
  */
 function wri_event_update_10001() {
@@ -231,4 +219,52 @@ function wri_event_update_10006() {
  */
 function wri_event_update_10007() {
   \Drupal::service('distro_helper.updates')->installConfig('metatag.metatag_defaults.node__event', 'wri_event', 'install', TRUE);
+}
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_event_update_dependencies() {
+  // Add the new image type first.
+  $dependencies['wri_event'][10501] = [
+    'wri_media' => 10501,
+  ];
+  return $dependencies;
+}
+
+/**
+ * Add a new webinar field to events.
+ */
+function wri_event_update_10501() {
+  // Add the fields.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('field.storage.node.field_body_contains_recording', 'wri_node', 'install', 'TRUE');
+
+  // Attach the fields to the Event node.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('field.field.node.event.field_body_contains_recording', 'wri_event', 'install', 'TRUE');
+
+  // Updating the Event form display.
+  \Drupal::service('distro_helper.updates')
+    ->updateConfig('core.entity_form_display.node.event.default', [
+      'content#field_body_contains_recording',
+    ], 'wri_event');
+
+  // Add the callout display mode.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('core.entity_view_mode.node.callout', 'wri_event', 'install', 'TRUE');
+
+  // Add the callout view display.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('core.entity_view_display.node.event.callout', 'wri_event', 'install', 'TRUE');
+}
+
+/**
+ * Enable the new wri_event_callout module.
+ */
+function wri_event_update_10502() {
+  \Drupal::service('module_installer')->install(['wri_event_callout']);
+
+  $message = 'wri_event_callout module enabled';
+  return $message;
 }
