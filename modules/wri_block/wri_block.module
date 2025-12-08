@@ -129,6 +129,6 @@ function wri_block_form_entity_embed_dialog_alter(array &$form, FormStateInterfa
     '#options' => $options,
     '#description' => t('Choose a per-embed style variant. “Border” matches the CKEditor Bulleted list border look.'),
     '#weight' => 11,
-    '#default_value' => isset($entity_element['data-style-attribute']) ? $entity_element['data-style-attribute'] : '',
+    '#default_value' => $entity_element['data-style-attribute'] ?? '',
   ];
 }
