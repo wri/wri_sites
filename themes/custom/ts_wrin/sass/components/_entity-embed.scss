@@ -1,7 +1,11 @@
 .embedded-entity {
   padding: var(--spacer-1) var(--spacer-6) var(--spacer-4);
+  margin-bottom: var(--spacer-7);
+  margin-top: var(--spacer-7);
   @include mq($md) {
-    padding: var(--spacer-2) var(--spacer-15) var(--spacer-5);
+    padding: var(--spacer-2) var(--spacer-11) var(--spacer-5);
+    margin-bottom: var(--spacer-11);
+    margin-top: var(--spacer-11);
   }
 
   @include font($acumin-semi-cond, "light");
@@ -12,6 +16,16 @@
   &.has-teal-background-color,
   &.has-black-background-color {
     color: $white;
+  }
+  &.has-border-background-color {
+    border: 1px solid var(--color-neutral-600);
+    padding: var(--spacer-5);
+    .embed-block__title {
+      margin-top: 0;
+      border-bottom: 0.5px solid $black;
+      padding-bottom: var(--spacer-3);
+      margin-bottom: var(--spacer-2);
+    }
   }
   form.webform-submission-form {
     input[type="text"],
