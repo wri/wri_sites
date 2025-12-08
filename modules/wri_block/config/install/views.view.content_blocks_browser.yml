@@ -2,9 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - block_content.type.in_this_series
-    - block_content.type.webform
-    - core.entity_view_mode.block_content.preview
+    - core.entity_view_mode.block_content.preview # Note: Do not add block_content.type dependencies here.
   module:
     - block_content
     - entity_browser
