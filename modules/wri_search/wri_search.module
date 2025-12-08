@@ -10,8 +10,6 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\search_api\Plugin\views\query\SearchApiQuery;
 use Drupal\views\ViewExecutable;
-use Drupal\Core\Entity\EntityInterface;
-use Drupal\Component\Utility\Html;
 
 /**
  * Implements hook_entity_base_field_info().
@@ -178,5 +176,3 @@ function wri_search_form_entity_embed_dialog_alter(array &$form, FormStateInterf
     '#weight' => 11,
   ];
 }
-
-
