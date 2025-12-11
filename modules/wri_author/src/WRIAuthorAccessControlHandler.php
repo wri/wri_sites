@@ -28,6 +28,12 @@ class WRIAuthorAccessControlHandler extends EntityAccessControlHandler {
           return AccessResult::allowedIfHasPermission($account, 'view unpublished author entities');
         }
 
+        $route_name = \Drupal::routeMatch()->getRouteName();
+        if ($route_name == 'entity.wri_author.canonical') {
+          // In the admin area, check for the admin view permission.
+          return AccessResult::allowedIfHasPermission($account, 'access administration pages');
+        }
+
         return AccessResult::allowedIfHasPermission($account, 'view published author entities');
 
       case 'update':
