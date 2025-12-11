@@ -1,5 +1,21 @@
 version: 2
 jobs:
+  build_theme:
+    docker:
+      - image: cimg/node:20.11.1
+    steps:
+      - checkout
+      - run:
+          name: Install Theme Dependencies
+          command: |
+            npm install --prefix themes/custom/ts_wrin
+            npm run build --prefix themes/custom/ts_wrin
+            if [[ `git status --porcelain themes/custom/ts_wrin/dist/main.css` ]]; then
+              echo "Note this PR changes themes/custom/ts_wrin/dist/main.css. Please verify these changes are committed and don't break your theme.";
+              exit 1;
+            else
+              echo "themes/custom/ts_wrin/dist/main.css is up to date.";
+            fi
   build:
     docker:
       - image: wodby/php:8.3
@@ -21,7 +37,6 @@ jobs:
           command: |
             /docker-entrypoint.sh
             export PATH="./vendor/bin:../vendor/bin:/root/.composer/vendor/bin:$PATH"
-            npm install -g n && n 16
             COMPOSER_MEMORY_LIMIT=-1 composer create-project --prefer-dist --stability=dev wri/wri-starter-kit:dev-views_arg circletest
             cd circletest
             COMPOSER_MEMORY_LIMIT=-1 composer require wri/wri_sites:dev-${CIRCLE_BRANCH} --update-with-dependencies --no-scripts
@@ -36,6 +51,7 @@ workflows:
   version: 2
   build-and-test:
     jobs:
+      - build_theme
       - build
   weekly-test:
     triggers:
