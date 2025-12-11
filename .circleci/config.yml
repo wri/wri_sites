@@ -22,12 +22,11 @@ jobs:
             /docker-entrypoint.sh
             export PATH="./vendor/bin:../vendor/bin:/root/.composer/vendor/bin:$PATH"
             npm install -g n && n 20
-            cd themes/custom/ts_wrin
             npm install --prefix web/profiles/contrib/wri_sites/themes/custom/ts_wrin)
-            npm run build
+            npm run build --prefix web/profiles/contrib/wri_sites/themes/custom/ts_wrin)
             // See if there's a change to the themes/custom/ts_wrin/dist/main.css file.
             if [[ `git status --porcelain themes/custom/ts_wrin/dist/main.css` ]]; then
-              echo "Note this file changes: themes/custom/ts_wrin/dist/main.css. Please verify these changes are committed.";
+              echo "Note this PR changes themes/custom/ts_wrin/dist/main.css. Please verify these changes are committed and don't break your theme.";
               exit 1;
             else
               echo "themes/custom/ts_wrin/dist/main.css is up to date.";
