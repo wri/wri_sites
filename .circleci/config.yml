@@ -1,5 +1,21 @@
 version: 2
 jobs:
+  build_theme:
+    docker:
+      - image: cimg/node:20.11.1
+    steps:
+      - checkout
+      - run:
+          name: Install Theme Dependencies
+          command: |
+            npm install --prefix themes/custom/ts_wrin
+            npm run build --prefix themes/custom/ts_wrin
+            if [[ `git status --porcelain themes/custom/ts_wrin/dist/main.css` ]]; then
+              echo "Note this PR changes themes/custom/ts_wrin/dist/main.css. Please verify these changes are committed and don't break your theme.";
+              exit 1;
+            else
+              echo "themes/custom/ts_wrin/dist/main.css is up to date.";
+            fi
   build:
     docker:
       - image: wodby/php:8.3
@@ -16,21 +32,6 @@ jobs:
     working_directory: /var/www/html/drupal-project
     steps:
       - checkout
-      - run:
-          name: Test npm works.
-          command: |
-            /docker-entrypoint.sh
-            export PATH="./vendor/bin:../vendor/bin:/root/.composer/vendor/bin:$PATH"
-            npm install -g n && n 20
-            npm install --prefix themes/custom/ts_wrin
-            npm run build --prefix themes/custom/ts_wrin
-            // See if there's a change to the themes/custom/ts_wrin/dist/main.css file.
-            if [[ `git status --porcelain themes/custom/ts_wrin/dist/main.css` ]]; then
-              echo "Note this PR changes themes/custom/ts_wrin/dist/main.css. Please verify these changes are committed and don't break your theme.";
-              exit 1;
-            else
-              echo "themes/custom/ts_wrin/dist/main.css is up to date.";
-            fi
       - run:
           name: Test site install works.
           command: |
@@ -50,6 +51,7 @@ workflows:
   version: 2
   build-and-test:
     jobs:
+      - build_theme
       - build
   weekly-test:
     triggers:
