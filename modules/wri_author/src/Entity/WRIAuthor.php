@@ -59,7 +59,6 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   links = {
  *     "add-page" = "/admin/content/wri_author/add",
  *     "add-form" = "/admin/content/wri_author/add/{wri_author_type}",
- *     "canonical" = "/admin/content/wri_author/{wri_author}/view",
  *     "edit-form" = "/admin/content/wri_author/{wri_author}/edit",
  *     "delete-form" = "/admin/content/wri_author/{wri_author}/delete",
  *     "version-history" = "/admin/content/wri_author/{wri_author}/revisions",
