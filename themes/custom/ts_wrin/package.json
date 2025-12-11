@@ -10,7 +10,6 @@
     "browser-sync": "^3.0.4",
     "browser-sync-webpack-plugin": "^2.4.0",
     "css-loader": "^6.8.1",
-    "fsevents": "^2.3.2",
     "husky": "^2.2.0",
     "mini-css-extract-plugin": "^1.0.0",
     "postcss-loader": "^8.2.0",
