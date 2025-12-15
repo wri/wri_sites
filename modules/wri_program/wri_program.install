@@ -70,3 +70,16 @@ function wri_program_update_10402() {
   $message = 'Update program form display configs';
   return $message;
 }
+
+/**
+ * Update program form display again.
+ */
+function wri_program_update_10403() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.program_center.default', [
+    'content#field_social_sharing_links',
+    'content#field_twitter_account',
+  ], 'wri_program');
+
+  $message = 'Update program form display configs to use the paragraph';
+  return $message;
+}
