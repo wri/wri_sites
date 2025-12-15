@@ -564,3 +564,14 @@ function ts_wrin_preprocess_image(&$variables) {
     $variables["attributes"]["loading"] = 'eager';
   }
 }
+
+/**
+ * Implements hook_preprocess_hook().
+ */
+function ts_wrin_preprocess_google_json_api_result(&$variables) {
+  $full_title = $variables['result']['htmlTitle'] ?? '';
+  $page_split = strpos($full_title, ' | ');
+  if ($page_split !== FALSE) {
+    $variables['result']['htmlTitle'] = substr($full_title, 0, $page_split);
+  }
+}
