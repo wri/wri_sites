@@ -17,7 +17,7 @@ jobs:
               echo "Note this PR changes themes/custom/ts_wrin/dist/main.min.js. Please verify these changes are committed and don't break your theme.";
               exit 1;
             else
-              echo "themes/custom/ts_wrin/dist/main.css is up to date.";
+              echo "themes/custom/ts_wrin/dist is up to date.";
             fi
   build:
     docker:
