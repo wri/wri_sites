@@ -8,3 +8,8 @@ services:
     arguments: ['@current_route_match']
     tags:
       - { name: event_subscriber }
+
+  wri_search.route_subscriber:
+    class: Drupal\wri_search\EventSubscriber\WriSearchRouteSubscriber
+    tags:
+      - { name: event_subscriber }
