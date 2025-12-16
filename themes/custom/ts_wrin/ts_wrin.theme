@@ -569,9 +569,14 @@ function ts_wrin_preprocess_image(&$variables) {
  * Implements hook_preprocess_hook().
  */
 function ts_wrin_preprocess_google_json_api_result(&$variables) {
-  $full_title = $variables['result']['htmlTitle'] ?? '';
+  $full_title = $variables['result']['title'] ?? '';
   $page_split = strpos($full_title, ' | ');
   if ($page_split !== FALSE) {
-    $variables['result']['htmlTitle'] = substr($full_title, 0, $page_split);
+    $variables['result']['title'] = substr($full_title, 0, $page_split);
+  }
+  // Determine the image to show
+  $variables['result']['image_url'] = $variables['result']['pagemap']['cse_image'][0]['src'];
+  if (isset($variables['result']['pagemap']['metatags'][0]['wri_thumbnail'])) {
+    $variables['result']['image_url'] = $variables['result']['pagemap']['metatags'][0]['wri_thumbnail'];
   }
 }

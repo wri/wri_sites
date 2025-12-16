@@ -2,7 +2,7 @@
   {% if result %}
     <div class="search-results-text">
       {% if result.link %}
-        <h3 class="h3"><a href="{{ result.link }}">{{ result.htmlTitle | raw }}</a></h3>
+        <h3 class="h3"><a href="{{ result.link }}">{{ result.title }}</a></h3>
       {% endif %}
       <div class="body-base mb-5"{{ highlight_search(result.snippet, term) }}</div>
       {% if result.pagemap.metatags[0].wri_register %}
@@ -10,8 +10,7 @@
       {% endif %}
     </div>
     <div class="search-results-image">
-      <img src="{{ result.pagemap.metatags[0].wri_thumbnail }}" alt="" />
-      <div class="tags"><ul><li>{{ result.pagemap.metatags[0]['article:tag'] }}</li></ul></div>
+      <img src="{{ result.image_url }}" alt="{{ result.title }}" />
     </div>
   {% endif %}
 </div>
