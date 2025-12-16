@@ -9,8 +9,10 @@
         {{ result.pagemap.metatags[0].wri_register }}
       {% endif %}
     </div>
+    {% if result.image_url %}
     <div class="search-results-image">
       <img src="{{ result.image_url }}" alt="{{ result.title }}" />
     </div>
+    {% endif %}
   {% endif %}
 </div>
