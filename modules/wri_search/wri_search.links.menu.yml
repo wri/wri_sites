@@ -1,0 +1,5 @@
+wri_search.wri_search_settings:
+  title: Wri search settings
+  route_name: wri_search.wri_search_settings
+  parent: system.admin_config_search
+  weight: 10

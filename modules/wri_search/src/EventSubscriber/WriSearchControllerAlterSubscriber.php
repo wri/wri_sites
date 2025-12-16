@@ -48,11 +48,41 @@ final class WriSearchControllerAlterSubscriber implements EventSubscriberInterfa
   }
 
   /**
+   * Kernel response event handler.
+   */
+  public function onKernelRequest(\Symfony\Component\HttpKernel\Event\RequestEvent $event): void {
+    if ($this->routeMatch->getRouteName() == 'search.view_google_json_api_search') {
+      // Get the config setting for wri_search.settings
+      $config = \Drupal::config('wri_search.settings');
+      // If the setting for enable_google is false, throw 404.
+      if (!$config->get('enable_google')) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+      }
+    }
+    elseif ($this->routeMatch->getRouteName() == 'search.view') {
+      $config = \Drupal::config('wri_search.settings');
+      // If the setting for enable_google is false, throw 404.
+      if ($config->get('enable_google')) {
+        // Redirect to search/all including the path.
+        $request = $event->getRequest();
+        $query = $request->getQueryString();
+        $new_path = '/search/all';
+        if ($query) {
+          $new_path .= '?' . $query;
+        }
+        $response = new \Symfony\Component\HttpFoundation\RedirectResponse($new_path);
+        $event->setResponse($response);
+      }
+    }
+  }
+
+  /**
    * {@inheritdoc}
    */
   public static function getSubscribedEvents(): array {
     return [
       KernelEvents::VIEW => ['onKernelView',10],
+      KernelEvents::REQUEST => ['onKernelRequest',10],
     ];
   }
 
