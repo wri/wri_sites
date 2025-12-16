@@ -574,7 +574,7 @@ function ts_wrin_preprocess_google_json_api_result(&$variables) {
   if ($page_split !== FALSE) {
     $variables['result']['title'] = substr($full_title, 0, $page_split);
   }
-  // Determine the image to show
+  // Determine the image to show.
   $variables['result']['image_url'] = $variables['result']['pagemap']['cse_image'][0]['src'] ?? NULL;
   if (isset($variables['result']['pagemap']['metatags'][0]['wri_thumbnail'])) {
     $variables['result']['image_url'] = $variables['result']['pagemap']['metatags'][0]['wri_thumbnail'];
@@ -585,7 +585,7 @@ function ts_wrin_preprocess_google_json_api_result(&$variables) {
  * Implements hook_preprocess_hook().
  */
 function ts_wrin_preprocess_google_json_api_no_results_message(&$variables) {
-  $variables['message'] = array(
+  $variables['message'] = [
     '#markup' => $variables['message'],
-  );
+  ];
 }
