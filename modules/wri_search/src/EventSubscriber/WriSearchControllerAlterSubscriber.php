@@ -37,7 +37,7 @@ final class WriSearchControllerAlterSubscriber implements EventSubscriberInterfa
    * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
    *   The route match.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *  The config factory.
+   *   The config factory.
    */
   public function __construct(RouteMatchInterface $route_match, configFactoryInterface $config_factory) {
     $this->routeMatch = $route_match;
