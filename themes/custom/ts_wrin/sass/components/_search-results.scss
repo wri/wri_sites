@@ -170,7 +170,8 @@ li.search-results {
     display: none;
   }
   .pager__items .pager__item--last,
-  .pager__items .pager__item--first {
+  .pager__items .pager__item--first,
+  .pager-show-next & .pager__item--next{
     align-items: center;
     border: 1px solid $black;
     bottom: 2px;

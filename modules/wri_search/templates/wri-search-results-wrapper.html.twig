@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display something.
+ *
+ * Available variables:
+ *
+ * @ingroup themeable
+ */
+#}
+<div class="view-search">
+<div class="container">
+  <h1 class="h1 padding-vertical">{{ search_results_title }}</h1>
+</div>
+{{ search_form }}
+<div class="resources-wrapper">
+  <div class="container">
+    <div class="grid results-wrapper">
+      <div class="results-body padding-bottom">
+        <div class="view-content">
+          {{ search_results }}
+        </div>
+        <div class="pager-show-next">
+          {{ pager }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

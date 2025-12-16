@@ -139,7 +139,7 @@ function ts_wrin_preprocess_paragraph(array &$variables) {
  */
 function ts_wrin_preprocess_page(array &$variables) {
   $current_route_name = \Drupal::service('current_route_match')->getRouteName();
-  if (str_starts_with($current_route_name, 'view.')) {
+  if (str_starts_with($current_route_name, 'view.') || ($current_route_name == 'search.view') || $current_route_name == 'search.view_google_json_api_search') {
     $variables['is_node'] = TRUE;
   }
 
@@ -563,4 +563,29 @@ function ts_wrin_preprocess_image(&$variables) {
   if ($loading == 'eager') {
     $variables["attributes"]["loading"] = 'eager';
   }
+}
+
+/**
+ * Implements hook_preprocess_hook().
+ */
+function ts_wrin_preprocess_google_json_api_result(&$variables) {
+  $full_title = $variables['result']['title'] ?? '';
+  $page_split = strpos($full_title, ' | ');
+  if ($page_split !== FALSE) {
+    $variables['result']['title'] = substr($full_title, 0, $page_split);
+  }
+  // Determine the image to show.
+  $variables['result']['image_url'] = $variables['result']['pagemap']['cse_image'][0]['src'] ?? NULL;
+  if (isset($variables['result']['pagemap']['metatags'][0]['wri_thumbnail'])) {
+    $variables['result']['image_url'] = $variables['result']['pagemap']['metatags'][0]['wri_thumbnail'];
+  }
+}
+
+/**
+ * Implements hook_preprocess_hook().
+ */
+function ts_wrin_preprocess_google_json_api_no_results_message(&$variables) {
+  $variables['message'] = [
+    '#markup' => $variables['message'],
+  ];
 }

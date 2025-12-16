@@ -1,0 +1,7 @@
+wri_search.wri_search_settings:
+  path: '/admin/config/search/wri-search'
+  defaults:
+    _title: 'Wri search settings'
+    _form: 'Drupal\wri_search\Form\WriSearchSettingsForm'
+  requirements:
+    _permission: 'administer site configuration'
