@@ -5,6 +5,6 @@ services:
 
   wri_search.event_subscriber:
     class: Drupal\wri_search\EventSubscriber\WriSearchControllerAlterSubscriber
-    arguments: ['@current_route_match']
+    arguments: ['@current_route_match', '@config.factory']
     tags:
       - { name: event_subscriber }

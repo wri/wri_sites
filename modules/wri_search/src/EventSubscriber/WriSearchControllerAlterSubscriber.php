@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\wri_search\EventSubscriber;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -24,13 +25,21 @@ final class WriSearchControllerAlterSubscriber implements EventSubscriberInterfa
   protected $routeMatch;
 
   /**
+   * The config factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $config;
+
+  /**
    * Constructs a new RouteCacheContext class.
    *
    * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
    *   The route match.
    */
-  public function __construct(RouteMatchInterface $route_match) {
+  public function __construct(RouteMatchInterface $route_match, configFactoryInterface $config_factory) {
     $this->routeMatch = $route_match;
+    $this->config = $config_factory->get('wri_search.settings');
   }
 
   /**
@@ -56,17 +65,14 @@ final class WriSearchControllerAlterSubscriber implements EventSubscriberInterfa
    */
   public function onKernelRequest(RequestEvent $event): void {
     if ($this->routeMatch->getRouteName() == 'search.view_google_json_api_search') {
-      // Get the config setting for wri_search.settings.
-      $config = \Drupal::config('wri_search.settings');
       // If the setting for enable_google is false, throw 404.
-      if (!$config->get('enable_google')) {
+      if (!$this->config->get('enable_google')) {
         throw new NotFoundHttpException();
       }
     }
     elseif ($this->routeMatch->getRouteName() == 'search.view') {
-      $config = \Drupal::config('wri_search.settings');
       // If the setting for enable_google is false, throw 404.
-      if ($config->get('enable_google')) {
+      if ($this->config->get('enable_google')) {
         // Redirect to search/all including the path.
         $request = $event->getRequest();
         $query = $request->getQueryString();
