@@ -6,12 +6,40 @@ namespace Drupal\wri_search\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\views\Entity\View;
+use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 
 /**
  * Configure WRIN Search settings for this site.
  */
-final class WriSearchSettingsForm extends ConfigFormBase {
+final class WriSearchSettingsForm extends ConfigFormBase implements ContainerInjectionInterface {
+  /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * Constructs a new ViewManager object.
+   *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
+   */
+  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
+    $this->entityTypeManager = $entity_type_manager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    // This static method is where services are retrieved from the container.
+    return new static(
+      $container->get('entity_type.manager')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -45,7 +73,9 @@ final class WriSearchSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
-    $view = View::load('search');
+    $view_storage = $this->entityTypeManager->getStorage('view');
+    /** @var \Drupal\views\Entity\View $view */
+    $view = $view_storage->load('search');
     $display =& $view->getDisplay('results');
     if ($form_state->getValue('enable_google')) {
       // If the value of enable_google is true, set the path for search.view to
