@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace Drupal\wri_search\EventSubscriber;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
- * @todo Add description for this subscriber.
+ * Alters routes related to the search pages to account for google_cse.
  */
 final class WriSearchControllerAlterSubscriber implements EventSubscriberInterface {
   /**
@@ -19,6 +22,7 @@ final class WriSearchControllerAlterSubscriber implements EventSubscriberInterfa
    * @var \Drupal\Core\Routing\RouteMatchInterface
    */
   protected $routeMatch;
+
   /**
    * Constructs a new RouteCacheContext class.
    *
@@ -41,7 +45,7 @@ final class WriSearchControllerAlterSubscriber implements EventSubscriberInterfa
       $build['#search_form'] = $build['search_form'] ?? [];
       $build['#search_results'] = $build['search_results'] ?? [];
       if (isset($build['search_results_title'])) {
-        $build['#search_results_title'] = $build['search_results_title']['#markup'] ? strip_tags($build[ 'search_results_title']['#markup']) : '';
+        $build['#search_results_title'] = $build['search_results_title']['#markup'] ? strip_tags($build['search_results_title']['#markup']) : '';
       }
       $event->setControllerResult($build);
     }
@@ -50,13 +54,13 @@ final class WriSearchControllerAlterSubscriber implements EventSubscriberInterfa
   /**
    * Kernel response event handler.
    */
-  public function onKernelRequest(\Symfony\Component\HttpKernel\Event\RequestEvent $event): void {
+  public function onKernelRequest(RequestEvent $event): void {
     if ($this->routeMatch->getRouteName() == 'search.view_google_json_api_search') {
-      // Get the config setting for wri_search.settings
+      // Get the config setting for wri_search.settings.
       $config = \Drupal::config('wri_search.settings');
       // If the setting for enable_google is false, throw 404.
       if (!$config->get('enable_google')) {
-        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        throw new NotFoundHttpException();
       }
     }
     elseif ($this->routeMatch->getRouteName() == 'search.view') {
@@ -70,7 +74,7 @@ final class WriSearchControllerAlterSubscriber implements EventSubscriberInterfa
         if ($query) {
           $new_path .= '?' . $query;
         }
-        $response = new \Symfony\Component\HttpFoundation\RedirectResponse($new_path);
+        $response = new RedirectResponse($new_path);
         $event->setResponse($response);
       }
     }
@@ -81,8 +85,8 @@ final class WriSearchControllerAlterSubscriber implements EventSubscriberInterfa
    */
   public static function getSubscribedEvents(): array {
     return [
-      KernelEvents::VIEW => ['onKernelView',10],
-      KernelEvents::REQUEST => ['onKernelRequest',10],
+      KernelEvents::VIEW => ['onKernelView', 10],
+      KernelEvents::REQUEST => ['onKernelRequest', 10],
     ];
   }
 

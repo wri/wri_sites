@@ -41,19 +41,24 @@ final class WriSearchSettingsForm extends ConfigFormBase {
     return parent::buildForm($form, $form_state);
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     $view = View::load('search');
     $display =& $view->getDisplay('results');
     if ($form_state->getValue('enable_google')) {
-      // If the value of enable_google is true, set the path for search.view to /search/site
+      // If the value of enable_google is true, set the path for search.view to
+      // /search/site.
       $display['display_options']['path'] = 'search/site';
     }
     else {
-      // Otherwise, set the path for search.view to /search
+      // Otherwise, set the path for search.view to /search.
       $display['display_options']['path'] = 'search';
     }
     $view->save();
 
     parent::submitForm($form, $form_state);
   }
+
 }

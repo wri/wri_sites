@@ -114,6 +114,6 @@ function wri_search_theme() {
         'search_results' => [],
         'search_results_title' => '',
       ],
-    ]
+    ],
   ];
 }
