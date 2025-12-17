@@ -25,12 +25,12 @@ class EntityShareCronSettingsForm extends ConfigFormBase {
    */
   protected $entityTypeManager;
 
-    /**
-     * The remote manager.
-     *
-     * @var \Drupal\entity_share_client\Service\RemoteManagerInterface
-     */
-    protected $remoteManager;
+  /**
+   * The remote manager.
+   *
+   * @var \Drupal\entity_share_client\Service\RemoteManagerInterface
+   */
+  protected $remoteManager;
 
   /**
    * {@inheritdoc}
@@ -77,19 +77,19 @@ class EntityShareCronSettingsForm extends ConfigFormBase {
     ];
 
     $channel_settings = is_array($settings['channel']) ? $settings['channel'] : [$settings['channel']];
-      try {
-          $channels_available = $this->remoteManager->getChannelsInfos($remote, [
-              'rethrow' => TRUE,
-          ]);
-      }
-      catch (\Throwable $exception) {
-          $channels_available = [];
-      }
+    try {
+      $channels_available = $this->remoteManager->getChannelsInfos($remote, [
+        'rethrow' => TRUE,
+      ]);
+    }
+    catch (\Throwable $exception) {
+      $channels_available = [];
+    }
 
-      $channel_options = [];
-      foreach ($channels_available as $channel_id => $channel_info) {
-          $channel_options[$channel_id] = $channel_info['label'];
-      }
+    $channel_options = [];
+    foreach ($channels_available as $channel_id => $channel_info) {
+      $channel_options[$channel_id] = $channel_info['label'];
+    }
     $form['channel'] = [
       '#type' => 'checkboxes',
       '#options' => $channel_options,
