@@ -607,8 +607,17 @@ function ts_wrin_preprocess_layout(array &$variables): void {
 
         // Compare by calendar day to avoid the <24h "Tomorrow" bug.
         $now_day = $now_dt->setTime(0, 0);
-        $event_day = $event_dt->setTime(0, 0);
 
+        // Expire at the next local midnight (when the label can change).
+        $next_midnight = $now_day->modify('+1 day')->getTimestamp();
+        $seconds_until_midnight = max(1, $next_midnight - $now);
+
+        if (!isset($variables['#cache']) || !is_array($variables['#cache'])) {
+          $variables['#cache'] = [];
+        }
+        $variables['#cache']['max-age'] = min($variables['#cache']['max-age'] ?? PHP_INT_MAX, $seconds_until_midnight);
+
+        $event_day = $event_dt->setTime(0, 0);
         $days = (int) $now_day->diff($event_day)->days;
 
         if ($days === 0) {
