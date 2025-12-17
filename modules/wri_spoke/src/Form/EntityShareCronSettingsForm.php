@@ -26,11 +26,19 @@ class EntityShareCronSettingsForm extends ConfigFormBase {
   protected $entityTypeManager;
 
   /**
+   * The remote manager.
+   *
+   * @var \Drupal\entity_share_client\Service\RemoteManagerInterface
+   */
+  protected $remoteManager;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
     $instance = new static($container->get('config.factory'));
     $instance->entityTypeManager = $container->get('entity_type.manager');
+    $instance->remoteManager = $container->get('entity_share_client.remote_manager');
     return $instance;
   }
 
@@ -67,23 +75,24 @@ class EntityShareCronSettingsForm extends ConfigFormBase {
       '#title' => $this->t('Remote'),
       '#default_value' => $settings['remote'] ?? '',
     ];
+
     $channel_settings = is_array($settings['channel']) ? $settings['channel'] : [$settings['channel']];
+    try {
+      $channels_available = $this->remoteManager->getChannelsInfos($remote, [
+        'rethrow' => TRUE,
+      ]);
+    }
+    catch (\Throwable $exception) {
+      $channels_available = [];
+    }
+
+    $channel_options = [];
+    foreach ($channels_available as $channel_id => $channel_info) {
+      $channel_options[$channel_id] = $channel_info['label'];
+    }
     $form['channel'] = [
       '#type' => 'checkboxes',
-      '#options' => [
-        'events_africa' => $this->t('Events for WRI Africa'),
-        'events_africa_fr' => $this->t('Events for WRI Africa (French)'),
-        'events_brasil' => $this->t('Events for WRI Brasil'),
-        'events_brasil_pt_br' => $this->t('Events for WRI Brasil (Portuguese, Brazil)'),
-        'events_china' => $this->t('Events for WRI China'),
-        'events_china_zh_hans' => $this->t('Events for WRI China (Chinese, Simplified)'),
-        'events_espanol' => $this->t('Events for WRI Espanol'),
-        'events_espanol_es' => $this->t('Events for WRI Espanol (Spanish)'),
-        'events_flagship' => $this->t('Events for WRI Flagship'),
-        'events_india' => $this->t('Events for WRI India'),
-        'events_indonesia' => $this->t('Events for WRI Indonesia'),
-        'events_indonesia_id' => $this->t('Events for WRI Indonesia (Indonesian)'),
-      ],
+      '#options' => $channel_options,
       '#title' => $this->t('Channel'),
       '#default_value' => $channel_settings,
     ];
