@@ -564,3 +564,67 @@ function ts_wrin_preprocess_image(&$variables) {
     $variables["attributes"]["loading"] = 'eager';
   }
 }
+
+/**
+ * Implements hook_preprocess_layout().
+ */
+function ts_wrin_preprocess_layout(array &$variables): void {
+  $node = $variables['content']['#node'] ?? NULL;
+
+  // Defaults.
+  $variables['is_webinar'] = FALSE;
+  $variables['time_until'] = NULL;
+
+  if (!$node instanceof NodeInterface) {
+    return;
+  }
+
+  /*
+   * is_webinar: compare against the untranslated/source label.
+   */
+  if ($node->hasField('field_type') && !$node->get('field_type')->isEmpty()) {
+    $term = $node->get('field_type')->entity;
+    if ($term) {
+      $source_label = $term->getUntranslated()->label();
+      $variables['is_webinar'] = (mb_strtolower($source_label) === 'webinar');
+    }
+  }
+
+  /*
+   * time_until: Smart Date stores a Unix timestamp in ->value.
+   */
+  if ($node->hasField('field_date_time') && !$node->get('field_date_time')->isEmpty()) {
+    $timestamp = (int) ($node->get('field_date_time')->first()->value ?? 0);
+    if ($timestamp > 0) {
+      $now = \Drupal::service('datetime.time')->getRequestTime();
+      if ($timestamp > $now) {
+
+        // Use the site default timezone (yours is America/New_York).
+        $tz = new \DateTimeZone(\Drupal::config('system.date')->get('timezone.default'));
+
+        $now_dt = (new \DateTimeImmutable('@' . $now))->setTimezone($tz);
+        $event_dt = (new \DateTimeImmutable('@' . $timestamp))->setTimezone($tz);
+
+        // Compare by calendar day to avoid the <24h "Tomorrow" bug.
+        $now_day = $now_dt->setTime(0, 0);
+        $event_day = $event_dt->setTime(0, 0);
+
+        $days = (int) $now_day->diff($event_day)->days;
+
+        if ($days === 0) {
+          $variables['time_until'] = t('Today');
+        }
+        elseif ($days === 1) {
+          $variables['time_until'] = t('In 1 day');
+        }
+        elseif ($days < 7) {
+          $variables['time_until'] = t('In @count days', ['@count' => $days]);
+        }
+        else {
+          $weeks = (int) round($days / 7);
+          $variables['time_until'] = t('In @count weeks', ['@count' => $weeks]);
+        }
+      }
+    }
+  }
+}

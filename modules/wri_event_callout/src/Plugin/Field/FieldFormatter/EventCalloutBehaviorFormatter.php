@@ -172,8 +172,8 @@ final class EventCalloutBehaviorFormatter extends FormatterBase implements Conta
       return $elements;
     }
 
-    // Case 2: explicit event exists and is in the future, always show it.
-    if ($this->isEventUpcoming($event)) {
+    // Case 2: explicit event exists and has not ended yet, always show it.
+    if ($this->isEventNotEnded($event)) {
       $elements[0] = $this->buildEventCallout($event);
       return $elements;
     }
@@ -203,26 +203,34 @@ final class EventCalloutBehaviorFormatter extends FormatterBase implements Conta
   }
 
   /**
-   * Check if an event is considered "upcoming".
+   * Returns TRUE if the event has not ended yet.
+   *
+   * Smart Date range stores:
+   * - start in ->value
+   * - end in ->end_value
    */
-  protected function isEventUpcoming(NodeInterface $event): bool {
+  protected function isEventNotEnded(NodeInterface $event): bool {
     $date_field = $this->getSetting('event_date_field');
 
     if (!$event->hasField($date_field) || $event->get($date_field)->isEmpty()) {
       return FALSE;
     }
 
-    // For datetime or daterange, the first item's "value" is usually the start.
     $item = $event->get($date_field)->first();
-    $timestamp = $item->value ?? NULL;
 
+    // Prefer end timestamp; fall back to start if end is missing.
+    $end = $item->end_value ?? NULL;
+    $start = $item->value ?? NULL;
+
+    $timestamp = $end ?: $start;
     if (!$timestamp) {
       return FALSE;
     }
 
     $now = $this->time->getRequestTime();
-    return $timestamp >= $now;
+    return (int) $timestamp >= $now;
   }
+
 
   /**
    * Render the event in the Callout view mode.
