@@ -65,87 +65,6 @@
     }
   }
 
-  .paragraph--type--side-by-side {
-    @extend .grid;
-    @extend .margin-top-xl;
-    @extend .margin-bottom-xl;
-    position: relative;
-
-    &:before {
-      content: "";
-      @extend .top-border-thick;
-      display: block;
-      @include column-width(1, -1);
-      margin: $space-xs 0 0;
-      padding-top: $space-xs;
-      grid-row: 1;
-
-      @include mq($md) {
-        @include column-width(2, 6);
-      }
-    }
-
-    .field--name-field-title {
-      @include column-width(1, -1);
-      grid-row: 2;
-      margin-top: 0;
-
-      @include mq($md) {
-        @include column-width(2, 6);
-        grid-row: 1;
-        margin-top: $space-md;
-      }
-
-      h2 {
-        @include font($acumin-semi-cond, bold);
-        @include font-line-height(32, 40);
-        margin: 0;
-      }
-    }
-
-    .field--name-field-body {
-      @include column-width(1, -1);
-      grid-row: 3;
-
-      @include mq($md) {
-        @include column-width(6, 12);
-        grid-row: 1;
-      }
-
-      p {
-        @include font($acumin-semi-cond, light);
-        @include font-line-height(18, 30);
-
-        &:first-of-type {
-          @include mq($md) {
-            margin-top: 10px;
-          }
-        }
-      }
-    }
-    .media--view-mode-half-content {
-      width: 50%;
-    }
-    .media--view-mode-full,
-    .media--view-mode-full-width {
-      @include mq($md) {
-        margin: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-      }
-    }
-
-    a {
-      background-position: left 100%;
-    }
-
-    img {
-      width: 100%;
-      height: auto;
-    }
-  }
-
   .paragraph--type--statistics {
     .field--name-field-statistics {
       @include mq($md) {
@@ -188,6 +107,87 @@
     @include mq($md) {
       display: block;
     }
+  }
+}
+
+.paragraph--type--side-by-side {
+  @extend .grid;
+  @extend .margin-top-xl;
+  @extend .margin-bottom-xl;
+  position: relative;
+
+  &:before {
+    content: "";
+    @extend .top-border-thick;
+    display: block;
+    @include column-width(1, -1);
+    margin: $space-xs 0 0;
+    padding-top: $space-xs;
+    grid-row: 1;
+
+    @include mq($md) {
+      @include column-width(2, 6);
+    }
+  }
+
+  .field--name-field-title {
+    @include column-width(1, -1);
+    grid-row: 2;
+    margin-top: 0;
+
+    @include mq($md) {
+      @include column-width(2, 6);
+      grid-row: 1;
+      margin-top: $space-md;
+    }
+
+    h2 {
+      @include font($acumin-semi-cond, bold);
+      @include font-line-height(32, 40);
+      margin: 0;
+    }
+  }
+
+  .field--name-field-body {
+    @include column-width(1, -1);
+    grid-row: 3;
+
+    @include mq($md) {
+      @include column-width(6, 12);
+      grid-row: 1;
+    }
+
+    p {
+      @include font($acumin-semi-cond, light);
+      @include font-line-height(18, 30);
+
+      &:first-of-type {
+        @include mq($md) {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+  .media--view-mode-half-content {
+    width: 50%;
+  }
+  .media--view-mode-full,
+  .media--view-mode-full-width {
+    @include mq($md) {
+      margin: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+    }
+  }
+
+  a {
+    background-position: left 100%;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
   }
 }
 
