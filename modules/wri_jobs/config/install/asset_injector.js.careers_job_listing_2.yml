@@ -1,0 +1,40 @@
+uuid: 1612984f-76d0-4a55-8b4a-6bad0702fc01
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: careers_job_listing_2
+label: 'Careers job listing 2'
+code: |-
+  (function ($, Drupal) {
+    Drupal.behaviors.backToJobsLink = {
+      attach: function (context, settings) {
+        // Find the main page title element.
+        const $pageTitle = $('h1.h1', context).first();
+
+        // Ensure the title exists before trying to insert content.
+        if ($pageTitle.length > 0) {
+          const backLinkHTML = '<p><a href="/careers/jobs">Back to job list</a></p>';
+          
+          // Insert the HTML directly after the <h1> tag.
+          $pageTitle.after(backLinkHTML);
+        }
+      }
+    };
+  })(jQuery, Drupal);
+noscript: ''
+noscriptRegion: {  }
+jquery: false
+header: false
+preprocess: true
+conditions:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      jobs: jobs
+contexts: {  }
+conditions_require_all: true

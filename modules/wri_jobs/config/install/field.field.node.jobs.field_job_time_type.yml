@@ -1,0 +1,29 @@
+uuid: 7ac0117e-88e4-46db-b276-f5c6dcce4689
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_time_type
+    - node.type.jobs
+    - taxonomy.vocabulary.job_time_type
+id: node.jobs.field_job_time_type
+field_name: field_job_time_type
+entity_type: node
+bundle: jobs
+label: 'Work Schedule'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      job_time_type: job_time_type
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

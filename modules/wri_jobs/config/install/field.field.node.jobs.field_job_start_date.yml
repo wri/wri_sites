@@ -1,0 +1,21 @@
+uuid: 9669904c-5296-405b-99c6-13b8b14c64be
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_start_date
+    - node.type.jobs
+  module:
+    - datetime
+id: node.jobs.field_job_start_date
+field_name: field_job_start_date
+entity_type: node
+bundle: jobs
+label: 'Date Posted'
+description: 'Job start date'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

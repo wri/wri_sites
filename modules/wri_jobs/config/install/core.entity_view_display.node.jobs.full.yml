@@ -1,0 +1,191 @@
+uuid: 74be5945-2753-4ea9-8a7f-70e3e46af9e7
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.jobs.body
+    - field.field.node.jobs.feeds_item
+    - field.field.node.jobs.field_job_country
+    - field.field.node.jobs.field_job_end_date
+    - field.field.node.jobs.field_job_externalpath
+    - field.field.node.jobs.field_job_guid
+    - field.field.node.jobs.field_job_hiring_org
+    - field.field.node.jobs.field_job_jobfamilygroup
+    - field.field.node.jobs.field_job_location
+    - field.field.node.jobs.field_job_posting_link
+    - field.field.node.jobs.field_job_pubdate
+    - field.field.node.jobs.field_job_remotetype
+    - field.field.node.jobs.field_job_reqid
+    - field.field.node.jobs.field_job_start_date
+    - field.field.node.jobs.field_job_time_type
+    - field.field.node.jobs.field_job_workersubtype
+    - node.type.jobs
+  module:
+    - datetime
+    - ds
+    - element_class_formatter
+    - layout_builder
+    - link
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  ds:
+    layout:
+      id: 'single_file_component_layout:wri_publication_columns'
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      hero:
+        - node_title
+      buttons:
+        - field_job_posting_link
+        - field_job_location
+      main_content:
+        - body
+      sidebar:
+        - field_job_end_date
+        - field_job_jobfamilygroup
+        - field_job_time_type
+        - field_job_remotetype
+        - field_job_reqid
+        - field_job_externalpath
+    fields:
+      node_title:
+        plugin_id: node_title
+        weight: 0
+        label: hidden
+        formatter: default
+        settings:
+          link: false
+          'link class': ''
+          link_target: ''
+          wrapper: h1
+          class: h1
+        ft:
+          id: reset
+          settings:
+            lb: ''
+id: node.jobs.full
+targetEntityType: node
+bundle: jobs
+mode: full
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: main_content
+  field_job_end_date:
+    type: datetime_default
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: short_day
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 4
+    region: sidebar
+  field_job_externalpath:
+    type: link
+    label: inline
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 9
+    region: sidebar
+  field_job_jobfamilygroup:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 5
+    region: sidebar
+  field_job_location:
+    type: entity_reference_label_class
+    label: hidden
+    settings:
+      link: true
+      class: int-office
+      tag: span
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 2
+    region: buttons
+  field_job_posting_link:
+    type: link_ally_class
+    label: hidden
+    settings:
+      class: 'apply-link button'
+      link_text: Apply
+      screenreader_text: ''
+      tag: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 1
+    region: buttons
+  field_job_remotetype:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 7
+    region: sidebar
+  field_job_reqid:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 8
+    region: sidebar
+  field_job_time_type:
+    type: entity_reference_label_class
+    label: above
+    settings:
+      link: true
+      class: ''
+      tag: ''
+    third_party_settings: {  }
+    weight: 6
+    region: sidebar
+hidden:
+  addtocal: true
+  feeds_item: true
+  field_job_country: true
+  field_job_guid: true
+  field_job_hiring_org: true
+  field_job_pubdate: true
+  field_job_start_date: true
+  field_job_workersubtype: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

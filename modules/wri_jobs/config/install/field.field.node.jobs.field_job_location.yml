@@ -1,0 +1,29 @@
+uuid: ba8e421c-3c7b-4380-bebc-6f80bd1f4a02
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_location
+    - node.type.jobs
+    - taxonomy.vocabulary.job_location
+id: node.jobs.field_job_location
+field_name: field_job_location
+entity_type: node
+bundle: jobs
+label: Location
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      job_location: job_location
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

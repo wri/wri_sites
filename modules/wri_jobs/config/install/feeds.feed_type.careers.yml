@@ -1,0 +1,283 @@
+uuid: 8fbf2378-1d5a-4c37-be4d-8101b37f0c73
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.jobs.body
+    - field.field.node.jobs.field_job_country
+    - field.field.node.jobs.field_job_end_date
+    - field.field.node.jobs.field_job_guid
+    - field.field.node.jobs.field_job_hiring_org
+    - field.field.node.jobs.field_job_jobfamilygroup
+    - field.field.node.jobs.field_job_location
+    - field.field.node.jobs.field_job_posting_link
+    - field.field.node.jobs.field_job_pubdate
+    - field.field.node.jobs.field_job_remotetype
+    - field.field.node.jobs.field_job_reqid
+    - field.field.node.jobs.field_job_start_date
+    - field.field.node.jobs.field_job_time_type
+    - field.field.node.jobs.field_job_workersubtype
+    - node.type.jobs
+  module:
+    - feeds_ex
+    - node
+label: Careers
+id: careers
+description: 'A feed from Workday with job listings'
+help: ''
+import_period: 1800
+fetcher: http
+fetcher_configuration:
+  auto_detect_feeds: false
+  use_pubsubhubbub: false
+  always_download: false
+  fallback_hub: ''
+  request_timeout: 30
+parser: xml
+parser_configuration:
+  context:
+    value: /rss/channel/item
+  source_encoding:
+    - auto
+  display_errors: false
+  line_limit: 100
+  use_tidy: false
+processor: 'entity:node'
+processor_configuration:
+  values:
+    type: jobs
+  langcode: en
+  insert_new: 1
+  update_existing: 2
+  update_non_existent: _keep
+  skip_hash_check: false
+  skip_validation: false
+  skip_validation_types: {  }
+  authorize: true
+  revision: false
+  expire: 7776000
+  owner_feed_author: false
+  owner_id: 385
+custom_sources:
+  apply:
+    value: Apply
+    label: Apply
+    machine_name: apply
+    type: blank
+  title:
+    label: Title
+    machine_name: title
+    value: title
+    raw: false
+    inner: false
+    type: xml
+  body:
+    label: Body
+    machine_name: body
+    value: description
+    raw: false
+    inner: false
+    type: xml
+  published_date:
+    label: 'Published date'
+    machine_name: published_date
+    value: pubDate
+    raw: false
+    inner: false
+    type: xml
+  guid:
+    label: GUID
+    machine_name: guid
+    value: guid
+    raw: false
+    inner: false
+    type: xml
+  country:
+    label: Country
+    machine_name: country
+    value: country
+    raw: false
+    inner: false
+    type: xml
+  end_date:
+    label: 'End date'
+    machine_name: end_date
+    value: endDate
+    raw: false
+    inner: false
+    type: xml
+  time_type:
+    label: 'Time Type'
+    machine_name: time_type
+    value: timeType
+    raw: false
+    inner: false
+    type: xml
+  remote_type:
+    label: 'Remote Type'
+    machine_name: remote_type
+    value: remoteType
+    raw: false
+    inner: false
+    type: xml
+  hiring_organization:
+    label: 'Hiring Organization'
+    machine_name: hiring_organization
+    value: hiringOrganization
+    raw: false
+    inner: false
+    type: xml
+  req_id:
+    label: 'Req ID'
+    machine_name: req_id
+    value: reqId
+    raw: false
+    inner: false
+    type: xml
+  start_date:
+    label: 'Start date'
+    machine_name: start_date
+    value: startDate
+    raw: false
+    inner: false
+    type: xml
+  location:
+    label: Location
+    machine_name: location
+    value: location
+    raw: false
+    inner: false
+    type: xml
+  link:
+    label: Link
+    machine_name: link
+    value: link
+    raw: false
+    inner: false
+    type: xml
+  job_family_group:
+    label: 'Job Family Group'
+    machine_name: job_family_group
+    value: jobFamilyGroup
+    raw: false
+    inner: false
+    type: xml
+  worker_subtype:
+    label: 'Worker Subtype'
+    machine_name: worker_subtype
+    value: workerSubType
+    raw: false
+    inner: false
+    type: xml
+mappings:
+  -
+    target: title
+    map:
+      value: title
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: body
+    map:
+      value: body
+      summary: ''
+    settings:
+      language: ''
+      format: full_html
+  -
+    target: field_job_guid
+    map:
+      value: guid
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_job_country
+    map:
+      value: country
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_job_end_date
+    map:
+      value: end_date
+    settings:
+      language: null
+      timezone: UTC
+  -
+    target: field_job_remotetype
+    map:
+      value: remote_type
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_job_hiring_org
+    map:
+      value: hiring_organization
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_job_reqid
+    map:
+      value: req_id
+    settings:
+      language: null
+    unique:
+      value: 1
+  -
+    target: field_job_start_date
+    map:
+      value: start_date
+    settings:
+      language: null
+      timezone: UTC
+  -
+    target: field_job_posting_link
+    map:
+      uri: link
+      title: ''
+    settings:
+      language: null
+  -
+    target: field_job_pubdate
+    map:
+      value: published_date
+    settings:
+      language: null
+      timezone: UTC
+  -
+    target: field_job_jobfamilygroup
+    map:
+      value: job_family_group
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_job_workersubtype
+    map:
+      value: worker_subtype
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_job_location
+    map:
+      target_id: location
+    settings:
+      language: ''
+      reference_by: name
+      autocreate: 1
+      autocreate_bundle: job_location
+  -
+    target: field_job_time_type
+    map:
+      target_id: time_type
+    settings:
+      language: ''
+      reference_by: name
+      autocreate: 1
+      autocreate_bundle: job_time_type

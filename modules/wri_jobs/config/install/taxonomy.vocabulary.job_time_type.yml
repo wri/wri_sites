@@ -1,0 +1,9 @@
+uuid: de7acafd-97f9-4dab-b6fb-d666e343af42
+langcode: en
+status: true
+dependencies: {  }
+name: 'Job Time Type'
+vid: job_time_type
+description: 'For job listings: Full Time, Part Time etc'
+weight: 0
+new_revision: false

@@ -1,0 +1,19 @@
+uuid: 06c8130d-1b37-49fe-af7b-42aa2dc64f6f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_country
+    - node.type.jobs
+id: node.jobs.field_job_country
+field_name: field_job_country
+entity_type: node
+bundle: jobs
+label: 'Job Country'
+description: 'Job country location (note: this is just the country, used for filtering, the Job Location field includes the city and country for the user)'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

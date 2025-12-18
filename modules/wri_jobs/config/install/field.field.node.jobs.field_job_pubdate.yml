@@ -1,0 +1,21 @@
+uuid: 42242217-9952-4ddb-b52b-12684a7d02b8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_pubdate
+    - node.type.jobs
+  module:
+    - datetime
+id: node.jobs.field_job_pubdate
+field_name: field_job_pubdate
+entity_type: node
+bundle: jobs
+label: 'Job Posted'
+description: 'The pubDate from the rss feed'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

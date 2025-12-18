@@ -1,0 +1,19 @@
+uuid: e0e1bebb-ca22-44ad-b5b6-f4fb50961c5f
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - node
+id: node.field_job_posting_link
+field_name: field_job_posting_link
+entity_type: node
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
