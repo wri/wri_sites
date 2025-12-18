@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_body_contains_recording
+    - node.type.event
+id: node.event.field_body_contains_recording
+field_name: field_body_contains_recording
+entity_type: node
+bundle: event
+label: 'Body contains recording'
+description: "The body of this event contains the event's recording. When this event passes, a 'Watch the recording' button will show up on event callouts linking to this page."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

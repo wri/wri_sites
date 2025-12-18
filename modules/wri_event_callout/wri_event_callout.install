@@ -1,0 +1,131 @@
+<?php
+
+/**
+ * @file
+ * Event Callout install hooks.
+ */
+
+use Drupal\user\Entity\Role;
+
+/**
+ * Add Event Callout view, display mode.
+ */
+function wri_event_callout_update_10501() {
+  // Add the view.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('views.view.event_callout', 'wri_event_callout', 'install', 'TRUE');
+}
+
+/**
+ * Add Upcoming Event block, fields, display modes.
+ */
+function wri_event_callout_update_10502() {
+  // Add field_after_the_event_ends field.storage.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('field.storage.block_content.field_after_the_event_ends', 'wri_event_callout', 'install', 'TRUE');
+  // Add field_event_to_feature field.storage.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('field.storage.block_content.field_event_to_feature', 'wri_event_callout', 'install', 'TRUE');
+  // Add field_topic field.storage.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('field.storage.block_content.field_topic', 'wri_event_callout', 'install', 'TRUE');
+
+  // Add the block type.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('block_content.type.upcoming_event', 'wri_event_callout', 'install', 'TRUE');
+
+  // Add field_after_the_event_ends.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('field.field.block_content.upcoming_event.field_after_the_event_ends', 'wri_event_callout', 'install', 'TRUE');
+  // Add field_event_to_feature.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('field.field.block_content.upcoming_event.field_event_to_feature', 'wri_event_callout', 'install', 'TRUE');
+  // Add field_topic.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('field.field.block_content.upcoming_event.field_topic', 'wri_event_callout', 'install', 'TRUE');
+
+  // Add language.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('language.content_settings.block_content.upcoming_event', 'wri_event_callout', 'install', 'TRUE');
+
+  // Add the form display.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('core.entity_form_display.block_content.upcoming_event.default', 'wri_event_callout', 'install', 'TRUE');
+  // Add default display mode.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('core.entity_view_display.block_content.upcoming_event.default', 'wri_event_callout', 'install', 'TRUE');
+  // Add preview display mode.
+  \Drupal::service('distro_helper.updates')
+    ->installConfig('core.entity_view_display.block_content.upcoming_event.preview', 'wri_event_callout', 'install', 'TRUE');
+}
+
+/**
+ * Add upcoming_event to content blocks browser and add permissions.
+ */
+function wri_event_callout_install() {
+  // Set the views.view.content_blocks_browser.yml config to include this
+  // module's block type.
+  $config = \Drupal::configFactory()->getEditable('views.view.content_blocks_browser');
+  $data = $config->getRawData();
+  $data['display']['default']['display_options']['filters']['type_1']['value']['upcoming_event'] = 'upcoming_event';
+  $data['dependencies']['config'][] = 'block_content.type.upcoming_event';
+  $config->setData($data);
+  $config->save();
+
+  // Allow Upcoming Event blocks in the block Entity Browser.
+  $config = \Drupal::configFactory()->getEditable('entity_browser.browser.block');
+  if (!$config->isNew()) {
+    $data = $config->getRawData();
+
+    if (!empty($data['widgets']) && is_array($data['widgets'])) {
+      foreach ($data['widgets'] as &$widget) {
+        // Only touch widgets that already have block_type settings.
+        if (!empty($widget['settings']['block_type']) && is_array($widget['settings']['block_type'])) {
+          $widget['settings']['block_type']['upcoming_event'] = 'upcoming_event';
+        }
+      }
+      unset($widget);
+
+      // Ensure this browser config depends on the upcoming_event block type.
+      if (empty($data['dependencies']['config']) || !is_array($data['dependencies']['config'])) {
+        $data['dependencies']['config'] = [];
+      }
+      if (!in_array('block_content.type.upcoming_event', $data['dependencies']['config'], TRUE)) {
+        $data['dependencies']['config'][] = 'block_content.type.upcoming_event';
+      }
+
+      $config->setData($data)->save();
+    }
+  }
+  // Add permissions.
+  wri_event_callout_add_permissions();
+}
+
+/**
+ * Helper function to set permissions for this block on install.
+ */
+function wri_event_callout_add_permissions() {
+  // Add permissions for Editorial:
+  // 'revert any upcoming_event block content revisions'
+  // 'edit any upcoming_event block content'
+  // 'create upcoming_event block content'.
+  $role = Role::load('editorial');
+  $role->grantPermission('revert any upcoming_event block content revisions');
+  $role->grantPermission('edit any upcoming_event block content');
+  $role->grantPermission('create upcoming_event block content');
+  $role->save();
+}
+
+/**
+ * Give Editor the ability to make upcoming_events blocks.
+ */
+function wri_event_callout_update_10503() {
+  wri_event_callout_add_permissions();
+}
+
+/**
+ * Allow Upcoming Event blocks in the block Entity Browser widget.
+ */
+function wri_event_callout_update_10504() {
+  wri_event_callout_install();
+}
