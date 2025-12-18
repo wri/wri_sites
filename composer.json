@@ -60,7 +60,7 @@
                 "Add a parent entity token for paragraphs https://www.drupal.org/project/paragraphs/issues/3067265": "https://git.drupalcode.org/project/paragraphs/-/merge_requests/92.diff"
             },
             "drupal/search_api": {
-                "View recalculated with wrong data from cache https://www.drupal.org/project/search_api/issues/3327645": "https://git.drupalcode.org/project/search_api/-/merge_requests/63.diff"
+                "View recalculated with wrong data from cache https://www.drupal.org/project/search_api/issues/3327645": "https://www.drupal.org/files/issues/2025-12-12/3327645-32.patch"
             },
             "drupal/token": {
                 "Add a [current-page:object:?] dynamic token https://www.drupal.org/project/token/issues/919760": "https://www.drupal.org/files/issues/2020-09-08/token--current_page_object_token--919760--83.patch",
