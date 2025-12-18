@@ -76,6 +76,18 @@ class EntityShareCronSettingsForm extends ConfigFormBase {
       '#default_value' => $settings['remote'] ?? '',
     ];
 
+    $import_configs = $this->entityTypeManager->getStorage('import_config')->loadMultiple();
+    foreach ($import_configs as $import_config) {
+      $import_config_options[$import_config->id()] = $import_config->label();
+    }
+
+    $form['import_config'] = [
+      '#type' => 'select',
+      '#options' => $import_config_options,
+      '#title' => $this->t('Import_config'),
+      '#default_value' => $settings['import_config'] ?? '',
+    ];
+
     $channel_settings = is_array($settings['channel']) ? $settings['channel'] : [$settings['channel']];
     try {
       $channels_available = $this->remoteManager->getChannelsInfos($remote, [

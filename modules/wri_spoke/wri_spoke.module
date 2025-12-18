@@ -18,7 +18,7 @@ function wri_spoke_cron() {
   $remote_manager = \Drupal::service('entity_share_client.remote_manager');
   $settings = \Drupal::service('config.factory')->getEditable('wri_spoke.cron.settings');
 
-  $import_config_id = 'hub_events';
+  $import_config_id = $settings->get('import_config') ?? 'hub_events';
   $channel_settings = $settings->get('channel');
   if (!is_array($channel_settings)) {
     $channel_settings = [$channel_settings];
