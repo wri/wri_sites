@@ -64,7 +64,7 @@ function wri_spoke_cron() {
         }
         catch (\Throwable $exception) {
           \Drupal::logger('wri_spoke')
-            ->error("Unable to retrieve Events from the Hub for channel $channel_id.");
+            ->error("Unable to retrieve tems from $remote_id for channel $channel_id.");
           continue;
         }
         $json = Json::decode((string) $response->getBody());
