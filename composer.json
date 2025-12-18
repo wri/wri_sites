@@ -181,7 +181,7 @@
         "drupal/robotstxt": "^1.6",
         "drupal/scheduled_transitions": "^2.2",
         "drupal/schema_metatag": "^3.0",
-        "drupal/search_api": "1.38",
+        "drupal/search_api": "^1.40",
         "drupal/search_api_exclude_entity": "^2.0",
         "drupal/search_api_pantheon": "^8.0",
         "drupal/search_api_solr": "^4.2.1",
