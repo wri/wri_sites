@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.jobs.field_job_externalpath
     - field.field.node.jobs.field_job_guid
     - field.field.node.jobs.field_job_hiring_org
+    - field.field.node.jobs.field_job_is_closed_manual_optio
     - field.field.node.jobs.field_job_jobfamilygroup
     - field.field.node.jobs.field_job_location
     - field.field.node.jobs.field_job_posting_link
@@ -50,6 +51,7 @@ hidden:
   field_job_externalpath: true
   field_job_guid: true
   field_job_hiring_org: true
+  field_job_is_closed_manual_optio: true
   field_job_jobfamilygroup: true
   field_job_location: true
   field_job_posting_link: true

@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.jobs.field_job_externalpath
     - field.field.node.jobs.field_job_guid
     - field.field.node.jobs.field_job_hiring_org
+    - field.field.node.jobs.field_job_is_closed_manual_optio
     - field.field.node.jobs.field_job_jobfamilygroup
     - field.field.node.jobs.field_job_location
     - field.field.node.jobs.field_job_posting_link
@@ -82,6 +83,16 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 13
+    region: content
+  field_job_is_closed_manual_optio:
+    type: boolean
+    label: above
+    settings:
+      format: yes-no
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 18
     region: content
   field_job_jobfamilygroup:
     type: string

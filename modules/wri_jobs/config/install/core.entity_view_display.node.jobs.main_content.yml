@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.jobs.field_job_externalpath
     - field.field.node.jobs.field_job_guid
     - field.field.node.jobs.field_job_hiring_org
+    - field.field.node.jobs.field_job_is_closed_manual_optio
     - field.field.node.jobs.field_job_jobfamilygroup
     - field.field.node.jobs.field_job_location
     - field.field.node.jobs.field_job_posting_link
@@ -46,6 +47,7 @@ third_party_settings:
         - field_job_posting_link
       sidebar:
         - field_job_hiring_org
+        - field_job_is_closed_manual_optio
 id: node.jobs.main_content
 targetEntityType: node
 bundle: jobs
@@ -66,6 +68,26 @@ content:
     third_party_settings: {  }
     weight: 3
     region: sidebar
+  field_job_is_closed_manual_optio:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 4
+    region: sidebar
+  field_job_location:
+    type: entity_reference_list_label_class
+    label: above
+    settings:
+      link: true
+      class: ''
+      list_type: ul
+    third_party_settings: {  }
+    weight: 0
+    region: main_content
   field_job_posting_link:
     type: link_class
     label: hidden
@@ -87,7 +109,6 @@ hidden:
   field_job_externalpath: true
   field_job_guid: true
   field_job_jobfamilygroup: true
-  field_job_location: true
   field_job_pubdate: true
   field_job_remotetype: true
   field_job_reqid: true

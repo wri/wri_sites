@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.jobs.field_job_externalpath
     - field.field.node.jobs.field_job_guid
     - field.field.node.jobs.field_job_hiring_org
+    - field.field.node.jobs.field_job_is_closed_manual_optio
     - field.field.node.jobs.field_job_jobfamilygroup
     - field.field.node.jobs.field_job_location
     - field.field.node.jobs.field_job_posting_link
@@ -56,6 +57,7 @@ third_party_settings:
         - field_job_remotetype
         - field_job_reqid
         - field_job_externalpath
+        - field_job_is_closed_manual_optio
     fields:
       node_title:
         plugin_id: node_title
@@ -109,6 +111,21 @@ content:
       target: ''
     third_party_settings: {  }
     weight: 9
+    region: sidebar
+  field_job_is_closed_manual_optio:
+    type: boolean
+    label: above
+    settings:
+      format: true-false
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 10
     region: sidebar
   field_job_jobfamilygroup:
     type: string

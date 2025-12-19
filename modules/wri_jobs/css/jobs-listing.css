@@ -1,0 +1,60 @@
+.jobs-view {
+  font-family: 'acumin-pro-semi-condensed';
+  max-width: 77%;
+  margin: 0 auto;
+  padding-bottom: 50px;
+}
+
+.jobs-view table tr{
+  height: 60px;
+  border-bottom: 1px dotted #999;
+}
+
+.jobs-view table td{
+  padding-right: 20px;
+}
+
+.jobs-view table th{
+  text-align: left;
+}
+
+.views-field-field-job-location {
+  width: 40%;
+}
+
+.jobs-view nav.pager {
+  margin: 50px 0px;
+}
+
+.resources-wrapper {
+  background-color: #ffffff;
+}
+
+@media (min-width: 64rem) {
+  .results {
+    grid-column: 1 / 12;
+  }
+}
+
+.form-actions.js-form-wrapper.form-wrapper {
+  display: inline-block;
+  margin-left: 20px;
+  margin-top: 8px;
+  margin-bottom: 30px;
+}
+
+.layout__region.layout__region--menu {
+  display: none;
+}
+
+form#views-exposed-form-careers-block-1 {
+  background: #E7E6E6;
+  font-family: 'acumin-pro-semi-condensed';
+}
+
+form#views-exposed-form-careers-block-1  .form--inline {
+  /*max-width: 77%;
+  margin: 0 auto;
+  padding: 25px 0px;*/
+  padding: 15px 0px 0px 40px;
+}
