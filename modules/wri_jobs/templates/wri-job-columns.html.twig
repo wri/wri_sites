@@ -1,0 +1,51 @@
+  {% if hero.content.field_toc %}
+    {{ attach_library('wri_toc/tocjs') }}
+  {% endif %}
+  {% if content %}
+    <div id="job__detail" class="job {{ display_type }}-display tall-hero">
+      {% if content.hero %}
+        <div class="landing-page__hero {{ ((content.hero.field_main_image|render and display_type == 'robust') ? 'has-image' : '') }}">
+          {% if content.hero.field_main_image|render and display_type == 'robust' %}
+          {% elseif display_type == 'simple' %}
+          {# endif robust display #}
+            <div class="hero__text">
+              <div class="grid hero__content--inner margin-top-lg">
+                <div class="hero__left">
+                  {{ content.hero }}
+                  {% if content.buttons|render %}
+                  <div class="buttons margin-top-md margin-bottom-sm">
+                    {{ content.buttons }}
+                  </div>
+                  {% else %}
+                  <div class="margin-top-sm"></div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+      {# end if content.hero #}
+
+
+      <div class="job__main grid margin-top-md">
+
+        {% if content.sidebar %}
+          <div {{ region_attributes.sidebar.addClass('layout__region', 'layout__region--sidebar', 'sidebar') }}>
+            {% if show_narrative_taxonomy == true %}
+              {{ content.sidebar }}
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if content.main_content %}
+          <div {{ region_attributes.main_content.addClass('layout__region', 'layout__region--main_content', 'main-content', 'margin-bottom-lg') }}>
+            {{ content.main_content }}
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+  {% endif %}
+
+

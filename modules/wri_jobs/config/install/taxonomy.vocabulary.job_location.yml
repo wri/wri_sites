@@ -1,5 +1,3 @@
-uuid: e02e6299-e29c-4d69-8026-255ed777d781
-langcode: en
 status: true
 dependencies: {  }
 name: 'Job Location'

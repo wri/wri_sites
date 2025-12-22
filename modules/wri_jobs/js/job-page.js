@@ -1,20 +1,4 @@
 (function ($, Drupal) {
-  Drupal.behaviors.backToJobsLink = {
-    attach: function (context, settings) {
-      // Find the main page title element.
-      const $pageTitle = $('h1.h1', context).first();
-
-      // Ensure the title exists before trying to insert content.
-      if ($pageTitle.length > 0) {
-        const backLinkHTML = '<p><a href="/careers/jobs">Back to job list</a></p>';
-
-        // Insert the HTML directly after the <h1> tag.
-        $pageTitle.after(backLinkHTML);
-      }
-    }
-  };
-})(jQuery, Drupal);
-(function ($, Drupal) {
   Drupal.behaviors.deadlineCheck = {
     attach: function (context, settings) {
 

@@ -49,10 +49,6 @@ span.int-office {
   text-decoration: none;
 }
 
-#block-ts-wrin-careersjobspagedisclaimer div.layout__region--main_content {
-  grid-column: 2 / 10;
-}
-
 @media (max-width: 1023px){
 
   .layout__region.layout__region--main_content.main-content.margin-bottom-lg {
