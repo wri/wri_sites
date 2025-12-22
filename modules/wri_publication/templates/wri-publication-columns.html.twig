@@ -32,7 +32,7 @@
                 {{ content.hero.field_type }}
               </div>
               <div class="grid hero__content--inner margin-top-lg">
-                <div class="hero__left col-span-full md:col-end-9 lg:col-start-2">
+                <div class="hero__left">
                   {{ content.hero.node_title }}
                   {{ content.hero.field_intro }}
                   {% if content.buttons|render %}
@@ -45,7 +45,7 @@
                 </div>
 
                 {% if content.hero.field_cover_image|render and display_type == 'simple' %}
-                  <div class="hero__right col-span-full md:col-start-10">
+                  <div class="hero__right">
                     <div class="hero__right--inner">
                       {{ content.hero.field_cover_image }}
                       <div class="publication-reference margin-top-xs">
@@ -126,7 +126,7 @@
         {% endif %}
 
         {% if content.sidebar %}
-          <div {{ region_attributes.sidebar.addClass('layout__region', 'layout__region--sidebar', 'sidebar', 'list-of-fields-sidebar', 'col-span-full', 'lg:col-end-12', 'lg:col-start-9', 'lg:order-1') }}>
+          <div {{ region_attributes.sidebar.addClass('layout__region', 'layout__region--sidebar', 'sidebar') }}>
             {% if show_narrative_taxonomy == true %}
               {{ content.sidebar.field_narrative_taxonomy }}
             {% endif %}
@@ -153,7 +153,7 @@
         {% endif %}
 
         {% if content.main_content %}
-          <div {{ region_attributes.main_content.addClass('layout__region', 'layout__region--main_content', 'main-content', 'utility-md', 'margin-bottom-lg', 'col-span-full', 'lg:col-end-8', 'lg:col-start-2') }}>
+          <div {{ region_attributes.main_content.addClass('layout__region', 'layout__region--main_content', 'main-content', 'margin-bottom-lg') }}>
             {{ content.main_content }}
           </div>
         {% endif %}

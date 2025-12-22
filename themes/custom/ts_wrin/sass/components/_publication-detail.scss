@@ -27,15 +27,30 @@
       }
     }
 
-    .h1 {
+    .hero__left {
+      @include mq($md) {
+        @include column-width(1, 9);
+      }
+
+      @include mq($lg) {
+        @include column-width(2, 9);
+      }
+
+      .h1 {
         margin-top: 0;
+      }
     }
 
     .hero__right {
       @include mq($md) {
+        @include column-width(9, 13);
         display: flex;
         flex-direction: column;
         align-items: flex-end;
+      }
+
+      @include mq($lg) {
+        @include column-width(9, $grid-columns);
       }
 
       img {
@@ -57,6 +72,15 @@
     }
   }
 
+  .main-content,
+  .sidebar {
+    @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+
+    @include mq($ph) {
+      @include center-columns($grid-columns, $grid-columns);
+    }
+  }
+
   // Publication Main
   .publication__image {
     @include center-columns($grid-columns-mobile, $grid-columns-mobile);
@@ -75,76 +99,88 @@
   }
 
   .main-content {
+    @include font($acumin-semi-cond, "light");
+    @include font-line-height(18, 30);
+
     & > *:first-child {
       margin-top: 0 !important;
     }
-  }
-}
 
-.list-of-fields-sidebar {
-  font-size: rem(14);
-  line-height: rem(18);
-  letter-spacing: normal;
-  font-family: "acumin-pro-semi-condensed", sans-serif;
-
-  a {
-    text-decoration: none;
-    font-weight: bold;
-
-    @include text-underline(transparent, $green);
-    background-position: left 100%;
-
-    &.more-open-close {
-      font-weight: normal;
-    }
-  }
-
-  .field-label-above,
-  .field-label-inline {
-    @extend .italic-tiny;
-  }
-
-  .field-label-above a {
     @include mq($lg) {
-      @include font($caslon, "regular", "italic");
-      @include font-line-height(15, 19);
+      @include column-width(2, 8);
     }
   }
 
-  .field-label-above.top-border-medium {
-    padding-top: 12px;
-  }
+  .publication__main .sidebar {
+    font-size: rem(14);
+    line-height: rem(18);
+    letter-spacing: normal;
+    font-family: "acumin-pro-semi-condensed", sans-serif;
 
-  .field {
-    @extend .margin-bottom-sm;
-  }
+    @include mq($lg) {
+      @include column-width(9, 12);
+      order: 1;
+    }
 
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    a {
+      text-decoration: none;
+      font-weight: bold;
 
-    li {
-      margin: 0 0 rem(7);
-      padding: 0;
+      @include text-underline(transparent, $green);
+      background-position: left 100%;
 
-      &.top-border-tiny {
-        padding: 6px 0 12px;
+      &.more-open-close {
+        font-weight: normal;
       }
     }
-  }
-  .paragraph--type--social-links-listing {
-    .field--name-field-title {
-      margin-bottom: 16px;
-    }
-    .field--name-field-social-links {
-      display: flex;
-    }
-  }
 
-  .pager .pager__item--next,
-  .pager .pager__item--previous {
-    display: inline-block;
+    .field-label-above,
+    .field-label-inline {
+      @extend .italic-tiny;
+    }
+
+    .field-label-above a {
+      @include mq($lg) {
+        @include font($caslon, "regular", "italic");
+        @include font-line-height(15, 19);
+      }
+    }
+
+    .field-label-above.top-border-medium {
+      padding-top: 12px;
+    }
+
+    .field {
+      @extend .margin-bottom-sm;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        margin: 0 0 rem(7);
+        padding: 0;
+
+        &.top-border-tiny {
+          padding: 6px 0 12px;
+        }
+      }
+    }
+    .paragraph--type--social-links-listing {
+      .field--name-field-title {
+        margin-bottom: 16px;
+      }
+      .field--name-field-social-links {
+        display: flex;
+      }
+    }
+
+    .pager .pager__item--next,
+    .pager .pager__item--previous {
+      display: inline-block;
+    }
   }
 }
 
