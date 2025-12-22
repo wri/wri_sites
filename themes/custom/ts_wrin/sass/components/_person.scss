@@ -89,13 +89,6 @@
     margin-left: 0;
   }
 
-  .int-office {
-    &:before {
-      background: transparent url("../img/svgs/pin-black.svg") no-repeat center
-        center / contain;
-    }
-  }
-
   .quote {
     border-top: 3px solid $black;
     display: block;
@@ -186,12 +179,15 @@
 }
 
 .int-office {
+  @include font($acumin-semi-cond, "bold");
   display: inline-block;
   position: relative;
   margin-left: $space-xs;
 
   &:before {
     content: "";
+    background: transparent url("../img/svgs/pin-black.svg") no-repeat center
+    center / contain;
     display: inline-block;
     height: 16px;
     line-height: 1.5rem;
@@ -202,7 +198,6 @@
   }
 
   a {
-    @include font($acumin-semi-cond, "bold");
     @include text-underline(transparent, $black);
     background-position: left 100%;
     padding-bottom: 5px;
