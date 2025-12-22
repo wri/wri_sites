@@ -77,30 +77,6 @@
     }
   }
 
-  .int-office {
-    display: inline-block;
-    position: relative;
-    margin-left: $space-xs;
-
-    &:before {
-      content: "";
-      display: inline-block;
-      height: 16px;
-      line-height: 1.5rem;
-      padding-right: 15px;
-      position: relative;
-      transition: background $transition-defaults;
-      text-decoration: none;
-    }
-
-    a {
-      @include font($acumin-semi-cond, "bold");
-      @include text-underline(transparent, $black);
-      background-position: left 100%;
-      padding-bottom: 5px;
-    }
-  }
-
   .paragraph--type--social-media-sites {
     display: inline-block;
     position: relative;
@@ -206,6 +182,30 @@
         color: $green;
       }
     }
+  }
+}
+
+.int-office {
+  display: inline-block;
+  position: relative;
+  margin-left: $space-xs;
+
+  &:before {
+    content: "";
+    display: inline-block;
+    height: 16px;
+    line-height: 1.5rem;
+    padding-right: 15px;
+    position: relative;
+    transition: background $transition-defaults;
+    text-decoration: none;
+  }
+
+  a {
+    @include font($acumin-semi-cond, "bold");
+    @include text-underline(transparent, $black);
+    background-position: left 100%;
+    padding-bottom: 5px;
   }
 }
 
