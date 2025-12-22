@@ -7,7 +7,7 @@
         <div class="landing-page__hero {{ ((content.hero.field_main_image|render and display_type == 'robust') ? 'has-image' : '') }}">
             <div class="hero__text">
               <div class="grid hero__content--inner margin-top-lg">
-                <div class="hero__left col-span-full lg:col-end-9 lg:col-start-2">
+                <div class="col-span-full lg:col-end-8 lg:col-start-2">
                   {{ content.hero }}
                   {% if content.buttons|render %}
                   <div class="buttons margin-top-md margin-bottom-sm">
@@ -27,13 +27,13 @@
       <div class="job__main grid margin-top-md">
 
         {% if content.sidebar %}
-          <div {{ region_attributes.sidebar.addClass('layout__region', 'layout__region--sidebar', 'sidebar') }}>
+          <div {{ region_attributes.sidebar.addClass('layout__region', 'layout__region--sidebar', 'sidebar', 'col-span-full', 'lg:col-end-12', 'lg:col-start-9', 'lg:order-1') }}>
             {{ content.sidebar }}
           </div>
         {% endif %}
 
         {% if content.main_content %}
-          <div {{ region_attributes.main_content.addClass('layout__region', 'layout__region--main_content', 'main-content', 'margin-bottom-lg') }}>
+          <div {{ region_attributes.main_content.addClass('layout__region', 'layout__region--main_content', 'main-content', 'margin-bottom-lg', 'col-span-full', 'lg:col-end-8', 'lg:col-start-2') }}>
             {{ content.main_content }}
           </div>
         {% endif %}

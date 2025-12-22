@@ -47,14 +47,29 @@
     grid-column-end: 13;
   }
 }
+.lg\:col-start-9 {
+  @include mq($lg) {
+    grid-column-start: 9;
+  }
+}
 .lg\:col-start-11 {
   @include mq($lg) {
     grid-column-start: 11;
   }
 }
+.lg\:col-end-8 {
+  @include mq($lg) {
+    grid-column-end: 8;
+  }
+}
 .lg\:col-end-9 {
   @include mq($lg) {
     grid-column-end: 9;
+  }
+}
+.lg\:col-end-12 {
+  @include mq($lg) {
+    grid-column-end: 12;
   }
 }
 .lg\:col-end-13 {
