@@ -1,5 +1,5 @@
 .jobs-view {
-  font-family: 'acumin-pro-semi-condensed';
+  font-family: var(--font-family-heading-condensed);
   max-width: 77%;
   margin: 0 auto;
   padding-bottom: 50px;

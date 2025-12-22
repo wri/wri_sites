@@ -1,0 +1,15 @@
+<?php
+/**
+ * @file
+ * Primary module hooks for wri_jobs module.
+ */
+
+/**
+ * Implements hook_preprocess_views_view().
+ */
+function wri_jobs_preprocess_views_view(&$variables) {
+  // Check if the view is the specific jobs view we want to target.
+  if ($variables['view']->id() == 'careers' && $variables['view']->current_display == 'block_1') {
+    $variables['#attached']['library'][] = 'wri_jobs/careers';
+  }
+}
