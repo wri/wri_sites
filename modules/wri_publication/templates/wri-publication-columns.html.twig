@@ -32,7 +32,7 @@
                 {{ content.hero.field_type }}
               </div>
               <div class="grid hero__content--inner margin-top-lg">
-                <div class="hero__left">
+                <div class="hero__left col-span-full md:col-end-9 lg:col-start-2">
                   {{ content.hero.node_title }}
                   {{ content.hero.field_intro }}
                   {% if content.buttons|render %}
@@ -45,7 +45,7 @@
                 </div>
 
                 {% if content.hero.field_cover_image|render and display_type == 'simple' %}
-                  <div class="hero__right">
+                  <div class="hero__right col-span-full md:col-start-10">
                     <div class="hero__right--inner">
                       {{ content.hero.field_cover_image }}
                       <div class="publication-reference margin-top-xs">

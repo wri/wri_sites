@@ -1,0 +1,75 @@
+.col-span-full {
+  @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+
+  @include mq($ph) {
+    @include center-columns($grid-columns, $grid-columns);
+  }
+}
+
+.col-start-1 {
+  grid-column-start: 1;
+}
+.col-end-4 {
+  grid-column-end: 12;
+}
+.md\:col-start-1 {
+  @include mq($md) {
+    grid-column-start: 1;
+  }
+}
+.md\:col-end-3 {
+  @include mq($md) {
+    grid-column-end: 3;
+  }
+}
+.md\:col-start-10 {
+  @include mq($md) {
+    grid-column-start: 10;
+  }
+}
+.md\:col-start-11 {
+  @include mq($md) {
+    grid-column-start: 11;
+  }
+}
+.md\:col-end-9 {
+  @include mq($md) {
+    grid-column-end: 9;
+  }
+}
+.md\:col-end-12 {
+  @include mq($md) {
+    grid-column-end: 12;
+  }
+}
+.md\:col-end-13 {
+  @include mq($md) {
+    grid-column-end: 13;
+  }
+}
+.lg\:col-start-11 {
+  @include mq($lg) {
+    grid-column-start: 11;
+  }
+}
+.lg\:col-end-9 {
+  @include mq($lg) {
+    grid-column-end: 9;
+  }
+}
+.lg\:col-end-13 {
+  @include mq($lg) {
+    grid-column-end: 13;
+  }
+}
+.xl\:col-start-10 {
+  @include mq($xl) {
+    grid-column-start: 10;
+  }
+}
+
+.lg\:col-start-2 {
+  @include mq($lg) {
+    grid-column-start: 2;
+  }
+}

@@ -5,12 +5,9 @@
     <div id="job__detail" class="job {{ display_type }}-display tall-hero">
       {% if content.hero %}
         <div class="landing-page__hero {{ ((content.hero.field_main_image|render and display_type == 'robust') ? 'has-image' : '') }}">
-          {% if content.hero.field_main_image|render and display_type == 'robust' %}
-          {% elseif display_type == 'simple' %}
-          {# endif robust display #}
             <div class="hero__text">
               <div class="grid hero__content--inner margin-top-lg">
-                <div class="hero__left">
+                <div class="hero__left col-span-full lg:col-end-9 lg:col-start-2">
                   {{ content.hero }}
                   {% if content.buttons|render %}
                   <div class="buttons margin-top-md margin-bottom-sm">
@@ -22,19 +19,16 @@
                 </div>
               </div>
             </div>
-          {% endif %}
         </div>
       {% endif %}
-      {# end if content.hero #}
+      {# end of content.hero #}
 
 
       <div class="job__main grid margin-top-md">
 
         {% if content.sidebar %}
           <div {{ region_attributes.sidebar.addClass('layout__region', 'layout__region--sidebar', 'sidebar') }}>
-            {% if show_narrative_taxonomy == true %}
-              {{ content.sidebar }}
-            {% endif %}
+            {{ content.sidebar }}
           </div>
         {% endif %}
 
