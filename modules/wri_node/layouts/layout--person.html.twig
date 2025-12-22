@@ -9,7 +9,7 @@
  * - ds_content: content region
  */
 #}
- <div class="person__detail publication__detail">
+ <div class="person__detail">
    {% if content.hero %}
      <div class="landing-page__hero">
        <div class="hero__text">
@@ -19,7 +19,7 @@
          </div>
          {% endif %}
          <div class="grid hero__content--inner">
-           <div class="hero__left">
+           <div class="hero__left col-span-full md:col-end-9 lg:col-start-2">
              {{ content.hero|without('field_first_name')|without('field_leadership') }}
              <div class="buttons">
                {% if content.sidebar_contact.field_email.0['#title'] %}
@@ -34,7 +34,7 @@
            </div>
 
            {% if content.featured_image|render %}
-             <div class="hero__right margin-top-sm margin-bottom-sm">
+             <div class="hero__right margin-top-sm margin-bottom-sm col-span-full md:col-start-10">
                {{ content.featured_image }}
              </div>
            {% endif %}
@@ -53,13 +53,13 @@
      </div>
 
      {% if content.main_content %}
-       <div {{ region_attributes.main_content.addClass('layout__region', 'layout__region--main_content', 'main-content', 'margin-bottom-lg') }}>
+       <div {{ region_attributes.main_content.addClass('layout__region', 'layout__region--main_content', 'main-content', 'utility-md', 'margin-bottom-lg', 'col-span-full', 'lg:col-end-8', 'lg:col-start-2') }}>
          {{ content.main_content }}
        </div>
      {% endif %}
 
      {% if content.sidebar_contact or content.sidebar %}
-       <div {{ region_attributes.sidebar.addClass('layout__region', 'layout__region--sidebar', 'sidebar') }}>
+       <div {{ region_attributes.sidebar.addClass('layout__region', 'layout__region--sidebar', 'sidebar', 'list-of-fields-sidebar', 'col-span-full', 'lg:col-end-12', 'lg:col-start-9', 'lg:order-1') }}>
          {% if content.sidebar_contact|render %}
            <div class="field-label-above">
            {{ "Contact Information"|t }}
