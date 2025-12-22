@@ -2,3 +2,7 @@
 .sidebar .field-label-inline {
   margin-top: 1em;
 }
+
+.job .main-content>*:first-child {
+  margin-top: 0;
+}

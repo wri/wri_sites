@@ -4,8 +4,6 @@ careers:
     component:
       css/jobs-listing.css: {}
 job:
-  js:
-    js/job-page.js: {}
   css:
     component:
       css/job-page.css: {}

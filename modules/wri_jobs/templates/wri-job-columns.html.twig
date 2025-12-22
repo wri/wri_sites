@@ -1,8 +1,8 @@
 {{ attach_library('wri_jobs/job') }}
 {% if content %}
-  <div id="job__detail" class="job {{ display_type }}-display tall-hero">
+  <div id="job__detail" class="job full-display tall-hero">
     {% if content.hero %}
-      <div class="landing-page__hero {{ ((content.hero.field_main_image|render and display_type == 'robust') ? 'has-image' : '') }}">
+      <div class="landing-page__hero">
           <div class="hero__text">
             <div class="grid hero__content--inner margin-top-lg">
               <div class="col-span-full lg:col-end-8 lg:col-start-2">
