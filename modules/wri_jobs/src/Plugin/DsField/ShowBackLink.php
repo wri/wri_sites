@@ -23,7 +23,7 @@ class ShowBackLink extends DsFieldBase {
   public function build() {
     $info = [];
 
-    $info['#markup'] = '<p><a href="' . $this->configuration['back_link'] . '">' . $this->configuration['link_text'] . '</a></p>';
+    $info['#markup'] = '<div class="breadcrumb"><ol><li><a href="' . $this->configuration['back_link'] . '">' . $this->configuration['link_text'] . '</a></li></ol></div>';
 
     return $info;
   }
