@@ -8,11 +8,12 @@
     @include center-columns($grid-columns, $grid-columns);
   }
 
-  @include mq($lg) {
+
+  @include mq($md) {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
   @include mq($lg) {
     flex-direction: row;
@@ -23,11 +24,12 @@
   .layout__region {
     display: block;
 
-    @include mq($lg) {
+    @include mq($md) {
       display: flex;
       align-items: baseline;
       margin-top: 0;
       width: auto;
+      flex: 1 1 100%;
 
       &.layout__region--share {
         justify-content: flex-end;
@@ -78,7 +80,7 @@
     @include column-width(1, 5);
 
     @include mq($ph) {
-      @include column-width(1, 5);
+      @include column-width(1, 13);
       grid-row: 1 / 3;
     }
     @include mq($lg) {
@@ -152,5 +154,58 @@
 
   @include mq($lg) {
     display: block;
+  }
+}
+
+.publication__detail {
+  .detail__meta-inner {
+    &.two-column {
+      @include mq($ph) {
+        @include column-width(1, 13);
+        grid-row: 1 / 2;
+      }
+      @include mq($lg) {
+        @include column-width(2, 12);
+        grid-row: 1 / 2;
+        margin-bottom: 60px;
+      }
+    }
+  }
+  .detail__meta-secondary {
+    @include column-width(1, 5);
+    margin-top: $space-xs;
+    margin-bottom: 0;
+
+    @include mq($ph) {
+      @include column-width(1, 13);
+      margin-top: 0;
+      grid-row: 2 / 3;
+    }
+
+    @include mq($lg) {
+      display: none;
+    }
+  }
+}
+
+@include mq($ph) {
+.page-node-type-project-detail #publication__detail .publication__main .main-content {
+    grid-column: 1 / 13;
+    grid-row: 4 / 4;
+    order: 3;
+  }
+}
+@include mq($md) {
+.page-node-type-project-detail #publication__detail .publication__main .main-content {
+    grid-column: 1 / 13;
+    grid-row: 4 / 4;
+    order: 3;
+  }
+}
+@include mq($lg) {
+.page-node-type-project-detail #publication__detail .publication__main .main-content {
+    grid-column: 4 / 10;
+    grid-row: 2 / 4;
+    order: 1;
   }
 }

@@ -389,3 +389,22 @@ function wri_node_update_10404() {
 
   wri_update_twitter_replacement($content_types, 'field_social_sharing_links');
 }
+
+/**
+ * Implements hook_install().
+ */
+function wri_node_install() {
+  \Drupal::service('distro_helper.updates')->installConfig('addtoany.settings', 'wri_block', 'post-install', TRUE);
+}
+
+/**
+ * Install addtoany and import its settings.
+ */
+function wri_node_update_10501() {
+
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('addtoany')) {
+    \Drupal::service('module_installer')->install(['addtoany'], TRUE);
+    \Drupal::service('distro_helper.updates')->installConfig('addtoany.settings', 'wri_node', 'post-install', TRUE);
+  }
+}

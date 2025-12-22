@@ -232,3 +232,17 @@ function wri_event_update_10006() {
 function wri_event_update_10007() {
   \Drupal::service('distro_helper.updates')->installConfig('metatag.metatag_defaults.node__event', 'wri_event', 'install', TRUE);
 }
+
+/**
+ * Replace wri_social_sharing_block with addtoany.
+ */
+function wri_event_update_10501() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.event.main_content', [
+    'third_party_settings#ds#regions#share',
+    'content',
+    'hidden',
+  ], 'wri_event');
+
+  $message = 'Replace wri_social_sharing_block with addtoany.';
+  return $message;
+}

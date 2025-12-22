@@ -63,7 +63,7 @@ third_party_settings:
         - field_primary_topic
         - field_region
       share:
-        - wri_social_sharing_block
+        - addtoany
       featured_image:
         - field_logo
       main_content:
@@ -90,6 +90,11 @@ targetEntityType: node
 bundle: project_detail
 mode: main_content
 content:
+  addtoany:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 9
+    region: share
   body:
     type: text_default
     label: hidden
@@ -333,11 +338,6 @@ content:
             lb: ''
     weight: 1
     region: hero
-  wri_social_sharing_block:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 10
-    region: share
 hidden:
   addtocal: true
   content_moderation_control: true
@@ -357,3 +357,4 @@ hidden:
   layout_builder__layout: true
   links: true
   search_api_excerpt: true
+  wri_social_sharing_block: true

@@ -49,6 +49,8 @@ third_party_settings:
       hero:
         - content_moderation_control
         - field_main_image
+      share:
+        - addtoany
       title:
         - node_title
       byline:
@@ -59,8 +61,6 @@ third_party_settings:
       category:
         - field_primary_topic
         - field_region
-      share:
-        - wri_social_sharing_block
       left_sidebar:
         - field_tags
       main_content:
@@ -117,6 +117,11 @@ targetEntityType: node
 bundle: article
 mode: main_content
 content:
+  addtoany:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: share
   body:
     type: text_default
     label: hidden
@@ -351,11 +356,6 @@ content:
             suffix: ''
     weight: 5
     region: bundle
-  wri_social_sharing_block:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 8
-    region: share
 hidden:
   addtocal: true
   field_exclude_from_blog_feed: true
@@ -371,3 +371,4 @@ hidden:
   layout_builder__layout: true
   links: true
   search_api_excerpt: true
+  wri_social_sharing_block: true
