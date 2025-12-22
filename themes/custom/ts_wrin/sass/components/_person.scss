@@ -41,6 +41,8 @@
       .hero__right {
         display: flex;
         justify-content: center;
+        flex-direction: column;
+        align-items: end;
 
         img {
           border-radius: 100%;

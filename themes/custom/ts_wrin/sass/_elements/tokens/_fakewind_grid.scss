@@ -22,6 +22,11 @@
     grid-column-end: 3;
   }
 }
+.md\:col-start-9 {
+  @include mq($md) {
+    grid-column-start: 9;
+  }
+}
 .md\:col-start-10 {
   @include mq($md) {
     grid-column-start: 10;
