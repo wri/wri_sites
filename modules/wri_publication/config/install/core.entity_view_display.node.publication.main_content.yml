@@ -292,6 +292,8 @@ content:
     settings:
       responsive_image_style: program_landing_page_hero
       image_link: ''
+      image_loading:
+        - attribute: lazy
     third_party_settings:
       wri_media:
         min_width: ''
