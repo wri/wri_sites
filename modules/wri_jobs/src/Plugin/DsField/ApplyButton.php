@@ -2,8 +2,8 @@
 
 namespace Drupal\wri_jobs\Plugin\DsField;
 
-use Drupal\Core\Link;
 use Drupal\Core\Url;
+use Drupal\Core\Link;
 use Drupal\ds\Plugin\DsField\DsFieldBase;
 
 /**
@@ -48,14 +48,15 @@ class ApplyButton extends DsFieldBase {
       }
 
       if ($url) {
-        $url = \Drupal\Core\Url::fromUri($url);
+        $url = Url::fromUri($url);
         $link = new Link($this->t('Apply'), $url);
         $info['link'] = $link->toRenderable();
         $info['link']['#attributes'] = [
           'class' => $button_classes,
         ];
       }
-    } else {
+    }
+    else {
       $info['#markup'] = '<h3>' . $this->t('The application deadline for this job posting has passed.') . '</h3>';
     }
 

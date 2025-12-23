@@ -28,7 +28,6 @@ class ShowBackLink extends DsFieldBase {
     return $info;
   }
 
-
   /**
    * {@inheritdoc}
    */
@@ -36,13 +35,13 @@ class ShowBackLink extends DsFieldBase {
     $form['back_link'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Back Link URL'),
-      '#default_value' => isset($this->configuration['back_link']) ? $this->configuration['back_link'] : '/jobs',
+      '#default_value' => $this->configuration['back_link'] ?? '/jobs',
       '#required' => TRUE,
     ];
     $form['link_text'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Link Text'),
-      '#default_value' => isset($this->configuration['link_text']) ? $this->configuration['link_text'] : 'Back to Job Listings',
+      '#default_value' => $this->configuration['link_text'] ?? 'Back to Job Listings',
       '#required' => TRUE,
     ];
     return $form;
@@ -54,8 +53,8 @@ class ShowBackLink extends DsFieldBase {
   public function settingsSummary($settings) {
     $summary = [];
 
-    $summary[] = $this->t('Back Link URL: @url', ['@url' => isset($this->configuration['back_link']) ? $this->configuration['back_link'] : '/jobs']);
-    $summary[] = $this->t('Link Text: @text', ['@text' => isset($this->configuration['link_text']) ? $this->configuration['link_text'] : 'Back to Job Listings']);
+    $summary[] = $this->t('Back Link URL: @url', ['@url' => $this->configuration['back_link'] ?? '/jobs']);
+    $summary[] = $this->t('Link Text: @text', ['@text' => $this->configuration['link_text'] ?? 'Back to Job Listings']);
 
     return $summary;
   }
