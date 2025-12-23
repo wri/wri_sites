@@ -102,6 +102,9 @@
 
               {% if content.share %}
               <div {{ region_attributes.share.addClass('layout__region', 'layout__region--share') }}>
+                {% if content.sidebar.field_social_sharing_links|render %}
+                  <div class="mobile-social visit-on-social margin-right-md">{{ content.sidebar.field_social_sharing_links }}</div>
+                {% endif %}
                 {{ content.share }}
               </div>
               {% endif %}
