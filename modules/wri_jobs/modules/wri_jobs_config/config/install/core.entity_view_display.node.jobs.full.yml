@@ -47,7 +47,7 @@ third_party_settings:
       buttons:
         - apply_button
         - field_job_location
-      main_content:
+      job_content:
         - body
       sidebar:
         - field_job_end_date
@@ -101,7 +101,7 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 3
-    region: main_content
+    region: job_content
   field_job_end_date:
     type: datetime_default
     label: above

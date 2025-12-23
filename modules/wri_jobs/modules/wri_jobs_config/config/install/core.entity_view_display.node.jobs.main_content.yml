@@ -39,7 +39,7 @@ third_party_settings:
       settings:
         label: ''
     regions:
-      main_content:
+      job_content:
         - field_job_location
         - body
         - field_job_posting_link
@@ -57,7 +57,7 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 1
-    region: main_content
+    region: job_content
   field_job_hiring_org:
     type: string
     label: hidden
@@ -85,7 +85,7 @@ content:
       list_type: ul
     third_party_settings: {  }
     weight: 0
-    region: main_content
+    region: job_content
   field_job_posting_link:
     type: link_class
     label: hidden
@@ -98,7 +98,7 @@ content:
       target: ''
     third_party_settings: {  }
     weight: 2
-    region: main_content
+    region: job_content
 hidden:
   addtocal: true
   feeds_item: true

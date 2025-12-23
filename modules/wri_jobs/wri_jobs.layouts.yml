@@ -6,11 +6,11 @@ wri_job_columns:
       label: Hero
     buttons:
       label: Buttons
-    main_content :
+    job_content :
       label: "Main Content"
     sidebar :
       label: Sidebar
   icon_map:
     - [hero]
-    - [main_content,sidebar]
-  default_section: main_content
+    - [job_content,sidebar]
+  default_section: job_content
