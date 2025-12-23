@@ -39,7 +39,7 @@ class ApplyButton extends DsFieldBase {
     }
 
     // If this event is in the past, show no button.
-    if (!($end || $end > time()) && !$closed) {
+    if ((!$end || $end > date("Y-d-m")) && !$closed) {
       if ($this->viewMode() == 'main_content' || $this->viewMode() == 'full') {
         $button_classes = ['button', 'button--primary'];
       }
