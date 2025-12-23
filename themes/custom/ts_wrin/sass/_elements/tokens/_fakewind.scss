@@ -45,11 +45,6 @@ Classes that emulate tailwind, in case some day we start using tailwind.
 .mb-xxs {
   margin-bottom: $space-xs;
 }
-.lg\:order-1 {
-  @include mq($lg) {
-    order: 1;
-  }
-}
 .relative {
   position: relative;
 }
