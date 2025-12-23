@@ -207,6 +207,18 @@
   height: var(--spacer-40);
 }
 
+.md\:mt-25 {
+  @include mq($md) {
+    margin-top: var(--spacer-25);
+  }
+}
+
+.lg\:mt-0 {
+  @include mq($lg) {
+    margin-top: 0;
+  }
+}
+
 .lg\:pt-0 {
   @include mq($lg) {
     padding-top: 0;
