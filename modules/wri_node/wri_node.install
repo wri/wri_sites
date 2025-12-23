@@ -394,7 +394,7 @@ function wri_node_update_10404() {
  * Implements hook_install().
  */
 function wri_node_install() {
-  \Drupal::service('distro_helper.updates')->installConfig('addtoany.settings', 'wri_block', 'post-install', TRUE);
+  \Drupal::service('distro_helper.updates')->installConfig('addtoany.settings', 'wri_node', 'post-install', TRUE);
 }
 
 /**

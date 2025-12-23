@@ -110,12 +110,12 @@ function wri_project_update_10403() {
  * Replace wri_social_sharing_block with addtoany.
  */
 function wri_project_update_10501() {
-  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.project.hero_on_a_subpage', [
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.project_detail.hero_on_a_subpage', [
     'third_party_settings#ds#regions#share',
     'content',
     'hidden',
   ], 'wri_project');
-  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.project.main_content', [
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.project_detail.main_content', [
     'third_party_settings#ds#regions#share',
     'content',
     'hidden',
