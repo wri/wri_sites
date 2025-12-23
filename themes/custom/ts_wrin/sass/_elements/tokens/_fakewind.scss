@@ -84,3 +84,17 @@ Classes that emulate tailwind, in case some day we start using tailwind.
 .z-1 {
     z-index: 1;
 }
+.border-top-solid {
+  border-top-style: solid;
+}
+.border-top-3 {
+  border-top-width: 3px;
+}
+.border-top-neutral-900 {
+  border-top-color: var(--color-neutral-900);
+}
+.lg\:border-top-0 {
+  @include mq($lg) {
+    border-top-width: 0;
+  }
+}

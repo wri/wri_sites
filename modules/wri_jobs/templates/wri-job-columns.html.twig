@@ -22,10 +22,10 @@
     {# end of content.hero #}
 
 
-    <div class="job__main grid margin-top-md">
+    <div class="job__main grid margin-top-md border-top-solid border-top-3 border-top-neutral-900 pt-7 lg:pt-0 lg:border-top-0">
 
       {% if content.sidebar %}
-        <div {{ region_attributes.sidebar.addClass('layout__region', 'layout__region--sidebar', 'sidebar', 'list-of-fields-sidebar', 'col-span-full', 'lg:col-end-12', 'lg:col-start-9', 'lg:order-1') }}>
+        <div {{ region_attributes.sidebar.addClass('layout__region', 'layout__region--sidebar', 'sidebar', 'list-of-fields-sidebar', 'col-span-full', 'lg:col-end-12', 'lg:col-start-9', 'lg:order-1', 'pb-7') }}>
           {{ content.sidebar }}
         </div>
       {% endif %}

@@ -24,6 +24,7 @@ class ApplyButton extends DsFieldBase {
   public function build() {
     $entity = $this->configuration['entity'];
     $info = [];
+    $end = FALSE;
 
     if (isset($entity->field_job_end_date->value)) {
       $end = $entity->field_job_end_date->value;

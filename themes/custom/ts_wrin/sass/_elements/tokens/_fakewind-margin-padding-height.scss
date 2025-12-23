@@ -207,4 +207,9 @@
   height: var(--spacer-40);
 }
 
+.lg\:pt-0 {
+  @include mq($lg) {
+    padding-top: 0;
+  }
+}
 
