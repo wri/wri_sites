@@ -34,7 +34,7 @@ third_party_settings:
     allow_custom: false
   ds:
     layout:
-      id: 'single_file_component_layout:wri_publication_columns'
+      id: wri_job_columns
       library: null
       disable_css: false
       entity_classes: all_classes
@@ -42,9 +42,10 @@ third_party_settings:
         label: ''
     regions:
       hero:
+        - show_backlink
         - node_title
       buttons:
-        - field_job_posting_link
+        - apply_button
         - field_job_location
       main_content:
         - body
@@ -57,9 +58,26 @@ third_party_settings:
         - field_job_externalpath
         - field_job_is_closed_manual_optio
     fields:
+      show_backlink:
+        plugin_id: show_backlink
+        weight: 0
+        label: hidden
+        formatter: default
+        settings:
+          back_link: /careers/jobs
+          link_text: 'Back to job list'
+        ft:
+          id: reset
+          settings:
+            lb: ''
+      apply_button:
+        plugin_id: apply_button
+        weight: 0
+        label: hidden
+        formatter: default
       node_title:
         plugin_id: node_title
-        weight: 0
+        weight: 1
         label: hidden
         formatter: default
         settings:
@@ -86,7 +104,7 @@ content:
     region: main_content
   field_job_end_date:
     type: datetime_default
-    label: inline
+    label: above
     settings:
       timezone_override: ''
       format_type: short_day
@@ -100,7 +118,7 @@ content:
     region: sidebar
   field_job_externalpath:
     type: link
-    label: inline
+    label: above
     settings:
       trim_length: 80
       url_only: false
@@ -127,7 +145,7 @@ content:
     region: sidebar
   field_job_jobfamilygroup:
     type: string
-    label: inline
+    label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -149,25 +167,9 @@ content:
             lb: ''
     weight: 2
     region: buttons
-  field_job_posting_link:
-    type: link_ally_class
-    label: hidden
-    settings:
-      class: 'apply-link button'
-      link_text: Apply
-      screenreader_text: ''
-      tag: ''
-    third_party_settings:
-      ds:
-        ft:
-          id: reset
-          settings:
-            lb: ''
-    weight: 1
-    region: buttons
   field_job_remotetype:
     type: string
-    label: inline
+    label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -175,7 +177,7 @@ content:
     region: sidebar
   field_job_reqid:
     type: string
-    label: inline
+    label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -197,6 +199,7 @@ hidden:
   field_job_country: true
   field_job_guid: true
   field_job_hiring_org: true
+  field_job_posting_link: true
   field_job_pubdate: true
   field_job_start_date: true
   field_job_workersubtype: true
