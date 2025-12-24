@@ -93,39 +93,41 @@
       <div class="publication__main grid margin-top-md">
 
         {% if content.category or content.share %}
-            <div class="detail__meta-inner meta-inner margin-bottom-md {% if content.sidebar.field_narrative_taxonomy|render %}two-column{% endif %}">
-              {% if content.category %}
-              <div {{ region_attributes.category.addClass('layout__region', 'layout__region--category') }}>
-                {{ content.category }}
-              </div>
-              {% endif %}
+          <div class="detail__meta-inner meta-inner margin-bottom-md {% if content.sidebar.field_narrative_taxonomy|render %}two-column{% endif %}">
+            {% if content.category %}
+            <div {{ region_attributes.category.addClass('layout__region', 'layout__region--category') }}>
+              {{ content.category }}
+            </div>
+            {% endif %}
 
-              {% if content.share %}
-              <div {{ region_attributes.share.addClass('layout__region', 'layout__region--share') }}>
-                  <div class="mobile-social visit-on-social margin-right-md">{{ content.sidebar.field_social_sharing_links }}</div>
-                {{ content.share }}
-              </div>
+            {% if content.share %}
+            <div {{ region_attributes.share.addClass('layout__region', 'layout__region--share') }}>
+              {% if content.sidebar.field_social_sharing_links|render %}
+                <div class="mobile-social visit-on-social margin-right-md">{{ content.sidebar.field_social_sharing_links }}</div>
               {% endif %}
+              {{ content.share }}
+            </div>
+            {% endif %}
+            {% if content.featured_image|render %}
               <div class="publication__image-inner">
                 <div {{ region_attributes.share.addClass('layout__region', 'layout__region--featured-image') }}>
-                {% if content.featured_image|render %}
                   <div class="margin-top-md">
                   {{ content.featured_image }}
                   </div>
-                {% endif %}
                 </div>
               </div>
-            </div>
-            {% if show_narrative_taxonomy == true %}
-              {% if content.sidebar.field_narrative_taxonomy|render %}
-                <div class="detail__meta-secondary">
-                  {{ content.sidebar.field_narrative_taxonomy }}
-                </div>
-              {% endif %}
             {% endif %}
+          </div>
+          {% if show_narrative_taxonomy == true %}
+            {% if content.sidebar.field_narrative_taxonomy|render %}
+              <div class="detail__meta-secondary">
+                {{ content.sidebar.field_narrative_taxonomy }}
+              </div>
+            {% endif %}
+          {% endif %}
         {% endif %}
 
-        {% if content.sidebar %}
+        {% if content.sidebar|render %}
           <div {{ region_attributes.sidebar.addClass('layout__region', 'layout__region--sidebar', 'sidebar') }}>
             {% if show_narrative_taxonomy == true %}
               {{ content.sidebar.field_narrative_taxonomy }}

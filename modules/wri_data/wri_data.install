@@ -41,3 +41,17 @@ function wri_data_update_dependencies() {
 function wri_data_update_10500() {
   \Drupal::service('distro_helper.updates')->updateConfig('metatag.metatag_defaults.node__data', ['tags#metatag_custom_tag:wri_thumbnail'], 'wri_data');
 }
+
+/**
+ * Replace wri_social_sharing_block with addtoany.
+ */
+function wri_data_update_10501() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.data.main_content', [
+    'third_party_settings#ds#regions#share',
+    'content',
+    'hidden',
+  ], 'wri_data');
+
+  $message = 'Replace wri_social_sharing_block with addtoany.';
+  return $message;
+}
