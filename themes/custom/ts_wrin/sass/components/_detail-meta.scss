@@ -157,12 +157,59 @@
   }
 }
 
-.publication__detail {
+.publication__detail .publication__main {
   .detail__meta-inner {
+    @include mq($ph) {
+      @include column-width(1, 5);
+      grid-row: auto;
+      align-self: start;
+      .layout__region {
+        flex-direction: column;
+      }
+    }
+    @include mq($lg) {
+      @include column-width(2, 12);
+      grid-row: 1 / 2;
+      margin-bottom: 60px;
+      .layout__region {
+        flex-direction: row;
+      }
+    }
+    &.two-column {
+      @include mq($ph) {
+        @include column-width(1, 5);
+        grid-row: auto;
+        align-self: start;
+        .layout__region {
+          flex-direction: column;
+        }
+      }
+      @include mq($lg) {
+        @include column-width(2, 12);
+        grid-row: 1 / 2;
+        margin-bottom: 60px;
+
+        .layout__region {
+          flex-direction: row;
+        }
+      }
+    }
+  }
+  .layout__region--sidebar {
+    @include mq($ph) {
+      @include column-width(1, 5);
+      grid-row: auto;
+      align-self: start;
+    }
+    @include mq($lg) {
+      @include column-width(2, 12);
+      grid-row: 2 / 2;
+      margin-bottom: 60px;
+    }
     &.two-column {
       @include mq($ph) {
         @include column-width(1, 13);
-        grid-row: 1 / 2;
+        grid-row: auto;
       }
       @include mq($lg) {
         @include column-width(2, 12);
@@ -175,30 +222,46 @@
     @include column-width(1, 5);
     margin-top: $space-xs;
     margin-bottom: 0;
+    align-self: start;
 
     @include mq($ph) {
-      @include column-width(1, 13);
+      @include column-width(1, 5);
       margin-top: 0;
-      grid-row: 2 / 3;
+      grid-row: auto;
     }
 
     @include mq($lg) {
-      display: none;
+      @include column-width(2, 12);
+      grid-row: 1 / 2;
+      margin-bottom: 60px;
     }
   }
+  .main-content {
+    @include mq($ph) {
+      grid-column: 6 / 13;
+      grid-row: 1 / 6;
+      order: 1;
+    }
+    @include mq($lg) {
+      grid-column: 2 / 8;
+      grid-row: 2 / 6;
+      order: 1;
+    }
+  }
+
 }
 
 @include mq($ph) {
 .page-node-type-project-detail #publication__detail .publication__main .main-content {
-    grid-column: 1 / 13;
-    grid-row: 4 / 4;
+    grid-column: 5 / 13;
+    grid-row: 1 / 6;
     order: 3;
   }
 }
 @include mq($md) {
 .page-node-type-project-detail #publication__detail .publication__main .main-content {
-    grid-column: 1 / 13;
-    grid-row: 4 / 4;
+    grid-column: 5 / 13;
+    grid-row: 1 / 6;
     order: 3;
   }
 }
