@@ -1,0 +1,10 @@
+name: 'WRI jobs'
+type: module
+description: 'Code for WRI job content types'
+core_version_requirement: '>=9.5'
+package: WRI
+dependencies:
+  - wri_node:wri_node
+  - feeds
+  - feeds_ex
+  - better_exposed_filters

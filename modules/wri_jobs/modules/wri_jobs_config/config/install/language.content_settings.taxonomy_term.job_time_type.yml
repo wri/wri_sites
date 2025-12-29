@@ -1,0 +1,9 @@
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.job_time_type
+id: taxonomy_term.job_time_type
+target_entity_type_id: taxonomy_term
+target_bundle: job_time_type
+default_langcode: site_default
+language_alterable: false
