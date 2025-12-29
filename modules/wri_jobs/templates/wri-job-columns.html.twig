@@ -7,6 +7,7 @@
             <div class="grid hero__content--inner margin-top-lg">
               <div class="col-span-full lg:col-end-8 lg:col-start-2">
                 {{ content.hero }}
+                <div class="flex">
                 {% if content.buttons|render %}
                 <div class="buttons margin-top-md margin-bottom-sm">
                   {{ content.buttons }}
@@ -14,6 +15,12 @@
                 {% else %}
                 <div class="margin-top-sm"></div>
                 {% endif %}
+                {% if content.locations|render %}
+                  <div class="locations margin-top-md margin-bottom-sm">
+                    {{ content.locations }}
+                  </div>
+                {% endif %}
+                </div>
               </div>
             </div>
           </div>

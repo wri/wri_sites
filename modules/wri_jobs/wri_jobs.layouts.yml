@@ -6,6 +6,8 @@ wri_job_columns:
       label: Hero
     buttons:
       label: Buttons
+    locations:
+      label: Locations
     job_content :
       label: "Main Content"
     sidebar :

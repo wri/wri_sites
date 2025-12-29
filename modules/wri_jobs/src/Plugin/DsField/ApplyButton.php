@@ -25,6 +25,7 @@ class ApplyButton extends DsFieldBase {
     $entity = $this->configuration['entity'];
     $info = [];
     $end = FALSE;
+    $closed = FALSE;
 
     if (isset($entity->field_job_end_date->value)) {
       $end = $entity->field_job_end_date->value;
@@ -57,7 +58,7 @@ class ApplyButton extends DsFieldBase {
       }
     }
     else {
-      $info['#markup'] = '<h3>' . $this->t('The application deadline for this job posting has passed.') . '</h3>';
+      $info['#markup'] = '<div class="h4">' . $this->t('The application deadline for this job posting has passed.') . '</div>';
     }
 
     return $info;
