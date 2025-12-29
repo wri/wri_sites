@@ -46,6 +46,7 @@ third_party_settings:
         - node_title
       buttons:
         - apply_button
+      locations:
         - field_job_location
       job_content:
         - body
@@ -166,7 +167,7 @@ content:
           settings:
             lb: ''
     weight: 2
-    region: buttons
+    region: locations
   field_job_remotetype:
     type: string
     label: above
