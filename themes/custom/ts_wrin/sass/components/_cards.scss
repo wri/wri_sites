@@ -72,7 +72,7 @@
 
 .card-headline {
   @include font($acumin-semi-cond, "light");
-  @include font-line-height(32);
+  @include font-line-height(32, 38);
 
   a {
     @include text-underline(transparent, $black);
