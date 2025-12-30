@@ -8,7 +8,8 @@
           <img src="/{{ ts_wrin_path }}/img/svgs/circle_grey_solid.svg" alt="{{ 'Person default'|t }}" width="100" height="100" typeof="foaf:Image" class="image-style-_00x100">
         {% endif %}
       </div>
-      <div class="right-section">
+      <div {{ attributes.addClass('right-section') }}>
+          {{ title_suffix.contextual_links }}
         {% if content.name|render %}
           <div class="card-headline">
             {{ content.name }}
