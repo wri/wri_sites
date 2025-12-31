@@ -207,7 +207,7 @@ final class EventCalloutBehaviorFormatter extends FormatterBase implements Conta
    *
    * Smart Date range stores:
    * - start in ->value
-   * - end in ->end_value
+   * - end in ->end_value.
    */
   protected function isEventNotEnded(NodeInterface $event): bool {
     $date_field = $this->getSetting('event_date_field');
@@ -230,7 +230,6 @@ final class EventCalloutBehaviorFormatter extends FormatterBase implements Conta
     $now = $this->time->getRequestTime();
     return (int) $timestamp >= $now;
   }
-
 
   /**
    * Render the event in the Callout view mode.
