@@ -204,10 +204,10 @@
     }
 
     @include mq($md) {
-      @include column-width(4, 13);
+      @include column-width(2, 10);
     }
     @include mq($lg) {
-      @include column-width(4, 10);
+      @include column-width(4, 11);
     }
 
     & > *:first-child {

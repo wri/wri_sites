@@ -80,7 +80,7 @@
     @include column-width(1, 5);
 
     @include mq($ph) {
-      @include column-width(1, 13);
+      @include column-width(1, 8);
       grid-row: 1 / 3;
     }
     @include mq($lg) {
@@ -112,7 +112,7 @@
   margin-bottom: 0;
 
   @include mq($ph) {
-    @include column-width(5, 13);
+    @include column-width(8, 13);
     margin-top: 0;
     grid-row: 1 / 2;
   }
@@ -236,38 +236,61 @@
       margin-bottom: 60px;
     }
   }
-  .main-content {
+  .publication__image {
     @include mq($ph) {
       grid-column: 5 / 13;
-      grid-row: 1 / 6;
+      grid-row: 1 / 4;
       order: 1;
     }
     @include mq($lg) {
-      grid-column: 2 / 8;
-      grid-row: 2 / 6;
+      grid-column: 2 / 9;
+      grid-row: auto;
+      order: 1;
+    }
+  }
+  .main-content {
+    @include mq($ph) {
+      grid-column: 1 / 13;
+      grid-row: auto;
+      order: 2;
+    }
+    @include mq($lg) {
+      grid-column: 2 / 9;
+      grid-row: auto;
+      order: 2;
+    }
+  }
+}
+
+.page-node-type-project-detail,
+.node--type-publication {
+  @include mq($ph) {
+  #publication__detail .publication__main .main-content {
+      grid-column: 5 / 13;
+      grid-row: 1 / 6;
+      order: 3;
+    }
+  }
+  @include mq($md) {
+  #publication__detail .publication__main .main-content {
+      grid-column: 5 / 13;
+      grid-row: 1 / 6;
+      order: 3;
+    }
+  }
+  @include mq($lg) {
+  #publication__detail .publication__main .main-content {
+      grid-column: 4 / 10;
+      grid-row: 2 / 4;
       order: 1;
     }
   }
 }
 
-@include mq($ph) {
-.page-node-type-project-detail #publication__detail .publication__main .main-content {
-    grid-column: 5 / 13;
-    grid-row: 1 / 6;
-    order: 3;
-  }
-}
-@include mq($md) {
-.page-node-type-project-detail #publication__detail .publication__main .main-content {
-    grid-column: 5 / 13;
-    grid-row: 1 / 6;
-    order: 3;
-  }
-}
-@include mq($lg) {
-.page-node-type-project-detail #publication__detail .publication__main .main-content {
-    grid-column: 4 / 10;
-    grid-row: 2 / 4;
-    order: 1;
+.node--type-publication {
+  @include mq($lg) {
+  #publication__detail .publication__main .main-content {
+      grid-column: 2 / 8;
+    }
   }
 }
