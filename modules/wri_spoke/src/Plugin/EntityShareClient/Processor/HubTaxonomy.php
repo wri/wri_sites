@@ -33,10 +33,11 @@ class HubTaxonomy extends ImportProcessorPluginBase {
    * @SuppressWarnings(PHPMD.ErrorControlOperator)
    */
   public function prepareImportableEntityData(RuntimeImportContext $runtime_import_context, array &$entity_json_data) {
-    [$entity_type, $vocabulary] = explode('--', $entity_json_data['type'])[0] ?? null;
+    [$entity_type, $vocabulary] = explode('--', $entity_json_data['type']);
     if ($entity_type !== 'taxonomy_term') {
       return;
     }
+    $entity_json_data["type"] = 'taxonomy_term--hub_terms';
     $uuid = $entity_json_data['id'] ?? null;
     if ($uuid) {
       // Check if term with this UUID exists locally.
@@ -100,6 +101,10 @@ class HubTaxonomy extends ImportProcessorPluginBase {
             }
           }
         }
+      } else {
+        // Just make sure the vocabulary continues to be what it was.
+        $existing_term = reset($terms);
+        $entity_json_data["type"] = 'taxonomy_term--' . $existing_term->bundle();
       }
     }
   }
