@@ -1,5 +1,19 @@
 <div class="ds-1col clearfix search-results-container margin-bottom-sm">
   {% if result %}
+  {% if result.pagemap.metatags[0].wri_type %}
+    <div class="search-results-tags">
+      <div class="tags">
+        {% if result.site_name %}
+          <div class="topic-tag">{{ result.site_name }}</div>
+        {% endif %}
+      </div>
+      {% if result.pagemap.metatags[0].wri_type %}
+        <span class="content-type-region bundle">
+          {{ result.pagemap.metatags[0].wri_type }}
+        </span>
+      {% endif %}
+    </div>
+  {% endif %}
     <div class="search-results-text">
       {% if result.link %}
         <h3 class="h3"><a href="{{ result.link }}">{{ result.title }}</a></h3>
