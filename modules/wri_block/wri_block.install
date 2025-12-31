@@ -78,3 +78,13 @@ function wri_block_update_10404() {
   $role->grantPermission('access block library');
   $role->save();
 }
+
+/**
+ * Update block browser to include 'Upcoming Event' blocks.
+ */
+function wri_block_update_10501() {
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.content_blocks_browser', [
+    'display#default#display_options#filters#type_1#value',
+    'display#default#display_options#filters#type#value',
+  ], 'wri_block');
+}

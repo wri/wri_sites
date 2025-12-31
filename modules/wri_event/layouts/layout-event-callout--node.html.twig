@@ -1,0 +1,66 @@
+{#
+/**
+ * @file
+ * Display Suite Card template.
+ *
+ * Available variables:
+ * - ds_content_wrapper: wrapper around content
+ * - attributes: content region attributes
+ * - ds_content: content region
+ */
+#}
+<div class="callout">
+<div class="event-callout">
+  <div class="event-wrapper">
+    {% if content.hero %}
+      {# See ts_wrin_preprocess_layout in ts_wrin.theme #}
+      {% set type = is_webinar ? 'Webinar'|t : 'Event'|t %}
+      {% if content.is_past %}
+        <span class="utility-sm font-bold uppercase has-blue-color">
+          {{ 'Past @type'|t({'@type': type}) }}
+        </span> -
+        <span class="time-wrapper utility-sm uppercase">
+          {{ content.hero.field_date_time }}
+        </span>
+      {% else %}
+        <span class="utility-sm font-bold uppercase has-blue-color">{{ 'Upcoming @type'|t({'@type': type}) }}</span> -
+        {% if time_until %}
+          <span class="time-wrapper utility-sm uppercase">
+            {{ time_until }}
+          </span>
+        {% endif %}
+      {% endif %}
+      <div class="primary-topic topic-tag">{{ content.hero.field_primary_topic }}</div>
+      {{ content.hero.node_title }}
+      {% set node = content['#node'] ?? null %}
+      {% if node and node.field_intro is not empty %}
+        <div class="utility-base info-text">
+          {{ node.field_intro.value|striptags|trim }}
+        </div>
+      {% elseif node and node.body.summary is not empty %}
+        <div class="utility-base info-text">
+          {{ node.body.summary|striptags|trim }}
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  <div class="image-wrapper">
+    {% if content.main_content %}
+      {{ content.main_content|without('is_past', 'field_type') }}
+    {% endif %}
+
+    {% set node = content['#node'] ?? null %}
+    {% if node %}
+      {% set url = path('entity.node.canonical', {'node': node.id}) %}
+    {% endif %}
+    <div class="buttons">
+      {% if content.is_past %}
+        <a href="{{ url }}" class="button button--primary">{{ "Watch the Video"|t }}</a>
+      {% else %}
+        {{ content.buttons }}
+      {% endif %}
+    </div>
+  </div>
+</div>
+</div>

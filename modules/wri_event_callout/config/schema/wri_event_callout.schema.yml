@@ -1,0 +1,14 @@
+field.formatter.settings.wri_event_callout_event_callout_behavior:
+  type: mapping
+  label: 'Event callout behavior formatter settings'
+  mapping:
+    view_id:
+      type: string
+      label: 'View ID'
+    display_id:
+      type: string
+      label: 'View display ID'
+    event_date_field:
+      type: string
+      label: 'Event date field'
+

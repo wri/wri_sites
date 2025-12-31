@@ -288,6 +288,7 @@ display:
           operator: in
           value:
             in_this_series: in_this_series
+            upcoming_event: upcoming_event
           group: 1
           exposed: true
           expose:
@@ -384,6 +385,7 @@ display:
           operator: in
           value:
             in_this_series: in_this_series
+            upcoming_event: upcoming_event
           group: 1
           exposed: false
           expose:

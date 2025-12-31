@@ -24,6 +24,7 @@ dependencies:
   - smart_date
   - taxonomy
   - webform
+  - wri_node
   - wri_media
 config_devel:
   install:
