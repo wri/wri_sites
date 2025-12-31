@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - field.field.node.event.body
+    - field.field.node.event.field_body_contains_recording
     - field.field.node.event.field_calendar_description
     - field.field.node.event.field_date_time
     - field.field.node.event.field_event_display
@@ -213,6 +214,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_body_contains_recording:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_calendar_description:
     type: text_textarea
     weight: 2
@@ -223,7 +231,7 @@ content:
     third_party_settings: {  }
   field_date_time:
     type: smartdate_timezone
-    weight: 5
+    weight: 6
     region: content
     settings:
       modal: false

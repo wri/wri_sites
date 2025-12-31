@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.upcoming_event
+    - core.entity_view_mode.block_content.preview
+    - field.field.block_content.upcoming_event.field_after_the_event_ends
+    - field.field.block_content.upcoming_event.field_event_to_feature
+    - field.field.block_content.upcoming_event.field_topic
+  module:
+    - layout_builder
+    - wri_event_callout
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: block_content.upcoming_event.preview
+targetEntityType: block_content
+bundle: upcoming_event
+mode: preview
+content:
+  field_after_the_event_ends:
+    type: wri_event_callout_event_callout_behavior
+    label: hidden
+    settings:
+      view_id: event_callout
+      display_id: block_1
+      event_date_field: field_date_time
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_event_to_feature: true
+  field_topic: true
+  langcode: true
+  search_api_excerpt: true

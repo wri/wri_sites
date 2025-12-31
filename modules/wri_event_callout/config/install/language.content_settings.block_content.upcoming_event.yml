@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.upcoming_event
+id: block_content.upcoming_event
+target_entity_type_id: block_content
+target_bundle: upcoming_event
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.upcoming_event
+    - field.storage.block_content.field_after_the_event_ends
+  module:
+    - options
+id: block_content.upcoming_event.field_after_the_event_ends
+field_name: field_after_the_event_ends
+entity_type: block_content
+bundle: upcoming_event
+label: 'After the event ends'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: hide_block
+default_value_callback: ''
+settings: {  }
+field_type: list_string

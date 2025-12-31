@@ -233,10 +233,6 @@
     margin-left: $space-sm;
   }
 
-  .right-section .person-title {
-    @include font-line-height(32, 38);
-  }
-
   .right-section p {
     margin: 0;
     @include font-line-height(15, 21);

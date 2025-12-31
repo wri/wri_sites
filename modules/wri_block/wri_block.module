@@ -6,6 +6,7 @@
  */
 
 use Drupal\Component\Utility\Html;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_preprocess_block().
@@ -59,4 +60,75 @@ function wri_block_form_alter(&$variables) {
   if (isset($variables["actions"]["configure_block"]) && str_contains($destination, '/entity-browser/iframe/block')) {
     $variables["actions"]["configure_block"]['#access'] = FALSE;
   }
+}
+
+/**
+ * Alter the Entity Embed dialog (final step, webform blocks only).
+ */
+function wri_block_form_entity_embed_dialog_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  // Only run on the final step: this one has 'entity' not 'entity_browser'.
+  if (!isset($form['entity'])) {
+    return;
+  }
+
+  // Figure out the entity type from the attributes.
+  $entity_type_value = NULL;
+  if (isset($form['attributes']['data-entity-type']['#value'])) {
+    $entity_type_value = $form['attributes']['data-entity-type']['#value'];
+  }
+
+  // Only touch block_content embeds at all.
+  if ($entity_type_value !== 'block_content') {
+    return;
+  }
+  $entity_element = $form_state->get('entity_element');
+
+  // Remove Align and Caption if present on this step.
+  if (isset($form['attributes']['data-align'])) {
+    unset($form['attributes']['data-align']);
+  }
+  if (isset($form['attributes']['data-caption'])) {
+    unset($form['attributes']['data-caption']);
+  }
+
+  // Load the selected block by UUID and limit to the 'webform' bundle.
+  $uuid = $form['attributes']['data-entity-uuid']['#value'] ?? NULL;
+  if (!$uuid) {
+    return;
+  }
+  $blocks = \Drupal::entityTypeManager()
+    ->getStorage('block_content')
+    ->loadByProperties(['uuid' => $uuid]);
+  $block = $blocks ? reset($blocks) : NULL;
+
+  // Add Title -> data-block-title.
+  $form['attributes']['data-block-title'] = [
+    '#type' => 'textfield',
+    '#title' => t('Title'),
+    '#description' => t('Optional title shown above this embedded block on this page only.'),
+    '#maxlength' => 255,
+    '#weight' => 10,
+    '#default_value' => isset($entity_element['data-block-title']) ? Html::decodeEntities($entity_element['data-block-title']) : '',
+  ];
+
+  $options = [
+    '' => t('- None -'),
+    'Border' => t('Border'),
+  ];
+
+  if ($block && $block->bundle() == 'webform') {
+    $options['Blue'] = t('Blue');
+    $options['Green'] = t('Green');
+    $options['Teal'] = t('Teal');
+  }
+
+  // Add Style -> data-style-attribute.
+  $form['attributes']['data-style-attribute'] = [
+    '#type' => 'select',
+    '#title' => t('Style'),
+    '#options' => $options,
+    '#description' => t('Choose a per-embed style variant. “Border” matches the CKEditor Bulleted list border look.'),
+    '#weight' => 11,
+    '#default_value' => $entity_element['data-style-attribute'] ?? '',
+  ];
 }
