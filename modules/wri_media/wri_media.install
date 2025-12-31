@@ -138,3 +138,15 @@ function wri_media_update_10107() {
     'settings#toolbar#items',
   ], 'wri_media');
 }
+
+/**
+ * Update filter block/entity embed settings.
+ */
+function wri_media_update_10501() {
+  \Drupal::service('distro_helper.updates')->updateConfig('filter.format.full_html', [
+    'filters#filter_html#settings#allowed_html',
+  ], 'wri_media');
+  \Drupal::service('distro_helper.updates')->updateConfig('editor.editor.full_html', [
+    'settings#plugins#ckeditor5_sourceEditing#allowed_tags',
+  ], 'wri_media');
+}

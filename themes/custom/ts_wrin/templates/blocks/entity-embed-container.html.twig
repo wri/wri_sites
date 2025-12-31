@@ -19,6 +19,7 @@
   ]
 %}
 
+{# Block bundle class, like embed--block-type--webform. #}
 {% set block = element.entity['#block_content'] ?? null %}
 {% if block %}
   {% set bundle_id = block.bundle() %}
@@ -26,4 +27,29 @@
   {% set bundle_label = block.type.entity.label %}
 {% endif %}
 
-<div{{ attributes.addClass(classes) }}>{{ children }}</div>
+{# Read per-embed attributes from the drupal-entity wrapper. #}
+{% set block_title = element['#attributes']['data-block-title']|default('') %}
+{% set style_attr  = element['#attributes']['data-style-attribute']|default('') %}
+
+{# Map style to a class like embed-style--green, embed-style--border, etc. #}
+{% set style_class = '' %}
+{% if style_attr %}
+  {% set style_class = 'has-' ~ style_attr|lower|replace({' ':'-'}) ~ '-background-color' %}
+  {% set classes = classes|merge([style_class]) %}
+{% endif %}
+
+{# (Optional) Also expose the data attributes on the outer wrapper if you care. #}
+{% if block_title %}
+  {% set attributes = attributes.setAttribute('data-block-title', block_title) %}
+{% endif %}
+{% if style_attr %}
+  {% set attributes = attributes.setAttribute('data-style-attribute', style_attr) %}
+{% endif %}
+
+<div{{ attributes.addClass(classes) }}>
+  {% if block_title %}
+    <h3 class="embed-block__title">{{ block_title }}</h3>
+  {% endif %}
+
+  {{ children }}
+</div>
