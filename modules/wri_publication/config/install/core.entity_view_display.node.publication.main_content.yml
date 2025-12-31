@@ -78,7 +78,7 @@ third_party_settings:
         - node_post_date
         - field_total_pages
       share:
-        - wri_social_sharing_block
+        - addtoany
       main_content:
         - body
       sidebar:
@@ -138,6 +138,11 @@ targetEntityType: node
 bundle: publication
 mode: main_content
 content:
+  addtoany:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 14
+    region: share
   body:
     type: text_default
     label: hidden
@@ -287,6 +292,8 @@ content:
     settings:
       responsive_image_style: program_landing_page_hero
       image_link: ''
+      image_loading:
+        - attribute: lazy
     third_party_settings:
       wri_media:
         min_width: ''
@@ -526,11 +533,6 @@ content:
             lb: ''
     weight: 1
     region: hero
-  wri_social_sharing_block:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 14
-    region: share
 hidden:
   content_moderation_control: true
   field_exclude_from_blog_feed: true
@@ -547,3 +549,4 @@ hidden:
   layout_builder__layout: true
   links: true
   search_api_excerpt: true
+  wri_social_sharing_block: true

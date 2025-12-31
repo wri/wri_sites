@@ -73,14 +73,32 @@
         margin-bottom: 0;
       }
     }
+    .layout__region--category {
+      @include mq($md) {
+        grid-column: 3 / 7;
+      }
+      @include mq($lg) {
+        grid-column: 4 / 7;
+      }
+    }
 
     .layout__region--share {
       display: flex;
       justify-content: space-between;
+      flex-wrap: wrap;
+      flex-direction: column-reverse;
+      gap: 24px;
 
       @include mq($md) {
-        display: block;
-        position: relative;
+        grid-column: 7 / 13;
+        display: flex;
+        justify-content: flex-end;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        gap: 24px;
+      }
+      @include mq($lg) {
+        grid-column: 7 / 12;
       }
     }
   }

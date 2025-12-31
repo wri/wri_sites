@@ -58,7 +58,7 @@ third_party_settings:
         - field_region
         - node_post_date
       share:
-        - wri_social_sharing_block
+        - addtoany
       featured_image:
         - field_media
       main_content:
@@ -119,6 +119,11 @@ targetEntityType: node
 bundle: data
 mode: main_content
 content:
+  addtoany:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: share
   body:
     type: text_default
     label: hidden
@@ -386,11 +391,6 @@ content:
             lb: ''
     weight: 0
     region: hero
-  wri_social_sharing_block:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 6
-    region: share
 hidden:
   changed: true
   content_moderation_control: true
@@ -423,3 +423,4 @@ hidden:
   type: true
   uuid: true
   vid: true
+  wri_social_sharing_block: true
