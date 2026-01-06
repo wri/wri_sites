@@ -571,6 +571,7 @@ function ts_wrin_preprocess_image(&$variables) {
 function ts_wrin_preprocess_google_json_api_result(&$variables) {
   $full_title = $variables['result']['title'] ?? '';
   $page_split = strpos($full_title, ' | ');
+  $site_name = \Drupal::config('system.site')->get('name');
   if ($page_split !== FALSE) {
     $variables['result']['title'] = substr($full_title, 0, $page_split);
   }
@@ -579,7 +580,7 @@ function ts_wrin_preprocess_google_json_api_result(&$variables) {
   if (isset($variables['result']['pagemap']['metatags'][0]['wri_thumbnail'])) {
     $variables['result']['image_url'] = $variables['result']['pagemap']['metatags'][0]['wri_thumbnail'];
   }
-  if (isset($variables["result"]["pagemap"]["metatags"][0]["og:site_name"])) {
+  if (isset($variables["result"]["pagemap"]["metatags"][0]["og:site_name"]) && ($variables["result"]["pagemap"]["metatags"][0]["og:site_name"] != $site_name)) {
     $variables['result']['site_name'] = $variables["result"]["pagemap"]["metatags"][0]["og:site_name"];
   }
 }
