@@ -61,3 +61,17 @@ function wri_article_update_10102() {
   $message = 'Add field field_contributing_authors and update view modes.';
   return $message;
 }
+
+/**
+ * Replace wri_social_sharing_block with addtoany.
+ */
+function wri_article_update_10501() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.article.main_content', [
+    'third_party_settings#ds#regions#share',
+    'content',
+    'hidden',
+  ], 'wri_article');
+
+  $message = 'Replace wri_social_sharing_block with addtoany.';
+  return $message;
+}

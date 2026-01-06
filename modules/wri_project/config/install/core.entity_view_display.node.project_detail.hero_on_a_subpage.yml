@@ -59,7 +59,7 @@ third_party_settings:
         - field_primary_topic
         - field_region
       share:
-        - wri_social_sharing_block
+        - addtoany
       sidebar:
         - field_narrative_taxonomy
         - field_social_sharing_links
@@ -92,6 +92,11 @@ targetEntityType: node
 bundle: project_detail
 mode: hero_on_a_subpage
 content:
+  addtoany:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: share
   field_narrative_taxonomy:
     type: text_default
     label: hidden
@@ -229,11 +234,6 @@ content:
     third_party_settings: {  }
     weight: 4
     region: hero
-  wri_social_sharing_block:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 8
-    region: share
 hidden:
   addtocal: true
   body: true
@@ -259,3 +259,4 @@ hidden:
   layout_builder__layout: true
   links: true
   search_api_excerpt: true
+  wri_social_sharing_block: true

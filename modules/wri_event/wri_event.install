@@ -257,3 +257,17 @@ function wri_event_update_10502() {
   $message = 'wri_event_callout module enabled';
   return $message;
 }
+
+/**
+ * Replace wri_social_sharing_block with addtoany.
+ */
+function wri_event_update_10503() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.event.main_content', [
+    'third_party_settings#ds#regions#share',
+    'content',
+    'hidden',
+  ], 'wri_event');
+
+  $message = 'Replace wri_social_sharing_block with addtoany.';
+  return $message;
+}
