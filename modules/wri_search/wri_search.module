@@ -107,5 +107,13 @@ function wri_search_theme() {
         'search_nav_destination' => '/search',
       ],
     ],
+    'wri_search_results_wrapper' => [
+      'variables' => [
+        'pager' => [],
+        'search_form' => [],
+        'search_results' => [],
+        'search_results_title' => '',
+      ],
+    ],
   ];
 }

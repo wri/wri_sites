@@ -270,6 +270,8 @@
       background: $white;
       border: 1px solid $white;
       padding: 2px 5px;
+      font-size: inherit;
+      height: auto;
     }
   }
 }
@@ -593,7 +595,8 @@
 
 .search-page-main-input {
   margin-top: -$space-lg;
-  .search-input {
+  .search-input,
+  .gjas-element-keys {
     @include font($acumin-semi-cond, "light", "normal");
     @include font-line-height(16, 22);
     box-sizing: border-box;
@@ -606,5 +609,11 @@
     @include mq($lg) {
       width: calc((100% / 12) * 8);
     }
+  }
+}
+
+.google-json-api-search-box-form {
+  .gjas-sort {
+    margin-left: 0;
   }
 }

@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="search-page-main-input padding-bottom margin-bottom-lg">
+  {{ form.keys }}
+  {{ form.submit }}
+  <div class="gjas-element gjas-page"> {{ form.searchpage }} </div>
+  <div class="gjas-remainder body-base">
+    {{ form |without('sort')|without('keys')|without('searchpage')|without('submit')}}
+  </div>
+  </div>
+</div>
+{% if form.sort['#options'] is defined %}
+<div class="resources-wrapper pt-15">
+  <div class="container">
+    <div class="grid results-wrapper">
+      <div class="results-header">
+  <div class="gjas-element gjas-sort form-item-sort-by"><label for="gjas-element-sort">Sort by:</label> {{ form.sort }} </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}

@@ -252,7 +252,8 @@ a.arrow-link {
   }
 }
 
-input[type="submit"].search-icon {
+input[type="submit"].search-icon,
+input[type="submit"].gjas-element-submit {
   @include font($acumin-semi-cond, "bold");
   @include font-line-height(16, 18);
   background-color: transparent;

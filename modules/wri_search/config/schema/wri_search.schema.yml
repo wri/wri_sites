@@ -20,3 +20,12 @@ block.settings.single_file_component_block:wri_search_menu:
     search_nav_submit:
       type: text
       label: 'Submit button text'
+
+# Schema for the configuration files of the WRIN Search module.
+wri_search.settings:
+  type: config_object
+  label: 'WRIN Search settings'
+  mapping:
+    enable_google:
+      type: boolean
+      label: 'Use Google Custom Search'

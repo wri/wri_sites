@@ -1,43 +1,32 @@
 <div class="ds-1col clearfix search-results-container margin-bottom-sm">
   {% if result %}
-    {% if result.articletags or result.pagemap.metatags[0].wri_type %}
-      <div class="search-results-tags">
-        <div class="tags">
-          {% if result.articletags %}
-            <div class="topic-tag">{{ result.articletags }}</div>
-          {% endif %}
-        </div>
-        {% if result.pagemap.metatags[0].wri_type %}
-          <span class="content-type-region bundle">
+  {% if result.pagemap.metatags[0].wri_type %}
+    <div class="search-results-tags">
+      <div class="tags">
+        {% if result.site_name %}
+          <div class="topic-tag">{{ result.site_name }}</div>
+        {% endif %}
+      </div>
+      {% if result.pagemap.metatags[0].wri_type %}
+        <span class="content-type-region bundle">
           {{ result.pagemap.metatags[0].wri_type }}
         </span>
-        {% endif %}
-      </div>
-    {% endif %}
+      {% endif %}
+    </div>
+  {% endif %}
     <div class="search-results-text">
-      <div>
-        {% if result.pagemap.metatags[0].wri_published %}
-          <span class="post-date">{{ result.pagemap.metatags[0].wri_published }}</span>
-        {% endif %}
-      </div>
       {% if result.link %}
-        <h3 class="h3"><a href="{{ result.link }}">{{ result.htmlTitle | raw }}</a></h3>
+        <h3 class="h3"><a href="{{ result.link }}">{{ result.title }}</a></h3>
       {% endif %}
-      {{ highlight_search(result.snippet, term) }}
-      {% if result.articletags %}
-        <div class="tags">
-          {{ result.articletags }}
-        </div>
-      {% endif %}
+      <div class="body-base mb-5"{{ highlight_search(result.snippet, term) }}</div>
       {% if result.pagemap.metatags[0].wri_register %}
         {{ result.pagemap.metatags[0].wri_register }}
       {% endif %}
     </div>
+    {% if result.image_url %}
     <div class="search-results-image">
-      {{ result.pagemap.metatags[0].wri_thumbnail }}
-      <div class="tags">
-        {{ result.articletags }}
-      </div>
+      <img src="{{ result.image_url }}" alt="{{ result.title }}" />
     </div>
+    {% endif %}
   {% endif %}
 </div>
