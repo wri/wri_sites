@@ -40,7 +40,7 @@ class ApplyButton extends DsFieldBase {
     }
 
     // If this event is in the past, show no button.
-    if ((!$end || $end > date("Y-d-m")) && !$closed) {
+    if ((!$end || $end > date("Y-m-d")) && !$closed) {
       if ($this->viewMode() == 'main_content' || $this->viewMode() == 'full') {
         $button_classes = ['button', 'button--primary'];
       }
@@ -58,7 +58,7 @@ class ApplyButton extends DsFieldBase {
       }
     }
     else {
-      $info['#markup'] = '<div class="h4">' . $this->t('The application deadline for this job posting has passed.') . '</div>';
+      $info['#markup'] = '<div class="utility-sm w-[200px]">' . $this->t('The application deadline for this job posting has passed.') . '</div>';
     }
 
     return $info;

@@ -77,6 +77,11 @@
     grid-column-end: 9;
   }
 }
+.lg\:col-end-10 {
+  @include mq($lg) {
+    grid-column-end: 10;
+  }
+}
 .lg\:col-end-12 {
   @include mq($lg) {
     grid-column-end: 12;
