@@ -24,7 +24,6 @@ id: careers
 description: 'A feed from Workday with job listings'
 help: ''
 import_period: 1800
-import_period_per_feed: false
 fetcher: http
 fetcher_configuration:
   auto_detect_feeds: false
