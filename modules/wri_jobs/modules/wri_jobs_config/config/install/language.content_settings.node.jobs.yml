@@ -1,0 +1,9 @@
+status: true
+dependencies:
+  config:
+    - node.type.jobs
+id: node.jobs
+target_entity_type_id: node
+target_bundle: jobs
+default_langcode: site_default
+language_alterable: false

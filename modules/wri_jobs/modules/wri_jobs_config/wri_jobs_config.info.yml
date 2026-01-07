@@ -1,0 +1,7 @@
+name: 'WRI Jobs Configuration'
+type: module
+description: 'IOs only: Initial Configuration for the WRI Jobs module'
+package: WRI
+core_version_requirement: ^10 || ^11
+dependencies:
+  - wri_jobs:wri_jobs

@@ -1,0 +1,64 @@
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.jobs.body
+    - field.field.node.jobs.feeds_item
+    - field.field.node.jobs.field_job_country
+    - field.field.node.jobs.field_job_end_date
+    - field.field.node.jobs.field_job_externalpath
+    - field.field.node.jobs.field_job_guid
+    - field.field.node.jobs.field_job_hiring_org
+    - field.field.node.jobs.field_job_is_closed_manual_optio
+    - field.field.node.jobs.field_job_jobfamilygroup
+    - field.field.node.jobs.field_job_location
+    - field.field.node.jobs.field_job_posting_link
+    - field.field.node.jobs.field_job_pubdate
+    - field.field.node.jobs.field_job_remotetype
+    - field.field.node.jobs.field_job_reqid
+    - field.field.node.jobs.field_job_start_date
+    - field.field.node.jobs.field_job_time_type
+    - field.field.node.jobs.field_job_workersubtype
+    - node.type.jobs
+  module:
+    - text
+    - user
+id: node.jobs.teaser
+targetEntityType: node
+bundle: jobs
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  addtocal: true
+  feeds_item: true
+  field_job_country: true
+  field_job_end_date: true
+  field_job_externalpath: true
+  field_job_guid: true
+  field_job_hiring_org: true
+  field_job_is_closed_manual_optio: true
+  field_job_jobfamilygroup: true
+  field_job_location: true
+  field_job_posting_link: true
+  field_job_pubdate: true
+  field_job_remotetype: true
+  field_job_reqid: true
+  field_job_start_date: true
+  field_job_time_type: true
+  field_job_workersubtype: true
+  langcode: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

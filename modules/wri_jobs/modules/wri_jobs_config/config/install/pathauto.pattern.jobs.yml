@@ -1,0 +1,20 @@
+status: true
+dependencies:
+  module:
+    - node
+id: jobs
+label: Jobs
+type: 'canonical_entities:node'
+pattern: 'careers/jobs/[node:title]-[node:field_job_reqid]'
+selection_criteria:
+  7ad34b6c-2013-43a2-8614-ed7899724b4a:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 7ad34b6c-2013-43a2-8614-ed7899724b4a
+    context_mapping:
+      node: node
+    bundles:
+      jobs: jobs
+selection_logic: and
+weight: -5
+relationships: {  }

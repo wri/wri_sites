@@ -1,0 +1,21 @@
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_is_closed_manual_optio
+    - node.type.jobs
+id: node.jobs.field_job_is_closed_manual_optio
+field_name: field_job_is_closed_manual_optio
+entity_type: node
+bundle: jobs
+label: 'Job is Closed'
+description: 'This is manual option to hide the job posting from the jobs list, and remove the Apply button. '
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

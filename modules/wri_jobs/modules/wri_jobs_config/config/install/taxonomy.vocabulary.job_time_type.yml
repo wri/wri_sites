@@ -1,0 +1,7 @@
+status: true
+dependencies: {  }
+name: 'Job Time Type'
+vid: job_time_type
+description: 'For job listings: Full Time, Part Time etc'
+weight: 0
+new_revision: false

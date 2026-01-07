@@ -41,6 +41,8 @@
       .hero__right {
         display: flex;
         justify-content: center;
+        flex-direction: column;
+        align-items: end;
 
         img {
           border-radius: 100%;
@@ -77,30 +79,6 @@
     }
   }
 
-  .int-office {
-    display: inline-block;
-    position: relative;
-    margin-left: $space-xs;
-
-    &:before {
-      content: "";
-      display: inline-block;
-      height: 16px;
-      line-height: 1.5rem;
-      padding-right: 15px;
-      position: relative;
-      transition: background $transition-defaults;
-      text-decoration: none;
-    }
-
-    a {
-      @include font($acumin-semi-cond, "bold");
-      @include text-underline(transparent, $black);
-      background-position: left 100%;
-      padding-bottom: 5px;
-    }
-  }
-
   .paragraph--type--social-media-sites {
     display: inline-block;
     position: relative;
@@ -111,13 +89,6 @@
 
   .paragraph--type--social-media-sites + .paragraph--type--social-media-sites {
     margin-left: 0;
-  }
-
-  .int-office {
-    &:before {
-      background: transparent url("../img/svgs/pin-black.svg") no-repeat center
-        center / contain;
-    }
   }
 
   .quote {
@@ -206,6 +177,32 @@
         color: $green;
       }
     }
+  }
+}
+
+.int-office {
+  @include font($acumin-semi-cond, "bold");
+  display: inline-block;
+  position: relative;
+  margin-left: $space-xs;
+
+  &:before {
+    content: "";
+    background: transparent url("../img/svgs/pin-black.svg") no-repeat center
+    center / contain;
+    display: inline-block;
+    height: 16px;
+    line-height: 1.5rem;
+    padding-right: 15px;
+    position: relative;
+    transition: background $transition-defaults;
+    text-decoration: none;
+  }
+
+  a {
+    @include text-underline(transparent, $black);
+    background-position: left 100%;
+    padding-bottom: 5px;
   }
 }
 

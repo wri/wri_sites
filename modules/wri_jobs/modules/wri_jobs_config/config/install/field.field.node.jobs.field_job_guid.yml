@@ -1,0 +1,17 @@
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_guid
+    - node.type.jobs
+id: node.jobs.field_job_guid
+field_name: field_job_guid
+entity_type: node
+bundle: jobs
+label: 'Job GUID'
+description: 'The GUID of the job from the rss feed'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

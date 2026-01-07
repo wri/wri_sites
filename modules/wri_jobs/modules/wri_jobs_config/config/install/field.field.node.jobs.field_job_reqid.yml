@@ -1,0 +1,17 @@
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_reqid
+    - node.type.jobs
+id: node.jobs.field_job_reqid
+field_name: field_job_reqid
+entity_type: node
+bundle: jobs
+label: 'Job Requisition ID'
+description: 'Job reqID from rss feed'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

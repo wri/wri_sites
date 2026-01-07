@@ -1,0 +1,27 @@
+.sidebar .field-label-above,
+.sidebar .field-label-inline {
+  margin-top: 1em;
+}
+
+.job .main-content>*:first-child {
+  margin-top: 0;
+}
+
+.text-block.grid .main-content {
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+@media (min-width: 31.3125rem) {
+  .text-block.grid .main-content {
+    grid-column-start: 1;
+    grid-column-end: 13;
+  }
+}
+
+@media (min-width: 64rem) {
+  .text-block.grid .main-content {
+    grid-column-start: 2;
+    grid-column-end: 10;
+  }
+}

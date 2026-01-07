@@ -1,0 +1,28 @@
+status: true
+dependencies:
+  config:
+    - views.view.careers
+  module:
+    - system
+    - views
+  theme:
+    - ts_wrin
+id: ts_wrin_views_block__careers_block_1
+theme: ts_wrin
+region: content
+weight: -17
+provider: null
+plugin: 'views_block:careers-block_1'
+settings:
+  id: 'views_block:careers-block_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+  items_per_page: none
+  exposed: {  }
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /careers/jobs

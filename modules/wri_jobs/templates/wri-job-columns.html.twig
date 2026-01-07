@@ -1,0 +1,50 @@
+{{ attach_library('wri_jobs/job') }}
+{% if content %}
+  <div id="job__detail" class="job full-display tall-hero">
+    {% if content.hero %}
+      <div class="landing-page__hero">
+          <div class="hero__text">
+            <div class="grid hero__content--inner margin-top-lg">
+              <div class="col-span-full lg:col-end-10 lg:col-start-2">
+                {{ content.hero }}
+                <div class="flex">
+                {% if content.buttons|render %}
+                <div class="buttons margin-top-md margin-bottom-sm">
+                  {{ content.buttons }}
+                </div>
+                {% else %}
+                <div class="margin-top-sm"></div>
+                {% endif %}
+                {% if content.locations|render %}
+                  <div class="locations margin-top-md margin-bottom-sm pt-4">
+                    {{ content.locations }}
+                  </div>
+                {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    {% endif %}
+    {# end of content.hero #}
+
+
+    <div class="job__main grid margin-top-md border-top-solid border-top-3 border-top-neutral-900 pt-7 lg:pt-0 lg:border-top-0">
+
+      {% if content.sidebar %}
+        <div {{ region_attributes.sidebar.addClass('layout__region', 'layout__region--sidebar', 'sidebar', 'list-of-fields-sidebar', 'col-span-full', 'lg:col-end-12', 'lg:col-start-9', 'lg:order-1', 'pb-7') }}>
+          {{ content.sidebar }}
+        </div>
+      {% endif %}
+
+      {% if content.job_content %}
+        <div {{ region_attributes.job_content.addClass('layout__region', 'layout__region-job_content', 'main-content', 'utility-md', 'margin-bottom-lg', 'col-span-full', 'lg:col-end-8', 'lg:col-start-2') }}>
+          {{ content.job_content }}
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+{% endif %}
+
+

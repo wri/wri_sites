@@ -128,7 +128,7 @@
         {% endif %}
 
         {% if content.sidebar|render %}
-          <div {{ region_attributes.sidebar.addClass('layout__region', 'layout__region--sidebar', 'sidebar') }}>
+          <div {{ region_attributes.sidebar.addClass('layout__region', 'layout__region--sidebar', 'sidebar', 'list-of-fields-sidebar') }}>
             {% if show_narrative_taxonomy == true %}
               {{ content.sidebar.field_narrative_taxonomy }}
             {% endif %}
