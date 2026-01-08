@@ -98,7 +98,7 @@
     }
   }
 
-  .sidebar {
+  .publication__main .sidebar {
     @include mq($lg) {
       @include column-width(9, 12);
       order: 1;
