@@ -129,7 +129,7 @@ form.webform-submission-form {
     @include font($acumin-semi-cond, "regular", "normal");
     @include font-line-height(18, 22);
     align-items: center;
-    background-color: transparent;
+    background-color: $white;
     border-radius: 3px;
     border: 1px solid #c9c9c9;
     box-sizing: border-box;
@@ -213,7 +213,7 @@ form.webform-submission-form {
     label {
       @include font($acumin-semi-cond, "regular", "normal");
       @include font-line-height(15, 15);
-      color: $black;
+      color: inherit;
     }
   }
 
