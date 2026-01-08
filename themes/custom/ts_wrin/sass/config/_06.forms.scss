@@ -221,6 +221,8 @@ form.webform-submission-form {
     padding: 12px 16px;
     border: 1px solid #c9c9c9;
     border-radius: 3px;
+    color: $black;
+    font-weight: 400;
     transition: all 0.3s ease-in;
     @include hocus() {
       border-color: $true-black;
