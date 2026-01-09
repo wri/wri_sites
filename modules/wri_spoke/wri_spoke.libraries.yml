@@ -1,0 +1,7 @@
+return_to:
+  version: 1.x
+  js:
+    js/wri-spoke-return-to.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
