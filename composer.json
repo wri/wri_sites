@@ -196,7 +196,7 @@
         "drupal/smart_date": "^4.0",
         "drupal/sortableviews": "^1.0@beta",
         "drupal/svg_image": "^3.2",
-        "drupal/token": "^1.8",
+        "drupal/token": "1.16.0",
         "drupal/token_filter": "^2.1",
         "drupal/twig_tweak": "^3.2",
         "drupal/twitter_api_block": "^4.0",
