@@ -64,7 +64,7 @@
                 "View recalculated with wrong data from cache https://www.drupal.org/project/search_api/issues/3327645": "https://www.drupal.org/files/issues/2025-12-12/3327645-32.patch"
             },
             "drupal/token": {
-                "Add a [current-page:object:?] dynamic token https://www.drupal.org/project/token/issues/919760": "https://www.drupal.org/files/issues/2020-09-08/token--current_page_object_token--919760--83.patch",
+                "Add a [current-page:object:?] dynamic token https://www.drupal.org/project/token/issues/919760": "https://www.drupal.org/files/issues/2023-06-22/919760-111.patch",
                 "Provide array of primitive property values on multivalue field https://www.drupal.org/project/token/issues/3115486": "https://www.drupal.org/files/issues/2020-12-11/token-provide_primitive_type_arrays_for_properties_of_multivalue_fields-3115486-12.patch",
                 "Updating to Token 1.13 breaks smart_date range tokens https://www.drupal.org/project/token/issues/3396209": "https://www.drupal.org/files/issues/2023-11-27/token-3396209-bypassing-null-insertion.patch"
             },
@@ -196,7 +196,7 @@
         "drupal/smart_date": "^4.0",
         "drupal/sortableviews": "^1.0@beta",
         "drupal/svg_image": "^3.2",
-        "drupal/token": "1.16.0",
+        "drupal/token": "^1.8",
         "drupal/token_filter": "^2.1",
         "drupal/twig_tweak": "^3.2",
         "drupal/twitter_api_block": "^4.0",
