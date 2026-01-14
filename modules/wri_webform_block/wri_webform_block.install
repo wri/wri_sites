@@ -5,6 +5,8 @@
  * Update hooks for wri_webform_block.
  */
 
+use Drupal\user\Entity\Role;
+
 /**
  * Implements hook_install().
  */
