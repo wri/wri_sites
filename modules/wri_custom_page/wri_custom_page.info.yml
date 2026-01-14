@@ -24,7 +24,6 @@ config_devel:
     - core.entity_view_display.node.custom_page.teaser.yml
     - core.entity_view_display.node.custom_page.tile.yml
     - field.field.block_content.plain_image.field_plain_image.yml
-    - field.field.block_content.webform.field_webform.yml
     - field.field.node.custom_page.body.yml
     - field.field.node.custom_page.field_main_image.yml
     - field.field.node.custom_page.field_metatags.yml
