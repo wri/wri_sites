@@ -17,14 +17,8 @@ function wri_webform_block_install() {
   \Drupal::service('distro_helper.updates')->installConfig('block_content.type.webform', 'wri_webform_block', 'post-install');
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.block_content.webform.default', 'wri_webform_block', 'post-install', TRUE);
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.block_content.webform.default', 'wri_webform_block', 'post-install', TRUE);
-  // Set the views.view.content_blocks_browser.yml config to include this
-  // module's block type.
-  $config = \Drupal::configFactory()->getEditable('views.view.content_blocks_browser');
-  $data = $config->getRawData();
-  $data['display']['default']['display_options']['filters']['type_1']['value']['webform_block'] = 'webform_block';
-  $data['dependencies']['config'][] = 'block_content.type.webform_block';
-  $config->setData($data);
-  $config->save();
+
+  wri_webform_block_add_content_blocks_browser_dependencies();
 
   // Allow Upcoming Event blocks in the block Entity Browser.
   $config = \Drupal::configFactory()->getEditable('entity_browser.browser.block');
@@ -65,6 +59,20 @@ function wri_webform_block_update_10600() {
 }
 
 /**
+ * Give Editor the ability to make webform_block blocks.
+ */
+function wri_webform_block_update_10601() {
+  wri_webform_block_add_permissions();
+}
+
+/**
+ * Ensure the webform block appears in the Content Blocks browser view.
+ */
+function wri_webform_block_update_10602() {
+  wri_webform_block_add_content_blocks_browser_dependencies();
+}
+
+/**
  * Helper function to set permissions for this block on install.
  */
 function wri_webform_block_add_permissions() {
@@ -80,8 +88,15 @@ function wri_webform_block_add_permissions() {
 }
 
 /**
- * Give Editor the ability to make webform_block blocks.
+ * Helper function to add this block type to the Content Blocks browser view.
  */
-function wri_webform_block_update_10503() {
-  wri_webform_block_add_permissions();
+function wri_webform_block_add_content_blocks_browser_dependencies() {
+  // Set the views.view.content_blocks_browser.yml config to include this
+  // module's block type.
+  $config = \Drupal::configFactory()->getEditable('views.view.content_blocks_browser');
+  $data = $config->getRawData();
+  $data['display']['default']['display_options']['filters']['type_1']['value']['webform_block'] = 'webform_block';
+  $data['dependencies']['config'][] = 'block_content.type.webform_block';
+  $config->setData($data);
+  $config->save();
 }
