@@ -73,9 +73,9 @@ function wri_webform_block_add_permissions() {
   // 'edit any webform_block block content'
   // 'create webform_block block content'.
   $role = Role::load('editorial');
-  $role->grantPermission('revert any webform_block block content revisions');
-  $role->grantPermission('edit any webform_block block content');
-  $role->grantPermission('create webform_block block content');
+  $role->grantPermission('revert any webform block content revisions');
+  $role->grantPermission('edit any webform block content');
+  $role->grantPermission('create webform block content');
   $role->save();
 }
 
