@@ -18,8 +18,7 @@ function wri_webform_block_install() {
 }
 
 /**
- * Update hook to ensure the webform block content type and its displays are
- * installed.
+ * Ensure the webform block content type and its displays are installed.
  */
 function wri_webform_block_update_10600() {
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.block_content.webform.default', 'wri_webform_block', 'post-install', TRUE);
