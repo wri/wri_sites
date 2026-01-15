@@ -71,7 +71,7 @@ function wri_webform_block_add_content_blocks_browser_dependencies() {
   $config = \Drupal::configFactory()->getEditable('views.view.content_blocks_browser');
   $data = $config->getRawData();
   $data['display']['default']['display_options']['filters']['type_1']['value']['webform_block'] = 'webform_block';
-  $data['dependencies']['config'][] = 'block_content.type.webform_block';
+  $data['dependencies']['config'][] = 'block_content.type.webform';
   $data['dependencies']['config'] = array_unique($data['dependencies']['config']);
   $config->setData($data);
   $config->save();
@@ -94,8 +94,8 @@ function wri_webform_block_add_content_blocks_browser_dependencies() {
       if (empty($data['dependencies']['config']) || !is_array($data['dependencies']['config'])) {
         $data['dependencies']['config'] = [];
       }
-      if (!in_array('block_content.type.webform_block', $data['dependencies']['config'], TRUE)) {
-        $data['dependencies']['config'][] = 'block_content.type.webform_block';
+      if (!in_array('block_content.type.webform', $data['dependencies']['config'], TRUE)) {
+        $data['dependencies']['config'][] = 'block_content.type.webform';
         $data['dependencies']['config'] = array_unique($data['dependencies']['config']);
       }
 
