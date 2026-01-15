@@ -6,8 +6,10 @@
   .hero__text {
     .publication__type > .h4 {
       @include center-columns($grid-columns-mobile, $grid-columns-mobile);
-      background-color: $black;
-      padding: 8px 10px;
+      & {
+        background-color: $black;
+        padding: 8px 10px;
+      }
 
       @include mq($ph) {
         @include center-columns($grid-columns, $grid-columns);
@@ -44,9 +46,11 @@
     .hero__right {
       @include mq($md) {
         @include column-width(9, 13);
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
+        & {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+        }
       }
 
       @include mq($lg) {
@@ -101,7 +105,9 @@
   .publication__main .sidebar {
     @include mq($lg) {
       @include column-width(9, 12);
-      order: 1;
+      & {
+        order: 1;
+      }
     }
   }
 
@@ -119,7 +125,6 @@
   }
 }
 
-
 .list-of-fields-sidebar {
   font-size: rem(14);
   line-height: rem(18);
@@ -131,7 +136,9 @@
     font-weight: bold;
 
     @include text-underline(transparent, $green);
-    background-position: left 100%;
+    & {
+      background-position: left 100%;
+    }
 
     &.more-open-close {
       font-weight: normal;

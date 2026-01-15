@@ -35,9 +35,11 @@
     }
     @include font-line-height(15, 40);
 
-    color: #fff;
-    display: block;
-    text-decoration: none;
+    & {
+      color: #fff;
+      display: block;
+      text-decoration: none;
+    }
 
     &.share-icon {
       background: transparent url("../img/svgs/share.svg") no-repeat;
@@ -126,7 +128,7 @@
       max-height: 28px;
     }
     &.weibo,
-    &.bluesky  {
+    &.bluesky {
       max-width: 25px;
       max-height: 25px;
     }
@@ -140,8 +142,10 @@
   a {
     @include font($acumin-semi-cond, "bold");
     @include text-underline(transparent, $black);
-    background-position: left 100%;
-    margin-right: rem(16);
+    & {
+      background-position: left 100%;
+      margin-right: rem(16);
+    }
   }
   a.handle {
     position: relative;

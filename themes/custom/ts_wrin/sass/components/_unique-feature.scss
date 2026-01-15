@@ -4,7 +4,9 @@
 
     .inner-box {
       @include center-columns($grid-columns-mobile, $grid-columns-mobile);
-      position: relative;
+      & {
+        position: relative;
+      }
 
       @include mq($ph) {
         @include center-columns($grid-columns, $grid-columns);
@@ -80,22 +82,28 @@
 
   .left-text-wrapper {
     @include center-columns($grid-columns-mobile, $grid-columns-mobile);
-    background-color: $white;
-    margin-top: -30px;
-    padding-top: 30px;
-    position: relative;
-    width: 93%;
-    z-index: 3;
+    & {
+      background-color: $white;
+      margin-top: -30px;
+      padding-top: 30px;
+      position: relative;
+      width: 93%;
+      z-index: 3;
+    }
 
     @include mq($ph) {
       @include center-columns($grid-columns, $grid-columns);
-      margin-top: calc(#{$padding-vertical} * -1);
+      & {
+        margin-top: calc(#{$padding-vertical} * -1);
+      }
     }
 
     @include mq($md) {
       @include column-width(2, 6);
-      padding-right: $grid-gutter;
-      width: 100%;
+      & {
+        padding-right: $grid-gutter;
+        width: 100%;
+      }
     }
 
     &::before {
@@ -120,7 +128,9 @@
     a.block_label {
       text-decoration: none;
       @include text-underline(transparent, $black);
-      background-position: left 100%;
+      & {
+        background-position: left 100%;
+      }
     }
 
     a.button {
@@ -134,8 +144,10 @@
 
   .right-text-wrapper {
     @include center-columns($grid-columns-mobile, $grid-columns-mobile);
-    z-index: 10;
-    position: relative;
+    & {
+      z-index: 10;
+      position: relative;
+    }
 
     @include mq($ph) {
       @include center-columns($grid-columns, $grid-columns);
@@ -159,7 +171,9 @@
 
     .intro p {
       @include font-line-height(18, 28);
-      margin-top: 0;
+      & {
+        margin-top: 0;
+      }
 
       @include mq($md) {
         margin-top: 18px;

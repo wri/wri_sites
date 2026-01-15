@@ -1,3 +1,5 @@
+@use "sass:math";
+
 .tile {
   .h3,
   .secondary {
@@ -56,12 +58,12 @@
   }
 
   .tile-buttons {
-    margin-bottom: $space-xs/2;
+    margin-bottom: math.div($space-xs, 2);
   }
 
   .button.small {
     margin-left: 0;
-    margin-bottom: $space-xs/2;
+    margin-bottom: math.div($space-xs, 2);
   }
 }
 
@@ -85,10 +87,12 @@
   .card-image::after {
     content: "";
     @include hero_bottom_gradient_medium(to bottom, $true-black);
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
+    & {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+    }
   }
 
   .card-text {
@@ -110,12 +114,16 @@
       @extend .card-headline;
       @include font($acumin-semi-cond, "bold");
       @include font-line-height(32, 40);
-      margin: 0;
+      & {
+        margin: 0;
+      }
 
       a {
         color: $white;
         @include text-underline(transparent, $white);
-        background-position: left 100%;
+        & {
+          background-position: left 100%;
+        }
       }
     }
 

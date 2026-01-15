@@ -38,8 +38,10 @@
   .layout__region--byline {
     @include font($acumin-semi-cond, light);
     @include font-line-height(16, 23);
-    padding-bottom: $padding-vertical;
-    border-bottom: 6px solid $black;
+    & {
+      padding-bottom: $padding-vertical;
+      border-bottom: 6px solid $black;
+    }
 
     a {
       font-weight: bold;
@@ -54,8 +56,10 @@
   .article__meta {
     .field-label-inline {
       @extend .italic-tiny;
-      display: inline;
-      margin-right: 2px;
+      & {
+        display: inline;
+        margin-right: 2px;
+      }
     }
 
     .taxonomy {
@@ -131,22 +135,30 @@
     ul li {
       @include font($acumin-pro, "semibold");
       @include font-line-height(14, 21);
-      color: $green;
+      & {
+        color: $green;
+      }
     }
 
     ul li a {
       @include text-underline();
-      background-position: left 100%;
-      text-decoration: none;
+      & {
+        background-position: left 100%;
+        text-decoration: none;
+      }
     }
   }
 
   .more-on__items a {
     @include font($acumin-pro, "semibold");
     @include font-line-height(18, 24);
-    color: $green;
+    & {
+      color: $green;
+    }
     @include text-underline();
-    background-position: left 100%;
-    text-decoration: none;
+    & {
+      background-position: left 100%;
+      text-decoration: none;
+    }
   }
 }

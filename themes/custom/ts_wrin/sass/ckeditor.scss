@@ -56,8 +56,10 @@
   .node-article-form .field--name-body & {
     @include font($caslon, "regular");
     @include font-line-height(20, 30);
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    color: $black;
+    & {
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+      color: $black;
+    }
   }
 }

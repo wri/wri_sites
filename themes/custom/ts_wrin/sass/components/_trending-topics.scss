@@ -9,7 +9,9 @@
     .listing-items li {
       @include font($acumin-semi-cond, "semibold");
       @include font-line-height(18, 20);
-      margin-bottom: rem(8);
+      & {
+        margin-bottom: rem(8);
+      }
 
       @include mq($ph) {
         flex-basis: calc(50% - 10px);

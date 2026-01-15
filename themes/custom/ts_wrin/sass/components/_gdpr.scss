@@ -6,8 +6,10 @@
     color: $white;
     @include font($acumin-semi-cond, "Regular");
     @include font-line-height(16, 20);
-    text-align: left;
-    display: inline;
+    & {
+      text-align: left;
+      display: inline;
+    }
   }
 
   .gdpr-popup-content {

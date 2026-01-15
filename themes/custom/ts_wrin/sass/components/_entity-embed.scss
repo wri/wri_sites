@@ -32,9 +32,11 @@
     input[type="email"] {
       @include font($acumin-semi-cond, "regular");
       @include font-line-height(16, 18);
-      height: 46px;
-      padding: 15px 10px 12px;
-      width: 100%;
+      & {
+        height: 46px;
+        padding: 15px 10px 12px;
+        width: 100%;
+      }
     }
   }
   .form-type-processed-text {
@@ -44,7 +46,9 @@
       @include font-line-height(22, 28);
     }
   }
-  h4, h5, p {
+  h4,
+  h5,
+  p {
     font-family: inherit;
     font-size: inherit;
     margin: 16px 0;

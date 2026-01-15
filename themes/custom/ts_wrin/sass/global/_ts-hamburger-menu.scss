@@ -34,7 +34,9 @@ body.fixed {
         left: 0;
         position: absolute;
         transform: translateY(-350%);
-        transition: transform 0.3s, background-color 0.3s;
+        transition:
+          transform 0.3s,
+          background-color 0.3s;
         width: 100%;
         z-index: 10;
       }
@@ -82,7 +84,9 @@ body.fixed {
   position: fixed;
   right: 0;
   top: 0;
-  transition: visibility 0s 0.2s, opacity $transition-defaults;
+  transition:
+    visibility 0s 0.2s,
+    opacity $transition-defaults;
   visibility: hidden;
   z-index: 1001;
 
@@ -218,22 +222,28 @@ body.fixed {
 
   ul.menu a.is-active {
     color: $white;
-    background-size: 100% 0, 100% 2px;
+    background-size:
+      100% 0,
+      100% 2px;
   }
 
   li.menu-item {
     @include font($acumin-semi-cond, regular);
     @include font-line-height(16, 20);
-    color: $white;
-    list-style-image: none;
-    list-style-type: none;
-    text-decoration: none;
+    & {
+      color: $white;
+      list-style-image: none;
+      list-style-type: none;
+      text-decoration: none;
+    }
   }
   li a {
     text-decoration: none;
     @include mq(768px) {
       @include text-underline(transparent, $white);
-      background-position-y: 100%;
+      & {
+        background-position-y: 100%;
+      }
     }
   }
 }
@@ -260,22 +270,26 @@ body.fixed {
     }
     li {
       @include font-line-height(18, 30);
-      border-radius: 3px;
-      border: 1px solid #b1b1b1;
-      flex: 0 1 calc(50% - 8px);
-      font-weight: 700;
-      margin-bottom: 6px;
-      margin-top: 6px;
-      padding-bottom: 12px;
-      padding-top: 12px;
-      text-align: center;
+      & {
+        border-radius: 3px;
+        border: 1px solid #b1b1b1;
+        flex: 0 1 calc(50% - 8px);
+        font-weight: 700;
+        margin-bottom: 6px;
+        margin-top: 6px;
+        padding-bottom: 12px;
+        padding-top: 12px;
+        text-align: center;
+      }
       @include mq(768px) {
         @include font-line-height(24, 30);
-        flex: 0 1 23%;
-        margin-bottom: 24px;
-        margin-top: 12px;
-        padding-bottom: 12px;
-        padding-top: 8px;
+        & {
+          flex: 0 1 23%;
+          margin-bottom: 24px;
+          margin-top: 12px;
+          padding-bottom: 12px;
+          padding-top: 8px;
+        }
       }
       @include mq(1080px) {
         border-bottom: none;
@@ -305,7 +319,9 @@ body.fixed {
     }
     & > ul.menu > li {
       @include font-line-height(20, 39);
-      font-weight: 600;
+      & {
+        font-weight: 600;
+      }
       @include mq(768px) {
         margin-right: $space-xs;
         margin-top: 12px;
@@ -355,11 +371,13 @@ body.fixed {
     & > ul li > ul span span {
       @include font($caslon, "regular", "italic");
       @include font-line-height(15, 15);
-      color: $white;
-      left: 0;
-      padding-top: 10px;
-      position: absolute;
-      text-transform: capitalize;
+      & {
+        color: $white;
+        left: 0;
+        padding-top: 10px;
+        position: absolute;
+        text-transform: capitalize;
+      }
     }
   }
 
@@ -378,9 +396,11 @@ body.fixed {
     }
     & > li {
       @include font-line-height(20, 39);
-      border-top: 1px solid #474747;
-      flex: 0 1 calc(33% - 30px);
-      font-weight: 600;
+      & {
+        border-top: 1px solid #474747;
+        flex: 0 1 calc(33% - 30px);
+        font-weight: 600;
+      }
       @include mq(768px) {
         border-top: none;
         margin-right: $space-xs;
@@ -491,18 +511,22 @@ body.fixed {
   & .menu-wrapper > ul.menu li {
     @include font($acumin-semi-cond, "regular", "normal");
     @include font-line-height(16, 19);
-    letter-spacing: 1.5px;
-    margin-right: $space-xs;
-    text-decoration: none;
-    text-transform: uppercase;
+    & {
+      letter-spacing: 1.5px;
+      margin-right: $space-xs;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
     @include mq(768px) {
       margin-right: $space-sm;
     }
   }
   & .menu-wrapper > ul.menu li a {
     @include text-underline(transparent, $brand-gold);
-    background-position-y: 100%;
-    color: $brand-gold;
+    & {
+      background-position-y: 100%;
+      color: $brand-gold;
+    }
   }
   & .menu-wrapper > ul.menu li a.button {
     color: $black;
@@ -510,14 +534,16 @@ body.fixed {
   & .menu-wrapper > ul.menu li:first-of-type {
     @include font($caslon, "regular", "italic");
     @include font-line-height(15, 15);
-    background-color: $black;
-    color: #b1b1b1;
-    left: 0px;
-    padding-bottom: 4px;
-    padding-right: 10px;
-    padding-top: 13px;
-    position: absolute;
-    text-transform: capitalize;
+    & {
+      background-color: $black;
+      color: #b1b1b1;
+      left: 0px;
+      padding-bottom: 4px;
+      padding-right: 10px;
+      padding-top: 13px;
+      position: absolute;
+      text-transform: capitalize;
+    }
   }
   & .menu-wrapper > ul.menu li .button {
     background-image: none;
@@ -598,12 +624,14 @@ body.fixed {
   & > .back {
     @include font($caslon, "regular", "italic");
     @include font-line-height(15, 15);
-    color: $brand-gold;
-    display: block;
-    margin-bottom: $space-xs;
-    padding-left: $space-xs;
-    position: relative;
-    text-decoration: none;
+    & {
+      color: $brand-gold;
+      display: block;
+      margin-bottom: $space-xs;
+      padding-left: $space-xs;
+      position: relative;
+      text-decoration: none;
+    }
   }
   & > .back:before {
     background: transparent url("../img/svgs/arrow-gold.svg") no-repeat center
@@ -629,7 +657,9 @@ body.fixed {
 .hamburger-slider-contents {
   & > ul.menu > li {
     @include font-line-height(24, 30);
-    font-weight: 600;
+    & {
+      font-weight: 600;
+    }
   }
   & > ul.menu > li > .menu-item-title {
     display: block;
@@ -639,25 +669,31 @@ body.fixed {
   & > ul li > ul span span {
     @include font($caslon, "regular", "italic");
     @include font-line-height(15, 18);
-    color: #b1b1b1;
-    display: block;
-    left: 0;
-    padding-bottom: 14px;
-    padding-top: 10px;
-    text-transform: capitalize;
+    & {
+      color: #b1b1b1;
+      display: block;
+      left: 0;
+      padding-bottom: 14px;
+      padding-top: 10px;
+      text-transform: capitalize;
+    }
   }
   & > ul.menu > li li li {
     @include font-line-height(20, 35);
-    border-top: 1px solid #474747;
-    font-weight: 600;
-    margin-bottom: 14px;
+    & {
+      border-top: 1px solid #474747;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
   }
 }
 
 .hamburger-slider-contents {
   & > ul.menu > li {
     @include font-line-height(24, 30);
-    font-weight: 600;
+    & {
+      font-weight: 600;
+    }
   }
   & > ul.menu > li > .menu-item-title a {
     display: block;
@@ -667,24 +703,30 @@ body.fixed {
   & > ul li > ul span span {
     @include font($caslon, "regular", "italic");
     @include font-line-height(15, 18);
-    color: #b1b1b1;
-    display: block;
-    left: 0;
-    padding-bottom: 14px;
-    padding-top: 10px;
-    text-transform: capitalize;
+    & {
+      color: #b1b1b1;
+      display: block;
+      left: 0;
+      padding-bottom: 14px;
+      padding-top: 10px;
+      text-transform: capitalize;
+    }
   }
   & > ul.menu > li li li {
     @include font-line-height(20, 35);
-    border-top: 1px solid #474747;
-    font-weight: 600;
-    margin-bottom: 14px;
+    & {
+      border-top: 1px solid #474747;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
   }
   & > ul.menu > li li {
     @include font-line-height(20, 35);
-    border-top: 1px solid #474747;
-    font-weight: 600;
-    margin-bottom: 14px;
+    & {
+      border-top: 1px solid #474747;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
   }
 }
 

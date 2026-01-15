@@ -63,7 +63,9 @@ body.noscroll {
   position: fixed;
   right: -330px;
   top: 0;
-  transition: right 0.5s ease-in-out, width 0.5s ease-in-out;
+  transition:
+    right 0.5s ease-in-out,
+    width 0.5s ease-in-out;
   width: 330px;
   @include mq($md) {
     padding: 30px 30px 130px 30px;
@@ -95,14 +97,18 @@ body.noscroll {
 .block-wri-search {
   h2.tray-nav-h2 {
     @include font($acumin-semi-cond, "bold", "normal");
-    margin-bottom: 6px;
-    margin-top: 20px;
+    & {
+      margin-bottom: 6px;
+      margin-top: 20px;
+    }
   }
   p.tray-nav-description {
     @include font($acumin-semi-cond, "light", "normal");
     @include font-line-height(18, 28);
-    margin-bottom: 36px;
-    margin-top: 0;
+    & {
+      margin-bottom: 36px;
+      margin-top: 0;
+    }
   }
 
   form {
@@ -125,10 +131,15 @@ body.noscroll {
   label {
     @include font($acumin-semi-cond, "light", "normal");
     @include font-line-height(16, 22);
-    left: 10px;
-    position: absolute;
-    top: 19px;
-    transition: top 0.3s ease-in, left 0.3s ease-in, font-size 0.3s ease-in;
+    & {
+      left: 10px;
+      position: absolute;
+      top: 19px;
+      transition:
+        top 0.3s ease-in,
+        left 0.3s ease-in,
+        font-size 0.3s ease-in;
+    }
     @include mq($md) {
       left: 25px;
     }
@@ -137,7 +148,10 @@ body.noscroll {
   .has-value label {
     font-size: rem(10);
     top: 2px;
-    transition: top 0.3s ease-out, left 0.3s ease-out, font-size 0.3s ease-out;
+    transition:
+      top 0.3s ease-out,
+      left 0.3s ease-out,
+      font-size 0.3s ease-out;
   }
 
   .button.ghost {

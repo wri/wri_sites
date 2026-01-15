@@ -87,11 +87,13 @@ ol {
   & > li::before {
     content: counter(list) ")";
     @include font-line-height(16, 24);
-    counter-increment: list;
-    font-weight: 700;
-    padding-right: 1rem;
-    position: relative;
-    left: rem(5);
+    & {
+      counter-increment: list;
+      font-weight: 700;
+      padding-right: 1rem;
+      position: relative;
+      left: rem(5);
+    }
   }
 }
 
@@ -101,11 +103,13 @@ li .ck-list-bogus-paragraph {
 /* Start Block Quote */
 .callout {
   @extend .secondary;
-  border-bottom: 3px solid $black;
-  border-left: none;
-  border-top: 3px solid $black;
-  padding: 20px 0 12px;
-  margin-top: $space-xs;
+  & {
+    border-bottom: 3px solid $black;
+    border-left: none;
+    border-top: 3px solid $black;
+    padding: 20px 0 12px;
+    margin-top: $space-xs;
+  }
 
   & p:first-child {
     margin-top: 0;
@@ -170,18 +174,22 @@ blockquote {
   p {
     @include font($acumin-semi-cond, "medium");
     @include font-line-height(20, 28);
-    border-left: 1px solid #b1b1b1;
-    margin: 16px 0;
-    text-align: left;
-    padding-left: $space-sm;
-    position: relative;
+    & {
+      border-left: 1px solid #b1b1b1;
+      margin: 16px 0;
+      text-align: left;
+      padding-left: $space-sm;
+      position: relative;
+    }
 
     @include mq($md) {
       @include font-line-height(24, 32);
-      display: inline;
-      float: right;
-      margin: 0 -26% $space-sm $space-sm;
-      width: 60%;
+      & {
+        display: inline;
+        float: right;
+        margin: 0 -26% $space-sm $space-sm;
+        width: 60%;
+      }
     }
 
     @include mq($lg) {
@@ -199,10 +207,12 @@ blockquote {
 
     &.with-quote:before {
       @include font($caslon, "bold");
-      content: "“";
-      font-size: 58px;
-      position: absolute;
-      left: 0;
+      & {
+        content: "“";
+        font-size: 58px;
+        position: absolute;
+        left: 0;
+      }
     }
     span.attribution {
       @include font($acumin-semi-cond, "semibold");
@@ -305,8 +315,8 @@ img {
 
   @include mq($site-max-width) {
     width: $site-max-width;
-    margin-left: -$site-max-width/2;
-    margin-right: -$site-max-width/2;
+    margin-left: calc(-1 * #{$site-max-width} / 2);
+    margin-right: calc(-1 * #{$site-max-width} / 2);
   }
 
   iframe,
@@ -421,9 +431,11 @@ table {
 
 .report-teaser {
   @extend .secondary;
-  border-left: none;
-  padding: 20px 0 12px;
-  margin-top: $space-xs;
+  & {
+    border-left: none;
+    padding: 20px 0 12px;
+    margin-top: $space-xs;
+  }
 
   & p:first-child {
     margin-top: 0;

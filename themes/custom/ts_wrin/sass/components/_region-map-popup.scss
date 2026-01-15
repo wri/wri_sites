@@ -22,7 +22,9 @@
     color: $brand-gold;
     @include font($acumin-semi-cond, "bold");
     @include font-line-height(20, 24);
-    text-decoration: none;
+    & {
+      text-decoration: none;
+    }
 
     @include hocus {
       color: $gold-hover;

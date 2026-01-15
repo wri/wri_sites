@@ -19,7 +19,9 @@
     .item-list {
       .tags.topic-tag a {
         @include text-underline(transparent, $green);
-        background-position: left 100%;
+        & {
+          background-position: left 100%;
+        }
       }
     }
   }

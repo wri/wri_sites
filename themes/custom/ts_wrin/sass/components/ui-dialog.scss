@@ -9,10 +9,12 @@ div.ui-dialog:not(.ui-dialog-off-canvas) {
     all: unset;
     @include font($acumin-semi-cond, "bold");
     @include font-line-height(24, 30);
-    position: relative;
-    padding-top: $space-sm;
-    padding-right: $space-sm;
-    padding-left: $space-xs;
+    & {
+      position: relative;
+      padding-top: $space-sm;
+      padding-right: $space-sm;
+      padding-left: $space-xs;
+    }
     @include mq($md) {
       padding-right: $space-md;
       padding-left: $space-md;
@@ -85,11 +87,13 @@ div.ui-dialog:not(.ui-dialog-off-canvas) {
   input[type="email"],
   input[type="text"] {
     @include font-line-height(14, 18);
-    padding: initial;
-    background-color: darkkhaki;
-    height: 46px;
-    padding: 15px 10px 12px;
-    background-color: $white;
+    & {
+      padding: initial;
+      background-color: darkkhaki;
+      height: 46px;
+      padding: 15px 10px 12px;
+      background-color: $white;
+    }
   }
 
   // Submit
@@ -97,7 +101,9 @@ div.ui-dialog:not(.ui-dialog-off-canvas) {
     @include font($acumin-semi-cond, "semibold");
     @include font-line-height(13, 16);
     // height: 40px;
-    padding: 12px 40px;
+    & {
+      padding: 12px 40px;
+    }
   }
 
   // Label

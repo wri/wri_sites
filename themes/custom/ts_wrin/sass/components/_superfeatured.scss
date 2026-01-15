@@ -38,8 +38,10 @@
 
     @include mq($md) {
       @include column-width(1, 8);
-      margin-top: rem(-50);
-      width: 100%;
+      & {
+        margin-top: rem(-50);
+        width: 100%;
+      }
     }
 
     @include mq($lg) {
@@ -96,7 +98,9 @@
 
     @include mq($md) {
       @include column-width(8, 13);
-      margin-top: 2rem;
+      & {
+        margin-top: 2rem;
+      }
     }
 
     @include mq($lg) {

@@ -174,7 +174,9 @@
         display: block;
         @include font($acumin-pro, "semibold");
         @include font-line-height(14, 24);
-        color: $green;
+        & {
+          color: $green;
+        }
       }
     }
   }
@@ -182,14 +184,16 @@
 
 .int-office {
   @include font($acumin-semi-cond, "bold");
-  display: inline-block;
-  position: relative;
-  margin-left: $space-xs;
+  & {
+    display: inline-block;
+    position: relative;
+    margin-left: $space-xs;
+  }
 
   &:before {
     content: "";
     background: transparent url("../img/svgs/pin-black.svg") no-repeat center
-    center / contain;
+      center / contain;
     display: inline-block;
     height: 16px;
     line-height: 1.5rem;
@@ -201,8 +205,10 @@
 
   a {
     @include text-underline(transparent, $black);
-    background-position: left 100%;
-    padding-bottom: 5px;
+    & {
+      background-position: left 100%;
+      padding-bottom: 5px;
+    }
   }
 }
 
@@ -273,8 +279,10 @@
   h2 {
     @include font($acumin-semi-cond, "bold", "normal");
     @include font-line-height(24, 30);
-    margin-bottom: 2px;
-    margin-top: 12px;
+    & {
+      margin-bottom: 2px;
+      margin-top: 12px;
+    }
     a {
       text-decoration: none;
     }

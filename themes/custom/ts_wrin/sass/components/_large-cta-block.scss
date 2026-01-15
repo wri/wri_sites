@@ -127,8 +127,10 @@
 
   .cta-text-inner {
     @include center-columns(4, 4);
-    position: relative;
-    z-index: 1;
+    & {
+      position: relative;
+      z-index: 1;
+    }
 
     @include mq($ph) {
       @include center-columns(12, 12);

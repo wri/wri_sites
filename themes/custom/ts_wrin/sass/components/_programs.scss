@@ -37,11 +37,15 @@
 
       @include mq($md) {
         @include font-line-height(30, 43);
-        max-width: 620px;
+        & {
+          max-width: 620px;
+        }
       }
 
       @include mq($xl) {
-        max-width: 825px;
+        & {
+          max-width: 825px;
+        }
       }
     }
   }
@@ -87,14 +91,16 @@
   .field-name-field-twitter-account {
     @include font($caslon, "regular", "italic");
     @include font-line-height(15, 16);
-    background-color: $white;
-    height: 50px;
-    width: 55px;
-    display: flex;
-    justify-content: center;
-    margin-top: -50px;
-    align-items: center;
-    text-indent: -9999px;
+    & {
+      background-color: $white;
+      height: 50px;
+      width: 55px;
+      display: flex;
+      justify-content: center;
+      margin-top: -50px;
+      align-items: center;
+      text-indent: -9999px;
+    }
 
     @include mq($lg) {
       text-indent: 0;
@@ -142,7 +148,9 @@
 
     @include mq($md) {
       @include column-width(4, 10);
-      margin-top: $space-md;
+      & {
+        margin-top: $space-md;
+      }
     }
     @include mq($xl) {
       @include column-width(4, 10);
@@ -173,7 +181,9 @@
   h2 {
     @include font($caslon, "regular", "italic");
     @include font-line-height(36, 40);
-    margin: 0;
+    & {
+      margin: 0;
+    }
   }
 
   @include mq($md) {
@@ -189,7 +199,9 @@
   @extend .intro;
   @include font-line-height(18, 30);
 
-  margin-bottom: $space-md;
+  & {
+    margin-bottom: $space-md;
+  }
 
   @include mq($md) {
     @include column-width(5, 13);
@@ -289,16 +301,20 @@
     .field--name-field-statistic-number {
       @extend .h1;
       @include font-line-height(48, 55);
-      margin-bottom: 0;
-      position: relative;
+      & {
+        margin-bottom: 0;
+        position: relative;
+      }
     }
 
     .field--name-field-statistic-text p,
     .field--name-field-statistic-text p a {
       @include font($acumin-semi-cond, "medium");
       @include font-line-height(16, 18);
-      color: $blue;
-      text-transform: none;
+      & {
+        color: $blue;
+        text-transform: none;
+      }
     }
     .field--name-field-statistic-text p a {
       @include hocus {
@@ -313,7 +329,9 @@
 
   .field--name-body {
     @extend .top-border-thick;
-    padding-top: $space-md;
+    & {
+      padding-top: $space-md;
+    }
 
     @include mq($md) {
       @include column-width(4, 11);

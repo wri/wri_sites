@@ -10,16 +10,18 @@ textarea {
 input[type="text"].ghost {
   @include font($acumin-semi-cond, "regular", "normal");
   @include font-line-height(16, 22);
-  background-color: transparent;
-  border: 1px solid $light-grey;
-  color: $white;
-  height: 40px;
-  padding: 8px 15px;
-  border-radius: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
+  & {
+    background-color: transparent;
+    border: 1px solid $light-grey;
+    color: $white;
+    height: 40px;
+    padding: 8px 15px;
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+  }
   @include mq($md) {
     height: 50px;
     padding: 12px 20px;
@@ -101,8 +103,10 @@ form.webform-submission-form {
   .fieldset-legend {
     @include font($acumin-semi-cond, "regular", "normal");
     @include font-line-height(16, 22);
-    position: relative;
-    top: -4px;
+    & {
+      position: relative;
+      top: -4px;
+    }
   }
 
   .checkboxes--wrapper {
@@ -128,19 +132,21 @@ form.webform-submission-form {
   select {
     @include font($acumin-semi-cond, "regular", "normal");
     @include font-line-height(18, 22);
-    align-items: center;
-    background-color: $white;
-    border-radius: 3px;
-    border: 1px solid #c9c9c9;
-    box-sizing: border-box;
-    color: $black;
-    display: flex;
-    height: 48px;
-    justify-content: center;
-    width: 100%;
-    max-width: 100%;
-    padding: 0 12px;
-    transition: all 0.3s ease-in;
+    & {
+      align-items: center;
+      background-color: $white;
+      border-radius: 3px;
+      border: 1px solid #c9c9c9;
+      box-sizing: border-box;
+      color: $black;
+      display: flex;
+      height: 48px;
+      justify-content: center;
+      width: 100%;
+      max-width: 100%;
+      padding: 0 12px;
+      transition: all 0.3s ease-in;
+    }
     @include hocus() {
       border-color: $true-black;
       outline: none;
@@ -213,7 +219,9 @@ form.webform-submission-form {
     label {
       @include font($acumin-semi-cond, "regular", "normal");
       @include font-line-height(15, 15);
-      color: inherit;
+      & {
+        color: inherit;
+      }
     }
   }
 

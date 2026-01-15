@@ -38,11 +38,13 @@
     .addthisevent-drop {
       @extend .button;
       @include font-line-height(16, 18);
-      background-color: $white;
-      background-image: none;
-      border: 2px solid $brand-gold;
-      box-sizing: border-box;
-      padding: 18px 38px;
+      & {
+        background-color: $white;
+        background-image: none;
+        border: 2px solid $brand-gold;
+        box-sizing: border-box;
+        padding: 18px 38px;
+      }
 
       &:hover {
         background-color: $light-grey;
@@ -55,11 +57,13 @@
 
     .addthisevent_dropdown {
       @include font($acumin-semi-cond, "regular");
-      border-radius: 0 0 3px 3px;
-      border: none;
-      margin-left: 0;
-      padding: 0;
-      width: 100%;
+      & {
+        border-radius: 0 0 3px 3px;
+        border: none;
+        margin-left: 0;
+        padding: 0;
+        width: 100%;
+      }
 
       span {
         padding: 10px;
@@ -247,7 +251,9 @@ a.backlink {
   @include font("acumin-pro", "normal");
   @include font-line-height(12, 26);
 
-  text-decoration: none;
+  & {
+    text-decoration: none;
+  }
 
   @include hocus {
     text-decoration: underline;

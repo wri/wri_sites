@@ -1,7 +1,8 @@
 .has-gold-background-color .image-cta .button {
   background-color: $white;
   border-color: $white;
-  transition: background-color $transition-defaults,
+  transition:
+    background-color $transition-defaults,
     border-color $transition-defaults;
 
   @include hocus() {

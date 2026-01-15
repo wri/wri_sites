@@ -80,10 +80,12 @@
   .visit-on-social {
     @include font($caslon, "italic");
     @include font-line-height(15, 16);
-    display: block;
-    margin-bottom: $space-xs;
-    text-decoration: none;
-    white-space: nowrap;
+    & {
+      display: block;
+      margin-bottom: $space-xs;
+      text-decoration: none;
+      white-space: nowrap;
+    }
 
     @include hocus() {
       text-decoration: underline;
@@ -113,42 +115,54 @@
     .sidebar {
       @include mq($ph) {
         @include column-width(1, 5);
-        align-self: start;
-        grid-row: 1;
-        order: 1;
+        & {
+          align-self: start;
+          grid-row: 1;
+          order: 1;
+        }
       }
       @include mq($lg) {
         @include column-width(10, 13);
-        order: 2;
-        grid-row: 2 / 3;
+        & {
+          order: 2;
+          grid-row: 2 / 3;
+        }
       }
     }
     .main-content {
       @include mq($ph) {
         @include column-width(5, 13);
-        grid-row: 2 / 4;
-        order: 3;
+        & {
+          grid-row: 2 / 4;
+          order: 3;
+        }
       }
       @include mq($lg) {
         @include column-width(4, 10);
-        order: 1;
+        & {
+          order: 1;
+        }
       }
     }
     .publication__image {
       @include mq($ph) {
         @include column-width(1, 5);
-        align-self: start;
-        order: 2;
-        grid-row: 2 / 3;
-        margin-top: 50px;
-        display: none;
+        & {
+          align-self: start;
+          order: 2;
+          grid-row: 2 / 3;
+          margin-top: 50px;
+          display: none;
+        }
       }
       @include mq($lg) {
         @include column-width(2, 4);
-        order: 0;
-        grid-row: 2;
-        margin-top: 0;
-        display: block;
+        & {
+          order: 0;
+          grid-row: 2;
+          margin-top: 0;
+          display: block;
+        }
       }
     }
   }
@@ -190,42 +204,54 @@
     .main-content {
       @include mq($ph) {
         @include column-width(1, 13);
-        grid-row: initial;
-        order: initial;
+        & {
+          grid-row: initial;
+          order: initial;
+        }
       }
       @include mq($md) {
         // Duplicating the md size for Microsites, overridden at $ph below.
         @include column-width(5, 13);
-        grid-row: 2 / 4;
-        order: 3;
+        & {
+          grid-row: 2 / 4;
+          order: 3;
+        }
       }
       @include mq($lg) {
         @include column-width(4, 10);
-        order: 1;
+        & {
+          order: 1;
+        }
       }
     }
     .publication__image {
       @include mq($ph) {
         @include column-width(1, 13);
-        grid-row: initial;
-        display: block;
-        order: initial;
-        margin-top: 0;
+        & {
+          grid-row: initial;
+          display: block;
+          order: initial;
+          margin-top: 0;
+        }
       }
 
       @include mq($md) {
         // Duplicating the md size for Microsites, overridden at $ph below.
         @include column-width(1, 5);
-        order: 2;
-        grid-row: 2 / 3;
+        & {
+          order: 2;
+          grid-row: 2 / 3;
+        }
       }
 
       @include mq($lg) {
         @include column-width(2, 4);
-        order: 0;
-        grid-row: 2;
-        margin-top: 0;
-        display: block;
+        & {
+          order: 0;
+          grid-row: 2;
+          margin-top: 0;
+          display: block;
+        }
       }
     }
   }

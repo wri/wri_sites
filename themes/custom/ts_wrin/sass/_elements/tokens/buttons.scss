@@ -90,7 +90,9 @@ button.btn-underline {
   &:focus-within {
     svg {
       @include keyframes_animate(float, 400ms, infinite, alternate);
-      fill: var(--primary);
+      & {
+        fill: var(--primary);
+      }
     }
     @keyframes float {
       from {

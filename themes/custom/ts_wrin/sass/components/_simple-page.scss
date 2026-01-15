@@ -35,16 +35,20 @@
 
   .layout__region--menu {
     @include center-columns($grid-columns-mobile, $grid-columns-mobile);
-    order: -1;
-    margin-top: 16px;
-    min-height: 46px;
+    & {
+      order: -1;
+      margin-top: 16px;
+      min-height: 46px;
+    }
     @include mq($ph) {
       @include center-columns($grid-columns, $grid-columns);
     }
     @include mq($md) {
       @include column-width(10, 12);
-      margin-top: 0;
-      order: 1;
+      & {
+        margin-top: 0;
+        order: 1;
+      }
     }
   }
 
@@ -57,11 +61,15 @@
   .intro-wrapper {
     @include font($acumin-semi-cond, "semibold");
     @include font-line-height(20, 24);
-    margin-bottom: 0;
+    & {
+      margin-bottom: 0;
+    }
 
     @include mq($md) {
       @include font-line-height(24, 32);
-      margin-bottom: 0;
+      & {
+        margin-bottom: 0;
+      }
     }
   }
 
@@ -114,7 +122,9 @@
   @extend .grid;
   @extend .margin-top-xl;
   @extend .margin-bottom-xl;
-  position: relative;
+  & {
+    position: relative;
+  }
 
   &:before {
     content: "";
@@ -132,29 +142,39 @@
 
   .field--name-field-title {
     @include column-width(1, -1);
-    grid-row: 2;
-    margin-top: 0;
+    & {
+      grid-row: 2;
+      margin-top: 0;
+    }
 
     @include mq($md) {
       @include column-width(2, 6);
-      grid-row: 1;
-      margin-top: $space-md;
+      & {
+        grid-row: 1;
+        margin-top: $space-md;
+      }
     }
 
     h2 {
       @include font($acumin-semi-cond, bold);
       @include font-line-height(32, 40);
-      margin: 0;
+      & {
+        margin: 0;
+      }
     }
   }
 
   .field--name-field-body {
     @include column-width(1, -1);
-    grid-row: 3;
+    & {
+      grid-row: 3;
+    }
 
     @include mq($md) {
       @include column-width(6, 12);
-      grid-row: 1;
+      & {
+        grid-row: 1;
+      }
     }
 
     p {
@@ -235,8 +255,10 @@
 
   .right {
     @include center-columns($grid-columns-mobile, $grid-columns-mobile);
-    margin-top: $space-sm;
-    margin-bottom: $space-sm;
+    & {
+      margin-top: $space-sm;
+      margin-bottom: $space-sm;
+    }
 
     @include mq($ph) {
       @include center-columns($grid-columns, $grid-columns);
@@ -272,14 +294,16 @@
 
   .field-label {
     @include font($acumin-semi-cond, "normal");
-    border-radius: 3px;
-    border: 1px solid $black;
-    display: flex;
-    font-style: normal;
-    justify-content: space-between;
-    margin-bottom: 0;
-    margin-left: 0;
-    padding: rem(10);
+    & {
+      border-radius: 3px;
+      border: 1px solid $black;
+      display: flex;
+      font-style: normal;
+      justify-content: space-between;
+      margin-bottom: 0;
+      margin-left: 0;
+      padding: rem(10);
+    }
 
     & > a {
       color: $black;

@@ -62,8 +62,10 @@
 
   @include font($acumin-semi-cond, "bold");
   @include font-line-height(18, 21);
-  position: relative;
-  z-index: 51;
+  & {
+    position: relative;
+    z-index: 51;
+  }
 
   &.sticky {
     position: fixed;
@@ -101,9 +103,11 @@
     .menu > ul > li > a {
       @include font($caslon, "bold", "italic");
       @include font-line-height(18, 18);
-      display: block;
-      margin-bottom: 5px;
-      position: relative;
+      & {
+        display: block;
+        margin-bottom: 5px;
+        position: relative;
+      }
 
       @include mq($md) {
         margin-right: 0;

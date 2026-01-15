@@ -3,7 +3,7 @@
  *
  * WRI Maps with SVG loading and resize debounce.
  */
-export default function(context) {
+export default function (context) {
   const $ = jQuery;
 
   // SVG loading logic with debounce.
@@ -19,18 +19,18 @@ export default function(context) {
 
     if (window.innerWidth >= 765 && !mapContainer.dataset.loaded) {
       fetch(svgUrl)
-        .then(response => {
+        .then((response) => {
           if (response.ok) {
             return response.text();
           }
           throw new Error("SVG could not be loaded.");
         })
-        .then(svgContent => {
+        .then((svgContent) => {
           mapContainer.innerHTML = svgContent;
           mapContainer.dataset.loaded = true;
           processRegionMapNodes(context);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
     }
@@ -43,11 +43,11 @@ export default function(context) {
 
   // Function to process .wri-region-map nodes.
   function processRegionMapNodes(context) {
-    $(".wri-region-map", context).each(function() {
+    $(".wri-region-map", context).each(function () {
       let $map = $(this);
       let nids = [];
 
-      $map.find("svg > g").each(function() {
+      $map.find("svg > g").each(function () {
         let matches = $(this)
           .attr("id")
           .match(/^node-(\d+)/, "");
@@ -59,14 +59,14 @@ export default function(context) {
       if (nids.length) {
         $.ajax("/wri_maps/region-map/json", {
           data: { nids: nids },
-          success: function(result) {
-            $.each(result, function(nid, data) {
+          success: function (result) {
+            $.each(result, function (nid, data) {
               $map
                 .find("svg > g[id='node-" + nid + "']")
                 .addClass(data.type)
                 .attr("aria-label", data.title)
                 .attr("tabindex", "0")
-                .on("click keypress", function(event) {
+                .on("click keypress", function (event) {
                   if (event.type == "click" || event.keyCode == 13) {
                     if ($(window).width() < 768) {
                       // Open region map popup on small screens.
@@ -81,7 +81,7 @@ export default function(context) {
                   }
                 });
             });
-          }
+          },
         });
       }
     });

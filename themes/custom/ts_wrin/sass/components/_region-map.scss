@@ -14,7 +14,9 @@
   .intro {
     @include center-columns($grid-columns-mobile, $grid-columns-mobile);
     /* line text up with border. */
-    margin-top: -0.5rem;
+    & {
+      margin-top: -0.5rem;
+    }
 
     &.margin-bottom-md {
       @media (max-width: rem(767)) {
@@ -93,7 +95,9 @@
   svg > g.region {
     text {
       @include font($caslon, "italic");
-      color: $black;
+      & {
+        color: $black;
+      }
     }
   }
 
@@ -114,7 +118,9 @@
     text {
       display: none;
       @include font($acumin-semi-cond, "medium");
-      color: $black;
+      & {
+        color: $black;
+      }
 
       @include mq($md) {
         display: block;

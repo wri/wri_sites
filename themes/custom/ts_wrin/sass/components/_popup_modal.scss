@@ -114,8 +114,10 @@
 
     @include mq($md) {
       @include font-line-height(18, 28);
-      padding-right: rem(23);
-      margin-bottom: $space-sm;
+      & {
+        padding-right: rem(23);
+        margin-bottom: $space-sm;
+      }
     }
   }
 
@@ -166,7 +168,9 @@
 .simple-popup-blocks-global {
   .spb-popup-main-wrapper {
     max-width: 100%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+    box-shadow:
+      0 4px 8px 0 rgba(0, 0, 0, 0.5),
+      0 6px 20px 0 rgba(0, 0, 0, 0.5);
     max-height: calc(100% - 40px);
   }
 
@@ -205,21 +209,27 @@
     label {
       @include font($acumin-semi-cond, "regular");
       @include font-line-height(14, 18);
-      padding-top: 2px;
+      & {
+        padding-top: 2px;
+      }
     }
     input[type="text"],
     input[type="email"] {
       @include font($acumin-semi-cond, "regular");
       @include font-line-height(14, 18);
-      height: 46px;
-      padding: 15px 10px 12px;
-      background-color: $white;
+      & {
+        height: 46px;
+        padding: 15px 10px 12px;
+        background-color: $white;
+      }
     }
     input[type="submit"] {
       @include font($acumin-semi-cond, "semibold");
       @include font-line-height(13, 16);
-      height: 40px;
-      padding: 12px 40px;
+      & {
+        height: 40px;
+        padding: 12px 40px;
+      }
     }
   }
   .has-blue-background-color,
@@ -229,8 +239,10 @@
       color: $white;
       @include mq($md) {
         @include text-underline-thin(transparent, $black);
-        background-position: left 100%;
-        color: $black;
+        & {
+          background-position: left 100%;
+          color: $black;
+        }
       }
     }
   }

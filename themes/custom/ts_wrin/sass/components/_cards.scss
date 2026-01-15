@@ -1,3 +1,5 @@
+@use "sass:math";
+
 // Large card (3 + 1 block)
 .card {
   .card-text {
@@ -52,7 +54,7 @@
 
   .button.small {
     margin-left: 0;
-    margin-top: $space-xs/2;
+    margin-top: math.div($space-xs, 2);
   }
 }
 
@@ -76,9 +78,11 @@
 
   a {
     @include text-underline(transparent, $black);
-    background-position: left 100%;
-    color: $black;
-    text-decoration: none;
+    & {
+      background-position: left 100%;
+      color: $black;
+      text-decoration: none;
+    }
   }
 
   &.medium {

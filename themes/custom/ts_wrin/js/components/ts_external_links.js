@@ -16,7 +16,9 @@ export default function (context) {
   $("a[href^=http]", context).each(function () {
     const $this = $(this);
     const href = $this.attr("href") || "";
-    const isInternal = href.indexOf(location.hostname) >= 0 && href.indexOf(location.hostname) <= 8;
+    const isInternal =
+      href.indexOf(location.hostname) >= 0 &&
+      href.indexOf(location.hostname) <= 8;
 
     // Skip .site-logo links
     if ($this.hasClass("site-logo")) return;
@@ -57,7 +59,11 @@ export default function (context) {
 
   // Add SVG icon to links in #main-content that open in new windows
   $("#main-content a", context).each(function () {
-    if (this.hasAttribute("target") && !this.classList.contains("button") && !$(this).find("svg.offsite-link").length) {
+    if (
+      this.hasAttribute("target") &&
+      !this.classList.contains("button") &&
+      !$(this).find("svg.offsite-link").length
+    ) {
       $(this).append(svgIcon);
     }
   });

@@ -3,7 +3,9 @@
   background-color: $black;
   @include font($acumin-semi-cond, light);
   @include font-line-height(14, 22);
-  color: $white;
+  & {
+    color: $white;
+  }
 }
 
 .region-footer-top {
@@ -101,8 +103,10 @@
   p {
     @include font($acumin-semi-cond);
     @include font-line-height(14, 22);
-    color: $white;
-    text-decoration: none;
+    & {
+      color: $white;
+      text-decoration: none;
+    }
   }
 
   .footer-logo {
@@ -131,18 +135,22 @@
 
   .block-menu:not(.menu--social-menu) ul.menu a {
     @include text-underline-thin(transparent, $white);
-    -webkit-font-smoothing: auto;
-    background-position: left 100%;
-    font-weight: 300;
-    letter-spacing: 0.5px;
+    & {
+      -webkit-font-smoothing: auto;
+      background-position: left 100%;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
   }
 
   .menu--footer-main ul.menu li.menu-item a,
   .menu--footer-secondary > ul.menu > li.menu-item > .menu-item-title a {
     @include text-underline(transparent, $white);
-    -webkit-font-smoothing: antialiased;
-    background-position: left 100%;
-    font-weight: 700;
+    & {
+      -webkit-font-smoothing: antialiased;
+      background-position: left 100%;
+      font-weight: 700;
+    }
   }
 
   .region-footer-left,
@@ -298,7 +306,8 @@
     }
   }
 
-  $social-icons: facebook twitter linkedin youtube instagram wechat weibo bluesky threads;
+  $social-icons: facebook twitter linkedin youtube instagram wechat weibo
+    bluesky threads;
   @each $icon in $social-icons {
     a.#{$icon} {
       background: transparent

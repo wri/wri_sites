@@ -31,8 +31,10 @@
     a.more-open-close {
       @include font($acumin-semi-cond, "normal");
       @include font-line-height(14, 18);
-      font-style: normal;
-      text-decoration: none;
+      & {
+        font-style: normal;
+        text-decoration: none;
+      }
     }
 
     @include mq($lg) {

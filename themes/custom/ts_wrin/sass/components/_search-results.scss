@@ -17,9 +17,11 @@
   .tags li {
     @include font($acumin-semi-cond, "medium", "normal");
     @include font-line-height(11, 14);
-    background-position: left 100%;
-    text-decoration: none;
-    text-transform: capitalize;
+    & {
+      background-position: left 100%;
+      text-decoration: none;
+      text-transform: capitalize;
+    }
     &:after {
       content: ", ";
     }
@@ -46,10 +48,14 @@
     }
     .topic-tag a {
       @include font-line-height(12, 18);
-      letter-spacing: 0.7px;
+      & {
+        letter-spacing: 0.7px;
+      }
       @include mq($md) {
         @include font-line-height(15, 22);
-        letter-spacing: 0.9px;
+        & {
+          letter-spacing: 0.9px;
+        }
       }
     }
     .tags {
@@ -63,8 +69,10 @@
     }
     .content-type-region a {
       @include text-underline-thin(transparent, $black);
-      background-position: left 100%;
-      text-decoration: none;
+      & {
+        background-position: left 100%;
+        text-decoration: none;
+      }
     }
   }
   .search-results-text {
@@ -85,13 +93,17 @@
     .event-info-item-past {
       @include font($acumin-semi-cond, "bold", "normal");
       @include font-line-height(14, 18);
-      color: $blue;
+      & {
+        color: $blue;
+      }
     }
     .post-date {
       @include font($acumin-semi-cond, "light", "normal");
       @include font-line-height(11, 14);
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
+      & {
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+      }
     }
     h3.h3 {
       margin-bottom: 20px;
@@ -105,8 +117,10 @@
       @include font($acumin-semi-cond, "bold", "normal");
       @include font-line-height(24, 30);
       @include text-underline(transparent, $black);
-      background-position: left 100%;
-      text-decoration: none;
+      & {
+        background-position: left 100%;
+        text-decoration: none;
+      }
     }
     .tags {
       display: none;
@@ -171,7 +185,7 @@ li.search-results {
   }
   .pager__items .pager__item--last,
   .pager__items .pager__item--first,
-  .pager-show-next & .pager__item--next{
+  .pager-show-next & .pager__item--next {
     align-items: center;
     border: 1px solid $black;
     bottom: 2px;
@@ -190,7 +204,9 @@ li.search-results {
   .pager__items a {
     @include font($acumin-semi-cond, "bold", "normal");
     @include font-line-height(18, 24);
-    text-decoration: none;
+    & {
+      text-decoration: none;
+    }
   }
   .pager__items .pager__item.is-active a {
     color: $green;

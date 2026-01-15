@@ -34,10 +34,6 @@ header:not(.pfp-header) {
   padding-bottom: 0;
   padding-top: 0;
   position: absolute;
-
-  @media print {
-    position: relative;
-  }
   top: 0;
   transition: all 0.2s linear;
   width: 100%;
@@ -68,6 +64,10 @@ header:not(.pfp-header) {
     background-color: transparent;
   }
 
+  @media print {
+    position: relative;
+  }
+
   @media (max-width: rem(768)) {
     .site-logo {
       display: inline-block;
@@ -87,7 +87,6 @@ header:not(.pfp-header) {
 }
 
 .header-wrapper {
-  @include container-padding;
   align-items: center;
   border-bottom: 1px solid $light-grey;
   box-sizing: border-box;
@@ -100,6 +99,8 @@ header:not(.pfp-header) {
   top: 2px;
   transition: background-color $transition-defaults;
   height: 72px;
+
+  @include container-padding;
 
   @include mq($md) {
     border-bottom: none;
@@ -179,22 +180,26 @@ header:not(.pfp-header) {
       &::before {
         @include font($acumin-semi-cond, "regular");
         @include font-line-height(14, 22);
-        background: $black;
-        border-radius: 5px 0 0 5px;
-        color: $brand-gold;
-        content: "Filter Site by Topic";
-        height: 30px;
-        left: -30px;
-        opacity: 0;
-        overflow: hidden;
-        padding: rem(5) rem(20) 0;
-        position: absolute;
-        text-align: left;
-        top: 0;
-        transition: left 0.65s ease-in-out, width 0.65s ease-in-out;
-        white-space: nowrap;
-        width: 0;
-        z-index: -1;
+        & {
+          background: $black;
+          border-radius: 5px 0 0 5px;
+          color: $brand-gold;
+          content: "Filter Site by Topic";
+          height: 30px;
+          left: -30px;
+          opacity: 0;
+          overflow: hidden;
+          padding: rem(5) rem(20) 0;
+          position: absolute;
+          text-align: left;
+          top: 0;
+          transition:
+            left 0.65s ease-in-out,
+            width 0.65s ease-in-out;
+          white-space: nowrap;
+          width: 0;
+          z-index: -1;
+        }
       }
     }
 
@@ -355,11 +360,13 @@ header nav.menu--main .menu-wrapper > ul.menu {
   li a {
     @include font($acumin-pro, "bold", "normal");
     @include font-line-height(15, 18);
-    color: $black;
-    letter-spacing: 0.91px;
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: all 0.2s linear;
+    & {
+      color: $black;
+      letter-spacing: 0.91px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all 0.2s linear;
+    }
     @include hocus {
       color: $med-grey;
       outline: none;
@@ -434,9 +441,11 @@ header nav.menu--main.has-active-trail .menu-wrapper > ul.menu {
   li a {
     @include font($acumin-semi-cond, "bold", "normal");
     @include font-line-height(14, 17);
-    color: $black;
-    letter-spacing: normal;
-    text-transform: none;
+    & {
+      color: $black;
+      letter-spacing: normal;
+      text-transform: none;
+    }
     @include hocus {
       color: $med-grey;
       outline: none;
@@ -445,9 +454,11 @@ header nav.menu--main.has-active-trail .menu-wrapper > ul.menu {
   & > li > a {
     @include font($caslon, "normal", "italic");
     @include font-line-height(15, 15);
-    margin-right: $space-xs;
-    position: relative;
-    top: 2px;
+    & {
+      margin-right: $space-xs;
+      position: relative;
+      top: 2px;
+    }
     @include mq($md) {
       margin-right: 0;
       top: 0;
@@ -540,12 +551,14 @@ header nav.menu--secondary > ul.menu {
   li a {
     @include font($acumin-pro, "bold", "normal");
     @include font-line-height(15, 17);
-    letter-spacing: normal;
-    text-decoration: none;
-    text-transform: capitalize;
-    position: relative;
-    bottom: -1px;
-    transition: color 0.2s linear;
+    & {
+      letter-spacing: normal;
+      text-decoration: none;
+      text-transform: capitalize;
+      position: relative;
+      bottom: -1px;
+      transition: color 0.2s linear;
+    }
     @include hocus {
       color: $med-grey;
       outline: none;
@@ -569,22 +582,24 @@ header nav.menu--donate > ul.menu {
   li a {
     @include font($acumin-semi-cond, "bold", "normal");
     @include font-line-height(12, 17);
-    align-items: center;
-    background-color: transparent;
-    border-radius: 3px;
-    border: 1px solid $brand-gold;
-    color: $black;
-    display: flex;
-    height: 32px;
-    justify-content: center;
-    letter-spacing: 0.43px;
-    padding: 1px 0 0 0;
-    position: relative;
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: all 0.2s linear;
-    top: -3px;
-    width: 76px;
+    & {
+      align-items: center;
+      background-color: transparent;
+      border-radius: 3px;
+      border: 1px solid $brand-gold;
+      color: $black;
+      display: flex;
+      height: 32px;
+      justify-content: center;
+      letter-spacing: 0.43px;
+      padding: 1px 0 0 0;
+      position: relative;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all 0.2s linear;
+      top: -3px;
+      width: 76px;
+    }
 
     .path-frontpage &,
     .white & {
