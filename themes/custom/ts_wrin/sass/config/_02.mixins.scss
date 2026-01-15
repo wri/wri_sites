@@ -446,36 +446,6 @@ Reference: https://www.drupal.org/docs/8/accessibility/hide-content-properly.*/
   }
 }
 
-// Keyframes
-@mixin keyframes_details($name) {
-  @-webkit-keyframes #{$name} {
-    @content;
-  }
-  @keyframes #{$name} {
-    @content;
-  }
-}
-
-@mixin keyframes_animate(
-  $name,
-  $duration: 1s,
-  $iteration-count: 1,
-  $direction: normal
-) {
-  -webkit-animation-name: $name;
-  -webkit-animation-duration: $duration;
-  -webkit-animation-iteration-count: $iteration-count;
-  -webkit-animation-direction: $direction;
-  animation-name: $name;
-  animation-duration: $duration;
-  animation-iteration-count: $iteration-count;
-  animation-direction: $direction;
-
-  @include keyframes_details($name) {
-    @content;
-  }
-}
-
 /* UNIQUE TO PROJECT */
 
 // For containers that need 'standard padding' (i.e., not full-width).

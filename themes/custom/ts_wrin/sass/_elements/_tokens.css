@@ -1,0 +1,53 @@
+:root {
+  /* Colors */
+  --color-black: #000;
+  --color-white: #ffffff;
+
+  --color-neutral-900: #1a1919;
+  --color-neutral-800: #686767;
+  --color-neutral-600: #757575;
+  --color-neutral-500: #898989;
+  --color-neutral-400: #B1B1B1;
+  --color-neutral-200: #e8e8e7;
+
+  --color-gold-500: #f3b229;
+  --color-gold-300: #ffd271;
+  --color-gold-100: #fbe8be;
+
+  --color-teal-500: #1b808d;
+  --color-blue-500: #3654a5;
+  --color-green-500: #32864b;
+
+  /* Fonts */
+  --font-family-heading-condensed: 'acumin-pro-semi-condensed', sans-serif;
+  --font-family-heading: 'acumin-pro', sans-serif;
+  --font-family-serif: 'adobe-caslon-pro', serif;
+
+  /* Spacing */
+  --spacer-40: 160px;
+  --spacer-30: 120px;
+  --spacer-25: 100px;
+  --spacer-20: 80px;
+  --spacer-15: 60px;
+  --spacer-12: 48px;
+  --spacer-11: 45px;
+  --spacer-10: 40px;
+  --spacer-7: 30px;
+  --spacer-6: 24px;
+  --spacer-5: 20px;
+  --spacer-4: 16px;
+  --spacer-3: 12px;
+  --spacer-2: 8px;
+  --spacer-1: 4px;
+
+  /* Grid + layout (not in Tailwind yet, but useful for S/R) */
+  --grid-max-width: 1390px;
+  --grid-max-width-xxl: 1575px;
+  --site-max-width: 3000px;
+
+  --grid-gutter-mobile: 20px;
+  --padding-vertical: 48px;
+
+  /* Motion */
+  --transition-default: 0.2s linear;
+}

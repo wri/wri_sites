@@ -136,3 +136,12 @@ $grid-columns: 12;
 
 // Transitions
 $transition-defaults: 0.2s linear;
+
+@keyframes float {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(0.25em);
+  }
+}

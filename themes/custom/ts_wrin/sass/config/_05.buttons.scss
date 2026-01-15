@@ -244,10 +244,7 @@ a.arrow-link {
 
   @include hocus {
     svg {
-      @include keyframes_animate(float, 400ms, infinite, alternate) {
-        from { transform: translateX(0); }
-        to { transform: translateX(0.25em); }
-      }
+      animation: float 400ms infinite alternate;
       & {
         fill: $black;
       }

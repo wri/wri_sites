@@ -1,5 +1,9 @@
+/* Tokens first (CSS vars) */
+@import "_elements/_tokens.css";
+
 @tailwind base;
 @tailwind components;
+@import "tailwind-components.scss";
 @tailwind utilities;
 
 @import "config/_01.vars.scss";
@@ -10,7 +14,6 @@
   @import "config/_04.base.scss";
   @import "config/_05.buttons.scss";
   @import "config/_06.forms.scss";
-  @import "_elements/tokens/colors-text-bg.scss";
   /* GLOBAL */
   @import "global/_wysiwyg.scss";
   @import "components/_teaser.scss";
@@ -54,12 +57,12 @@
   .node-article-edit-form .field--name-body &,
   .node-publication-form .field--name-body &,
   .node-article-form .field--name-body & {
-    @include font($caslon, "regular");
-    @include font-line-height(20, 30);
-    & {
-      -moz-osx-font-smoothing: grayscale;
-      -webkit-font-smoothing: antialiased;
-      color: $black;
-    }
+    font-family: var(--font-family-serif);
+    font-size: 1.25rem;
+    line-height: 1.5;
+
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    color: var(--color-neutral-900);
   }
 }
