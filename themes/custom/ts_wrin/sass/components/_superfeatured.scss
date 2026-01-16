@@ -24,7 +24,7 @@
   }
 
   .left-text-wrapper {
-    background: $white;
+    background: var(--color-white);
     margin-top: rem(-25);
     width: 93%;
     max-width: 87%;
@@ -38,8 +38,10 @@
 
     @include mq($md) {
       @include column-width(1, 8);
-      margin-top: rem(-50);
-      width: 100%;
+      & {
+        margin-top: rem(-50);
+        width: 100%;
+      }
     }
 
     @include mq($lg) {
@@ -69,7 +71,7 @@
       a {
         text-decoration: none;
         @include hocus {
-          color: $green;
+          color: var(--color-green-500);
         }
       }
 
@@ -96,7 +98,9 @@
 
     @include mq($md) {
       @include column-width(8, 13);
-      margin-top: 2rem;
+      & {
+        margin-top: 2rem;
+      }
     }
 
     @include mq($lg) {

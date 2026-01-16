@@ -1,10 +1,10 @@
 body.user-logged-in {
   .block-local-tasks-block .tabs {
-    background-color: $black;
+    background-color: var(--color-neutral-900);
     border-radius: 0 rem(3) rem(3) 0;
-    box-shadow: rem(3) rem(5) rem(5) rgba($black, 0.4);
-    padding-top: $space-sm;
-    padding-bottom: $space-sm;
+    box-shadow: rem(3) rem(5) rem(5) rgba(var(--color-neutral-900), 0.4);
+    padding-top: var(--spacer-7);
+    padding-bottom: var(--spacer-7);
     position: fixed;
     width: rem(200);
     left: -200px;
@@ -12,9 +12,9 @@ body.user-logged-in {
     z-index: 1000;
 
     .tabs-toggle {
-      background: $black;
-      box-shadow: rem(3) rem(5) rem(5) rgba($black, 0.4);
-      color: $brand-gold;
+      background: var(--color-neutral-900);
+      box-shadow: rem(3) rem(5) rem(5) rgba(var(--color-neutral-900), 0.4);
+      color: var(--color-gold-500);
       cursor: pointer;
       display: block;
       padding-top: 4px;
@@ -26,8 +26,8 @@ body.user-logged-in {
       text-align: center;
 
       .arrow {
-        background: $black url("../img/tabs/chevron-right.svg") no-repeat center
-          center;
+        background: var(--color-neutral-900)
+          url("../img/tabs/chevron-right.svg") no-repeat center center;
         background-size: 50%;
         display: block;
         width: rem(40);
@@ -47,7 +47,7 @@ body.user-logged-in {
     }
 
     ul li a {
-      color: $brand-gold;
+      color: var(--color-gold-500);
       font-size: rem(18);
       padding-top: 0.5rem;
       padding-bottom: 0.5rem;
@@ -55,7 +55,7 @@ body.user-logged-in {
       &:focus,
       &.is-active,
       &:hover {
-        background-color: rgba($black, 0.4);
+        background-color: rgba(var(--color-neutral-900), 0.4);
         text-decoration: underline;
         text-underline-position: under;
       }
@@ -67,8 +67,8 @@ body.user-logged-in {
       background-size: rem(20);
 
       @include hocus {
-        background: rgba($black, 0.4) url("../img/tabs/view.svg") no-repeat 95%
-          center;
+        background: rgba(var(--color-neutral-900), 0.4)
+          url("../img/tabs/view.svg") no-repeat 95% center;
         background-size: rem(20);
       }
     }
@@ -78,8 +78,8 @@ body.user-logged-in {
       background-size: rem(20);
 
       @include hocus {
-        background: rgba($black, 0.4) url("../img/tabs/shortcut.svg") no-repeat
-          95% center;
+        background: rgba(var(--color-neutral-900), 0.4)
+          url("../img/tabs/shortcut.svg") no-repeat 95% center;
         background-size: rem(20);
       }
     }
@@ -89,8 +89,8 @@ body.user-logged-in {
       background-size: rem(20);
 
       @include hocus {
-        background: rgba($black, 0.4) url("../img/tabs/edit.svg") no-repeat 95%
-          center;
+        background: rgba(var(--color-neutral-900), 0.4)
+          url("../img/tabs/edit.svg") no-repeat 95% center;
         background-size: rem(20);
       }
     }
@@ -100,8 +100,8 @@ body.user-logged-in {
       background-size: rem(20);
 
       @include hocus {
-        background: rgba($black, 0.4) url("../img/tabs/delete.svg") no-repeat
-          95% center;
+        background: rgba(var(--color-neutral-900), 0.4)
+          url("../img/tabs/delete.svg") no-repeat 95% center;
         background-size: rem(20);
       }
     }
@@ -111,8 +111,8 @@ body.user-logged-in {
       background-size: rem(20);
 
       @include hocus {
-        background: rgba($black, 0.4) url("../img/tabs/manage-display.svg")
-          no-repeat 95% center;
+        background: rgba(var(--color-neutral-900), 0.4)
+          url("../img/tabs/manage-display.svg") no-repeat 95% center;
         background-size: rem(20);
       }
     }
@@ -122,8 +122,8 @@ body.user-logged-in {
       background-size: rem(20);
 
       @include hocus {
-        background: rgba($black, 0.4) url("../img/tabs/revisions.svg") no-repeat
-          95% center;
+        background: rgba(var(--color-neutral-900), 0.4)
+          url("../img/tabs/revisions.svg") no-repeat 95% center;
         background-size: rem(20);
       }
     }
@@ -133,8 +133,8 @@ body.user-logged-in {
       background-size: rem(20);
 
       @include hocus {
-        background: rgba($black, 0.4) url("../img/tabs/devel.svg") no-repeat 95%
-          center;
+        background: rgba(var(--color-neutral-900), 0.4)
+          url("../img/tabs/devel.svg") no-repeat 95% center;
         background-size: rem(20);
       }
     }
@@ -144,8 +144,8 @@ body.user-logged-in {
       background-size: rem(20);
 
       @include hocus {
-        background: rgba($black, 0.4) url("../img/tabs/translations.svg")
-          no-repeat 95% center;
+        background: rgba(var(--color-neutral-900), 0.4)
+          url("../img/tabs/translations.svg") no-repeat 95% center;
         background-size: rem(20);
       }
     }

@@ -1,74 +1,8 @@
 /***
  * @file
- * VARIABLES - See theme Readme for more details.
+ * Misc Sass Variables.
+ * For CSS properties, see /sass/_elements/tokens.css
  */
-
-/* DEPRECATED COLORS */
-// @TODO: replace sass variable instances with css custom properties, and delete scss variables.
-$true-black: #000000;
-$black: #1a1919;
-$hover-black: #686767;
-$light-grey: #e8e8e7;
-$light-gray: $light-grey;
-$med-grey: #757575;
-$med-gray: $med-grey;
-$med-light-grey: #B1B1B1;
-$med-light-gray: $med-light-grey;
-$white: #ffffff;
-
-$brand-gold: #f3b229;
-$gold-tint: #fbe8be;
-$gold-hover: #ffd271;
-$green: #32864b;
-$teal: #1b808d;
-$blue: #3654a5;
-
-// USE CSS CUSTOM PROPERTIES DEFINED HERE.
-:root {
-  /* Formerly: True Black */
-  --color-black: #000;
-  /* Formerly: Brand Black */
-  --color-neutral-900: #1a1919;
-  /* Formerly: Hover Black */
-  --color-neutral-800: #686767;
-  /* Formerly: Med grey | Med gray */
-  --color-neutral-600: #757575;
-  /* FOUND IN FOOTER */
-  --color-neutral-500: #898989;
-  /* Formerly: Med Light grey | Med Light gray */
-  --color-neutral-400: #B1B1B1;
-  /* Formerly: Light grey | Light gray */
-  --color-neutral-200: #e8e8e7;
-  --color-white: #ffffff;
-
-  /* Formerly: Brand Gold */
-  --color-gold-500: #f3b229;
-  /* Formerly: Gold Hover */
-  --color-gold-300: #ffd271;
-  /* Formerly: Gold Tint */
-  --color-gold-100: #fbe8be;
-  /* Formerly: Teal */
-  --color-teal-500: #1b808d;
-  /* Formerly: Blue */
-  --color-blue-500: #3654a5;
-  /* Formerly: Green */
-  --color-green-500: #32864b;
-
-}
-
-/* FONTS */
-// Base Font Family
-// DEPRECATED SCSS VARIABLES: @todo: find instances of these variables and replace with CSS custom properties.
-$acumin-semi-cond: "acumin-pro-semi-condensed";
-$acumin-pro: "acumin-pro";
-$caslon: "adobe-caslon-pro";
-
-// USE CSS CUSTOM PROPERTIES DEFINED HERE.
-:root {
-  --font-family-heading-condensed: 'acumin-pro-semi-condensed', sans-serif;
-  --font-family-heading: 'acumin-pro', sans-serif;
-  --font-family-serif: 'adobe-caslon-pro', serif;
-}
 
 // Base Font Size
 $base-font-size: 16;
@@ -91,34 +25,6 @@ $xxl: 2000px;
 //Padding values
 $padding-vertical: 48px;
 
-// DEPRECATED Spacing values
-$space-xxs: 16px;
-$space-xs: 20px;
-$space-sm: 30px;
-$space-md: 45px;
-$space-lg: 60px;
-$space-xl: 120px;
-$space-xxl: 160px;
-
-// USE CSS CUSTOM PROPERTIES DEFINED HERE.
-:root {
-  --spacer-40: 160px;
-  --spacer-30: 120px;
-  --spacer-25: 100px;
-  --spacer-20: 80px;
-  --spacer-15: 60px;
-  --spacer-12: 48px;
-  --spacer-11: 45px;
-  --spacer-10: 40px;
-  --spacer-7: 30px;
-  --spacer-6: 24px;
-  --spacer-5: 20px;
-  --spacer-4: 16px;
-  --spacer-3: 12px;
-  --spacer-2: 8px;
-  --spacer-1: 4px;
-}
-
 /* GRID */
 $grid-max-width: 1390px; // Where the content begins and ends for desktops.
 $grid-max-width-xxl: 1575px; // Where the content begins and ends for xl screens.
@@ -133,6 +39,11 @@ $grid-columns-mobile: 4;
 $grid-columns: 12;
 
 /* MISC. */
-
-// Transitions
-$transition-defaults: 0.2s linear;
+@keyframes float {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(0.25em);
+  }
+}

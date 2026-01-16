@@ -1,4 +1,4 @@
 .wri-office {
-  @include font($acumin-semi-cond, "normal");
+  @include font(var(--font-family-heading-condensed), "normal");
   @include font-line-height(18);
 }

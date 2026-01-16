@@ -12,8 +12,8 @@
 
     & > li {
       border-radius: 3px;
-      border: 1px solid $light-grey;
-      color: $black;
+      border: 1px solid var(--color-neutral-200);
+      color: var(--color-neutral-900);
       display: block;
       padding: 0;
       position: relative;
@@ -22,7 +22,7 @@
 
       &:hover,
       &:focus-within {
-        background-color: $brand-gold;
+        background-color: var(--color-gold-500);
         cursor: pointer;
       }
     }
@@ -35,9 +35,11 @@
     }
     @include font-line-height(15, 40);
 
-    color: #fff;
-    display: block;
-    text-decoration: none;
+    & {
+      color: #fff;
+      display: block;
+      text-decoration: none;
+    }
 
     &.share-icon {
       background: transparent url("../img/svgs/share.svg") no-repeat;
@@ -60,8 +62,8 @@
 
   // Sub-nav
   ul > li > ul {
-    background: $light-grey;
-    border-top: 3px solid $white;
+    background: var(--color-neutral-200);
+    border-top: 3px solid var(--color-white);
     display: none;
     left: rem(-2);
     margin-top: 0;
@@ -90,7 +92,7 @@
       }
 
       a {
-        color: $black;
+        color: var(--color-neutral-900);
       }
     }
   }
@@ -126,7 +128,7 @@
       max-height: 28px;
     }
     &.weibo,
-    &.bluesky  {
+    &.bluesky {
       max-width: 25px;
       max-height: 25px;
     }
@@ -138,10 +140,12 @@
     }
   }
   a {
-    @include font($acumin-semi-cond, "bold");
-    @include text-underline(transparent, $black);
-    background-position: left 100%;
-    margin-right: rem(16);
+    @include font(var(--font-family-heading-condensed), "bold");
+    @include text-underline(transparent, var(--color-neutral-900));
+    & {
+      background-position: left 100%;
+      margin-right: rem(16);
+    }
   }
   a.handle {
     position: relative;

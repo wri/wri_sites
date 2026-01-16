@@ -5,16 +5,16 @@
 
   a.arrow-link {
     font-size: rem(24);
-    color: $white;
+    color: var(--color-white);
   }
 }
 
 .small-cta-wrapper.has-gold-background-color #CTA-content-blocks---large {
-  stroke: $black;
+  stroke: var(--color-neutral-900);
 }
 
 .small-cta-wrapper.has-light-gray-background-color {
   a.arrow-link {
-    color: $black;
+    color: var(--color-neutral-900);
   }
 }

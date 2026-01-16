@@ -1,0 +1,430 @@
+@layer components {
+
+/* Button and link styles. */
+.text-link {
+  color: var(--primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  &:hover,
+  &:focus-visible {
+    color: var(--action);
+  }
+}
+
+button.btn-underline {
+  background-color: unset;
+}
+
+.btn-solid {
+  background-color: var(--btn-solid-bg);
+  border-radius: 3px;
+  color: var(--btn-solid-text);
+  display: inline-flex;
+  font-family: var(--font-family-heading-condensed);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: .875;
+  margin: 0;
+  padding: var(--spacer-5) var(--spacer-10);
+  text-align: center;
+  text-decoration: none;
+  transition: color .2s linear, border-color .2s linear, background-color .2s linear;
+  &:hover,
+  &:focus-visible {
+    background-color: var(--btn-solid-bg-hover);
+    color: var(--btn-solid-text-hover);
+   & .btn-svg svg path {
+      fill: var(--btn-solid-svg-hover);
+    }
+  }
+  & .btn-svg {
+    align-items: center;
+    display: inline-flex;
+  }
+  & .btn-svg svg path {
+    fill: var(--btn-solid-svg);
+  }
+}
+
+.btn-outline {
+  border-radius: 3px;
+  background-color: var(--btn-outline-bg);
+  border: 2px solid var(--btn-outline-border);
+  color: var(--btn-outline-text);
+  display: inline-flex;
+  font-family: var(--font-family-heading-condensed);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: .875;
+  margin: 0;
+  padding: var(--spacer-5) var(--spacer-10);
+  text-align: center;
+  text-decoration: none;
+  transition: color .2s linear, border-color .2s linear, background-color .2s linear;
+  &:hover,
+  &:focus-visible {
+    background-color: var(--btn-outline-bg-hover);
+    color: var(--btn-outline-text-hover);
+  }
+}
+
+.btn-arrow {
+  background-color: transparent;
+  font-family: var(--font-family-heading-condensed);
+  font-weight: 700;
+  color: var(--primary);
+  display: inline-flex;
+  padding-left: 0;
+  padding-right: var(--spacer-10);
+  position: relative;
+  text-decoration: none;
+
+  svg {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 2px;
+    width: 22px;
+  }
+  &:hover,
+  &:focus-within {
+    svg {
+      animation: float 400ms infinite alternate;
+      fill: var(--primary);
+    }
+    &:before {
+      visibility: hidden;
+    }
+  }
+}
+
+.btn--sm {
+  font-size: 13px;
+  padding: 10px var(--spacer-5);
+  & .btn-svg svg {
+    width: var(--spacer-1);
+  }
+  & .btn-svg--after {
+    margin-left: var(--spacer-3);
+  }
+  & .btn-svg--before {
+    margin-right: var(--spacer-3);
+  }
+}
+
+.btn--lg {
+  font-size: 16px;
+  padding: var(--spacer-5) var(--spacer-10);
+  & .btn-svg svg {
+    width: var(--spacer-2);
+  }
+  & .btn-svg--after {
+    margin-left: var(--spacer-4);
+  }
+  & .btn-svg--before {
+    margin-right: var(--spacer-4);
+  }
+}
+
+// Colors/Text Backgrounds
+.has-white-background-color {
+  background: var(--color-white);
+}
+
+.has-black-background-color {
+  background-color:var(--color-neutral-900);
+}
+
+.has-light-gray-color {
+  color:var(--color-neutral-200);
+}
+.has-light-gray-background-color {
+  background-color:var(--color-neutral-200);
+}
+.has-white-color {
+  color:var(--color-white)
+}
+.has-white-background-color {
+  background-color:var(--color-white)
+}
+.has-blue-color {
+  color:var(--color-blue-500);
+}
+.has-blue-background-color {
+  background-color:var(--color-blue-500);
+  color: var(--color-white);
+}
+.has-teal-color {
+  color:var(--color-teal-500);
+}
+.has-teal-background-color {
+  background-color:var(--color-teal-500);
+}
+.has-green-color {
+  color:var(--color-green-500);
+}
+.has-green-background-color {
+  background-color:var(--color-green-500);
+}
+.has-gold-color {
+  color:var(--color-gold-500);
+}
+.has-gold-background-color {
+  background-color:var(--color-gold-500);
+}
+
+// Grids
+.ts-grid-cols-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacer-4);
+}
+.ts-grid-cols-5 {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--spacer-4);
+}
+
+/* The "Heading" prefaced styles in this file duplicate the heading styles in 04.base.scss, but remove the sass mixin. @TODO: Use these classes moving forward and remove the use of the mixin on the site to move towards a tailwind approach. When tailwind is added, move these to tailwind components. */
+
+.heading-1,
+.heading-2,
+.heading-3,
+.heading-4 {
+  &.white {
+    color: var(--color-white);
+  }
+}
+
+
+/* FORMERLY: .h1 */
+.heading-1,
+.heading-1--xl {
+  font-family: var(--font-family-heading-condensed);
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.1;
+
+  @media (min-width: 501px) {
+    font-size: 48px;
+  }
+}
+.heading-1--xl {
+  @media (min-width: 1024px) {
+    font-size: 74px;
+  }
+}
+
+/* FORMERLY: .h2 */
+.heading-2 {
+  font-family: var(--font-family-heading-condensed);
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.05;
+  @media (min-width: 768px) {
+    font-size: 42px;
+  }
+}
+
+/* FORMERLY: .paragraph--type--side-by-side .field--name-field-title h2 */
+.h2-alt {
+  font-family: var(--font-family-heading-condensed);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+/* FORMERLY: .h3 */
+.heading-3 {
+  font-family: var(--font-family-heading-condensed);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+/* FORMERLY: .h4 */
+.heading-4 {
+  font-family: var(--font-family-heading-condensed);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+
+.utility-xl,
+.utility-lg {
+  &.white {
+    color: var(--color-white);
+  }
+}
+
+.utility-2xl,
+.utility-lg {
+  & a {
+    background-position: left 100%;
+    color: var(--color-neutral-900);
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-action);
+    }
+  }
+}
+
+/* FORMERLY: .teaser-title.large */
+.utility-2xl {
+  font-family: var(--font-family-heading-condensed);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.3;
+  @media (min-width: 768px) {
+    font-size: 36px;
+    line-height: 1.1;
+  }
+}
+
+/* FORMERLY: .intro */
+.utility-xl {
+  font-family: var(--font-family-heading-condensed);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.3;
+}
+
+/* FORMERLY: .teaser-title */
+.utility-lg {
+  font-family: var(--font-family-heading-condensed);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.3;
+}
+
+/* FORMERLY: .subheader */
+.utility-md {
+  font-family: var(--font-family-heading-condensed);
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.67;
+}
+
+/* FORMERLY: .secondary */
+.utility-base {
+  font-family: var(--font-family-heading-condensed);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.33;
+}
+
+/* FORMERLY: figcaption and .label.small */
+.utility-sm {
+  font-family: var(--font-family-heading-condensed);
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.33;
+
+  &.font-bold {
+    font-weight: 700;
+  }
+}
+
+.utility-xs {
+  font-family: var(--font-family-heading-condensed);
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.45;
+
+  &.btn-pill {
+    line-height: 1.5;
+    background-color: var(--color-neutral-200);
+    border-radius: 3px;
+    display: inline-block;
+    padding: var(--spacer-1) var(--spacer-2);
+  }
+}
+
+/* FORMERLY: .subheader */
+.body-md {
+  font-family: var(--font-family-heading);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+/* FORMERLY: .topic-tag */
+.tag {
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.9px;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+/* FORMERLY: .topic-tag, without the color/uppercase and letterspacing */
+.body-base {
+  font-family: var(--font-family-heading);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+/* FORMERLY: .taxonomy.small-text */
+.body-sm {
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+/* FORMERLY: .secondary.link */
+.body-xs {
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+/* FORMERLY: default typography site-wide. */
+.body-serif-md {
+  font-family: var(--font-family-serif);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+/* FORMERLY: .italic-tiny */
+.body-serif-italic-sm {
+  font-family: var(--font-family-serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+/* FORMERLY: .italic-xtra-tiny */
+.body-serif-italic-xs {
+  font-family: var(--font-family-serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 13px;
+  line-height: 1.15;
+}
+
+
+// TAILWIND MODIFIERS HARDCODED
+.font-bold {
+  font-weight: 700;
+}
+.font-medium {
+  font-weight: 600;
+}
+.font-light {
+  font-weight: 300;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+
+}

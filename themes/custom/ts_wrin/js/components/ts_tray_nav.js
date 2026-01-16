@@ -3,20 +3,20 @@
  *
  * TS Tray Nav.
  */
-export default function(context) {
+export default function (context) {
   if (context == document) {
     let trayNavWrapper = document.querySelector("#tray-nav-wrapper");
     let pageBody = document.querySelector("body");
     let setTransparentHeader = document.querySelector(
-      ".add-transparent-header"
+      ".add-transparent-header",
     );
     let setWhiteHeader = document.querySelector(".add-white-header");
 
-    document.querySelectorAll(".tray-toggle").forEach(toggle => {
-      toggle.addEventListener("click", event => {
+    document.querySelectorAll(".tray-toggle").forEach((toggle) => {
+      toggle.addEventListener("click", (event) => {
         let dataAttr = event.currentTarget.dataset.tray;
         let dataIdItem = document.querySelector(
-          ".region-wrin-custom ." + dataAttr
+          ".region-wrin-custom ." + dataAttr,
         );
 
         if (
@@ -52,14 +52,14 @@ export default function(context) {
     });
 
     let hideTrayContents = () => {
-      document.querySelectorAll(".tray-contents").forEach(tray => {
+      document.querySelectorAll(".tray-contents").forEach((tray) => {
         tray.classList.remove("show");
       });
     };
 
     // Clicking on "X" closes tray no matter what.
-    document.querySelectorAll(".tray-nav__close").forEach(button => {
-      button.addEventListener("click", event => {
+    document.querySelectorAll(".tray-nav__close").forEach((button) => {
+      button.addEventListener("click", (event) => {
         trayNavWrapper.classList.remove("show-tray");
         pageBody.classList.remove("noscroll");
         document.querySelector(".toggled").classList.remove("toggled");
@@ -67,7 +67,7 @@ export default function(context) {
     });
 
     // Make sure the Esc key works.
-    document.addEventListener("keyup", function(e) {
+    document.addEventListener("keyup", function (e) {
       if (e.key === "Escape") {
         trayNavWrapper.classList.remove("show-tray");
         pageBody.classList.remove("noscroll");

@@ -1,8 +1,8 @@
 .black-bar {
-  background: $black;
-  color: $white;
+  background: var(--color-neutral-900);
+  color: var(--color-white);
   a {
-    color: $white;
+    color: var(--color-white);
     text-decoration: none;
 
     @include hocus() {
@@ -11,32 +11,32 @@
 
     &.active,
     &.is-active {
-      color: $med-light-gray;
+      color: var(--color-neutral-400);
     }
   }
   .menu-item--expanded > a {
-    color: $brand-gold;
+    color: var(--color-gold-500);
 
     @include hocus() {
       text-decoration: underline;
     }
   }
   ul.menu a.is-active {
-    color: $white;
+    color: var(--color-white);
     text-decoration: underline;
   }
 
   .back-arrow svg path,
   .nav-arrow svg path {
-    fill: $white;
+    fill: var(--color-white);
   }
 }
 .gold-bar {
-  background: $brand-gold;
-  color: $black;
+  background: var(--color-gold-500);
+  color: var(--color-neutral-900);
 
   a {
-    color: $black;
+    color: var(--color-neutral-900);
     text-decoration: none;
 
     @include hocus() {
@@ -49,7 +49,7 @@
 
   .back-arrow svg path,
   .nav-arrow svg path {
-    fill: $black;
+    fill: var(--color-neutral-900);
   }
 }
 
@@ -60,10 +60,12 @@
     display: block;
   }
 
-  @include font($acumin-semi-cond, "bold");
+  @include font(var(--font-family-heading-condensed), "bold");
   @include font-line-height(18, 21);
-  position: relative;
-  z-index: 51;
+  & {
+    position: relative;
+    z-index: 51;
+  }
 
   &.sticky {
     position: fixed;
@@ -81,7 +83,7 @@
 
   .toc,
   .block-menu {
-    margin: $space-xs 0;
+    margin: var(--spacer-5) 0;
     position: relative;
     @include center-columns($grid-columns-mobile, $grid-columns-mobile);
 
@@ -99,11 +101,13 @@
 
     .menu-title,
     .menu > ul > li > a {
-      @include font($caslon, "bold", "italic");
+      @include font(var(--font-family-serif), "bold", "italic");
       @include font-line-height(18, 18);
-      display: block;
-      margin-bottom: 5px;
-      position: relative;
+      & {
+        display: block;
+        margin-bottom: 5px;
+        position: relative;
+      }
 
       @include mq($md) {
         margin-right: 0;
@@ -158,7 +162,7 @@
       li {
         list-style-image: none;
         list-style-type: none;
-        margin-right: $space-sm;
+        margin-right: var(--spacer-7);
         padding-top: 0;
         white-space: nowrap;
       }
@@ -190,7 +194,7 @@
 
 .mobile__toc {
   clear: both;
-  background-color: $white;
+  background-color: var(--color-white);
   display: block;
   margin: 16px 20px 0;
   border-radius: 3px;
