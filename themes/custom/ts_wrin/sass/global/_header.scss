@@ -30,7 +30,7 @@
 }
 
 header:not(.pfp-header) {
-  background-color: $white;
+  background-color: var(--color-white);
   padding-bottom: 0;
   padding-top: 0;
   position: absolute;
@@ -40,7 +40,7 @@ header:not(.pfp-header) {
   z-index: 10;
 
   @include mq($md) {
-    padding-bottom: $space-sm;
+    padding-bottom: var(--spacer-7);
     padding-top: 32px;
   }
 
@@ -48,14 +48,14 @@ header:not(.pfp-header) {
     background-color: transparent;
     padding-bottom: 22px;
     @include mq($md) {
-      padding-bottom: $space-sm;
+      padding-bottom: var(--spacer-7);
     }
   }
 
   .showing-main-menu & {
     padding-bottom: 50px;
     @include mq($md) {
-      padding-bottom: $space-sm;
+      padding-bottom: var(--spacer-7);
     }
   }
 
@@ -88,7 +88,7 @@ header:not(.pfp-header) {
 
 .header-wrapper {
   align-items: center;
-  border-bottom: 1px solid $light-grey;
+  border-bottom: 1px solid var(--color-neutral-200);
   box-sizing: border-box;
   display: flex;
   flex: 1 1 auto;
@@ -97,7 +97,7 @@ header:not(.pfp-header) {
   min-width: 0;
   padding-bottom: 5px;
   top: 2px;
-  transition: background-color $transition-defaults;
+  transition: background-color var(--transition-default);
   height: 72px;
 
   @include container-padding;
@@ -123,13 +123,13 @@ header:not(.pfp-header) {
     display: flex;
     flex: 0 0 auto;
   }
-  @include header-right($black, $brand-gold);
+  @include header-right(var(--color-neutral-900), var(--color-gold-500));
 
   &.menu-open {
-    background-color: $black;
+    background-color: var(--color-neutral-900);
 
     svg path {
-      fill: $white;
+      fill: var(--color-white);
     }
   }
 
@@ -147,13 +147,13 @@ header:not(.pfp-header) {
     top: 2px;
     width: 35px;
     &.toggled {
-      background-color: $true-black;
+      background-color: var(--color-black);
     }
   }
 }
 
 .white .header-wrapper {
-  @include header-right($white, $brand-gold);
+  @include header-right(var(--color-white), var(--color-gold-500));
 }
 
 // Filter button
@@ -178,12 +178,12 @@ header:not(.pfp-header) {
       }
 
       &::before {
-        @include font($acumin-semi-cond, "regular");
+        @include font(var(--font-family-heading-condensed), "regular");
         @include font-line-height(14, 22);
         & {
-          background: $black;
+          background: var(--color-neutral-900);
           border-radius: 5px 0 0 5px;
-          color: $brand-gold;
+          color: var(--color-gold-500);
           content: "Filter Site by Topic";
           height: 30px;
           left: -30px;
@@ -215,11 +215,11 @@ header:not(.pfp-header) {
       }
     }
     @include hocus() {
-      background-color: $black;
+      background-color: var(--color-neutral-900);
 
       .filter-icon {
         svg path {
-          stroke: $brand-gold;
+          stroke: var(--color-gold-500);
         }
       }
     }
@@ -233,8 +233,8 @@ header:not(.pfp-header) {
   &:hover {
     .filter-icon {
       &::before {
-        background-color: $brand-gold;
-        color: $black;
+        background-color: var(--color-gold-500);
+        color: var(--color-neutral-900);
       }
     }
   }
@@ -244,7 +244,7 @@ header:not(.pfp-header) {
   .tray-toggle.filter-toggle {
     svg path {
       fill: transparent;
-      stroke: $white;
+      stroke: var(--color-white);
     }
   }
 }
@@ -262,16 +262,16 @@ header:not(.pfp-header) {
 .sitewide-filter-applied.path-frontpage
   .header-wrapper
   .tray-toggle.filter-toggle:focus {
-  background-color: $brand-gold;
+  background-color: var(--color-gold-500);
   svg path {
     fill: transparent;
-    stroke: $black;
+    stroke: var(--color-neutral-900);
   }
 }
 
 .path-frontpage .header-wrapper {
   @include mq($md) {
-    @include header-right($white, $brand-gold);
+    @include header-right(var(--color-white), var(--color-gold-500));
   }
 }
 
@@ -281,7 +281,7 @@ header nav.menu--main {
     bottom: 2px;
     display: block;
     flex: 0 1 auto;
-    margin-left: $space-sm;
+    margin-left: var(--spacer-7);
     width: auto;
   }
 }
@@ -320,14 +320,14 @@ header nav.menu--main.has-active-trail {
     right: auto;
     transform: scaleX(-1);
     @include mq($md) {
-      left: $space-sm;
+      left: var(--spacer-7);
       right: auto;
     }
   }
   .back-arrow svg path,
   .nav-arrow svg path {
-    fill: $black;
-    stroke: $black;
+    fill: var(--color-neutral-900);
+    stroke: var(--color-neutral-900);
   }
   @include mq($md) {
     border-top: none;
@@ -354,21 +354,21 @@ header nav.menu--main .menu-wrapper > ul.menu {
     display: flex;
     list-style-image: none;
     list-style-type: none;
-    margin-right: $space-xs;
+    margin-right: var(--spacer-5);
     padding-top: 0;
   }
   li a {
-    @include font($acumin-pro, "bold", "normal");
+    @include font(var(--font-family-heading), "bold", "normal");
     @include font-line-height(15, 18);
     & {
-      color: $black;
+      color: var(--color-neutral-900);
       letter-spacing: 0.91px;
       text-decoration: none;
       text-transform: uppercase;
       transition: all 0.2s linear;
     }
     @include hocus {
-      color: $med-grey;
+      color: var(--color-neutral-600);
       outline: none;
     }
   }
@@ -390,14 +390,14 @@ header nav.menu--main.has-active-trail .menu-wrapper > ul.menu {
   margin-top: 10px;
   overflow-x: scroll;
   overflow-y: hidden;
-  padding-bottom: $space-sm;
+  padding-bottom: var(--spacer-7);
   width: 100%;
   @include mq($md) {
-    border-left: 1px solid $black;
+    border-left: 1px solid var(--color-neutral-900);
     border-top: none;
     margin-top: 0;
-    padding-bottom: $space-xs;
-    padding-left: $space-xs;
+    padding-bottom: var(--spacer-5);
+    padding-left: var(--spacer-5);
     padding-right: 0;
     padding-top: 2px;
     width: calc(100% - #{$grid-gutter-mobile});
@@ -405,7 +405,7 @@ header nav.menu--main.has-active-trail .menu-wrapper > ul.menu {
   &:after {
     background-color: transparent;
     bottom: 3px;
-    color: $black;
+    color: var(--color-neutral-900);
     content: "...";
     display: inline-block;
     font-size: 16px;
@@ -439,23 +439,23 @@ header nav.menu--main.has-active-trail .menu-wrapper > ul.menu {
     }
   }
   li a {
-    @include font($acumin-semi-cond, "bold", "normal");
+    @include font(var(--font-family-heading-condensed), "bold", "normal");
     @include font-line-height(14, 17);
     & {
-      color: $black;
+      color: var(--color-neutral-900);
       letter-spacing: normal;
       text-transform: none;
     }
     @include hocus {
-      color: $med-grey;
+      color: var(--color-neutral-600);
       outline: none;
     }
   }
   & > li > a {
-    @include font($caslon, "normal", "italic");
+    @include font(var(--font-family-serif), "normal", "italic");
     @include font-line-height(15, 15);
     & {
-      margin-right: $space-xs;
+      margin-right: var(--spacer-5);
       position: relative;
       top: 2px;
     }
@@ -472,17 +472,17 @@ header nav.menu--main.has-active-trail .menu-wrapper > ul.menu {
 .white nav.menu--main.has-active-trail .menu-wrapper > ul.menu {
   &:after,
   li a {
-    color: $white;
+    color: var(--color-white);
   }
   @include mq($md) {
-    border-left: 1px solid $white;
+    border-left: 1px solid var(--color-white);
   }
 }
 
 .white header nav.menu--main .menu-wrapper > ul.menu li a {
-  color: $white;
+  color: var(--color-white);
   @include hocus {
-    color: $brand-gold;
+    color: var(--color-gold-500);
     outline: none;
   }
 }
@@ -491,8 +491,8 @@ header nav.menu--main.has-active-trail .menu-wrapper > ul.menu {
 .white nav.menu--main.has-active-trail .nav-arrow svg,
 .white nav.menu--main.has-active-trail .back-arrow svg path,
 .white nav.menu--main.has-active-trail .nav-arrow svg path {
-  fill: $white;
-  stroke: $white;
+  fill: var(--color-white);
+  stroke: var(--color-white);
   outline: none;
   transition: all 0.2s linear;
 }
@@ -502,8 +502,8 @@ header nav.menu--main.has-active-trail .menu-wrapper > ul.menu {
     outline: none;
     svg,
     svg path {
-      fill: $brand-gold;
-      stroke: $brand-gold;
+      fill: var(--color-gold-500);
+      stroke: var(--color-gold-500);
       outline: none;
     }
   }
@@ -549,7 +549,7 @@ header nav.menu--secondary > ul.menu {
   margin-right: 40px;
   width: 190px;
   li a {
-    @include font($acumin-pro, "bold", "normal");
+    @include font(var(--font-family-heading), "bold", "normal");
     @include font-line-height(15, 17);
     & {
       letter-spacing: normal;
@@ -560,15 +560,15 @@ header nav.menu--secondary > ul.menu {
       transition: color 0.2s linear;
     }
     @include hocus {
-      color: $med-grey;
+      color: var(--color-neutral-600);
       outline: none;
     }
 
     .path-frontpage &,
     .white & {
-      color: $white;
+      color: var(--color-white);
       @include hocus {
-        color: $brand-gold;
+        color: var(--color-gold-500);
         outline: none;
       }
     }
@@ -578,16 +578,16 @@ header nav.menu--secondary > ul.menu {
 header nav.menu--donate > ul.menu {
   margin-bottom: -10px;
   margin-left: 0;
-  margin-right: $space-xs;
+  margin-right: var(--spacer-5);
   li a {
-    @include font($acumin-semi-cond, "bold", "normal");
+    @include font(var(--font-family-heading-condensed), "bold", "normal");
     @include font-line-height(12, 17);
     & {
       align-items: center;
       background-color: transparent;
       border-radius: 3px;
-      border: 1px solid $brand-gold;
-      color: $black;
+      border: 1px solid var(--color-gold-500);
+      color: var(--color-neutral-900);
       display: flex;
       height: 32px;
       justify-content: center;
@@ -603,13 +603,13 @@ header nav.menu--donate > ul.menu {
 
     .path-frontpage &,
     .white & {
-      border: 1px solid $light-grey;
-      color: $white;
+      border: 1px solid var(--color-neutral-200);
+      color: var(--color-white);
     }
     @include hocus {
-      background-color: $brand-gold;
-      border: 1px solid $brand-gold;
-      color: $black;
+      background-color: var(--color-gold-500);
+      border: 1px solid var(--color-gold-500);
+      color: var(--color-neutral-900);
       outline: none;
     }
   }
@@ -621,7 +621,7 @@ header nav.menu--donate > ul.menu {
   }
   header:not(.pfp-header).sticky {
     align-items: center;
-    background-color: $white;
+    background-color: var(--color-white);
     border-bottom: none;
     display: flex;
     height: 60px;
@@ -635,7 +635,7 @@ header nav.menu--donate > ul.menu {
     z-index: 50;
 
     .header-wrapper {
-      border-bottom: 1px solid $light-grey;
+      border-bottom: 1px solid var(--color-neutral-200);
       height: 60px;
     }
     .header-wrapper .header-right {
@@ -692,7 +692,7 @@ header nav.menu--donate > ul.menu {
     }
     nav.menu--main.has-active-trail .menu-wrapper > ul:before,
     nav.menu--main .menu-wrapper > ul:before {
-      border-color: $black;
+      border-color: var(--color-neutral-900);
     }
     nav.menu--main.has-active-trail
       .menu-wrapper
@@ -700,18 +700,18 @@ header nav.menu--donate > ul.menu {
       nav.menu--main
       .menu-wrapper
       > ul:after {
-      color: $black;
-      background-color: $white;
+      color: var(--color-neutral-900);
+      background-color: var(--color-white);
     }
     .header-right .tray-toggle svg,
     .header-right .tray-toggle svg path {
-      fill: $black;
-      stroke: $black;
+      fill: var(--color-neutral-900);
+      stroke: var(--color-neutral-900);
     }
     .header-right .tray-toggle.toggled svg,
     .header-right .tray-toggle.toggled svg path {
-      fill: $brand-gold;
-      stroke: $brand-gold;
+      fill: var(--color-gold-500);
+      stroke: var(--color-gold-500);
     }
 
     .header-right .tray-toggle.filter-toggle {
@@ -720,26 +720,26 @@ header nav.menu--donate > ul.menu {
       }
       @include hocus() {
         svg path {
-          stroke: $brand-gold;
+          stroke: var(--color-gold-500);
         }
       }
     }
     .header-right .menu-toggle div span,
     .header-right .menu-toggle div span:before,
     .header-right .menu-toggle div span:after {
-      background-color: $black;
+      background-color: var(--color-neutral-900);
     }
     nav.menu--main.has-active-trail .menu-wrapper > ul.menu:after {
-      color: $black;
+      color: var(--color-neutral-900);
     }
     nav.menu--main.has-active-trail .menu-wrapper > ul.menu li a,
     nav.menu--main.has-active-trail .menu-wrapper > ul li a,
     nav.menu--main .menu-wrapper > ul li a,
     nav.menu--secondary > ul.menu li a {
-      color: $black;
+      color: var(--color-neutral-900);
       transition: all 0.2s linear;
       @include hocus {
-        color: $med-gray;
+        color: var(--color-neutral-600);
         outline: none;
       }
     }
@@ -747,8 +747,8 @@ header nav.menu--donate > ul.menu {
     nav.menu--main.has-active-trail .nav-arrow svg,
     nav.menu--main.has-active-trail .back-arrow svg path,
     nav.menu--main.has-active-trail .nav-arrow svg path {
-      fill: $black;
-      stroke: $black;
+      fill: var(--color-neutral-900);
+      stroke: var(--color-neutral-900);
     }
     nav.menu--main.has-active-trail .back-arrow,
     nav.menu--main.has-active-trail .nav-arrow {
@@ -756,15 +756,15 @@ header nav.menu--donate > ul.menu {
         outline: none;
         svg,
         svg path {
-          fill: $med-gray;
-          stroke: $med-gray;
+          fill: var(--color-neutral-600);
+          stroke: var(--color-neutral-600);
           outline: none;
         }
       }
     }
     nav.menu--donate > ul li a {
-      border-color: $brand-gold;
-      color: $black;
+      border-color: var(--color-gold-500);
+      color: var(--color-neutral-900);
     }
   }
 }

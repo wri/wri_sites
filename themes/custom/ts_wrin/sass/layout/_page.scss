@@ -1,9 +1,9 @@
 html {
-  background-color: $light-grey;
+  background-color: var(--color-neutral-200);
 }
 
 body {
-  background-color: $white;
+  background-color: var(--color-white);
   margin-left: auto;
   margin-right: auto;
   max-width: $site-max-width;
@@ -54,7 +54,7 @@ body {
   z-index: 11;
 
   p {
-    background: $black;
+    background: var(--color-neutral-900);
     margin: 0;
     opacity: 0.1;
     width: 100%;

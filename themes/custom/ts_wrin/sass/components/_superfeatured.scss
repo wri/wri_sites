@@ -24,7 +24,7 @@
   }
 
   .left-text-wrapper {
-    background: $white;
+    background: var(--color-white);
     margin-top: rem(-25);
     width: 93%;
     max-width: 87%;
@@ -71,7 +71,7 @@
       a {
         text-decoration: none;
         @include hocus {
-          color: $green;
+          color: var(--color-green-500);
         }
       }
 

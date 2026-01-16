@@ -5,7 +5,7 @@
     @include center-columns(12, 12);
   }
 
-  @include font($acumin-semi-cond);
+  @include font(var(--font-family-heading-condensed));
   @include font-line-height(24, 30);
 
   @include mq($md) {
@@ -17,13 +17,13 @@
   }
 
   a {
-    @include text-underline(transparent, $green);
+    @include text-underline(transparent, var(--color-green-500));
     & {
       background-position: left 90%;
     }
 
     @include hocus {
-      color: $green;
+      color: var(--color-green-500);
     }
   }
 }
@@ -35,8 +35,8 @@
     }
 
     a {
-      color: $black;
-      @include text-underline(transparent, $black);
+      color: var(--color-neutral-900);
+      @include text-underline(transparent, var(--color-neutral-900));
       & {
         background-size:
           100% 0,
@@ -62,7 +62,7 @@
     @include mq($lg) {
       @include font-line-height(24, 30);
       & {
-        padding-bottom: $space-sm;
+        padding-bottom: var(--spacer-7);
       }
     }
   }

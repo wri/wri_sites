@@ -15,14 +15,14 @@
   }
 
   a {
-    @include font($acumin-semi-cond, "bold", "normal");
+    @include font(var(--font-family-heading-condensed), "bold", "normal");
     @include font-line-height(15, 18);
-    @include text-underline(transparent, $green);
+    @include text-underline(transparent, var(--color-green-500));
     & {
       background-position: left 100%;
-      color: $green;
+      color: var(--color-green-500);
       letter-spacing: normal;
-      margin-right: $space-xs;
+      margin-right: var(--spacer-5);
       padding: 5px 0;
       position: relative;
       text-decoration: none;
@@ -30,42 +30,42 @@
     @include mq($lg) {
       @include font-line-height(18, 18);
       & {
-        margin-right: $space-sm;
+        margin-right: var(--spacer-7);
         padding: 7px 0;
       }
     }
   }
   a.is-active {
-    @include text-underline(transparent, $black);
+    @include text-underline(transparent, var(--color-neutral-900));
     & {
       background-position: left 100%;
       border-top: 3px solid black;
-      color: $black;
+      color: var(--color-neutral-900);
       top: -2px;
     }
   }
 }
 .topics-view-block .facet-inactive a.title {
-  @include text-underline(transparent, $black);
+  @include text-underline(transparent, var(--color-neutral-900));
   & {
     background-position: left 100%;
     border-top: 3px solid black;
-    color: $black;
+    color: var(--color-neutral-900);
     top: -2px;
   }
 }
 .view-search .topics-view-block .facets-widget-links div a {
   @include mq($lg) {
-    @include font($acumin-semi-cond, "semibold", "normal");
+    @include font(var(--font-family-heading-condensed), "semibold", "normal");
     @include font-line-height(15, 16);
     & {
-      margin-right: $space-xs;
+      margin-right: var(--spacer-5);
     }
   }
 }
 
 .resources-wrapper {
-  background-color: $light-grey;
+  background-color: var(--color-neutral-200);
 }
 
 .view-events div.form--inline,
@@ -151,16 +151,16 @@
     width: calc(100% - 55px);
   }
   label {
-    @include font($acumin-semi-cond, "normal", "normal");
+    @include font(var(--font-family-heading-condensed), "normal", "normal");
     @include font-line-height(18, 18);
     & {
-      color: $true-black;
+      color: var(--color-black);
       letter-spacing: normal;
       margin-right: 15px;
     }
   }
   input {
-    @include font($acumin-semi-cond, "normal", "normal");
+    @include font(var(--font-family-heading-condensed), "normal", "normal");
     @include font-line-height(14, 18);
     & {
       border-radius: 3px;
@@ -193,17 +193,17 @@
   }
 
   label {
-    @include font($acumin-semi-cond, "semibold", "normal");
+    @include font(var(--font-family-heading-condensed), "semibold", "normal");
     @include font-line-height(14, 18);
     & {
-      border-top: 1px solid $black;
-      color: $true-black;
+      border-top: 1px solid var(--color-neutral-900);
+      color: var(--color-black);
       display: block;
       padding-top: 10px;
     }
   }
   select {
-    @include font($acumin-semi-cond, "normal", "normal");
+    @include font(var(--font-family-heading-condensed), "normal", "normal");
     @include font-line-height(14, 18);
     & {
       border-radius: 3px;
@@ -253,7 +253,7 @@
     }
     .view-header {
       flex: 0 1 100%;
-      margin: $space-xs 0;
+      margin: var(--spacer-5) 0;
     }
   }
 }
@@ -272,27 +272,27 @@
   margin-top: 58px;
   text-align: right;
   label {
-    @include font($acumin-semi-cond, "normal", "normal");
+    @include font(var(--font-family-heading-condensed), "normal", "normal");
     @include font-line-height(18, 18);
     & {
-      color: $true-black;
+      color: var(--color-black);
       letter-spacing: normal;
       margin-right: 15px;
     }
   }
   .select-wrapper {
-    @include font($acumin-semi-cond, "normal", "normal");
+    @include font(var(--font-family-heading-condensed), "normal", "normal");
     @include font-line-height(14, 41);
     & {
-      background: $white;
+      background: var(--color-white);
       border-radius: 3px;
-      border: 1px solid $black;
+      border: 1px solid var(--color-neutral-900);
       padding: 10px;
     }
 
     select {
-      background: $white;
-      border: 1px solid $white;
+      background: var(--color-white);
+      border: 1px solid var(--color-white);
       padding: 2px 5px;
       font-size: inherit;
       height: auto;
@@ -309,26 +309,29 @@
 
 .view .view-header,
 .view .view-empty {
-  @include font($acumin-semi-cond, "regular", "normal");
+  @include font(var(--font-family-heading-condensed), "regular", "normal");
   @include font-line-height(18, 18);
   & {
-    color: $true-black;
+    color: var(--color-black);
     letter-spacing: normal;
     margin-bottom: 60px;
     margin-top: 40px;
   }
 
   .totals {
-    @include font($acumin-semi-cond, "bold", "normal");
+    @include font(var(--font-family-heading-condensed), "bold", "normal");
   }
   .query {
     display: none;
   }
 
   .facet-summary-list a {
-    @include font($acumin-semi-cond, "light", "normal");
+    @include font(var(--font-family-heading-condensed), "light", "normal");
     @include font-line-height(14, 18);
-    @include text-underline-thin(transparent, rgba($black, 0.32));
+    @include text-underline-thin(
+      transparent,
+      rgba(var(--color-neutral-900), 0.32)
+    );
     & {
       background-position: left 100%;
       display: inline-block;
@@ -342,7 +345,7 @@
       @include font-line-height(21, 18);
       & {
         bottom: 2px;
-        color: rgba($black, 0.32);
+        color: rgba(var(--color-neutral-900), 0.32);
         content: "×";
         font-weight: 700;
         position: absolute;
@@ -384,11 +387,11 @@
     opacity: 1;
   }
   .block-facets h3 {
-    @include font($acumin-semi-cond, "semibold", "normal");
+    @include font(var(--font-family-heading-condensed), "semibold", "normal");
     @include font-line-height(14, 18);
     & {
-      border-top: 1px solid $black;
-      color: $true-black;
+      border-top: 1px solid var(--color-neutral-900);
+      color: var(--color-black);
       cursor: pointer;
       padding-top: 10px;
       padding-bottom: 1rem;
@@ -435,10 +438,10 @@
     z-index: -1;
   }
   .block-facets label {
-    @include font($acumin-semi-cond, "normal", "normal");
+    @include font(var(--font-family-heading-condensed), "normal", "normal");
     @include font-line-height(14, 18);
     & {
-      color: $black;
+      color: var(--color-neutral-900);
       cursor: pointer;
       position: relative;
     }
@@ -471,7 +474,7 @@
     cursor: pointer;
   }
   .block-facets input:checked + label::before {
-    background-color: $green;
+    background-color: var(--color-green-500);
     text-shadow: 1px 1px 1px rgba(240, 240, 240, 0.5);
   }
   .block-facets input:focus + label::before,
@@ -485,10 +488,10 @@
 
 .form-item-date {
   label {
-    @include font($acumin-semi-cond, "normal", "normal");
+    @include font(var(--font-family-heading-condensed), "normal", "normal");
     @include font-line-height(14, 18);
     & {
-      color: $black;
+      color: var(--color-neutral-900);
       cursor: pointer;
       position: relative;
     }
@@ -514,7 +517,11 @@
         display: none;
       }
       select {
-        @include font($acumin-semi-cond, "semibold", "normal");
+        @include font(
+          var(--font-family-heading-condensed),
+          "semibold",
+          "normal"
+        );
         @include font-line-height(13, 16);
         & {
           width: calc(100% - 20px);
@@ -607,7 +614,7 @@
   }
 
   .experts-header-text {
-    @include font($acumin-semi-cond, "light", "normal");
+    @include font(var(--font-family-heading-condensed), "light", "normal");
     @include font-line-height(24, 36);
     & {
       margin-top: 10px;
@@ -617,7 +624,7 @@
   }
 
   .view-content > h3 {
-    @include font($acumin-semi-cond, "bold", "normal");
+    @include font(var(--font-family-heading-condensed), "bold", "normal");
     @include font-line-height(36, 44);
     & {
       flex: 0 1 100%;
@@ -642,10 +649,10 @@
 }
 
 .search-page-main-input {
-  margin-top: -$space-lg;
+  margin-top: -var(--spacer-15);
   .search-input,
   .gjas-element-keys {
-    @include font($acumin-semi-cond, "light", "normal");
+    @include font(var(--font-family-heading-condensed), "light", "normal");
     @include font-line-height(16, 22);
     & {
       box-sizing: border-box;

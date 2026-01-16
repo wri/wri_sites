@@ -4,7 +4,7 @@
 
   &.has-image {
     min-height: rem(700);
-    background-color: $true-black;
+    background-color: var(--color-black);
     @include mq($ph) {
       min-height: rem(400);
     }

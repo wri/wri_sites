@@ -48,12 +48,12 @@
       .inner-box {
         &::before,
         &::after {
-          background-color: $white;
+          background-color: var(--color-white);
           height: 30px;
           z-index: 2;
 
           @include mq($ph) {
-            height: $padding-vertical;
+            height: var(--padding-vertical);
           }
         }
       }
@@ -63,13 +63,13 @@
       .inner-box {
         &::before,
         &::after {
-          background-color: rgba($blue, 0.7);
+          background-color: rgba(var(--color-blue-500), 0.7);
           z-index: 1;
         }
 
         &.green::before,
         &.green::after {
-          background-color: rgba($green, 0.7);
+          background-color: rgba(var(--color-green-500), 0.7);
         }
       }
     }
@@ -83,7 +83,7 @@
   .left-text-wrapper {
     @include center-columns($grid-columns-mobile, $grid-columns-mobile);
     & {
-      background-color: $white;
+      background-color: var(--color-white);
       margin-top: -30px;
       padding-top: 30px;
       position: relative;
@@ -94,7 +94,7 @@
     @include mq($ph) {
       @include center-columns($grid-columns, $grid-columns);
       & {
-        margin-top: calc(#{$padding-vertical} * -1);
+        margin-top: calc(#{var(--padding-vertical)} * -1);
       }
     }
 
@@ -107,7 +107,7 @@
     }
 
     &::before {
-      background-color: $white;
+      background-color: var(--color-white);
       content: "";
       display: block;
       height: 100%;
@@ -127,7 +127,7 @@
 
     a.block_label {
       text-decoration: none;
-      @include text-underline(transparent, $black);
+      @include text-underline(transparent, var(--color-neutral-900));
       & {
         background-position: left 100%;
       }
@@ -158,13 +158,13 @@
     }
 
     &::after {
-      background-color: $white;
+      background-color: var(--color-white);
       content: "";
       display: block;
       height: 100%;
       right: -100vw;
       position: absolute;
-      top: calc(#{$padding-vertical} * -1);
+      top: calc(#{var(--padding-vertical)} * -1);
       width: 100vw;
       z-index: 3;
     }

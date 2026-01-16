@@ -11,14 +11,14 @@
 
   .listing-items li {
     list-style-type: none;
-    margin-bottom: $padding-vertical;
+    margin-bottom: var(--padding-vertical);
     margin-left: 0;
     &:last-child {
       margin-bottom: 0;
     }
 
     @include mq($md) {
-      margin-bottom: $space-lg;
+      margin-bottom: var(--spacer-15);
       &:last-child {
         margin-bottom: 0;
       }
@@ -109,7 +109,7 @@
   .listing-items li {
     box-sizing: border-box;
     list-style-type: none;
-    margin-bottom: $space-xs;
+    margin-bottom: var(--spacer-5);
     margin-left: 0;
 
     @include mq($ph) {
@@ -224,7 +224,7 @@
   }
 
   .more-link__line {
-    background-color: $light-grey;
+    background-color: var(--color-neutral-200);
     height: 1px;
     width: 100%;
   }

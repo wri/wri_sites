@@ -21,13 +21,13 @@
 
       &:after,
       &:before {
-        background-color: $white;
+        background-color: var(--color-white);
         content: "";
         height: 100%;
         left: 50%;
         position: absolute;
         top: 50%;
-        transition: background-color $transition-defaults;
+        transition: background-color var(--transition-default);
         width: 3px;
       }
       &:after {
@@ -41,7 +41,7 @@
     &:focus {
       .ui-icon-closethick:before,
       .ui-icon-closethick:after {
-        background-color: $gold-hover;
+        background-color: var(--color-gold-300);
       }
     }
   }
@@ -49,23 +49,23 @@
 
 .block-modal,
 .simple-popup-blocks-global {
-  @include font($acumin-semi-cond, "light");
+  @include font(var(--font-family-heading-condensed), "light");
   @include font-line-height(15, 21);
 
   &.has-blue-background-color,
   &.has-green-background-color,
   &.has-teal-background-color,
   &.has-black-background-color {
-    color: $white;
+    color: var(--color-white);
 
     .field--name-field-webform {
-      color: $black;
+      color: var(--color-neutral-900);
     }
 
     @include mq($md) {
       .spb_center & {
-        background: $white;
-        color: $black;
+        background: var(--color-white);
+        color: var(--color-neutral-900);
       }
     }
   }
@@ -87,9 +87,9 @@
   }
 
   .modal_inner {
-    padding: $space-xs;
+    padding: var(--spacer-5);
     @include mq($md) {
-      padding: $space-md;
+      padding: var(--spacer-11);
     }
   }
 
@@ -104,7 +104,7 @@
   }
 
   .left-text {
-    margin-bottom: $space-xs;
+    margin-bottom: var(--spacer-5);
 
     p {
       &:last-child {
@@ -116,13 +116,13 @@
       @include font-line-height(18, 28);
       & {
         padding-right: rem(23);
-        margin-bottom: $space-sm;
+        margin-bottom: var(--spacer-7);
       }
     }
   }
 
   .field--name-field-title {
-    @include font($acumin-semi-cond, "bold");
+    @include font(var(--font-family-heading-condensed), "bold");
     @include font-line-height(24, 30);
     @include mq($md) {
       @include font-line-height(32, 40);
@@ -207,7 +207,7 @@
 
   form.webform-submission-form {
     label {
-      @include font($acumin-semi-cond, "regular");
+      @include font(var(--font-family-heading-condensed), "regular");
       @include font-line-height(14, 18);
       & {
         padding-top: 2px;
@@ -215,16 +215,16 @@
     }
     input[type="text"],
     input[type="email"] {
-      @include font($acumin-semi-cond, "regular");
+      @include font(var(--font-family-heading-condensed), "regular");
       @include font-line-height(14, 18);
       & {
         height: 46px;
         padding: 15px 10px 12px;
-        background-color: $white;
+        background-color: var(--color-white);
       }
     }
     input[type="submit"] {
-      @include font($acumin-semi-cond, "semibold");
+      @include font(var(--font-family-heading-condensed), "semibold");
       @include font-line-height(13, 16);
       & {
         height: 40px;
@@ -236,12 +236,12 @@
   .has-green-background-color,
   .has-black-background-color {
     .files-overlay-trigger {
-      color: $white;
+      color: var(--color-white);
       @include mq($md) {
-        @include text-underline-thin(transparent, $black);
+        @include text-underline-thin(transparent, var(--color-neutral-900));
         & {
           background-position: left 100%;
-          color: $black;
+          color: var(--color-neutral-900);
         }
       }
     }
@@ -269,7 +269,7 @@
 //Download files modal
 .files-modal {
   display: none;
-  margin: $space-xs;
+  margin: var(--spacer-5);
   max-height: calc(100% - 40px);
   overflow: auto;
 
@@ -306,7 +306,7 @@
   }
 
   .spb_close {
-    color: $black;
+    color: var(--color-neutral-900);
   }
 
   .button {

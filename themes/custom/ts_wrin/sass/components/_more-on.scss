@@ -9,7 +9,7 @@
 
   .field-label {
     border-radius: 3px;
-    border: 1px solid $black;
+    border: 1px solid var(--color-neutral-900);
     cursor: pointer;
     display: flex;
     font-style: normal;
@@ -29,7 +29,7 @@
     }
 
     a.more-open-close {
-      @include font($acumin-semi-cond, "normal");
+      @include font(var(--font-family-heading-condensed), "normal");
       @include font-line-height(14, 18);
       & {
         font-style: normal;
@@ -47,7 +47,7 @@
       }
 
       &.top-border-medium {
-        border-top: 3px solid $black;
+        border-top: 3px solid var(--color-neutral-900);
       }
     }
   }
@@ -59,8 +59,8 @@
 
 .more-on__items {
   margin: 0;
-  background-color: $white;
-  border: 1px solid $light-grey;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-neutral-200);
   box-sizing: border-box;
   left: $grid-gutter-mobile;
   opacity: 0;

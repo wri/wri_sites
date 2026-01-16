@@ -4,7 +4,7 @@
 .subpage {
   .landing-page__hero.has-image {
     .intro p {
-      @include font($acumin-semi-cond, "semibold");
+      @include font(var(--font-family-heading-condensed), "semibold");
       @include font-line-height(24, 38);
 
       @include mq($ph) {
@@ -22,7 +22,7 @@
   }
   .hero__text--inner {
     .h1 p {
-      margin-bottom: $space-xs;
+      margin-bottom: var(--spacer-5);
     }
 
     .intro p {
@@ -31,7 +31,7 @@
   }
 
   .hero__text .intro-text {
-    @include font($acumin-semi-cond, "semibold");
+    @include font(var(--font-family-heading-condensed), "semibold");
     @include font-line-height(30, 43);
   }
 
@@ -78,11 +78,11 @@
   }
 
   .visit-on-social {
-    @include font($caslon, "italic");
+    @include font(var(--font-family-serif), "italic");
     @include font-line-height(15, 16);
     & {
       display: block;
-      margin-bottom: $space-xs;
+      margin-bottom: var(--spacer-5);
       text-decoration: none;
       white-space: nowrap;
     }

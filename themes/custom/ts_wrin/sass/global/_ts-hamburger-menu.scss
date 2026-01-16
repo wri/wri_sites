@@ -19,7 +19,7 @@ body.fixed {
 
   div {
     span {
-      background-color: $black;
+      background-color: var(--color-neutral-900);
       height: 2px;
       position: absolute;
       right: 12px;
@@ -28,7 +28,7 @@ body.fixed {
 
       &:before,
       &:after {
-        background: $black;
+        background: var(--color-neutral-900);
         content: "";
         height: 100%;
         left: 0;
@@ -50,9 +50,9 @@ body.fixed {
       background-color: transparent;
       &:before,
       &:after {
-        background: $white;
+        background: var(--color-white);
         transform: rotate(45deg) translateY(0);
-        transition: transform $transition-defaults;
+        transition: transform var(--transition-default);
       }
       &:after {
         transform: rotate(-45deg) translateY(0);
@@ -70,7 +70,7 @@ body.fixed {
     div span,
     div span:before,
     div span:after {
-      background-color: $brand-gold;
+      background-color: var(--color-gold-500);
     }
   }
 }
@@ -86,15 +86,15 @@ body.fixed {
   top: 0;
   transition:
     visibility 0s 0.2s,
-    opacity $transition-defaults;
+    opacity var(--transition-default);
   visibility: hidden;
   z-index: 1001;
 
   &.expanded {
-    background-color: $black;
-    color: $white;
+    background-color: var(--color-neutral-900);
+    color: var(--color-white);
     opacity: 1;
-    transition: opacity $transition-defaults;
+    transition: opacity var(--transition-default);
     visibility: visible;
   }
   .user-logged-in & {
@@ -146,7 +146,7 @@ body.fixed {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-bottom: $space-xs;
+  padding-bottom: var(--spacer-5);
   @include mq(768px) {
     padding-bottom: 0;
   }
@@ -191,8 +191,8 @@ body.fixed {
 }
 
 .hamburger-content:after {
-  background-color: $black;
-  color: $brand-gold;
+  background-color: var(--color-neutral-900);
+  color: var(--color-gold-500);
   content: "...";
   display: inline-block;
   font-size: 16px;
@@ -221,17 +221,17 @@ body.fixed {
   }
 
   ul.menu a.is-active {
-    color: $white;
+    color: var(--color-white);
     background-size:
       100% 0,
       100% 2px;
   }
 
   li.menu-item {
-    @include font($acumin-semi-cond, regular);
+    @include font(var(--font-family-heading-condensed), regular);
     @include font-line-height(16, 20);
     & {
-      color: $white;
+      color: var(--color-white);
       list-style-image: none;
       list-style-type: none;
       text-decoration: none;
@@ -240,7 +240,7 @@ body.fixed {
   li a {
     text-decoration: none;
     @include mq(768px) {
-      @include text-underline(transparent, $white);
+      @include text-underline(transparent, var(--color-white));
       & {
         background-position-y: 100%;
       }
@@ -323,12 +323,12 @@ body.fixed {
         font-weight: 600;
       }
       @include mq(768px) {
-        margin-right: $space-xs;
+        margin-right: var(--spacer-5);
         margin-top: 12px;
       }
       @include mq(1080px) {
         border-top: 1px solid #474747;
-        margin-right: $space-sm;
+        margin-right: var(--spacer-7);
         margin-top: 24px;
       }
     }
@@ -340,7 +340,7 @@ body.fixed {
     & > ul.menu > li > .menu-item-title:after {
       background: transparent url("../img/svgs/arrow-gold.svg") no-repeat center
         center / cover;
-      color: $brand-gold;
+      color: var(--color-gold-500);
       content: "";
       cursor: pointer;
       display: block;
@@ -369,10 +369,10 @@ body.fixed {
       padding-top: 6px;
     }
     & > ul li > ul span span {
-      @include font($caslon, "regular", "italic");
+      @include font(var(--font-family-serif), "regular", "italic");
       @include font-line-height(15, 15);
       & {
-        color: $white;
+        color: var(--color-white);
         left: 0;
         padding-top: 10px;
         position: absolute;
@@ -403,12 +403,12 @@ body.fixed {
       }
       @include mq(768px) {
         border-top: none;
-        margin-right: $space-xs;
+        margin-right: var(--spacer-5);
         margin-top: 12px;
       }
       @include mq(1080px) {
         border-top: 1px solid #474747;
-        margin-right: $space-sm;
+        margin-right: var(--spacer-7);
         margin-top: 24px;
       }
     }
@@ -433,7 +433,7 @@ body.fixed {
     & > li > .menu-item-title:after {
       background: transparent url("../img/svgs/arrow-gold.svg") no-repeat center
         center / cover;
-      color: $brand-gold;
+      color: var(--color-gold-500);
       content: "";
       cursor: pointer;
       display: block;
@@ -481,7 +481,7 @@ body.fixed {
     max-height: 25px;
     overflow-x: auto;
     overflow-y: hidden;
-    padding-bottom: $space-xs;
+    padding-bottom: var(--spacer-5);
     padding-right: 10px;
     @include mq(920px) {
       overflow: hidden;
@@ -509,33 +509,33 @@ body.fixed {
     margin-right: 25px;
   }
   & .menu-wrapper > ul.menu li {
-    @include font($acumin-semi-cond, "regular", "normal");
+    @include font(var(--font-family-heading-condensed), "regular", "normal");
     @include font-line-height(16, 19);
     & {
       letter-spacing: 1.5px;
-      margin-right: $space-xs;
+      margin-right: var(--spacer-5);
       text-decoration: none;
       text-transform: uppercase;
     }
     @include mq(768px) {
-      margin-right: $space-sm;
+      margin-right: var(--spacer-7);
     }
   }
   & .menu-wrapper > ul.menu li a {
-    @include text-underline(transparent, $brand-gold);
+    @include text-underline(transparent, var(--color-gold-500));
     & {
       background-position-y: 100%;
-      color: $brand-gold;
+      color: var(--color-gold-500);
     }
   }
   & .menu-wrapper > ul.menu li a.button {
-    color: $black;
+    color: var(--color-neutral-900);
   }
   & .menu-wrapper > ul.menu li:first-of-type {
-    @include font($caslon, "regular", "italic");
+    @include font(var(--font-family-serif), "regular", "italic");
     @include font-line-height(15, 15);
     & {
-      background-color: $black;
+      background-color: var(--color-neutral-900);
       color: #b1b1b1;
       left: 0px;
       padding-bottom: 4px;
@@ -588,7 +588,7 @@ body.fixed {
   }
   .back-arrow svg path,
   .nav-arrow svg path {
-    fill: $brand-gold;
+    fill: var(--color-gold-500);
   }
 }
 
@@ -617,18 +617,18 @@ body.fixed {
 }
 
 .hamburger-slider-contents {
-  background-color: $black;
+  background-color: var(--color-neutral-900);
   display: none;
-  padding: $space-xs;
+  padding: var(--spacer-5);
   z-index: 1;
   & > .back {
-    @include font($caslon, "regular", "italic");
+    @include font(var(--font-family-serif), "regular", "italic");
     @include font-line-height(15, 15);
     & {
-      color: $brand-gold;
+      color: var(--color-gold-500);
       display: block;
-      margin-bottom: $space-xs;
-      padding-left: $space-xs;
+      margin-bottom: var(--spacer-5);
+      padding-left: var(--spacer-5);
       position: relative;
       text-decoration: none;
     }
@@ -636,7 +636,7 @@ body.fixed {
   & > .back:before {
     background: transparent url("../img/svgs/arrow-gold.svg") no-repeat center
       center / cover;
-    color: $brand-gold;
+    color: var(--color-gold-500);
     content: "";
     display: block;
     height: 14px;
@@ -663,11 +663,11 @@ body.fixed {
   }
   & > ul.menu > li > .menu-item-title {
     display: block;
-    margin-bottom: $space-xs;
+    margin-bottom: var(--spacer-5);
     position: relative;
   }
   & > ul li > ul span span {
-    @include font($caslon, "regular", "italic");
+    @include font(var(--font-family-serif), "regular", "italic");
     @include font-line-height(15, 18);
     & {
       color: #b1b1b1;
@@ -697,11 +697,11 @@ body.fixed {
   }
   & > ul.menu > li > .menu-item-title a {
     display: block;
-    margin-bottom: $space-xs;
+    margin-bottom: var(--spacer-5);
     position: relative;
   }
   & > ul li > ul span span {
-    @include font($caslon, "regular", "italic");
+    @include font(var(--font-family-serif), "regular", "italic");
     @include font-line-height(15, 18);
     & {
       color: #b1b1b1;

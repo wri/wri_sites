@@ -1,11 +1,11 @@
 .field-related-resources {
-  margin-bottom: $padding-vertical;
+  margin-bottom: var(--padding-vertical);
 
   h2 {
     @extend .top-border-thick;
     @extend .h3;
     max-width: calc(100% - (#{$grid-gutter-mobile}* 2));
-    margin: 0 auto $space-md;
+    margin: 0 auto var(--spacer-11);
 
     @include mq($lg) {
       max-width: calc(100% - (#{$grid-gutter} * 2));

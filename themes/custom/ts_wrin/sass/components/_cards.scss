@@ -3,11 +3,11 @@
 // Large card (3 + 1 block)
 .card {
   .card-text {
-    background-color: $white;
+    background-color: var(--color-white);
     margin-top: -30px;
     max-width: 87%;
     padding-right: 16px;
-    padding-top: $space-xs;
+    padding-top: var(--spacer-5);
     position: relative;
     z-index: 1;
 
@@ -37,11 +37,11 @@
   }
 
   &.small-text {
-    @include font($acumin-semi-cond, "semi-bold");
+    @include font(var(--font-family-heading-condensed), "semi-bold");
     @include font-line-height(15);
 
     &.light {
-      @include font($acumin-semi-cond, "light");
+      @include font(var(--font-family-heading-condensed), "light");
     }
   }
 
@@ -54,12 +54,12 @@
 
   .button.small {
     margin-left: 0;
-    margin-top: math.div($space-xs, 2);
+    margin-top: rem(10);
   }
 }
 
 .card-h2 {
-  @include font($acumin-semi-cond, "semi-bold");
+  @include font(var(--font-family-heading-condensed), "semi-bold");
   @include font-line-height(40, 44);
 
   @include mq($lg) {
@@ -68,19 +68,19 @@
 }
 
 .card-teaser-text {
-  @include font($acumin-semi-cond, light);
+  @include font(var(--font-family-heading-condensed), light);
   @include font-line-height(18, 28);
 }
 
 .card-headline {
-  @include font($acumin-semi-cond, "light");
+  @include font(var(--font-family-heading-condensed), "light");
   @include font-line-height(32, 38);
 
   a {
-    @include text-underline(transparent, $black);
+    @include text-underline(transparent, var(--color-neutral-900));
     & {
       background-position: left 100%;
-      color: $black;
+      color: var(--color-neutral-900);
       text-decoration: none;
     }
   }

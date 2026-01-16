@@ -2,21 +2,21 @@
   .content-listing .listing-items {
     align-items: center;
     li {
-      margin-bottom: $padding-vertical;
+      margin-bottom: var(--padding-vertical);
       margin-right: 0;
 
       @include mq($ph) {
         flex-basis: calc(50% - #{$grid-gutter-mobile});
-        margin-right: $space-xs;
+        margin-right: var(--spacer-5);
       }
 
       @include mq($md) {
         flex-basis: calc(33% - #{$grid-gutter-mobile});
-        margin-right: $space-xs;
+        margin-right: var(--spacer-5);
       }
       @include mq($lg) {
         flex-basis: calc(16.667% - #{$grid-gutter});
-        margin-right: $space-md;
+        margin-right: var(--spacer-11);
       }
 
       img {

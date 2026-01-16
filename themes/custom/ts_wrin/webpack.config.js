@@ -32,7 +32,7 @@ module.exports = (env, argv) => {
                 implementation: require("sass"),
                 sourceMap: true,
                 sassOptions: {
-                  // Quiet deprecations until after Tailwind is working.
+                  // NOTE: migrate Sass @import -> @use/@forward before Sass 3.
                   silenceDeprecations: ["import"],
                 },
               }

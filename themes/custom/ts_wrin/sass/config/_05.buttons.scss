@@ -20,19 +20,19 @@
    margin: 0;
    overflow: visible;
    padding: 0;
-   transition: color $transition-defaults, border-color $transition-defaults, background-color $transition-defaults;
+   transition: color var(--transition-default), border-color var(--transition-default), background-color var(--transition-default);
  }
 
 // Default is "Large button" w/ brand-gold background.
 .wp-block-button a,
 .button,
 input[type="submit"] {
-  @include font($acumin-semi-cond, "bold");
+  @include font(var(--font-family-heading-condensed), "bold");
   @include font-line-height(16, 14);
   & {
-    background-color: $brand-gold;
+    background-color: var(--color-gold-500);
     border-radius: 3px;
-    color: $black;
+    color: var(--color-neutral-900);
     display: inline-block;
     margin: 0;
     padding: 20px 40px;
@@ -41,9 +41,9 @@ input[type="submit"] {
   }
 
   @include hocus() {
-    background-color: $gold-hover;
+    background-color: var(--color-gold-300);
     background-image: none;
-    color: $black;
+    color: var(--color-neutral-900);
   }
 }
 
@@ -54,22 +54,22 @@ input[type="submit"] {
 // White button
 .wp-block-button.white a,
 .button.white {
-  background-color: $white;
-  border: 2px solid $brand-gold;
+  background-color: var(--color-white);
+  border: 2px solid var(--color-gold-500);
 
   @include hocus() {
-    background-color: $light-grey;
+    background-color: var(--color-neutral-200);
   }
 }
 
 // Gold button
 .wp-block-button.gold a,
 .button.gold {
-  background-color: $brand-gold;
+  background-color: var(--color-gold-500);
 
   @include hocus() {
-    background-color: $gold-hover;
-    color: $black;
+    background-color: var(--color-gold-300);
+    color: var(--color-neutral-900);
   }
 }
 
@@ -84,7 +84,7 @@ input[type="submit"] {
 
 .wp-block-button.small.white a,
 .button.small.white {
-  border: 2px solid $brand-gold;
+  border: 2px solid var(--color-gold-500);
   padding: 10px 20px;
 }
 
@@ -93,12 +93,12 @@ input[type="submit"] {
 .wp-block-button.ghost a,
 .button.ghost,
 input[type="submit"].ghost {
-  @include font($acumin-semi-cond, "bold", "normal");
+  @include font(var(--font-family-heading-condensed), "bold", "normal");
   @include font-line-height(16, 16);
   & {
-    border: 1px solid $light-grey;
+    border: 1px solid var(--color-neutral-200);
     background-color: transparent;
-    color: $brand-gold;
+    color: var(--color-gold-500);
     height: 40px;
     box-sizing: border-box;
     padding: 8px 14px;
@@ -113,8 +113,8 @@ input[type="submit"].ghost {
   }
 
   @include hocus() {
-    border-color: $white;
-    background-color: $true-black;
+    border-color: var(--color-white);
+    background-color: var(--color-black);
     outline: none;
   }
 }
@@ -123,12 +123,12 @@ input[type="submit"].ghost {
 .wp-block-button.black a,
 .button.black,
 input[type="submit"].black {
-  @include font($acumin-semi-cond, "semibold", "normal");
+  @include font(var(--font-family-heading-condensed), "semibold", "normal");
   @include font-line-height(13, 16);
   & {
-    border: 1px solid $black;
-    background-color: $black;
-    color: $white;
+    border: 1px solid var(--color-neutral-900);
+    background-color: var(--color-neutral-900);
+    color: var(--color-white);
     height: 40px;
     box-sizing: border-box;
     padding: 8px 14px;
@@ -139,8 +139,8 @@ input[type="submit"].black {
   }
 
   @include hocus() {
-    border-color: $true-black;;
-    background-color: $true-black;
+    border-color: var(--color-black);;
+    background-color: var(--color-black);
     outline: none;
   }
 }
@@ -198,11 +198,11 @@ input[type="submit"].black {
 // Download button
 .wp-block-button.download a,
 .button.download {
-  background-color: $white;
-  border: 1px solid $brand-gold;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gold-500);
 
   @include hocus() {
-    background-color: $brand-gold;
+    background-color: var(--color-gold-500);
   }
 
   &::after {
@@ -227,7 +227,7 @@ input[type="submit"].black {
 a.arrow-link {
   @include font("acumin-pro-semi-condensed");
   & {
-    color: $black;
+    color: var(--color-neutral-900);
     display: flex;
     padding-right: 40px;
     position: relative;
@@ -246,7 +246,7 @@ a.arrow-link {
     svg {
       animation: float 400ms infinite alternate;
       & {
-        fill: $black;
+        fill: var(--color-neutral-900);
       }
     }
     &:before {
@@ -257,7 +257,7 @@ a.arrow-link {
 
 input[type="submit"].search-icon,
 input[type="submit"].gjas-element-submit {
-  @include font($acumin-semi-cond, "bold");
+  @include font(var(--font-family-heading-condensed), "bold");
   @include font-line-height(16, 18);
   & {
     background-color: transparent;
@@ -271,7 +271,7 @@ input[type="submit"].gjas-element-submit {
     left: -40px;
     top: -1px;
     text-indent: -9999px;
-    color: $black;
+    color: var(--color-neutral-900);
     display: inline-block;
     margin: 0;
     padding: 0;
@@ -282,7 +282,7 @@ input[type="submit"].gjas-element-submit {
   @include hocus() {
     background-color: transparent;
     background-image: url('../img/svgs/search_icon_black.svg');
-    color: $black;
+    color: var(--color-neutral-900);
   }
 }
 

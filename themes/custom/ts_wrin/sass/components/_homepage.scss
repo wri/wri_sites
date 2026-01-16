@@ -61,10 +61,10 @@
 }
 
 .field--name-field-hero-intro p {
-  @include font($caslon, "normal", "italic");
+  @include font(var(--font-family-serif), "normal", "italic");
   @include font-line-height(24, 28);
   & {
-    margin-bottom: $space-xs;
+    margin-bottom: var(--spacer-5);
     margin-top: 0;
   }
 }
@@ -74,7 +74,7 @@
   letter-spacing: -1.23px;
   max-width: 100%;
   @include mq($lg) {
-    margin-bottom: $space-md;
+    margin-bottom: var(--spacer-11);
     max-width: 90%;
   }
   @include mq($xl) {
@@ -91,10 +91,10 @@
     margin-bottom: 0;
   }
   .field__item {
-    @include font($acumin-pro, "bold", "normal");
+    @include font(var(--font-family-heading), "bold", "normal");
     @include font-line-height(14, 18);
     & {
-      border-top: 1px solid rgba($black, 0.5);
+      border-top: 1px solid rgba(var(--color-neutral-900), 0.5);
       flex: 1 1 calc(50% - 56px);
       list-style-image: none;
       list-style-type: none;
@@ -115,7 +115,7 @@
     text-decoration: none;
     transition: color 0.5s;
     @include hocus {
-      color: $green;
+      color: var(--color-green-500);
     }
   }
   .field-name-field-type {
@@ -123,7 +123,7 @@
     margin-top: 6px;
   }
   h3 {
-    @include font($acumin-pro, "bold", "normal");
+    @include font(var(--font-family-heading), "bold", "normal");
     @include font-line-height(20, 24);
     & {
       margin-top: 4px;
@@ -182,9 +182,9 @@
 }
 
 .field--name-field-featured-statement {
-  background-color: $green;
+  background-color: var(--color-green-500);
   a {
-    @include font($acumin-pro, "normal", "normal");
+    @include font(var(--font-family-heading), "normal", "normal");
     & {
       align-items: stretch;
       color: white;
@@ -214,7 +214,7 @@
     }
   }
   .body-wrapper:before {
-    border-left: 1px solid $white;
+    border-left: 1px solid var(--color-white);
     content: "";
     height: 100%;
     left: 0;
@@ -235,7 +235,7 @@
   a {
     @include hocus {
       h3 {
-        @include text-underline(transparent, $white);
+        @include text-underline(transparent, var(--color-white));
         & {
           background-position: left 94%;
         }
@@ -269,10 +269,10 @@
   }
   & > .views-row > a,
   & > .views-row.centers-block > h3 {
-    @include font($acumin-semi-cond, "bold", "normal");
+    @include font(var(--font-family-heading-condensed), "bold", "normal");
     @include font-line-height(20, 24);
     & {
-      background-color: $white;
+      background-color: var(--color-white);
       box-sizing: border-box;
       display: flex;
       height: 44px;
@@ -296,7 +296,7 @@
   & > .views-row.centers-block > h3:after {
     background: transparent url("../img/svgs/arrow-gold-sm.svg") no-repeat
       center center / cover;
-    color: $brand-gold;
+    color: var(--color-gold-500);
     content: "";
     display: block;
     height: 14px;
@@ -318,7 +318,7 @@
 }
 
 .centers-block {
-  background-color: $brand-gold;
+  background-color: var(--color-gold-500);
   box-sizing: border-box;
   padding-left: 17px;
   padding-top: 13.5%;
@@ -328,13 +328,13 @@
     padding-bottom: 2%;
   }
   a {
-    @include font($acumin-semi-cond, "bold", "normal");
+    @include font(var(--font-family-heading-condensed), "bold", "normal");
     @include font-line-height(15, 27);
     & {
       text-decoration: none;
       text-transform: uppercase;
     }
-    @include text-underline(transparent, $black);
+    @include text-underline(transparent, var(--color-neutral-900));
     & {
       background-position: left 94%;
     }

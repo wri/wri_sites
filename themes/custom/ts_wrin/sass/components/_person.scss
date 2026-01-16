@@ -2,19 +2,19 @@
   .landing-page__hero {
     padding-top: 0;
     .leadership {
-      margin-bottom: $space-md;
+      margin-bottom: var(--spacer-11);
       text-align: center;
 
       @include mq($md) {
         margin-bottom: 0;
-        margin-top: $space-lg;
+        margin-top: var(--spacer-15);
         text-align: left;
       }
     }
 
     .hero__text {
       .hero__left {
-        @include font($acumin-semi-cond, "light");
+        @include font(var(--font-family-heading-condensed), "light");
         @include mq($md) {
           margin-top: 72px;
         }
@@ -29,11 +29,11 @@
         }
 
         h1 {
-          margin-bottom: $space-xs;
+          margin-bottom: var(--spacer-5);
         }
         p {
           @include mq($md) {
-            margin-bottom: $space-lg;
+            margin-bottom: var(--spacer-15);
           }
         }
       }
@@ -60,8 +60,8 @@
 
         @include mq($md) {
           text-align: left;
-          margin-top: $space-lg;
-          margin-bottom: $space-lg;
+          margin-top: var(--spacer-15);
+          margin-bottom: var(--spacer-15);
         }
 
         a {
@@ -82,7 +82,7 @@
   .paragraph--type--social-media-sites {
     display: inline-block;
     position: relative;
-    margin-left: $space-xs;
+    margin-left: var(--spacer-5);
     margin-bottom: 0;
     vertical-align: middle;
   }
@@ -92,7 +92,7 @@
   }
 
   .quote {
-    border-top: 3px solid $black;
+    border-top: 3px solid var(--color-neutral-900);
     display: block;
     @include center-columns($grid-columns-mobile, $grid-columns-mobile);
 
@@ -105,9 +105,9 @@
     }
 
     .quote-inner {
-      border-bottom: 3px solid $black;
-      padding-bottom: $space-lg;
-      padding-top: $space-lg;
+      border-bottom: 3px solid var(--color-neutral-900);
+      padding-bottom: var(--spacer-15);
+      padding-top: var(--spacer-15);
     }
 
     img {
@@ -116,7 +116,7 @@
 
     p {
       display: inline;
-      padding: 0 $space-xs;
+      padding: 0 var(--spacer-5);
     }
 
     .tweet {
@@ -143,7 +143,7 @@
 
   .publication__main .sidebar {
     .field-label-above {
-      color: $med-grey;
+      color: var(--color-neutral-600);
       margin-bottom: 5px;
     }
 
@@ -153,18 +153,18 @@
 
     .field-label-inline {
       display: inline-block;
-      @include font($acumin-semi-cond, "light");
+      @include font(var(--font-family-heading-condensed), "light");
       @include font-line-height(15, 26);
     }
 
     .languages {
-      @include font($acumin-semi-cond, "bold");
+      @include font(var(--font-family-heading-condensed), "bold");
       @include font-line-height(15, 20);
     }
 
     .programs a {
-      color: $green;
-      @include font($acumin-pro, "semibold");
+      color: var(--color-green-500);
+      @include font(var(--font-family-heading), "semibold");
       @include font-line-height(15, 20);
     }
 
@@ -172,10 +172,10 @@
       a,
       span {
         display: block;
-        @include font($acumin-pro, "semibold");
+        @include font(var(--font-family-heading), "semibold");
         @include font-line-height(14, 24);
         & {
-          color: $green;
+          color: var(--color-green-500);
         }
       }
     }
@@ -183,11 +183,11 @@
 }
 
 .int-office {
-  @include font($acumin-semi-cond, "bold");
+  @include font(var(--font-family-heading-condensed), "bold");
   & {
     display: inline-block;
     position: relative;
-    margin-left: $space-xs;
+    margin-left: var(--spacer-5);
   }
 
   &:before {
@@ -199,12 +199,12 @@
     line-height: 1.5rem;
     padding-right: 15px;
     position: relative;
-    transition: background $transition-defaults;
+    transition: background var(--transition-default);
     text-decoration: none;
   }
 
   a {
-    @include text-underline(transparent, $black);
+    @include text-underline(transparent, var(--color-neutral-900));
     & {
       background-position: left 100%;
       padding-bottom: 5px;
@@ -233,7 +233,7 @@
   }
 
   .right-section {
-    margin-left: $space-sm;
+    margin-left: var(--spacer-7);
   }
 
   .right-section p {
@@ -273,11 +273,11 @@
     }
   }
   .leadership {
-    @include font($caslon, "italic");
+    @include font(var(--font-family-serif), "italic");
     @include font-line-height(15, 16);
   }
   h2 {
-    @include font($acumin-semi-cond, "bold", "normal");
+    @include font(var(--font-family-heading-condensed), "bold", "normal");
     @include font-line-height(24, 30);
     & {
       margin-bottom: 2px;
@@ -290,7 +290,7 @@
   .job_title,
   .job_title p {
     margin: 0;
-    @include font($acumin-semi-cond, "light", "normal");
+    @include font(var(--font-family-heading-condensed), "light", "normal");
     @include font-line-height(15, 21);
   }
 }

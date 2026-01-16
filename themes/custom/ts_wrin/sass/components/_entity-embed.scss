@@ -8,21 +8,21 @@
     margin-top: var(--spacer-11);
   }
 
-  @include font($acumin-semi-cond, "light");
+  @include font(var(--font-family-heading-condensed), "light");
   @include font-line-height(16, 21);
 
   &.has-blue-background-color,
   &.has-green-background-color,
   &.has-teal-background-color,
   &.has-black-background-color {
-    color: $white;
+    color: var(--color-white);
   }
   &.has-border-background-color {
     border: 1px solid var(--color-neutral-600);
     padding: var(--spacer-5);
     .embed-block__title {
       margin-top: 0;
-      border-bottom: 0.5px solid $black;
+      border-bottom: 0.5px solid var(--color-neutral-900);
       padding-bottom: var(--spacer-3);
       margin-bottom: var(--spacer-2);
     }
@@ -30,7 +30,7 @@
   form.webform-submission-form {
     input[type="text"],
     input[type="email"] {
-      @include font($acumin-semi-cond, "regular");
+      @include font(var(--font-family-heading-condensed), "regular");
       @include font-line-height(16, 18);
       & {
         height: 46px;
@@ -40,7 +40,7 @@
     }
   }
   .form-type-processed-text {
-    @include font($acumin-semi-cond, "regular");
+    @include font(var(--font-family-heading-condensed), "regular");
     @include font-line-height(16, 18);
     @include mq($md) {
       @include font-line-height(22, 28);
@@ -60,7 +60,7 @@
 }
 
 .article .embedded-entity .form-type-processed-text {
-  @include font($caslon, "light");
+  @include font(var(--font-family-serif), "light");
   @include font-line-height(16, 18);
   @include mq($md) {
     @include font-line-height(22, 28);

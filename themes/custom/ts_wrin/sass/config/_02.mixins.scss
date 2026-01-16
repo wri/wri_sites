@@ -26,7 +26,7 @@
 /* FONTS */
 
 // Font styles
-// Example: @include font($acumin-pro, "bold", "normal");
+// Example: @include font(var(--font-family-heading), "bold", "normal");
 @mixin font($family: "adobe-caslon-pro", $weight: "bold", $style: "normal") {
   // Compute outputs first (no CSS emitted yet).
   $font-family: null;
@@ -275,7 +275,7 @@
 }
 
 // Transparent at the top.
-@mixin hero_bottom_gradient($direction: to top, $color: $black) {
+@mixin hero_bottom_gradient($direction: to top, $color: var(--color-neutral-900)) {
   background: transparent
     linear-gradient($direction, rgba($color, 1) 0%, rgba($color, 0) 30%);
   @include mq($md) {
@@ -293,7 +293,7 @@
 }
 
 // Transparent at the top.
-@mixin hero_bottom_gradient_medium($direction: to top, $color: $black) {
+@mixin hero_bottom_gradient_medium($direction: to top, $color: var(--color-neutral-900)) {
   background: transparent
     linear-gradient(
       $direction,
@@ -334,7 +334,7 @@
 }
 
 // Transparent at the top.
-@mixin hero_bottom_gradient_heavy($direction: to top, $color: $black) {
+@mixin hero_bottom_gradient_heavy($direction: to top, $color: var(--color-neutral-900)) {
   background: transparent
     linear-gradient($direction, rgba($color, 1) 0%, rgba($color, 0) 30%);
   @include mq($md) {
@@ -352,7 +352,7 @@
 }
 
 // Underlined links and text
-@mixin text-underline($color-bg: transparent, $color-text: $green) {
+@mixin text-underline($color-bg: transparent, $color-text: var(--color-green-500)) {
   & {
     background-image: linear-gradient(to right, $color-bg, $color-bg),
       linear-gradient(to right, $color-text, $color-text);
@@ -374,7 +374,7 @@
 // Underlined links and text - thin-line
 @mixin text-underline-thin(
   $color-bg: transparent,
-  $color-text: $green,
+  $color-text: var(--color-green-500),
   $start: 0,
   $end: 100%
 ) {
@@ -472,7 +472,7 @@ Reference: https://www.drupal.org/docs/8/accessibility/hide-content-properly.*/
   .header-right .tray-toggle svg path {
     fill: $main-color;
     stroke: $main-color;
-    transition: all $transition-defaults;
+    transition: all var(--transition-default);
   }
   .header-right .tray-toggle {
     @include hocus {
@@ -487,8 +487,8 @@ Reference: https://www.drupal.org/docs/8/accessibility/hide-content-properly.*/
     &.toggled {
       svg,
       svg path {
-        fill: $brand-gold;
-        stroke: $brand-gold;
+        fill: var(--color-gold-500);
+        stroke: var(--color-gold-500);
       }
     }
   }
@@ -496,7 +496,7 @@ Reference: https://www.drupal.org/docs/8/accessibility/hide-content-properly.*/
   .header-right .menu-toggle div span:before,
   .header-right .menu-toggle div span:after {
     background-color: $main-color;
-    transition: all $transition-defaults;
+    transition: all var(--transition-default);
   }
   .header-right .menu-toggle {
     @include hocus {

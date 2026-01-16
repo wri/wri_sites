@@ -38,7 +38,7 @@ hr {
 }
 
 .drop-cap {
-  @include font($acumin-semi-cond, "bold");
+  @include font(var(--font-family-heading-condensed), "bold");
   @include font-line-height(24, 24);
 }
 
@@ -57,7 +57,7 @@ ol {
   }
 
   li {
-    @include font($acumin-semi-cond, "medium");
+    @include font(var(--font-family-heading-condensed), "medium");
     @include font-line-height(16, 26);
   }
 }
@@ -67,7 +67,7 @@ ol {
 }
 
 & > ul li::before {
-  background-color: $brand-gold;
+  background-color: var(--color-gold-500);
   border-radius: 50%;
   display: block;
   height: rem(5);
@@ -104,11 +104,11 @@ li .ck-list-bogus-paragraph {
 .callout {
   @extend .secondary;
   & {
-    border-bottom: 3px solid $black;
+    border-bottom: 3px solid var(--color-neutral-900);
     border-left: none;
-    border-top: 3px solid $black;
+    border-top: 3px solid var(--color-neutral-900);
     padding: 20px 0 12px;
-    margin-top: $space-xs;
+    margin-top: var(--spacer-5);
   }
 
   & p:first-child {
@@ -132,34 +132,34 @@ li .ck-list-bogus-paragraph {
 .callout.alignright {
   @include mq($md) {
     border-bottom: none;
-    border-left: 3px solid $black;
+    border-left: 3px solid var(--color-neutral-900);
     border-top: none;
     display: inline;
     float: right;
-    margin: 0 -25.7% 0 $space-sm;
+    margin: 0 -25.7% 0 var(--spacer-7);
     padding: 0 0 0 16px;
     width: 36%;
   }
 
   @include mq($lg) {
-    margin: 0 -18% 0 $space-sm;
+    margin: 0 -18% 0 var(--spacer-7);
   }
 }
 
 .callout.alignleft {
   @include mq($md) {
     border-bottom: none;
-    border-right: 3px solid $black;
+    border-right: 3px solid var(--color-neutral-900);
     border-top: none;
     display: inline;
     float: left;
-    margin: 0 $space-sm 0 -25.7%;
+    margin: 0 var(--spacer-7) 0 -25.7%;
     padding: 0 8px 0 0;
     width: 37%;
   }
 
   @include mq($lg) {
-    margin: 0 $space-sm 0 -18%;
+    margin: 0 var(--spacer-7) 0 -18%;
   }
 }
 /* End Block Quote */
@@ -168,17 +168,17 @@ li .ck-list-bogus-paragraph {
 blockquote {
   border: none;
   font-style: inherit !important; // this is added with javascript on editor load, so we need to override it here.
-  margin: 0 0 $space-sm 0;
+  margin: 0 0 var(--spacer-7) 0;
   padding: 0;
 
   p {
-    @include font($acumin-semi-cond, "medium");
+    @include font(var(--font-family-heading-condensed), "medium");
     @include font-line-height(20, 28);
     & {
       border-left: 1px solid #b1b1b1;
       margin: 16px 0;
       text-align: left;
-      padding-left: $space-sm;
+      padding-left: var(--spacer-7);
       position: relative;
     }
 
@@ -187,13 +187,13 @@ blockquote {
       & {
         display: inline;
         float: right;
-        margin: 0 -26% $space-sm $space-sm;
+        margin: 0 -26% var(--spacer-7) var(--spacer-7);
         width: 60%;
       }
     }
 
     @include mq($lg) {
-      margin: 0 -47.7% $space-sm $space-sm;
+      margin: 0 -47.7% var(--spacer-7) var(--spacer-7);
       width: 68%;
     }
 
@@ -206,7 +206,7 @@ blockquote {
     }
 
     &.with-quote:before {
-      @include font($caslon, "bold");
+      @include font(var(--font-family-serif), "bold");
       & {
         content: "“";
         font-size: 58px;
@@ -215,7 +215,7 @@ blockquote {
       }
     }
     span.attribution {
-      @include font($acumin-semi-cond, "semibold");
+      @include font(var(--font-family-heading-condensed), "semibold");
       @include font-line-height(18, 28);
       @include mq($md) {
         @include font-line-height(22, 32);
@@ -234,15 +234,15 @@ blockquote {
 
   p.text-align-left {
     @include mq($md) {
-      border-right: 1px solid $black;
+      border-right: 1px solid var(--color-neutral-900);
       border-left: none;
       float: left;
-      margin: 0 $space-sm $space-sm -26%;
-      padding-right: $space-sm;
+      margin: 0 var(--spacer-7) var(--spacer-7) -26%;
+      padding-right: var(--spacer-7);
     }
 
     @include mq($lg) {
-      margin: 0 $space-sm $space-sm -52.7%;
+      margin: 0 var(--spacer-7) var(--spacer-7) -52.7%;
     }
   }
 }
@@ -252,7 +252,7 @@ blockquote {
 // Reset caption styles.
 .caption {
   display: inherit;
-  margin: 0 0 $space-sm;
+  margin: 0 0 var(--spacer-7);
   float: none;
 }
 .caption > * {
@@ -268,17 +268,17 @@ blockquote {
 .caption.half_content.align-right,
 .media--view-mode-half-content.align-right {
   float: right;
-  margin-left: $space-md;
+  margin-left: var(--spacer-11);
   margin-right: 0;
-  margin-bottom: $space-sm;
+  margin-bottom: var(--spacer-7);
 }
 
 .caption.half_content.align-left,
 .media--view-mode-half-content.align-left {
   float: left;
   margin-left: 0;
-  margin-right: $space-md;
-  margin-bottom: $space-sm;
+  margin-right: var(--spacer-11);
+  margin-bottom: var(--spacer-7);
 }
 
 .caption.half_content,
@@ -369,7 +369,7 @@ table {
   overflow: auto;
 
   td {
-    @include font($acumin-semi-cond, "light");
+    @include font(var(--font-family-heading-condensed), "light");
     @include font-line-height(16, 22);
   }
 
@@ -381,11 +381,11 @@ table {
   }
 
   thead {
-    background-color: $black;
-    color: $white;
+    background-color: var(--color-neutral-900);
+    color: var(--color-white);
 
     th {
-      @include font($acumin-semi-cond, "bold");
+      @include font(var(--font-family-heading-condensed), "bold");
       @include font-line-height(16, 19);
     }
   }
@@ -397,12 +397,12 @@ table {
 
   td,
   th {
-    padding: 5px $space-xs;
+    padding: 5px var(--spacer-5);
   }
 
   tbody {
     tr:nth-of-type(even) {
-      background-color: $light-grey;
+      background-color: var(--color-neutral-200);
     }
   }
 
@@ -434,7 +434,7 @@ table {
   & {
     border-left: none;
     padding: 20px 0 12px;
-    margin-top: $space-xs;
+    margin-top: var(--spacer-5);
   }
 
   & p:first-child {
@@ -454,12 +454,12 @@ table {
   }
   img {
     max-height: 240px;
-    padding-bottom: $space-xs;
+    padding-bottom: var(--spacer-5);
     width: 180px;
   }
 
   p {
-    @include font($acumin-semi-cond, "semi-bold");
+    @include font(var(--font-family-heading-condensed), "semi-bold");
     @include font-line-height(18, 26);
   }
   figure {
@@ -471,14 +471,14 @@ table {
     display: flex;
 
     .media--type-image {
-      padding-right: $space-xs;
+      padding-right: var(--spacer-5);
     }
   }
   &.alignright {
     @include mq($lg) {
       display: inline;
       float: right;
-      margin: 0 -230px 0 $space-sm;
+      margin: 0 -230px 0 var(--spacer-7);
       position: relative;
       width: 180px;
       z-index: 10;

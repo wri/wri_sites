@@ -38,8 +38,8 @@
     .category-wrapper,
     .article-date {
       display: block;
-      margin-bottom: $space-xs;
-      margin-right: $space-xs;
+      margin-bottom: var(--spacer-5);
+      margin-right: var(--spacer-5);
 
       & > .field-label-inline {
         display: block;
@@ -60,7 +60,7 @@
 
   .article-date,
   .article-page-count {
-    @include font($acumin-semi-cond, light);
+    @include font(var(--font-family-heading-condensed), light);
     @include font-line-height(16, 23);
   }
 
@@ -112,7 +112,7 @@
 .detail__meta-secondary {
   @include column-width(1, 5);
   & {
-    margin-top: $space-xs;
+    margin-top: var(--spacer-5);
     margin-bottom: 0;
   }
 
@@ -137,8 +137,8 @@
 
 // Set the top border for mobile and dt.
 .simple-display .publication__main {
-  border-top: 3px solid $black;
-  padding-top: $space-sm;
+  border-top: 3px solid var(--color-neutral-900);
+  padding-top: var(--spacer-7);
 
   // At desktop, this becomes too wide. Set it on the inner element instead.
   @include mq($lg) {
@@ -150,8 +150,8 @@
 @include mq($lg) {
   // Set the top border desktop.
   .simple-display .detail__meta-inner {
-    border-top: 3px solid $black;
-    padding-top: $space-sm;
+    border-top: 3px solid var(--color-neutral-900);
+    padding-top: var(--spacer-7);
   }
 }
 
@@ -244,7 +244,7 @@
   .detail__meta-secondary {
     @include column-width(1, 5);
     & {
-      margin-top: $space-xs;
+      margin-top: var(--spacer-5);
       margin-bottom: 0;
       align-self: start;
     }

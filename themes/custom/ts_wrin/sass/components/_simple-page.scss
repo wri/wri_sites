@@ -3,7 +3,7 @@
     &.sticky {
       padding-top: rem(56px);
       .layout__region--menu {
-        background-color: $white;
+        background-color: var(--color-white);
         border-radius: 3px;
         left: 20px;
         margin: 0;
@@ -59,7 +59,7 @@
   }
 
   .intro-wrapper {
-    @include font($acumin-semi-cond, "semibold");
+    @include font(var(--font-family-heading-condensed), "semibold");
     @include font-line-height(20, 24);
     & {
       margin-bottom: 0;
@@ -131,8 +131,8 @@
     @extend .top-border-thick;
     display: block;
     @include column-width(1, -1);
-    margin: $space-xs 0 0;
-    padding-top: $space-xs;
+    margin: var(--spacer-5) 0 0;
+    padding-top: var(--spacer-5);
     grid-row: 1;
 
     @include mq($md) {
@@ -151,12 +151,12 @@
       @include column-width(2, 6);
       & {
         grid-row: 1;
-        margin-top: $space-md;
+        margin-top: var(--spacer-11);
       }
     }
 
     h2 {
-      @include font($acumin-semi-cond, bold);
+      @include font(var(--font-family-heading-condensed), bold);
       @include font-line-height(32, 40);
       & {
         margin: 0;
@@ -178,7 +178,7 @@
     }
 
     p {
-      @include font($acumin-semi-cond, light);
+      @include font(var(--font-family-heading-condensed), light);
       @include font-line-height(18, 30);
 
       &:first-of-type {
@@ -214,12 +214,12 @@
 .page-hierarchies,
 .menu-blockpage-hierarchies,
 .parent-menu-blockpage-hierarchies {
-  @include font($acumin-pro, "regular");
+  @include font(var(--font-family-heading), "regular");
 
   @include mq($md) {
     border-left: 1px solid #1a1919;
-    margin: $space-lg 0;
-    padding-left: $space-xs;
+    margin: var(--spacer-15) 0;
+    padding-left: var(--spacer-5);
   }
 
   li {
@@ -231,11 +231,11 @@
   }
 
   a {
-    color: $green;
+    color: var(--color-green-500);
     text-decoration: none;
 
     @include hocus {
-      color: $black;
+      color: var(--color-neutral-900);
     }
   }
 }
@@ -256,8 +256,8 @@
   .right {
     @include center-columns($grid-columns-mobile, $grid-columns-mobile);
     & {
-      margin-top: $space-sm;
-      margin-bottom: $space-sm;
+      margin-top: var(--spacer-7);
+      margin-bottom: var(--spacer-7);
     }
 
     @include mq($ph) {
@@ -265,13 +265,13 @@
     }
 
     @include mq($md) {
-      margin-top: $space-lg;
+      margin-top: var(--spacer-15);
       @include column-width(9, 13);
     }
     &.sticky {
       padding-top: rem(56px);
       .internal-menu-pages {
-        background-color: $white;
+        background-color: var(--color-white);
         border-radius: 3px;
         left: 20px;
         margin: 0;
@@ -293,10 +293,10 @@
   position: relative;
 
   .field-label {
-    @include font($acumin-semi-cond, "normal");
+    @include font(var(--font-family-heading-condensed), "normal");
     & {
       border-radius: 3px;
-      border: 1px solid $black;
+      border: 1px solid var(--color-neutral-900);
       display: flex;
       font-style: normal;
       justify-content: space-between;
@@ -306,7 +306,7 @@
     }
 
     & > a {
-      color: $black;
+      color: var(--color-neutral-900);
       text-decoration: none;
     }
 
@@ -329,8 +329,8 @@
   }
 
   ul.menu {
-    background-color: $white;
-    border: 1px solid $light-grey;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-neutral-200);
     box-sizing: border-box;
     opacity: 0;
     padding: rem(15) rem(20);

@@ -2,7 +2,7 @@
 .card-listing .project_detail,
 .card-listing .microsite {
   h3.teaser-title {
-    @include font($acumin-semi-cond);
+    @include font(var(--font-family-heading-condensed));
     @include font-line-height(24, 24);
     & {
       margin: 10px 0 0;

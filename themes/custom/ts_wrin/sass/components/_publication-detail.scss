@@ -7,7 +7,7 @@
     .publication__type > .h4 {
       @include center-columns($grid-columns-mobile, $grid-columns-mobile);
       & {
-        background-color: $black;
+        background-color: var(--color-neutral-900);
         padding: 8px 10px;
       }
 
@@ -112,7 +112,7 @@
   }
 
   .main-content {
-    @include font($acumin-semi-cond, "light");
+    @include font(var(--font-family-heading-condensed), "light");
     @include font-line-height(18, 30);
 
     & > *:first-child {
@@ -135,7 +135,7 @@
     text-decoration: none;
     font-weight: bold;
 
-    @include text-underline(transparent, $green);
+    @include text-underline(transparent, var(--color-green-500));
     & {
       background-position: left 100%;
     }
@@ -152,7 +152,7 @@
 
   .field-label-above a {
     @include mq($lg) {
-      @include font($caslon, "regular", "italic");
+      @include font(var(--font-family-serif), "regular", "italic");
       @include font-line-height(15, 19);
     }
   }
@@ -209,7 +209,7 @@
 
   .hero__right {
     .publication-reference {
-      @include font($acumin-semi-cond, "regular");
+      @include font(var(--font-family-heading-condensed), "regular");
       @include font-line-height(13, 18);
 
       .field-label-inline {
@@ -226,7 +226,7 @@
         a {
           font-weight: 700;
           text-decoration: none;
-          color: $black;
+          color: var(--color-neutral-900);
 
           @include hocus {
             text-decoration: underline;
@@ -246,6 +246,6 @@
 
 // Make text blocks match the font of their parent node.
 .block-inline-blocktext-block {
-  @include font($acumin-semi-cond, "light");
+  @include font(var(--font-family-heading-condensed), "light");
   @include font-line-height(18, 30);
 }
