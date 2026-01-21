@@ -93,3 +93,16 @@ function wri_spoke_cron() {
     $settings->save();
   }
 }
+
+/**
+ * Implements hook_page_attachments().
+ */
+function wri_spoke_page_attachments(array &$attachments): void {
+  /** @var \Drupal\Core\Routing\AdminContext $admin_context */
+  $admin_context = \Drupal::service('router.admin_context');
+  if ($admin_context->isAdminRoute()) {
+    return;
+  }
+
+  $attachments['#attached']['library'][] = 'wri_spoke/return_to';
+}
