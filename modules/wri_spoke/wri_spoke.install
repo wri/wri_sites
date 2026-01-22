@@ -18,7 +18,7 @@ function wri_spoke_update_10500() {
  * Replace wri_spoke cron job with entity_share_cron module.
  */
 function wri_spoke_update_10600() {
-  // enable entity_share_cron.
+  // Enable entity_share_cron.
   $moduleHandler = \Drupal::service('module_handler');
   if (!$moduleHandler->moduleExists('entity_share_cron')) {
     \Drupal::service('module_installer')->install(['entity_share_cron'], TRUE);
