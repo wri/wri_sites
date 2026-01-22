@@ -26,4 +26,5 @@ function wri_spoke_update_10600() {
 
   // Delete the wri_spoke.cron.settings config.
   \Drupal::service('config.factory')->getEditable('wri_spoke.cron.settings')->delete();
+  \Drupal::service('config.factory')->getEditable('ultimate_cron.job.wri_spoke_cron')->delete();
 }
