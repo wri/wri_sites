@@ -2,7 +2,7 @@ body.user-logged-in {
   .block-local-tasks-block .tabs {
     background-color: var(--color-neutral-900);
     border-radius: 0 rem(3) rem(3) 0;
-    box-shadow: rem(3) rem(5) rem(5) rgba(var(--color-neutral-900), 0.4);
+    box-shadow: rem(3) rem(5) rem(5) rgb(var(--color-neutral-900-rgb) / 0.4);
     padding-top: var(--spacer-7);
     padding-bottom: var(--spacer-7);
     position: fixed;
@@ -13,7 +13,7 @@ body.user-logged-in {
 
     .tabs-toggle {
       background: var(--color-neutral-900);
-      box-shadow: rem(3) rem(5) rem(5) rgba(var(--color-neutral-900), 0.4);
+      box-shadow: rem(3) rem(5) rem(5) rgb(var(--color-neutral-900-rgb) / 0.4);
       color: var(--color-gold-500);
       cursor: pointer;
       display: block;
@@ -55,7 +55,7 @@ body.user-logged-in {
       &:focus,
       &.is-active,
       &:hover {
-        background-color: rgba(var(--color-neutral-900), 0.4);
+        background-color: rgb(var(--color-neutral-900-rgb) / 0.4);
         text-decoration: underline;
         text-underline-position: under;
       }
@@ -67,7 +67,7 @@ body.user-logged-in {
       background-size: rem(20);
 
       @include hocus {
-        background: rgba(var(--color-neutral-900), 0.4)
+        background: rgb(var(--color-neutral-900-rgb) / 0.4)
           url("../img/tabs/view.svg") no-repeat 95% center;
         background-size: rem(20);
       }
@@ -78,7 +78,7 @@ body.user-logged-in {
       background-size: rem(20);
 
       @include hocus {
-        background: rgba(var(--color-neutral-900), 0.4)
+        background: rgb(var(--color-neutral-900-rgb) / 0.4)
           url("../img/tabs/shortcut.svg") no-repeat 95% center;
         background-size: rem(20);
       }
@@ -89,7 +89,7 @@ body.user-logged-in {
       background-size: rem(20);
 
       @include hocus {
-        background: rgba(var(--color-neutral-900), 0.4)
+        background: rgb(var(--color-neutral-900-rgb) / 0.4)
           url("../img/tabs/edit.svg") no-repeat 95% center;
         background-size: rem(20);
       }
@@ -100,7 +100,7 @@ body.user-logged-in {
       background-size: rem(20);
 
       @include hocus {
-        background: rgba(var(--color-neutral-900), 0.4)
+        background: rgb(var(--color-neutral-900-rgb) / 0.4)
           url("../img/tabs/delete.svg") no-repeat 95% center;
         background-size: rem(20);
       }
@@ -111,7 +111,7 @@ body.user-logged-in {
       background-size: rem(20);
 
       @include hocus {
-        background: rgba(var(--color-neutral-900), 0.4)
+        background: rgb(var(--color-neutral-900-rgb) / 0.4)
           url("../img/tabs/manage-display.svg") no-repeat 95% center;
         background-size: rem(20);
       }
@@ -122,7 +122,7 @@ body.user-logged-in {
       background-size: rem(20);
 
       @include hocus {
-        background: rgba(var(--color-neutral-900), 0.4)
+        background: rgb(var(--color-neutral-900-rgb) / 0.4)
           url("../img/tabs/revisions.svg") no-repeat 95% center;
         background-size: rem(20);
       }
@@ -133,7 +133,7 @@ body.user-logged-in {
       background-size: rem(20);
 
       @include hocus {
-        background: rgba(var(--color-neutral-900), 0.4)
+        background: rgb(var(--color-neutral-900-rgb) / 40%)
           url("../img/tabs/devel.svg") no-repeat 95% center;
         background-size: rem(20);
       }
@@ -144,7 +144,7 @@ body.user-logged-in {
       background-size: rem(20);
 
       @include hocus {
-        background: rgba(var(--color-neutral-900), 0.4)
+        background: rgb(var(--color-neutral-900-rgb) / 0.4)
           url("../img/tabs/translations.svg") no-repeat 95% center;
         background-size: rem(20);
       }

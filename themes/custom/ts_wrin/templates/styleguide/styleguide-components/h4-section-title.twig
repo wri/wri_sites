@@ -12,7 +12,7 @@
 
 <div class="styleguide-component--h4-section-title xl:container mt-10 mb-6" id="{{ id }}">
   <div class="flex justify-between">
-    <h3 class="h4 font-bold color-primary md:max-w-[75%]">{{ heading }}</h3>
+    <h3 class="h4 font-bold color-primary">{{ heading }}</h3>
     {% if show_btn %}
     {% include '@ts_wrin/design-system/atoms/btns/btn-solid.html.twig' with {
       link: {
@@ -24,7 +24,7 @@
     } %}
     {% endif %}
   </div>
-  <div class="mb-6 md:max-w-[75%]">
+  <div class="mb-6">
     {% if description %}
      <p class="{{ section_description_classes }}">{{ description }}</p>
     {% endif %}

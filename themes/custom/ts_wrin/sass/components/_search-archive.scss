@@ -330,7 +330,7 @@
     @include font-line-height(14, 18);
     @include text-underline-thin(
       transparent,
-      rgba(var(--color-neutral-900), 0.32)
+      rgb(var(--color-neutral-900-rgb) / 0.32)
     );
     & {
       background-position: left 100%;
@@ -345,7 +345,7 @@
       @include font-line-height(21, 18);
       & {
         bottom: 2px;
-        color: rgba(var(--color-neutral-900), 0.32);
+        color: rgb(var(--color-neutral-900--rgb) / 0.32);
         content: "×";
         font-weight: 700;
         position: absolute;
@@ -649,7 +649,7 @@
 }
 
 .search-page-main-input {
-  margin-top: -var(--spacer-15);
+  margin-top: calc(var(--spacer-15) * -1);
   .search-input,
   .gjas-element-keys {
     @include font(var(--font-family-heading-condensed), "light", "normal");

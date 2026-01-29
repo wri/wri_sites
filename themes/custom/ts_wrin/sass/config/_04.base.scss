@@ -331,7 +331,7 @@ ul.menu {
 .dark-overlay {
   @include gradient_setup();
   & {
-    background-color: rgba(var(--color-neutral-900), 0.5);
+    background-color: rgb(var(--color-neutral-900-rgb) / 0.5);
   }
 }
 

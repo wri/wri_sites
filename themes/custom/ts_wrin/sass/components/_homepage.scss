@@ -91,10 +91,10 @@
     margin-bottom: 0;
   }
   .field__item {
-    @include font(var(--font-family-heading), "bold", "normal");
+    @include font(var(--font-family-heading-rgb) / "bold", "normal");
     @include font-line-height(14, 18);
     & {
-      border-top: 1px solid rgba(var(--color-neutral-900), 0.5);
+      border-top: 1px solid rgb(var(--color-neutral-900-rgb) / 0.5);
       flex: 1 1 calc(50% - 56px);
       list-style-image: none;
       list-style-type: none;

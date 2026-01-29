@@ -37,7 +37,7 @@
   .card-text {
     max-width: calc(100% - 70px);
     position: relative;
-    margin-top: -var(--spacer-11);
+    margin-top: calc(var(--spacer-11) * -1);
     z-index: 2;
 
     @include mq($lg) {
@@ -86,7 +86,7 @@
 
   .card-image::after {
     content: "";
-    @include hero_bottom_gradient_medium(to bottom, var(--color-black));
+    @include hero_bottom_gradient_medium(to bottom, var(--color-black-rgb));
     & {
       height: 100%;
       width: 100%;

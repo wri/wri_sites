@@ -275,39 +275,39 @@
 }
 
 // Transparent at the top.
-@mixin hero_bottom_gradient($direction: to top, $color: var(--color-neutral-900)) {
+@mixin hero_bottom_gradient($direction: to top, $color: var(--color-neutral-900-rgb)) {
   background: transparent
-    linear-gradient($direction, rgba($color, 1) 0%, rgba($color, 0) 30%);
+    linear-gradient($direction, rgb($color / 1) 0%, rgb($color / 0) 30%);
   @include mq($md) {
     background: transparent
       linear-gradient(
         $direction,
-        rgba($color, 1) 0%,
-        rgba($color, 0.9) 10%,
-        rgba($color, 0.8) 20%,
-        rgba($color, 0.6) 35%,
-        rgba($color, 0.2) 60%,
-        rgba($color, 0) 100%
+        rgb($color / 1) 0%,
+        rgb($color / 0.9) 10%,
+        rgb($color / 0.8) 20%,
+        rgb($color / 0.6) 35%,
+        rgb($color / 0.2) 60%,
+        rgb($color / 0) 100%
       );
   }
 }
 
 // Transparent at the top.
-@mixin hero_bottom_gradient_medium($direction: to top, $color: var(--color-neutral-900)) {
+@mixin hero_bottom_gradient_medium($direction: to top, $color: var(--color-neutral-900-rgb)) {
   background: transparent
     linear-gradient(
       $direction,
-      rgba($color, 1) 0%,
-      rgba($color, 0) 40%
+      rgb($color / 1) 0%,
+      rgb($color / 0) 40%
     );
   @include mq($md) {
     background: transparent
       linear-gradient(
         $direction,
-        rgba($color, 1) 0%,
-        rgba($color, 0.7) 15%,
-        rgba($color, 0.5) 30%,
-        rgba($color, 0) 50%
+        rgb($color / 1) 0%,
+        rgb($color / 0.7) 15%,
+        rgb($color / 0.5) 30%,
+        rgb($color / 0) 50%
       );
   }
 
@@ -315,38 +315,38 @@
     background: transparent
       linear-gradient(
         $direction,
-        rgba($color, 1) 0%,
-        rgba($color, 0.6) 15%,
-        rgba($color, 0.4) 30%,
-        rgba($color, 0.2) 45%,
-        rgba($color, 0) 60%
+        rgb($color / 1) 0%,
+        rgb($color / 0.6) 15%,
+        rgb($color / 0.4) 30%,
+        rgb($color / 0.2) 45%,
+        rgb($color / 0) 60%
       );
   }
   @include mq($xl) {
     background: transparent
       linear-gradient(
         $direction,
-        rgba($color, 0.6) 0%,
-        rgba($color, 0.3) 25%,
-        rgba($color, 0) 50%
+        rgb($color / 0.6) 0%,
+        rgb($color / 0.3) 25%,
+        rgb($color / 0) 50%
       );
   }
 }
 
 // Transparent at the top.
-@mixin hero_bottom_gradient_heavy($direction: to top, $color: var(--color-neutral-900)) {
+@mixin hero_bottom_gradient_heavy($direction: to top, $color: var(--color-neutral-900-rgb)) {
   background: transparent
-    linear-gradient($direction, rgba($color, 1) 0%, rgba($color, 0) 30%);
+    linear-gradient($direction, rgb($color / 1) 0%, rgb($color / 0) 30%);
   @include mq($md) {
     background: transparent
       linear-gradient(
         $direction,
-        rgba($color, 1) 0%,
-        rgba($color, 1) 25%,
-        rgba($color, 0.85) 50%,
-        rgba($color, 0.75) 60%,
-        rgba($color, 0.6) 80%,
-        rgba($color, 0) 100%
+        rgb($color / 1) 0%,
+        rgb($color / 1) 25%,
+        rgb($color / 0.85) 50%,
+        rgb($color / 0.75) 60%,
+        rgb($color / 0.6) 80%,
+        rgb($color / 0) 100%
       );
   }
 }

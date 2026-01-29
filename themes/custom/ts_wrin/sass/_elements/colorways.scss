@@ -67,3 +67,49 @@
 .color-action {
   color: var(--action);
 }
+
+.has-white-background-color {
+  background: var(--color-white);
+}
+
+.has-black-background-color {
+  background-color: var(--color-neutral-900);
+}
+
+.has-light-gray-color {
+  color: var(--color-neutral-200);
+}
+.has-light-gray-background-color {
+  background-color: var(--color-neutral-200);
+}
+.has-white-color {
+  color: var(--color-white);
+}
+.has-white-background-color {
+  background-color: var(--color-white);
+}
+.has-blue-color {
+  color: var(--color-blue-500);
+}
+.has-blue-background-color {
+  background-color: var(--color-blue-500);
+  color: var(--color-white);
+}
+.has-teal-color {
+  color: var(--color-teal-500);
+}
+.has-teal-background-color {
+  background-color: var(--color-teal-500);
+}
+.has-green-color {
+  color: var(--color-green-500);
+}
+.has-green-background-color {
+  background-color: var(--color-green-500);
+}
+.has-gold-color {
+  color: var(--color-gold-500);
+}
+.has-gold-background-color {
+  background-color: var(--color-gold-500);
+}

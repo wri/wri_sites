@@ -121,7 +121,7 @@
       @include mq($md) {
         outline: var(--spacer-11) solid var(--color-white);
         outline-offset: -2px;
-        margin-top: -var(--spacer-40) - 5px;
+        margin-top: calc(var(--spacer-40) * -1 - 5px);
         padding: 5px;
       }
 

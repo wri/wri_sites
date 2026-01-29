@@ -1,22 +1,46 @@
 :root {
   /* Colors */
   --color-black: #000;
+  --color-black-rgb: 0 0 0;
+
   --color-white: #ffffff;
+  --color-white-rgb: 255 255 255;
 
   --color-neutral-900: #1a1919;
+  --color-neutral-900-rgb: 26 25 25;
+
   --color-neutral-800: #686767;
+  --color-neutral-800-rgb: 104 103 103;
+
   --color-neutral-600: #757575;
+  --color-neutral-600-rgb: 117 117 117;
+
   --color-neutral-500: #898989;
+  --color-neutral-500-rgb: 137 137 137;
+
   --color-neutral-400: #B1B1B1;
+  --color-neutral-400-rgb: 177 177 177;
+
   --color-neutral-200: #e8e8e7;
+  --color-neutral-200-rgb: 232 232 231;
 
   --color-gold-500: #f3b229;
+  --color-gold-500-rgb: 243 178 41;
+
   --color-gold-300: #ffd271;
+  --color-gold-300-rgb: 255 210 113;
+
   --color-gold-100: #fbe8be;
+  --color-gold-100-rgb: 251 232 190;
 
   --color-teal-500: #1b808d;
+  --color-teal-500-rgb: 27 128 141;
+
   --color-blue-500: #3654a5;
+  --color-blue-500-rgb: 54 84 165;
+
   --color-green-500: #32864b;
+  --color-green-500-rgb: 50 134 75;
 
   /* Fonts */
   --font-family-heading-condensed: 'acumin-pro-semi-condensed', sans-serif;

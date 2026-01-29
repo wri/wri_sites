@@ -63,13 +63,13 @@
       .inner-box {
         &::before,
         &::after {
-          background-color: rgba(var(--color-blue-500), 0.7);
+          background-color: rgb(var(--color-blue-500-rgb) / 0.7);
           z-index: 1;
         }
 
         &.green::before,
         &.green::after {
-          background-color: rgba(var(--color-green-500), 0.7);
+          background-color: rgb(var(--color-green-500-rgb) / 0.7);
         }
       }
     }
