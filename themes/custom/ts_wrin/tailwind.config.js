@@ -24,34 +24,34 @@ module.exports = {
 
       // Map Tailwind colors to your CSS vars.
       colors: {
-        black: "var(--color-black)",
-        white: "var(--color-white)",
+        black: "rgb(var(--color-black-rgb) / <alpha-value>)",
+        white: "rgb(var(--color-white-rgb) / <alpha-value>)",
 
         neutral: {
-          900: "var(--color-neutral-900)",
-          800: "var(--color-neutral-800)",
-          600: "var(--color-neutral-600)",
-          500: "var(--color-neutral-500)",
-          400: "var(--color-neutral-400)",
-          200: "var(--color-neutral-200)",
+          900: "rgb(var(--color-neutral-900-rgb) / <alpha-value>)",
+          800: "rgb(var(--color-neutral-800-rgb) / <alpha-value>)",
+          600: "rgb(var(--color-neutral-600-rgb) / <alpha-value>)",
+          500: "rgb(var(--color-neutral-500-rgb) / <alpha-value>)",
+          400: "rgb(var(--color-neutral-400-rgb) / <alpha-value>)",
+          200: "rgb(var(--color-neutral-200-rgb) / <alpha-value>)",
         },
 
         gold: {
-          500: "var(--color-gold-500)",
-          300: "var(--color-gold-300)",
-          100: "var(--color-gold-100)",
+          500: "rgb(var(--color-gold-500-rgb) / <alpha-value>)",
+          300: "rgb(var(--color-gold-300-rgb) / <alpha-value>)",
+          100: "rgb(var(--color-gold-100-rgb) / <alpha-value>)",
         },
 
         teal: {
-          500: "var(--color-teal-500)",
+          500: "rgb(var(--color-teal-500-rgb) / <alpha-value>)",
         },
 
         blue: {
-          500: "var(--color-blue-500)",
+          500: "rgb(var(--color-blue-500-rgb) / <alpha-value>)",
         },
 
         green: {
-          500: "var(--color-green-500)",
+          500: "rgb(var(--color-green-500-rgb) / <alpha-value>)",
         },
       },
 
