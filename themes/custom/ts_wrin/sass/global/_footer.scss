@@ -1,9 +1,11 @@
 .region-footer-top,
 .region-footer {
-  background-color: $black;
-  @include font($acumin-semi-cond, light);
+  background-color: var(--color-neutral-900);
+  @include font(var(--font-family-heading-condensed), light);
   @include font-line-height(14, 22);
-  color: $white;
+  & {
+    color: var(--color-white);
+  }
 }
 
 .region-footer-top {
@@ -17,7 +19,7 @@
 
     > div {
       border-bottom: 1px solid #898989;
-      padding-bottom: $padding-vertical;
+      padding-bottom: var(--padding-vertical);
       box-sizing: content-box;
 
       @include mq($md) {
@@ -73,8 +75,8 @@
 
 .region-footer .footer-padding {
   display: flex;
-  padding-bottom: $padding-vertical;
-  padding-top: $padding-vertical;
+  padding-bottom: var(--padding-vertical);
+  padding-top: var(--padding-vertical);
   flex-wrap: wrap;
 
   @include mq($md) {
@@ -99,10 +101,12 @@
   a,
   a.is-active,
   p {
-    @include font($acumin-semi-cond);
+    @include font(var(--font-family-heading-condensed));
     @include font-line-height(14, 22);
-    color: $white;
-    text-decoration: none;
+    & {
+      color: var(--color-white);
+      text-decoration: none;
+    }
   }
 
   .footer-logo {
@@ -130,19 +134,23 @@
   }
 
   .block-menu:not(.menu--social-menu) ul.menu a {
-    @include text-underline-thin(transparent, $white);
-    -webkit-font-smoothing: auto;
-    background-position: left 100%;
-    font-weight: 300;
-    letter-spacing: 0.5px;
+    @include text-underline-thin(transparent, var(--color-white));
+    & {
+      -webkit-font-smoothing: auto;
+      background-position: left 100%;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
   }
 
   .menu--footer-main ul.menu li.menu-item a,
   .menu--footer-secondary > ul.menu > li.menu-item > .menu-item-title a {
-    @include text-underline(transparent, $white);
-    -webkit-font-smoothing: antialiased;
-    background-position: left 100%;
-    font-weight: 700;
+    @include text-underline(transparent, var(--color-white));
+    & {
+      -webkit-font-smoothing: antialiased;
+      background-position: left 100%;
+      font-weight: 700;
+    }
   }
 
   .region-footer-left,
@@ -155,7 +163,7 @@
       display: flex;
       flex-basis: 75%;
       justify-content: space-between;
-      margin-bottom: $padding-vertical;
+      margin-bottom: var(--padding-vertical);
 
       .menu--footer-main {
         flex-basis: 25%;
@@ -171,7 +179,7 @@
       justify-content: flex-start;
 
       .menu--footer-main {
-        margin-left: $padding-vertical;
+        margin-left: var(--padding-vertical);
       }
 
       .menu--footer-secondary {
@@ -278,7 +286,7 @@
 
   .menu--social-menu ul.menu {
     display: flex;
-    padding-top: $padding-vertical;
+    padding-top: var(--padding-vertical);
 
     @include mq($md) {
       justify-content: flex-start;
@@ -298,7 +306,8 @@
     }
   }
 
-  $social-icons: facebook twitter linkedin youtube instagram wechat weibo bluesky threads;
+  $social-icons: facebook twitter linkedin youtube instagram wechat weibo
+    bluesky threads;
   @each $icon in $social-icons {
     a.#{$icon} {
       background: transparent
@@ -311,7 +320,7 @@
       height: 20px;
       position: relative;
       text-indent: -9999px;
-      transition: background $transition-defaults;
+      transition: background var(--transition-default);
       width: 20px;
 
       @include hocus {

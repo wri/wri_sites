@@ -3,7 +3,7 @@
 }
 
 .sitewide-filter-status {
-  background: $brand-gold;
+  background: var(--color-gold-500);
   padding: rem(7) 0 rem(5);
   position: absolute;
   text-align: center;
@@ -60,7 +60,7 @@
     margin-bottom: rem(30);
 
     p {
-      @include font($acumin-semi-cond, "light");
+      @include font(var(--font-family-heading-condensed), "light");
       @include font-line-height(18, 28);
     }
   }
@@ -86,7 +86,7 @@
         }
 
         .filter-description {
-          color: $black;
+          color: var(--color-neutral-900);
           white-space: nowrap;
         }
 
@@ -94,8 +94,8 @@
         &:active,
         &:focus,
         &.active {
-          background-color: $brand-gold;
-          color: $black !important;
+          background-color: var(--color-gold-500);
+          color: var(--color-neutral-900) !important;
         }
 
         &.active .filter-description {
@@ -108,11 +108,11 @@
           }
 
           &.active {
-            color: $brand-gold;
+            color: var(--color-gold-500);
 
             @include hocus() {
-              background-color: $black;
-              color: $brand-gold !important;
+              background-color: var(--color-neutral-900);
+              color: var(--color-gold-500) !important;
             }
 
             .filter-remove {

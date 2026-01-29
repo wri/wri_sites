@@ -1,6 +1,4 @@
-{# Color: All colors in the palette
- *
-#}
+{# Color: All colors in the palette #}
 
 {%
   set row1 = [
@@ -17,9 +15,9 @@
   'neutral-500',
   'neutral-400',
   'neutral-200'
-
 ]
 %}
+
 {%
   set row3 = [
   'gold-500',
@@ -27,6 +25,7 @@
   'gold-100'
 ]
 %}
+
 {%
   set row4 = [
   'teal-500',
@@ -34,6 +33,7 @@
   'green-500'
 ]
 %}
+
 {%
   set row5 = [
   'error-100',
@@ -42,22 +42,40 @@
 ]
 %}
 
-{% set color_rows = [
-  row1,
-  row2,
-  row3,
-  row4,
-  row5,
-] %}
+{% set color_rows = [row1, row2, row3, row4, row5] %}
 
-{# Add components/blocks here... #}
+{# Build a lookup map so Tailwind JIT can see the full class strings. #}
+{% set bgClasses = {
+  'black': 'bg-black',
+  'white': 'bg-white',
+
+  'neutral-900': 'bg-neutral-900',
+  'neutral-800': 'bg-neutral-800',
+  'neutral-600': 'bg-neutral-600',
+  'neutral-500': 'bg-neutral-500',
+  'neutral-400': 'bg-neutral-400',
+  'neutral-200': 'bg-neutral-200',
+
+  'gold-500': 'bg-gold-500',
+  'gold-300': 'bg-gold-300',
+  'gold-100': 'bg-gold-100',
+
+  'teal-500': 'bg-teal-500',
+  'blue-500': 'bg-blue-500',
+  'green-500': 'bg-green-500',
+
+  'error-100': 'bg-error-100',
+  'warning-100': 'bg-warning-100',
+  'success-100': 'bg-success-100',
+} %}
 
 {% for color_row in color_rows %}
   <div class="ts-grid-cols-5 gap-4 mb-12">
     {% for color1 in color_row %}
+      {% set bgClass = bgClasses[color1]|default('bg-transparent') %}
+
       <div class="col-span-1">
-        <div class="bg-{{ color1 }} color-primary body-bold body-sm p-sm shadow rounded-7 w-full h-11
-        mb-4"></div>
+        <div class="{{ bgClass }} color-primary body-bold body-sm p-sm shadow rounded-7 w-full h-11 mb-4"></div>
         <label class="body-sm">{{ color1 }}</label>
       </div>
     {% endfor %}

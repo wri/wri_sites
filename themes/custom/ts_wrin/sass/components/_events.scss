@@ -17,7 +17,7 @@
     }
 
     .intro {
-      @include font($acumin-semi-cond, "semibold");
+      @include font(var(--font-family-heading-condensed), "semibold");
       @include font-line-height(30, 43);
 
       @include mq($md) {
@@ -38,14 +38,16 @@
     .addthisevent-drop {
       @extend .button;
       @include font-line-height(16, 18);
-      background-color: $white;
-      background-image: none;
-      border: 2px solid $brand-gold;
-      box-sizing: border-box;
-      padding: 18px 38px;
+      & {
+        background-color: var(--color-white);
+        background-image: none;
+        border: 2px solid var(--color-gold-500);
+        box-sizing: border-box;
+        padding: 18px 38px;
+      }
 
       &:hover {
-        background-color: $light-grey;
+        background-color: var(--color-neutral-200);
       }
 
       & > span {
@@ -54,12 +56,14 @@
     }
 
     .addthisevent_dropdown {
-      @include font($acumin-semi-cond, "regular");
-      border-radius: 0 0 3px 3px;
-      border: none;
-      margin-left: 0;
-      padding: 0;
-      width: 100%;
+      @include font(var(--font-family-heading-condensed), "regular");
+      & {
+        border-radius: 0 0 3px 3px;
+        border: none;
+        margin-left: 0;
+        padding: 0;
+        width: 100%;
+      }
 
       span {
         padding: 10px;
@@ -68,7 +72,7 @@
 
       span,
       span:hover {
-        color: $black;
+        color: var(--color-neutral-900);
         @include font-line-height(16, 18);
       }
 
@@ -79,10 +83,10 @@
   }
 
   .event__type {
-    @include font($acumin-semi-cond, "bold");
+    @include font(var(--font-family-heading-condensed), "bold");
     @include font-line-height(20, 24);
     @include mq($lg) {
-      margin-top: $space-lg;
+      margin-top: var(--spacer-15);
     }
   }
 
@@ -97,12 +101,12 @@
 
   // Event info.
   .black-bar {
-    background: $black;
-    @include font($acumin-semi-cond, "bold");
+    background: var(--color-neutral-900);
+    @include font(var(--font-family-heading-condensed), "bold");
     @include font-line-height(20, 24);
 
     .info-inner-wrapper {
-      padding: $space-xs 0;
+      padding: var(--spacer-5) 0;
       text-align: center;
       @include center-columns($grid-columns-mobile, $grid-columns-mobile);
 
@@ -117,7 +121,7 @@
     }
 
     .event-info-item {
-      color: $white;
+      color: var(--color-white);
       display: block;
 
       &:first-child {
@@ -151,7 +155,7 @@
 
   // Meta.
   .category-wrapper.languages {
-    @include font($acumin-semi-cond, "semibold");
+    @include font(var(--font-family-heading-condensed), "semibold");
     @include font-line-height(18, 18);
 
     .language-item::after {
@@ -167,7 +171,7 @@
 
   // Main content region.
   .join-the-conversation {
-    margin-bottom: $space-sm;
+    margin-bottom: var(--spacer-7);
 
     .conversation-item {
       margin-bottom: 3px;
@@ -196,7 +200,7 @@
 
   .main-content {
     @include center-columns($grid-columns-mobile, $grid-columns-mobile);
-    @include font($acumin-semi-cond, "light");
+    @include font(var(--font-family-heading-condensed), "light");
     @include font-line-height(18, 30);
 
     @include mq($ph) {
@@ -217,13 +221,13 @@
 }
 
 .event-status-past .black-bar {
-  background-color: $light-gray;
+  background-color: var(--color-neutral-200);
 
   .info__bar-inner .info-inner-wrapper {
     .event-info-item {
-      color: $med-grey;
+      color: var(--color-neutral-600);
       &.event-info-item-past {
-        color: $blue;
+        color: var(--color-blue-500);
         display: inline-block;
         margin-right: rem(10);
       }
@@ -247,20 +251,22 @@ a.backlink {
   @include font("acumin-pro", "normal");
   @include font-line-height(12, 26);
 
-  text-decoration: none;
+  & {
+    text-decoration: none;
+  }
 
   @include hocus {
     text-decoration: underline;
   }
   &.backlink-white {
-    color: $white;
+    color: var(--color-white);
   }
 }
 
 .white .breadcrumb {
   ol::before {
-    border-left: 1px solid $white;
-    border-top: 1px solid $white;
+    border-left: 1px solid var(--color-white);
+    border-top: 1px solid var(--color-white);
   }
   .backlink-white {
     display: block;

@@ -3,17 +3,15 @@
  *
  * TS Facet js
  */
-export default function(context) {
+export default function (context) {
   const $ = jQuery;
   $(".block-facets h3")
     .off("click")
-    .on("click", function() {
-      $(this)
-        .parent()
-        .toggleClass("open");
+    .on("click", function () {
+      $(this).parent().toggleClass("open");
     });
 
-  $(".block-facets input[type=checkbox]").each(function() {
+  $(".block-facets input[type=checkbox]").each(function () {
     var el = $(this);
     if (el.is(":checked")) {
       el.closest(".facets-widget-checkbox").addClass("open");
@@ -26,7 +24,7 @@ export default function(context) {
 
   if ($(".block-facet-blocklanguages-spoken-taxonomy-term-name").length > 0) {
     $(
-      ".block-facet-blocklanguages-spoken-taxonomy-term-name .facets-widget-checkbox"
+      ".block-facet-blocklanguages-spoken-taxonomy-term-name .facets-widget-checkbox",
     )
       .once()
       .removeClass("open");
@@ -34,10 +32,10 @@ export default function(context) {
 
   $(".button.filters")
     .off("click")
-    .on("click", function() {
+    .on("click", function () {
       $(this)
         .closest(
-          ".view-resources, .view-experts-staff, .view-events, .view-paying-for-paris-resources"
+          ".view-resources, .view-experts-staff, .view-events, .view-paying-for-paris-resources",
         )
         .toggleClass("open");
     });

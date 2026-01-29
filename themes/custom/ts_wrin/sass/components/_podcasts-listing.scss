@@ -2,12 +2,12 @@
 .podcasts-content_listing .view-content-listing {
   ul.listing-items {
     display: flex;
-    gap:$grid-gutter-mobile;
+    gap: $grid-gutter-mobile;
     flex-wrap: wrap;
   }
 
   .listing-items li {
-    border: 3px solid $black;
+    border: 3px solid var(--color-neutral-900);
     flex-basis: 100%;
     margin-left: 0;
 
@@ -22,23 +22,23 @@
     }
 
     @include hocus() {
-      background-color: $green;
+      background-color: var(--color-green-500);
       transition: 0.5s;
 
       .topic-tag a,
       .teaser-title a,
       .date-region.date {
-        color: $white;
+        color: var(--color-white);
         transition: 0.5s;
       }
     }
   }
 
   .layout__region--header {
-    padding-top: $space-sm;
+    padding-top: var(--spacer-7);
 
     @include mq($md) {
-      padding-top: $space-xs;
+      padding-top: var(--spacer-5);
     }
   }
 

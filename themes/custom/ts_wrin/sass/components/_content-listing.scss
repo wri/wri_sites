@@ -1,3 +1,5 @@
+@use "sass:math";
+
 // All views like this
 .content-listing {
   ul.listing-items {
@@ -9,14 +11,14 @@
 
   .listing-items li {
     list-style-type: none;
-    margin-bottom: $padding-vertical;
+    margin-bottom: var(--padding-vertical);
     margin-left: 0;
     &:last-child {
       margin-bottom: 0;
     }
 
     @include mq($md) {
-      margin-bottom: $space-lg;
+      margin-bottom: var(--spacer-15);
       &:last-child {
         margin-bottom: 0;
       }
@@ -48,12 +50,12 @@
 
   .layout__region--header {
     @include mq($lg) {
-      @include column-width(1, $grid-columns/2 + 1);
+      @include column-width(1, math.div($grid-columns, 2) + 1);
     }
   }
   .layout__region--intro {
     @include mq($lg) {
-      @include column-width($grid-columns/2 + 1, $grid-columns + 1);
+      @include column-width(math.div($grid-columns, 2) + 1, $grid-columns + 1);
     }
 
     p {
@@ -107,7 +109,7 @@
   .listing-items li {
     box-sizing: border-box;
     list-style-type: none;
-    margin-bottom: $space-xs;
+    margin-bottom: var(--spacer-5);
     margin-left: 0;
 
     @include mq($ph) {
@@ -210,17 +212,19 @@
 .layout__region--more-link,
 .more-link {
   @include center-columns($grid-columns-mobile, $grid-columns-mobile);
-  align-items: center;
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
+  & {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+  }
 
   @include mq($ph) {
     @include center-columns($grid-columns, $grid-columns);
   }
 
   .more-link__line {
-    background-color: $light-grey;
+    background-color: var(--color-neutral-200);
     height: 1px;
     width: 100%;
   }

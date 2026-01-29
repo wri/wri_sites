@@ -1,3 +1,11 @@
+/* Tokens first (CSS vars) */
+@import "_elements/_tokens.css";
+
+@tailwind base;
+@tailwind components;
+@import "tailwind-components.scss";
+@tailwind utilities;
+
 /* autoprefixer grid: autoplace */
 
 /* CONFIG */
@@ -11,16 +19,6 @@
 /* DESIGN SYSTEM GLOBAL */
 @import "_elements/colorways.scss";
 @import "_elements/hocus.scss";
-/* TAILWIND HARDCODED TOKENS AND UTILITY CLASSES */
-@import "_elements/tokens/_fakewind.scss";
-@import "_elements/tokens/_fakewind-margin-padding-height.scss";
-@import "_elements/tokens/_fakewind_colors.scss";
-@import "_elements/tokens/_fakewind_grid.scss";
-@import "_elements/tokens/buttons.scss";
-@import "_elements/tokens/colors-text-bg.scss";
-@import "_elements/tokens/typography.scss";
-@import "_elements/tokens/grids.scss";
-
 
 /* LAYOUT */
 @import "layout/page.scss";
@@ -39,8 +37,8 @@
   line-height: 1.5;
 
   ::selection {
-    background-color: $black;
-    color: $white;
+    background-color: var(--color-neutral-900);
+    color: var(--color-white);
   }
 
   @import "global/wysiwyg.scss";

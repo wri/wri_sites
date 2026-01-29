@@ -1,4 +1,5 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const path = require("path");
 const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
 
@@ -16,26 +17,24 @@ module.exports = (env, argv) => {
         {
           test: /\.scss$/,
           use: [
-            {
-              loader: MiniCssExtractPlugin.loader
-            },
+            { loader: MiniCssExtractPlugin.loader },
             {
               loader: "css-loader",
-              options: {
-                sourceMap: true
-              }
+              options: { sourceMap: true }
             },
             {
               loader: "postcss-loader",
-              options: {
-                sourceMap: true
-              }
+              options: { sourceMap: true }
             },
             {
               loader: "sass-loader",
               options: {
                 implementation: require("sass"),
-                sourceMap: true
+                sourceMap: true,
+                sassOptions: {
+                  // NOTE: migrate Sass @import -> @use/@forward before Sass 3.
+                  silenceDeprecations: ["import"],
+                },
               }
             }
           ]
@@ -50,14 +49,8 @@ module.exports = (env, argv) => {
             }
           }
         },
-        {
-          test: /\.svg/,
-          type: "asset/inline"
-        },
-        {
-          test: /\.(jpg|png|gif)$/,
-          type: "asset/resource"
-        }
+        { test: /\.svg/, type: "asset/inline" },
+        { test: /\.(jpg|png|gif)$/, type: "asset/resource" }
       ]
     },
     output: {
@@ -72,17 +65,20 @@ module.exports = (env, argv) => {
       new BrowserSyncPlugin({
         host: "localhost",
         port: 3000,
-        // Replace proxy url with your local.
         proxy: "http://web.wriflagship.localhost/"
       })
     ],
     optimization: {
-      usedExports: true
+      usedExports: true,
+      minimize: !isDevMode,
+      minimizer: ["...", new CssMinimizerPlugin()]
     },
     externals: {
-      // require("jquery") is external and available
-      //  on the global var jQuery
       jquery: "jQuery"
-    }
+    },
+    performance: {
+      maxAssetSize: 800000,
+      maxEntrypointSize: 800000,
+    },
   };
 };

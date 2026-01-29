@@ -1,13 +1,15 @@
 #gdpr-popup {
-  padding: $space-xs 0;
+  padding: var(--spacer-5) 0;
 
   p.gdpr-popup-cookies,
   a.privacy-policy {
-    color: $white;
-    @include font($acumin-semi-cond, "Regular");
+    color: var(--color-white);
+    @include font(var(--font-family-heading-condensed), "Regular");
     @include font-line-height(16, 20);
-    text-align: left;
-    display: inline;
+    & {
+      text-align: left;
+      display: inline;
+    }
   }
 
   .gdpr-popup-content {

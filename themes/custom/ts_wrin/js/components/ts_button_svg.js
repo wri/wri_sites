@@ -4,13 +4,13 @@
  * TS Button SVG custom JS.
  */
 
-export default function(context) {
+export default function (context) {
   if (context == document) {
     const arrowLinks = document.querySelectorAll(
-      "a.arrow-link, div.arrow-link a"
+      "a.arrow-link, div.arrow-link a",
     );
 
-    arrowLinks.forEach(function(arrowLink) {
+    arrowLinks.forEach(function (arrowLink) {
       const innerDiv = document.createElement("DIV");
 
       innerDiv.innerHTML =

@@ -6,8 +6,10 @@
   .hero__text {
     .publication__type > .h4 {
       @include center-columns($grid-columns-mobile, $grid-columns-mobile);
-      background-color: $black;
-      padding: 8px 10px;
+      & {
+        background-color: var(--color-neutral-900);
+        padding: 8px 10px;
+      }
 
       @include mq($ph) {
         @include center-columns($grid-columns, $grid-columns);
@@ -44,9 +46,11 @@
     .hero__right {
       @include mq($md) {
         @include column-width(9, 13);
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
+        & {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+        }
       }
 
       @include mq($lg) {
@@ -101,12 +105,14 @@
   .publication__main .sidebar {
     @include mq($lg) {
       @include column-width(9, 12);
-      order: 1;
+      & {
+        order: 1;
+      }
     }
   }
 
   .main-content {
-    @include font($acumin-semi-cond, "light");
+    @include font(var(--font-family-heading-condensed), "light");
     @include font-line-height(18, 30);
 
     & > *:first-child {
@@ -119,7 +125,6 @@
   }
 }
 
-
 .list-of-fields-sidebar {
   font-size: rem(14);
   line-height: rem(18);
@@ -130,8 +135,10 @@
     text-decoration: none;
     font-weight: bold;
 
-    @include text-underline(transparent, $green);
-    background-position: left 100%;
+    @include text-underline(transparent, var(--color-green-500));
+    & {
+      background-position: left 100%;
+    }
 
     &.more-open-close {
       font-weight: normal;
@@ -145,7 +152,7 @@
 
   .field-label-above a {
     @include mq($lg) {
-      @include font($caslon, "regular", "italic");
+      @include font(var(--font-family-serif), "regular", "italic");
       @include font-line-height(15, 19);
     }
   }
@@ -202,7 +209,7 @@
 
   .hero__right {
     .publication-reference {
-      @include font($acumin-semi-cond, "regular");
+      @include font(var(--font-family-heading-condensed), "regular");
       @include font-line-height(13, 18);
 
       .field-label-inline {
@@ -219,7 +226,7 @@
         a {
           font-weight: 700;
           text-decoration: none;
-          color: $black;
+          color: var(--color-neutral-900);
 
           @include hocus {
             text-decoration: underline;
@@ -239,6 +246,6 @@
 
 // Make text blocks match the font of their parent node.
 .block-inline-blocktext-block {
-  @include font($acumin-semi-cond, "light");
+  @include font(var(--font-family-heading-condensed), "light");
   @include font-line-height(18, 30);
 }

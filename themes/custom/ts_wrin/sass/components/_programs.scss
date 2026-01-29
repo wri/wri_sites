@@ -1,10 +1,10 @@
 .page-node-type-program-center {
   .landing-page__hero__field-listing__mobile {
-    background-color: $teal;
+    background-color: var(--color-teal-500);
   }
 
   header nav .menu-wrapper > ul.menu li a {
-    color: $white;
+    color: var(--color-white);
   }
 
   .layout--onecol {
@@ -28,7 +28,7 @@
     }
 
     .intro p {
-      @include font($acumin-semi-cond, "semibold");
+      @include font(var(--font-family-heading-condensed), "semibold");
       @include font-line-height(24, 38);
 
       @include mq($ph) {
@@ -37,11 +37,15 @@
 
       @include mq($md) {
         @include font-line-height(30, 43);
-        max-width: 620px;
+        & {
+          max-width: 620px;
+        }
       }
 
       @include mq($xl) {
-        max-width: 825px;
+        & {
+          max-width: 825px;
+        }
       }
     }
   }
@@ -80,21 +84,23 @@
   position: relative;
 
   @include mq($lg) {
-    margin-right: $space-xxl;
+    margin-right: var(--spacer-40);
   }
 
   .field--name-field-twitter-account,
   .field-name-field-twitter-account {
-    @include font($caslon, "regular", "italic");
+    @include font(var(--font-family-serif), "regular", "italic");
     @include font-line-height(15, 16);
-    background-color: $white;
-    height: 50px;
-    width: 55px;
-    display: flex;
-    justify-content: center;
-    margin-top: -50px;
-    align-items: center;
-    text-indent: -9999px;
+    & {
+      background-color: var(--color-white);
+      height: 50px;
+      width: 55px;
+      display: flex;
+      justify-content: center;
+      margin-top: -50px;
+      align-items: center;
+      text-indent: -9999px;
+    }
 
     @include mq($lg) {
       text-indent: 0;
@@ -109,7 +115,7 @@
       line-height: 1.5rem;
       padding-right: 35px;
       position: relative;
-      transition: background $transition-defaults;
+      transition: background var(--transition-default);
       text-decoration: none;
 
       @include hocus {
@@ -142,7 +148,9 @@
 
     @include mq($md) {
       @include column-width(4, 10);
-      margin-top: $space-md;
+      & {
+        margin-top: var(--spacer-11);
+      }
     }
     @include mq($xl) {
       @include column-width(4, 10);
@@ -152,7 +160,7 @@
   h2,
   h3,
   h4 {
-    @include font($acumin-semi-cond, "bold");
+    @include font(var(--font-family-heading-condensed), "bold");
   }
 }
 
@@ -171,9 +179,11 @@
 
 .field--name-field-leadin-title {
   h2 {
-    @include font($caslon, "regular", "italic");
+    @include font(var(--font-family-serif), "regular", "italic");
     @include font-line-height(36, 40);
-    margin: 0;
+    & {
+      margin: 0;
+    }
   }
 
   @include mq($md) {
@@ -189,7 +199,9 @@
   @extend .intro;
   @include font-line-height(18, 30);
 
-  margin-bottom: $space-md;
+  & {
+    margin-bottom: var(--spacer-11);
+  }
 
   @include mq($md) {
     @include column-width(5, 13);
@@ -225,7 +237,7 @@
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 45px;
-    border-bottom: 2px solid $black;
+    border-bottom: 2px solid var(--color-neutral-900);
     position: relative;
     overflow: hidden;
 
@@ -289,20 +301,24 @@
     .field--name-field-statistic-number {
       @extend .h1;
       @include font-line-height(48, 55);
-      margin-bottom: 0;
-      position: relative;
+      & {
+        margin-bottom: 0;
+        position: relative;
+      }
     }
 
     .field--name-field-statistic-text p,
     .field--name-field-statistic-text p a {
-      @include font($acumin-semi-cond, "medium");
+      @include font(var(--font-family-heading-condensed), "medium");
       @include font-line-height(16, 18);
-      color: $blue;
-      text-transform: none;
+      & {
+        color: var(--color-blue-500);
+        text-transform: none;
+      }
     }
     .field--name-field-statistic-text p a {
       @include hocus {
-        color: $black;
+        color: var(--color-neutral-900);
       }
     }
   }
@@ -313,7 +329,9 @@
 
   .field--name-body {
     @extend .top-border-thick;
-    padding-top: $space-md;
+    & {
+      padding-top: var(--spacer-11);
+    }
 
     @include mq($md) {
       @include column-width(4, 11);
@@ -323,7 +341,7 @@
     }
 
     p {
-      @include font($acumin-semi-cond, "light");
+      @include font(var(--font-family-heading-condensed), "light");
       @include font-line-height(18, 30);
     }
 

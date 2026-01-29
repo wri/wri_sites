@@ -3,7 +3,7 @@
  *
  * TS Tabs
  */
-export default function(context) {
+export default function (context) {
   const $ = jQuery;
 
   if (context == document) {
@@ -12,26 +12,26 @@ export default function(context) {
 
     if (tabsBlock.length && userLoggedIn.length) {
       tabsBlock.prepend(
-        '<span class="tabs-toggle">Edit<span class="arrow"></span></span>'
+        '<span class="tabs-toggle">Edit<span class="arrow"></span></span>',
       );
 
       const tabsToggle = $(".tabs .tabs-toggle");
-      tabsToggle.click(function() {
+      tabsToggle.click(function () {
         if ($(this).hasClass("open")) {
           $(this).removeClass("open");
           tabsBlock.animate(
             {
-              left: -200
+              left: -200,
             },
-            500
+            500,
           );
         } else {
           $(this).addClass("open");
           tabsBlock.animate(
             {
-              left: 0
+              left: 0,
             },
-            500
+            500,
           );
         }
       });

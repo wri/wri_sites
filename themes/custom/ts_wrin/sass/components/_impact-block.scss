@@ -1,8 +1,10 @@
 .block-content--type-impact-in-action .grid {
   .h3 {
     @include column-width(1, 13);
-    @include font($acumin-semi-cond, bold);
-    margin-top: 0;
+    @include font(var(--font-family-heading-condensed), bold);
+    & {
+      margin-top: 0;
+    }
 
     @include mq($md) {
       @include column-width(1, 4);
@@ -19,8 +21,8 @@
   .impact-item {
     display: flex;
     flex-wrap: wrap;
-    padding-top: $space-xs;
-    border-top: 3px solid $black;
+    padding-top: var(--spacer-5);
+    border-top: 3px solid var(--color-neutral-900);
 
     &:first-of-type {
       border-top: none;
@@ -33,7 +35,7 @@
   }
 
   .impact-item .impact-title {
-    margin-bottom: $space-sm;
+    margin-bottom: var(--spacer-7);
     width: 100%;
 
     @include mq($ph) {
@@ -49,9 +51,11 @@
   }
 
   .impact-text {
-    @include font($acumin-semi-cond, light);
+    @include font(var(--font-family-heading-condensed), light);
     @include font-line-height(36, 42);
-    margin: 0;
+    & {
+      margin: 0;
+    }
 
     @include mq($md) {
       @include font-line-height(48, 58);
@@ -62,14 +66,14 @@
     width: 100%;
 
     @include mq($ph) {
-      margin-left: $space-xs;
-      width: calc(48% - #{$space-xs});
+      margin-left: var(--spacer-5);
+      width: calc(48% - #{var(--spacer-5)});
     }
     @include mq($md) {
-      width: calc(42% - #{$space-xs});
+      width: calc(42% - #{var(--spacer-5)});
     }
     @include mq($lg) {
-      width: calc(36% - #{$space-xs});
+      width: calc(36% - #{var(--spacer-5)});
     }
 
     .title,
@@ -80,12 +84,12 @@
     .topic-tag span,
     .topic-tag a {
       text-transform: none;
-      color: $black;
+      color: var(--color-neutral-900);
     }
 
     .topic-tag a {
       @include hocus() {
-        color: $green;
+        color: var(--color-green-500);
       }
     }
   }

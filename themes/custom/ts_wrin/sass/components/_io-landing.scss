@@ -11,7 +11,7 @@
       .hero__text {
         min-height: inherit;
         position: relative;
-        color: $black;
+        color: var(--color-neutral-900);
       }
 
       .hero__image {
@@ -64,11 +64,11 @@
       }
       .margin-top-xl {
         @include mq($lg) {
-          margin-top: $padding-vertical;
+          margin-top: var(--padding-vertical);
         }
 
         @include mq($xl) {
-          margin-top: $padding-vertical;
+          margin-top: var(--padding-vertical);
         }
       }
     }
@@ -97,7 +97,7 @@
     }
 
     @include mq($md) {
-      margin-left: $space-sm;
+      margin-left: var(--spacer-7);
     }
   }
 
@@ -115,18 +115,18 @@
   .content__inner.main-content {
     z-index: 1;
     .io-body {
-      background-color: $white;
+      background-color: var(--color-white);
       position: relative;
       z-index: 10;
       @include mq($md) {
-        outline: $space-md solid $white;
+        outline: var(--spacer-11) solid var(--color-white);
         outline-offset: -2px;
-        margin-top: -$space-xxl - 5px;
+        margin-top: calc(var(--spacer-40) * -1 - 5px);
         padding: 5px;
       }
 
       p {
-        @include font($acumin-semi-cond, "light");
+        @include font(var(--font-family-heading-condensed), "light");
         @include font-line-height(18, 30);
       }
     }

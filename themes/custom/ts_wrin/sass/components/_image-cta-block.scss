@@ -1,12 +1,13 @@
 .has-gold-background-color .image-cta .button {
-  background-color: $white;
-  border-color: $white;
-  transition: background-color $transition-defaults,
-    border-color $transition-defaults;
+  background-color: var(--color-white);
+  border-color: var(--color-white);
+  transition:
+    background-color var(--transition-default),
+    border-color var(--transition-default);
 
   @include hocus() {
-    background-color: $light-grey;
-    border-color: $light-grey;
+    background-color: var(--color-neutral-200);
+    border-color: var(--color-neutral-200);
   }
 }
 
@@ -46,7 +47,7 @@
       }
 
       @include mq($lg) {
-        width: calc(35% - #{$padding-vertical}* 2);
+        width: calc(35% - #{var(--padding-vertical)}* 2);
       }
     }
 

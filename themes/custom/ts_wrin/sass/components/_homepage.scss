@@ -33,11 +33,15 @@
     }
     @include mq($md) {
       @include column-width(8, 13);
-      height: 640px;
+      & {
+        height: 640px;
+      }
     }
     @include mq($lg) {
       @include column-width(8, 13);
-      height: 900px;
+      & {
+        height: 900px;
+      }
     }
   }
   .paragraph--type--featured-statement {
@@ -57,10 +61,12 @@
 }
 
 .field--name-field-hero-intro p {
-  @include font($caslon, "normal", "italic");
+  @include font(var(--font-family-serif), "normal", "italic");
   @include font-line-height(24, 28);
-  margin-bottom: $space-xs;
-  margin-top: 0;
+  & {
+    margin-bottom: var(--spacer-5);
+    margin-top: 0;
+  }
 }
 
 .homepage-hero-heading {
@@ -68,7 +74,7 @@
   letter-spacing: -1.23px;
   max-width: 100%;
   @include mq($lg) {
-    margin-bottom: $space-md;
+    margin-bottom: var(--spacer-11);
     max-width: 90%;
   }
   @include mq($xl) {
@@ -85,16 +91,18 @@
     margin-bottom: 0;
   }
   .field__item {
-    @include font($acumin-pro, "bold", "normal");
+    @include font(var(--font-family-heading-rgb) / "bold", "normal");
     @include font-line-height(14, 18);
-    border-top: 1px solid rgba($black, 0.5);
-    flex: 1 1 calc(50% - 56px);
-    list-style-image: none;
-    list-style-type: none;
-    margin-left: 0;
-    margin-right: 56px;
-    padding-top: 10px;
-    text-decoration: none;
+    & {
+      border-top: 1px solid rgb(var(--color-neutral-900-rgb) / 0.5);
+      flex: 1 1 calc(50% - 56px);
+      list-style-image: none;
+      list-style-type: none;
+      margin-left: 0;
+      margin-right: 56px;
+      padding-top: 10px;
+      text-decoration: none;
+    }
     @include mq($lg) {
       flex: 0 1 calc(50% - 56px);
       margin-top: 10px;
@@ -107,7 +115,7 @@
     text-decoration: none;
     transition: color 0.5s;
     @include hocus {
-      color: $green;
+      color: var(--color-green-500);
     }
   }
   .field-name-field-type {
@@ -115,9 +123,11 @@
     margin-top: 6px;
   }
   h3 {
-    @include font($acumin-pro, "bold", "normal");
+    @include font(var(--font-family-heading), "bold", "normal");
     @include font-line-height(20, 24);
-    margin-top: 4px;
+    & {
+      margin-top: 4px;
+    }
   }
 }
 
@@ -172,17 +182,19 @@
 }
 
 .field--name-field-featured-statement {
-  background-color: $green;
+  background-color: var(--color-green-500);
   a {
-    @include font($acumin-pro, "normal", "normal");
-    align-items: stretch;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding-bottom: $grid-gutter;
-    padding-top: $grid-gutter;
-    text-decoration: none;
+    @include font(var(--font-family-heading), "normal", "normal");
+    & {
+      align-items: stretch;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-bottom: $grid-gutter;
+      padding-top: $grid-gutter;
+      text-decoration: none;
+    }
     @include mq($md) {
       flex-direction: row;
     }
@@ -202,7 +214,7 @@
     }
   }
   .body-wrapper:before {
-    border-left: 1px solid $white;
+    border-left: 1px solid var(--color-white);
     content: "";
     height: 100%;
     left: 0;
@@ -212,8 +224,10 @@
 
   h3 {
     @include font-line-height(24, 32);
-    display: inline;
-    background-position: left 94%;
+    & {
+      display: inline;
+      background-position: left 94%;
+    }
   }
   .field--name-field-text {
     @include font-line-height(18, 28);
@@ -221,8 +235,10 @@
   a {
     @include hocus {
       h3 {
-        @include text-underline(transparent, $white);
-        background-position: left 94%;
+        @include text-underline(transparent, var(--color-white));
+        & {
+          background-position: left 94%;
+        }
       }
     }
   }
@@ -253,22 +269,24 @@
   }
   & > .views-row > a,
   & > .views-row.centers-block > h3 {
-    @include font($acumin-semi-cond, "bold", "normal");
+    @include font(var(--font-family-heading-condensed), "bold", "normal");
     @include font-line-height(20, 24);
-    background-color: $white;
-    box-sizing: border-box;
-    display: flex;
-    height: 44px;
-    justify-content: space-between;
-    left: 0;
-    min-width: 128px;
-    padding-left: 7px;
-    padding-right: 21px;
-    padding-top: 8px;
-    position: absolute;
-    text-decoration: none;
-    top: 0;
-    transition: all 0.2s ease-in-out;
+    & {
+      background-color: var(--color-white);
+      box-sizing: border-box;
+      display: flex;
+      height: 44px;
+      justify-content: space-between;
+      left: 0;
+      min-width: 128px;
+      padding-left: 7px;
+      padding-right: 21px;
+      padding-top: 8px;
+      position: absolute;
+      text-decoration: none;
+      top: 0;
+      transition: all 0.2s ease-in-out;
+    }
     @include hocus {
       min-width: 133px;
       height: 46px;
@@ -278,7 +296,7 @@
   & > .views-row.centers-block > h3:after {
     background: transparent url("../img/svgs/arrow-gold-sm.svg") no-repeat
       center center / cover;
-    color: $brand-gold;
+    color: var(--color-gold-500);
     content: "";
     display: block;
     height: 14px;
@@ -300,7 +318,7 @@
 }
 
 .centers-block {
-  background-color: $brand-gold;
+  background-color: var(--color-gold-500);
   box-sizing: border-box;
   padding-left: 17px;
   padding-top: 13.5%;
@@ -310,18 +328,21 @@
     padding-bottom: 2%;
   }
   a {
-    @include font($acumin-semi-cond, "bold", "normal");
+    @include font(var(--font-family-heading-condensed), "bold", "normal");
     @include font-line-height(15, 27);
-    text-decoration: none;
-    text-transform: uppercase;
-    @include text-underline(transparent, $black);
-    background-position: left 94%;
+    & {
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    @include text-underline(transparent, var(--color-neutral-900));
+    & {
+      background-position: left 94%;
+    }
   }
   h3 {
     margin: 0;
   }
 }
-
 
 // Adding menu css
 
@@ -335,7 +356,7 @@
     header:not(.pfp-header).sticky .region-primary-nav {
       flex-direction: column;
       align-items: start;
-      row-gap: .5rem;
+      row-gap: 0.5rem;
     }
 
     header nav.menu--main {
@@ -347,7 +368,7 @@
       align-items: start;
       width: 300px;
       justify-content: right;
-      row-gap: .5rem;
+      row-gap: 0.5rem;
       position: relative;
     }
     .header-right .menu--donate {
@@ -361,15 +382,15 @@
     .region-secondary-nav nav#block-secondarynavigation {
       display: block;
     }
-    header nav.menu--donate>ul.menu,
-    header nav.menu--secondary>ul.menu {
+    header nav.menu--donate > ul.menu,
+    header nav.menu--secondary > ul.menu {
       margin-right: 0;
     }
-    header nav.menu--secondary>ul.menu {
+    header nav.menu--secondary > ul.menu {
       width: 205px;
     }
-    header nav.menu--main .menu-wrapper>ul.menu li a {
-      font-size: .9rem;
+    header nav.menu--main .menu-wrapper > ul.menu li a {
+      font-size: 0.9rem;
     }
     header .site-logo img {
       height: 36px;
@@ -387,8 +408,8 @@
       align-items: center;
       column-gap: 2rem;
     }
-    header nav.menu--main .menu-wrapper>ul.menu li a {
-      font-size: .9375rem;
+    header nav.menu--main .menu-wrapper > ul.menu li a {
+      font-size: 0.9375rem;
     }
     header .site-logo img {
       height: auto;
@@ -405,11 +426,11 @@
     .region-secondary-nav {
       order: 0;
     }
-    header nav.menu--donate>ul.menu,
-    header nav.menu--secondary>ul.menu {
+    header nav.menu--donate > ul.menu,
+    header nav.menu--secondary > ul.menu {
       margin-right: 20px;
     }
-    header nav.menu--secondary>ul.menu {
+    header nav.menu--secondary > ul.menu {
       width: 190px;
     }
   }

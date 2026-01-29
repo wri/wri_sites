@@ -1,6 +1,6 @@
 .page-node-type-data {
   .layout__region--main_content {
-    @include font($acumin-semi-cond, "light");
+    @include font(var(--font-family-heading-condensed), "light");
     @include font-line-height(18, 30);
 
     p:first-of-type {

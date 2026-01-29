@@ -1,7 +1,9 @@
+@use "sass:math";
+
 .tile {
   .h3,
   .secondary {
-    margin-bottom: $space-xs;
+    margin-bottom: var(--spacer-5);
 
     a {
       text-decoration: none;
@@ -14,7 +16,7 @@
 
   .card-image {
     position: relative;
-    min-height: $space-md;
+    min-height: var(--spacer-11);
     z-index: 1;
 
     @include mq($lg) {
@@ -35,7 +37,7 @@
   .card-text {
     max-width: calc(100% - 70px);
     position: relative;
-    margin-top: -$space-md;
+    margin-top: calc(var(--spacer-11) * -1);
     z-index: 2;
 
     @include mq($lg) {
@@ -52,16 +54,16 @@
   }
 
   .has-white-background-color {
-    border: 1px solid $white;
+    border: 1px solid var(--color-white);
   }
 
   .tile-buttons {
-    margin-bottom: $space-xs/2;
+    margin-bottom: 10px;
   }
 
   .button.small {
     margin-left: 0;
-    margin-bottom: $space-xs/2;
+    margin-bottom: 10px;
   }
 }
 
@@ -84,38 +86,44 @@
 
   .card-image::after {
     content: "";
-    @include hero_bottom_gradient_medium(to bottom, $true-black);
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
+    @include hero_bottom_gradient_medium(to bottom, var(--color-black-rgb));
+    & {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+    }
   }
 
   .card-text {
     background-color: transparent;
     border: none;
-    color: $white;
+    color: var(--color-white);
     margin-top: 0;
     max-width: 100%;
-    padding: $space-xs;
+    padding: var(--spacer-5);
     position: absolute;
     top: 0;
 
     @include mq($lg) {
-      padding: 0 $space-xs * 2 0;
+      padding: 0 rem(40) 0;
     }
 
     h3 {
       @extend .white;
       @extend .card-headline;
-      @include font($acumin-semi-cond, "bold");
+      @include font(var(--font-family-heading-condensed), "bold");
       @include font-line-height(32, 40);
-      margin: 0;
+      & {
+        margin: 0;
+      }
 
       a {
-        color: $white;
-        @include text-underline(transparent, $white);
-        background-position: left 100%;
+        color: var(--color-white);
+        @include text-underline(transparent, var(--color-white));
+        & {
+          background-position: left 100%;
+        }
       }
     }
 
