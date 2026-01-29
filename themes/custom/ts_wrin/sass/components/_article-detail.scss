@@ -23,7 +23,7 @@
     @include mq($ph) {
       @include center-columns($grid-columns, $grid-columns);
       .article-date {
-        margin-right: $space-xs;
+        margin-right: var(--spacer-5);
       }
     }
   }
@@ -36,10 +36,12 @@
   }
 
   .layout__region--byline {
-    @include font($acumin-semi-cond, light);
+    @include font(var(--font-family-heading-condensed), light);
     @include font-line-height(16, 23);
-    padding-bottom: $padding-vertical;
-    border-bottom: 6px solid $black;
+    & {
+      padding-bottom: var(--padding-vertical);
+      border-bottom: 6px solid var(--color-neutral-900);
+    }
 
     a {
       font-weight: bold;
@@ -54,8 +56,10 @@
   .article__meta {
     .field-label-inline {
       @extend .italic-tiny;
-      display: inline;
-      margin-right: 2px;
+      & {
+        display: inline;
+        margin-right: 2px;
+      }
     }
 
     .taxonomy {
@@ -113,7 +117,7 @@
 
     .field-label {
       margin-bottom: rem(7);
-      @include font($caslon, "italic");
+      @include font(var(--font-family-serif), "italic");
       @include font-line-height(15, 16);
 
       a {
@@ -129,24 +133,32 @@
     }
 
     ul li {
-      @include font($acumin-pro, "semibold");
+      @include font(var(--font-family-heading), "semibold");
       @include font-line-height(14, 21);
-      color: $green;
+      & {
+        color: var(--color-green-500);
+      }
     }
 
     ul li a {
       @include text-underline();
-      background-position: left 100%;
-      text-decoration: none;
+      & {
+        background-position: left 100%;
+        text-decoration: none;
+      }
     }
   }
 
   .more-on__items a {
-    @include font($acumin-pro, "semibold");
+    @include font(var(--font-family-heading), "semibold");
     @include font-line-height(18, 24);
-    color: $green;
+    & {
+      color: var(--color-green-500);
+    }
     @include text-underline();
-    background-position: left 100%;
-    text-decoration: none;
+    & {
+      background-position: left 100%;
+      text-decoration: none;
+    }
   }
 }

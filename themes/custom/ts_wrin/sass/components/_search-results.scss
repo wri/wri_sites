@@ -1,5 +1,5 @@
 .search-results-container {
-  background-color: $white;
+  background-color: var(--color-white);
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -15,11 +15,13 @@
     margin: 0;
   }
   .tags li {
-    @include font($acumin-semi-cond, "medium", "normal");
+    @include font(var(--font-family-heading-condensed), "medium", "normal");
     @include font-line-height(11, 14);
-    background-position: left 100%;
-    text-decoration: none;
-    text-transform: capitalize;
+    & {
+      background-position: left 100%;
+      text-decoration: none;
+      text-transform: capitalize;
+    }
     &:after {
       content: ", ";
     }
@@ -36,7 +38,7 @@
     justify-content: space-between;
     order: 2;
     @include mq($md) {
-      border-right: 1px solid $black;
+      border-right: 1px solid var(--color-neutral-900);
       flex: 0 0 180px;
       margin-right: 25px;
       order: unset;
@@ -46,14 +48,18 @@
     }
     .topic-tag a {
       @include font-line-height(12, 18);
-      letter-spacing: 0.7px;
+      & {
+        letter-spacing: 0.7px;
+      }
       @include mq($md) {
         @include font-line-height(15, 22);
-        letter-spacing: 0.9px;
+        & {
+          letter-spacing: 0.9px;
+        }
       }
     }
     .tags {
-      margin-bottom: $space-xs;
+      margin-bottom: var(--spacer-5);
     }
     .content-type-region {
       box-sizing: border-box;
@@ -62,14 +68,16 @@
       width: calc(100% - 25px);
     }
     .content-type-region a {
-      @include text-underline-thin(transparent, $black);
-      background-position: left 100%;
-      text-decoration: none;
+      @include text-underline-thin(transparent, var(--color-neutral-900));
+      & {
+        background-position: left 100%;
+        text-decoration: none;
+      }
     }
   }
   .search-results-text {
     align-items: flex-start;
-    border-bottom: 1px solid $black;
+    border-bottom: 1px solid var(--color-neutral-900);
     display: flex;
     flex-direction: column;
     flex: 0 0 100%;
@@ -83,15 +91,19 @@
       order: unset;
     }
     .event-info-item-past {
-      @include font($acumin-semi-cond, "bold", "normal");
+      @include font(var(--font-family-heading-condensed), "bold", "normal");
       @include font-line-height(14, 18);
-      color: $blue;
+      & {
+        color: var(--color-blue-500);
+      }
     }
     .post-date {
-      @include font($acumin-semi-cond, "light", "normal");
+      @include font(var(--font-family-heading-condensed), "light", "normal");
       @include font-line-height(11, 14);
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
+      & {
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+      }
     }
     h3.h3 {
       margin-bottom: 20px;
@@ -102,11 +114,13 @@
       }
     }
     h3.h3 a {
-      @include font($acumin-semi-cond, "bold", "normal");
+      @include font(var(--font-family-heading-condensed), "bold", "normal");
       @include font-line-height(24, 30);
-      @include text-underline(transparent, $black);
-      background-position: left 100%;
-      text-decoration: none;
+      @include text-underline(transparent, var(--color-neutral-900));
+      & {
+        background-position: left 100%;
+        text-decoration: none;
+      }
     }
     .tags {
       display: none;
@@ -171,9 +185,9 @@ li.search-results {
   }
   .pager__items .pager__item--last,
   .pager__items .pager__item--first,
-  .pager-show-next & .pager__item--next{
+  .pager-show-next & .pager__item--next {
     align-items: center;
-    border: 1px solid $black;
+    border: 1px solid var(--color-neutral-900);
     bottom: 2px;
     display: inline-flex;
     height: 26px;
@@ -188,12 +202,14 @@ li.search-results {
     }
   }
   .pager__items a {
-    @include font($acumin-semi-cond, "bold", "normal");
+    @include font(var(--font-family-heading-condensed), "bold", "normal");
     @include font-line-height(18, 24);
-    text-decoration: none;
+    & {
+      text-decoration: none;
+    }
   }
   .pager__items .pager__item.is-active a {
-    color: $green;
+    color: var(--color-green-500);
     font-weight: normal;
   }
 }

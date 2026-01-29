@@ -4,7 +4,7 @@
 
   &.has-image {
     min-height: rem(700);
-    background-color: $true-black;
+    background-color: var(--color-black);
     @include mq($ph) {
       min-height: rem(400);
     }
@@ -127,8 +127,10 @@
 
   .cta-text-inner {
     @include center-columns(4, 4);
-    position: relative;
-    z-index: 1;
+    & {
+      position: relative;
+      z-index: 1;
+    }
 
     @include mq($ph) {
       @include center-columns(12, 12);

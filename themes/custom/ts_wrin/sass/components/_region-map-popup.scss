@@ -1,10 +1,10 @@
 .wri-region-map-popup {
   display: none;
-  background-color: $black;
+  background-color: var(--color-neutral-900);
 
   .region-section {
     text-align: center;
-    border-top: 1px solid $med-light-grey;
+    border-top: 1px solid var(--color-neutral-400);
     padding: 1rem;
 
     &:first-child {
@@ -13,19 +13,21 @@
   }
 
   .region-section-label {
-    color: $white;
-    @include font($caslon, "semibold", "italic");
+    color: var(--color-white);
+    @include font(var(--font-family-serif), "semibold", "italic");
     @include font-line-height(15, 18);
   }
 
   .region-section-link a {
-    color: $brand-gold;
-    @include font($acumin-semi-cond, "bold");
+    color: var(--color-gold-500);
+    @include font(var(--font-family-heading-condensed), "bold");
     @include font-line-height(20, 24);
-    text-decoration: none;
+    & {
+      text-decoration: none;
+    }
 
     @include hocus {
-      color: $gold-hover;
+      color: var(--color-gold-300);
       text-decoration: underline;
     }
   }
@@ -37,6 +39,6 @@
 
 .wri-region-map-popup-modal {
   .spb_close {
-    color: $white;
+    color: var(--color-white);
   }
 }

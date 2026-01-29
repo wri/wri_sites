@@ -36,7 +36,7 @@
   }
 
   &.has-image .hero__text {
-    color: $white;
+    color: var(--color-white);
     min-height: 700px;
 
     @include mq($ph) {
@@ -64,7 +64,7 @@
     z-index: 2;
 
     h1 {
-      margin-bottom: $space-xs;
+      margin-bottom: var(--spacer-5);
 
       @include mq($lg) {
         margin-bottom: 0;
@@ -76,22 +76,30 @@
 
     .hero__text--inner {
       @include center-columns($grid-columns-mobile, $grid-columns-mobile);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+      & {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
 
       @include mq($ph) {
         @include center-columns($grid-columns, $grid-columns);
-        max-width: 75%;
+        & {
+          max-width: 75%;
+        }
       }
       @include mq($md) {
         @include column-width(1, 10);
-        justify-content: flex-start;
-        max-width: 650px;
+        & {
+          justify-content: flex-start;
+          max-width: 650px;
+        }
       }
       @include mq($lg) {
         @include column-width(2, 12);
-        max-width: 800px;
+        & {
+          max-width: 800px;
+        }
       }
 
       .margin-top-xl:last-of-type {
@@ -106,13 +114,17 @@
     &.display-type-simple {
       .hero__text--inner {
         @include center-columns($grid-columns-mobile, $grid-columns-mobile);
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
+        & {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+        }
 
         @include mq($ph) {
           @include center-columns($grid-columns, $grid-columns);
-          justify-content: flex-start;
+          & {
+            justify-content: flex-start;
+          }
         }
 
         @include mq($lg) {
@@ -152,7 +164,7 @@
 .hero__text .hero__text--inner .field--name-field-listing,
 .landing-page__hero__field-listing__mobile .field--name-field-listing {
   .field__label {
-    @include font($caslon, "bold", "italic");
+    @include font(var(--font-family-serif), "bold", "italic");
     @include font-line-height(15, 18);
   }
 
@@ -161,25 +173,29 @@
     flex-direction: row;
     justify-content: flex-start;
     li {
-      @include font($acumin-pro, "bold", "normal");
+      @include font(var(--font-family-heading), "bold", "normal");
       @include font-line-height(14, 18);
-      border-top: 1px solid rgba(#e8e8e7, 0.5);
-      flex: 0 1 33%;
-      list-style-image: none;
-      list-style-type: none;
-      margin-left: 0;
-      margin-right: 28px;
-      margin-top: 10px;
-      padding-top: 10px;
-      text-decoration: none;
+      & {
+        border-top: 1px solid rgba(#e8e8e7, 0.5);
+        flex: 0 1 33%;
+        list-style-image: none;
+        list-style-type: none;
+        margin-left: 0;
+        margin-right: 28px;
+        margin-top: 10px;
+        padding-top: 10px;
+        text-decoration: none;
+      }
     }
     li:last-of-type {
       margin-right: 0;
     }
     li a {
-      @include text-underline-thin(transparent, $white);
-      text-decoration: none;
-      background-position: left 100%;
+      @include text-underline-thin(transparent, var(--color-white));
+      & {
+        text-decoration: none;
+        background-position: left 100%;
+      }
     }
   }
 }
@@ -195,8 +211,8 @@
 
 // Mobile version styles and overrides.
 .landing-page__hero__field-listing__mobile {
-  background-color: $blue;
-  color: $white;
+  background-color: var(--color-blue-500);
+  color: var(--color-white);
   display: block;
 
   @include mq($md) {
@@ -205,7 +221,7 @@
 
   .field--name-field-listing {
     .field__label {
-      padding-bottom: $space-xs;
+      padding-bottom: var(--spacer-5);
     }
 
     .happening-now-teasers ul.listing-items {
@@ -213,17 +229,19 @@
       margin-bottom: 0;
 
       li {
-        @include font($acumin-pro, "bold", "normal");
+        @include font(var(--font-family-heading), "bold", "normal");
         @include font-line-height(14, 18);
-        flex: none;
-        margin-right: 0;
-        padding-bottom: $space-xs;
+        & {
+          flex: none;
+          margin-right: 0;
+          padding-bottom: var(--spacer-5);
+        }
       }
       li:last-of-type {
         padding-bottom: 0;
       }
       li a {
-        color: $white;
+        color: var(--color-white);
       }
     }
   }
@@ -245,6 +263,6 @@
 
 .landing-page__content .main-content,
 .landing-page__content .main-content .text-formatted {
-  @include font($acumin-semi-cond, "light");
+  @include font(var(--font-family-heading-condensed), "light");
   @include font-line-height(18, 30);
 }

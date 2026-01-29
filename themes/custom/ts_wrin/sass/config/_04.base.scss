@@ -5,18 +5,18 @@
 
 /* FONT SMOOTHING */
 body {
-  @include font($caslon, "regular");
-  @include font-line-height(20, 24);
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  color: $black;
+  color: var(--color-neutral-900);
+  @include font(var(--font-family-serif), "regular");
+  @include font-line-height(20, 24);
 }
 
 .h1,
 .h2,
 .h3,
 .h4 {
-  @include font($acumin-semi-cond);
+  @include font(var(--font-family-heading-condensed));
 }
 
 .h1 {
@@ -37,7 +37,7 @@ body {
   }
 
   &.white {
-    color: $white;
+    color: var(--color-white);
   }
 }
 
@@ -49,7 +49,7 @@ body {
   }
 
   &.white {
-    color: $white;
+    color: var(--color-white);
   }
 }
 
@@ -57,7 +57,7 @@ body {
   @include font-line-height(24, 30);
 
   &.white {
-    color: $white;
+    color: var(--color-white);
   }
 }
 
@@ -65,7 +65,7 @@ body {
   @include font-line-height(20, 20);
 
   &.white {
-    color: $white;
+    color: var(--color-white);
   }
 }
 
@@ -76,11 +76,11 @@ a {
 
 p a,
 .bullets li a {
-  color: $green;
-  transition: color $transition-defaults;
+  color: var(--color-green-500);
+  transition: color var(--transition-default);
 
   @include hocus {
-    color: $black;
+    color: var(--color-neutral-900);
   }
 }
 
@@ -102,19 +102,21 @@ Blazy overrides.
 }
 
 figcaption, .figcaption {
-  @include font($acumin-semi-cond, 'regular');
+  @include font(var(--font-family-heading-condensed), 'regular');
   @include font-line-height(13,18);
 
-  margin-top: rem(13);
+  & {
+    margin-top: rem(13);
+  }
 }
 
 .subheader {
-  @include font($acumin-pro, 'regular');
+  @include font(var(--font-family-heading), 'regular');
   @include font-line-height(18, 24);
 }
 
 .intro {
-  @include font($acumin-semi-cond, light);
+  @include font(var(--font-family-heading-condensed), light);
   @include font-line-height(20, 31);
 
   @include mq($lg) {
@@ -122,21 +124,21 @@ figcaption, .figcaption {
   }
 
   &.white {
-    color: $white;
+    color: var(--color-white);
   }
 }
 
 /* Start bullets */
 .bullets {
-  padding: $space-xs;
+  padding: var(--spacer-5);
   margin: 1rem 0;
 
   .h4 {
-    @include font($caslon, 'bold', 'italic');
+    @include font(var(--font-family-serif), 'bold', 'italic');
   }
 
   .bottom-border-tiny-black {
-    border-bottom: 0.5px solid $black;
+    border-bottom: 0.5px solid var(--color-neutral-900);
     padding-bottom: rem(11);
     margin-bottom: rem(8);
   }
@@ -147,12 +149,12 @@ figcaption, .figcaption {
     padding: 0;
     list-style: none outside none;
     font-size: rem(16);
-    @include font($caslon, 'regular');
+    @include font(var(--font-family-serif), 'regular');
   }
   li {
     margin-left: rem(16);
     &::before {
-      background-color: $green;
+      background-color: var(--color-green-500);
       border-radius: 50%;
       display: block;
       height: rem(6.4);
@@ -166,17 +168,17 @@ figcaption, .figcaption {
 /* End Bullets */
 
 .italic-tiny {
-  @include font($caslon, 'regular', 'italic');
+  @include font(var(--font-family-serif), 'regular', 'italic');
   @include font-line-height(15,19);
 }
 
 .italic-xtra-tiny {
-  @include font($caslon, 'regular', 'italic');
+  @include font(var(--font-family-serif), 'regular', 'italic');
   @include font-line-height(13,15);
 }
 
 .teaser-title {
-  @include font($acumin-semi-cond, 'light');
+  @include font(var(--font-family-heading-condensed), 'light');
   @include font-line-height(20,26);
 
   &.large {
@@ -189,28 +191,32 @@ figcaption, .figcaption {
 
   a {
     background-position: left 100%;
-    color: $black;
+    color: var(--color-neutral-900);
     text-decoration: none;
 
     @include hocus {
-      color: $green;
+      color: var(--color-green-500);
     }
   }
 }
 
 .topic-tag,
 .topic-tag a {
-  @include font($acumin-pro, 'bold');
+  @include font(var(--font-family-heading), 'bold');
   @include font-line-height(15, 18);
-  color: $green;
-  letter-spacing: 0.9px;
-  text-decoration: none;
-  text-transform: uppercase;
+  & {
+    color: var(--color-green-500);
+    letter-spacing: 0.9px;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
 }
 
 .topic-tag a {
-  @include text-underline(transparent, $green);
-  background-position: left 100%;
+  @include text-underline(transparent, var(--color-green-500));
+  & {
+    background-position: left 100%;
+  }
 }
 
 .main-content .teaser-title a,
@@ -220,11 +226,13 @@ figcaption, .figcaption {
 
 .taxonomy,
 .topic-tag-wrapper a {
-  @include font($acumin-pro, 'semibold');
+  @include font(var(--font-family-heading), 'semibold');
   @include font-line-height(18,24);
-  @include text-underline(transparent, $green);
-  background-position: left 100%;
-  color: $green;
+  @include text-underline(transparent, var(--color-green-500));
+  & {
+    background-position: left 100%;
+    color: var(--color-green-500);
+  }
 
   &.small-text {
     @include font-line-height(14,18);
@@ -242,67 +250,73 @@ figcaption, .figcaption {
 
 .secondary.link,
 .secondary.link a{
-  @include font($acumin-pro, 'bold');
+  @include font(var(--font-family-heading), 'bold');
   @include font-line-height(13, 15);
-  color: $black;
-  text-decoration: none;
+  & {
+    color: var(--color-neutral-900);
+    text-decoration: none;
+  }
 }
 
 .bundle {
-  @include font($acumin-semi-cond, 'regular');
+  @include font(var(--font-family-heading-condensed), 'regular');
   @include font-line-height(11, 14);
-  background-color: $light-grey;
-  border-radius: 3px;
-  display: inline-block;
-  padding: 4px 8px;
+  & {
+    background-color: var(--color-neutral-200);
+    border-radius: 3px;
+    display: inline-block;
+    padding: 4px 8px;
+  }
 }
 
 .date {
-  @include font($acumin-semi-cond, 'light');
+  @include font(var(--font-family-heading-condensed), 'light');
   @include font-line-height(11, 16);
-  text-transform: uppercase;
+  & {
+    text-transform: uppercase;
+  }
 
   &.white {
-    color: $white;
+    color: var(--color-white);
   }
 }
 
 .secondary {
-  @include font($acumin-semi-cond, "light");
+  @include font(var(--font-family-heading-condensed), "light");
   @include font-line-height(16, 22);
 
   &.body-link {
-    @include font($acumin-semi-cond, "semibold");
+    @include font(var(--font-family-heading-condensed), "semibold");
   }
 }
 
 .border-small {
-  border: 1px solid $black;
+  border: 1px solid var(--color-neutral-900);
 }
 
 .top-border-thick {
-  border-top: 6px solid $black;
+  border-top: 6px solid var(--color-neutral-900);
   margin-top: 0;
   padding-top: 24px;
 }
 
 .top-border-medium {
-  border-top: 3px solid $black;
+  border-top: 3px solid var(--color-neutral-900);
 }
 
 .top-border-small {
-  border-top: 1px solid $black;
+  border-top: 1px solid var(--color-neutral-900);
 }
 
 .top-border-tiny {
-  border-top: 1px solid $light-grey;
-  padding-top: $space-xs;
+  border-top: 1px solid var(--color-neutral-200);
+  padding-top: var(--spacer-5);
 }
 
 .gold-borders-medium {
-  border-bottom: 4px solid $brand-gold;
-  border-top: 4px solid $brand-gold;
-  padding-top: $space-xs;
+  border-bottom: 4px solid var(--color-gold-500);
+  border-top: 4px solid var(--color-gold-500);
+  padding-top: var(--spacer-5);
 }
 
 ul.menu {
@@ -316,11 +330,13 @@ ul.menu {
 
 .dark-overlay {
   @include gradient_setup();
-  background-color: rgba($black, 0.5);
+  & {
+    background-color: rgb(var(--color-neutral-900-rgb) / 0.5);
+  }
 }
 
 .label {
-  @include font($acumin-semi-cond, "semi-bold");
+  @include font(var(--font-family-heading-condensed), "semi-bold");
   @include font-line-height(18);
 
   &.small {

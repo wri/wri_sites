@@ -14,7 +14,9 @@
   .intro {
     @include center-columns($grid-columns-mobile, $grid-columns-mobile);
     /* line text up with border. */
-    margin-top: -0.5rem;
+    & {
+      margin-top: -0.5rem;
+    }
 
     &.margin-bottom-md {
       @media (max-width: rem(767)) {
@@ -47,7 +49,7 @@
     path,
     polyline,
     polygon {
-      fill: $white;
+      fill: var(--color-white);
     }
   }
 }
@@ -55,12 +57,12 @@
 .interactive-map {
   width: 100%;
   height: auto;
-  background-color: $white;
+  background-color: var(--color-white);
   text-align: center;
   aspect-ratio: 923.2/448;
 }
 .has-light-gray-background-color .interactive-map {
-  background-color: $light-grey;
+  background-color: var(--color-neutral-200);
 }
 
 .wri-region-map {
@@ -86,14 +88,16 @@
     circle,
     text {
       cursor: pointer;
-      transition: fill $transition-defaults;
+      transition: fill var(--transition-default);
     }
   }
 
   svg > g.region {
     text {
-      @include font($caslon, "italic");
-      color: $black;
+      @include font(var(--font-family-serif), "italic");
+      & {
+        color: var(--color-neutral-900);
+      }
     }
   }
 
@@ -108,13 +112,15 @@
 
   svg > g.international_office {
     circle {
-      fill: $brand-gold;
+      fill: var(--color-gold-500);
     }
 
     text {
       display: none;
-      @include font($acumin-semi-cond, "medium");
-      color: $black;
+      @include font(var(--font-family-heading-condensed), "medium");
+      & {
+        color: var(--color-neutral-900);
+      }
 
       @include mq($md) {
         display: block;
@@ -122,14 +128,14 @@
     }
 
     text:last-of-type {
-      @include font($acumin-semi-cond, "semibold");
+      @include font(var(--font-family-heading-condensed), "semibold");
     }
   }
 
   svg > g.international_office:hover,
   svg > g.international_office:focus {
     circle {
-      fill: $gold-hover;
+      fill: var(--color-gold-300);
     }
   }
 }

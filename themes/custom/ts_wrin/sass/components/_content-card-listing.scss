@@ -19,14 +19,14 @@
 
   .listing-items li {
     list-style-type: none;
-    margin-bottom: $padding-vertical;
+    margin-bottom: var(--padding-vertical);
     margin-left: 0;
     &:last-child {
       margin-bottom: 0;
     }
 
     @include mq($md) {
-      margin-bottom: $space-lg;
+      margin-bottom: var(--spacer-15);
       &:last-child {
         margin-bottom: 0;
       }
