@@ -94,6 +94,7 @@ function wri_paragraph_update_10404() {
   $message = 'Set label for Social links listing to italic-tiny so it looks right on Programs.';
   return $message;
 }
+
 /**
  * Fix class on the social links listings.
  */
