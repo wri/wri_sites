@@ -13,3 +13,18 @@ function wri_spoke_update_10500() {
     'entity_share_client.import_config.hub_events',
     ['import_processor_settings#default_registration_link'], 'wri_spoke');
 }
+
+/**
+ * Replace wri_spoke cron job with entity_share_cron module.
+ */
+function wri_spoke_update_10600() {
+  // Enable entity_share_cron.
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('entity_share_cron')) {
+    \Drupal::service('module_installer')->install(['entity_share_cron'], TRUE);
+  }
+
+  // Delete the wri_spoke.cron.settings config.
+  \Drupal::service('config.factory')->getEditable('wri_spoke.cron.settings')->delete();
+  \Drupal::service('config.factory')->getEditable('ultimate_cron.job.wri_spoke_cron')->delete();
+}
