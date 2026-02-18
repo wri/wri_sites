@@ -162,3 +162,19 @@
     }
   }
 }
+
+.article-b {
+  .field-label-inline {
+    display: inline-block;
+    font-weight: 600;
+  }
+
+  .layout__region--byline {
+    @include font(var(--font-family-heading-condensed), light);
+    @include font-line-height(16, 23);
+    & {
+      padding-bottom: var(--spacer-1);
+      border-bottom: 2px solid var(--color-neutral-400);
+    }
+  }
+}

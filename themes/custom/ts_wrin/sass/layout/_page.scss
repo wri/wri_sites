@@ -178,3 +178,19 @@ body {
     @include center-columns(6, $grid-columns);
   }
 }
+.layout__region--main_content_wide {
+  @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+
+  @include mq($ph) {
+    @include center-columns($grid-columns, $grid-columns);
+  }
+
+  @include mq($md) {
+    @include center-columns(10, $grid-columns);
+  }
+
+  @include mq($lg) {
+    // @include center-columns(8, $grid-columns);
+    grid-column: 3 / 10;
+  }
+}
