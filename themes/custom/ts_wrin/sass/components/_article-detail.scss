@@ -164,6 +164,9 @@
 }
 
 .article-b {
+  .serif {
+    font-family: var(--font-family-serif);
+  }
   .field-label-inline {
     display: inline-block;
     font-weight: 600;

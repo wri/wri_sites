@@ -99,6 +99,15 @@ button.btn-underline {
   }
 }
 
+.button.tag-button {
+  background-color: transparent;
+  border: 1px solid var(--color-neutral-400);
+  color: var(--color-neutral-800);
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
 .btn--sm {
   font-size: 13px;
   padding: 10px var(--spacer-5);
