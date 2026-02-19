@@ -271,4 +271,7 @@
       }
     }
   }
+  .author-listing a {
+    @apply font-bold no-underline focus:underline hover:underline;
+  }
 }
