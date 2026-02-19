@@ -217,7 +217,6 @@ body {
       margin-left: -50vw;
       margin-right: -50vw;
 
-
       @include mq($site-max-width) {
         width: $site-max-width;
         margin-left: calc(-1 * #{$site-max-width} / 2);
