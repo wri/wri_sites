@@ -274,4 +274,7 @@
   .author-listing a {
     @apply font-bold no-underline focus:underline hover:underline;
   }
+  .author-listing .field-label-inline {
+    @apply font-medium;
+  }
 }
