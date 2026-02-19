@@ -1,6 +1,21 @@
 {% if content %}
-<div class="article article-b">
-  {% if content.hero %}
+
+  {# Note: this sets the layout. The display mode for the main image is
+     set in ts_wrin.theme in ts_wrin_preprocess_wri_article_columns_b() #}
+  {% if content.category %}
+    {# Default to full content. #}
+    {% set region_display_value = 'full' %}
+    {% set node = content['#node'] ?? null %}
+    {% if node and node.hasField('field_main_image_display') %}
+      {% set field = node.get('field_main_image_display') %}
+      {% if field and not field.isEmpty() %}
+        {% set region_display_value = field.value|clean_class %}
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+<div class="article article-b page-layout-{{ region_display_value }}">
+  {% if content.hero|render %}
   <div {{ region_attributes.hero.addClass('layout__region', 'layout__region--hero', 'layout__region--full') }}>
     <div class="centering">
     {{ content.hero }}
@@ -8,47 +23,46 @@
   </div>
   {% endif %}
   <div{{ attributes.addClass('grid','article__title', 'margin-bottom-sm') }}>
-    {% if content.title %}
+    {% if content.title|render %}
     <div {{ region_attributes.title.addClass('layout__region', 'layout__region--full', 'full-width') }}>
     {{ content.title }}
     </div>
     {% endif %}
 
-    {% if content.byline %}
+    {% if content.byline|render %}
     <div {{ region_attributes.byline.addClass('layout__region', 'layout__region--full', 'full-width', 'pb-2', 'neutral-bottom-border') }}>
     {{ content.byline }}
     </div>
     {% endif %}
   </div>
 
-  {% if content.bundle or content.category or content.share %}
+  {% if content.bundle|render or content.category|render or content.share|render %}
   <div class="article__meta grid">
-    {% if content.bundle %}
-    <div {{ region_attributes.bundle.addClass('layout__region', 'layout__region--bundle', 'layout__region--full') }}>
+    {% if content.bundle|render %}
+    <div {{ region_attributes.bundle.addClass('more-social-wrapper', 'layout__region', 'layout__region--bundle', 'layout__region--full') }}>
       {{ content.bundle }}
     </div>
     {% endif %}
 
-    {% if content.category %}
-      {% set region_display_value = 'full' %}
-
-      {% set node = content['#node'] ?? null %}
-      {% if node and node.hasField('field_main_image_display') %}
-        {% set field = node.get('field_main_image_display') %}
-        {% if field and not field.isEmpty() %}
-          {% set region_display_value = field.value|clean_class %}
-        {% endif %}
-      {% endif %}
-
-      <div {{ region_attributes.category.addClass('layout__region', 'layout__region--' ~ region_display_value) }}>
+    {% if content.category|render %}
+      {# Main image layout. #}
+      <div {{ region_attributes.category.addClass('main-image-wrapper', 'layout__region', 'layout__region--' ~ region_display_value) }}>
         {% if main_image_rendered %}
           {{ main_image_rendered }}
         {% endif %}
-        {{ content.category|without('field_main_image') }}
+        {{ content.category|without('field_main_image', 'field_main_image_caption') }}
+      </div>
+
+      {% if node and node.hasField('field_main_image_caption') %}
+        {% set caption = node.get('field_main_image_caption') %}
+      {% endif %}
+
+      <div class="caption-wrapper layout__region layout__region--full utility-sm mt-4 text-neutral-800">
+        {{ caption.value }}
       </div>
     {% endif %}
 
-    {% if content.share %}
+    {% if content.share|render%}
     <div {{ region_attributes.share.addClass('layout__region', 'layout__region--share', 'right-sidebar') }}>
       {{ content.share }}
 
@@ -75,13 +89,13 @@
     </div>
     {% endif %}
 
-    {% if content.main_content %}
+    {% if content.main_content|render %}
     <div {{ region_attributes.main_content.addClass('layout__region', 'layout__region--full', 'main-content', 'margin-bottom-xl') }}>
     {{ content.main_content }}
     </div>
     {% endif %}
 
-    {% if content.right_sidebar %}
+    {% if content.right_sidebar|render %}
     <div {{ region_attributes.right_sidebar.addClass('layout__region', 'layout__region--right_sidebar', 'right-sidebar') }}>
     {{ content.right_sidebar }}
     </div>
