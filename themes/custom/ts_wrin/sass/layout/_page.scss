@@ -190,8 +190,8 @@ body {
   }
 
   @include mq($lg) {
-    @include center-columns(8, $grid-columns);
-    // grid-column: 3 / 10;
+    @include center-columns(6, $grid-columns);
+    // grid-column: 4 / 10;
   }
 }
 .layout__region--full-width {
@@ -203,7 +203,7 @@ body {
   }
 
   @include mq($md) {
-    @include center-columns(10, $grid-columns);
+    @include center-columns(12, $grid-columns);
   }
 
   @include mq($lg) {
@@ -250,7 +250,6 @@ body {
   }
 
   @include mq($lg) {
-    @include center-columns(8, $grid-columns);
-    // grid-column: 3 / 10;
+    @include center-columns(6, $grid-columns);
   }
 }

@@ -244,11 +244,11 @@
       border-bottom: 2px solid var(--color-neutral-400);
     }
   }
+  .key-takeaway-label {
+    border-bottom: 2px solid var(--color-neutral-600);
+  }
   .key-takeaways {
     @apply pl-0 mb-12;
-    & > div {
-      border-bottom: 2px solid var(--color-neutral-600);
-    }
     li:before {
       background-color: var(--color-black);
     }
@@ -269,6 +269,41 @@
           color: var(--color-action);
         }
       }
+    }
+    .key-takeaways__item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .key-takeaways__share-trigger {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+    }
+
+    .key-takeaways__share {
+      position: relative;
+    }
+
+    .key-takeaways__share-popover {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 6px;
+      z-index: 100;
+      padding: 6px;
+      border: 1px solid #e8e8e7;
+      border-radius: 3px;
+      background: #fff;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .key-takeaways__share-popover a {
+      display: inline-flex;
+      margin: 0 4px;
     }
   }
   .author-listing a {
