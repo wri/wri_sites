@@ -173,3 +173,119 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+.article-b {
+  &.page-layout-full {
+    .more-social-wrapper {
+      @apply mb-8;
+      order: 1;
+    }
+    .main-image-wrapper {
+      order: 2;
+    }
+    .caption-wrapper {
+      order: 3;
+    }
+  }
+  &.page-layout-full-width {
+    .more-social-wrapper {
+      @apply mt-12;
+      order: 3;
+    }
+    .main-image-wrapper {
+      order: 1;
+    }
+    .caption-wrapper {
+      order: 2;
+    }
+  }
+  &.page-layout-half-content {
+    @apply grid;
+    grid-column-gap: 0;
+    max-width: 100%;
+
+    .article__title {
+      grid-column: 7 / 13;
+      grid-row: 1;
+      .layout__region--full {
+        grid-column: 1 / 13;
+      }
+    }
+    .article__meta {
+      grid-column: 1 / 7;
+      grid-row: 1;
+      .layout__region--full,
+      .layout__region--half-content {
+        grid-column: 1 / 13;
+      }
+    }
+    .article__main {
+      grid-column: 1 / 12;
+    }
+
+    .more-social-wrapper {
+      @apply mt-12;
+      order: 3;
+    }
+    .main-image-wrapper {
+      order: 1;
+    }
+    .caption-wrapper {
+      order: 2;
+    }
+  }
+
+  .serif {
+    font-family: var(--font-family-serif);
+  }
+  .field-label-inline {
+    display: inline-block;
+    font-weight: 600;
+  }
+
+  .neutral-bottom-border {
+    border-bottom: 2px solid var(--color-neutral-400);
+  }
+
+  .layout__region--byline {
+    @include font(var(--font-family-heading-condensed), light);
+    @include font-line-height(16, 23);
+    & {
+      padding-bottom: var(--spacer-1);
+      border-bottom: 2px solid var(--color-neutral-400);
+    }
+  }
+  .key-takeaways {
+    @apply pl-0 mb-12;
+    & > div {
+      border-bottom: 2px solid var(--color-neutral-600);
+    }
+    li:before {
+      background-color: var(--color-black);
+    }
+    li {
+      @apply mt-4;
+    }
+    li p {
+      @apply utility-md font-medium leading-6;
+    }
+    .utility-2xl,
+    .utility-lg {
+      & a {
+        color: var(--color-green-500);
+        text-decoration: underline;
+
+        &:hover,
+        &:focus-visible {
+          color: var(--color-action);
+        }
+      }
+    }
+  }
+  .author-listing a {
+    @apply font-bold no-underline focus:underline hover:underline;
+  }
+  .author-listing .field-label-inline {
+    @apply font-medium;
+  }
+}
