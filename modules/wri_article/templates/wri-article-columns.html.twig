@@ -1,5 +1,5 @@
 {% if content %}
-<div class="article">
+<div class="article article-columns" data-alt-content="/ajax/load-content/{{ content["#entity"].nid.value }}">
   {% if content.hero %}
   <div {{ region_attributes.hero.addClass('layout__region', 'layout__region--hero') }}>
     <div class="centering">
