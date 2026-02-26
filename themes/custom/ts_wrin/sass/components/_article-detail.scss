@@ -312,4 +312,27 @@
   .author-listing .field-label-inline {
     @apply font-medium;
   }
+  &.technical-perspective-template,
+  &.project-update-template,
+  &.news-template {
+    h1.serif {
+      @include font(var(--font-family-heading), "semibold");
+    }
+    .more-social-wrapper {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    .dek,
+    .key-takeaway-label,
+    .key-takeaways {
+      display: none;
+    }
+  }
+  &.project-update-template {
+    .author-listing,
+    .last-updated,
+    .originally-published {
+      display: none;
+    }
+  }
 }
