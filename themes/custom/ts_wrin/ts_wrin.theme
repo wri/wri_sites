@@ -57,6 +57,16 @@ function ts_wrin_preprocess_html(array &$variables) {
     $variables["attributes"]["class"][] = 'no-animation';
   }
 
+  // Add a class if we're running an a/b test.
+  if ($variables["page"]["#attached"]["html_head"]) {
+    foreach ($variables["page"]["#attached"]["html_head"] as $attachment) {
+      if (isset($attachment[1]) && $attachment[1] == 'abjs_script') {
+        $variables["attributes"]["class"][] = 'abjs-test';
+        break;
+      }
+    }
+  }
+
   if ($node = \Drupal::request()->attributes->get('node')) {
     if ($node instanceof NodeInterface) {
       // Throw the node title in b/c it's useful.

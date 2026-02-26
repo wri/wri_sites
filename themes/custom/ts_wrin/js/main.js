@@ -14,6 +14,7 @@ import wriMoreOn from "./components/wri_more_on.js";
 import wriMedia from "./components/wri_media.js";
 import tsExternalLinks from "./components/ts_external_links.js";
 import wriDatetime from "./components/wri_datetime.js";
+import wriShowInsights from "./components/wri_show_insights.js";
 
 (($, Drupal) => {
   /**
@@ -65,5 +66,9 @@ import wriDatetime from "./components/wri_datetime.js";
 
   Drupal.behaviors.wriDatetime = {
     attach: wriDatetime
+  };
+
+  Drupal.behaviors.wriShowInsights = {
+    attach: wriShowInsights
   };
 })(jQuery, Drupal);
