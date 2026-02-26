@@ -60,6 +60,7 @@ function ts_wrin_preprocess_html(array &$variables) {
   if ($node = \Drupal::request()->attributes->get('node')) {
     if ($node instanceof NodeInterface) {
       // Throw the node title in b/c it's useful.
+      $variables["html_attributes"]->addClass(Html::getClass($node->getType()));
       $variables['attributes']['class'][] = Html::getClass($node->getTitle());
 
       switch ($node->getType()) {
