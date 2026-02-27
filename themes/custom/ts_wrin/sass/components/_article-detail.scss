@@ -312,6 +312,10 @@
   .author-listing .field-label-inline {
     @apply font-medium;
   }
+  .more-author-info p {
+    display: inline;
+  }
+
   &.technical-perspective-template,
   &.project-update-template,
   &.news-template {

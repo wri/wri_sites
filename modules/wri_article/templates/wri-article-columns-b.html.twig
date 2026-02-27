@@ -66,7 +66,7 @@
     </div>
     {% elseif content.bundle|render %}
       <div {{ region_attributes.bundle.addClass('more-social-wrapper', 'layout__region', 'layout__region--bundle', 'layout__region--full') }}>
-      {{ content.bundle }}
+      {{ content.bundle|without('field_relevant_project') }}
     </div>
     {% endif %}
 
@@ -118,8 +118,22 @@
     {% if content.main_content|render %}
       <div {{ region_attributes.main_content.addClass('layout__region', 'layout__region--full', 'main-content', 'margin-bottom-xl') }}>
       {{ content.main_content }}
+        {% if content.byline|render and not template_class %}
+          <div class="my-8">...</div>
+          {% if node and node.hasField('field_authors') and not node.get('field_authors').isEmpty() %}
+            {% for item in node.get('field_authors') %}
+              {% set author = item.entity %}
+
+              {# Only show internal authors (they have field_person) #}
+              {% if author and author.hasField('field_person') and not author.get('field_person').isEmpty() %}
+                <div class="more-author-info">{{ drupal_entity('wri_author', item.target_id, 'listing') }}</div>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+
+        {% endif %}
         {% if content.bundle|render and template_class   %}
-          <div class="mt-8">{{ content.bundle|without('addtoany') }}</div>
+          <div class="mt-8">{{ content.bundle|without('addtoany', 'field_relevant_project') }}</div>
         {% endif %}
       </div>
     {% endif %}

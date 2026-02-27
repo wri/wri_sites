@@ -18,11 +18,14 @@
 
   function closeAllPopovers(context) {
     const root = context || document;
-    root.querySelectorAll(".key-takeaways__share-trigger").forEach((trigger) => {
-      const wrapper = trigger.closest(".key-takeaways__share");
-      const popover = wrapper && wrapper.querySelector(".key-takeaways__share-popover");
-      closePopover(trigger, popover);
-    });
+    root
+      .querySelectorAll(".key-takeaways__share-trigger")
+      .forEach((trigger) => {
+        const wrapper = trigger.closest(".key-takeaways__share");
+        const popover =
+          wrapper && wrapper.querySelector(".key-takeaways__share-popover");
+        closePopover(trigger, popover);
+      });
   }
 
   Drupal.behaviors.wriKeyTakeawaysShare = {
@@ -33,9 +36,14 @@
       }
 
       // Bind triggers once.
-      once("wriKeyTakeawaysShare", ".key-takeaways__share-trigger", context).forEach((trigger) => {
+      once(
+        "wriKeyTakeawaysShare",
+        ".key-takeaways__share-trigger",
+        context,
+      ).forEach((trigger) => {
         const wrapper = trigger.closest(".key-takeaways__share");
-        const popover = wrapper && wrapper.querySelector(".key-takeaways__share-popover");
+        const popover =
+          wrapper && wrapper.querySelector(".key-takeaways__share-popover");
         if (!popover) return;
 
         // Toggle on click.
@@ -52,7 +60,9 @@
             openPopover(trigger, popover);
 
             // Focus first link inside popover for keyboard users.
-            const firstLink = popover.querySelector("a, button, [tabindex]:not([tabindex='-1'])");
+            const firstLink = popover.querySelector(
+              "a, button, [tabindex]:not([tabindex='-1'])",
+            );
             if (firstLink) firstLink.focus();
           } else {
             closePopover(trigger, popover);
@@ -77,7 +87,7 @@
               closePopover(trigger, popover);
             }
           },
-          { passive: true }
+          { passive: true },
         );
 
         // Close on focus leaving the wrapper (keyboard tabbing away).
