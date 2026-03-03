@@ -29,7 +29,7 @@
     {% set template_class = map[parent_label] ?? null %}
   {% endif %}
 
-<div class="article article-b page-layout-{{ region_display_value }} {{ template_class }}">
+<div class="article article-b mt-4 page-layout-{{ region_display_value }} {{ template_class }}">
   {% if content.hero|render %}
   <div {{ region_attributes.hero.addClass('layout__region', 'layout__region--hero', 'layout__region--full') }}>
     <div class="centering">
