@@ -367,6 +367,14 @@
     @apply pl-6;
   }
 }
+.event__detail .callout--node {
+  @include mq($md) {
+    border-left: none;
+    @apply pl-0;
+    border-right: 3px solid var(--color-neutral-900);
+    @apply pr-6;
+  }
+}
 .callout--node img {
   max-width: 250px;
 }
