@@ -339,4 +339,9 @@
       display: none;
     }
   }
+  @media screen and (min-width: 1024px) {
+    #my-wrapper {
+      margin-left: 43vw !important;
+    }
+  }
 }
