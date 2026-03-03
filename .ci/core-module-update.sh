@@ -75,7 +75,6 @@ updb_loop cim
 
 # Check out a branch for updates.
 git checkout -b $(date +'%Y-%m-%d'-'updates')
-git pull
 
 if [[ "$TERMINUS_SITE" == "wriflagship" ]]
 then
