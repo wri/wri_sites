@@ -119,7 +119,7 @@
       <div {{ region_attributes.main_content.addClass('layout__region', 'layout__region--full', 'main-content', 'margin-bottom-xl') }}>
       {{ content.main_content }}
         {% if content.byline|render and not template_class %}
-          <div class="my-8">...</div>
+          <div class="mt-8 mb-2 utility-md font-bold">{{ 'About the Authors:'|t }}</div>
           {% if node and node.hasField('field_authors') and not node.get('field_authors').isEmpty() %}
             {% for item in node.get('field_authors') %}
               {% set author = item.entity %}
@@ -139,7 +139,7 @@
     {% endif %}
 
     {% if content.right_sidebar|render %}
-    <div {{ region_attributes.right_sidebar.addClass('layout__region', 'layout__region--right_sidebar', 'right-sidebar') }}>
+    <div {{ region_attributes.right_sidebar.addClass('layout__region', 'layout__region--right_sidebar', 'right-sidebar-wide') }}>
     {{ content.right_sidebar }}
     </div>
     {% endif %}

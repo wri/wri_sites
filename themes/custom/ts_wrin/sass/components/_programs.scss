@@ -357,3 +357,32 @@
   @extend .top-border-thick;
   @extend .margin-top-sm;
 }
+
+// This display mode exists for programs and microsites.
+// Putting it here b/c it's more global.
+
+.callout--node {
+  @include mq($md) {
+    border-left: 3px solid var(--color-neutral-900);
+    @apply pl-6;
+  }
+}
+.callout--node img {
+  max-width: 250px;
+}
+
+.callout--node .field--name-field-callout-summary p {
+  @apply utility-base my-6;
+}
+.callout--node .field--name-field-callout-summary p:last-child {
+  @include mq($md) {
+    @apply mb-0;
+  }
+}
+.callout--node .field--name-field-callout-summary a {
+  @extend .btn-solid;
+  @extend .btn--sm;
+}
+.callout--node .field--name-field-callout-summary a {
+  @apply py-2 px-4;
+}
