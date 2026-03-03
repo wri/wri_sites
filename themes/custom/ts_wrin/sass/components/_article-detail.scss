@@ -163,6 +163,30 @@
   }
 }
 
+.abjs-test {
+  .article-columns,
+  .article-b {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
+
+    &.reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.no-animation {
+  .article-columns,
+  .article-b {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .article-b {
   &.page-layout-full {
     .more-social-wrapper {
