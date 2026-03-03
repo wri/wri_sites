@@ -186,12 +186,12 @@ body {
   }
 
   @include mq($md) {
-    @include center-columns(10, $grid-columns);
+    grid-column: 2 / 9;
   }
 
   @include mq($lg) {
-    @include center-columns(8, $grid-columns);
-    // grid-column: 3 / 10;
+    // @include center-columns(6, $grid-columns);
+    grid-column: 3 / 9;
   }
 }
 .layout__region--full-width {
@@ -203,7 +203,7 @@ body {
   }
 
   @include mq($md) {
-    @include center-columns(10, $grid-columns);
+    @include center-columns(12, $grid-columns);
   }
 
   @include mq($lg) {
@@ -250,7 +250,21 @@ body {
   }
 
   @include mq($lg) {
-    @include center-columns(8, $grid-columns);
-    // grid-column: 3 / 10;
+    @include center-columns(6, $grid-columns);
+  }
+}
+.right-sidebar-wide {
+  @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+
+  @include mq($ph) {
+    @include center-columns($grid-columns, $grid-columns);
+  }
+
+  @include mq($md) {
+    @include column-width(9, 13);
+  }
+
+  @include mq($lg) {
+    @include column-width(9, $grid-columns);
   }
 }

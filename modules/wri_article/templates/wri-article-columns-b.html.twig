@@ -14,7 +14,22 @@
     {% endif %}
   {% endif %}
 
-<div class="article article-b page-layout-{{ region_display_value }}">
+  {% set template_class = null %}
+  {% if node and node.hasField('field_type') and not node.get('field_type').isEmpty() %}
+    {% set type = node.get('field_type').entity %}
+    {% set parent = type and not type.get('parent').isEmpty() ? type.get('parent').entity : null %}
+    {% set parent_label = parent ? parent.label : null %}
+
+    {% set map = {
+      'Technical Perspectives': 'technical-perspective-template',
+      'Update': 'project-update-template',
+      'News': 'news-template'
+    } %}
+
+    {% set template_class = map[parent_label] ?? null %}
+  {% endif %}
+
+<div class="article article-b page-layout-{{ region_display_value }} {{ template_class }}">
   {% if content.hero|render %}
   <div {{ region_attributes.hero.addClass('layout__region', 'layout__region--hero', 'layout__region--full') }}>
     <div class="centering">
@@ -22,10 +37,17 @@
     </div>
   </div>
   {% endif %}
+
   <div{{ attributes.addClass('grid','article__title', 'margin-bottom-sm') }}>
     {% if content.title|render %}
+
     <div {{ region_attributes.title.addClass('layout__region', 'layout__region--full', 'full-width') }}>
-    {{ content.title }}
+      {% if template_class %}
+        <div class="utility-base btn-pill font-bold">{{ type.label }}</div>
+        {{ content.title|without('field_type') }}
+      {% else %}
+        {{ content.title }}
+      {% endif %}
     </div>
     {% endif %}
 
@@ -38,13 +60,17 @@
 
   {% if content.bundle|render or content.category|render or content.share|render %}
   <div class="article__meta grid">
-    {% if content.bundle|render %}
+    {% if content.bundle|render and template_class   %}
     <div {{ region_attributes.bundle.addClass('more-social-wrapper', 'layout__region', 'layout__region--bundle', 'layout__region--full') }}>
-      {{ content.bundle }}
+      {{ content.bundle|without('field_tags') }}
+    </div>
+    {% elseif content.bundle|render %}
+      <div {{ region_attributes.bundle.addClass('more-social-wrapper', 'layout__region', 'layout__region--bundle', 'layout__region--full') }}>
+      {{ content.bundle|without('field_relevant_project') }}
     </div>
     {% endif %}
 
-    {% if content.category|render %}
+    {% if content.category|render and not template_class %}
       {# Main image layout. #}
       <div {{ region_attributes.category.addClass('main-image-wrapper', 'layout__region', 'layout__region--' ~ region_display_value) }}>
         {% if main_image_rendered %}
@@ -62,7 +88,7 @@
       </div>
     {% endif %}
 
-    {% if content.share|render%}
+    {% if content.share|render %}
     <div {{ region_attributes.share.addClass('layout__region', 'layout__region--share', 'right-sidebar') }}>
       {{ content.share }}
 
@@ -90,13 +116,30 @@
     {% endif %}
 
     {% if content.main_content|render %}
-    <div {{ region_attributes.main_content.addClass('layout__region', 'layout__region--full', 'main-content', 'margin-bottom-xl') }}>
-    {{ content.main_content }}
-    </div>
+      <div {{ region_attributes.main_content.addClass('layout__region', 'layout__region--full', 'main-content', 'margin-bottom-xl') }}>
+      {{ content.main_content }}
+        {% if content.byline|render and not template_class %}
+          <div class="mt-8 mb-2 utility-md font-bold">{{ 'About the Authors:'|t }}</div>
+          {% if node and node.hasField('field_authors') and not node.get('field_authors').isEmpty() %}
+            {% for item in node.get('field_authors') %}
+              {% set author = item.entity %}
+
+              {# Only show internal authors (they have field_person) #}
+              {% if author and author.hasField('field_person') and not author.get('field_person').isEmpty() %}
+                <div class="more-author-info">{{ drupal_entity('wri_author', item.target_id, 'listing') }}</div>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+
+        {% endif %}
+        {% if content.bundle|render and template_class   %}
+          <div class="mt-8">{{ content.bundle|without('addtoany', 'field_relevant_project') }}</div>
+        {% endif %}
+      </div>
     {% endif %}
 
     {% if content.right_sidebar|render %}
-    <div {{ region_attributes.right_sidebar.addClass('layout__region', 'layout__region--right_sidebar', 'right-sidebar') }}>
+    <div {{ region_attributes.right_sidebar.addClass('layout__region', 'layout__region--right_sidebar', 'right-sidebar-wide') }}>
     {{ content.right_sidebar }}
     </div>
     {% endif %}

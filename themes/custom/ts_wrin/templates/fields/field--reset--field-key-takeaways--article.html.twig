@@ -1,0 +1,58 @@
+{#
+/**
+ * Reset field template override for Key Takeaways.
+ * Works outside DS Expert and provides explicit UL/LI structure.
+ */
+#}
+
+{{ attach_library('ts_wrin/key_takeaways') }}
+
+{# Label (matches your DS Expert config) #}
+{% if not label_hidden %}
+  <div class="key-takeaway-label italic utility-md font-medium pb-2">
+    {{ label }}
+  </div>
+{% endif %}
+
+{# Always a plain string #}
+{% set page_url = url('<current>', {}, { 'absolute': true })|render %}
+{% set share_url = page_url ~ '#key-takeaways' %}
+
+<ul class="key-takeaways" id="key-takeaways">
+  {% for item in items %}
+    {# Rendered markup (formatted text) #}
+    {% set rendered = item.content|render %}
+
+    {# Plain text for share payload #}
+    {% set share_text = rendered|striptags|replace({'&nbsp;': ' '})|trim %}
+    {% set share_text = share_text|replace({"\n":" ", "\r":" ", "\t":" "})|trim %}
+    {% if share_text|length > 280 %}
+      {% set share_text = share_text|slice(0, 277) ~ '…' %}
+    {% endif %}
+
+    <li class="utility-lg">
+      <div class="key-takeaways__item">
+        <div class="key-takeaways__text">
+          {{ rendered|raw }}
+        </div>
+
+        <div class="key-takeaways__share">
+          <button type="button" class="key-takeaways__share-trigger" aria-haspopup="dialog" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="28" height="28" viewBox="0 0 50 50"><title>{{ 'Share'|t }}</title><path d="M15 30c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5zm0-8c-1.7 0-3 1.3-3 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z"/><path d="M35 20c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5zm0-8c-1.7 0-3 1.3-3 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z"/><path d="M35 40c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5zm0-8c-1.7 0-3 1.3-3 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z"/><path d="M19.007 25.885l12.88 6.44-.895 1.788-12.88-6.44z"/><path d="M30.993 15.885l.894 1.79-12.88 6.438-.894-1.79z"/></svg>
+          </button>
+          <div class="key-takeaways__share-popover" hidden>
+            <div class="a2a_kit" data-a2a-url="{{ share_url }}" data-a2a-title="{{ share_text }}">
+              <a class="a2a_button_copy_link" aria-label="Copy link"></a>
+              <a class="a2a_button_linkedin" aria-label="LinkedIn"></a>
+              <a class="a2a_button_facebook" aria-label="Facebook"></a>
+              <a class="a2a_button_bluesky" aria-label="Bluesky"></a>
+              <a class="a2a_button_x" aria-label="X"></a>
+              <a class="a2a_button_email" aria-label="Email"></a>
+              <a class="a2a_button_print" aria-label="Print"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  {% endfor %}
+</ul>

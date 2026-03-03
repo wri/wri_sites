@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * Theme override to display a callout node.
+ *
+ * @see template_preprocess_node()
+ *
+ */
+#}
+{%
+  set classes = [
+    'callout--node',
+    'produced-by-' ~ label.0['#context'].value|clean_class
+  ]
+%}
+{{ attach_library('classy/node') }}
+<article{{ attributes.addClass(classes) }}>
+  <div{{ content_attributes.addClass('node__content') }}>
+    {{ content }}
+  </div>
+</article>
