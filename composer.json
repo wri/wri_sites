@@ -89,9 +89,7 @@
         },
         "drupal-scaffold": {
             "file-mapping": {
-                "[project-root]/core-module-update.sh": {
-                    "path": ".ci/core-module-update.sh"
-                }
+                "[project-root]/core-module-update.sh": ".ci/core-module-update.sh"
             }
         },
         "installer-paths": {
