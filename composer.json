@@ -91,6 +91,9 @@
             "locations": {
                 "project-root": "./web",
                 "web-root": "./web"
+            },
+            "file-mapping": {
+                "[project-root]/core-module-update.sh": ".ci/core-module-update.sh"
             }
         },
         "installer-paths": {

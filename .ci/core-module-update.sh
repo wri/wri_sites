@@ -73,9 +73,8 @@ printf "y\nlive\n" | robo install
 # Running updb/cim
 updb_loop cim
 
-# Check out develop
-git checkout develop
-git pull
+# Check out a branch for updates.
+git checkout -b $(date +'%Y-%m-%d'-'updates')
 
 if [[ "$TERMINUS_SITE" == "wriflagship" ]]
 then
