@@ -251,9 +251,19 @@
   .serif {
     font-family: var(--font-family-serif);
   }
+
   .field-label-inline {
     display: inline-block;
     font-weight: 600;
+  }
+  .explore-more.field-label-inline {
+    @include font(var(--font-family-serif), 'regular', 'italic');
+    @include font-line-height(15,19);
+  }
+
+  .button.tag-button {
+    @apply mb-3;
+    border: 1px solid var(--color-neutral-600)
   }
 
   .neutral-bottom-border {
@@ -332,12 +342,14 @@
   }
   .author-listing a {
     @apply font-bold no-underline focus:underline hover:underline;
+    font-family: var(--font-family-heading);
   }
   .author-listing .field-label-inline {
     @apply font-medium;
   }
   .more-author-info p {
     display: inline;
+    font-family: var(--font-family-heading);
   }
 
   &.technical-perspective-template,
@@ -361,11 +373,6 @@
     .last-updated,
     .originally-published {
       display: none;
-    }
-  }
-  @media screen and (min-width: 1024px) {
-    #my-wrapper {
-      margin-left: 43vw !important;
     }
   }
 }

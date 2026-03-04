@@ -48,6 +48,15 @@
       {% else %}
         {{ content.title }}
       {% endif %}
+      {% if node
+        and node.hasField('field_intro')
+        and node.get('field_intro').isEmpty()
+        and node.body.summary|trim
+      %}
+        <div class="dek utility-xl">
+          <p><span>{{ node.body.summary }}</span></p>
+        </div>
+      {% endif %}
     </div>
     {% endif %}
 
