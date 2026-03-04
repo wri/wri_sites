@@ -347,6 +347,9 @@
   .author-listing .field-label-inline {
     @apply font-medium;
   }
+  .more-author-info {
+    font-size: rem(18);
+  }
   .more-author-info p {
     display: inline;
     font-family: var(--font-family-heading);
