@@ -13,6 +13,8 @@ use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\ckeditor5\Plugin\CKEditor5PluginDefinition;
 use Drupal\file\Entity\File;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 
 /**
  * Implements hook_theme().
@@ -222,4 +224,32 @@ function wri_media_preprocess_views_view_grid__entity_browser_1(array &$variable
  */
 function wri_media_form_entity_browser_files_form_alter(array &$form, FormStateInterface $form_state) {
   $form['#attached']['library'][] = 'wri_media/browser.styling';
+}
+
+
+/**
+ * Implements hook_entity_extra_field_info().
+ */
+function wri_media_entity_extra_field_info() {
+  $extra = [];
+
+  $extra['media']['image']['display']['caption_placeholder'] = [
+    'label' => t('Caption placeholder'),
+    'description' => t('This caption field will be populated by the caption field on the parent node.'),
+    'weight' => 0,
+    'visible' => TRUE,
+  ];
+
+  return $extra;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function wri_media_media_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if ($display->getComponent('caption_placeholder')) {
+    $build['caption_placeholder'] = [
+      '#markup' => $entity->caption[0]['value'] ?? ''
+    ];
+  }
 }

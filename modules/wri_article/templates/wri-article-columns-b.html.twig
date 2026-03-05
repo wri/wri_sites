@@ -87,14 +87,6 @@
         {% endif %}
         {{ content.category|without('field_main_image', 'field_main_image_caption') }}
       </div>
-
-      {% if node and node.hasField('field_main_image_caption') %}
-        {% set caption = node.get('field_main_image_caption') %}
-      {% endif %}
-
-      <div class="caption-wrapper layout__region layout__region--full utility-sm mt-4 text-neutral-800">
-        {{ caption.value }}
-      </div>
     {% endif %}
 
     {% if content.share|render %}

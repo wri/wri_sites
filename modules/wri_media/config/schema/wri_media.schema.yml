@@ -13,3 +13,11 @@ field.formatter.settings.wri_media_responsive_with_caption:
     foo:
       type: string
       label: Foo
+
+field.formatter.settings.wri_media_wri_media_with_caption:
+  type: mapping
+  label: wri_media_with_caption formatter settings
+  mapping:
+    foo:
+      type: string
+      label: Foo
