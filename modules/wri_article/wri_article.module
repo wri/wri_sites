@@ -28,7 +28,7 @@ function wri_article_preprocess_wri_article_columns(&$context) {
 /**
  * Preprocess for the wri_article_columns_b SFC layout.
  */
-function ts_wrin_preprocess_wri_article_columns_b(array &$variables): void {
+function wri_article_preprocess_wri_article_columns_b(array &$variables): void {
   // Default so Twig always has something.
   $variables['main_image_rendered'] = NULL;
   $variables['main_image_view_mode'] = 'default';
