@@ -677,4 +677,3 @@ function ts_wrin_preprocess_google_json_api_no_results_message(&$variables) {
     '#markup' => $variables['message'],
   ];
 }
-
