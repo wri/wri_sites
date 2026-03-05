@@ -26,3 +26,10 @@ dev:
     - core/drupal
     - core/drupalSettings
     - jquery_once/jquery.once
+
+key_takeaways:
+  js:
+    js/components/key-takeaways-a2a.js: {}
+  dependencies:
+    - core/drupal
+    - core/once

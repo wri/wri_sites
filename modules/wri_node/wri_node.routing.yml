@@ -5,3 +5,11 @@ wri_node.settings:
     _form: 'Drupal\wri_node\Form\SettingsForm'
   requirements:
     _permission: 'administer site configuration'
+wri_node.ajax_content_loader:
+  path: '/ajax/load-content/{node}'
+  defaults:
+    _controller: '\Drupal\wri_node\Controller\AjaxContentController::loadContent'
+    _title: 'Ajax Content Loader'
+  requirements:
+    _permission: 'access content'
+    node: '\d+'

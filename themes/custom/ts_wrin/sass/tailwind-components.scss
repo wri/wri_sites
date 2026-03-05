@@ -99,6 +99,16 @@ button.btn-underline {
   }
 }
 
+.button.tag-button {
+  background-color: transparent;
+  border: 1px solid var(--color-neutral-400);
+  color: var(--color-neutral-800);
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 8px;
+}
+
 .btn--sm {
   font-size: 13px;
   padding: 10px var(--spacer-5);
@@ -315,6 +325,14 @@ button.btn-underline {
   font-weight: 300;
   font-size: 16px;
   line-height: 1.33;
+
+  &.btn-pill {
+    line-height: 1.5;
+    background-color: var(--color-neutral-200);
+    border-radius: 4px;
+    display: inline-block;
+    padding: var(--spacer-1) var(--spacer-6);
+  }
 }
 
 /* FORMERLY: figcaption and .label.small */
