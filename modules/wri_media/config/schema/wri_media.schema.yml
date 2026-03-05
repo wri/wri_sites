@@ -1,23 +1,7 @@
-field.value.wri_media_wri_media_insert_caption:
-  type: mapping
-  label: Default value
-  mapping:
-    value:
-      type: label
-      label: Value
-
-field.formatter.settings.wri_media_responsive_with_caption:
-  type: mapping
-  label: responsive_with_caption formatter settings
-  mapping:
-    foo:
-      type: string
-      label: Foo
-
 field.formatter.settings.wri_media_wri_media_with_caption:
   type: mapping
   label: wri_media_with_caption formatter settings
   mapping:
-    foo:
+    caption_field:
       type: string
-      label: Foo
+      label: "Caption field"
