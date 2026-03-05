@@ -141,6 +141,9 @@
           {% endif %}
 
         {% endif %}
+        {% if image_attribution and template_class %}
+          <div class="caption-wrapper layout__region layout__region--full utility-sm mt-4 text-neutral-800">{{ image_attribution }}</div>
+        {% endif %}
         {% if content.bundle|render and template_class   %}
           <div class="mt-8">{{ content.bundle|without('addtoany', 'field_relevant_project') }}</div>
         {% endif %}
