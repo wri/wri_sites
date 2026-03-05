@@ -13,7 +13,6 @@ use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\ckeditor5\Plugin\CKEditor5PluginDefinition;
 use Drupal\file\Entity\File;
-use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 
 /**
@@ -226,7 +225,6 @@ function wri_media_form_entity_browser_files_form_alter(array &$form, FormStateI
   $form['#attached']['library'][] = 'wri_media/browser.styling';
 }
 
-
 /**
  * Implements hook_entity_extra_field_info().
  */
@@ -249,7 +247,7 @@ function wri_media_entity_extra_field_info() {
 function wri_media_media_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
   if ($display->getComponent('caption_placeholder')) {
     $build['caption_placeholder'] = [
-      '#markup' => $entity->caption[0]['value'] ?? ''
+      '#markup' => $entity->caption[0]['value'] ?? '',
     ];
   }
 }
