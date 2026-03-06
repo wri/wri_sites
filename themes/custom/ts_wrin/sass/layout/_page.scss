@@ -255,6 +255,7 @@ body {
 }
 .right-sidebar-wide {
   @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+  grid-row: 1;
 
   @include mq($ph) {
     @include center-columns($grid-columns, $grid-columns);
