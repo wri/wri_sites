@@ -362,7 +362,16 @@
 // Putting it here b/c it's more global.
 
 .callout--node {
+  border-top: 3px solid  var(--color-neutral-900);
+  border-bottom: 3px solid  var(--color-neutral-900);
+  padding-top: 24px;
+  padding-bottom: 12px;
+  margin-bottom: 48px;
   @include mq($md) {
+    border-top: 0;
+    border-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
     border-left: 3px solid var(--color-neutral-900);
     @apply pl-6;
   }
@@ -379,8 +388,25 @@
   max-width: 250px;
 }
 
+.callout--node .field--name-field-callout-summary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  @include mq($md) {
+    display: block;
+  }
+}
 .callout--node .field--name-field-callout-summary p {
   @apply utility-base my-6;
+  flex: 0 1 45%;
+}
+.callout--node .field--name-field-callout-summary p:first-child {
+  flex: 0 1 100%;
+  margin-bottom: 0;
+  @include mq($md) {
+    margin-bottom: 1.5rem;
+  }
 }
 .callout--node .field--name-field-callout-summary p:last-child {
   @include mq($md) {
