@@ -120,13 +120,17 @@
       <div {{ region_attributes.main_content.addClass('layout__region', 'layout__region--full', 'main-content', 'margin-bottom-xl') }}>
       {{ content.main_content }}
         {% if content.byline|render and not template_class %}
-          <div class="mt-8 mb-2 utility-md font-bold">{{ 'About the Authors:'|t }}</div>
+          {% set shownHeader = false %}
           {% if node and node.hasField('field_authors') and not node.get('field_authors').isEmpty() %}
             {% for item in node.get('field_authors') %}
               {% set author = item.entity %}
 
               {# Only show internal authors (they have field_person) #}
               {% if author and author.hasField('field_person') and not author.get('field_person').isEmpty() %}
+                {% if not shownHeader %}
+                <div class="mt-8 mb-2 utility-md font-bold">{{ 'About the Authors:'|t }}</div>
+                {% set shownHeader = true %}
+                {% endif %}
                 <div class="more-author-info">{{ drupal_entity('wri_author', item.target_id, 'listing') }}</div>
               {% endif %}
             {% endfor %}
