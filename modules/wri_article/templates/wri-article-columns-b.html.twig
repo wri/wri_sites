@@ -62,11 +62,9 @@
     </div>
     {% endif %}
 
-    {% if content.byline|render %}
     <div {{ region_attributes.byline.addClass('layout__region', 'layout__region--full', 'full-width', 'pb-2', 'neutral-bottom-border') }}>
     {{ content.byline }}
     </div>
-    {% endif %}
   </div>
 
   {% if content.bundle|render or content.category|render or content.share|render %}
