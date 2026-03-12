@@ -23,7 +23,9 @@
     {% set map = {
       'Technical Perspectives': 'technical-perspective-template',
       'Update': 'project-update-template',
-      'News': 'news-template'
+      'News': 'news-template',
+      'Outcomes': 'project-update-template',
+      'Snapshots': 'project-update-template'
     } %}
 
     {% set template_class = map[parent_label] ?? null %}
@@ -60,11 +62,9 @@
     </div>
     {% endif %}
 
-    {% if content.byline|render %}
     <div {{ region_attributes.byline.addClass('layout__region', 'layout__region--full', 'full-width', 'pb-2', 'neutral-bottom-border') }}>
     {{ content.byline }}
     </div>
-    {% endif %}
   </div>
 
   {% if content.bundle|render or content.category|render or content.share|render %}
@@ -86,14 +86,6 @@
           {{ main_image_rendered }}
         {% endif %}
         {{ content.category|without('field_main_image', 'field_main_image_caption') }}
-      </div>
-
-      {% if node and node.hasField('field_main_image_caption') %}
-        {% set caption = node.get('field_main_image_caption') %}
-      {% endif %}
-
-      <div class="caption-wrapper layout__region layout__region--full utility-sm mt-4 text-neutral-800">
-        {{ caption.value }}
       </div>
     {% endif %}
 
@@ -128,18 +120,25 @@
       <div {{ region_attributes.main_content.addClass('layout__region', 'layout__region--full', 'main-content', 'margin-bottom-xl') }}>
       {{ content.main_content }}
         {% if content.byline|render and not template_class %}
-          <div class="mt-8 mb-2 utility-md font-bold">{{ 'About the Authors:'|t }}</div>
+          {% set shownHeader = false %}
           {% if node and node.hasField('field_authors') and not node.get('field_authors').isEmpty() %}
             {% for item in node.get('field_authors') %}
               {% set author = item.entity %}
 
               {# Only show internal authors (they have field_person) #}
               {% if author and author.hasField('field_person') and not author.get('field_person').isEmpty() %}
+                {% if not shownHeader %}
+                <div class="mt-8 mb-2 utility-md font-bold">{{ 'About the Authors:'|t }}</div>
+                {% set shownHeader = true %}
+                {% endif %}
                 <div class="more-author-info">{{ drupal_entity('wri_author', item.target_id, 'listing') }}</div>
               {% endif %}
             {% endfor %}
           {% endif %}
 
+        {% endif %}
+        {% if image_attribution and template_class %}
+          <div class="more-author-info"><p>{{ image_attribution }}</p></div>
         {% endif %}
         {% if content.bundle|render and template_class   %}
           <div class="mt-8">{{ content.bundle|without('addtoany', 'field_relevant_project') }}</div>
