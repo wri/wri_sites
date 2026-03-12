@@ -29,13 +29,14 @@ function wri_article_preprocess_wri_article_columns(&$context) {
  * Preprocess for the wri_article_columns_b SFC layout.
  */
 function wri_article_preprocess_wri_article_columns_b(array &$variables): void {
-  // Show the label on "field_original_publish_date" if "field_most_recently_updated_date" has a value.
+  // Show the label on "field_original_publish_date" if
+  // "field_most_recently_updated_date" has a value.
   if (isset($variables["content"]["byline"]["field_most_recently_updated_date"][0])) {
     $variables["content"]["byline"]["field_original_publish_date"]["#label_display"] = 'inline';
     $variables["content"]["byline"]["node_post_date"]["#label_display"] = 'inline';
   }
   if (isset($variables["content"]["byline"]["field_original_publish_date"][0])) {
-    $variables["content"]["byline"]["node_post_date"]["#access"] = false;
+    $variables["content"]["byline"]["node_post_date"]["#access"] = FALSE;
   }
   // Default so Twig always has something.
   $variables['main_image_rendered'] = NULL;
