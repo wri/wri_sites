@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\wri_spoke\Plugin\EntityShareClient\Processor;
+namespace Drupal\wri_entity_share\Plugin\EntityShareClient\Processor;
 
 use Drupal\Component\DependencyInjection\Container;
 use Drupal\Core\Entity\ContentEntityInterface;
