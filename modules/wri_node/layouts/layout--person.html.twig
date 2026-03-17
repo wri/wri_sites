@@ -59,7 +59,7 @@
      {% endif %}
 
      {% if content.sidebar_contact or content.sidebar %}
-       <div {{ region_attributes.sidebar.addClass('layout__region', 'layout__region--sidebar', 'sidebar') }}>
+       <div {{ region_attributes.sidebar.addClass('layout__region', 'layout__region--sidebar', 'sidebar', 'list-of-fields-sidebar') }}>
          {% if content.sidebar_contact|render %}
            <div class="field-label-above">
            {{ "Contact Information"|t }}

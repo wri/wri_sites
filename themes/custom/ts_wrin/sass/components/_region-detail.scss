@@ -2,7 +2,7 @@
   background-color: transparent;
 
   &.sticky {
-    background-color: $white;
+    background-color: var(--color-white);
   }
 }
 
@@ -14,7 +14,7 @@
       top: 0;
       height: 100%;
       z-index: -1;
-      background-color: $light-grey;
+      background-color: var(--color-neutral-200);
       &:before {
         content: none;
       }
@@ -38,11 +38,11 @@
     }
 
     .h1 {
-      color: $black;
+      color: var(--color-neutral-900);
     }
 
     .hero__text {
-      color: $black;
+      color: var(--color-neutral-900);
     }
 
     .dark-overlay {
@@ -54,7 +54,7 @@
     position: relative;
     &:before {
       content: "";
-      background: $light-grey;
+      background: var(--color-neutral-200);
       position: absolute;
       top: 0;
       height: 250px;

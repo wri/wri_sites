@@ -3,7 +3,7 @@
  * TS Hamburger Menu custom JS.
  */
 
-export default function(context) {
+export default function (context) {
   // Alias global jQuery object.
   const $ = jQuery;
   let tabbingContext = null;
@@ -26,11 +26,11 @@ export default function(context) {
     // Mobile menu toggle behavior.
     $(".menu-toggle:not(.mobile-menu-toggle)", context)
       .once("ts-menu-toggle")
-      .on("click", function(e) {
+      .on("click", function (e) {
         toggleMenu();
         $("body").addClass("fixed");
       })
-      .keyup(function(e) {
+      .keyup(function (e) {
         if (e.keyCode == 27) {
           // escape key maps to keycode `27`
           toggleMenu();
@@ -41,7 +41,7 @@ export default function(context) {
       });
     $(".mega_menu_close")
       .once()
-      .on("click", function(e) {
+      .on("click", function (e) {
         toggleMenu();
         $("body").removeClass("fixed");
         sliderCleanUp();
@@ -53,17 +53,13 @@ export default function(context) {
       flexibleRowsClass = "flexible-row-submenu";
 
     function slideOut(menuParent) {
-      var clone = $(menuParent.target)
-        .parents("li")
-        .clone();
+      var clone = $(menuParent.target).parents("li").clone();
       $(".hamburger-slider-contents ul", hamburgerSlider).html(clone);
       $(".hamburger-slider-contents").addClass("active");
       // Hack to get the our-work link to have flexed rows.
       if (
         $(menuParent.target).hasClass(flexibleRowsClass) ||
-        $(menuParent.target)
-          .children("a")
-          .hasClass(flexibleRowsClass)
+        $(menuParent.target).children("a").hasClass(flexibleRowsClass)
       ) {
         $(".hamburger-slider-contents").addClass(flexibleRowsClass);
       }
@@ -75,7 +71,7 @@ export default function(context) {
       hamburgerContent.removeClass("left");
       hamburgerSlider.removeClass("active");
       $(".hamburger-slider-contents").removeClass(flexibleRowsClass);
-      setTimeout(function() {
+      setTimeout(function () {
         $(".hamburger-slider-contents ul", hamburgerSlider).html("");
       }, 500);
     }
@@ -85,19 +81,19 @@ export default function(context) {
         var burger = $(".hamburger-content");
         burger
           .find(".menu--footer-secondary > ul > li > .menu-item-title")
-          .on("click", function(e) {
+          .on("click", function (e) {
             e.preventDefault();
             slideOut(e);
           });
         burger
           .find(".menu--mega-menu > ul > li > .menu-item-title")
-          .on("click", function(e) {
+          .on("click", function (e) {
             e.preventDefault();
             slideOut(e);
           });
 
         // Close the sliders, then reset.
-        $(".hamburger-slider .back").on("click", function(e) {
+        $(".hamburger-slider .back").on("click", function (e) {
           e.preventDefault();
           sliderCleanUp();
         });
@@ -106,17 +102,17 @@ export default function(context) {
           ".hamburger-content .menu--footer-secondary > ul > li > a, \
           .hamburger-content .menu--mega-menu > ul > li:nth-child(1) > a, \
           .hamburger-content .menu--mega-menu > ul > li:nth-child(2) > a, \
-          .hamburger-content .menu--mega-menu > ul > li:nth-child(3) > a"
+          .hamburger-content .menu--mega-menu > ul > li:nth-child(3) > a",
         ).unbind();
       }
     }
 
     function debounce(func, wait, immediate) {
       var timeout;
-      return function() {
+      return function () {
         var context = this,
           args = arguments;
-        var later = function() {
+        var later = function () {
           timeout = null;
           if (!immediate) func.apply(context, args);
         };
@@ -127,8 +123,8 @@ export default function(context) {
       };
     }
 
-    var debouncedSliderMenus = debounce(function() {
-      let windowSize = function() {
+    var debouncedSliderMenus = debounce(function () {
+      let windowSize = function () {
         return window.innerWidth;
       };
       sliderMenus(windowSize());
@@ -154,10 +150,10 @@ export default function(context) {
 
     function stickyScrollMobile() {
       const mobileStickyNav = document.querySelector(
-        ".page-node-type-simple-page .layout__region--menu, .experts-staff-header .internal-menu-pages"
+        ".page-node-type-simple-page .layout__region--menu, .experts-staff-header .internal-menu-pages",
       );
       const mobileStickyParent = document.querySelector(
-        ".page-node-type-simple-page .simple-page__title, .experts-staff-header .right"
+        ".page-node-type-simple-page .simple-page__title, .experts-staff-header .right",
       );
 
       if (mobileStickyNav) {
@@ -173,16 +169,16 @@ export default function(context) {
       }
     }
 
-    var debouncedStickyNav = debounce(function() {
+    var debouncedStickyNav = debounce(function () {
       window.removeEventListener("scroll", stickyScroll);
       window.removeEventListener("scroll", stickyScrollMobile);
-      let windowSize = function() {
+      let windowSize = function () {
         return window.innerWidth;
       };
       if (windowSize() > 768) {
         window.addEventListener("scroll", stickyScroll);
         const mobileStickyParent = document.querySelector(
-          ".page-node-type-simple-page .simple-page__title, .experts-staff-header .right"
+          ".page-node-type-simple-page .simple-page__title, .experts-staff-header .right",
         );
         if (mobileStickyParent) {
           mobileStickyParent.classList.remove("sticky");
@@ -200,7 +196,7 @@ export default function(context) {
     let menuItem = $("nav.menu--main li.menu-item--active-trail");
     let scrollMenu = $("nav.menu--main .menu-wrapper > ul.menu");
 
-    var debouncedSideScroll = debounce(function() {
+    var debouncedSideScroll = debounce(function () {
       if (mainParent.width() > menuItem.width() + 75) {
         mainParent.addClass("no-scroll");
       } else {
@@ -211,7 +207,7 @@ export default function(context) {
     window.addEventListener("resize", debouncedSideScroll);
     debouncedSideScroll();
 
-    $("nav.menu--main .nav-arrow").click(function(e) {
+    $("nav.menu--main .nav-arrow").click(function (e) {
       e.preventDefault();
       var leftPos = scrollMenu.scrollLeft();
       scrollMenu.animate({ scrollLeft: leftPos + mainParent.width() / 2 }, 500);
@@ -221,12 +217,12 @@ export default function(context) {
         .insertBefore("nav.menu--main .menu-wrapper")
         .removeClass("nav-arrow")
         .addClass("back-arrow")
-        .click(function(f) {
+        .click(function (f) {
           f.preventDefault();
           var leftPosBack = scrollMenu.scrollLeft();
           scrollMenu.animate(
             { scrollLeft: leftPosBack - mainParent.width() / 2 },
-            500
+            500,
           );
         });
     });
@@ -235,7 +231,7 @@ export default function(context) {
     let quickLinksParent = $(".menu--quick-links .menu-wrapper");
     let quickLinksMenu = $(".menu--quick-links .menu-wrapper > ul.menu");
 
-    var debouncedQuickLinksScroll = debounce(function() {
+    var debouncedQuickLinksScroll = debounce(function () {
       if (quickLinksParent.width() > quickLinksMenu.width()) {
         quickLinksParent.addClass("no-scroll");
       } else {
@@ -246,12 +242,12 @@ export default function(context) {
     window.addEventListener("resize", debouncedQuickLinksScroll);
     debouncedQuickLinksScroll();
 
-    $(".hamburger-content .nav-arrow").click(function(e) {
+    $(".hamburger-content .nav-arrow").click(function (e) {
       e.preventDefault();
       var leftPos = quickLinksParent.scrollLeft();
       quickLinksParent.animate(
         { scrollLeft: leftPos + quickLinksParent.width() / 2 },
-        500
+        500,
       );
       $(this)
         .once()
@@ -259,12 +255,12 @@ export default function(context) {
         .insertBefore("#block-quicklinks")
         .removeClass("nav-arrow")
         .addClass("back-arrow")
-        .click(function(f) {
+        .click(function (f) {
           f.preventDefault();
           var leftPosBack = quickLinksParent.scrollLeft();
           quickLinksParent.animate(
             { scrollLeft: leftPosBack - quickLinksParent.width() / 2 },
-            500
+            500,
           );
         });
     });
@@ -274,7 +270,7 @@ export default function(context) {
     let tocMenuItem = $(".toc .menu-item--active-trail .menu");
     let tocScrollMenu = $(".toc .menu-item--active-trail .menu");
 
-    let tocDebouncedSideScroll = debounce(function() {
+    let tocDebouncedSideScroll = debounce(function () {
       if (
         tocMenuItem[0] &&
         tocMainParent.width() > tocMenuItem[0].scrollWidth - 30
@@ -288,12 +284,12 @@ export default function(context) {
     window.addEventListener("resize", tocDebouncedSideScroll);
     tocDebouncedSideScroll();
 
-    $("nav.toc .nav-arrow").click(function(e) {
+    $("nav.toc .nav-arrow").click(function (e) {
       e.preventDefault();
       var leftPos = tocScrollMenu.scrollLeft();
       tocScrollMenu.animate(
         { scrollLeft: leftPos + mainParent.width() / 2 },
-        500
+        500,
       );
     });
 
@@ -318,7 +314,7 @@ export default function(context) {
         }
       }
 
-      let tocDebouncedStickyNav = debounce(function() {
+      let tocDebouncedStickyNav = debounce(function () {
         window.addEventListener("scroll", tocStickyScroll);
       }, 250);
 
@@ -327,16 +323,16 @@ export default function(context) {
     }
 
     // Manage active class for toc links.
-    $(document).on("click", ".toc-list > li > a", function() {
+    $(document).on("click", ".toc-list > li > a", function () {
       $(".toc-list > li > a").removeClass("active");
       $(this).addClass("active");
     });
 
     // Check for anchor on page load and click button if available.
-    $(function() {
+    $(function () {
       let hash = location.hash;
       if (hash.length) {
-        let checkExist = setInterval(function() {
+        let checkExist = setInterval(function () {
           if ($(".toc-list > li").length) {
             $(".toc-list > li > a[href='" + hash + "'] ")[0].click();
             clearInterval(checkExist);
@@ -347,12 +343,12 @@ export default function(context) {
 
     const menuContainer = document.querySelector(".internal-menu-pages");
     const menuToggle = document.querySelector(
-      ".internal-menu-pages .field-label"
+      ".internal-menu-pages .field-label",
     );
 
     if (menuContainer && menuToggle) {
       // Toggle menu open/closed when clicking the label
-      menuToggle.addEventListener("click", function(e) {
+      menuToggle.addEventListener("click", function (e) {
         e.preventDefault();
         e.stopPropagation(); // Stop event propagation to avoid interfering with links
 
@@ -367,14 +363,16 @@ export default function(context) {
       });
 
       // Prevent clicks within the menu from toggling the menu
-      menuContainer.querySelector("nav").addEventListener("click", function(e) {
-        e.stopPropagation();
-      });
+      menuContainer
+        .querySelector("nav")
+        .addEventListener("click", function (e) {
+          e.stopPropagation();
+        });
     }
 
     if (menuContainer) {
       // Close the menu if clicking outside of it
-      document.addEventListener("click", function() {
+      document.addEventListener("click", function () {
         if (menuContainer.classList.contains("menu-open")) {
           menuContainer.classList.remove("menu-open");
           menuContainer.classList.add("menu-closed");

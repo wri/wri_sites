@@ -105,8 +105,9 @@ class SpokeHostProcessor implements OutboundPathProcessorInterface {
       // The prefix is used to add a translation code, but in this case we don't
       // need it added: we have our full URL coming from the hub url field.
       unset($options["prefix"]);
-      if ($request && !$this->adminContext->isAdminRoute()) {
-        $options['query']['returnTo'] = $request->getScheme() . "://" . $request->getHttpHost() . $request->getRequestUri();
+      // Always add returnTo, but leave it empty so JS can set it per page.
+      if (!$this->adminContext->isAdminRoute()) {
+        $options['query']['returnTo'] = '';
       }
       $path = $hub_url['path'];
     }

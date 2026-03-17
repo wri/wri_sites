@@ -79,7 +79,7 @@ third_party_settings:
         - field_region
         - field_languages_spoken
       share:
-        - wri_social_sharing_block
+        - addtoany
       main_content:
         - body
         - field_zoom_registration_form
@@ -115,6 +115,11 @@ targetEntityType: node
 bundle: event
 mode: main_content
 content:
+  addtoany:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 14
+    region: share
   addtocal:
     type: wri_event_wri_event_add_to_cal
     label: hidden
@@ -536,11 +541,6 @@ content:
     third_party_settings: {  }
     weight: 26
     region: hero
-  wri_social_sharing_block:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 11
-    region: share
 hidden:
   content_moderation_control: true
   field_calendar_description: true
@@ -561,3 +561,4 @@ hidden:
   langcode: true
   layout_builder__layout: true
   search_api_excerpt: true
+  wri_social_sharing_block: true

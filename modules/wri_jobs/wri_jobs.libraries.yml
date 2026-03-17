@@ -1,0 +1,11 @@
+# Custom library for general purposes.
+careers:
+  css:
+    component:
+      css/jobs-listing.css: {}
+job:
+  css:
+    component:
+      css/job-page.css: {}
+  dependencies:
+    - core/drupal

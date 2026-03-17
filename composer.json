@@ -36,10 +36,16 @@
             "drupal/diff": {
                 "No local tasks on compare revisions page https://www.drupal.org/project/diff/issues/3169729": "https://www.drupal.org/files/issues/2020-09-08/diff_add-local-tasks-3169729-2.patch"
             },
+            "drupal/facets_pretty_paths": {
+                "Space appended to url outputs error https://www.drupal.org/project/facets_pretty_paths/issues/3575306": "https://git.drupalcode.org/project/facets_pretty_paths/-/merge_requests/25.diff"
+            },
             "drupal/entity_embed": {
                 "Logs flooded with warning messages 'Invalid display settings encountered' https://www.drupal.org/project/entity_embed/issues/3077225": "https://www.drupal.org/files/issues/2019-12-11/3077225-10.reduce-invalid-config-logs.patch",
                 "Entity embed dialog can no longer use custom data- attributes in CKEditor 5 https://www.drupal.org/project/entity_embed/issues/3410132": "https://www.drupal.org/files/issues/2025-08-07/3410132-MR-31_support-custom-data-attribs.diff-14.patch",
-                "SEE README.md in patch folder. Drupal 10.5/11.2 compatability (tooltip broken, cannot edit embedded entities) https://www.drupal.org/project/entity_embed/issues/3531672": "web/profiles/contrib/wri_sites/patches/entity_embed--fix-ckeditor-icon-reference--3531672.patch"
+                "SEE README.md in patch folder. Drupal 10.5/11.2 compatability (tooltip broken, cannot edit embedded entities) https://www.drupal.org/project/entity_embed/issues/3531672": "https://raw.githubusercontent.com/wri/wri_sites/refs/heads/main/patches/entity_embed--fix-ckeditor-icon-reference--3531672.patch"
+            },
+            "drupal/entity_share": {
+                "Call to a member function hasField() on null in SkipImported https://www.drupal.org/project/entity_share/issues/3569090": "https://git.drupalcode.org/project/entity_share/-/merge_requests/165.diff"
             },
             "drupal/layout_builder_st": {
                 "Error: Call to a member function getConfig() OverridesSectionStorage.php https://www.drupal.org/project/layout_builder_st/issues/3420063": "https://www.drupal.org/files/issues/2024-03-29/layout_builder_st-call_to_a_member_function_getconfig-3420063-26.patch",
@@ -85,6 +91,9 @@
             "locations": {
                 "project-root": "./web",
                 "web-root": "./web"
+            },
+            "file-mapping": {
+                "[project-root]/core-module-update.sh": ".ci/core-module-update.sh"
             }
         },
         "installer-paths": {
@@ -118,6 +127,7 @@
         "cweagans/composer-patches": "^1.0",
         "drupal/access_unpublished": "^1.3",
         "drupal/address": "^2.0",
+        "drupal/addtoany": "^2.0",
         "drupal/addtocal": "^3.0.0-beta1",
         "drupal/admin_toolbar": "^3.2",
         "drupal/advban": "^1.8",
@@ -125,6 +135,7 @@
         "drupal/asset_injector": "^2.9",
         "drupal/auto_entitylabel": "^3.0@beta",
         "drupal/autoban": "^1.10",
+        "drupal/better_exposed_filters": "^7.1",
         "drupal/better_passwords": "^2.2",
         "drupal/block_list_override": "^1.0",
         "drupal/cer": "^5.0@beta",
@@ -146,9 +157,12 @@
         "drupal/entity_browser": "^2.6",
         "drupal/entity_class_formatter": "^2.0",
         "drupal/entity_embed": "1.7",
+        "drupal/entity_share_cron": "^3.0",
         "drupal/entity_usage": "^2.0@beta",
         "drupal/facets": "^2.0",
         "drupal/facets_pretty_paths": "^2.0",
+        "drupal/feeds": "^3.2",
+        "drupal/feeds_ex": "^1.0@beta",
         "drupal/field_group": "^3.2",
         "drupal/file_replace": "^1.2",
         "drupal/focal_point": "^2.0",
@@ -192,7 +206,7 @@
         "drupal/smart_date": "^4.0",
         "drupal/sortableviews": "^1.0@beta",
         "drupal/svg_image": "^3.2",
-        "drupal/token": "^1.8",
+        "drupal/token": "1.16.0",
         "drupal/token_filter": "^2.1",
         "drupal/twig_tweak": "^3.2",
         "drupal/twitter_api_block": "^4.0",

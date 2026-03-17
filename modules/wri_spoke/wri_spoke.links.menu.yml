@@ -1,10 +1,3 @@
-wri_spoke.cron.settings:
-  route_name: wri_spoke.cron.settings
-  parent: entity_share.admin_config_page
-  title: 'Cron Settings'
-  description: 'Cron settings for Entity Share spokes.'
-  weight: 10
-
 wri_spoke.wri_spoke_settings:
   title: WRI Spoke settings
   description: Settings for WRI spoke sites

@@ -7,15 +7,17 @@ div.ui-dialog:not(.ui-dialog-off-canvas) {
   .ui-dialog-titlebar {
     // Reset all styles so we can start from scratch.
     all: unset;
-    @include font($acumin-semi-cond, "bold");
+    @include font(var(--font-family-heading-condensed), "bold");
     @include font-line-height(24, 30);
-    position: relative;
-    padding-top: $space-sm;
-    padding-right: $space-sm;
-    padding-left: $space-xs;
+    & {
+      position: relative;
+      padding-top: var(--spacer-7);
+      padding-right: var(--spacer-7);
+      padding-left: var(--spacer-5);
+    }
     @include mq($md) {
-      padding-right: $space-md;
-      padding-left: $space-md;
+      padding-right: var(--spacer-11);
+      padding-left: var(--spacer-11);
       @include font-line-height(32, 40);
     }
 
@@ -39,7 +41,7 @@ div.ui-dialog:not(.ui-dialog-off-canvas) {
       &:focus {
         .ui-icon-closethick:before,
         .ui-icon-closethick:after {
-          background-color: $gold-hover;
+          background-color: var(--color-gold-300);
         }
       }
     }
@@ -56,8 +58,8 @@ div.ui-dialog:not(.ui-dialog-off-canvas) {
         height: 100%;
         top: 50%;
         left: 50%;
-        background-color: $brand-gold;
-        transition: background-color $transition-defaults;
+        background-color: var(--color-gold-500);
+        transition: background-color var(--transition-default);
       }
       &:after {
         transform: translate(-50%, -50%) rotate(-45deg);
@@ -70,14 +72,14 @@ div.ui-dialog:not(.ui-dialog-off-canvas) {
 
   // Content.
   .ui-dialog-content {
-    padding-right: $space-xs;
-    padding-bottom: $space-md;
-    padding-left: $space-xs;
+    padding-right: var(--spacer-5);
+    padding-bottom: var(--spacer-11);
+    padding-left: var(--spacer-5);
 
     @include mq($md) {
-      padding-right: $space-md;
-      padding-bottom: $space-md;
-      padding-left: $space-md;
+      padding-right: var(--spacer-11);
+      padding-bottom: var(--spacer-11);
+      padding-left: var(--spacer-11);
     }
   }
 
@@ -85,19 +87,23 @@ div.ui-dialog:not(.ui-dialog-off-canvas) {
   input[type="email"],
   input[type="text"] {
     @include font-line-height(14, 18);
-    padding: initial;
-    background-color: darkkhaki;
-    height: 46px;
-    padding: 15px 10px 12px;
-    background-color: $white;
+    & {
+      padding: initial;
+      background-color: darkkhaki;
+      height: 46px;
+      padding: 15px 10px 12px;
+      background-color: var(--color-white);
+    }
   }
 
   // Submit
   input[type="submit"] {
-    @include font($acumin-semi-cond, "semibold");
+    @include font(var(--font-family-heading-condensed), "semibold");
     @include font-line-height(13, 16);
     // height: 40px;
-    padding: 12px 40px;
+    & {
+      padding: 12px 40px;
+    }
   }
 
   // Label
@@ -110,15 +116,15 @@ div.ui-dialog:not(.ui-dialog-off-canvas) {
 
   // Show files.
   #skip-registration {
-    color: $black;
+    color: var(--color-neutral-900);
     cursor: pointer;
     font-size: 0.9375rem;
     text-decoration: underline;
-    transition: color $transition-defaults;
+    transition: color var(--transition-default);
 
     &:hover,
     &:focus {
-      color: $green;
+      color: var(--color-green-500);
     }
   }
 
@@ -144,6 +150,6 @@ div.ui-dialog:not(.ui-dialog-off-canvas) {
 
 // Darkened background behind modal.
 .ui-widget-overlay {
-  background-color: $black;
+  background-color: var(--color-neutral-900);
   opacity: 0.4;
 }

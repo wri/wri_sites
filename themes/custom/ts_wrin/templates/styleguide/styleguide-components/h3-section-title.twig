@@ -14,7 +14,7 @@
 
 <div class="styleguide-component--h3-section-title my-6" id="{{ id }}">
   <div class="flex items-center justify-between">
-    <h3 class="h3 {{ heading_color }} md:max-w-[75%]">{{ heading }}</h3>
+    <h3 class="h3 {{ heading_color }}">{{ heading }}</h3>
     {% include '@ts_wrin/design-system/atoms/btns/btn-solid.html.twig' with {
       link: {
         title: 'Report issue',
@@ -27,12 +27,12 @@
   {% if show_hr %}
     <hr class="border-1 border-neutral-300 mt-3 mb-5">
   {% endif %}
-  <div class="mb-lg md:max-w-[75%]">
+  <div class="mb-lg">
     {% if description %}
       <p class="{{ section_description_classes }}">{{ description }}</p>
     {% endif %}
     {% if dev_notes %}
-      <p class="utility-xs italic color-primary md:max-w-[75%]"><em>{{ dev_notes }}</em></p>
+      <p class="utility-xs italic color-primary"><em>{{ dev_notes }}</em></p>
     {% endif %}
   </div>
 </div>

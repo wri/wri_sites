@@ -1,0 +1,7 @@
+field.formatter.settings.wri_media_wri_media_with_caption:
+  type: mapping
+  label: wri_media_with_caption formatter settings
+  mapping:
+    caption_field:
+      type: string
+      label: "Caption field"

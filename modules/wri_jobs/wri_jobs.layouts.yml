@@ -1,0 +1,18 @@
+wri_job_columns:
+  label: Jobs
+  template: templates/wri-job-columns
+  regions:
+    hero:
+      label: Hero
+    buttons:
+      label: Buttons
+    locations:
+      label: Locations
+    job_content :
+      label: "Main Content"
+    sidebar :
+      label: Sidebar
+  icon_map:
+    - [hero]
+    - [job_content,sidebar]
+  default_section: job_content

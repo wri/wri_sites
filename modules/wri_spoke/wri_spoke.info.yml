@@ -8,3 +8,4 @@ dependencies:
   - entity_share_client:entity_share_client
   - wri_event:wri_event
   - ultimate_cron:ultimate_cron
+  - entity_share_cron:entity_share_cron

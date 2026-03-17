@@ -8,7 +8,7 @@
     }
   }
   .tweet {
-    @include font($acumin-semi-cond, "light");
+    @include font(var(--font-family-heading-condensed), "light");
     @include font-line-height(36, 42);
 
     @include mq($md) {
@@ -46,7 +46,7 @@
         height: auto;
         width: 30px;
         path {
-          transition: fill $transition-defaults;
+          transition: fill var(--transition-default);
         }
       }
 

@@ -95,7 +95,7 @@ function wri_event_node_view(array &$build, EntityInterface $entity, EntityViewD
 /**
  * Implements hook_preprocess_HOOK().
  */
-function wri_event_preprocess_layout__event(&$variables) {
+function wri_event_preprocess_layout_event__node(&$variables) {
   if (isset($variables['content']['#node']) && $variables['content']['#node']->bundle() == 'event') {
     if ($variables['content']['#node']->type->entity->getThirdPartySetting('wri_event', 'enable_backlink')) {
       $variables['content']['#backlink_enabled'] = TRUE;

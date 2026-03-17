@@ -8,13 +8,13 @@
 }
 
 .button.twitter {
-  background: $brand-gold url("../img/svgs/twitter-black.svg") no-repeat right
-    15px center;
+  background: var(--color-gold-500) url("../img/svgs/twitter-black.svg")
+    no-repeat right 15px center;
   background-size: 15px 15px;
   display: inline-block;
   padding-right: 35px;
   position: relative;
-  transition: background $transition-defaults;
+  transition: background var(--transition-default);
   text-decoration: none;
 
   @include hocus {

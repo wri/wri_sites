@@ -1,0 +1,119 @@
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.main_content
+    - field.field.node.jobs.body
+    - field.field.node.jobs.feeds_item
+    - field.field.node.jobs.field_job_country
+    - field.field.node.jobs.field_job_end_date
+    - field.field.node.jobs.field_job_externalpath
+    - field.field.node.jobs.field_job_guid
+    - field.field.node.jobs.field_job_hiring_org
+    - field.field.node.jobs.field_job_is_closed_manual_optio
+    - field.field.node.jobs.field_job_jobfamilygroup
+    - field.field.node.jobs.field_job_location
+    - field.field.node.jobs.field_job_posting_link
+    - field.field.node.jobs.field_job_pubdate
+    - field.field.node.jobs.field_job_remotetype
+    - field.field.node.jobs.field_job_reqid
+    - field.field.node.jobs.field_job_start_date
+    - field.field.node.jobs.field_job_time_type
+    - field.field.node.jobs.field_job_workersubtype
+    - node.type.jobs
+  module:
+    - ds
+    - element_class_formatter
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  ds:
+    layout:
+      id: 'single_file_component_layout:wri_publication_columns'
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      job_content:
+        - field_job_location
+        - body
+        - field_job_posting_link
+      sidebar:
+        - field_job_hiring_org
+        - field_job_is_closed_manual_optio
+id: node.jobs.main_content
+targetEntityType: node
+bundle: jobs
+mode: main_content
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: job_content
+  field_job_hiring_org:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: sidebar
+  field_job_is_closed_manual_optio:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 4
+    region: sidebar
+  field_job_location:
+    type: entity_reference_list_label_class
+    label: above
+    settings:
+      link: true
+      class: ''
+      list_type: ul
+    third_party_settings: {  }
+    weight: 0
+    region: job_content
+  field_job_posting_link:
+    type: link_class
+    label: hidden
+    settings:
+      class: ''
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 2
+    region: job_content
+hidden:
+  addtocal: true
+  feeds_item: true
+  field_job_country: true
+  field_job_end_date: true
+  field_job_externalpath: true
+  field_job_guid: true
+  field_job_jobfamilygroup: true
+  field_job_pubdate: true
+  field_job_remotetype: true
+  field_job_reqid: true
+  field_job_start_date: true
+  field_job_time_type: true
+  field_job_workersubtype: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

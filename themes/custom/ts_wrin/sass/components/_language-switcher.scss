@@ -1,5 +1,5 @@
 .tray-contents ul.links a.is-active {
-  color: $white;
+  color: var(--color-white);
 }
 .block-language ul {
   list-style-type: none;
@@ -7,21 +7,21 @@
   padding: 0;
 }
 .language-link {
-  color: $white;
+  color: var(--color-white);
   font-size: 1.25rem;
   line-height: 1;
   font-family: "acumin-pro-semi-condensed", sans-serif;
   font-weight: 700;
 }
 .block-language ul li .language-link.is-active {
-  color: $brand-gold;
+  color: var(--color-gold-500);
 }
 .block-language ul li .language-link:hover,
 .block-language ul li .language-link:active,
 .block-language ul li .language-link:focus,
 .block-language ul li .language-link.is-active {
-  background-color: $brand-gold;
-  color: $black !important;
+  background-color: var(--color-gold-500);
+  color: var(--color-neutral-900) !important;
 }
 .block-language ul li .language-link {
   display: block;
@@ -33,9 +33,9 @@
 .block-language ul li .language-link.is-active:active,
 .block-language ul li .language-link.is-active:hover,
 .block-language ul li .language-link.is-active:focus {
-  background-color: $black;
-  color: $brand-gold !important;
+  background-color: var(--color-neutral-900);
+  color: var(--color-gold-500) !important;
 }
 .block-language ul li .language-link.is-active {
-  color: $brand-gold;
+  color: var(--color-gold-500);
 }
