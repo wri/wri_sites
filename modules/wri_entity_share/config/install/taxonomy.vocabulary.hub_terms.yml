@@ -1,0 +1,7 @@
+status: true
+dependencies: {  }
+name: 'Hub terms'
+vid: hub_terms
+description: 'Terms that appear on the hub.'
+weight: 0
+new_revision: false
