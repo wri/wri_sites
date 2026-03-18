@@ -57,6 +57,9 @@ function wri_article_preprocess_wri_article_columns_b(array &$variables): void {
     $variables['main_image_rendered'] = $variables["content"]["field_main_image"];
   }
   else {
+    if ($view_mode == 'half_content') {
+      $view_mode = 'half_hero';
+    }
     $variables['main_image_view_mode'] = $view_mode;
     $variables['main_image_rendered'] = \Drupal::entityTypeManager()
       ->getViewBuilder('media')

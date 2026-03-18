@@ -41,9 +41,17 @@
   {% endif %}
 
   <div{{ attributes.addClass('grid','article__title', 'margin-bottom-sm') }}>
-    {% if content.title|render %}
+    {% if content.category|render and not template_class and  region_display_value == 'half-content' %}
+      {% if main_image_rendered %}
+        <div class="half-image-wrapper">
+          {{ main_image_rendered }}
+        </div>
+      {% endif %}
+    {% endif %}
 
-    <div {{ region_attributes.title.addClass('layout__region', 'layout__region--full', 'full-width') }}>
+    {% if content.title|render %}
+    <div {{ region_attributes.title.addClass('layout__region', 'layout__region--full', 'full-width', region_display_value) }}>
+
       {% if template_class %}
         <div class="utility-base btn-pill font-bold">{{ type.label }}</div>
         {{ content.title|without('field_type') }}
@@ -63,6 +71,9 @@
     {% endif %}
 
     <div {{ region_attributes.byline.addClass('layout__region', 'layout__region--full', 'full-width', 'pb-2', 'neutral-bottom-border') }}>
+      {% if region_display_value == 'half-content' %}
+        {{ content.bundle|without('field_relevant_project','field_tags') }}
+      {% endif %}
     {{ content.byline }}
     </div>
   </div>
@@ -70,22 +81,23 @@
   {% if content.bundle|render or content.category|render or content.share|render %}
   <div class="article__meta grid">
     {% if content.bundle|render and template_class   %}
-    <div {{ region_attributes.bundle.addClass('more-social-wrapper', 'layout__region', 'layout__region--bundle', 'layout__region--full') }}>
-      {{ content.bundle|without('field_tags') }}
-    </div>
+      <div {{ region_attributes.bundle.addClass('more-social-wrapper', 'layout__region', 'layout__region--bundle', 'layout__region--full') }}>
+        {{ content.bundle|without('field_tags') }}
+      </div>
     {% elseif content.bundle|render %}
       <div {{ region_attributes.bundle.addClass('more-social-wrapper', 'layout__region', 'layout__region--bundle', 'layout__region--full') }}>
-      {{ content.bundle|without('field_relevant_project') }}
-    </div>
+        {% if region_display_value != 'half-content' %}
+          {{ content.bundle|without('field_relevant_project') }}
+        {% endif %}
+      </div>
     {% endif %}
 
-    {% if content.category|render and not template_class %}
+    {% if content.category|render and not template_class and region_display_value != 'hidden' and region_display_value != 'half-content' %}
       {# Main image layout. #}
-      <div {{ region_attributes.category.addClass('main-image-wrapper', 'layout__region', 'layout__region--' ~ region_display_value) }}>
+      <div {{ region_attributes.category.addClass('main-image-wrapper', 'layout__region', 'layout__region--full') }}>
         {% if main_image_rendered %}
           {{ main_image_rendered }}
         {% endif %}
-        {{ content.category|without('field_main_image', 'field_main_image_caption') }}
       </div>
     {% endif %}
 
@@ -140,7 +152,7 @@
         {% if image_attribution and template_class %}
           <div class="more-author-info"><p>{{ image_attribution }}</p></div>
         {% endif %}
-        {% if content.bundle|render and template_class   %}
+        {% if content.bundle|render and (template_class is not empty or region_display_value == 'half-content') %}
           <div class="mt-8">{{ content.bundle|without('addtoany', 'field_relevant_project') }}</div>
         {% endif %}
       </div>
