@@ -137,22 +137,29 @@ class HubTaxonomy extends ImportProcessorPluginBase {
     if ($processed_entity instanceof NodeInterface) {
       // Load all the term reference fields on the node.
       // Loop through all of them.
-      foreach ($entity_json_data['relationships'] as $field_name => $relationship) {
-        if (isset($relationship["data"]["type"]) && str_starts_with($relationship["data"]["type"], 'taxonomy_term--')) {
-          $hub_terms = \Drupal::entityTypeManager()
-            ->getStorage('taxonomy_term')
-            ->loadByProperties(['uuid' => $relationship["data"]["id"]]);
+      foreach ($entity_json_data['relationships'] as $field_name => $relationships) {
+        if (!isset($relationships["data"][0])) {
+          $relationships["data"] = [$relationships["data"] ?? NULL];
+        }
+        foreach ($relationships['data'] as $relationship) {
+          if (isset($relationship["type"]) && str_starts_with($relationship["type"], 'taxonomy_term--')) {
+            $hub_terms = \Drupal::entityTypeManager()
+              ->getStorage('taxonomy_term')
+              ->loadByProperties(['uuid' => $relationship["id"]]);
 
-          $hub_term = reset($hub_terms);
+            $hub_term = reset($hub_terms);
 
-          if ($hub_term) {
-            $actual_vocabulary = $hub_term->bundle();
-            if ($actual_vocabulary == 'hub_terms') {
-              // If it does, see if that term has any AKA values.
-              $aka_term = $hub_term->field_also_known_as->entity;
+            if ($hub_term) {
+              $actual_vocabulary = $hub_term->bundle();
+              if ($actual_vocabulary == 'hub_terms') {
+                // If it does, see if that term has any AKA values.
+                $aka_term = $hub_term->field_also_known_as->entity;
 
-              // If it does, set the value of the field to match the AKA value.
-              $processed_entity->set($field_name, $aka_term);
+                // If it does, set the value of the field to match the AKA value.
+                if ($aka_term) {
+                  $processed_entity->set($field_name, $aka_term);
+                }
+              }
             }
           }
         }
