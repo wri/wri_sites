@@ -50,31 +50,33 @@
     {% endif %}
 
     {% if content.title|render %}
-    <div {{ region_attributes.title.addClass('layout__region', 'layout__region--full', 'full-width', region_display_value) }}>
+      <div {{ region_attributes.title.addClass('layout__region', 'layout__region--full', 'title-wrapper', 'full-width', region_display_value) }}>
+        {% if template_class %}
+          <div class="utility-base btn-pill font-bold">{{ type.label }}</div>
+          {{ content.title|without('field_type') }}
+        {% else %}
+          {{ content.title }}
+        {% endif %}
+      </div>
 
-      {% if template_class %}
-        <div class="utility-base btn-pill font-bold">{{ type.label }}</div>
-        {{ content.title|without('field_type') }}
-      {% else %}
-        {{ content.title }}
-      {% endif %}
-      {% if node
-        and node.hasField('field_intro')
-        and node.get('field_intro').isEmpty()
-        and node.body.summary|trim
-      %}
-        <div class="dek utility-xl">
-          <p><span>{{ node.body.summary }}</span></p>
-        </div>
+      <div class="intro-wrapper layout__region layout__region--full full-width">
+        {% if node
+          and node.hasField('field_intro')
+          and node.get('field_intro').isEmpty()
+          and node.body.summary|trim
+        %}
+          <div class="dek utility-xl">
+            <p><span>{{ node.body.summary }}</span></p>
+          </div>
+        {% endif %}
+        {% if region_display_value == 'half-content' %}
+          {{ content.bundle|without('field_relevant_project','field_tags') }}
+        {% endif %}
       {% endif %}
     </div>
-    {% endif %}
 
-    <div {{ region_attributes.byline.addClass('layout__region', 'layout__region--full', 'full-width', 'pb-2', 'neutral-bottom-border') }}>
-      {% if region_display_value == 'half-content' %}
-        {{ content.bundle|without('field_relevant_project','field_tags') }}
-      {% endif %}
-    {{ content.byline }}
+    <div {{ region_attributes.byline.addClass('layout__region', 'layout__region--full', 'byline-wrapper', 'full-width', 'pb-2', 'neutral-bottom-border') }}>
+      {{ content.byline }}
     </div>
   </div>
 
@@ -82,7 +84,12 @@
   <div class="article__meta grid">
     {% if content.bundle|render and template_class   %}
       <div {{ region_attributes.bundle.addClass('more-social-wrapper', 'layout__region', 'layout__region--bundle', 'layout__region--full') }}>
-        {{ content.bundle|without('field_tags') }}
+        {% if template_class == 'project-update-template' %}
+          {% if content.bundle.field_relevant_project %}
+            {{ content.bundle.field_relevant_project }}
+          {% endif %}
+        {% endif %}
+        {{ content.bundle|without('field_tags', 'field_relevant_project') }}
       </div>
     {% elseif content.bundle|render %}
       <div {{ region_attributes.bundle.addClass('more-social-wrapper', 'layout__region', 'layout__region--bundle', 'layout__region--full') }}>
