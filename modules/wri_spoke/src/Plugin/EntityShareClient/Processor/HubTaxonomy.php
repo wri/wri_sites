@@ -152,7 +152,7 @@ class HubTaxonomy extends ImportProcessorPluginBase {
               $aka_term = $hub_term->field_also_known_as->entity;
 
               // If it does, set the value of the field to match the AKA value.
-              $processed_entity->set($field_name, ['target_id' => $aka_term->id()]);
+              $processed_entity->set($field_name, $aka_term);
             }
           }
         }
