@@ -51,7 +51,7 @@ final class MoveTermToOriginalVocabulary extends ActionBase {
   public function execute(ContentEntityInterface $entity = NULL): void {
     if ($entity->hasField('field_original_vocabulary') && !$entity->field_original_vocabulary->isEmpty()) {
       // Make sure the value of $entity->field_original_vocabulary is a valid vocabulary.
-      $vocabulary_id = $entity->field_original_vocabulary->target_id;
+      $vocabulary_id = $entity->field_original_vocabulary->value;
       $vocabulary_storage = \Drupal::entityTypeManager()->getStorage('taxonomy_vocabulary');
       $vocabulary = $vocabulary_storage->load($vocabulary_id);
       if ($vocabulary) {
