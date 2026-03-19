@@ -14,6 +14,7 @@ use Drupal\file\FileInterface;
 use Drupal\entity_share_client\ImportProcessor\ImportProcessorPluginBase;
 use Drupal\entity_share_client\RuntimeImportContext;
 use Drupal\node\NodeInterface;
+use Drupal\taxonomy\Entity\Term;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -32,8 +33,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class HubTaxonomy extends ImportProcessorPluginBase {
   /**
    * {@inheritdoc}
-   *
-   * @SuppressWarnings(PHPMD.ErrorControlOperator)
    */
   public function prepareImportableEntityData(RuntimeImportContext $runtime_import_context, array &$entity_json_data) {
     [$entity_type, $vocabulary] = explode('--', $entity_json_data['type']);
@@ -133,38 +132,43 @@ class HubTaxonomy extends ImportProcessorPluginBase {
     }
   }
 
+
+  /**
+   * {@inheritdoc}
+   *
+   * This processor should be run AFTER the Entity reference one.
+   */
   public function processEntity(RuntimeImportContext $runtime_import_context, ContentEntityInterface $processed_entity, array $entity_json_data) {
     if ($processed_entity instanceof NodeInterface) {
       // Load all the term reference fields on the node.
       // Loop through all of them.
-      foreach ($entity_json_data['relationships'] as $field_name => $relationships) {
-        if (!isset($relationships["data"][0])) {
-          $relationships["data"] = [$relationships["data"] ?? NULL];
+      foreach ($processed_entity->getFields() as $field) {
+        if ($field->getFieldDefinition()->getType() !== 'entity_reference') {
+          continue;
         }
-        foreach ($relationships['data'] as $relationship) {
-          if (isset($relationship["type"]) && str_starts_with($relationship["type"], 'taxonomy_term--')) {
-            $hub_terms = \Drupal::entityTypeManager()
-              ->getStorage('taxonomy_term')
-              ->loadByProperties(['uuid' => $relationship["id"]]);
+        $field_name = $field->getName();
+        $field_values = $processed_entity->get($field_name)->referencedEntities();
+        $new_values = [];
+        foreach ($field_values as $related_entity) {
+          // By default, just save the term.
+          $new_value = $related_entity;
+          // If the related entity is a term, check if it belongs to the "Hub terms" vocabulary.
+          if ($related_entity instanceof Term) {
+            $actual_vocabulary = $related_entity->bundle();
+            if ($actual_vocabulary == 'hub_terms') {
+              // If it does, see if that term has any AKA values.
+              $aka_term = $related_entity->field_also_known_as->entity;
 
-            $hub_term = reset($hub_terms);
-
-            if ($hub_term) {
-              $actual_vocabulary = $hub_term->bundle();
-              if ($actual_vocabulary == 'hub_terms') {
-                // If it does, see if that term has any AKA values.
-                $aka_term = $hub_term->field_also_known_as->entity;
-
-                // If it does, set the value of the field to match the AKA value.
-                if ($aka_term) {
-                  $processed_entity->set($field_name, $aka_term);
-                }
+              // If it does, set the value of the field to match the AKA value.
+              if ($aka_term) {
+                $new_value = $aka_term;
               }
             }
           }
+          $new_values[] = $new_value;
         }
+        $processed_entity->set($field_name, $new_values);
       }
-
     }
   }
 }
