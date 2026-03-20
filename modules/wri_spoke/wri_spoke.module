@@ -5,6 +5,8 @@
  * The wri_spoke module.
  */
 
+use Drupal\Core\Entity\ContentEntityInterface;
+
 /**
  * Implements hook_page_attachments().
  */
@@ -16,4 +18,51 @@ function wri_spoke_page_attachments(array &$attachments): void {
   }
 
   $attachments['#attached']['library'][] = 'wri_spoke/return_to';
+}
+
+function wri_spoke_taxonomy_term_insert(ContentEntityInterface $entity): void {
+  // If just made a new term that exactly matches one of the "Hub" terms,
+  // set the new tern's UUID to be the hub's UUID and delete the hubterm.
+  $name = $entity->getName();
+  $vocabulary = 'hub_terms';
+  $original_vocabulary = $entity->bundle();
+  if ($name && $vocabulary && $original_vocabulary !== $vocabulary) {
+    $entity_query = \Drupal::entityQuery('taxonomy_term');
+    $entity_query
+      ->condition('name', $name)
+      ->condition('vid', $vocabulary) // Condition on an entity property (content type)
+      ->condition('field_original_vocabulary', $original_vocabulary) // Condition on a custom field value
+      ->accessCheck(TRUE); // Explicitly enable access checks (recommended)
+
+    // Execute the query to get entity IDs.
+    $hub_terms = $entity_query->execute();
+    if (!empty($hub_terms)) {
+      $hub_term_id = reset($hub_terms);
+      $hub_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($hub_term_id);
+      // Also move over any translations of the hub term to be translations of
+      // the current term.
+      $languages = $hub_term->getTranslationLanguages();
+      // Iterate over each language and retrieve the specific translation object.
+      foreach ($languages as $langcode => $language) {
+        if ($langcode === $hub_term->language()->getId()) {
+          continue;
+        }
+        if ($hub_term->hasTranslation($language->getId())) {
+          $translation = $hub_term->getTranslation($language->getId());
+          $translation->delete();
+
+          $entity->addTranslation($langcode, [
+            'name' => $translation->getName(),
+            'uuid' => $translation->uuid(),
+          ]);
+        }
+      }
+
+      // Then delete the hub term.
+      $hub_term->delete();
+
+      $entity->set('uuid', $hub_term->uuid());
+      $entity->save();
+    }
+  }
 }
