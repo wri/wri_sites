@@ -57,25 +57,25 @@
         {% else %}
           {{ content.title }}
         {% endif %}
-      </div>
-
-      <div class="intro-wrapper layout__region layout__region--full full-width">
         {% if node
           and node.hasField('field_intro')
           and node.get('field_intro').isEmpty()
           and node.body.summary|trim
         %}
-          <div class="dek utility-xl">
-            <p><span>{{ node.body.summary }}</span></p>
+          <div class="dek utility-xl mb-8">
+            {{ node.body.summary }}
           </div>
         {% endif %}
-        {% if region_display_value == 'half-content' %}
-          {{ content.bundle|without('field_relevant_project','field_tags') }}
-        {% endif %}
-      {% endif %}
-    </div>
+      </div>
 
-    <div {{ region_attributes.byline.addClass('layout__region', 'layout__region--full', 'byline-wrapper', 'full-width', 'pb-2', 'neutral-bottom-border') }}>
+      {% if region_display_value == 'half-content' %}
+        <div class="intro-wrapper layout__region layout__region--full full-width">
+          {{ content.bundle|without('field_relevant_project','field_tags') }}
+        </div>
+      {% endif %}
+    {% endif %}
+
+    <div {{ region_attributes.byline.addClass('layout__region', 'layout__region--full', 'byline-wrapper', 'full-width', 'pb-2') }}>
       {{ content.byline }}
     </div>
   </div>
@@ -93,7 +93,9 @@
       </div>
     {% elseif content.bundle|render %}
       <div {{ region_attributes.bundle.addClass('more-social-wrapper', 'layout__region', 'layout__region--bundle', 'layout__region--full') }}>
-        {% if region_display_value != 'half-content' %}
+        {% if region_display_value != 'half-content' or region_display_value != 'full-width' %}
+          {{ content.bundle|without('field_tags', 'field_relevant_project') }}
+        {% else %}
           {{ content.bundle|without('field_relevant_project') }}
         {% endif %}
       </div>
@@ -101,7 +103,7 @@
 
     {% if content.category|render and not template_class and region_display_value != 'hidden' and region_display_value != 'half-content' %}
       {# Main image layout. #}
-      <div {{ region_attributes.category.addClass('main-image-wrapper', 'layout__region', 'layout__region--full') }}>
+      <div {{ region_attributes.category.addClass('main-image-wrapper', 'layout__region', 'layout__region--' ~ region_display_value) }}>
         {% if main_image_rendered %}
           {{ main_image_rendered }}
         {% endif %}
@@ -159,7 +161,10 @@
         {% if image_attribution and template_class %}
           <div class="more-author-info"><p>{{ image_attribution }}</p></div>
         {% endif %}
-        {% if content.bundle|render and (template_class is not empty or region_display_value == 'half-content') %}
+        {% if content.bundle|render and (
+          template_class is not empty
+          or region_display_value in ['half-content', 'full-width']
+        ) %}
           <div class="mt-8">{{ content.bundle|without('addtoany', 'field_relevant_project') }}</div>
         {% endif %}
       </div>
