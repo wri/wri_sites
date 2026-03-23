@@ -305,9 +305,6 @@
   }
 
   .article-type {
-    &.text-neutral-600 {
-      color: var(--color-neutral-600);
-    }
     span:before {
       content: "| ";
     }
