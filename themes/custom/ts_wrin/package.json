@@ -4,7 +4,7 @@
   "description": "CSS Grid Layout with Webpack",
   "devDependencies": {
     "@babel/core": "^7.29.0",
-    "@babel/preset-env": "^7.29.0",
+    "@babel/preset-env": "^7.29.2",
     "autoprefixer": "^10.4.27",
     "babel-loader": "^10.1.1",
     "browser-sync": "^3.0.4",
