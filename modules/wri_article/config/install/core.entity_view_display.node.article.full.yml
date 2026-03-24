@@ -65,15 +65,23 @@ third_party_settings:
             weight: -6
             additional: {  }
           -
-            uuid: 1318f40a-3bb2-4fd1-a9a2-bdb7dfc8734f
+            uuid: 05d8a5d2-d2b8-4d38-8646-72c605168e86
             region: content
             configuration:
-              id: related_resources_fallback
-              label: 'Relevant Work'
-              label_display: visible
-              provider: wri_block
-              context_mapping: {  }
-            weight: -3
+              id: 'field_block:node:article:field_primary_contacts'
+              label: 'Primary Contact'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: card
+                third_party_settings: {  }
+            weight: 0
             additional: {  }
           -
             uuid: fde6caf2-893a-466a-82ac-279176a67d1b
@@ -92,24 +100,18 @@ third_party_settings:
                 settings:
                   view_mode: card
                 third_party_settings: {  }
-            weight: -2
+            weight: 2
             additional: {  }
           -
-            uuid: 05d8a5d2-d2b8-4d38-8646-72c605168e86
+            uuid: 1318f40a-3bb2-4fd1-a9a2-bdb7dfc8734f
             region: content
             configuration:
-              id: 'field_block:node:article:field_primary_contacts'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_entity_view
-                label: above
-                settings:
-                  view_mode: teaser
-                  link: false
-                third_party_settings: {  }
-            weight: -1
+              id: related_resources_fallback
+              label: 'Relevant Work'
+              label_display: visible
+              provider: wri_block
+              context_mapping: {  }
+            weight: 1
             additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:
