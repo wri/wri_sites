@@ -8,8 +8,7 @@
 use Drupal\node\Entity\Node;
 
 /**
- * Post-update: Ensure any Articles with customized layouts get the
- * new "Main content B" template.
+ * Assign any Articles with customized layouts the "Main content B" template.
  */
 function wri_article_post_update_entity_main_view(&$sandbox) {
   // Get Article nodes that have a Layout Builder value.
@@ -23,21 +22,21 @@ function wri_article_post_update_entity_main_view(&$sandbox) {
     $sandbox['#finished'] = 1;
     return t('No Article nodes with Layout Builder overrides found.');
   }
-
+  $changed_count = 0;
 
   /** @var \Drupal\node\NodeInterface[] $nodes */
   foreach (Node::loadMultiple($nids) as $node) {
+    $changed = FALSE;
     $layout = $node->get('layout_builder__layout');
     if ($layout->isEmpty()) {
       continue;
     }
 
     $sections = $layout->getSections();
-    if (empty($sections) || !isset($sections[1])) {
+    if (empty($sections)) {
       continue;
     }
 
-    $share_component_added = FALSE;
     foreach ($sections as $section) {
 
       $components = $section->getComponents();
@@ -45,9 +44,7 @@ function wri_article_post_update_entity_main_view(&$sandbox) {
         continue;
       }
 
-      $changed = FALSE;
-
-      foreach ($components as $uuid => $component) {
+      foreach ($components as $component) {
         $config = $component->get('configuration') ?? [];
         $plugin_id = $config['id'] ?? '';
 
@@ -58,13 +55,12 @@ function wri_article_post_update_entity_main_view(&$sandbox) {
         }
 
       }
-
-      if ($changed) {
-        $node->set('layout_builder__layout', $sections);
-        $node->setNewRevision(FALSE);
-        $node->save();
-        $changed_count++;
-      }
+    }
+    if ($changed) {
+      $node->set('layout_builder__layout', $sections);
+      $node->setNewRevision(FALSE);
+      $node->save();
+      $changed_count++;
     }
   }
 
