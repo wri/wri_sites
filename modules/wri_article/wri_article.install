@@ -5,6 +5,8 @@
  * Update hooks for wri_article.
  */
 
+use Drupal\node\Entity\Node;
+
 /**
  * Update the article display configs to remove blazy.
  */
@@ -77,9 +79,86 @@ function wri_article_update_10501() {
 }
 
 /**
+ * Populate field_relevant_project from first field_projects item.
+ */
+function wri_article_update_10601(): void {
+  $storage = \Drupal::entityTypeManager()->getStorage('node');
+  $query = $storage->getQuery()
+    ->accessCheck(FALSE)
+    ->condition('type', 'article')
+    ->exists('field_projects')
+    ->exists('field_type');
+
+  $nids = $query->execute();
+
+  if (empty($nids)) {
+    \Drupal::messenger()->addStatus('No matching article nodes found.');
+    return;
+  }
+
+  $nodes = $storage->loadMultiple($nids);
+
+  $updated = 0;
+  $skipped = 0;
+
+  foreach ($nodes as $node) {
+    if (!$node instanceof Node) {
+      $skipped++;
+      continue;
+    }
+
+    if (
+      !$node->hasField('field_type') ||
+      $node->get('field_type')->isEmpty() ||
+      !$node->hasField('field_projects') ||
+      $node->get('field_projects')->isEmpty() ||
+      !$node->hasField('field_relevant_project')
+    ) {
+      $skipped++;
+      continue;
+    }
+
+    $is_project_update = FALSE;
+    foreach ($node->get('field_type')->referencedEntities() as $term) {
+      if ($term->label() === 'Project Update') {
+        $is_project_update = TRUE;
+        break;
+      }
+    }
+
+    if (!$is_project_update) {
+      $skipped++;
+      continue;
+    }
+
+    // Skip nodes that already have field_relevant_project populated.
+    if (!$node->get('field_relevant_project')->isEmpty()) {
+      $skipped++;
+      continue;
+    }
+
+    $first_project = $node->get('field_projects')->first();
+    if (!$first_project || empty($first_project->target_id)) {
+      $skipped++;
+      continue;
+    }
+
+    $node->set('field_relevant_project', ['target_id' => $first_project->target_id]);
+    $node->save();
+    $updated++;
+  }
+
+  \Drupal::messenger()->addStatus(sprintf(
+    'Project Update backfill complete. Updated: %d. Skipped: %d.',
+    $updated,
+    $skipped
+  ));
+}
+
+/**
  * Update the default components for the Full article display.
  */
-function wri_article_update_10502() {
+function wri_article_update_10602() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.article.full', [
     'third_party_settings.layout_builder.sections[0].components',
   ], 'wri_article');
