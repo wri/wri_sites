@@ -77,7 +77,7 @@ function wri_article_update_10501() {
 }
 
 /**
- * Replace wri_social_sharing_block with addtoany.
+ * Update the default components for the Full article display.
  */
 function wri_article_update_10502() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.article.full', [
