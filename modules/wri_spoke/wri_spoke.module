@@ -22,7 +22,7 @@ function wri_spoke_page_attachments(array &$attachments): void {
 
 function wri_spoke_taxonomy_term_insert(ContentEntityInterface $entity): void {
   // If just made a new term that exactly matches one of the "Hub" terms,
-  // set the new tern's UUID to be the hub's UUID and delete the hubterm.
+  // set the new term's UUID to be the hub's UUID and delete the hubterm.
   $name = $entity->getName();
   $vocabulary = 'hub_terms';
   $original_vocabulary = $entity->bundle();
@@ -45,9 +45,9 @@ function wri_spoke_taxonomy_term_insert(ContentEntityInterface $entity): void {
       // Iterate over each language and retrieve the specific translation object.
       foreach ($languages as $langcode => $language) {
         if ($langcode === $hub_term->language()->getId()) {
-          continue;
+          $entity->set('name', $hub_term->getName());
         }
-        if ($hub_term->hasTranslation($language->getId())) {
+        elseif ($hub_term->hasTranslation($language->getId())) {
           $translation = $hub_term->getTranslation($language->getId());
           $translation->delete();
 
