@@ -46,6 +46,8 @@
             },
             "drupal/entity_share": {
                 "Call to a member function hasField() on null in SkipImported https://www.drupal.org/project/entity_share/issues/3569090": "https://git.drupalcode.org/project/entity_share/-/merge_requests/165.diff"
+                "Layout Builder import patch: https://www.drupal.org/project/entity_share/issues/3084184": "https://git.drupalcode.org/project/entity_share/-/merge_requests/96.diff?v=1",
+                "Paragraphs parent IDs are wrong https://www.drupal.org/project/entity_share/issues/3445703":"https://www.drupal.org/files/issues/2024-05-08/entity_share-parent-id-3445703-2.patch"
             },
             "drupal/layout_builder_st": {
                 "Error: Call to a member function getConfig() OverridesSectionStorage.php https://www.drupal.org/project/layout_builder_st/issues/3420063": "https://www.drupal.org/files/issues/2024-03-29/layout_builder_st-call_to_a_member_function_getconfig-3420063-26.patch",

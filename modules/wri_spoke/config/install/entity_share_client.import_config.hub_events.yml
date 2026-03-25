@@ -26,6 +26,15 @@ import_processor_settings:
     weights:
       process_entity: 10
     max_recursion_depth: -1
+  hub_taxonomy_importer:
+    weights:
+      prepare_importable_entity_data: 21
+      process_entity: 11
+  language_fallback:
+    weights:
+      prepare_entity_data: 0
+    fallback_language: en
+    force_language: false
   layout_builder:
     weights:
       post_entity_save: 0
@@ -35,6 +44,8 @@ import_processor_settings:
     weights:
       prepare_importable_entity_data: 20
     max_recursion_depth: -1
-  skip_imported:
+  s3_physical_file:
     weights:
-      is_entity_importable: -5
+      prepare_importable_entity_data: 0
+      process_entity: 0
+    rename: 0
