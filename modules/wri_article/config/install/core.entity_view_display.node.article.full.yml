@@ -41,7 +41,7 @@ third_party_settings:
           label: ''
           context_mapping: {  }
         components:
-          0c4e830d-4257-4738-9b5e-6f7830023cac:
+          -
             uuid: 0c4e830d-4257-4738-9b5e-6f7830023cac
             region: content
             configuration:
@@ -49,12 +49,12 @@ third_party_settings:
               label: 'Entity view (Content)'
               label_display: '0'
               provider: ctools
-              view_mode: main_content
+              view_mode: main_content_b
               context_mapping:
                 entity: layout_builder.entity
             weight: -9
             additional: {  }
-          515ab62a-1df5-402d-8b0a-af69283947aa:
+          -
             uuid: 515ab62a-1df5-402d-8b0a-af69283947aa
             region: content
             configuration:
@@ -64,7 +64,45 @@ third_party_settings:
                 entity: layout_builder.entity
             weight: -6
             additional: {  }
-          1318f40a-3bb2-4fd1-a9a2-bdb7dfc8734f:
+          -
+            uuid: 05d8a5d2-d2b8-4d38-8646-72c605168e86
+            region: content
+            configuration:
+              id: 'field_block:node:article:field_primary_contacts'
+              label: 'Primary Contact'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: card
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          -
+            uuid: fde6caf2-893a-466a-82ac-279176a67d1b
+            region: content
+            configuration:
+              id: 'field_block:node:article:field_projects'
+              label: Projects
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: card
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          -
             uuid: 1318f40a-3bb2-4fd1-a9a2-bdb7dfc8734f
             region: content
             configuration:
@@ -73,7 +111,7 @@ third_party_settings:
               label_display: visible
               provider: wri_block
               context_mapping: {  }
-            weight: -3
+            weight: 1
             additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:

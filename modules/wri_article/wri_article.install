@@ -154,3 +154,15 @@ function wri_article_update_10601(): void {
     $skipped
   ));
 }
+
+/**
+ * Update the default components for the Full article display.
+ */
+function wri_article_update_10602() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.article.full', [
+    'third_party_settings.layout_builder.sections[0].components',
+  ], 'wri_article');
+
+  $message = 'Setting Articles to use Main Content B';
+  return $message;
+}
