@@ -1,9 +1,0 @@
-status: true
-dependencies: {  }
-_core:
-  default_config_hash: OcnjC6rlMFEKQCFzMW2if_GkXPr0uk8GiCqFE5FwKUs
-name: 'Hub terms'
-vid: hub_terms
-description: 'Terms that appear on the hub.'
-weight: 0
-new_revision: false

@@ -1,8 +1,8 @@
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.hub_terms.field_map
-    - field.field.taxonomy_term.hub_terms.field_original_taxonomy
+    - field.field.taxonomy_term.hub_terms.field_also_known_as
+    - field.field.taxonomy_term.hub_terms.field_original_vocabulary
     - taxonomy.vocabulary.hub_terms
   module:
     - path
@@ -20,21 +20,15 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  field_map:
+  field_also_known_as:
     type: entity_reference_autocomplete
-    weight: 3
+    weight: 26
     region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  field_original_taxonomy:
-    type: options_select
-    weight: 2
-    region: content
-    settings: {  }
     third_party_settings: {  }
   langcode:
     type: language_select
@@ -69,4 +63,5 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_original_vocabulary: true

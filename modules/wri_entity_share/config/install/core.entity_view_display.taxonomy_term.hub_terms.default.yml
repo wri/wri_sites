@@ -1,8 +1,8 @@
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.hub_terms.field_map
-    - field.field.taxonomy_term.hub_terms.field_original_taxonomy
+    - field.field.taxonomy_term.hub_terms.field_also_known_as
+    - field.field.taxonomy_term.hub_terms.field_original_vocabulary
     - taxonomy.vocabulary.hub_terms
   module:
     - text
@@ -18,21 +18,21 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_map:
+  field_also_known_as:
     type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    weight: 2
+    weight: 4
     region: content
-  field_original_taxonomy:
-    type: entity_reference_label
+  field_original_vocabulary:
+    type: string
     label: above
     settings:
-      link: true
+      link_to_entity: false
     third_party_settings: {  }
-    weight: 1
+    weight: 3
     region: content
 hidden:
   langcode: true
