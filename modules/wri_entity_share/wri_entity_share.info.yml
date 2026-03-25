@@ -5,5 +5,4 @@ package: Custom
 core_version_requirement: ^10 || ^11
 dependencies:
   - entity_share:entity_share
-  - jsonapi_extras:jsonapi_extras
   - s3fs:s3fs
