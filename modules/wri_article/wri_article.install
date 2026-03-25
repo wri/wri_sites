@@ -158,9 +158,9 @@ function wri_article_update_10601(): void {
 /**
  * Update the default components for the Full article display.
  */
-function wri_article_update_10602() {
+function wri_article_update_10603() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.article.full', [
-    'third_party_settings#layout_builder#sections[0]#components',
+    'third_party_settings#layout_builder#sections#0#components',
     'third_party_settings#layout_builder_restrictions#entity_view_mode_restriction#allowlisted_blocks#Content fields'
   ], 'wri_article');
 
