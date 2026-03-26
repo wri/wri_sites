@@ -20,6 +20,9 @@ function wri_spoke_page_attachments(array &$attachments): void {
   $attachments['#attached']['library'][] = 'wri_spoke/return_to';
 }
 
+/**
+ * Implements hook_entity_type_insert().
+ */
 function wri_spoke_taxonomy_term_insert(ContentEntityInterface $entity): void {
   // If just made a new term that exactly matches one of the "Hub" terms,
   // set the new term's UUID to be the hub's UUID and delete the hubterm.
@@ -30,9 +33,12 @@ function wri_spoke_taxonomy_term_insert(ContentEntityInterface $entity): void {
     $entity_query = \Drupal::entityQuery('taxonomy_term');
     $entity_query
       ->condition('name', $name)
-      ->condition('vid', $vocabulary) // Condition on an entity property (content type)
-      ->condition('field_original_vocabulary', $original_vocabulary) // Condition on a custom field value
-      ->accessCheck(TRUE); // Explicitly enable access checks (recommended)
+    // Condition on an entity property (content type)
+      ->condition('vid', $vocabulary)
+    // Condition on a custom field value.
+      ->condition('field_original_vocabulary', $original_vocabulary)
+    // Explicitly enable access checks (recommended)
+      ->accessCheck(TRUE);
 
     // Execute the query to get entity IDs.
     $hub_terms = $entity_query->execute();
@@ -42,7 +48,7 @@ function wri_spoke_taxonomy_term_insert(ContentEntityInterface $entity): void {
       // Also move over any translations of the hub term to be translations of
       // the current term.
       $languages = $hub_term->getTranslationLanguages();
-      // Iterate over each language and retrieve the specific translation object.
+      // Iterate over each language and get the specific translation object.
       foreach ($languages as $langcode => $language) {
         if ($langcode === $hub_term->language()->getId()) {
           $entity->set('name', $hub_term->getName());

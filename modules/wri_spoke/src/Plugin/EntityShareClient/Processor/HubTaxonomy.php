@@ -4,18 +4,13 @@ declare(strict_types=1);
 
 namespace Drupal\wri_spoke\Plugin\EntityShareClient\Processor;
 
-use Drupal\Component\DependencyInjection\Container;
 use Drupal\Core\Entity\ContentEntityInterface;
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Plugin\PluginFormInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\entity_share_client\Attribute\ImportProcessor;
-use Drupal\file\FileInterface;
 use Drupal\entity_share_client\ImportProcessor\ImportProcessorPluginBase;
 use Drupal\entity_share_client\RuntimeImportContext;
 use Drupal\node\NodeInterface;
 use Drupal\taxonomy\Entity\Term;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Import Hub terms, mapping to other taxonomies.
@@ -31,6 +26,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
   locked: FALSE,
 )]
 class HubTaxonomy extends ImportProcessorPluginBase {
+
   /**
    * {@inheritdoc}
    */
@@ -48,7 +44,8 @@ class HubTaxonomy extends ImportProcessorPluginBase {
         ->loadByProperties(['uuid' => $uuid]);
 
       if (empty($terms)) {
-        // See if the term matches an existing term by name in the same vocabulary.
+        // See if the term matches an existing term by name in the same
+        // vocabulary.
         $name = $entity_json_data["attributes"]["name"] ?? NULL;
         if ($name && $vocabulary) {
           $existing_terms = \Drupal::entityTypeManager()
@@ -76,16 +73,18 @@ class HubTaxonomy extends ImportProcessorPluginBase {
         // If a term with one of the "Hub term"s is pulled, review the values in
         // the "Automatically map" field and add those terms to the node
         // referencing it.
-
         $entity_json_data["type"] = 'taxonomy_term--' . $existing_term->bundle();
       }
     }
   }
 
-  // If a term with the same name exists in the same vocabulary, update
-  // the UUID of the existing term to match the import data and update
-  // any config entities that reference the old UUID to reference the new
-  // UUID.
+  /**
+   * Update the UUID of a term.
+   *
+   * If a term with the same name exists in the same vocabulary, update
+   * the UUID of the existing term to match the import data and update
+   * any config entities that reference the old UUID to reference the new.
+   */
   private function updateUniqueIdentifierOfExistingTerm($existing_terms, $uuid) {
     // Map the existing term's ID to the import data.
     $existing_term = reset($existing_terms);
@@ -105,11 +104,11 @@ class HubTaxonomy extends ImportProcessorPluginBase {
     $results = $query->execute()->fetchAll();
 
     foreach ($results as $record) {
-      $config_data = unserialize($record->data);
+      $config_data = unserialize($record->data, ['allowed_classes' => FALSE]);
       $updated = FALSE;
 
       // Recursively search and replace the old UUID with the new UUID.
-      $replace_uuid = function(&$data) use (&$replace_uuid, $old_uuid, $uuid, &$updated) {
+      $replace_uuid = function (&$data) use (&$replace_uuid, $old_uuid, $uuid, &$updated) {
         if (is_array($data)) {
           foreach ($data as &$value) {
             $replace_uuid($value);
@@ -132,7 +131,6 @@ class HubTaxonomy extends ImportProcessorPluginBase {
     }
   }
 
-
   /**
    * {@inheritdoc}
    *
@@ -152,7 +150,8 @@ class HubTaxonomy extends ImportProcessorPluginBase {
         foreach ($field_values as $related_entity) {
           // By default, just save the term.
           $new_value = $related_entity;
-          // If the related entity is a term, check if it belongs to the "Hub terms" vocabulary.
+          // If the related entity is a term, check if it belongs to the
+          // "Hub terms" vocabulary.
           if ($related_entity instanceof Term) {
             $actual_vocabulary = $related_entity->bundle();
             if ($actual_vocabulary == 'hub_terms') {
@@ -171,4 +170,5 @@ class HubTaxonomy extends ImportProcessorPluginBase {
       }
     }
   }
+
 }

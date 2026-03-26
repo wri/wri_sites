@@ -38,7 +38,7 @@ final class MoveTermToOriginalVocabulary extends ActionBase {
   /**
    * {@inheritdoc}
    */
-  public function access($entity, AccountInterface $account = NULL, $return_as_object = FALSE): AccessResultInterface|bool {
+  public function access($entity, ?AccountInterface $account = NULL, $return_as_object = FALSE): AccessResultInterface|bool {
     /** @var \Drupal\Core\Entity\ContentEntityInterface $entity */
     $access = $entity->access('update', $account, TRUE)
       ->andIf($entity->get('field_original_vocabulary')->access('edit', $account, TRUE));
@@ -48,9 +48,10 @@ final class MoveTermToOriginalVocabulary extends ActionBase {
   /**
    * {@inheritdoc}
    */
-  public function execute(ContentEntityInterface $entity = NULL): void {
+  public function execute(?ContentEntityInterface $entity = NULL): void {
     if ($entity->hasField('field_original_vocabulary') && !$entity->field_original_vocabulary->isEmpty()) {
-      // Make sure the value of $entity->field_original_vocabulary is a valid vocabulary.
+      // Make sure the value of $entity->field_original_vocabulary is a valid
+      // vocabulary.
       $vocabulary_id = $entity->field_original_vocabulary->value;
       $vocabulary_storage = \Drupal::entityTypeManager()->getStorage('taxonomy_vocabulary');
       $vocabulary = $vocabulary_storage->load($vocabulary_id);

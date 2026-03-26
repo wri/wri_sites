@@ -286,10 +286,12 @@ function wri_common_update_10500() {
 }
 
 /**
- * If this site is using the wri_spoke module, uninstall it.
- * If this is anything other than the hub, reinstall it.
+ * Updating usage of the wri_spoke module.
+ *
+ * If this site is using the wri_spoke module, uninstall it. If this is
+ * anything other than the hub, reinstall it.
  */
-function  wri_common_update_10600() {
+function wri_common_update_10600() {
   $is_hub = FALSE;
   // Check if the wri_spoke module is enabled.
   $moduleHandler = \Drupal::service('module_handler');
