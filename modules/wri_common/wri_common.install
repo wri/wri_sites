@@ -284,3 +284,24 @@ function wri_common_update_10500() {
     'tags',
   ], 'wri_common', '../../../config/install');
 }
+
+/**
+ * If this site is using the wri_spoke module, uninstall it.
+ * If this is anything other than the hub, reinstall it.
+ */
+function  wri_common_update_10600() {
+  $is_hub = FALSE;
+  // Check if the wri_spoke module is enabled.
+  $moduleHandler = \Drupal::service('module_handler');
+  if ($moduleHandler->moduleExists('wri_spoke')) {
+    $spoke_settings = \Drupal::service('config.factory')->get('wri_spoke.settings');
+    $is_hub = $spoke_settings->get('ignore_hub_url');
+
+    if ($is_hub) {
+      \Drupal::service('module_installer')->uninstall(['wri_spoke'], TRUE);
+    }
+    else {
+      // Import the new config in wri_spoke.
+    }
+  }
+}

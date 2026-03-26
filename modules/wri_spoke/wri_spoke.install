@@ -29,16 +29,3 @@ function wri_spoke_update_10600() {
   \Drupal::service('config.factory')->getEditable('ultimate_cron.job.wri_spoke_cron')->delete();
 }
 
-/**
- * Enable the wri_entity_share module.
- */
-function wri_spoke_update_10601() {
-  // Enable entity_share_cron.
-  $moduleHandler = \Drupal::service('module_handler');
-  if (!$moduleHandler->moduleExists('wri_entity_share')) {
-    \Drupal::service('module_installer')->install(['wri_entity_share'], TRUE);
-  }
-
-  // Delete the wri_spoke.settings config.
-  \Drupal::service('config.factory')->getEditable('wri_spoke.settings')->delete();
-}
