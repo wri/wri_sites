@@ -72,7 +72,7 @@ display:
           empty_zero: false
           hide_alter_empty: true
           action_title: Action
-          include_exclude: exclude
+          include_exclude: include
           selected_actions:
             - hub_term_move
         name:
@@ -366,7 +366,7 @@ display:
         metatag_display_extender:
           metatags: {  }
           tokenize: false
-      path: admin/structure/taxonomy/manage/hub_terms/overview/approve
+      path: admin/structure/taxonomy/manage/%taxonomy_vocabulary/overview/approve
       menu:
         type: tab
         title: Approve
@@ -376,6 +376,11 @@ display:
         menu_name: admin
         parent: 'admin_toolbar_tools.extra_links:entity.taxonomy_vocabulary.overview_form.hub_terms'
         context: '0'
+      tab_options:
+        type: none
+        title: ''
+        description: ''
+        weight: 0
     cache_metadata:
       max-age: 0
       contexts:

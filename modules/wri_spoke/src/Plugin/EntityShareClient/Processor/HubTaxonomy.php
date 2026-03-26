@@ -74,6 +74,8 @@ class HubTaxonomy extends ImportProcessorPluginBase {
         // the "Automatically map" field and add those terms to the node
         // referencing it.
         $entity_json_data["type"] = 'taxonomy_term--' . $existing_term->bundle();
+        // And make sure the parent stays empty.
+        $entity_json_data["relationships"]["parent"]["data"] = [];
       }
     }
   }
