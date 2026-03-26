@@ -304,18 +304,18 @@ function wri_common_update_10600() {
     }
     else {
       // Import the new config in wri_spoke.
-      \Drupal::service('distro_helper.updates')->installConfig('modules/wri_spoke/config/install/core.entity_form_display.taxonomy_term.hub_terms.default', 'wri_spoke', 'install', 'TRUE');
-      \Drupal::service('distro_helper.updates')->installConfig('modules/wri_spoke/config/install/core.entity_view_display.taxonomy_term.hub_terms.default', 'wri_spoke', 'install', 'TRUE');
-      \Drupal::service('distro_helper.updates')->installConfig('modules/wri_spoke/config/install/entity_share_client.import_config.hub_events', 'wri_spoke', 'install', 'TRUE');
-      \Drupal::service('distro_helper.updates')->installConfig('modules/wri_spoke/config/install/field.field.taxonomy_term.hub_terms.field_also_known_as', 'wri_spoke', 'install', 'TRUE');
-      \Drupal::service('distro_helper.updates')->installConfig('modules/wri_spoke/config/install/field.field.taxonomy_term.hub_terms.field_original_vocabulary', 'wri_spoke', 'install', 'TRUE');
-      \Drupal::service('distro_helper.updates')->installConfig('modules/wri_spoke/config/install/field.storage.taxonomy_term.field_also_known_as', 'wri_spoke', 'install', 'TRUE');
-      \Drupal::service('distro_helper.updates')->installConfig('modules/wri_spoke/config/install/field.storage.taxonomy_term.field_original_vocabulary', 'wri_spoke', 'install', 'TRUE');
-      \Drupal::service('distro_helper.updates')->installConfig('modules/wri_spoke/config/install/language.content_settings.taxonomy_term.hub_terms', 'wri_spoke', 'install', 'TRUE');
-      \Drupal::service('distro_helper.updates')->installConfig('modules/wri_spoke/config/install/system.action.hub_term_move', 'wri_spoke', 'install', 'TRUE');
-      \Drupal::service('distro_helper.updates')->installConfig('modules/wri_spoke/config/install/taxonomy.vocabulary.hub_terms', 'wri_spoke', 'install', 'TRUE');
-      \Drupal::service('distro_helper.updates')->installConfig('modules/wri_spoke/config/install/views.view.hub_terms', 'wri_spoke', 'install', 'TRUE');
-      \Drupal::service('distro_helper.updates')->installConfig('modules/wri_spoke/config/install/views.view.terms_by_vid', 'wri_spoke', 'install', 'TRUE');
+      \Drupal::service('distro_helper.updates')->installConfig('taxonomy.vocabulary.hub_terms', 'wri_spoke', 'install', 'TRUE');
+      \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_also_known_as', 'wri_spoke', 'install', 'TRUE');
+      \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_original_vocabulary', 'wri_spoke', 'install', 'TRUE');
+      \Drupal::service('distro_helper.updates')->installConfig('field.field.taxonomy_term.hub_terms.field_also_known_as', 'wri_spoke', 'install', 'TRUE');
+      \Drupal::service('distro_helper.updates')->installConfig('field.field.taxonomy_term.hub_terms.field_original_vocabulary', 'wri_spoke', 'install', 'TRUE');
+      \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.taxonomy_term.hub_terms.default', 'wri_spoke', 'install', 'TRUE');
+      \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.taxonomy_term.hub_terms.default', 'wri_spoke', 'install', 'TRUE');
+      \Drupal::service('distro_helper.updates')->installConfig('entity_share_client.import_config.hub_events', 'wri_spoke', 'install', 'TRUE');
+      \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.taxonomy_term.hub_terms', 'wri_spoke', 'install', 'TRUE');
+      \Drupal::service('distro_helper.updates')->installConfig('system.action.hub_term_move', 'wri_spoke', 'install', 'TRUE');
+      \Drupal::service('distro_helper.updates')->installConfig('views.view.hub_terms', 'wri_spoke', 'install', 'TRUE');
+      \Drupal::service('distro_helper.updates')->installConfig('views.view.terms_by_vid', 'wri_spoke', 'install', 'TRUE');
       \Drupal::service('config.factory')->getEditable('wri_spoke.settings')->delete();
     }
   }
