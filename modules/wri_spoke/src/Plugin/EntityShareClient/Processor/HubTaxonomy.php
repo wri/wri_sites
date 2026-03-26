@@ -75,7 +75,9 @@ class HubTaxonomy extends ImportProcessorPluginBase {
         // referencing it.
         $entity_json_data["type"] = 'taxonomy_term--' . $existing_term->bundle();
         // And make sure the parent stays empty.
-        $entity_json_data["relationships"]["parent"]["data"] = [];
+        if ($existing_term->bundle() == 'hub_terms') {
+          $entity_json_data["relationships"]["parent"]["data"] = [];
+        }
       }
     }
   }
