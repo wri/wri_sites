@@ -49,3 +49,6 @@ import_processor_settings:
       prepare_importable_entity_data: 0
       process_entity: 0
     rename: 0
+  skip_imported:
+    weights:
+      is_entity_importable: -5

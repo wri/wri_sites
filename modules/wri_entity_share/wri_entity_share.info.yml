@@ -1,6 +1,6 @@
 name: 'WRI entity share'
 type: module
-description: 'Plugins and code needed when pulling entities'
+description: 'Enable this on both entity share clients and servers.'
 package: Custom
 core_version_requirement: ^10 || ^11
 dependencies:

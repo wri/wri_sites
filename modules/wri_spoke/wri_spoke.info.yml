@@ -9,3 +9,4 @@ dependencies:
   - wri_event:wri_event
   - ultimate_cron:ultimate_cron
   - entity_share_cron:entity_share_cron
+  - jsonapi_extras:jsonapi_extras
