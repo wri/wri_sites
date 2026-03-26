@@ -1,0 +1,24 @@
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_also_known_as
+    - taxonomy.vocabulary.hub_terms
+id: taxonomy_term.hub_terms.field_also_known_as
+field_name: field_also_known_as
+entity_type: taxonomy_term
+bundle: hub_terms
+label: 'Also known as'
+description: 'This term lives on the Hub. If you have an existing term that means the same thing and want to keep using that, add it here. Content pulled from the Hub will be tagged with that term instead of this one.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: terms_by_vid
+      display_name: entity_reference_1
+      arguments:
+        - '[term:field_original_vocabulary:value]'
+field_type: entity_reference

@@ -120,7 +120,6 @@ hidden:
   field_phone: true
   field_project_expert: true
   field_quote: true
-  field_share_with_io: true
   field_staff_group: true
   field_twitter_account: true
   field_type: true

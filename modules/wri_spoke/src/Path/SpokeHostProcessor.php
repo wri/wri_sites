@@ -57,10 +57,6 @@ class SpokeHostProcessor implements OutboundPathProcessorInterface {
    * {@inheritdoc}
    */
   public function processOutbound($path, &$options = [], ?Request $request = NULL, ?BubbleableMetadata $bubbleable_metadata = NULL) {
-    $spoke_config = $this->configFactory->get('wri_spoke.settings');
-    if ($spoke_config->get('ignore_hub_url')) {
-      return $path;
-    }
     try {
       $url = Url::fromUri('internal:' . $path);
     }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\wri_spoke\Plugin\EntityShareClient\Processor;
+namespace Drupal\wri_entity_share_s3\Plugin\EntityShareClient\Processor;
 
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -39,7 +39,7 @@ class S3ToS3Importer extends ImportProcessorPluginBase implements PluginFormInte
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
-    $instance->s3fsStream = $container->get('stream_wrapper.s3fs');
+    $instance->s3fsStream = $container->get('stream_wrapper.s3fs', ContainerInterface::IGNORE_ON_INVALID_REFERENCE);
     return $instance;
   }
 
@@ -56,7 +56,7 @@ class S3ToS3Importer extends ImportProcessorPluginBase implements PluginFormInte
    * @SuppressWarnings(PHPMD.ErrorControlOperator)
    */
   public function processEntity(RuntimeImportContext $runtime_import_context, ContentEntityInterface $processed_entity, array $entity_json_data) {
-    if ($processed_entity instanceof FileInterface) {
+    if ($processed_entity instanceof FileInterface && isset($this->s3fsStream)) {
       $uri = $processed_entity->getFileUri();
       if (strpos($uri, 's3://') === 0) {
         $this->s3fsStream->writeUriToCache($uri);
