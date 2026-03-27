@@ -178,7 +178,8 @@ body {
     @include center-columns(6, $grid-columns);
   }
 }
-.layout__region--full {
+.layout__region--full,
+.layout__region--full-content-with-attribution {
   @include center-columns($grid-columns-mobile, $grid-columns-mobile);
 
   @include mq($ph) {
