@@ -150,3 +150,70 @@ function wri_media_update_10501() {
     'settings#plugins#ckeditor5_sourceEditing#allowed_tags',
   ], 'wri_media');
 }
+
+/**
+ * Remove leading "Photo by" from media image attributions.
+ */
+function wri_media_update_10601(&$sandbox) {
+  $storage = \Drupal::entityTypeManager()->getStorage('media');
+  $logger = \Drupal::logger('wri_media');
+
+  if (!isset($sandbox['mids'])) {
+    $sandbox['mids'] = array_values(
+      \Drupal::entityQuery('media')
+        ->accessCheck(FALSE)
+        ->condition('bundle', 'image')
+        ->exists('field_attribution')
+        ->execute()
+    );
+
+    $sandbox['total'] = count($sandbox['mids']);
+    $sandbox['current'] = 0;
+    $sandbox['updated'] = 0;
+  }
+
+  if (empty($sandbox['mids'])) {
+    $logger->notice('No image media items found with field_attribution.');
+    return 'No image media items found with field_attribution.';
+  }
+
+  $batch_size = 25;
+  $slice = array_slice($sandbox['mids'], $sandbox['current'], $batch_size);
+
+  /** @var \Drupal\media\MediaInterface[] $media_items */
+  $media_items = $storage->loadMultiple($slice);
+
+  foreach ($media_items as $media) {
+    if (!$media->hasField('field_attribution') || $media->get('field_attribution')->isEmpty()) {
+      $sandbox['current']++;
+      continue;
+    }
+
+    $original = $media->get('field_attribution')->value;
+    $updated = preg_replace('/^\s*photo\s+by\s+/i', '', $original);
+
+    if ($updated !== NULL && $updated !== $original) {
+      $media->set('field_attribution', $updated);
+      $media->save();
+      $sandbox['updated']++;
+    }
+
+    $sandbox['current']++;
+  }
+
+  if ($sandbox['current'] < $sandbox['total']) {
+    $sandbox['#finished'] = $sandbox['current'] / $sandbox['total'];
+  }
+  else {
+    $sandbox['#finished'] = 1;
+
+    $message = sprintf(
+      'Media attribution cleanup complete. Updated %d of %d image media item(s).',
+      $sandbox['updated'],
+      $sandbox['total']
+    );
+
+    $logger->notice($message);
+    return $message;
+  }
+}
