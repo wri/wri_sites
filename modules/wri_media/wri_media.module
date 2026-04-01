@@ -245,9 +245,19 @@ function wri_media_entity_extra_field_info() {
  * Implements hook_ENTITY_TYPE_view().
  */
 function wri_media_media_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
-  if ($display->getComponent('caption_placeholder')) {
-    $build['caption_placeholder'] = [
-      '#markup' => $entity->caption[0]['value'] ?? '',
-    ];
+  // Bail early if this component isn't in the display.
+  if (!$display->getComponent('caption_placeholder')) {
+    return;
   }
+
+  $caption = '';
+
+  if ($entity->hasField('caption') && !$entity->get('caption')->isEmpty()) {
+    // Trim to avoid accidental double spaces, then add one for attribution.
+    $caption = rtrim($entity->get('caption')->value) . ' ';
+  }
+
+  $build['caption_placeholder'] = [
+    '#markup' => $caption,
+  ];
 }

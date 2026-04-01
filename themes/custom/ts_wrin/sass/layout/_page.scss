@@ -178,7 +178,8 @@ body {
     @include center-columns(6, $grid-columns);
   }
 }
-.layout__region--full {
+.layout__region--full,
+.layout__region--full-content-with-attribution {
   @include center-columns($grid-columns-mobile, $grid-columns-mobile);
 
   @include mq($ph) {
@@ -194,7 +195,8 @@ body {
     // grid-column: 3 / 9;
   }
 }
-.layout__region--full-width {
+.layout__region--full-width,
+.layout__region--full-width-with-attribution {
   @apply mt-8;
   @include center-columns($grid-columns-mobile, $grid-columns-mobile);
 
@@ -209,7 +211,9 @@ body {
   @include mq($lg) {
     @include center-columns(12, $grid-columns);
     // grid-column: 3 / 10;
-    .media--view-mode-full-width {
+    &.main-image-wrapper > .layout--onecol,
+    .media--view-mode-full-width,
+    .media--view-mode-full-width-with-attribution {
       width: 100vw;
       position: relative;
       left: 50%;
