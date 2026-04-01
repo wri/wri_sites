@@ -161,9 +161,89 @@ function wri_article_update_10601(): void {
 function wri_article_update_10603() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.article.full', [
     'third_party_settings#layout_builder#sections#0#components',
-    'third_party_settings#layout_builder_restrictions#entity_view_mode_restriction#allowlisted_blocks#Content fields'
+    'third_party_settings#layout_builder_restrictions#entity_view_mode_restriction#allowlisted_blocks#Content fields',
   ], 'wri_article');
 
   $message = 'Setting Articles to use Main Content B';
+  return $message;
+}
+
+/**
+ * Set main image display for Vignette articles.
+ */
+function wri_article_update_10604() {
+  $storage = \Drupal::entityTypeManager()->getStorage('node');
+  $logger = \Drupal::logger('wri_article');
+
+  $updated = 0;
+  $urls = [];
+
+  $nids = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type', 'article')
+    ->exists('field_type')
+    ->execute();
+
+  if (empty($nids)) {
+    $logger->notice('No matching article nodes found for Vignette update.');
+    return 'No matching article nodes found.';
+  }
+
+  /** @var \Drupal\node\NodeInterface[] $nodes */
+  $nodes = $storage->loadMultiple($nids);
+
+  foreach ($nodes as $node) {
+    if (
+      !$node->hasField('field_type') ||
+      !$node->hasField('field_main_image_display')
+    ) {
+      continue;
+    }
+
+    $is_vignette = FALSE;
+
+    foreach ($node->get('field_type')->referencedEntities() as $term) {
+      if ($term->label() === 'Vignette') {
+        $is_vignette = TRUE;
+        break;
+      }
+    }
+
+    if (!$is_vignette) {
+      continue;
+    }
+
+    if ($node->get('field_main_image_display')->value === 'full_width_with_attribution') {
+      continue;
+    }
+
+    $node->set('field_main_image_display', 'full_width_with_attribution');
+    $node->save();
+
+    $updated++;
+    $url = '/node/' . $node->id();
+    $urls[] = $url;
+
+    $logger->notice(
+      'Updated node @nid (@title) to full_width_with_attribution. URL: @url',
+      [
+        '@nid' => $node->id(),
+        '@title' => $node->label(),
+        '@url' => $url,
+      ]
+    );
+  }
+
+  $logger->notice(
+    'Vignette update complete. Updated: @count node(s).',
+    ['@count' => $updated]
+  );
+
+  $message = sprintf('Updated %d article node(s).', $updated);
+
+  if (!empty($urls)) {
+    $message .= ' URLs: ' . implode(', ', $urls);
+  }
+
   return $message;
 }

@@ -32,6 +32,10 @@
     {% set template_class = map[parent_label] ?? null %}
   {% endif %}
 
+  {% if node and node.hasField('field_hide_featured_wri_experts') and node.get('field_hide_featured_wri_experts').value == 1 %}
+    {% set hide_featured_experts = true %}
+  {% endif %}
+
 <div class="article article-b mt-4 page-layout-{{ region_display_value }} {{ template_class }}">
   {% if content.hero|render %}
   <div {{ region_attributes.hero.addClass('layout__region', 'layout__region--hero', 'layout__region--full') }}>
@@ -139,35 +143,38 @@
     {% endif %}
 
     {% if content.main_content|render %}
-      <div {{ region_attributes.main_content.addClass('layout__region', 'layout__region--full', 'main-content', 'margin-bottom-xl') }}>
-      {{ content.main_content }}
-        {% if content.byline|render and not template_class %}
-          {% set shownHeader = false %}
-          {% if node and node.hasField('field_authors') and not node.get('field_authors').isEmpty() %}
-            {% for item in node.get('field_authors') %}
-              {% set author = item.entity %}
+      <div {{ region_attributes.main_content.addClass('layout__region', 'layout__region--full', 'main-content', 'margin-bottom-lg') }}>
+        {{ content.main_content }}
+        <div class="post-body-content">
+          {% if content.byline|render and not template_class %}
+            {% set shownHeader = false %}
+            {% if node and node.hasField('field_authors') and not node.get('field_authors').isEmpty() %}
+              {% for item in node.get('field_authors') %}
+                {% set author = item.entity %}
 
-              {# Only show internal authors (they have field_person) #}
-              {% if author and author.hasField('field_person') and not author.get('field_person').isEmpty() %}
-                {% if not shownHeader %}
-                <div class="mt-8 mb-2 utility-md font-bold">{{ 'About the Authors:'|t }}</div>
-                {% set shownHeader = true %}
+
+                {# Only show internal authors (they have field_person) #}
+                {% if author and author.hasField('field_person') and not author.get('field_person').isEmpty() and not hide_featured_experts %}
+                  {% if not shownHeader %}
+                  <div class="mt-8 mb-2 utility-md font-bold">{{ 'Featured WRI Experts:'|t }}</div>
+                  {% set shownHeader = true %}
+                  {% endif %}
+                  <div class="more-author-info">{{ drupal_entity('wri_author', item.target_id, 'listing') }}</div>
                 {% endif %}
-                <div class="more-author-info">{{ drupal_entity('wri_author', item.target_id, 'listing') }}</div>
-              {% endif %}
-            {% endfor %}
-          {% endif %}
+              {% endfor %}
+            {% endif %}
 
-        {% endif %}
-        {% if image_attribution and template_class %}
-          <div class="more-author-info"><p>{{ image_attribution }}</p></div>
-        {% endif %}
-        {% if content.bundle|render and (
-          template_class is not empty
-          or region_display_value in ['half-content', 'full-width']
-        ) %}
-          <div class="mt-8">{{ content.bundle|without('addtoany', 'field_relevant_project') }}</div>
-        {% endif %}
+          {% endif %}
+          {% if image_attribution and template_class %}
+            <div class="more-author-info"><p>{{ image_attribution }}</p></div>
+          {% endif %}
+          {% if content.bundle|render and (
+            template_class is not empty
+            or region_display_value in ['half-content', 'full-width']
+          ) %}
+            <div class="mt-8">{{ content.bundle|without('addtoany', 'field_relevant_project') }}</div>
+          {% endif %}
+        </div>
       </div>
     {% endif %}
 

@@ -201,7 +201,8 @@
       order: 3;
     }
   }
-  &.page-layout-full-width {
+  &.page-layout-full-width,
+  &.page-layout-full-width-with-attribution {
     .more-social-wrapper {
       @apply mt-12;
       order: 3;
@@ -477,5 +478,16 @@
     .originally-published {
       display: none;
     }
+  }
+}
+
+.article-b .main-content .media--view-mode-full-width,
+.article-b .main-content .media--view-mode-full-width-with-attribution,
+.article-b .main-content .media--view-mode-landing-page-hero {
+  @include mq($md) {
+    left: 72.5%;
+  }
+  @include mq($lg) {
+    left: 50%;
   }
 }
