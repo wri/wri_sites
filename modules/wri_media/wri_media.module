@@ -247,7 +247,7 @@ function wri_media_entity_extra_field_info() {
 function wri_media_media_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
   if ($display->getComponent('caption_placeholder')) {
     $build['caption_placeholder'] = [
-      '#markup' => $entity->caption[0]['value'] ?? '',
+      '#markup' => $entity->caption[0]['value'] . ' ' ?? '',
     ];
   }
 }
