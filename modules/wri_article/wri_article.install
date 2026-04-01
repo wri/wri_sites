@@ -169,39 +169,51 @@ function wri_article_update_10603() {
 }
 
 /**
- * Set main image display for Vignette articles.
+ * Normalize main image display for article nodes.
+ *
+ * - Vignette articles => full_width_with_attribution
+ * - All other articles => full_content_with_attribution
  */
-function wri_article_update_10604() {
+function wri_article_update_10604(&$sandbox) {
   $storage = \Drupal::entityTypeManager()->getStorage('node');
   $logger = \Drupal::logger('wri_article');
 
-  $updated = 0;
-  $urls = [];
+  if (!isset($sandbox['nids'])) {
+    $sandbox['nids'] = array_values(
+      \Drupal::entityQuery('node')
+        ->accessCheck(FALSE)
+        ->condition('type', 'article')
+        ->execute()
+    );
 
-  $nids = \Drupal::entityQuery('node')
-    ->accessCheck(FALSE)
-    ->condition('type', 'article')
-    ->exists('field_type')
-    ->execute();
-
-  if (empty($nids)) {
-    $logger->notice('No matching article nodes found for Vignette update.');
-    return 'No matching article nodes found.';
+    $sandbox['total'] = count($sandbox['nids']);
+    $sandbox['current'] = 0;
+    $sandbox['updated_total'] = 0;
+    $sandbox['updated_vignette'] = 0;
+    $sandbox['updated_non_vignette'] = 0;
   }
 
+  if (empty($sandbox['nids'])) {
+    $logger->notice('Article main image display update complete. No article nodes found.');
+    return 'No article nodes found.';
+  }
+
+  $batch_size = 25;
+  $slice = array_slice($sandbox['nids'], $sandbox['current'], $batch_size);
+
   /** @var \Drupal\node\NodeInterface[] $nodes */
-  $nodes = $storage->loadMultiple($nids);
+  $nodes = $storage->loadMultiple($slice);
 
   foreach ($nodes as $node) {
     if (
       !$node->hasField('field_type') ||
       !$node->hasField('field_main_image_display')
     ) {
+      $sandbox['current']++;
       continue;
     }
 
     $is_vignette = FALSE;
-
     foreach ($node->get('field_type')->referencedEntities() as $term) {
       if ($term->label() === 'Vignette') {
         $is_vignette = TRUE;
@@ -209,41 +221,41 @@ function wri_article_update_10604() {
       }
     }
 
-    if (!$is_vignette) {
-      continue;
+    $target_value = $is_vignette
+      ? 'full_width_with_attribution'
+      : 'full_content_with_attribution';
+
+    if ($node->get('field_main_image_display')->value !== $target_value) {
+      $node->set('field_main_image_display', $target_value);
+      $node->save();
+
+      $sandbox['updated_total']++;
+
+      if ($is_vignette) {
+        $sandbox['updated_vignette']++;
+      }
+      else {
+        $sandbox['updated_non_vignette']++;
+      }
     }
 
-    if ($node->get('field_main_image_display')->value === 'full_width_with_attribution') {
-      continue;
-    }
+    $sandbox['current']++;
+  }
 
-    $node->set('field_main_image_display', 'full_width_with_attribution');
-    $node->save();
+  if ($sandbox['current'] < $sandbox['total']) {
+    $sandbox['#finished'] = $sandbox['current'] / $sandbox['total'];
+  }
+  else {
+    $sandbox['#finished'] = 1;
 
-    $updated++;
-    $url = '/node/' . $node->id();
-    $urls[] = $url;
-
-    $logger->notice(
-      'Updated node @nid (@title) to full_width_with_attribution. URL: @url',
-      [
-        '@nid' => $node->id(),
-        '@title' => $node->label(),
-        '@url' => $url,
-      ]
+    $message = sprintf(
+      'Article main image display update complete. Updated %d article(s): %d vignette, %d non-vignette.',
+      $sandbox['updated_total'],
+      $sandbox['updated_vignette'],
+      $sandbox['updated_non_vignette']
     );
+
+    $logger->notice($message);
+    return $message;
   }
-
-  $logger->notice(
-    'Vignette update complete. Updated: @count node(s).',
-    ['@count' => $updated]
-  );
-
-  $message = sprintf('Updated %d article node(s).', $updated);
-
-  if (!empty($urls)) {
-    $message .= ' URLs: ' . implode(', ', $urls);
-  }
-
-  return $message;
 }
