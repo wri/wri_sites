@@ -491,3 +491,13 @@
     left: 50%;
   }
 }
+
+.article-b .callout.alignleft {
+  @include mq($md) {
+    margin: 0 var(--spacer-7) 0 -12.85%;
+  }
+
+  @include mq($lg) {
+    margin: 0 var(--spacer-7) 0 -18%;
+  }
+}
