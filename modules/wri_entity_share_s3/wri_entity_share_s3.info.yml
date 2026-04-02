@@ -1,0 +1,8 @@
+name: 'WRI entity share S3'
+type: module
+description: 'Enable this sites that host their images on S3.'
+package: Custom
+core_version_requirement: ^10 || ^11
+dependencies:
+  - entity_share:entity_share
+  - s3fs:s3fs

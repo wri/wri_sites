@@ -1,0 +1,17 @@
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_original_vocabulary
+    - taxonomy.vocabulary.hub_terms
+id: taxonomy_term.hub_terms.field_original_vocabulary
+field_name: field_original_vocabulary
+entity_type: taxonomy_term
+bundle: hub_terms
+label: 'Original Vocabulary'
+description: 'The vocabulary where this term was originally located on the Hub.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
