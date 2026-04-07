@@ -199,6 +199,35 @@ body {
 .layout__region--full-width-with-attribution {
   @apply mt-8;
   @include center-columns($grid-columns-mobile, $grid-columns-mobile);
+  &.main-image-wrapper > .layout--onecol,
+  .media--view-mode-full-width,
+  .media--view-mode-full-width-with-attribution {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+
+    @include mq($site-max-width) {
+      width: $site-max-width;
+      margin-left: calc(-1 * #{$site-max-width} / 2);
+      margin-right: calc(-1 * #{$site-max-width} / 2);
+    }
+
+    iframe,
+    object,
+    embed {
+      max-width: 100%;
+    }
+    .field--name-field-media-oembed-video {
+      iframe,
+      object,
+      embed {
+        height: auto;
+      }
+    }
+  }
 
   @include mq($ph) {
     @include center-columns($grid-columns, $grid-columns);
@@ -210,36 +239,6 @@ body {
 
   @include mq($lg) {
     @include center-columns(12, $grid-columns);
-    // grid-column: 3 / 10;
-    &.main-image-wrapper > .layout--onecol,
-    .media--view-mode-full-width,
-    .media--view-mode-full-width-with-attribution {
-      width: 100vw;
-      position: relative;
-      left: 50%;
-      right: 50%;
-      margin-left: -50vw;
-      margin-right: -50vw;
-
-      @include mq($site-max-width) {
-        width: $site-max-width;
-        margin-left: calc(-1 * #{$site-max-width} / 2);
-        margin-right: calc(-1 * #{$site-max-width} / 2);
-      }
-
-      iframe,
-      object,
-      embed {
-        max-width: 100%;
-      }
-      .field--name-field-media-oembed-video {
-        iframe,
-        object,
-        embed {
-          height: auto;
-        }
-      }
-    }
   }
 }
 .layout__region--half-content {
