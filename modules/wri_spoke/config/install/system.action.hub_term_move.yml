@@ -1,0 +1,10 @@
+status: true
+dependencies:
+  module:
+    - taxonomy
+    - wri_spoke
+id: hub_term_move
+label: 'Move term to original vocabulary'
+type: taxonomy_term
+plugin: wri_spoke_move_term_to_original_vocabulary
+configuration: {  }
