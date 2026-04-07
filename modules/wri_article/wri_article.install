@@ -172,7 +172,7 @@ function wri_article_update_10603() {
  * Normalize main image display for article nodes.
  *
  * - Vignette articles => full_width_with_attribution
- * - All other articles => full_content_with_attribution
+ * - All other articles => full_content_with_attribution.
  */
 function wri_article_update_10604(&$sandbox) {
   $storage = \Drupal::entityTypeManager()->getStorage('node');
