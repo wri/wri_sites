@@ -11,6 +11,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
 use Drupal\views\ViewExecutable;
 use Drupal\wri_node\General;
+use Drupal\Core\Url;
 
 /**
  * Implements hook_preprocess().
@@ -26,7 +27,7 @@ function ts_wrin_preprocess(array &$variables) {
     $variables['logo_link'] = $logo_link;
   }
   else {
-    $variables['logo_link'] = '/';
+    $variables['logo_link'] = Url::fromRoute('<front>')->toString();
   }
 }
 
