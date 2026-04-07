@@ -15,6 +15,7 @@ import wriMedia from "./components/wri_media.js";
 import tsExternalLinks from "./components/ts_external_links.js";
 import wriDatetime from "./components/wri_datetime.js";
 import wriShowInsights from "./components/wri_show_insights.js";
+import wriExtraBodyArticles from "./components/wri_extra_body_articles.js";
 
 (($, Drupal) => {
   /**
@@ -70,5 +71,9 @@ import wriShowInsights from "./components/wri_show_insights.js";
 
   Drupal.behaviors.wriShowInsights = {
     attach: wriShowInsights
+  };
+
+  Drupal.behaviors.wriExtraBodyArticles = {
+    attach: wriExtraBodyArticles
   };
 })(jQuery, Drupal);

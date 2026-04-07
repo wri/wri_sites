@@ -5,6 +5,8 @@
  * Update hooks for wri_article.
  */
 
+use Drupal\node\Entity\Node;
+
 /**
  * Update the article display configs to remove blazy.
  */
@@ -74,4 +76,186 @@ function wri_article_update_10501() {
 
   $message = 'Replace wri_social_sharing_block with addtoany.';
   return $message;
+}
+
+/**
+ * Populate field_relevant_project from first field_projects item.
+ */
+function wri_article_update_10601(): void {
+  $storage = \Drupal::entityTypeManager()->getStorage('node');
+  $query = $storage->getQuery()
+    ->accessCheck(FALSE)
+    ->condition('type', 'article')
+    ->exists('field_projects')
+    ->exists('field_type');
+
+  $nids = $query->execute();
+
+  if (empty($nids)) {
+    \Drupal::messenger()->addStatus('No matching article nodes found.');
+    return;
+  }
+
+  $nodes = $storage->loadMultiple($nids);
+
+  $updated = 0;
+  $skipped = 0;
+
+  foreach ($nodes as $node) {
+    if (!$node instanceof Node) {
+      $skipped++;
+      continue;
+    }
+
+    if (
+      !$node->hasField('field_type') ||
+      $node->get('field_type')->isEmpty() ||
+      !$node->hasField('field_projects') ||
+      $node->get('field_projects')->isEmpty() ||
+      !$node->hasField('field_relevant_project')
+    ) {
+      $skipped++;
+      continue;
+    }
+
+    $is_project_update = FALSE;
+    foreach ($node->get('field_type')->referencedEntities() as $term) {
+      if ($term->label() === 'Project Update') {
+        $is_project_update = TRUE;
+        break;
+      }
+    }
+
+    if (!$is_project_update) {
+      $skipped++;
+      continue;
+    }
+
+    // Skip nodes that already have field_relevant_project populated.
+    if (!$node->get('field_relevant_project')->isEmpty()) {
+      $skipped++;
+      continue;
+    }
+
+    $first_project = $node->get('field_projects')->first();
+    if (!$first_project || empty($first_project->target_id)) {
+      $skipped++;
+      continue;
+    }
+
+    $node->set('field_relevant_project', ['target_id' => $first_project->target_id]);
+    $node->save();
+    $updated++;
+  }
+
+  \Drupal::messenger()->addStatus(sprintf(
+    'Project Update backfill complete. Updated: %d. Skipped: %d.',
+    $updated,
+    $skipped
+  ));
+}
+
+/**
+ * Update the default components for the Full article display.
+ */
+function wri_article_update_10603() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.article.full', [
+    'third_party_settings#layout_builder#sections#0#components',
+    'third_party_settings#layout_builder_restrictions#entity_view_mode_restriction#allowlisted_blocks#Content fields',
+  ], 'wri_article');
+
+  $message = 'Setting Articles to use Main Content B';
+  return $message;
+}
+
+/**
+ * Normalize main image display for article nodes.
+ *
+ * - Vignette articles => full_width_with_attribution
+ * - All other articles => full_content_with_attribution.
+ */
+function wri_article_update_10604(&$sandbox) {
+  $storage = \Drupal::entityTypeManager()->getStorage('node');
+  $logger = \Drupal::logger('wri_article');
+
+  if (!isset($sandbox['nids'])) {
+    $sandbox['nids'] = array_values(
+      \Drupal::entityQuery('node')
+        ->accessCheck(FALSE)
+        ->condition('type', 'article')
+        ->execute()
+    );
+
+    $sandbox['total'] = count($sandbox['nids']);
+    $sandbox['current'] = 0;
+    $sandbox['updated_total'] = 0;
+    $sandbox['updated_vignette'] = 0;
+    $sandbox['updated_non_vignette'] = 0;
+  }
+
+  if (empty($sandbox['nids'])) {
+    $logger->notice('Article main image display update complete. No article nodes found.');
+    return 'No article nodes found.';
+  }
+
+  $batch_size = 25;
+  $slice = array_slice($sandbox['nids'], $sandbox['current'], $batch_size);
+
+  /** @var \Drupal\node\NodeInterface[] $nodes */
+  $nodes = $storage->loadMultiple($slice);
+
+  foreach ($nodes as $node) {
+    if (
+      !$node->hasField('field_type') ||
+      !$node->hasField('field_main_image_display')
+    ) {
+      $sandbox['current']++;
+      continue;
+    }
+
+    $is_vignette = FALSE;
+    foreach ($node->get('field_type')->referencedEntities() as $term) {
+      if ($term->label() === 'Vignette') {
+        $is_vignette = TRUE;
+        break;
+      }
+    }
+
+    $target_value = $is_vignette
+      ? 'full_width_with_attribution'
+      : 'full_content_with_attribution';
+
+    if ($node->get('field_main_image_display')->value !== $target_value) {
+      $node->set('field_main_image_display', $target_value);
+      $node->save();
+
+      $sandbox['updated_total']++;
+
+      if ($is_vignette) {
+        $sandbox['updated_vignette']++;
+      }
+      else {
+        $sandbox['updated_non_vignette']++;
+      }
+    }
+
+    $sandbox['current']++;
+  }
+
+  if ($sandbox['current'] < $sandbox['total']) {
+    $sandbox['#finished'] = $sandbox['current'] / $sandbox['total'];
+  }
+  else {
+    $sandbox['#finished'] = 1;
+
+    $message = sprintf(
+      'Article main image display update complete. Updated %d article(s): %d vignette, %d non-vignette.',
+      $sandbox['updated_total'],
+      $sandbox['updated_vignette'],
+      $sandbox['updated_non_vignette']
+    );
+
+    $logger->notice($message);
+    return $message;
+  }
 }
