@@ -142,7 +142,7 @@
     </div>
     {% endif %}
 
-    {% if content.main_content|render %}
+    {% if content.main_content %}
       <div {{ region_attributes.main_content.addClass('layout__region', 'layout__region--full', 'main-content', 'margin-bottom-lg') }}>
         {{ content.main_content }}
         <div class="post-body-content">
