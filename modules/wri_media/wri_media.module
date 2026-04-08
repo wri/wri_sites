@@ -252,9 +252,9 @@ function wri_media_media_view(array &$build, EntityInterface $entity, EntityView
 
   $caption = '';
 
-  if ($entity->hasField('caption') && !$entity->get('caption')->isEmpty()) {
+  if (isset($entity->caption[0]['value'])) {
     // Trim to avoid accidental double spaces, then add one for attribution.
-    $caption = rtrim($entity->get('caption')->value) . ' ';
+    $caption = rtrim($entity->caption[0]['value']) . ' ';
   }
 
   $build['caption_placeholder'] = [
