@@ -75,6 +75,11 @@ function wri_article_preprocess_wri_article_columns_b(array &$variables): void {
       ->view($media, $view_mode);
   }
 
+  $variables['border_position'] = 'after_byline';
+  if ($variables['main_image_view_mode'] === 'half_hero' || $variables['main_image_view_mode'] == 'full_width_with_attribution') {
+    $variables['border_position'] = 'before_body';
+  }
+
   $variables['image_attribution'] = \Drupal::entityTypeManager()
     ->getViewBuilder('media')
     ->view($media, 'attribution');

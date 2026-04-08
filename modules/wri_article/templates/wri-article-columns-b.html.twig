@@ -1,5 +1,9 @@
 {% if content %}
-
+  {% if border_position == 'before_body' %}
+    {% set body_top_border = 'pt-12 border-0 border-solid border-t-2 border-neutral-400' %}
+  {% else %}
+    {% set byline_underline = 'border-0 border-solid border-b-2 border-neutral-400' %}
+  {% endif %}
   {# Note: this sets the layout. The display mode for the main image is
      set in ts_wrin.theme in ts_wrin_preprocess_wri_article_columns_b() #}
   {% if content.category %}
@@ -80,7 +84,7 @@
       {% endif %}
     {% endif %}
 
-    <div {{ region_attributes.byline.addClass('layout__region', 'layout__region--full', 'byline-wrapper', 'full-width', 'pb-2') }}>
+    <div {{ region_attributes.byline.addClass('layout__region', 'layout__region--full', 'byline-wrapper', 'full-width', 'pb-2', byline_underline) }}>
       {{ content.byline }}
     </div>
   </div>
@@ -143,7 +147,7 @@
     {% endif %}
 
     {% if content.main_content %}
-      <div {{ region_attributes.main_content.addClass('layout__region', 'layout__region--full', 'main-content', 'margin-bottom-lg') }}>
+      <div {{ region_attributes.main_content.addClass('layout__region', 'layout__region--full', 'main-content', 'margin-bottom-lg', body_top_border) }}>
         {{ content.main_content }}
         <div class="post-body-content">
           {% if content.byline|render and not template_class %}
