@@ -149,6 +149,9 @@ header:not(.pfp-header) {
     &.toggled {
       background-color: var(--color-black);
     }
+    &.language-toggle {
+      width: 50px;
+    }
   }
 }
 
@@ -159,10 +162,10 @@ header:not(.pfp-header) {
 // Filter button
 .header-wrapper {
   .tray-toggle.search-toggle svg {
-    width: 20px;
+    width: 40px;
   }
   .tray-toggle.language-toggle svg {
-    width: 32px;
+    width: 50px;
   }
   .tray-toggle.filter-toggle {
     position: relative;
