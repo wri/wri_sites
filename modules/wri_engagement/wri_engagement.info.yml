@@ -4,6 +4,7 @@ description: 'Engagement functionality and fields'
 core_version_requirement: '>=9.5'
 package: WRI
 dependencies:
+  - simple_popup_blocks
   - simple_recaptcha_webform
   - wri_block
   - webform_ui
