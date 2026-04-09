@@ -87,6 +87,9 @@
     <div {{ region_attributes.byline.addClass('layout__region', 'layout__region--full', 'byline-wrapper', 'full-width', 'pb-2', byline_underline) }}>
       {{ content.byline }}
     </div>
+    <div class="layout__region layout__region--full mt-8">
+      {{ content.bundle.field_tags }}
+    </div>
   </div>
 
   {% if content.bundle|render or content.category|render or content.share|render %}
