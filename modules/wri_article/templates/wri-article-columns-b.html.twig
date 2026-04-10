@@ -179,7 +179,7 @@
           {% endif %}
           {% if content.bundle|render and (
             template_class is not empty
-            or region_display_value in ['half-content', 'full-width']
+            or region_display_value in ['half-content', 'full-width-with-attribution']
           ) %}
             <div class="mt-8">{{ content.bundle|without('addtoany', 'field_relevant_project') }}</div>
           {% endif %}
