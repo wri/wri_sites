@@ -39,6 +39,9 @@
             "drupal/facets_pretty_paths": {
                 "Space appended to url outputs error https://www.drupal.org/project/facets_pretty_paths/issues/3575306": "https://git.drupalcode.org/project/facets_pretty_paths/-/merge_requests/25.diff"
             },
+            "drupal/focal_point": {
+                "On re-positioning hash, only flush image styles that use Focal Point (s3 incompatibility) https://www.drupal.org/project/focal_point/issues/3585050": "https://git.drupalcode.org/project/focal_point/-/merge_requests/56.diff"
+            },
             "drupal/entity_embed": {
                 "Logs flooded with warning messages 'Invalid display settings encountered' https://www.drupal.org/project/entity_embed/issues/3077225": "https://www.drupal.org/files/issues/2019-12-11/3077225-10.reduce-invalid-config-logs.patch",
                 "Entity embed dialog can no longer use custom data- attributes in CKEditor 5 https://www.drupal.org/project/entity_embed/issues/3410132": "https://www.drupal.org/files/issues/2025-08-07/3410132-MR-31_support-custom-data-attribs.diff-14.patch",
