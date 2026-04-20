@@ -45,22 +45,25 @@ function wri_spoke_taxonomy_term_insert(ContentEntityInterface $entity): void {
     if (!empty($hub_terms)) {
       $hub_term_id = reset($hub_terms);
       $hub_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($hub_term_id);
+
       // Also move over any translations of the hub term to be translations of
       // the current term.
       $languages = $hub_term->getTranslationLanguages();
       // Iterate over each language and get the specific translation object.
       foreach ($languages as $langcode => $language) {
-        if ($langcode === $hub_term->language()->getId()) {
-          $entity->set('name', $hub_term->getName());
-        }
-        elseif ($hub_term->hasTranslation($language->getId())) {
+        if ($hub_term->hasTranslation($language->getId())) {
           $translation = $hub_term->getTranslation($language->getId());
           $translation->delete();
 
-          $entity->addTranslation($langcode, [
-            'name' => $translation->getName(),
-            'uuid' => $translation->uuid(),
-          ]);
+          if ($langcode == $entity->language()->getId()) {
+            $entity->set('name', $translation->getName());
+          }
+          else {
+            $entity->addTranslation($langcode, [
+              'name' => $translation->getName(),
+              'uuid' => $translation->uuid(),
+            ]);
+          }
         }
       }
 
