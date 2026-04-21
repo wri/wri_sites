@@ -284,7 +284,7 @@ function wri_event_update_10504(): void {
  */
 function wri_event_update_10505(): void {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.event.main_content', [
-    'third_party_settings#field_group#group_related#children',
+    'third_party_settings#ds#regions#sidebar_left',
     'content#field_produced_by',
   ], 'wri_event', 'install');
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.event.default', [
