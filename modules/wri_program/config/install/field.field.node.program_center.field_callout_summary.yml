@@ -1,0 +1,22 @@
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_callout_summary
+    - filter.format.basic_html
+    - node.type.program_center
+  module:
+    - text
+id: node.program_center.field_callout_summary
+field_name: field_callout_summary
+entity_type: node
+bundle: program_center
+label: 'Callout Summary'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+field_type: text_long
