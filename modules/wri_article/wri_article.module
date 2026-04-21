@@ -32,6 +32,7 @@ function _wri_article_hide_main_content_b_fields(array &$form): void {
   $fields = [
     'field_hide_featured_wri_experts',
     'field_key_takeaways',
+    'field_intro',
     'field_main_image_caption',
     'field_main_image_display',
     'field_most_recently_updated_date',
