@@ -53,16 +53,16 @@ final class SettingsForm extends ConfigFormBase {
       return;
     }
 
-    // Todo: Instead of this, explicitly set the components display.
-    \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.article.full', [
-      'third_party_settings#layout_builder#sections#0#components',
-      'third_party_settings#layout_builder_restrictions#entity_view_mode_restriction#allowlisted_blocks#Content fields',
-    ], 'wri_article');
+    $view_mode = $enable_main_content_b ? 'main_content_b' : 'main_content';
+    $display_config = \Drupal::service('config.factory')->getEditable('core.entity_view_display.node.article.full');
+    $sections = $display_config->get('third_party_settings.layout_builder.sections');
+    $sections[0]['components'][0]['configuration']['view_mode'] = $view_mode;
+    $display_config->set('third_party_settings.layout_builder.sections', $sections)->save();
 
     $batch = [
       'title' => $this->t('Updating Article nodes to Main Content B...'),
       'operations' => [
-        [[self::class, 'batchUpdateArticleNodes'], []],
+        [[self::class, 'batchUpdateArticleNodes'], [$enable_main_content_b]],
       ],
       'finished' => [self::class, 'batchFinished'],
     ];
@@ -72,8 +72,9 @@ final class SettingsForm extends ConfigFormBase {
   /**
    * Batch operation: update article nodes to use main_content_b view mode.
    */
-  public static function batchUpdateArticleNodes(array &$context): void {
-    $use_main_content_b = $this->config->get('enable_main_content_b');
+  public static function batchUpdateArticleNodes(bool $enable_main_content_b, array &$context): void {
+    $from_view_mode = $enable_main_content_b ? 'main_content' : 'main_content_b';
+    $to_view_mode = $enable_main_content_b ? 'main_content_b' : 'main_content';
     if (empty($context['sandbox'])) {
       $nids = \Drupal::entityQuery('node')
         ->condition('type', 'article')
@@ -112,8 +113,8 @@ final class SettingsForm extends ConfigFormBase {
       foreach ($sections as $section) {
         foreach ($section->getComponents() as $component) {
           $config = $component->get('configuration') ?? [];
-          if (($config['id'] ?? '') === 'entity_view:node' && $config['view_mode'] === 'main_content') {
-            $config['view_mode'] = 'main_content_b';
+          if (($config['id'] ?? '') === 'entity_view:node' && $config['view_mode'] === $from_view_mode) {
+            $config['view_mode'] = $to_view_mode;
             $component->set('configuration', $config);
             $changed = TRUE;
           }

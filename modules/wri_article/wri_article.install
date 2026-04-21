@@ -163,8 +163,18 @@ function wri_article_update_10603() {
     'third_party_settings#layout_builder#sections#0#components',
     'third_party_settings#layout_builder_restrictions#entity_view_mode_restriction#allowlisted_blocks#Content fields',
   ], 'wri_article');
+  $message = "Updating default blocks on Full display.";
 
-  $message = 'Setting Articles to use Main Content B';
+  $article_settings = \Drupal::config('article.settings');
+  if ($article_settings->get('enable_article_blocks')) {
+
+    $view_mode = 'main_content_b';
+    $display_config = \Drupal::service('config.factory')->getEditable('core.entity_view_display.node.article.full');
+    $sections = $display_config->get('third_party_settings.layout_builder.sections');
+    $sections[0]['components'][0]['configuration']['view_mode'] = $view_mode;
+    $display_config->set('third_party_settings.layout_builder.sections', $sections)->save();
+    $message .= 'Setting Articles to use Main Content B';
+  }
   return $message;
 }
 
