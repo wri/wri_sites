@@ -83,3 +83,11 @@ function wri_program_update_10403() {
   $message = 'Update program form display configs to use the paragraph';
   return $message;
 }
+
+/**
+ * Install the callout summary field for program center.
+ */
+function wri_program_update_10404(): void {
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_callout_summary', 'wri_node', 'install', FALSE);
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.program_center.field_callout_summary', 'wri_program', 'install', FALSE);
+}

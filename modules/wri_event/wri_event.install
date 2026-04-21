@@ -271,3 +271,10 @@ function wri_event_update_10503() {
   $message = 'Replace wri_social_sharing_block with addtoany.';
   return $message;
 }
+
+/**
+ * Install the produced_by field for events.
+ */
+function wri_event_update_10504(): void {
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.event.field_produced_by', 'wri_event', 'install', FALSE);
+}

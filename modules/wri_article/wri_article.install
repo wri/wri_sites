@@ -269,3 +269,49 @@ function wri_article_update_10604(&$sandbox) {
     return $message;
   }
 }
+
+/**
+ * Install new article fields and view modes for main content B.
+ */
+function wri_article_update_10605(): void {
+  $configs = [
+    'field.storage.node.field_callout_summary',
+    'field.storage.node.field_hide_featured_wri_experts',
+    'field.storage.node.field_key_takeaways',
+    'field.storage.node.field_main_image_caption',
+    'field.storage.node.field_main_image_display',
+    'field.storage.node.field_most_recently_updated_date',
+    'field.storage.node.field_original_publish_date',
+    'field.storage.node.field_produced_by',
+    'field.storage.node.field_relevant_project',
+  ];
+  foreach ($configs as $config) {
+    \Drupal::service('distro_helper.updates')->installConfig($config, 'wri_node', 'install', FALSE);
+  }
+  $configs = [
+    'core.entity_view_mode.node.main_content_b',
+    'field.storage.node.field_hide_featured_wri_experts',
+    'field.storage.node.field_key_takeaways',
+    'field.storage.node.field_main_image_caption',
+    'field.storage.node.field_main_image_display',
+    'field.storage.node.field_most_recently_updated_date',
+    'field.storage.node.field_original_publish_date',
+    'field.storage.node.field_primary_contacts',
+    'field.storage.node.field_produced_by',
+    'field.storage.node.field_relevant_project',
+    'field.field.node.article.field_hide_featured_wri_experts',
+    'field.field.node.article.field_intro',
+    'field.field.node.article.field_key_takeaways',
+    'field.field.node.article.field_main_image_caption',
+    'field.field.node.article.field_main_image_display',
+    'field.field.node.article.field_most_recently_updated_date',
+    'field.field.node.article.field_original_publish_date',
+    'field.field.node.article.field_primary_contacts',
+    'field.field.node.article.field_produced_by',
+    'field.field.node.article.field_relevant_project',
+    'core.entity_view_display.node.article.main_content_b',
+  ];
+  foreach ($configs as $config) {
+    \Drupal::service('distro_helper.updates')->installConfig($config, 'wri_article', 'install', FALSE);
+  }
+}
