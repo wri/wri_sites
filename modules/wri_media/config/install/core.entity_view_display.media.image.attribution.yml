@@ -1,0 +1,87 @@
+uuid: 538e7a3a-6da8-4638-8f06-33d21a8b810a
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.attribution
+    - field.field.media.image.field_attribution
+    - field.field.media.image.field_media_image
+    - field.field.media.image.field_tags
+    - media.type.image
+  module:
+    - ds
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  ds:
+    layout:
+      id: ds_reset
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+        classes:
+          layout_class: {  }
+        wrappers:
+          ds_content: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+    regions:
+      ds_content:
+        - field_attribution
+id: media.image.attribution
+targetEntityType: media
+bundle: image
+mode: attribution
+content:
+  field_attribution:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: false
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: 'Preview image by'
+            suffix: ''
+    weight: 0
+    region: ds_content
+hidden:
+  caption_placeholder: true
+  created: true
+  field_media_image: true
+  field_tags: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true
