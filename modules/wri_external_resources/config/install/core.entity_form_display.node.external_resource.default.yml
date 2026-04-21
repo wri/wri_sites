@@ -1,6 +1,8 @@
 status: true
 dependencies:
   config:
+    - field.field.node.external_resource.feeds_item
+    - field.field.node.external_resource.field_authors
     - field.field.node.external_resource.field_intro
     - field.field.node.external_resource.field_main_image
     - field.field.node.external_resource.field_metatags
@@ -111,6 +113,24 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_authors:
+    type: inline_entity_form_complex
+    weight: 0
+    region: content
+    settings:
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      allow_duplicate: false
+      collapsible: false
+      collapsed: false
+      revision: false
+      removed_reference: optional
+    third_party_settings: {  }
   field_intro:
     type: text_textarea
     weight: 3
@@ -210,5 +230,6 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  feeds_item: true
   layout_builder__layout: true
   uid: true
