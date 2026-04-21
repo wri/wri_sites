@@ -290,15 +290,6 @@ function wri_article_update_10605(): void {
   }
   $configs = [
     'core.entity_view_mode.node.main_content_b',
-    'field.storage.node.field_hide_featured_wri_experts',
-    'field.storage.node.field_key_takeaways',
-    'field.storage.node.field_main_image_caption',
-    'field.storage.node.field_main_image_display',
-    'field.storage.node.field_most_recently_updated_date',
-    'field.storage.node.field_original_publish_date',
-    'field.storage.node.field_primary_contacts',
-    'field.storage.node.field_produced_by',
-    'field.storage.node.field_relevant_project',
     'field.field.node.article.field_hide_featured_wri_experts',
     'field.field.node.article.field_intro',
     'field.field.node.article.field_key_takeaways',
