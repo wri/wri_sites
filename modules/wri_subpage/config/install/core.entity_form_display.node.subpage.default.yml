@@ -3,7 +3,6 @@ status: true
 dependencies:
   config:
     - field.field.node.subpage.body
-    - field.field.node.subpage.field_exclude_from_search
     - field.field.node.subpage.field_long_title
     - field.field.node.subpage.field_main_image
     - field.field.node.subpage.field_metatags
@@ -39,13 +38,6 @@ content:
     weight: 10
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_exclude_from_search:
-    type: search_api_exclude_entity_widget
-    weight: 125
-    region: content
-    settings:
-      field_label: 'Yes, exclude this entity from the search indexes.'
     third_party_settings: {  }
   field_long_title:
     type: text_textarea
