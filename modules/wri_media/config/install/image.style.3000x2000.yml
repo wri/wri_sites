@@ -1,0 +1,15 @@
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 3000x2000
+label: 3000x2000
+effects:
+  a27089c5-3ca6-46a3-9e86-3f8b877ee9f5:
+    uuid: a27089c5-3ca6-46a3-9e86-3f8b877ee9f5
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 3000
+      height: 2000
+      crop_type: focal_point

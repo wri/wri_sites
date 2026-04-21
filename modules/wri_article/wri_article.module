@@ -9,14 +9,14 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
 
 /**
- * Implements hook_form_BASE_FORM_ID_alter() for node_form.
+ * Implements hook_form_FORM_ID_alter() for node_form.
  */
 function wri_article_form_node_article_form_alter(array &$form, FormStateInterface $form_state): void {
   _wri_article_hide_main_content_b_fields($form);
 }
 
 /**
- * Implements hook_form_BASE_FORM_ID_alter() for node_form.
+ * Implements hook_form_FORM_ID_alter() for node_form.
  */
 function wri_article_form_node_article_edit_form_alter(array &$form, FormStateInterface $form_state): void {
   _wri_article_hide_main_content_b_fields($form);

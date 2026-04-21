@@ -1,0 +1,15 @@
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 1130x1130
+label: 1130x1130
+effects:
+  65fe817a-c1f4-4043-9fe8-922e40f1e212:
+    uuid: 65fe817a-c1f4-4043-9fe8-922e40f1e212
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1130
+      height: 1130
+      crop_type: focal_point
