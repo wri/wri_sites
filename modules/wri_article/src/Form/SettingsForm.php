@@ -45,9 +45,9 @@ final class SettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
-    $was_main_content_b = $this->config('wri_article.settings')->get('enable_main_content_b');
+    $was_main_content_b = $form["enable_main_content_b"]["#default_value"];
+    $enable_main_content_b = $form_state->getValue('enable_main_content_b');
     parent::submitForm($form, $form_state);
-    $enable_main_content_b = $this->config('wri_article.settings')->get('enable_main_content_b');
     if ($was_main_content_b == $enable_main_content_b) {
       // Nothing changes.
       return;
@@ -60,7 +60,7 @@ final class SettingsForm extends ConfigFormBase {
     $display_config->set('third_party_settings.layout_builder.sections', $sections)->save();
 
     $batch = [
-      'title' => $this->t('Updating Article nodes to Main Content B...'),
+      'title' => $this->t('Updating Article nodes to @view_mode...', ['@view_mode' => $view_mode]),
       'operations' => [
         [[self::class, 'batchUpdateArticleNodes'], [$enable_main_content_b]],
       ],
