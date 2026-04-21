@@ -385,12 +385,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_share_with_io:
-    type: options_buttons
-    weight: 104
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete_tags
     weight: 12

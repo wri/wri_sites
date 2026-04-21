@@ -315,3 +315,34 @@ function wri_article_update_10605(): void {
     \Drupal::service('distro_helper.updates')->installConfig($config, 'wri_article', 'install', FALSE);
   }
 }
+
+/**
+ * Update article main_content view display with produced_by field and sidebar region.
+ */
+function wri_article_update_10606(): void {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.article.main_content', [
+    'content#field_produced_by',
+    'third_party_settings#ds#regions#right_sidebar',
+  ], 'wri_article', 'install');
+}
+
+/**
+ * Update article default form display with new fields and field groups.
+ */
+function wri_article_update_10607(): void {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.article.default', [
+    'third_party_settings#field_group#group_related',
+    'third_party_settings#field_group#group_experts_and_staff',
+    'third_party_settings#field_group#group_more#children',
+    'content#field_hide_featured_wri_experts',
+    'content#field_intro',
+    'content#field_key_takeaways',
+    'content#field_main_image_caption',
+    'content#field_main_image_display',
+    'content#field_most_recently_updated_date',
+    'content#field_original_publish_date',
+    'content#field_primary_contacts',
+    'content#field_produced_by',
+    'content#field_relevant_project',
+  ], 'wri_article', 'install');
+}

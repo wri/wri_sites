@@ -91,3 +91,13 @@ function wri_program_update_10404(): void {
   \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_callout_summary', 'wri_node', 'install', FALSE);
   \Drupal::service('distro_helper.updates')->installConfig('field.field.node.program_center.field_callout_summary', 'wri_program', 'install', FALSE);
 }
+
+/**
+ * Update program center form display to add field_callout_summary.
+ */
+function wri_program_update_10405(): void {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.program_center.default', [
+    'third_party_settings#field_group#group_featured#children',
+    'content#field_callout_summary',
+  ], 'wri_program', 'install');
+}
