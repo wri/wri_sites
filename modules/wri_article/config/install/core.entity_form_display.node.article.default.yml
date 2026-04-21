@@ -26,7 +26,6 @@ dependencies:
     - field.field.node.article.field_projects
     - field.field.node.article.field_region
     - field.field.node.article.field_related_resources
-    - field.field.node.article.field_relevant_program
     - field.field.node.article.field_relevant_project
     - field.field.node.article.field_tags
     - field.field.node.article.field_type

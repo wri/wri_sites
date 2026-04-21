@@ -113,7 +113,6 @@ config_devel:
     - image.style.240x220
     - image.style.250_wide
     - image.style.3000x1000
-    - image.style.3000x550
     - image.style.3000x700
     - image.style.3000x900
     - image.style.300x200

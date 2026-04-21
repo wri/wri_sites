@@ -27,9 +27,7 @@ dependencies:
     - field.field.node.article.field_projects
     - field.field.node.article.field_region
     - field.field.node.article.field_related_resources
-    - field.field.node.article.field_relevant_program
     - field.field.node.article.field_relevant_project
-    - field.field.node.article.field_share_with_io
     - field.field.node.article.field_tags
     - field.field.node.article.field_type
     - field.field.node.article.layout_builder__layout
@@ -427,7 +425,6 @@ hidden:
   field_primary_contacts: true
   field_projects: true
   field_related_resources: true
-  field_relevant_program: true
   field_relevant_project: true
   field_share_with_io: true
   langcode: true
