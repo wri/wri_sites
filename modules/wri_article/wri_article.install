@@ -322,7 +322,7 @@ function wri_article_update_10606(): void {
  */
 function wri_article_update_10607(): void {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.article.default', [
-    'third_party_settings#field_group#group_related',
+    'third_party_settings#field_group#group_related#children',
     'third_party_settings#field_group#group_experts_and_staff',
     'third_party_settings#field_group#group_more#children',
     'content#field_hide_featured_wri_experts',

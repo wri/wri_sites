@@ -106,7 +106,7 @@ third_party_settings:
       label: Related
       region: content
       parent_name: group_more
-      weight: 20
+      weight: 8
       format_type: details
       format_settings:
         classes: ''
