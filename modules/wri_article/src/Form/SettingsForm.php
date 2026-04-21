@@ -54,7 +54,7 @@ final class SettingsForm extends ConfigFormBase {
     }
 
     $view_mode = $enable_main_content_b ? 'main_content_b' : 'main_content';
-    $display_config = \Drupal::service('config.factory')->getEditable('core.entity_view_display.node.article.full');
+    $display_config = $this->configFactory()->getEditable('core.entity_view_display.node.article.full');
     $sections = $display_config->get('third_party_settings.layout_builder.sections');
     $sections[0]['components'][0]['configuration']['view_mode'] = $view_mode;
     $display_config->set('third_party_settings.layout_builder.sections', $sections)->save();
