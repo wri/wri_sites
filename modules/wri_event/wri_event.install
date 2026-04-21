@@ -280,7 +280,7 @@ function wri_event_update_10504(): void {
 }
 
 /**
- * Update event view display and form display with produced_by field and related group.
+ * Update event view display and form display with produced_by field.
  */
 function wri_event_update_10505(): void {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.event.main_content', [

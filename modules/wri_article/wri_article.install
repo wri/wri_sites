@@ -308,7 +308,7 @@ function wri_article_update_10605(): void {
 }
 
 /**
- * Update article main_content view display with produced_by field and sidebar region.
+ * Update article main_content view display with produced_by field.
  */
 function wri_article_update_10606(): void {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.article.main_content', [
