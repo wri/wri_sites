@@ -176,6 +176,38 @@ function wri_article_update_10603() {
     $display_config->set('third_party_settings.layout_builder.sections', $sections)->save();
     $message .= 'Setting Articles to use Main Content B';
   }
+
+  $configs = [
+    'field.storage.node.field_callout_summary',
+    'field.storage.node.field_hide_featured_wri_experts',
+    'field.storage.node.field_key_takeaways',
+    'field.storage.node.field_main_image_caption',
+    'field.storage.node.field_main_image_display',
+    'field.storage.node.field_most_recently_updated_date',
+    'field.storage.node.field_original_publish_date',
+    'field.storage.node.field_produced_by',
+    'field.storage.node.field_relevant_project',
+  ];
+  foreach ($configs as $config) {
+    \Drupal::service('distro_helper.updates')->installConfig($config, 'wri_node', 'install', FALSE);
+  }
+  $configs = [
+    'core.entity_view_mode.node.main_content_b',
+    'field.field.node.article.field_hide_featured_wri_experts',
+    'field.field.node.article.field_intro',
+    'field.field.node.article.field_key_takeaways',
+    'field.field.node.article.field_main_image_caption',
+    'field.field.node.article.field_main_image_display',
+    'field.field.node.article.field_most_recently_updated_date',
+    'field.field.node.article.field_original_publish_date',
+    'field.field.node.article.field_primary_contacts',
+    'field.field.node.article.field_produced_by',
+    'field.field.node.article.field_relevant_project',
+    'core.entity_view_display.node.article.main_content_b',
+  ];
+  foreach ($configs as $config) {
+    \Drupal::service('distro_helper.updates')->installConfig($config, 'wri_article', 'install', FALSE);
+  }
   return $message;
 }
 
@@ -272,46 +304,9 @@ function wri_article_update_10604(&$sandbox) {
 }
 
 /**
- * Install new article fields and view modes for main content B.
- */
-function wri_article_update_10605(): void {
-  $configs = [
-    'field.storage.node.field_callout_summary',
-    'field.storage.node.field_hide_featured_wri_experts',
-    'field.storage.node.field_key_takeaways',
-    'field.storage.node.field_main_image_caption',
-    'field.storage.node.field_main_image_display',
-    'field.storage.node.field_most_recently_updated_date',
-    'field.storage.node.field_original_publish_date',
-    'field.storage.node.field_produced_by',
-    'field.storage.node.field_relevant_project',
-  ];
-  foreach ($configs as $config) {
-    \Drupal::service('distro_helper.updates')->installConfig($config, 'wri_node', 'install', FALSE);
-  }
-  $configs = [
-    'core.entity_view_mode.node.main_content_b',
-    'field.field.node.article.field_hide_featured_wri_experts',
-    'field.field.node.article.field_intro',
-    'field.field.node.article.field_key_takeaways',
-    'field.field.node.article.field_main_image_caption',
-    'field.field.node.article.field_main_image_display',
-    'field.field.node.article.field_most_recently_updated_date',
-    'field.field.node.article.field_original_publish_date',
-    'field.field.node.article.field_primary_contacts',
-    'field.field.node.article.field_produced_by',
-    'field.field.node.article.field_relevant_project',
-    'core.entity_view_display.node.article.main_content_b',
-  ];
-  foreach ($configs as $config) {
-    \Drupal::service('distro_helper.updates')->installConfig($config, 'wri_article', 'install', FALSE);
-  }
-}
-
-/**
  * Update article main_content view display with produced_by field.
  */
-function wri_article_update_10606(): void {
+function wri_article_update_10605(): void {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.article.main_content', [
     'content#field_produced_by',
     'third_party_settings#ds#regions#right_sidebar',
@@ -321,7 +316,7 @@ function wri_article_update_10606(): void {
 /**
  * Update article default form display with new fields and field groups.
  */
-function wri_article_update_10607(): void {
+function wri_article_update_10606(): void {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.article.default', [
     'third_party_settings#field_group#group_related#children',
     'third_party_settings#field_group#group_experts_and_staff',
