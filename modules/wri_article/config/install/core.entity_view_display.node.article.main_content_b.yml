@@ -1,0 +1,551 @@
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.main_content_b
+    - field.field.node.article.body
+    - field.field.node.article.field_authors
+    - field.field.node.article.field_contributing_authors
+    - field.field.node.article.field_exclude_from_blog_feed
+    - field.field.node.article.field_featured
+    - field.field.node.article.field_featured_headline
+    - field.field.node.article.field_featured_media
+    - field.field.node.article.field_featured_text
+    - field.field.node.article.field_featured_tweet
+    - field.field.node.article.field_hide_featured_wri_experts
+    - field.field.node.article.field_intro
+    - field.field.node.article.field_key_takeaways
+    - field.field.node.article.field_main_image
+    - field.field.node.article.field_main_image_caption
+    - field.field.node.article.field_main_image_display
+    - field.field.node.article.field_metatags
+    - field.field.node.article.field_most_recently_updated_date
+    - field.field.node.article.field_original_publish_date
+    - field.field.node.article.field_primary_contacts
+    - field.field.node.article.field_primary_topic
+    - field.field.node.article.field_produced_by
+    - field.field.node.article.field_projects
+    - field.field.node.article.field_region
+    - field.field.node.article.field_related_resources
+    - field.field.node.article.field_relevant_project
+    - field.field.node.article.field_tags
+    - field.field.node.article.field_type
+    - field.field.node.article.layout_builder__layout
+    - node.type.article
+  module:
+    - datetime
+    - ds
+    - element_class_formatter
+    - layout_builder
+    - text
+    - user
+    - wri_author
+    - wri_media
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  ds:
+    layout:
+      id: 'single_file_component_layout:wri_article_columns_b'
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      title:
+        - field_type
+        - node_title
+        - field_intro
+      byline:
+        - field_authors
+        - field_most_recently_updated_date
+        - field_original_publish_date
+        - node_post_date
+      bundle:
+        - field_tags
+        - field_relevant_project
+        - addtoany
+      category:
+        - field_main_image
+      main_content:
+        - field_key_takeaways
+        - body
+        - field_contributing_authors
+      right_sidebar:
+        - field_produced_by
+    fields:
+      node_post_date:
+        plugin_id: node_post_date
+        weight: 6
+        label: hidden
+        formatter: ds_post_date_short_day
+        ft:
+          id: expert
+          settings:
+            lb: 'Originally Published:'
+            lbw: true
+            lbw-el: em
+            lbw-cl: body-base
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: span
+            ow-cl: originally-published
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: span
+            fi-cl: body-base
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+      node_title:
+        plugin_id: node_title
+        weight: 1
+        label: hidden
+        formatter: default
+        settings:
+          link: false
+          'link class': ''
+          link_target: ''
+          wrapper: h1
+          class: 'heading-1 serif'
+        ft:
+          id: reset
+          settings:
+            lb: ''
+_core:
+  default_config_hash: PYBzo-iv5M17RiKBK5Tf7VHzZVicNZfGZJJMoDD2KYo
+id: node.article.main_content_b
+targetEntityType: node
+bundle: article
+mode: main_content_b
+content:
+  addtoany:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 9
+    region: bundle
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 12
+    region: main_content
+  field_authors:
+    type: list_of_authors
+    label: inline
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: expert
+          settings:
+            lb: 'By: '
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: div
+            ow-cl: 'margin-right-xs mb-8 body-md author-listing'
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 3
+    region: byline
+  field_contributing_authors:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: true
+            lbw-el: div
+            lbw-cl: 'margin-top-md utility-base font-bold'
+            lbw-at: ''
+            lb-col: true
+            ow: true
+            ow-el: span
+            ow-cl: utility-base
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 13
+    region: main_content
+  field_intro:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: div
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: false
+            ow-el: div
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: ''
+            fi-cl: 'dek utility-xl'
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 2
+    region: title
+  field_key_takeaways:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: default
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    weight: 11
+    region: main_content
+  field_main_image:
+    type: wri_media_with_caption
+    label: hidden
+    settings:
+      view_mode: full_content_with_attribution
+      caption_field: field_main_image_caption
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: ''
+            ow-cl: mt-8
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 10
+    region: category
+  field_most_recently_updated_date:
+    type: datetime_default
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: short_day
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: 'Last Updated: '
+            lbw: true
+            lbw-el: em
+            lbw-cl: body-base
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: span
+            ow-cl: last-updated
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: span
+            fi-cl: body-base
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 4
+    region: byline
+  field_original_publish_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: short_day
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: 'Originally Published: '
+            lbw: true
+            lbw-el: em
+            lbw-cl: body-base
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: span
+            ow-cl: originally-published
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: span
+            fi-cl: body-base
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 5
+    region: byline
+  field_produced_by:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: callout
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: true
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 14
+    region: right_sidebar
+  field_relevant_project:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: 'More from this project'
+            lbw: true
+            lbw-el: span
+            lbw-cl: 'italic text-sm'
+            lbw-at: ''
+            lb-col: true
+            ow: true
+            ow-el: ''
+            ow-cl: mb-8
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: true
+            fis-el: span
+            fis-cl: 'text-green-500 body-sm hocus-text-underline'
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 8
+    region: bundle
+  field_tags:
+    type: entity_reference_label_class
+    label: inline
+    settings:
+      link: true
+      class: 'button tag-button mb-4'
+      tag: span
+    third_party_settings:
+      ds:
+        ds_limit: ''
+        ft:
+          id: expert
+          settings:
+            lb: 'Explore More:'
+            lbw: true
+            lbw-el: ''
+            lbw-cl: 'explore-more body-serif-italic-xs'
+            lbw-at: ''
+            lb-col: false
+            ow: false
+            ow-el: ''
+            ow-cl: mb-8
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: button
+            fi-cl: 'button white ghost small'
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 7
+    region: bundle
+  field_type:
+    type: entity_reference_label_class
+    label: inline
+    settings:
+      link: false
+      class: ''
+      tag: span
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: INSIGHTS
+            lbw: true
+            lbw-el: span
+            lbw-cl: 'tag color-action'
+            lbw-at: ''
+            lb-col: false
+            ow: false
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: span
+            fi-cl: 'article-type utility-base text-neutral-600'
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 0
+    region: title
+hidden:
+  addtocal: true
+  content_moderation_control: true
+  field_exclude_from_blog_feed: true
+  field_featured: true
+  field_featured_headline: true
+  field_featured_media: true
+  field_featured_text: true
+  field_featured_tweet: true
+  field_hide_featured_wri_experts: true
+  field_main_image_caption: true
+  field_main_image_display: true
+  field_metatags: true
+  field_primary_contacts: true
+  field_primary_topic: true
+  field_projects: true
+  field_region: true
+  field_related_resources: true
+  langcode: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

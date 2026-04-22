@@ -1,0 +1,9 @@
+status: true
+dependencies:
+  module:
+    - node
+id: node.main_content_b
+label: 'Main Content B'
+description: ''
+targetEntityType: node
+cache: true

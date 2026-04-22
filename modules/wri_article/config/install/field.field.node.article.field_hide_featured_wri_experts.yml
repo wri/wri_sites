@@ -1,0 +1,19 @@
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_hide_featured_wri_experts
+    - node.type.article
+id: node.article.field_hide_featured_wri_experts
+field_name: field_hide_featured_wri_experts
+entity_type: node
+bundle: article
+label: 'Hide "Featured WRI Experts"'
+description: 'Many Insights templates display a "Featured WRI Experts" section at the bottom of the page, highlighting WRI internal authors. If you prefer not to display this section for this article, check this box.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,8 +1,9 @@
-langcode: en
 status: true
 dependencies:
   module:
     - focal_point
+_core:
+  default_config_hash: fjgV8Oow0qEqmo8GI5uTQoQxPvPzyzzQVSKiOFRKdpo
 name: 1440x600
 label: 1440x600
 effects:

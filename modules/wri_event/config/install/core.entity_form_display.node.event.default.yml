@@ -19,6 +19,7 @@ dependencies:
     - field.field.node.event.field_metatag
     - field.field.node.event.field_primary_contacts
     - field.field.node.event.field_primary_topic
+    - field.field.node.event.field_produced_by
     - field.field.node.event.field_projects
     - field.field.node.event.field_region
     - field.field.node.event.field_register
@@ -39,6 +40,7 @@ dependencies:
     - field_group
     - link
     - media_library
+    - media_library_edit
     - metatag
     - path
     - smart_date
@@ -72,6 +74,7 @@ third_party_settings:
         - field_projects
         - field_files
         - field_related_events
+        - field_produced_by
       label: Related
       region: content
       parent_name: group_more
@@ -131,8 +134,8 @@ third_party_settings:
       children:
         - field_zoom_webinar_id
         - field_zoom_registration_form
-        - field_sent_to_orto
         - field_zoom_list_id
+        - field_sent_to_orto
       label: Zoom
       region: content
       parent_name: group_registration_options
@@ -191,8 +194,6 @@ third_party_settings:
         open: true
         description: 'Fill in all fields under the tab you choose. For Zoom, select both a Webform and a Registration Form, or the registration button will not render.'
         required_fields: true
-_core:
-  default_config_hash: z74aUAaSQBpsQ9K8zGUX5ZiaK3V_I1GNQGOK-VcZQDs
 id: node.event.default
 targetEntityType: node
 bundle: event
@@ -235,9 +236,6 @@ content:
     region: content
     settings:
       modal: false
-      default_tz: ''
-      custom_tz: ''
-      allowed_timezones: {  }
       default_duration: 60
       default_duration_increments: |-
         30
@@ -249,7 +247,11 @@ content:
       hide_date: false
       allday: true
       remove_seconds: false
+      duration_overlay: true
       separator: to
+      default_tz: ''
+      custom_tz: America/New_York
+      allowed_timezones: {  }
       add_abbreviations: ''
     third_party_settings: {  }
   field_event_display:
@@ -272,7 +274,7 @@ content:
       media_types: {  }
     third_party_settings:
       media_library_edit:
-        show_edit: '1'
+        show_edit: true
   field_hub_canonical_url:
     type: string_textfield
     weight: 105
@@ -329,7 +331,7 @@ content:
       media_types: {  }
     third_party_settings:
       media_library_edit:
-        show_edit: '1'
+        show_edit: true
   field_metatag:
     type: metatag_firehose
     weight: 129
@@ -353,6 +355,16 @@ content:
     weight: 8
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_produced_by:
+    type: entity_reference_autocomplete
+    weight: 106
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_projects:
     type: entity_reference_autocomplete

@@ -1,0 +1,9 @@
+status: true
+dependencies:
+  module:
+    - media
+id: media.attribution
+label: Attribution
+description: 'Shows the attribution for a media item'
+targetEntityType: media
+cache: true

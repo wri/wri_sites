@@ -1,0 +1,41 @@
+status: true
+dependencies:
+  config:
+    - image.style.1130x1130
+    - image.style.445x640
+    - image.style.500x375
+    - image.style.500x660
+    - image.style.630x900
+    - image.style.768x640
+  module:
+    - wri_media
+id: half_hero
+label: 'Half Hero'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: 1130x1130
+    breakpoint_id: wrin.xlarge
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: 630x900
+    breakpoint_id: wrin.large
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: 445x640
+    breakpoint_id: wrin.medium
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: 768x640
+    breakpoint_id: wrin.phablet
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: 500x660
+    breakpoint_id: wrin.small
+    multiplier: 1x
+breakpoint_group: wri_media
+fallback_image_style: 500x375
