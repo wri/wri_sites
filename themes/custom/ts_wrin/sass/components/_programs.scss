@@ -392,6 +392,7 @@
     border-bottom: 3px solid var(--color-neutral-900);
     padding-top: 24px;
     padding-bottom: 24px;
+    @apply pl-0;
   }
   @include mq($lg) {
     border-top: 0;
