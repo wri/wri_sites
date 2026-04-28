@@ -187,12 +187,11 @@ body {
   }
 
   @include mq($md) {
-    grid-column: 2 / 9;
+    grid-column: 3 / 10;
   }
 
   @include mq($lg) {
     @include center-columns(6, $grid-columns);
-    // grid-column: 3 / 9;
   }
 }
 .layout__region--full-width,
@@ -265,7 +264,7 @@ body {
   }
 
   @include mq($md) {
-    @include column-width(9, 13);
+    @include column-width(3, 10);
   }
 
   @include mq($lg) {
