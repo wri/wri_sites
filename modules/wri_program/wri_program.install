@@ -101,3 +101,10 @@ function wri_program_update_10405(): void {
     'content#field_callout_summary',
   ], 'wri_program', 'install');
 }
+
+/**
+ * Enable the Callout view mode on the program/center node.
+ */
+function wri_program_update_10406(): void {
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.callout', 'wri_program', 'install', FALSE);
+}
