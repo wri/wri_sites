@@ -465,7 +465,7 @@
 .article-b .main-content .media--view-mode-full-width-with-attribution,
 .article-b .main-content .media--view-mode-landing-page-hero {
   @include mq($md) {
-    left: 72.5%;
+    left: 58%;
   }
   @include mq($lg) {
     left: 50%;

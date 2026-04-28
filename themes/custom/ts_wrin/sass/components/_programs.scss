@@ -384,6 +384,24 @@
     @apply pr-6;
   }
 }
+
+.article .callout--node {
+  @include mq($md) {
+    border-left: none;
+    border-top: 3px solid var(--color-neutral-900);
+    border-bottom: 3px solid var(--color-neutral-900);
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+  @include mq($lg) {
+    border-top: 0;
+    border-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-left: 3px solid var(--color-neutral-900);
+    @apply pl-6;
+  }
+}
 .callout--node img {
   max-width: 250px;
 }
@@ -418,5 +436,8 @@
   @extend .btn--sm;
 }
 .callout--node .field--name-field-callout-summary a {
-  @apply py-2 px-4;
+  @apply py-2 px-4 inline-block;
+}
+.callout--node .field--name-field-callout-summary a.button.offsite.small::after {
+  background-position: center -3px;
 }
