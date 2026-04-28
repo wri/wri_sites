@@ -461,17 +461,6 @@
   }
 }
 
-.article-b .main-content .media--view-mode-full-width,
-.article-b .main-content .media--view-mode-full-width-with-attribution,
-.article-b .main-content .media--view-mode-landing-page-hero {
-  @include mq($md) {
-    left: 72.5%;
-  }
-  @include mq($lg) {
-    left: 50%;
-  }
-}
-
 .article-b .callout.alignleft {
   @include mq($md) {
     margin: 0 var(--spacer-7) 0 -12.85%;

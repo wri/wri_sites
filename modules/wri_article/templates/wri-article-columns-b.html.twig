@@ -18,24 +18,6 @@
     {% endif %}
   {% endif %}
 
-  {% set template_class = null %}
-  {% if node and node.hasField('field_type') and not node.get('field_type').isEmpty() %}
-    {% set type = node.get('field_type').entity %}
-    {% set parent = type and not type.get('parent').isEmpty() ? type.get('parent').entity : null %}
-    {% set parent_label = parent ? parent.label : null %}
-
-    {% set map = {
-      'Technical Perspectives': 'technical-perspective-template',
-      'Update': 'project-update-template',
-      'News': 'news-template',
-      'Top Outcome': 'project-update-template',
-      '2025 Top Outcome': 'project-update-template',
-      'Snapshot': 'project-update-template'
-    } %}
-
-    {% set template_class = map[parent_label] ?? null %}
-  {% endif %}
-
   {% if node and node.hasField('field_hide_featured_wri_experts') and node.get('field_hide_featured_wri_experts').value == 1 %}
     {% set hide_featured_experts = true %}
   {% endif %}
@@ -61,7 +43,7 @@
     {% if content.title|render %}
       <div {{ region_attributes.title.addClass('layout__region', 'layout__region--full', 'title-wrapper', 'full-width', region_display_value) }}>
         {% if template_class %}
-          <div class="utility-base btn-pill font-bold">{{ type.label }}</div>
+          <div class="utility-base btn-pill font-bold">{{ type_label }}</div>
           {{ content.title|without('field_type') }}
         {% else %}
           {{ content.title }}
