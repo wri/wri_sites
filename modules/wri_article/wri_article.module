@@ -47,6 +47,26 @@ function wri_article_preprocess_wri_article_columns_b(array &$variables): void {
     return;
   }
 
+  $variables['template_class'] = '';
+  $variables['type_label'] = '';
+  if ($node->hasField('field_type') && !$node->get('field_main_image')->isEmpty()) {
+    $type = $node->get('field_type')->entity;
+    $variables['type_label'] = $type->getName();
+    $parent = $type->get('parent')->entity;
+    $parent_label = $parent ? $parent->getName() : NULL;
+
+    $map = [
+      'Technical Perspectives' => 'technical-perspective-template',
+      'Update' => 'project-update-template',
+      'News' => 'news-template',
+      'Top Outcome' => 'project-update-template',
+      '2025 Top Outcome' => 'project-update-template',
+      'Snapshot' => 'project-update-template',
+    ];
+
+    $variables['template_class'] = $map[$parent_label] ?? NULL;
+  }
+
   if (!$node->hasField('field_main_image') || $node->get('field_main_image')->isEmpty()) {
     return;
   }
