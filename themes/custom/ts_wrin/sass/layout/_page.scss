@@ -187,7 +187,7 @@ body {
   }
 
   @include mq($md) {
-    grid-column: 3 / 10;
+    grid-column: 3 / 11;
   }
 
   @include mq($lg) {
@@ -264,7 +264,7 @@ body {
   }
 
   @include mq($md) {
-    @include column-width(3, 10);
+    @include column-width(3, 11);
   }
 
   @include mq($lg) {
