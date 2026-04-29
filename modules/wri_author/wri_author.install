@@ -24,3 +24,12 @@ function wri_author_update_8900() {
 function wri_author_update_9400() {
   \Drupal::service('distro_helper.updates')->installConfig('views.view.authors', 'wri_author');
 }
+
+/**
+ * Add view modes for Feature Experts.
+ */
+function wri_author_update_10600() {
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_mode.wri_author.listing', 'wri_author');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.wri_author.external.listing', 'wri_author');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_mode.node.person_author_listing', 'wri_author');
+}

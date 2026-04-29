@@ -1,0 +1,11 @@
+uuid: 0d5ee071-a469-43d4-b04f-baada77962a3
+langcode: zh-hans
+status: true
+dependencies:
+  module:
+    - wri_author
+id: wri_author.listing
+label: Listing
+description: ''
+targetEntityType: wri_author
+cache: true
