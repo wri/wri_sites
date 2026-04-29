@@ -121,7 +121,7 @@ function wri_article_update_10601(): void {
     $is_project_update = FALSE;
     $project_update_terms = [
       'Atividade de projeto',
-      'Project Update'
+      'Project Update',
     ];
 
     foreach ($node->get('field_type')->referencedEntities() as $term) {
@@ -264,7 +264,7 @@ function wri_article_update_10604(&$sandbox) {
     $is_vignette = FALSE;
     $vignette_terms = [
       'Viñeta',
-      'Vignette'
+      'Vignette',
     ];
     foreach ($node->get('field_type')->referencedEntities() as $term) {
       if (in_array($term->label(), $vignette_terms)) {
