@@ -335,10 +335,12 @@
   .serif {
     font-family: var(--font-family-serif);
   }
+  .insights-tags {
+    @apply utility-base text-neutral-600;
 
-  .article-type {
-    span:before {
-      content: "| ";
+    .taxonomy-term.count-1 {
+      @extend .tag;
+      @apply color-action;
     }
   }
 
