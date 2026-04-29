@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Drupal\wri_article\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
+use Drupal\Core\Form\ConfigTarget;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
@@ -126,7 +127,7 @@ final class SettingsForm extends ConfigFormBase {
           '#value' => $this->t('Preview'),
         ],
       ];
-      $form['article_templates'][$key]['field'] = [
+      $form['article_templates'][$key][$key . '_field'] = [
         '#type' => 'entity_autocomplete',
         '#target_type' => 'taxonomy_term',
         '#selection_handler' => 'views',
@@ -140,15 +141,20 @@ final class SettingsForm extends ConfigFormBase {
         '#title' => $label,
         '#description' => $template_descriptions[$key],
         '#default_value' => $default_terms,
+        '#config_target' => new ConfigTarget(
+          'wri_article.settings',
+          $key,
+          NULL,
+          // 'toConfig': Convert submitted entity object to ID
+          function ($value) {
+            $to_return = [];
+            foreach ($value as $term) {
+              $to_return[] = $term['target_id'];
+            }
+            return $to_return;
+          }
+        ),
       ];
-
-      //  handler_settings:
-      //    view:
-      //      view_name: related_to_this_project
-      //      display_name: entity_reference_1
-      //      arguments:
-      //        - '[node:nid]'
-
     }
 
     return parent::buildForm($form, $form_state);
