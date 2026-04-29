@@ -70,7 +70,7 @@ function wri_webform_block_add_content_blocks_browser_dependencies() {
   // module's block type.
   $config = \Drupal::configFactory()->getEditable('views.view.content_blocks_browser');
   $data = $config->getRawData();
-  $data['display']['default']['display_options']['filters']['type_1']['value']['webform_block'] = 'webform_block';
+  $data['display']['default']['display_options']['filters']['type_1']['value']['webform'] = 'webform';
   $data['dependencies']['config'][] = 'block_content.type.webform';
   $data['dependencies']['config'] = array_unique($data['dependencies']['config']);
   $config->setData($data);
