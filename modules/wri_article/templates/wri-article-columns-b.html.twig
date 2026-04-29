@@ -44,7 +44,8 @@
       <div {{ region_attributes.title.addClass('layout__region', 'layout__region--full', 'title-wrapper', 'full-width', region_display_value) }}>
         {% if template_class %}
           <div class="utility-base btn-pill font-bold">{{ type_label }}</div>
-          {{ content.title|without('field_type') }}
+          <h1 class="heading-1">{{ node.label }}</h1>
+          {{ content.field_intro }}
         {% else %}
           {{ content.title }}
         {% endif %}
