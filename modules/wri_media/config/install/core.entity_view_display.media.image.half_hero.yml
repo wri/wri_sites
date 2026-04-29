@@ -126,7 +126,7 @@ content:
       responsive_image_style: half_hero
       image_link: ''
       image_loading:
-        attribute: lazy
+        attribute: eager
     third_party_settings:
       ds:
         ft:
