@@ -90,8 +90,11 @@ function wri_article_preprocess_wri_article_columns_b(array &$variables): void {
   $variables['template_class'] = '';
   $variables['type_label'] = '';
   if ($node->hasField('field_type') && !$node->get('field_type')->isEmpty()) {
+    $lang_code = $node->language()->getId();
     $type = $node->get('field_type')->entity;
-    $variables['type_label'] = $type->getName();
+    $translated_term = \Drupal::service('entity.repository')
+      ->getTranslationFromContext($type, $lang_code);
+    $variables['type_label'] = $translated_term->getName();
     $parent = $type->get('parent')->entity;
     $templates = [
       'technical_perspective_template',
