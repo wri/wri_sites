@@ -348,3 +348,15 @@ function wri_article_update_10606(): void {
     'content#moderation_state#weight',
   ], 'wri_article', 'install');
 }
+
+/**
+ * Add a view of top-level Resource Types for our Article form.
+ */
+function wri_article_update_10607() {
+  $configs = [
+    'views.view.top_level_resource_types',
+  ];
+  foreach ($configs as $config) {
+    \Drupal::service('distro_helper.updates')->installConfig($config, 'wri_article', 'install', FALSE);
+  }
+}

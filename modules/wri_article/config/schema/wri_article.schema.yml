@@ -8,3 +8,21 @@ wri_article.settings:
       label: 'Default to main_content_b'
       constraints:
         NotNull: [ ]
+    technical_perspective_template:
+      type: sequence
+      label: 'Technical Perspective template'
+      sequence:
+        type: integer
+        label: 'Term ID'
+    update_template:
+      type: sequence
+      label: 'Update template'
+      sequence:
+        type: integer
+        label: 'Term ID'
+    news_template:
+      type: sequence
+      label: 'News template'
+      sequence:
+        type: integer
+        label: 'Term ID'

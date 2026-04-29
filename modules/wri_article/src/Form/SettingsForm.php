@@ -7,6 +7,7 @@ namespace Drupal\wri_article\Form;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
 
 /**
  * Configure WRI article settings for this site.
@@ -38,6 +39,118 @@ final class SettingsForm extends ConfigFormBase {
       '#default_value' => $this->config('wri_article.settings')->get('enable_main_content_b'),
       '#config_target' => 'wri_article.settings:enable_main_content_b',
     ];
+
+    $form['article_templates'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Article Templates'),
+      '#description' => $this->t('By default, all articles use the <strong>Insights template</strong>. Use the fields below to assign Article Resource Types to a different template instead.'),
+      '#open' => TRUE,
+    ];
+
+    $form['article_templates']['insights_template_image'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Insights template (default)'),
+      '#open' => TRUE,
+    ];
+
+
+    $form['article_templates']['insights_template_image']['details'] = [
+      '#type' => 'html_tag',
+      '#tag' => 'figure',
+      'link' => [
+        '#type' => 'html_tag',
+        '#tag' => 'a',
+        '#attributes' => [
+          'href' => '/profiles/contrib/wri_sites/modules/wri_article/images/insights.png',
+          'target' => '_blank',
+        ],
+        'image' => [
+          '#type' => 'html_tag',
+          '#tag' => 'img',
+          '#attributes' => [
+            'src' => '/profiles/contrib/wri_sites/modules/wri_article/images/insights.png',
+            'alt' => $this->t('Insights template preview'),
+            'width' => '100',
+          ],
+        ],
+      ],
+      'caption' => [
+        '#type' => 'html_tag',
+        '#tag' => 'figcaption',
+        '#value' => $this->t('Insights template (default)'),
+      ],
+    ];
+
+    $template_fields = [
+      'technical_perspective_template' => $this->t('Technical Perspective template'),
+      'update_template' => $this->t('Update template'),
+      'news_template' => $this->t('News template'),
+    ];
+    $template_descriptions = [
+      'technical_perspective_template' => $this->t('Top-level Resource Types that use the Technical Perspective Template.'),
+      'update_template' => $this->t('Top-level Resource Types that use the Update Template.'),
+      'news_template' => $this->t('Top-level Resource Types that use the News Template.'),
+    ];
+
+    foreach ($template_fields as $key => $label) {
+      $stored_tids = $this->config('wri_article.settings')->get($key) ?? [];
+      $default_terms = !empty($stored_tids) ? array_values(Term::loadMultiple($stored_tids)) : [];
+      $form['article_templates'][$key] = [
+        '#type' => 'details',
+        '#title' => $label,
+        '#open' => TRUE,
+      ];
+      $form['article_templates'][$key]['preview'] = [
+        '#type' => 'html_tag',
+        '#tag' => 'figure',
+        'link' => [
+          '#type' => 'html_tag',
+          '#tag' => 'a',
+          '#attributes' => [
+            'href' => '/profiles/contrib/wri_sites/modules/wri_article/images/' . $key . '.png',
+            'target' => '_blank',
+          ],
+          'image' => [
+            '#type' => 'html_tag',
+            '#tag' => 'img',
+            '#attributes' => [
+              'src' => '/profiles/contrib/wri_sites/modules/wri_article/images/' . $key . '.png',
+              'alt' => $label,
+              'width' => '100',
+            ],
+          ],
+        ],
+        'caption' => [
+          '#type' => 'html_tag',
+          '#tag' => 'figcaption',
+          '#value' => $this->t('Preview'),
+        ],
+      ];
+      $form['article_templates'][$key]['field'] = [
+        '#type' => 'entity_autocomplete',
+        '#target_type' => 'taxonomy_term',
+        '#selection_handler' => 'views',
+        '#selection_settings' => [
+          'view' => [
+            'view_name' => 'top_level_resource_types',
+            'display_name' => 'entity_reference_1'
+          ],
+        ],
+        '#tags' => TRUE,
+        '#title' => $label,
+        '#description' => $template_descriptions[$key],
+        '#default_value' => $default_terms,
+      ];
+
+      //  handler_settings:
+      //    view:
+      //      view_name: related_to_this_project
+      //      display_name: entity_reference_1
+      //      arguments:
+      //        - '[node:nid]'
+
+    }
+
     return parent::buildForm($form, $form_state);
   }
 
@@ -47,6 +160,7 @@ final class SettingsForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     $was_main_content_b = $form["enable_main_content_b"]["#default_value"];
     $enable_main_content_b = $form_state->getValue('enable_main_content_b');
+
     parent::submitForm($form, $form_state);
     if ($was_main_content_b == $enable_main_content_b) {
       // Nothing changes.
