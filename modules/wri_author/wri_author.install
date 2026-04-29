@@ -31,5 +31,4 @@ function wri_author_update_9400() {
 function wri_author_update_10600() {
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_mode.wri_author.listing', 'wri_author');
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.wri_author.internal.listing', 'wri_author');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_mode.node.person_author_listing', 'wri_author');
 }

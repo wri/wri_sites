@@ -1,9 +1,0 @@
-status: true
-dependencies:
-  module:
-    - node
-id: node.person_author_listing
-label: 'Person author listing'
-description: ''
-targetEntityType: node
-cache: true
