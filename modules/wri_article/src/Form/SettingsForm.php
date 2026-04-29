@@ -4,16 +4,33 @@ declare(strict_types=1);
 
 namespace Drupal\wri_article\Form;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\ConfigTarget;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\Entity\Node;
-use Drupal\taxonomy\Entity\Term;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Configure WRI article settings for this site.
  */
 final class SettingsForm extends ConfigFormBase {
+
+  /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected EntityTypeManagerInterface $entityTypeManager;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container): static {
+    $instance = parent::create($container);
+    $instance->entityTypeManager = $container->get('entity_type.manager');
+    return $instance;
+  }
 
   /**
    * {@inheritdoc}
@@ -94,7 +111,7 @@ final class SettingsForm extends ConfigFormBase {
 
     foreach ($template_fields as $key => $label) {
       $stored_tids = $this->config('wri_article.settings')->get($key) ?? [];
-      $default_terms = !empty($stored_tids) ? array_values(Term::loadMultiple($stored_tids)) : [];
+      $default_terms = !empty($stored_tids) ? array_values($this->entityTypeManager->getStorage('taxonomy_term')->loadMultiple($stored_tids)) : [];
       $form['article_templates'][$key] = [
         '#type' => 'details',
         '#title' => $label,
