@@ -119,8 +119,13 @@ function wri_article_update_10601(): void {
     }
 
     $is_project_update = FALSE;
+    $project_update_terms = [
+      'Atividade de projeto',
+      'Project Update'
+    ];
+
     foreach ($node->get('field_type')->referencedEntities() as $term) {
-      if ($term->label() === 'Project Update') {
+      if (in_array($term->label(), $project_update_terms)) {
         $is_project_update = TRUE;
         break;
       }
@@ -257,8 +262,12 @@ function wri_article_update_10604(&$sandbox) {
     }
 
     $is_vignette = FALSE;
+    $vignette_terms = [
+      'Viñeta',
+      'Vignette'
+    ];
     foreach ($node->get('field_type')->referencedEntities() as $term) {
-      if ($term->label() === 'Vignette') {
+      if (in_array($term->label(), $vignette_terms)) {
         $is_vignette = TRUE;
         break;
       }
