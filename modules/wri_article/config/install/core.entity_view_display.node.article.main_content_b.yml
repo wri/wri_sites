@@ -30,11 +30,13 @@ dependencies:
     - field.field.node.article.field_tags
     - field.field.node.article.field_type
     - field.field.node.article.layout_builder__layout
+    - field.field.node.article.layout_builder__translation
     - node.type.article
   module:
     - datetime
     - ds
     - element_class_formatter
+    - hierarchical_term_formatter
     - layout_builder
     - text
     - user
@@ -489,26 +491,28 @@ content:
     weight: 7
     region: bundle
   field_type:
-    type: entity_reference_label_class
-    label: inline
+    type: hierarchical_term_formatter
+    label: hidden
     settings:
+      display: all
       link: false
-      class: ''
-      tag: span
+      wrap: span
+      separator: ' | '
+      reverse: false
     third_party_settings:
       ds:
         ft:
           id: expert
           settings:
-            lb: INSIGHTS
-            lbw: true
-            lbw-el: span
-            lbw-cl: 'tag color-action'
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
             lbw-at: ''
             lb-col: false
-            ow: false
-            ow-el: ''
-            ow-cl: ''
+            ow: true
+            ow-el: div
+            ow-cl: insights-tags
             ow-at: ''
             ow-def-at: false
             ow-def-cl: false
@@ -517,9 +521,9 @@ content:
             fis-cl: ''
             fis-at: ''
             fis-def-at: false
-            fi: true
-            fi-el: span
-            fi-cl: 'article-type utility-base text-neutral-600'
+            fi: false
+            fi-el: ''
+            fi-cl: ''
             fi-at: ''
             fi-def-at: false
             prefix: ''
@@ -546,6 +550,7 @@ hidden:
   field_related_resources: true
   langcode: true
   layout_builder__layout: true
+  layout_builder__translation: true
   links: true
   search_api_excerpt: true
   wri_social_sharing_block: true
