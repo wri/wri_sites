@@ -54,7 +54,6 @@ final class SettingsForm extends ConfigFormBase {
       '#open' => TRUE,
     ];
 
-
     $form['article_templates']['insights_template_image']['details'] = [
       '#type' => 'html_tag',
       '#tag' => 'figure',
@@ -134,7 +133,7 @@ final class SettingsForm extends ConfigFormBase {
         '#selection_settings' => [
           'view' => [
             'view_name' => 'top_level_resource_types',
-            'display_name' => 'entity_reference_1'
+            'display_name' => 'entity_reference_1',
           ],
         ],
         '#tags' => TRUE,
