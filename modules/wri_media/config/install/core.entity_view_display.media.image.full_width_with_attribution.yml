@@ -1,0 +1,145 @@
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.full_width_with_attribution
+    - field.field.media.image.field_attribution
+    - field.field.media.image.field_media_image
+    - field.field.media.image.field_tags
+    - media.type.image
+    - responsive_image.styles.article_hero_large_cta
+  module:
+    - ds
+    - field_group
+    - layout_builder
+    - responsive_image
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  field_group:
+    group_caption_and_attribution:
+      children:
+        - caption_placeholder
+        - field_attribution
+      label: 'Caption and Attribution'
+      parent_name: group_full_width_caption_wrapper
+      region: content
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: 'caption-wrapper layout__region layout__region--full utility-sm mt-4 text-neutral-800'
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_full_width_caption_wrapper:
+      children:
+        - group_caption_and_attribution
+      label: 'Full-width caption wrapper'
+      parent_name: ''
+      region: content
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: grid
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        element: article
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+  ds:
+    layout:
+      id: layout_onecol
+      library: layout_discovery/onecol
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      content:
+        - field_media_image
+        - group_full_width_caption_wrapper
+        - group_caption_and_attribution
+        - caption_placeholder
+        - field_attribution
+id: media.image.full_width_with_attribution
+targetEntityType: media
+bundle: image
+mode: full_width_with_attribution
+content:
+  caption_placeholder:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_attribution:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: false
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: 'Image by'
+            suffix: ''
+    weight: 11
+    region: content
+  field_media_image:
+    type: responsive_image
+    label: hidden
+    settings:
+      responsive_image_style: article_hero_large_cta
+      image_link: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_tags: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

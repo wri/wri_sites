@@ -29,6 +29,7 @@ dependencies:
     - inline_entity_form
     - link_attributes
     - media_library
+    - media_library_edit
     - metatag
     - path
     - text
@@ -153,6 +154,7 @@ content:
       collapsible: false
       collapsed: false
       revision: false
+      removed_reference: optional
     third_party_settings: {  }
   field_featured:
     type: options_buttons
@@ -214,6 +216,7 @@ content:
     region: content
     settings:
       sidebar: true
+      use_details: true
     third_party_settings: {  }
   field_narrative_taxonomy:
     type: text_textarea
@@ -239,6 +242,7 @@ content:
         class: false
         accesskey: false
         title: false
+      widget_default_open: expandIfValuesSet
     third_party_settings: {  }
   field_primary_contacts:
     type: entity_reference_autocomplete

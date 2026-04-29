@@ -1,0 +1,24 @@
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_long_title
+    - filter.format.basic_html
+    - filter.format.full_html
+    - node.type.subpage
+  module:
+    - text
+id: node.subpage.field_long_title
+field_name: field_long_title
+entity_type: node
+bundle: subpage
+label: 'Long Title'
+description: 'A longer title that displays on the full subpage, and can have line breaks and classes.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+    - basic_html
+field_type: text_long

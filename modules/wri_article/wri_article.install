@@ -160,11 +160,54 @@ function wri_article_update_10601(): void {
  */
 function wri_article_update_10603() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.article.full', [
-    'third_party_settings#layout_builder#sections#0#components',
+    'third_party_settings#layout_builder#sections#0#components#3',
+    'third_party_settings#layout_builder#sections#0#components#4',
     'third_party_settings#layout_builder_restrictions#entity_view_mode_restriction#allowlisted_blocks#Content fields',
   ], 'wri_article');
+  $message = "Updating default blocks on Full display.";
 
-  $message = 'Setting Articles to use Main Content B';
+  $article_settings = \Drupal::config('article.settings');
+  if ($article_settings->get('enable_article_blocks')) {
+
+    $view_mode = 'main_content_b';
+    $display_config = \Drupal::service('config.factory')->getEditable('core.entity_view_display.node.article.full');
+    $sections = $display_config->get('third_party_settings.layout_builder.sections');
+    $sections[0]['components'][0]['configuration']['view_mode'] = $view_mode;
+    $display_config->set('third_party_settings.layout_builder.sections', $sections)->save();
+    $message .= 'Setting Articles to use Main Content B';
+  }
+
+  $configs = [
+    'field.storage.node.field_callout_summary',
+    'field.storage.node.field_hide_featured_wri_experts',
+    'field.storage.node.field_key_takeaways',
+    'field.storage.node.field_main_image_caption',
+    'field.storage.node.field_main_image_display',
+    'field.storage.node.field_most_recently_updated_date',
+    'field.storage.node.field_original_publish_date',
+    'field.storage.node.field_produced_by',
+    'field.storage.node.field_relevant_project',
+  ];
+  foreach ($configs as $config) {
+    \Drupal::service('distro_helper.updates')->installConfig($config, 'wri_node', 'install', FALSE);
+  }
+  $configs = [
+    'core.entity_view_mode.node.main_content_b',
+    'field.field.node.article.field_hide_featured_wri_experts',
+    'field.field.node.article.field_intro',
+    'field.field.node.article.field_key_takeaways',
+    'field.field.node.article.field_main_image_caption',
+    'field.field.node.article.field_main_image_display',
+    'field.field.node.article.field_most_recently_updated_date',
+    'field.field.node.article.field_original_publish_date',
+    'field.field.node.article.field_primary_contacts',
+    'field.field.node.article.field_produced_by',
+    'field.field.node.article.field_relevant_project',
+    'core.entity_view_display.node.article.main_content_b',
+  ];
+  foreach ($configs as $config) {
+    \Drupal::service('distro_helper.updates')->installConfig($config, 'wri_article', 'install', FALSE);
+  }
   return $message;
 }
 
@@ -257,5 +300,63 @@ function wri_article_update_10604(&$sandbox) {
 
     $logger->notice($message);
     return $message;
+  }
+}
+
+/**
+ * Update article main_content view display with produced_by field.
+ */
+function wri_article_update_10605(): void {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.article.main_content', [
+    'content#field_produced_by',
+    'third_party_settings#ds#regions#right_sidebar',
+  ], 'wri_article', 'install');
+}
+
+/**
+ * Update article default form display with new fields and field groups.
+ */
+function wri_article_update_10606(): void {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.article.default', [
+    'third_party_settings#field_group#group_related#children',
+    'third_party_settings#field_group#group_experts_and_staff',
+    'third_party_settings#field_group#group_more#children',
+    'third_party_settings#field_group#group_publishing#weight',
+    'third_party_settings#field_group#group_more#weight',
+    'content#field_hide_featured_wri_experts',
+    'content#field_intro',
+    'content#field_key_takeaways',
+    'content#field_main_image_caption',
+    'content#field_main_image_display',
+    'content#field_most_recently_updated_date',
+    'content#field_original_publish_date',
+    'content#field_primary_contacts',
+    'content#field_produced_by',
+    'content#field_relevant_project',
+    'content#body#weight',
+    'content#field_authors#weight',
+    'content#field_intro#weight',
+    'content#field_main_image_caption#weight',
+    'content#field_main_image_display#weight',
+    'content#langcode#weight',
+    'content#path#weight',
+    'content#promote#weight',
+    'content#status#weight',
+    'content#sticky#weight',
+    'content#url_redirects#weight',
+    'content#field_metatags#weight',
+    'content#moderation_state#weight',
+  ], 'wri_article', 'install');
+}
+
+/**
+ * Add a view of top-level Resource Types for our Article form.
+ */
+function wri_article_update_10607() {
+  $configs = [
+    'views.view.top_level_resource_types',
+  ];
+  foreach ($configs as $config) {
+    \Drupal::service('distro_helper.updates')->installConfig($config, 'wri_article', 'install', FALSE);
   }
 }

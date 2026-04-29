@@ -80,7 +80,7 @@
   <div class="article__meta grid">
     {% if content.bundle|render and template_class   %}
       <div {{ region_attributes.bundle.addClass('more-social-wrapper', 'layout__region', 'layout__region--bundle', 'layout__region--full') }}>
-        {% if template_class == 'project-update-template' %}
+        {% if template_class == 'project_update_template' %}
           {% if content.bundle.field_relevant_project %}
             {{ content.bundle.field_relevant_project }}
           {% endif %}

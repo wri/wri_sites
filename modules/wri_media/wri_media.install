@@ -217,3 +217,25 @@ function wri_media_update_10601(&$sandbox) {
     return $message;
   }
 }
+
+/**
+ * Install new media view modes, image styles, and responsive image styles.
+ */
+function wri_media_update_10602(): void {
+  $configs = [
+    'core.entity_view_mode.media.attribution',
+    'core.entity_view_mode.media.full_content_with_attribution',
+    'core.entity_view_mode.media.full_width_with_attribution',
+    'core.entity_view_mode.media.half_hero',
+    'image.style.1130x1130',
+    'responsive_image.styles.full_content_max_height',
+    'responsive_image.styles.half_hero',
+    'core.entity_view_display.media.image.attribution',
+    'core.entity_view_display.media.image.full_content_with_attribution',
+    'core.entity_view_display.media.image.full_width_with_attribution',
+    'core.entity_view_display.media.image.half_hero',
+  ];
+  foreach ($configs as $config) {
+    \Drupal::service('distro_helper.updates')->installConfig($config, 'wri_media', 'install', FALSE);
+  }
+}

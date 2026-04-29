@@ -1,0 +1,9 @@
+status: true
+dependencies:
+  module:
+    - media
+id: media.full_content_with_attribution
+label: 'Full content with attribution'
+description: 'Mirrors the Full content view mode but adds an attribution'
+targetEntityType: media
+cache: true

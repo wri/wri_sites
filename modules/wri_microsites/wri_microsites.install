@@ -51,3 +51,20 @@ function wri_microsites_update_dependencies() {
   ];
   return $dependencies;
 }
+
+/**
+ * Install the callout summary field for microsites.
+ */
+function wri_microsites_update_10404(): void {
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.microsite.field_callout_summary', 'wri_microsites', 'install', FALSE);
+}
+
+/**
+ * Update microsite form display to add field_callout_summary.
+ */
+function wri_microsites_update_10405(): void {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.microsite.default', [
+    'third_party_settings#field_group#group_featured#children',
+    'content#field_callout_summary',
+  ], 'wri_microsites', 'install');
+}

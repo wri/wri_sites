@@ -5,7 +5,46 @@
  * Publication module code.
  */
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_form_FORM_ID_alter() for node_form.
+ */
+function wri_article_form_node_article_form_alter(array &$form, FormStateInterface $form_state): void {
+  _wri_article_hide_main_content_b_fields($form);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for node_form.
+ */
+function wri_article_form_node_article_edit_form_alter(array &$form, FormStateInterface $form_state): void {
+  _wri_article_hide_main_content_b_fields($form);
+}
+
+/**
+ * Hides fields only relevant to Main Content B when that mode is disabled.
+ */
+function _wri_article_hide_main_content_b_fields(array &$form): void {
+  if (\Drupal::config('wri_article.settings')->get('enable_main_content_b')) {
+    return;
+  }
+  $fields = [
+    'field_hide_featured_wri_experts',
+    'field_key_takeaways',
+    'field_intro',
+    'field_main_image_caption',
+    'field_main_image_display',
+    'field_most_recently_updated_date',
+    'field_original_publish_date',
+    'field_relevant_project',
+  ];
+  foreach ($fields as $field) {
+    if (isset($form[$field])) {
+      $form[$field]['#access'] = FALSE;
+    }
+  }
+}
 
 /**
  * Implements hook_preprocess_hook().
@@ -29,6 +68,7 @@ function wri_article_preprocess_wri_article_columns(&$context) {
  * Preprocess for the wri_article_columns_b SFC layout.
  */
 function wri_article_preprocess_wri_article_columns_b(array &$variables): void {
+  $article_settings = \Drupal::config('wri_article.settings');
   // Show the label on "field_original_publish_date" if
   // "field_most_recently_updated_date" has a value.
   if (isset($variables["content"]["byline"]["field_most_recently_updated_date"][0])) {
@@ -49,22 +89,26 @@ function wri_article_preprocess_wri_article_columns_b(array &$variables): void {
 
   $variables['template_class'] = '';
   $variables['type_label'] = '';
-  if ($node->hasField('field_type') && !$node->get('field_main_image')->isEmpty()) {
+  if ($node->hasField('field_type') && !$node->get('field_type')->isEmpty()) {
+    $lang_code = $node->language()->getId();
     $type = $node->get('field_type')->entity;
-    $variables['type_label'] = $type->getName();
+    $translated_term = \Drupal::service('entity.repository')
+      ->getTranslationFromContext($type, $lang_code);
+    $variables['type_label'] = $translated_term->getName();
     $parent = $type->get('parent')->entity;
-    $parent_label = $parent ? $parent->getName() : NULL;
-
-    $map = [
-      'Technical Perspectives' => 'technical-perspective-template',
-      'Update' => 'project-update-template',
-      'News' => 'news-template',
-      'Top Outcome' => 'project-update-template',
-      '2025 Top Outcome' => 'project-update-template',
-      'Snapshot' => 'project-update-template',
+    $templates = [
+      'technical_perspective_template',
+      'update_template',
+      'news_template',
     ];
 
-    $variables['template_class'] = $map[$parent_label] ?? NULL;
+    foreach ($templates as $template) {
+      $terms_for_this_template = $article_settings->get($template);
+
+      if (is_array($terms_for_this_template) && in_array($parent->id(), $terms_for_this_template)) {
+        $variables['template_class'] = $template;
+      }
+    }
   }
 
   if (!$node->hasField('field_main_image') || $node->get('field_main_image')->isEmpty()) {

@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Update hooks for wri_subpage.
+ */
+
+/**
+ * Install the long title field for subpages.
+ */
+function wri_subpage_update_10601(): void {
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.subpage.field_long_title', 'wri_subpage', 'install', FALSE);
+}

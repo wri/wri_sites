@@ -1,0 +1,31 @@
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_main_image_display
+field_name: field_main_image_display
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: full_width_with_attribution
+      label: 'Full width'
+    -
+      value: full_content_with_attribution
+      label: 'Full content'
+    -
+      value: half_content
+      label: 'Half width'
+    -
+      value: hide_image
+      label: Hide
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

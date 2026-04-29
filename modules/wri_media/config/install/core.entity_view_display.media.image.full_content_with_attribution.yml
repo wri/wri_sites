@@ -1,0 +1,133 @@
+uuid: 9c2111fd-2dd3-4f87-9df7-3156cb79a805
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.full_content_with_attribution
+    - field.field.media.image.field_attribution
+    - field.field.media.image.field_media_image
+    - field.field.media.image.field_tags
+    - media.type.image
+    - responsive_image.styles.full_content_max_height
+  module:
+    - ds
+    - field_group
+    - layout_builder
+    - responsive_image
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  ds:
+    layout:
+      id: layout_onecol
+      library: layout_discovery/onecol
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      content:
+        - field_media_image
+        - caption_placeholder
+        - field_attribution
+        - group_caption_and_attribution
+  field_group:
+    group_caption_and_attribution:
+      children:
+        - caption_placeholder
+        - field_attribution
+      label: 'Caption and Attribution'
+      parent_name: ''
+      region: content
+      weight: 20
+      format_type: html_element
+      format_settings:
+        classes: 'caption-wrapper layout__region layout__region--full utility-sm mt-4 text-neutral-800'
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+id: media.image.full_content_with_attribution
+targetEntityType: media
+bundle: image
+mode: full_content_with_attribution
+content:
+  caption_placeholder:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_attribution:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: false
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: 'Image by'
+            suffix: ''
+    weight: 2
+    region: content
+  field_media_image:
+    type: responsive_image
+    label: hidden
+    settings:
+      responsive_image_style: full_content_max_height
+      image_link: ''
+      image_loading:
+        attribute: eager
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 0
+    region: content
+  wri_media_insert_caption:
+    type: wri_media_caption_placeholder
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  created: true
+  field_tags: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

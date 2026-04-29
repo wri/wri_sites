@@ -1,0 +1,19 @@
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_most_recently_updated_date
+    - node.type.article
+  module:
+    - datetime
+id: node.article.field_most_recently_updated_date
+field_name: field_most_recently_updated_date
+entity_type: node
+bundle: article
+label: 'Most recently updated date'
+description: 'Appears in article hero area.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

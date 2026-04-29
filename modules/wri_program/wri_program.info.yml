@@ -7,6 +7,7 @@ dependencies:
   - wri_node
   - wri_impact
   - wri_happening_now
+  - wri_narrative
   - wri_paragraph
   - wri_taxonomy
 config_devel:

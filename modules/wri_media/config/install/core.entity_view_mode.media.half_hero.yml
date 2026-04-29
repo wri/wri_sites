@@ -1,0 +1,9 @@
+status: true
+dependencies:
+  module:
+    - media
+id: media.half_hero
+label: 'Half Hero'
+description: ''
+targetEntityType: media
+cache: true
