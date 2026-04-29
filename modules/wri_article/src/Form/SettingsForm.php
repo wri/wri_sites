@@ -161,14 +161,7 @@ final class SettingsForm extends ConfigFormBase {
           'wri_article.settings',
           $key,
           NULL,
-          // 'toConfig': Convert submitted entity object to ID
-          function ($value) {
-            $to_return = [];
-            foreach ($value as $term) {
-              $to_return[] = $term['target_id'];
-            }
-            return $to_return;
-          }
+          [self::class, 'termIdsFromAutocomplete'],
         ),
       ];
     }
@@ -204,6 +197,19 @@ final class SettingsForm extends ConfigFormBase {
       'finished' => [self::class, 'batchFinished'],
     ];
     batch_set($batch);
+  }
+
+  /**
+   * ConfigTarget toConfig callback: extract term IDs from entity_autocomplete.
+   */
+  public static function termIdsFromAutocomplete(mixed $value): array {
+    $to_return = [];
+    if (is_array($value)) {
+      foreach ($value as $term) {
+        $to_return[] = $term['target_id'];
+      }
+    }
+    return $to_return;
   }
 
   /**
