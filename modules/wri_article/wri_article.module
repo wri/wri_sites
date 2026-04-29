@@ -115,7 +115,8 @@ function wri_article_preprocess_wri_article_columns_b(array &$variables): void {
   $variables['featured_experts'] = [];
   if ($node->hasField('field_hide_featured_wri_experts') && $node->get('field_hide_featured_wri_experts')->value == 1) {
     $variables['show_featured_experts'] = FALSE;
-  } else {
+  }
+  else {
     if ($node->hasField('field_authors') && !$node->get('field_authors')->isEmpty()) {
       foreach ($node->get('field_authors')->referencedEntities() as $author) {
         if ($author && $author->hasField('field_person') && !$author->get('field_person')->isEmpty()) {
