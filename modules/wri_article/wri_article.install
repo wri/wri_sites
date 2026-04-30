@@ -120,7 +120,7 @@ function wri_article_update_10601(): void {
 
     $is_project_update = FALSE;
     $project_update_terms = [
-      'Atividade de projeto',
+      'Atividades de projeto',
       'Project Update',
     ];
 
