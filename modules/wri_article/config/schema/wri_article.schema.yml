@@ -10,19 +10,37 @@ wri_article.settings:
         NotNull: [ ]
     technical_perspective_template:
       type: sequence
-      label: 'Technical Perspective template'
+      label: 'Technical Perspective template for root terms'
       sequence:
         type: integer
         label: 'Term ID'
     update_template:
       type: sequence
-      label: 'Update template'
+      label: 'Update template for root terms'
       sequence:
         type: integer
         label: 'Term ID'
     news_template:
       type: sequence
-      label: 'News template'
+      label: 'News template for root terms'
+      sequence:
+        type: integer
+        label: 'Term ID'
+    technical_perspective_template_child_field:
+      type: sequence
+      label: 'Technical Perspective template for child terms'
+      sequence:
+        type: integer
+        label: 'Term ID'
+    update_template_child_field:
+      type: sequence
+      label: 'Update template for child terms'
+      sequence:
+        type: integer
+        label: 'Term ID'
+    news_template_child_field:
+      type: sequence
+      label: 'News template for child terms'
       sequence:
         type: integer
         label: 'Term ID'
