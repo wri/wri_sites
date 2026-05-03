@@ -68,7 +68,7 @@ function wri_article_preprocess_wri_article_columns(&$context) {
  * Preprocess for the wri_article_columns_b SFC layout.
  */
 function wri_article_preprocess_wri_article_columns_b(array &$variables): void {
-  $article_settings = \Drupal::config('wri_article.settings');
+
   // Show the label on "field_original_publish_date" if
   // "field_most_recently_updated_date" has a value.
   if (isset($variables["content"]["byline"]["field_most_recently_updated_date"][0])) {
@@ -95,21 +95,11 @@ function wri_article_preprocess_wri_article_columns_b(array &$variables): void {
     $translated_term = \Drupal::service('entity.repository')
       ->getTranslationFromContext($type, $lang_code);
     $variables['type_label'] = $translated_term->getName();
-    $parent = $type->get('parent')->entity;
-    $templates = [
-      'technical_perspective_template',
-      'update_template',
-      'news_template',
-    ];
 
-    foreach ($templates as $template) {
-      $parent_terms_for_this_template = $article_settings->get($template);
-      $child_terms_for_this_template = $article_settings->get($template . '_child_field');
-
-      if ((is_array($parent_terms_for_this_template) && in_array($parent->id(), $parent_terms_for_this_template)) ||
-        (is_array($child_terms_for_this_template) && in_array($type->id(), $child_terms_for_this_template))){
-        $variables['template_class'] = $template;
-      }
+    $variables['template_class'] = wri_article_get_resource_type_template($type, '_child_field');
+    if (empty($variables['template_class'])) {
+      $parent = $type->get('parent')->entity;
+      $variables['template_class'] = wri_article_get_resource_type_template($parent);
     }
   }
 
@@ -175,4 +165,30 @@ function wri_article_preprocess_wri_article_columns_b(array &$variables): void {
     $node->getCacheTags(),
     $media->getCacheTags()
   );
+}
+
+/**
+ * Helper function to get a template for a given resource type.
+ * @param $term
+ * @param $setting
+ *
+ * @return string
+ */
+function wri_article_get_resource_type_template($term, $setting_suffix = '') {
+  $article_settings = \Drupal::config('wri_article.settings');
+  $template_class = '';
+  $templates = [
+    'technical_perspective_template',
+    'update_template',
+    'news_template',
+  ];
+  foreach ($templates as $template) {
+    $terms_for_this_template = $article_settings->get($template . $setting_suffix);
+
+    if (is_array($terms_for_this_template) && in_array($term->id(), $terms_for_this_template)) {
+      $template_class = $template;
+      break;
+    }
+  }
+  return $template_class;
 }
