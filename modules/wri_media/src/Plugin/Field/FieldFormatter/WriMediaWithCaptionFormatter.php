@@ -59,6 +59,9 @@ final class WriMediaWithCaptionFormatter extends EntityReferenceEntityFormatter 
     $elements = parent::viewElements($items, $langcode);
     if (isset($this->settings["caption_field"])) {
       $parent_item = $items->getParent()->getEntity();
+      if ($parent_item->hasTranslation($langcode)) {
+        $parent_item = $parent_item->getTranslation($langcode);
+      }
       $caption_value = $parent_item->get($this->settings["caption_field"])->getValue() ?? '';
       foreach ($elements as $delta => $element) {
         $elements[$delta]['#media']->caption = $caption_value;
