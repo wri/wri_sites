@@ -111,7 +111,9 @@ final class SettingsForm extends ConfigFormBase {
 
     foreach ($template_fields as $key => $label) {
       $stored_tids = $this->config('wri_article.settings')->get($key) ?? [];
+      $stored_child_tids = $this->config('wri_article.settings')->get($key . '_child_field') ?? [];
       $default_terms = !empty($stored_tids) ? array_values($this->entityTypeManager->getStorage('taxonomy_term')->loadMultiple($stored_tids)) : [];
+      $default_child_terms = !empty($stored_tids) ? array_values($this->entityTypeManager->getStorage('taxonomy_term')->loadMultiple($stored_child_tids)) : [];
       $form['article_templates'][$key] = [
         '#type' => 'details',
         '#title' => $label,
@@ -154,12 +156,32 @@ final class SettingsForm extends ConfigFormBase {
           ],
         ],
         '#tags' => TRUE,
-        '#title' => $label,
-        '#description' => $template_descriptions[$key],
+        '#title' => $template_descriptions[$key],
         '#default_value' => $default_terms,
         '#config_target' => new ConfigTarget(
           'wri_article.settings',
           $key,
+          NULL,
+          [self::class, 'termIdsFromAutocomplete'],
+        ),
+      ];
+
+      $form['article_templates'][$key][$key . '_child_field'] = [
+        '#type' => 'entity_autocomplete',
+        '#target_type' => 'taxonomy_term',
+        '#selection_handler' => 'views',
+        '#selection_settings' => [
+          'view' => [
+            'view_name' => 'top_level_resource_types',
+            'display_name' => 'children',
+          ],
+        ],
+        '#tags' => TRUE,
+        '#title' => 'Non-' . $template_descriptions[$key],
+        '#default_value' => $stored_child_tids,
+        '#config_target' => new ConfigTarget(
+          'wri_article.settings',
+          $key . '_child_field',
           NULL,
           [self::class, 'termIdsFromAutocomplete'],
         ),

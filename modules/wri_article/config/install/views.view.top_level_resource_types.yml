@@ -6,7 +6,7 @@ dependencies:
     - taxonomy
     - user
 id: top_level_resource_types
-label: 'Top-level resource types'
+label: 'Top- and Child- level resource types'
 module: views
 description: ''
 tag: ''
@@ -20,6 +20,13 @@ display:
     position: 0
     display_options:
       fields:
+        parent_target_id:
+          id: parent_target_id
+          table: taxonomy_term__parent
+          field: parent_target_id
+          entity_type: taxonomy_term
+          entity_field: parent
+          plugin_id: field
         name:
           id: name
           table: taxonomy_term_field_data
@@ -142,7 +149,7 @@ display:
           value:
             min: ''
             max: ''
-            value: .
+            value: '0'
           group: 1
           exposed: false
           expose:
@@ -208,9 +215,103 @@ display:
         - url.query_args
         - user.permissions
       tags: {  }
+  children:
+    id: children
+    display_title: 'Child-only terms'
+    display_plugin: entity_reference
+    position: 2
+    display_options:
+      filters:
+        status:
+          id: status
+          table: taxonomy_term_field_data
+          field: status
+          entity_type: taxonomy_term
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        vid:
+          id: vid
+          table: taxonomy_term_field_data
+          field: vid
+          entity_type: taxonomy_term
+          entity_field: vid
+          plugin_id: bundle
+          value:
+            resource_type: resource_type
+        parent_target_id:
+          id: parent_target_id
+          table: taxonomy_term__parent
+          field: parent_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: taxonomy_term
+          entity_field: parent
+          plugin_id: numeric
+          operator: '>'
+          value:
+            min: ''
+            max: ''
+            value: '0'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: entity_reference
+        options:
+          search_fields:
+            name: name
+      defaults:
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - user.permissions
+      tags: {  }
   entity_reference_1:
     id: entity_reference_1
-    display_title: 'Entity Reference'
+    display_title: 'Root terms'
     display_plugin: entity_reference
     position: 1
     display_options:
@@ -219,6 +320,7 @@ display:
         options:
           search_fields:
             name: name
+      display_description: ''
       display_extenders:
         metatag_display_extender:
           metatags: {  }
