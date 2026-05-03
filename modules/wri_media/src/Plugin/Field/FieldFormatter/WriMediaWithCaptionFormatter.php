@@ -63,7 +63,10 @@ final class WriMediaWithCaptionFormatter extends EntityReferenceEntityFormatter 
       foreach ($elements as $delta => $element) {
         $elements[$delta]['#media']->caption = $caption_value;
       }
+      $elements['#cache']['contexts'][] = 'url';
     }
+
+
 
     return $elements;
   }
