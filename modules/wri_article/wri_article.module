@@ -103,9 +103,11 @@ function wri_article_preprocess_wri_article_columns_b(array &$variables): void {
     ];
 
     foreach ($templates as $template) {
-      $terms_for_this_template = $article_settings->get($template);
+      $parent_terms_for_this_template = $article_settings->get($template);
+      $child_terms_for_this_template = $article_settings->get($template . '_child_field');
 
-      if (is_array($terms_for_this_template) && in_array($parent->id(), $terms_for_this_template)) {
+      if ((is_array($parent_terms_for_this_template) && in_array($parent->id(), $parent_terms_for_this_template)) ||
+        (is_array($child_terms_for_this_template) && in_array($type->id(), $child_terms_for_this_template))){
         $variables['template_class'] = $template;
       }
     }
