@@ -297,6 +297,13 @@ display:
         options:
           search_fields:
             name: name
+      row:
+        type: entity_reference
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ' - '
+          hide_empty: false
       defaults:
         filters: false
         filter_groups: false

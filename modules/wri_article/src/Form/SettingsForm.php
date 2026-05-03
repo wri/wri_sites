@@ -178,6 +178,7 @@ final class SettingsForm extends ConfigFormBase {
         ],
         '#tags' => TRUE,
         '#title' => 'Non-' . $template_descriptions[$key],
+        '#description' => $this->t('You only need to enter terms here if they do not follow the same rules as their parent term'),
         '#default_value' => $default_child_terms,
         '#config_target' => new ConfigTarget(
           'wri_article.settings',
