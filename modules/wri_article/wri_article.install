@@ -122,6 +122,7 @@ function wri_article_update_10603(): void {
     $project_update_terms = [
       'Atividades de projeto',
       'Project Update',
+      'Actualización de proyecto',
     ];
 
     foreach ($node->get('field_type')->referencedEntities() as $term) {
