@@ -69,8 +69,6 @@ final class WriMediaWithCaptionFormatter extends EntityReferenceEntityFormatter 
       $elements['#cache']['contexts'][] = 'url';
     }
 
-
-
     return $elements;
   }
 

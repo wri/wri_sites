@@ -169,10 +169,14 @@ function wri_article_preprocess_wri_article_columns_b(array &$variables): void {
 
 /**
  * Helper function to get a template for a given resource type.
- * @param $term
- * @param $setting
+ *
+ * @param \Drupal\taxonomy\Entity\Term $term
+ *   A taxonomy term.
+ * @param string $setting_suffix
+ *   The suffix to add to the WRI Article setting's name.
  *
  * @return string
+ *   The template to use for this resource type.
  */
 function wri_article_get_resource_type_template($term, $setting_suffix = '') {
   $article_settings = \Drupal::config('wri_article.settings');
