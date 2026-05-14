@@ -92,14 +92,16 @@ function wri_article_preprocess_wri_article_columns_b(array &$variables): void {
   if ($node->hasField('field_type') && !$node->get('field_type')->isEmpty()) {
     $lang_code = $node->language()->getId();
     $type = $node->get('field_type')->entity;
-    $translated_term = \Drupal::service('entity.repository')
-      ->getTranslationFromContext($type, $lang_code);
-    $variables['type_label'] = $translated_term->getName();
+    if ($type && $lang_code) {
+      $translated_term = \Drupal::service('entity.repository')
+        ->getTranslationFromContext($type, $lang_code);
+      $variables['type_label'] = $translated_term->getName();
 
-    $variables['template_class'] = wri_article_get_resource_type_template($type, '_child_field');
-    if (empty($variables['template_class'])) {
-      $parent = $type->get('parent')->entity;
-      $variables['template_class'] = wri_article_get_resource_type_template($parent);
+      $variables['template_class'] = wri_article_get_resource_type_template($type, '_child_field');
+      if (empty($variables['template_class'])) {
+        $parent = $type->get('parent')->entity;
+        $variables['template_class'] = wri_article_get_resource_type_template($parent);
+      }
     }
   }
 
