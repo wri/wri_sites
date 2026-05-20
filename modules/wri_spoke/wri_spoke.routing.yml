@@ -1,0 +1,7 @@
+wri_spoke.canonical_urls:
+  path: '/wri-spoke/canonical-urls/{uuid}'
+  defaults:
+    _title: 'Canonical Urls'
+    _controller: '\Drupal\wri_spoke\Controller\GetCanonicalUrlsByUUID'
+  requirements:
+    _permission: 'access content'
