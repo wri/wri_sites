@@ -8,7 +8,6 @@ use Drupal\Core\Cache\CacheableJsonResponse;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityRepositoryInterface;
-use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -67,11 +66,8 @@ final class GetCanonicalUrlsByUUID extends ControllerBase {
   private function canonicalUrls(EntityInterface $term): array {
     $urls = [];
     foreach ($term->getTranslationLanguages() as $language) {
-      $urls[$language->getId()] = Url::fromRoute(
-        'entity.taxonomy_term.canonical',
-        ['taxonomy_term' => $term->id()],
-        ['language' => $language, 'absolute' => TRUE],
-      )->toString();
+      $translation = $term->getTranslation($language->getId());
+      $urls[$language->getId()] = $translation->toUrl('canonical', ['absolute' => TRUE])->toString();
     }
     return $urls;
   }
