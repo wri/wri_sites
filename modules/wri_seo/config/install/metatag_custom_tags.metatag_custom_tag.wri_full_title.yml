@@ -3,6 +3,7 @@ dependencies: {  }
 id: wri_full_title
 label: 'WRI full title'
 description: 'The full page title for search results'
+multiple: false
 htmlElement: meta
 htmlValueAttribute: content
 attributes:

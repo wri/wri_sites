@@ -3,6 +3,7 @@ dependencies: {  }
 id: wri_topic
 label: 'WRI topic'
 description: 'The topic term associated with this tag'
+multiple: false
 htmlElement: meta
 htmlValueAttribute: content
 attributes:

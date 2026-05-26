@@ -3,6 +3,7 @@ dependencies: {  }
 id: wri_type
 label: 'WRI Type'
 description: 'The resource type associated with the page'
+multiple: false
 htmlElement: meta
 htmlValueAttribute: content
 attributes:
