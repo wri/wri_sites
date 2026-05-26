@@ -11,3 +11,4 @@ tags:
   schema_web_site_type: WebSite
   schema_web_site_id: '[site:url]'
   schema_web_site_name: '[site:name]'
+  metatag_custom_tag:wri_full_title: '[current-page:title] | [site:name]'

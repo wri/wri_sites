@@ -23,3 +23,13 @@ function wri_seo_update_10401() {
   $message = 'Added custom metatags';
   return $message;
 }
+
+/**
+ * Add wri_full_title custom metatag and set global default.
+ */
+function wri_seo_update_10402() {
+  \Drupal::service('distro_helper.updates')->installConfig('metatag_custom_tags.metatag_custom_tag.wri_full_title', 'wri_seo', 'install', TRUE);
+  \Drupal::service('distro_helper.updates')->updateConfig('metatag.metatag_defaults.global', ['tags#metatag_custom_tag:wri_full_title'], 'wri_seo', '../../../config/install');
+
+  return 'Added wri_full_title custom metatag with global default.';
+}
