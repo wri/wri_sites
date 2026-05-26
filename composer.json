@@ -242,6 +242,11 @@
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "oomphinc/composer-installers-extender": true,
             "mglaman/composer-drupal-lenient": true
+        },
+        "audit": {
+            "ignore": {
+                "PKSA-dwsq-ppd2-mb1x": "Updating to 10.6.9+ should solve."
+            }
         }
     },
     "require-dev": {
