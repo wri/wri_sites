@@ -673,6 +673,28 @@ function ts_wrin_preprocess_google_json_api_result(&$variables) {
   if (isset($variables["result"]["pagemap"]["metatags"][0]["og:site_name"]) && ($variables["result"]["pagemap"]["metatags"][0]["og:site_name"] != $site_name)) {
     $variables['result']['site_name'] = $variables["result"]["pagemap"]["metatags"][0]["og:site_name"];
   }
+  // Unset the register button if the event date is passed.
+  if (isset($variables["result"]["pagemap"]["metatags"][0]["wri_register"])) {
+
+    $snippet = explode(' ... ', $variables["result"]["snippet"]);
+    // Get the published date
+    $published_date = $snippet[0];
+    // Translate the date
+
+    // Convert it to date time from format "F j Y".
+    $stored_date = \DateTime::createFromFormat('F j, Y', $published_date);
+    $today = new \DateTime('today');
+
+    if ($stored_date) {
+      if ($stored_date > $today) {
+        // stored date is in the future
+      } elseif ($stored_date < $today) {
+        $variables["result"]["pagemap"]["metatags"][0]["wri_register"] = '';
+      } else {
+        // same day
+      }
+    }
+  }
 }
 
 /**
