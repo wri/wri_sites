@@ -13,7 +13,7 @@
  */
 #}
 {% if content %}
-  <div class="teaser-item">
+  <div {{ attributes.addClass('teaser-item') }}>
   {% if content.tag or content.topic %}
     <div class="tags topic-tag margin-top-xs">
       {{ content.tag }}
@@ -28,7 +28,7 @@
         </h3>
       {% endif %}
       {% if content.intro %}
-        <div class="teaser-intro">
+        <div class="card-teaser-text">
           {{ content.intro }}
         </div>
       {% endif %}
