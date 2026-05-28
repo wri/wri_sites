@@ -27,6 +27,11 @@
           {{ content.title }}
         </h3>
       {% endif %}
+      {% if content.intro %}
+        <div class="teaser-intro">
+          {{ content.intro }}
+        </div>
+      {% endif %}
       {% if content.content_type %}
         <span class="content-type-region bundle">
           {{ content.content_type }}
