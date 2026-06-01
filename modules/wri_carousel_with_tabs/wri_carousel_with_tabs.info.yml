@@ -1,0 +1,25 @@
+name: 'WRI Carousel with tabs'
+type: module
+description: 'Provides Carousel with tabs functionality'
+core_version_requirement: '>=9.5'
+package: WRI
+dependencies:
+  - wri_admin
+  - wri_article
+  - wri_block
+  - wri_paragraph
+config_devel:
+  install:
+    - block_content.type.carousel_with_tabs.yml
+    - core.entity_form_display.block_content.carousel_with_tabs.default.yml
+    - core.entity_form_display.paragraph.tab.default.yml
+    - core.entity_view_display.block_content.carousel_with_tabs.default.yml
+    - core.entity_view_display.paragraph.tab.default.yml
+    - field.field.block_content.carousel_with_tabs.body.yml
+    - field.field.block_content.carousel_with_tabs.field_tabs.yml
+    - field.field.paragraph.tab.field_content.yml
+    - field.field.paragraph.tab.field_title.yml
+    - field.storage.block_content.field_tabs.yml
+    - field.storage.paragraph.field_content.yml
+    - language.content_settings.block_content.carousel_with_tabs.yml
+    - paragraphs.paragraphs_type.tab.yml

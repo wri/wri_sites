@@ -1,0 +1,11 @@
+<div class="cta-text-wrapper grid padding-top padding-bottom">
+  <div class="cta-text-inner">
+    <h2 class="h2 white margin-bottom-lg">{{ content.content.block_label }}</h2>
+    {{ content.content|without("block_label") }}
+  </div>
+</div>
+{% if content.content.field_tabs|render %}
+  <div class="tabs">
+    {{ content.content.field_tabs }}
+  </div>
+{% endif %}
