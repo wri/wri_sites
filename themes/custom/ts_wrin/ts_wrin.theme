@@ -12,6 +12,7 @@ use Drupal\node\NodeInterface;
 use Drupal\views\ViewExecutable;
 use Drupal\wri_node\General;
 use Drupal\Core\Url;
+use Drupal\Core\Render\Element;
 
 /**
  * Implements hook_preprocess().
@@ -325,6 +326,39 @@ function ts_wrin_preprocess_views_view(array &$variables) {
 
   if ($view_id == '3_1' && $display_id == 'block_1') {
     $variables['attributes']['class'] = 'grid';
+  }
+
+  // Clone exposed filters so we can display them different places.
+  if ($view_id == 'resources' ) {
+    $variables["exposed_topics"] = $variables["exposed"];
+    $variables["exposed_facets"] = $variables["exposed"];
+    unset($variables["exposed_topics"]["sort_by"]);
+    unset($variables["exposed_facets"]["sort_by"]);
+    $child_keys = Element::children($variables['exposed']);
+
+    foreach ($child_keys as $field_name) {
+      if (isset($variables["exposed"][$field_name])) {
+        $added_classes = $variables["exposed"][$field_name]["#attributes"]["class"] ?? [];
+
+        if (in_array('show-in-top-links', $added_classes)) {
+          unset($variables["exposed"][$field_name]);
+          unset($variables["exposed_facets"][$field_name]);
+        } elseif (in_array('show-in-facet-sidebar', $added_classes)) {
+          $grouping = $variables["exposed"][$field_name]["#group"] ?? NULL;
+          if (isset($variables["exposed"][$grouping])) {
+            unset($variables["exposed"][$grouping]);
+          }
+          if (isset($variables["exposed_topics"][$grouping])) {
+            unset($variables["exposed_topics"][$grouping]);
+          }
+          unset($variables["exposed"][$field_name]);
+          unset($variables["exposed_topics"][$field_name]);
+        } elseif (in_array('show-at-top', $added_classes)) {
+          unset($variables["exposed_facets"][$field_name]);
+          unset($variables["exposed_topics"][$field_name]);
+        }
+      }
+    }
   }
 }
 
