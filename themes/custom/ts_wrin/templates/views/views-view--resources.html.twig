@@ -23,7 +23,6 @@
     <div class="container">
       <h1 class="h1 padding-vertical">{{ view.title }}</h1>
     </div>
-  {{ drupal_block('facet_block:all_topics') }}
   {% endif %}
   <div class="resources-wrapper">
     <div class="container">
@@ -36,14 +35,7 @@
 
       <div class="grid results-wrapper">
         <div class="results-sidebar padding-bottom">
-          {% if display_id == 'resources_page' %}
-          {{ drupal_block('facet_block:within_this_topic') }}
-          {{ drupal_block('facet_block:type_of_resource') }}
-          {{ drupal_block('facet_block:subtype') }}
-          {{ drupal_block('facet_block:region') }}
-          {{ drupal_block('facet_block:country') }}
-          {{ drupal_block('facet_block:tags') }}
-          {% endif %}
+          Todo: Facets here.
         </div>
 
         <div class="results-body padding-bottom">
