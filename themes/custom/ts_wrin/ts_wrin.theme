@@ -335,6 +335,19 @@ function ts_wrin_preprocess_views_view(array &$variables) {
 
   // Clone exposed filters so we can display them different places.
   if ($view_id == 'resources' ) {
+
+    if (empty($variables["exposed"]["topic"]["#value"]) || $variables["exposed"]["topic"]["#value"] == 'All') {
+      unset($variables["exposed"]['subtopic']);
+      unset($variables["exposed"]['subtopic_collapsible']);
+    }
+    if (empty($variables["exposed"]["region"]["#value"]) || $variables["exposed"]["region"]["#value"] == 'All') {
+      unset($variables["exposed"]['country']);
+      unset($variables["exposed"]['country_collapsible']);
+    }
+    if (empty($variables["exposed"]["type"]["#value"]) || $variables["exposed"]["type"]["#value"] == 'All') {
+      unset($variables["exposed"]['subtype']);
+      unset($variables["exposed"]['subtype_collapsible']);
+    }
     $variables["exposed_topics"] = $variables["exposed"];
     $variables["exposed_facets"] = $variables["exposed"];
     unset($variables["exposed_topics"]["sort_by"]);
@@ -364,6 +377,7 @@ function ts_wrin_preprocess_views_view(array &$variables) {
         }
       }
     }
+
   }
 }
 
