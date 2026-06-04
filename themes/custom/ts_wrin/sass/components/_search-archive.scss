@@ -68,10 +68,10 @@
   background-color: var(--color-neutral-200);
 }
 
-.view-events div.form--inline,
-.view-resources div.form--inline,
-.view-paying-for-paris-resources div.form--inline,
-.experts-container div.form--inline {
+.view-events .view-filters div.form--inline,
+.view-resources .view-filters div.form--inline,
+.view-paying-for-paris-resources .view-filters div.form--inline,
+.experts-container .view-filters div.form--inline {
   @extend .grid;
   & {
     margin: 0;
@@ -367,25 +367,14 @@
 
 .results-sidebar,
 .facet-filters {
-  .block-facets ul li {
-    height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition:
-      height 0.3s,
-      opacity 0.3s;
-  }
-  .block-facets .open ul li {
-    height: 26px;
-    opacity: 1;
-  }
-  .block-facets h3 {
+  summary {
     @include font(var(--font-family-heading-condensed), "semibold", "normal");
     @include font-line-height(14, 18);
     & {
       border-top: 1px solid var(--color-neutral-900);
       color: var(--color-black);
       cursor: pointer;
+      padding: 0;
       padding-top: 10px;
       padding-bottom: 1rem;
       position: relative;
@@ -403,10 +392,16 @@
       width: 15px;
     }
   }
-  .block-facets .open h3 span {
-    transform: rotate(0deg);
+  details {
+    border: 0;
   }
-  .block-facets ul {
+  .bef-exposed-form .form--inline > details.form-item {
+    float: none;
+  }
+  details .details-wrapper {
+    padding: 0;
+  }
+  details ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -414,15 +409,15 @@
       margin: 1rem 0;
     }
   }
-  .block-facets li {
+  details li {
     list-style-type: none;
     margin: 0;
   }
-  .block-facets .open li {
+  details .open li {
     margin-bottom: 7px;
   }
-  .block-facets input[type="checkbox"],
-  .block-facets input[type="radio"] {
+  details input[type="checkbox"],
+  details input[type="radio"] {
     height: 17px;
     margin-right: 15px;
     position: relative;
@@ -430,7 +425,7 @@
     width: 17px;
     z-index: -1;
   }
-  .block-facets label {
+  details label {
     @include font(var(--font-family-heading-condensed), "normal", "normal");
     @include font-line-height(14, 18);
     & {
@@ -439,7 +434,7 @@
       position: relative;
     }
   }
-  .block-facets label::before {
+  details label::before {
     background-color: #ffffff;
     background-position: 1px 0px;
     background-repeat: no-repeat;
@@ -461,18 +456,18 @@
       background-color 0.1s linear;
     width: 20px;
   }
-  .block-facets label::before:active,
-  .block-facets label::before:hover,
-  .block-facets label::before:focus {
+  details label::before:active,
+  details label::before:hover,
+  details label::before:focus {
     cursor: pointer;
   }
-  .block-facets input:checked + label::before {
+  details input:checked + label::before {
     background-color: var(--color-green-500);
     text-shadow: 1px 1px 1px rgba(240, 240, 240, 0.5);
   }
-  .block-facets input:focus + label::before,
-  .block-facets input:active + label::before,
-  .block-facets input:hover + label::before {
+  details input:focus + label::before,
+  details input:active + label::before,
+  details input:hover + label::before {
     box-shadow:
       0 3px 8px 0 rgba(0, 0, 0, 0.2),
       0 0 0 1px rgba(0, 0, 0, 0.08);
@@ -540,8 +535,9 @@
     margin-right: 0;
     padding-bottom: 0;
 
-    .block-facets {
+    details {
       flex: 0 1 45%;
+      float: none;
 
       &:last-child {
         margin-bottom: 10px;
