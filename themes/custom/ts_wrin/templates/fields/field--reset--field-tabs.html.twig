@@ -1,0 +1,32 @@
+{#
+/**
+ * @file
+ * Template to reset all HTML for the field_tabs field.
+ *
+ * Available variables:
+ * - element: The field element.
+ * - label: The label of the field.
+ * - show_colon: TRUE if colon should be displayed after label.
+ * - items: List of all the field items. Each item contains:
+ *   - attributes: List of HTML attributes for each item.
+ *   - content: The field item's content.
+ */
+#}
+{% if not label_hidden %}
+  <div class="field-label-{{ element['#label_display']|clean_class }}">
+    {{- label }}{% if show_colon %}:{% endif -%}
+  </div>
+{% endif %}
+
+<div class="tab-titles">
+  {% for item in items %}
+    {% set paragraph = item.content['#paragraph'] %}
+    <h2 class="h2-alt tab-title-{{ loop.index }}"><a class="no-underline" href="#tab-{{ loop.index }}">{{ paragraph.field_title.value }}</a></h2>
+  {% endfor %}
+</div>
+
+<div class="tab-content">
+  {% for item in items %}
+    <div class="tab-content-{{ loop.index }}">{{ item.content }}</div>
+  {% endfor %}
+</div>

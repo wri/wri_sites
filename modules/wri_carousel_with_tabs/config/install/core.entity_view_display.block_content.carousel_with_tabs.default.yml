@@ -3,9 +3,48 @@ status: true
 dependencies:
   config:
     - block_content.type.carousel_with_tabs
+    - field.field.block_content.carousel_with_tabs.body
     - field.field.block_content.carousel_with_tabs.field_tabs
   module:
+    - ds
     - entity_reference_revisions
+    - field_group
+third_party_settings:
+  ds:
+    layout:
+      id: 'single_file_component_layout:wri_carousel_with_tabs'
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      content:
+        - group_tabs
+        - field_tabs
+  field_group:
+    group_tabs:
+      children:
+        - field_tabs
+      label: Tabs
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: tab-group
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+_core:
+  default_config_hash: iFOxdR8mLaY1RPXWzc8Otd4TCflxfeeIRk1zGh_Gm1c
 id: block_content.carousel_with_tabs.default
 targetEntityType: block_content
 bundle: carousel_with_tabs
@@ -18,8 +57,9 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 0
+    weight: 2
     region: content
 hidden:
+  body: true
   langcode: true
   search_api_excerpt: true
