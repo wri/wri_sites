@@ -5,6 +5,7 @@ core_version_requirement: '>=9.5'
 package: WRI
 dependencies:
   - wri_node
+  - wri_happening_now
 config_devel:
   install:
     - core.entity_form_display.node.page.default

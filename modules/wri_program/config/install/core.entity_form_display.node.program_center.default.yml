@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - field.field.node.program_center.body
+    - field.field.node.program_center.field_callout_summary
     - field.field.node.program_center.field_featured_experts
     - field.field.node.program_center.field_featured_project
     - field.field.node.program_center.field_intro
@@ -80,6 +81,7 @@ third_party_settings:
     group_featured:
       children:
         - field_narrative_taxonomy
+        - field_callout_summary
       label: Featured
       region: content
       parent_name: group_more
@@ -111,6 +113,14 @@ content:
     weight: 4
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_callout_summary:
+    type: text_textarea
+    weight: 106
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
     third_party_settings: {  }
   field_featured_experts:
     type: entity_reference_autocomplete
@@ -181,7 +191,7 @@ content:
       media_types: {  }
     third_party_settings:
       media_library_edit:
-        show_edit: '1'
+        show_edit: true
   field_metatag:
     type: metatag_firehose
     weight: 105

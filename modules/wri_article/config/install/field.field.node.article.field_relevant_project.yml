@@ -1,0 +1,27 @@
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_relevant_project
+    - node.type.article
+    - node.type.project_detail
+id: node.article.field_relevant_project
+field_name: field_relevant_project
+entity_type: node
+bundle: article
+label: 'Relevant project'
+description: 'Feature this program/center at the top of the article.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      project_detail: project_detail
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: program_center
+field_type: entity_reference

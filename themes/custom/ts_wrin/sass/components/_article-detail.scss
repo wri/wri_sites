@@ -335,10 +335,12 @@
   .serif {
     font-family: var(--font-family-serif);
   }
+  .insights-tags {
+    @apply utility-base text-neutral-600;
 
-  .article-type {
-    span:before {
-      content: "| ";
+    .taxonomy-term.count-1 {
+      @extend .tag;
+      @apply color-action;
     }
   }
 
@@ -458,17 +460,6 @@
     .originally-published {
       display: none;
     }
-  }
-}
-
-.article-b .main-content .media--view-mode-full-width,
-.article-b .main-content .media--view-mode-full-width-with-attribution,
-.article-b .main-content .media--view-mode-landing-page-hero {
-  @include mq($md) {
-    left: 72.5%;
-  }
-  @include mq($lg) {
-    left: 50%;
   }
 }
 

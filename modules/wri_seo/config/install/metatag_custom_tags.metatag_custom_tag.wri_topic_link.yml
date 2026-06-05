@@ -3,6 +3,7 @@ dependencies: {  }
 id: wri_topic_link
 label: 'WRI Topic link'
 description: 'The link to the topic'
+multiple: false
 htmlElement: meta
 htmlValueAttribute: href
 attributes:

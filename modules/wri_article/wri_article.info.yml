@@ -8,6 +8,7 @@ dependencies:
   - wri_media
   - wri_data
   - wri_node
+  - wri_program
   - wri_project
   - wri_publication
   - wri_taxonomy

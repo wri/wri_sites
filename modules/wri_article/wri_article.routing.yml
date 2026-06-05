@@ -1,0 +1,7 @@
+wri_article.settings:
+  path: '/admin/config/system/article-settings'
+  defaults:
+    _title: 'Article Settings'
+    _form: 'Drupal\wri_article\Form\SettingsForm'
+  requirements:
+    _permission: 'administer site configuration'

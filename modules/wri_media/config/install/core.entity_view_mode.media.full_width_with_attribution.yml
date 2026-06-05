@@ -1,0 +1,9 @@
+status: true
+dependencies:
+  module:
+    - media
+id: media.full_width_with_attribution
+label: 'Full width with attribution'
+description: ''
+targetEntityType: media
+cache: true

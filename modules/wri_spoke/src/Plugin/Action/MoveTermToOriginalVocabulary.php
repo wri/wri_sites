@@ -57,6 +57,15 @@ final class MoveTermToOriginalVocabulary extends ActionBase {
       $vocabulary = $vocabulary_storage->load($vocabulary_id);
       if ($vocabulary) {
         $entity->set('vid', $vocabulary_id);
+        // After changing the bundle, clear any fields that are not defined on
+        // the destination vocabulary to avoid "Field X is unknown" errors.
+        $destination_field_definitions = \Drupal::service('entity_field.manager')
+          ->getFieldDefinitions('taxonomy_term', $vocabulary_id);
+        foreach ($entity->getFields() as $field_name => $field) {
+          if (!isset($destination_field_definitions[$field_name])) {
+            $entity->set($field_name, NULL);
+          }
+        }
         $entity->save();
       }
     }

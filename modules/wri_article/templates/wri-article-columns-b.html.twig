@@ -18,28 +18,6 @@
     {% endif %}
   {% endif %}
 
-  {% set template_class = null %}
-  {% if node and node.hasField('field_type') and not node.get('field_type').isEmpty() %}
-    {% set type = node.get('field_type').entity %}
-    {% set parent = type and not type.get('parent').isEmpty() ? type.get('parent').entity : null %}
-    {% set parent_label = parent ? parent.label : null %}
-
-    {% set map = {
-      'Technical Perspectives': 'technical-perspective-template',
-      'Update': 'project-update-template',
-      'News': 'news-template',
-      'Top Outcome': 'project-update-template',
-      '2025 Top Outcome': 'project-update-template',
-      'Snapshot': 'project-update-template'
-    } %}
-
-    {% set template_class = map[parent_label] ?? null %}
-  {% endif %}
-
-  {% if node and node.hasField('field_hide_featured_wri_experts') and node.get('field_hide_featured_wri_experts').value == 1 %}
-    {% set hide_featured_experts = true %}
-  {% endif %}
-
 <div class="article article-b mt-4 page-layout-{{ region_display_value }} {{ template_class }}">
   {% if content.hero|render %}
   <div {{ region_attributes.hero.addClass('layout__region', 'layout__region--hero', 'layout__region--full') }}>
@@ -61,8 +39,9 @@
     {% if content.title|render %}
       <div {{ region_attributes.title.addClass('layout__region', 'layout__region--full', 'title-wrapper', 'full-width', region_display_value) }}>
         {% if template_class %}
-          <div class="utility-base btn-pill font-bold">{{ type.label }}</div>
-          {{ content.title|without('field_type') }}
+          <div class="utility-base btn-pill font-bold">{{ type_label }}</div>
+          <h1 class="heading-1">{{ node.label }}</h1>
+          {{ content.field_intro }}
         {% else %}
           {{ content.title }}
         {% endif %}
@@ -98,10 +77,8 @@
   <div class="article__meta grid">
     {% if content.bundle|render and template_class   %}
       <div {{ region_attributes.bundle.addClass('more-social-wrapper', 'layout__region', 'layout__region--bundle', 'layout__region--full') }}>
-        {% if template_class == 'project-update-template' %}
-          {% if content.bundle.field_relevant_project %}
-            {{ content.bundle.field_relevant_project }}
-          {% endif %}
+        {% if template_class == 'update_template' %}
+          {{ content.bundle.field_relevant_project }}
         {% endif %}
         {{ content.bundle|without('field_tags', 'field_relevant_project') }}
       </div>
@@ -156,23 +133,12 @@
         {{ content.main_content }}
         <div class="post-body-content">
           {% if content.byline|render and not template_class %}
-            {% set shownHeader = false %}
-            {% if node and node.hasField('field_authors') and not node.get('field_authors').isEmpty() %}
-              {% for item in node.get('field_authors') %}
-                {% set author = item.entity %}
-
-
-                {# Only show internal authors (they have field_person) #}
-                {% if author and author.hasField('field_person') and not author.get('field_person').isEmpty() and not hide_featured_experts %}
-                  {% if not shownHeader %}
-                  <div class="mt-8 mb-2 utility-md font-bold">{{ 'Featured WRI Experts:'|t }}</div>
-                  {% set shownHeader = true %}
-                  {% endif %}
-                  <div class="more-author-info">{{ drupal_entity('wri_author', item.target_id, 'listing') }}</div>
-                {% endif %}
+            {% if show_featured_experts %}
+              <div class="mt-8 mb-2 utility-md font-bold">{{ 'Featured WRI Experts:'|t }}</div>
+              {% for item in featured_experts %}
+                <div class="more-author-info">{{ drupal_entity('wri_author', item, 'listing') }}</div>
               {% endfor %}
             {% endif %}
-
           {% endif %}
           {% if image_attribution and template_class %}
             <div class="more-author-info"><p>{{ image_attribution }}</p></div>

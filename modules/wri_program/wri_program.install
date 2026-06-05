@@ -83,3 +83,28 @@ function wri_program_update_10403() {
   $message = 'Update program form display configs to use the paragraph';
   return $message;
 }
+
+/**
+ * Install the callout summary field for program center.
+ */
+function wri_program_update_10404(): void {
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_callout_summary', 'wri_node', 'install', FALSE);
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.program_center.field_callout_summary', 'wri_program', 'install', FALSE);
+}
+
+/**
+ * Update program center form display to add field_callout_summary.
+ */
+function wri_program_update_10405(): void {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.program_center.default', [
+    'third_party_settings#field_group#group_featured#children',
+    'content#field_callout_summary',
+  ], 'wri_program', 'install');
+}
+
+/**
+ * Enable the Callout view mode on the program/center node.
+ */
+function wri_program_update_10406(): void {
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.callout', 'wri_program', 'install', FALSE);
+}

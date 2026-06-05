@@ -20,7 +20,7 @@
       {% endif %}
       <div class="body-base mb-5"{{ highlight_search(result.snippet, term) }}</div>
       {% if result.pagemap.metatags[0].wri_register %}
-        {{ result.pagemap.metatags[0].wri_register }}
+        <a class="button small" href="{{ result.pagemap.metatags[0].wri_register }}">{{ "Register"|t }}</a>
       {% endif %}
     </div>
     {% if result.image_url %}

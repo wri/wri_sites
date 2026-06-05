@@ -1,16 +1,15 @@
-langcode: en
 status: true
 dependencies:
   module:
     - focal_point
-name: 3000x550
-label: 3000x550
+name: 3000x2000
+label: 3000x2000
 effects:
-  bcb329e7-b69b-42bf-93be-a0442c24f0c2:
-    uuid: bcb329e7-b69b-42bf-93be-a0442c24f0c2
+  a27089c5-3ca6-46a3-9e86-3f8b877ee9f5:
+    uuid: a27089c5-3ca6-46a3-9e86-3f8b877ee9f5
     id: focal_point_scale_and_crop
     weight: 1
     data:
       width: 3000
-      height: 550
+      height: 2000
       crop_type: focal_point

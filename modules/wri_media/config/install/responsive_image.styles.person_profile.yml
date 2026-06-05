@@ -1,8 +1,9 @@
-langcode: en
 status: true
 dependencies:
   config:
     - image.style.220px
+_core:
+  default_config_hash: _jmPDQyq9qimqcAk06KhFKmrDhlumr0U8USGZLwjcro
 id: person_profile
 label: 'Person Profile'
 image_style_mappings: {  }

@@ -9,3 +9,4 @@ attributes:
   -
     name: name
     value: wri_thumbnail
+multiple: true
