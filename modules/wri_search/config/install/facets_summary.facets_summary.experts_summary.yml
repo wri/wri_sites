@@ -8,13 +8,6 @@ dependencies:
     - search_api
 id: experts_summary
 name: 'Experts Summary'
-facet_source_id: 'search_api:views_page__experts_staff__experts_staff1'
-processor_configs:
-  hide_when_not_rendered:
-    processor_id: hide_when_not_rendered
-    weights:
-      build: '45'
-    settings: {  }
 facets:
   experts_all_topics:
     checked: true
@@ -40,3 +33,6 @@ facets:
     separator: ', '
     show_count: false
     weight: 0
+facet_source_id: 'search_api:views_page__experts_staff__experts_staff1'
+only_visible_when_facet_source_is_visible: true
+processor_configs: {  }

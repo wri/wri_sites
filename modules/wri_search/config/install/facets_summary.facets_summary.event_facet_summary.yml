@@ -8,21 +8,6 @@ dependencies:
     - search_api
 id: event_facet_summary
 name: 'Event facet summary'
-facet_source_id: 'search_api:views_page__events__resources_page'
-processor_configs:
-  hide_when_not_rendered:
-    processor_id: hide_when_not_rendered
-    weights:
-      build: '45'
-    settings: {  }
-  show_text_when_empty:
-    processor_id: show_text_when_empty
-    weights:
-      build: '10'
-    settings:
-      text:
-        value: 'No results found.'
-        format: plain_text
 facets:
   all_event_topics:
     checked: true
@@ -54,3 +39,14 @@ facets:
     separator: ', '
     show_count: false
     weight: -6
+facet_source_id: 'search_api:views_page__events__resources_page'
+only_visible_when_facet_source_is_visible: true
+processor_configs:
+  show_text_when_empty:
+    processor_id: show_text_when_empty
+    weights:
+      build: '10'
+    settings:
+      text:
+        value: 'No results found.'
+        format: plain_text

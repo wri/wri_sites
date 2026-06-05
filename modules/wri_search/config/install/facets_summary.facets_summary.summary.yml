@@ -52,9 +52,5 @@ facets:
     weight: 0
     show_count: false
 facet_source_id: 'search_api:views_page__resources__resources_page'
-processor_configs:
-  hide_when_not_rendered:
-    processor_id: hide_when_not_rendered
-    weights:
-      build: '45'
-    settings: {  }
+only_visible_when_facet_source_is_visible: true
+processor_configs: {  }
