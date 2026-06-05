@@ -2,6 +2,10 @@ langcode: en
 status: true
 dependencies:
   config:
+    - facets.facet.department
+    - facets.facet.experts_all_topics
+    - facets.facet.international_office
+    - facets.facet.languages_spoken_taxonomy_term_name
     - search_api.index.sitewide
     - views.view.experts_staff
   module:

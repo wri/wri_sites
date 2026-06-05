@@ -2,6 +2,11 @@ langcode: en
 status: true
 dependencies:
   config:
+    - facets.facet.all_event_topics
+    - facets.facet.event_languages
+    - facets.facet.event_type
+    - facets.facet.international_office_event
+    - facets.facet.type_of_event
     - search_api.index.sitewide
     - views.view.events
   module:
