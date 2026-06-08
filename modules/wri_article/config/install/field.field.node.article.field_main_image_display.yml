@@ -1,0 +1,21 @@
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_main_image_display
+    - node.type.article
+  module:
+    - options
+id: node.article.field_main_image_display
+field_name: field_main_image_display
+entity_type: node
+bundle: article
+label: 'Main Image Display'
+description: "Technical Perspectives, Updates, and Statement don't show a Main Image on the full article display, but for any Insights templates that do show an image, what kind of image should show?"
+required: true
+translatable: false
+default_value:
+  -
+    value: full_content_with_attribution
+default_value_callback: ''
+settings: {  }
+field_type: list_string

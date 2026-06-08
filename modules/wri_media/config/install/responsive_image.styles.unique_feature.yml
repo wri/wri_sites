@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -9,33 +8,35 @@ dependencies:
     - image.style.768x460
   module:
     - wri_media
+_core:
+  default_config_hash: OX_Upbz99_9FvDCSpuY11IWvYLSDaQ3xSzUXVj9Q0wo
 id: unique_feature
 label: 'Unique feature'
 image_style_mappings:
   -
-    breakpoint_id: wrin.xlarge
-    multiplier: 1x
     image_mapping_type: image_style
     image_mapping: 2000x695
-  -
-    breakpoint_id: wrin.large
+    breakpoint_id: wrin.xlarge
     multiplier: 1x
+  -
     image_mapping_type: image_style
     image_mapping: 1440x500
-  -
-    breakpoint_id: wrin.medium
+    breakpoint_id: wrin.large
     multiplier: 1x
+  -
     image_mapping_type: image_style
     image_mapping: 1024x500
-  -
-    breakpoint_id: wrin.phablet
+    breakpoint_id: wrin.medium
     multiplier: 1x
+  -
     image_mapping_type: image_style
     image_mapping: 768x460
-  -
-    breakpoint_id: wrin.small
+    breakpoint_id: wrin.phablet
     multiplier: 1x
+  -
     image_mapping_type: image_style
     image_mapping: 500x240
+    breakpoint_id: wrin.small
+    multiplier: 1x
 breakpoint_group: wri_media
 fallback_image_style: 500x240

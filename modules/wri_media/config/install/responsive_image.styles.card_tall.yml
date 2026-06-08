@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -8,33 +7,35 @@ dependencies:
     - image.style.463x330
   module:
     - wri_media
+_core:
+  default_config_hash: EU4XTfzPwioZrB16rc1w-wer_6pYPcG_U4OrIuvLiis
 id: card_tall
 label: 'Card - Tall'
 image_style_mappings:
   -
+    image_mapping_type: image_style
+    image_mapping: 300x215
     breakpoint_id: wrin.xlarge
     multiplier: 1x
+  -
     image_mapping_type: image_style
     image_mapping: 300x215
-  -
     breakpoint_id: wrin.large
     multiplier: 1x
-    image_mapping_type: image_style
-    image_mapping: 300x215
   -
-    breakpoint_id: wrin.medium
-    multiplier: 1x
     image_mapping_type: image_style
     image_mapping: 215x153
-  -
-    breakpoint_id: wrin.phablet
+    breakpoint_id: wrin.medium
     multiplier: 1x
+  -
     image_mapping_type: image_style
     image_mapping: 350x250
-  -
-    breakpoint_id: wrin.small
+    breakpoint_id: wrin.phablet
     multiplier: 1x
+  -
     image_mapping_type: image_style
     image_mapping: 463x330
+    breakpoint_id: wrin.small
+    multiplier: 1x
 breakpoint_group: wri_media
 fallback_image_style: 215x153

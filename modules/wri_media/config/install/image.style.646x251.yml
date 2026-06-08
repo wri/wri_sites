@@ -1,8 +1,9 @@
-langcode: en
 status: true
 dependencies:
   module:
     - focal_point
+_core:
+  default_config_hash: Oc3E-RNSLDPUPENbSJIWIfECrVix6pgzT_dbpFKbX9w
 name: 646x251
 label: 646x251
 effects:

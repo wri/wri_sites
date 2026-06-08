@@ -13,7 +13,7 @@ use Drupal\user\Entity\Role;
 function wri_event_callout_update_10501() {
   // Add the view.
   \Drupal::service('distro_helper.updates')
-    ->installConfig('views.view.event_callout', 'wri_event_callout', 'install', 'TRUE');
+    ->installConfig('views.view.event_callout', 'wri_node', 'install', 'TRUE');
 }
 
 /**

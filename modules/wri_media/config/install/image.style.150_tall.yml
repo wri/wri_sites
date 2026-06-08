@@ -1,6 +1,7 @@
-langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: RH375UGEubiATgHjBhnnV0jbuKG4SO13LUbl51ItOZ4
 name: 150_tall
 label: '150 tall, max width 200'
 effects:

@@ -4,6 +4,8 @@ dependencies:
   config:
     - core.entity_view_mode.node.main_content
     - field.field.node.event.body
+    - field.field.node.event.field_body_contains_recording
+    - field.field.node.event.field_calendar_description
     - field.field.node.event.field_date_time
     - field.field.node.event.field_event_display
     - field.field.node.event.field_featured
@@ -18,6 +20,7 @@ dependencies:
     - field.field.node.event.field_metatag
     - field.field.node.event.field_primary_contacts
     - field.field.node.event.field_primary_topic
+    - field.field.node.event.field_produced_by
     - field.field.node.event.field_projects
     - field.field.node.event.field_region
     - field.field.node.event.field_register
@@ -86,6 +89,7 @@ third_party_settings:
       sidebar_left:
         - field_social_media_links
         - field_files
+        - field_produced_by
     fields:
       register_button:
         plugin_id: register_button
@@ -432,6 +436,43 @@ content:
             suffix: ''
     weight: 8
     region: category
+  field_produced_by:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: callout
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: true
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 19
+    region: sidebar_left
   field_region:
     type: hierarchical_term_formatter
     label: inline
@@ -543,6 +584,7 @@ content:
     region: hero
 hidden:
   content_moderation_control: true
+  field_body_contains_recording: true
   field_calendar_description: true
   field_event_display: true
   field_hub_canonical_url: true

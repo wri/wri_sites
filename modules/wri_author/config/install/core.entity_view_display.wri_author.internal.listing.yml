@@ -1,0 +1,78 @@
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.wri_author.listing
+    - field.field.wri_author.internal.field_person
+    - wri_author.wri_author_type.internal
+  module:
+    - ds
+    - layout_builder
+third_party_settings:
+  ds:
+    layout:
+      id: ds_reset
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+        classes:
+          layout_class: {  }
+        wrappers:
+          ds_content: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+    regions:
+      ds_content:
+        - field_person
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: wri_author.internal.listing
+targetEntityType: wri_author
+bundle: internal
+mode: listing
+content:
+  field_person:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: person_author_listing
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: false
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 0
+    region: ds_content
+hidden:
+  langcode: true
+  name: true
+  search_api_excerpt: true

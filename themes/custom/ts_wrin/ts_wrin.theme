@@ -702,19 +702,47 @@ function ts_wrin_preprocess_layout(array &$variables): void {
  * Implements hook_preprocess_hook().
  */
 function ts_wrin_preprocess_google_json_api_result(&$variables) {
-  $full_title = $variables['result']['title'] ?? '';
-  $page_split = strpos($full_title, ' | ');
   $site_name = \Drupal::config('system.site')->get('name');
-  if ($page_split !== FALSE) {
-    $variables['result']['title'] = substr($full_title, 0, $page_split);
+  if (isset($variables['result']['pagemap']['metatags'][0]['wri_full_title'])) {
+    $variables['result']['title'] = $variables['result']['pagemap']['metatags'][0]['wri_full_title'];
+  }
+  else {
+    $full_title = $variables['result']['title'] ?? '';
+    $page_split = strpos($full_title, ' | ');
+    if ($page_split !== FALSE) {
+      $variables['result']['title'] = substr($full_title, 0, $page_split);
+    }
   }
   // Determine the image to show.
-  $variables['result']['image_url'] = $variables['result']['pagemap']['cse_image'][0]['src'] ?? NULL;
+  $variables['result']['image_url'] = $variables['result']['pagemap']['cse_thumbnail'][0]['src'] ?? NULL;
   if (isset($variables['result']['pagemap']['metatags'][0]['wri_thumbnail'])) {
     $variables['result']['image_url'] = $variables['result']['pagemap']['metatags'][0]['wri_thumbnail'];
   }
   if (isset($variables["result"]["pagemap"]["metatags"][0]["og:site_name"]) && ($variables["result"]["pagemap"]["metatags"][0]["og:site_name"] != $site_name)) {
     $variables['result']['site_name'] = $variables["result"]["pagemap"]["metatags"][0]["og:site_name"];
+  }
+  // Unset the register button if the event date is passed.
+  if (isset($variables["result"]["pagemap"]["metatags"][0]["wri_register"])) {
+
+    $snippet = explode(' ... ', $variables["result"]["snippet"]);
+    // Get the published date.
+    $published_date = $snippet[0];
+    // Translate the date.
+    // Convert it to date time from format "F j Y".
+    $stored_date = \DateTime::createFromFormat('F j, Y', $published_date);
+    $today = new \DateTime('today');
+
+    if ($stored_date) {
+      if ($stored_date > $today) {
+        // Stored date is in the future.
+      }
+      elseif ($stored_date < $today) {
+        $variables["result"]["pagemap"]["metatags"][0]["wri_register"] = '';
+      }
+      else {
+        // Same day.
+      }
+    }
   }
 }
 

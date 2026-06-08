@@ -4,6 +4,7 @@ dependencies:
   config:
     - field.field.node.international_office.body
     - field.field.node.international_office.field_featured_experts
+    - field.field.node.international_office.field_international_office_video
     - field.field.node.international_office.field_intro
     - field.field.node.international_office.field_io_link
     - field.field.node.international_office.field_main_image
@@ -16,9 +17,11 @@ dependencies:
     - node.type.international_office
   module:
     - content_moderation
+    - field_group
     - inline_entity_form
     - link
     - media_library
+    - media_library_edit
     - metatag
     - path
     - text
@@ -46,6 +49,13 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_international_office_video:
+    type: media_library_widget
+    weight: 1
+    region: content
+    settings:
+      media_types: {  }
     third_party_settings: {  }
   field_intro:
     type: text_textarea
@@ -105,6 +115,7 @@ content:
       collapsible: true
       collapsed: false
       revision: false
+      removed_reference: optional
     third_party_settings: {  }
   field_region:
     type: entity_reference_autocomplete

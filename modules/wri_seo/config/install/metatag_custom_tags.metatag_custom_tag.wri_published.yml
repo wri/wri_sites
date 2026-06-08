@@ -3,6 +3,7 @@ dependencies: {  }
 id: wri_published
 label: 'WRI Published'
 description: 'The day the page was published'
+multiple: false
 htmlElement: meta
 htmlValueAttribute: content
 attributes:

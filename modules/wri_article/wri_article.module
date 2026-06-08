@@ -5,7 +5,46 @@
  * Publication module code.
  */
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_form_FORM_ID_alter() for node_form.
+ */
+function wri_article_form_node_article_form_alter(array &$form, FormStateInterface $form_state): void {
+  _wri_article_hide_main_content_b_fields($form);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for node_form.
+ */
+function wri_article_form_node_article_edit_form_alter(array &$form, FormStateInterface $form_state): void {
+  _wri_article_hide_main_content_b_fields($form);
+}
+
+/**
+ * Hides fields only relevant to Main Content B when that mode is disabled.
+ */
+function _wri_article_hide_main_content_b_fields(array &$form): void {
+  if (\Drupal::config('wri_article.settings')->get('enable_main_content_b')) {
+    return;
+  }
+  $fields = [
+    'field_hide_featured_wri_experts',
+    'field_key_takeaways',
+    'field_intro',
+    'field_main_image_caption',
+    'field_main_image_display',
+    'field_most_recently_updated_date',
+    'field_original_publish_date',
+    'field_relevant_project',
+  ];
+  foreach ($fields as $field) {
+    if (isset($form[$field])) {
+      $form[$field]['#access'] = FALSE;
+    }
+  }
+}
 
 /**
  * Implements hook_preprocess_hook().
@@ -29,6 +68,7 @@ function wri_article_preprocess_wri_article_columns(&$context) {
  * Preprocess for the wri_article_columns_b SFC layout.
  */
 function wri_article_preprocess_wri_article_columns_b(array &$variables): void {
+
   // Show the label on "field_original_publish_date" if
   // "field_most_recently_updated_date" has a value.
   if (isset($variables["content"]["byline"]["field_most_recently_updated_date"][0])) {
@@ -45,6 +85,43 @@ function wri_article_preprocess_wri_article_columns_b(array &$variables): void {
   $node = $variables['content']['#node'] ?? NULL;
   if (!$node instanceof NodeInterface) {
     return;
+  }
+
+  $variables['template_class'] = '';
+  $variables['type_label'] = '';
+  if ($node->hasField('field_type') && !$node->get('field_type')->isEmpty()) {
+    $lang_code = $node->language()->getId();
+    $type = $node->get('field_type')->entity;
+    if ($type && $lang_code) {
+      $translated_term = \Drupal::service('entity.repository')
+        ->getTranslationFromContext($type, $lang_code);
+      $variables['type_label'] = $translated_term->getName();
+
+      $variables['template_class'] = wri_article_get_resource_type_template($type, '_child_field');
+      if (empty($variables['template_class'])) {
+        $parent = $type->get('parent')->entity;
+        $variables['template_class'] = wri_article_get_resource_type_template($parent);
+      }
+    }
+  }
+
+  $variables['show_featured_experts'] = FALSE;
+  $variables['featured_experts'] = [];
+  if ($node->hasField('field_hide_featured_wri_experts') && $node->get('field_hide_featured_wri_experts')->value == 1) {
+    $variables['show_featured_experts'] = FALSE;
+  }
+  else {
+    if ($node->hasField('field_authors') && !$node->get('field_authors')->isEmpty()) {
+      foreach ($node->get('field_authors')->referencedEntities() as $author) {
+        if ($author && $author->hasField('field_person') && !$author->get('field_person')->isEmpty()) {
+          $internal_person = $author->get('field_person')->entity;
+          if ($internal_person->isPublished()) {
+            $variables['featured_experts'][] = $author->id();
+            $variables['show_featured_experts'] = TRUE;
+          }
+        }
+      }
+    }
   }
 
   if (!$node->hasField('field_main_image') || $node->get('field_main_image')->isEmpty()) {
@@ -90,4 +167,34 @@ function wri_article_preprocess_wri_article_columns_b(array &$variables): void {
     $node->getCacheTags(),
     $media->getCacheTags()
   );
+}
+
+/**
+ * Helper function to get a template for a given resource type.
+ *
+ * @param \Drupal\taxonomy\Entity\Term $term
+ *   A taxonomy term.
+ * @param string $setting_suffix
+ *   The suffix to add to the WRI Article setting's name.
+ *
+ * @return string
+ *   The template to use for this resource type.
+ */
+function wri_article_get_resource_type_template($term, $setting_suffix = '') {
+  $article_settings = \Drupal::config('wri_article.settings');
+  $template_class = '';
+  $templates = [
+    'technical_perspective_template',
+    'update_template',
+    'news_template',
+  ];
+  foreach ($templates as $template) {
+    $terms_for_this_template = $article_settings->get($template . $setting_suffix);
+
+    if (is_array($terms_for_this_template) && in_array($term->id(), $terms_for_this_template)) {
+      $template_class = $template;
+      break;
+    }
+  }
+  return $template_class;
 }

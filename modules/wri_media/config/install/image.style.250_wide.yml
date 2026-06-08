@@ -1,6 +1,7 @@
-langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: c6HrPtic_LSF7nbB4Px9ZxCE0hMOF6ArBbs18oq_Wuw
 name: 250_wide
 label: '250 wide'
 effects:

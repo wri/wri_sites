@@ -12,12 +12,22 @@ dependencies:
     - field.field.node.article.field_featured_media
     - field.field.node.article.field_featured_text
     - field.field.node.article.field_featured_tweet
+    - field.field.node.article.field_hide_featured_wri_experts
+    - field.field.node.article.field_intro
+    - field.field.node.article.field_key_takeaways
     - field.field.node.article.field_main_image
+    - field.field.node.article.field_main_image_caption
+    - field.field.node.article.field_main_image_display
     - field.field.node.article.field_metatags
+    - field.field.node.article.field_most_recently_updated_date
+    - field.field.node.article.field_original_publish_date
+    - field.field.node.article.field_primary_contacts
     - field.field.node.article.field_primary_topic
+    - field.field.node.article.field_produced_by
     - field.field.node.article.field_projects
     - field.field.node.article.field_region
     - field.field.node.article.field_related_resources
+    - field.field.node.article.field_relevant_project
     - field.field.node.article.field_tags
     - field.field.node.article.field_type
     - field.field.node.article.layout_builder__layout
@@ -49,8 +59,6 @@ third_party_settings:
       hero:
         - content_moderation_control
         - field_main_image
-      share:
-        - addtoany
       title:
         - node_title
       byline:
@@ -61,11 +69,15 @@ third_party_settings:
       category:
         - field_primary_topic
         - field_region
+      share:
+        - addtoany
       left_sidebar:
         - field_tags
       main_content:
         - body
         - field_contributing_authors
+      right_sidebar:
+        - field_produced_by
     fields:
       node_post_date:
         plugin_id: node_post_date
@@ -120,7 +132,7 @@ content:
   addtoany:
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 8
     region: share
   body:
     type: text_default
@@ -218,6 +230,7 @@ content:
     third_party_settings:
       wri_media:
         min_width: '1500'
+        insert_caption: ''
       ds:
         ft:
           id: reset
@@ -240,6 +253,43 @@ content:
             lb: ''
     weight: 6
     region: category
+  field_produced_by:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: callout
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: true
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 12
+    region: right_sidebar
   field_region:
     type: hierarchical_term_formatter
     label: inline
@@ -364,9 +414,19 @@ hidden:
   field_featured_media: true
   field_featured_text: true
   field_featured_tweet: true
+  field_hide_featured_wri_experts: true
+  field_intro: true
+  field_key_takeaways: true
+  field_main_image_caption: true
+  field_main_image_display: true
   field_metatags: true
+  field_most_recently_updated_date: true
+  field_original_publish_date: true
+  field_primary_contacts: true
   field_projects: true
   field_related_resources: true
+  field_relevant_project: true
+  field_share_with_io: true
   langcode: true
   layout_builder__layout: true
   links: true

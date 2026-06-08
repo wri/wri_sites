@@ -1,0 +1,5 @@
+wri_article.settings:
+  title: Article Settings
+  parent: system.admin_config_system
+  route_name: wri_article.settings
+  weight: 10

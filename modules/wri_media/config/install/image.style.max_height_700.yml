@@ -1,6 +1,7 @@
-langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: mfuDY_ZYxpUElf4Z65CDHGqqORAF1l1_QkbE0g3Tnpw
 name: max_height_700
 label: 'Max height 700'
 effects:

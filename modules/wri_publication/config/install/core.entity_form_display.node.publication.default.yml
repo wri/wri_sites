@@ -38,6 +38,7 @@ dependencies:
     - inline_entity_form
     - link_attributes
     - media_library
+    - media_library_edit
     - metatag
     - path
     - text
@@ -197,6 +198,7 @@ content:
       collapsible: false
       collapsed: false
       revision: false
+      removed_reference: optional
     third_party_settings: {  }
   field_cover_image:
     type: media_library_widget
@@ -223,6 +225,7 @@ content:
         class: false
         accesskey: false
         title: false
+      widget_default_open: expandIfValuesSet
     third_party_settings: {  }
   field_exclude_from_blog_feed:
     type: boolean_checkbox
@@ -311,6 +314,7 @@ content:
     region: content
     settings:
       sidebar: true
+      use_details: true
     third_party_settings: {  }
   field_narrative_taxonomy:
     type: text_textarea
@@ -334,6 +338,7 @@ content:
         rel: true
         class: true
         accesskey: false
+      widget_default_open: expandIfValuesSet
     third_party_settings: {  }
   field_primary_contacts:
     type: entity_reference_autocomplete

@@ -28,3 +28,12 @@ function wri_spoke_update_10600() {
   \Drupal::service('config.factory')->getEditable('wri_spoke.cron.settings')->delete();
   \Drupal::service('config.factory')->getEditable('ultimate_cron.job.wri_spoke_cron')->delete();
 }
+
+/**
+ * Enable the exclude_from_sitemap processor for hub_events imports.
+ */
+function wri_spoke_update_10601() {
+  \Drupal::service('distro_helper.updates')->updateConfig(
+    'entity_share_client.import_config.hub_events',
+    ['import_processor_settings#exclude_from_sitemap'], 'wri_spoke');
+}
