@@ -52,6 +52,9 @@
                 "Layout Builder import patch: https://www.drupal.org/project/entity_share/issues/3084184": "https://git.drupalcode.org/project/entity_share/-/merge_requests/96.diff?v=1",
                 "Paragraphs parent IDs are wrong https://www.drupal.org/project/entity_share/issues/3445703":"https://www.drupal.org/files/issues/2024-05-08/entity_share-parent-id-3445703-2.patch"
             },
+            "drupal/facets": {
+                "Add dependency support for exposed facet filters https://www.drupal.org/project/facets/issues/3592014": "https://git.drupalcode.org/project/facets/-/merge_requests/378.diff"
+            },
             "drupal/layout_builder_st": {
                 "Error: Call to a member function getConfig() OverridesSectionStorage.php https://www.drupal.org/project/layout_builder_st/issues/3420063": "https://www.drupal.org/files/issues/2024-03-29/layout_builder_st-call_to_a_member_function_getconfig-3420063-26.patch",
                 "Contextual links for translation are removed by core https://www.drupal.org/project/layout_builder_st/issues/3411037": "https://www.drupal.org/files/issues/2024-05-23/3411037-contextual-links-removed-from-core.patch",
@@ -165,7 +168,7 @@
         "drupal/entity_embed": "1.7",
         "drupal/entity_share_cron": "^3.0",
         "drupal/entity_usage": "^2.0@beta",
-        "drupal/facets": "dev-3.0.x",
+        "drupal/facets": "^3.0",
         "drupal/facets_pretty_paths": "^2.0",
         "drupal/feeds": "^3.2",
         "drupal/feeds_ex": "^1.0@beta",
