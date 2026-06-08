@@ -2,27 +2,32 @@
 
 namespace Drupal\wri_search\Plugin\facets\processor;
 
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Cache\UnchangingCacheableDependencyTrait;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\facets\FacetInterface;
-use Drupal\facets\FacetManager\DefaultFacetManager;
 use Drupal\facets\Processor\BuildProcessorInterface;
 use Drupal\facets\Processor\ProcessorPluginBase;
+use Drupal\facets\FacetManager\DefaultFacetManager;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides a processor that excludes specified items.
+ * Provides a processor that makes a facet depend on the state of another facet.
  *
  * @FacetsProcessor(
- *   id = "limit_to_parent",
- *   label = @Translation("Limit to parent"),
- *   description = @Translation("If this is a dependent facet, make sure only children of the chosen facet shows up."),
+ *   id = "dependent_processor",
+ *   label = @Translation("Dependent facet"),
+ *   description = @Translation("Display this facet depending on the state of another facet."),
  *   stages = {
- *     "build" = 50
+ *     "build" = 5
  *   }
  * )
  */
-class LimitToParentProcessor extends ProcessorPluginBase implements BuildProcessorInterface, ContainerFactoryPluginInterface {
+class DependentFacetProcessor extends ProcessorPluginBase implements BuildProcessorInterface, ContainerFactoryPluginInterface {
+
+  use UnchangingCacheableDependencyTrait;
+
   /**
    * The language manager.
    *
@@ -74,41 +79,33 @@ class LimitToParentProcessor extends ProcessorPluginBase implements BuildProcess
   /**
    * {@inheritdoc}
    */
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state, FacetInterface $current_facet) {
+    $build = [];
+
+    // TODO: Dynamically get all the other facet filters here instead of this clumsy textfield approach,
+    // so conditions keep working.
+    $build['query_key'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Depends on'),
+      '#description' => $this->t('The "Filter identifier" value of the facet that this facet depends on.'),
+      '#required' => TRUE,
+      '#default_value' => $current_facet->get('query_key'),
+    ];
+
+    return parent::buildConfigurationForm($form, $form_state, $current_facet) + $build;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function build(FacetInterface $facet, array $results) {
-    $conditions = $facet->getProcessorConfigs();
+    $conditions = $this->getConfiguration();
 
-    if (isset($conditions["dependent_processor"]["settings"])) {
-      $terms = [];
-      $query_key = $conditions["dependent_processor"]["settings"]["query_key"] ?? FALSE;
-
-      if ($query_key) {
-        $active = $facet->allFacetValues[$query_key];
-        foreach ($active as $value) {
-          // Load up children of that facet value.
-          $tree = \Drupal::entityTypeManager()
-            ->getStorage('taxonomy_term')
-            ->loadChildren($value);
-          $terms = array_merge(array_keys($tree), $terms);
-        }
-      }
-
-      // Exclude elements not in that list.
-      $good_results = [];
-
-      /** @var \Drupal\facets\Result\ResultInterface $result */
-      foreach ($results as $result) {
-        $value = $result->getRawValue();
-
-        // Compare the results to the list of valid children.
-        if (in_array($value, $terms)) {
-          $good_results[] = $result;
-        }
-      }
-
-      $results = $good_results;
+    if (isset($facet->allFacetValues[$conditions['query_key']])) {
+      return $results;
     }
 
-    return $results;
+    return [];
   }
 
 }
