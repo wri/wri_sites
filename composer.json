@@ -165,7 +165,7 @@
         "drupal/entity_embed": "1.7",
         "drupal/entity_share_cron": "^3.0",
         "drupal/entity_usage": "^2.0@beta",
-        "drupal/facets": "^3.0",
+        "drupal/facets": "dev-3.0.x",
         "drupal/facets_pretty_paths": "^2.0",
         "drupal/feeds": "^3.2",
         "drupal/feeds_ex": "^1.0@beta",
