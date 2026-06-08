@@ -81,6 +81,7 @@ class DependentFacetProcessor extends ProcessorPluginBase implements BuildProces
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state, FacetInterface $current_facet) {
     $build = [];
+    $config = $this->getConfiguration();
 
     // TODO: Dynamically get all the other facet filters here instead of this clumsy textfield approach,
     // so conditions keep working.
@@ -89,7 +90,7 @@ class DependentFacetProcessor extends ProcessorPluginBase implements BuildProces
       '#title' => $this->t('Depends on'),
       '#description' => $this->t('The "Filter identifier" value of the facet that this facet depends on.'),
       '#required' => TRUE,
-      '#default_value' => $current_facet->get('query_key'),
+      '#default_value' => $config['query_key'] ?? '',
     ];
 
     return parent::buildConfigurationForm($form, $form_state, $current_facet) + $build;
