@@ -79,15 +79,17 @@ class LimitToParentProcessor extends ProcessorPluginBase implements BuildProcess
 
     if (isset($conditions["dependent_processor"]["settings"])) {
       $terms = [];
-      $query_key = $conditions["dependent_processor"]["settings"]["query_key"] ?? FALSE;
+      // Load up any selected facet values.
+      foreach ($conditions["dependent_processor"]["settings"] as $facet_id => $condition_settings) {
 
-      if ($query_key) {
-        $active = $facet->allFacetValues[$query_key];
+        /** @var \Drupal\facets\Entity\Facet $current_facet */
+        $current_facet = $this->facetStorage->load($facet_id);
+        $current_facet = $this->facetsManager->returnProcessedFacet($current_facet);
+
+        $active = $current_facet->getActiveItems();
         foreach ($active as $value) {
           // Load up children of that facet value.
-          $tree = \Drupal::entityTypeManager()
-            ->getStorage('taxonomy_term')
-            ->loadChildren($value);
+          $tree = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadChildren($value);
           $terms = array_merge(array_keys($tree), $terms);
         }
       }
