@@ -90,3 +90,15 @@ function wri_search_update_10004() {
     'display#default#display_options#empty',
   ], 'wri_search');
 }
+
+/**
+ * Update the experts view to use autosubmit for facets 3 preop.
+ */
+function wri_search_update_10005() {
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.experts_staff', [
+    'display#default#display_options#exposed_form',
+  ], 'wri_search');
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.project_experts', [
+    'display#default#display_options#exposed_form',
+  ], 'wri_search');
+}
