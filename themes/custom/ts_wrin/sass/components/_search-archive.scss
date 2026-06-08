@@ -307,6 +307,10 @@
   }
 }
 
+.resources-wrapper .form-actions {
+  margin: 0;
+}
+
 .view .view-header,
 .view .view-empty {
   @include font(var(--font-family-heading-condensed), "regular", "normal");
