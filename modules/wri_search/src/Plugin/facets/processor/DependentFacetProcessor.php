@@ -16,8 +16,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Provides a processor that makes a facet depend on the state of another facet.
  *
  * @FacetsProcessor(
- *   id = "dependent_processor",
- *   label = @Translation("Dependent facet"),
+ *   id = "wri_dependent_processor",
+ *   label = @Translation("WRI Dependent facet"),
  *   description = @Translation("Display this facet depending on the state of another facet."),
  *   stages = {
  *     "build" = 5
