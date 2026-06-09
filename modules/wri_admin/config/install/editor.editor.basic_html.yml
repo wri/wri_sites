@@ -33,6 +33,9 @@ settings:
           label: Maroon
           element: '<span class="has-maroon-color">'
         -
+          label: 'Thin Light Grey'
+          element: '<span class="has-light-grey-color">'
+        -
           label: 'Serif font'
           element: '<span class="font-serif">'
         -

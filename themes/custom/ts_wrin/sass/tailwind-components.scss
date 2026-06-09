@@ -186,6 +186,10 @@ button.btn-underline {
 .has-maroon-color {
   color:var(--color-maroon);
 }
+.has-light-grey-color {
+  color: var(--color-neutral-500);
+  font-weight: 300;
+}
 
 // Grids
 .ts-grid-cols-2 {
