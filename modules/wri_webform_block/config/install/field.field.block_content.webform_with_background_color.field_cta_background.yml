@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.webform_with_background_color
+    - field.storage.block_content.field_cta_background
+  module:
+    - options
+id: block_content.webform_with_background_color.field_cta_background
+field_name: field_cta_background
+entity_type: block_content
+bundle: webform_with_background_color
+label: Background
+description: 'Select a background color for this CTA'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

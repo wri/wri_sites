@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.insights_teaser
+label: 'Insights Teaser'
+description: 'Teasers narrowed down to be within the insights context.'
+targetEntityType: node
+cache: true

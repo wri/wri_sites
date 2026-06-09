@@ -1,0 +1,184 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.insights_search_results
+    - field.field.node.article.body
+    - field.field.node.article.field_authors
+    - field.field.node.article.field_contributing_authors
+    - field.field.node.article.field_exclude_from_blog_feed
+    - field.field.node.article.field_featured
+    - field.field.node.article.field_featured_headline
+    - field.field.node.article.field_featured_media
+    - field.field.node.article.field_featured_text
+    - field.field.node.article.field_featured_tweet
+    - field.field.node.article.field_hide_featured_wri_experts
+    - field.field.node.article.field_intro
+    - field.field.node.article.field_key_takeaways
+    - field.field.node.article.field_main_image
+    - field.field.node.article.field_main_image_caption
+    - field.field.node.article.field_main_image_display
+    - field.field.node.article.field_metatags
+    - field.field.node.article.field_most_recently_updated_date
+    - field.field.node.article.field_original_publish_date
+    - field.field.node.article.field_primary_contacts
+    - field.field.node.article.field_primary_topic
+    - field.field.node.article.field_produced_by
+    - field.field.node.article.field_projects
+    - field.field.node.article.field_region
+    - field.field.node.article.field_related_resources
+    - field.field.node.article.field_relevant_project
+    - field.field.node.article.field_share_with_io
+    - field.field.node.article.field_tags
+    - field.field.node.article.field_type
+    - field.field.node.article.layout_builder__layout
+    - image.style.150_tall
+    - node.type.article
+  module:
+    - ds
+    - hierarchical_term_formatter
+    - layout_builder
+    - media
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  ds:
+    layout:
+      id: layout_search-results
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      left_section:
+        - field_primary_topic
+        - field_main_image
+        - field_type
+      main_section:
+        - node_title
+        - field_intro
+        - node_post_date
+    fields:
+      node_post_date:
+        plugin_id: node_post_date
+        weight: 6
+        label: hidden
+        formatter: ds_post_date_short_day
+        ft:
+          id: reset
+          settings:
+            lb: ''
+      node_title:
+        plugin_id: node_title
+        weight: 4
+        label: hidden
+        formatter: default
+        settings:
+          link: true
+          wrapper: h3
+          class: h3
+        ft:
+          id: reset
+          settings:
+            lb: ''
+_core:
+  default_config_hash: FrB91p5BfXOJ4LK-1UvpgB2h3UH9QpRuKVZXGEjmd9M
+id: node.article.insights_search_results
+targetEntityType: node
+bundle: article
+mode: insights_search_results
+content:
+  field_intro:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: main_section
+  field_main_image:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: 150_tall
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 1
+    region: left_section
+  field_primary_topic:
+    type: hierarchical_term_formatter
+    label: hidden
+    settings:
+      display: leaf
+      link: true
+      wrap: none
+      separator: ' » '
+      reverse: false
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 0
+    region: left_section
+  field_type:
+    type: hierarchical_term_formatter
+    label: hidden
+    settings:
+      display: leaf
+      link: false
+      wrap: none
+      separator: ' » '
+      reverse: false
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 2
+    region: left_section
+hidden:
+  addtoany: true
+  addtocal: true
+  body: true
+  content_moderation_control: true
+  field_authors: true
+  field_contributing_authors: true
+  field_exclude_from_blog_feed: true
+  field_featured: true
+  field_featured_headline: true
+  field_featured_media: true
+  field_featured_text: true
+  field_featured_tweet: true
+  field_hide_featured_wri_experts: true
+  field_key_takeaways: true
+  field_main_image_caption: true
+  field_main_image_display: true
+  field_metatags: true
+  field_most_recently_updated_date: true
+  field_original_publish_date: true
+  field_primary_contacts: true
+  field_produced_by: true
+  field_projects: true
+  field_region: true
+  field_related_resources: true
+  field_relevant_project: true
+  field_share_with_io: true
+  field_tags: true
+  langcode: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true
