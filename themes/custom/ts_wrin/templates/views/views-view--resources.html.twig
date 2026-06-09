@@ -23,7 +23,6 @@
     <div class="container">
       <h1 class="h1 padding-vertical">{{ view.title }}</h1>
     </div>
-    {{ exposed_topics }}
   {% endif %}
   <div class="resources-wrapper">
     <div class="container">
@@ -35,10 +34,6 @@
       {% endif %}
 
       <div class="grid results-wrapper">
-        <div class="results-sidebar padding-bottom">
-          {{ exposed_facets }}
-        </div>
-
         <div class="results-body padding-bottom">
             <div class="view-header">
               {{ header.extra_result }}
