@@ -126,6 +126,7 @@ display:
         type: full
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 40
           total_pages: null
           id: 0
@@ -144,7 +145,7 @@ display:
             offset_label: Offset
           quantity: 9
       exposed_form:
-        type: basic
+        type: autosubmit
         options:
           submit_button: Search
           reset_button: false
@@ -153,6 +154,8 @@ display:
           expose_sort_order: true
           sort_asc_label: Asc
           sort_desc_label: Desc
+          autosubmit_hide: true
+          timeout: 500
       access:
         type: none
         options: {  }
@@ -350,6 +353,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_term
           operator: not
           value:
             - 36
@@ -434,7 +438,7 @@ display:
           admin_label: ''
           plugin_id: extra_result
           empty: false
-          content: '<span class=''totals''>@total Featured Experts</span>'
+          content: "<span class='totals'>@total Featured Experts</span>"
         area:
           id: area
           table: views
@@ -449,7 +453,11 @@ display:
             format: unrestricted_text
           tokenize: false
       footer: {  }
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender:
+          metatags:
+            robots: noindex
+          tokenize: false
     cache_metadata:
       max-age: -1
       contexts:
@@ -471,7 +479,11 @@ display:
       defaults:
         cache: true
       display_description: ''
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender:
+          metatags:
+            robots: noindex
+          tokenize: false
       path: about/experts-staff
       menu:
         type: normal
