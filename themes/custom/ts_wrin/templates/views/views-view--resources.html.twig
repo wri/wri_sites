@@ -29,7 +29,11 @@
       {% if exposed %}
         <div class="view-filters">
           <button class="button black filters">{{ "Filters"|t }}</button>
-          {{ exposed }}
+          {% set form_attributes = exposed["#attributes"] %}
+          <form{{ attributes }}>
+            {% set clean = exposed|render|preg_replace('/<form[^>]*>/i', '') %}
+            {{ clean|replace({'</form>': ''})|raw }}
+          </form>
         </div>
       {% endif %}
 
