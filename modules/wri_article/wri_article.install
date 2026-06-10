@@ -380,15 +380,11 @@ function wri_article_update_10608() {
 }
 
 /**
- * Add view modes for Insights landing page.
+ * Add displays for Insights landing page.
  */
 function wri_article_update_10609() {
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.article.insights_card', 'wri_article', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.article.insights_large_image_teaser', 'wri_article', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.article.insights_search_results', 'wri_article', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.article.insights_teaser', 'wri_article', 'install');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_mode.node.insights_card', 'wri_article', 'install');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_mode.node.insights_large_image_teaser', 'wri_article', 'install');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_mode.node.insights_search_results', 'wri_article', 'install');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_mode.node.insights_teaser', 'wri_article', 'install');
 }

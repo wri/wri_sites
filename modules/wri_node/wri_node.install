@@ -408,3 +408,13 @@ function wri_node_update_10501() {
     \Drupal::service('distro_helper.updates')->installConfig('addtoany.settings', 'wri_node', 'post-install', TRUE);
   }
 }
+
+/**
+ * Add view modes for Insights landing page.
+ */
+function wri_node_update_10600() {
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_mode.node.insights_card', 'wri_node', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_mode.node.insights_large_image_teaser', 'wri_node', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_mode.node.insights_search_results', 'wri_node', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_mode.node.insights_teaser', 'wri_node', 'install');
+}
