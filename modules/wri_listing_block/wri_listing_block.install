@@ -165,6 +165,6 @@ function wri_listing_block_update_10301() {
 function wri_listing_block_update_10600() {
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.content_listing', [
     'display#insights_cards',
-    'displays#insights_teasers',
+    'display#insights_teasers',
   ], 'wri_listing_block');
 }
