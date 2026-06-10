@@ -22,22 +22,38 @@
   {% if display_id == 'resources_page' %}
     <div class="container">
       <h1 class="h1 padding-vertical">{{ view.title }}</h1>
+      {% if exposed %}
+      {{ exposed.topic }}
+      {% endif %}
     </div>
   {% endif %}
   <div class="resources-wrapper">
     <div class="container">
       {% if exposed %}
+        {% set form_attributes = create_attribute(exposed["#attributes"]) %}
+        <form{{ form_attributes }}>
+      {% endif %}
+
+      {% if exposed %}
         <div class="view-filters">
           <button class="button black filters">{{ "Filters"|t }}</button>
-          {% set form_attributes = exposed["#attributes"] %}
-          <form{{ attributes }}>
-            {% set clean = exposed|render|preg_replace('/<form[^>]*>/i', '') %}
-            {{ clean|replace({'</form>': ''})|raw }}
-          </form>
+          {% if exposed %}
+          {{ exposed.query }}
+          {{ exposed.sort_by }}
+          {% endif %}
         </div>
       {% endif %}
 
       <div class="grid results-wrapper">
+        <div class="results-sidebar padding-bottom">
+          {% if exposed %}
+            {% set form_attributes = exposed["#attributes"] %}
+            <form{{ attributes }}>
+              {% set clean = exposed|without('topic', 'query', 'sort_by')|render|preg_replace('/<form[^>]*>/i', '') %}
+              {{ clean|replace({'</form>': ''})|raw }}
+            </form>
+          {% endif %}
+        </div>
         <div class="results-body padding-bottom">
             <div class="view-header">
               {{ header.extra_result }}
@@ -63,7 +79,9 @@
           {% endif %}
         </div>
       </div>
-
+      {% if exposed %}
+        </form>
+      {% endif %}
       {% if footer %}
         <div class="view-footer">
           {{ footer }}
