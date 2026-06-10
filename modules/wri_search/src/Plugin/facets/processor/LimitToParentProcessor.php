@@ -75,41 +75,15 @@ class LimitToParentProcessor extends ProcessorPluginBase implements BuildProcess
    * {@inheritdoc}
    */
   public function build(FacetInterface $facet, array $results) {
-    // @todo Change this to use javascript.
-    // Add the parent that will allow each facet to show, and then if the parent is checked, show the value.
-    $conditions = $facet->getProcessorConfigs();
+    $term_storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+    $facet->set('reviewParents', TRUE);
+    /** @var \Drupal\facets\Result\ResultInterface $result */
+    foreach ($results as $result) {
+      $value = $result->getRawValue();
 
-    if (isset($conditions["dependent_processor"]["settings"])) {
-      $terms = [];
-      // Load up any selected facet values.
-      foreach ($conditions["dependent_processor"]["settings"] as $facet_id => $condition_settings) {
-
-        /** @var \Drupal\facets\Entity\Facet $current_facet */
-        $current_facet = $this->facetStorage->load($facet_id);
-        $current_facet = $this->facetsManager->returnProcessedFacet($current_facet);
-
-        $active = $current_facet->getActiveItems();
-        foreach ($active as $value) {
-          // Load up children of that facet value.
-          $tree = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadChildren($value);
-          $terms = array_merge(array_keys($tree), $terms);
-        }
-      }
-
-      // Exclude elements not in that list.
-      $good_results = [];
-
-      /** @var \Drupal\facets\Result\ResultInterface $result */
-      foreach ($results as $result) {
-        $value = $result->getRawValue();
-
-        // Compare the results to the list of valid children.
-        if (in_array($value, $terms)) {
-          $good_results[] = $result;
-        }
-      }
-
-      $results = $good_results;
+      // Load the result's parent, if there is one
+      $parents = $term_storage->loadParents($value);
+      $result->set('parentTerms', $parents);
     }
 
     return $results;
