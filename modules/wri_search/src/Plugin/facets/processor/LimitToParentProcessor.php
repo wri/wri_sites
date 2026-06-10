@@ -75,7 +75,7 @@ class LimitToParentProcessor extends ProcessorPluginBase implements BuildProcess
    * {@inheritdoc}
    */
   public function build(FacetInterface $facet, array $results) {
-    // TODO: Change this to use javascript.
+    // @todo Change this to use javascript.
     // Add the parent that will allow each facet to show, and then if the parent is checked, show the value.
     $conditions = $facet->getProcessorConfigs();
 
