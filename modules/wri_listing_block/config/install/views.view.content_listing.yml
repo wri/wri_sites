@@ -1159,7 +1159,10 @@ display:
           plugin_id: standard
           required: true
       display_description: ''
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender:
+          metatags: { }
+          tokenize: false
       block_hide_empty: true
       allow:
         items_per_page: true
