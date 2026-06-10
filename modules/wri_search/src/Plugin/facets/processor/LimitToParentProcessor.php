@@ -81,7 +81,7 @@ class LimitToParentProcessor extends ProcessorPluginBase implements BuildProcess
     foreach ($results as $result) {
       $value = $result->getRawValue();
 
-      // Load the result's parent, if there is one
+      // Load the result's parent, if there is one.
       $parents = $term_storage->loadParents($value);
       $result->set('parentTerms', $parents);
     }
