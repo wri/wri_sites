@@ -2,9 +2,5 @@
 
 /**
  * @file
- * wri_carousel_with_tabs install and update hooks.
+ * Wri_carousel_with_tabs install and update hooks.
  */
-
-use Drupal\Core\Utility\UpdateException;
-
-
