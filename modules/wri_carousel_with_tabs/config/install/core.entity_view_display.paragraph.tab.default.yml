@@ -5,8 +5,6 @@ dependencies:
     - field.field.paragraph.tab.field_content
     - field.field.paragraph.tab.field_title
     - paragraphs.paragraphs_type.tab
-  module:
-    - ds
 id: paragraph.tab.default
 targetEntityType: paragraph
 bundle: tab
@@ -16,38 +14,9 @@ content:
     type: entity_reference_entity_view
     label: hidden
     settings:
-      view_mode: card_w_summary
+      view_mode: insights_card
       link: false
-    third_party_settings:
-      ds:
-        ds_limit: ''
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: false
-            lbw-el: ''
-            lbw-cl: ''
-            lbw-at: ''
-            lb-col: false
-            ow: false
-            ow-el: ''
-            ow-cl: ''
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fis-def-at: false
-            fi: false
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
+    third_party_settings: {  }
     weight: 1
     region: content
   field_title:
