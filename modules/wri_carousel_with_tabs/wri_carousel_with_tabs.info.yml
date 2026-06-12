@@ -15,7 +15,6 @@ config_devel:
     - core.entity_form_display.paragraph.tab.default.yml
     - core.entity_view_display.block_content.carousel_with_tabs.default.yml
     - core.entity_view_display.paragraph.tab.default.yml
-    - field.field.block_content.carousel_with_tabs.body.yml
     - field.field.block_content.carousel_with_tabs.field_tabs.yml
     - field.field.paragraph.tab.field_content.yml
     - field.field.paragraph.tab.field_title.yml
