@@ -378,3 +378,14 @@ function wri_article_update_10608() {
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_mode.node.person_author_listing', 'wri_node');
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.person.person_author_listing', 'wri_person');
 }
+
+/**
+ * install wri_carousel_with_tabs.
+ */
+function wri_article_update_10609() {
+  $module = 'wri_carousel_with_tabs';
+  $moduleHandler = \Drupal::service('module_handler');
+  if ($moduleHandler->moduleExists($module)) {
+    \Drupal::service('module_installer')->install([$module], TRUE);
+  }
+}
