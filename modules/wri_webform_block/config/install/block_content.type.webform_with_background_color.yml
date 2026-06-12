@@ -1,7 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-id: webform_with_background_color
-label: 'Webform with background color'
-revision: false
-description: null

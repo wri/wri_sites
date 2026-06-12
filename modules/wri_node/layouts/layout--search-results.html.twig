@@ -20,7 +20,6 @@
           <div class="topic-tag">{{ content.left_section.field_primary_topic }}</div>
           <div class="topic-tag">{{ content.left_section.field_region }}</div>
             <div class="topic-tag">{{ content.left_section.field_topics }}</div>
-            {{ content.left_section.field_main_image }}
           {% endif %}
         </div>
       {% if content.main_section['bundle_field:node'] %}
@@ -52,9 +51,6 @@
       </div>
       {% if content.main_section.node_title %}
         {{ content.main_section.node_title }}
-      {% endif %}
-      {% if content.main_section.field_intro %}
-        {{ content.main_section.field_intro }}
       {% endif %}
       {% if content.main_section.field_tags  %}
         <div class="tags">

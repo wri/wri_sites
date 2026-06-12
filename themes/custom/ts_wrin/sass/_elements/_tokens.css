@@ -30,9 +30,6 @@
   --color-gold-300: #ffd271;
   --color-gold-300-rgb: 255 210 113;
 
-  --color-maroon: #9B216C;
-  --color-maroon-rgb: 155, 33, 108;
-
   --color-gold-100: #fbe8be;
   --color-gold-100-rgb: 251 232 190;
 
@@ -49,7 +46,6 @@
   --font-family-heading-condensed: 'acumin-pro-semi-condensed', sans-serif;
   --font-family-heading: 'acumin-pro', sans-serif;
   --font-family-serif: 'adobe-caslon-pro', serif;
-  --font-serif: 'adobe-caslon-pro', serif;
 
   /* Spacing */
   --spacer-40: 160px;

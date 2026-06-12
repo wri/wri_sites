@@ -200,15 +200,6 @@ figcaption, .figcaption {
   }
 }
 
-.display-insights-card,
-.display-insights-teaser,
-.display-insights-large-image-teaser {
-  .teaser-title {
-    @include font(var(--font-family-serif), 'bold');
-  }
-}
-
-
 .topic-tag,
 .topic-tag a {
   @include font(var(--font-family-heading), 'bold');

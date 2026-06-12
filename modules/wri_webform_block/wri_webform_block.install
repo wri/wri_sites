@@ -103,18 +103,3 @@ function wri_webform_block_add_content_blocks_browser_dependencies() {
     }
   }
 }
-
-
-/**
- * Add view modes for Insights landing page.
- */
-function wri_webform_block_update_10603() {
-  \Drupal::service('distro_helper.updates')->installConfig('block_content.type.webform_with_background_color', 'wri_webform_block', 'install');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.block_content.webform_with_background_color.default', 'wri_webform_block', 'install');
-  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.block_content.webform_with_background_color.default', 'wri_webform_block', 'install');
-  \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.webform_with_background_color.body', 'wri_webform_block', 'install');
-  \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.webform_with_background_color.field_cta_background', 'wri_webform_block', 'install');
-  \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.webform_with_background_color.field_other_orto_list_tags', 'wri_webform_block', 'install');
-  \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.webform_with_background_color.field_webform', 'wri_webform_block', 'install');
-  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.block_content.webform_with_background_color', 'wri_webform_block', 'install');
-}
