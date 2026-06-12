@@ -290,6 +290,11 @@ function ts_wrin_preprocess_block(array &$variables) {
   ) {
     $variables["content"]["field_featured_experts"]["#title"] = $variables["elements"]["#configuration"]["label"];
   }
+
+  // Add the class of the view within the block to the block itself.
+  if (isset($variables["elements"]["content"]["field_listing"][0]['#content'])) {
+    $variables['attributes']['class'][] = Html::getClass('block--views_block--' . $variables["elements"]["content"]["field_listing"][0]['#content']['#name'] . '--' . $variables["elements"]["content"]["field_listing"][0]['#content']['#display_id']);
+  }
 }
 
 /**
@@ -323,7 +328,7 @@ function ts_wrin_preprocess_views_view(array &$variables) {
   $view_id = $variables['id'];
   $display_id = $variables['display_id'];
 
-  if ($view_id == '3_1' && $display_id == 'block_1') {
+  if ($view_id == '3_1' && ($display_id == 'block_1' || $display_id == 'insights')) {
     $variables['attributes']['class'] = 'grid';
   }
 }

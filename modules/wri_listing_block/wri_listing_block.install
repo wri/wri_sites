@@ -158,3 +158,13 @@ function wri_listing_block_update_10301() {
     'translatable',
   ], 'wri_listing_block');
 }
+
+/**
+ * Update Listing blocks to work on Insights landing page.
+ */
+function wri_listing_block_update_10600() {
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.content_listing', [
+    'dependencies',
+    'display',
+  ], 'wri_listing_block');
+}

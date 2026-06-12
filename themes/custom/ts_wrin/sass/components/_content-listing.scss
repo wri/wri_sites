@@ -65,6 +65,7 @@
 }
 
 // Content Listing, 3/4 version
+.insights_teasers-content_listing,
 .teasers-content_listing,
 .teasers-content_listing_a_to_z,
 .podcasts-content_listing,
@@ -235,5 +236,21 @@
     flex-shrink: 0;
     margin-left: $grid-gutter-mobile; // Creates white space between line and button.
     margin-right: 0;
+  }
+}
+
+.insights_teasers-content_listing .listing-items li {
+  @include mq($md) {
+    display: none;
+
+    &:nth-child(1) {
+      display: block;
+    }
+    &:nth-child(2) {
+      display: block;
+    }
+    &:nth-child(3) {
+      display: block;
+    }
   }
 }
