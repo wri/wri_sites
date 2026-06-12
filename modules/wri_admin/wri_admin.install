@@ -67,3 +67,14 @@ function wri_admin_update_10302() {
 function wri_admin_update_10400() {
   \Drupal::service('distro_helper.updates')->installConfig('file.settings', 'wri_sites', 'install');
 }
+
+/**
+ * Update basic editor to allow differnt color styles.
+ */
+function wri_admin_update_10600() {
+  \Drupal::service('distro_helper.updates')->updateConfig('editor.editor.basic_html', [
+    'settings#plugins#ckeditor5_sourceEditing#allowed_tags',
+    'settings#plugins#ckeditor5_style#styles',
+    'image_upload'
+  ], 'wri_admin');
+}

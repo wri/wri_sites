@@ -13,6 +13,8 @@ layout_teaser:
       label: Tag
     title:
       label: Title
+    intro:
+      label: Intro
     image:
       label: Image
     content_type:
@@ -111,6 +113,8 @@ layout_large_image_teaser:
       label: Tag
     title:
       label: Title
+    intro:
+      label: Intro
     content_type:
       label: Content type
     date:
