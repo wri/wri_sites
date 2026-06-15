@@ -12,11 +12,11 @@
     'px-[28px] py-[40px]',
     'md:px-[50px] md:py-[70px]',
     'lg:px-[75px] lg:py-[80px]',
-    'grid',
     'col-start-1 col-end-13',
   ]
 %}
 <div{{ attributes.addClass(classes) }}>
+  <div class="grid">
   {{ title_prefix }}
   {% if label %}
     <h2 class="h2 ph:text-[32px] md:text-[40px] lg:text-[46px] m-0 mb-[16px] text-white
@@ -35,6 +35,7 @@
       {{ content }}
     </div>
   {% endblock %}
+  </div>
 </div>
 
 <style>
