@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: carousel_with_tabs
+label: 'Carousel with tabs'
+revision: false
+description: null

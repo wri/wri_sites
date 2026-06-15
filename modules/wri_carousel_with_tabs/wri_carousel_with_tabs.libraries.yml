@@ -1,0 +1,17 @@
+accessible_slick:
+  remote: https://github.com/Accessible360/accessible-slick
+  version: 1.0.1
+  license:
+    name: MIT
+    url: https://github.com/Accessible360/accessible-slick/blob/master/LICENSE
+    gpl-compatible: true
+  js:
+    https://cdn.jsdelivr.net/npm/@accessible360/accessible-slick@1.0.1/slick/slick.min.js: { type: external, minified: true }
+  css:
+    theme:
+      https://cdn.jsdelivr.net/npm/@accessible360/accessible-slick@1.0.1/slick/slick.min.css: { type: external, minified: true }
+      https://cdn.jsdelivr.net/npm/@accessible360/accessible-slick@1.0.1/slick/accessible-slick-theme.min.css: { type: external, minified: true }
+wri_carousel_with_tabs_slick:
+  version: VERSION
+  js:
+    js/accessible_slick.js: { }

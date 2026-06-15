@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.carousel_with_tabs
+id: block_content.carousel_with_tabs
+target_entity_type_id: block_content
+target_bundle: carousel_with_tabs
+default_langcode: site_default
+language_alterable: false
