@@ -7,12 +7,3 @@ single_file_component_layout:wri_carousel_with_tabs:
       label: Content
   icon_map:
     - [ content ]
-single_file_component_layout:block--block-content--type--carousel-with-tabs:
-  label: "Carousel with tabs block"
-  template: templates/block--block-content--type--carousel-with-tabs
-  default_region: content
-  regions:
-    content:
-      label: Content
-  icon_map:
-    - [ content ]
