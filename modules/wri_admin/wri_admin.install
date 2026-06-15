@@ -72,9 +72,28 @@ function wri_admin_update_10400() {
  * Update basic editor to allow differnt color styles.
  */
 function wri_admin_update_10600() {
-  \Drupal::service('distro_helper.updates')->updateConfig('editor.editor.basic_html', [
-    'settings#plugins#ckeditor5_sourceEditing#allowed_tags',
-    'settings#plugins#ckeditor5_style#styles',
-    'image_upload'
-  ], 'wri_admin');
+  // Add 3 new styles for ckeditor:
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('editor.editor.basic_html');
+  $settings = $config->get('settings');
+  $existing_styles = $settings["plugins"]["ckeditor5_style"]["styles"];
+  $new_styles = [
+    [
+      'label' => 'Maroon',
+      'element' => '<span class="has-maroon-color">',
+    ],
+    [
+      'label' => 'Thin Light Grey',
+      'element' => '<span class="has-light-grey-color">',
+    ],
+    [
+      'label' => 'Serif font',
+      'element' => '<span class="font-serif">',
+    ],
+  ];
+
+  $settings["plugins"]["ckeditor5_style"]["styles"] = array_merge($existing_styles, $new_styles);
+
+  $config->set('settings', $settings);
+  $config->save();
 }

@@ -104,7 +104,6 @@ function wri_webform_block_add_content_blocks_browser_dependencies() {
   }
 }
 
-
 /**
  * Add view modes for Insights landing page.
  */

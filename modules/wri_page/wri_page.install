@@ -10,12 +10,7 @@
  */
 function wri_page_update_10600() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.page.default', [
-    'dependencies#config',
-    'dependencies#module',
     'content#field_long_title',
-    'content#field_main_image',
-    'content#field_metatags',
     'content#title',
-    'hidden',
   ], 'wri_page');
 }

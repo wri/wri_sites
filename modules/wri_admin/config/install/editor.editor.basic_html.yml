@@ -38,15 +38,6 @@ settings:
         -
           label: 'Serif font'
           element: '<span class="font-serif">'
-        -
-          label: 'H2 (pfp)'
-          element: '<p class="pfp-h2-bold">'
-        -
-          label: 'H2 italic (pfp)'
-          element: '<p class="pfp-h2-bold-italic">'
-        -
-          label: 'Blue 200 (pfp)'
-          element: '<p class="pfp-text-blue-200">'
     editor_advanced_link_link:
       enabled_attributes:
         - class

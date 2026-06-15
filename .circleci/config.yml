@@ -2,7 +2,7 @@ version: 2
 jobs:
   build_theme:
     docker:
-      - image: cimg/node:20.11.1
+      - image: cimg/node:22.22.3
     steps:
       - checkout
       - run:
