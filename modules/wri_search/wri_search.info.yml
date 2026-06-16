@@ -4,8 +4,10 @@ description: 'Custom search menu.'
 core_version_requirement: '>=9.5'
 dependencies:
   - search_api
+  - better_exposed_filters
   - facets
   - facets_pretty_paths
+  - facets_exposed_filters
   - facets_summary
   - search_api_exclude_entity
   - search_api_pantheon
