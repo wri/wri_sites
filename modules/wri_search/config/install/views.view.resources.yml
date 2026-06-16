@@ -8,6 +8,7 @@ dependencies:
   module:
     - better_exposed_filters
     - facets_exposed_filters
+    - facets_summary
     - search_api
     - views_extras
 id: resources
@@ -420,6 +421,17 @@ display:
           plugin_id: extra_result
           empty: false
           content: "<span class='totals'>@total Resources</span><span class='query'> for </span>"
+        facets_summary:
+          id: facets_summary
+          table: search_api_index_sitewide
+          field: facets_summary
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_summary_area
+          empty: true
+          facet_summary: summary
+          label_display: false
       footer: {  }
       display_extenders:
         metatag_display_extender:
@@ -1145,6 +1157,7 @@ display:
             missing: false
             missing_label: others
             show_numbers: false
+            depends_on_exposed_filter: facets_smart_topic_parent
             processor_configs:
               hierarchy_processor:
                 processor_id: hierarchy_processor
@@ -1168,7 +1181,6 @@ display:
                   sort: 40
                 settings:
                   sort: ASC
-            depends_on_exposed_filter: facets_smart_topic_parent
         facets_top_level_type:
           id: facets_top_level_type
           table: search_api_index_sitewide
@@ -1312,6 +1324,7 @@ display:
             missing: false
             missing_label: others
             show_numbers: false
+            depends_on_exposed_filter: facets_top_level_type
             processor_configs:
               hierarchy_processor:
                 processor_id: hierarchy_processor
@@ -1343,7 +1356,6 @@ display:
                   sort: 40
                 settings:
                   sort: ASC
-            depends_on_exposed_filter: facets_top_level_type
         facets_term_parent_or_self:
           id: facets_term_parent_or_self
           table: search_api_index_sitewide
@@ -1464,6 +1476,7 @@ display:
             missing: false
             missing_label: others
             show_numbers: false
+            depends_on_exposed_filter: facets_term_parent_or_self
             processor_configs:
               translate_entity:
                 processor_id: translate_entity
@@ -1482,7 +1495,6 @@ display:
                   sort: 40
                 settings:
                   sort: ASC
-            depends_on_exposed_filter: facets_term_parent_or_self
         facets_field_tags:
           id: facets_field_tags
           table: search_api_index_sitewide
@@ -2371,6 +2383,7 @@ display:
             missing: false
             missing_label: others
             show_numbers: false
+            depends_on_exposed_filter: facets_smart_topic_parent
             processor_configs:
               hierarchy_processor:
                 processor_id: hierarchy_processor
@@ -2394,7 +2407,6 @@ display:
                   sort: 40
                 settings:
                   sort: ASC
-            depends_on_exposed_filter: facets_smart_topic_parent
         facets_top_level_type:
           id: facets_top_level_type
           table: search_api_index_sitewide
@@ -2538,6 +2550,7 @@ display:
             missing: false
             missing_label: others
             show_numbers: false
+            depends_on_exposed_filter: facets_top_level_type
             processor_configs:
               hierarchy_processor:
                 processor_id: hierarchy_processor
@@ -2569,7 +2582,6 @@ display:
                   sort: 40
                 settings:
                   sort: ASC
-            depends_on_exposed_filter: facets_top_level_type
         facets_term_parent_or_self:
           id: facets_term_parent_or_self
           table: search_api_index_sitewide
@@ -2690,6 +2702,7 @@ display:
             missing: false
             missing_label: others
             show_numbers: false
+            depends_on_exposed_filter: facets_term_parent_or_self
             processor_configs:
               translate_entity:
                 processor_id: translate_entity
@@ -2708,7 +2721,6 @@ display:
                   sort: 40
                 settings:
                   sort: ASC
-            depends_on_exposed_filter: facets_term_parent_or_self
         facets_field_tags:
           id: facets_field_tags
           table: search_api_index_sitewide
@@ -2810,11 +2822,21 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
+        - 'facets_filter:f'
         - 'languages:language_interface'
         - url
         - url.query_args
         - 'url.query_args:sort_by'
         - 'user.node_grants:view'
       tags:
+        - 'config:facets.facet.all_topics'
+        - 'config:facets.facet.country'
+        - 'config:facets.facet.region'
+        - 'config:facets.facet.subtype'
+        - 'config:facets.facet.tags'
+        - 'config:facets.facet.type_of_resource'
+        - 'config:facets.facet.within_this_topic'
         - 'config:search_api.index.sitewide'
+        - 'config:views.view.resources'
         - 'search_api_list:sitewide'
+        - taxonomy_term_list
