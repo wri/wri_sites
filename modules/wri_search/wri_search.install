@@ -112,11 +112,11 @@ function wri_search_update_10600() {
     'display',
   ], 'wri_search');
   \Drupal::service('config.factory')->getEditable('facets_summary.facets_summary.summary')->delete();
- \Drupal::service('config.factory')->getEditable('facets.facet.all_topics')->delete();
- \Drupal::service('config.factory')->getEditable('facets.facet.country')->delete();
- \Drupal::service('config.factory')->getEditable('facets.facet.region')->delete();
- \Drupal::service('config.factory')->getEditable('facets.facet.subtype')->delete();
- \Drupal::service('config.factory')->getEditable('facets.facet.tags')->delete();
- \Drupal::service('config.factory')->getEditable('facets.facet.type_of_resource')->delete();
- \Drupal::service('config.factory')->getEditable('facets.facet.within_this_topic')->delete();
+  \Drupal::service('config.factory')->getEditable('facets.facet.all_topics')->delete();
+  \Drupal::service('config.factory')->getEditable('facets.facet.country')->delete();
+  \Drupal::service('config.factory')->getEditable('facets.facet.region')->delete();
+  \Drupal::service('config.factory')->getEditable('facets.facet.subtype')->delete();
+  \Drupal::service('config.factory')->getEditable('facets.facet.tags')->delete();
+  \Drupal::service('config.factory')->getEditable('facets.facet.type_of_resource')->delete();
+  \Drupal::service('config.factory')->getEditable('facets.facet.within_this_topic')->delete();
 }
