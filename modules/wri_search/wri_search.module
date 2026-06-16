@@ -5,6 +5,7 @@
  * Contains hsus_search.module.
  */
 
+use Drupal\Core\Render\Element;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Form\FormStateInterface;
@@ -152,13 +153,20 @@ function wri_search_preprocess_bef_checkboxes(&$variables) {
     $current_request = $request_stack->getCurrentRequest();
     $current_filters = $current_request->query->all();
     $region = $current_filters['region'];
-    $good_results = \Drupal::service('wri_search.pretty_facets_helper')->limitFacetsByParentId($region, \Drupal\Core\Render\Element::children($variables['element']));
+    $terms = [];
+    foreach ($region as $value) {
+      // Load up children of that facet value.
+      $tree = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadChildren($value);
+      $terms = array_merge(array_keys($tree), $terms);
+    }
 
-    if (!empty($good_results)) {
-      foreach (\Drupal\Core\Render\Element::children($variables['element']) as $item_number) {
-        if (!in_array($item_number, $good_results)) {
-          unset($variables['element'][$item_number]);
-        }
+    // Exclude elements not in that list.
+    $good_results = [];
+
+    /** @var \Drupal\facets\Result\ResultInterface $result */
+    foreach (Element::children($variables['element']) as $value) {
+      if (!in_array($value, $good_results)) {
+        unset($variables['element'][$value]);
       }
     }
   }
