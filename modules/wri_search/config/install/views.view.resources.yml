@@ -1188,11 +1188,6 @@ display:
                   build: 5
                 settings:
                   skip_access_check: false
-              limit_to_parent:
-                processor_id: limit_to_parent
-                weights:
-                  build: 50
-                settings: {  }
               display_value_widget_order:
                 processor_id: display_value_widget_order
                 weights:
@@ -1363,11 +1358,6 @@ display:
                   build: 5
                 settings:
                   skip_access_check: false
-              limit_to_parent:
-                processor_id: limit_to_parent
-                weights:
-                  build: 50
-                settings: {  }
               display_value_widget_order:
                 processor_id: display_value_widget_order
                 weights:
@@ -1502,11 +1492,6 @@ display:
                   build: 5
                 settings:
                   skip_access_check: false
-              limit_to_parent:
-                processor_id: limit_to_parent
-                weights:
-                  build: 50
-                settings: {  }
               display_value_widget_order:
                 processor_id: display_value_widget_order
                 weights:
@@ -2414,11 +2399,6 @@ display:
                   build: 5
                 settings:
                   skip_access_check: false
-              limit_to_parent:
-                processor_id: limit_to_parent
-                weights:
-                  build: 50
-                settings: {  }
               display_value_widget_order:
                 processor_id: display_value_widget_order
                 weights:
@@ -2589,11 +2569,6 @@ display:
                   build: 5
                 settings:
                   skip_access_check: false
-              limit_to_parent:
-                processor_id: limit_to_parent
-                weights:
-                  build: 50
-                settings: {  }
               display_value_widget_order:
                 processor_id: display_value_widget_order
                 weights:
@@ -2728,11 +2703,6 @@ display:
                   build: 5
                 settings:
                   skip_access_check: false
-              limit_to_parent:
-                processor_id: limit_to_parent
-                weights:
-                  build: 50
-                settings: {  }
               display_value_widget_order:
                 processor_id: display_value_widget_order
                 weights:
@@ -2838,7 +2808,7 @@ display:
           tokenize: false
       path: resources
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
         - 'facets_filter:f'
         - 'languages:language_interface'

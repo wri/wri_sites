@@ -87,11 +87,6 @@ processor_configs:
       sort: 40
     settings:
       sort: ASC
-  limit_to_parent:
-    processor_id: limit_to_parent
-    weights:
-      build: 50
-    settings: {  }
   translate_entity:
     processor_id: translate_entity
     weights:
