@@ -117,3 +117,27 @@ function wri_search_theme() {
     ],
   ];
 }
+
+/**
+ * Implements hook_preprocess_hook().
+ */
+function wri_search_preprocess_facets_summary_item_list(&$variables) {
+  // The facet summary doesn't work with Facets Pretty Path right now.
+  // Urls look like this:
+  // resources/topics/business-74?topic=74.
+  // So attempting to unset the business topic doesn't strip out the ?topic=
+  // part. I'm doing that here instead.
+  // This may not be needed with a Drupal 11 upgrade, when we can start using
+  // the latest Facets release, so re-evaluate then.
+  if ($variables["facet_summary_id"] == 'summary') {
+    $allowed = ['sort_by', 'page', 'query'];
+    foreach ($variables["items"] as $delta => $facet) {
+      if ($facet["value"]["#url"]->getRouteName() == 'view.resources.resources_page') {
+        $options = $facet["value"]["#url"]->getOptions();
+        $query = $options['query'];
+        $options['query'] = array_intersect_key($query, array_flip($allowed));
+        $variables["items"][$delta]["value"]['#url']->setOptions($options);
+      }
+    }
+  }
+}
