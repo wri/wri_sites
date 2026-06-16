@@ -141,3 +141,43 @@ function wri_search_preprocess_facets_summary_item_list(&$variables) {
     }
   }
 }
+
+function wri_search_preprocess_bef_checkboxes(&$variables) {
+  $facets_to_limit = ['subtype', 'country'];
+
+  if (isset($variables["element"]["#name"]) && in_array($variables["element"]["#name"], $facets_to_limit)) {
+    // Get the parent values: type and region that have been set on the page.
+    $request_stack = Drupal::requestStack();
+    $current_request = $request_stack->getCurrentRequest();
+    $current_filters = $current_request->query->all();
+
+    if ($variables["element"]["#name"] == 'country') {
+      $region = $current_filters['region'];
+      $country_terms = [];
+      $subtype_terms = [];
+      foreach ($region as $value) {
+        // Load up children of that facet value.
+        $tree = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadChildren($value);
+        $country_terms = array_merge(array_keys($tree), $country_terms);
+      }
+
+      // Exclude elements not in that list.
+      $good_results = [];
+
+      /** @var \Drupal\facets\Result\ResultInterface $result */
+      foreach ( \Drupal\Core\Render\Element::children($variables['element']) as $key => $result) {
+        // Compare the results to the list of valid children.
+        if (in_array($result, $country_terms)) {
+          $good_results[$key] = $result;
+        }
+      }
+    } elseif ($variables["element"]["#name"] == 'country') {
+      $type = $current_filters['type'];
+      foreach ($type as $value) {
+        // Load up children of that facet value.
+        $tree = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadChildren($value);
+        $subtype_terms = array_merge(array_keys($tree), $subtype_terms);
+      }
+    }
+  }
+}
