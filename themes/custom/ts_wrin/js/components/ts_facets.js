@@ -7,7 +7,8 @@ export default function (context) {
   const $ = jQuery;
   $(".button.filters")
     .off("click")
-    .on("click", function () {
+    .on("click", function (e) {
+      e.preventDefault();
       $(this)
         .closest(
           ".view-resources, .view-experts-staff, .view-events, .view-paying-for-paris-resources",

@@ -2,12 +2,16 @@
   @include container-padding;
 }
 
-.show-in-top-links ul li {
+.show-in-top-links ul {
   align-items: center;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
+  padding: 0;
+  li::marker {
+    content: none;
+  }
 
   h4 {
     font-size: 0;
@@ -35,7 +39,7 @@
       }
     }
   }
-  a.is-active {
+  a.bef-link--selected {
     @include text-underline(transparent, var(--color-neutral-900));
     & {
       background-position: left 100%;
@@ -68,6 +72,7 @@
   background-color: var(--color-neutral-200);
 }
 
+.view-resources .view-filters,
 .view-events .view-filters div.form--inline,
 .view-resources .view-filters div.form--inline,
 .view-paying-for-paris-resources .view-filters div.form--inline,
@@ -88,6 +93,7 @@
 
 .results-sidebar,
 .view-events .form-type-textfield,
+.resources-wrapper .view-filters > .button.filters,
 .view-resources .form-type-textfield,
 .view-paying-for-paris-resources .form-type-textfield,
 .experts-container .form-type-textfield,
@@ -108,6 +114,18 @@
   margin-right: 0;
   @include mq($xl) {
     width: calc(100% - 55px);
+  }
+  .form--inline {
+    display: flex;
+    flex-wrap: wrap;
+    @include mq($lg) {
+      display: block;
+    }
+  }
+  .form--inline > details.form-item {
+    @include mq($lg) {
+      float: none;
+    }
   }
 }
 
@@ -493,7 +511,7 @@
     position: relative;
 
     .button.filters {
-      width: 23%;
+      width: 46%;
     }
     .form-item-sort-by {
       margin: 0;
