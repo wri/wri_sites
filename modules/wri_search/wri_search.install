@@ -111,11 +111,11 @@ function wri_search_update_10600() {
     'dependencies',
     'display',
   ], 'wri_search');
- \Drupal::service('config.factory')->getEditable('facets.facet.all_topics')->delete();
- \Drupal::service('config.factory')->getEditable('facets.facet.country')->delete();
- \Drupal::service('config.factory')->getEditable('facets.facet.region')->delete();
- \Drupal::service('config.factory')->getEditable('facets.facet.subtype')->delete();
- \Drupal::service('config.factory')->getEditable('facets.facet.tags')->delete();
- \Drupal::service('config.factory')->getEditable('facets.facet.type_of_resource')->delete();
- \Drupal::service('config.factory')->getEditable('facets.facet.within_this_topic')->delete();
+  \Drupal::service('distro_helper.updates')->installConfig('facets.facet.all_topics', 'wri_search');
+  \Drupal::service('distro_helper.updates')->installConfig('facets.facet.country', 'wri_search');
+  \Drupal::service('distro_helper.updates')->installConfig('facets.facet.region', 'wri_search');
+  \Drupal::service('distro_helper.updates')->installConfig('facets.facet.subtype', 'wri_search');
+  \Drupal::service('distro_helper.updates')->installConfig('facets.facet.tags', 'wri_search');
+  \Drupal::service('distro_helper.updates')->installConfig('facets.facet.type_of_resource', 'wri_search');
+  \Drupal::service('distro_helper.updates')->installConfig('facets.facet.within_this_topic', 'wri_search');
 }
