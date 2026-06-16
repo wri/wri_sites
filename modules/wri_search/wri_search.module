@@ -147,7 +147,7 @@ function wri_search_preprocess_facets_summary_item_list(&$variables) {
  * Implements hook_preprocess_hook() for bef_checkboxes.
  */
 function wri_search_preprocess_bef_checkboxes(&$variables) {
-  if (isset($variables["element"]["#name"]) == 'country') {
+  if ($variables["element"]["#name"] == 'country') {
     // Get the parent values for region that have been set on the page.
     $request_stack = Drupal::requestStack();
     $current_request = $request_stack->getCurrentRequest();
@@ -160,12 +160,9 @@ function wri_search_preprocess_bef_checkboxes(&$variables) {
       $terms = array_merge(array_keys($tree), $terms);
     }
 
-    // Exclude elements not in that list.
-    $good_results = [];
-
     /** @var \Drupal\facets\Result\ResultInterface $result */
     foreach (Element::children($variables['element']) as $value) {
-      if (!in_array($value, $good_results)) {
+      if (!in_array($value, $terms)) {
         unset($variables['element'][$value]);
       }
     }
