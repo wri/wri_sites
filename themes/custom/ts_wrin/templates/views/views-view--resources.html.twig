@@ -16,42 +16,45 @@
 %}
 
 {% if header %}
-  {{ header|without('extra_result') }}
+  {{ header|without('extra_result', 'facets_summary') }}
 {% endif %}
 <div{{ attributes.addClass(classes) }}>
+{% if exposed %}
+{% set form_attributes = create_attribute(exposed["#attributes"]) %}
+  <form{{ form_attributes }}>
+{% endif %}
   {% if display_id == 'resources_page' %}
     <div class="container">
       <h1 class="h1 padding-vertical">{{ view.title }}</h1>
+      {% if exposed %}
+      {{ exposed.topic }}
+      {% endif %}
     </div>
-  {{ drupal_block('facet_block:all_topics') }}
   {% endif %}
   <div class="resources-wrapper">
     <div class="container">
+
       {% if exposed %}
         <div class="view-filters">
           <button class="button black filters">{{ "Filters"|t }}</button>
-          {{ exposed }}
+          {% if exposed %}
+          {{ exposed.query }}
+          {{ exposed.sort_by }}
+          {% endif %}
         </div>
       {% endif %}
 
       <div class="grid results-wrapper">
         <div class="results-sidebar padding-bottom">
-          {% if display_id == 'resources_page' %}
-          {{ drupal_block('facet_block:within_this_topic') }}
-          {{ drupal_block('facet_block:type_of_resource') }}
-          {{ drupal_block('facet_block:subtype') }}
-          {{ drupal_block('facet_block:region') }}
-          {{ drupal_block('facet_block:country') }}
-          {{ drupal_block('facet_block:tags') }}
+          {% if exposed %}
+              {% set clean = exposed|without('topic', 'query', 'sort_by')|render|preg_replace('/<form[^>]*>/i', '') %}
+              {{ clean|replace({'</form>': ''})|raw }}
           {% endif %}
         </div>
-
         <div class="results-body padding-bottom">
             <div class="view-header">
               {{ header.extra_result }}
-              {% if display_id == 'resources_page' %}
-              {{ drupal_block('facets_summary_block:summary') }}
-              {% endif %}
+              {{ header.facets_summary }}
             </div>
           {% if rows %}
             <div class="view-content">
@@ -71,7 +74,6 @@
           {% endif %}
         </div>
       </div>
-
       {% if footer %}
         <div class="view-footer">
           {{ footer }}
@@ -81,4 +83,8 @@
       </div>
     </div>
   </div>
+
+{% if exposed %}
+  </form>
+{% endif %}
 </div>

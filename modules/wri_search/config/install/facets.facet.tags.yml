@@ -12,30 +12,39 @@ third_party_settings:
     coder: taxonomy_term_coder
 id: tags
 name: Tags
-url_alias: tags
 weight: 2
 min_count: 1
-show_only_one_result: false
-field_identifier: field_tags
+missing: false
+missing_label: others
+url_alias: tags
 facet_source_id: 'search_api:views_page__resources__resources_page'
+field_identifier: field_tags
+query_operator: or
+hard_limit: 0
+exclude: false
+use_hierarchy: false
+keep_hierarchy_parents_active: false
+hierarchy:
+  type: taxonomy
+  config: {  }
+expand_hierarchy: false
+enable_parent_when_child_gets_disabled: true
 widget:
   type: checkbox
   config:
     show_numbers: false
     soft_limit: 0
-    soft_limit_settings:
-      show_less_label: 'Show less'
-      show_more_label: 'Show more'
     show_reset_link: false
     reset_text: 'Show all'
     hide_reset_when_no_selection: false
-query_operator: or
-use_hierarchy: false
-expand_hierarchy: false
-enable_parent_when_child_gets_disabled: true
-hard_limit: 0
-exclude: false
+    soft_limit_settings:
+      show_less_label: 'Show less'
+      show_more_label: 'Show more'
+empty_behavior:
+  behavior: none
 only_visible_when_facet_source_is_visible: false
+show_only_one_result: false
+show_title: true
 processor_configs:
   display_value_widget_order:
     processor_id: display_value_widget_order
@@ -43,6 +52,19 @@ processor_configs:
       sort: 40
     settings:
       sort: ASC
+  exclude_specified_items:
+    processor_id: exclude_specified_items
+    weights:
+      build: 50
+    settings:
+      exclude: "building a sustainable guitar,lower emissions brighter economy,cities for all,climatewatch-pinned,creating a sustainable food future,Prize for Cities,Sustainable Development Goal 1,Sustainable Development Goal 2,Sustainable Development Goal 3,Sustainable Development Goal 4,Sustainable Development Goal 5,Sustainable Development Goal 6,Sustainable Development Goal 7,Sustainable Development Goal 8,Sustainable Development Goal 9,Sustainable Development Goal 10,Sustainable Development Goal 11,Sustainable Development Goal 12,Sustainable Development Goal 13,Sustainable Development Goal 14,Sustainable Development Goal 15,Sustainable Development Goal 16,Sustainable Development Goal 17, Top Outcome: 2011,Top Outcome: 2012,Top Outcome: 2013,Top Outcome: 2014,Top Outcome: 2015,Top Outcome: 2016,Top Outcome: 2017,Top Outcome: 2018,Top Outcome: 2019,Top Outcome: 2020,Top Outcome: 2021,Top Outcome: 2022,world resources report,this month in climate science,Aqueduct,Humans of Clean Energy,global forest watch,10498,long-term strategy related case study,The $26 Trillion Opportunity,open climate network,WRI Africa pillar,24/7 Carbon-Free Energy,AAC Workstream,electric school bus series,urban water resilience,COP27 upcoming event,COP27 event recording,carbon removal legislation & policy,Stepping up 2020 NDCs Webinar Series,BIRGS project profiles,WRR-synthesis report,AQ Community of Practice Latin America & Africa,AQ Community of Practice Southeast Asia,U.S. Climate Policy-Clean Power,U.S. Climate Policy-Community Solar,U.S. Climate Policy-Direct Air Capture,U.S. Climate Policy-Electric School Buses,U.S. Climate Policy-Electric Vehicles,U.S. Climate Policy-EV Charging,U.S. Climate Policy-Green Schools,U.S. Climate Policy-Hydrogen,U.S. Climate Policy-Lands,U.S. Climate Policy-Transmission,U.S. Climate Policy-Equity,JT Sector: Economy-wide,JT Sector: Electricity,JT Sector: Finance,JT Sector: Fossil Fuel Extraction,JT Sector: Fossil fuels,JT Sector: Renewables,Road Safety Project Updates,U.S. Energy Topics,WRI Europe in London,WRR synthesis report,COP28 upcoming event,COP28 event recording,FIGI,Climate Week event,Climate Week event recording,U.S. Community Benefits Frameworks,COP16 event recording,COP16 upcoming event,U.S. Community Benefits Snapshots,Next-Generation Geothermal Energy,Ocean Action 2030,Ocean Action 2030's Rapid Assistance Fund"
+      regex: false
+      invert: false
+  hierarchy_processor:
+    processor_id: hierarchy_processor
+    weights:
+      build: 100
+    settings: {  }
   translate_entity:
     processor_id: translate_entity
     weights:
@@ -54,6 +76,3 @@ processor_configs:
       pre_query: 50
       build: 15
     settings: {  }
-empty_behavior:
-  behavior: none
-show_title: true

@@ -102,3 +102,20 @@ function wri_search_update_10005() {
     'display#default#display_options#exposed_form',
   ], 'wri_search');
 }
+
+/**
+ * Refactor of resources view for facets 3 and updating facets.
+ */
+function wri_search_update_10600() {
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.resources', [
+    'dependencies',
+    'display',
+  ], 'wri_search');
+  \Drupal::service('distro_helper.updates')->installConfig('facets.facet.all_topics', 'wri_search');
+  \Drupal::service('distro_helper.updates')->installConfig('facets.facet.country', 'wri_search');
+  \Drupal::service('distro_helper.updates')->installConfig('facets.facet.region', 'wri_search');
+  \Drupal::service('distro_helper.updates')->installConfig('facets.facet.subtype', 'wri_search');
+  \Drupal::service('distro_helper.updates')->installConfig('facets.facet.tags', 'wri_search');
+  \Drupal::service('distro_helper.updates')->installConfig('facets.facet.type_of_resource', 'wri_search');
+  \Drupal::service('distro_helper.updates')->installConfig('facets.facet.within_this_topic', 'wri_search');
+}

@@ -2,12 +2,17 @@
   @include container-padding;
 }
 
-.topics-view-block .facets-widget-links div {
+.topics-view-block .facets-widget-links div,
+.show-in-top-links ul {
   align-items: center;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
+  padding: 0;
+  li::marker {
+    content: none;
+  }
 
   h4 {
     font-size: 0;
@@ -35,7 +40,8 @@
       }
     }
   }
-  a.is-active {
+  a.is-active,
+  a.bef-link--selected {
     @include text-underline(transparent, var(--color-neutral-900));
     & {
       background-position: left 100%;
@@ -69,9 +75,12 @@
 }
 
 .view-events div.form--inline,
-.view-resources div.form--inline,
 .view-paying-for-paris-resources div.form--inline,
-.experts-container div.form--inline {
+.experts-container div.form--inline,
+.view-resources .view-filters,
+.view-events .view-filters div.form--inline,
+.view-paying-for-paris-resources .view-filters div.form--inline,
+.experts-container .view-filters div.form--inline {
   @extend .grid;
   & {
     margin: 0;
@@ -88,6 +97,7 @@
 
 .results-sidebar,
 .view-events .form-type-textfield,
+.resources-wrapper .view-filters > .button.filters,
 .view-resources .form-type-textfield,
 .view-paying-for-paris-resources .form-type-textfield,
 .experts-container .form-type-textfield,
@@ -108,6 +118,18 @@
   margin-right: 0;
   @include mq($xl) {
     width: calc(100% - 55px);
+  }
+  .form--inline {
+    display: flex;
+    flex-wrap: wrap;
+    @include mq($lg) {
+      display: block;
+    }
+  }
+  .form--inline > details.form-item {
+    @include mq($lg) {
+      float: none;
+    }
   }
 }
 
@@ -379,13 +401,15 @@
     height: 26px;
     opacity: 1;
   }
-  .block-facets h3 {
+  .block-facets h3,
+  summary {
     @include font(var(--font-family-heading-condensed), "semibold", "normal");
     @include font-line-height(14, 18);
     & {
       border-top: 1px solid var(--color-neutral-900);
       color: var(--color-black);
       cursor: pointer;
+      padding: 0;
       padding-top: 10px;
       padding-bottom: 1rem;
       position: relative;
@@ -405,8 +429,18 @@
   }
   .block-facets .open h3 span {
     transform: rotate(0deg);
+    }
+  details {
+    border: 0;
   }
-  .block-facets ul {
+  .bef-exposed-form .form--inline > details.form-item {
+    float: none;
+  }
+  details .details-wrapper {
+    padding: 0;
+  }
+  .block-facets ul,
+  details ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -414,15 +448,19 @@
       margin: 1rem 0;
     }
   }
-  .block-facets li {
+  .block-facets li,
+  details li {
     list-style-type: none;
     margin: 0;
   }
-  .block-facets .open li {
+  .block-facets .open li,
+  details .open li {
     margin-bottom: 7px;
   }
   .block-facets input[type="checkbox"],
-  .block-facets input[type="radio"] {
+  .block-facets input[type="radio"],
+  details input[type="checkbox"],
+  details input[type="radio"] {
     height: 17px;
     margin-right: 15px;
     position: relative;
@@ -430,7 +468,8 @@
     width: 17px;
     z-index: -1;
   }
-  .block-facets label {
+  .block-facets label,
+  details label {
     @include font(var(--font-family-heading-condensed), "normal", "normal");
     @include font-line-height(14, 18);
     & {
@@ -439,7 +478,8 @@
       position: relative;
     }
   }
-  .block-facets label::before {
+  .block-facets label::before,
+  details label::before {
     background-color: #ffffff;
     background-position: 1px 0px;
     background-repeat: no-repeat;
@@ -463,16 +503,23 @@
   }
   .block-facets label::before:active,
   .block-facets label::before:hover,
-  .block-facets label::before:focus {
+  .block-facets label::before:focus,
+  details label::before:active,
+  details label::before:hover,
+  details label::before:focus {
     cursor: pointer;
   }
-  .block-facets input:checked + label::before {
+  .block-facets input:checked + label::before,
+  details input:checked + label::before {
     background-color: var(--color-green-500);
     text-shadow: 1px 1px 1px rgba(240, 240, 240, 0.5);
   }
   .block-facets input:focus + label::before,
   .block-facets input:active + label::before,
-  .block-facets input:hover + label::before {
+  .block-facets input:hover + label::before,
+  details input:focus + label::before,
+  details input:active + label::before,
+  details input:hover + label::before {
     box-shadow:
       0 3px 8px 0 rgba(0, 0, 0, 0.2),
       0 0 0 1px rgba(0, 0, 0, 0.08);
@@ -498,7 +545,7 @@
     position: relative;
 
     .button.filters {
-      width: 23%;
+      width: 46%;
     }
     .form-item-sort-by {
       margin: 0;
@@ -540,8 +587,10 @@
     margin-right: 0;
     padding-bottom: 0;
 
-    .block-facets {
+    .block-facets,
+    details {
       flex: 0 1 45%;
+      float: none;
 
       &:last-child {
         margin-bottom: 10px;
