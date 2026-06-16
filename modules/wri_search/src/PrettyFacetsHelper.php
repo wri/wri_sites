@@ -82,4 +82,5 @@ class PrettyFacetsHelper {
 
     return $pretty_paths;
   }
+
 }
