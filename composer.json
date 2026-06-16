@@ -53,7 +53,7 @@
                 "Paragraphs parent IDs are wrong https://www.drupal.org/project/entity_share/issues/3445703":"https://www.drupal.org/files/issues/2024-05-08/entity_share-parent-id-3445703-2.patch"
             },
             "drupal/facets": {
-                "Add dependency support for exposed facet filters https://www.drupal.org/project/facets/issues/3592014": "https://git.drupalcode.org/project/facets/-/merge_requests/378.diff"
+                "Add dependency support for exposed facet filters (Can be dropped in Drupal 11) https://www.drupal.org/project/facets/issues/3592014": "web/profiles/contrib/wri_sites/patches/facets--dependent-exposed-filters--3592014.patch"
             },
             "drupal/layout_builder_st": {
                 "Error: Call to a member function getConfig() OverridesSectionStorage.php https://www.drupal.org/project/layout_builder_st/issues/3420063": "https://www.drupal.org/files/issues/2024-03-29/layout_builder_st-call_to_a_member_function_getconfig-3420063-26.patch",

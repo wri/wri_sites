@@ -1,0 +1,717 @@
+diff --git a/modules/facets_exposed_filters/config/schema/facets_exposed_filters.views.schema.yml b/modules/facets_exposed_filters/config/schema/facets_exposed_filters.views.schema.yml
+index 328ed72e02fd9a699275ffd5274b635f8fb57e7b..5fbafcb31c07ea0e458269711df6f155e548d68b 100644
+--- a/modules/facets_exposed_filters/config/schema/facets_exposed_filters.views.schema.yml
++++ b/modules/facets_exposed_filters/config/schema/facets_exposed_filters.views.schema.yml
+@@ -34,6 +34,9 @@ views.filter.facets_filter:
+         show_numbers:
+           type: boolean
+           label: 'Show the amount of results'
++        depends_on_exposed_filter:
++          type: string
++          label: 'Depends on exposed filter'
+         processor_configs:
+           type: sequence
+           label: 'Processor settings'
+diff --git a/modules/facets_exposed_filters/facets_exposed_filters.libraries.yml b/modules/facets_exposed_filters/facets_exposed_filters.libraries.yml
+index b7ec00ca8208ba4f4ce10319d12da583ea975954..37a735be66bb14d4742c45411ca05e57c2423912 100644
+--- a/modules/facets_exposed_filters/facets_exposed_filters.libraries.yml
++++ b/modules/facets_exposed_filters/facets_exposed_filters.libraries.yml
+@@ -1,3 +1,10 @@
++dependent_filters:
++  js:
++    js/dependent-filters.js: {}
++  dependencies:
++    - core/drupal
++    - core/once
++
+ edit_filter:
+   js:
+     js/edit-filter.js: {}
+diff --git a/modules/facets_exposed_filters/js/dependent-filters.js b/modules/facets_exposed_filters/js/dependent-filters.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..969588ba0da25c94c83df0d94c0e4b72d9992169
+--- /dev/null
++++ b/modules/facets_exposed_filters/js/dependent-filters.js
+@@ -0,0 +1,249 @@
++((Drupal, once) => {
++  const identifierAttribute = 'data-facets-exposed-filter-identifier';
++  const dependentsAttribute = 'data-facets-exposed-filter-dependents';
++
++  /**
++   * Gets exposed form elements for an exposed filter identifier.
++   *
++   * @param {HTMLFormElement} form
++   *   The exposed form.
++   * @param {string} identifier
++   *   The exposed filter identifier.
++   *
++   * @return {Element[]}
++   *   Matching form elements.
++   */
++  function getElementsByIdentifier(form, identifier) {
++    return Array.from(form.elements).filter((element) => {
++      const name = element.getAttribute('name') || '';
++      return name === identifier || name.startsWith(`${identifier}[`);
++    });
++  }
++
++  /**
++   * Resets a select to the empty exposed-filter option.
++   *
++   * @param {HTMLSelectElement} select
++   *   The select element.
++   */
++  function resetSelect(select) {
++    if (select.multiple) {
++      Array.from(select.options).forEach((option) => {
++        option.selected = false;
++      });
++      return;
++    }
++
++    const emptyOption =
++      Array.from(select.options).find((option) => option.value === 'All') ||
++      Array.from(select.options).find((option) => option.value === '');
++
++    if (emptyOption) {
++      select.value = emptyOption.value;
++      return;
++    }
++
++    select.selectedIndex = -1;
++  }
++
++  /**
++   * Clears one exposed filter element.
++   *
++   * @param {Element} element
++   *   The element to clear.
++   */
++  function clearElement(element) {
++    if (element.tagName === 'SELECT') {
++      resetSelect(element);
++      return;
++    }
++
++    if (element.tagName !== 'INPUT' && element.tagName !== 'TEXTAREA') {
++      return;
++    }
++
++    switch (element.type) {
++      case 'checkbox':
++      case 'radio':
++        element.checked = false;
++        break;
++
++      case 'hidden':
++        element.remove();
++        break;
++
++      default:
++        element.value = '';
++        break;
++    }
++  }
++
++  /**
++   * Builds a dependency map from the rendered exposed form.
++   *
++   * @param {HTMLFormElement} form
++   *   The exposed form.
++   *
++   * @return {Map<string, string[]>}
++   *   Direct dependent identifiers keyed by parent identifier.
++   */
++  function getDependencyMap(form) {
++    const map = new Map();
++    form.querySelectorAll(`[${dependentsAttribute}]`).forEach((element) => {
++      const identifier = element.getAttribute(identifierAttribute);
++      const dependents = element
++        .getAttribute(dependentsAttribute)
++        .split(' ')
++        .filter(Boolean);
++
++      if (identifier && dependents.length > 0) {
++        map.set(identifier, dependents);
++      }
++    });
++
++    return map;
++  }
++
++  /**
++   * Clears dependent filters recursively.
++   *
++   * @param {HTMLFormElement} form
++   *   The exposed form.
++   * @param {string[]} identifiers
++   *   The identifiers to clear.
++   * @param {Map<string, string[]>} dependencyMap
++   *   Dependency map for the exposed form.
++   * @param {Set<string>} visited
++   *   Already cleared identifiers.
++   */
++  function clearDependentFilters(form, identifiers, dependencyMap, visited) {
++    identifiers.forEach((identifier) => {
++      if (visited.has(identifier)) {
++        return;
++      }
++
++      visited.add(identifier);
++      getElementsByIdentifier(form, identifier).forEach(clearElement);
++      clearDependentFilters(
++        form,
++        dependencyMap.get(identifier) || [],
++        dependencyMap,
++        visited,
++      );
++    });
++  }
++
++  /**
++   * Finds the exposed form referenced by a Views filters summary.
++   *
++   * @param {Element} element
++   *   A summary child element.
++   *
++   * @return {HTMLFormElement|null}
++   *   The exposed form.
++   */
++  function getSummaryExposedForm(element) {
++    const summary = element.closest('.views-filters-summary');
++    const exposedFormId = summary?.getAttribute('data-exposed-form-id');
++
++    if (!exposedFormId) {
++      return null;
++    }
++
++    return (
++      Array.from(document.forms).find((form) =>
++        form.id.startsWith(exposedFormId),
++      ) || null
++    );
++  }
++
++  /**
++   * Clears dependencies for one changed parent element.
++   *
++   * @param {Element} parent
++   *   The parent exposed filter element.
++   */
++  function clearElementDependents(parent) {
++    const form = parent.closest('form');
++
++    if (!form) {
++      return;
++    }
++
++    const dependents = parent
++      .getAttribute(dependentsAttribute)
++      .split(' ')
++      .filter(Boolean);
++
++    clearDependentFilters(form, dependents, getDependencyMap(form), new Set());
++  }
++
++  Drupal.behaviors.facetsExposedDependentFilters = {
++    attach(context) {
++      once('facets-exposed-dependent-filters', 'form', context).forEach(
++        (form) => {
++          if (!form.querySelector(`[${dependentsAttribute}]`)) {
++            return;
++          }
++
++          form.addEventListener(
++            'change',
++            (event) => {
++              if (!(event.target instanceof Element)) {
++                return;
++              }
++
++              const parent = event.target.closest(`[${dependentsAttribute}]`);
++
++              if (!parent || !form.contains(parent)) {
++                return;
++              }
++
++              clearElementDependents(parent);
++            },
++            true,
++          );
++        },
++      );
++
++      once(
++        'facets-exposed-dependent-filter-summary',
++        '.views-filters-summary a.remove-filter[data-remove-selector]',
++        context,
++      ).forEach((link) => {
++        link.addEventListener(
++          'click',
++          () => {
++            const removeSelector = link.getAttribute('data-remove-selector');
++
++            if (!removeSelector) {
++              return;
++            }
++
++            const colonIndex = removeSelector.indexOf(':');
++
++            if (colonIndex === -1) {
++              return;
++            }
++
++            const identifier = removeSelector.substring(0, colonIndex);
++            const form = getSummaryExposedForm(link);
++
++            if (!form) {
++              return;
++            }
++
++            const dependencyMap = getDependencyMap(form);
++            clearDependentFilters(
++              form,
++              dependencyMap.get(identifier) || [],
++              dependencyMap,
++              new Set(),
++            );
++          },
++          true,
++        );
++      });
++    },
++  };
++})(Drupal, once);
+diff --git a/modules/facets_exposed_filters/src/Plugin/views/filter/FacetsFilter.php b/modules/facets_exposed_filters/src/Plugin/views/filter/FacetsFilter.php
+index 7b9e9700885c580f6905d9348b9b7234a17cc055..734bf4b3feb3da700ca4290f93abc0c70a2e6d95 100644
+--- a/modules/facets_exposed_filters/src/Plugin/views/filter/FacetsFilter.php
++++ b/modules/facets_exposed_filters/src/Plugin/views/filter/FacetsFilter.php
+@@ -53,5 +53,6 @@ class FacetsFilter extends FilterPluginBase implements ContainerFactoryPluginInt
+     $options['facet']['contains']['missing_label'] = ['default' => 'others'];
+     $options['facet']['contains']['show_numbers'] = ['default' => FALSE];
++    $options['facet']['contains']['depends_on_exposed_filter'] = ['default' => ''];
+     $options['facet']['contains']['min_count'] = ['default' => 1];
+     $options['facet']['contains']['query_operator'] = ['default' => 'or'];
+     $options['facet']['contains']['hard_limit'] = ['default' => 0];
+@@ -176,6 +177,10 @@ class FacetsFilter extends FilterPluginBase implements ContainerFactoryPluginInt
+       }
+     }
+ 
++    if (!$this->isExposedFilterDependencySatisfied()) {
++      return $form;
++    }
++
+     // Due to how views works, this form is built before results are queried.
+     // We render this form again in the views_post_execute hook implementation
+     // once the Views query is executed and facet results are available.
+@@ -289,6 +294,19 @@ class FacetsFilter extends FilterPluginBase implements ContainerFactoryPluginInt
+       '#facets_active_option_values' => array_map('strval', array_values($facet->getActiveItems())),
+     ];
+ 
++    $dependency_attributes = $this->getExposedFilterDependencyAttributes();
++    if ($dependency_attributes !== []) {
++      $form['value']['#attributes'] = array_merge(
++        $form['value']['#attributes'] ?? [],
++        $dependency_attributes,
++      );
++      $form['value']['#wrapper_attributes'] = array_merge(
++        $form['value']['#wrapper_attributes'] ?? [],
++        $dependency_attributes,
++      );
++      $form['value']['#attached']['library'][] = 'facets_exposed_filters/dependent_filters';
++    }
++
+     $exposed_form_type = $this->displayHandler->getPlugin('exposed_form')->getPluginId();
+     if ($exposed_form_type == 'bef') {
+       $form['value']['#process'] = [[FacetsExposedFiltersHelper::class, 'removeValidation']];
+@@ -374,7 +392,7 @@ class FacetsFilter extends FilterPluginBase implements ContainerFactoryPluginInt
+   public function acceptExposedInput($input) {
+     // Modules like views_dependent_filters alter the exposed option to ignore
+     // the filter when hidden. We need to check for this.
+-    return $this->isExposed();
++    return $this->isExposed() && $this->isExposedFilterDependencySatisfied($input);
+   }
+ 
+   /**
+@@ -389,6 +407,16 @@ class FacetsFilter extends FilterPluginBase implements ContainerFactoryPluginInt
+    */
+   public function query() {
+     $facet = $this->getFacet();
++
++    if (!$this->isExposedFilterDependencySatisfied()) {
++      $facet->setActiveItems([]);
++      $this->syncFacetActiveItemsToExposedState($facet);
++      ExposedFacetBuildState::skipFacet($facet);
++      return;
++    }
++
++    ExposedFacetBuildState::allowFacet($facet);
++
+     $active_values = $this->getActiveFacetValues();
+     $facet->setActiveItems($active_values);
+ 
+@@ -620,6 +648,14 @@ class FacetsFilter extends FilterPluginBase implements ContainerFactoryPluginInt
+       '#default_value' => $this->options["facet"]["show_only_one_result"],
+     ];
+ 
++    $form['facet']['depends_on_exposed_filter'] = [
++      '#type' => 'select',
++      '#title' => $this->t('Depends on exposed filter'),
++      '#description' => $this->t('Only render and apply this facet after the selected exposed filter has an active value. When the selected filter changes in the exposed form, this facet is cleared before the form is submitted.'),
++      '#options' => $this->getExposedFilterDependencyOptions(),
++      '#default_value' => $this->options["facet"]["depends_on_exposed_filter"] ?? '',
++    ];
++
+     $form['weights'] = [
+       '#type' => 'details',
+       '#title' => $this->t('Processor order'),
+@@ -742,6 +778,10 @@ class FacetsFilter extends FilterPluginBase implements ContainerFactoryPluginInt
+    * to retrieve the active filters from the request ourself.
+    */
+   private function getActiveFacetValues() {
++    if (!$this->isExposedFilterDependencySatisfied()) {
++      return [];
++    }
++
+     // Reset button in ajax request. We probably want a better way to detect if
+     // this was clicked.
+     if (isset($_GET["reset"])) {
+@@ -761,6 +801,329 @@ class FacetsFilter extends FilterPluginBase implements ContainerFactoryPluginInt
+     return array_values($enabled);
+   }
+ 
++  /**
++   * Checks whether the configured parent exposed filter has an active value.
++   *
++   * @param mixed $input
++   *   Optional exposed input to inspect.
++   *
++   * @return bool
++   *   TRUE when no dependency is configured or when the dependency is active.
++   */
++  private function isExposedFilterDependencySatisfied(mixed $input = NULL): bool {
++    $dependency_filter_id = $this->getParentExposedFilterId();
++
++    if ($dependency_filter_id === '') {
++      return TRUE;
++    }
++
++    $dependency_identifier = $this->getExposedFilterIdentifier($dependency_filter_id);
++
++    if ($dependency_identifier === NULL) {
++      return TRUE;
++    }
++
++    if ($input === NULL) {
++      $input = $this->view->getExposedInput();
++    }
++
++    if (!is_array($input)) {
++      return FALSE;
++    }
++
++    $dependency_value = $this->getDependencyInputValue($input, $dependency_identifier);
++
++    if (!$this->hasActiveExposedValue($dependency_value)) {
++      return FALSE;
++    }
++
++    return $this->isExposedFilterDependencyChainSatisfied($dependency_filter_id, $input, [
++      $this->options['id'] ?? '' => TRUE,
++    ]);
++  }
++
++  /**
++   * Returns the configured parent filter handler ID.
++   *
++   * @return string
++   *   The parent filter handler ID or an empty string.
++   */
++  private function getParentExposedFilterId(): string {
++    $filter_id = $this->options["facet"]["depends_on_exposed_filter"] ?? '';
++
++    return is_string($filter_id) ? $filter_id : '';
++  }
++
++  /**
++   * Checks whether another exposed filter's own dependency chain is active.
++   *
++   * @param string $filter_id
++   *   The filter handler ID to inspect.
++   * @param array<string, mixed> $input
++   *   The exposed input.
++   * @param array<string, bool> $visited
++   *   Already inspected filter IDs.
++   *
++   * @return bool
++   *   TRUE when the filter has no inactive parent dependency.
++   */
++  private function isExposedFilterDependencyChainSatisfied(
++    string $filter_id,
++    array $input,
++    array $visited = [],
++  ): bool {
++    if (isset($visited[$filter_id])) {
++      return TRUE;
++    }
++
++    $visited[$filter_id] = TRUE;
++    $filters = $this->getFilterHandlers();
++    $filter = $filters[$filter_id] ?? NULL;
++
++    if (!$filter instanceof FilterPluginBase) {
++      return TRUE;
++    }
++
++    $parent_filter_id = $this->getFilterDependencyId($filter);
++    if ($parent_filter_id === '') {
++      return TRUE;
++    }
++
++    $parent_identifier = $this->getExposedFilterIdentifier($parent_filter_id);
++    if ($parent_identifier === NULL) {
++      return TRUE;
++    }
++
++    $parent_dependency_value = $this->getDependencyInputValue(
++      $input,
++      $parent_identifier,
++    );
++
++    if (!$this->hasActiveExposedValue($parent_dependency_value)) {
++      return FALSE;
++    }
++
++    return $this->isExposedFilterDependencyChainSatisfied($parent_filter_id, $input, $visited);
++  }
++
++  /**
++   * Builds the Views UI options for exposed filter dependencies.
++   *
++   * @return array<string, \Drupal\Core\StringTranslation\TranslatableMarkup|string>
++   *   Options keyed by filter handler ID.
++   */
++  private function getExposedFilterDependencyOptions(): array {
++    $options = [
++      '' => $this->t('- None -'),
++    ];
++
++    foreach ($this->getFilterHandlers() as $filter_id => $filter) {
++      if ($filter_id === ($this->options['id'] ?? NULL)) {
++        continue;
++      }
++
++      if (!$filter instanceof FilterPluginBase || !$filter->isExposed()) {
++        continue;
++      }
++
++      $identifier = $this->getExposedFilterIdentifier($filter_id);
++      if ($identifier === NULL) {
++        continue;
++      }
++
++      $label = $filter->options['expose']['label'] ?? $filter->adminLabel();
++      $options[$filter_id] = $this->t('@label (@identifier)', [
++        '@label' => $label,
++        '@identifier' => $identifier,
++      ]);
++    }
++
++    return $options;
++  }
++
++  /**
++   * Returns the exposed filter dependency configured on a filter handler.
++   *
++   * @param \Drupal\views\Plugin\views\filter\FilterPluginBase $filter
++   *   The filter handler.
++   *
++   * @return string
++   *   The configured parent filter handler ID or an empty string.
++   */
++  private function getFilterDependencyId(FilterPluginBase $filter): string {
++    $filter_id = $filter->options['facet']['depends_on_exposed_filter'] ?? '';
++
++    return is_string($filter_id) ? $filter_id : '';
++  }
++
++  /**
++   * Returns all filter handlers for the current display.
++   *
++   * @return array<string, \Drupal\views\Plugin\views\filter\FilterPluginBase>
++   *   Filter handlers keyed by handler ID.
++   */
++  private function getFilterHandlers(): array {
++    if (is_object($this->displayHandler) && method_exists($this->displayHandler, 'getHandlers')) {
++      return $this->displayHandler->getHandlers('filter');
++    }
++
++    return is_array($this->view->filter ?? NULL) ? $this->view->filter : [];
++  }
++
++  /**
++   * Returns the exposed identifier for a filter handler.
++   *
++   * @param string $filter_id
++   *   The filter handler ID.
++   *
++   * @return string|null
++   *   The exposed identifier, or NULL when the filter is not exposed.
++   */
++  private function getExposedFilterIdentifier(string $filter_id): ?string {
++    $filters = $this->getFilterHandlers();
++    $filter = $filters[$filter_id] ?? NULL;
++
++    if (!$filter instanceof FilterPluginBase || !$filter->isExposed()) {
++      return NULL;
++    }
++
++    $identifier = $filter->options['expose']['identifier'] ?? NULL;
++
++    if (!is_string($identifier) || $identifier === '') {
++      return NULL;
++    }
++
++    return $identifier;
++  }
++
++  /**
++   * Returns an exposed dependency value from Views input or raw exposed input.
++   *
++   * During the first exposed-form render, Views may omit facet form values
++   * because facet options are only available after query execution.
++   * The raw exposed input still contains URL values and is the source of truth
++   * for deciding whether a dependent facet should apply.
++   *
++   * @param array<string, mixed> $input
++   *   Exposed input provided by Views.
++   * @param string $identifier
++   *   The exposed filter identifier.
++   *
++   * @return mixed
++   *   The exposed value, or NULL when no value is available.
++   */
++  private function getDependencyInputValue(array $input, string $identifier): mixed {
++    if (array_key_exists($identifier, $input)) {
++      return $input[$identifier];
++    }
++
++    $exposed_input = $this->view->getExposedInput();
++    if (is_array($exposed_input) && array_key_exists($identifier, $exposed_input)) {
++      return $exposed_input[$identifier];
++    }
++
++    return NULL;
++  }
++
++  /**
++   * Builds data attributes used by the client-side dependency handler.
++   *
++   * @return array<string, string>
++   *   Data attributes for the exposed form element.
++   */
++  private function getExposedFilterDependencyAttributes(): array {
++    $identifier = $this->options['expose']['identifier'] ?? NULL;
++
++    if (!is_string($identifier) || $identifier === '') {
++      return [];
++    }
++
++    $attributes = [
++      'data-facets-exposed-filter-identifier' => $identifier,
++    ];
++
++    $dependency_filter_id = $this->getParentExposedFilterId();
++    if ($dependency_filter_id !== '') {
++      $dependency_identifier = $this->getExposedFilterIdentifier($dependency_filter_id);
++      if ($dependency_identifier !== NULL) {
++        $attributes['data-facets-exposed-filter-depends-on'] = $dependency_identifier;
++      }
++    }
++
++    $dependent_identifiers = $this->getDependentExposedFilterIdentifiers();
++    if ($dependent_identifiers !== []) {
++      $attributes['data-facets-exposed-filter-dependents'] = implode(' ', $dependent_identifiers);
++    }
++
++    if (count($attributes) === 1) {
++      return [];
++    }
++
++    return $attributes;
++  }
++
++  /**
++   * Returns exposed identifiers for filters that depend on this filter.
++   *
++   * @return string[]
++   *   The dependent exposed identifiers.
++   */
++  private function getDependentExposedFilterIdentifiers(): array {
++    $current_filter_id = $this->options['id'] ?? NULL;
++
++    if (!is_string($current_filter_id) || $current_filter_id === '') {
++      return [];
++    }
++
++    $identifiers = [];
++    foreach ($this->getFilterHandlers() as $filter_id => $filter) {
++      if (!$filter instanceof FilterPluginBase || $filter_id === $current_filter_id) {
++        continue;
++      }
++
++      $dependency_filter_id = $this->getFilterDependencyId($filter);
++      if ($dependency_filter_id !== $current_filter_id) {
++        continue;
++      }
++
++      $identifier = $this->getExposedFilterIdentifier($filter_id);
++      if ($identifier !== NULL) {
++        $identifiers[] = $identifier;
++      }
++    }
++
++    return array_values(array_unique($identifiers));
++  }
++
++  /**
++   * Checks whether an exposed filter value should count as active.
++   *
++   * @param mixed $value
++   *   The exposed filter value.
++   *
++   * @return bool
++   *   TRUE when the value is not empty or the Views all option.
++   */
++  private function hasActiveExposedValue(mixed $value): bool {
++    if (is_array($value)) {
++      foreach ($value as $child_value) {
++        if ($this->hasActiveExposedValue($child_value)) {
++          return TRUE;
++        }
++      }
++
++      return FALSE;
++    }
++
++    if ($value === NULL || $value === FALSE) {
++      return FALSE;
++    }
++
++    $value = trim((string) $value);
++
++    return $value !== '' && $value !== 'All';
++  }
++
+   /**
+    * Filters results for facets limited to a single visible active option.
+    *
+@@ -833,5 +836,8 @@ class FacetsFilter extends FilterPluginBase implements ContainerFactoryPluginInt
+     $options["facet"]["missing_label"] = $options["facet"]["missing_label"];
+     $options["facet"]["show_numbers"] = (bool) $options["facet"]["show_numbers"];
++    $options["facet"]["depends_on_exposed_filter"] = is_string($options["facet"]["depends_on_exposed_filter"] ?? NULL)
++      ? $options["facet"]["depends_on_exposed_filter"]
++      : '';
+
+     $form_state->setValue('options', $options);
+     parent::submitExtraOptionsForm($form, $form_state);
