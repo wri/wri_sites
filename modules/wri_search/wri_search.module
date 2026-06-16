@@ -142,6 +142,9 @@ function wri_search_preprocess_facets_summary_item_list(&$variables) {
   }
 }
 
+/**
+ * Implements hook_preprocess_hook() for bef_checkboxes.
+ */
 function wri_search_preprocess_bef_checkboxes(&$variables) {
   $facets_to_limit = ['subtype', 'country'];
 
@@ -153,30 +156,16 @@ function wri_search_preprocess_bef_checkboxes(&$variables) {
 
     if ($variables["element"]["#name"] == 'country') {
       $region = $current_filters['region'];
-      $country_terms = [];
-      $subtype_terms = [];
-      foreach ($region as $value) {
-        // Load up children of that facet value.
-        $tree = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadChildren($value);
-        $country_terms = array_merge(array_keys($tree), $country_terms);
-      }
-
-      // Exclude elements not in that list.
-      $good_results = [];
-
-      /** @var \Drupal\facets\Result\ResultInterface $result */
-      foreach ( \Drupal\Core\Render\Element::children($variables['element']) as $key => $result) {
-        // Compare the results to the list of valid children.
-        if (in_array($result, $country_terms)) {
-          $good_results[$key] = $result;
-        }
-      }
-    } elseif ($variables["element"]["#name"] == 'country') {
+      $good_results = \Drupal::service('wri_search.pretty_facets_helper')->limitFacetsByParentId($region, \Drupal\Core\Render\Element::children($variables['element']));
+    } elseif ($variables["element"]["#name"] == 'subtype') {
       $type = $current_filters['type'];
-      foreach ($type as $value) {
-        // Load up children of that facet value.
-        $tree = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadChildren($value);
-        $subtype_terms = array_merge(array_keys($tree), $subtype_terms);
+      $good_results = \Drupal::service('wri_search.pretty_facets_helper')->limitFacetsByParentId($type, \Drupal\Core\Render\Element::children($variables['element']));
+    }
+    if (!empty($good_results)) {
+      foreach (\Drupal\Core\Render\Element::children($variables['element']) as $item_number) {
+        if (!in_array($item_number, $good_results)) {
+          unset($variables['element'][$item_number]);
+        }
       }
     }
   }

@@ -83,4 +83,26 @@ class PrettyFacetsHelper {
     return $pretty_paths;
   }
 
+  public function limitFacetsByParentId($active_facets, $child_results) {
+    $terms = [];
+    foreach ($active_facets as $value) {
+      // Load up children of that facet value.
+      $tree = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadChildren($value);
+      $terms = array_merge(array_keys($tree), $terms);
+    }
+
+    // Exclude elements not in that list.
+    $good_results = [];
+
+    /** @var \Drupal\facets\Result\ResultInterface $result */
+    foreach ($child_results as $value) {
+      // Compare the results to the list of valid children.
+      if (in_array($value, $terms)) {
+        $good_results[] = $value;
+      }
+    }
+
+    return $good_results;
+  }
+
 }

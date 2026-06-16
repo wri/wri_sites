@@ -78,7 +78,6 @@ class LimitToParentProcessor extends ProcessorPluginBase implements BuildProcess
     $conditions = $facet->getProcessorConfigs();
 
     if (isset($conditions["dependent_processor"]["settings"])) {
-      $terms = [];
       // Load up any selected facet values.
       foreach ($conditions["dependent_processor"]["settings"] as $facet_id => $condition_settings) {
 
@@ -86,28 +85,14 @@ class LimitToParentProcessor extends ProcessorPluginBase implements BuildProcess
         $current_facet = $this->facetStorage->load($facet_id);
         $current_facet = $this->facetsManager->returnProcessedFacet($current_facet);
 
-        $active = $current_facet->getActiveItems();
-        foreach ($active as $value) {
-          // Load up children of that facet value.
-          $tree = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadChildren($value);
-          $terms = array_merge(array_keys($tree), $terms);
-        }
+        $active_facets = $current_facet->getActiveItems();
+      }
+      $child_values = [];
+      foreach ($results as $option_id => $result) {
+        $child_values[$result->getRawValue()] = $result->getRawValue();
       }
 
-      // Exclude elements not in that list.
-      $good_results = [];
-
-      /** @var \Drupal\facets\Result\ResultInterface $result */
-      foreach ($results as $result) {
-        $value = $result->getRawValue();
-
-        // Compare the results to the list of valid children.
-        if (in_array($value, $terms)) {
-          $good_results[] = $result;
-        }
-      }
-
-      $results = $good_results;
+      $results = \Drupal::service('wri_search.pretty_facets_helper')->limitFacetsByParentId($active_facets, $child_values);
     }
 
     return $results;
