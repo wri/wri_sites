@@ -16,7 +16,7 @@
 %}
 
 {% if header %}
-  {{ header|without('extra_result') }}
+  {{ header|without('extra_result', 'facets_summary') }}
 {% endif %}
 <div{{ attributes.addClass(classes) }}>
 {% if exposed %}
@@ -54,9 +54,7 @@
         <div class="results-body padding-bottom">
             <div class="view-header">
               {{ header.extra_result }}
-              {% if display_id == 'resources_page' %}
-              {{ drupal_block('facets_summary_block:summary') }}
-              {% endif %}
+              {{ header.facets_summary }}
             </div>
           {% if rows %}
             <div class="view-content">
