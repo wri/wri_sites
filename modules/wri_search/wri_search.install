@@ -111,6 +111,7 @@ function wri_search_update_10600() {
     'dependencies',
     'display',
   ], 'wri_search');
+  \Drupal::service('config.factory')->getEditable('facets_summary.facets_summary.summary')->delete();
  \Drupal::service('config.factory')->getEditable('facets.facet.all_topics')->delete();
  \Drupal::service('config.factory')->getEditable('facets.facet.country')->delete();
  \Drupal::service('config.factory')->getEditable('facets.facet.region')->delete();
