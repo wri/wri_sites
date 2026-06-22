@@ -45,7 +45,7 @@
       {% endif %}
 
       <div class="grid results-wrapper">
-        <div class="results-sidebar">
+        <div class="results-sidebar padding-bottom">
           {% if exposed %}
               {% set clean = exposed|without('topic', 'query', 'sort_by')|render|preg_replace('/<form[^>]*>/i', '') %}
               {{ clean|replace({'</form>': ''})|raw }}
