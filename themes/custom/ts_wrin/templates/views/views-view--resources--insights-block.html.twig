@@ -14,7 +14,6 @@
     'resources-container',
   ]
 %}
-
 {% if header %}
   {{ header|without('extra_result', 'facets_summary') }}
 {% endif %}
@@ -49,6 +48,7 @@
               {{ header.facets_summary }}
             </div>
           {% if rows %}
+            {{ attachment_before }}
             <div class="view-content">
               {{ rows }}
             </div>

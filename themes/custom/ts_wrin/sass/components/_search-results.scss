@@ -189,6 +189,10 @@
     };
 
   }
+
+  .pinned & {
+    border-top: 3px solid var(--color-gold-500);
+  }
 }
 
 li.search-results {
