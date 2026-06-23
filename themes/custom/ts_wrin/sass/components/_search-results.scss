@@ -43,6 +43,7 @@
       margin-right: 25px;
       order: unset;
     }
+
     .topic-tag {
       letter-spacing: 0.69px;
     }
@@ -114,7 +115,6 @@
       }
     }
     h3.h3 a {
-      @include font(var(--font-family-heading-condensed), "bold", "normal");
       @include font-line-height(24, 30);
       @include text-underline(transparent, var(--color-neutral-900));
       & {
@@ -163,6 +163,31 @@
     @include mq($md) {
       display: block;
     }
+  }
+
+  &.display-insights-search-results {
+
+    .search-results-tags {
+        @include mq($md) {
+          flex: 0 0 200px;
+        }
+      img {
+        margin: 8px 0;
+      }
+    }
+
+    h3.h3 {
+      margin-bottom: 0;
+      a {
+        background-image: none;
+
+        &:hover {
+          color: var(--color-green-500);
+          text-decoration: underline;
+        }
+      }
+    };
+
   }
 }
 
