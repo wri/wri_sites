@@ -1,0 +1,9 @@
+status: true
+dependencies:
+  config:
+    - block_content.type.on_page_resources
+id: block_content.on_page_resources
+target_entity_type_id: block_content
+target_bundle: on_page_resources
+default_langcode: site_default
+language_alterable: false
