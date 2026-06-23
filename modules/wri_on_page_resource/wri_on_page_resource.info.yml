@@ -1,0 +1,7 @@
+name: 'wri_on_page_resource'
+type: module
+description: 'The On-Page resource block'
+package: WRI
+core_version_requirement: ^10 || ^11
+dependencies:
+  - wri_block:wri_block
