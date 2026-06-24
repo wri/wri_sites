@@ -30,14 +30,19 @@ final class WriCommonCommands extends DrushCommands {
    *
    * @param string $source
    *   Path to the source config file (absolute or relative to the project root).
+   * @param array $options
+   *   Command options.
    *
    * @command wri_common:copy-config-to-profile
    * @aliases wri-ccp
+   * @option write-update-hook Also append an update hook to wri_common.install that calls distro_helper to sync the config.
    */
   #[CLI\Command(name: 'wri_common:copy-config-to-profile', aliases: ['wri-ccp'])]
   #[CLI\Argument(name: 'source', description: 'Path to the source config file (absolute or relative to the project root).')]
+  #[CLI\Option(name: 'write-update-hook', description: 'Also append an update hook to wri_common.install that calls distro_helper to sync the config.')]
   #[CLI\Usage(name: 'wri_common:copy-config-to-profile config/node.type.page.yml', description: 'Copy node.type.page.yml into the matching wri_sites config file.')]
-  public function copyConfigToProfile(string $source): void {
+  #[CLI\Usage(name: 'wri_common:copy-config-to-profile config/node.type.page.yml --write-update-hook', description: 'Copy and also generate an update hook.')]
+  public function copyConfigToProfile(string $source, array $options = ['write-update-hook' => FALSE]): void {
     if (!str_starts_with($source, '/')) {
       $source = $this->appRoot . '/../' . $source;
     }
@@ -50,7 +55,7 @@ final class WriCommonCommands extends DrushCommands {
       throw new \RuntimeException("wri_sites directory not found: {$this->appRoot}/profiles/contrib/wri_sites");
     }
 
-    $this->processConfigFile($source);
+    $this->processConfigFile($source, (bool) $options['write-update-hook']);
   }
 
   /**
@@ -64,15 +69,20 @@ final class WriCommonCommands extends DrushCommands {
    *   The base branch name.
    * @param string $target
    *   The target branch name.
+   * @param array $options
+   *   Command options.
    *
    * @command wri_common:sync-config-from-diff
    * @aliases wri-scd
+   * @option write-update-hook Also append update hooks to wri_common.install for each synced file.
    */
   #[CLI\Command(name: 'wri_common:sync-config-from-diff', aliases: ['wri-scd'])]
   #[CLI\Argument(name: 'base', description: 'The base branch.')]
   #[CLI\Argument(name: 'target', description: 'The target branch.')]
+  #[CLI\Option(name: 'write-update-hook', description: 'Also append update hooks to wri_common.install for each synced file.')]
   #[CLI\Usage(name: 'wri_common:sync-config-from-diff main issue-585', description: 'Sync all config changes between main and issue-585 into the wri_sites profile.')]
-  public function syncConfigFromDiff(string $base, string $target): void {
+  #[CLI\Usage(name: 'wri_common:sync-config-from-diff main issue-585 --write-update-hook', description: 'Sync and generate update hooks for every changed config file.')]
+  public function syncConfigFromDiff(string $base, string $target, array $options = ['write-update-hook' => FALSE]): void {
     $projectRoot = realpath($this->appRoot . '/..');
 
     $output = $this->runGitCommand(
@@ -99,7 +109,7 @@ final class WriCommonCommands extends DrushCommands {
         $this->logger()->warning("Skipped (deleted in diff): $relativePath");
         continue;
       }
-      $this->processConfigFile($absolutePath);
+      $this->processConfigFile($absolutePath, (bool) $options['write-update-hook']);
     }
 
     $this->io()->success('Sync complete.');
@@ -110,8 +120,11 @@ final class WriCommonCommands extends DrushCommands {
    * matching file under web/profiles/contrib/wri_sites.
    *
    * Logs a warning and returns without error when no matching profile file is found.
+   *
+   * @param bool $writeUpdateHook
+   *   When TRUE, appends an update hook to wri_common.install.
    */
-  protected function processConfigFile(string $absoluteSourcePath): void {
+  protected function processConfigFile(string $absoluteSourcePath, bool $writeUpdateHook = FALSE): void {
     $filename = basename($absoluteSourcePath);
     $profileBase = $this->appRoot . '/profiles/contrib/wri_sites';
 
@@ -130,15 +143,114 @@ final class WriCommonCommands extends DrushCommands {
     }
 
     $this->io()->writeln("  Synced: $filename");
+
+    if ($writeUpdateHook) {
+      $configName = basename($filename, '.yml');
+      $installFile = $this->appRoot . '/profiles/contrib/wri_sites/modules/wri_common/wri_common.install';
+      $hookCode = $this->generateUpdateHook($configName, $destPath, $filtered, $installFile);
+      $this->appendUpdateHook($installFile, $hookCode);
+    }
+  }
+
+  /**
+   * Generates an update hook string that calls distro_helper to sync a config.
+   *
+   * The hook number is one higher than the current maximum in the install file.
+   * The module and directory arguments to updateConfig are derived from the
+   * destination file path so distro_helper can locate the yml file.
+   *
+   * @param string $configName
+   *   Config name without the .yml extension (e.g. 'node.type.page').
+   * @param string $destPath
+   *   Absolute path to the destination yml file inside the profile.
+   * @param string $filteredContent
+   *   The filtered yml content (used to extract top-level keys).
+   * @param string $installFile
+   *   Absolute path to the .install file to number the hook against.
+   *
+   * @return string
+   *   PHP source for the new update hook, ready to append.
+   */
+  protected function generateUpdateHook(string $configName, string $destPath, string $filteredContent, string $installFile): string {
+    [$module, $directory] = $this->resolveModuleAndDirectory($destPath);
+    $keys = $this->extractTopLevelYamlKeys($filteredContent);
+    $hookNumber = $this->nextUpdateHookNumber($installFile, 'wri_common');
+
+    $keyLines = implode(",\n    ", array_map(fn($k) => "'$k'", $keys));
+    $description = "Update $configName config.";
+
+    return "\n/**\n * $description\n */\nfunction wri_common_update_{$hookNumber}() {\n  \\Drupal::service('distro_helper.updates')->updateConfig('$configName', [\n    $keyLines,\n  ], '$module', '$directory');\n}\n";
+  }
+
+  /**
+   * Appends hook PHP code to the given .install file.
+   */
+  protected function appendUpdateHook(string $installFile, string $hookCode): void {
+    if (!file_exists($installFile)) {
+      throw new \RuntimeException("Install file not found: $installFile");
+    }
+    if (file_put_contents($installFile, $hookCode, FILE_APPEND) === FALSE) {
+      throw new \RuntimeException("Could not write to install file: $installFile");
+    }
+    $this->io()->writeln("  Hook written to: " . basename($installFile));
+  }
+
+  /**
+   * Resolves the distro_helper module name and directory for a profile file.
+   *
+   * distro_helper resolves config files as:
+   *   extensionPathResolver->getPath('module', $module) . '/config/' . $directory . '/'
+   *
+   * For files inside a module's config dir the module name and subdirectory
+   * are extracted directly. For profile-level config a relative path from
+   * wri_common is used (mirroring the pattern in wri_common_update_10500).
+   *
+   * @return array{0: string, 1: string}
+   *   A [module, directory] tuple.
+   */
+  protected function resolveModuleAndDirectory(string $destPath): array {
+    if (preg_match('#/modules/([^/]+)/config/([^/]+)/#', $destPath, $m)) {
+      return [$m[1], $m[2]];
+    }
+    if (preg_match('#/config/([^/]+)/#', $destPath, $m)) {
+      // Relative path from wri_common/config/ up to wri_sites/config/<dir>/.
+      return ['wri_common', '../../../config/' . $m[1]];
+    }
+    return ['wri_common', 'install'];
+  }
+
+  /**
+   * Extracts top-level YAML key names from config file content.
+   *
+   * Skips Drupal metadata keys that should not be passed to updateConfig.
+   *
+   * @return string[]
+   */
+  protected function extractTopLevelYamlKeys(string $content): array {
+    $skip = ['_core', 'uuid', 'langcode'];
+    $keys = [];
+    foreach (explode("\n", $content) as $line) {
+      if (preg_match('/^([a-zA-Z_][a-zA-Z0-9_]*):\s*/', $line, $m) && !in_array($m[1], $skip, TRUE)) {
+        $keys[] = $m[1];
+      }
+    }
+    return $keys;
+  }
+
+  /**
+   * Returns the next available update hook number for a module's install file.
+   */
+  protected function nextUpdateHookNumber(string $installFile, string $moduleName): int {
+    $content = file_get_contents($installFile);
+    preg_match_all('/function ' . preg_quote($moduleName, '/') . '_update_(\d+)\(/', $content, $matches);
+    if (empty($matches[1])) {
+      return 10601;
+    }
+    return (int) max($matches[1]) + 1;
   }
 
   /**
    * Recursively searches a directory for a file matching the given name.
-   *
-   * @param string $directory
-   *   The directory to search.
-   * @param string $filename
-   *   The filename to find.
    *
    * @return string|null
    *   The full path to the first match, or NULL if not found.
