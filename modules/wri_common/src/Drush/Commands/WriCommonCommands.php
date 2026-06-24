@@ -53,7 +53,7 @@ final class WriCommonCommands extends DrushCommands {
   }
 
   /**
-   * Copies a config file into the matching wri_sites profile file, stripping uuid and langcode.
+   * Copies a config file into the matching profile file, stripping uuid and langcode.
    *
    * @param string $source
    *   Path to the source config file (absolute or relative to the project root).
@@ -67,7 +67,7 @@ final class WriCommonCommands extends DrushCommands {
   #[CLI\Command(name: 'wri_common:copy-config-to-profile', aliases: ['wri-ccp'])]
   #[CLI\Argument(name: 'source', description: 'Path to the source config file (absolute or relative to the project root).')]
   #[CLI\Option(name: 'write-update-hook', description: 'Also append an update hook to wri_common.install that calls distro_helper to sync the config.')]
-  #[CLI\Usage(name: 'wri_common:copy-config-to-profile config/node.type.page.yml', description: 'Copy node.type.page.yml into the matching wri_sites config file.')]
+  #[CLI\Usage(name: 'wri_common:copy-config-to-profile config/node.type.page.yml', description: 'Copy node.type.page.yml into the matching config file in a module in your profile.')]
   #[CLI\Usage(name: 'wri_common:copy-config-to-profile config/node.type.page.yml --write-update-hook', description: 'Copy and also generate an update hook.')]
   public function copyConfigToProfile(string $source, array $options = ['write-update-hook' => FALSE]): void {
     if (!str_starts_with($source, '/')) {
@@ -79,14 +79,14 @@ final class WriCommonCommands extends DrushCommands {
     }
 
     if (!is_dir($this->profileDirectory)) {
-      throw new \RuntimeException("wri_sites directory not found: {$this->appRoot}/profiles/contrib/wri_sites");
+      throw new \RuntimeException("{$this->installProfile} directory not found: {$this->profileDirectory}");
     }
 
     $this->processConfigFile($source, (bool) $options['write-update-hook']);
   }
 
   /**
-   * Syncs all config files changed between two git branches to the wri_sites profile.
+   * Syncs all config files changed between two git branches to the profile.
    *
    * Finds every file changed under the config/ directory in the diff between
    * the two branches and runs the same copy-and-strip logic as
@@ -107,7 +107,7 @@ final class WriCommonCommands extends DrushCommands {
   #[CLI\Argument(name: 'base', description: 'The base branch.')]
   #[CLI\Argument(name: 'target', description: 'The target branch.')]
   #[CLI\Option(name: 'write-update-hook', description: 'Also append update hooks to wri_common.install for each synced file.')]
-  #[CLI\Usage(name: 'wri_common:sync-config-from-diff main issue-585', description: 'Sync all config changes between main and issue-585 into the wri_sites profile.')]
+  #[CLI\Usage(name: 'wri_common:sync-config-from-diff main issue-585', description: 'Sync all config changes between main and issue-585 into the profile.')]
   #[CLI\Usage(name: 'wri_common:sync-config-from-diff main issue-585 --write-update-hook', description: 'Sync and generate update hooks for every changed config file.')]
   public function syncConfigFromDiff(string $base, string $target, array $options = ['write-update-hook' => FALSE]): void {
     $projectRoot = realpath($this->appRoot . '/..');
@@ -125,10 +125,10 @@ final class WriCommonCommands extends DrushCommands {
     }
 
     if (!is_dir($this->profileDirectory)) {
-      throw new \RuntimeException("wri_sites directory not found: {$this->appRoot}/profiles/contrib/wri_sites");
+      throw new \RuntimeException("{$this->installProfile} directory not found: {$this->profileDirectory}");
     }
 
-    $this->io()->section(sprintf('Syncing %d config file(s) to wri_sites profile…', count($changedFiles)));
+    $this->io()->section(sprintf('Syncing %d config file(s) to profile…', count($changedFiles)));
 
     foreach ($changedFiles as $relativePath) {
       $absolutePath = $projectRoot . '/' . $relativePath;
@@ -144,7 +144,7 @@ final class WriCommonCommands extends DrushCommands {
 
   /**
    * Reads a source config file, strips disallowed keys, and writes it to the
-   * matching file under web/profiles/contrib/wri_sites.
+   * matching in the installed profile.
    *
    * Logs a warning and returns without error when no matching profile file is found.
    *
@@ -286,7 +286,7 @@ final class WriCommonCommands extends DrushCommands {
       return [$m[1], $m[2]];
     }
     if (preg_match('#/config/([^/]+)/#', $destPath, $m)) {
-      // Relative path from wri_common/config/ up to wri_sites/config/<dir>/.
+      // Relative path from wri_common/config/ up to the profile's /config/<dir>/.
       return ['wri_common', '../../../config/' . $m[1]];
     }
     return ['wri_common', 'install'];
@@ -319,7 +319,7 @@ final class WriCommonCommands extends DrushCommands {
     if (!empty($matches[1])) {
       return (int) max($matches[1]) + 1;
     }
-    $wriCommonInstall = $this->appRoot . '/profiles/contrib/wri_sites/modules/wri_common/wri_common.install';
+    $wriCommonInstall = $this->profileDirectory . '/modules/wri_common/wri_common.install';
     if ($installFile !== $wriCommonInstall && file_exists($wriCommonInstall)) {
       return $this->nextUpdateHookNumber($wriCommonInstall, 'wri_common');
     }
@@ -331,7 +331,7 @@ final class WriCommonCommands extends DrushCommands {
       $moduleDir = $m[1];
     }
     else {
-      $moduleDir = $this->appRoot . '/profiles/contrib/wri_sites/modules/wri_common';
+      $moduleDir = $this->profileDirectory . '/modules/wri_common/wri_common';
     }
     $installFile = "$moduleDir/$module.install";
     if (!file_exists($installFile)) {
@@ -354,7 +354,7 @@ final class WriCommonCommands extends DrushCommands {
     $modules = array_map('basename', glob($modulesDir . '/*', GLOB_ONLYDIR) ?: []);
     sort($modules);
 
-    $this->io()->note("'$filename' was not found in any module under wri_sites. Choose where to write it.");
+    $this->io()->note("'$filename' was not found in any module under '$this->installProfile'. Choose where to write it.");
 
     $question = new Question('Module machine name: ');
     $question->setAutocompleterValues($modules);
@@ -363,7 +363,7 @@ final class WriCommonCommands extends DrushCommands {
         throw new \RuntimeException('A module name is required.');
       }
       if (!in_array($value, $modules, TRUE)) {
-        throw new \RuntimeException("'$value' is not a module under wri_sites/modules/.");
+        throw new \RuntimeException("'$value' is not a module under '$this->installProfile'.");
       }
       return $value;
     });
