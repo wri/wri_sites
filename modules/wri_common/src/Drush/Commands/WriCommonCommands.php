@@ -150,8 +150,9 @@ final class WriCommonCommands extends DrushCommands {
 
     if ($writeUpdateHook) {
       $configName = basename($filename, '.yml');
-      $installFile = $this->appRoot . '/profiles/contrib/wri_sites/modules/wri_common/wri_common.install';
-      $hookCode = $this->generateUpdateHook($configName, $destPath, $oldContent, $filtered, $installFile);
+      [$module, $directory] = $this->resolveModuleAndDirectory($destPath);
+      $installFile = $this->resolveInstallFile($module, $destPath);
+      $hookCode = $this->generateUpdateHook($configName, $module, $directory, $oldContent, $filtered, $installFile);
       $this->appendUpdateHook($installFile, $hookCode);
     }
   }
@@ -175,17 +176,16 @@ final class WriCommonCommands extends DrushCommands {
    * @return string
    *   PHP source for the new update hook, ready to append.
    */
-  protected function generateUpdateHook(string $configName, string $destPath, string $oldContent, string $newContent, string $installFile): string {
-    [$module, $directory] = $this->resolveModuleAndDirectory($destPath);
+  protected function generateUpdateHook(string $configName, string $module, string $directory, string $oldContent, string $newContent, string $installFile): string {
     $keys = $this->extractChangedYamlKeys($oldContent, $newContent);
     if (empty($keys)) {
       $keys = $this->extractTopLevelYamlKeys($newContent);
     }
-    $hookNumber = $this->nextUpdateHookNumber($installFile, 'wri_common');
+    $hookNumber = $this->nextUpdateHookNumber($installFile, $module);
 
     $keyLines = implode(",\n    ", array_map(fn($k) => "'$k'", $keys));
 
-    return "\nfunction wri_common_update_{$hookNumber}() {\n  \\Drupal::service('distro_helper.updates')->updateConfig('$configName', [\n    $keyLines,\n  ], '$module', '$directory');\n}\n";
+    return "\nfunction {$module}_update_{$hookNumber}() {\n  \\Drupal::service('distro_helper.updates')->updateConfig('$configName', [\n    $keyLines,\n  ], '$module', '$directory');\n}\n";
   }
 
   protected function extractChangedYamlKeys(string $oldContent, string $newContent): array {
@@ -281,10 +281,29 @@ final class WriCommonCommands extends DrushCommands {
   protected function nextUpdateHookNumber(string $installFile, string $moduleName): int {
     $content = file_get_contents($installFile);
     preg_match_all('/function ' . preg_quote($moduleName, '/') . '_update_(\d+)\(/', $content, $matches);
-    if (empty($matches[1])) {
-      return 10601;
+    if (!empty($matches[1])) {
+      return (int) max($matches[1]) + 1;
     }
-    return (int) max($matches[1]) + 1;
+    $wriCommonInstall = $this->appRoot . '/profiles/contrib/wri_sites/modules/wri_common/wri_common.install';
+    if ($installFile !== $wriCommonInstall && file_exists($wriCommonInstall)) {
+      return $this->nextUpdateHookNumber($wriCommonInstall, 'wri_common');
+    }
+    return 10601;
+  }
+
+  protected function resolveInstallFile(string $module, string $destPath): string {
+    if (preg_match('#(.*?/modules/' . preg_quote($module, '#') . ')/#', $destPath, $m)) {
+      $moduleDir = $m[1];
+    }
+    else {
+      $moduleDir = $this->appRoot . '/profiles/contrib/wri_sites/modules/wri_common';
+    }
+    $installFile = "$moduleDir/$module.install";
+    if (!file_exists($installFile)) {
+      file_put_contents($installFile, "<?php\n");
+      $this->io()->writeln("  Created: $module.install");
+    }
+    return $installFile;
   }
 
   /**
