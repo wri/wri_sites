@@ -244,7 +244,6 @@ display:
               content_editor: '0'
               editorial: '0'
               administrator: '0'
-              microsite_editor: '0'
             expose_fields: false
             placeholder: 'Search Resources'
             searched_fields_id: ''
@@ -348,52 +347,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        field_tags:
-          id: field_tags
-          table: search_api_index_sitewide
-          field: field_tags
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_term
-          operator: not
-          value:
-            - 30200
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          vid: tags
-          type: textfield
-          hierarchy: false
-          limit: true
-          error_message: true
       filter_groups:
         operator: AND
         groups:
@@ -474,6 +427,7 @@ display:
       tags:
         - 'config:search_api.index.sitewide'
         - 'search_api_list:sitewide'
+  ### ENd of default ###
   insights_block:
     id: insights_block
     display_title: Block
@@ -1606,6 +1560,7 @@ display:
       tags:
         - 'config:search_api.index.sitewide'
         - 'search_api_list:sitewide'
+  ### ENd of insights block ###
   page_1:
     id: page_1
     display_title: Page
@@ -1687,6 +1642,7 @@ display:
       tags:
         - 'config:search_api.index.sitewide'
         - 'search_api_list:sitewide'
+  ### ENd of page_1 ###
   resources_page:
     id: resources_page
     display_title: Page
@@ -2091,230 +2047,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        field_type:
-          id: field_type
-          table: search_api_index_sitewide
-          field: field_type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_term
-          operator: not
-          value:
-            - 30117
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          vid: resource_type
-          type: textfield
-          hierarchy: false
-          limit: true
-          error_message: true
-        nid:
-          id: nid
-          table: search_api_index_sitewide
-          field: nid
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_numeric
-          operator: '!='
-          value:
-            min: ''
-            max: ''
-            value: '102067'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        nid_1:
-          id: nid_1
-          table: search_api_index_sitewide
-          field: nid
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_numeric
-          operator: '!='
-          value:
-            min: ''
-            max: ''
-            value: '101868'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        field_tags:
-          id: field_tags
-          table: search_api_index_sitewide
-          field: field_tags
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_term
-          operator: not
-          value:
-            - 30200
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          vid: tags
-          type: textfield
-          hierarchy: false
-          limit: true
-          error_message: true
-        nid_2:
-          id: nid_2
-          table: search_api_index_sitewide
-          field: nid
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_numeric
-          operator: '!='
-          value:
-            min: ''
-            max: ''
-            value: '103985'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -2828,3 +2560,4 @@ display:
         - 'config:views.view.resources'
         - 'search_api_list:sitewide'
         - taxonomy_term_list
+  ### ENd of resources_page ###
