@@ -6,7 +6,7 @@ use Drush\Attributes as CLI;
 use Drush\Commands\DrushCommands;
 
 /**
- * A Drush commandfile.
+ * Drush commands for wri_common maintenance tasks.
  */
 final class WriCommonCommands extends DrushCommands {
 
@@ -15,54 +15,121 @@ final class WriCommonCommands extends DrushCommands {
    *
    * @var string
    */
-  protected $appRoot;
+  protected string $appRoot;
 
   /**
    * {@inheritdoc}
    */
   public function __construct(string $app_root) {
+    parent::__construct();
     $this->appRoot = $app_root;
   }
 
   /**
-   * Command description here.
+   * Copies a config file into the matching wri_sites profile file, stripping uuid and langcode.
+   *
+   * @param string $source
+   *   Path to the source config file (absolute or relative to the project root).
+   *
+   * @command wri_common:copy-config-to-profile
+   * @aliases wri-ccp
    */
   #[CLI\Command(name: 'wri_common:copy-config-to-profile', aliases: ['wri-ccp'])]
-  #[CLI\Argument(name: 'source', description: 'The source of the config file.')]
-  #[CLI\Usage(name: 'wri_common:copy-config-to-profile config/my-config.yml', description: 'Usage description')]
-  public function copyConfigToProfile(string $source) {
-    // Resolve relative paths against the Drupal root.
+  #[CLI\Argument(name: 'source', description: 'Path to the source config file (absolute or relative to the project root).')]
+  #[CLI\Usage(name: 'wri_common:copy-config-to-profile config/node.type.page.yml', description: 'Copy node.type.page.yml into the matching wri_sites config file.')]
+  public function copyConfigToProfile(string $source): void {
     if (!str_starts_with($source, '/')) {
       $source = $this->appRoot . '/../' . $source;
     }
 
     if (!file_exists($source)) {
-      throw new \InvalidArgumentException("Source file not found: {$source}");
+      throw new \InvalidArgumentException("Source file not found: $source");
     }
 
-    $filename = basename($source);
+    if (!is_dir($this->appRoot . '/profiles/contrib/wri_sites')) {
+      throw new \RuntimeException("wri_sites directory not found: {$this->appRoot}/profiles/contrib/wri_sites");
+    }
+
+    $this->processConfigFile($source);
+  }
+
+  /**
+   * Syncs all config files changed between two git branches to the wri_sites profile.
+   *
+   * Finds every file changed under the config/ directory in the diff between
+   * the two branches and runs the same copy-and-strip logic as
+   * wri_common:copy-config-to-profile on each one.
+   *
+   * @param string $base
+   *   The base branch name.
+   * @param string $target
+   *   The target branch name.
+   *
+   * @command wri_common:sync-config-from-diff
+   * @aliases wri-scd
+   */
+  #[CLI\Command(name: 'wri_common:sync-config-from-diff', aliases: ['wri-scd'])]
+  #[CLI\Argument(name: 'base', description: 'The base branch.')]
+  #[CLI\Argument(name: 'target', description: 'The target branch.')]
+  #[CLI\Usage(name: 'wri_common:sync-config-from-diff main issue-585', description: 'Sync all config changes between main and issue-585 into the wri_sites profile.')]
+  public function syncConfigFromDiff(string $base, string $target): void {
+    $projectRoot = realpath($this->appRoot . '/..');
+
+    $output = $this->runGitCommand(
+      sprintf('git diff --name-only %s %s -- config/', escapeshellarg($base), escapeshellarg($target)),
+      $projectRoot
+    );
+
+    $changedFiles = array_filter(explode("\n", trim($output)));
+
+    if (empty($changedFiles)) {
+      $this->io()->note("No config changes found between '$base' and '$target'.");
+      return;
+    }
+
+    if (!is_dir($this->appRoot . '/profiles/contrib/wri_sites')) {
+      throw new \RuntimeException("wri_sites directory not found: {$this->appRoot}/profiles/contrib/wri_sites");
+    }
+
+    $this->io()->section(sprintf('Syncing %d config file(s) to wri_sites profile…', count($changedFiles)));
+
+    foreach ($changedFiles as $relativePath) {
+      $absolutePath = $projectRoot . '/' . $relativePath;
+      if (!file_exists($absolutePath)) {
+        $this->logger()->warning("Skipped (deleted in diff): $relativePath");
+        continue;
+      }
+      $this->processConfigFile($absolutePath);
+    }
+
+    $this->io()->success('Sync complete.');
+  }
+
+  /**
+   * Reads a source config file, strips disallowed keys, and writes it to the
+   * matching file under web/profiles/contrib/wri_sites.
+   *
+   * Logs a warning and returns without error when no matching profile file is found.
+   */
+  protected function processConfigFile(string $absoluteSourcePath): void {
+    $filename = basename($absoluteSourcePath);
     $profileBase = $this->appRoot . '/profiles/contrib/wri_sites';
 
-    if (!is_dir($profileBase)) {
-      throw new \RuntimeException("wri_sites directory not found: {$profileBase}");
-    }
-
     $destPath = $this->findFileInDirectory($profileBase, $filename);
-
     if ($destPath === NULL) {
-      throw new \RuntimeException("No file named '{$filename}' found under {$profileBase}");
+      $this->logger()->warning("No file named '$filename' found under $profileBase — skipped.");
+      return;
     }
 
-    $content = file_get_contents($source);
+    $content = file_get_contents($absoluteSourcePath);
     $filtered = $this->stripTopLevelKeys($content, ['uuid', 'langcode']);
     $filtered = $this->stripField('field_share_with_io', $filtered);
 
     if (file_put_contents($destPath, $filtered) === FALSE) {
-      throw new \RuntimeException("Could not write to: {$destPath}");
+      throw new \RuntimeException("Could not write to: $destPath");
     }
 
-    $this->io()->success("Copied {$source}");
-    $this->logger()->info("Destination: {$destPath}");
+    $this->io()->writeln("  Synced: $filename");
   }
 
   /**
@@ -154,6 +221,34 @@ final class WriCommonCommands extends DrushCommands {
     $pattern = '/^(' . implode('|', array_map('preg_quote', $keys)) . '):.*\n?/m';
     $filtered = preg_replace($pattern, '', $content);
     return ltrim($filtered, "\n");
+  }
+
+  /**
+   * Runs a shell command in the given working directory and returns stdout.
+   *
+   * @throws \RuntimeException
+   *   When the command exits with a non-zero code.
+   */
+  protected function runGitCommand(string $command, string $cwd): string {
+    $descriptors = [
+      0 => ['pipe', 'r'],
+      1 => ['pipe', 'w'],
+      2 => ['pipe', 'w'],
+    ];
+    $process = proc_open($command, $descriptors, $pipes, $cwd);
+    if (!is_resource($process)) {
+      throw new \RuntimeException("Failed to start: $command");
+    }
+    fclose($pipes[0]);
+    $stdout = stream_get_contents($pipes[1]);
+    $stderr = stream_get_contents($pipes[2]);
+    fclose($pipes[1]);
+    fclose($pipes[2]);
+    $exitCode = proc_close($process);
+    if ($exitCode !== 0) {
+      throw new \RuntimeException("Git command failed (exit $exitCode): $stderr");
+    }
+    return $stdout;
   }
 
 }
