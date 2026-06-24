@@ -101,12 +101,12 @@ final class WriCommonCommands extends DrushCommands {
    *
    * @command wri_common:sync-config-from-diff
    * @aliases wri-scd
-   * @option write-update-hook Also append update hooks to wri_common.install for each synced file.
+   * @option write-update-hook Also append update hooks to the module for each synced file.
    */
   #[CLI\Command(name: 'wri_common:sync-config-from-diff', aliases: ['wri-scd'])]
   #[CLI\Argument(name: 'base', description: 'The base branch.')]
   #[CLI\Argument(name: 'target', description: 'The target branch.')]
-  #[CLI\Option(name: 'write-update-hook', description: 'Also append update hooks to wri_common.install for each synced file.')]
+  #[CLI\Option(name: 'write-update-hook', description: 'Also append update hooks for each synced file.')]
   #[CLI\Usage(name: 'wri_common:sync-config-from-diff main issue-585', description: 'Sync all config changes between main and issue-585 into the profile.')]
   #[CLI\Usage(name: 'wri_common:sync-config-from-diff main issue-585 --write-update-hook', description: 'Sync and generate update hooks for every changed config file.')]
   public function syncConfigFromDiff(string $base, string $target, array $options = ['write-update-hook' => FALSE]): void {
@@ -149,7 +149,7 @@ final class WriCommonCommands extends DrushCommands {
    * Logs a warning and returns without error when no matching profile file is found.
    *
    * @param bool $writeUpdateHook
-   *   When TRUE, appends an update hook to wri_common.install.
+   *   When TRUE, appends an update hook to the module where the config lives.
    */
   protected function processConfigFile(string $absoluteSourcePath, bool $writeUpdateHook = FALSE): void {
     $filename = basename($absoluteSourcePath);
@@ -319,19 +319,21 @@ final class WriCommonCommands extends DrushCommands {
     if (!empty($matches[1])) {
       return (int) max($matches[1]) + 1;
     }
-    $wriCommonInstall = $this->profileDirectory . '/modules/wri_common/wri_common.install';
-    if ($installFile !== $wriCommonInstall && file_exists($wriCommonInstall)) {
-      return $this->nextUpdateHookNumber($wriCommonInstall, 'wri_common');
+
+    return $this->drushVersionAsHookNumber();
+  }
+
+  protected function drushVersionAsHookNumber(): int {
+    $version = \Drush\Drush::getVersion() ?? '0.0.0';
+    if (preg_match('/^(\d+)\.(\d+)\.(\d+)/', $version, $m)) {
+      return (int) $m[1] * 1000 + (int) $m[2] * 100 + (int) $m[3];
     }
-    return 10601;
+    return 10000;
   }
 
   protected function resolveInstallFile(string $module, string $destPath): string {
     if (preg_match('#(.*?/modules/' . preg_quote($module, '#') . ')/#', $destPath, $m)) {
       $moduleDir = $m[1];
-    }
-    else {
-      $moduleDir = $this->profileDirectory . '/modules/wri_common/wri_common';
     }
     $installFile = "$moduleDir/$module.install";
     if (!file_exists($installFile)) {
