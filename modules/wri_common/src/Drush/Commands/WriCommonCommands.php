@@ -4,6 +4,8 @@ namespace Drupal\wri_common\Drush\Commands;
 
 use Drush\Attributes as CLI;
 use Drush\Commands\DrushCommands;
+use Symfony\Component\Yaml\Exception\ParseException;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Drush commands for wri_common maintenance tasks.
@@ -134,6 +136,8 @@ final class WriCommonCommands extends DrushCommands {
       return;
     }
 
+    $oldContent = file_get_contents($destPath) ?: '';
+
     $content = file_get_contents($absoluteSourcePath);
     $filtered = $this->stripTopLevelKeys($content, ['uuid', 'langcode']);
     $filtered = $this->stripField('field_share_with_io', $filtered);
@@ -147,7 +151,7 @@ final class WriCommonCommands extends DrushCommands {
     if ($writeUpdateHook) {
       $configName = basename($filename, '.yml');
       $installFile = $this->appRoot . '/profiles/contrib/wri_sites/modules/wri_common/wri_common.install';
-      $hookCode = $this->generateUpdateHook($configName, $destPath, $filtered, $installFile);
+      $hookCode = $this->generateUpdateHook($configName, $destPath, $oldContent, $filtered, $installFile);
       $this->appendUpdateHook($installFile, $hookCode);
     }
   }
@@ -171,15 +175,49 @@ final class WriCommonCommands extends DrushCommands {
    * @return string
    *   PHP source for the new update hook, ready to append.
    */
-  protected function generateUpdateHook(string $configName, string $destPath, string $filteredContent, string $installFile): string {
+  protected function generateUpdateHook(string $configName, string $destPath, string $oldContent, string $newContent, string $installFile): string {
     [$module, $directory] = $this->resolveModuleAndDirectory($destPath);
-    $keys = $this->extractTopLevelYamlKeys($filteredContent);
+    $keys = $this->extractChangedYamlKeys($oldContent, $newContent);
+    if (empty($keys)) {
+      $keys = $this->extractTopLevelYamlKeys($newContent);
+    }
     $hookNumber = $this->nextUpdateHookNumber($installFile, 'wri_common');
 
     $keyLines = implode(",\n    ", array_map(fn($k) => "'$k'", $keys));
-    $description = "Update $configName config.";
 
-    return "\n/**\n * $description\n */\nfunction wri_common_update_{$hookNumber}() {\n  \\Drupal::service('distro_helper.updates')->updateConfig('$configName', [\n    $keyLines,\n  ], '$module', '$directory');\n}\n";
+    return "\nfunction wri_common_update_{$hookNumber}() {\n  \\Drupal::service('distro_helper.updates')->updateConfig('$configName', [\n    $keyLines,\n  ], '$module', '$directory');\n}\n";
+  }
+
+  protected function extractChangedYamlKeys(string $oldContent, string $newContent): array {
+    try {
+      $old = Yaml::parse($oldContent) ?: [];
+      $new = Yaml::parse($newContent) ?: [];
+    }
+    catch (ParseException $e) {
+      return [];
+    }
+    $skip = ['_core', 'uuid', 'langcode'];
+    foreach ($skip as $key) {
+      unset($old[$key], $new[$key]);
+    }
+    return $this->diffArrays($old, $new);
+  }
+
+  protected function diffArrays(array $old, array $new, string $prefix = ''): array {
+    $changed = [];
+    foreach ($new as $key => $value) {
+      $path = $prefix !== '' ? "$prefix#$key" : (string) $key;
+      if (!array_key_exists($key, $old)) {
+        $changed[] = $path;
+      }
+      elseif (is_array($value) && is_array($old[$key])) {
+        $changed = array_merge($changed, $this->diffArrays($old[$key], $value, $path));
+      }
+      elseif ($value !== $old[$key]) {
+        $changed[] = $path;
+      }
+    }
+    return $changed;
   }
 
   /**
