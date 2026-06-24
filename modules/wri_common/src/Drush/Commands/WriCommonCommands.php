@@ -2,11 +2,8 @@
 
 namespace Drupal\wri_common\Drush\Commands;
 
-use Consolidation\OutputFormatters\StructuredData\RowsOfFields;
-use Drupal\Core\Utility\Token;
 use Drush\Attributes as CLI;
 use Drush\Commands\DrushCommands;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * A Drush commandfile.
@@ -26,7 +23,6 @@ final class WriCommonCommands extends DrushCommands {
   public function __construct(string $app_root) {
     $this->appRoot = $app_root;
   }
-
 
   /**
    * Command description here.
@@ -69,7 +65,6 @@ final class WriCommonCommands extends DrushCommands {
     $this->logger()->info("Destination: {$destPath}");
   }
 
-
   /**
    * Recursively searches a directory for a file matching the given name.
    *
@@ -100,6 +95,8 @@ final class WriCommonCommands extends DrushCommands {
    *   - Inline key-value pairs (e.g. `field_share_with_io: true`).
    *   - List items or values containing the string.
    *
+   * @param string $field_name
+   *   The field's machine name, like "field_my_field".
    * @param string $content
    *   The raw file content.
    *
@@ -117,7 +114,8 @@ final class WriCommonCommands extends DrushCommands {
         $trimmed = ltrim($line);
         $indent = strlen($line) - strlen($trimmed);
         if ($trimmed !== '' && $indent <= $blockIndent) {
-          // This line is outside the skipped block; fall through to evaluate it.
+          // This line is outside the skipped block.
+          // Fall through to evaluate it.
           $blockIndent = NULL;
         }
         else {
