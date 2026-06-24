@@ -1,6 +1,6 @@
 services:
   wri_common:copy-config-to-profile:
     class: Drupal\wri_common\Drush\Commands\WriCommonCommands
-    arguments: ['%app.root%']
+    arguments: ['%app.root%', '%install_profile%', '@extension.list.profile']
     tags:
       - { name: drush.command }

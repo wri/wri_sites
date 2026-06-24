@@ -2,6 +2,7 @@
 
 namespace Drupal\wri_common\Drush\Commands;
 
+use Drupal\Core\Extension\ProfileExtensionList;
 use Drush\Attributes as CLI;
 use Drush\Commands\DrushCommands;
 use Symfony\Component\Console\Question\Question;
@@ -21,11 +22,34 @@ final class WriCommonCommands extends DrushCommands {
   protected string $appRoot;
 
   /**
-   * {@inheritdoc}
+   * The actively-installed install profile.
+   *
+   * @var string
    */
-  public function __construct(string $app_root) {
+  protected string $installProfile;
+
+  /**
+   * The profile extension list.
+   *
+   * @var \Drupal\Core\Extension\ExtensionList
+   */
+  protected $profileExtensionList;
+
+  /**
+   * Constructs a new WriCommonCommands instance.
+   *
+   * @param string $app_root
+   *   The app root.
+   * @param string $install_profile
+   *    The install profile.
+   * @param \Drupal\Core\Extension\ProfileExtensionList $profile_extension_list
+   *   The profile extension list.
+   */
+  public function __construct(string $app_root, string $install_profile, ProfileExtensionList $profile_extension_list) {
     parent::__construct();
     $this->appRoot = $app_root;
+    $this->installProfile = $install_profile;
+    $this->profileExtensionList = $profile_extension_list;
   }
 
   /**
