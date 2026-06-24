@@ -106,7 +106,7 @@ final class WriCommonCommands extends DrushCommands {
    * @return string
    *   The filtered content.
    */
-  protected function stripFieldShareWithIo(string $content, string $field_name): string {
+  protected function stripField(string $field_name, string $content): string {
     $lines = explode("\n", $content);
     $result = [];
     $blockIndent = NULL;
