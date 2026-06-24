@@ -2,6 +2,7 @@
 
 namespace Drupal\wri_common\Drush\Commands;
 
+use Drush\Drush;
 use Drupal\Core\Extension\ProfileExtensionList;
 use Drush\Attributes as CLI;
 use Drush\Commands\DrushCommands;
@@ -41,7 +42,7 @@ final class WriCommonCommands extends DrushCommands {
    * @param string $app_root
    *   The app root.
    * @param string $install_profile
-   *    The install profile.
+   *   The install profile.
    * @param \Drupal\Core\Extension\ProfileExtensionList $profile_extension_list
    *   The profile extension list.
    */
@@ -53,24 +54,26 @@ final class WriCommonCommands extends DrushCommands {
   }
 
   /**
-   * Copies a config file into the matching profile file, stripping uuid and langcode.
+   * Copies a config file into the matching profile file.
    *
    * @param string $source
-   *   Path to the source config file (absolute or relative to the project root).
+   *   Path to the source config file (absolute or relative to the app root).
    * @param array $options
    *   Command options.
    *
    * @command wri_common:copy-config-to-profile
    * @aliases wri-ccp
-   * @option write-update-hook Also append an update hook to wri_common.install that calls distro_helper to sync the config.
+   * @option write-update-hook Also append an update hook to wri_common.install that calls wri_common to sync the config.
    */
   #[CLI\Command(name: 'wri_common:copy-config-to-profile', aliases: ['wri-ccp'])]
   #[CLI\Argument(name: 'source', description: 'Path to the source config file (absolute or relative to the project root).')]
-  #[CLI\Option(name: 'write-update-hook', description: 'Also append an update hook to wri_common.install that calls distro_helper to sync the config.')]
+  #[CLI\Option(name: 'write-update-hook', description: 'Also append an update hook to wri_common.install that calls wri_common to sync the config.')]
   #[CLI\Usage(name: 'wri_common:copy-config-to-profile config/node.type.page.yml', description: 'Copy node.type.page.yml into the matching config file in a module in your profile.')]
   #[CLI\Usage(name: 'wri_common:copy-config-to-profile config/node.type.page.yml --write-update-hook', description: 'Copy and also generate an update hook.')]
   public function copyConfigToProfile(string $source, array $options = ['write-update-hook' => FALSE]): void {
     if (!str_starts_with($source, '/')) {
+      // @todo determine this dynamically. We use ../config, but not everyone
+      // does.
       $source = $this->appRoot . '/../' . $source;
     }
 
@@ -143,11 +146,16 @@ final class WriCommonCommands extends DrushCommands {
   }
 
   /**
-   * Reads a source config file, strips disallowed keys, and writes it to the
-   * matching in the installed profile.
+   * Processes a yml config file within the site's config directory.
    *
-   * Logs a warning and returns without error when no matching profile file is found.
+   * Reads the source config file, strips disallowed keys, and writes it to the
+   * matching file in the installed profile.
    *
+   * In non-interactive mode, logs a warning and skips when no matching profile
+   * file is found. In interactive mode, prompts for a target module instead.
+   *
+   * @param string $absoluteSourcePath
+   *   Absolute path to the source config file.
    * @param bool $writeUpdateHook
    *   When TRUE, appends an update hook to the module where the config lives.
    */
@@ -193,18 +201,22 @@ final class WriCommonCommands extends DrushCommands {
   }
 
   /**
-   * Generates an update hook string that calls distro_helper to sync a config.
+   * Generates an update hook string that calls wri_common to sync a config.
    *
    * The hook number is one higher than the current maximum in the install file.
    * The module and directory arguments to updateConfig are derived from the
-   * destination file path so distro_helper can locate the yml file.
+   * destination file path so wri_common can locate the yml file.
    *
    * @param string $configName
    *   Config name without the .yml extension (e.g. 'node.type.page').
-   * @param string $destPath
-   *   Absolute path to the destination yml file inside the profile.
-   * @param string $filteredContent
-   *   The filtered yml content (used to extract top-level keys).
+   * @param string $module
+   *   The module machine name owning the config file.
+   * @param string $directory
+   *   The config subdirectory (e.g. 'install' or 'optional').
+   * @param string $oldContent
+   *   The previous yml content, used to detect changed keys.
+   * @param string $newContent
+   *   The new filtered yml content.
    * @param string $installFile
    *   Absolute path to the .install file to number the hook against.
    *
@@ -220,9 +232,20 @@ final class WriCommonCommands extends DrushCommands {
 
     $keyLines = implode(",\n    ", array_map(fn($k) => "'$k'", $keys));
 
-    return "\nfunction {$module}_update_{$hookNumber}() {\n  \\Drupal::service('distro_helper.updates')->updateConfig('$configName', [\n    $keyLines,\n  ], '$module', '$directory');\n}\n";
+    return "\nfunction {$module}_update_{$hookNumber}() {\n  \\Drupal::service('wri_common.updates')->updateConfig('$configName', [\n    $keyLines,\n  ], '$module', '$directory');\n}\n";
   }
 
+  /**
+   * Returns the top-level YAML keys that differ between two content strings.
+   *
+   * @param string $oldContent
+   *   The previous raw yml content.
+   * @param string $newContent
+   *   The new raw yml content.
+   *
+   * @return string[]
+   *   Keys whose values changed, were added, or whose nested values differ.
+   */
   protected function extractChangedYamlKeys(string $oldContent, string $newContent): array {
     try {
       $old = Yaml::parse($oldContent) ?: [];
@@ -238,6 +261,22 @@ final class WriCommonCommands extends DrushCommands {
     return $this->diffArrays($old, $new);
   }
 
+  /**
+   * Recursively finds keys that differ between two arrays.
+   *
+   * Nested differences are reported as '#'-delimited paths
+   * (e.g. 'parent#child').
+   *
+   * @param array $old
+   *   The previous value array.
+   * @param array $new
+   *   The new value array.
+   * @param string $prefix
+   *   Key path prefix for nested calls.
+   *
+   * @return string[]
+   *   Flat list of changed key paths.
+   */
   protected function diffArrays(array $old, array $new, string $prefix = ''): array {
     $changed = [];
     foreach ($new as $key => $value) {
@@ -257,6 +296,14 @@ final class WriCommonCommands extends DrushCommands {
 
   /**
    * Appends hook PHP code to the given .install file.
+   *
+   * @param string $installFile
+   *   Absolute path to the .install file.
+   * @param string $hookCode
+   *   The PHP function source to append.
+   *
+   * @throws \RuntimeException
+   *   If the install file does not exist or cannot be written.
    */
   protected function appendUpdateHook(string $installFile, string $hookCode): void {
     if (!file_exists($installFile)) {
@@ -269,14 +316,14 @@ final class WriCommonCommands extends DrushCommands {
   }
 
   /**
-   * Resolves the distro_helper module name and directory for a profile file.
-   *
-   * distro_helper resolves config files as:
-   *   extensionPathResolver->getPath('module', $module) . '/config/' . $directory . '/'
+   * Resolves the module name and config install directory for a config file.
    *
    * For files inside a module's config dir the module name and subdirectory
    * are extracted directly. For profile-level config a relative path from
-   * wri_common is used (mirroring the pattern in wri_common_update_10500).
+   * the module is used.
+   *
+   * @param string $destPath
+   *   Absolute path to the destination yml file.
    *
    * @return array{0: string, 1: string}
    *   A [module, directory] tuple.
@@ -286,7 +333,8 @@ final class WriCommonCommands extends DrushCommands {
       return [$m[1], $m[2]];
     }
     if (preg_match('#/config/([^/]+)/#', $destPath, $m)) {
-      // Relative path from wri_common/config/ up to the profile's /config/<dir>/.
+      // Relative path from wri_common/config/ up to the profile's
+      // /config/<dir>/.
       return ['wri_common', '../../../config/' . $m[1]];
     }
     return ['wri_common', 'install'];
@@ -297,7 +345,11 @@ final class WriCommonCommands extends DrushCommands {
    *
    * Skips Drupal metadata keys that should not be passed to updateConfig.
    *
+   * @param string $content
+   *   Raw yml file content.
+   *
    * @return string[]
+   *   The yml file content with skip items removed.
    */
   protected function extractTopLevelYamlKeys(string $content): array {
     $skip = ['_core', 'uuid', 'langcode'];
@@ -312,6 +364,15 @@ final class WriCommonCommands extends DrushCommands {
 
   /**
    * Returns the next available update hook number for a module's install file.
+   *
+   * @param string $installFile
+   *   Absolute path to the module's .install file.
+   * @param string $moduleName
+   *   The module machine name.
+   *
+   * @return int
+   *   One higher than the current maximum hook number, or the Drush-version-
+   *   derived baseline when no hooks exist yet.
    */
   protected function nextUpdateHookNumber(string $installFile, string $moduleName): int {
     $content = file_get_contents($installFile);
@@ -323,14 +384,35 @@ final class WriCommonCommands extends DrushCommands {
     return $this->drushVersionAsHookNumber();
   }
 
+  /**
+   * Returns a hook number baseline derived from the installed Drush version.
+   *
+   * Converts major.minor.patch to major * 1000 + minor * 100 + patch, matching
+   * the Drupal update hook numbering convention (e.g. 10.5.0 → 10500).
+   *
+   * @return int
+   *   The computed baseline hook number.
+   */
   protected function drushVersionAsHookNumber(): int {
-    $version = \Drush\Drush::getVersion() ?? '0.0.0';
+    $version = Drush::getVersion() ?? '0.0.0';
     if (preg_match('/^(\d+)\.(\d+)\.(\d+)/', $version, $m)) {
       return (int) $m[1] * 1000 + (int) $m[2] * 100 + (int) $m[3];
     }
     return 10000;
   }
 
+  /**
+   * Returns the path to a module's .install file, creating it if absent.
+   *
+   * @param string $module
+   *   The module machine name.
+   * @param string $destPath
+   *   Absolute path to the destination config file, used to locate the module
+   *   directory.
+   *
+   * @return string
+   *   Absolute path to the .install file.
+   */
   protected function resolveInstallFile(string $module, string $destPath): string {
     if (preg_match('#(.*?/modules/' . preg_quote($module, '#') . ')/#', $destPath, $m)) {
       $moduleDir = $m[1];
@@ -344,9 +426,14 @@ final class WriCommonCommands extends DrushCommands {
   }
 
   /**
-   * Prompts the user to pick a module and returns the resolved config/install path.
+   * Prompts the user to pick a module and returns its config/install path.
    *
-   * Uses the same Question + setAutocompleterValues pattern as drush generate yml:routing.
+   * Uses the same Question + setAutocompleterValues pattern as drush generate.
+   *
+   * @param string $profileBase
+   *   Absolute path to the profile root directory.
+   * @param string $filename
+   *   The config filename to write (e.g. 'node.type.page.yml').
    *
    * @return string|null
    *   The destination path, or NULL if the user cancels.
@@ -376,6 +463,11 @@ final class WriCommonCommands extends DrushCommands {
 
   /**
    * Recursively searches a directory for a file matching the given name.
+   *
+   * @param string $directory
+   *   The root directory to search within.
+   * @param string $filename
+   *   The filename to look for.
    *
    * @return string|null
    *   The full path to the first match, or NULL if not found.
