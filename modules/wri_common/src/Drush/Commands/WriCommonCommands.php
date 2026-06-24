@@ -4,6 +4,7 @@ namespace Drupal\wri_common\Drush\Commands;
 
 use Drush\Attributes as CLI;
 use Drush\Commands\DrushCommands;
+use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 
@@ -132,8 +133,18 @@ final class WriCommonCommands extends DrushCommands {
 
     $destPath = $this->findFileInDirectory($profileBase, $filename);
     if ($destPath === NULL) {
-      $this->logger()->warning("No file named '$filename' found under $profileBase — skipped.");
-      return;
+      if (!$this->input()->isInteractive()) {
+        $this->logger()->warning("No file named '$filename' found under $profileBase — skipped.");
+        return;
+      }
+      $destPath = $this->askForModuleDestination($profileBase, $filename);
+      if ($destPath === NULL) {
+        return;
+      }
+      $dir = dirname($destPath);
+      if (!is_dir($dir)) {
+        mkdir($dir, 0755, TRUE);
+      }
     }
 
     $oldContent = file_get_contents($destPath) ?: '';
@@ -304,6 +315,37 @@ final class WriCommonCommands extends DrushCommands {
       $this->io()->writeln("  Created: $module.install");
     }
     return $installFile;
+  }
+
+  /**
+   * Prompts the user to pick a module and returns the resolved config/install path.
+   *
+   * Uses the same Question + setAutocompleterValues pattern as drush generate yml:routing.
+   *
+   * @return string|null
+   *   The destination path, or NULL if the user cancels.
+   */
+  protected function askForModuleDestination(string $profileBase, string $filename): ?string {
+    $modulesDir = $profileBase . '/modules';
+    $modules = array_map('basename', glob($modulesDir . '/*', GLOB_ONLYDIR) ?: []);
+    sort($modules);
+
+    $this->io()->note("'$filename' was not found in any module under wri_sites. Choose where to write it.");
+
+    $question = new Question('Module machine name: ');
+    $question->setAutocompleterValues($modules);
+    $question->setValidator(function (?string $value) use ($modules): string {
+      if ($value === NULL || $value === '') {
+        throw new \RuntimeException('A module name is required.');
+      }
+      if (!in_array($value, $modules, TRUE)) {
+        throw new \RuntimeException("'$value' is not a module under wri_sites/modules/.");
+      }
+      return $value;
+    });
+
+    $module = $this->io()->askQuestion($question);
+    return "$modulesDir/$module/config/install/$filename";
   }
 
   /**
