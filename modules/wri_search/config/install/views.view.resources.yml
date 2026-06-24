@@ -3,9 +3,13 @@ status: true
 dependencies:
   config:
     - search_api.index.sitewide
+    - taxonomy.vocabulary.resource_type
+    - taxonomy.vocabulary.tags
   module:
+    - better_exposed_filters
+    - facets_exposed_filters
+    - facets_summary
     - search_api
-    - views_autosubmit
     - views_extras
 id: resources
 label: Resources
@@ -97,7 +101,7 @@ display:
             offset_label: Offset
           quantity: 9
       exposed_form:
-        type: autosubmit
+        type: bef
         options:
           submit_button: Apply
           reset_button: false
@@ -106,7 +110,47 @@ display:
           expose_sort_order: false
           sort_asc_label: Asc
           sort_desc_label: Desc
-          autosubmit_hide: true
+          text_input_required: 'Select any filter and click on Apply to see results'
+          text_input_required_format: full_html
+          bef:
+            general:
+              autosubmit: true
+              auto_submit_sort_only: false
+              autosubmit_breakpoint: ''
+              autosubmit_exclude_textfield: false
+              autosubmit_textfield_delay: 500
+              autosubmit_textfield_minimum_length: 3
+              autosubmit_hide: true
+              input_required: false
+              allow_secondary: false
+              secondary_label: 'Advanced options'
+              secondary_open: false
+              reset_button_always_show: false
+            sort:
+              plugin_id: default
+              advanced:
+                combine: false
+                combine_rewrite: ''
+                combine_param: sort_bef_combine
+                reset: false
+                reset_label: ''
+                collapsible: false
+                collapsible_label: 'Sort options'
+                is_secondary: false
+            filter:
+              search_api_fulltext:
+                plugin_id: default
+                advanced:
+                  placeholder_text: ''
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
+                  open_by_default: false
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: ''
       access:
         type: none
         options: {  }
@@ -115,18 +159,6 @@ display:
         options: {  }
       empty: {  }
       sorts:
-        field_is_featured:
-          id: field_is_featured
-          table: search_api_index_sitewide
-          field: field_is_featured
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api
-          order: DESC
-          expose:
-            label: Featured
-          exposed: true
         created:
           id: created
           table: search_api_index_sitewide
@@ -138,6 +170,20 @@ display:
           order: DESC
           expose:
             label: 'Most Recent'
+            field_identifier: created
+          exposed: true
+        field_featured:
+          id: field_featured
+          table: search_api_index_sitewide
+          field: field_featured
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: Featured
+            field_identifier: field_is_featured
           exposed: true
         title:
           id: title
@@ -150,6 +196,7 @@ display:
           order: ASC
           expose:
             label: Alphabetical
+            field_identifier: title
           exposed: true
         created_1:
           id: created_1
@@ -162,6 +209,7 @@ display:
           order: DESC
           expose:
             label: ''
+            field_identifier: created_1
           exposed: false
       arguments: {  }
       filters:
@@ -199,6 +247,7 @@ display:
             expose_fields: false
             placeholder: 'Search Resources'
             searched_fields_id: ''
+            value_maxlength: 128
           is_grouped: false
           group_info:
             label: ''
@@ -215,10 +264,7 @@ display:
           min_length: null
           fields:
             - body
-            - field_featured_headline
-            - field_featured_text
-            - field_featured_tweet
-            - field_intro
+            - title_fulltext
         type:
           id: type
           table: search_api_index_sitewide
@@ -346,8 +392,30 @@ display:
           plugin_id: extra_result
           empty: false
           content: "<span class='totals'>@total Resources</span><span class='query'> for </span>"
+        facets_summary:
+          id: facets_summary
+          table: search_api_index_sitewide
+          field: facets_summary
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_summary_area
+          empty: true
+          facet_summary: summary
+          label_display: false
       footer: {  }
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender:
+          metatags:
+            title: '[current-page:title] | [site:name]'
+            description: 'Resource listing page'
+            canonical_url: '[current-page:url]'
+            robots: noindex
+            schema_web_site_type: WebSite
+            schema_web_site_name: '[site:name]'
+            schema_web_site_url: '[site:url]'
+            schema_web_site_publisher: 'a:6:{s:5:"@type";s:12:"Organization";s:3:"@id";s:20:"https://www.wri.org/";s:4:"name";s:24:"World Resource Institute";s:3:"url";s:20:"https://www.wri.org/";s:6:"sameAs";s:204:"http://www.facebook.com/pages/World-Resources-Institute/61863318139,http://twitter.comworldresources, http://www.youtube.com/WorldResourcesInst, https://www.linkedin.com/company/world-resources-institute/";s:4:"logo";a:5:{s:5:"@type";s:11:"ImageObject";s:20:"representativeOfPage";s:4:"True";s:3:"url";s:77:"https://www.wri.org/profiles/contrib/wri_sites/themes/custom/ts_wrin/logo.png";s:5:"width";s:3:"150";s:6:"height";s:2:"53";}}'
+          tokenize: false
     cache_metadata:
       max-age: -1
       contexts:
@@ -359,6 +427,1140 @@ display:
       tags:
         - 'config:search_api.index.sitewide'
         - 'search_api_list:sitewide'
+  ### ENd of default ###
+  insights_block:
+    id: insights_block
+    display_title: Block
+    display_plugin: block
+    position: 2
+    display_options:
+      title: Resources
+      exposed_form:
+        type: bef
+        options:
+          submit_button: Apply
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: Sort
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+          text_input_required: 'Select any filter and click on Apply to see results'
+          text_input_required_format: full_html
+          bef:
+            general:
+              autosubmit: true
+              auto_submit_sort_only: false
+              autosubmit_breakpoint: ''
+              autosubmit_exclude_textfield: false
+              autosubmit_textfield_delay: 500
+              autosubmit_textfield_minimum_length: 3
+              autosubmit_hide: true
+              input_required: false
+              allow_secondary: false
+              secondary_label: 'Advanced options'
+              secondary_open: false
+              reset_button_always_show: false
+            sort:
+              plugin_id: default
+              advanced:
+                combine: false
+                combine_rewrite: ''
+                combine_param: sort_bef_combine
+                reset: false
+                reset_label: ''
+                collapsible: false
+                collapsible_label: 'Sort options'
+                is_secondary: false
+            filter:
+              facets_smart_topic_parent:
+                plugin_id: bef
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
+                  open_by_default: false
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: show-in-top-links
+                select_all_none: false
+                select_all_none_nested: false
+                display_inline: true
+                soft_limit: 0
+                soft_limit_label_less: 'Show less'
+                soft_limit_label_more: 'Show more'
+                scrollable: false
+                scrollable_height: 300
+              search_api_fulltext:
+                plugin_id: default
+                advanced:
+                  placeholder_text: ''
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
+                  open_by_default: false
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: show-at-top
+              facets_child_topic_term:
+                plugin_id: bef
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: false
+                  open_by_default: true
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: show-in-facet-sidebar
+                select_all_none: false
+                select_all_none_nested: false
+                display_inline: false
+                soft_limit: 0
+                soft_limit_label_less: 'Show less'
+                soft_limit_label_more: 'Show more'
+                scrollable: false
+                scrollable_height: 300
+              facets_top_level_type:
+                plugin_id: bef
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: false
+                  open_by_default: true
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: show-in-facet-sidebar
+                select_all_none: false
+                select_all_none_nested: false
+                display_inline: false
+                soft_limit: 0
+                soft_limit_label_less: 'Show less'
+                soft_limit_label_more: 'Show more'
+                scrollable: false
+                scrollable_height: 300
+              facets_term_parent_or_self:
+                plugin_id: bef
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: false
+                  open_by_default: true
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: show-in-facet-sidebar
+                select_all_none: false
+                select_all_none_nested: false
+                display_inline: false
+                soft_limit: 0
+                soft_limit_label_less: 'Show less'
+                soft_limit_label_more: 'Show more'
+                scrollable: false
+                scrollable_height: 300
+              facets_term_child_of_parent:
+                plugin_id: bef
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: false
+                  open_by_default: true
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: show-in-facet-sidebar
+                select_all_none: false
+                select_all_none_nested: false
+                display_inline: false
+                soft_limit: 0
+                soft_limit_label_less: 'Show less'
+                soft_limit_label_more: 'Show more'
+                scrollable: false
+                scrollable_height: 300
+              facets_child_type_term:
+                plugin_id: bef
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: false
+                  open_by_default: true
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: show-in-facet-sidebar
+                select_all_none: false
+                select_all_none_nested: false
+                display_inline: false
+                soft_limit: 0
+                soft_limit_label_less: 'Show less'
+                soft_limit_label_more: 'Show more'
+                scrollable: false
+                scrollable_height: 300
+              facets_field_tags:
+                plugin_id: bef
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: false
+                  open_by_default: false
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: show-in-facet-sidebar
+                select_all_none: false
+                select_all_none_nested: false
+                display_inline: false
+                soft_limit: 0
+                soft_limit_label_less: 'Show less'
+                soft_limit_label_more: 'Show more'
+                scrollable: false
+                scrollable_height: 300
+      filters:
+        facets_smart_topic_parent:
+          id: facets_smart_topic_parent
+          table: search_api_index_sitewide
+          field: facets_smart_topic_parent
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'All Topics'
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: topic
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              0: '0'
+              anonymous: '0'
+              hr: '0'
+              content_editor: '0'
+              editorial: '0'
+              administrator: '0'
+              microsite_editor: '0'
+              we: '0'
+            facets_pretty_paths_coder: taxonomy_term_coder
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: true
+          label_display: visible
+          facet:
+            expand_hierarchy: false
+            hierarchy: taxonomy
+            query_operator: or
+            hard_limit: 0
+            min_count: 1
+            missing: false
+            missing_label: others
+            show_numbers: false
+            processor_configs:
+              hierarchy_processor:
+                processor_id: hierarchy_processor
+                weights:
+                  build: 100
+                settings: {  }
+              exclude_specified_items:
+                processor_id: exclude_specified_items
+                weights:
+                  build: 50
+                settings:
+                  exclude: 'North America,Latin America,Asia,Africa,Europe'
+                  regex: false
+                  invert: false
+              translate_entity:
+                processor_id: translate_entity
+                weights:
+                  build: 5
+                settings:
+                  skip_access_check: false
+              display_value_widget_order:
+                processor_id: display_value_widget_order
+                weights:
+                  sort: 40
+                settings:
+                  sort: ASC
+        search_api_fulltext:
+          id: search_api_fulltext
+          table: search_api_index_sitewide
+          field: search_api_fulltext
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_fulltext
+          operator: or
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: search_api_fulltext_op
+            label: 'Filter Results'
+            description: ''
+            use_operator: false
+            operator: search_api_fulltext_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: query
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              hr: '0'
+              content_editor: '0'
+              editorial: '0'
+              administrator: '0'
+              microsite_editor: '0'
+            expose_fields: false
+            placeholder: 'Search Resources'
+            searched_fields_id: ''
+            value_maxlength: 128
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          parse_mode: terms
+          min_length: null
+          fields:
+            - body
+            - title_fulltext
+        type:
+          id: type
+          table: search_api_index_sitewide
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_options
+          operator: or
+          value:
+            article: article
+            data: data
+            project_detail: project_detail
+            publication: publication
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        status:
+          id: status
+          table: search_api_index_sitewide
+          field: status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_boolean
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_type:
+          id: field_type
+          table: search_api_index_sitewide
+          field: field_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_term
+          operator: not
+          value:
+            - 30117
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: resource_type
+          type: textfield
+          hierarchy: false
+          limit: true
+          error_message: true
+        nid:
+          id: nid
+          table: search_api_index_sitewide
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_numeric
+          operator: '!='
+          value:
+            min: ''
+            max: ''
+            value: '102067'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        nid_1:
+          id: nid_1
+          table: search_api_index_sitewide
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_numeric
+          operator: '!='
+          value:
+            min: ''
+            max: ''
+            value: '101868'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_tags:
+          id: field_tags
+          table: search_api_index_sitewide
+          field: field_tags
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_term
+          operator: not
+          value:
+            - 30200
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: tags
+          type: textfield
+          hierarchy: false
+          limit: true
+          error_message: true
+        nid_2:
+          id: nid_2
+          table: search_api_index_sitewide
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_numeric
+          operator: '!='
+          value:
+            min: ''
+            max: ''
+            value: '103985'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        facets_child_topic_term:
+          id: facets_child_topic_term
+          table: search_api_index_sitewide
+          field: facets_child_topic_term
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Within This Topic'
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: subtopic
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              0: '0'
+              anonymous: '0'
+              hr: '0'
+              content_editor: '0'
+              editorial: '0'
+              administrator: '0'
+              microsite_editor: '0'
+              we: '0'
+            facets_pretty_paths_coder: taxonomy_term_coder
+            dependent_facet: topic
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: true
+          label_display: visible
+          facet:
+            expand_hierarchy: false
+            hierarchy: taxonomy
+            query_operator: or
+            hard_limit: 0
+            min_count: 1
+            missing: false
+            missing_label: others
+            show_numbers: false
+            depends_on_exposed_filter: facets_smart_topic_parent
+            processor_configs:
+              hierarchy_processor:
+                processor_id: hierarchy_processor
+                weights:
+                  build: 100
+                settings: {  }
+              translate_entity:
+                processor_id: translate_entity
+                weights:
+                  build: 5
+                settings:
+                  skip_access_check: false
+              display_value_widget_order:
+                processor_id: display_value_widget_order
+                weights:
+                  sort: 40
+                settings:
+                  sort: ASC
+        facets_top_level_type:
+          id: facets_top_level_type
+          table: search_api_index_sitewide
+          field: facets_top_level_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Type of Resource'
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: type
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              hr: '0'
+              content_editor: '0'
+              editorial: '0'
+              administrator: '0'
+              microsite_editor: '0'
+            facets_pretty_paths_coder: taxonomy_term_coder
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: true
+          label_display: visible
+          facet:
+            expand_hierarchy: false
+            hierarchy: taxonomy
+            query_operator: or
+            hard_limit: 0
+            min_count: 1
+            missing: false
+            missing_label: others
+            show_numbers: false
+            processor_configs:
+              hierarchy_processor:
+                processor_id: hierarchy_processor
+                weights:
+                  build: 100
+                settings: {  }
+              exclude_specified_items:
+                processor_id: exclude_specified_items
+                weights:
+                  build: 50
+                settings:
+                  exclude: 'Publications,Outcomes,Microsite,Snapshots'
+                  regex: false
+                  invert: false
+              hide_1_result_facet:
+                processor_id: hide_1_result_facet
+                weights:
+                  build: 50
+                settings: {  }
+              translate_entity:
+                processor_id: translate_entity
+                weights:
+                  build: 5
+                settings:
+                  skip_access_check: false
+              term_weight_widget_order:
+                processor_id: term_weight_widget_order
+                weights:
+                  sort: 60
+                settings:
+                  sort: ASC
+        facets_child_type_term:
+          id: facets_child_type_term
+          table: search_api_index_sitewide
+          field: facets_child_type_term
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Subtype of Resource'
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: subtype
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              hr: '0'
+              content_editor: '0'
+              editorial: '0'
+              administrator: '0'
+              microsite_editor: '0'
+            facets_pretty_paths_coder: taxonomy_term_coder
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: true
+          label_display: visible
+          facet:
+            expand_hierarchy: false
+            hierarchy: taxonomy
+            query_operator: or
+            hard_limit: 0
+            min_count: 1
+            missing: false
+            missing_label: others
+            show_numbers: false
+            depends_on_exposed_filter: facets_top_level_type
+            processor_configs:
+              hierarchy_processor:
+                processor_id: hierarchy_processor
+                weights:
+                  build: 100
+                settings: {  }
+              exclude_specified_items:
+                processor_id: exclude_specified_items
+                weights:
+                  build: 50
+                settings:
+                  exclude: 'Project,Subtopic,Report Microsite,Testimony,Podcast,Video'
+                  regex: false
+                  invert: false
+              translate_entity:
+                processor_id: translate_entity
+                weights:
+                  build: 5
+                settings:
+                  skip_access_check: false
+              display_value_widget_order:
+                processor_id: display_value_widget_order
+                weights:
+                  sort: 40
+                settings:
+                  sort: ASC
+        facets_term_parent_or_self:
+          id: facets_term_parent_or_self
+          table: search_api_index_sitewide
+          field: facets_term_parent_or_self
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Region
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: region
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              hr: '0'
+              content_editor: '0'
+              editorial: '0'
+              administrator: '0'
+              microsite_editor: '0'
+            facets_pretty_paths_coder: taxonomy_term_coder
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: false
+          label_display: visible
+          facet:
+            query_operator: or
+            hard_limit: 0
+            min_count: 1
+            missing: false
+            missing_label: others
+            show_numbers: false
+            processor_configs:
+              display_value_widget_order:
+                processor_id: display_value_widget_order
+                weights:
+                  sort: 40
+                settings:
+                  sort: ASC
+              translate_entity:
+                processor_id: translate_entity
+                weights:
+                  build: 5
+                settings: {  }
+        facets_term_child_of_parent:
+          id: facets_term_child_of_parent
+          table: search_api_index_sitewide
+          field: facets_term_child_of_parent
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Country
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: country
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              hr: '0'
+              content_editor: '0'
+              editorial: '0'
+              administrator: '0'
+              microsite_editor: '0'
+            facets_pretty_paths_coder: taxonomy_term_coder
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: false
+          label_display: visible
+          facet:
+            query_operator: or
+            hard_limit: 0
+            min_count: 1
+            missing: false
+            missing_label: others
+            show_numbers: false
+            depends_on_exposed_filter: facets_term_parent_or_self
+            processor_configs:
+              translate_entity:
+                processor_id: translate_entity
+                weights:
+                  build: 5
+                settings:
+                  skip_access_check: false
+              display_value_widget_order:
+                processor_id: display_value_widget_order
+                weights:
+                  sort: 40
+                settings:
+                  sort: ASC
+        facets_field_tags:
+          id: facets_field_tags
+          table: search_api_index_sitewide
+          field: facets_field_tags
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Tags
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: tags
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              hr: '0'
+              content_editor: '0'
+              editorial: '0'
+              administrator: '0'
+              microsite_editor: '0'
+            facets_pretty_paths_coder: taxonomy_term_coder
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: true
+          label_display: visible
+          facet:
+            expand_hierarchy: false
+            hierarchy: taxonomy
+            query_operator: or
+            hard_limit: 0
+            min_count: 1
+            missing: false
+            missing_label: others
+            show_numbers: false
+            processor_configs:
+              hierarchy_processor:
+                processor_id: hierarchy_processor
+                weights:
+                  build: 100
+                settings: {  }
+              exclude_specified_items:
+                processor_id: exclude_specified_items
+                weights:
+                  build: 50
+                settings:
+                  exclude: "building a sustainable guitar,lower emissions brighter economy,cities for all,climatewatch-pinned,creating a sustainable food future,Prize for Cities,Sustainable Development Goal 1,Sustainable Development Goal 2,Sustainable Development Goal 3,Sustainable Development Goal 4,Sustainable Development Goal 5,Sustainable Development Goal 6,Sustainable Development Goal 7,Sustainable Development Goal 8,Sustainable Development Goal 9,Sustainable Development Goal 10,Sustainable Development Goal 11,Sustainable Development Goal 12,Sustainable Development Goal 13,Sustainable Development Goal 14,Sustainable Development Goal 15,Sustainable Development Goal 16,Sustainable Development Goal 17, Top Outcome: 2011,Top Outcome: 2012,Top Outcome: 2013,Top Outcome: 2014,Top Outcome: 2015,Top Outcome: 2016,Top Outcome: 2017,Top Outcome: 2018,Top Outcome: 2019,Top Outcome: 2020,Top Outcome: 2021,Top Outcome: 2022,world resources report,this month in climate science,Aqueduct,Humans of Clean Energy,global forest watch,10498,long-term strategy related case study,The $26 Trillion Opportunity,open climate network,WRI Africa pillar,24/7 Carbon-Free Energy,AAC Workstream,electric school bus series,urban water resilience,COP27 upcoming event,COP27 event recording,carbon removal legislation & policy,Stepping up 2020 NDCs Webinar Series,BIRGS project profiles,WRR-synthesis report,AQ Community of Practice Latin America & Africa,AQ Community of Practice Southeast Asia,U.S. Climate Policy-Clean Power,U.S. Climate Policy-Community Solar,U.S. Climate Policy-Direct Air Capture,U.S. Climate Policy-Electric School Buses,U.S. Climate Policy-Electric Vehicles,U.S. Climate Policy-EV Charging,U.S. Climate Policy-Green Schools,U.S. Climate Policy-Hydrogen,U.S. Climate Policy-Lands,U.S. Climate Policy-Transmission,U.S. Climate Policy-Equity,JT Sector: Economy-wide,JT Sector: Electricity,JT Sector: Finance,JT Sector: Fossil Fuel Extraction,JT Sector: Fossil fuels,JT Sector: Renewables,Road Safety Project Updates,U.S. Energy Topics,WRI Europe in London,WRR synthesis report,COP28 upcoming event,COP28 event recording,FIGI,Climate Week event,Climate Week event recording,U.S. Community Benefits Frameworks,COP16 event recording,COP16 upcoming event,U.S. Community Benefits Snapshots,Next-Generation Geothermal Energy,Ocean Action 2030,Ocean Action 2030's Rapid Assistance Fund"
+                  regex: false
+                  invert: false
+              translate_entity:
+                processor_id: translate_entity
+                weights:
+                  build: 5
+                settings:
+                  skip_access_check: false
+              display_value_widget_order:
+                processor_id: display_value_widget_order
+                weights:
+                  sort: 40
+                settings:
+                  sort: ASC
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        cache: true
+        title: false
+        exposed_form: false
+        filters: false
+        filter_groups: false
+      display_extenders:
+        metatag_display_extender:
+          metatags:
+            robots: noindex
+          tokenize: false
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'url.query_args:sort_by'
+        - 'user.node_grants:view'
+      tags:
+        - 'config:search_api.index.sitewide'
+        - 'search_api_list:sitewide'
+  ### ENd of insights block ###
   page_1:
     id: page_1
     display_title: Page
@@ -397,6 +1599,7 @@ display:
           break_phrase: false
           not: false
       defaults:
+        sorts: true
         arguments: false
         header: false
       header:
@@ -423,7 +1626,10 @@ display:
           view_mode: hero_on_a_subpage
           tokenize: true
           bypass_access: false
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
       path: project-resources/%
     cache_metadata:
       max-age: -1
@@ -436,6 +1642,7 @@ display:
       tags:
         - 'config:search_api.index.sitewide'
         - 'search_api_list:sitewide'
+  ### ENd of page_1 ###
   resources_page:
     id: resources_page
     display_title: Page
@@ -443,14 +1650,899 @@ display:
     position: 2
     display_options:
       title: Resources
+      exposed_form:
+        type: bef
+        options:
+          submit_button: Apply
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: Sort
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+          text_input_required: 'Select any filter and click on Apply to see results'
+          text_input_required_format: full_html
+          bef:
+            general:
+              autosubmit: true
+              auto_submit_sort_only: false
+              autosubmit_breakpoint: ''
+              autosubmit_exclude_textfield: false
+              autosubmit_textfield_delay: 500
+              autosubmit_textfield_minimum_length: 3
+              autosubmit_hide: true
+              input_required: false
+              allow_secondary: false
+              secondary_label: 'Advanced options'
+              secondary_open: false
+              reset_button_always_show: false
+            sort:
+              plugin_id: default
+              advanced:
+                combine: false
+                combine_rewrite: ''
+                combine_param: sort_bef_combine
+                reset: false
+                reset_label: ''
+                collapsible: false
+                collapsible_label: 'Sort options'
+                is_secondary: false
+            filter:
+              facets_smart_topic_parent:
+                plugin_id: bef_links
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: '- Any -|All Topics'
+                    filter_rewrite_values_key: false
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
+                  open_by_default: false
+                  is_secondary: false
+                  hide_label: true
+                  field_classes: show-in-top-links
+                select_all_none: false
+                soft_limit: 0
+                soft_limit_label_less: 'Show less'
+                soft_limit_label_more: 'Show more'
+                scrollable: false
+                scrollable_height: 300
+              search_api_fulltext:
+                plugin_id: default
+                advanced:
+                  placeholder_text: ''
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
+                  open_by_default: false
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: show-at-top
+              facets_child_topic_term:
+                plugin_id: bef
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: false
+                  open_by_default: true
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: show-in-facet-sidebar
+                select_all_none: false
+                select_all_none_nested: false
+                display_inline: false
+                soft_limit: 0
+                soft_limit_label_less: 'Show less'
+                soft_limit_label_more: 'Show more'
+                scrollable: false
+                scrollable_height: 300
+              facets_top_level_type:
+                plugin_id: bef
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: false
+                  open_by_default: true
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: show-in-facet-sidebar
+                select_all_none: false
+                select_all_none_nested: false
+                display_inline: false
+                soft_limit: 0
+                soft_limit_label_less: 'Show less'
+                soft_limit_label_more: 'Show more'
+                scrollable: false
+                scrollable_height: 300
+              facets_child_type_term:
+                plugin_id: bef
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: false
+                  open_by_default: true
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: show-in-facet-sidebar
+                select_all_none: false
+                select_all_none_nested: false
+                display_inline: false
+                soft_limit: 0
+                soft_limit_label_less: 'Show less'
+                soft_limit_label_more: 'Show more'
+                scrollable: false
+                scrollable_height: 300
+              facets_term_parent_or_self:
+                plugin_id: bef
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: false
+                  open_by_default: true
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: show-in-facet-sidebar
+                select_all_none: false
+                select_all_none_nested: false
+                display_inline: false
+                soft_limit: 0
+                soft_limit_label_less: 'Show less'
+                soft_limit_label_more: 'Show more'
+                scrollable: false
+                scrollable_height: 300
+              facets_term_child_of_parent:
+                plugin_id: bef
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: false
+                  open_by_default: true
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: show-in-facet-sidebar
+                select_all_none: false
+                select_all_none_nested: false
+                display_inline: false
+                soft_limit: 0
+                soft_limit_label_less: 'Show less'
+                soft_limit_label_more: 'Show more'
+                scrollable: false
+                scrollable_height: 300
+              facets_field_tags:
+                plugin_id: bef
+                advanced:
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: false
+                  open_by_default: false
+                  is_secondary: false
+                  hide_label: false
+                  field_classes: show-in-facet-sidebar
+                select_all_none: false
+                select_all_none_nested: false
+                display_inline: false
+                soft_limit: 0
+                soft_limit_label_less: 'Show less'
+                soft_limit_label_more: 'Show more'
+                scrollable: false
+                scrollable_height: 300
+      filters:
+        facets_smart_topic_parent:
+          id: facets_smart_topic_parent
+          table: search_api_index_sitewide
+          field: facets_smart_topic_parent
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'All Topics'
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: topic
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              0: '0'
+              anonymous: '0'
+              hr: '0'
+              content_editor: '0'
+              editorial: '0'
+              administrator: '0'
+              microsite_editor: '0'
+              we: '0'
+            facets_pretty_paths_coder: taxonomy_term_coder
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: true
+          label_display: visible
+          facet:
+            expand_hierarchy: false
+            hierarchy: taxonomy
+            query_operator: or
+            hard_limit: 0
+            min_count: 1
+            missing: false
+            missing_label: others
+            show_numbers: false
+            processor_configs:
+              hierarchy_processor:
+                processor_id: hierarchy_processor
+                weights:
+                  build: 100
+                settings: {  }
+              exclude_specified_items:
+                processor_id: exclude_specified_items
+                weights:
+                  build: 50
+                settings:
+                  exclude: 'North America,Latin America,Asia,Africa,Europe'
+                  regex: false
+                  invert: false
+              translate_entity:
+                processor_id: translate_entity
+                weights:
+                  build: 5
+                settings:
+                  skip_access_check: false
+              display_value_widget_order:
+                processor_id: display_value_widget_order
+                weights:
+                  sort: 40
+                settings:
+                  sort: ASC
+        search_api_fulltext:
+          id: search_api_fulltext
+          table: search_api_index_sitewide
+          field: search_api_fulltext
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_fulltext
+          operator: or
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: search_api_fulltext_op
+            label: 'Filter Results'
+            description: ''
+            use_operator: false
+            operator: search_api_fulltext_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: query
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              hr: '0'
+              content_editor: '0'
+              editorial: '0'
+              administrator: '0'
+              microsite_editor: '0'
+            expose_fields: false
+            placeholder: 'Search Resources'
+            searched_fields_id: ''
+            value_maxlength: 128
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          parse_mode: terms
+          min_length: null
+          fields:
+            - body
+            - title_fulltext
+        type:
+          id: type
+          table: search_api_index_sitewide
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_options
+          operator: or
+          value:
+            article: article
+            data: data
+            project_detail: project_detail
+            publication: publication
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        status:
+          id: status
+          table: search_api_index_sitewide
+          field: status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_boolean
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        facets_child_topic_term:
+          id: facets_child_topic_term
+          table: search_api_index_sitewide
+          field: facets_child_topic_term
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Within This Topic'
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: subtopic
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              0: '0'
+              anonymous: '0'
+              hr: '0'
+              content_editor: '0'
+              editorial: '0'
+              administrator: '0'
+              microsite_editor: '0'
+              we: '0'
+            facets_pretty_paths_coder: taxonomy_term_coder
+            dependent_facet: topic
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: true
+          label_display: visible
+          facet:
+            expand_hierarchy: false
+            hierarchy: taxonomy
+            query_operator: or
+            hard_limit: 0
+            min_count: 1
+            missing: false
+            missing_label: others
+            show_numbers: false
+            depends_on_exposed_filter: facets_smart_topic_parent
+            processor_configs:
+              hierarchy_processor:
+                processor_id: hierarchy_processor
+                weights:
+                  build: 100
+                settings: {  }
+              translate_entity:
+                processor_id: translate_entity
+                weights:
+                  build: 5
+                settings:
+                  skip_access_check: false
+              display_value_widget_order:
+                processor_id: display_value_widget_order
+                weights:
+                  sort: 40
+                settings:
+                  sort: ASC
+        facets_top_level_type:
+          id: facets_top_level_type
+          table: search_api_index_sitewide
+          field: facets_top_level_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Type of Resource'
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: type
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              hr: '0'
+              content_editor: '0'
+              editorial: '0'
+              administrator: '0'
+              microsite_editor: '0'
+            facets_pretty_paths_coder: taxonomy_term_coder
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: true
+          label_display: visible
+          facet:
+            expand_hierarchy: false
+            hierarchy: taxonomy
+            query_operator: or
+            hard_limit: 0
+            min_count: 1
+            missing: false
+            missing_label: others
+            show_numbers: false
+            processor_configs:
+              hierarchy_processor:
+                processor_id: hierarchy_processor
+                weights:
+                  build: 100
+                settings: {  }
+              exclude_specified_items:
+                processor_id: exclude_specified_items
+                weights:
+                  build: 50
+                settings:
+                  exclude: 'Publications,Outcomes,Microsite,Snapshots'
+                  regex: false
+                  invert: false
+              hide_1_result_facet:
+                processor_id: hide_1_result_facet
+                weights:
+                  build: 50
+                settings: {  }
+              translate_entity:
+                processor_id: translate_entity
+                weights:
+                  build: 5
+                settings:
+                  skip_access_check: false
+              term_weight_widget_order:
+                processor_id: term_weight_widget_order
+                weights:
+                  sort: 60
+                settings:
+                  sort: ASC
+        facets_child_type_term:
+          id: facets_child_type_term
+          table: search_api_index_sitewide
+          field: facets_child_type_term
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Subtype of Resource'
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: subtype
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              hr: '0'
+              content_editor: '0'
+              editorial: '0'
+              administrator: '0'
+              microsite_editor: '0'
+            facets_pretty_paths_coder: taxonomy_term_coder
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: true
+          label_display: visible
+          facet:
+            expand_hierarchy: false
+            hierarchy: taxonomy
+            query_operator: or
+            hard_limit: 0
+            min_count: 1
+            missing: false
+            missing_label: others
+            show_numbers: false
+            depends_on_exposed_filter: facets_top_level_type
+            processor_configs:
+              hierarchy_processor:
+                processor_id: hierarchy_processor
+                weights:
+                  build: 100
+                settings: {  }
+              exclude_specified_items:
+                processor_id: exclude_specified_items
+                weights:
+                  build: 50
+                settings:
+                  exclude: 'Project,Subtopic,Report Microsite,Testimony,Podcast,Video'
+                  regex: false
+                  invert: false
+              translate_entity:
+                processor_id: translate_entity
+                weights:
+                  build: 5
+                settings:
+                  skip_access_check: false
+              display_value_widget_order:
+                processor_id: display_value_widget_order
+                weights:
+                  sort: 40
+                settings:
+                  sort: ASC
+        facets_term_parent_or_self:
+          id: facets_term_parent_or_self
+          table: search_api_index_sitewide
+          field: facets_term_parent_or_self
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Region
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: region
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              hr: '0'
+              content_editor: '0'
+              editorial: '0'
+              administrator: '0'
+              microsite_editor: '0'
+            facets_pretty_paths_coder: taxonomy_term_coder
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: false
+          label_display: visible
+          facet:
+            query_operator: or
+            hard_limit: 0
+            min_count: 1
+            missing: false
+            missing_label: others
+            show_numbers: false
+            processor_configs:
+              display_value_widget_order:
+                processor_id: display_value_widget_order
+                weights:
+                  sort: 40
+                settings:
+                  sort: ASC
+              translate_entity:
+                processor_id: translate_entity
+                weights:
+                  build: 5
+                settings: {  }
+        facets_term_child_of_parent:
+          id: facets_term_child_of_parent
+          table: search_api_index_sitewide
+          field: facets_term_child_of_parent
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Country
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: country
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              hr: '0'
+              content_editor: '0'
+              editorial: '0'
+              administrator: '0'
+              microsite_editor: '0'
+            facets_pretty_paths_coder: taxonomy_term_coder
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: false
+          label_display: visible
+          facet:
+            query_operator: or
+            hard_limit: 0
+            min_count: 1
+            missing: false
+            missing_label: others
+            show_numbers: false
+            depends_on_exposed_filter: facets_term_parent_or_self
+            processor_configs:
+              translate_entity:
+                processor_id: translate_entity
+                weights:
+                  build: 5
+                settings:
+                  skip_access_check: false
+              display_value_widget_order:
+                processor_id: display_value_widget_order
+                weights:
+                  sort: 40
+                settings:
+                  sort: ASC
+        facets_field_tags:
+          id: facets_field_tags
+          table: search_api_index_sitewide
+          field: facets_field_tags
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Tags
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: tags
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              hr: '0'
+              content_editor: '0'
+              editorial: '0'
+              administrator: '0'
+              microsite_editor: '0'
+            facets_pretty_paths_coder: taxonomy_term_coder
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: true
+          label_display: visible
+          facet:
+            expand_hierarchy: false
+            hierarchy: taxonomy
+            query_operator: or
+            hard_limit: 0
+            min_count: 1
+            missing: false
+            missing_label: others
+            show_numbers: false
+            processor_configs:
+              hierarchy_processor:
+                processor_id: hierarchy_processor
+                weights:
+                  build: 100
+                settings: {  }
+              exclude_specified_items:
+                processor_id: exclude_specified_items
+                weights:
+                  build: 50
+                settings:
+                  exclude: "building a sustainable guitar,lower emissions brighter economy,cities for all,climatewatch-pinned,creating a sustainable food future,Prize for Cities,Sustainable Development Goal 1,Sustainable Development Goal 2,Sustainable Development Goal 3,Sustainable Development Goal 4,Sustainable Development Goal 5,Sustainable Development Goal 6,Sustainable Development Goal 7,Sustainable Development Goal 8,Sustainable Development Goal 9,Sustainable Development Goal 10,Sustainable Development Goal 11,Sustainable Development Goal 12,Sustainable Development Goal 13,Sustainable Development Goal 14,Sustainable Development Goal 15,Sustainable Development Goal 16,Sustainable Development Goal 17, Top Outcome: 2011,Top Outcome: 2012,Top Outcome: 2013,Top Outcome: 2014,Top Outcome: 2015,Top Outcome: 2016,Top Outcome: 2017,Top Outcome: 2018,Top Outcome: 2019,Top Outcome: 2020,Top Outcome: 2021,Top Outcome: 2022,world resources report,this month in climate science,Aqueduct,Humans of Clean Energy,global forest watch,10498,long-term strategy related case study,The $26 Trillion Opportunity,open climate network,WRI Africa pillar,24/7 Carbon-Free Energy,AAC Workstream,electric school bus series,urban water resilience,COP27 upcoming event,COP27 event recording,carbon removal legislation & policy,Stepping up 2020 NDCs Webinar Series,BIRGS project profiles,WRR-synthesis report,AQ Community of Practice Latin America & Africa,AQ Community of Practice Southeast Asia,U.S. Climate Policy-Clean Power,U.S. Climate Policy-Community Solar,U.S. Climate Policy-Direct Air Capture,U.S. Climate Policy-Electric School Buses,U.S. Climate Policy-Electric Vehicles,U.S. Climate Policy-EV Charging,U.S. Climate Policy-Green Schools,U.S. Climate Policy-Hydrogen,U.S. Climate Policy-Lands,U.S. Climate Policy-Transmission,U.S. Climate Policy-Equity,JT Sector: Economy-wide,JT Sector: Electricity,JT Sector: Finance,JT Sector: Fossil Fuel Extraction,JT Sector: Fossil fuels,JT Sector: Renewables,Road Safety Project Updates,U.S. Energy Topics,WRI Europe in London,WRR synthesis report,COP28 upcoming event,COP28 event recording,FIGI,Climate Week event,Climate Week event recording,U.S. Community Benefits Frameworks,COP16 event recording,COP16 upcoming event,U.S. Community Benefits Snapshots,Next-Generation Geothermal Energy,Ocean Action 2030,Ocean Action 2030's Rapid Assistance Fund"
+                  regex: false
+                  invert: false
+              translate_entity:
+                processor_id: translate_entity
+                weights:
+                  build: 5
+                settings:
+                  skip_access_check: false
+              display_value_widget_order:
+                processor_id: display_value_widget_order
+                weights:
+                  sort: 40
+                settings:
+                  sort: ASC
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
       defaults:
         cache: true
         title: false
-      display_extenders: {  }
+        exposed_form: false
+        filters: false
+        filter_groups: false
+      display_extenders:
+        metatag_display_extender:
+          metatags:
+            robots: noindex
+          tokenize: false
       path: resources
     cache_metadata:
       max-age: 0
       contexts:
+        - 'facets_filter:f'
         - 'languages:language_interface'
         - url
         - url.query_args
@@ -468,3 +2560,4 @@ display:
         - 'config:views.view.resources'
         - 'search_api_list:sitewide'
         - taxonomy_term_list
+  ### ENd of resources_page ###
