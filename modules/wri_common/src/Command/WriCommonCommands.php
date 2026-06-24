@@ -76,43 +76,5 @@ final class WriCommonCommands extends DrushCommands {
     $this->logger()->info("Destination: {$destPath}");
   }
 
-  /**
-   * Recursively searches a directory for a file matching the given name.
-   *
-   * @param string $directory
-   *   The directory to search.
-   * @param string $filename
-   *   The filename to find.
-   *
-   * @return string|null
-   *   The full path to the first match, or NULL if not found.
-   */
-  protected function findFileInDirectory(string $directory, string $filename): ?string {
-    $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($directory));
-    foreach ($iterator as $file) {
-      if ($file->isFile() && $file->getFilename() === $filename) {
-        return $file->getPathname();
-      }
-    }
-    return NULL;
-  }
-
-  /**
-   * Removes top-level YAML key lines from config file content.
-   *
-   * @param string $content
-   *   The raw file content.
-   * @param string[] $keys
-   *   Top-level keys to strip (e.g. ['uuid', 'langcode']).
-   *
-   * @return string
-   *   The filtered content.
-   */
-  protected function stripTopLevelKeys(string $content, array $keys): string {
-    $pattern = '/^(' . implode('|', array_map('preg_quote', $keys)) . '):.*\n?/m';
-    $filtered = preg_replace($pattern, '', $content);
-    return ltrim($filtered, "\n");
-  }
-
 
 }
