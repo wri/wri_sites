@@ -59,7 +59,7 @@ final class WriCommonCommands extends DrushCommands {
 
     $content = file_get_contents($source);
     $filtered = $this->stripTopLevelKeys($content, ['uuid', 'langcode']);
-    $filtered = $this->stripFieldShareWithIo($filtered);
+    $filtered = $this->stripField('field_share_with_io', $filtered);
 
     if (file_put_contents($destPath, $filtered) === FALSE) {
       throw new \RuntimeException("Could not write to: {$destPath}");
@@ -92,7 +92,7 @@ final class WriCommonCommands extends DrushCommands {
   }
 
   /**
-   * Removes all references to field_share_with_io from config file content.
+   * Removes all references to a field from config file content.
    *
    * Handles three cases:
    *   - Bare block keys (e.g. `field_share_with_io:`) — removes the key and
@@ -106,7 +106,7 @@ final class WriCommonCommands extends DrushCommands {
    * @return string
    *   The filtered content.
    */
-  protected function stripFieldShareWithIo(string $content): string {
+  protected function stripFieldShareWithIo(string $content, string $field_name): string {
     $lines = explode("\n", $content);
     $result = [];
     $blockIndent = NULL;
@@ -125,7 +125,7 @@ final class WriCommonCommands extends DrushCommands {
         }
       }
 
-      if (!str_contains($line, 'field_share_with_io')) {
+      if (!str_contains($line, $field_name)) {
         $result[] = $line;
         continue;
       }
