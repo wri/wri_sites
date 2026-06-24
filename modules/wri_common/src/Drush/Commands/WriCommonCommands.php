@@ -59,6 +59,7 @@ final class WriCommonCommands extends DrushCommands {
 
     $content = file_get_contents($source);
     $filtered = $this->stripTopLevelKeys($content, ['uuid', 'langcode']);
+    $filtered = $this->stripFieldShareWithIo($filtered);
 
     if (file_put_contents($destPath, $filtered) === FALSE) {
       throw new \RuntimeException("Could not write to: {$destPath}");
@@ -88,6 +89,56 @@ final class WriCommonCommands extends DrushCommands {
       }
     }
     return NULL;
+  }
+
+  /**
+   * Removes all references to field_share_with_io from config file content.
+   *
+   * Handles three cases:
+   *   - Bare block keys (e.g. `field_share_with_io:`) — removes the key and
+   *     its entire indented child block.
+   *   - Inline key-value pairs (e.g. `field_share_with_io: true`).
+   *   - List items or values containing the string.
+   *
+   * @param string $content
+   *   The raw file content.
+   *
+   * @return string
+   *   The filtered content.
+   */
+  protected function stripFieldShareWithIo(string $content): string {
+    $lines = explode("\n", $content);
+    $result = [];
+    $blockIndent = NULL;
+
+    foreach ($lines as $line) {
+      // If we're inside a skipped block, check whether this line ends it.
+      if ($blockIndent !== NULL) {
+        $trimmed = ltrim($line);
+        $indent = strlen($line) - strlen($trimmed);
+        if ($trimmed !== '' && $indent <= $blockIndent) {
+          // This line is outside the skipped block; fall through to evaluate it.
+          $blockIndent = NULL;
+        }
+        else {
+          continue;
+        }
+      }
+
+      if (!str_contains($line, 'field_share_with_io')) {
+        $result[] = $line;
+        continue;
+      }
+
+      // If the line is a bare block key (nothing after the colon), its
+      // indented children must also be removed.
+      if (str_ends_with(rtrim($line), ':')) {
+        $blockIndent = strlen($line) - strlen(ltrim($line));
+      }
+      // Skip this line regardless.
+    }
+
+    return implode("\n", $result);
   }
 
   /**
