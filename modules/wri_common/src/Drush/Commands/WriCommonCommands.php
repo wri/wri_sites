@@ -29,11 +29,11 @@ final class WriCommonCommands extends DrushCommands {
   protected string $installProfile;
 
   /**
-   * The profile extension list.
+   * The profile directory.
    *
-   * @var \Drupal\Core\Extension\ExtensionList
+   * @var string
    */
-  protected $profileExtensionList;
+  protected $profileDirectory;
 
   /**
    * Constructs a new WriCommonCommands instance.
@@ -49,7 +49,7 @@ final class WriCommonCommands extends DrushCommands {
     parent::__construct();
     $this->appRoot = $app_root;
     $this->installProfile = $install_profile;
-    $this->profileExtensionList = $profile_extension_list;
+    $this->profileDirectory = $profile_extension_list->getPath($install_profile);
   }
 
   /**
@@ -78,7 +78,7 @@ final class WriCommonCommands extends DrushCommands {
       throw new \InvalidArgumentException("Source file not found: $source");
     }
 
-    if (!is_dir($this->appRoot . '/profiles/contrib/wri_sites')) {
+    if (!is_dir($this->profileDirectory)) {
       throw new \RuntimeException("wri_sites directory not found: {$this->appRoot}/profiles/contrib/wri_sites");
     }
 
@@ -124,7 +124,7 @@ final class WriCommonCommands extends DrushCommands {
       return;
     }
 
-    if (!is_dir($this->appRoot . '/profiles/contrib/wri_sites')) {
+    if (!is_dir($this->profileDirectory)) {
       throw new \RuntimeException("wri_sites directory not found: {$this->appRoot}/profiles/contrib/wri_sites");
     }
 
@@ -153,7 +153,7 @@ final class WriCommonCommands extends DrushCommands {
    */
   protected function processConfigFile(string $absoluteSourcePath, bool $writeUpdateHook = FALSE): void {
     $filename = basename($absoluteSourcePath);
-    $profileBase = $this->appRoot . '/profiles/contrib/wri_sites';
+    $profileBase = $this->profileDirectory;
 
     $destPath = $this->findFileInDirectory($profileBase, $filename);
     if ($destPath === NULL) {
