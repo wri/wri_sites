@@ -1,0 +1,6 @@
+services:
+  wri_common:copy-config-to-profile:
+    class: Drupal\wri_common\Command\WriCommonCommands
+    arguments: ['%app.root%']
+    tags:
+      - { name: console.command }
