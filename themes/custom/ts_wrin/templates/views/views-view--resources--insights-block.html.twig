@@ -21,8 +21,10 @@
 {% endif %}
 <div{{ attributes.addClass(classes) }}>
 {% if exposed %}
-{% set form_attributes = create_attribute(exposed["#attributes"]) %}
-  <form{{ form_attributes }}>
+  {% set rendered = exposed|without('query', 'sort_by')|render %}
+  {% set form_tag = rendered|preg_replace('/(<form[^>]*>).*/is', '$1') %}
+  {% set clean = rendered|preg_replace('/<form[^>]*>/i', '') %}
+  {{ form_tag|raw }}
 {% endif %}
   <div class="resources-wrapper">
     <div class="container">
@@ -40,7 +42,6 @@
       <div class="grid results-wrapper">
         <div class="results-sidebar padding-bottom">
           {% if exposed %}
-              {% set clean = exposed|without('query', 'sort_by')|render|preg_replace('/<form[^>]*>/i', '') %}
               {{ clean|replace({'</form>': ''})|raw }}
           {% endif %}
         </div>
