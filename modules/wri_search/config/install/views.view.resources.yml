@@ -1433,6 +1433,7 @@ display:
       tags:
         - 'config:search_api.index.sitewide'
         - 'search_api_list:sitewide'
+  ### ENd of insights block ###
   page_1:
     id: page_1
     display_title: Page
@@ -1514,6 +1515,7 @@ display:
       tags:
         - 'config:search_api.index.sitewide'
         - 'search_api_list:sitewide'
+  ### ENd of page_1 ###
   pinned_resources:
     id: pinned_resources
     display_title: 'Pinned insights'
@@ -2468,7 +2470,7 @@ display:
       tags:
         - 'config:search_api.index.sitewide'
         - 'search_api_list:sitewide'
-  ### ENd of insights block ###
+  ### ENd of pinned_resources ###
   page_1:
     id: page_1
     display_title: Page
