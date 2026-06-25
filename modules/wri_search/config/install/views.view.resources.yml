@@ -606,11 +606,6 @@ display:
                 scrollable: false
                 scrollable_height: 300
       sorts:
-        weight:
-          id: weight
-          table: views_arg_order_sort
-          field: weight
-          plugin_id: views_arg_order_sort_default
         created:
           id: created
           table: search_api_index_sitewide
