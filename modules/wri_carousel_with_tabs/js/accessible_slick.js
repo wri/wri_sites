@@ -1,4 +1,4 @@
-(function ($, Drupal, drupalSettings) {
+(function ($, Drupal, drupalSettings, once) {
   Drupal.behaviors.tsSlick = {
     attach: function (context, settings) {
       if (context == document) {
@@ -82,4 +82,4 @@
       } // context
     } // attach
   }
-})(jQuery, Drupal, drupalSettings);
+})(jQuery, Drupal, drupalSettings, once);
