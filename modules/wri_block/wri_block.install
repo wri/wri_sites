@@ -94,7 +94,7 @@ function wri_block_update_10501() {
 /**
  * Enabling wri_webform_block, which didn't get enabled on flagship.
  */
-function wri_block_update_10502() {
+function wri_block_update_10503() {
   $moduleHandler = \Drupal::service('module_handler');
   if (!$moduleHandler->moduleExists('wri_webform_block')) {
     // Delete the field_other_orto_list_tags field.
