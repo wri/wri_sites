@@ -379,7 +379,7 @@ display:
           preserve_facet_query_args: true
       relationships: {  }
       css_class: ''
-      use_ajax: false
+      use_ajax: true
       header:
         extra_result:
           id: extra_result
@@ -426,7 +426,6 @@ display:
       tags:
         - 'config:search_api.index.sitewide'
         - 'search_api_list:sitewide'
-  ### ENd of default ###
   insights_block:
     id: insights_block
     display_title: Block
@@ -1396,6 +1395,7 @@ display:
       defaults:
         cache: true
         title: false
+        use_ajax: false
         exposed_form: false
         style: false
         row: false
@@ -1403,6 +1403,7 @@ display:
         arguments: false
         filters: false
         filter_groups: false
+      use_ajax: true
       display_extenders:
         metatag_display_extender:
           metatags:
@@ -1428,7 +1429,6 @@ display:
       tags:
         - 'config:search_api.index.sitewide'
         - 'search_api_list:sitewide'
-  ### ENd of insights block ###
   page_1:
     id: page_1
     display_title: Page
@@ -1510,7 +1510,6 @@ display:
       tags:
         - 'config:search_api.index.sitewide'
         - 'search_api_list:sitewide'
-  ### ENd of page_1 ###
   pinned_resources:
     id: pinned_resources
     display_title: 'Pinned insights'
@@ -2463,13 +2462,11 @@ display:
       contexts:
         - 'languages:language_interface'
         - url
-        - url.query_args
         - 'url.query_args:sort_by'
         - 'user.node_grants:view'
       tags:
         - 'config:search_api.index.sitewide'
         - 'search_api_list:sitewide'
-  ### ENd of pinned_resources ###
   resources_page:
     id: resources_page
     display_title: Page
