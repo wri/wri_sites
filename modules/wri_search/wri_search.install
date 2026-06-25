@@ -109,7 +109,18 @@ function wri_search_update_10005() {
 function wri_search_update_10600() {
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.resources', [
     'dependencies',
-    'display',
+    'display.default.display_options.exposed_form',
+    'display.default.display_options.header.facets_summary',
+    'display.insights_block',
+    'display.resources_page.display_options.defaults',
+    'display.resources_page.display_options.exposed_form',
+    'display.resources_page.display_options.filters.facets_smart_topic_parent',
+    'display.resources_page.display_options.filters.facets_smart_topic_parent',
+    'display.resources_page.display_options.filters.facets_child_topic_term',
+    'display.resources_page.display_options.filters.facets_child_type_term',
+    'display.resources_page.display_options.filters.facets_term_parent_or_self',
+    'display.resources_page.display_options.filters.facets_term_child_of_parent',
+    'display.resources_page.display_options.filters.facets_field_tags',
   ], 'wri_search');
   \Drupal::service('distro_helper.updates')->installConfig('facets.facet.all_topics', 'wri_search');
   \Drupal::service('distro_helper.updates')->installConfig('facets.facet.country', 'wri_search');
