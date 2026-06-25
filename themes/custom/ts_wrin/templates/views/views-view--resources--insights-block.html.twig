@@ -22,14 +22,15 @@
 <div{{ attributes.addClass(classes) }}>
 {% if exposed %}
   {% set rendered = exposed|without('query', 'sort_by')|render %}
-  {% set form_tag = rendered|preg_replace('/(<form[^>]*>).*/is', '$1') %}
-  {% set clean = rendered|preg_replace('/<form[^>]*>/i', '') %}
-  {{ form_tag|raw }}
+  {% set form_opening_tag = rendered|preg_replace('/(<form[^>]*>).*/is', '$1') %}
+  {% set form_guts = rendered|preg_replace('/<form[^>]*>/i', '') %}
+  {% set form_closing_tag = '</form>' %}
 {% endif %}
   <div class="resources-wrapper">
     <div class="container">
 
       {% if exposed %}
+        {{ form_opening_tag|raw }}
         <div class="view-filters">
           <button class="button black filters">{{ "Filters"|t }}</button>
           {% if exposed %}
@@ -42,7 +43,7 @@
       <div class="grid results-wrapper">
         <div class="results-sidebar padding-bottom">
           {% if exposed %}
-              {{ clean|replace({'</form>': ''})|raw }}
+              {{ form_guts|replace({'</form>': ''})|raw }}
           {% endif %}
         </div>
         <div class="results-body padding-bottom">
@@ -69,6 +70,9 @@
           {% endif %}
         </div>
       </div>
+      {% if exposed %}
+        {{ form_closing_tag|raw }}
+      {% endif %}
       {% if footer %}
         <div class="view-footer">
           {{ footer }}
@@ -78,8 +82,4 @@
       </div>
     </div>
   </div>
-
-{% if exposed %}
-  </form>
-{% endif %}
 </div>
