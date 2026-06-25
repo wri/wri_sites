@@ -168,3 +168,12 @@ function wri_listing_block_update_10600() {
     'display#insights_teasers',
   ], 'wri_listing_block');
 }
+
+/**
+ * Add a new content snippet value: resource_block_view_arguments.
+ */
+function wri_listing_block_update_10601() {
+  \Drupal::service('distro_helper.updates')->updateConfig('content_snippets.content', [
+    'snippets#resource_block_view_arguments',
+  ], 'wri_listing_block', 'install');
+}

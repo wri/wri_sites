@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -31,7 +30,7 @@ dependencies:
     - field.field.node.article.field_tags
     - field.field.node.article.field_type
     - field.field.node.article.layout_builder__layout
-    - image.style.150_tall
+    - image.style.180x240_scale
     - node.type.article
   module:
     - ds
@@ -78,8 +77,10 @@ third_party_settings:
         formatter: default
         settings:
           link: true
+          'link class': ''
+          link_target: ''
           wrapper: h3
-          class: h3
+          class: 'h3 font-serif'
         ft:
           id: reset
           settings:
@@ -95,7 +96,35 @@ content:
     type: text_default
     label: hidden
     settings: {  }
-    third_party_settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: ''
+            ow-cl: utility-lg
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
     weight: 5
     region: main_section
   field_main_image:
@@ -103,7 +132,7 @@ content:
     label: hidden
     settings:
       image_link: ''
-      image_style: 150_tall
+      image_style: 180x240_scale
       image_loading:
         attribute: lazy
     third_party_settings:

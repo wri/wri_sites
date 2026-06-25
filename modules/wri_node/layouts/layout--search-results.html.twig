@@ -68,11 +68,13 @@
         {{ content.main_section.register_button }}
       {% endif %}
     </div>
+    {% if content.right_section %}
     <div class="search-results-image">
       {{ content.right_section }}
       <div class="tags">
         {{ content.main_section.field_tags }}
       </div>
     </div>
+    {% endif %}
   {% endif %}
 </div>

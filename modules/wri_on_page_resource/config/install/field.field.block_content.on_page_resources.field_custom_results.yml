@@ -1,0 +1,26 @@
+status: true
+dependencies:
+  config:
+    - block_content.type.on_page_resources
+    - field.storage.block_content.field_custom_results
+_core:
+  default_config_hash: l48DYtj-loWZwBWbOj-9clqIRZ_mFl95Q-t_T3kwyew
+id: block_content.on_page_resources.field_custom_results
+field_name: field_custom_results
+entity_type: block_content
+bundle: on_page_resources
+label: 'Custom results'
+description: 'By default, the most recently published items will appear here. You may override this with a custom item using this field.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: content_by_type
+      display_name: entity_reference_1
+      arguments:
+        - article+data+project_detail+publication
+field_type: entity_reference

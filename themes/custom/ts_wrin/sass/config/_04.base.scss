@@ -17,6 +17,10 @@ body {
 .h3,
 .h4 {
   @include font(var(--font-family-heading-condensed));
+
+  &.font-serif {
+    @include font(var(--font-family-serif));
+  }
 }
 
 .h1 {
