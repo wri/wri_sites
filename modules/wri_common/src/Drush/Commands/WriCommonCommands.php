@@ -232,7 +232,7 @@ final class WriCommonCommands extends DrushCommands {
 
     $keyLines = implode(",\n    ", array_map(fn($k) => "'$k'", $keys));
 
-    return "\nfunction {$module}_update_{$hookNumber}() {\n  \\Drupal::service('wri_common.updates')->updateConfig('$configName', [\n    $keyLines,\n  ], '$module', '$directory');\n}\n";
+    return "\nfunction {$module}_update_{$hookNumber}() {\n  \\Drupal::service('distro_helper.updates')->updateConfig('$configName', [\n    $keyLines,\n  ], '$module', '$directory');\n}\n";
   }
 
   /**
