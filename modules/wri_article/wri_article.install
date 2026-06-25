@@ -403,3 +403,14 @@ function wri_article_update_10610() {
     \Drupal::service('module_installer')->install([$module], TRUE);
   }
 }
+
+/**
+ * Install wri_carousel_with_tabs.
+ */
+function wri_article_update_10611() {
+  $module = 'wri_on_page_resource';
+  $moduleHandler = \Drupal::service('module_handler');
+  if ($moduleHandler->moduleExists($module)) {
+    \Drupal::service('module_installer')->install([$module], TRUE);
+  }
+}
