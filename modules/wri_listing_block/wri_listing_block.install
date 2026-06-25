@@ -169,6 +169,9 @@ function wri_listing_block_update_10600() {
   ], 'wri_listing_block');
 }
 
+/**
+ * Add a new content snippet value: resource_block_view_arguments.
+ */
 function wri_listing_block_update_10601() {
   \Drupal::service('wri_common.updates')->updateConfig('content_snippets.content', [
     'snippets#resource_block_view_arguments',

@@ -98,6 +98,9 @@ function wri_admin_update_10600() {
   $config->save();
 }
 
+/**
+ * Add a new content snippet item: resource_block_view_arguments.
+ */
 function wri_admin_update_10601() {
   \Drupal::service('wri_common.updates')->updateConfig('content_snippets.items', [
     'resource_block_view_arguments',
