@@ -112,6 +112,7 @@ function wri_search_update_10600() {
     'display.default.display_options.exposed_form',
     'display.default.display_options.header.facets_summary',
     'display.insights_block',
+    'display.pinned_resources',
     'display.resources_page.display_options.defaults',
     'display.resources_page.display_options.exposed_form',
     'display.resources_page.display_options.filters.facets_smart_topic_parent',
