@@ -557,6 +557,10 @@
 
     .button.filters {
       width: 46%;
+
+      .view-paying-for-paris-resources & {
+        width: 23%;
+      }
     }
     .form-item-sort-by {
       margin: 0;
@@ -647,6 +651,11 @@
     .form-item-sort-by {
       right: 0;
     }
+  }
+
+
+  .view-paying-for-paris-resources .view-filters .button.filters {
+    width: 48%;
   }
 }
 .button.filters,
