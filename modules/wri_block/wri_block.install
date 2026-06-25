@@ -6,6 +6,8 @@
  */
 
 use Drupal\user\Entity\Role;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
 
 /**
  * Implements hook_install().
@@ -87,4 +89,35 @@ function wri_block_update_10501() {
     'display#default#display_options#filters#type_1#value',
     'display#default#display_options#filters#type#value',
   ], 'wri_block');
+}
+
+/**
+ * Enabling wri_webform_block, which didn't get enabled on flagship.
+ */
+function wri_block_update_10502() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('wri_webform_block')) {
+    // Delete the field_other_orto_list_tags field.
+    $entity_type = 'block_content';
+    $field_name = 'field_other_orto_list_tags';
+
+    // 1. Get all bundles for this entity type
+    $bundle_info = \Drupal::service('entity_type.bundle.info')->getBundleInfo($entity_type);
+
+    // 2. Loop through bundles and delete the field instance configuration
+    foreach (array_keys($bundle_info) as $bundle) {
+      $field_config = FieldConfig::loadByName($entity_type, $bundle, $field_name);
+      if ($field_config) {
+        $field_config->delete();
+      }
+    }
+
+    // 3. Load and delete the underlying field storage configuration
+    $field_storage = FieldStorageConfig::loadByName($entity_type, $field_name);
+    if ($field_storage) {
+      $field_storage->delete();
+    }
+
+    \Drupal::service('module_installer')->install(['wri_webform_block'], TRUE);
+  }
 }
