@@ -97,3 +97,9 @@ function wri_admin_update_10600() {
   $config->set('settings', $settings);
   $config->save();
 }
+
+function wri_admin_update_10601() {
+  \Drupal::service('wri_common.updates')->updateConfig('content_snippets.items', [
+    'resource_block_view_arguments',
+  ], 'wri_admin', 'install');
+}

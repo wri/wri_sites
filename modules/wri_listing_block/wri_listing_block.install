@@ -168,3 +168,9 @@ function wri_listing_block_update_10600() {
     'display#insights_teasers',
   ], 'wri_listing_block');
 }
+
+function wri_listing_block_update_10601() {
+  \Drupal::service('wri_common.updates')->updateConfig('content_snippets.content', [
+    'snippets#resource_block_view_arguments',
+  ], 'wri_listing_block', 'install');
+}
