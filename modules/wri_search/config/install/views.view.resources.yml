@@ -1783,7 +1783,7 @@ display:
           plugin_id: search_api
           default_action: 'not found'
           exception:
-            value: all
+            value: ''
             title_enable: false
             title: All
           title_enable: false
@@ -1796,11 +1796,15 @@ display:
             sort_order: asc
             number_of_records: 0
             format: default_summary
-          specify_validation: false
+          specify_validation: true
           validate:
-            type: none
+            type: 'entity:node'
             fail: 'not found'
-          validate_options: {  }
+          validate_options:
+            bundles: {  }
+            access: true
+            operation: view
+            multiple: 0
           break_phrase: true
           not: false
       filters:
