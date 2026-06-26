@@ -380,7 +380,6 @@ export default function (context) {
       });
     }
 
-
     // Carousel Menu.
     let carouselMenuItem = jQuery(".carousel.tab-titles");
 
@@ -407,7 +406,5 @@ export default function (context) {
         500,
       );
     });
-
-
   }
 }

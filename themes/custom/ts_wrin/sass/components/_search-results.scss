@@ -166,11 +166,10 @@
   }
 
   &.display-insights-search-results {
-
     .search-results-tags {
-        @include mq($md) {
-          flex: 0 0 200px;
-        }
+      @include mq($md) {
+        flex: 0 0 200px;
+      }
       img {
         margin: 8px 0;
       }
@@ -186,8 +185,7 @@
           text-decoration: underline;
         }
       }
-    };
-
+    }
   }
 
   .pinned & {
