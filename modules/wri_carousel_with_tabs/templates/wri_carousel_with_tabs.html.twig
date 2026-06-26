@@ -38,17 +38,68 @@
     display: flex;
     align-items: center;
     padding-right: 100px;
+    padding-top: 12px;
+    gap: 40px;
+    @media (min-width: 768px) {
+      gap: 60px;
+    }
+  }
+  .carousel-with-tabs .tab-titles .tab-wrapper {
+    display: flex;
+    align-items: center;
+    padding-right: 100px;
     margin-top: -12px;
     gap: 40px;
     @media (min-width: 768px) {
       gap: 60px;
     }
   }
+  .carousel-with-tabs .tab-titles h2 a {
+    color: var(--color-green-500);
+    background-position: left 100%;
+    background-image: linear-gradient(to right, transparent, transparent), linear-gradient(to right, var(--color-green-500), var(--color-green-500));
+    background-repeat: no-repeat;
+    background-size: 100% 2px, 0 2px;
+    transition: .5s;
+  }
   .carousel-with-tabs .tab-titles h2 a:hover,
-  .carousel-with-tabs .tab-titles h2 a:focus,
+  .carousel-with-tabs .tab-titles h2 a:focus {
+    outline: none;
+    background-size: 100% 0, 100% 2px;
+  }
   .carousel-with-tabs .tab-titles h2.active a {
     text-decoration: overline;
+    text-decoration-thickness: 3px;
+    color: var(--color-neutral-900);
     outline: none;
+    background-size: 100% 2px, 0 2px;
+    background-position: left 100%;
+  }
+  .carousel-with-tabs .tab-titles a.nav-arrow {
+    position: absolute;
+    right: 60px;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    width: 36px;
+    gap: 8px;
+    align-items: flex-end;
+    margin-top: -14px;
+    text-decoration: none;
+    line-height: 0.8;
+
+    @media (min-width: 768px) {
+      right: 80px;
+    margin-top: -28px;
+    }
+  }
+  .carousel-with-tabs .carousel.tab-titles.no-scroll a.nav-arrow {
+    display: none;
+  }
+
+  .carousel-with-tabs .tab-titles a.nav-arrow:hover,
+  .carousel-with-tabs .tab-titles a.nav-arrow:focus {
+    text-decoration: underline;
   }
 
   .carousel-with-tabs .tab-content > div {
@@ -59,9 +110,6 @@
   }
 
   /* Active tab title indicator — underline style from comp */
-  .carousel-with-tabs .tab-titles h2.active a {
-    text-decoration: overline;
-  }
   .carousel-with-tabs .tab-titles {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch; /* smooth momentum scroll on iOS */
@@ -79,17 +127,14 @@
     margin-top: 2px;
   }
   .carousel-with-tabs .tab-titles h2.h2-alt {
-    font-size: 28px;
+    font-size: 18px;
     margin-top: 24px;
-    @media (min-width: 501px) {
-      font-size: 24px;
-    }
     @media (min-width: 768px) {
-      font-size: 28px;
+      font-size: 20px;
       margin-top: 6px;
     }
     @media (min-width: 1024px) {
-      font-size: 30px;
+      font-size: 22px;
       margin-top: 4px;
     }
   }
@@ -220,9 +265,22 @@
     aspect-ratio: 16 / 9;
   }
 
+  .carousel-with-tabs .teaser-title {
+    font-size: 1.75rem;
+    line-height: 2rem;
+    margin: 1rem 0;
+  }
+
   .carousel-with-tabs .card-summary-body {
     font-family: 'acumin-pro-semi-condensed', sans-serif;
     font-weight: 300;
+  }
+
+  .carousel-with-tabs .card .card-text {
+    margin: 0 1rem 1rem;
+  }
+  .carousel-with-tabs .card .card-text .bundle {
+    margin-top: 0;
   }
 
   .carousel-with-tabs .card-summary-text {
