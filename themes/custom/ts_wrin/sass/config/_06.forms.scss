@@ -98,6 +98,7 @@ form.webform-submission-form {
   label {
     @include font(var(--font-family-heading-condensed), "regular", "normal");
     @include font-line-height(16, 22);
+    color: var(--color-neutral-900);
   }
 
   .fieldset-legend {
