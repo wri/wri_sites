@@ -126,6 +126,9 @@
     @include mq($md) {
       flex: 0 1 33.333%;
       padding-right: $grid-gutter-mobile;
+      &:nth-child(2n) {
+        padding-right: $grid-gutter-mobile;;
+      }
       &:nth-child(3n) {
         padding-right: 0;
       }

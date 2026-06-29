@@ -160,6 +160,12 @@
   }
 }
 
+.transparent-header {
+  .transparent-header-padding {
+    @extend .margin-top-xl;
+  }
+}
+
 // Happening now
 .hero__text .hero__text--inner .field--name-field-listing,
 .landing-page__hero__field-listing__mobile .field--name-field-listing {

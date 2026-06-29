@@ -332,6 +332,9 @@
     margin-bottom: 60px;
     margin-top: 40px;
   }
+  &:empty {
+    margin: 0;
+  }
 
   .totals {
     @include font(var(--font-family-heading-condensed), "bold", "normal");
