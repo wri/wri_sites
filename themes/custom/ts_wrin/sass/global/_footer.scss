@@ -52,7 +52,11 @@
     }
   }
 
-  input:not([type="submit"]) {
+  form.webform-submission-form label {
+    color: var(--color-white);
+  }
+
+  form.webform-submission-form input:not([type="submit"]) {
     background: none;
     border: 1px solid #e8e8e7;
     box-sizing: border-box;

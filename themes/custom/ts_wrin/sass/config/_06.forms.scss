@@ -52,53 +52,19 @@ input[type="text"].ghost {
   }
 }
 
-#wri-stay-informed-footer .form-item {
-  position: relative;
-  label {
-    left: 10px;
-    position: absolute;
-    top: 5px;
-    transition: top 0.3s ease-in, left 0.3s ease-in, font-size 0.3s ease-in;
-  }
-  &.form-item-datetime label,
-  &.form-item-range label,
-  &.form-item-color label {
-    position: static;
-  }
-
-  &.move-label label,
-  &.has-value label {
-    font-size: 10px;
-    top: 2px;
-    transition: top 0.3s ease-out, left 0.3s ease-out, font-size 0.3s ease-out;
-  }
-}
-
-#wri-stay-informed-footer {
-  position: relative;
-  -webkit-font-smoothing: auto;
-  letter-spacing: 0.3px;
-  div[id^=edit-actions] {
-    margin: 0;
-    position: absolute;
-    right: 1px;
-    top: 1px;
-    z-index: 10;
-    input {
-      border-radius: 0;
-    }
-  }
-  .form-item label {
-    top: 25%;
-  }
-}
-
 form.webform-submission-form {
 
   label {
     @include font(var(--font-family-heading-condensed), "regular", "normal");
     @include font-line-height(16, 22);
     color: var(--color-neutral-900);
+
+    .has-blue-background-color &,
+    .has-green-background-color &,
+    .has-teal-background-color &,
+    .has-black-background-color & {
+      color: var(--color-white);
+    }
   }
 
   .fieldset-legend {
@@ -239,6 +205,54 @@ form.webform-submission-form {
     }
     &:focus-visible {
       outline: none;
+    }
+  }
+
+  &.all-inputs-inline .form-item {
+    position: relative;
+    label {
+      left: 10px;
+      position: absolute;
+      top: 5px;
+      transition: top 0.3s ease-in, left 0.3s ease-in, font-size 0.3s ease-in;
+
+      .has-blue-background-color &,
+      .has-green-background-color &,
+      .has-teal-background-color &,
+      .has-black-background-color & {
+        color: var(--color-neutral-900);
+      }
+    }
+    &.form-item-datetime label,
+    &.form-item-range label,
+    &.form-item-color label {
+      position: static;
+    }
+
+    &.move-label label,
+    &.has-value label {
+      font-size: 10px;
+      top: 2px;
+      transition: top 0.3s ease-out, left 0.3s ease-out, font-size 0.3s ease-out;
+    }
+  }
+
+  &.all-inputs-inline {
+    position: relative;
+    -webkit-font-smoothing: auto;
+    letter-spacing: 0.3px;
+    div[id^=edit-actions] {
+      margin: 0;
+      position: absolute;
+      right: 1px;
+      top: 1px;
+      z-index: 10;
+      input {
+        border-radius: 0;
+      }
+    }
+    .form-item label {
+      top: 25%;
     }
   }
 }
