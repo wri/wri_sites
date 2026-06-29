@@ -19,10 +19,13 @@
   {{ header|without('extra_result', 'facets_summary') }}
 {% endif %}
 <div{{ attributes.addClass(classes) }}>
-{% if exposed %}
-{% set form_attributes = create_attribute(exposed["#attributes"]) %}
-  <form{{ form_attributes }}>
-{% endif %}
+  {% if exposed %}
+    {% set rendered = exposed|without('query', 'sort_by', 'topic')|render %}
+    {% set form_opening_tag = rendered|preg_replace('/(<form[^>]*>).*/is', '$1') %}
+    {% set form_guts = rendered|preg_replace('/<form[^>]*>/i', '') %}
+    {% set form_closing_tag = '</form>' %}
+    {{ form_opening_tag|raw }}
+  {% endif %}
   {% if display_id == 'resources_page' %}
     <div class="container">
       <h1 class="h1 padding-vertical">{{ view.title }}</h1>
@@ -47,8 +50,7 @@
       <div class="grid results-wrapper">
         <div class="results-sidebar padding-bottom">
           {% if exposed %}
-              {% set clean = exposed|without('topic', 'query', 'sort_by')|render|preg_replace('/<form[^>]*>/i', '') %}
-              {{ clean|replace({'</form>': ''})|raw }}
+            {{ form_guts|replace({'</form>': ''})|raw }}
           {% endif %}
         </div>
         <div class="results-body padding-bottom">
@@ -79,12 +81,9 @@
           {{ footer }}
         </div>
       {% endif %}
-        </div>
-      </div>
     </div>
   </div>
-
 {% if exposed %}
-  </form>
+  {{ form_closing_tag|raw }}
 {% endif %}
 </div>
