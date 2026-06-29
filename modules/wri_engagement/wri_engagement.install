@@ -21,6 +21,12 @@ function wri_engagement_update_9501() {
   \Drupal::service('distro_helper.updates')->installConfig('wri_engagement.settings', 'wri_engagement');
 }
 
+/**
+ * Allow editor to add the class "all-inputs-inline" on webforms.
+ *
+ * This setting, which puts the single input, label, and submit button inline,
+ * was previously hard-coded to the footer webform submission block.
+ */
 function wri_engagement_update_9502() {
   \Drupal::service('distro_helper.updates')->updateConfig('webform.webform.simple_email_submit', [
     'settings#form_attributes#class',
