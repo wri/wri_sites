@@ -166,12 +166,40 @@
   }
 
   &.display-insights-search-results {
+    display: block;
+    @include mq($md) {
+      display: flex;
+    }
     .search-results-tags {
       @include mq($md) {
         flex: 0 0 200px;
       }
+      .tags {
+        margin-bottom: 0;
+      }
+
+      @include mq($md) {
+        margin-bottom: var(--spacer-5);
+      }
       img {
-        margin: 8px 0;
+        display: none;
+      }
+      @include mq($md) {
+        img {
+          display: block;
+          margin: 8px 0;
+        }
+      }
+
+      .content-type-region {
+        position: absolute;
+        bottom: 25px;
+        width: calc(100% - 50px);
+
+        @include mq($md) {
+          position: static;
+          width: calc(100% - 25px);
+        }
       }
     }
 
