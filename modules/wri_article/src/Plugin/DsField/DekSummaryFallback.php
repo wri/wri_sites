@@ -2,7 +2,6 @@
 
 namespace Drupal\wri_article\Plugin\DsField;
 
-use Drupal\Core\Link;
 use Drupal\ds\Plugin\DsField\DsFieldBase;
 
 /**
@@ -25,7 +24,7 @@ class DekSummaryFallback extends DsFieldBase {
     $info = [];
 
     if (isset($entity->field_intro->value)) {
-      $render = $entity->field_intro->view(array('type' => 'text_default', 'label' => 'hidden'));
+      $render = $entity->field_intro->view(['type' => 'text_default', 'label' => 'hidden']);
       $info = ['#markup' => \Drupal::service('renderer')->render($render)];
     }
     elseif (isset($entity->body->summary) && !empty($entity->body->summary)) {
