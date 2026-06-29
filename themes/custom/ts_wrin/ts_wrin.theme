@@ -248,7 +248,6 @@ function ts_wrin_preprocess_field(array &$variables) {
  */
 function ts_wrin_preprocess_block(array &$variables) {
   $unfriendly_block_types = [
-    '3_1_articles',
     'impact_in_action',
   ];
   if ($variables['plugin_id'] == 'parent_menu_block:main' && isset($variables["content"]["#items"])) {

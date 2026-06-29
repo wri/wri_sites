@@ -1,9 +1,9 @@
 {% if content %}
-  <div{{ attributes.addClass(listing_type) }}>
+  <div{{ attributes.addClass(listing_type, 'margin-bottom-xl') }}>
 
     {% if content.header %}
       <div class="grid">
-        <h2 {{ region_attributes.header.addClass('layout__region', 'layout__region--header', 'h3', 'top-border-thick') }}>
+        <h2 {{ region_attributes.header.addClass('layout__region', 'layout__region--header', 'h3', 'top-border-thick', 'margin-top-xl') }}>
           {{ content.header }}
         </h2>
       </div>
