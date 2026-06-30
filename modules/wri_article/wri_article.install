@@ -415,6 +415,9 @@ function wri_article_update_10611() {
   }
 }
 
+/**
+ * Using the "dek_summary_fallback" DS field instead of the intro field.
+ */
 function wri_article_update_10612() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.article.main_content_b', [
     'third_party_settings#ds#regions#title',
