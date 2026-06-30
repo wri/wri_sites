@@ -177,3 +177,9 @@ function wri_listing_block_update_10601() {
     'snippets#resource_block_view_arguments',
   ], 'wri_listing_block', 'install');
 }
+
+function wri_listing_block_update_10602() {
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.content_listing', [
+    'display#default#display_options#header',
+  ], 'wri_listing_block', 'install');
+}
