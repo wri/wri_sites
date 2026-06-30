@@ -37,7 +37,6 @@ dependencies:
     - hierarchical_term_formatter
     - layout_builder
     - media
-    - text
     - user
 third_party_settings:
   layout_builder:
@@ -58,9 +57,41 @@ third_party_settings:
         - field_type
       main_section:
         - node_title
-        - field_intro
+        - dek_summary_fallback
         - node_post_date
     fields:
+      dek_summary_fallback:
+        plugin_id: dek_summary_fallback
+        weight: 5
+        label: hidden
+        formatter: default
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: ''
+            ow-cl: utility-lg
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
       node_post_date:
         plugin_id: node_post_date
         weight: 6
@@ -92,41 +123,6 @@ targetEntityType: node
 bundle: article
 mode: insights_search_results
 content:
-  field_intro:
-    type: text_default
-    label: hidden
-    settings: {  }
-    third_party_settings:
-      ds:
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: false
-            lbw-el: ''
-            lbw-cl: ''
-            lbw-at: ''
-            lb-col: false
-            ow: true
-            ow-el: ''
-            ow-cl: utility-lg
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fis-def-at: false
-            fi: false
-            fi-el: ''
-            fi-cl: ''
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
-    weight: 5
-    region: main_section
   field_main_image:
     type: media_thumbnail
     label: hidden
@@ -191,6 +187,7 @@ hidden:
   field_featured_text: true
   field_featured_tweet: true
   field_hide_featured_wri_experts: true
+  field_intro: true
   field_key_takeaways: true
   field_main_image_caption: true
   field_main_image_display: true
