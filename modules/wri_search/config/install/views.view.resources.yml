@@ -379,7 +379,7 @@ display:
           preserve_facet_query_args: true
       relationships: {  }
       css_class: ''
-      use_ajax: true
+      use_ajax: false
       header:
         extra_result:
           id: extra_result
@@ -426,7 +426,6 @@ display:
       tags:
         - 'config:search_api.index.sitewide'
         - 'search_api_list:sitewide'
-  ### ENd of default ###
   insights_block:
     id: insights_block
     display_title: Block
@@ -1430,7 +1429,6 @@ display:
       tags:
         - 'config:search_api.index.sitewide'
         - 'search_api_list:sitewide'
-  ### ENd of insights block ###
   page_1:
     id: page_1
     display_title: Page
