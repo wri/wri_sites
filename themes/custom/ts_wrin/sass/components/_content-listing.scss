@@ -137,8 +137,11 @@
       }
     }
 
-    @include mq($lg) {
+    @include mq($xl) {
       padding-right: $grid-gutter;
+      &:nth-child(2n) {
+        padding-right: $grid-gutter;
+      }
     }
   }
 }
@@ -249,21 +252,5 @@
     flex-shrink: 0;
     margin-left: $grid-gutter-mobile; // Creates white space between line and button.
     margin-right: 0;
-  }
-}
-
-.insights_teasers-content_listing .listing-items li {
-  @include mq($md) {
-    display: none;
-
-    &:nth-child(1) {
-      display: block;
-    }
-    &:nth-child(2) {
-      display: block;
-    }
-    &:nth-child(3) {
-      display: block;
-    }
   }
 }
