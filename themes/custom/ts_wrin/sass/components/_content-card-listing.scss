@@ -85,16 +85,6 @@
       flex: 0 1 calc(33% - (#{$grid-gutter} - (#{$grid-gutter} / 2)));
       flex-grow: 1;
 
-      &:nth-child(1) {
-        display: block;
-      }
-      &:nth-child(2) {
-        display: block;
-      }
-      &:nth-child(3) {
-        display: block;
-      }
-
       &:nth-child(3n) {
         margin-right: 0;
       }
