@@ -84,7 +84,6 @@
     @include mq($md) {
       flex: 0 1 calc(33% - (#{$grid-gutter} - (#{$grid-gutter} / 2)));
       flex-grow: 1;
-      display: none;
 
       &:nth-child(1) {
         display: block;

@@ -5,6 +5,7 @@
   {% set header_type = 'h3' %}
 {% endif %}
 {% if content %}
+  {{ attach_library('wri_listing_block/desktop-3') }}
   <div{{ attributes.addClass(listing_type, 'grid', 'margin-bottom-lg', 'unfriendly-block') }}>
 
     {% if content.header %}
