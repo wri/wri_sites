@@ -41,18 +41,9 @@
         {% if template_class %}
           <div class="utility-base btn-pill font-bold">{{ type_label }}</div>
           <h1 class="heading-1">{{ node.label }}</h1>
-          {{ content.field_intro }}
+          {{ content.dek_summary_fallback }}
         {% else %}
           {{ content.title }}
-        {% endif %}
-        {% if node
-          and node.hasField('field_intro')
-          and node.get('field_intro').isEmpty()
-          and node.body.summary|trim
-        %}
-          <div class="dek utility-xl mb-8">
-            {{ node.body.summary }}
-          </div>
         {% endif %}
       </div>
 

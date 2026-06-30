@@ -1,6 +1,7 @@
-langcode: en
 status: open
 dependencies: {  }
+_core:
+  default_config_hash: pwOSnyi49C7_t3SifXLAFHCLH7RwUuhu387q4ChnbMk
 weight: 0
 open: null
 close: null
@@ -10,7 +11,7 @@ archive: false
 id: simple_email_submit
 title: 'Simple Email Submit'
 description: 'Footer form that sends an email to a larger form'
-category: ''
+categories: {  }
 elements: |-
   '#attributes':
     class:
@@ -71,7 +72,10 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
-  form_attributes: {  }
+  form_attributes:
+    class:
+      - all-inputs-inline
+      - wri-stay-informed-footer
   form_method: ''
   form_action: ''
   share: false
@@ -117,6 +121,8 @@ settings:
   wizard_toggle: true
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
   preview: 0
   preview_label: ''
   preview_title: ''

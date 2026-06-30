@@ -6,3 +6,4 @@ snippets:
   osano_id: ''
   osano_params: ''
   analytics_url: 'https://www.googletagmanager.com'
+  resource_block_view_arguments: '[block_content:field_filter_by_resource_type:array:target_id:join:+]/[block_content:field_custom_results:array:target_id:join:+]'

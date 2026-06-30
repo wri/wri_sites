@@ -23,20 +23,24 @@ settings:
       allowed_tags:
         - '<span class>'
         - '<div class>'
+        - '<a name>'
     ckeditor5_style:
       styles:
         -
           label: Gold
           element: '<span class="has-gold-color">'
+        -
+          label: Maroon
+          element: '<span class="has-maroon-color">'
+        -
+          label: 'Thin Light Grey'
+          element: '<span class="has-light-grey-color">'
+        -
+          label: 'Serif font'
+          element: '<span class="font-serif">'
     editor_advanced_link_link:
       enabled_attributes:
         - class
         - target
 image_upload:
   status: false
-  scheme: public
-  directory: inline-images
-  max_size: ''
-  max_dimensions:
-    width: null
-    height: null

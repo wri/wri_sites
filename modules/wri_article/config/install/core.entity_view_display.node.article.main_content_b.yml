@@ -57,7 +57,7 @@ third_party_settings:
       title:
         - field_type
         - node_title
-        - field_intro
+        - dek_summary_fallback
       byline:
         - field_authors
         - field_most_recently_updated_date
@@ -76,6 +76,38 @@ third_party_settings:
       right_sidebar:
         - field_produced_by
     fields:
+      dek_summary_fallback:
+        plugin_id: dek_summary_fallback
+        weight: 2
+        label: hidden
+        formatter: default
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: false
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: ''
+            fi-cl: 'dek utility-xl'
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
       node_post_date:
         plugin_id: node_post_date
         weight: 6
@@ -215,41 +247,6 @@ content:
             suffix: ''
     weight: 13
     region: main_content
-  field_intro:
-    type: text_default
-    label: hidden
-    settings: {  }
-    third_party_settings:
-      ds:
-        ft:
-          id: expert
-          settings:
-            lb: ''
-            lbw: false
-            lbw-el: div
-            lbw-cl: ''
-            lbw-at: ''
-            lb-col: false
-            ow: false
-            ow-el: div
-            ow-cl: ''
-            ow-at: ''
-            ow-def-at: false
-            ow-def-cl: false
-            fis: false
-            fis-el: ''
-            fis-cl: ''
-            fis-at: ''
-            fis-def-at: false
-            fi: true
-            fi-el: ''
-            fi-cl: 'dek utility-xl'
-            fi-at: ''
-            fi-def-at: false
-            prefix: ''
-            suffix: ''
-    weight: 2
-    region: title
   field_key_takeaways:
     type: text_default
     label: above
@@ -505,8 +502,8 @@ content:
           settings:
             lb: ''
             lbw: false
-            lbw-el: ''
-            lbw-cl: ''
+            lbw-el: span
+            lbw-cl: 'tag color-action'
             lbw-at: ''
             lb-col: false
             ow: true
@@ -521,8 +518,8 @@ content:
             fis-at: ''
             fis-def-at: false
             fi: false
-            fi-el: ''
-            fi-cl: ''
+            fi-el: span
+            fi-cl: 'article-type utility-base text-neutral-600'
             fi-at: ''
             fi-def-at: false
             prefix: ''
@@ -539,6 +536,7 @@ hidden:
   field_featured_text: true
   field_featured_tweet: true
   field_hide_featured_wri_experts: true
+  field_intro: true
   field_main_image_caption: true
   field_main_image_display: true
   field_metatags: true
@@ -549,7 +547,6 @@ hidden:
   field_related_resources: true
   langcode: true
   layout_builder__layout: true
-  layout_builder__translation: true
   links: true
   search_api_excerpt: true
   wri_social_sharing_block: true

@@ -79,4 +79,21 @@
       }
     }
   }
+
+  &.desktop-3 .listing-items li {
+    @include mq($md) {
+      flex: 0 1 calc(33% - (#{$grid-gutter} - (#{$grid-gutter} / 2)));
+      flex-grow: 1;
+
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+      &:nth-child(4n) {
+        margin-right: $grid-gutter;
+      }
+    }
+    @include mq($lg) {
+      flex: 0 1 calc(33% - (#{$grid-gutter} - (#{$grid-gutter} / 3)));
+    }
+  }
 }

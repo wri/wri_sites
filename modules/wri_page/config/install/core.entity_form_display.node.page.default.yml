@@ -44,6 +44,14 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
+  field_long_title:
+    type: text_textarea
+    weight: -1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
   field_main_image:
     type: media_library_widget
     weight: 2
@@ -52,13 +60,14 @@ content:
       media_types: {  }
     third_party_settings:
       media_library_edit:
-        show_edit: '1'
+        show_edit: true
   field_metatags:
     type: metatag_firehose
     weight: 26
     region: content
     settings:
       sidebar: true
+      use_details: true
     third_party_settings: {  }
   langcode:
     type: language_select
@@ -102,7 +111,7 @@ content:
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: -1
+    weight: -2
     region: content
     settings:
       size: 60
@@ -124,6 +133,5 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
-  field_long_title: true
   layout_builder__layout: true
   layout_selection: true

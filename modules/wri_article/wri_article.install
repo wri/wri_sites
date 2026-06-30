@@ -378,3 +378,50 @@ function wri_article_update_10608() {
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_mode.node.person_author_listing', 'wri_node');
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.person.person_author_listing', 'wri_person');
 }
+
+/**
+ * Add view modes for Insights landing page.
+ */
+function wri_article_update_10609() {
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_mode.node.insights_card', 'wri_node', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_mode.node.insights_large_image_teaser', 'wri_node', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_mode.node.insights_search_results', 'wri_node', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_mode.node.insights_teaser', 'wri_node', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.article.insights_card', 'wri_article', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.article.insights_large_image_teaser', 'wri_article', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.article.insights_search_results', 'wri_article', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.article.insights_teaser', 'wri_article', 'install');
+}
+
+/**
+ * Install wri_carousel_with_tabs.
+ */
+function wri_article_update_10610() {
+  $module = 'wri_carousel_with_tabs';
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists($module)) {
+    \Drupal::service('module_installer')->install([$module], TRUE);
+  }
+}
+
+/**
+ * Install wri_on_page_resource.
+ */
+function wri_article_update_10611() {
+  $module = 'wri_on_page_resource';
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists($module)) {
+    \Drupal::service('module_installer')->install([$module], TRUE);
+  }
+}
+
+/**
+ * Using the "dek_summary_fallback" DS field instead of the intro field.
+ */
+function wri_article_update_10612() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.article.main_content_b', [
+    'third_party_settings#ds#regions#title',
+    'third_party_settings#ds#fields#dek_summary_fallback',
+    'content#field_intro',
+  ], 'wri_article', 'install');
+}

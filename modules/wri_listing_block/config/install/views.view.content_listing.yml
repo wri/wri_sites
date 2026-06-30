@@ -5,6 +5,8 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.card
+    - core.entity_view_mode.node.insights_card
+    - core.entity_view_mode.node.insights_teaser
     - core.entity_view_mode.node.teaser
     - core.entity_view_mode.node.tile
     - taxonomy.vocabulary.resource_type
@@ -137,7 +139,6 @@ display:
           default_argument_type: fixed
           default_argument_options:
             argument: all
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -165,7 +166,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: numeric
+          plugin_id: entity_target_id
           default_action: ignore
           exception:
             value: all
@@ -176,7 +177,6 @@ display:
           default_argument_type: fixed
           default_argument_options:
             argument: all
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -193,6 +193,7 @@ display:
           validate_options: {  }
           break_phrase: false
           not: false
+          target_entity_type_id: taxonomy_term
         term_node_tid_depth:
           id: term_node_tid_depth
           table: node_field_data
@@ -212,7 +213,6 @@ display:
           default_argument_type: fixed
           default_argument_options:
             argument: ''
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -249,7 +249,6 @@ display:
           default_argument_type: fixed
           default_argument_options:
             argument: ''
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -286,7 +285,6 @@ display:
           default_argument_type: fixed
           default_argument_options:
             argument: ''
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -327,7 +325,6 @@ display:
           default_argument_type: fixed
           default_argument_options:
             argument: ''
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -353,7 +350,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: numeric
+          plugin_id: entity_target_id
           default_action: ignore
           exception:
             value: all
@@ -364,7 +361,6 @@ display:
           default_argument_type: fixed
           default_argument_options:
             argument: ''
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -381,6 +377,7 @@ display:
           validate_options: {  }
           break_phrase: false
           not: false
+          target_entity_type_id: node
       filters:
         status_extra:
           id: status_extra
@@ -487,6 +484,7 @@ display:
           query_tags: {  }
       relationships: {  }
       css_class: content-listing
+      use_ajax: false
       use_more: false
       use_more_always: true
       use_more_text: 'View all'
@@ -494,7 +492,10 @@ display:
       link_url: '/resources?type={{ raw_arguments.type }}&featured={{ raw_arguments.field_featured_target_id }}'
       header: {  }
       footer: {  }
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
     cache_metadata:
       max-age: -1
       contexts:
@@ -639,6 +640,105 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+  insights_cards:
+    id: insights_cards
+    display_title: 'Insights Cards'
+    display_plugin: block
+    position: 2
+    display_options:
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 4
+      style:
+        type: html_list
+        options:
+          row_class: ''
+          default_row_class: true
+          uses_fields: false
+          type: ul
+          wrapper_class: item-list
+          class: listing-items
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: insights_card
+      defaults:
+        css_class: false
+        pager: false
+        style: false
+        row: false
+        arguments: true
+        filters: true
+        filter_groups: true
+      css_class: 'card-listing desktop-3 content-listing'
+      display_description: ''
+      display_extenders:
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'cookies:STYXKEY_wri_filter'
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  insights_teasers:
+    id: insights_teasers
+    display_title: 'Insights Teasers'
+    display_plugin: block
+    position: 1
+    display_options:
+      style:
+        type: html_list
+        options:
+          row_class: ''
+          default_row_class: true
+          uses_fields: false
+          type: ul
+          wrapper_class: item-list
+          class: listing-items
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: insights_teaser
+      defaults:
+        style: false
+        row: false
+      display_description: ''
+      display_extenders:
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
+      block_hide_empty: true
+      allow:
+        items_per_page: true
+        offset: '0'
+        pager: '0'
+        hide_fields: '0'
+        sort_fields: '0'
+        disable_filters: '0'
+        configure_sorts: '0'
+        arguments: '0'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'cookies:STYXKEY_wri_filter'
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
   podcasts:
     id: podcasts
     display_title: Podcasts
@@ -664,7 +764,6 @@ display:
           default_argument_type: fixed
           default_argument_options:
             argument: ''
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -687,7 +786,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: numeric
+          plugin_id: entity_target_id
           default_action: ignore
           exception:
             value: all
@@ -698,7 +797,6 @@ display:
           default_argument_type: fixed
           default_argument_options:
             argument: all
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -715,6 +813,7 @@ display:
           validate_options: {  }
           break_phrase: false
           not: false
+          target_entity_type_id: taxonomy_term
         term_node_tid_depth:
           id: term_node_tid_depth
           table: node_field_data
@@ -734,7 +833,6 @@ display:
           default_argument_type: fixed
           default_argument_options:
             argument: ''
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -770,7 +868,6 @@ display:
           default_argument_type: fixed
           default_argument_options:
             argument: ''
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -805,7 +902,6 @@ display:
           default_argument_type: fixed
           default_argument_options:
             argument: ''
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -846,7 +942,6 @@ display:
           default_argument_type: fixed
           default_argument_options:
             argument: ''
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -872,7 +967,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: numeric
+          plugin_id: entity_target_id
           default_action: ignore
           exception:
             value: all
@@ -883,7 +978,6 @@ display:
           default_argument_type: fixed
           default_argument_options:
             argument: ''
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -1067,7 +1161,7 @@ display:
       display_description: ''
       display_extenders:
         metatag_display_extender:
-          metatags: {  }
+          metatags: { }
           tokenize: false
       block_hide_empty: true
       allow:
@@ -1096,7 +1190,10 @@ display:
     position: 1
     display_options:
       display_description: ''
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
       block_hide_empty: true
       allow:
         items_per_page: true
