@@ -331,16 +331,16 @@ function wri_common_update_10609() {
   $bad_blocks = \Drupal::database()->query('SELECT * FROM block_content_revision WHERE revision_default=0 GROUP BY id')->fetchCol();
   foreach ($bad_blocks as $block_id) {
     $block_storage = \Drupal::entityTypeManager()->getStorage('block_content');
-    // Get latest revision
+    // Get latest revision.
     $revision_id = $block_storage->getLatestRevisionId($block_id);
 
-    // Load the specific revision to pull content from
+    // Load the specific revision to pull content from.
     /** @var \Drupal\block_content\Entity\BlockContent $revision_to_restore */
     $revision_to_restore = $block_storage->loadRevision($revision_id);
 
     if ($revision_to_restore) {
       $revision_to_restore->isDefaultRevision(TRUE);
-      // Save the new revision, which pushes it to the top as the default
+      // Save the new revision, which pushes it to the top as the default.
       $revision_to_restore->save();
     }
   }
