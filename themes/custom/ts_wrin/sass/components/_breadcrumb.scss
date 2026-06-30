@@ -49,4 +49,8 @@
   @include mq($xxl) {
     max-width: $grid-max-width-xxl + ($grid-gutter * 2);
   }
+
+  .transparent-header & {
+    display: none;
+  }
 }
