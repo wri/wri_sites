@@ -483,7 +483,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
-      css_class: content-listing
+      css_class: 'content-listing desktop-3'
       use_ajax: false
       use_more: false
       use_more_always: true
