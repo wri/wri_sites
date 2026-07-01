@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * Display Suite Insights Search Results template.
+ *
+ * Available variables:
+ * - ds_content_wrapper: wrapper around content
+ * - attributes: content region attributes
+ * - ds_content: content region
+ */
+#}
+
+<div {{ attributes.addClass('ds-1col', 'clearfix', 'search-results-container', 'margin-bottom-sm') }}>
+  {{ title_suffix.contextual_links }}
+  {% if content %}
+    {% if content.left_section %}
+      {{ drupal_breakpoint() }}
+      <div class="search-results-tags">
+        {{ content.left_section }}
+      </div>
+    {% endif %}
+    {% if content.main_section %}
+      <div class="search-results-text">
+        {{ content.left_section.node_post_date }}
+        {{ content.main_section }}
+        {{ content.left_section.field_type }}
+      </div>
+    {% endif %}
+  {% endif %}
+</div>
