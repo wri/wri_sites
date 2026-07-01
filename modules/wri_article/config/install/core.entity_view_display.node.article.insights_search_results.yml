@@ -44,7 +44,7 @@ third_party_settings:
     allow_custom: false
   ds:
     layout:
-      id: layout_search-results
+      id: layout_insights-search-results
       library: null
       disable_css: false
       entity_classes: all_classes
@@ -53,12 +53,12 @@ third_party_settings:
     regions:
       left_section:
         - field_primary_topic
+        - node_post_date
         - field_main_image
         - field_type
       main_section:
         - node_title
         - dek_summary_fallback
-        - node_post_date
     fields:
       dek_summary_fallback:
         plugin_id: dek_summary_fallback
@@ -94,13 +94,36 @@ third_party_settings:
             suffix: ''
       node_post_date:
         plugin_id: node_post_date
-        weight: 6
+        weight: 1
         label: hidden
         formatter: ds_post_date_short_day
         ft:
-          id: reset
+          id: expert
           settings:
             lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: false
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: ''
+            fi-cl: post-date
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
       node_title:
         plugin_id: node_title
         weight: 4
@@ -137,7 +160,7 @@ content:
           id: reset
           settings:
             lb: ''
-    weight: 1
+    weight: 2
     region: left_section
   field_primary_topic:
     type: hierarchical_term_formatter
@@ -151,9 +174,32 @@ content:
     third_party_settings:
       ds:
         ft:
-          id: reset
+          id: expert
           settings:
             lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: false
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: ''
+            fi-cl: topic-tag
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
     weight: 0
     region: left_section
   field_type:
@@ -168,10 +214,33 @@ content:
     third_party_settings:
       ds:
         ft:
-          id: reset
+          id: expert
           settings:
             lb: ''
-    weight: 2
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: false
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: ''
+            fi-cl: bundle
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+    weight: 3
     region: left_section
 hidden:
   addtoany: true

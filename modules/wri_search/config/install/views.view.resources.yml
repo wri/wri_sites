@@ -1803,7 +1803,7 @@ display:
             bundles: {  }
             access: true
             operation: view
-            multiple: 0
+            multiple: 1
           break_phrase: true
           not: false
       filters:
@@ -3384,4 +3384,3 @@ display:
         - 'config:views.view.resources'
         - 'search_api_list:sitewide'
         - taxonomy_term_list
-  ### ENd of resources_page ###
