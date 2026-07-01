@@ -433,6 +433,28 @@ display:
     position: 2
     display_options:
       title: Resources
+      pager:
+        type: full
+        options:
+          offset: 0
+          pagination_heading_level: h4
+          items_per_page: 10
+          total_pages: null
+          id: 0
+          tags:
+            next: »
+            previous: «
+            first: First
+            last: Last
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
       exposed_form:
         type: bef
         options:
@@ -1396,6 +1418,7 @@ display:
         cache: true
         title: false
         use_ajax: false
+        pager: false
         exposed_form: false
         style: false
         row: false
