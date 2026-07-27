@@ -43,7 +43,7 @@ jobs:
             COMPOSER_MEMORY_LIMIT=-1 composer create-project --stability=dev wri/wri-starter-kit:^10.2 circletest
             cd circletest
             cd web/profiles/contrib/wri_sites
-            git checkout {CIRCLE_BRANCH}
+            git checkout ${CIRCLE_BRANCH}
             git pull
             cd ../../../../
             ./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/modules
