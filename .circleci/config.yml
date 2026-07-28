@@ -41,9 +41,11 @@ jobs:
             /docker-entrypoint.sh
             export PATH="./vendor/bin:../vendor/bin:/root/.composer/vendor/bin:$PATH"
             COMPOSER_MEMORY_LIMIT=-1 composer create-project --stability=dev wri/wri-starter-kit:^10.2 circletest
+            rm -r circletest/web/profiles/contrib/wri_sites -f
             cd circletest
+            composer require wri/wri_sites:dev-main --prefer-source
             cd web/profiles/contrib/wri_sites
-            git pull
+            git pull origin main
             git checkout ${CIRCLE_BRANCH}
             git pull
             cd ../../../../
