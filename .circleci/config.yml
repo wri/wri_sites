@@ -19,6 +19,10 @@ jobs:
             else
               echo "themes/custom/ts_wrin/dist is up to date.";
             fi
+      - store_artifacts:
+          path: themes/custom/ts_wrin/dist
+          when: always
+
   build:
     docker:
       - image: wodby/php:8.3
