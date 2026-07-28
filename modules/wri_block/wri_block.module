@@ -54,11 +54,15 @@ function wri_block_preprocess_block(array &$variables) {
  * Implements hook_form_alter().
  */
 function wri_block_form_alter(&$variables) {
-  // If the destination of this request is an entity browser, don't show the
-  // "Save and configure" button.
-  $destination = \Drupal::request()->get('destination');
-  if (isset($variables["actions"]["configure_block"]) && str_contains($destination, '/entity-browser/iframe/block')) {
-    $variables["actions"]["configure_block"]['#access'] = FALSE;
+  // If the destination of this request is an entity browser,
+  // don't show the "Save and configure" button.
+  $destination = \Drupal::request()->query->get('destination') ?? '';
+
+  if (
+    isset($variables['actions']['configure_block']) &&
+    str_contains($destination, '/entity-browser/iframe/block')
+  ) {
+    $variables['actions']['configure_block']['#access'] = FALSE;
   }
 }
 

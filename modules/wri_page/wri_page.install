@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Update hooks for wri_page.
+ */
+
+/**
+ * Insights Landing page updates.
+ */
+function wri_page_update_10600() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.page.default', [
+    'content#field_long_title',
+    'content#title',
+  ], 'wri_page');
+}
+
+/**
+ * Add the Breadcrumb block to pages.
+ */
+function wri_page_update_10601() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.page.full', [
+    'third_party_settings#layout_builder#sections#0#components#3',
+    'third_party_settings#layout_builder_restrictions#entity_view_mode_restriction#allowlisted_blocks#System',
+  ], 'wri_page', 'install');
+}

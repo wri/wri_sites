@@ -439,6 +439,8 @@
 .callout--node .field--name-field-callout-summary a {
   @apply py-2 px-4 inline-block;
 }
-.callout--node .field--name-field-callout-summary a.button.offsite.small::after {
+.callout--node
+  .field--name-field-callout-summary
+  a.button.offsite.small::after {
   background-position: center -3px;
 }

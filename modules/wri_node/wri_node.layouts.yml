@@ -13,6 +13,8 @@ layout_teaser:
       label: Tag
     title:
       label: Title
+    intro:
+      label: Intro
     image:
       label: Image
     content_type:
@@ -111,6 +113,8 @@ layout_large_image_teaser:
       label: Tag
     title:
       label: Title
+    intro:
+      label: Intro
     content_type:
       label: Content type
     date:
@@ -133,6 +137,20 @@ layout_search-results:
       label: Main section
     right_section:
       label: Right section
+
+layout_insights-search-results:
+  label: 'Insights Search results'
+  path: layouts
+  template: layout--insights-search-results
+  category: 'WRI Custom'
+  default_region: main_section
+  icon_map:
+    - [ left_section, main_section ]
+  regions:
+    left_section:
+      label: Left section
+    main_section:
+      label: Main section
 
 layout_hero-and-content:
   label: 'Hero & Content'

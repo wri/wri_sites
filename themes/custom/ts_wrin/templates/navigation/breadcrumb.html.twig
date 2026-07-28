@@ -9,7 +9,7 @@
 #}
 {% if breadcrumb and breadcrumb.1 %}
   <nav class="breadcrumb" role="navigation" aria-labelledby="system-breadcrumb">
-    <h2 id="system-breadcrumb" class="visually-hidden">{{ 'Breadcrumb'|t }}</h2>
+    <div id="system-breadcrumb" class="visually-hidden">{{ 'Breadcrumb'|t }}</div>
     <ol>
     {% for item in breadcrumb %}
       {% if loop.last and not loop.first %}

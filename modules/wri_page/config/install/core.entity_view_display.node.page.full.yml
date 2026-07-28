@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -17,6 +16,7 @@ dependencies:
     - layout_builder_restrictions
     - layout_discovery
     - media
+    - system
     - text
     - user
 third_party_settings:
@@ -30,7 +30,7 @@ third_party_settings:
           label: ''
           context_mapping: {  }
         components:
-          b214db3b-2673-4c91-9923-1028a73708e0:
+          -
             uuid: b214db3b-2673-4c91-9923-1028a73708e0
             region: content
             configuration:
@@ -43,7 +43,7 @@ third_party_settings:
                 entity: layout_builder.entity
             weight: -9
             additional: {  }
-          f253c221-176c-445b-a223-6c257d8bad4c:
+          -
             uuid: f253c221-176c-445b-a223-6c257d8bad4c
             region: content
             configuration:
@@ -53,11 +53,12 @@ third_party_settings:
               provider: layout_builder
               view_mode: full
               context_mapping: {  }
+              block_id: null
               block_revision_id: 8
               block_serialized: null
             weight: -10
             additional: {  }
-          a40bb126-b044-4129-b503-c2273e8b27d2:
+          -
             uuid: a40bb126-b044-4129-b503-c2273e8b27d2
             region: content
             configuration:
@@ -66,6 +67,17 @@ third_party_settings:
               context_mapping:
                 entity: layout_builder.entity
             weight: -8
+            additional: {  }
+          -
+            uuid: 9ee731de-8c1b-4ce8-8a11-302dc126d34e
+            region: content
+            configuration:
+              id: system_breadcrumb_block
+              label: Breadcrumbs
+              label_display: '0'
+              provider: system
+              context_mapping: {  }
+            weight: -11
             additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:
@@ -101,7 +113,8 @@ third_party_settings:
         Forms: {  }
         'Lists (Views)': {  }
         Menus: {  }
-        System: {  }
+        System:
+          - system_breadcrumb_block
         User: {  }
         'WRI block':
           - wri_region_map_block

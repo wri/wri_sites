@@ -8,7 +8,7 @@ export default function (context) {
 
   // Set the destination url of the form based on the hidden URL value.
   // Also put the email in localStorage.
-  $("#wri-stay-informed-footer").on("submit", function (e) {
+  $(".wri-stay-informed-footer").on("submit", function (e) {
     e.preventDefault();
     var el = $(this),
       action = el.find("input[name='url_action']"),
@@ -31,12 +31,12 @@ export default function (context) {
   );
   $inputs
     .focus(function () {
-      if (!$(this).closest("form").hasClass("webform-submission-form")) {
+      if ($(this).closest("form").hasClass("all-inputs-inline")) {
         $(this).parents(".js-form-item").first().addClass("move-label");
       }
     })
     .on("blur", function () {
-      if (!$(this).closest("form").hasClass("webform-submission-form")) {
+      if ($(this).closest("form").hasClass("all-inputs-inline")) {
         $(this).parents(".js-form-item").first().removeClass("move-label");
       }
     });

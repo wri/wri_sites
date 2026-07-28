@@ -84,7 +84,24 @@ function wri_node_preprocess_wri_page_hero(&$context) {
 /**
  * Implements hook_preprocess_hook().
  */
+function wri_node_preprocess_layout__insights_card(&$variables) {
+  wri_node_use_fallback_image($variables);
+}
+
+/**
+ * Implements hook_preprocess_hook().
+ */
 function wri_node_preprocess_layout__card(&$variables) {
+  wri_node_use_fallback_image($variables);
+}
+
+/**
+ * Helper to provide the fallback image on cards.
+ *
+ * @param array $variables
+ *   The render array.
+ */
+function wri_node_use_fallback_image(&$variables) {
   $variables['default_image'] = [];
   if (Drupal::config('wri_node.settings')->get('use_fallback_image')) {
     $node = $variables['content']['#node'];
@@ -123,6 +140,16 @@ function wri_node_preprocess_layout__card(&$variables) {
       '#uri' => $image_url,
       '#alt' => '',
     ];
+  }
+}
+
+/**
+ * Implements hook_preprocess_hook().
+ */
+function wri_node_preprocess_layout(&$variables) {
+  // Add the view mode as a class.
+  if (isset($variables["content"]["#view_mode"])) {
+    $variables['attributes']['class'][] = HTML::getClass('display-' . $variables["content"]["#view_mode"]);
   }
 }
 

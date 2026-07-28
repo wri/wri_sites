@@ -379,5 +379,32 @@ export default function (context) {
         }
       });
     }
+
+    // Carousel Menu.
+    let carouselMenuItem = jQuery(".carousel.tab-titles");
+
+    let carouselDebouncedSideScroll = debounce(function () {
+      if (
+        carouselMenuItem[0] &&
+        carouselMenuItem.width() > carouselMenuItem[0].scrollWidth - 270
+      ) {
+        carouselMenuItem.addClass("no-scroll");
+      } else {
+        carouselMenuItem.removeClass("no-scroll");
+      }
+    }, 250);
+
+    window.addEventListener("resize", carouselDebouncedSideScroll);
+    carouselDebouncedSideScroll();
+
+    $(".carousel.tab-titles .nav-arrow").click(function (e) {
+      e.preventDefault();
+
+      var leftPos = carouselMenuItem.scrollLeft();
+      carouselMenuItem.animate(
+        { scrollLeft: leftPos + carouselMenuItem.width() / 2 },
+        500,
+      );
+    });
   }
 }

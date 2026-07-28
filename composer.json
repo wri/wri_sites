@@ -53,7 +53,7 @@
                 "Paragraphs parent IDs are wrong https://www.drupal.org/project/entity_share/issues/3445703":"https://www.drupal.org/files/issues/2024-05-08/entity_share-parent-id-3445703-2.patch"
             },
             "drupal/facets": {
-                "Add dependency support for exposed facet filters (Can be dropped in Drupal 11) https://www.drupal.org/project/facets/issues/3592014": "web/profiles/contrib/wri_sites/patches/facets--dependent-exposed-filters--3592014.patch"
+                "Add dependency support for exposed facet filters (Can be dropped in Drupal 11) https://www.drupal.org/project/facets/issues/3592014": "https://raw.githubusercontent.com/wri/wri_sites/refs/heads/main/patches/facets--dependent-exposed-filters--3592014.patch"
             },
             "drupal/layout_builder_st": {
                 "Error: Call to a member function getConfig() OverridesSectionStorage.php https://www.drupal.org/project/layout_builder_st/issues/3420063": "https://www.drupal.org/files/issues/2024-03-29/layout_builder_st-call_to_a_member_function_getconfig-3420063-26.patch",
@@ -72,8 +72,7 @@
                 "Use strict should be inside function https://www.drupal.org/project/oembed_lazyload/issues/3475956#comment-16067120": "https://www.drupal.org/files/issues/2024-09-21/oembed_lazyload_use_strict-3475956.patch"
             },
             "drupal/paragraphs": {
-                "Paragraph access check using incorrect revision of its parent https://www.drupal.org/project/paragraphs/issues/3090200": "https://www.drupal.org/files/issues/2022-10-26/3084934-13_combine_3090200-22.patch",
-                "Add a parent entity token for paragraphs https://www.drupal.org/project/paragraphs/issues/3067265": "https://git.drupalcode.org/project/paragraphs/-/merge_requests/92.diff"
+                "Add a parent entity token for paragraphs https://www.drupal.org/project/paragraphs/issues/3067265": "https://www.drupal.org/files/issues/2026-06-24/3084934-13_combine_3090200-22-rebase.patch"
             },
             "drupal/token": {
                 "Add a [current-page:object:?] dynamic token https://www.drupal.org/project/token/issues/919760": "https://www.drupal.org/files/issues/2020-09-08/token--current_page_object_token--919760--83.patch",

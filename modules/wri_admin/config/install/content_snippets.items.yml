@@ -35,7 +35,7 @@ osano_id:
   id: osano_id
   type: textfield
   filter: full_html
-  description: 'The script ID for Osano (not the account ID). It will have this pattern: 68d76b4b-41d5-408a-8727-00456ae2d7c6'
+  description: 'The script ID for Osano (not the account ID). It will have this pattern: 2f1a8361-e0bc-41c3-b332-023fe627c0bb'
   group: '3rd Party'
   weight: '10'
 osano_params:
@@ -54,3 +54,11 @@ analytics_url:
   description: 'example: https://www.googletagmanager.com (with no final slash)'
   group: '3rd Party'
   weight: '-10'
+resource_block_view_arguments:
+  label: 'Resource Block view arguments'
+  id: resource_block_view_arguments
+  type: textarea
+  filter: full_html
+  description: 'The token values to send to the "Block" view of the Resources page'
+  group: 'View arguments'
+  weight: '10'

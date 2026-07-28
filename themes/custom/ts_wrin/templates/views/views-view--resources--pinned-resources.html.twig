@@ -1,0 +1,13 @@
+{#
+/**
+ * @file
+ * Theme override for the resources view template.
+ *
+ * @see template_preprocess_views_view()
+ */
+#}
+{% if rows %}
+  <div class="view-content pinned">
+    {{ rows }}
+  </div>
+{% endif %}

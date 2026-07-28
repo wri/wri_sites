@@ -1,0 +1,318 @@
+{{ attach_library('wri_carousel_with_tabs/accessible_slick') }}
+{{ attach_library('wri_carousel_with_tabs/wri_carousel_with_tabs_slick') }}
+
+<div class="carousel-with-tabs md:padding-top">
+  {{ content.content }}
+</div>
+<style>
+  .carousel-with-tabs-title {
+    grid-column: 1 / 5;
+    margin-top: 0;
+    @media (min-width: 501px) {
+      grid-column: 1 / 3;
+    }
+    @media (min-width: 768px) {
+      grid-column: 1 / 3;
+    }
+  }
+  .carousel-with-tabs {
+    grid-column: 1 / 5;
+    @media (min-width: 501px) {
+      margin-top: 48px;
+      grid-column: 3 / 11;
+    }
+    @media (min-width: 768px) {
+      grid-column: 3 / 11;
+    }
+    @media (min-width: 1024px) {
+      grid-column: 3 / 12;
+    }
+  }
+
+  .paragraph--type--tab {
+    position: relative;
+    margin-bottom: 48px;
+    width: 100%;
+  }
+  .carousel-with-tabs .tab-titles {
+    display: flex;
+    align-items: center;
+    padding-right: 100px;
+    padding-top: 12px;
+    gap: 40px;
+    @media (min-width: 768px) {
+      gap: 60px;
+    }
+  }
+  .carousel-with-tabs .tab-titles .tab-wrapper {
+    display: flex;
+    align-items: center;
+    padding-right: 100px;
+    margin-top: -12px;
+    gap: 40px;
+    @media (min-width: 768px) {
+      gap: 60px;
+    }
+  }
+  .carousel-with-tabs .tab-titles h2 a {
+    color: var(--color-green-500);
+    background-position: left 100%;
+    background-image: linear-gradient(to right, transparent, transparent), linear-gradient(to right, var(--color-green-500), var(--color-green-500));
+    background-repeat: no-repeat;
+    background-size: 100% 2px, 0 2px;
+    transition: .5s;
+  }
+  .carousel-with-tabs .tab-titles h2 a:hover,
+  .carousel-with-tabs .tab-titles h2 a:focus {
+    outline: none;
+    background-size: 100% 0, 100% 2px;
+  }
+  .carousel-with-tabs .tab-titles h2.active a {
+    text-decoration: overline;
+    text-decoration-thickness: 3px;
+    color: var(--color-neutral-900);
+    outline: none;
+    background-size: 100% 2px, 0 2px;
+    background-position: left 100%;
+  }
+  .carousel-with-tabs .tab-titles a.nav-arrow {
+    position: absolute;
+    right: 60px;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    width: 36px;
+    gap: 8px;
+    align-items: flex-end;
+    margin-top: -14px;
+    text-decoration: none;
+    line-height: 0.8;
+
+    @media (min-width: 768px) {
+      right: 80px;
+    margin-top: -28px;
+    }
+  }
+  .carousel-with-tabs .carousel.tab-titles.no-scroll a.nav-arrow {
+    display: none;
+  }
+
+  .carousel-with-tabs .tab-titles a.nav-arrow:hover,
+  .carousel-with-tabs .tab-titles a.nav-arrow:focus {
+    text-decoration: underline;
+  }
+
+  .carousel-with-tabs .tab-content > div {
+    display: none;
+  }
+  .carousel-with-tabs .tab-content > div.active {
+    display: block;
+  }
+
+  /* Active tab title indicator — underline style from comp */
+  .carousel-with-tabs .tab-titles {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* smooth momentum scroll on iOS */
+    scrollbar-width: none; /* hide scrollbar Firefox */
+  }
+  .carousel-with-tabs .tab-titles::-webkit-scrollbar {
+    display: none; /* hide scrollbar Chrome/Safari */
+  }
+
+  /* Make sure titles don't wrap */
+  .carousel-with-tabs .tab-titles h2 {
+    white-space: nowrap;
+    flex-shrink: 0;
+    cursor: pointer;
+    margin-top: 2px;
+  }
+  .carousel-with-tabs .tab-titles h2.h2-alt {
+    font-size: 18px;
+    margin-top: 24px;
+    @media (min-width: 768px) {
+      font-size: 20px;
+      margin-top: 6px;
+    }
+    @media (min-width: 1024px) {
+      font-size: 22px;
+      margin-top: 4px;
+    }
+  }
+
+  .paragraph--type--tab > .field--name-field-title {
+    color: var(--color-black);
+    font-family: 'acumin-pro-semi-condensed', sans-serif;;
+    font-size: var(--spacer-7);
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 72px;
+  }
+
+  .carousel-with-tabs .slick-list {
+    margin-left: 32px;
+    @media (min-width: 501px) {
+      margin-left: 0px;
+    }
+    @media (min-width: 768px) {
+      margin-left: -20px;
+    }
+    @media (min-width: 1024px) {
+      margin-left: -20px;
+    }
+    @media (min-width: 1440px) {
+      margin-left: -20px;
+    }
+  }
+  .carousel-with-tabs .slick-prev.slick-arrow {
+    left: -12px;
+    @media (min-width: 501px) {
+      left: -80px;
+    }
+    @media (min-width: 768px) {
+      left: -110px;
+    }
+    @media (min-width: 1024px) {
+      left: -160px;
+    }
+    @media (min-width: 1440px) {
+      left: -160px;
+    }
+  }
+  .carousel-with-tabs .slick-next.slick-arrow {
+    right: -16px;
+    @media (min-width: 501px) {
+      right: -80px;
+    }
+    @media (min-width: 768px) {
+      right: -120px;
+    }
+    @media (min-width: 1024px) {
+      right: -100px;
+    }
+    @media (min-width: 1440px) {
+      right: -120px;
+    }
+  }
+  .carousel-with-tabs button.slick-prev.slick-arrow,
+  .carousel-with-tabs button.slick-next.slick-arrow {
+    background-color: var(--color-neutral-400);
+    color: var(--color-white);
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (min-width: 768px) {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  .carousel-with-tabs button.slick-arrow.slick-disabled {
+    background-color: var(--color-neutral-200);
+  }
+  .carousel-with-tabs button.slick-arrow svg {
+    height: 55px;
+    @media (min-width: 768px) {
+      width: 45px;
+      height: 45px;
+    }
+  }
+
+  .carousel-with-tabs .field--name-field-content .field-item {
+    max-width: 365px;
+  }
+  .carousel-with-tabs .field--name-field-content .slick-track {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    @media (min-width: 768px) {
+      gap: 40px;
+    }
+    @media (min-width: 1024px) {
+      gap: 40px;
+    }
+    @media (min-width: 1440px) {
+      gap: 40px;
+    }
+  }
+
+  .carousel-with-tabs .card-summary {
+    margin-bottom: 72px;
+    max-width: 290px;
+    @media (min-width: 501px) {
+      max-width: 390px;
+    }
+  }
+  .carousel-with-tabs .card-summary-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .carousel-with-tabs .card-summary-image {
+    flex: 1;
+    width: 100%;
+    max-height: 278px;
+  }
+
+  .carousel-with-tabs .card-summary-image img {
+    object-fit: cover;
+    width: 100%;
+    max-height: 220px;
+    aspect-ratio: 16 / 9;
+  }
+
+  .carousel-with-tabs .teaser-title {
+    font-size: 1.75rem;
+    line-height: 2rem;
+    margin: 1rem 0;
+  }
+
+  .carousel-with-tabs .card-summary-body {
+    font-family: 'acumin-pro-semi-condensed', sans-serif;
+    font-weight: 300;
+  }
+
+  .carousel-with-tabs .card .card-text {
+    margin: 0 1rem 1rem;
+  }
+  .carousel-with-tabs .card .card-text .bundle {
+    margin-top: 0;
+  }
+
+  .carousel-with-tabs .card-summary-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-left: var(--spacer-5);
+    padding-right: var(--spacer-5);
+    max-width: 100%;
+    margin-top: -24px;
+  }
+  .carousel-with-tabs .card-summary-text .date-region {
+    order: 3;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+  }
+  .carousel-with-tabs .card-summary-text .date-region .article-type {
+    order: -1;
+  }
+  .carousel-with-tabs .card-summary-text h3 {
+    font-weight: bold;
+    font-family: 'adobe-caslon-pro', serif;
+    font-size: 1.75rem;
+    margin: 0;
+  }
+
+  .carousel-with-tabs .card-topic {
+    z-index: 1;
+    display: block;
+    position: relative;
+    padding: var(--spacer-5);
+  }
+</style>

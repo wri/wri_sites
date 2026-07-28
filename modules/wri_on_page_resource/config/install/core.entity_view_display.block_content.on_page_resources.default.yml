@@ -1,0 +1,29 @@
+status: true
+dependencies:
+  config:
+    - block_content.type.on_page_resources
+    - field.field.block_content.on_page_resources.field_custom_results
+    - field.field.block_content.on_page_resources.field_filter_by_resource_type
+    - field.field.block_content.on_page_resources.field_listing
+  module:
+    - wri_admin
+id: block_content.on_page_resources.default
+targetEntityType: block_content
+bundle: on_page_resources
+mode: default
+content:
+  field_listing:
+    type: viewfield_token
+    label: hidden
+    settings:
+      view_title: hidden
+      always_build_output: false
+      empty_view_title: hidden
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_custom_results: true
+  field_filter_by_resource_type: true
+  langcode: true
+  search_api_excerpt: true
