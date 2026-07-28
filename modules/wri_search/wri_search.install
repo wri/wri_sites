@@ -140,3 +140,48 @@ function wri_search_update_10600() {
   \Drupal::service('distro_helper.updates')->installConfig('facets.facet.type_of_resource', 'wri_search');
   \Drupal::service('distro_helper.updates')->installConfig('facets.facet.within_this_topic', 'wri_search');
 }
+
+/**
+ * Sync facet exclude values to resources view insights_block and resources_page.
+ */
+function wri_search_update_10601() {
+  $config_factory = \Drupal::configFactory();
+  $view = $config_factory->getEditable('views.view.resources');
+  $updated = FALSE;
+
+  foreach ($config_factory->listAll('facets.facet.') as $facet_config_name) {
+    $facet = $config_factory->get($facet_config_name);
+
+    $source_id = $facet->get('facet_source_id');
+    if ($source_id !== 'search_api:views_page__resources__resources_page') {
+        continue;
+    }
+    $exclude = $facet->get('processor_configs.exclude_specified_items.settings.exclude');
+
+    if (empty($exclude)) {
+      continue;
+    }
+
+    $filter_id = $facet->get('url_alias');
+
+    foreach (['insights_block', 'resources_page'] as $display_id) {
+      $filters_path = "display.$display_id.display_options.filters";
+      if ($view->get($filters_path) !== NULL) {
+          $filters = $view->get($filters_path);
+          foreach ($filters as $filter_name => $filter) {
+              if ($filter['expose']['identifier'] == $filter_id) {
+                  $view->set("$filters_path.$filter_name.facet.processor_configs.exclude_specified_items.settings.exclude", $exclude);
+                  $updated = TRUE;
+                  continue;
+              }
+          }
+      }
+    }
+  }
+
+  if ($updated) {
+    $view->save(TRUE);
+  }
+
+  return 'Synced facet exclude values to resources view insights_block and resources_page displays.';
+}
