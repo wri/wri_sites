@@ -39,16 +39,6 @@ module.exports = (env, argv) => {
             }
           ]
         },
-        {
-          test: /\.js$/,
-          exclude: /(node_modules|bower_components)/,
-          use: {
-            loader: "babel-loader",
-            options: {
-              presets: [["@babel/preset-env", { modules: false }]]
-            }
-          }
-        },
         { test: /\.svg/, type: "asset/inline" },
         { test: /\.(jpg|png|gif)$/, type: "asset/resource" }
       ]
