@@ -142,7 +142,7 @@ function wri_search_update_10600() {
 }
 
 /**
- * Sync facet exclude values to resources view insights_block and resources_page.
+ * Sync facet exclude values to resources insights_block and resources_page.
  */
 function wri_search_update_10601() {
   $config_factory = \Drupal::configFactory();
@@ -154,7 +154,7 @@ function wri_search_update_10601() {
 
     $source_id = $facet->get('facet_source_id');
     if ($source_id !== 'search_api:views_page__resources__resources_page') {
-        continue;
+      continue;
     }
     $exclude = $facet->get('processor_configs.exclude_specified_items.settings.exclude');
 
@@ -167,14 +167,14 @@ function wri_search_update_10601() {
     foreach (['insights_block', 'resources_page'] as $display_id) {
       $filters_path = "display.$display_id.display_options.filters";
       if ($view->get($filters_path) !== NULL) {
-          $filters = $view->get($filters_path);
-          foreach ($filters as $filter_name => $filter) {
-              if ($filter['expose']['identifier'] == $filter_id) {
-                  $view->set("$filters_path.$filter_name.facet.processor_configs.exclude_specified_items.settings.exclude", $exclude);
-                  $updated = TRUE;
-                  continue;
-              }
+        $filters = $view->get($filters_path);
+        foreach ($filters as $filter_name => $filter) {
+          if ($filter['expose']['identifier'] == $filter_id) {
+            $view->set("$filters_path.$filter_name.facet.processor_configs.exclude_specified_items.settings.exclude", $exclude);
+            $updated = TRUE;
+            continue;
           }
+        }
       }
     }
   }
