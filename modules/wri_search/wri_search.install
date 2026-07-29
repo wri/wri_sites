@@ -113,6 +113,7 @@ function wri_search_update_10600() {
     \Drupal::service('module_installer')->install([$module], TRUE);
   }
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.resources', [
+    'uuid',
     'dependencies',
     'display#default#display_options#exposed_form',
     'display#default#display_options#header#facets_summary',
