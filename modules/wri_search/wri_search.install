@@ -185,3 +185,19 @@ function wri_search_update_10601() {
 
   return 'Synced facet exclude values to resources view insights_block and resources_page displays.';
 }
+
+/**
+ * Add language specifics if this site has translations.
+ */
+function wri_search_update_10602() {
+  $module = 'facets_exposed_filters';
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists($module)) {
+    \Drupal::service('module_installer')->install([$module], TRUE);
+  }
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.resources', [
+    'display#default#display_options#filters#search_api_language',
+    'display#insights_block#display_options#filters#search_api_language',
+    'display#resources_page#display_options#filters#search_api_language',
+  ], 'wri_search');
+}
