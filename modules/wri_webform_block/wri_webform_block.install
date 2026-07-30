@@ -124,5 +124,6 @@ function wri_webform_block_update_10603() {
 function wri_webform_block_update_10604() {
   \Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.webform_with_background_color.field_cta_background', [
     'required',
+    'default_value#0',
   ], 'wri_webform_block', 'install');
 }

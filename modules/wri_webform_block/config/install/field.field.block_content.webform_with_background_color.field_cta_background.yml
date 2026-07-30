@@ -13,7 +13,9 @@ label: Background
 description: 'Select a background color for this CTA'
 required: true
 translatable: false
-default_value: {  }
+default_value:
+  -
+    value: has-blue-background-color
 default_value_callback: ''
 settings: {  }
 field_type: list_string
