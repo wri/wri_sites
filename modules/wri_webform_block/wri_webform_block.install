@@ -117,3 +117,12 @@ function wri_webform_block_update_10603() {
   \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.webform_with_background_color.field_webform', 'wri_webform_block', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.block_content.webform_with_background_color', 'wri_webform_block', 'install');
 }
+
+/**
+ * Ensure the background color on the block with background color is required.
+ */
+function wri_webform_block_update_10604() {
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.webform_with_background_color.field_cta_background', [
+    'required',
+  ], 'wri_webform_block', 'install');
+}

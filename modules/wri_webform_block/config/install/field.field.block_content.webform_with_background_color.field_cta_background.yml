@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -12,7 +11,7 @@ entity_type: block_content
 bundle: webform_with_background_color
 label: Background
 description: 'Select a background color for this CTA'
-required: false
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''
