@@ -1,0 +1,21 @@
+<?php
+/**
+ * @file
+ * Update hooks for wri_text_block.
+ */
+
+/**
+ * Hooks to update config automatically on installation.
+ */
+function wri_text_block_install() {
+  \Drupal::service('distro_helper.updates')->installConfig('layout_builder_modal.settings', 'wri_text_block', 'post-install', TRUE);
+}
+
+/**
+ * Set the layout modal to use the admin theme.
+ */
+function wri_text_block_update_12503() {
+  \Drupal::service('distro_helper.updates')->updateConfig('layout_builder_modal.settings', [
+    'theme_display',
+  ], 'wri_text_block', 'post-install');
+}
