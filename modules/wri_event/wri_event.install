@@ -276,6 +276,7 @@ function wri_event_update_10503() {
  * Install the produced_by field for events.
  */
 function wri_event_update_10504(): void {
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.node.field_produced_by', 'wri_node', 'install', FALSE);
   \Drupal::service('distro_helper.updates')->installConfig('field.field.node.event.field_produced_by', 'wri_event', 'install', FALSE);
 }
 
