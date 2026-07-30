@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Update hooks for wri_text_block.
