@@ -144,6 +144,24 @@ function ts_wrin_preprocess_paragraph(array &$variables) {
   if ($variables['paragraph']->getType() == 'person_listing') {
     $variables["elements"]["field_block"][0]["field_featured_experts"]['#object']->overridden_label = $variables["elements"]["field_block"][0]["#block_content"]->info->value ?? NULL;
   }
+  // Get the name of the menu item based on its id
+  if ($variables['paragraph']->getType() == 'submenu') {
+    // Load the menu item by its uuid.
+    /** @var \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository */
+    $entity_repository = \Drupal::service('entity.repository');
+    $variables['menu_uuid'] = $variables['paragraph']->get('field_parent_menu_item')->value ?? NULL;
+    $variables['menu_title'] = '';
+
+    if ($variables['menu_uuid']) {
+      /** @var \Drupal\menu_link_content\Entity\MenuLinkContent|null $menu_item */
+      $menu_item = $entity_repository->loadEntityByUuid('menu_link_content', $variables['menu_uuid']);
+
+      if ($menu_item) {
+        // Access your menu item data
+        $variables['menu_title'] = $menu_item->getTitle();
+      }
+    }
+  }
 }
 
 /**
