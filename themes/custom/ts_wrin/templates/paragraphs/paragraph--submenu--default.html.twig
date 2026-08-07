@@ -49,7 +49,30 @@
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-      {{ content }}
+      <button>{{ menu_title }}</button>
+      <div class="menu-contents">
+      {{ menu_title }}
+      {{ content.field_text }}
+      {{ content.field_listing }}
+      {{ drupal_block('menu_block:main-menu-2026', {
+        id: 'menu_block:main-menu-2026',
+        label: 'Main Menu 2026',
+        label_display: 0,
+        provider: menu_block,
+        follow: 1,
+        follow_parent: 'child',
+        display_empty: false,
+        label_link: false,
+        label_type: block,
+        level: 1,
+        depth: 0,
+        expand_all_items: true,
+        parent: 'main-menu-2026:menu_link_content:' ~ menu_uuid,
+        render_parent: false,
+        suggestion: main_menu_2026,
+        hide_on_nonactive: false
+      }) }}
+      </div>
     {% endblock %}
   </div>
 {% endblock paragraph %}
