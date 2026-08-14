@@ -3,6 +3,7 @@
  * Main theme behaviors.
  */
 import tsHeaderNav from "./components/ts_header_nav.js";
+import tsMegamenu from "./components/ts_megamenu.js";
 import tsTabs from "./components/ts_tabs.js";
 import tsTrayNav from "./components/ts_tray_nav.js";
 import tsButtonSvg from "./components/ts_button_svg.js";
@@ -23,6 +24,10 @@ import wriExtraBodyArticles from "./components/wri_extra_body_articles.js";
    **/
   Drupal.behaviors.tsHeaderNav = {
     attach: tsHeaderNav
+  };
+
+  Drupal.behaviors.tsMegamenu = {
+    attach: tsMegamenu
   };
 
   Drupal.behaviors.tsTabs = {
