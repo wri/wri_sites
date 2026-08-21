@@ -4,6 +4,7 @@
  */
 import tsHeaderNav from "./components/ts_header_nav.js";
 import tsMegamenu from "./components/ts_megamenu.js";
+import tsMegamenuMobile from "./components/ts_megamenu_mobile.js";
 import tsTabs from "./components/ts_tabs.js";
 import tsTrayNav from "./components/ts_tray_nav.js";
 import tsButtonSvg from "./components/ts_button_svg.js";
@@ -28,6 +29,10 @@ import wriExtraBodyArticles from "./components/wri_extra_body_articles.js";
 
   Drupal.behaviors.tsMegamenu = {
     attach: tsMegamenu
+  };
+
+  Drupal.behaviors.tsMegamenuMobile = {
+    attach: tsMegamenuMobile
   };
 
   Drupal.behaviors.tsTabs = {

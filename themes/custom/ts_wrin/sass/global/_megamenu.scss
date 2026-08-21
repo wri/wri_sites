@@ -18,23 +18,77 @@
 // notes inline.
 // =============================================================================
 
-.wri-megamenu {
-  // ---------------------------------------------------------------------
-  // Tokens — mapped to the site's real custom properties. Named --mega-*
-  // so it's obvious at a glance which are local aliases vs. global tokens.
-  // ---------------------------------------------------------------------
-  --mega-bg: var(--color-green-500); // #32864b — ~4.5:1 contrast with white text, passes AA for body copy
+// #block-quicklinks lives in .region-primary-nav as a sibling of
+// .wri-megamenu (moved there per the Quick Links block placement change).
+// megamenu-mobile.js reads its content purely as a data source for the
+// mobile overlay's own "Quicklinks" section — the real, live block should
+// never render itself. Without this it was showing up unstyled at every
+// viewport width, including desktop.
+.region-primary-nav #block-quicklinks {
+  display: none;
+}
+
+
+// Color/text tokens shared between the desktop panels (.wri-megamenu) and
+// the mobile overlay (.wri-mobile-nav, see _megamenu-mobile.scss).
+// megamenu-mobile.js deliberately appends .wri-mobile-nav to <body>, not
+// inside .wri-megamenu (it needs to sit above the entire page as a fixed
+// overlay) — which means it CANNOT inherit custom properties scoped only
+// to .wri-megamenu; inheritance follows the DOM tree, and it isn't a
+// descendant. Defining these on both selectors is what actually makes
+// "one theme, one place to change it" true; scoping them to .wri-megamenu
+// alone silently broke every color in the mobile overlay (transparent
+// background, default black text) despite every declaration looking
+// correct in isolation.
+.wri-megamenu,
+.wri-mobile-nav {
   --mega-text: var(--color-white);
   --mega-text-secondary: rgb(var(--color-white-rgb) / 82%);
   --mega-sep: rgb(var(--color-white-rgb) / 25%);
   --mega-row-hover-bg: rgb(var(--color-white-rgb) / 8%);
-  // No lighter green token exists yet — this is --color-green-500 lightened
-  // ~20% toward white. Ask design for an official token if one exists.
-  --mega-row-active-bg: #5b9e6f;
-  --mega-col-width: 220px;
-  --mega-col-width-wide: 260px;
-  --mega-col-gap: var(--spacer-10);
   --mega-focus-ring: var(--color-gold-300); // distinct from the gold-500 underline used on the top nav
+
+  // ---------------------------------------------------------------------
+  // Color theme — the one thing likely to change (green now, maybe grey
+  // later). Everything that varies by theme lives here and nowhere else,
+  // so switching is a one-line class change rather than a re-theme.
+  //
+  // Applied as a modifier class alongside .wri-megamenu or .wri-mobile-nav
+  // (megamenu-mobile.js copies whichever class .wri-megamenu has onto the
+  // overlay at build time), e.g. <div class="wri-megamenu green">. Defaults
+  // to green if no modifier class is present, so nothing breaks if the
+  // Drupal side hasn't wired up the toggle yet.
+  // ---------------------------------------------------------------------
+  --mega-bg: var(--color-green-500); // #32864b — ~4.5:1 contrast with white text, passes AA for body copy
+  --mega-row-active-bg: #5b9e6f; // green-500 lightened ~20% toward white — no official token yet
+
+  &.green {
+    --mega-bg: var(--color-green-500);
+    --mega-row-active-bg: #5b9e6f;
+  }
+
+  &.grey {
+    --mega-bg: var(--color-neutral-800); // #686767 — ~5.65:1 contrast with white text
+    --mega-row-active-bg: #868686; // neutral-800 lightened ~20% toward white — no official token yet
+  }
+}
+
+.wri-megamenu {
+  // ---------------------------------------------------------------------
+  // Layout-only tokens — desktop's side-by-side column grid. Not shared
+  // with .wri-mobile-nav above: the mobile overlay uses full-screen
+  // sliding panels instead (its own --mega-mobile-* tokens live in
+  // _megamenu-mobile.scss), so there's nothing for it to inherit here.
+  // ---------------------------------------------------------------------
+  // Fluid, not fixed — at exactly 1024px (where the JS turns the menu on)
+  // 4-5 columns at a flat 220px + 40px gaps is wider than the viewport
+  // itself, which is what was clipping "All Research", "Latest pub...",
+  // etc. off the right edge. These interpolate up from a narrower value
+  // at 1024px to the original size by 1440px, same technique already
+  // used for .field__items gap further down this file.
+  --mega-col-width: clamp(170px, calc(170px + (50 * ((100vw - 1024px) / 416))), 220px);
+  --mega-col-width-wide: clamp(210px, calc(210px + (50 * ((100vw - 1024px) / 416))), 260px);
+  --mega-col-gap: clamp(20px, calc(20px + (20 * ((100vw - 1024px) / 416))), var(--spacer-10));
 
   // Intentionally no position:relative here — .menu-contents (position:
   // absolute; left:0; right:0) needs to resolve against a positioned
@@ -114,6 +168,18 @@
       font-size: 22px;
       margin: 0 0 12px;
     }
+
+    // `color` inherits by default, so any generic form control in here
+    // that doesn't set its own color would otherwise silently pick up the
+    // panel's white text. This is speculative insurance in case a real
+    // exposed-filter/search form ever ends up in a panel — it wasn't the
+    // cause of the gold button issue (that was .more-link a below, fixed
+    // directly). Safe to remove if nothing like this actually exists.
+    .form-submit,
+    input[type="submit"],
+    button[type="submit"] {
+      color: var(--color-neutral-900);
+    }
   }
 
   .paragraph--type--submenu.is-open {
@@ -131,7 +197,14 @@
   // ---------------------------------------------------------------------
   .mega-grid {
     display: flex;
-    align-items: flex-start;
+    // stretch (the flex default) rather than flex-start: has-sep's
+    // border-left is only as tall as its own flex item's box, so every
+    // column needs to match the row's tallest sibling for the divider to
+    // actually run the full height of the row. With flex-start each
+    // column was only ever as tall as its own content — it just wasn't
+    // noticeable until the featured column's long title started wrapping
+    // to 5-6 lines while the nav column next to it stayed short.
+    align-items: stretch;
     gap: var(--mega-col-gap);
   }
 
@@ -159,8 +232,24 @@
   // Featured listing column (Research & Data / News & Insights / Events)
   // ---------------------------------------------------------------------
   .field--name-field-listing {
+    // Wider than the default --mega-col-width: this column holds full
+    // article/report titles (unlike the compact nav-selector and flyout
+    // columns), and the standard width was wrapping them 5-6 lines deep
+    // at the low end of the fluid range.
+    flex-basis: var(--mega-col-width-wide);
+
+    // Reset any layout (grid/flex, gap, columns) a sitewide utility class
+    // might apply to these generic Views wrapper classes elsewhere on the
+    // site — they're reused across many views, and we want our own
+    // .item-list spacing below to be the only thing governing this column,
+    // not an inherited gap from an unrelated grid pattern.
+    .views-element-container,
+    .view-content,
     .views-view {
       display: block;
+      gap: 0;
+      margin: 0;
+      padding: 0;
     }
 
     .item-list ul {
@@ -169,8 +258,19 @@
       padding: 0;
     }
 
-    .item-list li + li {
-      margin-top: 22px;
+    // A sitewide item-list.css rule sets `margin: 0 0 0.25em 1.5em` on
+    // every li (list-style indent + a small default bottom margin).
+    // margin-top from a li + li selector is a different longhand property
+    // from margin-left, so it never actually overrode that left indent —
+    // they were both applying at once. Reset all four sides explicitly
+    // first, then add spacing back with margin-top only.
+    .item-list li {
+      margin: 0;
+      padding: 0;
+
+      & + li {
+        margin-top: 22px;
+      }
     }
 
     .views-field-field-type .field-content {
@@ -198,16 +298,16 @@
     .more-link {
       margin-top: 24px;
 
+      // .menu-contents sets color: var(--mega-text) (white), which
+      // inherits to this bare <a> (it has no class of its own — the
+      // gold-pill look comes from a sitewide .more-link component style)
+      // unless something more specific overrides it. Rather than assume
+      // that sitewide style sets its own color with enough specificity to
+      // win, set it explicitly so the pill's text reliably stays dark
+      // regardless of what that component does elsewhere on lighter
+      // backgrounds.
       a {
-        color: var(--mega-text);
-        font-size: 13px;
-        font-weight: 700;
-        text-decoration: none;
-
-        &:hover,
-        &:focus-visible {
-          text-decoration: underline;
-        }
+        color: var(--color-neutral-900);
       }
 
       &__line {
@@ -405,7 +505,7 @@
   }
 
   .header-wrapper button.tray-toggle {
-    top: -4px;
+    top: 6px;
 
     &:hover,
     &:focus {
@@ -444,8 +544,18 @@
     }
   }
 
-  .tray-toggle.filter-toggle,
-  .menu-toggle {
+  .tray-toggle.filter-toggle {
     display: none;
+  }
+
+  // .menu-toggle is now the trigger for the new mobile sliding-panel
+  // overlay (see megamenu-mobile.js) below the desktop breakpoint. Only
+  // hide it once desktop's inline mega menu takes over — hiding it
+  // unconditionally, as before, would leave mobile with no way to open
+  // the menu at all.
+  @include mq($lg) {
+    .menu-toggle {
+      display: none;
+    }
   }
 }

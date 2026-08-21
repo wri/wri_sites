@@ -1,6 +1,31 @@
 /**
  * @file
- * TS Hamburger Menu custom JS.
+ * TS Header Nav custom JS.
+ *
+ * Trimmed down from the original ts_header_nav.js: removed everything that
+ * only existed to drive the old .hamburger-content / .hamburger-slider
+ * system (now retired in favor of .wri-megamenu + megamenu-mobile.js).
+ * That included:
+ *   - toggleMenu() and its .menu-toggle / .mega_menu_close click bindings
+ *     — this was directly competing with megamenu-mobile.js for clicks on
+ *     .menu-toggle, since neither script excluded the other's handler.
+ *   - slideOut() / sliderCleanUp() / sliderMenus() and their resize
+ *     listener — operated on .hamburger-content, .hamburger-slider,
+ *     .menu--footer-secondary, .menu--mega-menu, none of which exist once
+ *     .region-hamburger-nav is gone.
+ *   - The quicklinks side-scroll-arrow block (.hamburger-content
+ *     .nav-arrow acting on #block-quicklinks) — that was scroll-arrow
+ *     behavior for the old horizontal quicklinks strip inside the old
+ *     hamburger nav. #block-quicklinks is now permanently display:none
+ *     (it's a pure data source for megamenu-mobile.js), so this was
+ *     measuring width/scrollLeft on a hidden element on every resize.
+ *
+ * NOT verified: whether any other CSS on the site keys off
+ * .header-wrapper.menu-open or body.fixed for something unrelated to the
+ * removed hamburger slider. These were removed on the assumption they
+ * existed only to support it — worth a quick grep before deploying.
+ *
+ * Everything below is untouched from the original file.
  */
 
 export default function (context) {
@@ -8,131 +33,6 @@ export default function (context) {
   const $ = jQuery;
   let tabbingContext = null;
   if (context == document) {
-    // Hamburger Nav.
-    function toggleMenu() {
-      var toggle = $(".menu-toggle:not(.mobile-menu-toggle)");
-      var target = $(".mobile-menu-target");
-      var headerNav = $(".header-wrapper");
-      toggle.toggleClass("active");
-      if (toggle.hasClass("active")) {
-        headerNav.addClass("menu-open");
-        toggle.attr("aria-label", "Close mobile menu");
-      } else {
-        headerNav.removeClass("menu-open");
-        toggle.attr("aria-label", "Open mobile menu");
-      }
-      target.toggleClass("expanded");
-    }
-    // Mobile menu toggle behavior.
-    $(".menu-toggle:not(.mobile-menu-toggle)", context)
-      .once("ts-menu-toggle")
-      .on("click", function (e) {
-        toggleMenu();
-        $("body").addClass("fixed");
-      })
-      .keyup(function (e) {
-        if (e.keyCode == 27) {
-          // escape key maps to keycode `27`
-          toggleMenu();
-          $(this).blur();
-          $("body").removeClass("fixed");
-          sliderCleanUp();
-        }
-      });
-    $(".mega_menu_close")
-      .once()
-      .on("click", function (e) {
-        toggleMenu();
-        $("body").removeClass("fixed");
-        sliderCleanUp();
-      });
-
-    // Mega-Menu sliders.
-    var hamburgerContent = $(".hamburger-content"),
-      hamburgerSlider = $(".hamburger-slider"),
-      flexibleRowsClass = "flexible-row-submenu";
-
-    function slideOut(menuParent) {
-      var clone = $(menuParent.target).parents("li").clone();
-      $(".hamburger-slider-contents ul", hamburgerSlider).html(clone);
-      $(".hamburger-slider-contents").addClass("active");
-      // Hack to get the our-work link to have flexed rows.
-      if (
-        $(menuParent.target).hasClass(flexibleRowsClass) ||
-        $(menuParent.target).children("a").hasClass(flexibleRowsClass)
-      ) {
-        $(".hamburger-slider-contents").addClass(flexibleRowsClass);
-      }
-      hamburgerContent.addClass("left");
-      hamburgerSlider.addClass("active");
-    }
-
-    function sliderCleanUp() {
-      hamburgerContent.removeClass("left");
-      hamburgerSlider.removeClass("active");
-      $(".hamburger-slider-contents").removeClass(flexibleRowsClass);
-      setTimeout(function () {
-        $(".hamburger-slider-contents ul", hamburgerSlider).html("");
-      }, 500);
-    }
-
-    function sliderMenus(windowWidth) {
-      if (windowWidth <= 768) {
-        var burger = $(".hamburger-content");
-        burger
-          .find(".menu--footer-secondary > ul > li > .menu-item-title")
-          .on("click", function (e) {
-            e.preventDefault();
-            slideOut(e);
-          });
-        burger
-          .find(".menu--mega-menu > ul > li > .menu-item-title")
-          .on("click", function (e) {
-            e.preventDefault();
-            slideOut(e);
-          });
-
-        // Close the sliders, then reset.
-        $(".hamburger-slider .back").on("click", function (e) {
-          e.preventDefault();
-          sliderCleanUp();
-        });
-      } else {
-        $(
-          ".hamburger-content .menu--footer-secondary > ul > li > a, \
-          .hamburger-content .menu--mega-menu > ul > li:nth-child(1) > a, \
-          .hamburger-content .menu--mega-menu > ul > li:nth-child(2) > a, \
-          .hamburger-content .menu--mega-menu > ul > li:nth-child(3) > a",
-        ).unbind();
-      }
-    }
-
-    function debounce(func, wait, immediate) {
-      var timeout;
-      return function () {
-        var context = this,
-          args = arguments;
-        var later = function () {
-          timeout = null;
-          if (!immediate) func.apply(context, args);
-        };
-        var callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
-      };
-    }
-
-    var debouncedSliderMenus = debounce(function () {
-      let windowSize = function () {
-        return window.innerWidth;
-      };
-      sliderMenus(windowSize());
-    }, 250);
-
-    window.addEventListener("resize", debouncedSliderMenus);
-    debouncedSliderMenus();
-
     // Sticky Nav.
     const stickyNav = document.querySelector("header");
 
@@ -167,6 +67,22 @@ export default function (context) {
           mobileStickyParent.classList.remove("sticky");
         }
       }
+    }
+
+    function debounce(func, wait, immediate) {
+      var timeout;
+      return function () {
+        var context = this,
+          args = arguments;
+        var later = function () {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
     }
 
     var debouncedStickyNav = debounce(function () {
@@ -222,44 +138,6 @@ export default function (context) {
           var leftPosBack = scrollMenu.scrollLeft();
           scrollMenu.animate(
             { scrollLeft: leftPosBack - mainParent.width() / 2 },
-            500,
-          );
-        });
-    });
-
-    // Mega-menu side-scrolling quicklink nav.
-    let quickLinksParent = $(".menu--quick-links .menu-wrapper");
-    let quickLinksMenu = $(".menu--quick-links .menu-wrapper > ul.menu");
-
-    var debouncedQuickLinksScroll = debounce(function () {
-      if (quickLinksParent.width() > quickLinksMenu.width()) {
-        quickLinksParent.addClass("no-scroll");
-      } else {
-        quickLinksParent.removeClass("no-scroll");
-      }
-    }, 250);
-
-    window.addEventListener("resize", debouncedQuickLinksScroll);
-    debouncedQuickLinksScroll();
-
-    $(".hamburger-content .nav-arrow").click(function (e) {
-      e.preventDefault();
-      var leftPos = quickLinksParent.scrollLeft();
-      quickLinksParent.animate(
-        { scrollLeft: leftPos + quickLinksParent.width() / 2 },
-        500,
-      );
-      $(this)
-        .once()
-        .clone()
-        .insertBefore("#block-quicklinks")
-        .removeClass("nav-arrow")
-        .addClass("back-arrow")
-        .click(function (f) {
-          f.preventDefault();
-          var leftPosBack = quickLinksParent.scrollLeft();
-          quickLinksParent.animate(
-            { scrollLeft: leftPosBack - quickLinksParent.width() / 2 },
             500,
           );
         });
