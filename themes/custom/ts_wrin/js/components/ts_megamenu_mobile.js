@@ -38,9 +38,11 @@
 
   Drupal.behaviors.wriMobileMegaMenu = {
     attach: function (context) {
-      once("wri-mobile-megamenu", ".wri-megamenu", context).forEach(function (root) {
-        initMobileMenu(root);
-      });
+      once("wri-mobile-megamenu", ".wri-megamenu", context).forEach(
+        function (root) {
+          initMobileMenu(root);
+        },
+      );
     },
   };
 
@@ -84,15 +86,23 @@
       // height — the mobile prototype assumed a fixed 88px standalone
       // topbar, but the live site's actual header may differ or change
       // (e.g. a promo bar above it).
-      var header = document.querySelector(".header-wrapper") || document.querySelector("header");
-      overlay.root.style.setProperty("--mega-mobile-nav-h", header ? header.offsetHeight + "px" : "64px");
+      var header =
+        document.querySelector(".header-wrapper") ||
+        document.querySelector("header");
+      overlay.root.style.setProperty(
+        "--mega-mobile-nav-h",
+        header ? header.offsetHeight + "px" : "64px",
+      );
 
       overlay.root.classList.add("is-open");
       toggle.setAttribute("aria-expanded", "true");
       lockScroll(true);
 
       stack = [];
-      pushPanel("Menu", data.items, { quicklinks: data.quicklinks, isRoot: true });
+      pushPanel("Menu", data.items, {
+        quicklinks: data.quicklinks,
+        isRoot: true,
+      });
 
       overlay.closeBtn.focus();
     }
@@ -133,7 +143,11 @@
 
     function trapFocus(event) {
       var focusables = Array.prototype.slice
-        .call(overlay.root.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])'))
+        .call(
+          overlay.root.querySelectorAll(
+            'button, [href], [tabindex]:not([tabindex="-1"])',
+          ),
+        )
         .filter(function (el) {
           return !el.hasAttribute("disabled") && el.offsetParent !== null;
         });
@@ -194,7 +208,8 @@
           var back = document.createElement("button");
           back.type = "button";
           back.className = "wri-mobile-nav__back";
-          back.innerHTML = '<span aria-hidden="true">&larr;</span><span>Back</span>';
+          back.innerHTML =
+            '<span aria-hidden="true">&larr;</span><span>Back</span>';
           back.addEventListener("click", popPanel);
           panel.appendChild(back);
 
@@ -227,14 +242,17 @@
             // placeholder (e.g. "Data & Tools", "Coalitions" today).
             // Rendered as inert rather than a dead link.
             var span = document.createElement("span");
-            span.className = "wri-mobile-nav__row wri-mobile-nav__row--disabled";
+            span.className =
+              "wri-mobile-nav__row wri-mobile-nav__row--disabled";
             span.textContent = item.label;
             li.appendChild(span);
           } else {
             var a = document.createElement("a");
             a.className = "wri-mobile-nav__row";
             a.href = item.url || "#";
-            var label = item.emphasis ? "<strong>" + escapeHtml(item.label) + "</strong>" : escapeHtml(item.label);
+            var label = item.emphasis
+              ? "<strong>" + escapeHtml(item.label) + "</strong>"
+              : escapeHtml(item.label);
             a.innerHTML = "<span>" + label + "</span>";
             li.appendChild(a);
           }
@@ -245,11 +263,15 @@
         panel.appendChild(ul);
 
         if (node.featured && node.featured.items.length) {
-          panel.appendChild(buildBottomBlock(node.featured.heading, node.featured.items, true));
+          panel.appendChild(
+            buildBottomBlock(node.featured.heading, node.featured.items, true),
+          );
         }
 
         if (node.isRoot && node.quicklinks && node.quicklinks.length) {
-          panel.appendChild(buildBottomBlock("Quicklinks", node.quicklinks, false));
+          panel.appendChild(
+            buildBottomBlock("Quicklinks", node.quicklinks, false),
+          );
         }
 
         overlay.track.appendChild(panel);
@@ -270,13 +292,25 @@
       items.forEach(function (item) {
         var li = document.createElement("li");
         var a = document.createElement("a");
-        a.className = "wri-mobile-nav__row" + (isFeatured ? " wri-mobile-nav__row--featured" : "");
+        a.className =
+          "wri-mobile-nav__row" +
+          (isFeatured ? " wri-mobile-nav__row--featured" : "");
         a.href = item.url || "#";
 
-        var labelHtml = item.emphasis ? "<strong>" + escapeHtml(item.label) + "</strong>" : escapeHtml(item.label);
-        var typeHtml = item.type ? '<span class="wri-mobile-nav__badge">' + escapeHtml(item.type) + "</span>" : "";
+        var labelHtml = item.emphasis
+          ? "<strong>" + escapeHtml(item.label) + "</strong>"
+          : escapeHtml(item.label);
+        var typeHtml = item.type
+          ? '<span class="wri-mobile-nav__badge">' +
+            escapeHtml(item.type) +
+            "</span>"
+          : "";
         a.innerHTML =
-          "<span>" + typeHtml + '<span class="wri-mobile-nav__row-title">' + labelHtml + "</span></span>";
+          "<span>" +
+          typeHtml +
+          '<span class="wri-mobile-nav__row-title">' +
+          labelHtml +
+          "</span></span>";
         li.appendChild(a);
         ul.appendChild(li);
       });
@@ -296,7 +330,9 @@
     // Inherit whichever green/grey theme modifier .wri-megamenu is using
     // (see _megamenu.scss), so the mobile overlay always matches the
     // desktop panel colors instead of tracking its own copy of the theme.
-    wrap.classList.add(themeSource.classList.contains("grey") ? "grey" : "green");
+    wrap.classList.add(
+      themeSource.classList.contains("grey") ? "grey" : "green",
+    );
 
     wrap.innerHTML =
       '<div class="wri-mobile-nav__header">' +
@@ -326,7 +362,9 @@
    */
   function buildMenuData(root) {
     var panelItems = Array.prototype.slice.call(
-      root.querySelectorAll(":scope > .field__items > .field__item > .paragraph--type--submenu")
+      root.querySelectorAll(
+        ":scope > .field__items > .field__item > .paragraph--type--submenu",
+      ),
     );
 
     var items = panelItems
@@ -347,8 +385,12 @@
         // stopped matching anything the moment that ran, which is what
         // was producing an empty <ul> for every panel here.
         var listing = panel.querySelector(".field--name-field-listing");
-        var navBlock = panel.querySelector('[id^="block-menu-blockmain-menu-2026"]');
-        var rootList = navBlock ? navBlock.querySelector(":scope > ul.menu") : null;
+        var navBlock = panel.querySelector(
+          '[id^="block-menu-blockmain-menu-2026"]',
+        );
+        var rootList = navBlock
+          ? navBlock.querySelector(":scope > ul.menu")
+          : null;
 
         // The desktop drilldown also auto-activates the first expandable
         // top-level item (whichever carries .is-active) and, as a side
@@ -358,8 +400,14 @@
         // treat that one item as a dead-end placeholder, since its <ul>
         // genuinely isn't inside its <li> anymore — recover it from where
         // desktop actually put it.
-        var flyoutRegion = navBlock ? navBlock.parentElement.querySelector(":scope > .mega-col-flyout-region") : null;
-        var recoveryUl = flyoutRegion ? flyoutRegion.querySelector(":scope > ul.menu") : null;
+        var flyoutRegion = navBlock
+          ? navBlock.parentElement.querySelector(
+              ":scope > .mega-col-flyout-region",
+            )
+          : null;
+        var recoveryUl = flyoutRegion
+          ? flyoutRegion.querySelector(":scope > ul.menu")
+          : null;
 
         return {
           label: label,
@@ -400,10 +448,17 @@
         }
 
         if (a) {
-          return { label: a.textContent.trim(), url: a.getAttribute("href"), emphasis: emphasis };
+          return {
+            label: a.textContent.trim(),
+            url: a.getAttribute("href"),
+            emphasis: emphasis,
+          };
         }
         if (btn && nested) {
-          return { label: btn.textContent.trim(), children: buildChildren(nested) };
+          return {
+            label: btn.textContent.trim(),
+            children: buildChildren(nested),
+          };
         }
         return { label: btn ? btn.textContent.trim() : "", disabled: true };
       });
@@ -411,7 +466,11 @@
 
   function extractFeatured(listingEl, panelLabel) {
     var items = Array.prototype.slice
-      .call(listingEl.querySelectorAll(".views-element-container .item-list > ul > li"))
+      .call(
+        listingEl.querySelectorAll(
+          ".views-element-container .item-list > ul > li",
+        ),
+      )
       .map(function (li) {
         var type = li.querySelector(".views-field-field-type .field-content");
         var titleLink = li.querySelector(".views-field-title a");
@@ -442,7 +501,9 @@
   // fallbacks in case it ends up a level up instead — keeps this working
   // either way without needing another edit here if placement shifts again.
   function extractQuicklinks(root) {
-    var scope = root.querySelector("#block-quicklinks") ? root : root.closest(".region-primary-nav") || document;
+    var scope = root.querySelector("#block-quicklinks")
+      ? root
+      : root.closest(".region-primary-nav") || document;
     var list = scope.querySelector("#block-quicklinks .menu-wrapper ul.menu");
     if (!list) {
       return [];
@@ -451,7 +512,9 @@
       .call(list.children)
       .map(function (li) {
         var a = li.querySelector(":scope > a");
-        return a ? { label: a.textContent.trim(), url: a.getAttribute("href") } : null;
+        return a
+          ? { label: a.textContent.trim(), url: a.getAttribute("href") }
+          : null;
       })
       .filter(Boolean); // drops the label-only "Quick Links" <li><span> item
   }
