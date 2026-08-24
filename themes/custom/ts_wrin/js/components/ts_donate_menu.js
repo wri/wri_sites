@@ -25,9 +25,11 @@
 
   Drupal.behaviors.wriDonateMenu = {
     attach: function (context) {
-      once("wri-donate-menu", "#block-donate", context).forEach(function (root) {
-        initDonateMenu(root);
-      });
+      once("wri-donate-menu", "#block-donate", context).forEach(
+        function (root) {
+          initDonateMenu(root);
+        },
+      );
     },
   };
 
