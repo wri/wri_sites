@@ -15,8 +15,7 @@
  * Desktop-only by design (matches megamenu.js's 1024px gate). On mobile,
  * "Donate" is already covered by the Quicklinks section inside
  * megamenu-mobile.js's overlay, so this dropdown doesn't get its own
- * mobile treatment — ASSUMPTION worth confirming against an actual
- * mobile screenshot of this block, which I don't have.
+ * mobile treatment.
  */
 (function (Drupal, once) {
   "use strict";
