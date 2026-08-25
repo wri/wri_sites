@@ -1,0 +1,50 @@
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.submenu.field_custom_featured
+    - field.field.paragraph.submenu.field_listing
+    - field.field.paragraph.submenu.field_parent_menu_item
+    - field.field.paragraph.submenu.field_text
+    - paragraphs.paragraphs_type.submenu
+  module:
+    - viewfield
+id: paragraph.submenu.default
+targetEntityType: paragraph
+bundle: submenu
+mode: default
+content:
+  field_custom_featured:
+    type: entity_reference_autocomplete
+    weight: 3
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_listing:
+    type: viewfield_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_parent_menu_item:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_text:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

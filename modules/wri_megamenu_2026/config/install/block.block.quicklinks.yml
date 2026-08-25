@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -7,17 +6,19 @@ dependencies:
     - system
   theme:
     - ts_wrin
+_core:
+  default_config_hash: 5CC7zWG2WNP5I0fANzucvr9dcOzPgWcQVmfmyctlnVs
 id: quicklinks
 theme: ts_wrin
-region: hamburger_nav
-weight: -12
+region: primary_nav
+weight: -18
 provider: null
 plugin: 'system_menu_block:quick-links'
 settings:
   id: 'system_menu_block:quick-links'
   label: 'Quick Links'
-  provider: system
   label_display: '0'
+  provider: system
   level: 1
   depth: 0
   expand_all_items: false

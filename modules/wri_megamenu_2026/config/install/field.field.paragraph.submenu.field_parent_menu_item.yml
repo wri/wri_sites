@@ -1,0 +1,17 @@
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_parent_menu_item
+    - paragraphs.paragraphs_type.submenu
+id: paragraph.submenu.field_parent_menu_item
+field_name: field_parent_menu_item
+entity_type: paragraph
+bundle: submenu
+label: 'Parent Menu Item'
+description: "This is a temporary field. Eventually I'll provide a widget to refer to the menu item, but for now it's plain text."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,98 @@
+status: true
+dependencies:
+  config:
+    - block_content.type.megamenu
+    - field.storage.block_content.field_menu_sections
+    - paragraphs.paragraphs_type.submenu
+  module:
+    - entity_reference_revisions
+id: block_content.megamenu.field_menu_sections
+field_name: field_menu_sections
+entity_type: block_content
+bundle: megamenu
+label: 'Menu sections'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      submenu: submenu
+    negate: 0
+    target_bundles_drag_drop:
+      accordion_item:
+        weight: 25
+        enabled: false
+      cards:
+        weight: 26
+        enabled: false
+      featured_statement:
+        weight: 27
+        enabled: false
+      happening_now:
+        weight: 28
+        enabled: false
+      homepage_hero:
+        weight: 29
+        enabled: false
+      image:
+        weight: 30
+        enabled: false
+      image_cta:
+        weight: 31
+        enabled: false
+      impact:
+        weight: 32
+        enabled: false
+      impact_in_action_blocks:
+        weight: 33
+        enabled: false
+      listing_block:
+        weight: 34
+        enabled: false
+      narrative_taxonomy:
+        weight: 35
+        enabled: false
+      partner_logo:
+        weight: 36
+        enabled: false
+      person_listing:
+        weight: 37
+        enabled: false
+      program_lead_in:
+        weight: 38
+        enabled: false
+      side_by_side:
+        weight: 39
+        enabled: false
+      small_cta:
+        weight: 40
+        enabled: false
+      social_links_listing:
+        weight: 41
+        enabled: false
+      social_media_sites:
+        weight: 42
+        enabled: false
+      statistic:
+        weight: 43
+        enabled: false
+      statistics:
+        weight: 44
+        enabled: false
+      submenu:
+        weight: 45
+        enabled: true
+      superfeatured_item:
+        weight: 46
+        enabled: false
+      tab:
+        weight: 47
+        enabled: false
+      unique_feature_cta:
+        weight: 48
+        enabled: false
+field_type: entity_reference_revisions

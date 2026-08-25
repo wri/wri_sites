@@ -1,16 +1,18 @@
-langcode: en
 status: true
 dependencies:
   config:
     - system.menu.main
   module:
+    - system
     - wri_menus
   theme:
     - ts_wrin
+_core:
+  default_config_hash: 3xK82x49pjOtMb_GJVet2L10_9pBIKMQX6eohan2-0Y
 id: ts_wrin_main_menu
 theme: ts_wrin
 region: primary_nav
-weight: -12
+weight: -20
 provider: null
 plugin: 'parent_menu_block:main'
 settings:
@@ -20,6 +22,7 @@ settings:
   provider: wri_menus
   follow: 1
   follow_parent: active
+  display_empty: false
   level: '1'
   depth: '2'
   expand_all_items: false
@@ -28,4 +31,10 @@ settings:
   suggestion: main
   label_type: block
   label_link: 0
-visibility: {  }
+  hide_on_nonactive: 0
+  add_class: ''
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: /testing-2026-menu
