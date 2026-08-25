@@ -6,8 +6,6 @@ dependencies:
     - system
   theme:
     - ts_wrin
-_core:
-  default_config_hash: 5CC7zWG2WNP5I0fANzucvr9dcOzPgWcQVmfmyctlnVs
 id: quicklinks
 theme: ts_wrin
 region: primary_nav

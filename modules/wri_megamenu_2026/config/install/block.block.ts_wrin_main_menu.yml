@@ -7,8 +7,6 @@ dependencies:
     - wri_menus
   theme:
     - ts_wrin
-_core:
-  default_config_hash: 3xK82x49pjOtMb_GJVet2L10_9pBIKMQX6eohan2-0Y
 id: ts_wrin_main_menu
 theme: ts_wrin
 region: primary_nav

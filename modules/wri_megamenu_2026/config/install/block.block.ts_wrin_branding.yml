@@ -4,8 +4,6 @@ dependencies:
     - system
   theme:
     - ts_wrin
-_core:
-  default_config_hash: 8AHaHBqOrKKYAksqLR1rUtV08UgOHiWG3kfV2gvziLA
 id: ts_wrin_branding
 theme: ts_wrin
 region: primary_nav
