@@ -197,11 +197,17 @@
       flex-basis: var(--mega-col-width-wide);
     }
 
-    &.has-sep {
-      border-left: 1px solid var(--mega-sep);
-      padding-left: var(--mega-col-gap);
-    }
+
   }
+
+
+  .has-sep {
+    height: 100%;
+    min-height: 230px;
+    border-left: 1px solid var(--mega-sep);
+    padding-left: var(--mega-col-gap);
+  }
+
 
   .field--name-field-text {
     color: var(--mega-text-secondary);
@@ -247,12 +253,16 @@
     }
 
     .views-field-field-type .field-content {
-      color: var(--mega-text-secondary);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+      display: inline-block;
+      width: fit-content;
+      padding: 3px 8px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.4px;
       text-transform: uppercase;
-      margin-bottom: 6px;
+      line-height: 1.2;
     }
 
     .views-field-title a {
@@ -273,8 +283,11 @@
       justify-content: flex-start;
 
       a {
-        color: var(--color-neutral-900);
+        color: var(--mega-text);
+        background: none;
         margin-left: 0;
+        padding: 0;
+        font-weight: normal;
       }
 
       &__line {
@@ -299,7 +312,6 @@
     ul.menu {
       list-style: none;
       margin: 0;
-      padding: 0;
     }
 
     li.menu-item {
@@ -311,7 +323,6 @@
 
       > a,
       > button {
-        @include font(var(--font-family-heading), "regular", "normal");
         -webkit-appearance: none;
         background: transparent;
         border: 0;
@@ -321,7 +332,7 @@
         align-items: center;
         justify-content: space-between;
         gap: 8px;
-        font-size: 15px;
+        font-size: 16px;
         padding: 10px 12px;
         border-radius: 6px;
         text-align: left;
@@ -386,7 +397,6 @@
   .mega-col-flyout-region {
     position: relative;
     flex: 1 1 auto;
-    min-height: 230px;
   }
 
   // Flyout columns (depth 1+). Positioned relative to whichever of the two
@@ -399,6 +409,13 @@
       (var(--depth, 1) - 1) * (var(--mega-col-width) + var(--mega-col-gap))
     );
     width: var(--mega-col-width);
+
+    // Depth-2 columns get one extra gap of offset. depth is fixed at 2 by
+    // the selector, so this is just the depth-1 offset (1 width + 1 gap)
+    // plus the extra gap, rather than re-deriving it from --depth.
+    &[style*="--depth: 2;"] {
+      left: calc(var(--mega-col-width) + (2 * var(--mega-col-gap)));
+    }
   }
 
   // ---------------------------------------------------------------------

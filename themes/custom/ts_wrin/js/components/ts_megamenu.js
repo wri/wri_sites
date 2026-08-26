@@ -206,7 +206,7 @@
 
         if (btn && nested) {
           nested.hidden = true;
-          nested.classList.add("mega-flyout");
+          nested.classList.add("mega-flyout", "has-sep");
           nested.style.setProperty("--depth", String(depth));
           registry.set(li, { btn: btn, nested: nested, depth: depth });
           btn.setAttribute("aria-expanded", "false");
