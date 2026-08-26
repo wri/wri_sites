@@ -226,6 +226,10 @@
     // at the low end of the fluid range.
     flex-basis: var(--mega-col-width-wide);
 
+    .field__item__label {
+      @extend .tag;
+    }
+
     // Reset any sitewide utility class layouts.
     .views-element-container,
     .view-content,
@@ -244,12 +248,8 @@
 
     // Reset item-list.css
     .item-list li {
-      margin: 0;
+      margin: 22px 0 0;
       padding: 0;
-
-      & + li {
-        margin-top: 22px;
-      }
     }
 
     .views-field-field-type .field-content {
