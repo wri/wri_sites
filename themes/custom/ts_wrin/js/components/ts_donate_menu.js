@@ -8,6 +8,9 @@
  * top-level open/close, just without any drill-down levels, since this
  * menu is a single flat list rather than a recursive tree.
  *
+ * Also matches #block-donate-2026, the duplicate "Donate 2026" block
+ * shown only on /testing-2026-menu.
+ *
  * No Twig changes required — the trigger button and dropdown wrapper are
  * both built here from the block's existing markup (same approach
  * megamenu.js uses to build .mega-grid without needing template changes).
@@ -24,7 +27,11 @@
 
   Drupal.behaviors.wriDonateMenu = {
     attach: function (context) {
-      once("wri-donate-menu", "#block-donate", context).forEach(
+      once(
+        "wri-donate-menu",
+        "#block-donate-2026",
+        context,
+      ).forEach(
         function (root) {
           initDonateMenu(root);
         },

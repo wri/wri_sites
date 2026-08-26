@@ -468,13 +468,13 @@
     }
   }
 
-  header nav.menu--donate > ul.menu {
+  header nav#block-donate-2026 > ul.menu {
     margin-bottom: 0;
     margin-left: var(--spacer-4);
     margin-right: var(--spacer-4);
   }
 
-  header nav.menu--donate > ul.menu > li > a {
+  header nav#block-donate-2026 > ul.menu > li > a {
     border: 1px solid var(--color-neutral-900);
     line-height: 1;
     height: 33px;
@@ -489,14 +489,14 @@
   // ---------------------------------------------------------------------
   // Donate dropdown — enhanced by donate-menu.js from the block above.
   // ---------------------------------------------------------------------
-  #block-donate {
+  #block-donate-2026 {
     position: relative;
   }
 
-  .menu--donate h2 {
+  #block-donate-2026 h2 {
     opacity: 0;
   }
-  .menu--donate ul {
+  #block-donate-2026 ul {
     display: none;
   }
 
