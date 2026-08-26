@@ -1,0 +1,29 @@
+/**
+ * @file
+ * Standalone Sass entry for the new .wri-megamenu / .wri-mobile-nav system
+ * (see megamenu library in ts_wrin.libraries.yml). Split out of style.scss
+ * so it compiles to its own CSS file and only loads on pages that render
+ * the megamenu block, rather than shipping in main.css on every page.
+ *
+ * Re-imports the same tokens/tailwind/config partials style.scss pulls in
+ * before global/megamenu.scss and global/megamenu-mobile.scss, since those
+ * two files depend on the mq()/font()/font-line-height()/hocus() mixins,
+ * the $md/$lg breakpoint vars, and the .tag class (via @extend) that
+ * style.scss normally provides.
+ */
+
+/* Tokens first (CSS vars) */
+@import "_elements/_tokens.css";
+
+@tailwind base;
+@tailwind components;
+@import "tailwind-components.scss";
+@tailwind utilities;
+
+/* CONFIG */
+@import "config/_01.vars.scss";
+@import "config/_02.mixins.scss";
+
+/* GLOBAL */
+@import "global/megamenu.scss";
+@import "global/megamenu-mobile.scss";

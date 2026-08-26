@@ -1,0 +1,23 @@
+wri_megamenu_2026.settings:
+  type: config_object
+  label: 'WRI Megamenu 2026 settings'
+  mapping:
+    enable_everywhere:
+      type: boolean
+      label: 'Enable everywhere'
+    block_overrides:
+      type: sequence
+      label: 'Original request_path visibility for blocks toggled by Enable everywhere, so unchecking it can restore them exactly'
+      sequence:
+        type: mapping
+        label: 'Block visibility snapshot'
+        mapping:
+          id:
+            type: string
+            label: 'Block ID'
+          negate:
+            type: boolean
+            label: 'Original negate value'
+          pages:
+            type: string
+            label: 'Original pages value'

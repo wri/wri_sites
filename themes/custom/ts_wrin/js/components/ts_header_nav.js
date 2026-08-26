@@ -2,30 +2,14 @@
  * @file
  * TS Header Nav custom JS.
  *
- * Trimmed down from the original ts_header_nav.js: removed everything that
- * only existed to drive the old .hamburger-content / .hamburger-slider
- * system (now retired in favor of .wri-megamenu + megamenu-mobile.js).
- * That included:
- *   - toggleMenu() and its .menu-toggle / .mega_menu_close click bindings
- *     — this was directly competing with megamenu-mobile.js for clicks on
- *     .menu-toggle, since neither script excluded the other's handler.
- *   - slideOut() / sliderCleanUp() / sliderMenus() and their resize
- *     listener — operated on .hamburger-content, .hamburger-slider,
- *     .menu--footer-secondary, .menu--mega-menu, none of which exist once
- *     .region-hamburger-nav is gone.
- *   - The quicklinks side-scroll-arrow block (.hamburger-content
- *     .nav-arrow acting on #block-quicklinks-2026) — that was scroll-arrow
- *     behavior for the old horizontal quicklinks strip inside the old
- *     hamburger nav. #block-quicklinks-2026 is now permanently display:none
- *     (it's a pure data source for megamenu-mobile.js), so this was
- *     measuring width/scrollLeft on a hidden element on every resize.
- *
- * NOT verified: whether any other CSS on the site keys off
- * .header-wrapper.menu-open or body.fixed for something unrelated to the
- * removed hamburger slider. These were removed on the assumption they
- * existed only to support it — worth a quick grep before deploying.
- *
- * Everything below is untouched from the original file.
+ * The old .hamburger-content / .hamburger-slider system (toggleMenu(),
+ * the mega-menu slide-out panels, and the quicklinks side-scroll arrow)
+ * moved out of this file into its own library, ts_hamburger_nav_legacy.js
+ * — see that file and hamburger_nav_legacy in ts_wrin.libraries.yml. It's
+ * attached only from region--hamburger-nav.html.twig, so it loads
+ * alongside the new .wri-megamenu + megamenu-mobile.js system only on
+ * pages that still render the old hamburger_nav region, until the #532
+ * swap is complete.
  */
 
 export default function (context) {
