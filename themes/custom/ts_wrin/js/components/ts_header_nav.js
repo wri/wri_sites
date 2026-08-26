@@ -14,9 +14,9 @@
  *     .menu--footer-secondary, .menu--mega-menu, none of which exist once
  *     .region-hamburger-nav is gone.
  *   - The quicklinks side-scroll-arrow block (.hamburger-content
- *     .nav-arrow acting on #block-quicklinks) — that was scroll-arrow
+ *     .nav-arrow acting on #block-quicklinks-2026) — that was scroll-arrow
  *     behavior for the old horizontal quicklinks strip inside the old
- *     hamburger nav. #block-quicklinks is now permanently display:none
+ *     hamburger nav. #block-quicklinks-2026 is now permanently display:none
  *     (it's a pure data source for megamenu-mobile.js), so this was
  *     measuring width/scrollLeft on a hidden element on every resize.
  *

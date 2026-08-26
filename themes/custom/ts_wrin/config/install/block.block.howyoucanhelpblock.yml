@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - wri_block
+  theme:
+    - ts_wrin
+id: howyoucanhelpblock
+theme: ts_wrin
+region: footer_top
+weight: 0
+provider: null
+plugin: how_you_can_help
+settings:
+  id: how_you_can_help
+  label: 'How You Can Help Block'
+  provider: wri_block
+  label_display: '0'
+  title: 'How You Can Help'
+  description: 'Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.'
+  first_button_url: 'https://www.wri.org/donate-now'
+  first_button_text: Donate
+  second_button_url: 'https://www.wri.org/support'
+  second_button_text: 'Ways to Give'
+  third_button_url: 'http://www.wri.org/support#charity_ratings'
+  third_button_text: 'Charity Ratings'
+visibility: {  }

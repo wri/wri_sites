@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - wri_menus
+  theme:
+    - ts_wrin
+id: ts_wrin_main_menu
+theme: ts_wrin
+region: primary_nav
+weight: -12
+provider: null
+plugin: 'parent_menu_block:main'
+settings:
+  id: 'menu_block:main'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: wri_menus
+  follow: 1
+  follow_parent: active
+  level: '1'
+  depth: '2'
+  expand_all_items: false
+  parent: 'main:'
+  render_parent: 1
+  suggestion: main
+  label_type: block
+  label_link: 0
+visibility: {  }

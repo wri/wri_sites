@@ -1,0 +1,14 @@
+features:
+  node_user_picture: true
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: 1
+logo:
+  use_default: 0
+  path: profiles/contrib/wri_sites/themes/custom/ts_wrin/img/svgs/nav_logo_color.svg
+favicon:
+  use_default: 1
+white_logo:
+  use_default: 0
+  path: profiles/contrib/wri_sites/themes/custom/ts_wrin/img/svgs/nav_logo_white.svg
+logo_link: ''

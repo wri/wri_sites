@@ -14,7 +14,7 @@
  * than an injected/Twig-authored button of our own — its old click
  * handler (which used to open the now-retired .region-hamburger-nav
  * slider) needs to be removed on the Drupal/theme side so it isn't still
- * firing alongside this. #block-quicklinks lives inside .wri-megamenu
+ * firing alongside this. #block-quicklinks-2026 lives inside .wri-megamenu
  * (moved there per the Quick Links block placement change).
  *
  * .menu-toggle doesn't carry aria-haspopup/aria-expanded/aria-controls in
@@ -357,7 +357,7 @@
 
   /**
    * Walks the real (possibly hidden) .wri-megamenu DOM and the real
-   * #block-quicklinks menu to build the tree the renderer above expects,
+   * #block-quicklinks-2026 menu to build the tree the renderer above expects,
    * instead of a second hand-maintained copy of the menu structure.
    */
   function buildMenuData(root) {
@@ -496,15 +496,15 @@
     };
   }
 
-  // #block-quicklinks now lives inside .wri-megamenu itself. Checking
+  // #block-quicklinks-2026 now lives inside .wri-megamenu itself. Checking
   // root first (the real, current structure) with a couple of safety-net
   // fallbacks in case it ends up a level up instead — keeps this working
   // either way without needing another edit here if placement shifts again.
   function extractQuicklinks(root) {
-    var scope = root.querySelector("#block-quicklinks")
+    var scope = root.querySelector("#block-quicklinks-2026")
       ? root
       : root.closest(".region-primary-nav") || document;
-    var list = scope.querySelector("#block-quicklinks .menu-wrapper ul.menu");
+    var list = scope.querySelector("#block-quicklinks-2026 .menu-wrapper ul.menu");
     if (!list) {
       return [];
     }

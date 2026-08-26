@@ -17,13 +17,13 @@
 // anything until megamenu.js has run.
 // =============================================================================
 
-// #block-quicklinks lives in .region-primary-nav as a sibling of
+// #block-quicklinks-2026 lives in .region-primary-nav as a sibling of
 // .wri-megamenu (moved there per the Quick Links block placement change).
 // megamenu-mobile.js reads its content purely as a data source for the
 // mobile overlay's own "Quicklinks" section — the real, live block should
 // never render itself. Without this it was showing up unstyled at every
 // viewport width, including desktop.
-.region-primary-nav #block-quicklinks {
+.region-primary-nav #block-quicklinks-2026 {
   display: none;
 }
 
