@@ -18,9 +18,9 @@ content:
     type: viewfield_token
     label: hidden
     settings:
-      view_title: hidden
-      always_build_output: false
+      view_title: above
       empty_view_title: hidden
+      always_build_output: 0
     third_party_settings: {  }
     weight: 2
     region: content
