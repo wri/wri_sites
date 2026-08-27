@@ -496,6 +496,11 @@
     }
   }
 
+  .header-right {
+    position: relative;
+    top: -3px;
+  }
+
   // ---------------------------------------------------------------------
   // Donate dropdown — enhanced by donate-menu.js from the block above.
   // ---------------------------------------------------------------------
@@ -532,7 +537,6 @@
     text-decoration: none;
     text-transform: uppercase;
     transition: all 0.2s linear;
-    top: -3px;
     width: 76px;
 
     .path-frontpage &,
