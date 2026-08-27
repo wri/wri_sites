@@ -73,6 +73,10 @@
 }
 
 .wri-megamenu {
+  display: none;
+  @include mq($lg) {
+    display: block;
+  }
   // ---------------------------------------------------------------------
   // Layout-only tokens — desktop's side-by-side column grid. Not shared
   // with .wri-mobile-nav above: the mobile overlay uses full-screen
@@ -227,7 +231,13 @@
     flex-basis: var(--mega-col-width-wide);
 
     .field__item__label {
-      @extend .tag;
+      // Inlined from .tag (tailwind-components.scss) — see megamenu.scss.
+      font-family: var(--font-family-heading);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.9px;
+      line-height: 1.2;
+      text-transform: uppercase;
     }
 
     // Reset any sitewide utility class layouts.
@@ -446,9 +456,9 @@
     }
 
     @include mq($md) {
-      flex-wrap: wrap;
       gap: 16px;
       justify-content: flex-start;
+      margin-right: 10px;
 
       .wri-megamenu .field__items {
         display: flex;
@@ -491,13 +501,15 @@
   // ---------------------------------------------------------------------
   #block-donate-2026 {
     position: relative;
+    display: none;
+
+    @include mq($lg) {
+      display: block;
+    }
   }
 
   #block-donate-2026 h2 {
     opacity: 0;
-  }
-  #block-donate-2026 ul {
-    display: none;
   }
 
   .donate-menu__trigger {
@@ -571,7 +583,7 @@
     }
   }
 
-  .header-wrapper button.tray-toggle {
+  .header-wrapper button.tray-toggle.filter-toggle {
     top: 6px;
     @include mq($lg) {
       top: -4px;
@@ -590,29 +602,8 @@
     }
   }
 
-  .header-wrapper .header-right .tray-toggle.search-toggle {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    border-radius: 6px;
-
-    &:hover,
-    &:focus {
-      background-color: var(--color-neutral-200);
-    }
-  }
-
-  .header-wrapper .header-right .tray-toggle.search-toggle svg {
-    width: 25px;
-  }
-
-  .header-wrapper .header-right .tray-toggle.search-toggle {
-    &:hover svg path,
-    &:focus svg path {
-      fill: var(--color-neutral-900);
-      stroke: var(--color-neutral-900);
-    }
-  }
+  // Search-toggle button styling now lives, unscoped, in _header.scss so
+  // it applies to every search-toggle button, not just this page.
 
   .tray-toggle.filter-toggle {
     display: none;
