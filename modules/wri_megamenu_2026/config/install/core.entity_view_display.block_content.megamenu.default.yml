@@ -1,0 +1,24 @@
+status: true
+dependencies:
+  config:
+    - block_content.type.megamenu
+    - field.field.block_content.megamenu.field_menu_sections
+  module:
+    - entity_reference_revisions
+id: block_content.megamenu.default
+targetEntityType: block_content
+bundle: megamenu
+mode: default
+content:
+  field_menu_sections:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

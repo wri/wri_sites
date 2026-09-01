@@ -1,0 +1,28 @@
+status: true
+dependencies:
+  content:
+    - 'block_content:megamenu:9fbc1fc8-82c3-4c46-a0c5-86758e654041'
+  module:
+    - block_content
+    - system
+  theme:
+    - ts_wrin
+id: ts_wrin_megamenu2026_2
+theme: ts_wrin
+region: primary_nav
+weight: -19
+provider: null
+plugin: 'block_content:9fbc1fc8-82c3-4c46-a0c5-86758e654041'
+settings:
+  id: 'block_content:9fbc1fc8-82c3-4c46-a0c5-86758e654041'
+  label: 'Mega menu 2026'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /testing-2026-menu

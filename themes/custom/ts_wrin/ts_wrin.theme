@@ -74,28 +74,35 @@ function ts_wrin_preprocess_html(array &$variables) {
       $variables["html_attributes"]->addClass('html-' . Html::getClass($node->getType()));
       $variables['attributes']['class'][] = Html::getClass($node->getTitle());
 
+      // The 2026 megamenu header isn't designed for a transparent/white
+      // treatment, so once "Enable everywhere" (wri_megamenu_2026.settings)
+      // is on and the new header shows site-wide, skip adding these classes.
+      $megamenu_enabled_everywhere = (bool) \Drupal::config('wri_megamenu_2026.settings')->get('enable_everywhere');
+
       switch ($node->getType()) {
         case 'program_center':
         case 'microsite':
         case 'project_detail':
-          $variables['attributes']['class'][] = 'transparent-header white';
+          if (!$megamenu_enabled_everywhere) {
+            $variables['attributes']['class'][] = 'transparent-header white';
+          }
           break;
 
         case 'subpage':
           $parent_page = $node->get('field_parent_page')->entity;
-          if ($parent_page instanceof NodeInterface && $parent_page->getType() != 'custom_page') {
+          if (!$megamenu_enabled_everywhere && $parent_page instanceof NodeInterface && $parent_page->getType() != 'custom_page') {
             $variables['attributes']['class'][] = 'transparent-header white';
           }
           break;
 
         case 'publication':
-          if ($node->get('field_toc')->getValue() && $node->get('field_publication_display')->getString() == 'robust') {
+          if (!$megamenu_enabled_everywhere && $node->get('field_toc')->getValue() && $node->get('field_publication_display')->getString() == 'robust') {
             $variables['attributes']['class'][] = 'transparent-header white';
           }
           break;
 
         case 'event':
-          if ($node->get('field_event_display')->getString() == 'robust') {
+          if (!$megamenu_enabled_everywhere && $node->get('field_event_display')->getString() == 'robust') {
             $variables['attributes']['class'][] = 'transparent-header white';
           }
 
@@ -143,6 +150,24 @@ function ts_wrin_preprocess_paragraph(array &$variables) {
   // Person listing blocks do this automatically.
   if ($variables['paragraph']->getType() == 'person_listing') {
     $variables["elements"]["field_block"][0]["field_featured_experts"]['#object']->overridden_label = $variables["elements"]["field_block"][0]["#block_content"]->info->value ?? NULL;
+  }
+  // Get the name of the menu item based on its id
+  if ($variables['paragraph']->getType() == 'submenu') {
+    // Load the menu item by its uuid.
+    /** @var \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository */
+    $entity_repository = \Drupal::service('entity.repository');
+    $variables['menu_uuid'] = $variables['paragraph']->get('field_parent_menu_item')->value ?? NULL;
+    $variables['menu_title'] = '';
+
+    if ($variables['menu_uuid']) {
+      /** @var \Drupal\menu_link_content\Entity\MenuLinkContent|null $menu_item */
+      $menu_item = $entity_repository->loadEntityByUuid('menu_link_content', $variables['menu_uuid']);
+
+      if ($menu_item) {
+        // Access your menu item data
+        $variables['menu_title'] = $menu_item->getTitle();
+      }
+    }
   }
 }
 

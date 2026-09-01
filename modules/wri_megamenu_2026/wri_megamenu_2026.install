@@ -1,0 +1,375 @@
+<?php
+
+/**
+ * @file
+ * Update hooks for wri_megamenu_2026
+ */
+
+function wri_megamenu_2026_update_12503() {
+  \Drupal::service('distro_helper.updates')->updateConfig('block.block.donate', [
+    'status',
+    'dependencies',
+    'id',
+    'theme',
+    'region',
+    'weight',
+    'provider',
+    'plugin',
+    'settings',
+    'visibility',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12504() {
+  \Drupal::service('distro_helper.updates')->updateConfig('block.block.quicklinks', [
+    'status',
+    'dependencies',
+    'id',
+    'theme',
+    'region',
+    'weight',
+    'provider',
+    'plugin',
+    'settings',
+    'visibility',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12505() {
+  \Drupal::service('distro_helper.updates')->updateConfig('block.block.secondarynavigation', [
+    'status',
+    'dependencies',
+    'id',
+    'theme',
+    'region',
+    'weight',
+    'provider',
+    'plugin',
+    'settings',
+    'visibility',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12506() {
+  \Drupal::service('distro_helper.updates')->updateConfig('block.block.ts_wrin_branding', [
+    'status',
+    'dependencies',
+    'id',
+    'theme',
+    'region',
+    'weight',
+    'provider',
+    'plugin',
+    'settings',
+    'visibility',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12507() {
+  \Drupal::service('distro_helper.updates')->updateConfig('block.block.ts_wrin_main_menu', [
+    'status',
+    'dependencies',
+    'id',
+    'theme',
+    'region',
+    'weight',
+    'provider',
+    'plugin',
+    'settings',
+    'visibility',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12508() {
+  \Drupal::service('distro_helper.updates')->updateConfig('block.block.ts_wrin_megamenu2026_2', [
+    'status',
+    'dependencies',
+    'id',
+    'theme',
+    'region',
+    'weight',
+    'provider',
+    'plugin',
+    'settings',
+    'visibility',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12509() {
+  \Drupal::service('distro_helper.updates')->updateConfig('block_content.type.megamenu', [
+    'status',
+    'dependencies',
+    'id',
+    'label',
+    'revision',
+    'description',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12510() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.block_content.megamenu.default', [
+    'status',
+    'dependencies',
+    'id',
+    'targetEntityType',
+    'bundle',
+    'mode',
+    'content',
+    'hidden',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12511() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.paragraph.submenu.default', [
+    'status',
+    'dependencies',
+    'id',
+    'targetEntityType',
+    'bundle',
+    'mode',
+    'content',
+    'hidden',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12512() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.block_content.megamenu.default', [
+    'status',
+    'dependencies',
+    'id',
+    'targetEntityType',
+    'bundle',
+    'mode',
+    'content',
+    'hidden',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12513() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.paragraph.submenu.default', [
+    'status',
+    'dependencies',
+    'id',
+    'targetEntityType',
+    'bundle',
+    'mode',
+    'content',
+    'hidden',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12514() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.paragraph.submenu.preview', [
+    'status',
+    'dependencies',
+    'id',
+    'targetEntityType',
+    'bundle',
+    'mode',
+    'content',
+    'hidden',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12515() {
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.megamenu.field_menu_sections', [
+    'status',
+    'dependencies',
+    'id',
+    'field_name',
+    'entity_type',
+    'bundle',
+    'label',
+    'description',
+    'required',
+    'translatable',
+    'default_value',
+    'default_value_callback',
+    'settings',
+    'field_type',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12516() {
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.submenu.field_custom_featured', [
+    'status',
+    'dependencies',
+    'id',
+    'field_name',
+    'entity_type',
+    'bundle',
+    'label',
+    'description',
+    'required',
+    'translatable',
+    'default_value',
+    'default_value_callback',
+    'settings',
+    'field_type',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12517() {
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.submenu.field_listing', [
+    'status',
+    'dependencies',
+    'id',
+    'field_name',
+    'entity_type',
+    'bundle',
+    'label',
+    'description',
+    'required',
+    'translatable',
+    'default_value',
+    'default_value_callback',
+    'settings',
+    'field_type',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12518() {
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.submenu.field_parent_menu_item', [
+    'status',
+    'dependencies',
+    'id',
+    'field_name',
+    'entity_type',
+    'bundle',
+    'label',
+    'description',
+    'required',
+    'translatable',
+    'default_value',
+    'default_value_callback',
+    'settings',
+    'field_type',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12519() {
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.paragraph.submenu.field_text', [
+    'status',
+    'dependencies',
+    'id',
+    'field_name',
+    'entity_type',
+    'bundle',
+    'label',
+    'description',
+    'required',
+    'translatable',
+    'default_value',
+    'default_value_callback',
+    'settings',
+    'field_type',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12520() {
+  \Drupal::service('distro_helper.updates')->updateConfig('field.storage.block_content.field_menu_sections', [
+    'status',
+    'dependencies',
+    'id',
+    'field_name',
+    'entity_type',
+    'type',
+    'settings',
+    'module',
+    'locked',
+    'cardinality',
+    'translatable',
+    'indexes',
+    'persist_with_no_fields',
+    'custom_storage',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12521() {
+  \Drupal::service('distro_helper.updates')->updateConfig('field.storage.paragraph.field_custom_featured', [
+    'status',
+    'dependencies',
+    'id',
+    'field_name',
+    'entity_type',
+    'type',
+    'settings',
+    'module',
+    'locked',
+    'cardinality',
+    'translatable',
+    'indexes',
+    'persist_with_no_fields',
+    'custom_storage',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12522() {
+  \Drupal::service('distro_helper.updates')->updateConfig('field.storage.paragraph.field_parent_menu_item', [
+    'status',
+    'dependencies',
+    'id',
+    'field_name',
+    'entity_type',
+    'type',
+    'settings',
+    'module',
+    'locked',
+    'cardinality',
+    'translatable',
+    'indexes',
+    'persist_with_no_fields',
+    'custom_storage',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12523() {
+  \Drupal::service('distro_helper.updates')->updateConfig('language.content_settings.block_content.megamenu', [
+    'status',
+    'dependencies',
+    'id',
+    'target_entity_type_id',
+    'target_bundle',
+    'default_langcode',
+    'language_alterable',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12524() {
+  \Drupal::service('distro_helper.updates')->updateConfig('paragraphs.paragraphs_type.submenu', [
+    'status',
+    'dependencies',
+    'id',
+    'label',
+    'icon_uuid',
+    'icon_default',
+    'description',
+    'behavior_plugins',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12525() {
+  \Drupal::service('distro_helper.updates')->updateConfig('system.menu.main-menu-2026', [
+    'status',
+    'dependencies',
+    'id',
+    'label',
+    'description',
+    'locked',
+  ], 'wri_megamenu_2026', 'install');
+}
+
+function wri_megamenu_2026_update_12526() {
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.featured_menu_items', [
+    'status',
+    'dependencies',
+    'id',
+    'label',
+    'module',
+    'description',
+    'tag',
+    'base_table',
+    'base_field',
+    'display',
+  ], 'wri_megamenu_2026', 'install');
+}

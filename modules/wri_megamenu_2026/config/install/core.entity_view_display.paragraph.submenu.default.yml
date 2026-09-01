@@ -1,0 +1,52 @@
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.submenu.field_custom_featured
+    - field.field.paragraph.submenu.field_listing
+    - field.field.paragraph.submenu.field_parent_menu_item
+    - field.field.paragraph.submenu.field_text
+    - paragraphs.paragraphs_type.submenu
+  module:
+    - ds
+    - wri_admin
+id: paragraph.submenu.default
+targetEntityType: paragraph
+bundle: submenu
+mode: default
+content:
+  field_listing:
+    type: viewfield_token
+    label: hidden
+    settings:
+      view_title: above
+      empty_view_title: hidden
+      always_build_output: 0
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_parent_menu_item:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_text:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    weight: 1
+    region: content
+hidden:
+  field_custom_featured: true
+  search_api_excerpt: true

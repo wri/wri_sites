@@ -50,7 +50,7 @@
             "drupal/entity_share": {
                 "Call to a member function hasField() on null in SkipImported https://www.drupal.org/project/entity_share/issues/3569090": "https://git.drupalcode.org/project/entity_share/-/merge_requests/165.diff",
                 "Layout Builder import patch: https://www.drupal.org/project/entity_share/issues/3084184": "https://git.drupalcode.org/project/entity_share/-/merge_requests/96.diff?v=1",
-                "Paragraphs parent IDs are wrong https://www.drupal.org/project/entity_share/issues/3445703":"https://www.drupal.org/files/issues/2024-05-08/entity_share-parent-id-3445703-2.patch"
+                "Paragraphs parent IDs are wrong https://www.drupal.org/project/entity_share/issues/3445703": "https://www.drupal.org/files/issues/2024-05-08/entity_share-parent-id-3445703-2.patch"
             },
             "drupal/facets": {
                 "Add dependency support for exposed facet filters (Can be dropped in Drupal 11) https://www.drupal.org/project/facets/issues/3592014": "https://raw.githubusercontent.com/wri/wri_sites/refs/heads/main/patches/facets--dependent-exposed-filters--3592014.patch"
@@ -82,6 +82,9 @@
             },
             "drupal/views_bulk_edit": {
                 "Fix Required fields to really not be required https://www.drupal.org/node/3024419": "https://www.drupal.org/files/issues/2024-01-10/views_bulk_edit-3024419-fix_required_fields-57.patch"
+            },
+            "drupal/viewfield": {
+                "View title is HTML-double-encoded when shown via the field label (e.g. &amp; becomes &amp;amp;) https://www.drupal.org/project/viewfield/issues/3619319": "https://git.drupalcode.org/project/viewfield/-/merge_requests/26.diff"
             },
             "drupal/views_extras": {
                 "Why does Views Extras require Drupal_Visitors to be part of the cookie name? https://www.drupal.org/project/views_extras/issues/3054202" : "https://www.drupal.org/files/issues/2024-01-03/3054202-11.patch"

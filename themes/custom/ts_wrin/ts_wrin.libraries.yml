@@ -33,3 +33,22 @@ key_takeaways:
   dependencies:
     - core/drupal
     - core/once
+
+hamburger_nav_legacy:
+  js:
+    js/components/ts_hamburger_nav_legacy.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - jquery_once/jquery.once
+
+megamenu:
+  version: VERSION
+  css:
+    theme:
+      dist/megamenu.css: {}
+  js:
+    dist/megamenu.min.js: {}
+  dependencies:
+    - core/drupal
+    - core/once

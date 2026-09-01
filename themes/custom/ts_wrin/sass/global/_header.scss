@@ -37,7 +37,7 @@ header:not(.pfp-header) {
   top: 0;
   transition: all 0.2s linear;
   width: 100%;
-  z-index: 10;
+  z-index: 100;
 
   @include mq($md) {
     padding-bottom: var(--spacer-7);
@@ -167,6 +167,31 @@ header:not(.pfp-header) {
   .tray-toggle.language-toggle svg {
     width: 50px;
   }
+
+  // Search-toggle button treatment — was scoped to `.testing-2026-menu`
+  // (see _megamenu.scss); now applies to every search-toggle button.
+  .header-right .tray-toggle.search-toggle {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    border-radius: 6px;
+
+    svg {
+      width: 25px;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: var(--color-neutral-200);
+    }
+
+    &:hover svg path,
+    &:focus svg path {
+      fill: var(--color-neutral-900);
+      stroke: var(--color-neutral-900);
+    }
+  }
+
   .tray-toggle.filter-toggle {
     position: relative;
     border-radius: 5px;

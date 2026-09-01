@@ -163,41 +163,85 @@ final class WriCommonCommands extends DrushCommands {
     $filename = basename($absoluteSourcePath);
     $profileBase = $this->profileDirectory;
 
-    $destPath = $this->findFileInDirectory($profileBase, $filename);
-    if ($destPath === NULL) {
-      if (!$this->input()->isInteractive()) {
-        $this->logger()->warning("No file named '$filename' found under $profileBase — skipped.");
-        return;
-      }
-      $destPath = $this->askForModuleDestination($profileBase, $filename);
-      if ($destPath === NULL) {
-        return;
-      }
-      $dir = dirname($destPath);
-      if (!is_dir($dir)) {
-        mkdir($dir, 0755, TRUE);
-      }
-    }
-
-    $oldContent = file_get_contents($destPath) ?: '';
+    // Restricted to modules/ specifically — never the whole profile tree.
+    // This tool only ever syncs into the per-site custom modules that
+    // carry update hooks; themes/ (and anything else under the profile)
+    // is out of scope entirely, regardless of whether some other copy of
+    // this filename happens to exist there.
+    $modulesRoot = rtrim($profileBase, '/') . '/modules';
+    $destPaths = is_dir($modulesRoot) ? $this->findAllFilesInDirectory($modulesRoot, $filename) : [];
 
     $content = file_get_contents($absoluteSourcePath);
     $filtered = $this->stripTopLevelKeys($content, ['uuid', 'langcode']);
     $filtered = $this->stripField('field_share_with_io', $filtered);
 
-    if (file_put_contents($destPath, $filtered) === FALSE) {
-      throw new \RuntimeException("Could not write to: $destPath");
+    // oldContent per path, used later for hook key-diffing. A brand-new
+    // destination has no "old" content to diff against by definition —
+    // don't attempt to read a file that doesn't exist yet.
+    $oldContentByPath = [];
+
+    if (empty($destPaths)) {
+      if (!$this->input()->isInteractive()) {
+        $this->logger()->warning("No file named '$filename' found under any module in $profileBase — skipped.");
+        return;
+      }
+      $newDestPath = $this->askForModuleDestination($profileBase, $filename);
+      if ($newDestPath === NULL) {
+        return;
+      }
+      $dir = dirname($newDestPath);
+      if (!is_dir($dir)) {
+        mkdir($dir, 0755, TRUE);
+      }
+      $destPaths = [$newDestPath];
+      $oldContentByPath[$newDestPath] = '';
+    }
+    else {
+      foreach ($destPaths as $path) {
+        $oldContentByPath[$path] = file_get_contents($path) ?: '';
+      }
     }
 
-    $this->io()->writeln("  Synced: $filename");
+    foreach ($destPaths as $path) {
+      if (file_put_contents($path, $filtered) === FALSE) {
+        throw new \RuntimeException("Could not write to: $path");
+      }
+      $this->io()->writeln("  Synced: " . $this->relativeToProfile($path));
+    }
 
-    if ($writeUpdateHook) {
-      $configName = basename($filename, '.yml');
-      [$module, $directory] = $this->resolveModuleAndDirectory($destPath);
-      $installFile = $this->resolveInstallFile($module, $destPath);
-      $hookCode = $this->generateUpdateHook($configName, $module, $directory, $oldContent, $filtered, $installFile);
+    if (!$writeUpdateHook) {
+      return;
+    }
+
+    // Every path here is guaranteed to be under modules/ (either found
+    // there, or just created there above), so resolveModuleAndDirectory()
+    // always succeeds — no "which module should own this" prompt needed
+    // beyond the one askForModuleDestination() already handled above for
+    // a config file that didn't exist under any module yet.
+    $configName = basename($filename, '.yml');
+    foreach ($destPaths as $path) {
+      [$module, $directory] = $this->resolveModuleAndDirectory($path);
+      $installFile = $this->resolveInstallFile($module);
+      $hookCode = $this->generateUpdateHook($configName, $module, $directory, $oldContentByPath[$path], $filtered, $installFile);
       $this->appendUpdateHook($installFile, $hookCode);
     }
+  }
+
+  /**
+   * Shortens an absolute path to one relative to the profile directory,
+   * purely for more readable CLI output when a file exists in more than
+   * one place.
+   *
+   * @param string $path
+   *   Absolute path, expected to be under $this->profileDirectory.
+   *
+   * @return string
+   *   The path relative to the profile directory, or the original path
+   *   unchanged if it isn't actually under it.
+   */
+  protected function relativeToProfile(string $path): string {
+    $base = rtrim($this->profileDirectory, '/') . '/';
+    return str_starts_with($path, $base) ? substr($path, strlen($base)) : $path;
   }
 
   /**
@@ -318,26 +362,48 @@ final class WriCommonCommands extends DrushCommands {
   /**
    * Resolves the module name and config install directory for a config file.
    *
-   * For files inside a module's config dir the module name and subdirectory
-   * are extracted directly. For profile-level config a relative path from
-   * the module is used.
+   * Parses the module name and config subdirectory directly out of
+   * $destPath's own structure — it's always
+   * "{profile}/modules/MODULE/config/DIR/filename.yml", since
+   * processConfigFile() only ever calls this with a path that's already
+   * confirmed to be under modules/ (either found there, or just created
+   * there via askForModuleDestination()).
+   *
+   * Deliberately NOT using Drupal's ModuleExtensionList for this: that
+   * depends on extension-discovery cache being fresh, which is exactly
+   * the case most likely to be stale for a module that was only just
+   * created — precisely the situation this tool exists to help with. The
+   * profile's own directory convention (modules live directly under
+   * modules/, one segment deep) is simpler and doesn't depend on Drupal's
+   * bootstrap state at all.
    *
    * @param string $destPath
-   *   Absolute path to the destination yml file.
+   *   Absolute path to the destination yml file. Must be under
+   *   {profile}/modules/ — callers are responsible for that guarantee.
    *
    * @return array{0: string, 1: string}
    *   A [module, directory] tuple.
+   *
+   * @throws \RuntimeException
+   *   If $destPath isn't actually under {profile}/modules/ — a caller
+   *   contract violation, not a data problem this method should guess
+   *   its way around.
    */
   protected function resolveModuleAndDirectory(string $destPath): array {
-    if (preg_match('#/modules/([^/]+)/config/([^/]+)/#', $destPath, $m)) {
-      return [$m[1], $m[2]];
+    $modulesDir = rtrim($this->profileDirectory, '/') . '/modules/';
+    if (!str_starts_with($destPath, $modulesDir)) {
+      throw new \RuntimeException("Expected '$destPath' to be under '$modulesDir'.");
     }
+
+    $remainder = substr($destPath, strlen($modulesDir));
+    $module = explode('/', $remainder)[0];
+
+    $directory = 'install';
     if (preg_match('#/config/([^/]+)/#', $destPath, $m)) {
-      // Relative path from wri_common/config/ up to the profile's
-      // /config/<dir>/.
-      return ['wri_common', '../../../config/' . $m[1]];
+      $directory = $m[1];
     }
-    return ['wri_common', 'install'];
+
+    return [$module, $directory];
   }
 
   /**
@@ -404,19 +470,29 @@ final class WriCommonCommands extends DrushCommands {
   /**
    * Returns the path to a module's .install file, creating it if absent.
    *
+   * Locates the module's directory the same way resolveModuleAndDirectory()
+   * does — directly under {profile}/modules/$module — rather than via
+   * Drupal's ModuleExtensionList, which depends on extension-discovery
+   * cache being fresh. That's exactly the case most likely to be stale
+   * for a module that was only just created, which caused this to throw
+   * "couldn't resolve its module ownership" for a real, already-synced
+   * module directory.
+   *
    * @param string $module
    *   The module machine name.
-   * @param string $destPath
-   *   Absolute path to the destination config file, used to locate the module
-   *   directory.
    *
    * @return string
    *   Absolute path to the .install file.
+   *
+   * @throws \RuntimeException
+   *   If the module's directory doesn't exist under {profile}/modules/.
    */
-  protected function resolveInstallFile(string $module, string $destPath): string {
-    if (preg_match('#(.*?/modules/' . preg_quote($module, '#') . ')/#', $destPath, $m)) {
-      $moduleDir = $m[1];
+  protected function resolveInstallFile(string $module): string {
+    $moduleDir = rtrim($this->profileDirectory, '/') . '/modules/' . $module;
+    if (!is_dir($moduleDir)) {
+      throw new \RuntimeException("Module directory not found: $moduleDir");
     }
+
     $installFile = "$moduleDir/$module.install";
     if (!file_exists($installFile)) {
       file_put_contents($installFile, "<?php\n");
@@ -438,12 +514,30 @@ final class WriCommonCommands extends DrushCommands {
    * @return string|null
    *   The destination path, or NULL if the user cancels.
    */
-  protected function askForModuleDestination(string $profileBase, string $filename): ?string {
+  /**
+   * Prompts the user to pick a module and returns its config/install path.
+   *
+   * Uses the same Question + setAutocompleterValues pattern as drush generate.
+   *
+   * @param string $profileBase
+   *   Absolute path to the profile root directory.
+   * @param string $filename
+   *   The config filename to write (e.g. 'node.type.page.yml').
+   * @param string|null $note
+   *   Custom message explaining why the prompt is happening. Defaults to
+   *   the "file not found anywhere" message; pass a different one when
+   *   reusing this for a different reason (e.g. picking an update-hook
+   *   owner for base-build config that already exists elsewhere).
+   *
+   * @return string|null
+   *   The destination path, or NULL if the user cancels.
+   */
+  protected function askForModuleDestination(string $profileBase, string $filename, ?string $note = NULL): ?string {
     $modulesDir = $profileBase . '/modules';
     $modules = array_map('basename', glob($modulesDir . '/*', GLOB_ONLYDIR) ?: []);
     sort($modules);
 
-    $this->io()->note("'$filename' was not found in any module under '$this->installProfile'. Choose where to write it.");
+    $this->io()->note($note ?? "'$filename' was not found in any module under '$this->installProfile'. Choose where to write it.");
 
     $question = new Question('Module machine name: ');
     $question->setAutocompleterValues($modules);
@@ -462,24 +556,32 @@ final class WriCommonCommands extends DrushCommands {
   }
 
   /**
-   * Recursively searches a directory for a file matching the given name.
+   * Recursively searches a directory for every file matching the given name.
+   *
+   * A config file can legitimately exist in more than one place at once
+   * (a base-build copy plus a no-UUID module copy used by update hooks),
+   * so this returns every match rather than stopping at the first —
+   * callers need to keep all of them in sync, not just whichever one
+   * happens to be encountered first while walking the tree.
    *
    * @param string $directory
    *   The root directory to search within.
    * @param string $filename
    *   The filename to look for.
    *
-   * @return string|null
-   *   The full path to the first match, or NULL if not found.
+   * @return string[]
+   *   Absolute paths to every match, in the order the filesystem walk
+   *   encountered them. Empty array if none found.
    */
-  protected function findFileInDirectory(string $directory, string $filename): ?string {
+  protected function findAllFilesInDirectory(string $directory, string $filename): array {
+    $matches = [];
     $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($directory));
     foreach ($iterator as $file) {
       if ($file->isFile() && $file->getFilename() === $filename) {
-        return $file->getPathname();
+        $matches[] = $file->getPathname();
       }
     }
-    return NULL;
+    return $matches;
   }
 
   /**

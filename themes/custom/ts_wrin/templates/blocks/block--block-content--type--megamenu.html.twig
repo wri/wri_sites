@@ -1,0 +1,22 @@
+{#
+/**
+ * @file
+ * Theme override to display the megamenu block.
+ *
+ * @see template_preprocess_block()
+ */
+#}
+{{ attach_library('ts_wrin/megamenu') }}
+{%
+  set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    'wri-megamenu'
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {% block content %}
+    {{ content }}
+  {% endblock %}
+</div>

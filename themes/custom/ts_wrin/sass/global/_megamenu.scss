@@ -1,0 +1,626 @@
+// =============================================================================
+// WRI Mega Menu
+// Namespaced entirely under .wri-megamenu so it cannot leak into / be
+// affected by the legacy site nav. Depends on Drupal's rendered markup:
+//   .wri-megamenu
+//     .field__items > .field__item > .paragraph--type--submenu
+//       > button                          (top nav trigger, e.g. "Explore")
+//       > .menu-contents
+//           h3
+//           .field--name-field-text       (intro copy)
+//           .field--name-field-listing    (optional "Featured" viewfield)
+//           .block-menu-blockmain-menu-2026 ul.menu (recursive nav)
+//
+// JS (megamenu.js) rearranges the above into a .mega-grid of .mega-col
+// elements and turns nested <ul class="menu"> levels into positioned
+// flyout columns. This file styles that structure. Nothing here does
+// anything until megamenu.js has run.
+// =============================================================================
+
+// #block-quicklinks-2026 lives in .region-primary-nav as a sibling of
+// .wri-megamenu (moved there per the Quick Links block placement change).
+// megamenu-mobile.js reads its content purely as a data source for the
+// mobile overlay's own "Quicklinks" section — the real, live block should
+// never render itself. Without this it was showing up unstyled at every
+// viewport width, including desktop.
+.region-primary-nav #block-quicklinks-2026 {
+  display: none;
+}
+
+// Color/text tokens shared between the desktop panels (.wri-megamenu) and
+// the mobile overlay (.wri-mobile-nav, see _megamenu-mobile.scss).
+.wri-megamenu,
+.wri-mobile-nav {
+  --mega-text: var(--color-white);
+  --mega-text-secondary: rgb(var(--color-white-rgb) / 82%);
+  --mega-sep: rgb(var(--color-white-rgb) / 25%);
+  --mega-row-hover-bg: rgb(var(--color-white-rgb) / 8%);
+  --mega-focus-ring: var(
+    --color-gold-300
+  ); // distinct from the gold-500 underline used on the top nav
+
+  // ---------------------------------------------------------------------
+  // Color theme — the one thing likely to change (green now, maybe grey
+  // later). Everything that varies by theme lives here and nowhere else,
+  // so switching is a one-line class change rather than a re-theme.
+  //
+  // Applied as a modifier class alongside .wri-megamenu or .wri-mobile-nav
+  // (megamenu-mobile.js copies whichever class .wri-megamenu has onto the
+  // overlay at build time), e.g. <div class="wri-megamenu green">. Defaults
+  // to green if no modifier class is present, so nothing breaks if the
+  // Drupal side hasn't wired up the toggle yet.
+  // ---------------------------------------------------------------------
+  --mega-bg: var(
+    --color-green-500
+  ); // #32864b — ~4.5:1 contrast with white text, passes AA for body copy
+  --mega-row-active-bg: #5b9e6f; // green-500 lightened ~20% toward white — no official token yet
+
+  &.green {
+    --mega-bg: var(--color-green-500);
+    --mega-row-active-bg: #5b9e6f;
+  }
+
+  &.grey {
+    --mega-bg: var(
+      --color-neutral-800
+    ); // #686767 — ~5.65:1 contrast with white text
+    --mega-row-active-bg: #868686; // neutral-800 lightened ~20% toward white — no official token yet
+  }
+
+  &.contextual-region {
+    position: static;
+  }
+}
+
+.wri-megamenu {
+  display: none;
+  @include mq($lg) {
+    display: block;
+  }
+  // ---------------------------------------------------------------------
+  // Layout-only tokens — desktop's side-by-side column grid. Not shared
+  // with .wri-mobile-nav above: the mobile overlay uses full-screen
+  // sliding panels instead (its own --mega-mobile-* tokens live in
+  // _megamenu-mobile.scss), so there's nothing for it to inherit here.
+  // ---------------------------------------------------------------------
+  --mega-col-width: clamp(
+    170px,
+    calc(170px + (50 * ((100vw - 1024px) / 416))),
+    220px
+  );
+  --mega-col-width-wide: clamp(
+    210px,
+    calc(210px + (50 * ((100vw - 1024px) / 416))),
+    260px
+  );
+  --mega-col-gap: clamp(
+    20px,
+    calc(20px + (20 * ((100vw - 1024px) / 416))),
+    var(--spacer-10)
+  );
+
+  // ---------------------------------------------------------------------
+  // Top nav row (the field__items flex row) + trigger buttons
+  // ---------------------------------------------------------------------
+  .paragraph--type--submenu {
+    position: static; // .menu-contents anchors to .wri-megamenu, not this
+
+    > button {
+      @include font(var(--font-family-heading), "bold", "normal");
+      @include font-line-height(15, 18);
+
+      -webkit-appearance: none;
+      background-color: transparent;
+      border: 0;
+      color: var(--color-neutral-900);
+      cursor: pointer;
+      letter-spacing: 0.91px;
+      padding-bottom: 10px;
+      position: relative;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all var(--transition-default);
+      white-space: nowrap;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -5px;
+        height: 5px;
+        background: var(--color-gold-500);
+        opacity: 0;
+        transition: opacity var(--transition-default);
+      }
+
+      &:hover::after,
+      &[aria-expanded="true"]::after {
+        opacity: 1;
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--color-gold-500);
+        outline-offset: 3px;
+      }
+    }
+  }
+
+  // ---------------------------------------------------------------------
+  // Panel (the dropdown itself)
+  // ---------------------------------------------------------------------
+  .menu-contents {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--mega-bg);
+    color: var(--mega-text);
+    padding: var(--spacer-10) clamp(var(--spacer-6), 4vw, var(--spacer-15))
+      var(--spacer-12);
+    z-index: 50;
+    box-shadow: 0 12px 24px rgb(var(--color-black-rgb) / 18%);
+
+    h3 {
+      @include font(var(--font-family-heading), "bold", "normal");
+      color: var(--mega-text);
+      font-size: 22px;
+      margin: 0 0 12px;
+    }
+    .form-submit,
+    input[type="submit"],
+    button[type="submit"] {
+      color: var(--color-neutral-900);
+    }
+  }
+
+  .paragraph--type--submenu.is-open {
+    > .menu-contents {
+      display: block;
+    }
+  }
+
+  // Reduced motion: no slide/fade transitions are used (display toggling
+  // only), so nothing extra required here — intentionally simple.
+
+  // ---------------------------------------------------------------------
+  // Grid built by megamenu.js: intro col, optional featured col,
+  // nav selector col, flyout region.
+  // ---------------------------------------------------------------------
+  .mega-grid {
+    display: flex;
+    align-items: stretch;
+    gap: var(--mega-col-gap);
+  }
+
+  .mega-col {
+    flex: 0 0 var(--mega-col-width);
+
+    &.flush-left {
+      flex-basis: var(--mega-col-width-wide);
+    }
+
+
+  }
+
+
+  .has-sep {
+    height: 100%;
+    min-height: 230px;
+    border-left: 1px solid var(--mega-sep);
+    padding-left: var(--mega-col-gap);
+  }
+
+
+  .field--name-field-text {
+    color: var(--mega-text-secondary);
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  // ---------------------------------------------------------------------
+  // Featured listing column (Research & Data / News & Insights / Events)
+  // ---------------------------------------------------------------------
+  .field--name-field-listing {
+    // Wider than the default --mega-col-width: this column holds full
+    // article/report titles (unlike the compact nav-selector and flyout
+    // columns), and the standard width was wrapping them 5-6 lines deep
+    // at the low end of the fluid range.
+    flex-basis: var(--mega-col-width-wide);
+
+    .field__item__label {
+      // Inlined from .tag (tailwind-components.scss) — see megamenu.scss.
+      font-family: var(--font-family-heading);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.9px;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    // Reset any sitewide utility class layouts.
+    .views-element-container,
+    .view-content,
+    .views-view {
+      display: block;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+    }
+
+    .item-list ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    // Reset item-list.css
+    .item-list li {
+      margin: 22px 0 0;
+      padding: 0;
+    }
+
+    .views-field-field-type .field-content {
+      display: inline-block;
+      width: fit-content;
+      padding: 3px 8px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .views-field-title a {
+      color: var(--mega-text);
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.35;
+      text-decoration: none;
+
+      &:hover,
+      &:focus-visible {
+        text-decoration: underline;
+      }
+    }
+
+    .more-link {
+      margin-top: 24px;
+      justify-content: flex-start;
+
+      a {
+        color: var(--mega-text);
+        background: none;
+        margin-left: 0;
+        padding: 0;
+        font-weight: normal;
+      }
+
+      &__line {
+        display: none;
+      }
+    }
+  }
+
+  // ---------------------------------------------------------------------
+  // Nav rows: the recursive <ul class="menu"> drill-down.
+  //
+  // IMPORTANT: megamenu.js physically moves the active nested <ul> out of
+  // the nav block and into .mega-col-flyout-region so it can be laid out
+  // as its own column. That means these rules must NOT be scoped under
+  // [id^="block-menu-blockmain-menu-2026"] — once a <ul> is relocated it's
+  // no longer a descendant of that block, and a descendant selector like
+  // "[id^=...] .mega-flyout" would silently stop matching. Scoping to
+  // .menu-contents instead works regardless of which column a <ul>
+  // currently lives in, since the panel itself is never moved.
+  // ---------------------------------------------------------------------
+  .menu-contents {
+    ul.menu {
+      list-style: none;
+      margin: 0;
+    }
+
+    li.menu-item {
+      margin: 0;
+    }
+
+    .menu-item-title {
+      display: block;
+
+      > a,
+      > button {
+        -webkit-appearance: none;
+        background: transparent;
+        border: 0;
+        color: var(--mega-text);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 16px;
+        padding: 10px 12px;
+        border-radius: 6px;
+        text-align: left;
+        text-decoration: none;
+        width: 100%;
+
+        &:hover {
+          background: var(--mega-row-hover-bg);
+        }
+
+        &:focus-visible {
+          outline: 2px solid var(--mega-focus-ring);
+          outline-offset: -2px;
+        }
+      }
+
+      // Leaf buttons with no href and no children (content-team placeholders,
+      // e.g. "Coalitions", "Data & Tools" before a link is set) — visually
+      // distinguish so they don't look broken.
+      > button:not([aria-expanded]) {
+        cursor: default;
+        opacity: 0.6;
+
+        &:hover {
+          background: transparent;
+        }
+      }
+    }
+
+    li.is-active > .menu-item-title > button {
+      background: var(--mega-row-active-bg);
+    }
+
+    // Chevron on every expandable row, at any depth or column.
+    .menu-item--expanded > .menu-item-title > button::after {
+      content: "";
+      flex: 0 0 auto;
+      width: 7px;
+      height: 7px;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(-45deg);
+      opacity: 0.85;
+    }
+
+    // "All Climate & Energy" style parent links inside a flyout column
+    .font-bold > a {
+      font-weight: 700;
+    }
+  }
+
+  // Positioning root for every nested flyout at any depth, whether the
+  // <ul> is still inside the nav block (hasn't been activated yet) or has
+  // already been relocated into .mega-col-flyout-region.
+  [id^="block-menu-blockmain-menu-2026"] {
+    position: relative;
+  }
+
+  // Region the active flyout columns get moved into by megamenu.js. It
+  // needs an explicit min-height since its children are all
+  // position:absolute and can't otherwise establish any height of their own.
+  .mega-col-flyout-region {
+    position: relative;
+    flex: 1 1 auto;
+  }
+
+  // Flyout columns (depth 1+). Positioned relative to whichever of the two
+  // elements above currently contains them — both establish a positioning
+  // context, so this resolves correctly either way.
+  .mega-flyout {
+    position: absolute;
+    top: 0;
+    left: calc(
+      (var(--depth, 1) - 1) * (var(--mega-col-width) + var(--mega-col-gap))
+    );
+    width: var(--mega-col-width);
+
+    // Depth-2 columns get one extra gap of offset. depth is fixed at 2 by
+    // the selector, so this is just the depth-1 offset (1 width + 1 gap)
+    // plus the extra gap, rather than re-deriving it from --depth.
+    &[style*="--depth: 2;"] {
+      left: calc(var(--mega-col-width) + (2 * var(--mega-col-gap)));
+    }
+  }
+
+  // ---------------------------------------------------------------------
+  // No-JS fallback: without megamenu.js the panels can't open at all, so
+  // degrade to a plain expanded list rather than a totally inert menu.
+  // ---------------------------------------------------------------------
+  &.no-js {
+    .menu-contents {
+      display: block;
+      position: static;
+      box-shadow: none;
+    }
+
+    .mega-flyout {
+      position: static;
+      width: auto;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------
+// Header layout rules.
+// ---------------------------------------------------------------------
+.testing-2026-menu {
+  .region-primary-nav {
+    .wri-megamenu .field__items {
+      display: none;
+    }
+
+    @include mq($md) {
+      gap: 16px;
+      justify-content: flex-start;
+      margin-right: 10px;
+
+      .wri-megamenu .field__items {
+        display: flex;
+        gap: clamp(20px, calc(18px + (10 * ((100vw - 1002px) / 318))), 30px);
+        margin-left: 0;
+        font-family: var(--font-family-heading);
+      }
+    }
+
+    @include mq($lg) {
+      flex-wrap: nowrap;
+
+      .wri-megamenu .field__items {
+        margin-left: 0;
+        margin-left: clamp(42px, 4vw, 54px);
+      }
+    }
+  }
+
+  header nav#block-donate-2026 > ul.menu {
+    margin-bottom: 0;
+    margin-left: var(--spacer-4);
+    margin-right: var(--spacer-4);
+  }
+
+  header nav#block-donate-2026 > ul.menu > li > a {
+    border: 1px solid var(--color-neutral-900);
+    line-height: 1;
+    height: 33px;
+    width: 85px;
+
+    &:hover,
+    &:focus {
+      border-color: var(--color-gold-500);
+    }
+  }
+
+  .header-right {
+    position: relative;
+    top: -3px;
+  }
+
+  // ---------------------------------------------------------------------
+  // Donate dropdown — enhanced by donate-menu.js from the block above.
+  // ---------------------------------------------------------------------
+  #block-donate-2026 {
+    position: relative;
+    display: none;
+
+    @include mq($lg) {
+      display: block;
+    }
+  }
+
+  #block-donate-2026 h2 {
+    opacity: 0;
+  }
+
+  .donate-menu__trigger {
+    @include font(var(--font-family-heading-condensed), "bold", "normal");
+    @include font-line-height(12, 17);
+
+    align-items: center;
+    background-color: transparent;
+    border-radius: 3px;
+    border: 1px solid var(--color-neutral-900);
+    color: var(--color-neutral-900);
+    display: flex;
+    height: 32px;
+    justify-content: center;
+    letter-spacing: 0.43px;
+    margin-left: 0;
+    margin-right: var(--spacer-5);
+    padding: 1px 0 0 0;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.2s linear;
+    width: 76px;
+
+    .path-frontpage &,
+    .white & {
+      border: 1px solid var(--color-neutral-200);
+      color: var(--color-white);
+    }
+    @include hocus {
+      background-color: var(--color-gold-500);
+      border: 1px solid var(--color-gold-500);
+      color: var(--color-neutral-900);
+      outline: none;
+    }
+  }
+
+  .donate-menu__panel {
+    @include font(var(--font-family-heading-condensed), "regular", "normal");
+    @include font-line-height(12, 17);
+    position: absolute;
+    border-radius: 6px;
+    top: calc(100% + var(--spacer-2));
+    right: 20px;
+    z-index: 50;
+    min-width: 240px;
+    background: var(--color-white);
+    border: 1px solid var(--color-neutral-200);
+    box-shadow: 0 12px 24px rgb(var(--color-black-rgb) / 12%);
+
+    ul.menu {
+      display: block;
+      opacity: 1;
+      list-style: none;
+      margin: 0;
+    }
+
+    a {
+      display: block;
+      padding: var(--spacer-3) var(--spacer-4);
+      color: var(--color-neutral-900);
+      font-size: 14px;
+      text-decoration: none;
+
+      &:hover,
+      &:focus-visible {
+        background: var(--color-neutral-200);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .header-wrapper button.tray-toggle.filter-toggle {
+    top: 6px;
+    @include mq($lg) {
+      top: -4px;
+    }
+
+    &:hover,
+    &:focus {
+      .filter-icon {
+        &::before {
+          opacity: 1;
+          left: rem(-145);
+          width: rem(110);
+          z-index: 1;
+        }
+      }
+    }
+  }
+
+  // Search-toggle button styling now lives, unscoped, in _header.scss so
+  // it applies to every search-toggle button, not just this page.
+
+  .tray-toggle.filter-toggle {
+    display: none;
+  }
+
+  // .menu-toggle is now the trigger for the new mobile sliding-panel
+  // overlay (see megamenu-mobile.js) below the desktop breakpoint. Only
+  // hide it once desktop's inline mega menu takes over — hiding it
+  // unconditionally, as before, would leave mobile with no way to open
+  // the menu at all.
+  @include mq($lg) {
+    .menu-toggle {
+      display: none;
+    }
+  }
+}
