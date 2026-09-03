@@ -61,7 +61,7 @@ final class TopicPagesResourceSectionLinkBlock extends BlockBase {
     $build['content'] = [
       '#type' => 'html_tag',
       '#tag' => 'a',
-      '#attributes' => ['href' => $this->configuration['link_url']],
+      '#attributes' => ['href' => $this->configuration['link_url'], 'class' => 'button white download'],
       '#value' => $this->configuration['link_title'],
     ];
     return $build;
