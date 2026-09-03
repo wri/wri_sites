@@ -1,0 +1,7 @@
+block.settings.wri_taxonomy_topic_pages_resource_section_link:
+  type: block_settings
+  label: 'Topic pages resource section link block'
+  mapping:
+    example:
+      type: string
+      label: Example
