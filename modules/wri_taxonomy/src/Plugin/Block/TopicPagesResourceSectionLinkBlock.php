@@ -23,7 +23,8 @@ final class TopicPagesResourceSectionLinkBlock extends BlockBase {
    */
   public function defaultConfiguration(): array {
     return [
-      'example' => $this->t('Hello world!'),
+      'link_url' => '',
+      'link_title' => '',
     ];
   }
 
@@ -31,10 +32,15 @@ final class TopicPagesResourceSectionLinkBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function blockForm($form, FormStateInterface $form_state): array {
-    $form['example'] = [
-      '#type' => 'textarea',
-      '#title' => $this->t('Example'),
-      '#default_value' => $this->configuration['example'],
+    $form['link_url'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Link url'),
+      '#default_value' => $this->configuration['link_url'],
+    ];
+    $form['link_title'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Link title'),
+      '#default_value' => $this->configuration['link_title'],
     ];
     return $form;
   }
@@ -43,15 +49,20 @@ final class TopicPagesResourceSectionLinkBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function blockSubmit($form, FormStateInterface $form_state): void {
-    $this->configuration['example'] = $form_state->getValue('example');
+    $this->configuration['link_url'] = $form_state->getValue('link_url');
+    $this->configuration['link_title'] = $form_state->getValue('link_title');
   }
 
   /**
    * {@inheritdoc}
    */
   public function build(): array {
+    // A link to '#resources'
     $build['content'] = [
-      '#markup' => $this->t('It works!'),
+      '#type' => 'html_tag',
+      '#tag' => 'a',
+      '#attributes' => ['href' => $this->configuration['link_url']],
+      '#value' => $this->configuration['link_title'],
     ];
     return $build;
   }

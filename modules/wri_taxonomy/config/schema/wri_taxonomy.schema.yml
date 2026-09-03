@@ -2,6 +2,18 @@ block.settings.wri_taxonomy_topic_pages_resource_section_link:
   type: block_settings
   label: 'Topic pages resource section link block'
   mapping:
-    example:
+    link_url:
       type: string
-      label: Example
+      label: 'Link url'
+    link_title:
+      type: string
+      label: 'Link title'
+
+# Schema for the configuration files of the WRI taxonomy module.
+wri_taxonomy.settings:
+  type: config_object
+  label: 'WRI taxonomy settings'
+  mapping:
+    enable_canonical_urls:
+      type: boolean
+      label: 'Enable canonical urls'
