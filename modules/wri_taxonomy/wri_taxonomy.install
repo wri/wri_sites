@@ -11,6 +11,7 @@ use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\file\Entity\File;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\block_content\Entity\BlockContent;
 
 /**
  * Implements hook_install().
@@ -154,5 +155,28 @@ function wri_taxonomy_update_10401() {
       $term->save();
       \Drupal::messenger()->addStatus(t('Created/updated term @name with icon.', ['@name' => $term_name]));
     }
+  }
+}
+
+/**
+ * Generates the term-level webform block.
+ */
+function wri_taxonomy_update_10602() {
+  $block_manager = \Drupal::entityTypeManager()->getStorage('block_content');
+  // Load the block by uuid 'c2faf277-9cee-48bd-9f70-09ee7613806a'
+  $block = $block_manager->loadByProperties(['uuid' => 'c2faf277-9cee-48bd-9f70-09ee7613806a']);
+
+  if (!$block) {
+    // If it doesn't exist, generate it.
+    $block = BlockContent::create([
+      'uuid' => 'c2faf277-9cee-48bd-9f70-09ee7613806a',
+      'type' => 'webform_with_background_color',
+      'info' => 'Stay Informed',
+      'langcode' => 'en',
+      'field_webform' => 'term_email_signup',
+      'field_cta_background' => 'has-teal-background-color',
+      'reusable' => TRUE,
+    ]);
+    $block->save();
   }
 }
