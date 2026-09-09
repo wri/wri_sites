@@ -180,3 +180,28 @@ function wri_taxonomy_update_10602() {
     $block->save();
   }
 }
+
+/**
+ * Generates the term-level resource library CTA block.
+ */
+function wri_taxonomy_update_10603() {
+  $block_manager = \Drupal::entityTypeManager()->getStorage('block_content');
+  // Load the block by uuid '9525250a-f59c-4d2f-9f71-fdff3d104966'
+  $block = $block_manager->loadByProperties(['uuid' => '69c2110e-2eab-4a62-b298-8c04414e17a6']);
+
+  if (!$block) {
+    // If it doesn't exist, generate it.
+    $block = BlockContent::create([
+      'uuid' => '69c2110e-2eab-4a62-b298-8c04414e17a6',
+      'type' => 'small_cta',
+      'info' => 'Explore our full Resource Library',
+      'langcode' => 'en',
+      'field_link' => [
+        'uri' => 'internal:/resources',
+        'title' => 'Explore our full Resource Library',
+      ],
+      'reusable' => TRUE,
+    ]);
+    $block->save();
+  }
+}
