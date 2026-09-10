@@ -16,6 +16,7 @@
   ]
 %}
 <div{{ attributes.addClass(classes) }}>
+  <div class="relative">{{ title_prefix }}{{ title_suffix }}</div>
   {% block content %}
     {{ content }}
   {% endblock %}

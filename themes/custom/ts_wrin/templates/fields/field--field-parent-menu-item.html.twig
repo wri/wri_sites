@@ -1,0 +1,19 @@
+{#
+/**
+ * @file
+ * Strips the default .field wrapper for field_parent_menu_item.
+ *
+ * The formatter's <button> and .menu-contents need to be direct children of
+ * the paragraph element (.paragraph--type--submenu), not nested one level
+ * deeper inside a .field--name-field-parent-menu-item wrapper:
+ * ts_megamenu.js/ts_megamenu_mobile.js find the submenu's button and
+ * .menu-contents with :scope > queries against the paragraph element itself.
+ *
+ * Available variables:
+ * - items: List of all the field items. Each item contains:
+ *   - content: The field item's content.
+ */
+#}
+{% for item in items %}
+  {{ item.content }}
+{% endfor %}
