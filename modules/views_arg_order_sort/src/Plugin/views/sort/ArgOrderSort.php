@@ -36,14 +36,14 @@ class ArgOrderSort extends SortPluginBase {
     $options = [];
 
     $base_tables = Views::viewsData()->fetchBaseTables();
-    $table_data = Views::viewsData()->get();
+    $table_data = Views::viewsData()->getAll();
 
     foreach ($base_tables as $table => $values) {
       $data = $table_data[$table];
-      $group = (string) \Drupal::service('renderer')->render($data['table']['group']);
+      $group = (string) $data['table']['group'];
       foreach ($data as $field => $f) {
         if (isset($f['entity field'])) {
-          $options[$group][$table . '::' . $field] = \Drupal::service('renderer')->render($f['title']);
+          $options[$group][$table . '::' . $field] = (string) $f['title'];
         }
       }
     }
