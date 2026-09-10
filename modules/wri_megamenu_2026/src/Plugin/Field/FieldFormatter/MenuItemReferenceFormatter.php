@@ -91,6 +91,7 @@ final class MenuItemReferenceFormatter extends FormatterBase implements Containe
       }
 
       $elements[$delta] = $this->buildMenuBlock($menu_item);
+      $items->getEntity()->menu_title =  $menu_item->getTitle();
     }
 
     return $elements;
