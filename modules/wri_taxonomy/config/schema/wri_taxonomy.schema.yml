@@ -2,9 +2,6 @@ block.settings.wri_taxonomy_topic_pages_resource_section_link:
   type: block_settings
   label: 'Topic pages resource section link block'
   mapping:
-    link_url:
-      type: string
-      label: 'Link url'
     link_title:
       type: string
       label: 'Link title'
@@ -17,3 +14,10 @@ wri_taxonomy.settings:
     enable_canonical_urls:
       type: boolean
       label: 'Enable canonical urls'
+    resources_anchor:
+      type: string
+      label: 'On-page Resources anchor'
+      constraints:
+        Regex:
+          pattern: '/^[a-zA-Z0-9][a-zA-Z0-9-]*$/'
+          message: "The %value anchor must contain only letters, numbers, and dashes, and cannot start with a dash or the '#' character."

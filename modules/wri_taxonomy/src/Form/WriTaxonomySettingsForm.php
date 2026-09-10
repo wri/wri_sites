@@ -8,6 +8,7 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
+use Drupal\Core\Form\ConfigTarget;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -61,6 +62,17 @@ final class WriTaxonomySettingsForm extends ConfigFormBase {
       '#title' => $this->t('Enable canonical urls'),
       '#description' => $this->t('Canonical urls for terms on this site are, by default, overridden to point to either the term\'s "Landing page" or to the resource library filtered to this term. Checking this box sets canonical urls back to the Drupal default behavior, pointing links for the terms to /taxonomy/term/XXX.'),
       '#config_target' => 'wri_taxonomy.settings:enable_canonical_urls',
+    ];
+    $form['resources_anchor'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('On-page Resources anchor'),
+      '#description' => $this->t('The ID of the on-page anchor for the resources section, without the leading "#". Letters, numbers, and dashes only.'),
+      '#config_target' => new ConfigTarget(
+        'wri_taxonomy.settings',
+        'resources_anchor',
+        fromConfig: static fn (?string $value): string => $value ?? 'resources',
+        toConfig: static fn (string $value): string => $value,
+      ),
     ];
     return parent::buildForm($form, $form_state);
   }
