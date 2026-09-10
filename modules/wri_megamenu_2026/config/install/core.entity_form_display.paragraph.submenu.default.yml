@@ -4,9 +4,11 @@ dependencies:
     - field.field.paragraph.submenu.field_custom_featured
     - field.field.paragraph.submenu.field_listing
     - field.field.paragraph.submenu.field_parent_menu_item
+    - field.field.paragraph.submenu.field_section_title
     - field.field.paragraph.submenu.field_text
     - paragraphs.paragraphs_type.submenu
   module:
+    - link
     - viewfield
 id: paragraph.submenu.default
 targetEntityType: paragraph
@@ -15,7 +17,7 @@ mode: default
 content:
   field_custom_featured:
     type: entity_reference_autocomplete
-    weight: 3
+    weight: 4
     region: content
     settings:
       match_operator: CONTAINS
@@ -25,7 +27,7 @@ content:
     third_party_settings: {  }
   field_listing:
     type: viewfield_select
-    weight: 2
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -35,9 +37,17 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_section_title:
+    type: link_default
+    weight: 1
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
   field_text:
     type: string_textfield
-    weight: 1
+    weight: 2
     region: content
     settings:
       size: 60

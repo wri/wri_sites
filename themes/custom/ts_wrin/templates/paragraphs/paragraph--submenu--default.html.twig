@@ -3,11 +3,13 @@
  * @file
  * Default theme implementation to display a paragraph.
  *
- * The field_parent_menu_item formatter builds the whole submenu (button,
- * .menu-contents, field_text, field_listing, and the menu_block) itself, so
- * this template only needs to print that one field. field_text and
- * field_listing stay visible on this display so the formatter's own
- * ->view() calls to them keep working; they're just not printed here again.
+ * The button and heading use menu_title/menu_url, which
+ * MenuItemReferenceFormatter stashes on the paragraph entity and
+ * ts_wrin_preprocess_paragraph() copies into these template variables. The
+ * heading prefers field_section_title when it has a value, falling back to
+ * a link to the referenced menu item otherwise. field_parent_menu_item
+ * (the menu_block build), field_text, and field_listing print via the
+ * blanket {{ content }} call below.
  *
  * Available variables:
  * - paragraph: Full paragraph entity.
@@ -57,8 +59,12 @@
     {% block content %}
       <button>{{ menu_title }}</button>
       <div class="menu-contents">
-        <h3>{{ menu_title }}</h3>
-        {{ content }}
+        {% if not paragraph.field_section_title.isEmpty %}
+          <h3>{{ content.field_section_title }}</h3>
+        {% else %}
+          <h3><a href="{{ menu_url }}">{{ menu_title }}</a></h3>
+        {% endif %}
+        {{ content|without('field_section_title') }}
       </div>
     {% endblock %}
   </div>

@@ -151,8 +151,9 @@ function ts_wrin_preprocess_paragraph(array &$variables) {
   if ($variables['paragraph']->getType() == 'person_listing') {
     $variables["elements"]["field_block"][0]["field_featured_experts"]['#object']->overridden_label = $variables["elements"]["field_block"][0]["#block_content"]->info->value ?? NULL;
   }
-  // Menu title is passed to the paragraph via MenuItemReferenceFormatter.php.
+  // Menu title/URL are passed to the paragraph via MenuItemReferenceFormatter.php.
   $variables['menu_title'] = $variables['paragraph']->menu_title ?? '';
+  $variables['menu_url'] = $variables['paragraph']->menu_url ?? '';
 }
 
 /**

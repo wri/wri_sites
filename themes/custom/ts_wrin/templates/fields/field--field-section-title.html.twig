@@ -1,0 +1,17 @@
+{#
+/**
+ * @file
+ * Strips the default .field wrapper for field_section_title.
+ *
+ * paragraph--submenu--default.html.twig prints this field's link directly
+ * inside a hand-written <h3>; a .field wrapper div here would nest a block
+ * element inside the heading.
+ *
+ * Available variables:
+ * - items: List of all the field items. Each item contains:
+ *   - content: The field item's content.
+ */
+#}
+{% for item in items %}
+  {{ item.content }}
+{% endfor %}

@@ -20,17 +20,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Plugin implementation of the 'menu_item_reference_label' formatter.
  *
  * Renders the menu_block content for the referenced menu item's children
- * (the mega menu flyout panel's link tree). The button, heading, and the
- * paragraph's field_text/field_listing are handled elsewhere: the button and
- * heading read the referenced item's title directly in
- * paragraph--submenu--default.html.twig, and field_text/field_listing keep
- * rendering through their own formatters as configured on the paragraph's
- * display.
- *
- * Builds the menu_block plugin and renders it the same way
- * \Drupal\menu_block\Plugin\Block\MenuBlock::build() output is normally
- * wrapped for display, without going through a block-rendering helper
- * module.
+ * (the mega menu flyout panel's link tree). Also stashes the referenced item's
+ * title and URL onto the parent entity as (menu_title/menu_url).
  *
  * @FieldFormatter(
  *   id = "menu_item_reference_label",
@@ -91,7 +82,8 @@ final class MenuItemReferenceFormatter extends FormatterBase implements Containe
       }
 
       $elements[$delta] = $this->buildMenuBlock($menu_item);
-      $items->getEntity()->menu_title =  $menu_item->getTitle();
+      $items->getEntity()->menu_title = $menu_item->getTitle();
+      $items->getEntity()->menu_url = $menu_item->getUrlObject()->toString();
     }
 
     return $elements;

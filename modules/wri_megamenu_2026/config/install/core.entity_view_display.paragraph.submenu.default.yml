@@ -4,10 +4,12 @@ dependencies:
     - field.field.paragraph.submenu.field_custom_featured
     - field.field.paragraph.submenu.field_listing
     - field.field.paragraph.submenu.field_parent_menu_item
+    - field.field.paragraph.submenu.field_section_title
     - field.field.paragraph.submenu.field_text
     - paragraphs.paragraphs_type.submenu
   module:
     - ds
+    - link
     - wri_admin
 id: paragraph.submenu.default
 targetEntityType: paragraph
@@ -30,6 +32,18 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_section_title:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: -1
     region: content
   field_text:
     type: string
