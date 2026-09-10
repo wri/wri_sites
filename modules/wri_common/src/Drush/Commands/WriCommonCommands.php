@@ -131,6 +131,12 @@ final class WriCommonCommands extends DrushCommands {
       throw new \RuntimeException("{$this->installProfile} directory not found: {$this->profileDirectory}");
     }
 
+    // A module whose entry in core.extension.yml is new as of $target (not
+    // present at $base) was itself created as part of this branch — an
+    // existing site has never had it enabled, so there's nothing for an
+    // update hook to update.
+    $newModules = $options['write-update-hook'] ? $this->findNewlyAddedModules($base, $target, $projectRoot) : [];
+
     $this->io()->section(sprintf('Syncing %d config file(s) to profile…', count($changedFiles)));
 
     foreach ($changedFiles as $relativePath) {
@@ -139,10 +145,60 @@ final class WriCommonCommands extends DrushCommands {
         $this->logger()->warning("Skipped (deleted in diff): $relativePath");
         continue;
       }
-      $this->processConfigFile($absolutePath, (bool) $options['write-update-hook']);
+      $this->processConfigFile($absolutePath, (bool) $options['write-update-hook'], $newModules);
     }
 
     $this->io()->success('Sync complete.');
+  }
+
+  /**
+   * Returns module machine names enabled at $target but not at $base.
+   *
+   * Reads config/core.extension.yml as it existed at each ref (rather than
+   * the working copy), so a module only becomes "new" once its entry
+   * actually lands under the `module:` key between the two branches.
+   *
+   * @param string $base
+   *   The base branch/ref.
+   * @param string $target
+   *   The target branch/ref.
+   * @param string $projectRoot
+   *   Absolute path to the repo root core.extension.yml lives under.
+   *
+   * @return string[]
+   *   Module machine names present at $target but not $base.
+   */
+  protected function findNewlyAddedModules(string $base, string $target, string $projectRoot): array {
+    $baseModules = $this->getEnabledModulesAtRef($base, $projectRoot);
+    $targetModules = $this->getEnabledModulesAtRef($target, $projectRoot);
+    return array_values(array_diff($targetModules, $baseModules));
+  }
+
+  /**
+   * Returns the module machine names enabled at a given git ref.
+   *
+   * @param string $ref
+   *   The git ref (branch, tag, or commit) to read core.extension.yml from.
+   * @param string $projectRoot
+   *   Absolute path to the repo root core.extension.yml lives under.
+   *
+   * @return string[]
+   *   Enabled module machine names, or an empty array if the file doesn't
+   *   exist at that ref or fails to parse.
+   */
+  protected function getEnabledModulesAtRef(string $ref, string $projectRoot): array {
+    try {
+      $content = $this->runGitCommand(
+        sprintf('git show %s', escapeshellarg("$ref:config/core.extension.yml")),
+        $projectRoot
+      );
+      $parsed = Yaml::parse($content) ?: [];
+    }
+    catch (\RuntimeException | ParseException $e) {
+      return [];
+    }
+
+    return array_keys($parsed['module'] ?? []);
   }
 
   /**
@@ -158,8 +214,13 @@ final class WriCommonCommands extends DrushCommands {
    *   Absolute path to the source config file.
    * @param bool $writeUpdateHook
    *   When TRUE, appends an update hook to the module where the config lives.
+   * @param string[] $newModules
+   *   Machine names of modules that were themselves newly created as part
+   *   of this diff. When the config's owning module is in this list, the
+   *   update hook is skipped — a brand-new module needs no update hook,
+   *   since no existing site has it enabled yet to run one against.
    */
-  protected function processConfigFile(string $absoluteSourcePath, bool $writeUpdateHook = FALSE): void {
+  protected function processConfigFile(string $absoluteSourcePath, bool $writeUpdateHook = FALSE, array $newModules = []): void {
     $filename = basename($absoluteSourcePath);
     $profileBase = $this->profileDirectory;
 
@@ -232,6 +293,12 @@ final class WriCommonCommands extends DrushCommands {
     $configName = basename($filename, '.yml');
     foreach ($destPaths as $path) {
       [$owner, $directory, $ownerDir] = $this->resolveModuleAndDirectory($path);
+
+      if (in_array($owner, $newModules, TRUE)) {
+        $this->logger()->notice("Skipped update hook: '$owner' is a new module in this branch, so all new config will be imported automatically.");
+        continue;
+      }
+
       $installFile = $this->resolveInstallFile($ownerDir, $owner);
       $hookCode = $this->generateUpdateHook($configName, $owner, $directory, $oldContentByPath[$path], $filtered, $installFile);
       $this->appendUpdateHook($installFile, $hookCode);
