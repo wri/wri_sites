@@ -163,13 +163,23 @@ final class WriCommonCommands extends DrushCommands {
     $filename = basename($absoluteSourcePath);
     $profileBase = $this->profileDirectory;
 
-    // Restricted to modules/ specifically — never the whole profile tree.
-    // This tool only ever syncs into the per-site custom modules that
-    // carry update hooks; themes/ (and anything else under the profile)
-    // is out of scope entirely, regardless of whether some other copy of
-    // this filename happens to exist there.
-    $modulesRoot = rtrim($profileBase, '/') . '/modules';
-    $destPaths = is_dir($modulesRoot) ? $this->findAllFilesInDirectory($modulesRoot, $filename) : [];
+    // Search modules/, themes/, and the profile's own top-level config/ —
+    // a config file can legitimately live in any of the three.
+    $searchRoots = [
+      rtrim($profileBase, '/') . '/modules',
+      rtrim($profileBase, '/') . '/themes',
+      rtrim($profileBase, '/') . '/config',
+    ];
+    $destPaths = [];
+    foreach ($searchRoots as $root) {
+      if (is_dir($root)) {
+        $destPaths = array_merge($destPaths, $this->findAllFilesInDirectory($root, $filename));
+      }
+    }
+
+    if (count($destPaths) > 1) {
+      throw new \RuntimeException("'$filename' exists in more than one place, which should never happen: " . implode(', ', array_map([$this, 'relativeToProfile'], $destPaths)));
+    }
 
     $content = file_get_contents($absoluteSourcePath);
     $filtered = $this->stripTopLevelKeys($content, ['uuid', 'langcode']);
@@ -213,16 +223,17 @@ final class WriCommonCommands extends DrushCommands {
       return;
     }
 
-    // Every path here is guaranteed to be under modules/ (either found
-    // there, or just created there above), so resolveModuleAndDirectory()
-    // always succeeds — no "which module should own this" prompt needed
-    // beyond the one askForModuleDestination() already handled above for
-    // a config file that didn't exist under any module yet.
+    // Every path here was either found under modules/, themes/, or the
+    // profile's own config/ (or just created under modules/ above via
+    // askForModuleDestination()), so resolveModuleAndDirectory() always
+    // succeeds — no "which owner should own this" prompt needed beyond
+    // the one askForModuleDestination() already handled above for a
+    // config file that didn't exist anywhere yet.
     $configName = basename($filename, '.yml');
     foreach ($destPaths as $path) {
-      [$module, $directory] = $this->resolveModuleAndDirectory($path);
-      $installFile = $this->resolveInstallFile($module);
-      $hookCode = $this->generateUpdateHook($configName, $module, $directory, $oldContentByPath[$path], $filtered, $installFile);
+      [$owner, $directory, $ownerDir] = $this->resolveModuleAndDirectory($path);
+      $installFile = $this->resolveInstallFile($ownerDir, $owner);
+      $hookCode = $this->generateUpdateHook($configName, $owner, $directory, $oldContentByPath[$path], $filtered, $installFile);
       $this->appendUpdateHook($installFile, $hookCode);
     }
   }
@@ -361,50 +372,44 @@ final class WriCommonCommands extends DrushCommands {
   }
 
   /**
-   * Resolves the module name and config install directory for a config file.
+   * Resolves the owner (module/theme/profile) and config directory for a
+   * config file.
    *
-   * Parses the module name and config subdirectory directly out of
-   * $destPath's own structure — it's always
-   * "{profile}/modules/MODULE/config/DIR/filename.yml", since
-   * processConfigFile() only ever calls this with a path that's already
-   * confirmed to be under modules/ (either found there, or just created
-   * there via askForModuleDestination()).
+   * A config file always lives at "{owner-dir}/config/DIR/filename.yml",
+   * whether the owner is a module (e.g. .../modules/wri_common/config/...),
+   * a theme (e.g. .../themes/custom/ts_wrin/config/...), or the profile
+   * itself (.../config/... directly, where the profile's own directory
+   * name is the owner). The directory segment immediately preceding
+   * "/config/" is the owner's machine name, and everything up to and
+   * including that segment is the owner's directory.
    *
-   * Deliberately NOT using Drupal's ModuleExtensionList for this: that
-   * depends on extension-discovery cache being fresh, which is exactly
-   * the case most likely to be stale for a module that was only just
-   * created — precisely the situation this tool exists to help with. The
-   * profile's own directory convention (modules live directly under
-   * modules/, one segment deep) is simpler and doesn't depend on Drupal's
-   * bootstrap state at all.
+   * Deliberately NOT using Drupal's extension lists for this: that depends
+   * on extension-discovery cache being fresh, which is exactly the case
+   * most likely to be stale for a module/theme that was only just
+   * created — precisely the situation this tool exists to help with.
    *
    * @param string $destPath
-   *   Absolute path to the destination yml file. Must be under
-   *   {profile}/modules/ — callers are responsible for that guarantee.
+   *   Absolute path to the destination yml file. Must contain a
+   *   "/config/DIR/" segment — callers are responsible for that guarantee.
    *
-   * @return array{0: string, 1: string}
-   *   A [module, directory] tuple.
+   * @return array{0: string, 1: string, 2: string}
+   *   An [owner, directory, ownerDir] tuple.
    *
    * @throws \RuntimeException
-   *   If $destPath isn't actually under {profile}/modules/ — a caller
-   *   contract violation, not a data problem this method should guess
-   *   its way around.
+   *   If $destPath doesn't match the "{owner-dir}/config/DIR/filename"
+   *   shape — a caller contract violation, not a data problem this method
+   *   should guess its way around.
    */
   protected function resolveModuleAndDirectory(string $destPath): array {
-    $modulesDir = rtrim($this->profileDirectory, '/') . '/modules/';
-    if (!str_starts_with($destPath, $modulesDir)) {
-      throw new \RuntimeException("Expected '$destPath' to be under '$modulesDir'.");
+    if (!preg_match('#^(.*/)([^/]+)/config/([^/]+)/[^/]+$#', $destPath, $m)) {
+      throw new \RuntimeException("Expected '$destPath' to contain a '/config/DIR/' segment.");
     }
 
-    $remainder = substr($destPath, strlen($modulesDir));
-    $module = explode('/', $remainder)[0];
+    $ownerDir = rtrim($m[1] . $m[2], '/');
+    $owner = $m[2];
+    $directory = $m[3];
 
-    $directory = 'install';
-    if (preg_match('#/config/([^/]+)/#', $destPath, $m)) {
-      $directory = $m[1];
-    }
-
-    return [$module, $directory];
+    return [$owner, $directory, $ownerDir];
   }
 
   /**
@@ -469,35 +474,34 @@ final class WriCommonCommands extends DrushCommands {
   }
 
   /**
-   * Returns the path to a module's .install file, creating it if absent.
+   * Returns the path to an owner's .install file, creating it if absent.
    *
-   * Locates the module's directory the same way resolveModuleAndDirectory()
-   * does — directly under {profile}/modules/$module — rather than via
-   * Drupal's ModuleExtensionList, which depends on extension-discovery
-   * cache being fresh. That's exactly the case most likely to be stale
-   * for a module that was only just created, which caused this to throw
-   * "couldn't resolve its module ownership" for a real, already-synced
-   * module directory.
+   * Takes the owner directory as resolved by resolveModuleAndDirectory()
+   * rather than reconstructing it, since the owner (module, theme, or the
+   * profile itself) doesn't always live under a fixed {profile}/modules/
+   * prefix.
    *
-   * @param string $module
-   *   The module machine name.
+   * @param string $ownerDir
+   *   Absolute path to the module/theme/profile directory that owns the
+   *   config.
+   * @param string $owner
+   *   The owner's machine name (module, theme, or profile name).
    *
    * @return string
    *   Absolute path to the .install file.
    *
    * @throws \RuntimeException
-   *   If the module's directory doesn't exist under {profile}/modules/.
+   *   If the owner's directory doesn't exist.
    */
-  protected function resolveInstallFile(string $module): string {
-    $moduleDir = rtrim($this->profileDirectory, '/') . '/modules/' . $module;
-    if (!is_dir($moduleDir)) {
-      throw new \RuntimeException("Module directory not found: $moduleDir");
+  protected function resolveInstallFile(string $ownerDir, string $owner): string {
+    if (!is_dir($ownerDir)) {
+      throw new \RuntimeException("Owner directory not found: $ownerDir");
     }
 
-    $installFile = "$moduleDir/$module.install";
+    $installFile = "$ownerDir/$owner.install";
     if (!file_exists($installFile)) {
       file_put_contents($installFile, "<?php\n");
-      $this->io()->writeln("  Created: $module.install");
+      $this->io()->writeln("  Created: $owner.install");
     }
     return $installFile;
   }
@@ -560,11 +564,11 @@ final class WriCommonCommands extends DrushCommands {
   /**
    * Recursively searches a directory for every file matching the given name.
    *
-   * A config file can legitimately exist in more than one place at once
-   * (a base-build copy plus a no-UUID module copy used by update hooks),
-   * so this returns every match rather than stopping at the first —
-   * callers need to keep all of them in sync, not just whichever one
-   * happens to be encountered first while walking the tree.
+   * A config file should never exist in more than one place at once; this
+   * returns every match found (rather than stopping at the first) so the
+   * caller can detect and reject that situation instead of silently acting
+   * on whichever copy happens to be encountered first while walking the
+   * tree.
    *
    * @param string $directory
    *   The root directory to search within.
