@@ -25,10 +25,9 @@ content:
     weight: 2
     region: content
   field_parent_menu_item:
-    type: string
+    type: menu_item_reference_label
     label: hidden
-    settings:
-      link_to_entity: false
+    settings: {  }
     third_party_settings: {  }
     weight: 0
     region: content

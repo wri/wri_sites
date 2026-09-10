@@ -30,12 +30,10 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_parent_menu_item:
-    type: string_textfield
+    type: menu_item_reference_select
     weight: 0
     region: content
-    settings:
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_text:
     type: string_textfield

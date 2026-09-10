@@ -1,3 +1,35 @@
+field.storage_settings.menu_item_reference:
+  type: mapping
+  label: 'Menu item reference field storage settings'
+  mapping:
+    target_type:
+      type: string
+      label: 'Type of item to reference'
+
+field.field_settings.menu_item_reference:
+  type: mapping
+  label: 'Menu item reference field settings'
+  mapping:
+    target_menu:
+      type: string
+      label: 'Menu'
+    handler:
+      type: string
+      label: 'Reference method'
+    handler_settings:
+      type: entity_reference_selection.[%parent.handler]
+      label: 'Entity reference selection plugin settings'
+
+field.value.menu_item_reference:
+  type: mapping
+  label: 'Default value'
+  mapping:
+    target_id:
+      type: string
+      label: 'Value'
+    target_uuid:
+      type: uuid
+
 wri_megamenu_2026.settings:
   type: config_object
   label: 'WRI Megamenu 2026 settings'

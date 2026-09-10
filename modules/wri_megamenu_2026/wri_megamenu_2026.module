@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Hooks for wri_megamenu_2026.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function wri_megamenu_2026_theme($existing, $type, $theme, $path) {
+  return [
+    'wri_megamenu_2026_submenu' => [
+      'variables' => [
+        'title' => NULL,
+        'text' => NULL,
+        'listing' => NULL,
+        'menu_block' => NULL,
+      ],
+    ],
+  ];
+}
