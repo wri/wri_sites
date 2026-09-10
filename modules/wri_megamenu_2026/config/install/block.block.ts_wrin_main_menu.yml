@@ -29,10 +29,10 @@ settings:
   suggestion: main
   label_type: block
   label_link: 0
-  hide_on_nonactive: 0
-  add_class: ''
+  hide_on_nonactive: false
 visibility:
   request_path:
     id: request_path
     negate: true
+    context_mapping: {  }
     pages: /testing-2026-menu

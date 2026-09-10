@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -54,6 +53,8 @@ bundle: custom_page
 mode: impact
 content: {  }
 hidden:
+  addtoany: true
+  addtocal: true
   body: true
   field_main_image: true
   field_metatags: true

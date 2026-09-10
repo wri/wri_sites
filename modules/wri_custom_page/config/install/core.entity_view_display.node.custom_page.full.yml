@@ -1,8 +1,6 @@
-langcode: en
 status: true
 dependencies:
   config:
-    - block_content.type.hero
     - core.entity_view_mode.node.full
     - field.field.node.custom_page.body
     - field.field.node.custom_page.field_main_image
@@ -10,7 +8,6 @@ dependencies:
     - field.field.node.custom_page.layout_builder__layout
     - node.type.custom_page
   module:
-    - ctools
     - layout_builder
     - layout_builder_restrictions
     - layout_discovery
@@ -32,7 +29,6 @@ third_party_settings:
   layout_builder_restrictions:
     allowed_block_categories:
       - 'Chaos Tools'
-      - Components
       - 'Content fields'
       - 'Custom block types'
       - 'Custom blocks'
@@ -43,7 +39,10 @@ third_party_settings:
       - 'Lists (Views)'
       - Menus
       - System
+      - Twitter
       - User
+      - 'WRI Data Viz'
+      - 'WRI External Publications'
       - 'WRI block'
       - Webform
       - core
@@ -64,12 +63,10 @@ third_party_settings:
       allowlisted_blocks:
         'Chaos Tools':
           - 'entity_view:node'
-        Components: {  }
         'Content fields':
           - 'field_block:node:custom_page:body'
           - 'field_block:node:custom_page:field_main_image'
           - 'field_block:node:custom_page:title'
-        Devel: {  }
         Facets: {  }
         'Facets summary (Experimental)': {  }
         Forms: {  }
@@ -85,6 +82,9 @@ third_party_settings:
         Webform:
           - webform_block
         core: {  }
+      restricted_categories:
+        - Twitter
+        - 'WRI External Publications'
 id: node.custom_page.full
 targetEntityType: node
 bundle: custom_page
@@ -107,6 +107,8 @@ content:
     weight: 0
     region: content
 hidden:
+  addtoany: true
+  addtocal: true
   field_metatags: true
   langcode: true
   layout_builder__layout: true

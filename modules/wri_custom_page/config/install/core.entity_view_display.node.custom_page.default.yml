@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -97,11 +96,6 @@ content:
     third_party_settings: {  }
     weight: 102
     region: content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 100
-    region: content
   field_metatags:
     type: metatag_empty_formatter
     label: above
@@ -109,7 +103,14 @@ content:
     third_party_settings: {  }
     weight: 103
     region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
 hidden:
+  addtoany: true
+  addtocal: true
   field_main_image: true
   langcode: true
   layout_builder__layout: true
