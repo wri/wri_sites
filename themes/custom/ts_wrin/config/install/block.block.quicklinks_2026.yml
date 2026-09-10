@@ -6,18 +6,23 @@ dependencies:
     - system
   theme:
     - ts_wrin
-id: quicklinks
+id: quicklinks_2026
 theme: ts_wrin
 region: primary_nav
-weight: -18
+weight: -12
 provider: null
 plugin: 'system_menu_block:quick-links'
 settings:
   id: 'system_menu_block:quick-links'
-  label: 'Quick Links'
+  label: 'Quick Links 2026'
   label_display: '0'
   provider: system
   level: 1
   depth: 0
   expand_all_items: false
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /testing-2026-menu
