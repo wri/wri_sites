@@ -17,6 +17,8 @@ function wri_webform_block_install() {
   \Drupal::service('distro_helper.updates')->installConfig('block_content.type.webform', 'wri_webform_block', 'post-install');
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.block_content.webform.default', 'wri_webform_block', 'post-install', TRUE);
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.block_content.webform.default', 'wri_webform_block', 'post-install', TRUE);
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.webform.field_other_orto_list_tags', 'wri_webform_block', 'post-install', TRUE);
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.webform.field_webform', 'wri_webform_block', 'post-install', TRUE);
 
   wri_webform_block_add_content_blocks_browser_dependencies();
 
@@ -116,4 +118,14 @@ function wri_webform_block_update_10603() {
   \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.webform_with_background_color.field_other_orto_list_tags', 'wri_webform_block', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('field.field.block_content.webform_with_background_color.field_webform', 'wri_webform_block', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.block_content.webform_with_background_color', 'wri_webform_block', 'install');
+}
+
+/**
+ * Ensure the background color on the block with background color is required.
+ */
+function wri_webform_block_update_10604() {
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.webform_with_background_color.field_cta_background', [
+    'required',
+    'default_value#0',
+  ], 'wri_webform_block', 'install');
 }
