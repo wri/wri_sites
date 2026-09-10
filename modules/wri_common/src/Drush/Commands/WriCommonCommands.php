@@ -239,7 +239,10 @@ final class WriCommonCommands extends DrushCommands {
     }
 
     if (count($destPaths) > 1) {
-      throw new \RuntimeException("'$filename' exists in more than one place, which should never happen: " . implode(', ', array_map([$this, 'relativeToProfile'], $destPaths)));
+      throw new \RuntimeException("'$filename' exists in more than one place, which should never happen: " . implode(', ', array_map([
+        $this,
+        'relativeToProfile',
+      ], $destPaths)));
     }
 
     $content = file_get_contents($absoluteSourcePath);
@@ -439,8 +442,7 @@ final class WriCommonCommands extends DrushCommands {
   }
 
   /**
-   * Resolves the owner (module/theme/profile) and config directory for a
-   * config file.
+   * Resolves the owner (module/theme/profile) and config directory for config.
    *
    * A config file always lives at "{owner-dir}/config/DIR/filename.yml",
    * whether the owner is a module (e.g. .../modules/wri_common/config/...),
