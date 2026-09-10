@@ -62,7 +62,11 @@
         {% if not paragraph.field_section_title.isEmpty %}
           <h3>{{ content.field_section_title }}</h3>
         {% else %}
-          <h3><a href="{{ menu_url }}">{{ menu_title }}</a></h3>
+          {%  if menu_url %}
+            <h3><a href="{{ menu_url }}">{{ menu_title }}</a></h3>
+          {% else %}
+            <h3>{{ menu_title }}</h3>
+          {% endif %}
         {% endif %}
         {{ content|without('field_section_title') }}
       </div>
