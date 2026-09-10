@@ -19,8 +19,7 @@ class SettingsForm extends ConfigFormBase {
   const TESTING_2026_PATH = '/testing-2026-menu';
 
   /**
-   * The path the old blocks are shown on / 2026 blocks hidden on, once
-   * "Enable everywhere" is checked.
+   * The path the old blocks are shown on.
    */
   const TESTING_LEGACY_PATH = '/testing-legacy-menu';
 

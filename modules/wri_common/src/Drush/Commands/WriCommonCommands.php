@@ -228,8 +228,9 @@ final class WriCommonCommands extends DrushCommands {
   }
 
   /**
-   * Shortens an absolute path to one relative to the profile directory,
-   * purely for more readable CLI output when a file exists in more than
+   * Shortens an absolute path to one relative to the profile directory.
+   *
+   * Purely for more readable CLI output when a file exists in more than
    * one place.
    *
    * @param string $path
@@ -514,6 +515,7 @@ final class WriCommonCommands extends DrushCommands {
    * @return string|null
    *   The destination path, or NULL if the user cancels.
    */
+
   /**
    * Prompts the user to pick a module and returns its config/install path.
    *
