@@ -14,6 +14,9 @@
  * existing pages and just get /testing-2026-menu appended (unless it's
  * already there) and negate set to TRUE; blocks with no request_path
  * condition get one created from scratch.
+ *
+ * Also creates the megamenu block_content entity the 2026 megamenu block
+ * placement points at, with a fixed UUID so it can be referenced elsewhere.
  */
 function wri_megamenu_2026_install() {
   $testing_path = '/testing-2026-menu';
@@ -58,5 +61,15 @@ function wri_megamenu_2026_install() {
 
     $block->setVisibilityConfig('request_path', $configuration);
     $block->save();
+  }
+
+  $block_content_storage = \Drupal::entityTypeManager()->getStorage('block_content');
+  $megamenu_uuid = '9fbc1fc8-82c3-4c46-a0c5-86758e654041';
+  if (!$block_content_storage->loadByProperties(['uuid' => $megamenu_uuid])) {
+    $block_content_storage->create([
+      'type' => 'megamenu',
+      'uuid' => $megamenu_uuid,
+      'info' => 'Mega menu 2026',
+    ])->save();
   }
 }
