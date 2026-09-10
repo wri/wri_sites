@@ -1,3 +1,4 @@
+langcode: en
 status: true
 dependencies:
   config:
@@ -8,15 +9,15 @@ dependencies:
     - ts_wrin
 id: quicklinks
 theme: ts_wrin
-region: primary_nav
-weight: -18
+region: hamburger_nav
+weight: -12
 provider: null
 plugin: 'system_menu_block:quick-links'
 settings:
   id: 'system_menu_block:quick-links'
   label: 'Quick Links'
-  label_display: '0'
   provider: system
+  label_display: '0'
   level: 1
   depth: 0
   expand_all_items: false
