@@ -446,181 +446,176 @@
   }
 }
 
-// ---------------------------------------------------------------------
-// Header layout rules.
-// ---------------------------------------------------------------------
-.testing-2026-menu {
-  .region-primary-nav {
+.region-primary-nav {
+  .wri-megamenu .field__items {
+    display: none;
+  }
+
+  @include mq($md) {
+    gap: 16px;
+    justify-content: flex-start;
+    margin-right: 10px;
+
     .wri-megamenu .field__items {
-      display: none;
-    }
-
-    @include mq($md) {
-      gap: 16px;
-      justify-content: flex-start;
-      margin-right: 10px;
-
-      .wri-megamenu .field__items {
-        display: flex;
-        gap: clamp(20px, calc(18px + (10 * ((100vw - 1002px) / 318))), 30px);
-        margin-left: 0;
-        font-family: var(--font-family-heading);
-      }
-    }
-
-    @include mq($lg) {
-      flex-wrap: nowrap;
-
-      .wri-megamenu .field__items {
-        margin-left: 0;
-        margin-left: clamp(42px, 4vw, 54px);
-      }
+      display: flex;
+      gap: clamp(20px, calc(18px + (10 * ((100vw - 1002px) / 318))), 30px);
+      margin-left: 0;
+      font-family: var(--font-family-heading);
     }
   }
 
-  header nav#block-donate-2026 > ul.menu {
-    margin-bottom: 0;
-    margin-left: var(--spacer-4);
-    margin-right: var(--spacer-4);
-  }
-
-  header nav#block-donate-2026 > ul.menu > li > a {
-    border: 1px solid var(--color-neutral-900);
-    line-height: 1;
-    height: 33px;
-    width: 85px;
-
-    &:hover,
-    &:focus {
-      border-color: var(--color-gold-500);
-    }
-  }
-
-  .header-right {
-    position: relative;
-    top: -3px;
-  }
-
-  // ---------------------------------------------------------------------
-  // Donate dropdown — enhanced by donate-menu.js from the block above.
-  // ---------------------------------------------------------------------
-  #block-donate-2026 {
-    position: relative;
-    display: none;
-
-    @include mq($lg) {
-      display: block;
-    }
-  }
-
-  #block-donate-2026 h2 {
-    opacity: 0;
-  }
-
-  .donate-menu__trigger {
-    @include font(var(--font-family-heading-condensed), "bold", "normal");
-    @include font-line-height(12, 17);
-
-    align-items: center;
-    background-color: transparent;
-    border-radius: 3px;
-    border: 1px solid var(--color-neutral-900);
-    color: var(--color-neutral-900);
-    display: flex;
-    height: 32px;
-    justify-content: center;
-    letter-spacing: 0.43px;
-    margin-left: 0;
-    margin-right: var(--spacer-5);
-    padding: 1px 0 0 0;
-    position: relative;
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: all 0.2s linear;
-    width: 76px;
-
-    .path-frontpage &,
-    .white & {
-      border: 1px solid var(--color-neutral-200);
-      color: var(--color-white);
-    }
-    @include hocus {
-      background-color: var(--color-gold-500);
-      border: 1px solid var(--color-gold-500);
-      color: var(--color-neutral-900);
-      outline: none;
-    }
-  }
-
-  .donate-menu__panel {
-    @include font(var(--font-family-heading-condensed), "regular", "normal");
-    @include font-line-height(12, 17);
-    position: absolute;
-    border-radius: 6px;
-    top: calc(100% + var(--spacer-2));
-    right: 20px;
-    z-index: 50;
-    min-width: 240px;
-    background: var(--color-white);
-    border: 1px solid var(--color-neutral-200);
-    box-shadow: 0 12px 24px rgb(var(--color-black-rgb) / 12%);
-
-    ul.menu {
-      display: block;
-      opacity: 1;
-      list-style: none;
-      margin: 0;
-    }
-
-    a {
-      display: block;
-      padding: var(--spacer-3) var(--spacer-4);
-      color: var(--color-neutral-900);
-      font-size: 14px;
-      text-decoration: none;
-
-      &:hover,
-      &:focus-visible {
-        background: var(--color-neutral-200);
-        text-decoration: underline;
-      }
-    }
-  }
-
-  .header-wrapper button.tray-toggle.filter-toggle {
-    top: 6px;
-    @include mq($lg) {
-      top: -4px;
-    }
-
-    &:hover,
-    &:focus {
-      .filter-icon {
-        &::before {
-          opacity: 1;
-          left: rem(-145);
-          width: rem(110);
-          z-index: 1;
-        }
-      }
-    }
-  }
-
-  // Search-toggle button styling now lives, unscoped, in _header.scss so
-  // it applies to every search-toggle button, not just this page.
-
-  .tray-toggle.filter-toggle {
-    display: none;
-  }
-
-  // .menu-toggle is now the trigger for the new mobile sliding-panel
-  // overlay (see megamenu-mobile.js) below the desktop breakpoint. Only
-  // hide it once desktop's inline mega menu takes over — hiding it
-  // unconditionally, as before, would leave mobile with no way to open
-  // the menu at all.
   @include mq($lg) {
-    .menu-toggle {
-      display: none;
+    flex-wrap: nowrap;
+
+    .wri-megamenu .field__items {
+      margin-left: 0;
+      margin-left: clamp(42px, 4vw, 54px);
     }
+  }
+}
+
+header nav#block-donate-2026 > ul.menu {
+  margin-bottom: 0;
+  margin-left: var(--spacer-4);
+  margin-right: var(--spacer-4);
+}
+
+header nav#block-donate-2026 > ul.menu > li > a {
+  border: 1px solid var(--color-neutral-900);
+  line-height: 1;
+  height: 33px;
+  width: 85px;
+
+  &:hover,
+  &:focus {
+    border-color: var(--color-gold-500);
+  }
+}
+
+.header-right {
+  position: relative;
+  top: -3px;
+}
+
+// ---------------------------------------------------------------------
+// Donate dropdown — enhanced by donate-menu.js from the block above.
+// ---------------------------------------------------------------------
+#block-donate-2026 {
+  position: relative;
+  display: none;
+
+  @include mq($lg) {
+    display: block;
+  }
+}
+
+#block-donate-2026 h2 {
+  opacity: 0;
+}
+
+.donate-menu__trigger {
+  @include font(var(--font-family-heading-condensed), "bold", "normal");
+  @include font-line-height(12, 17);
+
+  align-items: center;
+  background-color: transparent;
+  border-radius: 3px;
+  border: 1px solid var(--color-neutral-900);
+  color: var(--color-neutral-900);
+  display: flex;
+  height: 32px;
+  justify-content: center;
+  letter-spacing: 0.43px;
+  margin-left: 0;
+  margin-right: var(--spacer-5);
+  padding: 1px 0 0 0;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.2s linear;
+  width: 76px;
+
+  .path-frontpage &,
+  .white & {
+    border: 1px solid var(--color-neutral-200);
+    color: var(--color-white);
+  }
+  @include hocus {
+    background-color: var(--color-gold-500);
+    border: 1px solid var(--color-gold-500);
+    color: var(--color-neutral-900);
+    outline: none;
+  }
+}
+
+.donate-menu__panel {
+  @include font(var(--font-family-heading-condensed), "regular", "normal");
+  @include font-line-height(12, 17);
+  position: absolute;
+  border-radius: 6px;
+  top: calc(100% + var(--spacer-2));
+  right: 20px;
+  z-index: 50;
+  min-width: 240px;
+  background: var(--color-white);
+  border: 1px solid var(--color-neutral-200);
+  box-shadow: 0 12px 24px rgb(var(--color-black-rgb) / 12%);
+
+  ul.menu {
+    display: block;
+    opacity: 1;
+    list-style: none;
+    margin: 0;
+  }
+
+  a {
+    display: block;
+    padding: var(--spacer-3) var(--spacer-4);
+    color: var(--color-neutral-900);
+    font-size: 14px;
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+      background: var(--color-neutral-200);
+      text-decoration: underline;
+    }
+  }
+}
+
+.header-wrapper button.tray-toggle.filter-toggle {
+  top: 6px;
+  @include mq($lg) {
+    top: -4px;
+  }
+
+  &:hover,
+  &:focus {
+    .filter-icon {
+      &::before {
+        opacity: 1;
+        left: rem(-145);
+        width: rem(110);
+        z-index: 1;
+      }
+    }
+  }
+}
+
+// Search-toggle button styling now lives, unscoped, in _header.scss so
+// it applies to every search-toggle button, not just this page.
+
+.tray-toggle.filter-toggle {
+  display: none;
+}
+
+// .menu-toggle is now the trigger for the new mobile sliding-panel
+// overlay (see megamenu-mobile.js) below the desktop breakpoint. Only
+// hide it once desktop's inline mega menu takes over — hiding it
+// unconditionally, as before, would leave mobile with no way to open
+// the menu at all.
+@include mq($lg) {
+  .menu-toggle {
+    display: none;
   }
 }

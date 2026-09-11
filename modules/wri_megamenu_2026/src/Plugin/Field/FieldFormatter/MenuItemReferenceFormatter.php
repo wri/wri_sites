@@ -115,7 +115,7 @@ final class MenuItemReferenceFormatter extends FormatterBase implements Containe
       'label' => $menu?->label() ?? $menu_name,
       'label_display' => 0,
       'provider' => 'menu_block',
-      'follow' => 1,
+      'follow' => FALSE,
       'follow_parent' => 'child',
       'display_empty' => FALSE,
       'label_link' => FALSE,
