@@ -1,0 +1,21 @@
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_parent_menu_item
+    - paragraphs.paragraphs_type.submenu
+    - system.menu.main-menu-2026
+id: paragraph.submenu.field_parent_menu_item
+field_name: field_parent_menu_item
+entity_type: paragraph
+bundle: submenu
+label: 'Parent Menu Item'
+description: 'The menu item this submenu hangs off of. Its children are shown in the flyout panel.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  target_menu: main-menu-2026
+  handler: 'default:menu_link_content'
+  handler_settings: {  }
+field_type: menu_item_reference

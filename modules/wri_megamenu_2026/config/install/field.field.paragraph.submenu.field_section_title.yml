@@ -1,0 +1,21 @@
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_title
+    - paragraphs.paragraphs_type.submenu
+  module:
+    - link
+id: paragraph.submenu.field_section_title
+field_name: field_section_title
+entity_type: paragraph
+bundle: submenu
+label: 'Section title'
+description: 'Heading shown above the "Text" field. If empty, uses the parent menu item''s title and link (e.g. "About").'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 2
+  link_type: 1
+field_type: link

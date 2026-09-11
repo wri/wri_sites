@@ -3,6 +3,7 @@
  * Main theme behaviors.
  */
 import tsHeaderNav from "./components/ts_header_nav.js";
+import tsDonateMenu from "./components/ts_donate_menu.js";
 import tsTabs from "./components/ts_tabs.js";
 import tsTrayNav from "./components/ts_tray_nav.js";
 import tsButtonSvg from "./components/ts_button_svg.js";
@@ -23,6 +24,10 @@ import wriExtraBodyArticles from "./components/wri_extra_body_articles.js";
    **/
   Drupal.behaviors.tsHeaderNav = {
     attach: tsHeaderNav
+  };
+
+  Drupal.behaviors.tsDonateMenu = {
+    attach: tsDonateMenu
   };
 
   Drupal.behaviors.tsTabs = {

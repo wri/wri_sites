@@ -10,7 +10,12 @@ module.exports = (env, argv) => {
     devtool: isDevMode ? "source-map" : false,
     entry: {
       main: ["./js/main.js", "./sass/style.scss"],
-      ckeditor5: ["./sass/ckeditor.scss"]
+      ckeditor5: ["./sass/ckeditor.scss"],
+      megamenu: [
+        "./js/components/ts_megamenu.js",
+        "./js/components/ts_megamenu_mobile.js",
+        "./sass/megamenu.scss"
+      ]
     },
     module: {
       rules: [

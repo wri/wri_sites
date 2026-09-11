@@ -1,0 +1,19 @@
+status: true
+dependencies:
+  module:
+    - menu_link_content
+    - paragraphs
+    - wri_megamenu_2026
+id: paragraph.field_parent_menu_item
+field_name: field_parent_menu_item
+entity_type: paragraph
+type: menu_item_reference
+settings:
+  target_type: menu_link_content
+module: wri_megamenu_2026
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

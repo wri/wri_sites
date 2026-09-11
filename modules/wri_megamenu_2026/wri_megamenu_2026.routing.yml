@@ -1,0 +1,7 @@
+wri_megamenu_2026.settings:
+  path: '/admin/config/content/wri-megamenu-2026'
+  defaults:
+    _form: '\Drupal\wri_megamenu_2026\Form\SettingsForm'
+    _title: 'WRI Megamenu 2026'
+  requirements:
+    _permission: 'administer site configuration'

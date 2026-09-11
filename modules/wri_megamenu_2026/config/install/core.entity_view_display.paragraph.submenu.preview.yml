@@ -1,0 +1,36 @@
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.submenu.field_custom_featured
+    - field.field.paragraph.submenu.field_listing
+    - field.field.paragraph.submenu.field_parent_menu_item
+    - field.field.paragraph.submenu.field_text
+    - paragraphs.paragraphs_type.submenu
+  module:
+    - ds
+id: paragraph.submenu.preview
+targetEntityType: paragraph
+bundle: submenu
+mode: preview
+content:
+  field_text:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      ds:
+        ft:
+          id: minimal
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    weight: 2
+    region: content
+hidden:
+  field_custom_featured: true
+  field_listing: true
+  field_parent_menu_item: true
+  search_api_excerpt: true

@@ -1,0 +1,111 @@
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.hero_on_a_subpage
+    - field.field.node.custom_page.body
+    - field.field.node.custom_page.field_main_image
+    - field.field.node.custom_page.field_metatags
+    - field.field.node.custom_page.layout_builder__layout
+    - node.type.custom_page
+    - system.menu.page-hierarchies
+  module:
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_discovery
+    - user
+    - wri_menus
+    - wri_toc
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          -
+            uuid: 00dc2146-20fa-4b6f-9868-726c9a8c8690
+            region: hero
+            configuration:
+              id: 'field_block:node:custom_page:field_main_image'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: hidden
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          -
+            uuid: 61254967-51da-4c4f-beac-02da7bc18546
+            region: content
+            configuration:
+              id: wri_toc_horizontal_bar_menu
+              label: 'Horizontal bar menu'
+              label_display: '0'
+              provider: wri_toc
+              context_mapping: {  }
+              color_class: black-bar
+              menu: page-hierarchies
+            weight: 0
+            additional: {  }
+          -
+            uuid: 0403ff4b-0d5e-4549-a4cf-003be601e258
+            region: content
+            configuration:
+              id: 'parent_menu_block:page-hierarchies'
+              label: 'WRI Page Hierarchies'
+              label_display: '0'
+              provider: wri_menus
+              context_mapping: {  }
+              follow: 1
+              follow_parent: child
+              display_empty: false
+              level: '1'
+              depth: '0'
+              expand_all_items: false
+              parent: 'page-hierarchies:'
+              render_parent: 1
+              suggestion: page_hierarchies
+              label_type: block
+              label_link: 0
+              hide_on_nonactive: 1
+              add_class: mobile__toc
+            weight: 1
+            additional: {  }
+        third_party_settings: {  }
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      allowed_layouts: {  }
+      denylisted_blocks: {  }
+      allowlisted_blocks: {  }
+      restricted_categories: {  }
+id: node.custom_page.hero_on_a_subpage
+targetEntityType: node
+bundle: custom_page
+mode: hero_on_a_subpage
+content:
+  field_main_image:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: hero
+hidden:
+  addtoany: true
+  addtocal: true
+  body: true
+  field_metatags: true
+  langcode: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true
