@@ -11,6 +11,7 @@ use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\file\Entity\File;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\block_content\Entity\BlockContent;
 
 /**
  * Implements hook_install().
@@ -154,5 +155,53 @@ function wri_taxonomy_update_10401() {
       $term->save();
       \Drupal::messenger()->addStatus(t('Created/updated term @name with icon.', ['@name' => $term_name]));
     }
+  }
+}
+
+/**
+ * Generates the term-level webform block.
+ */
+function wri_taxonomy_update_10602() {
+  $block_manager = \Drupal::entityTypeManager()->getStorage('block_content');
+  // Load the block by uuid 'c2faf277-9cee-48bd-9f70-09ee7613806a'
+  $block = $block_manager->loadByProperties(['uuid' => 'c2faf277-9cee-48bd-9f70-09ee7613806a']);
+
+  if (!$block) {
+    // If it doesn't exist, generate it.
+    $block = BlockContent::create([
+      'uuid' => 'c2faf277-9cee-48bd-9f70-09ee7613806a',
+      'type' => 'webform_with_background_color',
+      'info' => 'Stay Informed',
+      'langcode' => 'en',
+      'field_webform' => 'term_email_signup',
+      'field_cta_background' => 'has-teal-background-color',
+      'reusable' => TRUE,
+    ]);
+    $block->save();
+  }
+}
+
+/**
+ * Generates the term-level resource library CTA block.
+ */
+function wri_taxonomy_update_10603() {
+  $block_manager = \Drupal::entityTypeManager()->getStorage('block_content');
+  // Load the block by uuid '9525250a-f59c-4d2f-9f71-fdff3d104966'
+  $block = $block_manager->loadByProperties(['uuid' => '69c2110e-2eab-4a62-b298-8c04414e17a6']);
+
+  if (!$block) {
+    // If it doesn't exist, generate it.
+    $block = BlockContent::create([
+      'uuid' => '69c2110e-2eab-4a62-b298-8c04414e17a6',
+      'type' => 'small_cta',
+      'info' => 'Explore our full Resource Library',
+      'langcode' => 'en',
+      'field_link' => [
+        'uri' => 'internal:/resources',
+        'title' => 'Explore our full Resource Library',
+      ],
+      'reusable' => TRUE,
+    ]);
+    $block->save();
   }
 }

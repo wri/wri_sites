@@ -16,6 +16,11 @@ use Drupal\taxonomy\TermInterface;
  * Implements hook_entity_type_alter().
  */
 function wri_taxonomy_entity_type_alter(array &$entity_types) {
+  $config = \Drupal::config('wri_taxonomy.settings');
+  $is_canonical = $config->get('enable_canonical_urls');
+  if ($is_canonical) {
+    return;
+  }
   // Ovewrite the Taxonomy entity class to use my own,
   // which only overwrites the toUrl method.
   $entity_types['taxonomy_term']->setClass('Drupal\wri_taxonomy\Entity\WriTerm');
@@ -115,6 +120,11 @@ function wri_taxonomy_term_uri(TermInterface $term) {
  * Implements hook_entity_field_access().
  */
 function wri_taxonomy_entity_field_access($operation, FieldDefinitionInterface $field_definition, AccountInterface $account, ?FieldItemListInterface $items = NULL) {
+  $config = \Drupal::config('wri_taxonomy.settings');
+  $is_canonical = $config->get('enable_canonical_urls');
+  if ($is_canonical) {
+    return AccessResult::neutral();
+  }
   // Disable the Url Alias field.
   if ($field_definition->getTargetEntityTypeId() == 'taxonomy_term' && $field_definition->getName() == 'path' && $operation == 'edit') {
     return AccessResult::forbidden();

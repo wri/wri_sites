@@ -1,0 +1,18 @@
+name: 'WRI Looking Terms'
+type: module
+description: 'Provides the "Looking for something specific" block'
+core_version_requirement: '>=9.5'
+package: WRI
+dependencies:
+  - wri_admin
+  - viewfield
+config_devel:
+  install:
+    - block_content.type.looking_for_something_specific.yml
+    - core.entity_form_display.block_content.looking_for_something_specific.default.yml
+    - core.entity_view_display.block_content.looking_for_something_specific.default.yml
+    - field.field.block_content.looking_for_something_specific.field_title.yml
+    - field.field.block_content.looking_for_something_specific.field_explore_more.yml
+    - field.field.block_content.looking_for_something_specific.field_intro.yml
+    - field.field.block_content.looking_for_something_specific.field_listing.yml
+    - field.storage.block_content.field_explore_more.yml

@@ -1,0 +1,5 @@
+wri_taxonomy.settings:
+  title: WRI taxonomy settings
+  parent: system.admin_config_system
+  route_name: wri_taxonomy.settings
+  weight: 10

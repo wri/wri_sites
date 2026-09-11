@@ -158,6 +158,10 @@ function wri_common_token_info() {
     'name' => 'WRI Organization name',
     'description' => 'WRI is default, change to "WRI India, WRI China, etc."',
   ];
+  $info['tokens']['wri_tokens']['resources_anchor'] = [
+    'name' => 'Resources anchor',
+    'description' => 'The on-page anchor link (e.g. "#resources") for the resources section, as configured in WRI taxonomy settings.',
+  ];
   $info['tokens']['node']['link'] = [
     'name' => 'A node link',
     'description' => 'The link to the node, if published, or its title if not.',
@@ -204,6 +208,12 @@ function wri_common_token_info() {
 function wri_common_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
   $replacements = [];
   if ($type == 'wri_tokens') {
+    foreach ($tokens as $name => $original) {
+      if ($name == 'resources_anchor') {
+        $anchor = \Drupal::config('wri_taxonomy.settings')->get('resources_anchor') ?: 'resources';
+        $replacements[$original] = Markup::create('#' . $anchor);
+      }
+    }
     if (isset($data['node']) && $node = $data['node']) {
       foreach ($tokens as $name => $original) {
         // Find the desired token by name.

@@ -1,0 +1,52 @@
+{#
+/**
+ * @file
+ * Theme override for the "Looking for something specific" block.
+ *
+ * Adds open/close (accordion) toggling on the Title, and a side-scrolling
+ * carousel on the Listing (reusing the Carousel with tabs element's
+ * accessible-slick library).
+ *
+ * Views affected: content.field_listing (the Listing viewfield) renders
+ * views.view.child_topics, "child_topics_block" display, passed the current
+ * page's term id. If that view has no results, its own empty-region
+ * attachment falls back to views.view.tags_within_a_topic's "term_cards"
+ * display instead - both display types render via the "Cards with
+ * subterms" view mode (see taxonomy-term--cards-with-subterms.html.twig).
+ *
+ * @see template_preprocess_block()
+ */
+#}
+{{ attach_library('wri_looking_terms/looking_terms') }}
+{%
+  set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    'looking-terms',
+    'py-[40px]',
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  <div class="looking-terms-header flex items-start justify-between gap-[24px]">
+    <div class="contents">{{ content.field_title }}</div>
+    <button type="button" class="looking-terms-toggle body-sm shrink-0 flex items-center gap-[8px]" aria-expanded="false">
+      <span class="looking-terms-toggle-label-closed">{{ content.field_explore_more }}</span>
+      <span class="looking-terms-toggle-label-open">{{ 'Close'|t }}</span>
+      <span class="looking-terms-toggle-icon" aria-hidden="true">
+        <svg viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1L7 7L13 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </button>
+  </div>
+  {% set intro = content.field_intro|render %}
+  {% if intro|trim %}
+    <div class="looking-terms-intro body-md mt-[16px]">{{ intro }}</div>
+  {% endif %}
+  <div class="looking-terms-content">
+    <div class="looking-terms-listing mt-[40px]">
+      {{ content.field_listing }}
+    </div>
+  </div>
+</div>
