@@ -7,6 +7,13 @@
  * carousel on the Listing (reusing the Carousel with tabs element's
  * accessible-slick library).
  *
+ * Views affected: content.field_listing (the Listing viewfield) renders
+ * views.view.child_topics, "child_topics_block" display, passed the current
+ * page's term id. If that view has no results, its own empty-region
+ * attachment falls back to views.view.tags_within_a_topic's "term_cards"
+ * display instead - both display types render via the "Cards with
+ * subterms" view mode (see taxonomy-term--cards-with-subterms.html.twig).
+ *
  * @see template_preprocess_block()
  */
 #}

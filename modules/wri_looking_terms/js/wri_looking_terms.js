@@ -2,6 +2,12 @@
  * @file
  * Open/close toggle and side-scroll carousel for the "Looking for something
  * specific" block.
+ *
+ * Views affected: initializes Slick on the Listing's rendered output, which
+ * comes from views.view.child_topics ("child_topics_block" display) or,
+ * when that has no results, its empty-region fallback to
+ * views.view.tags_within_a_topic ("term_cards" display). Both render rows
+ * via the "Cards with subterms" view mode.
  */
 (function ($, Drupal, once) {
   var prevArrow = '<button class="slick-prev"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg></button>';

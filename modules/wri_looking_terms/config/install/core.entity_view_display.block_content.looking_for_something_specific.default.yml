@@ -8,6 +8,7 @@ dependencies:
     - field.field.block_content.looking_for_something_specific.field_listing
     - field.field.block_content.looking_for_something_specific.field_title
   module:
+    - element_class_formatter
     - text
     - wri_admin
     - wri_looking_terms
@@ -34,17 +35,22 @@ content:
     type: viewfield_token
     label: hidden
     settings:
-      view_title: hidden
+      view_title: above
       always_build_output: 1
       empty_view_title: hidden
     third_party_settings: {  }
     weight: 3
     region: content
   field_title:
-    type: string
+    type: wrapper_class
     label: hidden
     settings:
-      link_to_entity: false
+      class: h3
+      tag: h2
+      link: false
+      link_class: ''
+      summary: false
+      trim: 200
     third_party_settings: {  }
     weight: 0
     region: content

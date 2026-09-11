@@ -10,17 +10,26 @@
  * .cards-with-subterms-card override under .looking-terms-related-tags in
  * _looking-terms.scss).
  *
+ * Views affected by this template: this renders each row wherever a View
+ * uses the "entity: Content" row plugin with view mode "Cards with
+ * subterms" - currently:
+ * - views.view.child_topics, "child_topics_block" display.
+ * - views.view.tags_within_a_topic, "term_cards" display.
+ * (The same view's "term_names" display does NOT use this template - it's a
+ * plain fields row showing just the term name, used for the nested Related
+ * tags list.)
+ *
  * @see template_preprocess_taxonomy_term()
  */
 #}
-<div class="cards-with-subterms-card border border-solid border-neutral-900 p-[16px] h-full flex flex-col">
-  <h3 class="h3 mb-[8px]">
+<div class="cards-with-subterms-card border border-solid border-neutral-900 px-[20px] pt-[16px] pb-[32px] h-full flex flex-col">
+  <h3 class="h3 mb-[12px]">
     <a href="{{ url }}" class="text-neutral-900 no-underline">{{ name }}</a>
   </h3>
-  <hr class="cards-with-subterms-card__rule border-t border-solid border-neutral-900 mb-[10px]">
+  <hr class="cards-with-subterms-card__rule border-t-[0] border-solid border-neutral-900 mb-[10px]">
   {% set intro = content.field_intro|render %}
   {% if intro|trim %}
-    <div class="utility-base mb-[10px]">{{ intro }}</div>
+    <div class="utility-base leading-[150%] mb-[10px]">{{ intro }}</div>
   {% endif %}
   {% set image = content.field_main_image|render %}
   {% if image|trim %}

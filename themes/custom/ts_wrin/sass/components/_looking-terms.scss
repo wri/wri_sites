@@ -2,17 +2,30 @@
   "Looking for something specific" block, and the "Cards with subterms"
   taxonomy term view mode it lists (Topics and Subtopics child topics, or
   their related Tags as a fallback).
+
+  Views affected by this file:
+  - views.view.child_topics (Child Topics), "child_topics_block" display.
+    Row plugin renders each result in the "Cards with subterms" view mode -
+    styled here via .cards-with-subterms-card and friends. Its "no results"
+    behavior embeds the view below, inheriting the current term id.
+  - views.view.tags_within_a_topic (Tags within a Topic):
+    - "term_cards" display: same row/view-mode setup as above, used as the
+      fallback when a Topic has no child topics. Styled identically.
+    - "term_names" display: plain term-name list (no card template), used
+      by a Topic's own "Related tags" field, nested one level inside its
+      own card - styled here via .looking-terms-related-tags.
 */
 
 .looking-terms {
-  border-top: 1px solid var(--color-neutral-900);
+  border-top: 5px solid var(--color-neutral-200);
+  margin-top: 32px;
 }
 
 /* Preflight/reset is disabled sitewide, so <h2> keeps the browser's default
    margin - override it here so the title's text lines up with the top of
    the toggle instead of sitting below it. */
 .looking-terms-header h2 {
-  margin: 0;
+  margin: 0 0 16px 0;
 }
 
 .looking-terms-toggle {
@@ -24,10 +37,6 @@
   font-weight: 700;
   padding: 0;
   text-align: right;
-}
-
-.looking-terms.is-open .looking-terms-toggle-label-open {
-  text-decoration: underline;
 }
 
 .looking-terms-toggle-label-closed,
@@ -67,10 +76,11 @@
 /* "Explore within [Topic]" - the Child topics view's own title, shown above
    the Listing via the Listing field's "view title" formatter setting. */
 .looking-terms-listing .field__item__label {
+  color: var(--color-black);
   font-family: var(--font-family-serif);
   font-size: 20px;
   font-style: italic;
-  font-weight: 400;
+  font-weight: 700;
   margin-bottom: var(--spacer-7);
 }
 
@@ -110,7 +120,7 @@
 }
 
 .looking-terms-listing .slick-slide > div {
-  padding: 0 calc(var(--spacer-7) / 2);
+  padding: 0 calc(var(--spacer-10) / 2);
 }
 
 /* Matches the arrow styling used by the Carousel with tabs element. */
@@ -184,11 +194,14 @@
 
 .explore-all-link {
   align-items: center;
-  display: inline-flex;
-  gap: 8px;
+  display: inline-block;
+  font-size: 14px;
 
   svg {
-    min-width: 12px;
+    min-width: 15px;
+    position: relative;
+    top: 1px;
+    left: 4px;
   }
 }
 
@@ -196,9 +209,12 @@
    divided list, not as its own bordered cards). */
 .looking-terms-related-tags .view-content {
   display: block;
+  margin-bottom: 8px;
 }
 
 .looking-terms-related-tags .view-content > div {
   border-bottom: 1px solid var(--color-neutral-400);
-  padding: 6px 0;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 16px 0 8px;
 }
