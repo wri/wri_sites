@@ -1,0 +1,89 @@
+<?php
+
+/**
+ * @file
+ * Contains wri_looking_terms.module.
+ */
+
+use Drupal\Core\Cache\CacheableMetadata;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\views\ViewExecutable;
+use Drupal\views\Views;
+
+/**
+ * Implements hook_views_pre_execute().
+ *
+ * The views "Title" option only tokenizes Views' own row/argument tokens
+ * (see ViewExecutable::getTitle()), not Drupal's global Token API - so a
+ * title like "Explore within [current-page:taxonomy_term:name]" needs its
+ * token replaced explicitly. Runs during execute(), well before the Listing
+ * viewfield formatter reads $view->getTitle().
+ */
+function wri_looking_terms_views_pre_execute(ViewExecutable $view) {
+  if (in_array($view->id(), ['child_topics', 'tags_within_a_topic'], TRUE)) {
+    $view->setTitle(\Drupal::token()->replace($view->getTitle(), [], ['clear' => TRUE]));
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view_alter() for block_content.
+ *
+ * Hides the entire "Looking for something specific" block when its Listing
+ * viewfield has nothing to show - including the Child topics view's
+ * "no results" attachment behavior, which falls back to a related-tags
+ * listing. If that fallback is also empty, there is nothing useful to show.
+ *
+ * Both the regular Block Layout view builder and Layout Builder's block
+ * component renderer decide whether to output a block's wrapping markup by
+ * checking whether its content render array is structurally empty
+ * (\Drupal\Core\Render\Element::isEmpty()) - they do not look at #access on
+ * that array. So hiding the block means actually emptying $build, not just
+ * forbidding access to it.
+ */
+function wri_looking_terms_block_content_view_alter(array &$build, EntityInterface $entity) {
+  if ($entity->bundle() !== 'looking_for_something_specific') {
+    return;
+  }
+
+  $library = 'wri_looking_terms/looking_terms';
+
+  if (!$entity->hasField('field_listing') || $entity->get('field_listing')->isEmpty()) {
+    $build['#attached']['library'][] = $library;
+    return;
+  }
+
+  $item = $entity->get('field_listing')->first();
+  $cacheability = (new CacheableMetadata())
+    ->addCacheTags(['config:block_content.type.looking_for_something_specific'])
+    ->addCacheContexts(['url']);
+
+  $view = Views::getView($item->target_id);
+  $is_empty = TRUE;
+
+  if ($view && $view->access($item->display_id)) {
+    $arguments = [];
+    if (!empty($item->arguments)) {
+      $argument_string = \Drupal::token()->replace($item->arguments, ['block_content' => $entity], ['clear' => TRUE]);
+      $arguments = explode('/', $argument_string);
+    }
+
+    // The empty/header/footer area handlers - including the "no results"
+    // attachment to the related-tags view - only mark themselves empty or
+    // not once actually rendered, so the output must be rendered (not just
+    // previewed) before outputIsEmpty() reflects the attachment's content.
+    $output = $view->preview($item->display_id, $arguments);
+    \Drupal::service('renderer')->renderPlain($output);
+
+    $cacheability->addCacheableDependency(CacheableMetadata::createFromRenderArray($view->element ?? []));
+    $is_empty = $view->display_handler->outputIsEmpty();
+  }
+
+  if ($is_empty) {
+    $build = [];
+  }
+  else {
+    $build['#attached']['library'][] = $library;
+  }
+
+  $cacheability->applyTo($build);
+}

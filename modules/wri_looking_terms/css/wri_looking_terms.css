@@ -1,0 +1,21 @@
+/**
+ * Functional (non-visual) behavior styles for the "Looking for something
+ * specific" block. Brand styling (color, type, spacing, card look) lives in
+ * the ts_wrin theme's sass/components/_looking-terms.scss, since this is a
+ * themeable presentational concern, not block behavior.
+ */
+.looking-terms-content[hidden] {
+  display: none;
+}
+
+.looking-terms .looking-terms-toggle-label-open {
+  display: none;
+}
+
+.looking-terms.is-open .looking-terms-toggle-label-open {
+  display: inline;
+}
+
+.looking-terms.is-open .looking-terms-toggle-label-closed {
+  display: none;
+}

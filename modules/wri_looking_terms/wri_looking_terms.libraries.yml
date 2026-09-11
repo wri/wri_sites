@@ -1,0 +1,12 @@
+looking_terms:
+  version: VERSION
+  css:
+    theme:
+      css/wri_looking_terms.css: {}
+  js:
+    js/wri_looking_terms.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once
+    - wri_carousel_with_tabs/accessible_slick

@@ -1,0 +1,53 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.looking_for_something_specific
+    - field.field.block_content.looking_for_something_specific.field_explore_more
+    - field.field.block_content.looking_for_something_specific.field_intro
+    - field.field.block_content.looking_for_something_specific.field_listing
+    - field.field.block_content.looking_for_something_specific.field_title
+  module:
+    - text
+    - wri_admin
+    - wri_looking_terms
+id: block_content.looking_for_something_specific.default
+targetEntityType: block_content
+bundle: looking_for_something_specific
+mode: default
+content:
+  field_explore_more:
+    type: wri_looking_terms_plain_text
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_intro:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_listing:
+    type: viewfield_token
+    label: hidden
+    settings:
+      view_title: hidden
+      always_build_output: 1
+      empty_view_title: hidden
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

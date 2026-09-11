@@ -1,0 +1,204 @@
+/*
+  "Looking for something specific" block, and the "Cards with subterms"
+  taxonomy term view mode it lists (Topics and Subtopics child topics, or
+  their related Tags as a fallback).
+*/
+
+.looking-terms {
+  border-top: 1px solid var(--color-neutral-900);
+}
+
+/* Preflight/reset is disabled sitewide, so <h2> keeps the browser's default
+   margin - override it here so the title's text lines up with the top of
+   the toggle instead of sitting below it. */
+.looking-terms-header h2 {
+  margin: 0;
+}
+
+.looking-terms-toggle {
+  background: none;
+  border: none;
+  color: var(--color-neutral-900);
+  cursor: pointer;
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  padding: 0;
+  text-align: right;
+}
+
+.looking-terms.is-open .looking-terms-toggle-label-open {
+  text-decoration: underline;
+}
+
+.looking-terms-toggle-label-closed,
+.looking-terms-toggle-label-closed * {
+  font-family: inherit;
+}
+
+.looking-terms-toggle-icon {
+  display: inline-flex;
+  flex: none;
+
+  svg {
+    height: 8px;
+    transition: transform 200ms ease;
+    width: 14px;
+  }
+}
+
+.looking-terms.is-open .looking-terms-toggle-icon svg {
+  transform: rotate(180deg);
+}
+
+.looking-terms-intro p {
+  margin: 0 0 var(--spacer-7);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.looking-terms-intro a {
+  color: var(--color-neutral-900);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* "Explore within [Topic]" - the Child topics view's own title, shown above
+   the Listing via the Listing field's "view title" formatter setting. */
+.looking-terms-listing .field__item__label {
+  font-family: var(--font-family-serif);
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 400;
+  margin-bottom: var(--spacer-7);
+}
+
+/* Card row / carousel. */
+.looking-terms-listing .view-content {
+  display: flex;
+  gap: var(--spacer-7);
+}
+
+/* Slick itself injects an extra wrapper div around each slide's original
+   content at init time (inline `width: 100%; display: inline-block;`, no
+   height) - one level deeper than the Views row wrapper. Reach through both
+   so the actual card can stretch. */
+.looking-terms-listing .slick-slide {
+  height: auto !important;
+
+  > div {
+    height: 100%;
+
+    > div {
+      height: 100%;
+    }
+  }
+}
+
+/* !important guards against slick.min.css (loaded from the CDN after this
+   stylesheet) re-asserting its own display/height defaults on these same
+   selectors and winning the load-order tie, which was silently breaking
+   the equal-height stretch below. */
+.looking-terms-listing .slick-track {
+  align-items: stretch !important;
+  display: flex !important;
+}
+
+.looking-terms-listing .slick-list {
+  margin: 0 calc(-1 * var(--spacer-7) / 2);
+}
+
+.looking-terms-listing .slick-slide > div {
+  padding: 0 calc(var(--spacer-7) / 2);
+}
+
+/* Matches the arrow styling used by the Carousel with tabs element. */
+.looking-terms-listing .slick-arrow {
+  align-items: center;
+  background-color: var(--color-neutral-400);
+  border: none;
+  border-radius: 50%;
+  color: var(--color-white);
+  cursor: pointer;
+  display: flex;
+  height: 60px;
+  justify-content: center;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  z-index: 1;
+
+  @include mq($md) {
+    height: 75px;
+    width: 75px;
+  }
+
+  svg {
+    fill: currentColor;
+    height: 28px;
+    width: 28px;
+
+    @include mq($md) {
+      height: 32px;
+      width: 32px;
+    }
+  }
+}
+
+.looking-terms-listing .slick-arrow.slick-disabled {
+  background-color: var(--color-neutral-200);
+  pointer-events: none;
+}
+
+.looking-terms-listing .slick-prev {
+  left: -20px !important;
+}
+
+.looking-terms-listing .slick-next {
+  right: -20px !important;
+}
+
+/* Cards with subterms - the individual card. */
+.cards-with-subterms-card {
+  background-color: var(--color-white);
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.cards-with-subterms-card__rule {
+  width: 100%;
+}
+
+.cards-with-subterms-card__image {
+  overflow: hidden;
+}
+
+.cards-with-subterms-card__image img {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.explore-all-link {
+  align-items: center;
+  display: inline-flex;
+  gap: 8px;
+
+  svg {
+    min-width: 12px;
+  }
+}
+
+/* Nested Related tags list (Topic card showing its child Tags as a plain
+   divided list, not as its own bordered cards). */
+.looking-terms-related-tags .view-content {
+  display: block;
+}
+
+.looking-terms-related-tags .view-content > div {
+  border-bottom: 1px solid var(--color-neutral-400);
+  padding: 6px 0;
+}

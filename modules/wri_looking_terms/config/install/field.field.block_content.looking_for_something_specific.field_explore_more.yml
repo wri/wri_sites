@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.looking_for_something_specific
+    - field.storage.block_content.field_explore_more
+    - filter.format.basic_html
+  module:
+    - text
+id: block_content.looking_for_something_specific.field_explore_more
+field_name: field_explore_more
+entity_type: block_content
+bundle: looking_for_something_specific
+label: 'Explore more'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 'Explore more topics within [current-page:taxonomy_term:name]'
+    format: basic_html
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+field_type: text_long
