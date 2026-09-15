@@ -160,43 +160,6 @@ function wri_taxonomy_update_10401() {
 }
 
 /**
- * Points any layout builder displays using $block at its current id/revision.
- *
- * @param \Drupal\block_content\Entity\BlockContent|null $block
- *   The inline block content entity, or NULL to skip.
- * @param string $entity_type
- *   The target entity type of the displays to check (e.g. 'taxonomy_term').
- */
-function _wri_taxonomy_update_inline_block_displays($block, $entity_type) {
-  if (!$block) {
-    return;
-  }
-
-  $display_storage = \Drupal::entityTypeManager()->getStorage('entity_view_display');
-  $displays = $display_storage->loadByProperties(['targetEntityType' => $entity_type]);
-  foreach ($displays as $display) {
-    if (!$display instanceof LayoutEntityDisplayInterface) {
-      continue;
-    }
-    $changed = FALSE;
-    foreach ($display->getSections() as $section) {
-      foreach ($section->getComponents() as $component) {
-        $configuration = $component->get('configuration');
-        if (($configuration['uuid'] ?? NULL) === $block->uuid()) {
-          $configuration['block_id'] = $block->id();
-          $configuration['block_revision_id'] = $block->getRevisionId();
-          $component->setConfiguration($configuration);
-          $changed = TRUE;
-        }
-      }
-    }
-    if ($changed) {
-      $display->save();
-    }
-  }
-}
-
-/**
  * Generates the term-level webform block.
  */
 function wri_taxonomy_update_10602() {
@@ -218,8 +181,6 @@ function wri_taxonomy_update_10602() {
     ]);
     $block->save();
   }
-
-  _wri_taxonomy_update_inline_block_displays($block, 'taxonomy_term');
 }
 
 /**
@@ -247,6 +208,4 @@ function wri_taxonomy_update_10603() {
     ]);
     $block->save();
   }
-
-  _wri_taxonomy_update_inline_block_displays($block, 'taxonomy_term');
 }
