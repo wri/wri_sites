@@ -160,8 +160,7 @@ function wri_taxonomy_update_10401() {
 }
 
 /**
- * Points any layout builder displays using $block at its current id and
- * revision.
+ * Points any layout builder displays using $block at its current id/revision.
  *
  * @param \Drupal\block_content\Entity\BlockContent|null $block
  *   The inline block content entity, or NULL to skip.
