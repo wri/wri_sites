@@ -25,9 +25,11 @@
     'block-' ~ plugin_id|clean_class,
     'looking-terms',
     'py-[40px]',
+    'container'
   ]
 %}
 <div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}{{ title_suffix }}
   <div class="looking-terms-header flex items-start justify-between gap-[24px]">
     <div class="contents">{{ content.field_title }}</div>
     <button type="button" class="looking-terms-toggle body-sm shrink-0 flex items-center gap-[8px]" aria-expanded="false">
