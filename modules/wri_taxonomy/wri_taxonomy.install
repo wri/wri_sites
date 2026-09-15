@@ -12,6 +12,7 @@ use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\file\Entity\File;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\block_content\Entity\BlockContent;
+use Drupal\layout_builder\Entity\LayoutEntityDisplayInterface;
 
 /**
  * Implements hook_install().
@@ -159,12 +160,51 @@ function wri_taxonomy_update_10401() {
 }
 
 /**
+ * Points any layout builder displays using $block at its current id and
+ * revision.
+ *
+ * @param \Drupal\block_content\Entity\BlockContent|null $block
+ *   The inline block content entity, or NULL to skip.
+ * @param string $entity_type
+ *   The target entity type of the displays to check (e.g. 'taxonomy_term').
+ */
+function _wri_taxonomy_update_inline_block_displays($block, $entity_type) {
+  if (!$block) {
+    return;
+  }
+
+  $display_storage = \Drupal::entityTypeManager()->getStorage('entity_view_display');
+  $displays = $display_storage->loadByProperties(['targetEntityType' => $entity_type]);
+  foreach ($displays as $display) {
+    if (!$display instanceof LayoutEntityDisplayInterface) {
+      continue;
+    }
+    $changed = FALSE;
+    foreach ($display->getSections() as $section) {
+      foreach ($section->getComponents() as $component) {
+        $configuration = $component->get('configuration');
+        if (($configuration['uuid'] ?? NULL) === $block->uuid()) {
+          $configuration['block_id'] = $block->id();
+          $configuration['block_revision_id'] = $block->getRevisionId();
+          $component->setConfiguration($configuration);
+          $changed = TRUE;
+        }
+      }
+    }
+    if ($changed) {
+      $display->save();
+    }
+  }
+}
+
+/**
  * Generates the term-level webform block.
  */
 function wri_taxonomy_update_10602() {
   $block_manager = \Drupal::entityTypeManager()->getStorage('block_content');
-  // Load the block by uuid 'c2faf277-9cee-48bd-9f70-09ee7613806a'
-  $block = $block_manager->loadByProperties(['uuid' => 'c2faf277-9cee-48bd-9f70-09ee7613806a']);
+  // Load the block by uuid 'c2faf277-9cee-48bd-9f70-09ee7613806a'.
+  $blocks = $block_manager->loadByProperties(['uuid' => 'c2faf277-9cee-48bd-9f70-09ee7613806a']);
+  $block = $blocks ? reset($blocks) : NULL;
 
   if (!$block) {
     // If it doesn't exist, generate it.
@@ -175,10 +215,12 @@ function wri_taxonomy_update_10602() {
       'langcode' => 'en',
       'field_webform' => 'term_email_signup',
       'field_cta_background' => 'has-teal-background-color',
-      'reusable' => TRUE,
+      'reusable' => FALSE,
     ]);
     $block->save();
   }
+
+  _wri_taxonomy_update_inline_block_displays($block, 'taxonomy_term');
 }
 
 /**
@@ -186,13 +228,14 @@ function wri_taxonomy_update_10602() {
  */
 function wri_taxonomy_update_10603() {
   $block_manager = \Drupal::entityTypeManager()->getStorage('block_content');
-  // Load the block by uuid '9525250a-f59c-4d2f-9f71-fdff3d104966'
-  $block = $block_manager->loadByProperties(['uuid' => '69c2110e-2eab-4a62-b298-8c04414e17a6']);
+  // Load the block by uuid '8d9546bf-84e4-4412-9b8c-0804d6845252'.
+  $blocks = $block_manager->loadByProperties(['uuid' => '8d9546bf-84e4-4412-9b8c-0804d6845252']);
+  $block = $blocks ? reset($blocks) : NULL;
 
   if (!$block) {
     // If it doesn't exist, generate it.
     $block = BlockContent::create([
-      'uuid' => '69c2110e-2eab-4a62-b298-8c04414e17a6',
+      'uuid' => '8d9546bf-84e4-4412-9b8c-0804d6845252',
       'type' => 'small_cta',
       'info' => 'Explore our full Resource Library',
       'langcode' => 'en',
@@ -201,8 +244,10 @@ function wri_taxonomy_update_10603() {
         'title' => 'Explore our full Resource Library',
       ],
       'field_cta_background' => 'has-teal-background-color',
-      'reusable' => TRUE,
+      'reusable' => FALSE,
     ]);
     $block->save();
   }
+
+  _wri_taxonomy_update_inline_block_displays($block, 'taxonomy_term');
 }
