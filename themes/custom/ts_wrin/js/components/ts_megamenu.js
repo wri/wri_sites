@@ -15,9 +15,14 @@
  *     2 levels for Explore's "By Topic", etc). Nothing here assumes a
  *     fixed number of columns.
  *
- * Desktop-only by design (min-width gate below) — the mobile prototype
- * uses a different interaction pattern (off-canvas / accordion) and
- * should get its own behavior once that markup is finalized.
+ * Desktop-only by design (min-width gate below) — ts_megamenu_mobile.js
+ * handles the equivalent overlay below that breakpoint.
+ *
+ * Exposes window.WRIMegaMenuDesktop = { getOpenIndex, openIndex,
+ * closeAllPanels }, used by ts_megamenu_breakpoint_handoff.js to read
+ * and restore open state across a breakpoint crossing. "Index" is
+ * position among the .paragraph--type--submenu elements, matching the
+ * order ts_megamenu_mobile.js iterates them in.
  */
 (function (Drupal, once) {
   "use strict";
@@ -102,6 +107,35 @@
       },
       true,
     );
+
+    // Read/set which panel is open, and close all. Used by
+    // ts_megamenu_breakpoint_handoff.js to read and restore state across
+    // a breakpoint crossing; "index" matches the order
+    // ts_megamenu_mobile.js iterates the same elements in.
+    window.WRIMegaMenuDesktop = {
+      getOpenIndex: function () {
+        var openIndex = -1;
+        entries.some(function (entry, i) {
+          if (entry.item.classList.contains("is-open")) {
+            openIndex = i;
+            return true;
+          }
+          return false;
+        });
+        return openIndex === -1 ? null : openIndex;
+      },
+      openIndex: function (index) {
+        var entry = entries[index];
+        if (!entry) {
+          return;
+        }
+        closeAll(entries);
+        openPanel(entry);
+      },
+      closeAllPanels: function () {
+        closeAll(entries);
+      },
+    };
   }
 
   function openPanel(entry) {

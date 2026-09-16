@@ -14,6 +14,7 @@ module.exports = (env, argv) => {
       megamenu: [
         "./js/components/ts_megamenu.js",
         "./js/components/ts_megamenu_mobile.js",
+        "./js/components/ts_megamenu_breakpoint_handoff.js",
         "./sass/megamenu.scss"
       ]
     },

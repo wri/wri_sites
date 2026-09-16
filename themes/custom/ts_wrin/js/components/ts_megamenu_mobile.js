@@ -20,6 +20,13 @@
  * .menu-toggle doesn't carry aria-haspopup/aria-expanded/aria-controls in
  * its own markup, so those are set here at init instead of requiring a
  * template change.
+ *
+ * Exposes window.WRIMegaMenuMobile = { getOpenTopLevelIndex,
+ * openAtTopLevelIndex, closeOverlay }, used by
+ * ts_megamenu_breakpoint_handoff.js to read and restore open state
+ * across a breakpoint crossing. "Index" is position among data.items,
+ * matching the order ts_megamenu.js iterates the same elements in.
+ * Only the top-level section is tracked, not drill depth.
  */
 (function (Drupal, once) {
   "use strict";
@@ -68,18 +75,7 @@
 
     toggle.addEventListener("click", openMenu);
 
-    function openMenu(event) {
-      if (isDesktop()) {
-        return; // desktop uses the inline mega menu instead
-      }
-      if (event) {
-        event.preventDefault();
-      }
-
-      if (!data) {
-        data = buildMenuData(root);
-      }
-
+    function openOverlayShell() {
       lastFocused = document.activeElement;
 
       // Measure the real site header each time rather than hardcoding a
@@ -97,6 +93,21 @@
       overlay.root.classList.add("is-open");
       toggle.setAttribute("aria-expanded", "true");
       lockScroll(true);
+    }
+
+    function openMenu(event) {
+      if (isDesktop()) {
+        return; // desktop uses the inline mega menu instead
+      }
+      if (event) {
+        event.preventDefault();
+      }
+
+      if (!data) {
+        data = buildMenuData(root);
+      }
+
+      openOverlayShell();
 
       stack = [];
       pushPanel("Menu", data.items, {
@@ -105,6 +116,45 @@
       });
 
       overlay.closeBtn.focus();
+    }
+
+    // Opens the overlay already drilled into a given top-level section.
+    // Used by ts_megamenu_breakpoint_handoff.js; doesn't call isDesktop()
+    // like openMenu() does since the caller has already confirmed we're
+    // below the breakpoint.
+    function openAtTopLevelIndex(index) {
+      if (!data) {
+        data = buildMenuData(root);
+      }
+      var item = data.items[index];
+      if (!item) {
+        return;
+      }
+
+      openOverlayShell();
+
+      stack = [];
+      pushPanel("Menu", data.items, {
+        quicklinks: data.quicklinks,
+        isRoot: true,
+      });
+      if (item.children) {
+        pushPanel(item.label, item.children, {
+          featured: item.featured,
+          sourceIndex: index,
+        });
+      }
+    }
+
+    // Reports which top-level section (if any) is currently drilled
+    // into, for ts_megamenu_breakpoint_handoff.js. Only checks one level
+    // deep (stack[1]); deeper drill state isn't tracked.
+    function getOpenTopLevelIndex() {
+      if (!overlay.root.classList.contains("is-open") || stack.length < 2) {
+        return null;
+      }
+      var node = stack[1];
+      return typeof node.sourceIndex === "number" ? node.sourceIndex : null;
     }
 
     function closeMenu() {
@@ -222,7 +272,7 @@
         var ul = document.createElement("ul");
         ul.className = "menu";
 
-        node.items.forEach(function (item) {
+        node.items.forEach(function (item, idx) {
           var li = document.createElement("li");
 
           if (item.children) {
@@ -234,7 +284,10 @@
               escapeHtml(item.label) +
               '</span><span class="wri-mobile-nav__chev" aria-hidden="true"></span>';
             btn.addEventListener("click", function () {
-              pushPanel(item.label, item.children, { featured: item.featured });
+              pushPanel(item.label, item.children, {
+                featured: item.featured,
+                sourceIndex: idx,
+              });
             });
             li.appendChild(btn);
           } else if (item.disabled) {
@@ -318,6 +371,12 @@
       wrap.appendChild(ul);
       return wrap;
     }
+
+    window.WRIMegaMenuMobile = {
+      getOpenTopLevelIndex: getOpenTopLevelIndex,
+      openAtTopLevelIndex: openAtTopLevelIndex,
+      closeOverlay: closeMenu,
+    };
   }
 
   function buildOverlaySkeleton(themeSource) {
@@ -504,7 +563,9 @@
     var scope = root.querySelector("#block-quicklinks-2026")
       ? root
       : root.closest(".region-primary-nav") || document;
-    var list = scope.querySelector("#block-quicklinks-2026 .menu-wrapper ul.menu");
+    var list = scope.querySelector(
+      "#block-quicklinks-2026 .menu-wrapper ul.menu",
+    );
     if (!list) {
       return [];
     }
