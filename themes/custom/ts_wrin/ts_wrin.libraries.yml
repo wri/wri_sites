@@ -37,6 +37,9 @@ key_takeaways:
 hamburger_nav_legacy:
   js:
     js/components/ts_hamburger_nav_legacy.js: {}
+  css:
+    theme:
+      css/legacy-nav.css
   dependencies:
     - core/jquery
     - core/drupal

@@ -533,11 +533,6 @@ header nav#block-donate-2026 > ul.menu > li > a {
   transition: all 0.2s linear;
   width: 76px;
 
-  .path-frontpage &,
-  .white & {
-    border: 1px solid var(--color-neutral-200);
-    color: var(--color-white);
-  }
   @include hocus {
     background-color: var(--color-gold-500);
     border: 1px solid var(--color-gold-500);

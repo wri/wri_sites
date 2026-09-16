@@ -44,14 +44,6 @@ header:not(.pfp-header) {
     padding-top: 32px;
   }
 
-  .path-frontpage & {
-    background-color: transparent;
-    padding-bottom: 22px;
-    @include mq($md) {
-      padding-bottom: var(--spacer-7);
-    }
-  }
-
   .showing-main-menu & {
     padding-bottom: 50px;
     @include mq($md) {
@@ -294,12 +286,6 @@ header:not(.pfp-header) {
   svg path {
     fill: transparent;
     stroke: var(--color-neutral-900);
-  }
-}
-
-.path-frontpage .header-wrapper {
-  @include mq($md) {
-    @include header-right(var(--color-white), var(--color-gold-500));
   }
 }
 
