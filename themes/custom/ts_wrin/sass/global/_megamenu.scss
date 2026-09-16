@@ -501,7 +501,9 @@ header nav#block-donate-2026 > ul.menu > li > a {
   display: none;
 
   @include mq($lg) {
-    display: block;
+    &.donate-menu--enhanced {
+      display: block;
+    }
   }
 }
 

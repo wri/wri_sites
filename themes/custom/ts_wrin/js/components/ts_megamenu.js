@@ -101,6 +101,17 @@
     root.addEventListener(
       "focusout",
       function (event) {
+        // A null relatedTarget means focus left the document rather than
+        // moving to another element — dragging the window or devtools
+        // resize handle, switching apps, or clicking a non-focusable area.
+        // Closing on those was what broke the desktop -> mobile handoff:
+        // resizing blurs the trigger, so the panel was already closed by
+        // the time ts_megamenu_breakpoint_handoff.js read the open index.
+        // Real outside clicks are still covered by the document click
+        // handler above.
+        if (!event.relatedTarget) {
+          return;
+        }
         if (!root.contains(event.relatedTarget)) {
           closeAll(entries);
         }
