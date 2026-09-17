@@ -41,6 +41,11 @@
           {{ node.body.summary|striptags|trim }}
         </div>
       {% endif %}
+      {% if content.hero.field_location %}
+      <div class="utility-base mb-4">
+        {{ content.hero.field_location }} • {{ content.hero.field_date_time }}
+      </div>
+      {% endif %}
     {% endif %}
   </div>
 
