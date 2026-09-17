@@ -12,7 +12,6 @@ use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\file\Entity\File;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\block_content\Entity\BlockContent;
-use Drupal\layout_builder\Entity\LayoutEntityDisplayInterface;
 
 /**
  * Implements hook_install().
@@ -163,14 +162,10 @@ function wri_taxonomy_update_10401() {
  * Generates the term-level webform block.
  */
 function wri_taxonomy_update_10602() {
-  $block_manager = \Drupal::entityTypeManager()->getStorage('block_content');
-  // Load the block by uuid 'c2faf277-9cee-48bd-9f70-09ee7613806a'.
-  $blocks = $block_manager->loadByProperties(['uuid' => 'c2faf277-9cee-48bd-9f70-09ee7613806a']);
-  $block = $blocks ? reset($blocks) : NULL;
-
-  if (!$block) {
-    // If it doesn't exist, generate it.
-    $block = BlockContent::create([
+  _wri_taxonomy_force_block_id(
+    'c2faf277-9cee-48bd-9f70-09ee7613806a',
+    100,
+    [
       'uuid' => 'c2faf277-9cee-48bd-9f70-09ee7613806a',
       'type' => 'webform_with_background_color',
       'info' => 'Stay Informed',
@@ -178,23 +173,18 @@ function wri_taxonomy_update_10602() {
       'field_webform' => 'term_email_signup',
       'field_cta_background' => 'has-teal-background-color',
       'reusable' => FALSE,
-    ]);
-    $block->save();
-  }
+    ]
+  );
 }
 
 /**
  * Generates the term-level resource library CTA block.
  */
 function wri_taxonomy_update_10603() {
-  $block_manager = \Drupal::entityTypeManager()->getStorage('block_content');
-  // Load the block by uuid '8d9546bf-84e4-4412-9b8c-0804d6845252'.
-  $blocks = $block_manager->loadByProperties(['uuid' => '8d9546bf-84e4-4412-9b8c-0804d6845252']);
-  $block = $blocks ? reset($blocks) : NULL;
-
-  if (!$block) {
-    // If it doesn't exist, generate it.
-    $block = BlockContent::create([
+  _wri_taxonomy_force_block_id(
+    '8d9546bf-84e4-4412-9b8c-0804d6845252',
+    101,
+    [
       'uuid' => '8d9546bf-84e4-4412-9b8c-0804d6845252',
       'type' => 'small_cta',
       'info' => 'Explore our full Resource Library',
@@ -205,7 +195,20 @@ function wri_taxonomy_update_10603() {
       ],
       'field_cta_background' => 'has-teal-background-color',
       'reusable' => FALSE,
-    ]);
+    ]
+  );
+}
+
+/**
+ * Ensures a block_content entity exists with a fixed revision_id.
+ */
+function _wri_taxonomy_force_block_id($uuid, $id, array $values) {
+  $block_manager = \Drupal::entityTypeManager()->getStorage('block_content');
+  $blocks = $block_manager->loadByProperties(['uuid' => $uuid]);
+  $block = $blocks ? reset($blocks) : NULL;
+
+  if (!$block) {
+    $block = BlockContent::create(['revision_id' => $id] + $values);
     $block->save();
   }
 }

@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for the wri_looking_terms module.
+ */
+
+use Drupal\block_content\Entity\BlockContent;
+
+/**
+ * Implements hook_install().
+ *
+ * Generates the "Looking for something specific" block with a fixed
+ * revision id, since the topics_and_subtopics layout builder config
+ * hardcodes block_revision_id rather than relying on auto-increment values,
+ * which differ per environment.
+ */
+function wri_looking_terms_install() {
+  $uuid = '81846b54-79dc-4910-9d5c-177a54e695fb';
+
+  $block_manager = \Drupal::entityTypeManager()->getStorage('block_content');
+  $blocks = $block_manager->loadByProperties(['uuid' => $uuid]);
+  $block = $blocks ? reset($blocks) : NULL;
+
+  if ($block && (int) $block->id() !== $id) {
+    $block->delete();
+    $block = NULL;
+  }
+
+  if (!$block) {
+    $block = BlockContent::create([
+      'revision_id' => $id,
+      'uuid' => $uuid,
+      'type' => 'looking_for_something_specific',
+      'info' => 'Looking for something specific',
+      'langcode' => 'en',
+      'reusable' => FALSE,
+    ]);
+    $block->save();
+  }
+}
