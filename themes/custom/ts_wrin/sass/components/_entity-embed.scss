@@ -83,7 +83,7 @@
 .embedded-entity.embed--block-type--upcoming-event {
   padding: 0;
 
-  .callout {
+  &.has-border-background-color {
     border: 2px solid var(--color-neutral-200);
     padding: var(--spacer-5);
 

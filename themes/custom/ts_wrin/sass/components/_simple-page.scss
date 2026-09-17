@@ -44,7 +44,7 @@
       @include center-columns($grid-columns, $grid-columns);
     }
     @include mq($md) {
-      @include column-width(10, 12);
+      @include column-width(10, 13);
       & {
         margin-top: 0;
         order: 1;
