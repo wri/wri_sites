@@ -18,6 +18,7 @@ use Twig\Error\LoaderError;
  * Implements hook_preprocess_hook().
  */
 function wri_node_preprocess_wri_page_hero(&$context) {
+  $context['show_toggle'] = TRUE;
   $node = \Drupal::routeMatch()->getParameter('node');
   if (!$node) {
     $node_route = \Drupal::routeMatch()->getRawParameter('section_storage');
