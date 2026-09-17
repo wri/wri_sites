@@ -1,0 +1,11 @@
+ai_keytakeaways:
+  version: 1.x
+  css:
+    component:
+      css/ai-keytakeaways.css: {}
+  js:
+    js/ai-keytakeaways.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/drupal.ajax

@@ -1,0 +1,162 @@
+<?php
+
+declare(strict_types=1);
+
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\PrependCommand;
+use Drupal\Core\Ajax\ReplaceCommand;
+use Drupal\Core\Field\WidgetBase;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\ai\OperationType\Chat\ChatInput;
+use Drupal\ai\OperationType\Chat\ChatMessage;
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter() for node_form.
+ */
+function wri_ai_keytakeaways_form_node_form_alter(array &$form, FormStateInterface $form_state, string $form_id): void {
+  $node = $form_state->getFormObject()->getEntity();
+  if ($node->bundle() !== 'article' || !isset($form['field_key_takeaways'])) {
+    return;
+  }
+
+  $form['#attached']['library'][] = 'wri_ai_keytakeaways/ai_keytakeaways';
+
+  // Get the actual wrapper ID Drupal assigned (it appends a unique suffix).
+  $wrapper_id = NULL;
+  $prefix = $form['field_key_takeaways']['widget']['#prefix'] ?? '';
+  if (preg_match('/id="([^"]+)"/', $prefix, $matches)) {
+    $wrapper_id = $matches[1];
+  }
+
+  $form['field_key_takeaways']['ai_tools'] = [
+    '#type' => 'container',
+    '#weight' => 100,
+    '#attributes' => ['class' => ['form-actions', 'wri-ai-keytakeaways-actions']],
+    'button' => [
+      '#type' => 'submit',
+      '#value' => t('Auto Generate (AI)'),
+      '#name' => 'ai_generate_key_takeaways',
+      '#submit' => ['wri_ai_keytakeaways_ajax_submit'],
+      '#ajax' => [
+        'callback' => 'wri_ai_keytakeaways_ajax_generate',
+        'wrapper' => $wrapper_id,
+        'effect' => 'fade',
+        'progress' => [
+          'type' => 'throbber',
+          'message' => t('Generating key takeaways…'),
+        ],
+      ],
+      // Validate only the body and title fields so they're available.
+      '#limit_validation_errors' => [['body'], ['title']],
+      '#validate' => [],
+    ],
+  ];
+}
+
+/**
+ * Submit handler: calls AI, stores bullets in form state, triggers rebuild.
+ */
+function wri_ai_keytakeaways_ajax_submit(array $form, FormStateInterface $form_state): void {
+  // Read body from raw user input to bypass #limit_validation_errors stripping.
+  $input = $form_state->getUserInput();
+  $body = '';
+  $delta = 0;
+  while (isset($input['body'][$delta]['value'])) {
+    $body .= strip_tags($input['body'][$delta]['value']) . "\n\n";
+    $delta++;
+  }
+  $body = trim($body);
+
+  if (empty($body)) {
+    \Drupal::messenger()->addWarning(t('The article body is empty. Please add body content before generating key takeaways.'));
+    $form_state->setRebuild();
+    return;
+  }
+
+  $title = $input['title'][0]['value'] ?? '';
+
+  $prompt = <<<PROMPT
+You are an editorial assistant for a policy and research organization. Read the article below and identify ONLY the most essential key takeaways.
+
+Rules:
+- Include a takeaway ONLY if it represents a primary finding or a major policy implication.
+- Most articles have 2 to 4 significant points. Do not pad to reach 5.
+- If the article clearly supports only 2 takeaways, return exactly 2. Returning extra takeaways to fill a quota is an error.
+- Each takeaway must be one sentence.
+- Return ONLY the takeaways, one per line, with no bullet characters, numbering, labels, or extra formatting.
+
+TITLE: {$title}
+
+ARTICLE:
+{$body}
+PROMPT;
+
+  try {
+    /** @var \Drupal\ai\AiProviderPluginManager $manager */
+    $manager = \Drupal::service('ai.provider');
+    $default = $manager->getDefaultProviderForOperationType('chat');
+
+    if (empty($default['provider_id'])) {
+      \Drupal::messenger()->addError(t('No default AI chat provider is configured. Please configure one at Admin > Configuration > AI.'));
+      $form_state->setRebuild();
+      return;
+    }
+
+    $provider = $manager->createInstance($default['provider_id']);
+    $model = $default['model_id'] ?? '';
+
+    $input = new ChatInput([new ChatMessage('user', $prompt)]);
+
+    /** @var \Drupal\ai\OperationType\Chat\ChatOutput $output */
+    $output = $provider->chat($input, $model);
+    $text = $output->getNormalized()->getText();
+    $bullets = array_values(array_filter(array_map('trim', explode("\n", $text))));
+
+    if (empty($bullets)) {
+      \Drupal::messenger()->addWarning(t('The AI returned an empty response. Please try again.'));
+      $form_state->setRebuild();
+      return;
+    }
+
+    // Set widget state items_count so formMultipleElements renders the right rows.
+    $field_state = WidgetBase::getWidgetState($form['#parents'], 'field_key_takeaways', $form_state);
+    $field_state['items_count'] = count($bullets);
+    WidgetBase::setWidgetState($form['#parents'], 'field_key_takeaways', $form_state, $field_state);
+
+    // Set the field values so the rebuilt rows are pre-populated.
+    foreach ($bullets as $i => $bullet) {
+      $form_state->setValue(['field_key_takeaways', $i, 'value'], $bullet);
+    }
+
+    // Also update user input so the rebuilt textarea HTML contains the bullet
+    // text — CKEditor 5 reads the textarea value on initialization.
+    $user_input = $form_state->getUserInput();
+    foreach ($bullets as $i => $bullet) {
+      $user_input['field_key_takeaways'][$i]['value'] = $bullet;
+    }
+    $form_state->setUserInput($user_input);
+  }
+  catch (\Throwable $e) {
+    \Drupal::logger('wri_ai_keytakeaways')->error($e->getMessage());
+    \Drupal::messenger()->addError(t('An error occurred while contacting the AI provider. Check the logs for details.'));
+  }
+
+  $form_state->setRebuild();
+}
+
+/**
+ * AJAX callback: returns the rebuilt widget after the submit handler has run.
+ *
+ * Also replays any messenger messages (errors/warnings from the submit
+ * handler) into the page's status-messages region, since replacing only
+ * the field widget would otherwise leave them queued but never rendered.
+ */
+function wri_ai_keytakeaways_ajax_generate(array &$form, FormStateInterface $form_state): AjaxResponse {
+  $response = new AjaxResponse();
+  $response->addCommand(new ReplaceCommand('#field-key-takeaways-add-more-wrapper', $form['field_key_takeaways']['widget']));
+
+  $messages = ['#type' => 'status_messages'];
+  $response->addCommand(new PrependCommand('[data-drupal-messages]', $messages));
+
+  return $response;
+}
