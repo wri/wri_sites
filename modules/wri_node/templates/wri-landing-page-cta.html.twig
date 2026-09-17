@@ -7,7 +7,7 @@
       {% if content.field_long_title[0]["#text"] is not empty %}
         <div {{ title_attributes.addClass('h2', 'margin-bottom-sm') }}>{{ content.field_long_title }}</div>
       {% else %}
-        {{ content.node_title }}
+        <div {{ title_attributes.addClass('h2', 'margin-bottom-sm') }}>{{ content.node_title }}</div>
       {% endif %}
       {{ title_suffix }}
       {% block content %}
