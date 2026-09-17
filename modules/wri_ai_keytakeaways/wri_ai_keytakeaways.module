@@ -2,6 +2,20 @@
 
 declare(strict_types=1);
 
+/**
+ * @file
+ * Adds an AI-assisted "Auto Generate" button to the article Key Takeaways
+ * field.
+ *
+ * The button is injected via hook_form_BASE_FORM_ID_alter() rather than a
+ * custom field widget, so it appears regardless of which widget is
+ * configured for field_key_takeaways (plain textarea, this module's own
+ * widget if one is added later, etc.). When clicked, it AJAX-submits the
+ * form, sends the article's title and body to the site's default AI chat
+ * provider (configured under Admin > Configuration > AI), and repopulates
+ * the Key Takeaways field with the bullets the model returns.
+ */
+
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\PrependCommand;
 use Drupal\Core\Ajax\ReplaceCommand;
@@ -12,6 +26,10 @@ use Drupal\ai\OperationType\Chat\ChatMessage;
 
 /**
  * Implements hook_form_BASE_FORM_ID_alter() for node_form.
+ *
+ * Only article nodes get the button, and only if field_key_takeaways is
+ * actually present on the form (e.g. it could be hidden by a form display
+ * configuration on some sites, in which case there's nothing to attach to).
  */
 function wri_ai_keytakeaways_form_node_form_alter(array &$form, FormStateInterface $form_state, string $form_id): void {
   $node = $form_state->getFormObject()->getEntity();
@@ -21,7 +39,13 @@ function wri_ai_keytakeaways_form_node_form_alter(array &$form, FormStateInterfa
 
   $form['#attached']['library'][] = 'wri_ai_keytakeaways/ai_keytakeaways';
 
-  // Get the actual wrapper ID Drupal assigned (it appends a unique suffix).
+  // The field widget's #ajax 'wrapper' option needs the *rendered* HTML id
+  // of the widget's wrapping element, but that id isn't available as a
+  // plain form array key — Drupal generates it (with a uniqueness suffix)
+  // and only exposes it baked into the widget's #prefix markup, e.g.
+  // '<div id="edit-field-key-takeaways-wrapper">'. Scraping it out of the
+  // prefix string is the standard way core/contrib code gets this value
+  // when building a sibling element that needs to target the same wrapper.
   $wrapper_id = NULL;
   $prefix = $form['field_key_takeaways']['widget']['#prefix'] ?? '';
   if (preg_match('/id="([^"]+)"/', $prefix, $matches)) {
@@ -31,6 +55,11 @@ function wri_ai_keytakeaways_form_node_form_alter(array &$form, FormStateInterfa
   $form['field_key_takeaways']['ai_tools'] = [
     '#type' => 'container',
     '#weight' => 100,
+    // 'form-actions' matches Claro's own button-row styling (see the
+    // Save/Preview/Delete actions elsewhere on this form) so the button
+    // gets consistent spacing. 'wri-ai-keytakeaways-actions' is this
+    // module's own class; see css/ai-keytakeaways.css for why it's needed
+    // in addition to 'form-actions'.
     '#attributes' => ['class' => ['form-actions', 'wri-ai-keytakeaways-actions']],
     'button' => [
       '#type' => 'submit',
@@ -46,7 +75,12 @@ function wri_ai_keytakeaways_form_node_form_alter(array &$form, FormStateInterfa
           'message' => t('Generating key takeaways…'),
         ],
       ],
-      // Validate only the body and title fields so they're available.
+      // This button doesn't submit the whole form (it's not "Save"), so
+      // most fields haven't necessarily been filled in validly yet — for
+      // example a required field elsewhere on the form might still be
+      // empty. Restricting validation to just body/title means the AJAX
+      // submit succeeds even if the rest of the form isn't complete, since
+      // those are the only two fields the AI prompt actually needs.
       '#limit_validation_errors' => [['body'], ['title']],
       '#validate' => [],
     ],
@@ -54,13 +88,37 @@ function wri_ai_keytakeaways_form_node_form_alter(array &$form, FormStateInterfa
 }
 
 /**
- * Submit handler: calls AI, stores bullets in form state, triggers rebuild.
+ * Submit handler: calls the AI provider and stores the result for rebuild.
+ *
+ * This is the #submit handler for the "Auto Generate (AI)" button. It reads
+ * the article's title and body, sends them to the site's default AI chat
+ * provider, and — on success — writes the returned bullets into both
+ * FormState's value storage and the raw user input, so the field widget
+ * renders pre-filled with the new text once the form rebuilds. See the
+ * inline comments below for why *both* of those need updating.
+ *
+ * Errors and warnings are reported via the messenger service rather than
+ * thrown back to the caller, because this always needs to end in a form
+ * rebuild (so the editor sees a response) regardless of whether the AI call
+ * succeeded — see wri_ai_keytakeaways_ajax_generate(), which is responsible
+ * for actually rendering those messenger messages back into the page.
  */
 function wri_ai_keytakeaways_ajax_submit(array $form, FormStateInterface $form_state): void {
-  // Read body from raw user input to bypass #limit_validation_errors stripping.
+  // #limit_validation_errors restricts *validation* to body/title, but it
+  // also has the side effect of stripping every other field's submitted
+  // value out of $form_state's processed values — body/title included,
+  // confusingly, because of how the field validation pipeline builds that
+  // list. Reading the raw, unprocessed user input instead sidesteps that
+  // entirely: it's the same data the browser POSTed, before Drupal's field
+  // validators (and their side effect of dropping "unvalidated" values)
+  // ever touch it.
   $input = $form_state->getUserInput();
   $body = '';
   $delta = 0;
+  // The body field can have multiple deltas (though it normally has just
+  // one). Concatenate every delta's plain-text value into a single prompt
+  // input, stripping HTML tags since the AI provider expects plain text
+  // and the article body is stored as rich HTML from CKEditor.
   while (isset($input['body'][$delta]['value'])) {
     $body .= strip_tags($input['body'][$delta]['value']) . "\n\n";
     $delta++;
@@ -75,6 +133,9 @@ function wri_ai_keytakeaways_ajax_submit(array $form, FormStateInterface $form_s
 
   $title = $input['title'][0]['value'] ?? '';
 
+  // The prompt is deliberately opinionated about *not* padding to a target
+  // count, to avoid generic filler bullets once the article runs out of
+  // genuinely distinct findings.
   $prompt = <<<PROMPT
 You are an editorial assistant for a policy and research organization. Read the article below and identify ONLY the most essential key takeaways.
 
@@ -94,6 +155,12 @@ PROMPT;
   try {
     /** @var \Drupal\ai\AiProviderPluginManager $manager */
     $manager = \Drupal::service('ai.provider');
+    // Deliberately using whatever chat provider/model the site has
+    // configured as its default (Admin > Configuration > AI), rather than
+    // hardcoding a specific provider or model id here. That keeps this
+    // module working unmodified as sites change AI vendors or upgrade
+    // models — the tradeoff is that prompt behavior can shift too, since
+    // model choice is outside this module's control.
     $default = $manager->getDefaultProviderForOperationType('chat');
 
     if (empty($default['provider_id'])) {
@@ -105,6 +172,12 @@ PROMPT;
     $provider = $manager->createInstance($default['provider_id']);
     $model = $default['model_id'] ?? '';
 
+    // Note: do not pass a 'temperature' (or similar sampling) setting into
+    // $provider->setConfiguration() here. Newer reasoning-tier models
+    // (e.g. OpenAI's GPT-5 series) reject any non-default temperature
+    // value outright and the chat call throws, which previously made this
+    // feature fail on every click with no visible error once the site's
+    // default model was upgraded. Let the provider use its own default.
     $input = new ChatInput([new ChatMessage('user', $prompt)]);
 
     /** @var \Drupal\ai\OperationType\Chat\ChatOutput $output */
@@ -118,18 +191,31 @@ PROMPT;
       return;
     }
 
-    // Set widget state items_count so formMultipleElements renders the right rows.
+    // field_key_takeaways is a multi-value field, so its widget tracks how
+    // many value rows to render (its "items_count") in per-request widget
+    // state, separate from the field's actual values. If we only set the
+    // field values below without also updating items_count here, the
+    // widget would still render whatever row count it had before this
+    // submit (e.g. the single empty row an editor started with) and any
+    // additional AI-generated bullets beyond that count would have nowhere
+    // to render.
     $field_state = WidgetBase::getWidgetState($form['#parents'], 'field_key_takeaways', $form_state);
     $field_state['items_count'] = count($bullets);
     WidgetBase::setWidgetState($form['#parents'], 'field_key_takeaways', $form_state, $field_state);
 
-    // Set the field values so the rebuilt rows are pre-populated.
+    // Populate FormState's value storage so the field's typed data (what
+    // Drupal considers to be the "real" submitted value once the form is
+    // eventually saved) reflects the generated bullets.
     foreach ($bullets as $i => $bullet) {
       $form_state->setValue(['field_key_takeaways', $i, 'value'], $bullet);
     }
 
-    // Also update user input so the rebuilt textarea HTML contains the bullet
-    // text — CKEditor 5 reads the textarea value on initialization.
+    // FormState values alone are not enough to make the *rendered* textarea
+    // widgets show the new text after the AJAX rebuild: Drupal's textarea
+    // render element pulls its displayed value from the raw user input
+    // array (the same one read from further up this function), not from
+    // FormState::getValue(). Writing the bullets into user input as well
+    // ensures the rebuilt widget markup actually contains them.
     $user_input = $form_state->getUserInput();
     foreach ($bullets as $i => $bullet) {
       $user_input['field_key_takeaways'][$i]['value'] = $bullet;
@@ -147,14 +233,29 @@ PROMPT;
 /**
  * AJAX callback: returns the rebuilt widget after the submit handler has run.
  *
- * Also replays any messenger messages (errors/warnings from the submit
- * handler) into the page's status-messages region, since replacing only
- * the field widget would otherwise leave them queued but never rendered.
+ * Drupal's #ajax system supports two return shapes for a callback: a plain
+ * render array (which it wraps in a single implicit ReplaceCommand against
+ * the 'wrapper' selector), or an AjaxResponse built from explicit commands.
+ * This uses the latter because a single ReplaceCommand isn't enough:
+ * wri_ai_keytakeaways_ajax_submit() may have queued messenger errors or
+ * warnings (empty body, no AI provider configured, provider call failed,
+ * empty AI response), and those messages are only rendered where Drupal's
+ * standard [data-drupal-messages] block sits in the page — which is
+ * outside the field widget's own wrapper and would never be touched by a
+ * command that only replaces the widget. Without the second command here,
+ * those messages would be set on the messenger service (and consumed off
+ * of it, since messenger messages are read-once) but never actually shown
+ * to the editor, making a failure look exactly like the button doing
+ * nothing.
  */
 function wri_ai_keytakeaways_ajax_generate(array &$form, FormStateInterface $form_state): AjaxResponse {
   $response = new AjaxResponse();
   $response->addCommand(new ReplaceCommand('#field-key-takeaways-add-more-wrapper', $form['field_key_takeaways']['widget']));
 
+  // Render Drupal's standard status-messages element and prepend it into
+  // the page's existing messages region, so any queued messenger message
+  // appears above the field the same way it would after a normal
+  // non-AJAX form submission.
   $messages = ['#type' => 'status_messages'];
   $response->addCommand(new PrependCommand('[data-drupal-messages]', $messages));
 
