@@ -1,11 +1,8 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * @file
- * Adds an AI-assisted "Auto Generate" button to the article Key Takeaways
- * field.
+ * Adds an AI-assisted "Auto Generate" button to the Key Takeaways field.
  *
  * The button is injected via hook_form_BASE_FORM_ID_alter() rather than a
  * custom field widget, so it appears regardless of which widget is
@@ -15,6 +12,8 @@ declare(strict_types=1);
  * provider (configured under Admin > Configuration > AI), and repopulates
  * the Key Takeaways field with the bullets the model returns.
  */
+
+declare(strict_types=1);
 
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\PrependCommand;

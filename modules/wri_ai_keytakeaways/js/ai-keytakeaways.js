@@ -22,7 +22,11 @@
       // Drupal.behaviors.attach() runs again on the same button \u2014 which
       // happens on every AJAX rebuild of this form, since the button gets
       // re-rendered as part of the field widget's wrapper each time.
-      once('wri-ai-keytakeaways', '[name="ai_generate_key_takeaways"]', context).forEach(function (button) {
+      once(
+        'wri-ai-keytakeaways',
+        '[name="ai_generate_key_takeaways"]',
+        context
+      ).forEach(function (button) {
         // Mark the button as AJAX-driven for consistency with Drupal's own
         // markup conventions, even though the actual submission below is
         // handled manually rather than through Drupal's automatic binding.
@@ -40,7 +44,13 @@
           // Manually show a throbber next to the field, matching what
           // Drupal's own #ajax 'progress' option would render if this
           // button were using the standard automatic binding.
-          $wrapper.after('<div class="ajax-progress ajax-progress-throbber"><div class="throbber">&nbsp;</div><div class="message">' + Drupal.t('Generating key takeaways\u2026') + '</div></div>');
+          var message = Drupal.t('Generating key takeaways\u2026');
+          $wrapper.after(
+            '<div class="ajax-progress ajax-progress-throbber">'
+            + '<div class="throbber">&nbsp;</div>'
+            + '<div class="message">' + message + '</div>'
+            + '</div>'
+          );
           $button.prop('disabled', true);
 
           // Build and fire the AJAX request by hand. This mirrors exactly
