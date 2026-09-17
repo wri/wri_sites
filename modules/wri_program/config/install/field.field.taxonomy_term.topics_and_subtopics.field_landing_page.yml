@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - field.storage.taxonomy_term.field_landing_page
+    - node.type.microsite
     - node.type.program_center
     - node.type.project_detail
     - taxonomy.vocabulary.topics_and_subtopics
@@ -20,6 +21,7 @@ settings:
   handler: 'default:node'
   handler_settings:
     target_bundles:
+      microsite: microsite
       program_center: program_center
       project_detail: project_detail
     sort:

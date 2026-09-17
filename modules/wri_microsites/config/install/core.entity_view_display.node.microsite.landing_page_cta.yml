@@ -1,0 +1,130 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.landing_page_cta
+    - field.field.node.microsite.body
+    - field.field.node.microsite.field_featured_experts
+    - field.field.node.microsite.field_featured_related_resources
+    - field.field.node.microsite.field_intro
+    - field.field.node.microsite.field_intro_paragraphs
+    - field.field.node.microsite.field_logo
+    - field.field.node.microsite.field_long_title
+    - field.field.node.microsite.field_main_image
+    - field.field.node.microsite.field_metatags
+    - field.field.node.microsite.field_primary_contacts
+    - field.field.node.microsite.field_project_partners
+    - field.field.node.microsite.field_social_sharing_links
+    - field.field.node.microsite.field_theme
+    - field.field.node.microsite.field_toc
+    - field.field.node.microsite.field_twitter_account
+    - field.field.node.microsite.field_type
+    - field.field.node.microsite.layout_builder__layout
+    - node.type.microsite
+    - responsive_image.styles.image_cta
+  module:
+    - ds
+    - layout_builder
+    - media_responsive_thumbnail
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  ds:
+    layout:
+      id: 'single_file_component_layout:wri_landing_page_cta'
+      library: null
+      disable_css: false
+      entity_classes: no_classes
+      settings:
+        label: ''
+    regions:
+      content:
+        - node_title
+        - field_intro
+        - node_link_token
+      image:
+        - field_main_image
+    fields:
+      node_link_token:
+        plugin_id: node_link_token
+        weight: 2
+        label: hidden
+        formatter: default
+        settings:
+          'link text': 'Explore [node:title]'
+          'link class': button
+          wrapper: ''
+          class: ''
+        ft:
+          id: reset
+          settings:
+            lb: ''
+      node_title:
+        plugin_id: node_title
+        weight: 0
+        label: hidden
+        formatter: default
+        settings:
+          link: false
+          wrapper: ''
+          class: ''
+        ft:
+          id: reset
+          settings:
+            lb: ''
+id: node.microsite.landing_page_cta
+targetEntityType: node
+bundle: microsite
+mode: landing_page_cta
+content:
+  field_intro:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 1
+    region: content
+  field_main_image:
+    type: media_responsive_thumbnail
+    label: hidden
+    settings:
+      responsive_image_style: image_cta
+      image_link: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 0
+    region: image
+hidden:
+  body: true
+  content_moderation_control: true
+  field_featured_experts: true
+  field_featured_related_resources: true
+  field_intro_paragraphs: true
+  field_logo: true
+  field_long_title: true
+  field_metatags: true
+  field_primary_contacts: true
+  field_project_partners: true
+  field_social_sharing_links: true
+  field_theme: true
+  field_toc: true
+  field_twitter_account: true
+  field_type: true
+  langcode: true
+  layout_builder__layout: true
+  layout_builder__translation: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

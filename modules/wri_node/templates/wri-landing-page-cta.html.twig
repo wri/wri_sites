@@ -1,0 +1,27 @@
+{% set title_attributes = create_attribute() %}
+
+<div class="block-wrapper image-cta has-black-background-color has-white-color">
+  <div class="cta-text-wrapper container padding-vertical">
+    <div class="cta-text-wrapper__inner">
+      {{ title_prefix }}
+      {% if content.content.node_title|render|striptags|trim is not empty %}
+        <div {{ title_attributes.addClass('h2', 'margin-bottom-sm') }}>{{ content.content.node_title }}</div>
+      {% endif %}
+      {{ title_suffix }}
+      {% block content %}
+        <div class="margin-bottom-sm">
+          {{ content.content.field_intro }}
+        </div>
+        <div class="button-wrapper">
+          {{ content.content.node_link_token }}
+        </div>
+      {% endblock %}
+    </div>
+  </div>
+
+  {% block image %}
+    <div class="image-wrapper">
+      {{ content.image }}
+    </div>
+  {% endblock %}
+</div>
