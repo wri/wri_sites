@@ -253,7 +253,7 @@ function ts_wrin_preprocess_field(array &$variables) {
   if ($variables['element']['#field_name'] == 'field_featured_experts') {
     $variables['expert_facet_url'] = '';
     $object = $variables['element']['#object'];
-    if ($object instanceof TermInterface) {
+    if ($object instanceof TermInterface && $object->id()) {
       $facet_id = match ($object->bundle()) {
         'topics_and_subtopics' => 'experts_all_topics',
         'tags' => 'experts_tags',
