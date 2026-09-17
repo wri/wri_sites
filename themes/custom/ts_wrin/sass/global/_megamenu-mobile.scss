@@ -1,0 +1,246 @@
+// =============================================================================
+// WRI Mobile Mega Menu — full-screen sliding panels
+//
+// Structure is injected by megamenu-mobile.js as `.wri-mobile-nav`,
+// appended directly to <body> (not inside .wri-megamenu, since it needs
+// to sit above the entire page as a fixed overlay). It carries a matching
+// .green/.grey modifier class copied from .wri-megamenu at open-time, so
+// it always inherits the same --mega-* custom properties defined in
+// _megamenu.scss — one theme, one place to change it, for both desktop
+// and mobile.
+//
+// Ported from the wri-nav-mobile-updated-green.html prototype's CSS, with
+// its standalone tokens (--bg, --text, --nav-h, etc.) mapped onto the
+// site's real tokens/--mega-* aliases where a sensible match exists.
+// =============================================================================
+
+.wri-mobile-nav {
+  // Local tokens specific to the mobile overlay's full-screen panel
+  // layout — not shared with desktop, which uses side-by-side columns
+  // instead of a sliding panel stack.
+  --mega-mobile-nav-h: 64px; // overwritten via JS at open-time to match the real site header's measured height
+  --mega-mobile-pad-x: var(--spacer-5); // 20px — prototype used a flat 18px
+  --mega-mobile-radius: 10px;
+  // Prototype used rgba(255,255,255,.50) for row dividers — visibly
+  // heavier than desktop's --mega-sep (25%), intentional given mobile
+  // rows have no column/border-left context to lean on for separation.
+  --mega-mobile-divider: rgb(var(--color-white-rgb) / 50%);
+
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  background: var(--mega-bg);
+  color: var(--mega-text);
+  // .wri-mobile-nav sits outside .wri-megamenu (appended to <body>), so it
+  // never inherits any font-family from it — every row/title/back button
+  // below was silently falling back to the page's default body font
+  // instead of the brand font desktop uses.
+  font-family: var(--font-family-heading);
+  overflow: hidden;
+
+  &.is-open {
+    display: block;
+  }
+
+  // Belt-and-suspenders: if a resize crosses the breakpoint while the
+  // overlay happens to be open, don't let it linger visible on desktop
+  // (which has its own, different, open/close state machine).
+  @include mq($lg) {
+    display: none !important;
+  }
+
+  &__header {
+    height: var(--mega-mobile-nav-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--mega-mobile-pad-x);
+  }
+
+  &__logo {
+    height: 44px;
+    width: auto;
+    display: block;
+  }
+
+  &__close {
+    -webkit-appearance: none;
+    background: transparent;
+    border: 0;
+    color: var(--mega-text);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: var(--mega-mobile-radius);
+    font-size: 24px;
+    line-height: 1;
+
+    &:focus-visible {
+      outline: 2px solid var(--mega-focus-ring);
+      outline-offset: 2px;
+    }
+  }
+
+  &__viewport {
+    height: calc(100% - var(--mega-mobile-nav-h));
+    position: relative;
+    overflow: hidden;
+  }
+
+  &__track {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    transform: translateX(0%);
+    // Prototype used 220ms ease specifically; using the site's own
+    // transition-default (200ms linear) instead for consistency with
+    // everything else in this component — close enough visually, but
+    // flag if you want the exact prototype timing preserved instead.
+    transition: transform var(--transition-default);
+  }
+
+  &__panel {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    flex: 0 0 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--spacer-4) var(--mega-mobile-pad-x) var(--spacer-7);
+  }
+
+  &__title {
+    // Matches desktop's h3 (see _megamenu.scss) — plain heading font, not
+    // the condensed variant the original prototype used for its own
+    // standalone title styling.
+    @include font(var(--font-family-heading), "bold", "normal");
+    font-size: 1.35rem;
+    line-height: 1.2;
+    margin: 6px 0 14px;
+  }
+
+  &__back {
+    -webkit-appearance: none;
+    background: transparent;
+    border: 0;
+    color: var(--mega-text);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 10px 10px 0;
+    font-size: 1rem;
+    border-radius: var(--mega-mobile-radius);
+
+    &:focus-visible {
+      outline: 2px solid var(--mega-focus-ring);
+      outline-offset: 2px;
+    }
+  }
+
+  .menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .menu > li {
+    border-bottom: 1px solid var(--mega-mobile-divider);
+  }
+
+  &__row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 2px;
+    color: var(--mega-text);
+    text-decoration: none;
+    font-size: 1.12rem;
+    font-weight: 600;
+    line-height: 1.25;
+    background: transparent;
+    border: 0;
+    text-align: left;
+
+    &:focus-visible {
+      outline: 2px solid var(--mega-focus-ring);
+      outline-offset: 2px;
+      border-radius: var(--mega-mobile-radius);
+    }
+
+    // Leaf items with no href and no children — content-team placeholders
+    // (e.g. "Data & Tools", "Coalitions" today). See the equivalent note
+    // in _megamenu.scss for the desktop treatment of the same items.
+    &--disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
+  }
+
+  &__chev {
+    flex: 0 0 auto;
+    width: 7px;
+    height: 7px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg);
+    opacity: 0.95;
+  }
+
+  // Shared wrapper for both the "Quicklinks" block (root panel only) and
+  // the "FEATURED ..." block (first-level panels with a listing view).
+  &__bottom {
+    margin-top: var(--spacer-5);
+
+    h3 {
+      margin: var(--spacer-5) 0 var(--spacer-3);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      opacity: 0.95;
+    }
+
+    .menu > li {
+      border-bottom: none;
+    }
+
+    .wri-mobile-nav__row {
+      font-weight: 500;
+      padding: 10px 2px;
+    }
+  }
+
+  &__row--featured {
+    align-items: flex-start;
+
+    > span {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+  }
+
+  &__badge {
+    display: inline-block;
+    width: fit-content;
+    padding: 3px 8px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  &__row-title {
+    display: block;
+  }
+}

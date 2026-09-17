@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -7,6 +6,8 @@ dependencies:
     - system
   theme:
     - ts_wrin
+_core:
+  default_config_hash: 4TSOz36g7A9zRj9iIffO7FfDR1CIoIU0ESV_2yAuezc
 id: donate
 theme: ts_wrin
 region: secondary_nav
@@ -16,9 +17,14 @@ plugin: 'system_menu_block:donate'
 settings:
   id: 'system_menu_block:donate'
   label: Donate
-  provider: system
   label_display: '0'
+  provider: system
   level: 1
-  depth: 0
+  depth: 1
   expand_all_items: false
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    context_mapping: {  }
+    pages: /testing-2026-menu

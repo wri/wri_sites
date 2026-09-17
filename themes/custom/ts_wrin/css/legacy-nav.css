@@ -1,0 +1,111 @@
+.path-frontpage header:not(.pfp-header) {
+  background-color: transparent;
+  padding-bottom: 22px;
+}
+
+@media (min-width: 48rem) {
+  .path-frontpage header:not(.pfp-header) {
+    padding-bottom: var(--spacer-7);
+  }
+}
+
+@media (min-width: 48rem) {
+  .path-frontpage .header-wrapper .header-right .tray-toggle svg,
+  .path-frontpage .header-wrapper .header-right .tray-toggle svg path {
+    fill: var(--color-white);
+    stroke: var(--color-white);
+    transition: all var(--transition-default);
+  }
+  .path-frontpage .header-wrapper .header-right .tray-toggle:active,
+  .path-frontpage .header-wrapper .header-right .tray-toggle:hover,
+  .path-frontpage .header-wrapper .header-right .tray-toggle:focus {
+    outline: none;
+  }
+  .path-frontpage .header-wrapper .header-right .tray-toggle:active svg,
+  .path-frontpage .header-wrapper .header-right .tray-toggle:active svg path,
+  .path-frontpage .header-wrapper .header-right .tray-toggle:hover svg,
+  .path-frontpage .header-wrapper .header-right .tray-toggle:hover svg path,
+  .path-frontpage .header-wrapper .header-right .tray-toggle:focus svg,
+  .path-frontpage .header-wrapper .header-right .tray-toggle:focus svg path {
+    fill: var(--color-gold-500);
+    stroke: var(--color-gold-500);
+    outline: none;
+  }
+  .path-frontpage .header-wrapper .header-right .tray-toggle.toggled svg,
+  .path-frontpage .header-wrapper .header-right .tray-toggle.toggled svg path {
+    fill: var(--color-gold-500);
+    stroke: var(--color-gold-500);
+  }
+  .path-frontpage .header-wrapper .header-right .menu-toggle div span,
+  .path-frontpage .header-wrapper .header-right .menu-toggle div span:before,
+  .path-frontpage .header-wrapper .header-right .menu-toggle div span:after {
+    background-color: var(--color-white);
+    transition: all var(--transition-default);
+  }
+  .path-frontpage .header-wrapper .header-right .menu-toggle:active,
+  .path-frontpage .header-wrapper .header-right .menu-toggle:hover,
+  .path-frontpage .header-wrapper .header-right .menu-toggle:focus {
+    outline: none;
+  }
+  .path-frontpage .header-wrapper .header-right .menu-toggle:active div span,
+  .path-frontpage
+    .header-wrapper
+    .header-right
+    .menu-toggle:active
+    div
+    span:before,
+  .path-frontpage
+    .header-wrapper
+    .header-right
+    .menu-toggle:active
+    div
+    span:after,
+  .path-frontpage .header-wrapper .header-right .menu-toggle:hover div span,
+  .path-frontpage
+    .header-wrapper
+    .header-right
+    .menu-toggle:hover
+    div
+    span:before,
+  .path-frontpage
+    .header-wrapper
+    .header-right
+    .menu-toggle:hover
+    div
+    span:after,
+  .path-frontpage .header-wrapper .header-right .menu-toggle:focus div span,
+  .path-frontpage
+    .header-wrapper
+    .header-right
+    .menu-toggle:focus
+    div
+    span:before,
+  .path-frontpage
+    .header-wrapper
+    .header-right
+    .menu-toggle:focus
+    div
+    span:after {
+    background-color: var(--color-gold-500);
+  }
+  .page-node-type-homepage .region-primary-nav, .page-node-type-homepage header:not(.pfp-header).sticky .region-primary-nav {
+    flex-direction: column;
+    align-items: start;
+    row-gap: 0.5rem;
+  }
+
+  .page-node-type-homepage .header-right {
+    flex-wrap: wrap;
+    align-items: start;
+    width: 300px;
+    justify-content: right;
+    row-gap: 0.5rem;
+    position: relative;
+  }
+
+  .page-node-type-homepage .region-secondary-nav {
+    order: 4;
+  }
+
+}
+
