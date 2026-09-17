@@ -14,8 +14,10 @@
     {{ title_suffix.contextual_links }}
     {% if content %}
       <div class="card-image">
-        {% if content.image|render|striptags('<img>')|trim or content.image|render|striptags('<iframe>')|trim %}
-          {{ content.image }}
+        {{ content.image|without('field_main_image', 'field_media') }}
+        {% if content.image.field_main_image[0] or content.image.field_media[0] %}
+          {{ content.image.field_main_image }}
+          {{ content.image.field_media }}
         {% else %}
           {{ default_image }}
         {% endif %}
@@ -27,7 +29,7 @@
             {{ content.topic }}
           </div>
         {% endif %}
-        {% if content.title %}
+        {% if content.title and not content.title["#theme"] %}
           {% if layout.id == 'layout_large_image_teaser' %}
             {% set textClass = 'large' %}
           {% else %}
