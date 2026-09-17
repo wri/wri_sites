@@ -4,12 +4,14 @@
   <div class="cta-text-wrapper container padding-vertical">
     <div class="cta-text-wrapper__inner">
       {{ title_prefix }}
-      {% if content.content.node_title|render|striptags|trim is not empty %}
-        <div {{ title_attributes.addClass('h2', 'margin-bottom-sm') }}>{{ content.content.node_title }}</div>
+      {% if content.field_long_title[0]["#text"] is not empty %}
+        <div {{ title_attributes.addClass('h2', 'margin-bottom-sm') }}>{{ content.field_long_title }}</div>
+      {% else %}
+        {{ content.node_title }}
       {% endif %}
       {{ title_suffix }}
       {% block content %}
-        <div class="margin-bottom-sm">
+        <div class="margin-bottom-sm cta-text__intro">
           {{ content.content.field_intro }}
         </div>
         <div class="button-wrapper">

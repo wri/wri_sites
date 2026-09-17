@@ -54,6 +54,16 @@
     p {
       @include font-line-height(18, 28);
     }
+
+    .h2 p,
+    .h2 span {
+      font-size: inherit;
+      color: inherit;
+    }
+
+    .cta-text__intro .button {
+      display: none;
+    }
   }
 
   .image-wrapper {
