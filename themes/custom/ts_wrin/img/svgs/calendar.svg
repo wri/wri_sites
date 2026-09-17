@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 90" fill="none">
+  <!-- Spiral binder rings -->
+  <rect x="5.33" y="0" width="7" height="12" rx="3.5" fill="#000"/>
+  <rect x="21" y="0" width="7" height="12" rx="3.5" fill="#000"/>
+  <rect x="36.67" y="0" width="7" height="12" rx="3.5" fill="#000"/>
+  <rect x="52.33" y="0" width="7" height="12" rx="3.5" fill="#000"/>
+  <rect x="68" y="0" width="7" height="12" rx="3.5" fill="#000"/>
+  <rect x="83.67" y="0" width="7" height="12" rx="3.5" fill="#000"/>
+
+  <rect x="6.83" y="2" width="4" height="4" rx="1.5" fill="#fff"/>
+  <rect x="22.5" y="2" width="4" height="4" rx="1.5" fill="#fff"/>
+  <rect x="38.17" y="2" width="4" height="4" rx="1.5" fill="#fff"/>
+  <rect x="53.83" y="2" width="4" height="4" rx="1.5" fill="#fff"/>
+  <rect x="69.5" y="2" width="4" height="4" rx="1.5" fill="#fff"/>
+  <rect x="85.17" y="2" width="4" height="4" rx="1.5" fill="#fff"/>
+
+  <!-- Header bar -->
+  <rect x="1" y="6" width="94" height="14" rx="4" fill="#000"/>
+
+  <!-- Calendar body with folded corner -->
+  <path fill="#000" d="M7,24 H89 A6,6 0 0 1 95,30 V72 L79,88 H7 A6,6 0 0 1 1,82 V30 A6,6 0 0 1 7,24 Z"/>
+
+  <!-- Folded corner flap -->
+  <path fill="#000" d="M93,86 L93,80 L87,86 Z"/>
+
+  <!-- Day grid -->
+  <rect x="12.75" y="35.5" width="12" height="12" rx="2" fill="#fff"/>
+  <rect x="32.25" y="35.5" width="12" height="12" rx="2" fill="#fff"/>
+  <rect x="51.75" y="35.5" width="12" height="12" rx="2" fill="#fff"/>
+  <rect x="71.25" y="35.5" width="12" height="12" rx="2" fill="#fff"/>
+
+  <rect x="12.75" y="50.5" width="12" height="12" rx="2" fill="#fff"/>
+  <rect x="32.25" y="50.5" width="12" height="12" rx="2" fill="#fff"/>
+  <rect x="51.75" y="50.5" width="12" height="12" rx="2" fill="#fff"/>
+  <rect x="71.25" y="50.5" width="12" height="12" rx="2" fill="#fff"/>
+
+  <rect x="12.75" y="65.5" width="12" height="12" rx="2" fill="#fff"/>
+  <rect x="32.25" y="65.5" width="12" height="12" rx="2" fill="#fff"/>
+  <rect x="51.75" y="65.5" width="12" height="12" rx="2" fill="#fff"/>
+</svg>

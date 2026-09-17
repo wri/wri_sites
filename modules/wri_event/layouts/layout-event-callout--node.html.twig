@@ -12,8 +12,12 @@
 <div class="event-callout">
   <div class="event-wrapper">
     {% if content.hero %}
+      <div class="align-middle">
       {# See ts_wrin_preprocess_layout in ts_wrin.theme #}
       {% set type = is_webinar ? 'Webinar'|t : 'Event'|t %}
+      {% if content["#view_mode"] == 'hero_featured' %}
+        <img src="/profiles/contrib/wri_sites/themes/custom/ts_wrin/img/svgs/calendar.svg" height="20" width="20" class="inline-block align-middle w-5 h-4">
+      {% endif %}
       {% if content.is_past %}
         <span class="utility-sm font-bold uppercase has-blue-color">
           {{ 'Past @type'|t({'@type': type}) }}
@@ -29,6 +33,7 @@
           </span>
         {% endif %}
       {% endif %}
+      </div>
       <div class="primary-topic topic-tag">{{ content.hero.field_primary_topic }}</div>
       {{ content.hero.node_title }}
       {% set node = content['#node'] ?? null %}
