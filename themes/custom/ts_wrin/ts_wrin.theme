@@ -9,6 +9,7 @@ use Drupal\Component\Utility\Html;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
+use Drupal\taxonomy\TermInterface;
 use Drupal\views\ViewExecutable;
 use Drupal\wri_node\General;
 use Drupal\Core\Url;
@@ -240,6 +241,31 @@ function ts_wrin_preprocess_field(array &$variables) {
         'clear' => TRUE,
       ]
     );
+  }
+
+  // For the field_featured_expert field, if the entity is a taxonomy term,
+  // set the path to:
+  // /about/experts-staff?all_topics=[tid] for topics_and_subtopics
+  // /about/experts-staff?tags=[tid] for tags
+  // /about/experts-staff?regions=[tid] for regions
+  // then use \Drupal::service('wri_search.pretty_facets_helper')->getPrettyPaths($filters_current_result)
+  // to get the pretty url for it.
+  if ($variables['element']['#field_name'] == 'field_featured_experts') {
+    $variables['expert_facet_url'] = '';
+    $object = $variables['element']['#object'];
+    if ($object instanceof TermInterface) {
+      $facet_id = match ($object->bundle()) {
+        'topics_and_subtopics' => 'experts_all_topics',
+        'tags' => 'experts_tags',
+        'regions' => 'experts_region',
+        default => NULL,
+      };
+      if ($facet_id && \Drupal::hasService('wri_search.pretty_facets_helper')) {
+        $filters_current_result = [$facet_id => [$object->id()]];
+        $pretty_path = \Drupal::service('wri_search.pretty_facets_helper')->getPrettyPaths($filters_current_result);
+        $variables['expert_facet_url'] = '/about/experts-staff' . $pretty_path;
+      }
+    }
   }
 }
 
