@@ -83,7 +83,7 @@
 .embedded-entity.embed--block-type--upcoming-event {
   padding: 0;
 
-  .callout {
+  &.has-border-background-color {
     border: 2px solid var(--color-neutral-200);
     padding: var(--spacer-5);
 
@@ -104,14 +104,6 @@
   }
   .event-callout .event-wrapper {
     flex: 0 1 70%;
-    .time-wrapper {
-      margin-bottom: var(--spacer-6);
-      font-weight: 500;
-    }
-    .info-text {
-      line-height: 1.8;
-      margin: var(--spacer-3) 0;
-    }
     .h3 {
       margin-bottom: var(--spacer-1);
       margin-top: var(--spacer-1);

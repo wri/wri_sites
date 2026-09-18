@@ -16,9 +16,9 @@
   height: 1px;
 }
 
-.layout-builder__add-section {
-  display: none;
-}
+/*.layout-builder__add-section {*/
+/*  display: none;*/
+/*}*/
 
 .page-node-type-custom-page .layout-builder .layout-builder__add-section {
   display: block;

@@ -1,0 +1,17 @@
+{#
+/**
+ * @file
+ * Theme override for a Project Detail: Featured Experts field.
+ *
+ * @see template_preprocess_field()
+ */
+#}
+{% set show_more_link = 1 %}
+{% extends "@ts_wrin/fields/field--node--field-featured-experts.html.twig"  %}
+{% block link %}
+
+  <div class="layout__region--more-link">
+    <span class="more-link__line"></span>
+    <a href="{{ expert_facet_url|default('/about/experts-staff') }}" class="button small">{{ "View more"|t }}</a>
+  </div>
+{% endblock %}

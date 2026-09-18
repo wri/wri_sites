@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.looking_for_something_specific
+    - field.storage.block_content.field_listing
+  module:
+    - viewfield
+id: block_content.looking_for_something_specific.field_listing
+field_name: field_listing
+entity_type: block_content
+bundle: looking_for_something_specific
+label: Listing
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    target_id: child_topics
+    display_id: child_topics_block
+    arguments: '[current-page:taxonomy_term:tid]'
+    items_to_display: ''
+    token_help: ''
+default_value_callback: ''
+settings:
+  force_default: true
+  allowed_views:
+    child_topics: child_topics
+  allowed_display_types:
+    block: block
+  handler: 'default:view'
+  handler_settings: {  }
+field_type: viewfield

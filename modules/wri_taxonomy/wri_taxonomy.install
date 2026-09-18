@@ -11,6 +11,7 @@ use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\file\Entity\File;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\block_content\Entity\BlockContent;
 
 /**
  * Implements hook_install().
@@ -154,5 +155,60 @@ function wri_taxonomy_update_10401() {
       $term->save();
       \Drupal::messenger()->addStatus(t('Created/updated term @name with icon.', ['@name' => $term_name]));
     }
+  }
+}
+
+/**
+ * Generates the term-level webform block.
+ */
+function wri_taxonomy_update_10602() {
+  _wri_taxonomy_force_block_id(
+    'c2faf277-9cee-48bd-9f70-09ee7613806a',
+    100,
+    [
+      'uuid' => 'c2faf277-9cee-48bd-9f70-09ee7613806a',
+      'type' => 'webform_with_background_color',
+      'info' => 'Stay Informed',
+      'langcode' => 'en',
+      'field_webform' => 'term_email_signup',
+      'field_cta_background' => 'has-teal-background-color',
+      'reusable' => FALSE,
+    ]
+  );
+}
+
+/**
+ * Generates the term-level resource library CTA block.
+ */
+function wri_taxonomy_update_10603() {
+  _wri_taxonomy_force_block_id(
+    '8d9546bf-84e4-4412-9b8c-0804d6845252',
+    101,
+    [
+      'uuid' => '8d9546bf-84e4-4412-9b8c-0804d6845252',
+      'type' => 'small_cta',
+      'info' => 'Explore our full Resource Library',
+      'langcode' => 'en',
+      'field_link' => [
+        'uri' => 'internal:/resources',
+        'title' => 'Explore our full Resource Library',
+      ],
+      'field_cta_background' => 'has-teal-background-color',
+      'reusable' => FALSE,
+    ]
+  );
+}
+
+/**
+ * Ensures a block_content entity exists with a fixed revision_id.
+ */
+function _wri_taxonomy_force_block_id($uuid, $id, array $values) {
+  $block_manager = \Drupal::entityTypeManager()->getStorage('block_content');
+  $blocks = $block_manager->loadByProperties(['uuid' => $uuid]);
+  $block = $blocks ? reset($blocks) : NULL;
+
+  if (!$block) {
+    $block = BlockContent::create(['revision_id' => $id] + $values);
+    $block->save();
   }
 }

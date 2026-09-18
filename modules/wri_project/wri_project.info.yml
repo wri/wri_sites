@@ -9,6 +9,7 @@ dependencies:
   - wri_person
   - wri_paragraph
   - wri_toc
+  - wri_node
 config_devel:
   install:
     - core.base_field_override.node.project_detail.promote
@@ -19,6 +20,7 @@ config_devel:
     - core.entity_view_display.node.project_detail.full
     - core.entity_view_display.node.project_detail.hero_on_a_subpage
     - core.entity_view_display.node.project_detail.impact
+    - core.entity_view_display.node.project_detail.landing_page_cta
     - core.entity_view_display.node.project_detail.large_image_teaser
     - core.entity_view_display.node.project_detail.main_content
     - core.entity_view_display.node.project_detail.search_results

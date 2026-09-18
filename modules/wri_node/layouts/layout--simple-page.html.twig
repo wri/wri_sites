@@ -23,7 +23,7 @@
         {% endif %}
           <div{{ attributes.addClass('grid','simple-page__title') }}>
             {% if content.hero_text|render|striptags|trim is not empty %}
-              <div {{ region_attributes.title.addClass('layout__region', 'layout__region--title', text_class) }}>
+              <div {{ region_attributes.hero_text.addClass('layout__region', 'layout__region--title', text_class) }}>
                 {{ content.hero_text }}
               </div>
             {% endif %}

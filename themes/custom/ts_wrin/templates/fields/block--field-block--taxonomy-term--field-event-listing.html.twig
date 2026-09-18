@@ -1,0 +1,39 @@
+{#
+/**
+ * @file
+ * Custom theme implementation to display a happening now teasers.
+ *
+ * @see template_preprocess_viewfield_item()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set classes = [
+  'columns-25-75',
+  'content_listing',
+  'grid',
+  'margin-bottom-lg',
+  'unfriendly-block',
+  'events-content_listing'
+]
+%}
+{# Only show the view if there are results. We can't use the setting for this, #}
+{# because this view falls back to other views. #}
+{% if content|render|striptags|trim %}
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {% if not label_hidden and label %}
+  <h2 class="layout__region layout__region--header h3 top-border-thick margin-bottom-md">{{ label }}</h2>
+  {% endif %}
+  {{ title_suffix }}
+  {% block content %}
+<div class="layout__region layout__region--listing">
+    {{ content }}
+  <div class="layout__region--more-link">
+    <span class="more-link__line"></span>
+    <a href="{{ expert_facet_url|default('/events') }}" class="button small">{{ "View more"|t }}</a>
+  </div>
+</div>
+  {% endblock %}
+</div>
+{% endif %}
