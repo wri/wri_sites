@@ -1,6 +1,6 @@
 name: 'WRI AI Key Takeaways'
 type: module
-description: 'Adds an AI auto-generate button to the Key Takeaways field on article nodes, using the default AI chat provider. Includes JS to wire the button into an AJAX submit and CSS to fix a clipped focus outline caused by the admin layout region''s overflow:hidden.'
+description: 'Adds an AI auto-generate button to the Key Takeaways field on article nodes, using the default AI chat provider. Includes JS to wire the button into an AJAX submit and CSS to fix a clipped focus outline caused by the admin layout region overflow:hidden.'
 core_version_requirement: '>=9.5'
 package: WRI
 dependencies:
