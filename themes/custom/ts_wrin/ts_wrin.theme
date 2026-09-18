@@ -321,6 +321,32 @@ function ts_wrin_preprocess_block(array &$variables) {
   if (isset($variables["elements"]["content"]["field_listing"][0]['#content'])) {
     $variables['attributes']['class'][] = Html::getClass('block--views_block--' . $variables["elements"]["content"]["field_listing"][0]['#content']['#name'] . '--' . $variables["elements"]["content"]["field_listing"][0]['#content']['#display_id']);
   }
+
+  // For the field_event_listing block field, if the entity is a taxonomy term,
+  // set the path to:
+  // /events?all_topics=[tid] for topics_and_subtopics
+  // /events?tags=[tid] for tags
+  // /events?regions=[tid] for regions
+  // then use \Drupal::service('wri_search.pretty_facets_helper')->getPrettyPaths($filters_current_result)
+  // to get the pretty url for it.
+  $derivative_parts = isset($variables['derivative_plugin_id']) ? explode(':', $variables['derivative_plugin_id']) : [];
+  if ($variables['base_plugin_id'] == 'field_block' && ($derivative_parts[2] ?? NULL) == 'field_event_listing') {
+    $variables['expert_facet_url'] = '';
+    $object = $variables["content"][0]["#object"] ?? NULL;
+    if ($object instanceof TermInterface && $object->id()) {
+      $facet_id = match ($object->bundle()) {
+        'topics_and_subtopics' => 'all_event_topics',
+        'tags' => 'tags_event',
+        'regions' => 'region_event',
+        default => NULL,
+      };
+      if ($facet_id && \Drupal::hasService('wri_search.pretty_facets_helper')) {
+        $filters_current_result = [$facet_id => [$object->id()]];
+        $pretty_path = \Drupal::service('wri_search.pretty_facets_helper')->getPrettyPaths($filters_current_result);
+        $variables['expert_facet_url'] = '/events' . $pretty_path;
+      }
+    }
+  }
 }
 
 /**
