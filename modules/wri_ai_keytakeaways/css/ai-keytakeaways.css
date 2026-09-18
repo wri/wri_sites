@@ -1,0 +1,10 @@
+/**
+ * The parent .layout-region--main has overflow:hidden (see
+ * wri_admin/css/admin.css), which clips the button's green focus
+ * box-shadow since box-shadow doesn't participate in layout flow.
+ * Margin here gives the shadow room before it reaches that edge.
+ */
+.wri-ai-keytakeaways-actions {
+  margin-inline: 0.3125rem;
+  margin-block-end: 0.3125rem;
+}
