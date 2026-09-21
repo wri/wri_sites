@@ -102,7 +102,8 @@
 .view-resources .form-type-textfield,
 .view-paying-for-paris-resources .form-type-textfield,
 .experts-container .form-type-textfield,
-.view-events .form-item-date {
+.view-events .form-item-date,
+.view-term-resources .form-type-textfield {
   @include column-width(1, 5);
 
   @include mq($ph) {
@@ -231,7 +232,8 @@
 
 .results-body,
 .view-resources .form-item-sort-by,
-.view-paying-for-paris-resources .form-item-sort-by {
+.view-paying-for-paris-resources .form-item-sort-by,
+.view-term-resources .form-item-sort-by {
   @include column-width(1, 5);
 
   @include mq($ph) {
@@ -379,7 +381,8 @@
 
 .view-resources .view-header,
 .view-paying-for-paris-resources .view-header,
-.experts-container .view-header {
+.experts-container .view-header,
+.view-term-resources .view-header {
   @include mq($lg) {
     margin-top: -98px;
     margin-right: 230px;
