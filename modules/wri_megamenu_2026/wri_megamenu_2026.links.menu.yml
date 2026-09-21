@@ -1,0 +1,5 @@
+wri_megamenu_2026.settings:
+  title: 'WRI Megamenu 2026'
+  description: 'Toggle whether the 2026 mega menu is enabled everywhere or only on /testing-2026-menu.'
+  route_name: wri_megamenu_2026.settings
+  parent: system.admin_config_content

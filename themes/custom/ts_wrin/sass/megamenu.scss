@@ -1,0 +1,23 @@
+/**
+ * @file
+ * Standalone Sass entry for the new .wri-megamenu / .wri-mobile-nav system.
+ * Compiles to its own CSS file (see megamenu library in ts_wrin.libraries.yml)
+ * so it only loads on pages that render the megamenu block.
+ *
+ * No Tailwind directives on purpose: @tailwind components previously leaked
+ * Tailwind's unconfigured .container rules into this bundle and broke
+ * .header-wrapper's width on /testing-2026-menu. .field__item__label in
+ * global/_megamenu.scss inlines the one style (.tag) that used to come from
+ * tailwind-components.scss instead of extending it.
+ */
+
+/* Tokens first (CSS vars) */
+@import "_elements/_tokens.css";
+
+/* CONFIG */
+@import "config/_01.vars.scss";
+@import "config/_02.mixins.scss";
+
+/* GLOBAL */
+@import "global/megamenu.scss";
+@import "global/megamenu-mobile.scss";

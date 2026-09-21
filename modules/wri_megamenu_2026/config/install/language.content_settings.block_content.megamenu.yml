@@ -1,0 +1,9 @@
+status: true
+dependencies:
+  config:
+    - block_content.type.megamenu
+id: block_content.megamenu
+target_entity_type_id: block_content
+target_bundle: megamenu
+default_langcode: site_default
+language_alterable: false
