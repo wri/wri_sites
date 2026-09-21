@@ -38,20 +38,22 @@
     'view-display-id-' ~ display_id,
     dom_id ? 'js-view-dom-id-' ~ dom_id,
     'container',
-  'show-in-top-links'
+  'flex',
+  'items-baseline'
   ]
 %}
+<div class="mb-8">
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if title %}
     {{ title }}
   {% endif %}
   {{ title_suffix }}
-  {# The header is folded into the first list item by
-     ts_wrin_preprocess_views_view_unformatted__tags_within_a_topic__fake_facets()
-     so it's themed the same as the other tag links. #}
-
+  {% if header %}
+  <span class="body-serif-italic-sm mr-7">{{ header }}</span>
+  {% endif %}
   {% if rows %}
       {{ rows }}
   {% endif %}
+</div>
 </div>
