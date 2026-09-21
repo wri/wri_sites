@@ -357,6 +357,14 @@ function ts_wrin_preprocess_block(array &$variables) {
       }
     }
   }
+
+  // Give the field_on_page_resource_library block the same anchor id that
+  // [wri_tokens:resources_anchor] resolves to, so links using that token
+  // land on this block.
+  if ($variables['base_plugin_id'] == 'field_block' && ($derivative_parts[2] ?? NULL) == 'field_on_page_resource_library') {
+    $variables['resources_anchor'] = \Drupal::config('wri_taxonomy.settings')->get('resources_anchor') ?: 'resources';
+    $variables['#cache']['tags'][] = 'config:wri_taxonomy.settings';
+  }
 }
 
 /**

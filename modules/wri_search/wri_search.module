@@ -152,7 +152,7 @@ function wri_search_preprocess_bef_checkboxes(&$variables) {
     $request_stack = Drupal::requestStack();
     $current_request = $request_stack->getCurrentRequest();
     $current_filters = $current_request->query->all();
-    $region = $current_filters['region'];
+    $region = $current_filters['region'] ?? [];
     $terms = [];
     foreach ($region as $value) {
       // Load up children of that facet value.
