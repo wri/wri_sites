@@ -1,0 +1,16 @@
+{#
+/**
+ * @file
+ * Theme override for the "name" field on the "tags_within_a_topic"
+ * "fake_facets" display.
+ *
+ * Links the tag to its term page with the on-page resources anchor appended.
+ *
+ * Available variables:
+ * - term_url: The term's URL with the resources anchor appended.
+ * - term_label: The term's label.
+ *
+ * @see ts_wrin_preprocess_views_view_field__tags_within_a_topic__fake_facets__name()
+ */
+#}
+<a href="{{ term_url }}">{{ term_label }}</a>

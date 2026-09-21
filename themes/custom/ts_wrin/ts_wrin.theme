@@ -463,6 +463,48 @@ function ts_wrin_preprocess_views_view_list__all_topics__topic_list_block_anchor
 }
 
 /**
+ * Implements hook_preprocess_HOOK() for views-view-field--tags-within-a-topic--fake-facets--name.html.twig.
+ *
+ * Builds a link to the term with [wri_tokens:resources_anchor] appended, so
+ * the "Explore within [topic]" tag list on the Term resources header jumps
+ * straight to the on-page resources block.
+ */
+function ts_wrin_preprocess_views_view_field__tags_within_a_topic__fake_facets__name(array &$variables) {
+  $term = $variables['field']->getEntity($variables['row']);
+  if (!$term instanceof TermInterface) {
+    return;
+  }
+
+  $anchor = \Drupal::config('wri_taxonomy.settings')->get('resources_anchor') ?: 'resources';
+  $variables['term_url'] = $term->toUrl()->toString() . '#' . $anchor;
+  $variables['term_label'] = $term->label();
+
+  $variables['#cache']['tags'][] = 'config:wri_taxonomy.settings';
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for views-view--tags-within-a-topic--fake-facets.html.twig.
+ *
+ * Prepends the display's header content ("Explore within [topic]:") as the
+ * first item of the results, same as
+ * ts_wrin_preprocess_views_view_list__all_topics__topic_list_block_anchored().
+ *
+ * @see views-view--tags-within-a-topic--fake-facets.html.twig
+ */
+function ts_wrin_preprocess_views_view_unformatted__tags_within_a_topic__fake_facets(array &$variables) {
+  $view = $variables['view'];
+  $header = $view->display_handler->renderArea('header', empty($view->result));
+  if (Element::isEmpty($header)) {
+    return;
+  }
+
+  $variables['rows'] = ['header' => [
+    'content' => $header,
+    'attributes' => new Attribute(),
+  ]] + $variables['rows'];
+}
+
+/**
  * Implements hook_page_attachments_alter().
  */
 function ts_wrin_page_attachments_alter(array &$attachments) {
