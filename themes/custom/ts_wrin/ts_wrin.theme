@@ -415,6 +415,30 @@ function ts_wrin_preprocess_views_view(array &$variables) {
 }
 
 /**
+ * Implements hook_preprocess_HOOK() for views-view-field--all-topics--topic-list-block-anchored--name.html.twig.
+ *
+ * Builds a link to the term with [wri_tokens:resources_anchor] appended, and
+ * flags it as selected when it points at the term the visitor is currently
+ * on, so it can be themed like the bef-links topic facet links.
+ */
+function ts_wrin_preprocess_views_view_field__all_topics__topic_list_block_anchored__name(array &$variables) {
+  $term = $variables['field']->getEntity($variables['row']);
+  if (!$term instanceof TermInterface) {
+    return;
+  }
+
+  $anchor = \Drupal::config('wri_taxonomy.settings')->get('resources_anchor') ?: 'resources';
+  $variables['term_url'] = $term->toUrl()->toString() . '#' . $anchor;
+  $variables['term_label'] = $term->label();
+
+  $current_term = \Drupal::routeMatch()->getParameter('taxonomy_term');
+  $variables['is_selected'] = $current_term instanceof TermInterface && $current_term->id() == $term->id();
+
+  $variables['#cache']['tags'][] = 'config:wri_taxonomy.settings';
+  $variables['#cache']['contexts'][] = 'route';
+}
+
+/**
  * Implements hook_page_attachments_alter().
  */
 function ts_wrin_page_attachments_alter(array &$attachments) {
