@@ -417,6 +417,31 @@ function ts_wrin_preprocess_views_view(array &$variables) {
 }
 
 /**
+ * Sets term_url (with [wri_tokens:resources_anchor] appended) and term_label
+ * on a views field preprocess, from the row's entity.
+ *
+ * Shared by the views-view-field preprocesses that link a term row to its
+ * on-page resources anchor.
+ *
+ * @return \Drupal\taxonomy\TermInterface|null
+ *   The row's term, so callers needing more (e.g. is_selected) don't have to
+ *   re-fetch it, or NULL if the row isn't backed by a taxonomy term.
+ */
+function _ts_wrin_set_term_anchor_link_variables(array &$variables): ?TermInterface {
+  $term = $variables['field']->getEntity($variables['row']);
+  if (!$term instanceof TermInterface) {
+    return NULL;
+  }
+
+  $anchor = \Drupal::config('wri_taxonomy.settings')->get('resources_anchor') ?: 'resources';
+  $variables['term_url'] = $term->toUrl()->toString() . '#' . $anchor;
+  $variables['term_label'] = $term->label();
+  $variables['#cache']['tags'][] = 'config:wri_taxonomy.settings';
+
+  return $term;
+}
+
+/**
  * Implements hook_preprocess_HOOK() for views-view-field--all-topics--topic-list-block-anchored--name.html.twig.
  *
  * Builds a link to the term with [wri_tokens:resources_anchor] appended, and
@@ -424,19 +449,13 @@ function ts_wrin_preprocess_views_view(array &$variables) {
  * on, so it can be themed like the bef-links topic facet links.
  */
 function ts_wrin_preprocess_views_view_field__all_topics__topic_list_block_anchored__name(array &$variables) {
-  $term = $variables['field']->getEntity($variables['row']);
-  if (!$term instanceof TermInterface) {
+  $term = _ts_wrin_set_term_anchor_link_variables($variables);
+  if (!$term) {
     return;
   }
 
-  $anchor = \Drupal::config('wri_taxonomy.settings')->get('resources_anchor') ?: 'resources';
-  $variables['term_url'] = $term->toUrl()->toString() . '#' . $anchor;
-  $variables['term_label'] = $term->label();
-
   $current_term = \Drupal::routeMatch()->getParameter('taxonomy_term');
   $variables['is_selected'] = $current_term instanceof TermInterface && $current_term->id() == $term->id();
-
-  $variables['#cache']['tags'][] = 'config:wri_taxonomy.settings';
   $variables['#cache']['contexts'][] = 'route';
 }
 
@@ -470,16 +489,18 @@ function ts_wrin_preprocess_views_view_list__all_topics__topic_list_block_anchor
  * straight to the on-page resources block.
  */
 function ts_wrin_preprocess_views_view_field__tags_within_a_topic__fake_facets__name(array &$variables) {
-  $term = $variables['field']->getEntity($variables['row']);
-  if (!$term instanceof TermInterface) {
-    return;
-  }
+  _ts_wrin_set_term_anchor_link_variables($variables);
+}
 
-  $anchor = \Drupal::config('wri_taxonomy.settings')->get('resources_anchor') ?: 'resources';
-  $variables['term_url'] = $term->toUrl()->toString() . '#' . $anchor;
-  $variables['term_label'] = $term->label();
-
-  $variables['#cache']['tags'][] = 'config:wri_taxonomy.settings';
+/**
+ * Implements hook_preprocess_HOOK() for views-view-field--tags-within-a-topic--sibling-tags--name.html.twig.
+ *
+ * Builds a link to the term with [wri_tokens:resources_anchor] appended, so
+ * the sibling tags list on the Term resources header jumps straight to the
+ * on-page resources block.
+ */
+function ts_wrin_preprocess_views_view_field__tags_within_a_topic__sibling_tags__name(array &$variables) {
+  _ts_wrin_set_term_anchor_link_variables($variables);
 }
 
 /**

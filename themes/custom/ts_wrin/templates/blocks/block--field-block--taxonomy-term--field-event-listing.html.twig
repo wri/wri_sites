@@ -19,7 +19,7 @@
 %}
 {# Only show the view if there are results. We can't use the setting for this, #}
 {# because this view falls back to other views. #}
-{% if content|render|striptags|trim %}
+{% if content|render|striptags|trim or in_preview %}
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if not label_hidden and label %}

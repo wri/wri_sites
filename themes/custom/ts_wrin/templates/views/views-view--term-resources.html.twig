@@ -16,10 +16,10 @@
     dom_id ? 'js-view-dom-id-' ~ dom_id,
   ]
 %}
-{% if header %}
-  {{ header|without('extra_result', 'facets_summary') }}
-{% endif %}
 <div{{ attributes.addClass(classes) }}>
+  {% if header %}
+    {{ header|without('extra_result', 'facets_summary') }}
+  {% endif %}
 {% if exposed %}
   {% set rendered = exposed|without('query', 'sort_by')|render %}
   {% set form_opening_tag = rendered|preg_replace('/(<form[^>]*>).*/is', '$1') %}

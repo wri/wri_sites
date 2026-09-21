@@ -6,6 +6,7 @@ package: WRI
 dependencies:
   - cer
   - taxonomy
+  - views
   - wri_common
 config_devel:
   install:

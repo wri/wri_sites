@@ -15,6 +15,7 @@
   'unfriendly-block'
 ]
 %}
+{% if content|render|striptags|trim or in_preview %}
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if not label_hidden and label %}
@@ -27,3 +28,4 @@
 </div>
   {% endblock %}
 </div>
+{% endif %}
