@@ -34,6 +34,13 @@ key_takeaways:
     - core/drupal
     - core/once
 
+resource_type_facet_link:
+  js:
+    js/components/ts_resource_type_facet_link.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+
 hamburger_nav_legacy:
   js:
     js/components/ts_hamburger_nav_legacy.js: {}

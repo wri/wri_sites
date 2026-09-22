@@ -360,6 +360,22 @@ function ts_wrin_preprocess_block(array &$variables) {
     }
   }
 
+  // For the field_project_listing block field, link to this page's on-page
+  // resource library and pass the "Initiatives" resource type so JS can
+  // select that facet.
+  if ($variables['base_plugin_id'] == 'field_block' && ($derivative_parts[2] ?? NULL) == 'field_project_listing') {
+    $anchor = \Drupal::config('wri_taxonomy.settings')->get('resources_anchor') ?: 'resources';
+    $variables['initiatives_facet_url'] = Url::fromRoute('<current>', [], ['fragment' => $anchor])->toString();
+    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties([
+      'vid' => 'resource_type',
+      'name' => 'Initiatives',
+    ]);
+    $variables['initiatives_facet_tid'] = $terms ? reset($terms)->id() : NULL;
+    $variables['#cache']['contexts'][] = 'url.path';
+    $variables['#cache']['tags'][] = 'config:wri_taxonomy.settings';
+    $variables['#cache']['tags'][] = 'taxonomy_term_list:resource_type';
+  }
+
   // Give the field_on_page_resource_library block the same anchor id that
   // [wri_tokens:resources_anchor] resolves to, so links using that token
   // land on this block.
