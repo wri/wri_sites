@@ -454,9 +454,13 @@ function ts_wrin_preprocess_views_view_field__all_topics__topic_list_block_ancho
     return;
   }
 
-  $current_term = \Drupal::routeMatch()->getParameter('taxonomy_term');
+  // wri_taxonomy_get_current_term() falls back to a hidden exposed-filter
+  // value when there's no {taxonomy_term} route parameter, which is the
+  // case for a Views AJAX rebuild (e.g. an exposed filter autosubmit).
+  $current_term = wri_taxonomy_get_current_term();
   $variables['is_selected'] = $current_term instanceof TermInterface && $current_term->id() == $term->id();
   $variables['#cache']['contexts'][] = 'route';
+  $variables['#cache']['contexts'][] = 'url.query_args:' . WRI_TAXONOMY_CURRENT_TERM_PARAM;
 }
 
 /**

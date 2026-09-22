@@ -117,6 +117,42 @@ function wri_taxonomy_term_uri(TermInterface $term) {
 }
 
 /**
+ * Name of the hidden exposed-filter field that carries the current term.
+ *
+ * @see wri_taxonomy_get_current_term()
+ * @see wri_search_form_views_exposed_form_alter()
+ */
+const WRI_TAXONOMY_CURRENT_TERM_PARAM = 'wri_current_term';
+
+/**
+ * Gets the taxonomy term for the page currently being viewed.
+ *
+ * Normally this is just the {taxonomy_term} route parameter. But a Views
+ * AJAX request (e.g. an exposed filter autosubmit) is handled by the
+ * generic /views/ajax route, which carries none of the original page's
+ * route parameters. For that case, this falls back to whatever term ID was
+ * passed through as a hidden value on the submitted exposed form, which
+ * wri_search_form_views_exposed_form_alter() populates from this same
+ * function on the initial page render.
+ *
+ * @return \Drupal\taxonomy\TermInterface|null
+ *   The current term, or NULL if there isn't one.
+ */
+function wri_taxonomy_get_current_term(): ?TermInterface {
+  $term = \Drupal::routeMatch()->getParameter('taxonomy_term');
+  if ($term instanceof TermInterface) {
+    return $term;
+  }
+
+  $tid = \Drupal::request()->query->get(WRI_TAXONOMY_CURRENT_TERM_PARAM);
+  if (!$tid) {
+    return NULL;
+  }
+  $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
+  return $term instanceof TermInterface ? $term : NULL;
+}
+
+/**
  * Implements hook_entity_field_access().
  */
 function wri_taxonomy_entity_field_access($operation, FieldDefinitionInterface $field_definition, AccountInterface $account, ?FieldItemListInterface $items = NULL) {

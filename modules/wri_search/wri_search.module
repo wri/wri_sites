@@ -84,11 +84,25 @@ function wri_search_form_views_exposed_form_alter(&$form, FormStateInterface $fo
     $facet_source = \Drupal::entityTypeManager()
       ->getStorage('facets_facet_source')
       ->load($facet_source_id);
-    if (!$facet_source) {
-      return;
-    }
-    if ('facets_pretty_paths' == $facet_source->getUrlProcessorName()) {
+    if ($facet_source && 'facets_pretty_paths' == $facet_source->getUrlProcessorName()) {
       $form['#action'] = NULL;
+    }
+  }
+
+  // Carry the term page we're on through the exposed filters as a hidden
+  // value. A Views AJAX rebuild (e.g. an exposed filter autosubmit) is
+  // handled by the generic /views/ajax route, which has no {taxonomy_term}
+  // route parameter of its own, so contextual filters and the "selected"
+  // link state that depend on knowing the current term would otherwise
+  // break after the first filter change.
+  // @see wri_taxonomy_get_current_term()
+  if ($view->id() == 'term_resources') {
+    $current_term = wri_taxonomy_get_current_term();
+    if ($current_term) {
+      $form[WRI_TAXONOMY_CURRENT_TERM_PARAM] = [
+        '#type' => 'hidden',
+        '#value' => $current_term->id(),
+      ];
     }
   }
 }
