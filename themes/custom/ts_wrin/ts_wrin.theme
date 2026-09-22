@@ -274,6 +274,13 @@ function ts_wrin_preprocess_field(array &$variables) {
       };
       if ($facet_id && \Drupal::hasService('wri_search.pretty_facets_helper')) {
         $filters_current_result = [$facet_id => [$object->id()]];
+        // Child topics filter by their parent, then by themselves within it.
+        if ($object->bundle() == 'topics_and_subtopics' && ($parent_id = $object->parent->target_id)) {
+          $filters_current_result = [
+            $facet_id => [$parent_id],
+            'experts_within_this_topic' => [$object->id()],
+          ];
+        }
         $pretty_path = \Drupal::service('wri_search.pretty_facets_helper')->getPrettyPaths($filters_current_result);
         $variables['expert_facet_url'] = '/about/experts-staff' . $pretty_path;
       }
@@ -354,6 +361,13 @@ function ts_wrin_preprocess_block(array &$variables) {
       };
       if ($facet_id && \Drupal::hasService('wri_search.pretty_facets_helper')) {
         $filters_current_result = [$facet_id => [$object->id()]];
+        // Child topics filter by their parent, then by themselves within it.
+        if ($object->bundle() == 'topics_and_subtopics' && ($parent_id = $object->parent->target_id)) {
+          $filters_current_result = [
+            $facet_id => [$parent_id],
+            'within_this_topic_event' => [$object->id()],
+          ];
+        }
         $pretty_path = \Drupal::service('wri_search.pretty_facets_helper')->getPrettyPaths($filters_current_result);
         $variables['expert_facet_url'] = '/events' . $pretty_path;
       }
