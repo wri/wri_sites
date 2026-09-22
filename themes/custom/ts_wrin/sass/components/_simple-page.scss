@@ -118,6 +118,10 @@
   }
 }
 
+.simple-page-intro > .block-content--type-webform-with-background-color:first-child {
+  margin-top: var(--spacer-10);
+}
+
 .paragraph--type--side-by-side {
   @extend .grid;
   @extend .margin-top-xl;
