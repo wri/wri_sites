@@ -34,7 +34,7 @@ use Drupal\views\Plugin\views\argument_default\ArgumentDefaultPluginBase;
 class TermFieldTargetId extends ArgumentDefaultPluginBase implements CacheableDependencyInterface {
 
   /**
-   * Exposed filter identifier for the "All Topics" facet (facets.facet.all_topics).
+   * Exposed filter identifier for the "All Topics" facet.
    */
   const TOPIC_FACET_IDENTIFIER = 'topic';
 

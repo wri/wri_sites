@@ -479,10 +479,12 @@ function ts_wrin_preprocess_views_view_list__all_topics__topic_list_block_anchor
     return;
   }
 
-  $variables['rows'] = ['header' => [
-    'content' => $header,
-    'attributes' => new Attribute(),
-  ]] + $variables['rows'];
+  $variables['rows'] = [
+    'header' => [
+      'content' => $header,
+      'attributes' => new Attribute(),
+    ],
+  ] + $variables['rows'];
 }
 
 /**
