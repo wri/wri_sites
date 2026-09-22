@@ -112,6 +112,13 @@ class ParentTopicLink extends AreaPluginBase implements CacheableDependencyInter
   /**
    * {@inheritdoc}
    */
+  public function getCacheTags() {
+    return ['config:wri_taxonomy.settings'];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getCacheMaxAge() {
     return Cache::PERMANENT;
   }

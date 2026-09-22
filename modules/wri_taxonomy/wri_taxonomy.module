@@ -153,6 +153,20 @@ function wri_taxonomy_get_current_term(): ?TermInterface {
 }
 
 /**
+ * Implements hook_views_data().
+ */
+function wri_taxonomy_views_data() {
+  $data['views']['wri_taxonomy_parent_topic_link'] = [
+    'title' => t('Parent topic link'),
+    'help' => t("Links to the parent of the current page's term, falling back to a configured link if it has none."),
+    'area' => [
+      'id' => 'wri_taxonomy_parent_topic_link',
+    ],
+  ];
+  return $data;
+}
+
+/**
  * Implements hook_entity_field_access().
  */
 function wri_taxonomy_entity_field_access($operation, FieldDefinitionInterface $field_definition, AccountInterface $account, ?FieldItemListInterface $items = NULL) {
