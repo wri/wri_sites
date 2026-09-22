@@ -13,13 +13,14 @@ use Drupal\views\Attribute\ViewsArea;
 use Drupal\views\Plugin\views\area\AreaPluginBase;
 
 /**
- * Links to the parent of the current page's term, with a static fallback.
+ * Links to a related term of the current page's term, with a static fallback.
  *
- * Renders "All {parent name}", linking to the parent's page with
+ * Renders "All {name}", linking to the target term's page with
  * [wri_tokens:resources_anchor] appended, using
- * wri_taxonomy_get_current_term() to find the current term. If that term has
- * no parent, renders the configured fallback link instead (e.g. "All Topics"
- * linking to /resources for a top-level topic).
+ * wri_taxonomy_get_current_term() to find the current term and a
+ * configurable field (e.g. "parent", or field_primary_topic) to find the
+ * term to link to. If that field is empty, renders the configured fallback
+ * link instead (e.g. "All Topics" linking to /resources).
  */
 #[ViewsArea('wri_taxonomy_parent_topic_link')]
 class ParentTopicLink extends AreaPluginBase implements CacheableDependencyInterface {
@@ -29,6 +30,7 @@ class ParentTopicLink extends AreaPluginBase implements CacheableDependencyInter
    */
   protected function defineOptions() {
     $options = parent::defineOptions();
+    $options['field_name'] = ['default' => 'parent'];
     $options['fallback_url'] = ['default' => ''];
     $options['fallback_label'] = ['default' => ''];
     $options['link_class'] = ['default' => ''];
@@ -41,10 +43,16 @@ class ParentTopicLink extends AreaPluginBase implements CacheableDependencyInter
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
     parent::buildOptionsForm($form, $form_state);
 
+    $form['field_name'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Field name'),
+      '#description' => $this->t('The machine name of an entity reference field on the current term whose target term to link to, e.g. "parent" for the term hierarchy parent, or field_primary_topic.'),
+      '#default_value' => $this->options['field_name'],
+    ];
     $form['fallback_url'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Fallback URL'),
-      '#description' => $this->t('Used when the current term has no parent (e.g. a top-level topic). Internal paths only, e.g. /resources.'),
+      '#description' => $this->t('Used when the field above is empty on the current term. Internal paths only, e.g. /resources.'),
       '#default_value' => $this->options['fallback_url'],
     ];
     $form['fallback_label'] = [
@@ -68,15 +76,16 @@ class ParentTopicLink extends AreaPluginBase implements CacheableDependencyInter
     }
 
     $anchor = \Drupal::config('wri_taxonomy.settings')->get('resources_anchor') ?: 'resources';
+    $field_name = $this->options['field_name'] ?: 'parent';
     $term = wri_taxonomy_get_current_term();
-    $parent_id = $term instanceof TermInterface ? $term->get('parent')->target_id : NULL;
-    $parent = $parent_id ? \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($parent_id) : NULL;
+    $target_id = ($term instanceof TermInterface && $term->hasField($field_name)) ? $term->get($field_name)->target_id : NULL;
+    $target = $target_id ? \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($target_id) : NULL;
 
-    if ($parent instanceof TermInterface) {
-      $url = $parent->toUrl();
+    if ($target instanceof TermInterface) {
+      $url = $target->toUrl();
       $url->setOption('fragment', $anchor);
-      $title = $this->t('All @name', ['@name' => $parent->label()]);
-      $cache_tags = Cache::mergeTags($parent->getCacheTags(), ['config:wri_taxonomy.settings']);
+      $title = $this->t('All @name', ['@name' => $target->label()]);
+      $cache_tags = Cache::mergeTags($target->getCacheTags(), ['config:wri_taxonomy.settings']);
     }
     else {
       $url = Url::fromUserInput($this->options['fallback_url'] ?: '/');

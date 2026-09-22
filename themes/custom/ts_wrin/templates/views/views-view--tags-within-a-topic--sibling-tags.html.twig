@@ -38,8 +38,7 @@
     'view-display-id-' ~ display_id,
     dom_id ? 'js-view-dom-id-' ~ dom_id,
     'container',
-  'flex',
-  'items-baseline'
+  'show-in-top-links'
   ]
 %}
 <div class="mb-8">
@@ -49,9 +48,6 @@
     {{ title }}
   {% endif %}
   {{ title_suffix }}
-  {% if header %}
-  <span class="body-serif-italic-sm mr-7">{{ header }}</span>
-  {% endif %}
   {% if rows %}
       {{ rows }}
   {% endif %}
