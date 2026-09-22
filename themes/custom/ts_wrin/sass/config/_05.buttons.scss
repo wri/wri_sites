@@ -225,13 +225,12 @@ input[type="submit"].black {
 
 // Arrow link.
 a.arrow-link {
-  @include font("acumin-pro-semi-condensed");
+  @include font("acumin-pro-semi-condensed", 'normal');
   & {
     color: var(--color-neutral-900);
-    display: flex;
+    display: inline-block;
     padding-right: 40px;
     position: relative;
-    text-decoration: none;
   }
 
   svg {
