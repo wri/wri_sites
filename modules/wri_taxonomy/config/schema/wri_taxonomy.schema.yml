@@ -6,6 +6,17 @@ block.settings.wri_taxonomy_topic_pages_resource_section_link:
       type: string
       label: 'Link title'
 
+block.settings.wri_taxonomy_path_based_breadcrumb:
+  type: block_settings
+  label: 'Path-based breadcrumbs block'
+  mapping:
+    home_link_text:
+      type: label
+      label: 'Home link text'
+    home_link_url:
+      type: string
+      label: 'Home link URL'
+
 # Schema for the configuration files of the WRI taxonomy module.
 wri_taxonomy.settings:
   type: config_object
