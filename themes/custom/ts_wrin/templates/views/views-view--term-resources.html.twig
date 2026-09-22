@@ -21,7 +21,7 @@
     {{ header|without('extra_result', 'facets_summary') }}
   {% endif %}
 {% if exposed %}
-  {% set rendered = exposed|without('query', 'sort_by')|render %}
+  {% set rendered = exposed|without('query', 'sort_by', 'topic')|render %}
   {% set form_opening_tag = rendered|preg_replace('/(<form[^>]*>).*/is', '$1') %}
   {% set form_guts = rendered|preg_replace('/<form[^>]*>/i', '') %}
   {% set form_closing_tag = '</form>' %}
@@ -31,6 +31,9 @@
 
       {% if exposed %}
         {{ form_opening_tag|raw }}
+        {% if exposed %}
+          {{ exposed.topic }}
+        {% endif %}
         <div class="view-filters">
           <button class="button black filters">{{ "Filters"|t }}</button>
           {% if exposed %}
