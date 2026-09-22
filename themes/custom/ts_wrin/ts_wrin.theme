@@ -508,6 +508,17 @@ function ts_wrin_preprocess_views_view_field__tags_within_a_topic__sibling_tags_
 }
 
 /**
+ * Implements hook_preprocess_HOOK() for views-view-field--child-topics--child-topic-names--name.html.twig.
+ *
+ * Builds a link to the term with [wri_tokens:resources_anchor] appended, so
+ * the child topics list on the Term resources header jumps straight to the
+ * on-page resources block.
+ */
+function ts_wrin_preprocess_views_view_field__child_topics__child_topic_names__name(array &$variables) {
+  _ts_wrin_set_term_anchor_link_variables($variables);
+}
+
+/**
  * Implements hook_page_attachments_alter().
  */
 function ts_wrin_page_attachments_alter(array &$attachments) {
