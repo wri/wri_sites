@@ -37,12 +37,21 @@
     'view-id-' ~ id,
     'view-display-id-' ~ display_id,
     dom_id ? 'js-view-dom-id-' ~ dom_id,
-    'container',
-  'flex',
-  'items-baseline'
   ]
 %}
 {% if rows %}
+{%
+  set classes = [
+  'view',
+  'view-' ~ id|clean_class,
+  'view-id-' ~ id,
+  'view-display-id-' ~ display_id,
+  dom_id ? 'js-view-dom-id-' ~ dom_id,
+  'container',
+  'flex',
+  'items-baseline'
+]
+%}
 <div class="mb-8">
   {% endif %}
 <div{{ attributes.addClass(classes) }}>
