@@ -42,7 +42,9 @@
   'items-baseline'
   ]
 %}
+{% if rows %}
 <div class="mb-8">
+  {% endif %}
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if title %}
@@ -54,6 +56,10 @@
   {% endif %}
   {% if rows %}
       {{ rows }}
+  {% elseif empty %}
+      {{ empty }}
   {% endif %}
 </div>
+  {% if rows %}
 </div>
+{% endif %}
