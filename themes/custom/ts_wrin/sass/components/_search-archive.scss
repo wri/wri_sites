@@ -20,6 +20,8 @@
   }
 
   a {
+    display: inline-block;
+    margin-top: 10px;
     @include font(var(--font-family-heading-condensed), "bold", "normal");
     @include font-line-height(15, 18);
     @include text-underline(transparent, var(--color-green-500));
