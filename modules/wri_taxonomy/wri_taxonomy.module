@@ -6,8 +6,11 @@
  */
 
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Render\Markup;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\taxonomy\TermInterface;
@@ -173,4 +176,42 @@ function wri_taxonomy_entity_field_access($operation, FieldDefinitionInterface $
     return AccessResult::forbidden();
   }
   return AccessResult::neutral();
+}
+
+/**
+ * Implements hook_entity_extra_field_info().
+ */
+function wri_taxonomy_entity_extra_field_info() {
+  $extra = [];
+  foreach (['tags', 'topics_and_subtopics'] as $bundle) {
+    $extra['taxonomy_term'][$bundle]['display']['explore_all_link'] = [
+      'label' => t('Explore all link'),
+      'description' => t('A link to the term page, anchored to the resources section.'),
+      'weight' => 2,
+      'visible' => FALSE,
+    ];
+  }
+  return $extra;
+}
+
+/**
+ * Implements hook_taxonomy_term_view().
+ *
+ * Used for the 'Explore All' link on the cards in:
+ * - views.view.child_topics, "child_topics_block" display.
+ * - views.view.tags_within_a_topic, "term_cards" display.
+ */
+function wri_taxonomy_taxonomy_term_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if (!$display->getComponent('explore_all_link')) {
+    return;
+  }
+
+  $anchor = \Drupal::token()->replace('[wri_tokens:resources_anchor]', [], ['clear' => TRUE]);
+  $arrow = Markup::create('<svg width="15" height="10" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.3536 4.03568C11.5488 3.84042 11.5488 3.52384 11.3536 3.32858L8.17157 0.146595C7.97631 -0.0486672 7.65973 -0.0486672 7.46447 0.146595C7.2692 0.341857 7.2692 0.65844 7.46447 0.853702L10.2929 3.68213L7.46447 6.51056C7.2692 6.70582 7.2692 7.0224 7.46447 7.21766C7.65973 7.41293 7.97631 7.41293 8.17157 7.21766L11.3536 4.03568ZM0 3.68213V4.18213H11V3.68213V3.18213H0V3.68213Z" fill="currentColor"/></svg>');
+  $build['explore_all_link'] = [
+    '#type' => 'link',
+    '#title' => Markup::create(t('Explore all @name resources', ['@name' => $entity->label()]) . $arrow),
+    '#url' => Url::fromUserInput($entity->toUrl()->toString() . $anchor),
+    '#attributes' => ['class' => ['explore-all-link', 'utility-base', 'font-bold', 'underline']],
+  ];
 }
