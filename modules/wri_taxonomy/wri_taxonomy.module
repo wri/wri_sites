@@ -11,6 +11,7 @@ use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\taxonomy\TermInterface;
+use Drupal\wri_taxonomy\CurrentTerm;
 
 /**
  * Implements hook_entity_type_alter().
@@ -117,14 +118,6 @@ function wri_taxonomy_term_uri(TermInterface $term) {
 }
 
 /**
- * Name of the hidden exposed-filter field that carries the current term.
- *
- * @see wri_taxonomy_get_current_term()
- * @see wri_search_form_views_exposed_form_alter()
- */
-const WRI_TAXONOMY_CURRENT_TERM_PARAM = 'wri_current_term';
-
-/**
  * Gets the taxonomy term for the page currently being viewed.
  *
  * Normally this is just the {taxonomy_term} route parameter. But a Views
@@ -144,7 +137,7 @@ function wri_taxonomy_get_current_term(): ?TermInterface {
     return $term;
   }
 
-  $tid = \Drupal::request()->query->get(WRI_TAXONOMY_CURRENT_TERM_PARAM);
+  $tid = \Drupal::request()->query->get(CurrentTerm::QUERY_PARAM);
   if (!$tid) {
     return NULL;
   }

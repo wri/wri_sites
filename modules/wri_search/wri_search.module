@@ -11,6 +11,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\search_api\Plugin\views\query\SearchApiQuery;
 use Drupal\views\ViewExecutable;
+use Drupal\wri_taxonomy\CurrentTerm;
 
 /**
  * Implements hook_entity_base_field_info().
@@ -99,7 +100,7 @@ function wri_search_form_views_exposed_form_alter(&$form, FormStateInterface $fo
   if ($view->id() == 'term_resources') {
     $current_term = wri_taxonomy_get_current_term();
     if ($current_term) {
-      $form[WRI_TAXONOMY_CURRENT_TERM_PARAM] = [
+      $form[CurrentTerm::QUERY_PARAM] = [
         '#type' => 'hidden',
         '#value' => $current_term->id(),
       ];

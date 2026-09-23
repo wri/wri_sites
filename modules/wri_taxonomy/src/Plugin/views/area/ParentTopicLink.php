@@ -11,6 +11,7 @@ use Drupal\Core\Url;
 use Drupal\taxonomy\TermInterface;
 use Drupal\views\Attribute\ViewsArea;
 use Drupal\views\Plugin\views\area\AreaPluginBase;
+use Drupal\wri_taxonomy\CurrentTerm;
 
 /**
  * Links to a related term of the current page's term, with a static fallback.
@@ -114,8 +115,8 @@ class ParentTopicLink extends AreaPluginBase implements CacheableDependencyInter
    */
   public function getCacheContexts() {
     // wri_taxonomy_get_current_term() falls back to a hidden exposed-filter
-    // value (WRI_TAXONOMY_CURRENT_TERM_PARAM) when there's no route context.
-    return ['route', 'url.query_args:' . WRI_TAXONOMY_CURRENT_TERM_PARAM];
+    // value (CurrentTerm::QUERY_PARAM) when there's no route context.
+    return ['route', 'url.query_args:' . CurrentTerm::QUERY_PARAM];
   }
 
   /**
