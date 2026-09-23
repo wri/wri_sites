@@ -41,11 +41,7 @@
         {% endif %}
         {% if content.intro %}
           <div class="card-teaser-text">
-            {% if content.intro.field_featured_text[0] %}
-              {{ content.intro.field_featured_text }}
-            {% else %}
-              {{ content.intro }}
-            {% endif %}
+            {{ content.intro }}
           </div>
         {% endif %}
         {% if content.content_type %}
