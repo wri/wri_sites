@@ -425,14 +425,3 @@ function wri_article_update_10612() {
     'content#field_intro',
   ], 'wri_article', 'install');
 }
-
-/**
- * Install wri_ai_keytakeaways.
- */
-function wri_article_update_10613() {
-  $module = 'wri_ai_keytakeaways';
-  $moduleHandler = \Drupal::service('module_handler');
-  if (!$moduleHandler->moduleExists($module)) {
-    \Drupal::service('module_installer')->install([$module], TRUE);
-  }
-}
