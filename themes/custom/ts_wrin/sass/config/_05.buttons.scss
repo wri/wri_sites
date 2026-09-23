@@ -225,12 +225,13 @@ input[type="submit"].black {
 
 // Arrow link.
 a.arrow-link {
-  @include font("acumin-pro-semi-condensed", 'normal');
+  @include font("acumin-pro-semi-condensed");
   & {
     color: var(--color-neutral-900);
     display: inline-block;
     padding-right: 40px;
     position: relative;
+    text-decoration: none;
   }
 
   svg {
@@ -252,6 +253,11 @@ a.arrow-link {
       visibility: hidden;
     }
   }
+}
+
+.intro a.arrow-link {
+  text-decoration: underline;
+  font-weight: inherit;
 }
 
 input[type="submit"].search-icon,
