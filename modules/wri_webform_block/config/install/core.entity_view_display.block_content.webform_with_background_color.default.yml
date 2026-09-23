@@ -4,6 +4,7 @@ dependencies:
   config:
     - block_content.type.webform_with_background_color
     - field.field.block_content.webform_with_background_color.field_cta_background
+    - field.field.block_content.webform_with_background_color.field_hidden_from_visitors
     - field.field.block_content.webform_with_background_color.field_other_orto_list_tags
     - field.field.block_content.webform_with_background_color.field_webform
   module:
@@ -42,5 +43,6 @@ content:
     weight: 6
     region: content
 hidden:
+  field_hidden_from_visitors: true
   langcode: true
   search_api_excerpt: true

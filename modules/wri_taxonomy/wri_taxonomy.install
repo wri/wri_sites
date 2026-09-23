@@ -238,18 +238,25 @@ function wri_taxonomy_update_10604() {
 }
 
 /**
- * Adds intro text to the term-level webform block.
+ * Adds intro text to the term-level webform block and hides it from visitors.
  */
 function wri_taxonomy_update_10605() {
+  // Updates run before config import, so install the fields first.
+  $updates = \Drupal::service('distro_helper.updates');
+  $updates->installConfig('field.storage.block_content.field_hidden_from_visitors', 'wri_webform_block');
+  $updates->installConfig('field.field.block_content.webform_with_background_color.field_intro', 'wri_webform_block');
+  $updates->installConfig('field.field.block_content.webform_with_background_color.field_hidden_from_visitors', 'wri_webform_block');
+
   $blocks = \Drupal::entityTypeManager()->getStorage('block_content')->loadByProperties([
     'uuid' => 'c2faf277-9cee-48bd-9f70-09ee7613806a',
   ]);
   $block = $blocks ? reset($blocks) : NULL;
-  if ($block && $block->hasField('field_intro')) {
+  if ($block) {
     $block->set('field_intro', [
       'value' => '<p>Get the latest research, events, and insights on [current-page:taxonomy_term:name] delivered to your inbox.</p>',
       'format' => 'basic_html',
     ]);
+    $block->set('field_hidden_from_visitors', 1);
     $block->save();
   }
 }
