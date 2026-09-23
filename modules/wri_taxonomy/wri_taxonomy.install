@@ -238,6 +238,23 @@ function wri_taxonomy_update_10604() {
 }
 
 /**
+ * Adds intro text to the term-level webform block.
+ */
+function wri_taxonomy_update_10605() {
+  $blocks = \Drupal::entityTypeManager()->getStorage('block_content')->loadByProperties([
+    'uuid' => 'c2faf277-9cee-48bd-9f70-09ee7613806a',
+  ]);
+  $block = $blocks ? reset($blocks) : NULL;
+  if ($block && $block->hasField('field_intro')) {
+    $block->set('field_intro', [
+      'value' => '<p>Get the latest research, events, and insights on [current-page:taxonomy_term:name] delivered to your inbox.</p>',
+      'format' => 'basic_html',
+    ]);
+    $block->save();
+  }
+}
+
+/**
  * Ensures a block_content entity exists with a fixed revision_id.
  */
 function _wri_taxonomy_force_block_id($uuid, $id, array $values) {
