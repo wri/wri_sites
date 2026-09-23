@@ -9,7 +9,7 @@ field_name: field_hidden_from_visitors
 entity_type: block_content
 bundle: webform_with_background_color
 label: 'Hidden from visitors'
-description: 'If checked, only administrators will see this webform on the layout builder page. Regular visitors will not.'
+description: 'If this block is being added via Layout Builder and this box is checked, only administrators will see this webform on the layout builder page. Regular visitors will not. If this block is added any other way, this checkbox is irrelevant.'
 required: false
 translatable: false
 default_value:
