@@ -27,7 +27,7 @@
   {% endif %}
   {{ title_suffix }}
   {% block content %}
-    <div class="md:flex gap-8 justify-between col-span-full">
+    <div class="md:grid md:grid-cols-2 gap-8 col-span-full">
       {% if content.field_intro[0] %}
     <div class="utility-lg">
       {{ content.field_intro }}
