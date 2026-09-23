@@ -262,6 +262,41 @@ function wri_taxonomy_update_10605() {
 }
 
 /**
+ * Unpublishes tags excluded from the tags facet.
+ */
+function wri_taxonomy_update_10606() {
+  // Updates run before config import, so prefer the sync directory copy.
+  $facet = \Drupal::service('config.storage.sync')->read('facets.facet.tags')
+    ?: \Drupal::config('facets.facet.tags')->getRawData();
+  $exclude = $facet['processor_configs']['exclude_specified_items']['settings']['exclude'] ?? '';
+  $names = array_filter(array_map('trim', explode(',', $exclude)));
+  if (!$names) {
+    return t('No excluded tags found.');
+  }
+
+  $storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+  $unpublished = [];
+  foreach ($names as $name) {
+    $terms = $storage->loadByProperties(['vid' => 'tags', 'name' => $name]);
+    // Facets also match on raw values, so numeric items may be term IDs.
+    if (!$terms && ctype_digit($name) && ($term = $storage->load($name)) && $term->bundle() === 'tags') {
+      $terms = [$term];
+    }
+    foreach ($terms as $term) {
+      if ($term->isPublished()) {
+        $term->setUnpublished()->save();
+        $unpublished[] = $term->label();
+      }
+    }
+  }
+
+  return t('Unpublished @count tags: @names', [
+    '@count' => count($unpublished),
+    '@names' => implode(', ', $unpublished),
+  ]);
+}
+
+/**
  * Ensures a block_content entity exists with a fixed revision_id.
  */
 function _wri_taxonomy_force_block_id($uuid, $id, array $values) {
