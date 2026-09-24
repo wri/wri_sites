@@ -10,7 +10,6 @@ dependencies:
   - wri_narrative
   - wri_paragraph
   - wri_taxonomy
-  - wri_microsites
 config_devel:
   install:
     - cer.corresponding_reference.program_landing
