@@ -3,7 +3,6 @@
 {% else %}
 
 <div {{ attributes.addClass('ds-1col', 'clearfix') }}>
-
   {# Header nav #}
   {% if use_microsite_nav %}
     {% include '@ts_wrin/_includes/_microsite-header.html.twig' %}
@@ -22,7 +21,7 @@
       <div class="grid">
         <div class="hero__text--inner padding-vertical">
           <div class="transparent-header-padding"></div>
-          <h1 class="h1 {{ ((content.hero_image|render) ? 'xl white' : '') }}">{{ content.title }}</h1>
+          <h1 class="h1 {{ ((content.hero_image|render) ? 'xl white' : '') }}">{{ content.title }}{{ content.name }}</h1>
           <div class="intro">{{ content.intro }}</div>
           {% if content.content|render|striptags|trim is not empty %}
             <div class="landing-page__hero__content">

@@ -1,0 +1,6 @@
+services:
+  wri_webform_block.hidden_from_visitors_subscriber:
+    class: Drupal\wri_webform_block\EventSubscriber\HiddenFromVisitorsSubscriber
+    arguments: ['@entity_type.manager']
+    tags:
+      - { name: event_subscriber }

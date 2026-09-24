@@ -11,6 +11,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\search_api\Plugin\views\query\SearchApiQuery;
 use Drupal\views\ViewExecutable;
+use Drupal\wri_taxonomy\CurrentTerm;
 
 /**
  * Implements hook_entity_base_field_info().
@@ -84,11 +85,25 @@ function wri_search_form_views_exposed_form_alter(&$form, FormStateInterface $fo
     $facet_source = \Drupal::entityTypeManager()
       ->getStorage('facets_facet_source')
       ->load($facet_source_id);
-    if (!$facet_source) {
-      return;
-    }
-    if ('facets_pretty_paths' == $facet_source->getUrlProcessorName()) {
+    if ($facet_source && 'facets_pretty_paths' == $facet_source->getUrlProcessorName()) {
       $form['#action'] = NULL;
+    }
+  }
+
+  // Carry the term page we're on through the exposed filters as a hidden
+  // value. A Views AJAX rebuild (e.g. an exposed filter autosubmit) is
+  // handled by the generic /views/ajax route, which has no {taxonomy_term}
+  // route parameter of its own, so contextual filters and the "selected"
+  // link state that depend on knowing the current term would otherwise
+  // break after the first filter change.
+  // @see wri_taxonomy_get_current_term()
+  if ($view->id() == 'term_resources') {
+    $current_term = wri_taxonomy_get_current_term();
+    if ($current_term) {
+      $form[CurrentTerm::QUERY_PARAM] = [
+        '#type' => 'hidden',
+        '#value' => $current_term->id(),
+      ];
     }
   }
 }
@@ -152,7 +167,7 @@ function wri_search_preprocess_bef_checkboxes(&$variables) {
     $request_stack = Drupal::requestStack();
     $current_request = $request_stack->getCurrentRequest();
     $current_filters = $current_request->query->all();
-    $region = $current_filters['region'];
+    $region = $current_filters['region'] ?? [];
     $terms = [];
     foreach ($region as $value) {
       // Load up children of that facet value.

@@ -4,6 +4,7 @@ dependencies:
   config:
     - block_content.type.webform_with_background_color
     - field.field.block_content.webform_with_background_color.field_cta_background
+    - field.field.block_content.webform_with_background_color.field_hidden_from_visitors
     - field.field.block_content.webform_with_background_color.field_other_orto_list_tags
     - field.field.block_content.webform_with_background_color.field_webform
   module:
@@ -13,6 +14,13 @@ targetEntityType: block_content
 bundle: webform_with_background_color
 mode: default
 content:
+  field_hidden_from_visitors:
+    type: boolean_checkbox
+    weight: 34
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_cta_background:
     type: options_select
     weight: 0

@@ -228,7 +228,7 @@ a.arrow-link {
   @include font("acumin-pro-semi-condensed");
   & {
     color: var(--color-neutral-900);
-    display: flex;
+    display: inline-block;
     padding-right: 40px;
     position: relative;
     text-decoration: none;
@@ -253,6 +253,11 @@ a.arrow-link {
       visibility: hidden;
     }
   }
+}
+
+.intro a.arrow-link {
+  text-decoration: underline;
+  font-weight: inherit;
 }
 
 input[type="submit"].search-icon,

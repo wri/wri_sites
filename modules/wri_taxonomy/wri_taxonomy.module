@@ -6,16 +6,25 @@
  */
 
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Render\Markup;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\taxonomy\TermInterface;
+use Drupal\wri_taxonomy\CurrentTerm;
 
 /**
  * Implements hook_entity_type_alter().
  */
 function wri_taxonomy_entity_type_alter(array &$entity_types) {
+  $config = \Drupal::config('wri_taxonomy.settings');
+  $is_canonical = $config->get('enable_canonical_urls');
+  if ($is_canonical) {
+    return;
+  }
   // Ovewrite the Taxonomy entity class to use my own,
   // which only overwrites the toUrl method.
   $entity_types['taxonomy_term']->setClass('Drupal\wri_taxonomy\Entity\WriTerm');
@@ -112,12 +121,97 @@ function wri_taxonomy_term_uri(TermInterface $term) {
 }
 
 /**
+ * Gets the taxonomy term for the page currently being viewed.
+ *
+ * Normally this is just the {taxonomy_term} route parameter. But a Views
+ * AJAX request (e.g. an exposed filter autosubmit) is handled by the
+ * generic /views/ajax route, which carries none of the original page's
+ * route parameters. For that case, this falls back to whatever term ID was
+ * passed through as a hidden value on the submitted exposed form, which
+ * wri_search_form_views_exposed_form_alter() populates from this same
+ * function on the initial page render.
+ *
+ * @return \Drupal\taxonomy\TermInterface|null
+ *   The current term, or NULL if there isn't one.
+ */
+function wri_taxonomy_get_current_term(): ?TermInterface {
+  $term = \Drupal::routeMatch()->getParameter('taxonomy_term');
+  if ($term instanceof TermInterface) {
+    return $term;
+  }
+
+  $tid = \Drupal::request()->query->get(CurrentTerm::QUERY_PARAM);
+  if (!$tid) {
+    return NULL;
+  }
+  $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
+  return $term instanceof TermInterface ? $term : NULL;
+}
+
+/**
+ * Implements hook_views_data().
+ */
+function wri_taxonomy_views_data() {
+  $data['views']['wri_taxonomy_parent_topic_link'] = [
+    'title' => t('Parent topic link'),
+    'help' => t("Links to the parent of the current page's term, falling back to a configured link if it has none."),
+    'area' => [
+      'id' => 'wri_taxonomy_parent_topic_link',
+    ],
+  ];
+  return $data;
+}
+
+/**
  * Implements hook_entity_field_access().
  */
 function wri_taxonomy_entity_field_access($operation, FieldDefinitionInterface $field_definition, AccountInterface $account, ?FieldItemListInterface $items = NULL) {
+  $config = \Drupal::config('wri_taxonomy.settings');
+  $is_canonical = $config->get('enable_canonical_urls');
+  if ($is_canonical) {
+    return AccessResult::neutral();
+  }
   // Disable the Url Alias field.
   if ($field_definition->getTargetEntityTypeId() == 'taxonomy_term' && $field_definition->getName() == 'path' && $operation == 'edit') {
     return AccessResult::forbidden();
   }
   return AccessResult::neutral();
+}
+
+/**
+ * Implements hook_entity_extra_field_info().
+ */
+function wri_taxonomy_entity_extra_field_info() {
+  $extra = [];
+  foreach (['tags', 'topics_and_subtopics'] as $bundle) {
+    $extra['taxonomy_term'][$bundle]['display']['explore_all_link'] = [
+      'label' => t('Explore all link'),
+      'description' => t('A link to the term page, anchored to the resources section.'),
+      'weight' => 2,
+      'visible' => FALSE,
+    ];
+  }
+  return $extra;
+}
+
+/**
+ * Implements hook_taxonomy_term_view().
+ *
+ * Used for the 'Explore All' link on the cards in:
+ * - views.view.child_topics, "child_topics_block" display.
+ * - views.view.tags_within_a_topic, "term_cards" display.
+ */
+function wri_taxonomy_taxonomy_term_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if (!$display->getComponent('explore_all_link')) {
+    return;
+  }
+
+  $anchor = \Drupal::token()->replace('[wri_tokens:resources_anchor]', [], ['clear' => TRUE]);
+  $arrow = Markup::create('<svg width="15" height="10" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.3536 4.03568C11.5488 3.84042 11.5488 3.52384 11.3536 3.32858L8.17157 0.146595C7.97631 -0.0486672 7.65973 -0.0486672 7.46447 0.146595C7.2692 0.341857 7.2692 0.65844 7.46447 0.853702L10.2929 3.68213L7.46447 6.51056C7.2692 6.70582 7.2692 7.0224 7.46447 7.21766C7.65973 7.41293 7.97631 7.41293 8.17157 7.21766L11.3536 4.03568ZM0 3.68213V4.18213H11V3.68213V3.18213H0V3.68213Z" fill="currentColor"/></svg>');
+  $build['explore_all_link'] = [
+    '#type' => 'link',
+    '#title' => Markup::create(t('Explore all @name resources', ['@name' => $entity->label()]) . $arrow),
+    '#url' => Url::fromUserInput($entity->toUrl()->toString() . $anchor),
+    '#attributes' => ['class' => ['explore-all-link', 'utility-base', 'font-bold', 'underline']],
+  ];
 }

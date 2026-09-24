@@ -17,3 +17,4 @@ dependencies:
   - wri_unique_feature
   - wri_text_block
   - wri_latest_tweet
+  - wri_looking_terms

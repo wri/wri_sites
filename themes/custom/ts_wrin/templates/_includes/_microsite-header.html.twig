@@ -18,11 +18,13 @@
 
       {# Menu toggle #}
       <div>
+
+        {% if show_toggle %}
         {# Desktop #}
         <div class="pfp-header__menu-toggle-wrap-desktop">
           {% include '@ts_wrin/ts_custom/ts-hamburger-nav.html.twig' %}
         </div>
-
+        {% endif %}
         {# Mobile #}
         <div class="pfp-header__menu-toggle-wrap-mobile">
           {% include '@ts_wrin/ts_custom/ts-hamburger-nav.html.twig' with {

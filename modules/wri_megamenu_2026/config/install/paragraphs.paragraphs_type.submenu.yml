@@ -1,0 +1,8 @@
+status: true
+dependencies: {  }
+id: submenu
+label: Submenu
+icon_uuid: null
+icon_default: null
+description: 'Rich submenus for the 2026 megamenu'
+behavior_plugins: {  }

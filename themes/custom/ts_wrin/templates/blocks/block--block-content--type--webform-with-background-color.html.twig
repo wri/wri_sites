@@ -27,12 +27,15 @@
   {% endif %}
   {{ title_suffix }}
   {% block content %}
-    <div class="form-wrapper
-      col-start-1 col-end-4
-      ph:col-start-1 ph:col-end-10
-      md:col-start-1 md:col-end-9
-      lg:col-start-1 lg:col-end-7">
-      {{ content }}
+    <div class="md:grid md:grid-cols-2 gap-8 col-span-full">
+      {% if content.field_intro[0] %}
+    <div class="utility-lg">
+      {{ content.field_intro }}
+    </div>
+      {% endif %}
+    <div class="form-wrapper">
+      {{ content.field_webform }}
+    </div>
     </div>
   {% endblock %}
   </div>

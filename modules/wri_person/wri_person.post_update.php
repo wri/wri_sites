@@ -78,3 +78,80 @@ function wri_person_post_update_person_grouping(&$sandbox) {
     $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
   }
 }
+
+/**
+ * Populates Person Region, Tags, and Areas of Expertise from their Programs.
+ */
+function wri_person_post_update_populate_program_expertise(&$sandbox) {
+  $storage = \Drupal::entityTypeManager()->getStorage('node');
+
+  if (!isset($sandbox['total'])) {
+    $nids = \Drupal::entityQuery('node')
+      ->accessCheck(FALSE)
+      ->condition('type', 'person')
+      ->exists('field_project_expert')
+      ->execute();
+    $sandbox['nids'] = array_values($nids);
+    $sandbox['total'] = count($sandbox['nids']);
+    $sandbox['current'] = 0;
+
+    if (empty($sandbox['total'])) {
+      $sandbox['#finished'] = 1;
+      return;
+    }
+  }
+
+  $batch_size = 25;
+  $nids = array_slice($sandbox['nids'], $sandbox['current'], $batch_size);
+  $persons = $storage->loadMultiple($nids);
+
+  // Cache loaded programs across batches, since many persons share them.
+  static $programs_cache = [];
+
+  foreach ($persons as $person) {
+    $program_ids = array_column($person->get('field_project_expert')->getValue(), 'target_id');
+    if (empty($program_ids)) {
+      $sandbox['current']++;
+      continue;
+    }
+
+    $regions = array_column($person->get('field_region')->getValue(), 'target_id');
+    $tags = array_column($person->get('field_tags')->getValue(), 'target_id');
+    $expertise = array_column($person->get('field_areas_of_expertise')->getValue(), 'target_id');
+
+    $to_load = array_diff($program_ids, array_keys($programs_cache));
+    if ($to_load) {
+      $programs_cache += $storage->loadMultiple($to_load);
+    }
+
+    foreach ($program_ids as $program_id) {
+      $program = $programs_cache[$program_id] ?? NULL;
+      if (!$program || $program->bundle() != 'project_detail') {
+        continue;
+      }
+      $regions = array_merge($regions, array_column($program->get('field_region')->getValue(), 'target_id'));
+      $tags = array_merge($tags, array_column($program->get('field_tags')->getValue(), 'target_id'));
+      $primary_topic = $program->get('field_primary_topic')->target_id;
+      if (!empty($primary_topic)) {
+        $expertise[] = $primary_topic;
+      }
+    }
+
+    $person->set('field_region', array_values(array_unique($regions)));
+    $person->set('field_tags', array_values(array_unique($tags)));
+    $person->set('field_areas_of_expertise', array_values(array_unique($expertise)));
+    $person->save();
+
+    $sandbox['current']++;
+  }
+
+  \Drupal::messenger()
+    ->addMessage($sandbox['current'] . ' of ' . $sandbox['total'] . ' persons processed.');
+
+  if ($sandbox['current'] >= $sandbox['total']) {
+    $sandbox['#finished'] = 1;
+  }
+  else {
+    $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+  }
+}

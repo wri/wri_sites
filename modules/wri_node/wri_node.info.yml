@@ -26,6 +26,7 @@ config_devel:
     - core.entity_view_mode.node.card
     - core.entity_view_mode.node.hero_on_a_subpage
     - core.entity_view_mode.node.impact
+    - core.entity_view_mode.node.landing_page_cta
     - core.entity_view_mode.node.large_image_teaser
     - core.entity_view_mode.node.main_content
     - core.entity_view_mode.node.search_results

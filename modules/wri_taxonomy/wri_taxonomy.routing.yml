@@ -5,3 +5,11 @@ wri_taxonomy.move_term_form:
     _title: 'MoveTermForm'
   requirements:
     _permission: 'administer taxonomy'
+
+wri_taxonomy.settings:
+  path: '/admin/config/system/wri-taxonomy'
+  defaults:
+    _title: 'WRI taxonomy settings'
+    _form: 'Drupal\wri_taxonomy\Form\WriTaxonomySettingsForm'
+  requirements:
+    _permission: 'administer site configuration'

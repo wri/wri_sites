@@ -1,0 +1,17 @@
+{#
+/**
+ * @file
+ * Theme override for the "name" field on the "child_topics"
+ * "child_topic_names" display.
+ *
+ * Links the topic to its term page with the on-page resources anchor
+ * appended.
+ *
+ * Available variables:
+ * - term_url: The term's URL with the resources anchor appended.
+ * - term_label: The term's label.
+ *
+ * @see ts_wrin_preprocess_views_view_field__child_topics__child_topic_names__name()
+ */
+#}
+<span class="hocus-text-underline"><a href="{{ term_url }}" class="mr-7 body-base font-bold">{{ term_label }}</a></span>

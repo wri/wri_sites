@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.webform_with_background_color
+    - field.storage.block_content.field_intro
+    - filter.format.basic_html
+    - filter.format.full_html
+  module:
+    - text
+id: block_content.webform_with_background_color.field_intro
+field_name: field_intro
+entity_type: block_content
+bundle: webform_with_background_color
+label: Intro
+description: 'Introductory text for this webform. If present, it will appear side-by-side with the webform on large screens.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+    - basic_html
+field_type: text_long

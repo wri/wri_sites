@@ -1,0 +1,36 @@
+{#
+/**
+ * @file
+ * Custom theme implementation to display a happening now teasers.
+ *
+ * @see template_preprocess_viewfield_item()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set classes = [
+  'content_listing',
+  'grid',
+  'margin-bottom-lg',
+  'unfriendly-block'
+]
+%}
+{% if content|render|striptags|trim or in_preview %}
+{{ attach_library('ts_wrin/resource_type_facet_link') }}
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {% if not label_hidden and label %}
+  <h2 class="layout__region layout__region--header h3 top-border-thick margin-bottom-md">{{ label }}</h2>
+  {% endif %}
+  {{ title_suffix }}
+  {% block content %}
+<div class="layout__region layout__region--listing">
+    {{ content }}
+  <div class="layout__region--more-link">
+    <span class="more-link__line"></span>
+    <a href="{{ initiatives_facet_url|default('#resources') }}" class="button small"{% if initiatives_facet_tid %} data-resource-type-facet="{{ initiatives_facet_tid }}"{% endif %}>{{ "View all Projects and Initiatives"|t }}</a>
+  </div>
+</div>
+  {% endblock %}
+</div>
+{% endif %}

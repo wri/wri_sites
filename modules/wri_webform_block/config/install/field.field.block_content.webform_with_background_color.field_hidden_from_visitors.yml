@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.webform_with_background_color
+    - field.storage.block_content.field_hidden_from_visitors
+id: block_content.webform_with_background_color.field_hidden_from_visitors
+field_name: field_hidden_from_visitors
+entity_type: block_content
+bundle: webform_with_background_color
+label: 'Hidden from visitors'
+description: 'If this block is being added via Layout Builder and this box is checked, only administrators will see this webform on the layout builder page. Regular visitors will not. If this block is added any other way, this checkbox is irrelevant.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

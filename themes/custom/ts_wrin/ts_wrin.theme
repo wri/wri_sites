@@ -8,10 +8,14 @@
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Template\Attribute;
 use Drupal\node\NodeInterface;
+use Drupal\taxonomy\TermInterface;
 use Drupal\views\ViewExecutable;
 use Drupal\wri_node\General;
 use Drupal\Core\Url;
+use Drupal\wri_taxonomy\CurrentTerm;
 
 /**
  * Implements hook_preprocess().
@@ -74,28 +78,35 @@ function ts_wrin_preprocess_html(array &$variables) {
       $variables["html_attributes"]->addClass('html-' . Html::getClass($node->getType()));
       $variables['attributes']['class'][] = Html::getClass($node->getTitle());
 
+      // The 2026 megamenu header isn't designed for a transparent/white
+      // treatment, so once "Enable everywhere" (wri_megamenu_2026.settings)
+      // is on and the new header shows site-wide, skip adding these classes.
+      $megamenu_enabled_everywhere = (bool) \Drupal::config('wri_megamenu_2026.settings')->get('enable_everywhere');
+
       switch ($node->getType()) {
         case 'program_center':
         case 'microsite':
         case 'project_detail':
-          $variables['attributes']['class'][] = 'transparent-header white';
+          if (!$megamenu_enabled_everywhere) {
+            $variables['attributes']['class'][] = 'transparent-header white';
+          }
           break;
 
         case 'subpage':
           $parent_page = $node->get('field_parent_page')->entity;
-          if ($parent_page instanceof NodeInterface && $parent_page->getType() != 'custom_page') {
+          if (!$megamenu_enabled_everywhere && $parent_page instanceof NodeInterface && $parent_page->getType() != 'custom_page') {
             $variables['attributes']['class'][] = 'transparent-header white';
           }
           break;
 
         case 'publication':
-          if ($node->get('field_toc')->getValue() && $node->get('field_publication_display')->getString() == 'robust') {
+          if (!$megamenu_enabled_everywhere && $node->get('field_toc')->getValue() && $node->get('field_publication_display')->getString() == 'robust') {
             $variables['attributes']['class'][] = 'transparent-header white';
           }
           break;
 
         case 'event':
-          if ($node->get('field_event_display')->getString() == 'robust') {
+          if (!$megamenu_enabled_everywhere && $node->get('field_event_display')->getString() == 'robust') {
             $variables['attributes']['class'][] = 'transparent-header white';
           }
 
@@ -144,6 +155,9 @@ function ts_wrin_preprocess_paragraph(array &$variables) {
   if ($variables['paragraph']->getType() == 'person_listing') {
     $variables["elements"]["field_block"][0]["field_featured_experts"]['#object']->overridden_label = $variables["elements"]["field_block"][0]["#block_content"]->info->value ?? NULL;
   }
+  // MenuItemReferenceFormatter.php passes the menu title/URL to the paragraph.
+  $variables['menu_title'] = $variables['paragraph']->menu_title ?? '';
+  $variables['menu_url'] = $variables['paragraph']->menu_url ?? '';
 }
 
 /**
@@ -241,6 +255,38 @@ function ts_wrin_preprocess_field(array &$variables) {
       ]
     );
   }
+
+  // For the field_featured_expert field, if the entity is a taxonomy term,
+  // set the path to:
+  // /about/experts-staff?all_topics=[tid] for topics_and_subtopics
+  // /about/experts-staff?tags=[tid] for tags
+  // /about/experts-staff?regions=[tid] for regions
+  // then use \Drupal::service('wri_search.pretty_facets_helper')->getPrettyPaths($filters_current_result)
+  // to get the pretty url for it.
+  if ($variables['element']['#field_name'] == 'field_featured_experts') {
+    $variables['expert_facet_url'] = '';
+    $object = $variables['element']['#object'];
+    if ($object instanceof TermInterface && $object->id()) {
+      $facet_id = match ($object->bundle()) {
+        'topics_and_subtopics' => 'experts_all_topics',
+        'tags' => 'experts_tags',
+        'regions' => 'experts_region',
+        default => NULL,
+      };
+      if ($facet_id && \Drupal::hasService('wri_search.pretty_facets_helper')) {
+        $filters_current_result = [$facet_id => [$object->id()]];
+        // Child topics filter by their parent, then by themselves within it.
+        if ($object->bundle() == 'topics_and_subtopics' && ($parent_id = $object->parent->target_id)) {
+          $filters_current_result = [
+            $facet_id => [$parent_id],
+            'experts_within_this_topic' => [$object->id()],
+          ];
+        }
+        $pretty_path = \Drupal::service('wri_search.pretty_facets_helper')->getPrettyPaths($filters_current_result);
+        $variables['expert_facet_url'] = '/about/experts-staff' . $pretty_path;
+      }
+    }
+  }
 }
 
 /**
@@ -295,6 +341,63 @@ function ts_wrin_preprocess_block(array &$variables) {
   if (isset($variables["elements"]["content"]["field_listing"][0]['#content'])) {
     $variables['attributes']['class'][] = Html::getClass('block--views_block--' . $variables["elements"]["content"]["field_listing"][0]['#content']['#name'] . '--' . $variables["elements"]["content"]["field_listing"][0]['#content']['#display_id']);
   }
+
+  // For the field_event_listing block field, if the entity is a taxonomy term,
+  // set the path to:
+  // /events?all_topics=[tid] for topics_and_subtopics
+  // /events?tags=[tid] for tags
+  // /events?regions=[tid] for regions
+  // then use \Drupal::service('wri_search.pretty_facets_helper')->getPrettyPaths($filters_current_result)
+  // to get the pretty url for it.
+  $derivative_parts = isset($variables['derivative_plugin_id']) ? explode(':', $variables['derivative_plugin_id']) : [];
+  if ($variables['base_plugin_id'] == 'field_block' && ($derivative_parts[2] ?? NULL) == 'field_event_listing') {
+    $variables['expert_facet_url'] = '';
+    $object = $variables["content"][0]["#object"] ?? NULL;
+    if ($object instanceof TermInterface && $object->id()) {
+      $facet_id = match ($object->bundle()) {
+        'topics_and_subtopics' => 'all_event_topics',
+        'tags' => 'tags_event',
+        'regions' => 'region_event',
+        default => NULL,
+      };
+      if ($facet_id && \Drupal::hasService('wri_search.pretty_facets_helper')) {
+        $filters_current_result = [$facet_id => [$object->id()]];
+        // Child topics filter by their parent, then by themselves within it.
+        if ($object->bundle() == 'topics_and_subtopics' && ($parent_id = $object->parent->target_id)) {
+          $filters_current_result = [
+            $facet_id => [$parent_id],
+            'within_this_topic_event' => [$object->id()],
+          ];
+        }
+        $pretty_path = \Drupal::service('wri_search.pretty_facets_helper')->getPrettyPaths($filters_current_result);
+        $variables['expert_facet_url'] = '/events' . $pretty_path;
+      }
+    }
+  }
+
+  // For the field_project_listing block field, link to this page's on-page
+  // resource library and pass the "Initiatives" resource type so JS can
+  // select that facet.
+  if ($variables['base_plugin_id'] == 'field_block' && ($derivative_parts[2] ?? NULL) == 'field_project_listing') {
+    $anchor = \Drupal::config('wri_taxonomy.settings')->get('resources_anchor') ?: 'resources';
+    $variables['initiatives_facet_url'] = Url::fromRoute('<current>', [], ['fragment' => $anchor])->toString();
+    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties([
+      'vid' => 'resource_type',
+      'name' => 'Initiatives',
+    ]);
+    $variables['initiatives_facet_tid'] = $terms ? reset($terms)->id() : NULL;
+    $variables['#cache']['contexts'][] = 'url.path';
+    $variables['#cache']['tags'][] = 'config:wri_taxonomy.settings';
+    $variables['#cache']['tags'][] = 'taxonomy_term_list:resource_type';
+  }
+
+  // Give the field_on_page_resource_library block the same anchor id that
+  // [wri_tokens:resources_anchor] resolves to, so links using that token
+  // land on this block.
+  if ($variables['base_plugin_id'] == 'field_block' && ($derivative_parts[2] ?? NULL) == 'field_on_page_resource_library') {
+    $variables['resources_anchor'] = \Drupal::config('wri_taxonomy.settings')->get('resources_anchor') ?: 'resources';
+    $variables['#cache']['tags'][] = 'config:wri_taxonomy.settings';
+  }
 }
 
 /**
@@ -307,6 +410,17 @@ function ts_wrin_theme_suggestions_block_alter(array &$suggestions, array $varia
   if (isset($variables["elements"]["content"]["#name"]) && $variables["elements"]["content"]["#name"] == 'authored_by') {
     $suggestions[] = 'block__views_block__authored_by_shared';
   }
+
+  $parts = explode(':', $variables['elements']['#plugin_id']);
+  if ($parts[0] !== 'field_block' || count($parts) !== 4) {
+    return;
+  }
+  [, $entity_type, , $field_name] = $parts;
+  // Insert right after 'block__field_block__[entity_type]' so the
+  // bundle-agnostic suggestion is available alongside core's own ones.
+  $position = array_search('block__field_block__' . $entity_type, $suggestions);
+  $insert_at = $position === FALSE ? count($suggestions) : $position + 1;
+  array_splice($suggestions, $insert_at, 0, 'block__field_block__' . $entity_type . '__' . $field_name);
 }
 
 /**
@@ -331,6 +445,146 @@ function ts_wrin_preprocess_views_view(array &$variables) {
   if ($view_id == '3_1' && ($display_id == 'block_1' || $display_id == 'insights')) {
     $variables['attributes']['class'] = 'grid';
   }
+}
+
+/**
+ * Appends [wri_tokens:resources_anchor] to a term label in view rows.
+ *
+ * Shared by the views-view-field preprocesses that link a term row to its
+ * on-page resources anchor.
+ *
+ * @return \Drupal\taxonomy\TermInterface|null
+ *   The row's term, so callers needing more (e.g. is_selected) don't have to
+ *   re-fetch it, or NULL if the row isn't backed by a taxonomy term.
+ */
+function _ts_wrin_set_term_anchor_link_variables(array &$variables): ?TermInterface {
+  $term = $variables['field']->getEntity($variables['row']);
+  if (!$term instanceof TermInterface) {
+    return NULL;
+  }
+
+  $anchor = \Drupal::config('wri_taxonomy.settings')->get('resources_anchor') ?: 'resources';
+  $variables['term_url'] = $term->toUrl()->toString() . '#' . $anchor;
+  $variables['term_label'] = $term->label();
+  $variables['#cache']['tags'][] = 'config:wri_taxonomy.settings';
+
+  return $term;
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for views-view-field--all-topics--topic-list-block-anchored--name.html.twig.
+ *
+ * Builds a link to the term with [wri_tokens:resources_anchor] appended, and
+ * flags it as selected when it points at the term the visitor is currently
+ * on, so it can be themed like the bef-links topic facet links.
+ */
+function ts_wrin_preprocess_views_view_field__all_topics__topic_list_block_anchored__name(array &$variables) {
+  $term = _ts_wrin_set_term_anchor_link_variables($variables);
+  if (!$term) {
+    return;
+  }
+
+  // wri_taxonomy_get_current_term() falls back to a hidden exposed-filter
+  // value when there's no {taxonomy_term} route parameter, which is the
+  // case for a Views AJAX rebuild (e.g. an exposed filter autosubmit).
+  $current_term = wri_taxonomy_get_current_term();
+  $variables['is_selected'] = $current_term instanceof TermInterface && $current_term->id() == $term->id();
+  $variables['#cache']['contexts'][] = 'route';
+  $variables['#cache']['contexts'][] = 'url.query_args:' . CurrentTerm::QUERY_PARAM;
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for views-view-list--all-topics--topic-list-block-anchored.html.twig.
+ *
+ * Prepends the display's header content as the first item of the list, so it
+ * gets the same <li> markup/theming as the rest of the topic links instead of
+ * rendering as a separate block above the list.
+ *
+ * @see views-view--all-topics--topic-list-block-anchored.html.twig
+ */
+function ts_wrin_preprocess_views_view_list__all_topics__topic_list_block_anchored(array &$variables) {
+  $view = $variables['view'];
+  $header = $view->display_handler->renderArea('header', empty($view->result));
+  if (Element::isEmpty($header)) {
+    return;
+  }
+
+  $variables['rows'] = [
+    'header' => [
+      'content' => $header,
+      'attributes' => new Attribute(),
+    ],
+  ] + $variables['rows'];
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for views-view-list--tags-within-a-topic--sibling-tags.html.twig.
+ *
+ * Prepends the display's header content as the first item of the list, so it
+ * gets the same <li> markup/theming as the rest of the sibling tag links
+ * instead of rendering as a separate block above the list.
+ *
+ * @see views-view--tags-within-a-topic--sibling-tags.html.twig
+ */
+function ts_wrin_preprocess_views_view_list__tags_within_a_topic__sibling_tags(array &$variables) {
+  $view = $variables['view'];
+  $header = $view->display_handler->renderArea('header', empty($view->result));
+  if (Element::isEmpty($header)) {
+    return;
+  }
+
+  $variables['rows'] = [
+    'header' => [
+      'content' => $header,
+      'attributes' => new Attribute(),
+    ],
+  ] + $variables['rows'];
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for views-view-field--tags-within-a-topic--fake-facets--name.html.twig.
+ *
+ * Builds a link to the term with [wri_tokens:resources_anchor] appended, so
+ * the "Explore within [topic]" tag list on the Term resources header jumps
+ * straight to the on-page resources block.
+ */
+function ts_wrin_preprocess_views_view_field__tags_within_a_topic__fake_facets__name(array &$variables) {
+  _ts_wrin_set_term_anchor_link_variables($variables);
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for views-view-field--tags-within-a-topic--sibling-tags--name.html.twig.
+ *
+ * Builds a link to the term with [wri_tokens:resources_anchor] appended, and
+ * flags it as selected when it points at the term the visitor is currently
+ * on, so the sibling tags list on the Term resources header jumps straight
+ * to the on-page resources block and can be themed like the bef-links tag
+ * facet links.
+ */
+function ts_wrin_preprocess_views_view_field__tags_within_a_topic__sibling_tags__name(array &$variables) {
+  $term = _ts_wrin_set_term_anchor_link_variables($variables);
+  if (!$term) {
+    return;
+  }
+
+  // wri_taxonomy_get_current_term() falls back to a hidden exposed-filter
+  // value when there's no {taxonomy_term} route parameter, which is the
+  // case for a Views AJAX rebuild (e.g. an exposed filter autosubmit).
+  $current_term = wri_taxonomy_get_current_term();
+  $variables['is_selected'] = $current_term instanceof TermInterface && $current_term->id() == $term->id();
+  $variables['#cache']['contexts'][] = 'route';
+  $variables['#cache']['contexts'][] = 'url.query_args:' . CurrentTerm::QUERY_PARAM;
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for views-view-field--child-topics--child-topic-names--name.html.twig.
+ *
+ * Builds a link to the term with [wri_tokens:resources_anchor] appended, so
+ * the child topics list on the Term resources header jumps straight to the
+ * on-page resources block.
+ */
+function ts_wrin_preprocess_views_view_field__child_topics__child_topic_names__name(array &$variables) {
+  _ts_wrin_set_term_anchor_link_variables($variables);
 }
 
 /**

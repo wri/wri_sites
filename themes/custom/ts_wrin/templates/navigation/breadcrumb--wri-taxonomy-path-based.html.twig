@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * Theme override for the path-based breadcrumb block (wri_taxonomy).
+ * Only shows the parent of the current page.
+ *
+ * Available variables:
+ * - breadcrumb: Breadcrumb trail items.
+ */
+#}
+{% if breadcrumb and breadcrumb.1 %}
+  <nav class="breadcrumb" role="navigation" aria-labelledby="system-breadcrumb">
+    <div id="system-breadcrumb" class="visually-hidden">{{ 'Breadcrumb'|t }}</div>
+    <ol>
+    {% for item in breadcrumb %}
+      <li{% if loop.last and not item.url %} aria-current="page"{% endif %}>
+        {% if item.url %}
+          <a href="{{ item.url }}">{{ item.text }}</a>
+        {% else %}
+          <strong>{{ item.text }}</strong>
+        {% endif %}
+      </li>
+    {% endfor %}
+    </ol>
+  </nav>
+{% endif %}

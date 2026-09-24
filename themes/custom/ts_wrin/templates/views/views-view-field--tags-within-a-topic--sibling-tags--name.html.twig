@@ -1,0 +1,16 @@
+{#
+/**
+ * @file
+ * Theme override for the "name" field on the "tags_within_a_topic"
+ * "sibling_tags" display.
+ *
+ * Links the tag to its term page with the on-page resources anchor appended.
+ *
+ * Available variables:
+ * - term_url: The term's URL with the resources anchor appended.
+ * - term_label: The term's label.
+ *
+ * @see ts_wrin_preprocess_views_view_field__tags_within_a_topic__sibling_tags__name()
+ */
+#}
+<span class="hocus-text-underline"><a href="{{ term_url }}" class="bef-link{{ is_selected ? ' bef-link--selected' : '' }}">{{ term_label }}</a></span>

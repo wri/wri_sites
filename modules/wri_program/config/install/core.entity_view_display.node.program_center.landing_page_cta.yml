@@ -1,0 +1,129 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.landing_page_cta
+    - field.field.node.program_center.body
+    - field.field.node.program_center.field_callout_summary
+    - field.field.node.program_center.field_featured_experts
+    - field.field.node.program_center.field_featured_project
+    - field.field.node.program_center.field_intro
+    - field.field.node.program_center.field_intro_paragraphs
+    - field.field.node.program_center.field_long_title
+    - field.field.node.program_center.field_main_image
+    - field.field.node.program_center.field_metatag
+    - field.field.node.program_center.field_narrative_taxonomy
+    - field.field.node.program_center.field_primary_contacts
+    - field.field.node.program_center.field_primary_topic
+    - field.field.node.program_center.field_show_more_link
+    - field.field.node.program_center.field_social_sharing_links
+    - field.field.node.program_center.field_twitter_account
+    - field.field.node.program_center.field_type
+    - field.field.node.program_center.layout_builder__layout
+    - node.type.program_center
+    - responsive_image.styles.image_cta
+  module:
+    - ds
+    - layout_builder
+    - media_responsive_thumbnail
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  ds:
+    layout:
+      id: 'single_file_component_layout:wri_landing_page_cta'
+      library: null
+      disable_css: false
+      entity_classes: no_classes
+      settings:
+        label: ''
+    regions:
+      content:
+        - node_title
+        - field_intro
+        - node_link_token
+      image:
+        - field_main_image
+    fields:
+      node_link_token:
+        plugin_id: node_link_token
+        weight: 2
+        label: hidden
+        formatter: default
+        settings:
+          'link text': 'Explore [node:title]'
+          'link class': button
+          wrapper: ''
+          class: ''
+        ft:
+          id: reset
+          settings:
+            lb: ''
+      node_title:
+        plugin_id: node_title
+        weight: 0
+        label: hidden
+        formatter: default
+        settings:
+          link: false
+          wrapper: ''
+          class: ''
+        ft:
+          id: reset
+          settings:
+            lb: ''
+id: node.program_center.landing_page_cta
+targetEntityType: node
+bundle: program_center
+mode: landing_page_cta
+content:
+  field_intro:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 1
+    region: content
+  field_main_image:
+    type: media_responsive_thumbnail
+    label: hidden
+    settings:
+      responsive_image_style: image_cta
+      image_link: ''
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 0
+    region: image
+hidden:
+  body: true
+  content_moderation_control: true
+  field_callout_summary: true
+  field_featured_experts: true
+  field_featured_project: true
+  field_intro_paragraphs: true
+  field_long_title: true
+  field_metatag: true
+  field_narrative_taxonomy: true
+  field_primary_contacts: true
+  field_primary_topic: true
+  field_show_more_link: true
+  field_social_sharing_links: true
+  field_twitter_account: true
+  field_type: true
+  langcode: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

@@ -11,7 +11,7 @@ use Drupal\ds\Plugin\DsField\DsFieldBase;
  *   id = "dek_summary_fallback",
  *   title = @Translation("Dek with body summary fallback"),
  *   entity_type = "node",
- *   ui_limit = {"article|*"}
+ *   ui_limit = {"*|*"}
  * )
  */
 class DekSummaryFallback extends DsFieldBase {

@@ -172,6 +172,18 @@ layout_hero-and-content:
     content:
       label: Content
 
+single_file_component_layout:wri_landing_page_cta:
+  label: "Landing Page CTA"
+  template: templates/wri-landing-page-cta
+  default_region: content
+  regions:
+    content:
+      label: Content
+    image:
+      label: Image
+  icon_map:
+    - [ content, image ]
+
 layout_simple-page:
   label: 'Simple Page'
   path: layouts

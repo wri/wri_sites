@@ -1,0 +1,17 @@
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text
+    - paragraphs.paragraphs_type.submenu
+id: paragraph.submenu.field_text
+field_name: field_text
+entity_type: paragraph
+bundle: submenu
+label: Text
+description: 'Brief text about this section of the menu'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,19 @@
+{#
+/**
+ * @file
+ * Theme override for the "name" field on the "all_topics"
+ * "topic_list_block_anchored" display.
+ *
+ * Renders the topic link with the on-page resources anchor appended, styled
+ * like the bef-links topic facet links (see bef-links--resources--topic.html.twig),
+ * and marked as selected when it points at the term for the current page.
+ *
+ * Available variables:
+ * - term_url: The term's URL with the resources anchor appended.
+ * - term_label: The term's label.
+ * - is_selected: Whether this link points at the current page's term.
+ *
+ * @see ts_wrin_preprocess_views_view_field__all_topics__topic_list_block_anchored__name()
+ */
+#}
+<a href="{{ term_url }}" class="bef-link{{ is_selected ? ' bef-link--selected' : '' }}">{{ term_label }}</a>

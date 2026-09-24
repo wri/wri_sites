@@ -1,6 +1,7 @@
 .card-listing .program_center,
 .card-listing .project_detail,
-.card-listing .microsite {
+.card-listing .microsite,
+.term-featured-cards .card {
   h3.teaser-title {
     @include font(var(--font-family-heading-condensed));
     @include font-line-height(24, 24);

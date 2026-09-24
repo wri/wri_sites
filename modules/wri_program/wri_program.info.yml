@@ -22,6 +22,7 @@ config_devel:
     - core.entity_view_display.node.program_center.default
     - core.entity_view_display.node.program_center.full
     - core.entity_view_display.node.program_center.impact
+    - core.entity_view_display.node.program_center.landing_page_cta
     - core.entity_view_display.node.program_center.main_content
     - core.entity_view_display.node.program_center.search_results
     - core.entity_view_display.node.program_center.teaser

@@ -65,4 +65,15 @@
     -webkit-font-smoothing: antialiased;
     color: var(--color-neutral-900);
   }
+
+  // Editor has no inline SVG, so mimic it with a background image.
+  a.arrow-link::after {
+    background: url("../img/svgs/arrow-gold.svg") no-repeat center / contain;
+    content: "";
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 2px;
+    width: 22px;
+  }
 }

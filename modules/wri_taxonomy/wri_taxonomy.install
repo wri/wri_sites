@@ -11,6 +11,7 @@ use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\file\Entity\File;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\block_content\Entity\BlockContent;
 
 /**
  * Implements hook_install().
@@ -154,5 +155,157 @@ function wri_taxonomy_update_10401() {
       $term->save();
       \Drupal::messenger()->addStatus(t('Created/updated term @name with icon.', ['@name' => $term_name]));
     }
+  }
+}
+
+/**
+ * Generates the term-level webform block.
+ */
+function wri_taxonomy_update_10602() {
+  _wri_taxonomy_force_block_id(
+    'c2faf277-9cee-48bd-9f70-09ee7613806a',
+    100,
+    [
+      'uuid' => 'c2faf277-9cee-48bd-9f70-09ee7613806a',
+      'type' => 'webform_with_background_color',
+      'info' => 'Stay Informed',
+      'langcode' => 'en',
+      'field_webform' => 'term_email_signup',
+      'field_cta_background' => 'has-teal-background-color',
+      'reusable' => FALSE,
+    ]
+  );
+}
+
+/**
+ * Generates the term-level resource library CTA block.
+ */
+function wri_taxonomy_update_10603() {
+  _wri_taxonomy_force_block_id(
+    '8d9546bf-84e4-4412-9b8c-0804d6845252',
+    101,
+    [
+      'uuid' => '8d9546bf-84e4-4412-9b8c-0804d6845252',
+      'type' => 'small_cta',
+      'info' => 'Explore our full Resource Library',
+      'langcode' => 'en',
+      'field_link' => [
+        'uri' => 'internal:/resources',
+        'title' => 'Explore our full Resource Library',
+      ],
+      'field_cta_background' => 'has-teal-background-color',
+      'reusable' => FALSE,
+    ]
+  );
+}
+
+/**
+ * Generates the term-level resource library CTA block.
+ */
+function wri_taxonomy_update_10604() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('wri_looking_terms')) {
+    \Drupal::service('module_installer')->install(['wri_looking_terms'], TRUE);
+  }
+
+  _wri_taxonomy_force_block_id(
+    '81846b54-79dc-4910-9d5c-177a54e695fb',
+    102,
+    [
+      'uuid' => '81846b54-79dc-4910-9d5c-177a54e695fb',
+      'type' => 'looking_for_something_specific',
+      'info' => 'Looking for something specific',
+      'langcode' => 'en',
+      'reusable' => FALSE,
+      'field_title' => 'Looking for something specific?',
+      'field_intro' => [
+        'value' => '<p>WRI works on multiple topics within [current-page:taxonomy_term:name]. To view and filter all [current-page:taxonomy_term:name] resources, explore our <a href="[wri_tokens:resources_anchor]">Resource Library Below</a>.</p>',
+        'format' => 'basic_html',
+      ],
+      'field_explore_more' => [
+        'value' => 'Explore more topics within [current-page:taxonomy_term:name]',
+        'format' => 'basic_html',
+      ],
+      'field_listing' => [
+        'target_id' => 'child_topics',
+        'display_id' => 'child_topics_block',
+        'arguments' => '[current-page:taxonomy_term:tid]',
+        'items_to_display' => '',
+        'token_help' => '',
+      ],
+    ]
+  );
+}
+
+/**
+ * Adds intro text to the term-level webform block and hides it from visitors.
+ */
+function wri_taxonomy_update_10605() {
+  // Updates run before config import, so install the fields first.
+  $updates = \Drupal::service('distro_helper.updates');
+  $updates->installConfig('field.storage.block_content.field_hidden_from_visitors', 'wri_webform_block');
+  $updates->installConfig('field.field.block_content.webform_with_background_color.field_intro', 'wri_webform_block');
+  $updates->installConfig('field.field.block_content.webform_with_background_color.field_hidden_from_visitors', 'wri_webform_block');
+
+  $blocks = \Drupal::entityTypeManager()->getStorage('block_content')->loadByProperties([
+    'uuid' => 'c2faf277-9cee-48bd-9f70-09ee7613806a',
+  ]);
+  $block = $blocks ? reset($blocks) : NULL;
+  if ($block) {
+    $block->set('field_intro', [
+      'value' => '<p>Get the latest research, events, and insights on [current-page:taxonomy_term:name] delivered to your inbox.</p>',
+      'format' => 'basic_html',
+    ]);
+    $block->set('field_hidden_from_visitors', 1);
+    $block->save();
+  }
+}
+
+/**
+ * Unpublishes tags excluded from the tags facet.
+ */
+function wri_taxonomy_update_10606() {
+  // Updates run before config import, so prefer the sync directory copy.
+  $facet = \Drupal::service('config.storage.sync')->read('facets.facet.tags')
+    ?: \Drupal::config('facets.facet.tags')->getRawData();
+  $exclude = $facet['processor_configs']['exclude_specified_items']['settings']['exclude'] ?? '';
+  $names = array_filter(array_map('trim', explode(',', $exclude)));
+  if (!$names) {
+    return t('No excluded tags found.');
+  }
+
+  $storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+  $unpublished = [];
+  foreach ($names as $name) {
+    $terms = $storage->loadByProperties(['vid' => 'tags', 'name' => $name]);
+    // Facets also match on raw values, so numeric items may be term IDs.
+    if (!$terms && ctype_digit($name) && ($term = $storage->load($name)) && $term->bundle() === 'tags') {
+      $terms = [$term];
+    }
+    foreach ($terms as $term) {
+      if ($term->isPublished()) {
+        $term->setUnpublished()->save();
+        $unpublished[] = $term->label();
+      }
+    }
+  }
+
+  return t('Unpublished @count tags: @names', [
+    '@count' => count($unpublished),
+    '@names' => implode(', ', $unpublished),
+  ]);
+}
+
+/**
+ * Ensures a block_content entity exists with a fixed revision_id.
+ */
+function _wri_taxonomy_force_block_id($uuid, $id, array $values) {
+  $block_manager = \Drupal::entityTypeManager()->getStorage('block_content');
+  $blocks = $block_manager->loadByProperties(['uuid' => $uuid]);
+  $block = $blocks ? reset($blocks) : NULL;
+
+  if (!$block) {
+    $block = BlockContent::create(['revision_id' => $id] + $values);
+    $block->save();
   }
 }

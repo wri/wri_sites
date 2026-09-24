@@ -29,6 +29,10 @@
         text-decoration: underline;
       }
     }
+
+    &:before {
+      content: ' / '
+    }
   }
 }
 
@@ -53,4 +57,8 @@
   .transparent-header & {
     display: none;
   }
+}
+
+.simple-page .block-system-breadcrumb-block {
+  max-width: none;
 }
