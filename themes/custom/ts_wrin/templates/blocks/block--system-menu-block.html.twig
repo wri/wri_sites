@@ -1,0 +1,31 @@
+{#
+/**
+ * @file
+ * Theme override for a menu block.
+ *
+ * Just turns the h2 for the label into a div.
+ * See https://github.com/wri/WRIN/issues/589.
+#}
+{%
+  set classes = [
+    'block',
+    'block-menu',
+    'navigation',
+    'menu--' ~ derivative_plugin_id|clean_class,
+  ]
+%}
+{% set heading_id = attributes.id ~ '-menu'|clean_id %}
+<nav role="navigation" aria-labelledby="{{ heading_id }}"{{ attributes.addClass(classes)|without('role', 'aria-labelledby') }}>
+  {# Label. If not displayed, we still provide it for screen readers. #}
+  {% if not configuration.label_display %}
+    {% set title_attributes = title_attributes.addClass('visually-hidden') %}
+  {% endif %}
+  {{ title_prefix }}
+  <div{{ title_attributes.setAttribute('id', heading_id) }}>{{ configuration.label }}</div>
+  {{ title_suffix }}
+
+  {# Menu. #}
+  {% block content %}
+    {{ content }}
+  {% endblock %}
+</nav>
