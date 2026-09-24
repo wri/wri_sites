@@ -121,6 +121,9 @@ final class WriTaxonomySettingsForm extends ConfigFormBase {
 
     if ($this->moduleHandler->moduleExists('pathauto')) {
       $enable_canonical_urls = (bool) $this->config('wri_taxonomy.settings')->get('enable_canonical_urls');
+      // Pathauto only derives the taxonomy_term alias type when terms have a
+      // canonical link template, so its cached alias types must be rebuilt.
+      \Drupal::service('plugin.manager.alias_type')->clearCachedDefinitions();
       $this->batchUpdateTermsPathauto($enable_canonical_urls);
     }
   }
@@ -154,10 +157,17 @@ final class WriTaxonomySettingsForm extends ConfigFormBase {
    */
   public static function batchProcessTerms(array $tids, bool $enabled, array &$context): void {
     $storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+    $generator = \Drupal::service('pathauto.generator');
     $pathauto_state = $enabled ? PathautoState::CREATE : PathautoState::SKIP;
     foreach ($storage->loadMultiple($tids) as $term) {
       $term->path->pathauto = $pathauto_state;
       $term->save();
+      if ($enabled) {
+        // Generate the alias for each translation.
+        foreach ($term->getTranslationLanguages() as $langcode => $language) {
+          $generator->updateEntityAlias($term->getTranslation($langcode), 'bulkupdate');
+        }
+      }
     }
     $context['results']['count'] = ($context['results']['count'] ?? 0) + count($tids);
   }
