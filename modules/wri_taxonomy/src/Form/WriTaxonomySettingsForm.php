@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Drupal\wri_taxonomy\Form;
 
+use Drupal\Component\Plugin\Discovery\CachedDiscoveryInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\ConfigTarget;
 use Drupal\Core\Form\FormStateInterface;
@@ -36,7 +36,7 @@ final class WriTaxonomySettingsForm extends ConfigFormBase {
     ConfigFactoryInterface $config_factory,
     TypedConfigManagerInterface $typed_config_manager,
     protected EntityTypeManagerInterface $entityTypeManager,
-    protected ModuleHandlerInterface $moduleHandler,
+    protected ?CachedDiscoveryInterface $aliasTypeManager = NULL,
   ) {
     parent::__construct($config_factory, $typed_config_manager);
   }
@@ -49,7 +49,7 @@ final class WriTaxonomySettingsForm extends ConfigFormBase {
       $container->get('config.factory'),
       $container->get('config.typed'),
       $container->get('entity_type.manager'),
-      $container->get('module_handler'),
+      $container->has('plugin.manager.alias_type') ? $container->get('plugin.manager.alias_type') : NULL,
     );
   }
 
@@ -119,11 +119,11 @@ final class WriTaxonomySettingsForm extends ConfigFormBase {
     // type definition must be rebuilt to pick up the change.
     $this->entityTypeManager->clearCachedDefinitions();
 
-    if ($this->moduleHandler->moduleExists('pathauto')) {
+    if ($this->aliasTypeManager) {
       $enable_canonical_urls = (bool) $this->config('wri_taxonomy.settings')->get('enable_canonical_urls');
       // Pathauto only derives the taxonomy_term alias type when terms have a
       // canonical link template, so its cached alias types must be rebuilt.
-      \Drupal::service('plugin.manager.alias_type')->clearCachedDefinitions();
+      $this->aliasTypeManager->clearCachedDefinitions();
       $this->batchUpdateTermsPathauto($enable_canonical_urls);
     }
   }
