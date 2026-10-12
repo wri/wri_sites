@@ -101,12 +101,10 @@
 .publication,
 .article,
 .data {
-  .card .card-teaser-text {
+  .display-card .card-teaser-text {
     display: none;
 
-    .desktop-3 &,
-    .view-display-id-hero_featured &,
-    .block-content--type-carousel-with-tabs & {
+    .desktop-3 & {
       display: initial;
     }
   }
