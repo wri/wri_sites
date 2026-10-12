@@ -105,7 +105,8 @@
     display: none;
 
     .desktop-3 &,
-    .view-display-id-hero_featured {
+    .view-display-id-hero_featured &,
+    .block-content--type-carousel-with-tabs & {
       display: initial;
     }
   }
