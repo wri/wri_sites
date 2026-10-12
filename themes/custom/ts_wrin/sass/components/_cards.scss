@@ -97,3 +97,16 @@
     padding-top: var(--spacer-4);
   }
 }
+
+.publication,
+.article,
+.data {
+  .card .card-teaser-text {
+    display: none;
+
+    .desktop-3 &,
+    .view-display-id-hero_featured {
+      display: initial;
+    }
+  }
+}
