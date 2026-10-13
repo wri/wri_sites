@@ -8,7 +8,9 @@ dependencies:
   - pathauto
   - taxonomy
   - views
+  - wri_admin
   - wri_common
+  - wri_node
 config_devel:
   install:
     - core.entity_form_display.taxonomy_term.tags.default
