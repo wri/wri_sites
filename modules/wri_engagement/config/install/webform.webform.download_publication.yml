@@ -1,11 +1,8 @@
-uuid: a0a75f35-a24f-4111-a004-9b97903dd683
-langcode: en
 status: open
 dependencies:
   module:
+    - simple_recaptcha_webform
     - wri_engagement
-_core:
-  default_config_hash: MvKfy-qrTey4xEs37HROb2YZKdykDC0KI2xRjyTn43s
 weight: 0
 open: null
 close: null
@@ -15,7 +12,7 @@ archive: false
 id: download_publication
 title: 'Download publication'
 description: ''
-category: ''
+categories: {  }
 elements: |-
   download_list:
     '#type': container
@@ -33,11 +30,15 @@ elements: |-
     '#attributes':
       class:
         - downloads-submission-form
+    email:
+      '#type': email
+      '#title': Email
+      '#required': true
     flexbox:
       '#type': webform_flexbox
       first_name:
         '#type': textfield
-        '#title': 'First Name'
+        '#title': 'First name'
         '#required': true
       last_name:
         '#type': textfield
@@ -45,19 +46,17 @@ elements: |-
         '#required': true
     flexbox_01:
       '#type': webform_flexbox
-      email:
-        '#type': email
-        '#title': Email
-        '#required': true
+      job_title:
+        '#type': textfield
+        '#title': 'Job title'
       organization:
         '#type': textfield
         '#title': Organization
-        '#required': true
-    country:
-      '#type': webform_autocomplete
-      '#title': Country
+    sector_affiliation:
+      '#type': select
+      '#title': 'Sector / Affiliation'
+      '#options': sector
       '#required': true
-      '#autocomplete_items': country_names
     markup:
       '#type': webform_markup
       '#markup': '<h5>By sharing your information you agree to receive updates from WRI. You can change your email preferences at any time.</h5>'
@@ -80,7 +79,7 @@ elements: |-
   source_type:
     '#type': hidden
     '#title': 'Source type'
-    '#default_value': 'research publication download'
+    '#default_value': 'Research Publication Download - WRI.org'
   source_details:
     '#type': hidden
     '#title': 'Source details'
@@ -90,14 +89,14 @@ elements: |-
     '#title': 'Source interest'
     '#default_value': '[webform_submission:source-entity:field_primary_topic:entity:name]'
 css: ''
-javascript: ''
+javascript: "function getEmailValue(event) {\r\n// Prevent the default form submission\r\n      event.preventDefault();\r\n    // Get the email input field\r\n    const emailInput = document.querySelector('input[name=\"email\"]');\r\n\r\n    // Get the value of the email input field\r\n    const emailValue = emailInput.value;\r\n\r\n    // Output the email value (for demonstration purposes)\r\n    console.log(emailValue);\r\n  alert('click');\r\n\r\n    // You can now use the emailValue for further processing, e.g., AJAX submission\r\n  }\r\n\r\n  // Add event listener to the submit button\r\n  const submitButton = document.querySelector('input.webform-button--submit[name=\"op\"]');\r\nif (submitButton) {\r\n      submitButton.addEventListener('click', getEmailValue);\r\n      console.log('Submit button found');\r\n    } else {\r\n      console.error('Submit button not found');\r\n    }"
 settings:
   ajax: false
   ajax_scroll_top: form
   ajax_progress_type: ''
   ajax_effect: ''
   ajax_speed: null
-  page: true
+  page: false
   page_submit_path: ''
   page_confirm_path: ''
   page_theme_name: ''
@@ -273,10 +272,33 @@ access:
     users: {  }
     permissions: {  }
 handlers:
-  remote_post:
+  recaptcha:
+    id: simple_recaptcha
+    handler_id: recaptcha
+    label: reCAPTCHA
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      recaptcha_type: v3
+      v3_score: '90'
+      v3_error_message: 'There was an error during validation of your form submission, please try to reload the page and submit form again.'
+      hide_badge_v3: false
+  add_cookie:
+    id: add_cookie
+    handler_id: add_cookie
+    label: 'Add Cookie'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      cookie_name: has_signed_up
+  ortto_remote_post:
     id: remote_post
-    handler_id: remote_post
-    label: 'Remote post'
+    handler_id: ortto_remote_post
+    label: 'Ortto remote post'
     notes: ''
     status: true
     conditions: {  }
@@ -295,9 +317,7 @@ handlers:
         changed: changed
         in_draft: in_draft
         current_page: current_page
-        remote_addr: remote_addr
         uid: uid
-        langcode: langcode
         webform_id: webform_id
         entity_type: entity_type
         entity_id: entity_id
@@ -308,9 +328,10 @@ handlers:
       custom_options: ''
       file_data: true
       cast: false
+      check_access: false
       debug: false
-      completed_url: 'https://connect.wri.org/l/120942/2021-04-06/528nh6'
-      completed_custom_data: ''
+      completed_url: 'https://ortto.wri.org/custom-forms/'
+      completed_custom_data: "website: \"wri.org\"\r\nlist: \"COM - NEWSL - WRI Digest - LIST\"\r\nform-name: \"Research Publication Download Signup Form\""
       updated_url: ''
       updated_custom_data: ''
       deleted_url: ''
@@ -324,14 +345,4 @@ handlers:
       message: ''
       messages: {  }
       error_url: ''
-  add_cookie:
-    id: add_cookie
-    handler_id: add_cookie
-    label: 'Add Cookie'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 0
-    settings:
-      cookie_name: has_signed_up
 variants: {  }

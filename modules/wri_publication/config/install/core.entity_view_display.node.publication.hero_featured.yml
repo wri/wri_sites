@@ -1,0 +1,223 @@
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.hero_featured
+    - field.field.node.publication.body
+    - field.field.node.publication.field_authors
+    - field.field.node.publication.field_cover_image
+    - field.field.node.publication.field_doi
+    - field.field.node.publication.field_exclude_from_blog_feed
+    - field.field.node.publication.field_featured
+    - field.field.node.publication.field_featured_headline
+    - field.field.node.publication.field_featured_text
+    - field.field.node.publication.field_files
+    - field.field.node.publication.field_in_this_series
+    - field.field.node.publication.field_intro
+    - field.field.node.publication.field_isbn
+    - field.field.node.publication.field_license
+    - field.field.node.publication.field_main_image
+    - field.field.node.publication.field_metatag
+    - field.field.node.publication.field_narrative_taxonomy
+    - field.field.node.publication.field_platform_link
+    - field.field.node.publication.field_primary_contacts
+    - field.field.node.publication.field_primary_topic
+    - field.field.node.publication.field_projects
+    - field.field.node.publication.field_publication_display
+    - field.field.node.publication.field_publication_series
+    - field.field.node.publication.field_region
+    - field.field.node.publication.field_related_resources
+    - field.field.node.publication.field_tags
+    - field.field.node.publication.field_toc
+    - field.field.node.publication.field_total_pages
+    - field.field.node.publication.field_type
+    - field.field.node.publication.layout_builder__layout
+    - image.style.363x245
+    - node.type.publication
+  module:
+    - ds
+    - layout_builder
+    - media
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  ds:
+    layout:
+      id: layout_card
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      image:
+        - node_title
+        - field_main_image
+      intro:
+        - dek_summary_fallback
+      content_type:
+        - field_type
+      date:
+        - node_post_date
+      tag:
+        - field_primary_topic
+    fields:
+      dek_summary_fallback:
+        plugin_id: dek_summary_fallback
+        weight: 0
+        label: hidden
+        formatter: default
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: false
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: div
+            fi-cl: body-base
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+      node_post_date:
+        plugin_id: node_post_date
+        weight: 0
+        label: hidden
+        formatter: ds_post_date_short_day
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: false
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+      node_title:
+        plugin_id: node_title
+        weight: 0
+        label: hidden
+        formatter: default
+        settings:
+          link: true
+          'link class': ''
+          link_target: ''
+          wrapper: div
+          class: 'block label mb-4 hocus-text-underline'
+        ft:
+          id: reset
+          settings:
+            lb: ''
+id: node.publication.hero_featured
+targetEntityType: node
+bundle: publication
+mode: hero_featured
+content:
+  field_main_image:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: 363x245
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 102
+    region: image
+  field_primary_topic:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 107
+    region: tag
+  field_type:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 0
+    region: content_type
+hidden:
+  addtoany: true
+  addtocal: true
+  body: true
+  content_moderation_control: true
+  field_authors: true
+  field_cover_image: true
+  field_doi: true
+  field_exclude_from_blog_feed: true
+  field_featured: true
+  field_featured_headline: true
+  field_featured_media: true
+  field_featured_text: true
+  field_featured_tweet: true
+  field_files: true
+  field_in_this_series: true
+  field_intro: true
+  field_isbn: true
+  field_license: true
+  field_metatag: true
+  field_metatags: true
+  field_narrative_taxonomy: true
+  field_platform_link: true
+  field_primary_contacts: true
+  field_projects: true
+  field_publication_display: true
+  field_publication_series: true
+  field_region: true
+  field_related_resources: true
+  field_tags: true
+  field_toc: true
+  field_total_pages: true
+  langcode: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

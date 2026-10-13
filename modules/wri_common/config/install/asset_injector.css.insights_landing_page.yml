@@ -1,0 +1,41 @@
+status: false
+dependencies:
+  module:
+    - system
+id: insights_landing_page
+label: 'Insights landing page'
+code: |-
+  .landing-page__hero .hero__text h1 {
+  margin-bottom: 0 !important;;
+  }
+  .hero__text--inner {
+  margin-bottom: 0 !important;;
+  padding-bottom: 0 !important;
+  }
+
+  .hero__text--inner .padding-vertical {
+  margin-bottom: 0 !important;;
+  padding-bottom: 0 !important;
+  }
+
+
+  .block-inline-block3-1-articles .layout__region--listing {
+  margin-top: 0 !important;
+  }
+
+  .intro p {
+  margin-bottom: 0 !important;
+  }
+
+  h1 {
+  margin-top: 0 !important;;
+  }
+media: all
+preprocess: true
+conditions:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /insights
+contexts: {  }
+conditions_require_all: true

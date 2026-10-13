@@ -11,6 +11,7 @@ dependencies:
     - ds
     - link
     - wri_admin
+    - wri_megamenu_2026
 id: paragraph.submenu.default
 targetEntityType: paragraph
 bundle: submenu
@@ -21,8 +22,8 @@ content:
     label: hidden
     settings:
       view_title: above
+      always_build_output: '1'
       empty_view_title: hidden
-      always_build_output: 0
     third_party_settings: {  }
     weight: 2
     region: content

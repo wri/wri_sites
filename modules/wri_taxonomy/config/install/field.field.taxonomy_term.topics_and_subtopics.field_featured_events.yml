@@ -1,0 +1,27 @@
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_featured_events
+    - node.type.event
+    - taxonomy.vocabulary.topics_and_subtopics
+id: taxonomy_term.topics_and_subtopics.field_featured_events
+field_name: field_featured_events
+entity_type: taxonomy_term
+bundle: topics_and_subtopics
+label: 'Featured Events'
+description: 'By default, the 3 next published events tagged with this term and set to Featured will show to visitors. If there are no upcoming events marked with "Featured" fall back to upcoming events. If there are none upcoming, show old events that are marked as "Featured". Use this field to feature different, specific content instead.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      event: event
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

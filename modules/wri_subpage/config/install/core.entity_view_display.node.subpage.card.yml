@@ -1,0 +1,154 @@
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.card
+    - field.field.node.subpage.body
+    - field.field.node.subpage.field_exclude_from_search
+    - field.field.node.subpage.field_long_title
+    - field.field.node.subpage.field_main_image
+    - field.field.node.subpage.field_metatags
+    - field.field.node.subpage.field_parent_page
+    - field.field.node.subpage.layout_builder__layout
+    - image.style.363x245
+    - node.type.subpage
+  module:
+    - ds
+    - field_group
+    - layout_builder
+    - layout_builder_restrictions
+    - media
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      allowed_layouts: {  }
+      denylisted_blocks: {  }
+      allowlisted_blocks: {  }
+      restricted_categories: {  }
+  ds:
+    layout:
+      id: layout_card
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      image:
+        - field_main_image
+      title:
+        - group_top_wrapper
+        - node_title
+      intro:
+        - dek_summary_fallback
+    fields:
+      dek_summary_fallback:
+        plugin_id: dek_summary_fallback
+        weight: 0
+        label: hidden
+        formatter: default
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: div
+            ow-cl: secondary
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+      node_title:
+        plugin_id: node_title
+        weight: 2
+        label: hidden
+        formatter: default
+        settings:
+          link: true
+          'link class': ''
+          link_target: ''
+          wrapper: h3
+          class: 'teaser-title margin-top-xs'
+        ft:
+          id: reset
+          settings:
+            lb: ''
+  field_group:
+    group_top_wrapper:
+      children:
+        - node_title
+      label: 'Top Wrapper'
+      parent_name: ''
+      region: title
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: project_detail
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+_core:
+  default_config_hash: mv1RmjKLVZo28MZbMR8H-v-Yk5u3XB3kIBD3ku2D5i4
+id: node.subpage.card
+targetEntityType: node
+bundle: subpage
+mode: card
+content:
+  field_main_image:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: 363x245
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 0
+    region: image
+hidden:
+  addtoany: true
+  addtocal: true
+  body: true
+  content_moderation_control: true
+  field_exclude_from_search: true
+  field_long_title: true
+  field_metatags: true
+  field_parent_page: true
+  langcode: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

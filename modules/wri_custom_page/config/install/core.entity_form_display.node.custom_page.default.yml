@@ -4,10 +4,14 @@ dependencies:
     - field.field.node.custom_page.body
     - field.field.node.custom_page.field_main_image
     - field.field.node.custom_page.field_metatags
+    - field.field.node.custom_page.field_projects
     - field.field.node.custom_page.layout_builder__layout
     - node.type.custom_page
+    - workflows.workflow.content_publishing
   module:
+    - content_moderation
     - media_library
+    - media_library_edit
     - metatag
     - path
     - text
@@ -47,6 +51,16 @@ content:
     region: content
     settings:
       sidebar: true
+    third_party_settings: {  }
+  field_projects:
+    type: entity_reference_autocomplete
+    weight: 103
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   langcode:
     type: language_select

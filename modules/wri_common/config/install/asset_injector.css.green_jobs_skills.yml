@@ -1,0 +1,40 @@
+status: true
+dependencies:
+  module:
+    - system
+id: green_jobs_skills
+label: 'Green Jobs & Skills'
+code: |
+  .main-content .text-formatted a {
+      text-decoration: none;
+  }
+
+  .main-content .text-formatted h3, .main-content h3 {
+      font-size: 1.25rem;
+      line-height: 1.3;
+      font-weight: 300;
+  }
+
+
+  .main-content .text-formatted h2, .main-content h2 {
+       font-size: 1.5rem;
+       line-height: 1.25;
+  }
+
+  @media (min-width: 768px){
+
+  article.media.media--type-video.media--view-mode-full {
+      width: calc(50% - 3px);
+      display: inline-block;
+      vertical-align: top;
+  }
+  }
+media: all
+preprocess: true
+conditions:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /node/106742
+contexts: {  }
+conditions_require_all: true

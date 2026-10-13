@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -20,7 +19,10 @@ dependencies:
     - field.field.node.person.field_profile_image
     - field.field.node.person.field_project_expert
     - field.field.node.person.field_quote
+    - field.field.node.person.field_region
+    - field.field.node.person.field_social_links
     - field.field.node.person.field_staff_group
+    - field.field.node.person.field_tags
     - field.field.node.person.field_title
     - field.field.node.person.field_topics
     - field.field.node.person.field_twitter_account
@@ -40,6 +42,7 @@ dependencies:
     - text
     - user
     - views
+    - wri_external_pub
 third_party_settings:
   layout_builder:
     enabled: true
@@ -51,7 +54,7 @@ third_party_settings:
           label: ''
           context_mapping: {  }
         components:
-          a8cde8f7-da41-4bf2-94f8-182f39e00323:
+          -
             uuid: a8cde8f7-da41-4bf2-94f8-182f39e00323
             region: content
             configuration:
@@ -64,7 +67,7 @@ third_party_settings:
                 entity: layout_builder.entity
             weight: -9
             additional: {  }
-          33996bab-91a7-4f7b-9306-7e7072739617:
+          -
             uuid: 33996bab-91a7-4f7b-9306-7e7072739617
             region: content
             configuration:
@@ -74,7 +77,7 @@ third_party_settings:
                 entity: layout_builder.entity
             weight: -10
             additional: {  }
-          289716b1-599c-4414-854b-f44fa4531bb7:
+          -
             uuid: 289716b1-599c-4414-854b-f44fa4531bb7
             region: content
             configuration:
@@ -87,7 +90,7 @@ third_party_settings:
               items_per_page: '8'
             weight: -6
             additional: {  }
-          38c00e82-d1b6-4c8f-9e37-321abfd1c683:
+          -
             uuid: 38c00e82-d1b6-4c8f-9e37-321abfd1c683
             region: content
             configuration:
@@ -100,7 +103,7 @@ third_party_settings:
               items_per_page: '8'
             weight: -7
             additional: {  }
-          c50a0ee7-957f-448d-903a-2fc0ccbbfcde:
+          -
             uuid: c50a0ee7-957f-448d-903a-2fc0ccbbfcde
             region: content
             configuration:
@@ -112,7 +115,7 @@ third_party_settings:
                 node: layout_builder.entity
             weight: 1
             additional: {  }
-          874cd517-3926-49a5-afa3-96c3ec904689:
+          -
             uuid: 874cd517-3926-49a5-afa3-96c3ec904689
             region: content
             configuration:
@@ -183,6 +186,8 @@ content:
     weight: 0
     region: additional_info
 hidden:
+  addtoany: true
+  addtocal: true
   body: true
   content_moderation_control: true
   field_alt_first_names: true
@@ -200,7 +205,10 @@ hidden:
   field_phone: true
   field_project_expert: true
   field_quote: true
+  field_region: true
+  field_social_links: true
   field_staff_group: true
+  field_tags: true
   field_topics: true
   field_twitter_account: true
   field_type: true

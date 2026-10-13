@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -12,12 +11,22 @@ dependencies:
     - field.field.node.article.field_featured_media
     - field.field.node.article.field_featured_text
     - field.field.node.article.field_featured_tweet
+    - field.field.node.article.field_hide_featured_wri_experts
+    - field.field.node.article.field_intro
+    - field.field.node.article.field_key_takeaways
     - field.field.node.article.field_main_image
+    - field.field.node.article.field_main_image_caption
+    - field.field.node.article.field_main_image_display
     - field.field.node.article.field_metatags
+    - field.field.node.article.field_most_recently_updated_date
+    - field.field.node.article.field_original_publish_date
+    - field.field.node.article.field_primary_contacts
     - field.field.node.article.field_primary_topic
+    - field.field.node.article.field_produced_by
     - field.field.node.article.field_projects
     - field.field.node.article.field_region
     - field.field.node.article.field_related_resources
+    - field.field.node.article.field_relevant_project
     - field.field.node.article.field_tags
     - field.field.node.article.field_type
     - field.field.node.article.layout_builder__layout
@@ -52,7 +61,41 @@ third_party_settings:
         - field_main_image
       tag:
         - field_primary_topic
+      intro:
+        - dek_summary_fallback
     fields:
+      dek_summary_fallback:
+        plugin_id: dek_summary_fallback
+        weight: 0
+        label: hidden
+        formatter: default
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: div
+            ow-cl: secondary
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
       node_post_date:
         plugin_id: node_post_date
         weight: 0
@@ -143,6 +186,8 @@ content:
     weight: 0
     region: content_type
 hidden:
+  addtoany: true
+  addtocal: true
   body: true
   content_moderation_control: true
   field_authors: true
@@ -153,10 +198,20 @@ hidden:
   field_featured_media: true
   field_featured_text: true
   field_featured_tweet: true
+  field_hide_featured_wri_experts: true
+  field_intro: true
+  field_key_takeaways: true
+  field_main_image_caption: true
+  field_main_image_display: true
   field_metatags: true
+  field_most_recently_updated_date: true
+  field_original_publish_date: true
+  field_primary_contacts: true
+  field_produced_by: true
   field_projects: true
   field_region: true
   field_related_resources: true
+  field_relevant_project: true
   field_tags: true
   langcode: true
   layout_builder__layout: true

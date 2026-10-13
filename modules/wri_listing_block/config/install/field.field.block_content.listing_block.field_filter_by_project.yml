@@ -1,9 +1,9 @@
-langcode: en
 status: true
 dependencies:
   config:
     - block_content.type.listing_block
     - field.storage.block_content.field_filter_by_project
+    - node.type.microsite
     - node.type.project_detail
 id: block_content.listing_block.field_filter_by_project
 field_name: field_filter_by_project
@@ -19,10 +19,11 @@ settings:
   handler: 'default:node'
   handler_settings:
     target_bundles:
+      microsite: microsite
       project_detail: project_detail
     sort:
       field: _none
       direction: ASC
     auto_create: false
-    auto_create_bundle: ''
+    auto_create_bundle: microsite
 field_type: entity_reference

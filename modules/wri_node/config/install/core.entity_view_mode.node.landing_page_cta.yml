@@ -1,9 +1,11 @@
-langcode: en
 status: true
 dependencies:
   module:
     - node
+_core:
+  default_config_hash: ZZv7UTFwPLPvdoaAVGetcH9kw9rbCgaeHhy8Tj_aBZY
 id: node.landing_page_cta
 label: 'Landing page CTA'
+description: ''
 targetEntityType: node
 cache: true

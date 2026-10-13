@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -7,6 +6,7 @@ dependencies:
     - core.entity_view_display.node.event.full
     - core.entity_view_display.node.homepage.full
     - core.entity_view_display.node.international_office.full
+    - core.entity_view_display.node.microsite.full
     - core.entity_view_display.node.page.full
     - core.entity_view_display.node.program_center.full
     - core.entity_view_display.node.project_detail.full
@@ -14,6 +14,8 @@ dependencies:
     - core.entity_view_display.node.region.full
     - core.entity_view_display.node.simple_page.full
     - core.entity_view_display.node.subpage.full
+    - entity_browser.browser.files
+    - entity_browser.browser.tweets
     - filter.format.basic_html
     - filter.format.full_html
     - filter.format.migrated
@@ -27,6 +29,7 @@ dependencies:
     - node.type.event
     - node.type.homepage
     - node.type.international_office
+    - node.type.microsite
     - node.type.page
     - node.type.person
     - node.type.program_center
@@ -41,6 +44,7 @@ dependencies:
   module:
     - access_unpublished
     - admin_toolbar_search
+    - ai_image_alt_text
     - block
     - block_content
     - content_moderation
@@ -53,18 +57,23 @@ dependencies:
     - media
     - node
     - path
+    - scheduled_transitions
     - system
     - taxonomy
     - toolbar
     - webform
     - wri_author
     - wri_io_content
+    - wri_policy
+_core:
+  default_config_hash: _cTHKb0_3RjEDUPI0lOUJuedsMlpyH-7RMwdLvd-8Oo
 id: content_editor
 label: 'Content Editor'
 weight: 4
 is_admin: null
 permissions:
   - 'access administration pages'
+  - 'access block library'
   - 'access content overview'
   - 'access contextual links'
   - 'access files entity browser pages'
@@ -78,14 +87,30 @@ permissions:
   - 'access webform help'
   - 'access webform overview'
   - 'access webform submission user'
+  - 'access_unpublished menu_link_content microsites'
+  - 'access_unpublished node microsite'
   - 'add author entities'
+  - 'add scheduled transitions node article'
+  - 'add scheduled transitions node data'
+  - 'add scheduled transitions node homepage'
+  - 'add scheduled transitions node international_office'
+  - 'add scheduled transitions node page'
+  - 'add scheduled transitions node person'
+  - 'add scheduled transitions node program_center'
+  - 'add scheduled transitions node project_detail'
+  - 'add scheduled transitions node publication'
+  - 'add scheduled transitions node region'
   - 'add wri office entities'
+  - 'add wri_policy entities'
+  - 'administer block content'
+  - 'administer block types'
   - 'administer blocks'
   - 'configure editable article node layout overrides'
   - 'configure editable data node layout overrides'
   - 'configure editable event node layout overrides'
   - 'configure editable homepage node layout overrides'
   - 'configure editable international_office node layout overrides'
+  - 'configure editable microsite node layout overrides'
   - 'configure editable page node layout overrides'
   - 'configure editable program_center node layout overrides'
   - 'configure editable project_detail node layout overrides'
@@ -94,21 +119,11 @@ permissions:
   - 'configure editable simple_page node layout overrides'
   - 'configure editable subpage node layout overrides'
   - 'create and edit custom blocks'
-  - 'create article content'
-  - 'create data content'
-  - 'create event content'
-  - 'create homepage content'
+  - 'create document media'
+  - 'create embed media'
   - 'create image media'
-  - 'create international_office content'
   - 'create media'
-  - 'create page content'
   - 'create person content'
-  - 'create program_center content'
-  - 'create project_detail content'
-  - 'create publication content'
-  - 'create region content'
-  - 'create simple_page content'
-  - 'create subpage content'
   - 'create terms in embed_types'
   - 'create terms in media_tags'
   - 'create url aliases'
@@ -126,17 +141,11 @@ permissions:
   - 'delete homepage revisions'
   - 'delete international_office revisions'
   - 'delete media'
-  - 'delete own article content'
-  - 'delete own data content'
-  - 'delete own event content'
-  - 'delete own homepage content'
+  - 'delete microsite revisions'
+  - 'delete own document media'
+  - 'delete own embed media'
+  - 'delete own files'
   - 'delete own image media'
-  - 'delete own international_office content'
-  - 'delete own page content'
-  - 'delete own person content'
-  - 'delete own program_center content'
-  - 'delete own project_detail content'
-  - 'delete own publication content'
   - 'delete own region content'
   - 'delete own simple_page content'
   - 'delete own subpage content'
@@ -150,15 +159,11 @@ permissions:
   - 'delete simple_page revisions'
   - 'delete subpage revisions'
   - 'delete wri office entities'
-  - 'edit any article content'
-  - 'edit any data content'
-  - 'edit any event content'
-  - 'edit any homepage content'
+  - 'delete wri_policy entities'
+  - 'edit any document media'
+  - 'edit any embed media'
   - 'edit any image media'
-  - 'edit any international_office content'
-  - 'edit any page content'
-  - 'edit any person content'
-  - 'edit any program_center content'
+  - 'edit any microsite content'
   - 'edit any project_detail content'
   - 'edit any publication content'
   - 'edit any region content'
@@ -184,12 +189,25 @@ permissions:
   - 'edit own subpage content'
   - 'edit own video media'
   - 'edit wri office entities'
+  - 'edit wri_policy entities'
+  - 'generate ai alt tags'
   - 'replace files'
+  - 'reschedule scheduled transitions node article'
+  - 'reschedule scheduled transitions node data'
+  - 'reschedule scheduled transitions node homepage'
+  - 'reschedule scheduled transitions node international_office'
+  - 'reschedule scheduled transitions node page'
+  - 'reschedule scheduled transitions node person'
+  - 'reschedule scheduled transitions node program_center'
+  - 'reschedule scheduled transitions node project_detail'
+  - 'reschedule scheduled transitions node publication'
+  - 'reschedule scheduled transitions node region'
   - 'revert article revisions'
   - 'revert data revisions'
   - 'revert event revisions'
   - 'revert homepage revisions'
   - 'revert international_office revisions'
+  - 'revert microsite revisions'
   - 'revert page revisions'
   - 'revert person revisions'
   - 'revert program_center revisions'
@@ -211,6 +229,7 @@ permissions:
   - 'view all author revisions'
   - 'view all media revisions'
   - 'view all revisions'
+  - 'view all wri_policy revisions'
   - 'view any unpublished content'
   - 'view article revisions'
   - 'view data revisions'
@@ -218,6 +237,7 @@ permissions:
   - 'view homepage revisions'
   - 'view international_office revisions'
   - 'view latest version'
+  - 'view microsite revisions'
   - 'view own unpublished content'
   - 'view own unpublished media'
   - 'view own webform submission'
@@ -226,9 +246,21 @@ permissions:
   - 'view program_center revisions'
   - 'view project_detail revisions'
   - 'view publication revisions'
+  - 'view published wri_policy entities'
   - 'view region revisions'
+  - 'view scheduled transitions node article'
+  - 'view scheduled transitions node data'
+  - 'view scheduled transitions node homepage'
+  - 'view scheduled transitions node international_office'
+  - 'view scheduled transitions node page'
+  - 'view scheduled transitions node person'
+  - 'view scheduled transitions node program_center'
+  - 'view scheduled transitions node project_detail'
+  - 'view scheduled transitions node publication'
+  - 'view scheduled transitions node region'
   - 'view simple_page revisions'
   - 'view subpage revisions'
   - 'view the administration theme'
   - 'view unpublished author entities'
   - 'view unpublished wri office entities'
+  - 'view unpublished wri_policy entities'

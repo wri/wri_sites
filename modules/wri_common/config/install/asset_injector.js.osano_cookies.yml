@@ -1,0 +1,90 @@
+status: true
+dependencies:
+  module:
+    - system
+id: osano_cookies
+label: 'Privacy Policy Cookie List'
+code: |-
+  // privacy policy link on other sites would look like this: 
+  // https://wri.org/about/privacy-policy?sitename=Some WRI Site&osanoid=12345
+
+  // working example for WRI Indonessia = ?osanoid=2451d0f9-8875-46c7-8203-0b10d2de1d21&sitename=WRI Indonesia
+
+  // for sites that aren't using Osano but need to point to wri.org's privacy policy, we're using the ':target' 
+  // pseudo class, so use wri.org/about/privacy-policy#wrisite
+
+  const queryString = window.location.search;
+  // console.log(queryString);
+  // pulling params i.e. '?sitename=Some WRI Site&osanoid=12345'
+
+  const urlParams = new URLSearchParams(queryString);
+
+  const thesitename = urlParams.get('sitename')
+  // console.log(thesitename);
+  // outputs sitename param i.e. 'Some WRI Site'
+
+  const osanoid = urlParams.get('osanoid')
+  // console.log("Osano ID is: "+osanoid);
+  // outputs osanoid param i.e. 'Osano ID is 12345'
+  // console.log("this is the id we're going to use to create the filename for the cookie json file: "+osanoid);
+
+  if (thesitename !== null) {
+    thesitename2 = thesitename;
+    // console.log("thesitename2 is "+thesitename2)
+  }
+  else {
+    thesitename2 = "World Resources Institute";
+  }
+
+  if (osanoid !== null) {
+    osanosrc = "https://disclosure.api.osano.com/customer/AzyfddTRtqi1560Dk/config/"+osanoid+"?language=en";
+  }
+  else {
+    // setting default as flagship ID
+    osanosrc = "https://disclosure.api.osano.com/customer/AzyfddTRtqi1560Dk/config/2f1a8361-e0bc-41c3-b332-023fe627c0bb?language=en";
+  }
+
+  onload=showSiteName();
+
+  function showSiteName(){
+    document.getElementById("website-name").innerHTML = thesitename2;
+  }
+
+
+  var myArray = []
+
+  jQuery.ajax({
+    method:'GET',
+    url: osanosrc,
+    success:function(data){
+      myArray = data
+      buildTable(myArray)
+      console.log(myArray)
+    }
+  })
+
+  function buildTable(data){
+    var table = document.getElementById('osano-table')
+
+    for (var i = 0; i < data.length; i++){
+      var row = `<tr>
+        <td>${data[i].provider}</td>
+        <td>${data[i].name}</td>
+        <td>${data[i].classification}</td>
+        <td>${data[i].purpose}</td>
+        </tr>`
+      table.innerHTML += row
+    }
+  }
+noscript: ''
+noscriptRegion: {  }
+jquery: true
+header: false
+preprocess: false
+conditions:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/node/100305\r\n"
+contexts: {  }
+conditions_require_all: true

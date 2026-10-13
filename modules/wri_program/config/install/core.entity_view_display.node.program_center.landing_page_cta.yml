@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -107,6 +106,8 @@ content:
     weight: 0
     region: image
 hidden:
+  addtoany: true
+  addtocal: true
   body: true
   content_moderation_control: true
   field_callout_summary: true

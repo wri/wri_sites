@@ -1,0 +1,21 @@
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.regions
+  module:
+    - taxonomy
+id: regions
+label: Regions
+type: 'canonical_entities:taxonomy_term'
+pattern: '/regions/[term:parents]/[term:name]'
+selection_criteria:
+  4f232cba-4300-473f-97f4-26a07a2a69eb:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      regions: regions
+selection_logic: and
+weight: -5
+relationships: {  }

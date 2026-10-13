@@ -5,12 +5,15 @@ dependencies:
     - field.field.node.custom_page.body
     - field.field.node.custom_page.field_main_image
     - field.field.node.custom_page.field_metatags
+    - field.field.node.custom_page.field_projects
     - field.field.node.custom_page.layout_builder__layout
+    - image.style.363x245
     - node.type.custom_page
   module:
     - ds
     - layout_builder
     - layout_builder_restrictions
+    - media
     - user
 third_party_settings:
   layout_builder:
@@ -35,19 +38,59 @@ third_party_settings:
         - field_main_image
       title:
         - node_title
-      content_type:
-        - 'bundle_field:node'
       date:
         - node_post_date
+      intro:
+        - dek_summary_fallback
     fields:
+      dek_summary_fallback:
+        plugin_id: dek_summary_fallback
+        weight: 0
+        label: hidden
+        formatter: default
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: div
+            ow-cl: secondary
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
       'bundle_field:node':
         plugin_id: 'bundle_field:node'
         weight: 2
         label: hidden
         formatter: default
+        settings:
+          link: true
+          wrapper: ''
+          class: ''
+        ft:
+          id: reset
+          settings:
+            lb: ''
       node_post_date:
         plugin_id: node_post_date
-        weight: 3
+        weight: 2
         label: hidden
         formatter: ds_post_date_short_day
         ft:
@@ -77,29 +120,25 @@ third_party_settings:
             fi-def-at: false
             prefix: ''
             suffix: ''
-      node_title:
-        plugin_id: node_title
-        weight: 1
-        label: hidden
-        formatter: default
-        settings:
-          link: true
-          wrapper: ''
-          class: ''
-        ft:
-          id: reset
-          settings:
-            lb: ''
 id: node.custom_page.card
 targetEntityType: node
 bundle: custom_page
 mode: card
 content:
   field_main_image:
-    type: entity_reference_entity_id
+    type: media_thumbnail
     label: hidden
-    settings: {  }
-    third_party_settings: {  }
+    settings:
+      image_link: ''
+      image_style: 363x245
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
     weight: 0
     region: image
 hidden:
@@ -108,6 +147,7 @@ hidden:
   body: true
   field_intro: true
   field_metatags: true
+  field_projects: true
   langcode: true
   layout_builder__layout: true
   links: true

@@ -1,35 +1,382 @@
-langcode: en
 status: true
 dependencies:
   config:
+    - block_content.type.looking_for_something_specific
+    - block_content.type.small_cta
+    - block_content.type.webform_with_background_color
+    - field.field.taxonomy_term.regions.field_intro
+    - field.field.taxonomy_term.topics_and_subtopics.field_default_image
+    - field.field.taxonomy_term.topics_and_subtopics.field_event_listing
+    - field.field.taxonomy_term.topics_and_subtopics.field_featured_events
+    - field.field.taxonomy_term.topics_and_subtopics.field_featured_experts
+    - field.field.taxonomy_term.topics_and_subtopics.field_featured_in_the_hero
     - field.field.taxonomy_term.topics_and_subtopics.field_featured_items
+    - field.field.taxonomy_term.topics_and_subtopics.field_featured_related_resources
     - field.field.taxonomy_term.topics_and_subtopics.field_full_name
+    - field.field.taxonomy_term.topics_and_subtopics.field_hero_listing
+    - field.field.taxonomy_term.topics_and_subtopics.field_intro
     - field.field.taxonomy_term.topics_and_subtopics.field_landing_page
+    - field.field.taxonomy_term.topics_and_subtopics.field_main_image
+    - field.field.taxonomy_term.topics_and_subtopics.field_on_page_resource_library
+    - field.field.taxonomy_term.topics_and_subtopics.field_project_listing
+    - field.field.taxonomy_term.topics_and_subtopics.field_projects
+    - field.field.taxonomy_term.topics_and_subtopics.field_related_tags
+    - field.field.taxonomy_term.topics_and_subtopics.field_resources_listing
+    - field.field.taxonomy_term.topics_and_subtopics.field_topic_filter_excluded
+    - field.field.taxonomy_term.topics_and_subtopics.layout_builder__layout
     - taxonomy.vocabulary.topics_and_subtopics
   module:
-    - text
+    - layout_builder
+    - layout_builder_restrictions
+    - wri_node
+    - wri_taxonomy
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: true
+    sections:
+      -
+        layout_id: layout_simple-page
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+          custom_id: ''
+          custom_classes: ''
+          custom_class_choose: {  }
+          custom_styles: ''
+          custom_data_attributes: ''
+          regions:
+            content:
+              region_id: ''
+              region_class_choose: {  }
+              region_classes: ''
+              region_styles: ''
+              region_data: ''
+            hero_image:
+              region_id: ''
+              region_class_choose: {  }
+              region_classes: ''
+              region_styles: ''
+              region_data: ''
+            hero_text:
+              region_id: ''
+              region_class_choose: {  }
+              region_classes: ''
+              region_styles: ''
+              region_data: ''
+            menu:
+              region_id: ''
+              region_class_choose: {  }
+              region_classes: ''
+              region_styles: ''
+              region_data: ''
+            intro:
+              region_id: ''
+              region_class_choose: {  }
+              region_classes: ''
+              region_styles: ''
+              region_data: ''
+        components:
+          -
+            uuid: e8f0c5a9-e144-42dd-93f4-87befee8648e
+            region: hero_text
+            configuration:
+              id: 'field_block:taxonomy_term:regions:name'
+              label: Name
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: wrapper_class
+                label: hidden
+                settings:
+                  class: h1
+                  tag: h1
+                  link: false
+                  link_class: ''
+                  summary: false
+                  trim: 200
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          -
+            uuid: ab51476e-0006-44de-8ef1-8c802bfc109f
+            region: hero_text
+            configuration:
+              id: 'field_block:taxonomy_term:regions:field_intro'
+              label: Intro
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: wrapper_class
+                label: hidden
+                settings:
+                  class: intro
+                  tag: div
+                  link: false
+                  link_class: ''
+                  summary: false
+                  trim: 200
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          -
+            uuid: 35e3fdcf-50a5-4539-8451-8a2fa8c00ade
+            region: hero_text
+            configuration:
+              id: wri_taxonomy_topic_pages_resource_section_link
+              label: 'Topic pages resource section link'
+              label_display: '0'
+              provider: wri_taxonomy
+              context_mapping: {  }
+              link_title: 'View all resources'
+              link_url: '#resources'
+            weight: 2
+            additional: {  }
+          -
+            uuid: abb7d15e-f13b-4539-8095-143280058f84
+            region: intro
+            configuration:
+              id: 'inline_block:looking_for_something_specific'
+              label: 'Looking for something specific'
+              label_display: '0'
+              provider: layout_builder
+              view_mode: full
+              context_mapping: {  }
+              block_id: null
+              block_revision_id: 102
+              block_serialized: null
+              type: looking_for_something_specific
+              uuid: 81846b54-79dc-4910-9d5c-177a54e695fb
+            weight: 2
+            additional: {  }
+          -
+            uuid: e6c340cc-0745-4c02-a6e7-0a3e7f167acf
+            region: intro
+            configuration:
+              id: 'inline_block:webform_with_background_color'
+              label: 'Stay informed'
+              label_display: visible
+              provider: layout_builder
+              view_mode: default
+              context_mapping: {  }
+              block_id: null
+              block_revision_id: 100
+              block_serialized: null
+              type: webform_with_background_color
+              uuid: c2faf277-9cee-48bd-9f70-09ee7613806a
+            weight: 3
+            additional: {  }
+          -
+            uuid: c720e2b2-c09f-45b9-8674-3c9c876997aa
+            region: menu
+            configuration:
+              id: 'field_block:taxonomy_term:topics_and_subtopics:field_hero_listing'
+              label: 'Hero Listing'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: viewfield_token
+                label: hidden
+                settings:
+                  view_title: hidden
+                  always_build_output: true
+                  empty_view_title: hidden
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          -
+            uuid: d5cb0e9a-ce75-438a-85d0-6772d47d9296
+            region: intro
+            configuration:
+              id: 'inline_block:small_cta'
+              label: 'Explore our full resource library'
+              label_display: ''
+              provider: layout_builder
+              view_mode: default
+              context_mapping: {  }
+              block_id: null
+              block_revision_id: 101
+              block_serialized: null
+              type: small_cta
+              uuid: 8d9546bf-84e4-4412-9b8c-0804d6845252
+            weight: 9
+            additional: {  }
+          -
+            uuid: c237b1c6-f777-4112-a6c3-6f7e6026f3db
+            region: intro
+            configuration:
+              id: 'field_block:taxonomy_term:topics_and_subtopics:field_landing_page'
+              label: 'Landing page'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: landing_page_cta
+                third_party_settings: {  }
+            weight: 6
+            additional: {  }
+          -
+            uuid: 7fca2048-a89c-4f84-ba96-d1d30bcb5ea8
+            region: intro
+            configuration:
+              id: 'field_block:taxonomy_term:topics_and_subtopics:field_featured_experts'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: teaser
+                  link: false
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+          -
+            uuid: 1abe09c4-fc81-44ee-8198-59b2d01b6e1c
+            region: intro
+            configuration:
+              id: 'field_block:taxonomy_term:topics_and_subtopics:field_event_listing'
+              label: Events
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: viewfield_token
+                label: hidden
+                settings:
+                  view_title: hidden
+                  always_build_output: true
+                  empty_view_title: hidden
+                third_party_settings: {  }
+            weight: 5
+            additional: {  }
+          -
+            uuid: fef2b59b-fa70-4285-af34-e65af8a443d3
+            region: intro
+            configuration:
+              id: 'field_block:taxonomy_term:topics_and_subtopics:field_resources_listing'
+              label: 'Featured Resources'
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: viewfield_token
+                label: hidden
+                settings:
+                  view_title: hidden
+                  always_build_output: false
+                  empty_view_title: hidden
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          -
+            uuid: 66bc63b1-11ca-477d-b3d0-fbd69977d21c
+            region: intro
+            configuration:
+              id: 'field_block:taxonomy_term:topics_and_subtopics:field_project_listing'
+              label: 'Related Projects & Initiatives'
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: viewfield_token
+                label: hidden
+                settings:
+                  view_title: hidden
+                  always_build_output: false
+                  empty_view_title: hidden
+                third_party_settings: {  }
+            weight: 7
+            additional: {  }
+          -
+            uuid: 855c4e15-14af-48bb-b41a-f4aeee9c80ff
+            region: intro
+            configuration:
+              id: 'field_block:taxonomy_term:topics_and_subtopics:field_on_page_resource_library'
+              label: Resources
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: viewfield_token
+                label: hidden
+                settings:
+                  view_title: hidden
+                  always_build_output: true
+                  empty_view_title: hidden
+                third_party_settings: {  }
+            weight: 8
+            additional: {  }
+          -
+            uuid: ad13dbfd-f563-4361-bada-061e3b17439a
+            region: hero_text
+            configuration:
+              id: wri_taxonomy_path_based_breadcrumb
+              label: Breadcrumbs
+              label_display: '0'
+              provider: wri_taxonomy
+              context_mapping: {  }
+              home_link_text: 'All Topics'
+              home_link_url: /resources
+            weight: -1
+            additional: {  }
+        third_party_settings: {  }
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      allowed_layouts: {  }
+      denylisted_blocks: {  }
+      allowlisted_blocks: {  }
+      restricted_categories: {  }
 id: taxonomy_term.topics_and_subtopics.default
 targetEntityType: taxonomy_term
 bundle: topics_and_subtopics
 mode: default
-content:
-  description:
-    type: text_default
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 0
-    region: content
-  field_full_name:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 1
-    region: content
+content: {  }
 hidden:
+  description: true
+  explore_all_link: true
+  field_default_image: true
+  field_event_listing: true
+  field_featured_events: true
+  field_featured_experts: true
+  field_featured_in_the_hero: true
   field_featured_items: true
+  field_featured_related_resources: true
+  field_full_name: true
+  field_hero_listing: true
+  field_intro: true
   field_landing_page: true
+  field_main_image: true
+  field_on_page_resource_library: true
+  field_project_listing: true
+  field_projects: true
+  field_related_tags: true
+  field_resources_listing: true
+  field_topic_filter_excluded: true
   langcode: true
+  layout_builder__layout: true
   search_api_excerpt: true

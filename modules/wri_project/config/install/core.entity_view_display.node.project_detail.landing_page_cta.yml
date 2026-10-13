@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -113,6 +112,8 @@ content:
     weight: 0
     region: image
 hidden:
+  addtoany: true
+  addtocal: true
   body: true
   content_moderation_control: true
   field_featured: true
@@ -130,6 +131,7 @@ hidden:
   field_project_partners: true
   field_region: true
   field_show_more_link: true
+  field_social_sharing_links: true
   field_tags: true
   field_toc: true
   field_twitter_account: true

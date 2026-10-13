@@ -1,11 +1,11 @@
-langcode: en
 status: true
 dependencies:
   module:
     - editor
     - media
-    - responsive_tables_filter
     - token_filter
+_core:
+  default_config_hash: ew6m4t_uz7qLJKiMl_YuOyj7wRISLwC3pg-thsSQ4sU
 name: 'Basic HTML'
 format: basic_html
 weight: -8
@@ -40,7 +40,7 @@ filters:
     status: true
     weight: -49
     settings:
-      allowed_html: '<br> <p> <span class> <div class> <strong> <em> <u> <a href class target="_blank">'
+      allowed_html: '<br> <p class="pfp-h2-bold pfp-h2-bold-italic pfp-text-blue-200"> <span class> <a class name href target="_blank"> <div class> <strong> <em> <u>'
       filter_html_help: false
       filter_html_nofollow: false
   filter_html_escape:
@@ -67,14 +67,6 @@ filters:
     status: true
     weight: -43
     settings: {  }
-  filter_responsive_tables_filter:
-    id: filter_responsive_tables_filter
-    provider: responsive_tables_filter
-    status: false
-    weight: 0
-    settings:
-      tablesaw_type: stack
-      tablesaw_persist: '1'
   filter_url:
     id: filter_url
     provider: filter
@@ -97,4 +89,4 @@ filters:
     status: true
     weight: -50
     settings:
-      replace_empty: '1'
+      replace_empty: true

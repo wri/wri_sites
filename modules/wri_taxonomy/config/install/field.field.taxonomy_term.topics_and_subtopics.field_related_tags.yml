@@ -1,0 +1,32 @@
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_related_tags
+    - taxonomy.vocabulary.topics_and_subtopics
+  module:
+    - viewfield
+id: taxonomy_term.topics_and_subtopics.field_related_tags
+field_name: field_related_tags
+entity_type: taxonomy_term
+bundle: topics_and_subtopics
+label: 'Related tags'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    target_id: tags_within_a_topic
+    display_id: term_names
+    arguments: '[term:tid]'
+    items_to_display: ''
+    token_help: ''
+default_value_callback: ''
+settings:
+  force_default: true
+  allowed_views:
+    tags_within_a_topic: tags_within_a_topic
+  allowed_display_types:
+    block: block
+  handler: 'default:view'
+  handler_settings: {  }
+field_type: viewfield

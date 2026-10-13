@@ -437,6 +437,7 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -656,6 +657,7 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -852,7 +854,20 @@ display:
         sorts: false
         filters: false
         filter_groups: false
+        header: false
       display_description: 'Final fallback for Featured Events: past events marked Featured, when there are no upcoming events at all.'
+      header:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: false
+          content: '<div class="field__item__label">Featured Events</div>'
+          tokenize: false
       display_extenders:
         metatag_display_extender:
           metatags: {  }
@@ -862,6 +877,7 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -1025,7 +1041,20 @@ display:
         sorts: false
         filters: false
         filter_groups: false
+        header: false
       display_description: 'Fallback for Featured Events: upcoming events of any Featured status. Falls back to Featured Events - Past Featured when empty.'
+      header:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: false
+          content: '<div class="field__item__label">Featured Events</div>'
+          tokenize: false
       display_extenders:
         metatag_display_extender:
           metatags: {  }
@@ -1035,6 +1064,7 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -1214,6 +1244,7 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -1243,6 +1274,7 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - 'user.node_grants:view'
         - user.permissions
       tags:

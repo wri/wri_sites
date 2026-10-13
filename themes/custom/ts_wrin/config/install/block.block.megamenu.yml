@@ -1,12 +1,14 @@
-langcode: en
 status: true
 dependencies:
   config:
     - system.menu.mega-menu
   module:
     - menu_block
+    - system
   theme:
     - ts_wrin
+_core:
+  default_config_hash: 8xRexY_oWuVLE4JUYA64stJLrZkQ4V-d4s5YXg4BNNw
 id: megamenu
 theme: ts_wrin
 region: hamburger_nav
@@ -16,17 +18,22 @@ plugin: 'menu_block:mega-menu'
 settings:
   id: 'menu_block:mega-menu'
   label: 'Mega Menu'
-  provider: menu_block
   label_display: '0'
+  provider: menu_block
   follow: false
   follow_parent: child
+  display_empty: false
+  label_link: false
+  label_type: block
   level: 1
   depth: 0
   expand_all_items: false
   parent: 'mega-menu:'
   render_parent: false
   suggestion: mega_menu
-  label_type: block
-  label_link: false
-  expand: false
-visibility: {  }
+  hide_on_nonactive: false
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: /testing-2026-menu

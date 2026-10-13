@@ -1,17 +1,19 @@
-langcode: en
 status: true
 dependencies:
   config:
     - core.entity_view_mode.taxonomy_term.card
+    - field.field.taxonomy_term.regions.field_featured_experts
+    - field.field.taxonomy_term.regions.field_featured_in_the_hero
+    - field.field.taxonomy_term.regions.field_featured_related_resources
     - field.field.taxonomy_term.regions.field_intro
     - field.field.taxonomy_term.regions.field_landing_page
     - field.field.taxonomy_term.regions.field_main_image
-    - image.style.363x245
+    - field.field.taxonomy_term.regions.field_projects
+    - field.field.taxonomy_term.regions.layout_builder__layout
     - taxonomy.vocabulary.regions
   module:
     - ds
     - layout_builder
-    - media
     - text
 third_party_settings:
   layout_builder:
@@ -84,23 +86,25 @@ content:
     weight: 2
     region: intro
   field_main_image:
-    type: media_thumbnail
+    type: entity_reference_entity_id
     label: hidden
-    settings:
-      image_link: ''
-      image_style: 363x245
-      image_loading:
-        attribute: lazy
-    third_party_settings:
-      ds:
-        ft:
-          id: reset
-          settings:
-            lb: ''
+    settings: {  }
+    third_party_settings: {  }
     weight: 0
     region: image
 hidden:
   description: true
+  field_event_listing: true
+  field_featured_experts: true
+  field_featured_in_the_hero: true
+  field_featured_items: true
+  field_featured_related_resources: true
+  field_hero_listing: true
   field_landing_page: true
+  field_on_page_resource_library: true
+  field_project_listing: true
+  field_projects: true
+  field_resources_listing: true
   langcode: true
+  layout_builder__layout: true
   search_api_excerpt: true

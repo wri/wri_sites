@@ -1,0 +1,29 @@
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_region
+    - node.type.person
+    - taxonomy.vocabulary.regions
+_core:
+  default_config_hash: GsmGUMusaen0JcPXldS7Fx7I6pAMNbDOi6lf7zmtbww
+id: node.person.field_region
+field_name: field_region
+entity_type: node
+bundle: person
+label: Regions
+description: 'Choose the most specific regions applicable.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      regions: regions
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

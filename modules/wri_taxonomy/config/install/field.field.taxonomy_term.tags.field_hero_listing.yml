@@ -1,0 +1,33 @@
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_hero_listing
+    - taxonomy.vocabulary.tags
+    - views.view.term_featured_items
+  module:
+    - viewfield
+id: taxonomy_term.tags.field_hero_listing
+field_name: field_hero_listing
+entity_type: taxonomy_term
+bundle: tags
+label: 'Hero Listing'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    target_uuid: 0492724a-f7eb-4b5f-b4d4-56e05bca4df4
+    display_id: hero_custom
+    arguments: '[term:field_featured_in_the_hero:target_id]/[term:tid]'
+    items_to_display: ''
+    token_help: ''
+default_value_callback: ''
+settings:
+  force_default: true
+  allowed_views:
+    term_featured_items: term_featured_items
+  allowed_display_types:
+    block: block
+  handler: 'default:view'
+  handler_settings: {  }
+field_type: viewfield

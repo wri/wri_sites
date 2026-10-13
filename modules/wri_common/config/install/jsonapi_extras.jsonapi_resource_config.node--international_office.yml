@@ -1,0 +1,233 @@
+status: true
+dependencies:
+  config:
+    - node.type.international_office
+id: node--international_office
+disabled: false
+path: node/international_office
+resourceType: node--international_office
+resourceFields:
+  nid:
+    disabled: false
+    fieldName: nid
+    publicName: nid
+    enhancer:
+      id: ''
+  uuid:
+    disabled: false
+    fieldName: uuid
+    publicName: uuid
+    enhancer:
+      id: ''
+  vid:
+    disabled: false
+    fieldName: vid
+    publicName: vid
+    enhancer:
+      id: ''
+  langcode:
+    disabled: false
+    fieldName: langcode
+    publicName: langcode
+    enhancer:
+      id: ''
+  type:
+    disabled: false
+    fieldName: type
+    publicName: type
+    enhancer:
+      id: ''
+  revision_timestamp:
+    disabled: false
+    fieldName: revision_timestamp
+    publicName: revision_timestamp
+    enhancer:
+      id: ''
+  revision_uid:
+    disabled: false
+    fieldName: revision_uid
+    publicName: revision_uid
+    enhancer:
+      id: ''
+  revision_log:
+    disabled: false
+    fieldName: revision_log
+    publicName: revision_log
+    enhancer:
+      id: ''
+  status:
+    disabled: false
+    fieldName: status
+    publicName: status
+    enhancer:
+      id: ''
+  uid:
+    disabled: false
+    fieldName: uid
+    publicName: uid
+    enhancer:
+      id: ''
+  title:
+    disabled: false
+    fieldName: title
+    publicName: title
+    enhancer:
+      id: ''
+  created:
+    disabled: false
+    fieldName: created
+    publicName: created
+    enhancer:
+      id: ''
+  changed:
+    disabled: false
+    fieldName: changed
+    publicName: changed
+    enhancer:
+      id: ''
+  promote:
+    disabled: false
+    fieldName: promote
+    publicName: promote
+    enhancer:
+      id: ''
+  sticky:
+    disabled: false
+    fieldName: sticky
+    publicName: sticky
+    enhancer:
+      id: ''
+  default_langcode:
+    disabled: false
+    fieldName: default_langcode
+    publicName: default_langcode
+    enhancer:
+      id: ''
+  revision_default:
+    disabled: false
+    fieldName: revision_default
+    publicName: revision_default
+    enhancer:
+      id: ''
+  revision_translation_affected:
+    disabled: false
+    fieldName: revision_translation_affected
+    publicName: revision_translation_affected
+    enhancer:
+      id: ''
+  moderation_state:
+    disabled: false
+    fieldName: moderation_state
+    publicName: moderation_state
+    enhancer:
+      id: ''
+  metatag:
+    disabled: false
+    fieldName: metatag
+    publicName: metatag
+    enhancer:
+      id: ''
+  path:
+    disabled: false
+    fieldName: path
+    publicName: path
+    enhancer:
+      id: entity_share_pathauto
+      settings:
+        behavior: expose_current_pathauto
+  menu_link:
+    disabled: false
+    fieldName: menu_link
+    publicName: menu_link
+    enhancer:
+      id: ''
+  addtocal:
+    disabled: false
+    fieldName: addtocal
+    publicName: addtocal
+    enhancer:
+      id: ''
+  wri_menu_settings:
+    disabled: false
+    fieldName: wri_menu_settings
+    publicName: wri_menu_settings
+    enhancer:
+      id: ''
+  smart_topic_parent:
+    disabled: false
+    fieldName: smart_topic_parent
+    publicName: smart_topic_parent
+    enhancer:
+      id: ''
+  body:
+    disabled: false
+    fieldName: body
+    publicName: body
+    enhancer:
+      id: entity_share_embedded_entities
+  field_featured_experts:
+    disabled: false
+    fieldName: field_featured_experts
+    publicName: field_featured_experts
+    enhancer:
+      id: ''
+  field_international_office_video:
+    disabled: false
+    fieldName: field_international_office_video
+    publicName: field_international_office_video
+    enhancer:
+      id: ''
+  field_intro:
+    disabled: false
+    fieldName: field_intro
+    publicName: field_intro
+    enhancer:
+      id: ''
+  field_io_link:
+    disabled: false
+    fieldName: field_io_link
+    publicName: field_io_link
+    enhancer:
+      id: ''
+  field_main_image:
+    disabled: false
+    fieldName: field_main_image
+    publicName: field_main_image
+    enhancer:
+      id: ''
+  field_map_image:
+    disabled: false
+    fieldName: field_map_image
+    publicName: field_map_image
+    enhancer:
+      id: ''
+  field_metatags:
+    disabled: false
+    fieldName: field_metatags
+    publicName: field_metatags
+    enhancer:
+      id: ''
+  field_offices:
+    disabled: false
+    fieldName: field_offices
+    publicName: field_offices
+    enhancer:
+      id: ''
+  field_region:
+    disabled: false
+    fieldName: field_region
+    publicName: field_region
+    enhancer:
+      id: ''
+  field_show_more_link:
+    disabled: false
+    fieldName: field_show_more_link
+    publicName: field_show_more_link
+    enhancer:
+      id: ''
+  layout_builder__layout:
+    disabled: false
+    fieldName: layout_builder__layout
+    publicName: layout_builder__layout
+    enhancer:
+      id: entity_share_layout_builder

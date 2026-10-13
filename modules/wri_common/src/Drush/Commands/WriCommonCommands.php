@@ -145,10 +145,71 @@ final class WriCommonCommands extends DrushCommands {
         $this->logger()->warning("Skipped (deleted in diff): $relativePath");
         continue;
       }
+      if ($reason = $this->getIgnoreReason($absolutePath)) {
+        $this->logger()->notice("Skipped ($reason): $relativePath");
+        continue;
+      }
       $this->processConfigFile($absolutePath, (bool) $options['write-update-hook'], $newModules);
     }
 
     $this->io()->success('Sync complete.');
+  }
+
+  /**
+   * Rules for config that sync-config-from-diff should skip.
+   *
+   * Add a rule by adding an entry: the key is the reason logged when a file is
+   * skipped, the value receives the config name and whether the profile
+   * already ships that config, and returns TRUE to skip it.
+   *
+   * @return array<string, callable(string, bool): bool>
+   *   Skip rules keyed by reason.
+   */
+  protected function ignoreRules(): array {
+    return [
+      'webform not already in profile' => fn(string $name, bool $inProfile) => str_starts_with($name, 'webform.webform') && !$inProfile,
+    ];
+  }
+
+  /**
+   * Returns the reason a config file should be skipped, or NULL to sync it.
+   *
+   * @param string $absoluteSourcePath
+   *   Absolute path to the source config file.
+   */
+  protected function getIgnoreReason(string $absoluteSourcePath): ?string {
+    $filename = basename($absoluteSourcePath);
+    $configName = basename($filename, '.yml');
+    $inProfile = !empty($this->findProfileConfigPaths($filename));
+    foreach ($this->ignoreRules() as $reason => $rule) {
+      if ($rule($configName, $inProfile)) {
+        return $reason;
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Returns every path in the profile where a config file with this name lives.
+   *
+   * Searches modules/, themes/, and the profile's own top-level config/, since
+   * a config file can legitimately live in any of the three.
+   *
+   * @param string $filename
+   *   The config filename (e.g. 'node.type.page.yml').
+   *
+   * @return string[]
+   *   Absolute paths to every match.
+   */
+  protected function findProfileConfigPaths(string $filename): array {
+    $profileBase = rtrim($this->profileDirectory, '/');
+    $paths = [];
+    foreach (['modules', 'themes', 'config'] as $dir) {
+      if (is_dir("$profileBase/$dir")) {
+        $paths = array_merge($paths, $this->findAllFilesInDirectory("$profileBase/$dir", $filename));
+      }
+    }
+    return $paths;
   }
 
   /**
@@ -224,19 +285,7 @@ final class WriCommonCommands extends DrushCommands {
     $filename = basename($absoluteSourcePath);
     $profileBase = $this->profileDirectory;
 
-    // Search modules/, themes/, and the profile's own top-level config/ —
-    // a config file can legitimately live in any of the three.
-    $searchRoots = [
-      rtrim($profileBase, '/') . '/modules',
-      rtrim($profileBase, '/') . '/themes',
-      rtrim($profileBase, '/') . '/config',
-    ];
-    $destPaths = [];
-    foreach ($searchRoots as $root) {
-      if (is_dir($root)) {
-        $destPaths = array_merge($destPaths, $this->findAllFilesInDirectory($root, $filename));
-      }
-    }
+    $destPaths = $this->findProfileConfigPaths($filename);
 
     if (count($destPaths) > 1) {
       throw new \RuntimeException("'$filename' exists in more than one place, which should never happen: " . implode(', ', array_map([

@@ -1,0 +1,205 @@
+status: true
+dependencies:
+  module:
+    - system
+id: gfw_timeline
+label: 'Stories of WRI: Timelines'
+code: |+
+  #timeline-scroll{
+  position: relative; /* Needed for positioning the arrows */
+  overflow: hidden; 
+  }
+
+  #timeline{
+  font-family: "acumin-pro-semi-condensed",sans-serif;
+  font-weight: lighter;
+  color: white;
+  padding: 40px 20px;
+  display: flex;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch; /* Improves scrolling on iOS */
+  scroll-behavior: auto; /* Modern browsers enable smooth scrolling */
+  -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+  scrollbar-width: none;  /* For Firefox */
+  position: relative;
+  z-index: 1;
+  }
+
+  .timeline-long{
+  padding: 80px 20px !important;
+  }
+
+  /* Hide the default scrollbar for different browsers */
+  #timeline::-webkit-scrollbar {
+    display: none; /* For WebKit-based browsers (Chrome, Safari, etc.) */
+  }
+
+  #timeline-scroll hr{
+  border-top: solid 1px white;
+  position: relative;
+  top: 233px;
+  }
+
+  .timeline-long-hr hr{
+  top: 270px !important;
+  }
+
+  .timeline-year{
+  flex: 1;
+  padding: 0px 40px;
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  }
+
+  .timeline-year div{
+  height: 100px;
+  }
+
+  .timeline-event p{
+  font-size: 11px;
+  min-width: 140px;
+  margin-top: 0;
+  }
+
+  .date{
+  height: unset !important;
+  }
+
+  .date p{
+  font-weight: bolder;
+  font-size: 24px;
+  text-align: center;
+  border: solid 0.5px white;
+  padding: 3px;
+  height: unset !important;
+  width: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  }
+
+  .timeline-event.event-top{
+  position: relative;
+  margin-bottom: 35px;
+  }
+
+  .timeline-event.event-top p{
+  border-bottom: solid white 1px;
+  padding-bottom: 5px;
+  position: absolute;
+  bottom: 0;
+  }
+
+  .timeline-event.event-bottom{
+  margin-top: 10px;
+  }
+
+  .timeline-event.event-bottom p{
+  border-top: solid white 1px;
+  padding-top: 5px;
+  }
+
+  .arrow-top::after {
+  content: '';
+  display: block;
+  height: 35px;
+  border-left: solid 1px white;
+  position: relative;
+  left: 50px;
+  }
+
+  .arrow-bottom::before {
+  content: '';
+  display: block;
+  height: 35px;
+  margin-top: -35px;
+  border-left: solid 1px white;
+  position: relative;
+  left: 50px;
+  }
+
+  /* Styles for the arrow buttons */
+  .scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 10;
+    user-select: none;
+  }
+
+  .left-arrow {
+    left: 10px;
+  }
+
+  .right-arrow {
+    right: 10px;
+  }
+
+  /* Program Backgrounds */
+
+  /* GFW */
+  .timeline-gfw-background{
+  background:linear-gradient(to right, #879e56, #708a3a);
+  }
+
+  .timeline-gfw-background .date p{
+  background: #708a3a;
+  }
+
+
+  /* GHG */
+
+  .timeline-ghg-background{
+  background:linear-gradient(to right, #2a9389, #017368);
+  }
+
+  .timeline-ghg-background .date p{
+  background: #017368;
+  }
+
+
+  /* Initiative 20x20 */
+
+  .timeline-in2020-background{
+  background:linear-gradient(to right, #304d75, #132e53);
+  }
+
+  .timeline-in2020-background .date p{
+  background: #132e53;
+  }
+
+
+  /* NCE */
+  .timeline-nce-background{
+  background:linear-gradient(to right, #d44427, #94271f);
+  }
+
+  .timeline-nce-background .date p{
+  background: #94271f;
+  }
+
+
+  /* EMBARQ */
+  .timeline-embarq-background{
+  background:linear-gradient(to right, #9f68a6, #7e2b89);
+  }
+
+  .timeline-embarq-background .date p{
+  background: #7e2b89;
+  }
+
+
+media: all
+preprocess: true
+conditions:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/node/105618\r\n/stories-changed-world/*"
+contexts: {  }
+conditions_require_all: true
