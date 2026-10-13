@@ -22,7 +22,6 @@ dependencies:
   - schema_publication_volume
   - schema_web_site
   - wri_schema
-  - wri_taxonomy
   - xmlsitemap
 config_devel:
   install:
