@@ -2,7 +2,6 @@ status: true
 dependencies:
   config:
     - block_content.type.small_cta
-    - field.field.taxonomy_term.regions.field_intro
     - field.field.taxonomy_term.tags.field_event_listing
     - field.field.taxonomy_term.tags.field_featured_experts
     - field.field.taxonomy_term.tags.field_featured_in_the_hero
@@ -103,7 +102,7 @@ third_party_settings:
             uuid: ab51476e-0006-44de-8ef1-8c802bfc109f
             region: hero_text
             configuration:
-              id: 'field_block:taxonomy_term:regions:field_intro'
+              id: 'field_block:taxonomy_term:tags:field_intro'
               label: Intro
               label_display: '0'
               provider: layout_builder
