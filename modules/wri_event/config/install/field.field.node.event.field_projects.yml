@@ -3,7 +3,6 @@ dependencies:
   config:
     - field.storage.node.field_projects
     - node.type.event
-    - node.type.microsite
     - node.type.project_detail
 _core:
   default_config_hash: Qyrl3cmy38-KKquAD_1INKa6dcwZA651emPsaZ7svWA
@@ -21,11 +20,10 @@ settings:
   handler: 'default:node'
   handler_settings:
     target_bundles:
-      microsite: microsite
       project_detail: project_detail
     sort:
       field: _none
       direction: ASC
     auto_create: false
-    auto_create_bundle: microsite
+    auto_create_bundle: ''
 field_type: entity_reference
