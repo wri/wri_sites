@@ -3,7 +3,6 @@ dependencies:
   config:
     - core.entity_view_mode.node.card
     - field.field.node.subpage.body
-    - field.field.node.subpage.field_exclude_from_search
     - field.field.node.subpage.field_long_title
     - field.field.node.subpage.field_main_image
     - field.field.node.subpage.field_metatags
@@ -143,7 +142,6 @@ hidden:
   addtocal: true
   body: true
   content_moderation_control: true
-  field_exclude_from_search: true
   field_long_title: true
   field_metatags: true
   field_parent_page: true
