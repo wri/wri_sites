@@ -18,7 +18,6 @@ dependencies:
     - field.field.taxonomy_term.topics_and_subtopics.field_projects
     - field.field.taxonomy_term.topics_and_subtopics.field_related_tags
     - field.field.taxonomy_term.topics_and_subtopics.field_resources_listing
-    - field.field.taxonomy_term.topics_and_subtopics.field_topic_filter_excluded
     - field.field.taxonomy_term.topics_and_subtopics.layout_builder__layout
     - image.style.thumbnail
     - taxonomy.vocabulary.topics_and_subtopics
@@ -34,7 +33,6 @@ third_party_settings:
     group_featured:
       children:
         - field_default_image
-        - field_topic_filter_excluded
       label: Advanced
       region: content
       parent_name: ''
@@ -177,13 +175,6 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  field_topic_filter_excluded:
-    type: boolean_checkbox
-    weight: 10
-    region: content
-    settings:
-      display_label: true
     third_party_settings: {  }
   langcode:
     type: language_select

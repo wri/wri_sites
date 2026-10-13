@@ -12,3 +12,4 @@ dependencies:
   - wri_publication
   - wri_taxonomy
   - wri_search
+  - wri_webform_block
