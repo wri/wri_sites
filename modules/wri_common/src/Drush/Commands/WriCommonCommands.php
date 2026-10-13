@@ -168,6 +168,12 @@ final class WriCommonCommands extends DrushCommands {
   protected function ignoreRules(): array {
     return [
       'webform not already in profile' => fn(string $name, bool $inProfile) => str_starts_with($name, 'webform.webform') && !$inProfile,
+      'ignore asset injector' => fn(string $name, bool $inProfile) => str_starts_with($name, 'asset_injector') && !$inProfile,
+      'ignore core.extension' =>  fn(string $name, bool $inProfile) => $name === 'core.extension.yml',
+      'ignore downloads sector view' =>  fn(string $name, bool $inProfile) => $name === 'views.view.downloads_sector.yml',
+      'ignore statistics settings' =>  fn(string $name, bool $inProfile) => $name === 'statistics.settings.yml',
+      'ignore jsonapi extras' => fn(string $name, bool $inProfile) => str_starts_with($name, 'jsonapi_extras.jsonapi_resource_config') && !$inProfile,
+      'ignore ultimate cron' => fn(string $name, bool $inProfile) => str_starts_with($name, 'ultimate_cron.job') && !$inProfile,
     ];
   }
 
