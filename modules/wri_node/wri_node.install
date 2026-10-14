@@ -173,6 +173,22 @@ function wri_node_update_dependencies() {
       'wri_program' => 10402,
     ];
   }
+
+  // These install hero_featured displays, which fail without the view mode.
+  $hero_featured_updates = [
+    'wri_article' => 10613,
+    'wri_data' => 10502,
+    'wri_event' => 10506,
+    'wri_project' => 10502,
+    'wri_publication' => 10502,
+  ];
+  foreach ($hero_featured_updates as $module => $update) {
+    if ($moduleHandler->moduleExists($module)) {
+      $dependencies[$module][$update] = [
+        'wri_node' => 10601,
+      ];
+    }
+  }
   return $dependencies;
 }
 
