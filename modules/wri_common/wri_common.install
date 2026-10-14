@@ -409,12 +409,12 @@ function wri_common_update_10610() {
 }
 
 /**
- * Install wri_menus_2026.
+ * Install wri_megamenu_2026.
  */
 function wri_common_update_10611() {
   $moduleHandler = \Drupal::service('module_handler');
-  if (!$moduleHandler->moduleExists('wri_menus_2026') && !$moduleHandler->moduleExists('wri_flagship')) {
-    \Drupal::service('module_installer')->install(['wri_taxonomy_2026'], TRUE);
+  if (!$moduleHandler->moduleExists('wri_megamenu_2026')) {
+    \Drupal::service('module_installer')->install(['wri_megamenu_2026'], TRUE);
   }
 
   // Import the following blocks from ts_wrin:
