@@ -416,4 +416,17 @@ function wri_common_update_10611() {
   if (!$moduleHandler->moduleExists('wri_menus_2026') && !$moduleHandler->moduleExists('wri_flagship')) {
     \Drupal::service('module_installer')->install(['wri_taxonomy_2026'], TRUE);
   }
+
+  // Import the following blocks from ts_wrin:
+  // ts_wrin_megamenu2026_2
+  // quicklinks_2026
+  // donate_2026.
+  \Drupal::service('distro_helper.updates')->installConfig('block.block.ts_wrin_megamenu2026_2', 'wri_common', '../../../themes/custom/ts_wrin/config/install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('block.block.quicklinks_2026', 'wri_common', '../../../themes/custom/ts_wrin/config/install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('block.block.donate_2026', 'wri_common', '../../../themes/custom/ts_wrin/config/install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->updateConfig('block.block.megamenu',
+    [
+      'visibility',
+    ], 'wri_common', '../../../themes/custom/ts_wrin/config/install', 'TRUE');
+
 }
