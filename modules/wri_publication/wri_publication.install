@@ -89,7 +89,7 @@ function wri_publication_update_10501() {
 function wri_publication_update_10502() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.publication.card', [
     'third_party_settings#ds#regions#intro',
-    'third_party_settings#ds#fields#dek_summary_fallback'
+    'third_party_settings#ds#fields#dek_summary_fallback',
   ], 'wri_publication', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.publication.hero_featured', 'wri_publication', 'install');
 }
