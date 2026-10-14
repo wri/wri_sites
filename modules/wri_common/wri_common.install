@@ -375,12 +375,35 @@ function wri_common_update_10610() {
     $path = \Drupal::service('extension.list.module')->getPath('wri_taxonomy_2026');
     $source = new FileStorage($path . '/' . InstallStorage::CONFIG_INSTALL_DIRECTORY);
     $config_factory = \Drupal::configFactory();
+    $originals = [];
     foreach ($source->listAll() as $name) {
       $config = $config_factory->getEditable($name);
       if (!$config->isNew()) {
+        $originals[$name] = $config->getRawData();
         $config->delete();
       }
     }
-    \Drupal::service('module_installer')->install(['wri_taxonomy_2026'], TRUE);
+
+    try {
+      \Drupal::service('module_installer')->install(['wri_taxonomy_2026'], TRUE);
+    }
+    catch (\Exception $e) {
+      // Config deletes aren't transactional, so put the originals back.
+      foreach ($originals as $name => $data) {
+        $config_factory->getEditable($name)->setData($data)->save();
+      }
+      throw $e;
+    }
+
+    // Keep the original UUIDs so config sync sees an update, not a recreate.
+    foreach ($originals as $name => $data) {
+      $config = $config_factory->getEditable($name);
+      foreach (['uuid', 'langcode'] as $key) {
+        if (isset($data[$key])) {
+          $config->set($key, $data[$key]);
+        }
+      }
+      $config->save();
+    }
   }
 }
