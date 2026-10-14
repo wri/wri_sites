@@ -177,3 +177,18 @@ function wri_listing_block_update_10601() {
     'snippets#resource_block_view_arguments',
   ], 'wri_listing_block', 'install');
 }
+
+/**
+ * Updates config changed between main and HEAD.
+ */
+function wri_listing_block_update_10602() {
+  \Drupal::service('distro_helper.updates')->updateConfig('content_snippets.content', [
+    'snippets#the_content_listing_view_arguments',
+  ], 'wri_listing_block', 'install');
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.content_listing', [
+    'display#default#display_options#arguments#field_tags_target_id#break_phrase',
+    'display#default#display_options#arguments#field_tags_target_id#not',
+    'display#podcasts#display_options#arguments#field_tags_target_id#break_phrase',
+    'display#podcasts#display_options#arguments#field_tags_target_id#not',
+  ], 'wri_listing_block', 'install');
+}

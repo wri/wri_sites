@@ -201,3 +201,32 @@ function wri_search_update_10602() {
     'display#resources_page#display_options#filters#search_api_language',
   ], 'wri_search');
 }
+
+/**
+ * Updates config changed between main and HEAD.
+ */
+function wri_search_update_10603() {
+  \Drupal::service('distro_helper.updates')->installConfig('facets.facet.experts_region', 'wri_search', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('facets.facet.experts_tags', 'wri_search', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('facets.facet.experts_within_this_topic', 'wri_search', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('facets.facet.region_event', 'wri_search', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('facets.facet.tags_event', 'wri_search', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('facets.facet.within_this_topic_event', 'wri_search', 'install');
+  \Drupal::service('distro_helper.updates')->updateConfig('facets_summary.facets_summary.event_facet_summary', [
+    'facets#tags_event',
+    'facets#region_event',
+    'facets#within_this_topic_event',
+  ], 'wri_search', 'install');
+  \Drupal::service('distro_helper.updates')->updateConfig('facets_summary.facets_summary.experts_summary', [
+    'facets#experts_region',
+    'facets#experts_tags',
+    'facets#experts_within_this_topic',
+  ], 'wri_search', 'install');
+  \Drupal::service('distro_helper.updates')->updateConfig('search_api.index.sitewide', [
+    'field_settings#field_areas_of_expertise',
+    'field_settings#field_primary_topic',
+    'field_settings#field_topics',
+    'field_settings#term_self_and_ancestors',
+    'processor_settings#hierarchy#fields#term_self_and_ancestors',
+  ], 'wri_search', 'install');
+}

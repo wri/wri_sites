@@ -68,3 +68,13 @@ function wri_microsites_update_10405(): void {
     'content#field_callout_summary',
   ], 'wri_microsites', 'install');
 }
+
+/**
+ * Updates config changed between main and HEAD.
+ */
+function wri_microsites_update_10406() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.microsite.landing_page_cta', [
+    'third_party_settings#ds#regions#content',
+    'content#field_long_title',
+  ], 'wri_microsites', 'install');
+}

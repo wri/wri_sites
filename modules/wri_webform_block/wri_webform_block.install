@@ -131,3 +131,16 @@ function wri_webform_block_update_10604() {
     'default_value#0',
   ], 'wri_webform_block', 'install');
 }
+
+/**
+ * Updates config changed between main and HEAD.
+ */
+function wri_webform_block_update_10605() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.block_content.webform_with_background_color.default', [
+    'content#field_hidden_from_visitors#weight',
+    'content#field_intro',
+  ], 'wri_webform_block', 'install');
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.block_content.webform_with_background_color.default', [
+    'content#field_intro',
+  ], 'wri_webform_block', 'install');
+}

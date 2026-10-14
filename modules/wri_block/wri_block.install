@@ -121,3 +121,15 @@ function wri_block_update_10503() {
     \Drupal::service('module_installer')->install(['wri_webform_block'], TRUE);
   }
 }
+
+/**
+ * Updates config changed between main and HEAD.
+ */
+function wri_block_update_10504() {
+  \Drupal::service('distro_helper.updates')->updateConfig('entity_browser.browser.block', [
+    'display_configuration#use_admin_theme',
+  ], 'wri_block', 'install');
+  \Drupal::service('distro_helper.updates')->updateConfig('field.storage.block_content.field_filter_by_tag', [
+    'cardinality',
+  ], 'wri_block', 'install');
+}

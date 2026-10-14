@@ -293,3 +293,15 @@ function wri_event_update_10505(): void {
     'content#field_produced_by',
   ], 'wri_event', 'install');
 }
+
+/**
+ * Updates config changed between main and HEAD.
+ */
+function wri_event_update_10506() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.event.card', [
+    'third_party_settings#ds#regions#intro',
+    'third_party_settings#ds#fields#dek_summary_fallback',
+  ], 'wri_event', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.event.hero_featured', 'wri_event', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('smart_date.smart_date_format.start_time_only', 'wri_event', 'install');
+}

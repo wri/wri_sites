@@ -156,6 +156,105 @@ final class WriCommonCommands extends DrushCommands {
   }
 
   /**
+   * Writes update hooks for profile config changed between two commits.
+   *
+   * @param string $base
+   *   The base commit/ref in the profile repo.
+   * @param string $target
+   *   The target commit/ref in the profile repo.
+   * @param array $options
+   *   Command options.
+   *
+   * @command wri_common:update-hooks-from-diff
+   * @aliases wri-uhd
+   * @option confirm Ask before including each changed file in a hook.
+   */
+  #[CLI\Command(name: 'wri_common:update-hooks-from-diff', aliases: ['wri-uhd'])]
+  #[CLI\Argument(name: 'base', description: 'The base commit in the profile repo.')]
+  #[CLI\Argument(name: 'target', description: 'The target commit in the profile repo.')]
+  #[CLI\Option(name: 'confirm', description: 'Ask y/n before including each changed file in a hook.')]
+  #[CLI\Usage(name: 'wri_common:update-hooks-from-diff main HEAD', description: 'Write an update hook per module for config changed between main and HEAD.')]
+  #[CLI\Usage(name: 'wri_common:update-hooks-from-diff abc123 def456 --confirm', description: 'Same, but confirm each file.')]
+  public function updateHooksFromDiff(string $base, string $target, array $options = ['confirm' => FALSE]): void {
+    $profileDir = str_starts_with($this->profileDirectory, '/') ? $this->profileDirectory : $this->appRoot . '/' . $this->profileDirectory;
+    $repoRoot = trim($this->runGitCommand('git rev-parse --show-toplevel', $profileDir));
+
+    $output = $this->runGitCommand(
+      sprintf('git diff --no-renames --name-status %s %s -- %s', escapeshellarg($base), escapeshellarg($target), escapeshellarg(':(glob)**/config/*/*.yml')),
+      $repoRoot
+    );
+
+    // Calls to add, grouped by owning module.
+    $callsByModule = [];
+    $installDirs = [];
+    foreach (array_filter(explode("\n", trim($output))) as $line) {
+      [$status, $relativePath] = explode("\t", $line, 2);
+      if ($status === 'D') {
+        $this->logger()->notice("Skipped (deleted): $relativePath");
+        continue;
+      }
+
+      [$module, $directory, $moduleDir] = $this->resolveModuleAndDirectory("$repoRoot/$relativePath");
+      $moduleRelDir = ltrim(substr($moduleDir, strlen($repoRoot)), '/');
+      $infoFile = ($moduleRelDir === '' ? '' : "$moduleRelDir/") . "$module.info.yml";
+      if (!$this->refHasFile($base, $infoFile, $repoRoot)) {
+        $this->logger()->notice("Skipped (module '$module' is new): $relativePath");
+        continue;
+      }
+
+      $configName = basename($relativePath, '.yml');
+      if ($status === 'A') {
+        $call = "\\Drupal::service('distro_helper.updates')->installConfig('$configName', '$module', '$directory');";
+      }
+      else {
+        $keys = $this->extractChangedYamlKeys(
+          $this->runGitCommand(sprintf('git show %s', escapeshellarg("$base:$relativePath")), $repoRoot),
+          $this->runGitCommand(sprintf('git show %s', escapeshellarg("$target:$relativePath")), $repoRoot)
+        );
+        if (empty($keys)) {
+          $this->logger()->notice("Skipped (no changed keys): $relativePath");
+          continue;
+        }
+        $keyLines = implode(",\n    ", array_map(fn($k) => "'$k'", $keys));
+        $call = "\\Drupal::service('distro_helper.updates')->updateConfig('$configName', [\n    $keyLines,\n  ], '$module', '$directory');";
+      }
+
+      if ($options['confirm'] && !$this->io()->confirm("Add an update hook for $relativePath?", TRUE)) {
+        continue;
+      }
+      $callsByModule[$module][] = $call;
+      $installDirs[$module] = $moduleDir;
+    }
+
+    if (empty($callsByModule)) {
+      $this->io()->note("No config changes to write hooks for between '$base' and '$target'.");
+      return;
+    }
+
+    foreach ($callsByModule as $module => $calls) {
+      $installFile = $this->resolveInstallFile($installDirs[$module], $module);
+      $hookNumber = $this->nextUpdateHookNumber($installFile, $module);
+      $hookCode = "\n/**\n * Updates config changed between $base and $target.\n */\nfunction {$module}_update_{$hookNumber}() {\n  " . implode("\n  ", $calls) . "\n}\n";
+      $this->appendUpdateHook($installFile, $hookCode);
+    }
+
+    $this->io()->success('Update hooks written.');
+  }
+
+  /**
+   * Returns whether a file exists at a git ref.
+   */
+  protected function refHasFile(string $ref, string $path, string $repoRoot): bool {
+    try {
+      $this->runGitCommand(sprintf('git cat-file -e %s', escapeshellarg("$ref:$path")), $repoRoot);
+      return TRUE;
+    }
+    catch (\RuntimeException $e) {
+      return FALSE;
+    }
+  }
+
+  /**
    * Rules for config that sync-config-from-diff should skip.
    *
    * Add a rule by adding an entry: the key is the reason logged when a file is

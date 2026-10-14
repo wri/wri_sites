@@ -309,3 +309,19 @@ function _wri_taxonomy_force_block_id($uuid, $id, array $values) {
     $block->save();
   }
 }
+
+/**
+ * Updates config changed between main and HEAD.
+ */
+function wri_taxonomy_update_10607() {
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.taxonomy_term.tags.field_featured_items', 'wri_taxonomy', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_featured_events', 'wri_taxonomy', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_featured_experts', 'wri_taxonomy', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_featured_related_resources', 'wri_taxonomy', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_primary_topic', 'wri_taxonomy', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_project_listing', 'wri_taxonomy', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_projects', 'wri_taxonomy', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_related_tags', 'wri_taxonomy', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_resources_listing', 'wri_taxonomy', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.layout_builder__layout', 'wri_taxonomy', 'install');
+}
