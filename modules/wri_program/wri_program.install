@@ -127,4 +127,8 @@ function wri_program_update_10407() {
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.all_topics', [
     'display#topic_list_block_anchored',
   ], 'wri_program', 'install');
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.taxonomy_term.topics_and_subtopics.field_featured_items', [
+    'label',
+    'description',
+  ], 'wri_program', 'install');
 }
