@@ -458,6 +458,10 @@ final class WriCommonCommands extends DrushCommands {
 
       $installFile = $this->resolveInstallFile($ownerDir, $owner);
       $hookCode = $this->generateUpdateHook($configName, $owner, $directory, $oldContentByPath[$path], $filtered, $installFile);
+      if ($hookCode === NULL) {
+        $this->logger()->notice("Skipped update hook (no changed keys): " . $this->relativeToProfile($path));
+        continue;
+      }
       $this->appendUpdateHook($installFile, $hookCode);
     }
   }
@@ -500,13 +504,13 @@ final class WriCommonCommands extends DrushCommands {
    * @param string $installFile
    *   Absolute path to the .install file to number the hook against.
    *
-   * @return string
-   *   PHP source for the new update hook, ready to append.
+   * @return string|null
+   *   PHP source for the new update hook, or NULL if no keys need updating.
    */
-  protected function generateUpdateHook(string $configName, string $module, string $directory, string $oldContent, string $newContent, string $installFile): string {
+  protected function generateUpdateHook(string $configName, string $module, string $directory, string $oldContent, string $newContent, string $installFile): ?string {
     $keys = $this->extractChangedYamlKeys($oldContent, $newContent);
     if (empty($keys)) {
-      $keys = $this->extractTopLevelYamlKeys($newContent);
+      return NULL;
     }
     $hookNumber = $this->nextUpdateHookNumber($installFile, $module);
 
@@ -538,7 +542,20 @@ final class WriCommonCommands extends DrushCommands {
     foreach ($skip as $key) {
       unset($old[$key], $new[$key]);
     }
-    return $this->diffArrays($old, $new);
+    return $this->withoutIgnoredKeys($this->diffArrays($old, $new));
+  }
+
+  /**
+   * Drops key paths that update hooks should never touch.
+   *
+   * @param string[] $keys
+   *   Key paths, '#'-delimited for nested keys.
+   *
+   * @return string[]
+   *   The keys not starting with an ignored prefix.
+   */
+  protected function withoutIgnoredKeys(array $keys): array {
+    return array_values(array_filter($keys, fn(string $key) => !str_starts_with($key, 'dependencies') && !str_starts_with($key, 'hidden')));
   }
 
   /**
@@ -633,28 +650,6 @@ final class WriCommonCommands extends DrushCommands {
     $directory = $m[3];
 
     return [$owner, $directory, $ownerDir];
-  }
-
-  /**
-   * Extracts top-level YAML key names from config file content.
-   *
-   * Skips Drupal metadata keys that should not be passed to updateConfig.
-   *
-   * @param string $content
-   *   Raw yml file content.
-   *
-   * @return string[]
-   *   The yml file content with skip items removed.
-   */
-  protected function extractTopLevelYamlKeys(string $content): array {
-    $skip = ['_core', 'uuid', 'langcode'];
-    $keys = [];
-    foreach (explode("\n", $content) as $line) {
-      if (preg_match('/^([a-zA-Z_][a-zA-Z0-9_]*):\s*/', $line, $m) && !in_array($m[1], $skip, TRUE)) {
-        $keys[] = $m[1];
-      }
-    }
-    return $keys;
   }
 
   /**
