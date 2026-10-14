@@ -116,7 +116,6 @@ function wri_program_update_10407() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.program_center.card', [
     'third_party_settings#ds#regions#intro',
     'third_party_settings#ds#fields#dek_summary_fallback',
-    'third_party_settings#ds#fields#node_link_token#settings#link text',
   ], 'wri_program', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('field.field.taxonomy_term.topics_and_subtopics.field_featured_experts', 'wri_program', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('field.field.taxonomy_term.topics_and_subtopics.field_intro', 'wri_program', 'install');

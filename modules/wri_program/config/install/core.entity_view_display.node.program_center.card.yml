@@ -83,7 +83,7 @@ third_party_settings:
         label: hidden
         formatter: default
         settings:
-          'link text': 'Learn more'
+          'link text': 'Visit the [node:title] [node:field_type]'
           'link class': 'button small'
           wrapper: ''
           class: ''
