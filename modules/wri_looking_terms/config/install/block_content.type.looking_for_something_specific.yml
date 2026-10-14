@@ -1,3 +1,5 @@
+# Leave this uuid so the block made from this doesn't get deleted.
+uuid: 750b8e50-b5fc-46be-bd84-0cdd0923abee
 status: true
 dependencies: {  }
 _core:
