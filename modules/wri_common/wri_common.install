@@ -345,3 +345,13 @@ function wri_common_update_10609() {
     }
   }
 }
+
+/**
+ * Install wri_taxonomy_2026 (but not on Flagship).
+ */
+function wri_common_update_10610() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('wri_taxonomy_2026') && !$moduleHandler->moduleExists('wri_flagship')) {
+    \Drupal::service('module_installer')->install(['wri_taxonomy_2026'], TRUE);
+  }
+}
