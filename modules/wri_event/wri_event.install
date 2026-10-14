@@ -304,4 +304,5 @@ function wri_event_update_10506() {
   ], 'wri_event', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.event.hero_featured', 'wri_event', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('smart_date.smart_date_format.start_time_only', 'wri_event', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('views.view.featured_events', 'wri_event', 'install');
 }

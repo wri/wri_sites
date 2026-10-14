@@ -5,6 +5,24 @@
  * Update hooks for wri_article.
  */
 
+use Drupal\Core\Config\FileStorage;
+use Drupal\Core\Config\InstallStorage;
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_common_update_dependencies() {
+  // Installing wri_taxonomy_2026 needs the fields and view these provide.
+  $dependencies['wri_common'][10610] = [
+    'wri_taxonomy' => 10607,
+    'wri_program' => 10407,
+    'wri_region' => 10002,
+    'wri_event' => 10506,
+  ];
+
+  return $dependencies;
+}
+
 /**
  * Enable the wri_text_block module.
  */
@@ -352,6 +370,17 @@ function wri_common_update_10609() {
 function wri_common_update_10610() {
   $moduleHandler = \Drupal::service('module_handler');
   if (!$moduleHandler->moduleExists('wri_taxonomy_2026') && !$moduleHandler->moduleExists('wri_flagship')) {
+    // The module replaces existing taxonomy displays, which would otherwise
+    // block the install as pre-existing config.
+    $path = \Drupal::service('extension.list.module')->getPath('wri_taxonomy_2026');
+    $source = new FileStorage($path . '/' . InstallStorage::CONFIG_INSTALL_DIRECTORY);
+    $config_factory = \Drupal::configFactory();
+    foreach ($source->listAll() as $name) {
+      $config = $config_factory->getEditable($name);
+      if (!$config->isNew()) {
+        $config->delete();
+      }
+    }
     \Drupal::service('module_installer')->install(['wri_taxonomy_2026'], TRUE);
   }
 }

@@ -243,7 +243,7 @@ function wri_taxonomy_update_10604() {
 function wri_taxonomy_update_10605() {
   // Updates run before config import, so install the fields first.
   $updates = \Drupal::service('distro_helper.updates');
-  $updates->installConfig('field.storage.block_content.field_hidden_from_visitors', 'wri_webform_block');
+  $updates->installConfig('field.storage.block_content.field_hidden_from_visitors', 'wri_block');
   $updates->installConfig('field.field.block_content.webform_with_background_color.field_intro', 'wri_webform_block');
   $updates->installConfig('field.field.block_content.webform_with_background_color.field_hidden_from_visitors', 'wri_webform_block');
 

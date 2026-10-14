@@ -6,6 +6,18 @@
  */
 
 /**
+ * Implements hook_update_dependencies().
+ */
+function wri_region_update_dependencies() {
+  // Needs the taxonomy field storages.
+  $dependencies['wri_region'][10002] = [
+    'wri_taxonomy' => 10607,
+  ];
+
+  return $dependencies;
+}
+
+/**
  * Update the metatags to display field_intro for description.
  */
 function wri_region_update_10001() {

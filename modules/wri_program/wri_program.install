@@ -41,6 +41,10 @@ function wri_program_update_dependencies() {
   $dependencies['wri_program'][10401] = [
     'wri_node' => 10401,
   ];
+  // Needs the taxonomy field storages.
+  $dependencies['wri_program'][10407] = [
+    'wri_taxonomy' => 10607,
+  ];
 
   return $dependencies;
 }

@@ -186,7 +186,6 @@ function wri_person_update_10502() {
 function wri_person_update_10503() {
   \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.person.default', [
     'third_party_settings#field_group#group_category',
-    'third_party_settings#field_group#group_publishing',
     'content#field_region',
     'content#field_tags',
   ], 'wri_person', 'install');
