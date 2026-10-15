@@ -48,6 +48,10 @@ function wri_project_update_dependencies() {
   $dependencies['wri_project'][10402] = [
     'wri_project' => 10401,
   ];
+  // Needs the landing_page_cta view mode.
+  $dependencies['wri_project'][10502] = [
+    'wri_node' => 10601,
+  ];
 
   return $dependencies;
 }
@@ -133,6 +137,7 @@ function wri_project_update_10502() {
     'third_party_settings#ds#regions#intro',
     'third_party_settings#ds#fields#dek_summary_fallback',
   ], 'wri_project', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.project_detail.landing_page_cta', 'wri_project', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.project_detail.hero_featured', 'wri_project', 'install');
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.related_to_this_project', [
     'display#by_term',
