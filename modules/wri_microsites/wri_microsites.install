@@ -77,10 +77,5 @@ function wri_microsites_update_10405(): void {
  * Updates config changed between main and HEAD.
  */
 function wri_microsites_update_10406() {
-  // Never installed on existing sites, and updateConfig() throws on missing config.
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.microsite.landing_page_cta', 'wri_microsites', 'install');
-  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.microsite.landing_page_cta', [
-    'third_party_settings#ds#regions#content',
-    'content#field_long_title',
-  ], 'wri_microsites', 'install');
 }
