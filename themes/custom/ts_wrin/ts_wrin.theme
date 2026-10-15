@@ -372,7 +372,8 @@ function ts_wrin_preprocess_block(array &$variables) {
           ];
         }
         $pretty_path = \Drupal::service('wri_search.pretty_facets_helper')->getPrettyPaths($filters_current_result);
-        $variables['expert_facet_url'] = '/events' . $pretty_path;
+        $prefix = rtrim(Url::fromRoute('<front>')->toString(), '/');
+        $variables['expert_facet_url'] = $prefix . '/events' . $pretty_path;
       }
     }
   }
