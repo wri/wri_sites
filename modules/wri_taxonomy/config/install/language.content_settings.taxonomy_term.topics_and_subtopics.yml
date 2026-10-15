@@ -1,0 +1,16 @@
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.topics_and_subtopics
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '1'
+id: taxonomy_term.topics_and_subtopics
+target_entity_type_id: taxonomy_term
+target_bundle: topics_and_subtopics
+default_langcode: site_default
+language_alterable: true

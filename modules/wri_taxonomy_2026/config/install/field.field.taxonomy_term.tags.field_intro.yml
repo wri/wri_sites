@@ -6,6 +6,8 @@ dependencies:
     - taxonomy.vocabulary.tags
   module:
     - text
+_core:
+  default_config_hash: VSamaU2Gs8s8fYdbiOKjQiOUZFC2SYNTTXfvRLeXmcg
 id: taxonomy_term.tags.field_intro
 field_name: field_intro
 entity_type: taxonomy_term
@@ -13,7 +15,7 @@ bundle: tags
 label: Intro
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

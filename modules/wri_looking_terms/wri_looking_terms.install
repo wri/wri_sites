@@ -1,0 +1,31 @@
+<?php
+
+function wri_looking_terms_update_12503() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.base_field_override.block_content.looking_for_something_specific.info', [
+    'status',
+    'id',
+    'field_name',
+    'entity_type',
+    'bundle',
+    'label',
+    'description',
+    'required',
+    'translatable',
+    'default_value',
+    'default_value_callback',
+    'settings',
+    'field_type',
+  ], 'wri_looking_terms', 'install');
+}
+
+function wri_looking_terms_update_12504() {
+  \Drupal::service('distro_helper.updates')->updateConfig('language.content_settings.block_content.looking_for_something_specific', [
+    'status',
+    'third_party_settings',
+    'id',
+    'target_entity_type_id',
+    'target_bundle',
+    'default_langcode',
+    'language_alterable',
+  ], 'wri_looking_terms', 'install');
+}

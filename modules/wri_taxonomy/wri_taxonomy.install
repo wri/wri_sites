@@ -324,4 +324,6 @@ function wri_taxonomy_update_10607() {
   \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_related_tags', 'wri_taxonomy', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_resources_listing', 'wri_taxonomy', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.layout_builder__layout', 'wri_taxonomy', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.taxonomy_term.tags', 'wri_taxonomy', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.taxonomy_term.topics_and_subtopics', 'wri_taxonomy', 'install');
 }

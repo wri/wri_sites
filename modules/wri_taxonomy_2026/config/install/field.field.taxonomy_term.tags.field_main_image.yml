@@ -5,7 +5,7 @@ dependencies:
     - media.type.image
     - taxonomy.vocabulary.tags
 _core:
-  default_config_hash: GXxpXg4RqafFNS8j9IYQ_Q9f23YpMniDcCvKddjtYbw
+  default_config_hash: 82aA8kGP0gvULN0zmTeZU9rjwNK223vwzRcApQ5jmVo
 id: taxonomy_term.tags.field_main_image
 field_name: field_main_image
 entity_type: taxonomy_term
@@ -13,7 +13,7 @@ bundle: tags
 label: 'Main Image'
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

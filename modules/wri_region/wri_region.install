@@ -42,4 +42,5 @@ function wri_region_update_10002() {
   \Drupal::service('distro_helper.updates')->installConfig('field.field.taxonomy_term.regions.field_featured_related_resources', 'wri_region', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('field.field.taxonomy_term.regions.field_projects', 'wri_region', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('field.field.taxonomy_term.regions.layout_builder__layout', 'wri_region', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.taxonomy_term.regions', 'wri_region', 'install');
 }

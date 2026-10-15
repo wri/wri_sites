@@ -1,0 +1,16 @@
+status: true
+dependencies:
+  config:
+    - block_content.type.megamenu
+id: block_content.megamenu.info
+field_name: info
+entity_type: block_content
+bundle: megamenu
+label: 'Block description'
+description: 'A brief description of your block.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

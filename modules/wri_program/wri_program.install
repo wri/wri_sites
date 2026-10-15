@@ -137,3 +137,15 @@ function wri_program_update_10407() {
     'description',
   ], 'wri_program', 'install');
 }
+
+function wri_program_update_10408() {
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.taxonomy_term.topics_and_subtopics.field_intro', [
+    'translatable',
+  ], 'wri_program', 'install');
+}
+
+function wri_program_update_10409() {
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.taxonomy_term.topics_and_subtopics.field_main_image', [
+    'translatable',
+  ], 'wri_program', 'install');
+}
