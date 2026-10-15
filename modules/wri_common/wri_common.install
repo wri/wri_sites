@@ -375,10 +375,9 @@ function wri_common_update_10610() {
     $path = \Drupal::service('extension.list.module')->getPath('wri_taxonomy_2026');
     $source = new FileStorage($path . '/' . InstallStorage::CONFIG_INSTALL_DIRECTORY);
     $config_factory = \Drupal::configFactory();
-    $originals = $save_uuis = [];
+    $originals = [];
     foreach ($source->listAll() as $name) {
       $config = $config_factory->getEditable($name);
-      $save_uuis[$name] = $config->getRawData();
       if (!$config->isNew()) {
         $originals[$name] = $config->getRawData();
         $config->delete();
@@ -397,7 +396,7 @@ function wri_common_update_10610() {
     }
 
     // Keep the original UUIDs so config sync sees an update, not a recreate.
-    foreach ($save_uuis as $name => $data) {
+    foreach ($originals as $name => $data) {
       $config = $config_factory->getEditable($name);
       foreach (['uuid', 'langcode'] as $key) {
         if (isset($data[$key])) {
