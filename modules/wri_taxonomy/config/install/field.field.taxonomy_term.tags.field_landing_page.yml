@@ -1,9 +1,10 @@
-langcode: en
 status: true
 dependencies:
   config:
     - field.storage.taxonomy_term.field_landing_page
     - taxonomy.vocabulary.tags
+_core:
+  default_config_hash: zz54yH2GP8UOn90KRu_RqHKSQ4MSMmrBsRI2yOHIw-s
 id: taxonomy_term.tags.field_landing_page
 field_name: field_landing_page
 entity_type: taxonomy_term
@@ -11,7 +12,7 @@ bundle: tags
 label: 'Landing page'
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:

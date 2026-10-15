@@ -143,3 +143,12 @@ function wri_program_update_10407() {
     'translatable',
   ], 'wri_program', 'install');
 }
+
+/**
+ * Make landing_page field non-translatable.
+ */
+function wri_program_update_10408() {
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.taxonomy_term.topics_and_subtopics.field_landing_page', [
+    'translatable',
+  ], 'wri_program', 'install');
+}

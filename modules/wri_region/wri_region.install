@@ -46,3 +46,12 @@ function wri_region_update_10002() {
     \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.taxonomy_term.regions', 'wri_region', 'optional');
   }
 }
+
+/**
+ * Make landing_page field non-translatable.
+ */
+function wri_region_update_10003() {
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.taxonomy_term.regions.field_landing_page', [
+    'translatable',
+  ], 'wri_region', 'install');
+}
