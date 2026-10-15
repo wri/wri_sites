@@ -63,7 +63,6 @@
                 "Add option to allow Custom Tags to control multiple property https://www.drupal.org/project/metatag/issues/3561350": "https://git.drupalcode.org/project/metatag/-/merge_requests/249.diff"
             },
             "drupal/schema_metatag": {
-                "Description sub_property for Organization / Person: https://www.drupal.org/project/schema_metatag/issues/3187882": "https://www.drupal.org/files/issues/2021-01-04/description-sub-property-for-organization-or-person-3187882-4.patch",
                 "allow more characters in \"sameAs\" field? or convert to multivalue single fields? https://www.drupal.org/project/schema_metatag/issues/3498969": "https://git.drupalcode.org/project/schema_metatag/-/merge_requests/90.diff"
             },
             "drupal/oembed_lazyload": {
@@ -212,7 +211,7 @@
         "drupal/robotstxt": "^1.6",
         "drupal/s3fs": "^3.10",
         "drupal/scheduled_transitions": "^2.2",
-        "drupal/schema_metatag": "^3.0",
+        "drupal/schema_metatag": "^3.1",
         "drupal/search_api": "^1.41",
         "drupal/search_api_exclude_entity": "^2.0",
         "drupal/search_api_pantheon": "^8.0",
