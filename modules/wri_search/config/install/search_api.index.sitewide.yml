@@ -1,46 +1,86 @@
-langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.body
-    - field.storage.node.field_primary_topic
-    - field.storage.node.field_type
+    - field.storage.node.field_areas_of_expertise
     - field.storage.node.field_date_time
     - field.storage.node.field_department
     - field.storage.node.field_email
     - field.storage.node.field_featured
-    - field.storage.node.field_featured_headline
     - field.storage.node.field_featured_media
-    - field.storage.node.field_featured_text
-    - field.storage.node.field_featured_tweet
     - field.storage.node.field_first_name
     - field.storage.node.field_international_office
-    - field.storage.node.field_intro
-    - field.storage.taxonomy_term.field_is_featured
+    - field.storage.node.field_languages_spoken
     - field.storage.node.field_last_name
     - field.storage.node.field_leadership
     - field.storage.node.field_main_image
+    - field.storage.node.field_primary_topic
     - field.storage.node.field_project_expert
     - field.storage.node.field_projects
+    - field.storage.node.field_quote
     - field.storage.node.field_region
     - field.storage.node.field_staff_group
     - field.storage.node.field_tags
-    - field.storage.node.field_weight
-    - field.storage.node.field_languages_spoken
-    - field.storage.node.field_areas_of_expertise
     - field.storage.node.field_title
-    - field.storage.node.field_quote
     - field.storage.node.field_topics
+    - field.storage.node.field_type
+    - field.storage.node.field_weight
+    - field.storage.taxonomy_term.field_is_featured
     - search_api.server.pantheon
-    - core.entity_view_mode.node.main_content
   module:
     - node
-    - taxonomy
-    - wri_search
-    - token
-    - search_api
     - search_api_exclude_entity
     - search_api_solr
+    - taxonomy
+    - token
+    - wri_search
+third_party_settings:
+  search_api_solr:
+    finalize: false
+    commit_before_finalize: false
+    commit_after_finalize: false
+    debug_finalize: false
+    highlighter:
+      maxAnalyzedChars: 51200
+      fragmenter: gap
+      usePhraseHighlighter: true
+      highlightMultiTerm: true
+      preserveMulti: false
+      regex:
+        slop: 0.5
+        pattern: blank
+        maxAnalyzedChars: 10000
+      highlight:
+        mergeContiguous: false
+        requireFieldMatch: false
+        snippets: 3
+        fragsize: 0
+    mlt:
+      mintf: 1
+      mindf: 1
+      maxdf: 0
+      maxdfpct: 0
+      minwl: 0
+      maxwl: 0
+      maxqt: 100
+      maxntp: 2000
+      boost: false
+      interestingTerms: none
+    term_modifiers:
+      slop: 10000000
+      fuzzy: 2
+      fuzzy_analyzer: true
+    advanced:
+      index_prefix: ''
+      collection: ''
+      timezone: ''
+    multilingual:
+      limit_to_content_language: false
+      include_language_independent: true
+      use_language_undefined_as_fallback_language: false
+      specific_languages:
+        en: '0'
+      use_universal_collation: false
 id: sitewide
 name: Sitewide
 description: ''
@@ -92,6 +132,14 @@ field_settings:
     dependencies:
       module:
         - node
+  field_areas_of_expertise:
+    label: 'Areas of expertise'
+    datasource_id: 'entity:node'
+    property_path: field_areas_of_expertise
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_areas_of_expertise
   field_date_time:
     label: Date/Time
     datasource_id: 'entity:node'
@@ -124,14 +172,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_featured
-  field_featured_headline:
-    label: 'Featured Headline'
-    datasource_id: 'entity:node'
-    property_path: field_featured_headline
-    type: text
-    dependencies:
-      config:
-        - field.storage.node.field_featured_headline
   field_featured_media:
     label: 'Featured Media'
     datasource_id: 'entity:node'
@@ -140,22 +180,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_featured_media
-  field_featured_text:
-    label: 'Featured Text'
-    datasource_id: 'entity:node'
-    property_path: field_featured_text
-    type: text
-    dependencies:
-      config:
-        - field.storage.node.field_featured_text
-  field_featured_tweet:
-    label: 'Featured Tweet'
-    datasource_id: 'entity:node'
-    property_path: field_featured_tweet
-    type: text
-    dependencies:
-      config:
-        - field.storage.node.field_featured_tweet
   field_first_name:
     label: 'First Name'
     datasource_id: 'entity:node'
@@ -172,14 +196,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_international_office
-  field_intro:
-    label: Intro
-    datasource_id: 'entity:node'
-    property_path: field_intro
-    type: text
-    dependencies:
-      config:
-        - field.storage.node.field_intro
   field_is_featured:
     label: 'Featured » Taxonomy term » Is Featured'
     datasource_id: 'entity:node'
@@ -215,6 +231,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_main_image
+  field_primary_topic:
+    label: 'Primary topic'
+    datasource_id: 'entity:node'
+    property_path: field_primary_topic
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_primary_topic
   field_project_expert:
     label: Projects
     datasource_id: 'entity:node'
@@ -255,6 +279,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_tags
+  field_topics:
+    label: Topics
+    datasource_id: 'entity:node'
+    property_path: field_topics
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_topics
   field_type:
     label: Type
     datasource_id: 'entity:node'
@@ -364,28 +396,6 @@ field_settings:
     dependencies:
       module:
         - node
-  rendered_item:
-    label: 'Rendered HTML output'
-    property_path: rendered_item
-    type: text
-    configuration:
-      roles:
-        - anonymous
-      view_mode:
-        'entity:node':
-          article: main_content
-          data: main_content
-          event: main_content
-          homepage: main_content
-          international_office: main_content
-          page: main_content
-          person: main_content
-          program_center: main_content
-          project_detail: main_content
-          publication: main_content
-          region: main_content
-          simple_page: main_content
-          subpage: main_content
   smart_topic_parent:
     label: 'Smart Topic'
     datasource_id: 'entity:node'
@@ -447,6 +457,25 @@ field_settings:
       module:
         - taxonomy
         - wri_search
+  term_self_and_ancestors:
+    label: 'Term (self and ancestors)'
+    property_path: aggregated_field
+    type: integer
+    configuration:
+      type: union
+      fields:
+        - 'entity:node/field_areas_of_expertise'
+        - 'entity:node/field_primary_topic'
+        - 'entity:node/field_region'
+        - 'entity:node/field_tags'
+        - 'entity:node/field_topics'
+    dependencies:
+      config:
+        - field.storage.node.field_region
+        - field.storage.node.field_tags
+        - field.storage.node.field_primary_topic
+        - field.storage.node.field_topics
+        - field.storage.node.field_areas_of_expertise
   title:
     label: Title
     datasource_id: 'entity:node'
@@ -456,7 +485,7 @@ field_settings:
       module:
         - node
   title_fulltext:
-    label: Title
+    label: 'Fulltext Title'
     datasource_id: 'entity:node'
     property_path: title
     type: text
@@ -518,7 +547,9 @@ datasource_settings:
   'entity:node':
     bundles:
       default: true
-      selected: {  }
+      selected:
+        - microsite
+        - rfp
     languages:
       default: true
       selected: {  }
@@ -530,26 +561,22 @@ processor_settings:
     weights:
       preprocess_query: -30
   custom_value: {  }
-  entity_status: {  }
   entity_type: {  }
   hierarchy:
     weights:
       preprocess_index: -45
     fields:
       field_type: taxonomy_term-parent
+      term_self_and_ancestors: taxonomy_term-parent
   html_filter:
     weights:
       preprocess_index: -15
       preprocess_query: -15
-    all_fields: true
+    all_fields: false
     fields:
       - body
       - field_email
-      - field_featured_headline
-      - field_featured_text
-      - field_featured_tweet
       - field_first_name
-      - field_intro
       - field_last_name
       - langcode
       - langcode_1
@@ -565,22 +592,19 @@ processor_settings:
     title: true
     alt: true
     tags:
-      b: 2
-      h1: 5
-      h2: 3
-      h3: 2
-      strong: 2
+      b: 2.0
+      em: 1.5
+      h1: 5.0
+      h2: 3.0
+      h3: 2.0
+      strong: 2.0
+      u: 1.5
   ignore_character:
     weights:
       preprocess_index: -10
       preprocess_query: -10
     all_fields: false
     fields:
-      - body
-      - field_featured_headline
-      - field_featured_text
-      - field_featured_tweet
-      - field_intro
       - langcode
       - name
       - title
@@ -593,17 +617,6 @@ processor_settings:
       - Pi
       - Po
       - Ps
-  ignorecase:
-    all_fields: false
-    fields:
-      - body
-      - field_featured_headline
-      - field_featured_text
-      - field_featured_tweet
-      - field_intro
-      - langcode
-      - title
-      - type
   language_with_fallback: {  }
   rendered_item: {  }
   search_api_exclude_entity_processor:
@@ -612,66 +625,12 @@ processor_settings:
   solr_date_range:
     weights:
       preprocess_index: 0
-  stopwords:
-    all_fields: false
-    fields:
-      - body
-      - field_featured_headline
-      - field_featured_text
-      - field_featured_tweet
-      - field_intro
-    stopwords:
-      - a
-      - an
-      - and
-      - are
-      - as
-      - at
-      - be
-      - but
-      - by
-      - for
-      - if
-      - in
-      - into
-      - is
-      - it
-      - 'no'
-      - not
-      - of
-      - 'on'
-      - or
-      - s
-      - such
-      - t
-      - that
-      - the
-      - their
-      - then
-      - there
-      - these
-      - they
-      - this
-      - to
-      - was
-      - will
-      - with
-  transliteration:
-    all_fields: false
-    fields:
-      - body
-      - field_featured_headline
-      - field_featured_text
-      - field_featured_tweet
-      - field_intro
-      - langcode
-      - title
-      - type
 tracker_settings:
   default:
     indexing_order: fifo
 options:
-  cron_limit: 50
+  cron_limit: 100
+  delete_on_fail: true
   index_directly: true
   track_changes_in_references: true
 server: pantheon

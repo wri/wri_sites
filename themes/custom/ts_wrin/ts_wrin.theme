@@ -283,7 +283,9 @@ function ts_wrin_preprocess_field(array &$variables) {
           ];
         }
         $pretty_path = \Drupal::service('wri_search.pretty_facets_helper')->getPrettyPaths($filters_current_result);
-        $variables['expert_facet_url'] = '/about/experts-staff' . $pretty_path;
+        // The front page URL has the base path and language prefix ("/en/").
+        $prefix = rtrim(Url::fromRoute('<front>')->toString(), '/');
+        $variables['expert_facet_url'] = $prefix . '/about/experts-staff' . $pretty_path;
       }
     }
   }
@@ -370,7 +372,8 @@ function ts_wrin_preprocess_block(array &$variables) {
           ];
         }
         $pretty_path = \Drupal::service('wri_search.pretty_facets_helper')->getPrettyPaths($filters_current_result);
-        $variables['expert_facet_url'] = '/events' . $pretty_path;
+        $prefix = rtrim(Url::fromRoute('<front>')->toString(), '/');
+        $variables['expert_facet_url'] = $prefix . '/events' . $pretty_path;
       }
     }
   }
@@ -462,6 +465,8 @@ function _ts_wrin_set_term_anchor_link_variables(array &$variables): ?TermInterf
   if (!$term instanceof TermInterface) {
     return NULL;
   }
+  // getEntity() returns the original language, not the row's translation.
+  $term = \Drupal::service('entity.repository')->getTranslationFromContext($term);
 
   $anchor = \Drupal::config('wri_taxonomy.settings')->get('resources_anchor') ?: 'resources';
   $variables['term_url'] = $term->toUrl()->toString() . '#' . $anchor;

@@ -30,3 +30,29 @@ function wri_custom_page_update_10402() {
   // Deprecated: replaced with wri_webform_block_install, but we need this
   // placeholder because Flagship has already run this.
 }
+
+/**
+ * Updates config changed between main and HEAD.
+ */
+function wri_custom_page_update_10403() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.custom_page.default', [
+    'content#field_projects',
+  ], 'wri_custom_page', 'install');
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.custom_page.card', [
+    'third_party_settings#ds#regions#intro',
+    'third_party_settings#ds#fields#dek_summary_fallback',
+    'third_party_settings#ds#fields#bundle_field:node#settings',
+    'third_party_settings#ds#fields#bundle_field:node#ft',
+    'third_party_settings#ds#fields#node_post_date#weight',
+    'content#field_main_image',
+  ], 'wri_custom_page', 'install');
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.custom_page.default', [
+    'third_party_settings#layout_builder#sections#0#components#0',
+    'content#field_projects',
+  ], 'wri_custom_page', 'install');
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.custom_page.full', [
+    'third_party_settings#layout_builder#sections#0#components#0',
+    'content#field_projects',
+  ], 'wri_custom_page', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.custom_page.field_projects', 'wri_custom_page', 'install');
+}

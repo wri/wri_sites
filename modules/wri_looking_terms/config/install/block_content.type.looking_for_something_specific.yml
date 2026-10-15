@@ -1,7 +1,9 @@
+# Leave this uuid so the block made from this doesn't get deleted.
 uuid: 750b8e50-b5fc-46be-bd84-0cdd0923abee
-langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: AV2NFUi4SvQ00nYVIFfEua8T9tpQbnP02_PTlX1nGvo
 id: looking_for_something_specific
 label: 'Looking for something specific'
 revision: false

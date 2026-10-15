@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -10,6 +9,8 @@ dependencies:
   module:
     - text
     - viewfield
+_core:
+  default_config_hash: 6iv-6cI2_2dVvv5pnvSvWQad1gslf_XEBBqE9V5_t4g
 id: block_content.looking_for_something_specific.default
 targetEntityType: block_content
 bundle: looking_for_something_specific

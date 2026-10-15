@@ -11,3 +11,10 @@
 function wri_subpage_update_10601(): void {
   \Drupal::service('distro_helper.updates')->installConfig('field.field.node.subpage.field_long_title', 'wri_subpage', 'install', FALSE);
 }
+
+/**
+ * Updates config changed between main and HEAD.
+ */
+function wri_subpage_update_10602() {
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.subpage.card', 'wri_subpage', 'install');
+}

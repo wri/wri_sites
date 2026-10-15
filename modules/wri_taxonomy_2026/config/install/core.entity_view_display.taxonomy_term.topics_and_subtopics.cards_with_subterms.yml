@@ -1,0 +1,82 @@
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.cards_with_subterms
+    - field.field.taxonomy_term.topics_and_subtopics.field_default_image
+    - field.field.taxonomy_term.topics_and_subtopics.field_featured_events
+    - field.field.taxonomy_term.topics_and_subtopics.field_featured_experts
+    - field.field.taxonomy_term.topics_and_subtopics.field_featured_in_the_hero
+    - field.field.taxonomy_term.topics_and_subtopics.field_featured_items
+    - field.field.taxonomy_term.topics_and_subtopics.field_featured_related_resources
+    - field.field.taxonomy_term.topics_and_subtopics.field_full_name
+    - field.field.taxonomy_term.topics_and_subtopics.field_hero_listing
+    - field.field.taxonomy_term.topics_and_subtopics.field_intro
+    - field.field.taxonomy_term.topics_and_subtopics.field_landing_page
+    - field.field.taxonomy_term.topics_and_subtopics.field_main_image
+    - field.field.taxonomy_term.topics_and_subtopics.field_projects
+    - field.field.taxonomy_term.topics_and_subtopics.field_related_tags
+    - field.field.taxonomy_term.topics_and_subtopics.layout_builder__layout
+    - taxonomy.vocabulary.topics_and_subtopics
+  module:
+    - element_class_formatter
+    - wri_admin
+id: taxonomy_term.topics_and_subtopics.cards_with_subterms
+targetEntityType: taxonomy_term
+bundle: topics_and_subtopics
+mode: cards_with_subterms
+content:
+  explore_all_link:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_intro:
+    type: wrapper_class
+    label: hidden
+    settings:
+      class: intro
+      tag: div
+      link: false
+      link_class: ''
+      summary: false
+      trim: 200
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_main_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: card
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_related_tags:
+    type: viewfield_token
+    label: hidden
+    settings:
+      view_title: hidden
+      always_build_output: false
+      empty_view_title: hidden
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  description: true
+  field_default_image: true
+  field_event_listing: true
+  field_featured_events: true
+  field_featured_experts: true
+  field_featured_in_the_hero: true
+  field_featured_items: true
+  field_featured_related_resources: true
+  field_full_name: true
+  field_hero_listing: true
+  field_landing_page: true
+  field_project_listing: true
+  field_projects: true
+  field_resources_listing: true
+  langcode: true
+  layout_builder__layout: true
+  search_api_excerpt: true

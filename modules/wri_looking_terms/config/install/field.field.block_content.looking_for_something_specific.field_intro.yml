@@ -1,5 +1,4 @@
-uuid: b989a8d9-04bc-4b55-acde-42d1cc373724
-langcode: en
+uuid: f75310b6-2440-4ac8-986e-606770364398
 status: true
 dependencies:
   config:
@@ -7,6 +6,8 @@ dependencies:
     - field.storage.block_content.field_intro
   module:
     - text
+_core:
+  default_config_hash: Q3m2ND9dFOR3oxlxbnWiqPk-LbxuD9inTJVsCLikdJM
 id: block_content.looking_for_something_specific.field_intro
 field_name: field_intro
 entity_type: block_content

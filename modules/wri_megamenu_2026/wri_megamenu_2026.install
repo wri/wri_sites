@@ -22,6 +22,7 @@ function wri_megamenu_2026_install() {
   $testing_path = '/testing-2026-menu';
   $regions = ['primary_nav', 'secondary_nav'];
   $excluded_block_ids = [
+    'ts_wrin_branding',
     'donate_2026',
     'quicklinks_2026',
     'primary_nav',
@@ -72,8 +73,4 @@ function wri_megamenu_2026_install() {
       'info' => 'Mega menu 2026',
     ])->save();
   }
-
-  // Install our two required menus.
-  \Drupal::service('distro_helper.updates')->installConfig('system.menu.donate_2026', 'wri_menus', 'install');
-  \Drupal::service('distro_helper.updates')->installConfig('system.menu.main-menu-2026', 'wri_menus', 'install');
 }

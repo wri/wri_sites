@@ -6,6 +6,7 @@ package: WRI
 dependencies:
   - block_content
   - link
+  - wri_block
 config_devel:
   install:
     - block_content.type.small_cta

@@ -4,6 +4,7 @@ dependencies:
     - field.field.node.custom_page.body
     - field.field.node.custom_page.field_main_image
     - field.field.node.custom_page.field_metatags
+    - field.field.node.custom_page.field_projects
     - field.field.node.custom_page.layout_builder__layout
     - node.type.custom_page
   module:
@@ -23,7 +24,23 @@ third_party_settings:
         layout_settings:
           label: ''
           context_mapping: {  }
-        components: {  }
+        components:
+          -
+            uuid: 7463598d-1421-4c53-916c-d60658e02f65
+            region: content
+            configuration:
+              id: 'field_block:node:custom_page:field_projects'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories: {  }
@@ -102,6 +119,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 103
+    region: content
+  field_projects:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 18
     region: content
   links:
     settings: {  }

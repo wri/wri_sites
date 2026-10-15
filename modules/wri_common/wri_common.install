@@ -5,6 +5,28 @@
  * Update hooks for wri_article.
  */
 
+use Drupal\Core\Config\FileStorage;
+use Drupal\Core\Config\InstallStorage;
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function wri_common_update_dependencies() {
+  // Installing wri_taxonomy_2026 needs the fields and view these provide.
+  $dependencies['wri_common'][10610] = [
+    'wri_taxonomy' => 10607,
+    'wri_program' => 10407,
+    'wri_region' => 10002,
+    'wri_event' => 10506,
+  ];
+  // wri_megamenu_2026's submenu field needs the 2026 menus.
+  $dependencies['wri_common'][10611] = [
+    'wri_menus' => 10601,
+  ];
+
+  return $dependencies;
+}
+
 /**
  * Enable the wri_text_block module.
  */
@@ -312,7 +334,9 @@ function wri_common_update_10600() {
       \Drupal::service('distro_helper.updates')->installConfig('core.entity_form_display.taxonomy_term.hub_terms.default', 'wri_spoke', 'install', 'TRUE');
       \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.taxonomy_term.hub_terms.default', 'wri_spoke', 'install', 'TRUE');
       \Drupal::service('distro_helper.updates')->installConfig('entity_share_client.import_config.hub_events', 'wri_spoke', 'install', 'TRUE');
-      \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.taxonomy_term.hub_terms', 'wri_spoke', 'install', 'TRUE');
+      if (\Drupal::moduleHandler()->moduleExists('content_translation')) {
+        \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.taxonomy_term.hub_terms', 'wri_spoke', 'optional', 'TRUE');
+      }
       \Drupal::service('distro_helper.updates')->installConfig('system.action.hub_term_move', 'wri_spoke', 'install', 'TRUE');
       \Drupal::service('distro_helper.updates')->installConfig('views.view.hub_terms', 'wri_spoke', 'install', 'TRUE');
       \Drupal::service('distro_helper.updates')->installConfig('views.view.terms_by_vid', 'wri_spoke', 'install', 'TRUE');
@@ -344,4 +368,71 @@ function wri_common_update_10609() {
       $revision_to_restore->save();
     }
   }
+}
+
+/**
+ * Install wri_taxonomy_2026 (but not on Flagship).
+ */
+function wri_common_update_10610() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('wri_taxonomy_2026') && !$moduleHandler->moduleExists('wri_flagship')) {
+    // The module replaces existing taxonomy displays, which would otherwise
+    // block the install as pre-existing config.
+    $path = \Drupal::service('extension.list.module')->getPath('wri_taxonomy_2026');
+    $source = new FileStorage($path . '/' . InstallStorage::CONFIG_INSTALL_DIRECTORY);
+    $config_factory = \Drupal::configFactory();
+    $originals = [];
+    foreach ($source->listAll() as $name) {
+      $config = $config_factory->getEditable($name);
+      if (!$config->isNew()) {
+        $originals[$name] = $config->getRawData();
+        $config->delete();
+      }
+    }
+
+    try {
+      \Drupal::service('module_installer')->install(['wri_taxonomy_2026'], TRUE);
+    }
+    catch (\Exception $e) {
+      // Config deletes aren't transactional, so put the originals back.
+      foreach ($originals as $name => $data) {
+        $config_factory->getEditable($name)->setData($data)->save();
+      }
+      throw $e;
+    }
+
+    // Keep the original UUIDs so config sync sees an update, not a recreate.
+    foreach ($originals as $name => $data) {
+      $config = $config_factory->getEditable($name);
+      foreach (['uuid', 'langcode'] as $key) {
+        if (isset($data[$key])) {
+          $config->set($key, $data[$key]);
+        }
+      }
+      $config->save();
+    }
+  }
+}
+
+/**
+ * Install wri_megamenu_2026.
+ */
+function wri_common_update_10611() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('wri_megamenu_2026')) {
+    \Drupal::service('module_installer')->install(['wri_megamenu_2026'], TRUE);
+  }
+
+  // Import the following blocks from ts_wrin:
+  // ts_wrin_megamenu2026_2
+  // quicklinks_2026
+  // donate_2026.
+  \Drupal::service('distro_helper.updates')->installConfig('block.block.ts_wrin_megamenu2026_2', 'wri_common', '../../../themes/custom/ts_wrin/config/install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('block.block.quicklinks_2026', 'wri_common', '../../../themes/custom/ts_wrin/config/install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->installConfig('block.block.donate_2026', 'wri_common', '../../../themes/custom/ts_wrin/config/install', 'TRUE');
+  \Drupal::service('distro_helper.updates')->updateConfig('block.block.megamenu',
+    [
+      'visibility',
+    ], 'wri_common', '../../../themes/custom/ts_wrin/config/install', 'TRUE');
+
 }

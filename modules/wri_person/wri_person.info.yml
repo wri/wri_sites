@@ -11,6 +11,7 @@ dependencies:
   - wri_paragraph
   - wri_person_templates
   - wri_taxonomy
+  - wri_external_pub
 config_devel:
   install:
     - block_content.type.person_listing

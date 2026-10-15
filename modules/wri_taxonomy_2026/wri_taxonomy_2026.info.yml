@@ -1,0 +1,15 @@
+name: 'wri_taxonomy_2026'
+type: module
+description: 'Updates taxonomy pages to contain listings of related content.'
+package: Custom
+core_version_requirement: ^10 || ^11
+dependencies:
+  - wri_article
+  - wri_person
+  - wri_data
+  - wri_event
+  - wri_project
+  - wri_publication
+  - wri_taxonomy
+  - wri_search
+  - wri_webform_block

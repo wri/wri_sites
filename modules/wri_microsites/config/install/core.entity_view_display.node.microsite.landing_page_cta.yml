@@ -1,9 +1,9 @@
-langcode: en
 status: true
 dependencies:
   config:
     - core.entity_view_mode.node.landing_page_cta
     - field.field.node.microsite.body
+    - field.field.node.microsite.field_callout_summary
     - field.field.node.microsite.field_featured_experts
     - field.field.node.microsite.field_featured_related_resources
     - field.field.node.microsite.field_intro
@@ -42,6 +42,7 @@ third_party_settings:
         label: ''
     regions:
       content:
+        - field_long_title
         - node_title
         - field_intro
         - node_link_token
@@ -92,12 +93,21 @@ content:
             lb: ''
     weight: 1
     region: content
+  field_long_title:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
   field_main_image:
     type: media_responsive_thumbnail
     label: hidden
     settings:
       responsive_image_style: image_cta
       image_link: ''
+      image_loading:
+        attribute: lazy
     third_party_settings:
       ds:
         ft:
@@ -107,13 +117,15 @@ content:
     weight: 0
     region: image
 hidden:
+  addtoany: true
+  addtocal: true
   body: true
   content_moderation_control: true
+  field_callout_summary: true
   field_featured_experts: true
   field_featured_related_resources: true
   field_intro_paragraphs: true
   field_logo: true
-  field_long_title: true
   field_metatags: true
   field_primary_contacts: true
   field_project_partners: true

@@ -1,9 +1,11 @@
-langcode: en
 status: true
 dependencies:
   config:
     - facets.facet.department
     - facets.facet.experts_all_topics
+    - facets.facet.experts_region
+    - facets.facet.experts_tags
+    - facets.facet.experts_within_this_topic
     - facets.facet.international_office
     - facets.facet.languages_spoken_taxonomy_term_name
     - search_api.index.sitewide
@@ -12,6 +14,9 @@ dependencies:
     - search_api
 id: experts_summary
 name: 'Experts Summary'
+facet_source_id: 'search_api:views_page__experts_staff__experts_staff1'
+only_visible_when_facet_source_is_visible: true
+processor_configs: {  }
 facets:
   experts_all_topics:
     checked: true
@@ -37,6 +42,21 @@ facets:
     separator: ', '
     show_count: false
     weight: 0
-facet_source_id: 'search_api:views_page__experts_staff__experts_staff1'
-only_visible_when_facet_source_is_visible: true
-processor_configs: {  }
+  experts_region:
+    checked: true
+    label: Region
+    separator: ', '
+    show_count: false
+    weight: 0
+  experts_tags:
+    checked: true
+    label: Tags
+    separator: ', '
+    show_count: false
+    weight: 0
+  experts_within_this_topic:
+    checked: true
+    label: 'Within This Topic'
+    separator: ', '
+    show_count: false
+    weight: 0

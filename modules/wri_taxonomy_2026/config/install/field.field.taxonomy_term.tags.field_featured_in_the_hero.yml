@@ -1,0 +1,35 @@
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_featured_in_the_hero
+    - node.type.article
+    - node.type.data
+    - node.type.event
+    - node.type.program_center
+    - node.type.project_detail
+    - taxonomy.vocabulary.tags
+id: taxonomy_term.tags.field_featured_in_the_hero
+field_name: field_featured_in_the_hero
+entity_type: taxonomy_term
+bundle: tags
+label: 'Featured in the Hero'
+description: 'By default, the most recently published item tagged with this term and set to Super Featured will show to visitors. Use this field to feature different, specific content instead.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      article: article
+      data: data
+      event: event
+      program_center: program_center
+      project_detail: project_detail
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: article
+field_type: entity_reference

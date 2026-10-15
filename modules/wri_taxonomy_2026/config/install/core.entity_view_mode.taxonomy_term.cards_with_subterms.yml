@@ -1,0 +1,9 @@
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: taxonomy_term.cards_with_subterms
+label: 'Cards with subterms'
+description: ''
+targetEntityType: taxonomy_term
+cache: true

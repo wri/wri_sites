@@ -1,15 +1,18 @@
-langcode: en
 status: true
 dependencies:
   config:
     - block_content.type.webform_with_background_color
     - field.field.block_content.webform_with_background_color.field_cta_background
     - field.field.block_content.webform_with_background_color.field_hidden_from_visitors
+    - field.field.block_content.webform_with_background_color.field_intro
     - field.field.block_content.webform_with_background_color.field_other_orto_list_tags
     - field.field.block_content.webform_with_background_color.field_webform
   module:
     - entity_class_formatter
+    - text
     - webform
+_core:
+  default_config_hash: 7ieXWfKUM6Oay6p9NFl0e7ICGz4iVniShVPQJkAtNxs
 id: block_content.webform_with_background_color.default
 targetEntityType: block_content
 bundle: webform_with_background_color
@@ -25,6 +28,13 @@ content:
       field: ''
     third_party_settings: {  }
     weight: 1
+    region: content
+  field_intro:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
     region: content
   field_other_orto_list_tags:
     type: basic_string

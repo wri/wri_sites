@@ -1,0 +1,9 @@
+status: true
+dependencies:
+  module:
+    - node
+id: node.hero_featured
+label: 'Hero Featured'
+description: ''
+targetEntityType: node
+cache: true

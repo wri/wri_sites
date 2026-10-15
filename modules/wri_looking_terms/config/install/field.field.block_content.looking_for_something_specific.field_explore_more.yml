@@ -1,5 +1,4 @@
-uuid: 76fa7129-6813-4571-815c-6123855d0e3f
-langcode: en
+uuid: 3a4ef346-50f7-4c60-ac03-856cad3504a7
 status: true
 dependencies:
   config:
@@ -8,6 +7,8 @@ dependencies:
     - filter.format.basic_html
   module:
     - text
+_core:
+  default_config_hash: erkpZ4HH0EmE_T4xAf06zu5TscocNvd3URRpq8O5uhg
 id: block_content.looking_for_something_specific.field_explore_more
 field_name: field_explore_more
 entity_type: block_content

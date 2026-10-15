@@ -33,4 +33,5 @@ hidden:
   field_custom_featured: true
   field_listing: true
   field_parent_menu_item: true
+  field_section_title: true
   search_api_excerpt: true

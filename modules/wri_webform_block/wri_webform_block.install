@@ -58,10 +58,12 @@ function wri_webform_block_add_permissions() {
   // 'edit any webform_block block content'
   // 'create webform_block block content'.
   $role = Role::load('editorial');
-  $role->grantPermission('revert any webform block content revisions');
-  $role->grantPermission('edit any webform block content');
-  $role->grantPermission('create webform block content');
-  $role->save();
+  if ($role) {
+    $role->grantPermission('revert any webform block content revisions');
+    $role->grantPermission('edit any webform block content');
+    $role->grantPermission('create webform block content');
+    $role->save();
+  }
 }
 
 /**
@@ -127,5 +129,18 @@ function wri_webform_block_update_10604() {
   \Drupal::service('distro_helper.updates')->updateConfig('field.field.block_content.webform_with_background_color.field_cta_background', [
     'required',
     'default_value#0',
+  ], 'wri_webform_block', 'install');
+}
+
+/**
+ * Updates config changed between main and HEAD.
+ */
+function wri_webform_block_update_10605() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.block_content.webform_with_background_color.default', [
+    'content#field_hidden_from_visitors#weight',
+    'content#field_intro',
+  ], 'wri_webform_block', 'install');
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.block_content.webform_with_background_color.default', [
+    'content#field_intro',
   ], 'wri_webform_block', 'install');
 }

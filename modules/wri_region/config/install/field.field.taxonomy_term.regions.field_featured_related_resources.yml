@@ -1,0 +1,26 @@
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_featured_related_resources
+    - taxonomy.vocabulary.regions
+_core:
+  default_config_hash: mieL_yuks514PZM-liC2qMrLwtrY60BJyKNRMhkJ1Ac
+id: taxonomy_term.regions.field_featured_related_resources
+field_name: field_featured_related_resources
+entity_type: taxonomy_term
+bundle: regions
+label: 'Featured Resources'
+description: 'By default, the 3 most recently published items tagged with this term and set to Featured will show to visitors. Use this field to feature different, specific content instead.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: related_to_this_project
+      display_name: by_term
+      arguments:
+        - '[term:tid]'
+field_type: entity_reference

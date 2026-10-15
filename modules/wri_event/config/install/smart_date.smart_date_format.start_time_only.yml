@@ -1,0 +1,13 @@
+status: true
+dependencies: {  }
+id: start_time_only
+label: 'Start time only'
+date_format: ''
+time_format: 'g:ia <\s\p\a\n \c\l\a\s\s=''\g\m\t''>T</\s\p\a\n>'
+time_hour_format: 'g:ia <\s\p\a\n \c\l\a\s\s=''\g\m\t''>T</\s\p\a\n>'
+allday_label: 'All day'
+separator: '-'
+join: ''
+ampm_reduce: '1'
+date_first: '0'
+site_time_toggle: '0'

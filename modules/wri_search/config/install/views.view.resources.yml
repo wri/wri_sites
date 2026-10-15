@@ -1,10 +1,12 @@
-uuid: 170d95c1-240e-4fcd-8f3e-1f5b3cca9c73
 status: true
 dependencies:
   config:
     - search_api.index.sitewide
     - taxonomy.vocabulary.resource_type
     - taxonomy.vocabulary.tags
+  content:
+    - 'taxonomy_term:resource_type:6d64a8a9-b322-483e-8ba4-e42760376fc6'
+    - 'taxonomy_term:tags:f5d72745-7fdf-4f33-97f5-5a82972649d2'
   module:
     - better_exposed_filters
     - facets_exposed_filters
@@ -244,6 +246,7 @@ display:
               content_editor: '0'
               editorial: '0'
               administrator: '0'
+              microsite_editor: '0'
             expose_fields: false
             placeholder: 'Search Resources'
             searched_fields_id: ''
@@ -347,6 +350,52 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        field_tags:
+          id: field_tags
+          table: search_api_index_sitewide
+          field: field_tags
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_term
+          operator: not
+          value:
+            - 30200
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: tags
+          type: textfield
+          hierarchy: false
+          limit: true
+          error_message: true
         search_api_language:
           id: search_api_language
           table: search_api_index_sitewide
@@ -367,7 +416,7 @@ display:
             use_operator: false
             operator: ''
             operator_limit_selection: false
-            operator_list: { }
+            operator_list: {  }
             identifier: ''
             required: false
             remember: false
@@ -385,8 +434,8 @@ display:
             multiple: false
             remember: false
             default_group: All
-            default_group_multiple: { }
-            group_items: { }
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
         groups:
@@ -565,6 +614,7 @@ display:
                 soft_limit: 0
                 soft_limit_label_less: 'Show less'
                 soft_limit_label_more: 'Show more'
+                soft_limit_include_children: false
                 scrollable: false
                 scrollable_height: 300
               facets_child_topic_term:
@@ -585,6 +635,7 @@ display:
                 soft_limit: 0
                 soft_limit_label_less: 'Show less'
                 soft_limit_label_more: 'Show more'
+                soft_limit_include_children: false
                 scrollable: false
                 scrollable_height: 300
               facets_child_type_term:
@@ -605,6 +656,7 @@ display:
                 soft_limit: 0
                 soft_limit_label_less: 'Show less'
                 soft_limit_label_more: 'Show more'
+                soft_limit_include_children: false
                 scrollable: false
                 scrollable_height: 300
               facets_term_parent_or_self:
@@ -625,6 +677,7 @@ display:
                 soft_limit: 0
                 soft_limit_label_less: 'Show less'
                 soft_limit_label_more: 'Show more'
+                soft_limit_include_children: false
                 scrollable: false
                 scrollable_height: 300
               facets_term_child_of_parent:
@@ -645,6 +698,7 @@ display:
                 soft_limit: 0
                 soft_limit_label_less: 'Show less'
                 soft_limit_label_more: 'Show more'
+                soft_limit_include_children: false
                 scrollable: false
                 scrollable_height: 300
               facets_field_tags:
@@ -665,6 +719,7 @@ display:
                 soft_limit: 0
                 soft_limit_label_less: 'Show less'
                 soft_limit_label_more: 'Show more'
+                soft_limit_include_children: false
                 scrollable: false
                 scrollable_height: 300
       sorts:
@@ -1690,6 +1745,7 @@ display:
                 soft_limit: 0
                 soft_limit_label_less: 'Show less'
                 soft_limit_label_more: 'Show more'
+                soft_limit_include_children: false
                 scrollable: false
                 scrollable_height: 300
               facets_child_topic_term:
@@ -1710,6 +1766,7 @@ display:
                 soft_limit: 0
                 soft_limit_label_less: 'Show less'
                 soft_limit_label_more: 'Show more'
+                soft_limit_include_children: false
                 scrollable: false
                 scrollable_height: 300
               facets_child_type_term:
@@ -1730,6 +1787,7 @@ display:
                 soft_limit: 0
                 soft_limit_label_less: 'Show less'
                 soft_limit_label_more: 'Show more'
+                soft_limit_include_children: false
                 scrollable: false
                 scrollable_height: 300
               facets_term_parent_or_self:
@@ -1750,6 +1808,7 @@ display:
                 soft_limit: 0
                 soft_limit_label_less: 'Show less'
                 soft_limit_label_more: 'Show more'
+                soft_limit_include_children: false
                 scrollable: false
                 scrollable_height: 300
               facets_term_child_of_parent:
@@ -1770,6 +1829,7 @@ display:
                 soft_limit: 0
                 soft_limit_label_less: 'Show less'
                 soft_limit_label_more: 'Show more'
+                soft_limit_include_children: false
                 scrollable: false
                 scrollable_height: 300
               facets_field_tags:
@@ -1790,6 +1850,7 @@ display:
                 soft_limit: 0
                 soft_limit_label_less: 'Show less'
                 soft_limit_label_more: 'Show more'
+                soft_limit_include_children: false
                 scrollable: false
                 scrollable_height: 300
       sorts:
@@ -2632,6 +2693,7 @@ display:
                 soft_limit: 0
                 soft_limit_label_less: 'Show less'
                 soft_limit_label_more: 'Show more'
+                soft_limit_include_children: false
                 scrollable: false
                 scrollable_height: 300
               search_api_fulltext:
@@ -2665,6 +2727,7 @@ display:
                 soft_limit: 0
                 soft_limit_label_less: 'Show less'
                 soft_limit_label_more: 'Show more'
+                soft_limit_include_children: false
                 scrollable: false
                 scrollable_height: 300
               facets_top_level_type:
@@ -2685,6 +2748,7 @@ display:
                 soft_limit: 0
                 soft_limit_label_less: 'Show less'
                 soft_limit_label_more: 'Show more'
+                soft_limit_include_children: false
                 scrollable: false
                 scrollable_height: 300
               facets_child_type_term:
@@ -2705,6 +2769,7 @@ display:
                 soft_limit: 0
                 soft_limit_label_less: 'Show less'
                 soft_limit_label_more: 'Show more'
+                soft_limit_include_children: false
                 scrollable: false
                 scrollable_height: 300
               facets_term_parent_or_self:
@@ -2725,6 +2790,7 @@ display:
                 soft_limit: 0
                 soft_limit_label_less: 'Show less'
                 soft_limit_label_more: 'Show more'
+                soft_limit_include_children: false
                 scrollable: false
                 scrollable_height: 300
               facets_term_child_of_parent:
@@ -2745,6 +2811,7 @@ display:
                 soft_limit: 0
                 soft_limit_label_less: 'Show less'
                 soft_limit_label_more: 'Show more'
+                soft_limit_include_children: false
                 scrollable: false
                 scrollable_height: 300
               facets_field_tags:
@@ -2765,6 +2832,7 @@ display:
                 soft_limit: 0
                 soft_limit_label_less: 'Show less'
                 soft_limit_label_more: 'Show more'
+                soft_limit_include_children: false
                 scrollable: false
                 scrollable_height: 300
       filters:
@@ -2987,17 +3055,17 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        search_api_language:
-          id: search_api_language
+        field_type:
+          id: field_type
           table: search_api_index_sitewide
-          field: search_api_language
+          field: field_type
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: search_api_language
-          operator: in
+          plugin_id: search_api_term
+          operator: not
           value:
-            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+            - 30117
           group: 1
           exposed: false
           expose:
@@ -3015,6 +3083,190 @@ display:
             remember_roles:
               authenticated: authenticated
             reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: resource_type
+          type: textfield
+          hierarchy: false
+          limit: true
+          error_message: true
+        nid:
+          id: nid
+          table: search_api_index_sitewide
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_numeric
+          operator: '!='
+          value:
+            min: ''
+            max: ''
+            value: '102067'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        nid_1:
+          id: nid_1
+          table: search_api_index_sitewide
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_numeric
+          operator: '!='
+          value:
+            min: ''
+            max: ''
+            value: '101868'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_tags:
+          id: field_tags
+          table: search_api_index_sitewide
+          field: field_tags
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_term
+          operator: not
+          value:
+            - 30200
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: tags
+          type: textfield
+          hierarchy: false
+          limit: true
+          error_message: true
+        nid_2:
+          id: nid_2
+          table: search_api_index_sitewide
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_numeric
+          operator: '!='
+          value:
+            min: ''
+            max: ''
+            value: '103985'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -3491,6 +3743,46 @@ display:
                   sort: 40
                 settings:
                   sort: ASC
+        search_api_language:
+          id: search_api_language
+          table: search_api_index_sitewide
+          field: search_api_language
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
         groups:

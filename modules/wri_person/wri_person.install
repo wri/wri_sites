@@ -179,3 +179,16 @@ function wri_person_update_10501() {
 function wri_person_update_10502() {
   \Drupal::service('distro_helper.updates')->updateConfig('metatag.metatag_defaults.node__person', ['tags#metatag_custom_tag:wri_type'], 'wri_person');
 }
+
+/**
+ * Updates config changed between main and HEAD.
+ */
+function wri_person_update_10503() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_form_display.node.person.default', [
+    'third_party_settings#field_group#group_category',
+    'content#field_region',
+    'content#field_tags',
+  ], 'wri_person', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.person.field_region', 'wri_person', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.node.person.field_tags', 'wri_person', 'install');
+}

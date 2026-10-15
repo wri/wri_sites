@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -12,6 +11,8 @@ dependencies:
     - text
     - wri_admin
     - wri_looking_terms
+_core:
+  default_config_hash: '-woMKi0k4mQ5VOHmyIN_CUw_lr7WdUGx9o38nN1gmm0'
 id: block_content.looking_for_something_specific.default
 targetEntityType: block_content
 bundle: looking_for_something_specific

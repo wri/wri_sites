@@ -1,0 +1,207 @@
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.hero_featured
+    - field.field.node.data.body
+    - field.field.node.data.field_authors
+    - field.field.node.data.field_featured
+    - field.field.node.data.field_featured_headline
+    - field.field.node.data.field_featured_text
+    - field.field.node.data.field_files
+    - field.field.node.data.field_intro
+    - field.field.node.data.field_license
+    - field.field.node.data.field_media
+    - field.field.node.data.field_metatags
+    - field.field.node.data.field_narrative_taxonomy
+    - field.field.node.data.field_platform_link
+    - field.field.node.data.field_primary_contacts
+    - field.field.node.data.field_primary_topic
+    - field.field.node.data.field_projects
+    - field.field.node.data.field_region
+    - field.field.node.data.field_related_resources
+    - field.field.node.data.field_tags
+    - field.field.node.data.field_type
+    - field.field.node.data.layout_builder__layout
+    - image.style.363x245
+    - node.type.data
+  module:
+    - ds
+    - layout_builder
+    - layout_builder_restrictions
+    - media
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      allowed_layouts: {  }
+      denylisted_blocks: {  }
+      allowlisted_blocks: {  }
+  ds:
+    layout:
+      id: layout_card
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      image:
+        - node_title
+        - field_media
+      intro:
+        - dek_summary_fallback
+      content_type:
+        - 'bundle_field:node'
+      date:
+        - node_post_date
+      tag:
+        - field_primary_topic
+    fields:
+      dek_summary_fallback:
+        plugin_id: dek_summary_fallback
+        weight: 0
+        label: hidden
+        formatter: default
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: false
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: true
+            fi-el: div
+            fi-cl: body-base
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+      'bundle_field:node':
+        plugin_id: 'bundle_field:node'
+        weight: 3
+        label: hidden
+        formatter: default
+        ft:
+          id: reset
+          settings:
+            lb: ''
+      node_post_date:
+        plugin_id: node_post_date
+        weight: 4
+        label: hidden
+        formatter: ds_post_date_short_day
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: false
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
+      node_title:
+        plugin_id: node_title
+        weight: 2
+        label: hidden
+        formatter: default
+        settings:
+          link: true
+          'link class': ''
+          link_target: ''
+          wrapper: div
+          class: 'block label mb-4 hocus-text-underline'
+        ft:
+          id: reset
+          settings:
+            lb: ''
+id: node.data.hero_featured
+targetEntityType: node
+bundle: data
+mode: hero_featured
+content:
+  field_media:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: 363x245
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      ds:
+        ft:
+          id: reset
+          settings:
+            lb: ''
+    weight: 0
+    region: image
+  field_primary_topic:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: tag
+hidden:
+  addtoany: true
+  addtocal: true
+  body: true
+  content_moderation_control: true
+  field_authors: true
+  field_featured: true
+  field_featured_headline: true
+  field_featured_text: true
+  field_files: true
+  field_intro: true
+  field_license: true
+  field_metatags: true
+  field_narrative_taxonomy: true
+  field_platform_link: true
+  field_primary_contacts: true
+  field_projects: true
+  field_region: true
+  field_related_resources: true
+  field_tags: true
+  field_transparent_header: true
+  field_type: true
+  langcode: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  wri_social_sharing_block: true

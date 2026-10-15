@@ -1,0 +1,21 @@
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.tags
+  module:
+    - taxonomy
+id: tags
+label: Tags
+type: 'canonical_entities:taxonomy_term'
+pattern: '/[term:field_primary_topic:entity:url:path]/[term:name]'
+selection_criteria:
+  aaf87284-fbdf-4f68-a52c-07bda6f92697:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      tags: tags
+selection_logic: and
+weight: -5
+relationships: {  }

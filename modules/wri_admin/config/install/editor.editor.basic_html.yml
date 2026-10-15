@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -38,6 +37,9 @@ settings:
         -
           label: 'Serif font'
           element: '<span class="font-serif">'
+        -
+          label: 'Arrow link'
+          element: '<a class="arrow-link">'
     editor_advanced_link_link:
       enabled_attributes:
         - class

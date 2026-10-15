@@ -5,6 +5,7 @@ dependencies:
     - field.field.node.custom_page.body
     - field.field.node.custom_page.field_main_image
     - field.field.node.custom_page.field_metatags
+    - field.field.node.custom_page.field_projects
     - field.field.node.custom_page.layout_builder__layout
     - image.style.150_tall
     - node.type.custom_page
@@ -69,6 +70,7 @@ hidden:
   addtocal: true
   body: true
   field_metatags: true
+  field_projects: true
   langcode: true
   layout_builder__layout: true
   links: true

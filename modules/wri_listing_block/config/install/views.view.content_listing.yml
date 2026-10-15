@@ -339,10 +339,11 @@ display:
             type: none
             fail: 'not found'
           validate_options: {  }
-          break_phrase: false
+          break_phrase: true
           add_table: false
           require_value: false
           reduce_duplicates: false
+          not: 0
         field_projects_target_id:
           id: field_projects_target_id
           table: node__field_projects
@@ -956,10 +957,11 @@ display:
             type: none
             fail: 'not found'
           validate_options: {  }
-          break_phrase: false
+          break_phrase: true
           add_table: false
           require_value: false
           reduce_duplicates: false
+          not: 0
         field_projects_target_id:
           id: field_projects_target_id
           table: node__field_projects

@@ -1,9 +1,10 @@
-langcode: en
 status: true
 dependencies:
   config:
     - core.entity_view_mode.node.card
     - field.field.node.event.body
+    - field.field.node.event.field_body_contains_recording
+    - field.field.node.event.field_calendar_description
     - field.field.node.event.field_date_time
     - field.field.node.event.field_event_display
     - field.field.node.event.field_featured
@@ -18,6 +19,7 @@ dependencies:
     - field.field.node.event.field_metatag
     - field.field.node.event.field_primary_contacts
     - field.field.node.event.field_primary_topic
+    - field.field.node.event.field_produced_by
     - field.field.node.event.field_projects
     - field.field.node.event.field_region
     - field.field.node.event.field_register
@@ -47,11 +49,11 @@ third_party_settings:
   ds:
     layout:
       id: layout_card
-      settings:
-        label: ''
       library: null
       disable_css: false
       entity_classes: all_classes
+      settings:
+        label: ''
     regions:
       image:
         - field_main_image
@@ -63,7 +65,41 @@ third_party_settings:
         - node_title
       content_type:
         - field_type
+      intro:
+        - dek_summary_fallback
     fields:
+      dek_summary_fallback:
+        plugin_id: dek_summary_fallback
+        weight: 0
+        label: hidden
+        formatter: default
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            lbw: false
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            lb-col: false
+            ow: true
+            ow-el: div
+            ow-cl: secondary
+            ow-at: ''
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fis-def-at: false
+            fi: false
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            fi-def-at: false
+            prefix: ''
+            suffix: ''
       node_title:
         plugin_id: node_title
         weight: 2
@@ -142,9 +178,14 @@ content:
     weight: 3
     region: content_type
 hidden:
+  addtoany: true
+  addtocal: true
   body: true
   content_moderation_control: true
   field_authors: true
+  field_body_contains_recording: true
+  field_calendar_description: true
+  field_callout_summary: true
   field_event_display: true
   field_exclude_from_blog_feed: true
   field_featured: true
@@ -161,6 +202,7 @@ hidden:
   field_location_detail: true
   field_metatag: true
   field_primary_contacts: true
+  field_produced_by: true
   field_projects: true
   field_region: true
   field_register: true

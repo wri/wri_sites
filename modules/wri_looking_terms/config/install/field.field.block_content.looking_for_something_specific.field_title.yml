@@ -1,10 +1,11 @@
-uuid: f223ad97-a179-40b0-86bd-2554863ce151
-langcode: en
+uuid: ff6355d9-8365-4e5c-8fa9-0659e91e8fb2
 status: true
 dependencies:
   config:
     - block_content.type.looking_for_something_specific
     - field.storage.block_content.field_title
+_core:
+  default_config_hash: gEiu4IHdTUya83DApBw3VzeirNczQIKfzRHfTgjw-CE
 id: block_content.looking_for_something_specific.field_title
 field_name: field_title
 entity_type: block_content

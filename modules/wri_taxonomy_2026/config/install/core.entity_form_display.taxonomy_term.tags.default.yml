@@ -1,0 +1,181 @@
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.tags.field_featured_experts
+    - field.field.taxonomy_term.tags.field_featured_in_the_hero
+    - field.field.taxonomy_term.tags.field_featured_items
+    - field.field.taxonomy_term.tags.field_featured_related_resources
+    - field.field.taxonomy_term.tags.field_intro
+    - field.field.taxonomy_term.tags.field_landing_page
+    - field.field.taxonomy_term.tags.field_main_image
+    - field.field.taxonomy_term.tags.field_primary_topic
+    - field.field.taxonomy_term.tags.field_projects
+    - field.field.taxonomy_term.tags.layout_builder__layout
+    - taxonomy.vocabulary.tags
+  module:
+    - field_group
+    - media_library
+    - media_library_edit
+    - path
+    - text
+third_party_settings:
+  field_group:
+    group_category:
+      children:
+        - field_primary_topic
+      label: Category
+      region: content
+      parent_name: group_more
+      weight: 6
+      format_type: details
+      format_settings:
+        classes: ''
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+    group_related:
+      children:
+        - field_landing_page
+        - field_featured_in_the_hero
+        - field_featured_related_resources
+        - field_featured_experts
+        - field_projects
+        - field_featured_items
+      label: Related
+      region: content
+      parent_name: ''
+      weight: 20
+      format_type: details
+      format_settings:
+        classes: ''
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
+_core:
+  default_config_hash: KsofjMC79ZGQSbyLfpJNiYlLM6SLH9gOFGIT65811nI
+id: taxonomy_term.tags.default
+targetEntityType: taxonomy_term
+bundle: tags
+mode: default
+content:
+  field_featured_experts:
+    type: entity_reference_autocomplete
+    weight: 3
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_featured_in_the_hero:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_featured_items:
+    type: entity_reference_autocomplete
+    weight: 6
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_featured_related_resources:
+    type: entity_reference_autocomplete
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_intro:
+    type: text_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_landing_page:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_main_image:
+    type: media_library_widget
+    weight: 3
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: true
+  field_primary_topic:
+    type: options_select
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_projects:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 5
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 101
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden:
+  description: true
+  field_event_listing: true
+  field_hero_listing: true
+  field_on_page_resource_library: true
+  field_project_listing: true
+  field_resources_listing: true
+  layout_builder__layout: true

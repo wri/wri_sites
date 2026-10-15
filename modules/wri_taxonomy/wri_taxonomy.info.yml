@@ -5,9 +5,13 @@ core_version_requirement: '>=9.5'
 package: WRI
 dependencies:
   - cer
+  - pathauto
   - taxonomy
   - views
+  - wri_admin
   - wri_common
+  - wri_node
+  - wri_small_cta
 config_devel:
   install:
     - core.entity_form_display.taxonomy_term.tags.default

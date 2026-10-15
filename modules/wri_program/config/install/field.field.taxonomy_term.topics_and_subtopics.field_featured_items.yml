@@ -1,0 +1,26 @@
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_featured_items
+    - taxonomy.vocabulary.topics_and_subtopics
+_core:
+  default_config_hash: WitUWElIX2gSX7tN17vjt2rkh7gnyZae8edn3N9BI4o
+id: taxonomy_term.topics_and_subtopics.field_featured_items
+field_name: field_featured_items
+entity_type: taxonomy_term
+bundle: topics_and_subtopics
+label: 'Pinned Resource Library items'
+description: 'Pin these items to the top of the On-page Resources list.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: tagged_with
+      display_name: entity_reference_1
+      arguments:
+        - '[term:tid]'
+field_type: entity_reference

@@ -1,7 +1,8 @@
+uuid: 3f5f5f2e-6b8f-4e1a-9f0a-2c8b7e6f4a1d
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.hero_featured
     - node.type.event
     - taxonomy.vocabulary.featured
     - taxonomy.vocabulary.topics_and_subtopics
@@ -170,12 +171,19 @@ display:
             operator_limit_selection: false
             operator_list: {  }
       style:
-        type: default
+        type: html_list
+        options:
+          row_class: ''
+          default_row_class: true
+          uses_fields: false
+          type: ul
+          wrapper_class: item-list
+          class: listing-items
       row:
         type: 'entity:node'
         options:
           relationship: none
-          view_mode: teaser
+          view_mode: hero_featured
       query:
         type: views_query
         options:
@@ -185,6 +193,11 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
+      use_more: false
+      use_more_always: false
+      use_more_text: 'View more'
+      link_display: custom_url
+      link_url: /events
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -348,6 +361,48 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        langcode:
+          id: langcode
+          table: node_field_data
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       defaults:
         sorts: false
         filters: false
@@ -469,6 +524,48 @@ display:
             min_placeholder: ''
             max_placeholder: ''
             placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        langcode:
+          id: langcode
+          table: node_field_data
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
           is_grouped: false
           group_info:
             label: ''
@@ -661,12 +758,57 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        langcode:
+          id: langcode
+          table: node_field_data
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       defaults:
         empty: false
         sorts: false
         filters: false
       display_description: 'Upcoming events marked Featured for the given topic. Falls back to Upcoming (any), then Past Featured.'
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
       block_description: 'Featured Events (Upcoming Featured)'
       block_hide_empty: true
     cache_metadata:

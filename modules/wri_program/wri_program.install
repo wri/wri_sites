@@ -41,6 +41,11 @@ function wri_program_update_dependencies() {
   $dependencies['wri_program'][10401] = [
     'wri_node' => 10401,
   ];
+  // Needs the taxonomy field storages and the landing_page_cta view mode.
+  $dependencies['wri_program'][10407] = [
+    'wri_taxonomy' => 10607,
+    'wri_node' => 10601,
+  ];
 
   return $dependencies;
 }
@@ -107,4 +112,34 @@ function wri_program_update_10405(): void {
  */
 function wri_program_update_10406(): void {
   \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.callout', 'wri_program', 'install', FALSE);
+}
+
+/**
+ * Updates config changed between main and HEAD.
+ */
+function wri_program_update_10407() {
+  \Drupal::service('distro_helper.updates')->updateConfig('core.entity_view_display.node.program_center.card', [
+    'third_party_settings#ds#regions#intro',
+    'third_party_settings#ds#fields#dek_summary_fallback',
+  ], 'wri_program', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.taxonomy_term.topics_and_subtopics.field_featured_experts', 'wri_program', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.taxonomy_term.topics_and_subtopics.field_intro', 'wri_program', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.taxonomy_term.topics_and_subtopics.field_main_image', 'wri_program', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.taxonomy_term.topics_and_subtopics.field_projects', 'wri_program', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.taxonomy_term.topics_and_subtopics.field_related_tags', 'wri_program', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.taxonomy_term.topics_and_subtopics.layout_builder__layout', 'wri_program', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.program_center.landing_page_cta', 'wri_program', 'install');
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.all_topics', [
+    'display#topic_list_block_anchored',
+  ], 'wri_program', 'install');
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.taxonomy_term.topics_and_subtopics.field_featured_items', [
+    'label',
+    'description',
+  ], 'wri_program', 'install');
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.taxonomy_term.topics_and_subtopics.field_intro', [
+    'translatable',
+  ], 'wri_program', 'install');
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.taxonomy_term.topics_and_subtopics.field_main_image', [
+    'translatable',
+  ], 'wri_program', 'install');
 }

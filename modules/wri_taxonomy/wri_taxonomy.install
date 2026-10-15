@@ -243,7 +243,7 @@ function wri_taxonomy_update_10604() {
 function wri_taxonomy_update_10605() {
   // Updates run before config import, so install the fields first.
   $updates = \Drupal::service('distro_helper.updates');
-  $updates->installConfig('field.storage.block_content.field_hidden_from_visitors', 'wri_webform_block');
+  $updates->installConfig('field.storage.block_content.field_hidden_from_visitors', 'wri_block');
   $updates->installConfig('field.field.block_content.webform_with_background_color.field_intro', 'wri_webform_block');
   $updates->installConfig('field.field.block_content.webform_with_background_color.field_hidden_from_visitors', 'wri_webform_block');
 
@@ -307,5 +307,25 @@ function _wri_taxonomy_force_block_id($uuid, $id, array $values) {
   if (!$block) {
     $block = BlockContent::create(['revision_id' => $id] + $values);
     $block->save();
+  }
+}
+
+/**
+ * Updates config changed between main and HEAD.
+ */
+function wri_taxonomy_update_10607() {
+  \Drupal::service('distro_helper.updates')->installConfig('field.field.taxonomy_term.tags.field_featured_items', 'wri_taxonomy', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_featured_events', 'wri_taxonomy', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_featured_experts', 'wri_taxonomy', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_featured_related_resources', 'wri_taxonomy', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_primary_topic', 'wri_taxonomy', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_project_listing', 'wri_taxonomy', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_projects', 'wri_taxonomy', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_related_tags', 'wri_taxonomy', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.field_resources_listing', 'wri_taxonomy', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('field.storage.taxonomy_term.layout_builder__layout', 'wri_taxonomy', 'install');
+  if (\Drupal::moduleHandler()->moduleExists('content_translation')) {
+    \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.taxonomy_term.tags', 'wri_taxonomy', 'optional');
+    \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.taxonomy_term.topics_and_subtopics', 'wri_taxonomy', 'optional');
   }
 }

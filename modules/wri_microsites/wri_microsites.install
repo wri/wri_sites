@@ -49,6 +49,10 @@ function wri_microsites_update_dependencies() {
   $dependencies['wri_microsites'][10401] = [
     'wri_node' => 10401,
   ];
+  // Needs the landing_page_cta view mode.
+  $dependencies['wri_microsites'][10406] = [
+    'wri_node' => 10601,
+  ];
   return $dependencies;
 }
 
@@ -67,4 +71,11 @@ function wri_microsites_update_10405(): void {
     'third_party_settings#field_group#group_featured#children',
     'content#field_callout_summary',
   ], 'wri_microsites', 'install');
+}
+
+/**
+ * Updates config changed between main and HEAD.
+ */
+function wri_microsites_update_10406() {
+  \Drupal::service('distro_helper.updates')->installConfig('core.entity_view_display.node.microsite.landing_page_cta', 'wri_microsites', 'install');
 }

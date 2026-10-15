@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the wri_menus module.
+ */
+
+/**
+ * Install the 2026 donate and main menus.
+ */
+function wri_menus_update_10601() {
+  \Drupal::service('distro_helper.updates')->installConfig('system.menu.donate_2026', 'wri_menus', 'install');
+  \Drupal::service('distro_helper.updates')->installConfig('system.menu.main-menu-2026', 'wri_menus', 'install');
+}

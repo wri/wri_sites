@@ -145,10 +145,176 @@ final class WriCommonCommands extends DrushCommands {
         $this->logger()->warning("Skipped (deleted in diff): $relativePath");
         continue;
       }
+      if ($reason = $this->getIgnoreReason($absolutePath)) {
+        $this->logger()->notice("Skipped ($reason): $relativePath");
+        continue;
+      }
       $this->processConfigFile($absolutePath, (bool) $options['write-update-hook'], $newModules);
     }
 
     $this->io()->success('Sync complete.');
+  }
+
+  /**
+   * Writes update hooks for profile config changed between two commits.
+   *
+   * @param string $base
+   *   The base commit/ref in the profile repo.
+   * @param string $target
+   *   The target commit/ref in the profile repo.
+   * @param array $options
+   *   Command options.
+   *
+   * @command wri_common:update-hooks-from-diff
+   * @aliases wri-uhd
+   * @option confirm Ask before including each changed file in a hook.
+   */
+  #[CLI\Command(name: 'wri_common:update-hooks-from-diff', aliases: ['wri-uhd'])]
+  #[CLI\Argument(name: 'base', description: 'The base commit in the profile repo.')]
+  #[CLI\Argument(name: 'target', description: 'The target commit in the profile repo.')]
+  #[CLI\Option(name: 'confirm', description: 'Ask y/n before including each changed file in a hook.')]
+  #[CLI\Usage(name: 'wri_common:update-hooks-from-diff main HEAD', description: 'Write an update hook per module for config changed between main and HEAD.')]
+  #[CLI\Usage(name: 'wri_common:update-hooks-from-diff abc123 def456 --confirm', description: 'Same, but confirm each file.')]
+  public function updateHooksFromDiff(string $base, string $target, array $options = ['confirm' => FALSE]): void {
+    $profileDir = str_starts_with($this->profileDirectory, '/') ? $this->profileDirectory : $this->appRoot . '/' . $this->profileDirectory;
+    $repoRoot = trim($this->runGitCommand('git rev-parse --show-toplevel', $profileDir));
+
+    $output = $this->runGitCommand(
+      sprintf('git diff --no-renames --name-status %s %s -- %s', escapeshellarg($base), escapeshellarg($target), escapeshellarg(':(glob)**/config/*/*.yml')),
+      $repoRoot
+    );
+
+    // Calls to add, grouped by owning module.
+    $callsByModule = [];
+    $installDirs = [];
+    foreach (array_filter(explode("\n", trim($output))) as $line) {
+      [$status, $relativePath] = explode("\t", $line, 2);
+      if ($status === 'D') {
+        $this->logger()->notice("Skipped (deleted): $relativePath");
+        continue;
+      }
+
+      [$module, $directory, $moduleDir] = $this->resolveModuleAndDirectory("$repoRoot/$relativePath");
+      $moduleRelDir = ltrim(substr($moduleDir, strlen($repoRoot)), '/');
+      $infoFile = ($moduleRelDir === '' ? '' : "$moduleRelDir/") . "$module.info.yml";
+      if (!$this->refHasFile($base, $infoFile, $repoRoot)) {
+        $this->logger()->notice("Skipped (module '$module' is new): $relativePath");
+        continue;
+      }
+
+      $configName = basename($relativePath, '.yml');
+      if ($status === 'A') {
+        $call = "\\Drupal::service('distro_helper.updates')->installConfig('$configName', '$module', '$directory');";
+      }
+      else {
+        $keys = $this->extractChangedYamlKeys(
+          $this->runGitCommand(sprintf('git show %s', escapeshellarg("$base:$relativePath")), $repoRoot),
+          $this->runGitCommand(sprintf('git show %s', escapeshellarg("$target:$relativePath")), $repoRoot)
+        );
+        if (empty($keys)) {
+          $this->logger()->notice("Skipped (no changed keys): $relativePath");
+          continue;
+        }
+        $keyLines = implode(",\n    ", array_map(fn($k) => "'$k'", $keys));
+        $call = "\\Drupal::service('distro_helper.updates')->updateConfig('$configName', [\n    $keyLines,\n  ], '$module', '$directory');";
+      }
+
+      if ($options['confirm'] && !$this->io()->confirm("Add an update hook for $relativePath?", TRUE)) {
+        continue;
+      }
+      $callsByModule[$module][] = $call;
+      $installDirs[$module] = $moduleDir;
+    }
+
+    if (empty($callsByModule)) {
+      $this->io()->note("No config changes to write hooks for between '$base' and '$target'.");
+      return;
+    }
+
+    foreach ($callsByModule as $module => $calls) {
+      $installFile = $this->resolveInstallFile($installDirs[$module], $module);
+      $hookNumber = $this->nextUpdateHookNumber($installFile, $module);
+      $hookCode = "\n/**\n * Updates config changed between $base and $target.\n */\nfunction {$module}_update_{$hookNumber}() {\n  " . implode("\n  ", $calls) . "\n}\n";
+      $this->appendUpdateHook($installFile, $hookCode);
+    }
+
+    $this->io()->success('Update hooks written.');
+  }
+
+  /**
+   * Returns whether a file exists at a git ref.
+   */
+  protected function refHasFile(string $ref, string $path, string $repoRoot): bool {
+    try {
+      $this->runGitCommand(sprintf('git cat-file -e %s', escapeshellarg("$ref:$path")), $repoRoot);
+      return TRUE;
+    }
+    catch (\RuntimeException $e) {
+      return FALSE;
+    }
+  }
+
+  /**
+   * Rules for config that sync-config-from-diff should skip.
+   *
+   * Add a rule by adding an entry: the key is the reason logged when a file is
+   * skipped, the value receives the config name and whether the profile
+   * already ships that config, and returns TRUE to skip it.
+   *
+   * @return array<string, callable(string, bool): bool>
+   *   Skip rules keyed by reason.
+   */
+  protected function ignoreRules(): array {
+    return [
+      'webform not already in profile' => fn(string $name, bool $inProfile) => str_starts_with($name, 'webform.webform') && !$inProfile,
+      'ignore asset injector' => fn(string $name, bool $inProfile) => str_starts_with($name, 'asset_injector') && !$inProfile,
+      'ignore core.extension' => fn(string $name, bool $inProfile) => $name === 'core.extension.yml',
+      'ignore downloads sector view' => fn(string $name, bool $inProfile) => $name === 'views.view.downloads_sector.yml',
+      'ignore statistics settings' => fn(string $name, bool $inProfile) => $name === 'statistics.settings.yml',
+      'ignore jsonapi extras' => fn(string $name, bool $inProfile) => str_starts_with($name, 'jsonapi_extras.jsonapi_resource_config') && !$inProfile,
+      'ignore ultimate cron' => fn(string $name, bool $inProfile) => str_starts_with($name, 'ultimate_cron.job') && !$inProfile,
+    ];
+  }
+
+  /**
+   * Returns the reason a config file should be skipped, or NULL to sync it.
+   *
+   * @param string $absoluteSourcePath
+   *   Absolute path to the source config file.
+   */
+  protected function getIgnoreReason(string $absoluteSourcePath): ?string {
+    $filename = basename($absoluteSourcePath);
+    $configName = basename($filename, '.yml');
+    $inProfile = !empty($this->findProfileConfigPaths($filename));
+    foreach ($this->ignoreRules() as $reason => $rule) {
+      if ($rule($configName, $inProfile)) {
+        return $reason;
+      }
+    }
+    return NULL;
+  }
+
+  /**
+   * Returns every path in the profile where a config file with this name lives.
+   *
+   * Searches modules/, themes/, and the profile's own top-level config/, since
+   * a config file can legitimately live in any of the three.
+   *
+   * @param string $filename
+   *   The config filename (e.g. 'node.type.page.yml').
+   *
+   * @return string[]
+   *   Absolute paths to every match.
+   */
+  protected function findProfileConfigPaths(string $filename): array {
+    $profileBase = rtrim($this->profileDirectory, '/');
+    $paths = [];
+    foreach (['modules', 'themes', 'config'] as $dir) {
+      if (is_dir("$profileBase/$dir")) {
+        $paths = array_merge($paths, $this->findAllFilesInDirectory("$profileBase/$dir", $filename));
+      }
+    }
+    return $paths;
   }
 
   /**
@@ -224,19 +390,7 @@ final class WriCommonCommands extends DrushCommands {
     $filename = basename($absoluteSourcePath);
     $profileBase = $this->profileDirectory;
 
-    // Search modules/, themes/, and the profile's own top-level config/ —
-    // a config file can legitimately live in any of the three.
-    $searchRoots = [
-      rtrim($profileBase, '/') . '/modules',
-      rtrim($profileBase, '/') . '/themes',
-      rtrim($profileBase, '/') . '/config',
-    ];
-    $destPaths = [];
-    foreach ($searchRoots as $root) {
-      if (is_dir($root)) {
-        $destPaths = array_merge($destPaths, $this->findAllFilesInDirectory($root, $filename));
-      }
-    }
+    $destPaths = $this->findProfileConfigPaths($filename);
 
     if (count($destPaths) > 1) {
       throw new \RuntimeException("'$filename' exists in more than one place, which should never happen: " . implode(', ', array_map([
@@ -304,6 +458,10 @@ final class WriCommonCommands extends DrushCommands {
 
       $installFile = $this->resolveInstallFile($ownerDir, $owner);
       $hookCode = $this->generateUpdateHook($configName, $owner, $directory, $oldContentByPath[$path], $filtered, $installFile);
+      if ($hookCode === NULL) {
+        $this->logger()->notice("Skipped update hook (no changed keys): " . $this->relativeToProfile($path));
+        continue;
+      }
       $this->appendUpdateHook($installFile, $hookCode);
     }
   }
@@ -346,13 +504,13 @@ final class WriCommonCommands extends DrushCommands {
    * @param string $installFile
    *   Absolute path to the .install file to number the hook against.
    *
-   * @return string
-   *   PHP source for the new update hook, ready to append.
+   * @return string|null
+   *   PHP source for the new update hook, or NULL if no keys need updating.
    */
-  protected function generateUpdateHook(string $configName, string $module, string $directory, string $oldContent, string $newContent, string $installFile): string {
+  protected function generateUpdateHook(string $configName, string $module, string $directory, string $oldContent, string $newContent, string $installFile): ?string {
     $keys = $this->extractChangedYamlKeys($oldContent, $newContent);
     if (empty($keys)) {
-      $keys = $this->extractTopLevelYamlKeys($newContent);
+      return NULL;
     }
     $hookNumber = $this->nextUpdateHookNumber($installFile, $module);
 
@@ -384,7 +542,20 @@ final class WriCommonCommands extends DrushCommands {
     foreach ($skip as $key) {
       unset($old[$key], $new[$key]);
     }
-    return $this->diffArrays($old, $new);
+    return $this->withoutIgnoredKeys($this->diffArrays($old, $new));
+  }
+
+  /**
+   * Drops key paths that update hooks should never touch.
+   *
+   * @param string[] $keys
+   *   Key paths, '#'-delimited for nested keys.
+   *
+   * @return string[]
+   *   The keys not starting with an ignored prefix.
+   */
+  protected function withoutIgnoredKeys(array $keys): array {
+    return array_values(array_filter($keys, fn(string $key) => !str_starts_with($key, 'dependencies') && !str_starts_with($key, 'hidden')));
   }
 
   /**
@@ -479,28 +650,6 @@ final class WriCommonCommands extends DrushCommands {
     $directory = $m[3];
 
     return [$owner, $directory, $ownerDir];
-  }
-
-  /**
-   * Extracts top-level YAML key names from config file content.
-   *
-   * Skips Drupal metadata keys that should not be passed to updateConfig.
-   *
-   * @param string $content
-   *   Raw yml file content.
-   *
-   * @return string[]
-   *   The yml file content with skip items removed.
-   */
-  protected function extractTopLevelYamlKeys(string $content): array {
-    $skip = ['_core', 'uuid', 'langcode'];
-    $keys = [];
-    foreach (explode("\n", $content) as $line) {
-      if (preg_match('/^([a-zA-Z_][a-zA-Z0-9_]*):\s*/', $line, $m) && !in_array($m[1], $skip, TRUE)) {
-        $keys[] = $m[1];
-      }
-    }
-    return $keys;
   }
 
   /**
@@ -614,19 +763,23 @@ final class WriCommonCommands extends DrushCommands {
 
     $this->io()->note($note ?? "'$filename' was not found in any module under '$this->installProfile'. Choose where to write it.");
 
-    $question = new Question('Module machine name: ');
-    $question->setAutocompleterValues($modules);
+    $question = new Question("Module machine name (or 'skip' to not write it anywhere): ");
+    $question->setAutocompleterValues([...$modules, 'skip']);
     $question->setValidator(function (?string $value) use ($modules): string {
       if ($value === NULL || $value === '') {
-        throw new \RuntimeException('A module name is required.');
+        throw new \RuntimeException("A module name is required. Enter 'skip' to not write it anywhere.");
       }
-      if (!in_array($value, $modules, TRUE)) {
+      if ($value !== 'skip' && !in_array($value, $modules, TRUE)) {
         throw new \RuntimeException("'$value' is not a module under '$this->installProfile'.");
       }
       return $value;
     });
 
     $module = $this->io()->askQuestion($question);
+    if ($module === 'skip') {
+      $this->logger()->notice("Skipped '$filename'.");
+      return NULL;
+    }
     return "$modulesDir/$module/config/install/$filename";
   }
 

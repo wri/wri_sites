@@ -1,0 +1,29 @@
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_featured_experts
+    - node.type.person
+    - taxonomy.vocabulary.topics_and_subtopics
+_core:
+  default_config_hash: yre6eReCKCAKeOcAol9xm4t7CLOpjmYxBMivKoWWgBg
+id: taxonomy_term.topics_and_subtopics.field_featured_experts
+field_name: field_featured_experts
+entity_type: taxonomy_term
+bundle: topics_and_subtopics
+label: 'Featured Experts'
+description: 'Choose experts to feature on this term.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      person: person
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

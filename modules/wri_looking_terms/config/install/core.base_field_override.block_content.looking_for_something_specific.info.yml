@@ -1,0 +1,16 @@
+status: true
+dependencies:
+  config:
+    - block_content.type.looking_for_something_specific
+id: block_content.looking_for_something_specific.info
+field_name: info
+entity_type: block_content
+bundle: looking_for_something_specific
+label: 'Block description'
+description: 'A brief description of your block.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
