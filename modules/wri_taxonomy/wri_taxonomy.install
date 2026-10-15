@@ -329,3 +329,12 @@ function wri_taxonomy_update_10607() {
     \Drupal::service('distro_helper.updates')->installConfig('language.content_settings.taxonomy_term.topics_and_subtopics', 'wri_taxonomy', 'optional');
   }
 }
+
+/**
+ * Make landing_page field non-translatable.
+ */
+function wri_taxonomy_update_10608() {
+  \Drupal::service('distro_helper.updates')->updateConfig('field.field.taxonomy_term.tags.field_landing_page', [
+    'translatable',
+  ], 'wri_taxonomy', 'install');
+}

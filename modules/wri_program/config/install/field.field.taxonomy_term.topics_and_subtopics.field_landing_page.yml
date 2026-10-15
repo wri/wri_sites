@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -6,6 +5,8 @@ dependencies:
     - node.type.program_center
     - node.type.project_detail
     - taxonomy.vocabulary.topics_and_subtopics
+_core:
+  default_config_hash: NxCHQW6e5idJVZh1XO24PCsh4jul_Ii4uvqb1wcwcR0
 id: taxonomy_term.topics_and_subtopics.field_landing_page
 field_name: field_landing_page
 entity_type: taxonomy_term
@@ -13,7 +14,7 @@ bundle: topics_and_subtopics
 label: 'Landing page'
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
@@ -24,7 +25,6 @@ settings:
       project_detail: project_detail
     sort:
       field: _none
-      direction: ASC
     auto_create: false
     auto_create_bundle: program_center
 field_type: entity_reference
