@@ -283,7 +283,9 @@ function ts_wrin_preprocess_field(array &$variables) {
           ];
         }
         $pretty_path = \Drupal::service('wri_search.pretty_facets_helper')->getPrettyPaths($filters_current_result);
-        $variables['expert_facet_url'] = '/about/experts-staff' . $pretty_path;
+        // The front page URL carries the base path and language prefix ("/en/").
+        $prefix = rtrim(Url::fromRoute('<front>')->toString(), '/');
+        $variables['expert_facet_url'] = $prefix . '/about/experts-staff' . $pretty_path;
       }
     }
   }
