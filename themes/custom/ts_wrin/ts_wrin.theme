@@ -974,7 +974,7 @@ function ts_wrin_preprocess_google_json_api_no_results_message(&$variables) {
 /**
  * Implements hook_theme_suggestions_taxonomy_term_alter().
  */
-function wri_flagship_theme_suggestions_taxonomy_term_alter(array &$suggestions, array $variables) {
+function ts_wrin_theme_suggestions_taxonomy_term_alter(array &$suggestions, array $variables) {
   if ($variables['elements']['#view_mode'] === 'cards_with_subterms') {
     $suggestions[] = 'taxonomy_term__cards_with_subterms';
   }
