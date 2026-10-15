@@ -462,8 +462,10 @@ function _ts_wrin_set_term_anchor_link_variables(array &$variables): ?TermInterf
   if (!$term instanceof TermInterface) {
     return NULL;
   }
+  // getEntity() returns the original language, not the row's translation.
+  $term = \Drupal::service('entity.repository')->getTranslationFromContext($term);
 
-  $anchor = \Drupal::config('wri_taxonomy.settings')->get('resources_anchor') ?: 'resources';
+  $anchor =\Drupal::config('wri_taxonomy.settings')->get('resources_anchor') ?: 'resources';
   $variables['term_url'] = $term->toUrl()->toString() . '#' . $anchor;
   $variables['term_label'] = $term->label();
   $variables['#cache']['tags'][] = 'config:wri_taxonomy.settings';
