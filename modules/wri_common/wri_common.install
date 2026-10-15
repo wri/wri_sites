@@ -19,6 +19,10 @@ function wri_common_update_dependencies() {
     'wri_region' => 10002,
     'wri_event' => 10506,
   ];
+  // wri_megamenu_2026's submenu field needs the 2026 menus.
+  $dependencies['wri_common'][10611] = [
+    'wri_menus' => 10601,
+  ];
 
   return $dependencies;
 }

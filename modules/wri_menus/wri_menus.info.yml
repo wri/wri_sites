@@ -5,16 +5,17 @@ core_version_requirement: '>=9.5'
 package: WRI
 dependencies:
   - menu_block
-  - menu_position
   - jquery_once
 config_devel:
   install:
     - system.menu.donate
+    - system.menu.donate_2026
     - system.menu.footer-additional
     - system.menu.footer-main
     - system.menu.footer-offices
     - system.menu.footer-secondary
     - system.menu.how-you-can-help
+    - system.menu.main-menu-2026
     - system.menu.mega-menu
     - system.menu.page-hierarchies
     - system.menu.quick-links

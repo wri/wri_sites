@@ -9,3 +9,4 @@ dependencies:
   - drupal:menu_link_content
   - drupal:menu_ui
   - drupal:paragraphs
+  - wri_menus
