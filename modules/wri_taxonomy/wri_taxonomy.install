@@ -162,6 +162,9 @@ function wri_taxonomy_update_10401() {
  * Generates the term-level webform block.
  */
 function wri_taxonomy_update_10602() {
+  if (\Drupal::moduleHandler()->moduleExists('webform')) {
+    \Drupal::service('distro_helper.updates')->installConfig('webform.webform.term_email_signup', 'wri_taxonomy', 'optional');
+  }
   _wri_taxonomy_force_block_id(
     'c2faf277-9cee-48bd-9f70-09ee7613806a',
     100,
