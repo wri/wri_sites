@@ -90,6 +90,12 @@
   gap: var(--spacer-7);
 }
 
+/* Once Slick initializes on .view-content, the flex above would shrink
+   .slick-list to its content width, so Slick sizes each slide to ~1px. */
+.looking-terms-listing .slick-slider {
+  display: block;
+}
+
 /* Slick itself injects an extra wrapper div around each slide's original
    content at init time (inline `width: 100%; display: inline-block;`, no
    height) - one level deeper than the Views row wrapper. Reach through both
