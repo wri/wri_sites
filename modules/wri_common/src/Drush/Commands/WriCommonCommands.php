@@ -763,19 +763,23 @@ final class WriCommonCommands extends DrushCommands {
 
     $this->io()->note($note ?? "'$filename' was not found in any module under '$this->installProfile'. Choose where to write it.");
 
-    $question = new Question('Module machine name: ');
-    $question->setAutocompleterValues($modules);
+    $question = new Question("Module machine name (or 'skip' to not write it anywhere): ");
+    $question->setAutocompleterValues([...$modules, 'skip']);
     $question->setValidator(function (?string $value) use ($modules): string {
       if ($value === NULL || $value === '') {
-        throw new \RuntimeException('A module name is required.');
+        throw new \RuntimeException("A module name is required. Enter 'skip' to not write it anywhere.");
       }
-      if (!in_array($value, $modules, TRUE)) {
+      if ($value !== 'skip' && !in_array($value, $modules, TRUE)) {
         throw new \RuntimeException("'$value' is not a module under '$this->installProfile'.");
       }
       return $value;
     });
 
     $module = $this->io()->askQuestion($question);
+    if ($module === 'skip') {
+      $this->logger()->notice("Skipped '$filename'.");
+      return NULL;
+    }
     return "$modulesDir/$module/config/install/$filename";
   }
 
