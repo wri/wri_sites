@@ -341,3 +341,15 @@ function wri_taxonomy_update_10608() {
     'translatable',
   ], 'wri_taxonomy', 'install');
 }
+
+/**
+ * Disable the default taxonomy_term view.
+ */
+function wri_taxonomy_update_10609() {
+  $view = \Drupal::entityTypeManager()->getStorage('view')->load('taxonomy_term');
+  if ($view && $view->status()) {
+    $view->disable()->save();
+    return t('Disabled the taxonomy_term view.');
+  }
+  return t('The taxonomy_term view is missing or already disabled.');
+}
