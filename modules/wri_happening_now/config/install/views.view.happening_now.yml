@@ -212,7 +212,7 @@ display:
             label: ''
           inherit_type: 0
           null_below: 1
-          argument_number: 3
+          argument_number: '2'
           field_type: 'node_field_data::nid'
           plugin_id: views_arg_order_sort_default
         created:

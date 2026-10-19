@@ -27,6 +27,5 @@ function wri_happening_now_update_10302() {
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.happening_now', [
     'display#default#display_options#cache#type',
     'display#default#display_options#sorts#weight#argument_number',
-    'display#default#display_options#arguments#type#default_argument_options#argument',
   ], 'wri_happening_now', 'install');
 }
