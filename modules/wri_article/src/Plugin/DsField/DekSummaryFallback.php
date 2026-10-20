@@ -24,8 +24,9 @@ class DekSummaryFallback extends DsFieldBase {
     $info = [];
 
     if (isset($entity->field_intro->value)) {
-      $render = $entity->field_intro->view(['type' => 'text_default', 'label' => 'hidden']);
-      $info = ['#markup' => \Drupal::service('renderer')->render($render)];
+      $render = $entity->field_intro->view(['type' => 'text_trimmed', 'label' => 'hidden', 'trim_length' => 300]);
+      $markup =  \Drupal::service('renderer')->render($render);
+      $info = ['#markup' => $markup];
     }
     elseif (isset($entity->body->summary) && !empty($entity->body->summary)) {
       $info = ['#markup' => '<div class="clearfix text-formatted field field--name-field-intro field--type-text-long field--label-hidden field__item"><p>' . $entity->body->summary . '</p></div>'];
