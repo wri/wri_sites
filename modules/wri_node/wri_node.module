@@ -19,6 +19,8 @@ use Twig\Error\LoaderError;
  */
 function wri_node_preprocess_wri_page_hero(&$context) {
   $context['show_toggle'] = TRUE;
+  $context['megamenu_enabled_everywhere'] = (bool) \Drupal::config('wri_megamenu_2026.settings')->get('enable_everywhere');
+
   $node = \Drupal::routeMatch()->getParameter('node');
   if (!$node) {
     $node_route = \Drupal::routeMatch()->getRawParameter('section_storage');
@@ -50,7 +52,10 @@ function wri_node_preprocess_wri_page_hero(&$context) {
         '#responsive_image_style_id' => 'landing_page_hero',
       ];
       $context['content']['hero_image'] = $build;
-      General::$htmlClasses[] = 'transparent-header white';
+
+      if (!$context['megamenu_enabled_everywhere']) {
+        General::$htmlClasses[] = 'transparent-header white';
+      }
     }
     else {
       $context['content']['hero_image'] = [];
