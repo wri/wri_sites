@@ -94,3 +94,17 @@
     }
   }
 }
+
+.simple-page-intro > .block-field-blocktaxonomy-termtopics-and-subtopicsfield-landing-page:first-of-type {
+  margin-top: var(--spacer-15)
+}
+
+/* Give the block a top margin. */
+.simple-page-intro > .block-field-blocktaxonomy-termtopics-and-subtopicsfield-landing-page {
+  margin-top: var(--spacer-15)
+}
+
+/* Remove the top margin if this is a sibling of another div. */
+.simple-page-intro > div ~ .block-field-blocktaxonomy-termtopics-and-subtopicsfield-landing-page {
+  margin-top: initial;
+}

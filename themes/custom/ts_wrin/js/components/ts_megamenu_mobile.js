@@ -393,12 +393,19 @@
       themeSource.classList.contains("grey") ? "grey" : "green",
     );
 
+    var footerLogo = document.querySelector(".footer-logo img.logo-white");
+    var logoHtml = "";
+    if (footerLogo) {
+      var logoClone = footerLogo.cloneNode(false);
+      logoClone.classList.add("wri-mobile-nav__logo");
+      // Decorative here: the dialog is already labelled "Menu".
+      logoClone.alt = "";
+      logoHtml = logoClone.outerHTML;
+    }
+
     wrap.innerHTML =
       '<div class="wri-mobile-nav__header">' +
-      // Reuses the same white-logo asset the site's own branding block
-      // already references (#block-ts-wrin-branding), rather than
-      // introducing a new asset path or requiring a Twig change.
-      '<img class="wri-mobile-nav__logo" src="/sites/default/files/nav_logo_white_0.svg" alt="World Resources Institute">' +
+      logoHtml +
       '<button type="button" class="wri-mobile-nav__close" aria-label="Close menu">' +
       '<span aria-hidden="true">&times;</span>' +
       "</button>" +
