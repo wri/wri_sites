@@ -149,6 +149,54 @@ function wri_taxonomy_get_current_term(): ?TermInterface {
 }
 
 /**
+ * Syncs field_landing_page across all translations of a vocabulary's terms.
+ *
+ * Run before making the field untranslatable, while translations can still
+ * hold their own values. The default translation wins unless it is empty.
+ *
+ * @param string $vid
+ *   The vocabulary ID.
+ *
+ * @return int
+ *   The number of terms updated.
+ */
+function wri_taxonomy_sync_landing_page_translations(string $vid): int {
+  $storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+  $tids = $storage->getQuery()
+    ->accessCheck(FALSE)
+    ->condition('vid', $vid)
+    ->execute();
+  $updated = 0;
+  foreach ($storage->loadMultiple($tids) as $term) {
+    $languages = $term->getTranslationLanguages();
+    if (count($languages) < 2 || !$term->hasField('field_landing_page')) {
+      continue;
+    }
+    $value = $term->get('field_landing_page')->getValue();
+    if (!$value) {
+      foreach ($languages as $langcode => $language) {
+        if ($value = $term->getTranslation($langcode)->get('field_landing_page')->getValue()) {
+          break;
+        }
+      }
+    }
+    $changed = FALSE;
+    foreach ($languages as $langcode => $language) {
+      $translation = $term->getTranslation($langcode);
+      if ($translation->get('field_landing_page')->getValue() != $value) {
+        $translation->set('field_landing_page', $value);
+        $changed = TRUE;
+      }
+    }
+    if ($changed) {
+      $term->save();
+      $updated++;
+    }
+  }
+  return $updated;
+}
+
+/**
  * Implements hook_views_data().
  */
 function wri_taxonomy_views_data() {

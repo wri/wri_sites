@@ -337,9 +337,12 @@ function wri_taxonomy_update_10607() {
  * Make landing_page field non-translatable.
  */
 function wri_taxonomy_update_10608() {
+  $updated = wri_taxonomy_sync_landing_page_translations('tags');
   \Drupal::service('distro_helper.updates')->updateConfig('field.field.taxonomy_term.tags.field_landing_page', [
     'translatable',
   ], 'wri_taxonomy', 'install');
+
+  return t('Synced field_landing_page across translations on @count tags.', ['@count' => $updated]);
 }
 
 /**
