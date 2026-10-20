@@ -10,7 +10,7 @@
   {{ title_suffix.contextual_links }}
 
   {# Marquee hero #}
-  <div class="landing-page__hero {{ ((content.hero_image|render) ? 'has-image add-transparent-header add-white-header' : '') }}">
+  <div class="landing-page__hero {{ ((content.hero_image|render and not megamenu_enabled_everywhere) ? 'has-image add-transparent-header add-white-header' : '') }}">
     {% if content.hero_image %}
       <div class="hero__image">
         {{ content.hero_image }}

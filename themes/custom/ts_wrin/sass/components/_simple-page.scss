@@ -244,6 +244,16 @@
   }
 }
 
+/**
+  Hide the hero featured item until it shows in a column.
+ */
+.path-taxonomy .simple-page .layout__region--menu {
+  display: none;
+  @include mq($md) {
+    display: initial;
+  }
+}
+
 .experts-staff-header {
   .left {
     @include center-columns($grid-columns-mobile, $grid-columns-mobile);
