@@ -5,6 +5,7 @@ block.settings.wri_taxonomy_topic_pages_resource_section_link:
     link_title:
       type: string
       label: 'Link title'
+      translatable: true
 
 block.settings.wri_taxonomy_path_based_breadcrumb:
   type: block_settings
@@ -16,6 +17,7 @@ block.settings.wri_taxonomy_path_based_breadcrumb:
     home_link_url:
       type: string
       label: 'Home link URL'
+      translatable: true
 
 # Schema for the configuration files of the WRI taxonomy module.
 wri_taxonomy.settings:
