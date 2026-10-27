@@ -30,6 +30,7 @@ jobs:
           IS_CIRCLE: TRUE
           PHP_MEMORY_LIMIT: 256M
           PHP_CLI_MEMORY_LIMIT: 256M
+          COMPOSER_DISCARD_CHANGES: true
       - image: wodby/mariadb
         environment:
           MYSQL_RANDOM_ROOT_PASSWORD: 1
