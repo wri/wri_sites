@@ -1,0 +1,19 @@
+diff --git a/src/Plugin/schema_metatag/PropertyType/Url.php b/src/Plugin/schema_metatag/PropertyType/Url.php
+index a1eb1a4..8375e6e 100644
+--- a/src/Plugin/schema_metatag/PropertyType/Url.php
++++ b/src/Plugin/schema_metatag/PropertyType/Url.php
+@@ -16,4 +16,14 @@
+  */
+ class Url extends PropertyTypeBase {
+ 
++  /**
++   * {@inheritdoc}
++   */
++  public function formElement(array $input_values) {
++    $form = parent::formElement($input_values);
++    $form['#maxlength'] = 1024;
++
++    return $form;
++  }
++
+ }
