@@ -1,0 +1,3 @@
+field.formatter.settings.wri_event_smartdate_timezone_name:
+  type: field.formatter.settings.smartdate_default
+  label: 'Smart Date full time zone name formatter settings'
