@@ -98,10 +98,17 @@
   }
 }
 
-.publication,
 .article,
-.data {
-  .display-card .card-teaser-text {
+.custom_page,
+.data,
+.event,
+.page,
+.publication,
+.region,
+.simple_page,
+.subpage {
+  // Child combinator so .region/.page don't match Drupal's region/page wrappers.
+  > .display-card .card-teaser-text {
     display: none;
 
     .desktop-3 & {
