@@ -47,7 +47,7 @@ jobs:
             COMPOSER_MEMORY_LIMIT=-1 composer create-project --stability=dev wri/wri-starter-kit:^10.2 circletest
             rm -r circletest/web/profiles/contrib/wri_sites -f
             cd circletest
-            composer require wri/wri_sites:dev-main --no-interaction
+            composer require wri/wri_sites:dev-main --no-interaction --prefer-source -W
             composer require wri/wri_sites:dev-${CIRCLE_BRANCH} --no-interaction --prefer-source -W
             ./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/modules
             ./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/themes/custom
