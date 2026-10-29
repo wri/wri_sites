@@ -3,7 +3,7 @@
 namespace Drupal\wri_filter;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Path\PathMatcher;
+use Drupal\Core\Path\PathMatcherInterface;
 use Drupal\Core\Routing\AdminContext;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
@@ -22,9 +22,9 @@ class FilterService {
   protected $requestStack;
 
   /**
-   * Drupal\Core\Path\PathMatcher definition.
+   * Drupal\Core\Path\PathMatcherInterface definition.
    *
-   * @var \Drupal\Core\Path\PathMatcher
+   * @var \Drupal\Core\Path\PathMatcherInterface
    */
   protected $pathMatcher;
 
@@ -54,7 +54,7 @@ class FilterService {
    *
    * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
    *   RequestStack Class.
-   * @param \Drupal\Core\Path\PathMatcher $path_matcher
+   * @param \Drupal\Core\Path\PathMatcherInterface $path_matcher
    *   Pathmatcher Class.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   Entity type manager.
@@ -63,7 +63,7 @@ class FilterService {
    * @param \Drupal\Core\Routing\AdminContext $admin_context
    *   The admin context.
    */
-  public function __construct(RequestStack $request_stack, PathMatcher $path_matcher, EntityTypeManagerInterface $entityTypeManager, RouteMatchInterface $current_route_match, AdminContext $admin_context) {
+  public function __construct(RequestStack $request_stack, PathMatcherInterface $path_matcher, EntityTypeManagerInterface $entityTypeManager, RouteMatchInterface $current_route_match, AdminContext $admin_context) {
     $this->requestStack = $request_stack;
     $this->pathMatcher = $path_matcher;
     $this->entityTypeManager = $entityTypeManager;
