@@ -17,14 +17,17 @@
     ],
     "extra": {
         "patches": {
+            "drupal/address": {
+                "AddressFieldBuilder::build() needs an array return type for diff 2.x https://www.drupal.org/project/address/issues/3460590 (committed to 2.0.x, not released)": "https://git.drupalcode.org/project/address/-/commit/ba10f2ea735dc6f64e500a203116b4e897be37e1.diff"
+            },
             "drupal/core": {
-                "Dynamic Views Arguments via Tokens https://www.drupal.org/project/drupal/issues/1699378": "https://www.drupal.org/files/issues/2024-07-07/1699378-drupal-10.3.x.patch",
-                "Add reusable option to inline block creation https://www.drupal.org/project/drupal/issues/2999491": "https://www.drupal.org/files/issues/2024-01-23/add_reusable_option_to_inline_block_creation-2999491-141.patch",
-                "Hyphens and forward slashes (-/) break Views contextual filters https://www.drupal.org/node/672606": "https://www.drupal.org/files/issues/2022-09-27/672606-76.patch",
+                "Dynamic Views Arguments via Tokens https://www.drupal.org/project/drupal/issues/1699378": "https://git.drupalcode.org/project/drupal/-/merge_requests/9935.diff",
+                "Add reusable option to inline block creation https://www.drupal.org/project/drupal/issues/2999491": "https://raw.githubusercontent.com/wri/wri_sites/refs/heads/624-d11-upgrade/patches/core--reusable-option-inline-block-creation--2999491-d11.patch",
+                "Hyphens and forward slashes (-/) break Views contextual filters https://www.drupal.org/node/672606": "https://raw.githubusercontent.com/wri/wri_sites/refs/heads/624-d11-upgrade/patches/core--views-contextual-filters-hyphens-slashes--672606-d11.patch",
                 "Views RSS feeds have validation issues https://www.drupal.org/project/drupal/issues/1337894": "https://git.drupalcode.org/project/drupal/-/merge_requests/10628.diff",
-                "Add missing enclosure to Views RSS https://www.drupal.org/node/2511878": "https://www.drupal.org/files/issues/2024-06-23/2511878-add-support-for-enclosure-field-10.3.x.patch",
+                "Add missing enclosure to Views RSS https://www.drupal.org/node/2511878": "https://www.drupal.org/files/issues/2026-08-10/drupal-core-2511878-95_0.patch",
                 "Views Term ID has broken filters (\"All of\", \"Is none of\") and contextual filters \"allow multiple\" https://www.drupal.org/project/drupal/issues/2829178": "https://git.drupalcode.org/project/drupal/-/merge_requests/5321.patch",
-                "More link is missing in pager when using the \"Some\" pager and there are more records than shown https://www.drupal.org/project/drupal/issues/3381979": "https://www.drupal.org/files/issues/2023-10-09/3381979-13.patch",
+                "More link is missing in pager when using the \"Some\" pager and there are more records than shown https://www.drupal.org/project/drupal/issues/3381979": "https://www.drupal.org/files/issues/2025-06-25/3381979-more-link-is-missing-in-some-pager-when-there-are-more-records-than-shown-d11.2.0-rc2.patch",
                 "Background colour of UI widgets get overridden on Ajax load. https://www.drupal.org/project/drupal/issues/3383631": "https://git.drupalcode.org/project/drupal/-/merge_requests/13775.diff"
             },
             "drupal/config_partial_export": {
@@ -34,10 +37,11 @@
                 "Error: Cannot unset string offsets... https://www.drupal.org/project/content_snippets/issues/3268757": "https://git.drupalcode.org/issue/content_snippets-3268757/-/merge_requests/1.diff"
             },
             "drupal/diff": {
-                "No local tasks on compare revisions page https://www.drupal.org/project/diff/issues/3169729": "https://www.drupal.org/files/issues/2020-09-08/diff_add-local-tasks-3169729-2.patch"
+                "No local tasks on compare revisions page https://www.drupal.org/project/diff/issues/2954352": "https://www.drupal.org/files/issues/2026-08-13/diff-add_local_tasks-2954352-34.patch"
             },
             "drupal/facets_pretty_paths": {
-                "Space appended to url outputs error https://www.drupal.org/project/facets_pretty_paths/issues/3575306": "https://git.drupalcode.org/project/facets_pretty_paths/-/merge_requests/25.diff"
+                "Space appended to url outputs error https://www.drupal.org/project/facets_pretty_paths/issues/3575306": "https://git.drupalcode.org/project/facets_pretty_paths/-/merge_requests/25.diff",
+                "ViewPageController::$contextualLinks must not be accessed before initialization (Drupal 11) https://www.drupal.org/project/facets_pretty_paths/issues/3608564": "https://git.drupalcode.org/project/facets_pretty_paths/-/merge_requests/27.diff"
             },
             "drupal/focal_point": {
                 "On re-positioning hash, only flush image styles that use Focal Point (s3 incompatibility) https://www.drupal.org/project/focal_point/issues/3585050": "https://git.drupalcode.org/project/focal_point/-/merge_requests/56.diff"
@@ -50,13 +54,11 @@
             "drupal/entity_share": {
                 "Call to a member function hasField() on null in SkipImported https://www.drupal.org/project/entity_share/issues/3569090": "https://git.drupalcode.org/project/entity_share/-/merge_requests/165.diff",
                 "Layout Builder import patch: https://www.drupal.org/project/entity_share/issues/3084184": "https://git.drupalcode.org/project/entity_share/-/merge_requests/96.diff?v=1",
-                "Paragraphs parent IDs are wrong https://www.drupal.org/project/entity_share/issues/3445703": "https://www.drupal.org/files/issues/2024-05-08/entity_share-parent-id-3445703-2.patch"
+                "Paragraphs parent IDs are wrong https://www.drupal.org/project/entity_share/issues/3445703": "https://www.drupal.org/files/issues/2024-05-08/entity_share-parent-id-3445703-2.patch",
+                "Drupal 11 list builders add a View operation for entity types with a canonical link template; channel and remote have no canonical route (not reported upstream yet)": "https://raw.githubusercontent.com/wri/wri_sites/refs/heads/624-d11-upgrade/patches/entity_share--remove-unrouted-canonical-link--d11.patch"
             },
             "drupal/layout_builder_st": {
-                "Error: Call to a member function getConfig() OverridesSectionStorage.php https://www.drupal.org/project/layout_builder_st/issues/3420063": "https://www.drupal.org/files/issues/2024-03-29/layout_builder_st-call_to_a_member_function_getconfig-3420063-26.patch",
-                "Contextual links for translation are removed by core https://www.drupal.org/project/layout_builder_st/issues/3411037": "https://www.drupal.org/files/issues/2024-05-23/3411037-contextual-links-removed-from-core.patch",
-                "Drupal\\Component\\Plugin\\Exception\\PluginNotFoundException: The \"block.settings.<block_name>\" plugin does not exist https://www.drupal.org/project/layout_builder_st/issues/3463435": "https://www.drupal.org/files/issues/2024-07-23/layout_builder_st-plugin-not-found-3463435-3.patch",
-                "Nontranslatable custom block fields are not synchronized between translations https://www.drupal.org/project/layout_builder_st/issues/3108061": "https://git.drupalcode.org/project/layout_builder_st/-/merge_requests/33.diff"
+                "Nontranslatable custom block fields are not synchronized between translations https://www.drupal.org/project/layout_builder_st/issues/3108061 (MR !33 without its tests hunk, which no longer applies to 2.0.0)": "https://raw.githubusercontent.com/wri/wri_sites/refs/heads/624-d11-upgrade/patches/layout_builder_st--nontranslatable-block-fields-sync--3108061-mr33-without-tests.patch"
             },
             "drupal/metatag": {
                 "Provide field formatter to output meta tags on-page, e.g. for use with Views (D9), https://www.drupal.org/project/metatag/issues/3027873": "https://www.drupal.org/files/issues/2023-07-23/metatag-field_formatter_for_views-3027873-27.patch",
@@ -88,7 +90,17 @@
                 "View title is HTML-double-encoded when shown via the field label (e.g. &amp; becomes &amp;amp;) https://www.drupal.org/project/viewfield/issues/3619319": "https://git.drupalcode.org/project/viewfield/-/merge_requests/26.diff"
             },
             "drupal/views_extras": {
-                "Why does Views Extras require Drupal_Visitors to be part of the cookie name? https://www.drupal.org/project/views_extras/issues/3054202" : "https://www.drupal.org/files/issues/2024-01-03/3054202-11.patch"
+                "Why does Views Extras require Drupal_Visitors to be part of the cookie name? https://www.drupal.org/project/views_extras/issues/3054202" : "https://www.drupal.org/files/issues/2024-01-03/3054202-11.patch",
+                "Automated Drupal 11 compatibility fixes https://www.drupal.org/project/views_extras/issues/3435460 (committed to 3.x, not released)": "https://git.drupalcode.org/project/views_extras/-/commit/357d342dc3b44d7993b61f2c2f0e98919dcce84f.diff"
+            },
+            "drupal/dblog_persistent": {
+                "Drupal 11 core_version_requirement (no D11 release or upstream issue yet)": "https://raw.githubusercontent.com/wri/wri_sites/refs/heads/624-d11-upgrade/patches/dblog_persistent--d11-compatibility.patch"
+            },
+            "drupal/entity_share_cron": {
+                "Drupal 11 compatibility https://www.drupal.org/project/entity_share_cron/issues/3430244 (bot MR !13 targets 3.0.x-dev and does not apply to 3.0.2)": "https://raw.githubusercontent.com/wri/wri_sites/refs/heads/624-d11-upgrade/patches/entity_share_cron--d11-compatibility.patch"
+            },
+            "drupal/twitter_api_block": {
+                "Drupal 11 core_version_requirement (no D11 release or upstream issue yet)": "https://raw.githubusercontent.com/wri/wri_sites/refs/heads/624-d11-upgrade/patches/twitter_api_block--d11-compatibility.patch"
             },
             "drupal/layout_builder_modal": {
                 "incompatibility with layout_builder_st, contextual links broken https://www.drupal.org/project/layout_builder_modal/issues/3133695": "https://www.drupal.org/files/issues/2022-12-15/3133695-13.patch"
@@ -154,15 +166,15 @@
         "drupal/cer": "^5.0@beta",
         "drupal/ckeditor5_template": "^1.0",
         "drupal/ckeditor_accordion": "^2.0",
-        "drupal/classy": "^1.0",
+        "drupal/classy": "^2.0",
         "drupal/cloudflare": "^2.0@beta",
         "drupal/config_partial_export": "^2.0@alpha",
         "drupal/content_snippets": "^2.0",
-        "drupal/core-composer-scaffold": "^10.6",
-        "drupal/core-recommended": "^10.6",
+        "drupal/core-composer-scaffold": "^11.4",
+        "drupal/core-recommended": "^11.4",
         "drupal/ctools": "^4.0",
         "drupal/dblog_persistent": "^2.1",
-        "drupal/diff": "^1.0",
+        "drupal/diff": "^2.1",
         "drupal/distro_helper": "^1.0",
         "drupal/ds": "^3.0",
         "drupal/editor_advanced_link": "^2.2",
@@ -181,17 +193,17 @@
         "drupal/focal_point": "^2.0",
         "drupal/hierarchical_term_formatter": "^1.2",
         "drupal/http_cache_control": "^2.6",
-        "drupal/inline_entity_form": "^1.0@RC",
+        "drupal/inline_entity_form": "^3.0",
         "drupal/jquery_once": "^1.0",
         "drupal/jsonapi_extras": "^3.28",
         "drupal/layout_builder_modal": "^1.1",
-        "drupal/layout_builder_restrictions": "^2.12",
-        "drupal/layout_builder_st": "^1.0@alpha",
+        "drupal/layout_builder_restrictions": "^3.0",
+        "drupal/layout_builder_st": "^2.0",
         "drupal/layout_custom_section_classes": "^2.0",
         "drupal/link_attributes": "^2.1",
         "drupal/logging_alerts": "^2.0",
         "drupal/media_library_edit": "^3.0",
-        "drupal/media_responsive_thumbnail": "^1.2",
+        "drupal/media_responsive_thumbnail": "^2.0",
         "drupal/menu_admin_per_menu": "*",
         "drupal/menu_block": "^1.8",
         "drupal/menu_item_extras": "^3.1",
@@ -205,7 +217,7 @@
         "drupal/purge": "^3.6",
         "drupal/redirect": "^1.7",
         "drupal/redis": "^1.5",
-        "drupal/rename_admin_paths": "^2.2",
+        "drupal/rename_admin_paths": "^3.1",
         "drupal/responsive_tables_filter": "^2.1.2",
         "drupal/robotstxt": "^1.6",
         "drupal/s3fs": "^3.10",
@@ -234,7 +246,7 @@
         "drupal/webform": "^6.1",
         "drupal/webform_views": "^5.2",
         "drupal/webp": "^1.0@RC",
-        "drupal/xmlsitemap": "^1.2",
+        "drupal/xmlsitemap": "^2.0",
         "mglaman/composer-drupal-lenient": "*",
         "npm-asset/jquery.toc": "^0.4.0",
         "solarium/solarium": "^6.1.5"

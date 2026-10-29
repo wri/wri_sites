@@ -1,0 +1,34 @@
+diff --git a/entity_share_cron.info.yml b/entity_share_cron.info.yml
+index dfd01b5..5050495 100644
+--- a/entity_share_cron.info.yml
++++ b/entity_share_cron.info.yml
+@@ -1,7 +1,7 @@
+ name: 'Entity Share Cron'
+ type: module
+ description: 'Synchronizes entities on Cron execution.'
+-core_version_requirement: ^9 || ^10
++core_version_requirement: ^9 || ^10 || ^11
+ package: 'Web services'
+ configure: entity_share_cron.settings
+ dependencies:
+diff --git a/src/Form/SettingsForm.php b/src/Form/SettingsForm.php
+index 4ea239f..0498cfd 100644
+--- a/src/Form/SettingsForm.php
++++ b/src/Form/SettingsForm.php
+@@ -7,6 +7,7 @@ namespace Drupal\entity_share_cron\Form;
+ use Drupal\Core\Entity\EntityTypeManagerInterface;
+ use Drupal\Core\Form\ConfigFormBase;
+ use Drupal\Core\Form\FormStateInterface;
++use Drupal\Core\Utility\Error;
+ use Drupal\entity_share_client\Service\RemoteManagerInterface;
+ use GuzzleHttp\Exception\ClientException;
+ use Symfony\Component\DependencyInjection\ContainerInterface;
+@@ -133,7 +134,7 @@ class SettingsForm extends ConfigFormBase {
+         }
+         catch (ClientException $exception) {
+           $channels = [];
+-          \watchdog_exception('entity_share_cron', $exception);
++          Error::logException(\Drupal::logger('entity_share_cron'), $exception);
+           $this->messenger()->addError($this->t('Could not get channels from remote %remote.', [
+             '%remote' => $remote->label(),
+           ]));
