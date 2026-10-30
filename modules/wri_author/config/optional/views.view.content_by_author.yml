@@ -1,5 +1,8 @@
 status: true
 dependencies:
+  config:
+    - field.field.node.publication.field_authors
+    - field.storage.node.field_authors
   module:
     - node
     - user
