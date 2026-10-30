@@ -93,14 +93,8 @@
                 "Why does Views Extras require Drupal_Visitors to be part of the cookie name? https://www.drupal.org/project/views_extras/issues/3054202" : "https://www.drupal.org/files/issues/2024-01-03/3054202-11.patch",
                 "Automated Drupal 11 compatibility fixes https://www.drupal.org/project/views_extras/issues/3435460 (committed to 3.x, not released)": "https://git.drupalcode.org/project/views_extras/-/commit/357d342dc3b44d7993b61f2c2f0e98919dcce84f.diff"
             },
-            "drupal/dblog_persistent": {
-                "Drupal 11 core_version_requirement (no D11 release or upstream issue yet)": "https://raw.githubusercontent.com/wri/wri_sites/refs/heads/624-d11-upgrade/patches/dblog_persistent--d11-compatibility.patch"
-            },
             "drupal/entity_share_cron": {
                 "Drupal 11 compatibility https://www.drupal.org/project/entity_share_cron/issues/3430244 (bot MR !13 targets 3.0.x-dev and does not apply to 3.0.2)": "https://raw.githubusercontent.com/wri/wri_sites/refs/heads/624-d11-upgrade/patches/entity_share_cron--d11-compatibility.patch"
-            },
-            "drupal/twitter_api_block": {
-                "Drupal 11 core_version_requirement (no D11 release or upstream issue yet)": "https://raw.githubusercontent.com/wri/wri_sites/refs/heads/624-d11-upgrade/patches/twitter_api_block--d11-compatibility.patch"
             },
             "drupal/layout_builder_modal": {
                 "incompatibility with layout_builder_st, contextual links broken https://www.drupal.org/project/layout_builder_modal/issues/3133695": "https://www.drupal.org/files/issues/2022-12-15/3133695-13.patch"
@@ -173,7 +167,6 @@
         "drupal/core-composer-scaffold": "^11.4",
         "drupal/core-recommended": "^11.4",
         "drupal/ctools": "^4.0",
-        "drupal/dblog_persistent": "^2.1",
         "drupal/diff": "^2.1",
         "drupal/distro_helper": "^1.0",
         "drupal/ds": "^3.0",
@@ -236,7 +229,6 @@
         "drupal/token": "^1.17",
         "drupal/token_filter": "^2.1",
         "drupal/twig_tweak": "^3.2",
-        "drupal/twitter_api_block": "^4.0",
         "drupal/ultimate_cron": "^2.0@alpha",
         "drupal/viewfield": "^3.0@beta",
         "drupal/views_autosubmit": "^1.4",
