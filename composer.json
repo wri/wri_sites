@@ -55,7 +55,7 @@
                 "Call to a member function hasField() on null in SkipImported https://www.drupal.org/project/entity_share/issues/3569090": "https://git.drupalcode.org/project/entity_share/-/merge_requests/165.diff",
                 "Layout Builder import patch: https://www.drupal.org/project/entity_share/issues/3084184": "https://git.drupalcode.org/project/entity_share/-/merge_requests/96.diff?v=1",
                 "Paragraphs parent IDs are wrong https://www.drupal.org/project/entity_share/issues/3445703": "https://www.drupal.org/files/issues/2024-05-08/entity_share-parent-id-3445703-2.patch",
-                "Drupal 11 list builders add a View operation for entity types with a canonical link template; channel and remote have no canonical route (not reported upstream yet)": "https://raw.githubusercontent.com/wri/wri_sites/refs/heads/624-d11-upgrade/patches/entity_share--remove-unrouted-canonical-link--d11.patch"
+                "Remove canonical link templates that have no route (list builders 500 on Drupal 11) https://www.drupal.org/project/entity_share/issues/3419256": "https://git.drupalcode.org/project/entity_share/-/merge_requests/89.diff"
             },
             "drupal/layout_builder_st": {
                 "Nontranslatable custom block fields are not synchronized between translations https://www.drupal.org/project/layout_builder_st/issues/3108061 (MR !33 without its tests hunk, which no longer applies to 2.0.0)": "https://raw.githubusercontent.com/wri/wri_sites/refs/heads/624-d11-upgrade/patches/layout_builder_st--nontranslatable-block-fields-sync--3108061-mr33-without-tests.patch"
