@@ -31,7 +31,6 @@ dependencies:
     - field.field.node.person.layout_builder__layout
     - image.style.100x100
     - node.type.person
-    - views.view.authored_by
   module:
     - ctools
     - ds

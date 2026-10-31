@@ -29,7 +29,7 @@ jobs:
         environment:
           IS_CIRCLE: TRUE
           PHP_MEMORY_LIMIT: 256M
-          PHP_CLI_MEMORY_LIMIT: 256M
+          PHP_CLI_MEMORY_LIMIT: 512M
       - image: wodby/mariadb
         environment:
           MYSQL_RANDOM_ROOT_PASSWORD: 1
@@ -44,11 +44,14 @@ jobs:
           command: |
             /docker-entrypoint.sh
             export PATH="./vendor/bin:../vendor/bin:/root/.composer/vendor/bin:$PATH"
-            COMPOSER_MEMORY_LIMIT=-1 composer create-project --stability=dev wri/wri-starter-kit:^10.2 circletest
-            rm -r circletest/web/profiles/contrib/wri_sites -f
+            # The lenient plugin must be active before the first dependency
+            # resolution, so install it globally.
+            composer global config --no-plugins allow-plugins.mglaman/composer-drupal-lenient true
+            composer global require mglaman/composer-drupal-lenient --no-interaction
+            COMPOSER_MEMORY_LIMIT=-1 composer create-project --stability=dev --no-install wri/wri-starter-kit:dev-624-d11-upgrade circletest
             cd circletest
-            composer require wri/wri_sites:dev-main --no-interaction --prefer-source -W
-            composer require wri/wri_sites:dev-${CIRCLE_BRANCH} --no-interaction --prefer-source -W
+            # Retry once to give Packagist a minute to see new branches.
+            composer require wri/wri_sites:dev-${CIRCLE_BRANCH} --no-interaction --prefer-source -W || (sleep 60 && composer require wri/wri_sites:dev-${CIRCLE_BRANCH} --no-interaction --prefer-source -W)
             ./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/modules
             ./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/themes/custom
             ./vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/modules

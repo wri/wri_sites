@@ -9,6 +9,7 @@ dependencies:
   - entity_usage
   - link
   - paragraphs
+  - text
   - viewfield
   - views_arg_order_sort
 config_devel:
