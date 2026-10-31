@@ -18,7 +18,7 @@
       {% if result.link %}
         <h3 class="h3"><a href="{{ result.link }}">{{ result.title }}</a></h3>
       {% endif %}
-      <div class="body-base mb-5"{{ highlight_search(result.snippet, term) }}</div>
+      <div class="body-base mb-5">{{ highlight_search(result.snippet, term) }}</div>
       {% if result.pagemap.metatags[0].wri_register %}
         <a class="button small" href="{{ result.pagemap.metatags[0].wri_register }}">{{ "Register"|t }}</a>
       {% endif %}
