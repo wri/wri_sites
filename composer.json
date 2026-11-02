@@ -78,7 +78,7 @@
                 "MISSING_AUTHORIZATION_HEADER on batch https://www.drupal.org/project/rest_api_authentication/issues/3517729": "https://www.drupal.org/files/issues/2026-09-24/rest_api_authentication-3517729-5.patch"
             },
             "drupal/token": {
-                "Add a [current-page:object:?] dynamic token https://www.drupal.org/project/token/issues/919760": "https://www.drupal.org/files/issues/2026-08-18/token-current_page_object_tokens-919760-118.patch",
+                "Add a [current-page:object:?] dynamic token https://www.drupal.org/project/token/issues/919760": "https://www.drupal.org/files/issues/2026-11-02/token-current_page_object_tokens-1-18-0-919760.patch",
                 "Provide array of primitive property values on multivalue field https://www.drupal.org/project/token/issues/3115486": "https://git.drupalcode.org/project/token/-/merge_requests/114.diff"
             },
             "drupal/views_bulk_edit": {
