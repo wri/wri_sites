@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Drupal\wri_search\Form;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
@@ -24,10 +26,15 @@ final class WriSearchSettingsForm extends ConfigFormBase implements ContainerInj
   /**
    * Constructs a new ViewManager object.
    *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   The factory for configuration objects.
+   * @param \Drupal\Core\Config\TypedConfigManagerInterface $typed_config_manager
+   *   The typed config manager.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(ConfigFactoryInterface $config_factory, TypedConfigManagerInterface $typed_config_manager, EntityTypeManagerInterface $entity_type_manager) {
+    parent::__construct($config_factory, $typed_config_manager);
     $this->entityTypeManager = $entity_type_manager;
   }
 
@@ -37,6 +44,8 @@ final class WriSearchSettingsForm extends ConfigFormBase implements ContainerInj
   public static function create(ContainerInterface $container) {
     // This static method is where services are retrieved from the container.
     return new static(
+      $container->get('config.factory'),
+      $container->get('config.typed'),
       $container->get('entity_type.manager')
     );
   }

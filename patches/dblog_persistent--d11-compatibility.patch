@@ -1,0 +1,13 @@
+diff --git a/dblog_persistent.info.yml b/dblog_persistent.info.yml
+index d91d4ac..37f6fcf 100644
+--- a/dblog_persistent.info.yml
++++ b/dblog_persistent.info.yml
+@@ -1,7 +1,7 @@
+ name: Persistent Log
+ type: module
+ description: Records specific log messages in non-temporary storage.
+-core_version_requirement: ^9 || ^10
++core_version_requirement: ^9 || ^10 || ^11
+ package: Logging
+ dependencies:
+   - drupal:dblog

@@ -1,0 +1,779 @@
+diff --git a/core/modules/block_content/src/Plugin/Block/BlockContentBlock.php b/core/modules/block_content/src/Plugin/Block/BlockContentBlock.php
+index cc8f4f3d..d864da10 100644
+--- a/core/modules/block_content/src/Plugin/Block/BlockContentBlock.php
++++ b/core/modules/block_content/src/Plugin/Block/BlockContentBlock.php
+@@ -4,14 +4,17 @@
+ 
+ use Drupal\block_content\BlockContentUuidLookup;
+ use Drupal\block_content\Plugin\Derivative\BlockContent;
++use Drupal\Component\Utility\NestedArray;
+ use Drupal\Core\Access\AccessResult;
+ use Drupal\Core\Block\Attribute\Block;
+ use Drupal\Core\Block\BlockBase;
+ use Drupal\Core\Block\BlockManagerInterface;
+ use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
+ use Drupal\Core\Entity\EntityRepositoryInterface;
++use Drupal\Core\Entity\Entity\EntityFormDisplay;
+ use Drupal\Core\Entity\EntityTypeManagerInterface;
+ use Drupal\Core\Form\FormStateInterface;
++use Drupal\Core\Form\SubformStateInterface;
+ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+ use Drupal\Core\Routing\UrlGeneratorInterface;
+ use Drupal\Core\Session\AccountInterface;
+@@ -74,6 +77,15 @@ public function blockForm($form, FormStateInterface $form_state) {
+     if (!$block) {
+       return $form;
+     }
++
++    if ($form_state->get('is_layout_builder')) {
++      $form['block_form'] = [
++        '#type' => 'container',
++        '#block' => $this->getEntity(),
++        '#form_mode' => 'edit',
++      ];
++    }
++
+     $options = $this->entityDisplayRepository->getViewModeOptionsByBundle('block_content', $block->bundle());
+ 
+     $form['view_mode'] = [
+@@ -106,6 +118,77 @@ protected function blockAccess(AccountInterface $account) {
+     return AccessResult::forbidden();
+   }
+ 
++  /**
++   * {@inheritdoc}
++   */
++  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
++    $is_lb = $form_state->get('is_layout_builder');
++    if ($is_lb) {
++      $form['messages'] = [
++        '#theme' => 'status_messages',
++        '#message_list' => [
++          'warning' => [
++            $this->t('This block is reusable! Any changes made will be applied globally.'),
++            // @todo Make better description.
++            $this->t('Any change made to this block will be immediately visible inside the entity.'),
++          ],
++        ],
++      ];
++    }
++
++    $form = parent::buildConfigurationForm($form, $form_state);
++
++    if ($is_lb) {
++      $form['block_form'] = [
++        '#type' => 'container',
++        '#block' => $this->getEntity(),
++      ];
++
++      EntityFormDisplay::collectRenderDisplay($this->getEntity(), 'edit')
++        ->buildForm($this->getEntity(), $form['block_form'], $form_state);
++      $form['block_form']['revision_log']['#access'] = FALSE;
++      $form['block_form']['info']['#access'] = FALSE;
++    }
++
++    return $form;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function validateConfigurationForm(array &$form, FormStateInterface $form_state) {
++    parent::validateConfigurationForm($form, $form_state);
++    if (!$form_state->get('is_layout_builder')) {
++      return;
++    }
++
++    $block = $this->getEntity();
++    $block_form = $form['block_form'];
++    $form_display = EntityFormDisplay::collectRenderDisplay($block, 'edit');
++    $complete_form_state = $form_state instanceof SubformStateInterface ? $form_state->getCompleteFormState() : $form_state;
++    $form_display->extractFormValues($block, $block_form, $complete_form_state);
++    $form_display->validateFormValues($block, $block_form, $complete_form_state);
++    // @todo Remove when https://www.drupal.org/project/drupal/issues/2948549 is closed.
++    $form_state->setTemporaryValue('block_form_parents', $block_form['#parents']);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
++    parent::submitConfigurationForm($form, $form_state);
++    if (!$form_state->get('is_layout_builder')) {
++      return;
++    }
++
++    // @todo Remove when https://www.drupal.org/project/drupal/issues/2948549 is closed.
++    $block_form = NestedArray::getValue($form, $form_state->getTemporaryValue('block_form_parents'));
++    $form_display = EntityFormDisplay::collectRenderDisplay($this->getEntity(), 'edit');
++    $complete_form_state = $form_state instanceof SubformStateInterface ? $form_state->getCompleteFormState() : $form_state;
++    $form_display->extractFormValues($this->getEntity(), $block_form, $complete_form_state);
++    $this->getEntity()->save();
++  }
++
+   /**
+    * {@inheritdoc}
+    */
+diff --git a/core/modules/content_moderation/tests/src/Functional/LayoutBuilderContentModerationIntegrationTest.php b/core/modules/content_moderation/tests/src/Functional/LayoutBuilderContentModerationIntegrationTest.php
+index db94581a..a2442e06 100644
+--- a/core/modules/content_moderation/tests/src/Functional/LayoutBuilderContentModerationIntegrationTest.php
++++ b/core/modules/content_moderation/tests/src/Functional/LayoutBuilderContentModerationIntegrationTest.php
+@@ -184,7 +184,7 @@ public function testModeratedInlineBlockBundles(): void {
+     $this->drupalGet("node/{$node->id()}/layout");
+     $page->clickLink('Add block');
+     $this->clickLink('Create content block');
+-
++    $page->pressButton('Create inline block');
+     $assert_session->fieldNotExists('settings[block_form][moderation_state][0][state]');
+     $this->submitForm([
+       'settings[label]' => 'Test inline block',
+diff --git a/core/modules/layout_builder/layout_builder.links.contextual.yml b/core/modules/layout_builder/layout_builder.links.contextual.yml
+index 4bbfcc9e..6e408e4d 100644
+--- a/core/modules/layout_builder/layout_builder.links.contextual.yml
++++ b/core/modules/layout_builder/layout_builder.links.contextual.yml
+@@ -27,3 +27,13 @@ layout_builder_block_remove:
+       class: ['use-ajax']
+       data-dialog-type: dialog
+       data-dialog-renderer: off_canvas
++
++layout_builder_block_make_reusable:
++  title: 'Make block reusable'
++  route_name: 'layout_builder.make_reusable'
++  group: 'layout_builder_content_block'
++  options:
++    attributes:
++      class: ['use-ajax']
++      data-dialog-type: dialog
++      data-dialog-renderer: off_canvas
+diff --git a/core/modules/layout_builder/layout_builder.routing.yml b/core/modules/layout_builder/layout_builder.routing.yml
+index a0e7f4fd..abefa548 100644
+--- a/core/modules/layout_builder/layout_builder.routing.yml
++++ b/core/modules/layout_builder/layout_builder.routing.yml
+@@ -128,6 +128,19 @@ layout_builder.remove_block:
+       section_storage:
+         layout_builder_tempstore: TRUE
+ 
++layout_builder.make_reusable:
++  path: '/layout_builder/make-reusable/block/{section_storage_type}/{section_storage}/{delta}/{region}/{uuid}'
++  defaults:
++    _form: '\Drupal\layout_builder\Form\MakeReusableBlockForm'
++  requirements:
++    _permission: 'create and edit custom blocks'
++    _layout_builder_access: 'view'
++  options:
++    _admin_route: TRUE
++    parameters:
++      section_storage:
++        layout_builder_tempstore: TRUE
++
+ layout_builder.move_block:
+   path: '/layout_builder/move/block/{section_storage_type}/{section_storage}/{delta_from}/{delta_to}/{region_to}/{block_uuid}/{preceding_block_uuid}'
+   defaults:
+diff --git a/core/modules/layout_builder/src/Element/LayoutBuilder.php b/core/modules/layout_builder/src/Element/LayoutBuilder.php
+index 6d2b7ce8..f3b1081c 100644
+--- a/core/modules/layout_builder/src/Element/LayoutBuilder.php
++++ b/core/modules/layout_builder/src/Element/LayoutBuilder.php
+@@ -308,11 +308,13 @@ protected function buildAdministrativeSection(SectionStorageInterface $section_s
+     foreach ($layout_definition->getRegions() as $region => $info) {
+       if (!empty($build[$region])) {
+         foreach (Element::children($build[$region]) as $uuid) {
+-          $build[$region][$uuid]['#attributes']['class'][] = 'js-layout-builder-block';
+-          $build[$region][$uuid]['#attributes']['class'][] = 'layout-builder-block';
+-          $build[$region][$uuid]['#attributes']['data-layout-block-uuid'] = $uuid;
+-          $build[$region][$uuid]['#attributes']['data-layout-builder-highlight-id'] = $this->blockUpdateHighlightId($uuid);
+-          $build[$region][$uuid]['#contextual_links'] = [
++          $component = &$build[$region][$uuid];
++
++          $component['#attributes']['class'][] = 'js-layout-builder-block';
++          $component['#attributes']['class'][] = 'layout-builder-block';
++          $component['#attributes']['data-layout-block-uuid'] = $uuid;
++          $component['#attributes']['data-layout-builder-highlight-id'] = $this->blockUpdateHighlightId($uuid);
++          $component['#contextual_links'] = [
+             'layout_builder_block' => [
+               'route_parameters' => [
+                 'section_storage_type' => $storage_type,
+@@ -330,6 +332,23 @@ protected function buildAdministrativeSection(SectionStorageInterface $section_s
+               ],
+             ],
+           ];
++
++          if (isset($component['#base_plugin_id'])
++            && $component['#base_plugin_id'] === 'inline_block'
++            && $component['content']['#block_content']?->isReusable() === FALSE) {
++            $component['#contextual_links']['layout_builder_content_block'] = [
++              'route_parameters' => [
++                'section_storage_type' => $storage_type,
++                'section_storage' => $storage_id,
++                'delta' => $delta,
++                'region' => $region,
++                'uuid' => $uuid,
++              ],
++              'metadata' => [
++                'operations' => 'reusable',
++              ],
++            ];
++          }
+         }
+       }
+ 
+diff --git a/core/modules/layout_builder/src/Form/AddBlockForm.php b/core/modules/layout_builder/src/Form/AddBlockForm.php
+index be4f796c..a60ad7ce 100644
+--- a/core/modules/layout_builder/src/Form/AddBlockForm.php
++++ b/core/modules/layout_builder/src/Form/AddBlockForm.php
+@@ -2,8 +2,10 @@
+ 
+ namespace Drupal\layout_builder\Form;
+ 
++use Drupal\Component\Utility\Html;
+ use Drupal\Core\Form\FormStateInterface;
+ use Drupal\layout_builder\LayoutBuilderHighlightTrait;
++use Drupal\layout_builder\Plugin\Block\InlineBlock;
+ use Drupal\layout_builder\SectionComponent;
+ use Drupal\layout_builder\SectionStorageInterface;
+ 
+@@ -56,9 +58,103 @@ public function buildForm(array $form, FormStateInterface $form_state, ?SectionS
+       $component = new SectionComponent($this->uuidGenerator->generate(), $region, ['id' => $plugin_id]);
+       $section_storage->getSection($delta)->appendComponent($component);
+       $form_state->set('layout_builder__component', $component);
++
++      if ($component->getPlugin() instanceof InlineBlock && !$form_state->get('second_step')) {
++        return $this->buildFirstStep($form, $form_state);
++      }
++
++      // In case if that's not inline block context set indicator that this is
++      // one step form.
++      $form_state->set('one_step_form', TRUE);
+     }
++
+     $form['#attributes']['data-layout-builder-target-highlight-id'] = $this->blockAddHighlightId($delta, $region);
+     return $this->doBuildForm($form, $form_state, $section_storage, $delta, $component);
+   }
+ 
++  /**
++   * Builds first step where user can choose block type.
++   */
++  protected function buildFirstStep(array $form, FormStateInterface $form_state): array {
++    $form['#id'] = Html::getId($form_state->getBuildInfo()['form_id']);
++
++    $form['actions'] = [
++      'inline_block' => [
++        '#type' => 'submit',
++        '#value' => t('Create inline block'),
++        '#submit' => [[static::class, 'firstStep']],
++        '#ajax' => [
++          'callback' => '::ajaxSubmit',
++          'wrapper' => $form['#id'],
++        ],
++        '#action' => 'inline',
++      ],
++      'reusable_block' => [
++        '#type' => 'submit',
++        '#value' => t('Create reusable block'),
++        '#submit' => [[static::class, 'firstStep']],
++        '#ajax' => [
++          'callback' => '::ajaxSubmit',
++          'wrapper' => $form['#id'],
++        ],
++        '#action' => 'reusable',
++      ],
++    ];
++
++    $form['description'] = [
++      '#type' => 'html_tag',
++      '#tag' => 'p',
++      '#value' => $this->t('Inline block is a block that cannot be reused. Reusable block instead can be reused but there are few caveats:'),
++      'caveats' => [
++        '#theme' => 'item_list',
++        '#items' => [
++          $this->t('Reusable block cannot be converted to inline'),
++          $this->t('If you will make block reusable it will be available in blocks selection'),
++          $this->t('The block will appear in the custom block library and it can be used in more than one place'),
++        ],
++      ],
++    ];
++
++    return $form;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function validateForm(array &$form, FormStateInterface $form_state) {
++    if ($form_state->get('second_step') || $form_state->get('one_step_form')) {
++      parent::validateForm($form, $form_state);
++    }
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function submitForm(array &$form, FormStateInterface $form_state) {
++    // Make sure that appropriate ajax handler will be triggered.
++    // @see self::successfulAjaxSubmit
++    $form_state->set('is_last_step', TRUE);
++    parent::submitForm($form, $form_state);
++  }
++
++  /**
++   * Selects what block type will be created.
++   */
++  public static function firstStep($form, FormStateInterface $form_state) {
++    $form_state->set('second_step', TRUE);
++    $form_state->set('make_reusable', $form_state->getTriggeringElement()['#action'] === 'reusable');
++    $form_state->setRebuild();
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function successfulAjaxSubmit(array $form, FormStateInterface $form_state) {
++    if ($form_state->get('is_last_step')) {
++      return parent::successfulAjaxSubmit($form, $form_state);
++    }
++
++    return $form;
++  }
++
+ }
+diff --git a/core/modules/layout_builder/src/Form/ConfigureBlockFormBase.php b/core/modules/layout_builder/src/Form/ConfigureBlockFormBase.php
+index 6974d97a..e5211620 100644
+--- a/core/modules/layout_builder/src/Form/ConfigureBlockFormBase.php
++++ b/core/modules/layout_builder/src/Form/ConfigureBlockFormBase.php
+@@ -7,6 +7,7 @@
+ use Drupal\Core\Ajax\AjaxFormHelperTrait;
+ use Drupal\Core\Block\BlockManagerInterface;
+ use Drupal\Core\Block\BlockPluginInterface;
++use Drupal\Core\Entity\EntityTypeManagerInterface;
+ use Drupal\Core\Form\BaseFormIdInterface;
+ use Drupal\Core\Form\FormBase;
+ use Drupal\Core\Form\FormStateInterface;
+@@ -17,9 +18,12 @@
+ use Drupal\Core\Plugin\ContextAwarePluginInterface;
+ use Drupal\Core\Plugin\PluginFormFactoryInterface;
+ use Drupal\Core\Plugin\PluginWithFormsInterface;
++use Drupal\Core\Session\AccountInterface;
++use Drupal\Core\TempStore\SharedTempStoreFactory;
+ use Drupal\layout_builder\Context\LayoutBuilderContextTrait;
+ use Drupal\layout_builder\Controller\LayoutRebuildTrait;
+ use Drupal\layout_builder\LayoutTempstoreRepositoryInterface;
++use Drupal\layout_builder\Plugin\Block\InlineBlock;
+ use Drupal\layout_builder\SectionComponent;
+ use Drupal\layout_builder\SectionStorageInterface;
+ use Symfony\Component\DependencyInjection\ContainerInterface;
+@@ -101,6 +105,27 @@ abstract class ConfigureBlockFormBase extends FormBase implements BaseFormIdInte
+    */
+   protected $sectionStorage;
+ 
++  /**
++   * The entity type manager service.
++   *
++   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
++   */
++  protected $entityTypeManager;
++
++  /**
++   * The current user.
++   *
++   * @var \Drupal\Core\Session\AccountInterface
++   */
++  protected $currentUser;
++
++  /**
++   * The shared tempstore factory.
++   *
++   * @var \Drupal\Core\TempStore\SharedTempStoreFactory
++   */
++  protected $tempStoreFactory;
++
+   /**
+    * Constructs a new block form.
+    *
+@@ -114,13 +139,22 @@ abstract class ConfigureBlockFormBase extends FormBase implements BaseFormIdInte
+    *   The UUID generator.
+    * @param \Drupal\Core\Plugin\PluginFormFactoryInterface $plugin_form_manager
+    *   The plugin form manager.
++   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
++   *   The entity type manager service.
++   * @param \Drupal\Core\Session\AccountInterface $current_user
++   *   The current user.
++   * @param \Drupal\Core\TempStore\SharedTempStoreFactory $temp_store_factory
++   *   The shared tempstore factory.
+    */
+-  public function __construct(LayoutTempstoreRepositoryInterface $layout_tempstore_repository, ContextRepositoryInterface $context_repository, BlockManagerInterface $block_manager, UuidInterface $uuid, PluginFormFactoryInterface $plugin_form_manager) {
++  public function __construct(LayoutTempstoreRepositoryInterface $layout_tempstore_repository, ContextRepositoryInterface $context_repository, BlockManagerInterface $block_manager, UuidInterface $uuid, PluginFormFactoryInterface $plugin_form_manager, EntityTypeManagerInterface $entity_type_manager, AccountInterface $current_user, SharedTempStoreFactory $temp_store_factory) {
+     $this->layoutTempstoreRepository = $layout_tempstore_repository;
+     $this->contextRepository = $context_repository;
+     $this->blockManager = $block_manager;
+     $this->uuidGenerator = $uuid;
+     $this->pluginFormFactory = $plugin_form_manager;
++    $this->entityTypeManager = $entity_type_manager;
++    $this->currentUser = $current_user;
++    $this->tempStoreFactory = $temp_store_factory;
+   }
+ 
+   /**
+@@ -132,7 +166,10 @@ public static function create(ContainerInterface $container) {
+       $container->get('context.repository'),
+       $container->get('plugin.manager.block'),
+       $container->get('uuid'),
+-      $container->get('plugin_form.factory')
++      $container->get('plugin_form.factory'),
++      $container->get('entity_type.manager'),
++      $container->get('current_user'),
++      $container->get('tempstore.shared')
+     );
+   }
+ 
+@@ -167,12 +204,21 @@ public function doBuildForm(array $form, FormStateInterface $form_state, ?Sectio
+     $this->block = $component->getPlugin();
+ 
+     $form_state->setTemporaryValue('gathered_contexts', $this->getPopulatedContexts($section_storage));
++    $form_state->set('is_layout_builder', TRUE);
+ 
+     $form['#tree'] = TRUE;
+     $form['settings'] = [];
+     $subform_state = SubformState::createForSubform($form['settings'], $form, $form_state);
+     $form['settings'] = $this->getPluginForm($this->block)->buildConfigurationForm($form['settings'], $subform_state);
+ 
++    if ($form_state->get('make_reusable')) {
++      $form['info'] = [
++        '#type' => 'textfield',
++        '#title' => $this->t('Admin title'),
++        '#description' => $this->t('The title used to find and reuse this block later.'),
++      ];
++    }
++
+     $form['actions']['submit'] = [
+       '#type' => 'submit',
+       '#value' => $this->submitLabel(),
+@@ -226,6 +272,26 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
+     }
+ 
+     $configuration = $this->block->getConfiguration();
++    // If the block got marked as reusable, then convert the inline_block plugin
++    // to a block_content plugin.
++    if ($this->block instanceof InlineBlock && $form_state->get('make_reusable')) {
++      $settings = $form_state->getValue('settings');
++
++      /** @var \Drupal\block_content\BlockContentInterface $block_content */
++      $block_content = $form['settings']['block_form']['#block'];
++      $block_content->setReusable();
++      $block_content->setInfo($form_state->getValue('info') ?: $settings['label']);
++      $block_content->save();
++
++      $this->block = $this->blockManager->createInstance('block_content:' . $block_content->uuid(), [
++        'view_mode' => $configuration['view_mode'],
++        'label' => $configuration['label'],
++        'type' => $block_content->bundle(),
++        'uuid' => $block_content->uuid(),
++        'label_display' => $settings['label_display'],
++      ]);
++      $configuration = $this->block->getConfiguration();
++    }
+ 
+     $section = $this->sectionStorage->getSection($this->delta);
+     $section->getComponent($this->uuid)->setConfiguration($configuration);
+diff --git a/core/modules/layout_builder/src/Form/MakeReusableBlockForm.php b/core/modules/layout_builder/src/Form/MakeReusableBlockForm.php
+new file mode 100644
+index 00000000..dabba199
+--- /dev/null
++++ b/core/modules/layout_builder/src/Form/MakeReusableBlockForm.php
+@@ -0,0 +1,151 @@
++<?php
++
++namespace Drupal\layout_builder\Form;
++
++use Drupal\block_content\Entity\BlockContent;
++use Drupal\Core\Block\BlockManagerInterface;
++use Drupal\Core\Entity\EntityTypeManagerInterface;
++use Drupal\Core\Form\FormStateInterface;
++use Drupal\layout_builder\LayoutTempstoreRepositoryInterface;
++use Drupal\layout_builder\SectionStorageInterface;
++use Symfony\Component\DependencyInjection\ContainerInterface;
++
++/**
++ * Provides a form to confirm the removal of a block.
++ */
++final class MakeReusableBlockForm extends LayoutRebuildConfirmFormBase {
++
++  /**
++   * The current region.
++   *
++   * @var string
++   */
++  protected $region;
++
++  /**
++   * The UUID of the block being removed.
++   *
++   * @var string
++   */
++  protected $uuid;
++
++  /**
++   * Constructs a new MakeReusableBlockForm.
++   *
++   * @param \Drupal\layout_builder\LayoutTempstoreRepositoryInterface $layout_tempstore_repository
++   *   The layout tempstore repository.
++   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
++   *   Entity type manager.
++   * @param \Drupal\Core\Block\BlockManagerInterface $blockManager
++   *   Block manager.
++   */
++  public function __construct(
++    LayoutTempstoreRepositoryInterface $layout_tempstore_repository,
++    protected EntityTypeManagerInterface $entityTypeManager,
++    protected BlockManagerInterface $blockManager
++  ) {
++    parent::__construct($layout_tempstore_repository);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function create(ContainerInterface $container) {
++    return new static(
++      $container->get('layout_builder.tempstore_repository'),
++      $container->get('entity_type.manager'),
++      $container->get('plugin.manager.block')
++    );
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function getQuestion() {
++    $label = $this->sectionStorage
++      ->getSection($this->delta)
++      ->getComponent($this->uuid)
++      ->getPlugin()
++      ->label();
++
++    return $this->t('Are you sure you want to make the %label block reusable?', ['%label' => $label]);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function getDescription() {
++    return $this->t(
++      'This action cannot be undone. If you will make block reusable it will be available in blocks selection.
++    The block will appear in the custom block library and it can be used in more than one place.'
++    );
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function getConfirmText() {
++    return $this->t('Make reusable');
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function getFormId() {
++    return 'layout_builder_make_reusable_block';
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function buildForm(
++    array $form,
++    FormStateInterface $form_state,
++    SectionStorageInterface $section_storage = NULL,
++    $delta = NULL,
++    $region = NULL,
++    $uuid = NULL
++  ) {
++    $this->region = $region;
++    $this->uuid = $uuid;
++
++    return parent::buildForm($form, $form_state, $section_storage, $delta);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function handleSectionStorage(SectionStorageInterface $section_storage, FormStateInterface $form_state) {
++    $section = $section_storage->getSection($this->delta);
++    $component = $section->getComponent($this->uuid);
++    $component_configuration = $component->get('configuration');
++
++    $block_content = NULL;
++    if (!empty($component_configuration['block_serialized'])) {
++      $block_content = unserialize($component_configuration['block_serialized']);
++    }
++    elseif (!empty($component_configuration['block_revision_id'])) {
++      $block_content = $this->entityTypeManager->getStorage('block_content')->loadRevision($component_configuration['block_revision_id']);
++    }
++
++    // Not sure how to handle it properly.
++    if (!($block_content instanceof BlockContent)) {
++      return;
++    }
++
++    $block_content->setReusable();
++    $block_content->save();
++
++    assert($block_content instanceof BlockContent);
++    $converter_block = $this->blockManager->createInstance('block_content:' . $block_content->uuid(), [
++      'view_mode' => $component_configuration['view_mode'],
++      'label' => $component_configuration['label'],
++      'type' => $block_content->bundle(),
++      'uuid' => $block_content->uuid(),
++      'label_display' => $component_configuration['label_display'],
++    ]);
++
++    $section->getComponent($this->uuid)->setConfiguration($converter_block->getConfiguration());
++  }
++
++}
+diff --git a/core/modules/layout_builder/tests/src/FunctionalJavascript/InlineBlockTest.php b/core/modules/layout_builder/tests/src/FunctionalJavascript/InlineBlockTest.php
+index a61857bb..f5859cd1 100644
+--- a/core/modules/layout_builder/tests/src/FunctionalJavascript/InlineBlockTest.php
++++ b/core/modules/layout_builder/tests/src/FunctionalJavascript/InlineBlockTest.php
+@@ -153,6 +153,12 @@ public function testNoLayoutSave($operation, $no_save_button_text, $confirm_butt
+     $assert_session->pageTextContains('The block body');
+     $blocks = $this->blockStorage->loadMultiple();
+     $this->assertCount(1, $blocks);
++    $this->addInlineBlockToLayout('Block title', 'The reusable block body', TRUE);
++    $this->assertSaveLayout();
++    $this->drupalGet('node/1');
++    $assert_session->pageTextContains('The reusable block body');
++    $blocks = $this->blockStorage->loadMultiple();
++    $this->assertCount(2, $blocks);
+     /** @var \Drupal\Core\Entity\ContentEntityBase $block */
+     $block = array_pop($blocks);
+     $revision_id = $block->getRevisionId();
+@@ -217,7 +223,10 @@ public function testInlineBlocksRevisioningIntegrity(): void {
+       'create and edit custom blocks',
+     ]));
+     $this->drupalGet(static::FIELD_UI_PREFIX . '/display/default');
+-    $this->submitForm(['layout[enabled]' => TRUE, 'layout[allow_custom]' => TRUE], 'Save');
++    $this->submitForm([
++      'layout[enabled]' => TRUE,
++      'layout[allow_custom]' => TRUE,
++    ], 'Save');
+ 
+     $block_1_locator = static::INLINE_BLOCK_LOCATOR;
+     $block_2_locator = sprintf('%s + %s', static::INLINE_BLOCK_LOCATOR, static::INLINE_BLOCK_LOCATOR);
+@@ -436,7 +445,10 @@ public function testAccess(): void {
+ 
+     // Enable layout builder and overrides.
+     $this->drupalGet(static::FIELD_UI_PREFIX . '/display/default');
+-    $this->submitForm(['layout[enabled]' => TRUE, 'layout[allow_custom]' => TRUE], 'Save');
++    $this->submitForm([
++      'layout[enabled]' => TRUE,
++      'layout[allow_custom]' => TRUE,
++    ], 'Save');
+ 
+     // Ensure we have 2 copies of the block in node overrides.
+     $this->drupalGet('node/1/layout');
+@@ -477,7 +489,10 @@ public function testAddWorkFlow(): void {
+ 
+     // Enable layout builder and overrides.
+     $this->drupalGet(static::FIELD_UI_PREFIX . '/display/default');
+-    $this->submitForm(['layout[enabled]' => TRUE, 'layout[allow_custom]' => TRUE], 'Save');
++    $this->submitForm([
++      'layout[enabled]' => TRUE,
++      'layout[allow_custom]' => TRUE,
++    ], 'Save');
+ 
+     $layout_default_path = 'admin/structure/types/manage/bundle_with_section_field/display/default/layout';
+     $this->drupalGet($layout_default_path);
+@@ -493,11 +508,13 @@ public function testAddWorkFlow(): void {
+     // Add a basic block with the body field set.
+     $page->clickLink('Add block');
+     $assert_session->assertWaitOnAjaxRequest();
+-    // Confirm with only 1 type the "Create content block" link goes directly t
++    // Confirm with only 1 type the "Create content block" link goes directly to
+     // block add form.
+     $assert_session->linkNotExists('Basic block');
+     $this->clickLink('Create content block');
+     $assert_session->assertWaitOnAjaxRequest();
++    $page->pressButton('Create inline block');
++    $assert_session->assertWaitOnAjaxRequest();
+     $assert_session->fieldExists('Title');
+ 
+     $this->createBlockContentType('advanced', 'Advanced block');
+@@ -518,6 +535,8 @@ public function testAddWorkFlow(): void {
+ 
+     $this->clickLink('Advanced block');
+     $assert_session->assertWaitOnAjaxRequest();
++    $page->pressButton('Create inline block');
++    $assert_session->assertWaitOnAjaxRequest();
+     $assert_session->fieldExists('Title');
+ 
+     // Confirm that Create Content block opt out logic works for Navigation.
+diff --git a/core/modules/layout_builder/tests/src/FunctionalJavascript/InlineBlockTestBase.php b/core/modules/layout_builder/tests/src/FunctionalJavascript/InlineBlockTestBase.php
+index bd467678..b45844e4 100644
+--- a/core/modules/layout_builder/tests/src/FunctionalJavascript/InlineBlockTestBase.php
++++ b/core/modules/layout_builder/tests/src/FunctionalJavascript/InlineBlockTestBase.php
+@@ -56,7 +56,10 @@ protected function setUp(): void {
+ 
+     $this->drupalPlaceBlock('local_tasks_block');
+ 
+-    $this->createContentType(['type' => 'bundle_with_section_field', 'new_revision' => TRUE]);
++    $this->createContentType([
++      'type' => 'bundle_with_section_field',
++      'new_revision' => TRUE,
++    ]);
+     $this->createNode([
+       'type' => 'bundle_with_section_field',
+       'title' => 'The node title',
+@@ -145,8 +148,10 @@ protected function removeInlineBlockFromLayout($selector = NULL) {
+    *   The title field value.
+    * @param string $body
+    *   The body field value.
++   * @param bool $reusable
++   *   Whether the block is reusable or not.
+    */
+-  protected function addInlineBlockToLayout($title, $body) {
++  protected function addInlineBlockToLayout($title, $body, $reusable = FALSE) {
+     $assert_session = $this->assertSession();
+     $page = $this->getSession()->getPage();
+     $page->clickLink('Add block');
+@@ -154,13 +159,34 @@ protected function addInlineBlockToLayout($title, $body) {
+     $this->assertNotEmpty($assert_session->waitForLink('Create content block'));
+     $this->clickLink('Create content block');
+     $assert_session->assertWaitOnAjaxRequest();
+-    $textarea = $assert_session->waitForElement('css', '[name="settings[block_form][body][0][value]"]');
+-    $this->assertNotEmpty($textarea);
+-    $assert_session->fieldValueEquals('Title', '');
+-    $page->findField('Title')->setValue($title);
+-    $textarea->setValue($body);
+-    $page->pressButton('Add block');
+-    $this->assertDialogClosedAndTextVisible($body, static::INLINE_BLOCK_LOCATOR);
++    if ($reusable === FALSE) {
++      $page->pressButton('Create inline block');
++      $assert_session->assertWaitOnAjaxRequest();
++      $textarea = $assert_session->waitForElement('css', '[name="settings[block_form][body][0][value]"]');
++      $this->assertNotEmpty($textarea);
++      $assert_session->fieldValueEquals('Title', '');
++      $page->findField('Title')->setValue($title);
++      $textarea->setValue($body);
++      $page->pressButton('Add block');
++      $this->assertDialogClosedAndTextVisible($body, static::INLINE_BLOCK_LOCATOR);
++    }
++    else {
++      $page->pressButton('Create reusable block');
++      $assert_session->assertWaitOnAjaxRequest();
++      $textarea = $assert_session->waitForElement('css', '[name="settings[block_form][body][0][value]"]');
++      $this->assertNotEmpty($textarea);
++      $assert_session->fieldValueEquals('Title', '');
++      $page->findField('Title')->setValue($title);
++      $textarea->setValue($body);
++      $page->pressButton('Add block');
++      $this->assertDialogClosedAndTextVisible($body, static::INLINE_BLOCK_LOCATOR);
++      $page->findField('Admin Title')->setValue('Test Reusable block ' . $title);
++      $page->pressButton('Add block');
++      $this->assertDialogClosedAndTextVisible($body, static::INLINE_BLOCK_LOCATOR);
++      $this->clickLink('Add block');
++      $assert_session->assertWaitOnAjaxRequest();
++      $assert_session->pageTextContains('Test Reusable block ' . $title);
++    }
+   }
+ 
+   /**

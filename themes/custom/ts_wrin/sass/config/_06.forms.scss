@@ -66,6 +66,11 @@ form.webform-submission-form {
     }
   }
 
+  fieldset {
+    border: none;
+    padding: 0;
+  }
+
   .fieldset-legend {
     @include font(var(--font-family-heading-condensed), "regular", "normal");
     @include font-line-height(16, 22);

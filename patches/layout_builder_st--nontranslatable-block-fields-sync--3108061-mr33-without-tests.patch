@@ -1,0 +1,159 @@
+diff --git a/layout_builder_st.install b/layout_builder_st.install
+index bb99fccf8c2e7ebf6d17ca69052c8f52ebd53a2d..2f3bccc032615b4d810e165a73907d66e570757a 100644
+--- a/layout_builder_st.install
++++ b/layout_builder_st.install
+@@ -84,3 +84,81 @@ function layout_builder_st_requirements($phase) {
+ 
+   return $requirements;
+ }
++
++/**
++ * Update block revisions in layout.
++ */
++function layout_builder_st_update_9101(&$sandbox) {
++  if (!isset($sandbox['progress'])) {
++    // Count all nodes with layout translations.
++    $count = \Drupal::entityTypeManager()
++      ->getStorage('node')
++      ->getQuery()
++      ->condition(OverridesSectionStorage::TRANSLATED_CONFIGURATION_FIELD_NAME, NULL, 'IS NOT NULL')
++      ->accessCheck(FALSE)
++      ->count()
++      ->execute();
++    $sandbox['total_count'] = $count;
++    $sandbox['updated_count'] = 0;
++    $sandbox['progress'] = 0;
++
++    if (empty($sandbox['total_count'])) {
++      $sandbox['#finished'] = 1;
++      return;
++    }
++  }
++
++  $batch_size = 25;
++  $nids = \Drupal::entityTypeManager()
++    ->getStorage('node')
++    ->getQuery()
++    ->condition(OverridesSectionStorage::TRANSLATED_CONFIGURATION_FIELD_NAME, NULL, 'IS NOT NULL')
++    ->accessCheck(FALSE)
++    ->range($sandbox['progress'], $batch_size)
++    ->execute();
++  $node_storage = \Drupal::entityTypeManager()->getStorage('node');
++
++  $nodes = $node_storage->loadMultiple($nids);
++
++  /** @var \Drupal\node\NodeInterface $node */
++  foreach ($nodes as $node) {
++    $sections = $node->get(OverridesSectionStorage::FIELD_NAME)->getValue();
++
++    // Loop through the sections and update the referenced block revision id.
++    foreach ($sections as $section_array) {
++      /** @var \Drupal\layout_builder\Section $section */
++      $section = $section_array['section'];
++      foreach ($section->getComponents() as $component) {
++        $plugin_configuration = $component->getPlugin()->getConfiguration();
++        if (!isset($plugin_configuration['block_revision_id'])) {
++          continue;
++        }
++        $block = \Drupal::entityTypeManager()->getStorage('block_content')->loadRevision($plugin_configuration['block_revision_id']);
++        if (!$block) {
++          continue;
++        }
++        // Load the default revision of the block.
++        $default_revision = \Drupal::entityTypeManager()->getStorage('block_content')->load($block->id());
++
++        // Reference the default revision.
++        $plugin_configuration['block_revision_id'] = $default_revision->getRevisionId();
++        $component->setConfiguration($plugin_configuration);
++      }
++    }
++
++    $node->set(OverridesSectionStorage::FIELD_NAME, $sections);
++    // Saving the node will trigger InlineBlockEntityOperations::setBlockRevisionForAllTranslations(),
++    // causing all translations to be updated as well.
++    $node->save();
++    $sandbox['updated_count']++;
++
++    $sandbox['progress']++;
++  }
++  if ($sandbox['progress'] >= $sandbox['total_count']) {
++    $sandbox['#finished'] = 1;
++  }
++  else {
++    $sandbox['#finished'] = ($sandbox['total_count'] - $sandbox['progress']) / $sandbox['total_count'];
++  }
++  return t('@number nodes were updated', ['@number' => $sandbox['updated_count']]);
++}
+diff --git a/src/InlineBlockEntityOperations.php b/src/InlineBlockEntityOperations.php
+index 3673a601dfb0d376f15727000f3f9586320d9941..d639359061e3664052d28ac75f62199eece08c07 100644
+--- a/src/InlineBlockEntityOperations.php
++++ b/src/InlineBlockEntityOperations.php
+@@ -2,6 +2,7 @@
+ 
+ namespace Drupal\layout_builder_st;
+ 
++use Drupal\Core\Entity\ContentEntityInterface;
+ use Drupal\Core\Entity\EntityInterface;
+ use Drupal\layout_builder\InlineBlockEntityOperations as CoreInlineBlockEntityOperations;
+ use Drupal\layout_builder\SectionComponent;
+@@ -60,13 +61,60 @@ final class InlineBlockEntityOperations extends CoreInlineBlockEntityOperations
+       $translated_component_configuration = $section_storage->getTranslatedComponentConfiguration($component->getUuid());
+       if (isset($translated_component_configuration['block_serialized'])) {
+         $this->saveTranslatedInlineBlock($entity, $component->getUuid(), $translated_component_configuration, $new_revision);
++        if ($new_revision) {
++          $block_revision_id = $section_storage->getTranslatedComponentConfiguration($component->getUuid())['block_revision_id'];
++        }
+       }
+ 
+     }
+     else {
+       parent::saveInlineBlockComponent($entity, $component, $new_revision, $duplicate_blocks);
++      if ($new_revision) {
++        $block_revision_id = $component->get('configuration')['block_revision_id'];
++      }
+     }
+ 
++    // If a new block revision was created, update all translations of the
++    // layout to reference the new block revision ID. This ensures that if a
++    // non-translatable field is updated in one language, it will be visible in
++    // all translations.
++    if (!empty($block_revision_id) && $entity->isDefaultRevision()) {
++      $this->setBlockRevisionForAllTranslations($entity, $component, $block_revision_id);
++    }
++  }
++
++  /**
++   * Updates all layout translations to reference a given block revision ID.
++   *
++   * @param \Drupal\Core\Entity\ContentEntityInterface $entity
++   *   The entity with the layout.
++   * @param SectionComponent $component
++   *   The section component with an inline block.
++   * @param int $block_revision_id
++   *   The new block revision ID.
++   */
++  protected function setBlockRevisionForAllTranslations(ContentEntityInterface $entity, SectionComponent $component, $block_revision_id) {
++    if ($entity->isTranslatable()) {
++      foreach ($entity->getTranslationLanguages() as $langcode => $language) {
++        $section_storage = $this->getSectionStorageForEntity($entity->getTranslation($langcode));
++        // Update each translation language.
++        if (static::isTranslation($section_storage)) {
++          /** @var \Drupal\layout_builder_st\TranslatableSectionStorageInterface $section_storage */
++          $configuration = $section_storage->getTranslatedComponentConfiguration($component->getUuid());
++          // Only update the block revision ID if there is already one present.
++          if (!empty($configuration)) {
++            $configuration['block_revision_id'] = $block_revision_id;
++            $section_storage->setTranslatedComponentConfiguration($component->getUuid(), $configuration);
++          }
++        }
++        // Update the source language.
++        else {
++          $configuration = $component->getPlugin()->getConfiguration();
++          $configuration['block_revision_id'] = $block_revision_id;
++          $component->setConfiguration($configuration);
++        }
++      }
++    }
+   }
+ 
+ }

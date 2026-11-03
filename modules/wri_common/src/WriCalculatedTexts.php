@@ -14,7 +14,7 @@ class WriCalculatedTexts extends FieldItemList {
   /**
    * {@inheritdoc}
    */
-  public function getIterator() {
+  public function getIterator(): \ArrayIterator {
     $this->ensurePopulated();
     return new \ArrayIterator($this->list);
   }

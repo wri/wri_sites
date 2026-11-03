@@ -22,7 +22,6 @@ dependencies:
   - contextual
   - ctools_views
   - dblog
-  - dblog_persistent
   - diff
   - distro_helper
   - ds

@@ -436,3 +436,41 @@ function wri_common_update_10611() {
     ], 'wri_common', '../../../themes/custom/ts_wrin/config/install', 'TRUE');
 
 }
+
+/**
+ * Remove the latest tweet block and uninstall twitter_api_block.
+ */
+function wri_common_update_11001() {
+  // Delete the latest tweet blocks and their block type.
+  $block_storage = \Drupal::entityTypeManager()->getStorage('block_content');
+  $ids = $block_storage->getQuery()
+    ->accessCheck(FALSE)
+    ->condition('type', 'latest_tweet')
+    ->execute();
+  if ($ids) {
+    $block_storage->delete($block_storage->loadMultiple($ids));
+  }
+  $block_type = \Drupal::entityTypeManager()->getStorage('block_content_type')->load('latest_tweet');
+  if ($block_type) {
+    $block_type->delete();
+  }
+
+  // Remove the block type from the block entity browser.
+  $config = \Drupal::configFactory()->getEditable('entity_browser.browser.block');
+  if (!$config->isNew()) {
+    foreach ($config->get('widgets') ?? [] as $uuid => $widget) {
+      if (isset($widget['settings']['block_type']['latest_tweet'])) {
+        $config->clear("widgets.$uuid.settings.block_type.latest_tweet");
+      }
+    }
+    $config->save();
+  }
+
+  $moduleHandler = \Drupal::service('module_handler');
+  if ($moduleHandler->moduleExists('wri_latest_tweet')) {
+    \Drupal::service('module_installer')->uninstall(['wri_latest_tweet'], TRUE);
+  }
+  if ($moduleHandler->moduleExists('twitter_api_block')) {
+    \Drupal::service('module_installer')->uninstall(['twitter_api_block'], TRUE);
+  }
+}

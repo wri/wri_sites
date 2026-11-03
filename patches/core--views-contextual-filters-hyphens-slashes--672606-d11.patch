@@ -1,0 +1,83 @@
+diff --git a/core/modules/views/src/Plugin/views/HandlerBase.php b/core/modules/views/src/Plugin/views/HandlerBase.php
+index f2121382..11d60d5a 100644
+--- a/core/modules/views/src/Plugin/views/HandlerBase.php
++++ b/core/modules/views/src/Plugin/views/HandlerBase.php
+@@ -849,12 +849,12 @@ public static function breakString($str, $force_int = FALSE) {
+ 
+     // Determine if the string has 'or' operators (plus signs) or 'and'
+     // operators (commas) and split the string accordingly.
+-    if (preg_match('/^([\w0-9-_\.]+[+ ]+)+[\w0-9-_\.]+$/u', $str)) {
++    if (preg_match(HandlerBase::generatePattern('+', '+'), $str)) {
+       // The '+' character in a query string may be parsed as ' '.
+       $operator = 'or';
+       $value = preg_split('/[+ ]/', $str);
+     }
+-    elseif (preg_match('/^([\w0-9-_\.]+[, ]+)*[\w0-9-_\.]+$/u', $str)) {
++    elseif (preg_match(HandlerBase::generatePattern(), $str)) {
+       $operator = 'and';
+       $value = explode(',', $str);
+     }
+@@ -995,4 +995,18 @@ public function calculateDependencies() {
+     return $dependencies;
+   }
+ 
++  /**
++   * Pass in a string to be added to an auto generated pattern. That will be
++   * used to find patterns such as x,y,z and x+y+z.
++   *
++   * @param string $string
++   *   (Optional) A string to use for searching in the pattern. Defaults to ','.
++   * @param string $op
++   *   (Optional) A string used for searching what operation the regex pattern
++   *    will look for. Defaults to '*'.
++   */
++  private static function generatePattern(string $string = ',', string $op = '*') {
++    return '/^([\w0-9-_\.\#\&\/\(\)]+[' . $string . ' ]+)' . $op . '[\w0-9-_\.\#\&\/\(\)]+$/u';
++  }
++
+ }
+diff --git a/core/modules/views/tests/src/Functional/Handler/HandlerTest.php b/core/modules/views/tests/src/Functional/Handler/HandlerTest.php
+index 52276694..fd89abce 100644
+--- a/core/modules/views/tests/src/Functional/Handler/HandlerTest.php
++++ b/core/modules/views/tests/src/Functional/Handler/HandlerTest.php
+@@ -122,6 +122,40 @@ public function testBreakString(): void {
+     $this->assertEquals(['wõrd1', 'wõrd2', 'wõrd'], $handler->value);
+     $this->assertEquals('and', $handler->operator);
+ 
++    // Test ','
++    $handler = HandlerBase::breakString('Law & Order,word,word');
++    $this->assertEquals(['Law & Order', 'word', 'word'], $handler->value);
++    $this->assertEquals('and', $handler->operator);
++    $handler = HandlerBase::breakString('word,Law & Order,word');
++    $this->assertEquals(['word', 'Law & Order', 'word'], $handler->value);
++    $this->assertEquals('and', $handler->operator);
++    $handler = HandlerBase::breakString('word,#Law&Order,word');
++    $this->assertEquals(['word', '#Law&Order', 'word'], $handler->value);
++    $this->assertEquals('and', $handler->operator);
++    $handler = HandlerBase::breakString('word,word,Law/Order');
++    $this->assertEquals(['word', 'word', 'Law/Order'], $handler->value);
++    $this->assertEquals('and', $handler->operator);
++    $handler = HandlerBase::breakString('word,word,Law (O) Order');
++    $this->assertEquals(['word', 'word', 'Law (O) Order'], $handler->value);
++    $this->assertEquals('and', $handler->operator);
++
++    // Test '+'
++    $handler = HandlerBase::breakString('Law & Order+word+word');
++    $this->assertEquals(['Law', '&', 'Order', 'word', 'word'], $handler->value);
++    $this->assertEquals('or', $handler->operator);
++    $handler = HandlerBase::breakString('word+Law & Order+word');
++    $this->assertEquals(['word', 'Law', '&', 'Order', 'word'], $handler->value);
++    $this->assertEquals('or', $handler->operator);
++    $handler = HandlerBase::breakString('word+#Law&Order+word');
++    $this->assertEquals(['word', '#Law&Order', 'word'], $handler->value);
++    $this->assertEquals('or', $handler->operator);
++    $handler = HandlerBase::breakString('word+word+Law/Order');
++    $this->assertEquals(['word', 'word', 'Law/Order'], $handler->value);
++    $this->assertEquals('or', $handler->operator);
++    $handler = HandlerBase::breakString('word+word+Law (O) Order');
++    $this->assertEquals(['word', 'word', 'Law', '(O)', 'Order'], $handler->value);
++    $this->assertEquals('or', $handler->operator);
++
+     // Test a single word.
+     $handler = HandlerBase::breakString('word');
+     $this->assertEquals(['word'], $handler->value);

@@ -5,6 +5,7 @@ core_version_requirement: '>=9.5'
 package: WRI
 dependencies:
   - layout_builder_modal
+  - wri_block
 config_devel:
   install:
     - block_content.type.text_block
