@@ -37,6 +37,7 @@ dependencies:
   - language
   - layout_builder
   - layout_builder_restrictions
+  - layout_builder_reusable_blocks
   - layout_discovery
   - link_attributes
   - link_attributes_menu_link_content

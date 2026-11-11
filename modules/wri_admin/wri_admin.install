@@ -120,3 +120,13 @@ function wri_admin_update_11001() {
     \Drupal::service('module_installer')->uninstall(['dblog_persistent'], TRUE);
   }
 }
+
+/**
+ * Enable layout_builder_reusable_blocks.
+ */
+function wri_admin_update_11002() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('layout_builder_reusable_blocks')) {
+    \Drupal::service('module_installer')->install(['layout_builder_reusable_blocks']);
+  }
+}
