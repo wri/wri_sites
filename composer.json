@@ -93,7 +93,7 @@
                 "Drupal 11 core_version_requirement (no D11 release or upstream issue yet)": "https://raw.githubusercontent.com/wri/wri_sites/refs/heads/624-d11-upgrade/patches/dblog_persistent--d11-compatibility.patch"
             },
             "drupal/entity_share_cron": {
-                "Drupal 11 compatibility https://www.drupal.org/project/entity_share_cron/issues/3430244 (bot MR !13 targets 3.0.x-dev and does not apply to 3.0.2)": "https://raw.githubusercontent.com/wri/wri_sites/refs/heads/624-d11-upgrade/patches/entity_share_cron--d11-compatibility.patch"
+                "Drupal 11 compatibility https://www.drupal.org/project/entity_share_cron/issues/3430244 (bot MR !13 targets 3.0.x-dev and does not apply to 3.0.2)": "https://git.drupalcode.org/project/entity_share_cron/-/merge_requests/13.diff"
             },
             "drupal/twitter_api_block": {
                 "Drupal 11 core_version_requirement (no D11 release or upstream issue yet)": "https://raw.githubusercontent.com/wri/wri_sites/refs/heads/624-d11-upgrade/patches/twitter_api_block--d11-compatibility.patch"
