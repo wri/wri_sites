@@ -122,11 +122,14 @@ function wri_admin_update_11001() {
 }
 
 /**
- * Enable layout_builder_reusable_blocks.
+ * Enable layout_builder_reusable_blocks and allow editing reusable blocks.
  */
 function wri_admin_update_11002() {
   $moduleHandler = \Drupal::service('module_handler');
   if (!$moduleHandler->moduleExists('layout_builder_reusable_blocks')) {
     \Drupal::service('module_installer')->install(['layout_builder_reusable_blocks']);
   }
+  \Drupal::configFactory()->getEditable('layout_builder_reusable_blocks.settings')
+    ->set('allow_editing_reusable_blocks', 1)
+    ->save();
 }
