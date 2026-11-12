@@ -9,6 +9,7 @@ namespace Drupal\wri_search\Plugin\Field\FieldType;
  *   id = "smart_topic_parent",
  *   label = @Translation("Smart Topic parent"),
  *   description = @Translation("Any topic term attached to content, including its parent or itself."),
+ *   category = "reference",
  * )
  */
 class WriSmartTopic extends WriCalculatedField {

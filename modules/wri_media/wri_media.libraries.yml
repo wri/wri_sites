@@ -6,5 +6,6 @@ browser.styling:
   js:
     js/browser.js: { }
   dependencies:
-    - core/backbone
+    - core/internal.backbone
+    - core/internal.underscore
     - core/jquery

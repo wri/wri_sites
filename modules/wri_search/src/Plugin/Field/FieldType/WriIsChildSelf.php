@@ -9,6 +9,7 @@ namespace Drupal\wri_search\Plugin\Field\FieldType;
  *   id = "term_child_of_parent",
  *   label = @Translation("Is Child"),
  *   description = @Translation("Returns the term if it's a child, otherwise 0."),
+ *   category = "reference",
  * )
  */
 class WriIsChildSelf extends WriCalculatedField {

@@ -1,0 +1,13 @@
+diff --git a/twitter_api_block.info.yml b/twitter_api_block.info.yml
+index 0ed6a9a..b6ceee9 100644
+--- a/twitter_api_block.info.yml
++++ b/twitter_api_block.info.yml
+@@ -1,7 +1,7 @@
+ name: 'Twitter API Block'
+ type: module
+ description: 'Display tweets in Drupal, with blocks.'
+-core_version_requirement: ^8.9 || ^9 || ^10
++core_version_requirement: ^8.9 || ^9 || ^10 || ^11
+ package: Twitter
+ dependencies:
+   - drupal:block

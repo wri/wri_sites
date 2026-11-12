@@ -2,7 +2,7 @@
 
 namespace Drupal\schema_dataset\Plugin\metatag\Group;
 
-use Drupal\schema_web_page\Plugin\metatag\Group\SchemaWebPage;
+use Drupal\schema_metatag\Plugin\metatag\Group\SchemaGroupBase;
 
 /**
  * Provides a plugin for the 'WebPage' meta tag group.
@@ -16,6 +16,6 @@ use Drupal\schema_web_page\Plugin\metatag\Group\SchemaWebPage;
  *   weight = 10,
  * )
  */
-class SchemaDataset extends SchemaWebPage {
+class SchemaDataset extends SchemaGroupBase {
   // Nothing here yet. Just a placeholder class for a plugin.
 }

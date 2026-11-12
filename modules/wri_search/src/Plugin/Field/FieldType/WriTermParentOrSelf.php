@@ -9,6 +9,7 @@ namespace Drupal\wri_search\Plugin\Field\FieldType;
  *   id = "term_parent_or_self",
  *   label = @Translation("Parent or self"),
  *   description = @Translation("If the term has no value in its parent, show the term itself."),
+ *   category = "reference",
  * )
  */
 class WriTermParentOrSelf extends WriCalculatedField {

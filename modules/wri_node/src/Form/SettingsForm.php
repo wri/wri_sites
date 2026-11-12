@@ -3,6 +3,7 @@
 namespace Drupal\wri_node\Form;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -22,10 +23,17 @@ class SettingsForm extends ConfigFormBase {
   protected $moduleExtensionList;
 
   /**
+   * The request context.
+   *
+   * @var \Drupal\Core\Routing\RequestContext
+   */
+  protected $requestContext;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(ConfigFactoryInterface $config_factory, ModuleExtensionList $module_extension_list, RequestContext $request_context) {
-    parent::__construct($config_factory);
+  public function __construct(ConfigFactoryInterface $config_factory, TypedConfigManagerInterface $typed_config_manager, ModuleExtensionList $module_extension_list, RequestContext $request_context) {
+    parent::__construct($config_factory, $typed_config_manager);
     $this->moduleExtensionList = $module_extension_list;
     $this->requestContext = $request_context;
   }
@@ -36,6 +44,7 @@ class SettingsForm extends ConfigFormBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('config.factory'),
+      $container->get('config.typed'),
       $container->get('extension.list.module'),
       $container->get('router.request_context')
     );
