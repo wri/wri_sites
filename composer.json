@@ -54,7 +54,7 @@
                 "Remove canonical link templates that have no route (list builders 500 on Drupal 11) https://www.drupal.org/project/entity_share/issues/3419256": "https://git.drupalcode.org/project/entity_share/-/merge_requests/89.diff"
             },
             "drupal/layout_builder_st": {
-                "Nontranslatable custom block fields are not synchronized between translations https://www.drupal.org/project/layout_builder_st/issues/3108061 (MR !33 re-rolled for 2.0.2, without its tests hunk)": "https://raw.githubusercontent.com/wri/wri_sites/refs/heads/624-d11-upgrade/patches/layout_builder_st--nontranslatable-block-fields-sync--3108061-mr33-without-tests.patch"
+                "Nontranslatable custom block fields are not synchronized between translations https://www.drupal.org/project/layout_builder_st/issues/3108061": "https://git.drupalcode.org/project/layout_builder_st/-/merge_requests/33.diff"
             },
             "drupal/metatag": {
                 "Provide field formatter to output meta tags on-page, e.g. for use with Views (D9), https://www.drupal.org/project/metatag/issues/3027873": "https://www.drupal.org/files/issues/2023-07-23/metatag-field_formatter_for_views-3027873-27.patch",
