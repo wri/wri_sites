@@ -12,6 +12,12 @@ export default function (context) {
   // Track links that open in new windows
   const linksToDecorate = new Set();
 
+  // Admins can add the "no-offsite" class to a link (e.g. via the menu link
+  // Class attribute) to open it in a new tab without the offsite indicator.
+  // Screen reader users still get visually hidden "(opens in a new tab)" text.
+  const noOffsiteText =
+    '<span class="visually-hidden no-offsite-label">(opens in a new tab)</span>';
+
   // External links
   $("a[href^=http]", context).each(function () {
     const $this = $(this);
@@ -29,7 +35,7 @@ export default function (context) {
       }
       linksToDecorate.add(this);
 
-      if ($this.hasClass("button")) {
+      if ($this.hasClass("button") && !$this.hasClass("no-offsite")) {
         $this.addClass("offsite");
       }
     }
@@ -46,7 +52,7 @@ export default function (context) {
       }
       linksToDecorate.add(this);
 
-      if ($this.hasClass("button")) {
+      if ($this.hasClass("button") && !$this.hasClass("no-offsite")) {
         $this.addClass("offsite");
       }
     }
@@ -57,11 +63,19 @@ export default function (context) {
     linksToDecorate.add(this);
   });
 
+  // Add screen reader text to opted-out links that open in new windows
+  $("a.no-offsite[target='_blank']", context).each(function () {
+    if (!$(this).find(".no-offsite-label").length) {
+      $(this).append(noOffsiteText);
+    }
+  });
+
   // Add SVG icon to links in #main-content that open in new windows
   $("#main-content a", context).each(function () {
     if (
       this.hasAttribute("target") &&
       !this.classList.contains("button") &&
+      !this.classList.contains("no-offsite") &&
       !$(this).find("svg.offsite-link").length
     ) {
       $(this).append(svgIcon);
