@@ -41,13 +41,9 @@ function wri_common_update_9401() {
 }
 
 /**
- * Enable the wri_latest_tweet module.
+ * Formerly enabled wri_latest_tweet, which wri_common_update_11001() removes.
  */
 function wri_common_update_9402() {
-  $moduleHandler = \Drupal::service('module_handler');
-  if (!$moduleHandler->moduleExists('wri_latest_tweet')) {
-    \Drupal::service('module_installer')->install(['wri_latest_tweet'], TRUE);
-  }
 }
 
 /**
