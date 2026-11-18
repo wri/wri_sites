@@ -27,7 +27,7 @@
 (function (Drupal, once) {
   "use strict";
 
-  var DESKTOP_QUERY = "(min-width: 1024px)";
+  var DESKTOP_QUERY = "(min-width: 1002px)";
 
   Drupal.behaviors.wriMegaMenu = {
     attach: function (context) {

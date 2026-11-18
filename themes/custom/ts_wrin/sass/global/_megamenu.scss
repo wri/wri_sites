@@ -74,7 +74,7 @@
 
 .wri-megamenu {
   display: none;
-  @include mq($lg) {
+  @include mq($megamenu-desktop) {
     display: block;
   }
   // ---------------------------------------------------------------------
@@ -85,18 +85,29 @@
   // ---------------------------------------------------------------------
   --mega-col-width: clamp(
     170px,
-    calc(170px + (50 * ((100vw - 1024px) / 416))),
+    calc(170px + (50 * ((100vw - 1002px) / 438))),
     220px
   );
   --mega-col-width-wide: clamp(
     210px,
-    calc(210px + (50 * ((100vw - 1024px) / 416))),
+    calc(210px + (50 * ((100vw - 1002px) / 438))),
     260px
   );
+  // Space between a column's separator line and its text, and between the
+  // text and the next separator. 20px at $megamenu-desktop, 24px from
+  // 1440px up (was up to 40px; reduced to match the 2026 mockup).
   --mega-col-gap: clamp(
     20px,
-    calc(20px + (20 * ((100vw - 1024px) / 416))),
-    var(--spacer-10)
+    calc(20px + (4 * ((100vw - 1002px) / 438))),
+    var(--spacer-6)
+  );
+  // Featured listing column: wider than --mega-col-width-wide so article
+  // titles wrap to about two lines, as in the mockup. Same 210px as before
+  // at $megamenu-desktop, so the narrow end of the range is unchanged.
+  --mega-col-width-featured: clamp(
+    210px,
+    calc(210px + (110 * ((100vw - 1002px) / 438))),
+    320px
   );
 
   // ---------------------------------------------------------------------
@@ -109,12 +120,26 @@
       @include font(var(--font-family-heading), "bold", "normal");
       @include font-line-height(15, 18);
 
+      // Scale the type down toward the narrow end of the desktop range so
+      // all five items fit beside Donate and search without touching:
+      // 13px / 0.5px tracking at $megamenu-desktop (1002px), growing to the
+      // full 15px / 0.91px at 1440px and above.
+      font-size: clamp(
+        0.8125rem,
+        calc(0.8125rem + (2 * ((100vw - 1002px) / 438))),
+        0.9375rem
+      );
+      letter-spacing: clamp(
+        0.5px,
+        calc(0.5px + (0.41 * ((100vw - 1002px) / 438))),
+        0.91px
+      );
+
       -webkit-appearance: none;
       background-color: transparent;
       border: 0;
       color: var(--color-neutral-900);
       cursor: pointer;
-      letter-spacing: 0.91px;
       padding-bottom: 10px;
       position: relative;
       text-decoration: none;
@@ -157,9 +182,29 @@
     right: 0;
     background: var(--mega-bg);
     color: var(--mega-text);
-    padding: var(--spacer-10) clamp(var(--spacer-6), 4vw, var(--spacer-15))
+    // The background stays full-bleed, but the content lines up with the
+    // page container. This mirrors .header-wrapper in _header.scss: a
+    // $grid-gutter margin on each side until the viewport is wide enough
+    // for the max-width to apply, then centered. Both sit in the same
+    // full-width <header>, so 100% here matches .header-wrapper's parent.
+    padding: var(--spacer-10)
+      max(
+        #{$grid-gutter},
+        calc((100% - #{$grid-max-width + ($grid-gutter * 2)}) / 2)
+      )
       var(--spacer-12);
     z-index: 50;
+
+    @include mq($xxl) {
+      padding-left: max(
+        #{$grid-gutter},
+        calc((100% - #{$grid-max-width-xxl + ($grid-gutter * 2)}) / 2)
+      );
+      padding-right: max(
+        #{$grid-gutter},
+        calc((100% - #{$grid-max-width-xxl + ($grid-gutter * 2)}) / 2)
+      );
+    }
     box-shadow: 0 12px 24px rgb(var(--color-black-rgb) / 18%);
 
     h3 {
@@ -224,7 +269,7 @@
     // article/report titles (unlike the compact nav-selector and flyout
     // columns), and the standard width was wrapping them 5-6 lines deep
     // at the low end of the fluid range.
-    flex-basis: var(--mega-col-width-wide);
+    flex-basis: var(--mega-col-width-featured);
 
     .field__item__label {
       // Inlined from .tag (tailwind-components.scss) — see megamenu.scss.
@@ -460,7 +505,7 @@
     }
   }
 
-  @include mq($lg) {
+  @include mq($megamenu-desktop) {
     flex-wrap: nowrap;
 
     .wri-megamenu .field__items {
@@ -500,7 +545,7 @@ header nav#block-donate-2026 > ul.menu > li > a {
   position: relative;
   display: none;
 
-  @include mq($lg) {
+  @include mq($megamenu-desktop) {
     &.donate-menu--enhanced {
       display: block;
     }
@@ -607,7 +652,7 @@ header nav#block-donate-2026 > ul.menu > li > a {
 // hide it once desktop's inline mega menu takes over — hiding it
 // unconditionally, as before, would leave mobile with no way to open
 // the menu at all.
-@include mq($lg) {
+@include mq($megamenu-desktop) {
   .menu-toggle {
     display: none;
   }

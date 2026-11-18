@@ -19,7 +19,7 @@
 (function (Drupal, once) {
   "use strict";
 
-  var mq = window.matchMedia("(min-width: 1024px)");
+  var mq = window.matchMedia("(min-width: 1002px)");
 
   Drupal.behaviors.wriMegaMenuBreakpointHandoff = {
     attach: function (context) {

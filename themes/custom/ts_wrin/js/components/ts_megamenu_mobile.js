@@ -4,7 +4,7 @@
  *
  * Reuses the same real Drupal markup that powers the desktop drill-down
  * (megamenu.js) as its single source of truth. .wri-megamenu is rendered
- * regardless of viewport (just hidden below 1024px via CSS), so this file
+ * regardless of viewport (just hidden below 1002px via CSS), so this file
  * reads that hidden structure once, builds an in-memory tree, and drives
  * its own full-screen sliding-panel overlay from it — rather than
  * maintaining a second hand-written menu structure that could drift out
@@ -31,7 +31,7 @@
 (function (Drupal, once) {
   "use strict";
 
-  var DESKTOP_QUERY = "(min-width: 1024px)";
+  var DESKTOP_QUERY = "(min-width: 1002px)";
 
   // Hardcoded because Drupal's .field--name-field-listing markup contains
   // no heading text of its own — the mobile design shows one (the desktop

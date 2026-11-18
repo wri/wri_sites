@@ -15,7 +15,7 @@
  * both built here from the block's existing markup (same approach
  * megamenu.js uses to build .mega-grid without needing template changes).
  *
- * Desktop-only by design (matches megamenu.js's 1024px gate). On mobile,
+ * Desktop-only by design (matches megamenu.js's 1002px gate). On mobile,
  * "Donate" is already covered by the Quicklinks section inside
  * megamenu-mobile.js's overlay, so this dropdown doesn't get its own
  * mobile treatment.
@@ -23,7 +23,7 @@
 (function (Drupal, once) {
   "use strict";
 
-  var DESKTOP_QUERY = "(min-width: 1024px)";
+  var DESKTOP_QUERY = "(min-width: 1002px)";
 
   Drupal.behaviors.wriDonateMenu = {
     attach: function (context) {

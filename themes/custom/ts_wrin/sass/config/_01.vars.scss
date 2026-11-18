@@ -21,6 +21,11 @@ $lg: 1024px;
 $xl: 1440px;
 // Double Extra large screens / wide monitor
 $xxl: 2000px;
+// Where the 2026 mega menu switches from the hamburger (mobile) view to the
+// desktop menu: desktop from this width up, hamburger at 1001px and below.
+// Keep in sync with DESKTOP_QUERY in js/components/ts_megamenu*.js and
+// ts_donate_menu.js.
+$megamenu-desktop: 1002px;
 
 //Padding values
 $padding-vertical: 48px;
