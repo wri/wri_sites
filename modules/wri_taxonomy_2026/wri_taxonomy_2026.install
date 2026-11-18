@@ -17,14 +17,22 @@ function wri_taxonomy_2026_update_11001() {
 
   // Build the project listing even when only the selected-projects attachment
   // has results; the block template still hides it when nothing renders.
-  $components = [
-    'tags' => 9,
-    'regions' => 9,
-    'topics_and_subtopics' => 11,
-  ];
-  foreach ($components as $bundle => $delta) {
-    $updates->updateConfig("core.entity_view_display.taxonomy_term.$bundle.default", [
-      "third_party_settings#layout_builder#sections#0#components#$delta#configuration#formatter#settings#always_build_output",
-    ], 'wri_taxonomy_2026');
+  // Matched by plugin ID since component positions can vary per site.
+  foreach (['tags', 'regions', 'topics_and_subtopics'] as $bundle) {
+    $name = "core.entity_view_display.taxonomy_term.$bundle.default";
+    $config = \Drupal::configFactory()->getEditable($name);
+    if ($config->isNew()) {
+      continue;
+    }
+    $sections = $config->get('third_party_settings.layout_builder.sections') ?? [];
+    foreach ($sections as $s => $section) {
+      foreach ($section['components'] as $c => $component) {
+        if ($component['configuration']['id'] === "field_block:taxonomy_term:$bundle:field_project_listing") {
+          $sections[$s]['components'][$c]['configuration']['formatter']['settings']['always_build_output'] = TRUE;
+        }
+      }
+    }
+    $config->set('third_party_settings.layout_builder.sections', $sections)->save();
+    $updates->exportConfig($name);
   }
 }
