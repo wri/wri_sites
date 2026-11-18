@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Contains wri_taxonomy_2026.module.
+ */
+
+use Drupal\views\ViewExecutable;
+use Drupal\views\Views;
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function wri_taxonomy_2026_views_pre_render(ViewExecutable $view) {
+  if ($view->id() !== 'term_featured_items' || $view->current_display !== 'featured_projects') {
+    return;
+  }
+  // The selected-projects attachment shares this display's item limit. Trim
+  // here rather than in post_execute: viewfield hides the block if the main
+  // result is empty before render.
+  $selected = Views::getView('term_featured_items');
+  $selected->setArguments($view->args);
+  $selected->setDisplay('featured_projects_selected');
+  $selected->execute();
+  $remaining = max(0, $view->getItemsPerPage() - count($selected->result));
+  $view->result = array_slice($view->result, 0, $remaining);
+}
