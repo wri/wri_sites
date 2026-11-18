@@ -245,8 +245,7 @@
         "drupal/webp": "^1.0@RC",
         "drupal/xmlsitemap": "^2.0",
         "mglaman/composer-drupal-lenient": "*",
-        "npm-asset/jquery.toc": "^0.4.0",
-        "solarium/solarium": "^6.1.5"
+        "npm-asset/jquery.toc": "^0.4.0"
     },
     "config": {
         "sort-packages": true,
