@@ -17,6 +17,36 @@
 // anything until megamenu.js has run.
 // =============================================================================
 
+@use "sass:math";
+
+// Scales a length from $min at $megamenu-desktop up to $max at $xl, clamped
+// at both ends. $min and $max must share a unit (px or rem).
+@function megamenu-fluid($min, $max) {
+  $range: math.div($xl - $megamenu-desktop, 1px);
+  $delta: $max - $min;
+  // Unitless px: multiplying by the length (100vw - ...) must give a length.
+  @if math.unit($delta) == "rem" {
+    $delta: math.div($delta, 1rem) * $base-font-size;
+  } @else {
+    $delta: math.div($delta, 1px);
+  }
+  @return clamp(
+    #{$min},
+    calc(#{$min} + (#{$delta} * ((100vw - #{$megamenu-desktop}) / #{$range}))),
+    #{$max}
+  );
+}
+
+// Horizontal inset that lines panel content up with .header-wrapper (see
+// _header.scss and the container-padding mixin): a fixed gutter until the
+// viewport is wide enough for $max-width to apply, then centered.
+@function megamenu-container-inset($max-width) {
+  @return max(
+    #{$grid-gutter},
+    calc((100% - #{$max-width + ($grid-gutter * 2)}) / 2)
+  );
+}
+
 // #block-quicklinks-2026 lives in .region-primary-nav as a sibling of
 // .wri-megamenu (moved there per the Quick Links block placement change).
 // megamenu-mobile.js reads its content purely as a data source for the
@@ -74,7 +104,7 @@
 
 .wri-megamenu {
   display: none;
-  @include mq($lg) {
+  @include mq($megamenu-desktop) {
     display: block;
   }
   // ---------------------------------------------------------------------
@@ -83,21 +113,16 @@
   // sliding panels instead (its own --mega-mobile-* tokens live in
   // _megamenu-mobile.scss), so there's nothing for it to inherit here.
   // ---------------------------------------------------------------------
-  --mega-col-width: clamp(
-    170px,
-    calc(170px + (50 * ((100vw - 1024px) / 416))),
-    220px
-  );
-  --mega-col-width-wide: clamp(
-    210px,
-    calc(210px + (50 * ((100vw - 1024px) / 416))),
-    260px
-  );
-  --mega-col-gap: clamp(
-    20px,
-    calc(20px + (20 * ((100vw - 1024px) / 416))),
-    var(--spacer-10)
-  );
+  // Nav selector and flyout columns.
+  --mega-col-width: #{megamenu-fluid(170px, 220px)};
+  // Intro column (section title + description, far left).
+  --mega-col-width-intro: #{megamenu-fluid(150px, 200px)};
+  // Featured listing column: wide enough for article titles to wrap to
+  // about two lines.
+  --mega-col-width-featured: #{megamenu-fluid(210px, 320px)};
+  // Space between a column's separator line and its text, and between the
+  // text and the next separator.
+  --mega-col-gap: #{megamenu-fluid(20px, 24px)};
 
   // ---------------------------------------------------------------------
   // Top nav row (the field__items flex row) + trigger buttons
@@ -107,14 +132,18 @@
 
     > button {
       @include font(var(--font-family-heading), "bold", "normal");
-      @include font-line-height(15, 18);
+      // Smaller toward the narrow end of the desktop range so all items
+      // fit beside Donate and search: 13px at $megamenu-desktop up to 15px
+      // at $xl.
+      font-size: megamenu-fluid(rem(13), rem(15));
+      letter-spacing: megamenu-fluid(0.5px, 0.91px);
+      line-height: 1.2;
 
       -webkit-appearance: none;
       background-color: transparent;
       border: 0;
       color: var(--color-neutral-900);
       cursor: pointer;
-      letter-spacing: 0.91px;
       padding-bottom: 10px;
       position: relative;
       text-decoration: none;
@@ -157,10 +186,20 @@
     right: 0;
     background: var(--mega-bg);
     color: var(--mega-text);
-    padding: var(--spacer-10) clamp(var(--spacer-6), 4vw, var(--spacer-15))
-      var(--spacer-12);
+    // Full-bleed background, with content lined up with the page container
+    // (.header-wrapper). Both sit in the same full-width <header>, so 100%
+    // in megamenu-container-inset() matches .header-wrapper's parent.
+    padding: var(--spacer-10) $grid-gutter-mobile var(--spacer-12);
     z-index: 50;
     box-shadow: 0 12px 24px rgb(var(--color-black-rgb) / 18%);
+
+    @include mq($lg) {
+      padding-inline: megamenu-container-inset($grid-max-width);
+    }
+
+    @include mq($xxl) {
+      padding-inline: megamenu-container-inset($grid-max-width-xxl);
+    }
 
     h3 {
       @include font(var(--font-family-heading), "bold", "normal");
@@ -198,7 +237,7 @@
     flex: 0 0 var(--mega-col-width);
 
     &.flush-left {
-      flex-basis: var(--mega-col-width-wide);
+      flex-basis: var(--mega-col-width-intro);
     }
   }
 
@@ -220,11 +259,7 @@
   // Featured listing column (Research & Data / News & Insights / Events)
   // ---------------------------------------------------------------------
   .field--name-field-listing {
-    // Wider than the default --mega-col-width: this column holds full
-    // article/report titles (unlike the compact nav-selector and flyout
-    // columns), and the standard width was wrapping them 5-6 lines deep
-    // at the low end of the fluid range.
-    flex-basis: var(--mega-col-width-wide);
+    flex-basis: var(--mega-col-width-featured);
 
     .field__item__label {
       // Inlined from .tag (tailwind-components.scss) — see megamenu.scss.
@@ -460,7 +495,7 @@
     }
   }
 
-  @include mq($lg) {
+  @include mq($megamenu-desktop) {
     flex-wrap: nowrap;
 
     .wri-megamenu .field__items {
@@ -500,7 +535,7 @@ header nav#block-donate-2026 > ul.menu > li > a {
   position: relative;
   display: none;
 
-  @include mq($lg) {
+  @include mq($megamenu-desktop) {
     &.donate-menu--enhanced {
       display: block;
     }
@@ -607,7 +642,7 @@ header nav#block-donate-2026 > ul.menu > li > a {
 // hide it once desktop's inline mega menu takes over — hiding it
 // unconditionally, as before, would leave mobile with no way to open
 // the menu at all.
-@include mq($lg) {
+@include mq($megamenu-desktop) {
   .menu-toggle {
     display: none;
   }

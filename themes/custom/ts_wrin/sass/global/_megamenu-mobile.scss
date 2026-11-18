@@ -46,7 +46,7 @@
   // Belt-and-suspenders: if a resize crosses the breakpoint while the
   // overlay happens to be open, don't let it linger visible on desktop
   // (which has its own, different, open/close state machine).
-  @include mq($lg) {
+  @include mq($megamenu-desktop) {
     display: none !important;
   }
 
