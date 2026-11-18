@@ -17,6 +17,36 @@
 // anything until megamenu.js has run.
 // =============================================================================
 
+@use "sass:math";
+
+// Scales a length from $min at $megamenu-desktop up to $max at $xl, clamped
+// at both ends. $min and $max must share a unit (px or rem).
+@function megamenu-fluid($min, $max) {
+  $range: math.div($xl - $megamenu-desktop, 1px);
+  $delta: $max - $min;
+  // Unitless px: multiplying by the length (100vw - ...) must give a length.
+  @if math.unit($delta) == "rem" {
+    $delta: math.div($delta, 1rem) * $base-font-size;
+  } @else {
+    $delta: math.div($delta, 1px);
+  }
+  @return clamp(
+    #{$min},
+    calc(#{$min} + (#{$delta} * ((100vw - #{$megamenu-desktop}) / #{$range}))),
+    #{$max}
+  );
+}
+
+// Horizontal inset that lines panel content up with .header-wrapper (see
+// _header.scss and the container-padding mixin): a fixed gutter until the
+// viewport is wide enough for $max-width to apply, then centered.
+@function megamenu-container-inset($max-width) {
+  @return max(
+    #{$grid-gutter},
+    calc((100% - #{$max-width + ($grid-gutter * 2)}) / 2)
+  );
+}
+
 // #block-quicklinks-2026 lives in .region-primary-nav as a sibling of
 // .wri-megamenu (moved there per the Quick Links block placement change).
 // megamenu-mobile.js reads its content purely as a data source for the
@@ -83,36 +113,16 @@
   // sliding panels instead (its own --mega-mobile-* tokens live in
   // _megamenu-mobile.scss), so there's nothing for it to inherit here.
   // ---------------------------------------------------------------------
-  --mega-col-width: clamp(
-    170px,
-    calc(170px + (50 * ((100vw - 1002px) / 438))),
-    220px
-  );
-  // Intro column (section title + description, far left). Narrowed to
-  // match the 2026 mockup: 150px at $megamenu-desktop, so the separator
-  // sits 170px from the text's left edge, growing to 200px at 1440px+
-  // (was 210px-260px).
-  --mega-col-width-intro: clamp(
-    150px,
-    calc(150px + (50 * ((100vw - 1002px) / 438))),
-    200px
-  );
+  // Nav selector and flyout columns.
+  --mega-col-width: #{megamenu-fluid(170px, 220px)};
+  // Intro column (section title + description, far left).
+  --mega-col-width-intro: #{megamenu-fluid(150px, 200px)};
+  // Featured listing column: wide enough for article titles to wrap to
+  // about two lines.
+  --mega-col-width-featured: #{megamenu-fluid(210px, 320px)};
   // Space between a column's separator line and its text, and between the
-  // text and the next separator. 20px at $megamenu-desktop, 24px from
-  // 1440px up (was up to 40px; reduced to match the 2026 mockup).
-  --mega-col-gap: clamp(
-    20px,
-    calc(20px + (4 * ((100vw - 1002px) / 438))),
-    var(--spacer-6)
-  );
-  // Featured listing column: wider than the other columns so article
-  // titles wrap to about two lines, as in the mockup. Same 210px as before
-  // at $megamenu-desktop, so the narrow end of the range is unchanged.
-  --mega-col-width-featured: clamp(
-    210px,
-    calc(210px + (110 * ((100vw - 1002px) / 438))),
-    320px
-  );
+  // text and the next separator.
+  --mega-col-gap: #{megamenu-fluid(20px, 24px)};
 
   // ---------------------------------------------------------------------
   // Top nav row (the field__items flex row) + trigger buttons
@@ -122,22 +132,12 @@
 
     > button {
       @include font(var(--font-family-heading), "bold", "normal");
-      @include font-line-height(15, 18);
-
-      // Scale the type down toward the narrow end of the desktop range so
-      // all five items fit beside Donate and search without touching:
-      // 13px / 0.5px tracking at $megamenu-desktop (1002px), growing to the
-      // full 15px / 0.91px at 1440px and above.
-      font-size: clamp(
-        0.8125rem,
-        calc(0.8125rem + (2 * ((100vw - 1002px) / 438))),
-        0.9375rem
-      );
-      letter-spacing: clamp(
-        0.5px,
-        calc(0.5px + (0.41 * ((100vw - 1002px) / 438))),
-        0.91px
-      );
+      // Smaller toward the narrow end of the desktop range so all items
+      // fit beside Donate and search: 13px at $megamenu-desktop up to 15px
+      // at $xl.
+      font-size: megamenu-fluid(rem(13), rem(15));
+      letter-spacing: megamenu-fluid(0.5px, 0.91px);
+      line-height: 1.2;
 
       -webkit-appearance: none;
       background-color: transparent;
@@ -186,30 +186,20 @@
     right: 0;
     background: var(--mega-bg);
     color: var(--mega-text);
-    // The background stays full-bleed, but the content lines up with the
-    // page container. This mirrors .header-wrapper in _header.scss: a
-    // $grid-gutter margin on each side until the viewport is wide enough
-    // for the max-width to apply, then centered. Both sit in the same
-    // full-width <header>, so 100% here matches .header-wrapper's parent.
-    padding: var(--spacer-10)
-      max(
-        #{$grid-gutter},
-        calc((100% - #{$grid-max-width + ($grid-gutter * 2)}) / 2)
-      )
-      var(--spacer-12);
+    // Full-bleed background, with content lined up with the page container
+    // (.header-wrapper). Both sit in the same full-width <header>, so 100%
+    // in megamenu-container-inset() matches .header-wrapper's parent.
+    padding: var(--spacer-10) $grid-gutter-mobile var(--spacer-12);
     z-index: 50;
+    box-shadow: 0 12px 24px rgb(var(--color-black-rgb) / 18%);
+
+    @include mq($lg) {
+      padding-inline: megamenu-container-inset($grid-max-width);
+    }
 
     @include mq($xxl) {
-      padding-left: max(
-        #{$grid-gutter},
-        calc((100% - #{$grid-max-width-xxl + ($grid-gutter * 2)}) / 2)
-      );
-      padding-right: max(
-        #{$grid-gutter},
-        calc((100% - #{$grid-max-width-xxl + ($grid-gutter * 2)}) / 2)
-      );
+      padding-inline: megamenu-container-inset($grid-max-width-xxl);
     }
-    box-shadow: 0 12px 24px rgb(var(--color-black-rgb) / 18%);
 
     h3 {
       @include font(var(--font-family-heading), "bold", "normal");
@@ -269,10 +259,6 @@
   // Featured listing column (Research & Data / News & Insights / Events)
   // ---------------------------------------------------------------------
   .field--name-field-listing {
-    // Wider than the default --mega-col-width: this column holds full
-    // article/report titles (unlike the compact nav-selector and flyout
-    // columns), and the standard width was wrapping them 5-6 lines deep
-    // at the low end of the fluid range.
     flex-basis: var(--mega-col-width-featured);
 
     .field__item__label {
