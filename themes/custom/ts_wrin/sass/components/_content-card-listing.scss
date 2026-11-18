@@ -97,3 +97,36 @@
     }
   }
 }
+
+// term_featured_items renders selected projects as an attachment with its own
+// list; flatten both lists into one grid so they read as a single row.
+.card-listing.view-display-id-featured_projects {
+  display: grid;
+  gap: var(--padding-vertical) $grid-gutter-mobile;
+
+  @include mq($ph) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include mq($md) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    row-gap: var(--spacer-15);
+  }
+
+  @include mq($lg) {
+    column-gap: $grid-gutter;
+  }
+
+  > .attachment,
+  > .attachment > .views-element-container,
+  > .attachment > .views-element-container > .view,
+  .view > .view-content,
+  .view-content > .item-list,
+  .item-list > ul.listing-items {
+    display: contents;
+  }
+
+  .listing-items > li {
+    margin: 0;
+  }
+}

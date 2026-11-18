@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * Install and update functions for wri_taxonomy_2026.
+ */
+
+/**
+ * Show selected projects ahead of featured ones in term project listings.
+ */
+function wri_taxonomy_2026_update_11001() {
+  $updates = \Drupal::service('distro_helper.updates');
+  $updates->updateConfig('views.view.term_featured_items', [
+    'display#featured_projects#display_options#arguments',
+    'display#featured_projects_selected',
+  ], 'wri_taxonomy_2026');
+
+  // Build the project listing even when only the selected-projects attachment
+  // has results; the block template still hides it when nothing renders.
+  $components = [
+    'tags' => 9,
+    'regions' => 9,
+    'topics_and_subtopics' => 11,
+  ];
+  foreach ($components as $bundle => $delta) {
+    $updates->updateConfig("core.entity_view_display.taxonomy_term.$bundle.default", [
+      "third_party_settings#layout_builder#sections#0#components#$delta#configuration#formatter#settings#always_build_output",
+    ], 'wri_taxonomy_2026');
+  }
+}
