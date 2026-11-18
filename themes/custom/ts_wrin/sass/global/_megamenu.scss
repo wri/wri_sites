@@ -88,10 +88,14 @@
     calc(170px + (50 * ((100vw - 1002px) / 438))),
     220px
   );
-  --mega-col-width-wide: clamp(
-    210px,
-    calc(210px + (50 * ((100vw - 1002px) / 438))),
-    260px
+  // Intro column (section title + description, far left). Narrowed to
+  // match the 2026 mockup: 150px at $megamenu-desktop, so the separator
+  // sits 170px from the text's left edge, growing to 200px at 1440px+
+  // (was 210px-260px).
+  --mega-col-width-intro: clamp(
+    150px,
+    calc(150px + (50 * ((100vw - 1002px) / 438))),
+    200px
   );
   // Space between a column's separator line and its text, and between the
   // text and the next separator. 20px at $megamenu-desktop, 24px from
@@ -101,7 +105,7 @@
     calc(20px + (4 * ((100vw - 1002px) / 438))),
     var(--spacer-6)
   );
-  // Featured listing column: wider than --mega-col-width-wide so article
+  // Featured listing column: wider than the other columns so article
   // titles wrap to about two lines, as in the mockup. Same 210px as before
   // at $megamenu-desktop, so the narrow end of the range is unchanged.
   --mega-col-width-featured: clamp(
@@ -243,7 +247,7 @@
     flex: 0 0 var(--mega-col-width);
 
     &.flush-left {
-      flex-basis: var(--mega-col-width-wide);
+      flex-basis: var(--mega-col-width-intro);
     }
   }
 
