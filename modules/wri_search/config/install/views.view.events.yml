@@ -1,4 +1,3 @@
-langcode: en
 status: true
 dependencies:
   config:
@@ -16,90 +15,23 @@ base_table: search_api_index_sitewide
 base_field: search_api_id
 display:
   default:
-    display_plugin: default
     id: default
     display_title: Default
+    display_plugin: default
     position: 0
     display_options:
-      access:
-        type: none
-        options: {  }
-      cache:
-        type: search_api_tag
-        options: {  }
-      query:
-        type: views_query
-        options:
-          skip_access: 0
-          bypass_access: 0
-          preserve_facet_query_args: 1
-      exposed_form:
-        type: autosubmit
-        options:
-          submit_button: Apply
-          reset_button: false
-          reset_button_label: Reset
-          exposed_sorts_label: Sort
-          expose_sort_order: false
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-          autosubmit_hide: true
-      pager:
-        type: full
-        options:
-          items_per_page: 20
-          offset: 0
-          id: 0
-          total_pages: null
-          tags:
-            previous: «
-            next: »
-            first: First
-            last: Last
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-          quantity: 9
-      style:
-        type: default
-        options:
-          row_class: ''
-          default_row_class: false
-          uses_fields: false
-      row:
-        type: search_api
-        options:
-          view_modes:
-            'entity:node':
-              article: search_results
-              data: search_results
-              event: search_results
-              homepage: search_results
-              international_office: search_results
-              page: search_results
-              person: search_results
-              program_center: search_results
-              project_detail: search_results
-              publication: search_results
-              region: search_results
-              simple_page: search_results
-              subpage: search_results
+      title: Events
       fields:
         search_api_id:
+          id: search_api_id
           table: search_api_index_sitewide
           field: search_api_id
-          id: search_api_id
-          entity_type: null
-          entity_field: null
-          plugin_id: standard
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: null
+          entity_field: null
+          plugin_id: standard
           label: ''
           exclude: false
           alter:
@@ -141,6 +73,87 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
+      pager:
+        type: full
+        options:
+          offset: 0
+          pagination_heading_level: h4
+          items_per_page: 20
+          total_pages: null
+          id: 0
+          tags:
+            next: »
+            previous: «
+            first: First
+            last: Last
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      exposed_form:
+        type: autosubmit
+        options:
+          submit_button: Apply
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: Sort
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+          autosubmit_hide: true
+      access:
+        type: none
+        options: {  }
+      cache:
+        type: search_api_tag
+        options: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: 'There are no upcoming events. Click here to see past events.'
+            format: full_html
+          tokenize: false
+      sorts:
+        field_date_time:
+          id: field_date_time
+          table: search_api_index_sitewide
+          field: field_date_time
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: field_date_time
+          exposed: false
+        title:
+          id: title
+          table: search_api_index_sitewide
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: ASC
+          expose:
+            label: Alphabetical
+            field_identifier: title
+          exposed: false
+      arguments: {  }
       filters:
         search_api_fulltext:
           id: search_api_fulltext
@@ -149,6 +162,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_fulltext
           operator: or
           value: ''
           group: 1
@@ -167,13 +181,8 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              hr: '0'
-              content_editor: '0'
-              editorial: '0'
-              administrator: '0'
-            placeholder: 'Search Events'
             expose_fields: false
+            placeholder: 'Search Events'
             searched_fields_id: ''
           is_grouped: false
           group_info:
@@ -189,13 +198,7 @@ display:
             group_items: {  }
           parse_mode: terms
           min_length: null
-          fields:
-            - body
-            - field_featured_headline
-            - field_featured_text
-            - field_featured_tweet
-            - field_intro
-          plugin_id: search_api_fulltext
+          fields: {  }
         type:
           id: type
           table: search_api_index_sitewide
@@ -203,6 +206,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_options
           operator: or
           value:
             event: event
@@ -236,7 +240,6 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-          plugin_id: search_api_options
         status:
           id: status
           table: search_api_index_sitewide
@@ -244,6 +247,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_boolean
           operator: '='
           value: '1'
           group: 1
@@ -274,7 +278,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: search_api_boolean
         field_date_time:
           id: field_date_time
           table: search_api_index_sitewide
@@ -282,6 +285,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_date
           operator: 'not empty'
           value:
             min: ''
@@ -291,11 +295,11 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: field_date_time_op
+            operator_id: ''
             label: Date/Time
             description: ''
             use_operator: false
-            operator: field_date_time_op
+            operator: ''
             operator_limit_selection: false
             operator_list: {  }
             identifier: field_date_time
@@ -304,20 +308,15 @@ display:
             multiple: true
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              hr: '0'
-              content_editor: '0'
-              editorial: '0'
-              administrator: '0'
-            placeholder: ''
             min_placeholder: ''
             max_placeholder: ''
+            placeholder: ''
           is_grouped: true
           group_info:
             label: 'Event status'
             description: ''
             identifier: date
-            optional: true
+            optional: false
             widget: select
             multiple: false
             remember: false
@@ -328,45 +327,95 @@ display:
                 title: 'Show upcoming Events'
                 operator: '>='
                 value:
-                  type: offset
-                  value: now
                   min: ''
                   max: ''
+                  value: now
+                  type: offset
               2:
                 title: 'Show past Events'
                 operator: '<='
                 value:
-                  type: offset
-                  value: now
                   min: ''
                   max: ''
-          plugin_id: search_api_date
-      sorts:
-        field_date_time:
-          id: field_date_time
+                  value: now
+                  type: offset
+        search_api_language:
+          id: search_api_language
           table: search_api_index_sitewide
-          field: field_date_time
+          field: search_api_language
           relationship: none
           group_type: group
           admin_label: ''
-          order: ASC
+          plugin_id: search_api_language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
           exposed: false
           expose:
+            operator_id: ''
             label: ''
-          plugin_id: search_api
-        title:
-          id: title
-          table: search_api_index_sitewide
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: Alphabetical
-          plugin_id: search_api
-      title: Events
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: default
+        options:
+          row_class: ''
+          default_row_class: false
+          uses_fields: false
+      row:
+        type: search_api
+        options:
+          view_modes:
+            'entity:node':
+              article: search_results
+              data: search_results
+              event: search_results
+              homepage: search_results
+              international_office: search_results
+              page: search_results
+              person: search_results
+              program_center: search_results
+              project_detail: search_results
+              publication: search_results
+              region: search_results
+              simple_page: search_results
+              subpage: search_results
+      query:
+        type: search_api_query
+        options:
+          bypass_access: false
+          skip_access: false
+          preserve_facet_query_args: true
+      relationships: {  }
+      css_class: ''
+      use_ajax: false
       header:
         extra_result:
           id: extra_result
@@ -375,21 +424,12 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          empty: false
-          content: '<span class=''totals''>@total Resources</span><span class=''query''> for </span>'
           plugin_id: extra_result
+          empty: false
+          content: "<span class='totals'>@total Resources</span><span class='query'> for </span>"
       footer: {  }
-      empty: {  }
-      relationships: {  }
-      arguments: {  }
-      display_extenders: {  }
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      css_class: ''
-      use_ajax: false
       display_comment: 'This view is altered by the wri_event_views_query_alter function, which sets the order do "DESC" if the "View Past Events" option is chosen.'
+      display_extenders: {  }
     cache_metadata:
       max-age: -1
       contexts:
@@ -399,26 +439,30 @@ display:
         - 'user.node_grants:view'
       tags:
         - 'config:search_api.index.sitewide'
+        - 'search_api_list:sitewide'
   resources_page:
-    display_plugin: page
     id: resources_page
-    display_title: Page
+    display_title: Events
+    display_plugin: page
     position: 2
     display_options:
-      display_extenders: {  }
-      path: events
       defaults:
-        cache: false
-      cache:
-        type: none
+        cache: true
+      display_description: ''
       display_comment: 'This view is altered by the wri_event_views_query_alter function, which sets the order do "DESC" if the "View Past Events" option is chosen.'
+      display_extenders:
+        metatag_display_extender:
+          metatags:
+            robots: noindex
+          tokenize: false
+      path: events
     cache_metadata:
       max-age: -1
       contexts:
-        - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - url.query_args
         - 'user.node_grants:view'
       tags:
         - 'config:search_api.index.sitewide'
+        - 'search_api_list:sitewide'

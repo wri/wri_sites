@@ -230,3 +230,10 @@ function wri_search_update_10603() {
     'processor_settings#hierarchy#fields#term_self_and_ancestors',
   ], 'wri_search', 'install');
 }
+
+function wri_search_update_10604() {
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.events', [
+    'display#default#display_options#filters#field_date_time#expose#operator_id',
+    'display#default#display_options#filters#field_date_time#expose#operator',
+  ], 'wri_search', 'install');
+}
