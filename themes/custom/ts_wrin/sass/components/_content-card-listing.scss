@@ -98,9 +98,10 @@
   }
 }
 
-// term_featured_items renders selected projects as an attachment with its own
+// term_featured_items renders selected items as an attachment with its own
 // list; flatten both lists into one grid so they read as a single row.
-.card-listing.view-display-id-featured_projects {
+.card-listing.view-display-id-featured_projects,
+.card-listing.view-display-id-featured_resources {
   display: grid;
   gap: var(--padding-vertical) $grid-gutter-mobile;
 
@@ -120,6 +121,7 @@
   > .attachment,
   > .attachment > .views-element-container,
   > .attachment > .views-element-container > .view,
+  > .view-content,
   .view > .view-content,
   .view-content > .item-list,
   .item-list > ul.listing-items {
@@ -128,5 +130,11 @@
 
   .listing-items > li {
     margin: 0;
+  }
+
+  &.desktop-3 {
+    @include mq($md) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
   }
 }

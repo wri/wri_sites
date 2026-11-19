@@ -766,14 +766,16 @@ display:
           offset: 0
           items_per_page: 3
       arguments:
-        'null':
-          id: 'null'
-          table: views
-          field: 'null'
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: 'null'
+          entity_type: node
+          entity_field: nid
+          plugin_id: node_nid
           default_action: ignore
           exception:
             value: all
@@ -798,7 +800,8 @@ display:
             type: none
             fail: 'not found'
           validate_options: {  }
-          must_not_be: false
+          break_phrase: true
+          not: true
         term_node_tid_depth:
           id: term_node_tid_depth
           table: node_field_data
@@ -1039,6 +1042,96 @@ display:
         metatag_display_extender:
           metatags: {  }
           tokenize: false
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  featured_resources_selected:
+    id: featured_resources_selected
+    display_title: 'Featured Resources selected'
+    display_plugin: attachment
+    position: 4
+    display_options:
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 3
+      arguments:
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: nid
+          plugin_id: node_nid
+          default_action: empty
+          exception:
+            value: ''
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: fixed
+          default_argument_options:
+            argument: ''
+          summary_options:
+            base_path: ''
+            count: true
+            override: false
+            items_per_page: 25
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: false
+          validate:
+            type: none
+            fail: empty
+          validate_options: {  }
+          break_phrase: true
+          not: false
+      style:
+        type: html_list
+        options:
+          row_class: ''
+          default_row_class: true
+          uses_fields: false
+          type: ul
+          wrapper_class: item-list
+          class: listing-items
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: card
+      defaults:
+        pager: false
+        style: false
+        row: false
+        relationships: false
+        arguments: false
+      relationships: {  }
+      display_description: 'Resources passed in argument 1, in argument order; featured_resources excludes these.'
+      display_extenders:
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
+      displays:
+        featured_resources: featured_resources
+      attachment_position: before
+      inherit_arguments: true
+      inherit_exposed_filters: false
+      inherit_pager: false
+      render_pager: false
     cache_metadata:
       max-age: -1
       contexts:

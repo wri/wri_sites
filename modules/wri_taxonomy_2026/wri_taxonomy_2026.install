@@ -15,26 +15,7 @@ function wri_taxonomy_2026_update_11001() {
     'display#featured_projects_selected',
   ], 'wri_taxonomy_2026');
 
-  // Build the project listing even when only the selected-projects attachment
-  // has results; the block template still hides it when nothing renders.
-  // Matched by plugin ID since component positions can vary per site.
-  foreach (['tags', 'regions', 'topics_and_subtopics'] as $bundle) {
-    $name = "core.entity_view_display.taxonomy_term.$bundle.default";
-    $config = \Drupal::configFactory()->getEditable($name);
-    if ($config->isNew()) {
-      continue;
-    }
-    $sections = $config->get('third_party_settings.layout_builder.sections') ?? [];
-    foreach ($sections as $s => $section) {
-      foreach ($section['components'] as $c => $component) {
-        if ($component['configuration']['id'] === "field_block:taxonomy_term:$bundle:field_project_listing") {
-          $sections[$s]['components'][$c]['configuration']['formatter']['settings']['always_build_output'] = TRUE;
-        }
-      }
-    }
-    $config->set('third_party_settings.layout_builder.sections', $sections)->save();
-    $updates->exportConfig($name);
-  }
+  _wri_taxonomy_2026_always_build_listing('field_project_listing');
 }
 
 /**
@@ -47,5 +28,42 @@ function wri_taxonomy_2026_update_11002() {
       'dependencies',
       'settings',
     ], 'wri_taxonomy_2026');
+  }
+}
+
+/**
+ * Show selected resources ahead of featured ones in term resource listings.
+ */
+function wri_taxonomy_2026_update_11003() {
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.term_featured_items', [
+    'display#featured_resources#display_options#arguments',
+    'display#featured_resources_selected',
+  ], 'wri_taxonomy_2026');
+  _wri_taxonomy_2026_always_build_listing('field_resources_listing');
+}
+
+/**
+ * Builds a term listing even when only its selected-items attachment has results.
+ */
+function _wri_taxonomy_2026_always_build_listing(string $field_name) {
+  $updates = \Drupal::service('distro_helper.updates');
+  // The block template still hides it when nothing renders.
+  foreach (['tags', 'regions', 'topics_and_subtopics'] as $bundle) {
+    $name = "core.entity_view_display.taxonomy_term.$bundle.default";
+    $config = \Drupal::configFactory()->getEditable($name);
+    if ($config->isNew()) {
+      continue;
+    }
+    $sections = $config->get('third_party_settings.layout_builder.sections') ?? [];
+    foreach ($sections as $s => $section) {
+      foreach ($section['components'] as $c => $component) {
+        // Matched by plugin ID since component positions vary per site.
+        if ($component['configuration']['id'] === "field_block:taxonomy_term:$bundle:$field_name") {
+          $sections[$s]['components'][$c]['configuration']['formatter']['settings']['always_build_output'] = TRUE;
+        }
+      }
+    }
+    $config->set('third_party_settings.layout_builder.sections', $sections)->save();
+    $updates->exportConfig($name);
   }
 }
