@@ -28,11 +28,13 @@
   {% if exposed %}
     <div class="container">{{ exposed.topic }}</div>
   {% endif %}
+  {% endif %}
   {% if header %}
     {{ header|without('extra_result', 'facets_summary') }}
   {% endif %}
   <div class="resources-wrapper">
     <div class="container">
+      {% if exposed %}
         <div class="view-filters">
           <button class="button black filters">{{ "Filters"|t }}</button>
           {% if exposed %}

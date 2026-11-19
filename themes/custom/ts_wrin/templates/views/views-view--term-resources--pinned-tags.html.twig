@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * Pinned items attachment for the term resources view.
+ *
+ * Rendered inside the parent view's results column, so it skips the parent
+ * template's filter/sidebar layout.
+ *
+ * @see views-view--term-resources.html.twig
+ *
+ * Available variables:
+ * - attributes: Remaining HTML attributes for the element.
+ * - id: The view's machine name.
+ * - display_id: The display's machine name.
+ * - dom_id: Unique id for every view being printed to give unique class for
+ *   JavaScript.
+ * - rows: The results of the view query, if any.
+ */
+#}
+{%
+  set classes = [
+    'view',
+    'view-' ~ id|clean_class,
+    'view-id-' ~ id,
+    'view-display-id-' ~ display_id,
+    dom_id ? 'js-view-dom-id-' ~ dom_id,
+  ]
+%}
+{% if rows %}
+  <div{{ attributes.addClass(classes) }}>
+    <div class="view-content">
+      {{ rows }}
+    </div>
+  </div>
+{% endif %}
