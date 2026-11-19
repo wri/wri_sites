@@ -29,6 +29,9 @@
             "drupal/config_partial_export": {
                 "Support config download based on collection https://www.drupal.org/project/config_partial_export/issues/3439357": "https://git.drupalcode.org/project/config_partial_export/-/merge_requests/6.diff"
             },
+            "drupal/config_suite": {
+                "Run automatic export on request terminate, through export transforms (config_split) https://www.drupal.org/project/config_suite/issues/3596592": "https://git.drupalcode.org/project/config_suite/-/merge_requests/18.diff"
+            },
             "drupal/content_snippets": {
                 "Error: Cannot unset string offsets... https://www.drupal.org/project/content_snippets/issues/3268757": "https://git.drupalcode.org/issue/content_snippets-3268757/-/merge_requests/1.diff"
             },
