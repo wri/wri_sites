@@ -2,9 +2,6 @@ status: true
 dependencies:
   config:
     - field.storage.taxonomy_term.field_featured_related_resources
-    - node.type.article
-    - node.type.data
-    - node.type.publication
     - taxonomy.vocabulary.topics_and_subtopics
 _core:
   default_config_hash: mieL_yuks514PZM-liC2qMrLwtrY60BJyKNRMhkJ1Ac
@@ -19,15 +16,11 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:node'
+  handler: views
   handler_settings:
-    target_bundles:
-      article: article
-      data: data
-      publication: publication
-    sort:
-      field: _none
-      direction: ASC
-    auto_create: false
-    auto_create_bundle: article
+    view:
+      view_name: related_to_this_project
+      display_name: by_term
+      arguments:
+        - '[term:tid]'
 field_type: entity_reference

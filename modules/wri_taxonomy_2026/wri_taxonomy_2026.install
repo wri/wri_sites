@@ -36,3 +36,16 @@ function wri_taxonomy_2026_update_11001() {
     $updates->exportConfig($name);
   }
 }
+
+/**
+ * Limit Featured Resources on tags and topics to content tagged with the term.
+ */
+function wri_taxonomy_2026_update_11002() {
+  $updates = \Drupal::service('distro_helper.updates');
+  foreach (['tags', 'topics_and_subtopics'] as $bundle) {
+    $updates->updateConfig("field.field.taxonomy_term.$bundle.field_featured_related_resources", [
+      'dependencies',
+      'settings',
+    ], 'wri_taxonomy_2026');
+  }
+}
