@@ -126,10 +126,10 @@ function wri_taxonomy_term_uri(TermInterface $term) {
  * Normally this is just the {taxonomy_term} route parameter. But a Views
  * AJAX request (e.g. an exposed filter autosubmit) is handled by the
  * generic /views/ajax route, which carries none of the original page's
- * route parameters. For that case, this falls back to whatever term ID was
- * passed through as a hidden value on the submitted exposed form, which
- * wri_search_form_views_exposed_form_alter() populates from this same
- * function on the initial page render.
+ * route parameters. For that case, this falls back to the hidden exposed-form
+ * value set by wri_search_form_views_exposed_form_alter(), then to the
+ * original page path Views sends with every AJAX request (pager links don't
+ * submit the exposed form, so they only have that).
  *
  * @return \Drupal\taxonomy\TermInterface|null
  *   The current term, or NULL if there isn't one.
@@ -140,11 +140,24 @@ function wri_taxonomy_get_current_term(): ?TermInterface {
     return $term;
   }
 
-  $tid = \Drupal::request()->query->get(CurrentTerm::QUERY_PARAM);
-  if (!$tid) {
+  $request = \Drupal::request();
+  $tid = $request->query->get(CurrentTerm::QUERY_PARAM);
+  if ($tid) {
+    $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
+    return $term instanceof TermInterface ? $term : NULL;
+  }
+
+  if (\Drupal::routeMatch()->getRouteName() !== 'views.ajax') {
     return NULL;
   }
-  $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
+  // ViewAjaxController strips view_path from the request but sets it as the
+  // current path.
+  $path = \Drupal::service('path.current')->getPath();
+  $url = \Drupal::service('path.validator')->getUrlIfValidWithoutAccessCheck($path);
+  if (!$url || !$url->isRouted() || $url->getRouteName() !== 'entity.taxonomy_term.canonical') {
+    return NULL;
+  }
+  $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($url->getRouteParameters()['taxonomy_term']);
   return $term instanceof TermInterface ? $term : NULL;
 }
 
