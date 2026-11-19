@@ -43,6 +43,10 @@ jobs:
           name: Test site install works.
           command: |
             /docker-entrypoint.sh
+            # Newer PHP builds throw when Symfony sets session ini values while upload_progress is on.
+            mkdir -p /tmp/php-conf
+            echo "session.upload_progress.enabled=0" > /tmp/php-conf/zz-circle.ini
+            export PHP_INI_SCAN_DIR=":/tmp/php-conf"
             export PATH="./vendor/bin:../vendor/bin:/root/.composer/vendor/bin:$PATH"
             # The lenient plugin must be active before the first dependency
             # resolution, so install it globally.
