@@ -81,7 +81,7 @@ function _wri_taxonomy_2026_ensure_featured_term() {
 }
 
 /**
- * Builds a term listing even when only its selected-items attachment has results.
+ * Set always_build_output to true for blocks placed on taxonomy terms.
  */
 function _wri_taxonomy_2026_always_build_listing(string $field_name) {
   $updates = \Drupal::service('distro_helper.updates');
