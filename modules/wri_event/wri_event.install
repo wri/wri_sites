@@ -306,3 +306,24 @@ function wri_event_update_10506() {
   \Drupal::service('distro_helper.updates')->installConfig('smart_date.smart_date_format.start_time_only', 'wri_event', 'install');
   \Drupal::service('distro_helper.updates')->installConfig('views.view.featured_events', 'wri_event', 'install');
 }
+
+/**
+ * Show selected events in Featured Events and find Featured by term name.
+ */
+function wri_event_update_10507() {
+  \Drupal::service('distro_helper.updates')->updateConfig('views.view.featured_events', [
+    // Whole set, so the old leading 'null' argument is removed.
+    'display#default#display_options#arguments',
+    'display#past_featured#display_options#arguments',
+    'display#past_featured#display_options#relationships',
+    'display#past_featured#display_options#defaults#arguments',
+    'display#past_featured#display_options#defaults#relationships',
+    'display#upcoming_featured#display_options#arguments',
+    'display#upcoming_featured#display_options#relationships',
+    'display#upcoming_featured#display_options#defaults#arguments',
+    'display#upcoming_featured#display_options#defaults#relationships',
+    'display#past_featured#display_options#filters#field_featured_target_id',
+    'display#upcoming_featured#display_options#filters#field_featured_target_id',
+    'display#upcoming_featured_selected',
+  ], 'wri_event', 'install');
+}

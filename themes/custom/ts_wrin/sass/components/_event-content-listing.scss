@@ -28,6 +28,24 @@
     margin: 0;
   }
 
+  // featured_events renders selected events as an attachment and its
+  // fallbacks inside the empty area; flatten them into one row.
+  .view-display-id-upcoming_featured {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $grid-gutter-mobile;
+
+    .attachment,
+    .views-element-container,
+    .view,
+    .view-content,
+    .view-empty,
+    .item-list,
+    ul.listing-items {
+      display: contents;
+    }
+  }
+
   .layout__region--header {
     padding-top: var(--spacer-7);
 
@@ -43,9 +61,5 @@
     .content-type-region.bundle {
       display: none;
     }
-  }
-
-  .layout__region--more-link {
-    margin-top: 0;
   }
 }

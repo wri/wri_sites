@@ -6,6 +6,13 @@
  */
 
 /**
+ * Implements hook_install().
+ */
+function wri_taxonomy_2026_install() {
+  _wri_taxonomy_2026_ensure_featured_term();
+}
+
+/**
  * Show selected projects ahead of featured ones in term project listings.
  */
 function wri_taxonomy_2026_update_11001() {
@@ -40,6 +47,37 @@ function wri_taxonomy_2026_update_11003() {
     'display#featured_resources_selected',
   ], 'wri_taxonomy_2026');
   _wri_taxonomy_2026_always_build_listing('field_resources_listing');
+}
+
+/**
+ * Create the "Featured" term that featured listings look up by name.
+ */
+function wri_taxonomy_2026_update_11004() {
+  _wri_taxonomy_2026_ensure_featured_term();
+}
+
+/**
+ * Build term event listings even when only selected events have results.
+ */
+function wri_taxonomy_2026_update_11005() {
+  _wri_taxonomy_2026_always_build_listing('field_event_listing');
+}
+
+/**
+ * Creates the "Featured" term in the featured vocabulary if it is missing.
+ */
+function _wri_taxonomy_2026_ensure_featured_term() {
+  $storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+  // Views match the name case-insensitively, so do the same here.
+  $existing = $storage->getQuery()
+    ->accessCheck(FALSE)
+    ->condition('vid', 'featured')
+    ->condition('name', 'featured', 'LIKE')
+    ->count()
+    ->execute();
+  if (!$existing) {
+    $storage->create(['vid' => 'featured', 'name' => 'Featured'])->save();
+  }
 }
 
 /**
