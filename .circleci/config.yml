@@ -54,13 +54,23 @@ jobs:
             composer global require mglaman/composer-drupal-lenient --no-interaction
             COMPOSER_MEMORY_LIMIT=-1 composer create-project --stability=dev --no-install wri/wri-starter-kit:^11.0 circletest
             cd circletest
-            # Packagist can take a minute to pick up a newly pushed branch.
-            for i in $(seq 1 20); do
-              composer require wri/wri_sites:dev-${CIRCLE_BRANCH} --no-interaction --prefer-source -W && break
-              if [ "$i" -eq 20 ]; then echo "dev-${CIRCLE_BRANCH} never appeared on Packagist"; exit 1; fi
-              echo "Waiting for dev-${CIRCLE_BRANCH} on Packagist (attempt $i)..."
-              sleep 15
-            done
+            case "$CIRCLE_BRANCH" in
+              # Packagist never indexes dependabot branches, so install main from source and check out the branch.
+              dependabot/*)
+                composer require wri/wri_sites:dev-main --no-interaction --prefer-source -W
+                git -C web/profiles/contrib/wri_sites fetch https://github.com/wri/wri_sites.git "$CIRCLE_BRANCH"
+                git -C web/profiles/contrib/wri_sites checkout FETCH_HEAD
+                ;;
+              *)
+                # Packagist can take a minute to pick up a newly pushed branch.
+                for i in $(seq 1 20); do
+                  composer require wri/wri_sites:dev-${CIRCLE_BRANCH} --no-interaction --prefer-source -W && break
+                  if [ "$i" -eq 20 ]; then echo "dev-${CIRCLE_BRANCH} never appeared on Packagist"; exit 1; fi
+                  echo "Waiting for dev-${CIRCLE_BRANCH} on Packagist (attempt $i)..."
+                  sleep 15
+                done
+                ;;
+            esac
             ./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/modules
             ./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/themes/custom
             ./vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/contrib/wri_sites/modules
