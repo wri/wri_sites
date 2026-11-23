@@ -72,6 +72,15 @@
   }
 }
 
+// Wrap whole topic names to new lines on small screens, like the topic tabs above.
+.view-display-id-child_topic_names {
+  flex-wrap: wrap;
+  row-gap: var(--spacer-3);
+  > div {
+    white-space: nowrap;
+  }
+}
+
 .resources-wrapper {
   background-color: var(--color-neutral-200);
 }
