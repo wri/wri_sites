@@ -234,7 +234,7 @@ function wri_search_update_10603() {
 /**
  * Fixes warnings on /events related to the exposed operator.
  */
-function wri_search_update_10604() {
+function wri_search_update_10605() {
   \Drupal::service('distro_helper.updates')->updateConfig('views.view.events', [
     'display#default#display_options#filters#field_date_time#expose#operator_id',
     'display#default#display_options#filters#field_date_time#expose#operator',
