@@ -40,7 +40,7 @@
                 "No local tasks on compare revisions page https://www.drupal.org/project/diff/issues/2954352": "https://www.drupal.org/files/issues/2026-08-13/diff-add_local_tasks-2954352-34.patch"
             },
             "drupal/facets_pretty_paths": {
-                "Space appended to url outputs error https://www.drupal.org/project/facets_pretty_paths/issues/3575306": "https://git.drupalcode.org/project/facets_pretty_paths/-/merge_requests/25.diff",
+                "Space appended to url outputs error https://www.drupal.org/project/facets_pretty_paths/issues/3575306": "https://git.drupalcode.org/project/facets_pretty_paths/-/merge_requests/25.diff?v=1",
                 "ViewPageController::$contextualLinks must not be accessed before initialization (Drupal 11) https://www.drupal.org/project/facets_pretty_paths/issues/3608564": "https://git.drupalcode.org/project/facets_pretty_paths/-/merge_requests/27.diff"
             },
             "drupal/focal_point": {
