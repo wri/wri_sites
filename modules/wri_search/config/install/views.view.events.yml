@@ -106,6 +106,7 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
           autosubmit_hide: true
+          timeout: 500
       access:
         type: none
         options: {  }
@@ -184,6 +185,7 @@ display:
             expose_fields: false
             placeholder: 'Search Events'
             searched_fields_id: ''
+            value_maxlength: 128
           is_grouped: false
           group_info:
             label: ''
@@ -286,7 +288,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: search_api_date
-          operator: 'not empty'
+          operator: '>='
           value:
             min: ''
             max: ''
@@ -295,17 +297,17 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: ''
+            operator_id: field_date_time_op
             label: Date/Time
             description: ''
             use_operator: false
-            operator: ''
+            operator: field_date_time_op
             operator_limit_selection: false
             operator_list: {  }
             identifier: field_date_time
             required: false
             remember: false
-            multiple: true
+            multiple: false
             remember_roles:
               authenticated: authenticated
             min_placeholder: ''
@@ -457,12 +459,23 @@ display:
           tokenize: false
       path: events
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
+        - 'facets_filter:f'
         - 'languages:language_interface'
         - url
         - url.query_args
         - 'user.node_grants:view'
       tags:
+        - 'config:facets.facet.all_event_topics'
+        - 'config:facets.facet.event_languages'
+        - 'config:facets.facet.event_type'
+        - 'config:facets.facet.international_office_event'
+        - 'config:facets.facet.region_event'
+        - 'config:facets.facet.tags_event'
+        - 'config:facets.facet.type_of_event'
+        - 'config:facets.facet.within_this_topic_event'
         - 'config:search_api.index.sitewide'
+        - 'config:views.view.events'
         - 'search_api_list:sitewide'
+        - taxonomy_term_list
