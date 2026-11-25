@@ -252,6 +252,7 @@
         "drupal/webp": "^1.0@RC",
         "drupal/xmlsitemap": "^2.0",
         "mglaman/composer-drupal-lenient": "*",
+        "mnsami/composer-custom-directory-installer": "^2.3",
         "npm-asset/jquery.toc": "^0.4.0"
     },
     "config": {
@@ -261,7 +262,7 @@
             "drupal/core-composer-scaffold": true,
             "composer/installers": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
-            "oomphinc/composer-installers-extender": true,
+            "mnsami/composer-custom-directory-installer": true,
             "mglaman/composer-drupal-lenient": true
         }
     },
