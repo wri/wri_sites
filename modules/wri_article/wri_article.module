@@ -100,7 +100,9 @@ function wri_article_preprocess_wri_article_columns_b(array &$variables): void {
       $variables['template_class'] = wri_article_get_resource_type_template($type, '_child_field');
       if (empty($variables['template_class'])) {
         $parent = $type->get('parent')->entity;
-        $variables['template_class'] = wri_article_get_resource_type_template($parent);
+        if ($parent) {
+          $variables['template_class'] = wri_article_get_resource_type_template($parent);
+        }
       }
     }
   }
