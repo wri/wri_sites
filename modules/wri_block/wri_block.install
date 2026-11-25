@@ -133,3 +133,35 @@ function wri_block_update_10504() {
     'cardinality',
   ], 'wri_block', 'install');
 }
+
+/**
+ * Backfills empty block descriptions, which Drupal 11 requires.
+ */
+function wri_block_update_10505(&$sandbox) {
+  $database = \Drupal::database();
+  $storage = \Drupal::entityTypeManager()->getStorage('block_content');
+
+  if (!isset($sandbox['max'])) {
+    $sandbox['rows'] = $database->query("SELECT id, langcode FROM {block_content_field_data} WHERE info IS NULL OR info = :e", [':e' => ''])->fetchAll();
+    $sandbox['max'] = count($sandbox['rows']);
+    $sandbox['progress'] = 0;
+  }
+
+  foreach (array_splice($sandbox['rows'], 0, 50) as $row) {
+    $sandbox['progress']++;
+    $block = $storage->load($row->id);
+    if (!$block || !$block->hasTranslation($row->langcode)) {
+      continue;
+    }
+    $translation = $block->getTranslation($row->langcode);
+    $translation->set('info', $block->type->entity->label() . ' ' . $block->id());
+    // Avoid creating new revisions or changing timestamps.
+    $translation->setSyncing(TRUE);
+    $translation->save();
+  }
+
+  $sandbox['#finished'] = $sandbox['max'] ? $sandbox['progress'] / $sandbox['max'] : 1;
+  if ($sandbox['#finished'] >= 1) {
+    return t('Backfilled @count empty block descriptions.', ['@count' => $sandbox['max']]);
+  }
+}
