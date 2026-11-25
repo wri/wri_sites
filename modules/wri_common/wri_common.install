@@ -9,21 +9,47 @@ use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Config\InstallStorage;
 
 /**
+ * Returns the modules each wri_common update needs, keyed by update number.
+ */
+function _wri_common_update_requirements(): array {
+  return [
+    // Installing wri_taxonomy_2026 needs the fields and view these provide.
+    10610 => [
+      'wri_taxonomy' => 10607,
+      'wri_program' => 10407,
+      'wri_region' => 10002,
+      'wri_event' => 10506,
+    ],
+    // wri_megamenu_2026's submenu field needs the 2026 menus.
+    10611 => [
+      'wri_menus' => 10601,
+    ],
+  ];
+}
+
+/**
+ * Checks whether every module the given update needs is enabled.
+ */
+function _wri_common_update_requirements_met(int $update): bool {
+  $module_handler = \Drupal::moduleHandler();
+  foreach (array_keys(_wri_common_update_requirements()[$update]) as $module) {
+    if (!$module_handler->moduleExists($module)) {
+      return FALSE;
+    }
+  }
+  return TRUE;
+}
+
+/**
  * Implements hook_update_dependencies().
  */
 function wri_common_update_dependencies() {
-  // Installing wri_taxonomy_2026 needs the fields and view these provide.
-  $dependencies['wri_common'][10610] = [
-    'wri_taxonomy' => 10607,
-    'wri_program' => 10407,
-    'wri_region' => 10002,
-    'wri_event' => 10506,
-  ];
-  // wri_megamenu_2026's submenu field needs the 2026 menus.
-  $dependencies['wri_common'][10611] = [
-    'wri_menus' => 10601,
-  ];
-
+  // Core blocks an update forever if it depends on an uninstalled module, so
+  // only declare the ones this site has; the updates skip themselves otherwise.
+  $module_handler = \Drupal::moduleHandler();
+  foreach (_wri_common_update_requirements() as $update => $modules) {
+    $dependencies['wri_common'][$update] = array_filter($modules, [$module_handler, 'moduleExists'], ARRAY_FILTER_USE_KEY);
+  }
   return $dependencies;
 }
 
@@ -375,7 +401,7 @@ function wri_common_update_10609() {
  */
 function wri_common_update_10610() {
   $moduleHandler = \Drupal::service('module_handler');
-  if (!$moduleHandler->moduleExists('wri_taxonomy_2026') && !$moduleHandler->moduleExists('wri_flagship')) {
+  if (!$moduleHandler->moduleExists('wri_taxonomy_2026') && !$moduleHandler->moduleExists('wri_flagship') && _wri_common_update_requirements_met(10610)) {
     // The module replaces existing taxonomy displays, which would otherwise
     // block the install as pre-existing config.
     $path = \Drupal::service('extension.list.module')->getPath('wri_taxonomy_2026');
@@ -419,6 +445,9 @@ function wri_common_update_10610() {
  */
 function wri_common_update_10611() {
   $moduleHandler = \Drupal::service('module_handler');
+  if (!_wri_common_update_requirements_met(10611)) {
+    return;
+  }
   if (!$moduleHandler->moduleExists('wri_megamenu_2026')) {
     \Drupal::service('module_installer')->install(['wri_megamenu_2026'], TRUE);
   }
