@@ -13,6 +13,8 @@ function wri_microsites_update_10401() {
   // Define the content types to process.
   $content_types = ['microsite'];
 
+  // Defined in wri_node.install, which isn't loaded unless wri_node has pending updates.
+  \Drupal::moduleHandler()->loadInclude('wri_node', 'install');
   wri_update_twitter_replacement($content_types, 'field_social_sharing_links');
 
   $message = 'Add field Social Sharing Links and update view modes.';
